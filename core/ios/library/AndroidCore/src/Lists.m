@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\google\android\collect\Lists.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Lists.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collections.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADLists
@@ -66,10 +79,12 @@ JavaUtilArrayList *ADLists_newArrayList() {
 
 JavaUtilArrayList *ADLists_newArrayListWithNSObjectArray_(IOSObjectArray *elements) {
   ADLists_initialize();
-  jint capacity = JreIntDiv((((IOSObjectArray *) nil_chk(elements))->size_ * 110), 100) + 5;
+  int32_t capacity = JreIntDiv((((IOSObjectArray *) nil_chk(elements))->size_ * 110), 100) + 5;
   JavaUtilArrayList *list = create_JavaUtilArrayList_initWithInt_(capacity);
   JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(list, elements);
   return list;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLists)
+
+J2OBJC_NAME_MAPPING(ADLists, "r.com.google.android.collect", "AD")

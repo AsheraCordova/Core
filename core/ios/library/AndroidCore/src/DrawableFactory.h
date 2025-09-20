@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\drawable\DrawableFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DrawableFactory")
@@ -17,6 +18,7 @@
 #define ASDrawableFactory_
 
 @class ADDrawable;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilMap;
 
@@ -46,6 +48,7 @@ FOUNDATION_EXPORT ADDrawable *ASDrawableFactory_getDrawableWithNSString_withJava
 J2OBJC_TYPE_LITERAL_HEADER(ASDrawableFactory)
 
 @compatibility_alias ComAsheraDrawableDrawableFactory ASDrawableFactory;
+
 
 #endif
 

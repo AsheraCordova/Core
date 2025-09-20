@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\TextDirectionHeuristics.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TextDirectionHeuristics")
@@ -100,6 +101,7 @@ FOUNDATION_EXPORT ADTextDirectionHeuristics *create_ADTextDirectionHeuristics_in
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics)
 
 @compatibility_alias RAndroidTextTextDirectionHeuristics ADTextDirectionHeuristics;
+
 
 #endif
 

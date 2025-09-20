@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\JavaEventCommand.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_JavaEventCommand")
@@ -48,6 +49,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASJavaEventCommand)
 
 @compatibility_alias ComAsheraConverterJavaEventCommand ASJavaEventCommand;
 
+
 #endif
 
 #if !defined (ASJavaEventCommand_SingleParamFunction_) && (INCLUDE_ALL_JavaEventCommand || defined(INCLUDE_ASJavaEventCommand_SingleParamFunction))
@@ -67,6 +69,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASJavaEventCommand)
 J2OBJC_EMPTY_STATIC_INIT(ASJavaEventCommand_SingleParamFunction)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASJavaEventCommand_SingleParamFunction)
+
 
 #endif
 

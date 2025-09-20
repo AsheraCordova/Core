@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebChromeClient.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ConsoleMessage.h"
 #include "GeolocationPermissions.h"
 #include "IOSObjectArray.h"
@@ -16,6 +21,15 @@
 #include "WebChromeClient.h"
 #include "WebStorage.h"
 #include "WebView.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADWebChromeClient
@@ -27,34 +41,34 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)onJsAlertWithADWebView:(ADWebView *)view
-                      withNSString:(NSString *)url
-                      withNSString:(NSString *)message
-                    withADJsResult:(ADJsResult *)result {
+- (bool)onJsAlertWithADWebView:(ADWebView *)view
+                  withNSString:(NSString *)url
+                  withNSString:(NSString *)message
+                withADJsResult:(ADJsResult *)result {
   return false;
 }
 
-- (jboolean)onJsConfirmWithADWebView:(ADWebView *)view
-                        withNSString:(NSString *)url
-                        withNSString:(NSString *)message
-                      withADJsResult:(ADJsResult *)result {
+- (bool)onJsConfirmWithADWebView:(ADWebView *)view
+                    withNSString:(NSString *)url
+                    withNSString:(NSString *)message
+                  withADJsResult:(ADJsResult *)result {
   return false;
 }
 
-- (jboolean)onJsPromptWithADWebView:(ADWebView *)view
-                       withNSString:(NSString *)origin
-                       withNSString:(NSString *)message
-                       withNSString:(NSString *)defaultValue
-               withADJsPromptResult:(ADJsPromptResult *)result {
+- (bool)onJsPromptWithADWebView:(ADWebView *)view
+                   withNSString:(NSString *)origin
+                   withNSString:(NSString *)message
+                   withNSString:(NSString *)defaultValue
+           withADJsPromptResult:(ADJsPromptResult *)result {
   return false;
 }
 
 - (void)onConsoleMessageWithNSString:(NSString *)message
-                             withInt:(jint)lineNumber
+                             withInt:(int32_t)lineNumber
                         withNSString:(NSString *)sourceID {
 }
 
-- (jboolean)onConsoleMessageWithADConsoleMessage:(ADConsoleMessage *)consoleMessage {
+- (bool)onConsoleMessageWithADConsoleMessage:(ADConsoleMessage *)consoleMessage {
   return false;
 }
 
@@ -73,9 +87,9 @@ withADWebChromeClient_CustomViewCallback:(ADWebChromeClient_CustomViewCallback *
   return nil;
 }
 
-- (jboolean)onShowFileChooserWithADWebView:(ADWebView *)webView
-                       withADValueCallback:(ADValueCallback *)filePathsCallback
-   withADWebChromeClient_FileChooserParams:(ADWebChromeClient_FileChooserParams *)fileChooserParams {
+- (bool)onShowFileChooserWithADWebView:(ADWebView *)webView
+                   withADValueCallback:(ADValueCallback *)filePathsCallback
+withADWebChromeClient_FileChooserParams:(ADWebChromeClient_FileChooserParams *)fileChooserParams {
   return false;
 }
 
@@ -84,9 +98,9 @@ withADWebChromeClient_CustomViewCallback:(ADWebChromeClient_CustomViewCallback *
 
 - (void)onExceededDatabaseQuotaWithNSString:(NSString *)url
                                withNSString:(NSString *)databaseIdentifier
-                                   withLong:(jlong)currentQuota
-                                   withLong:(jlong)estimatedSize
-                                   withLong:(jlong)totalUsedQuota
+                                   withLong:(int64_t)currentQuota
+                                   withLong:(int64_t)estimatedSize
+                                   withLong:(int64_t)totalUsedQuota
               withADWebStorage_QuotaUpdater:(ADWebStorage_QuotaUpdater *)quotaUpdater {
 }
 
@@ -144,6 +158,8 @@ ADWebChromeClient *create_ADWebChromeClient_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWebChromeClient)
 
+J2OBJC_NAME_MAPPING(ADWebChromeClient, "r.android.webkit", "AD")
+
 NSString *ADWebChromeClient_FileChooserParams_MODE_OPEN_MULTIPLE;
 
 @implementation ADWebChromeClient_FileChooserParams
@@ -159,7 +175,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-+ (IOSObjectArray *)parseResultWithInt:(jint)resultCode
++ (IOSObjectArray *)parseResultWithInt:(int32_t)resultCode
                           withADIntent:(ADIntent *)intent {
   return ADWebChromeClient_FileChooserParams_parseResultWithInt_withADIntent_(resultCode, intent);
 }
@@ -211,7 +227,7 @@ ADWebChromeClient_FileChooserParams *create_ADWebChromeClient_FileChooserParams_
   J2OBJC_CREATE_IMPL(ADWebChromeClient_FileChooserParams, init)
 }
 
-IOSObjectArray *ADWebChromeClient_FileChooserParams_parseResultWithInt_withADIntent_(jint resultCode, ADIntent *intent) {
+IOSObjectArray *ADWebChromeClient_FileChooserParams_parseResultWithInt_withADIntent_(int32_t resultCode, ADIntent *intent) {
   ADWebChromeClient_FileChooserParams_initialize();
   return nil;
 }

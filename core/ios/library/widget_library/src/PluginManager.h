@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\plugin\PluginManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PluginManager")
@@ -16,6 +17,7 @@
 #if !defined (ASPluginManager_) && (INCLUDE_ALL_PluginManager || defined(INCLUDE_ASPluginManager))
 #define ASPluginManager_
 
+@class NSString;
 @protocol ASIPlugin;
 
 @interface ASPluginManager : NSObject
@@ -45,6 +47,7 @@ FOUNDATION_EXPORT id<ASIPlugin> ASPluginManager_getWithNSString_(NSString *name)
 J2OBJC_TYPE_LITERAL_HEADER(ASPluginManager)
 
 @compatibility_alias ComAsheraPluginPluginManager ASPluginManager;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewOverlayImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewOverlayImpl")
@@ -23,6 +24,7 @@
 @class ASWidgetAttribute;
 @class IOSClass;
 @class IOSObjectArray;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -95,6 +97,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOverlayImpl)
 
 @compatibility_alias ComAsheraLayoutViewOverlayImpl ASViewOverlayImpl;
 
+
 #endif
 
 #if !defined (ASViewOverlayImpl_ViewExt_) && (INCLUDE_ALL_ViewOverlayImpl || defined(INCLUDE_ASViewOverlayImpl_ViewExt))
@@ -109,6 +112,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOverlayImpl)
 #include "IViewStub.h"
 
 @class ASViewOverlayImpl;
+@class NSString;
 
 @interface ASViewOverlayImpl_ViewExt : ADView < ASIViewStub >
 
@@ -135,6 +139,7 @@ FOUNDATION_EXPORT ASViewOverlayImpl_ViewExt *new_ASViewOverlayImpl_ViewExt_initW
 FOUNDATION_EXPORT ASViewOverlayImpl_ViewExt *create_ASViewOverlayImpl_ViewExt_initWithASViewOverlayImpl_(ASViewOverlayImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewOverlayImpl_ViewExt)
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IMaxHeight.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IMaxHeight")
@@ -16,9 +17,11 @@
 #if !defined (ASIMaxHeight_) && (INCLUDE_ALL_IMaxHeight || defined(INCLUDE_ASIMaxHeight))
 #define ASIMaxHeight_
 
+@class JavaLangInteger;
+
 @protocol ASIMaxHeight < JavaObject >
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
 @end
 
@@ -27,6 +30,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIMaxHeight)
 J2OBJC_TYPE_LITERAL_HEADER(ASIMaxHeight)
 
 #define ComAsheraWidgetIMaxHeight ASIMaxHeight
+
 
 #endif
 

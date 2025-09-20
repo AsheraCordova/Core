@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\Drawable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Canvas.h"
 #include "Drawable.h"
 #include "IOSClass.h"
@@ -12,26 +17,34 @@
 #include "Insets.h"
 #include "J2ObjC_source.h"
 #include "Rect.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADDrawable () {
  @public
   ADRect *mBounds_;
   IOSIntArray *mStateSet_;
-  jint minimumWidth_;
+  int32_t minimumWidth_;
   id drawable_;
-  jboolean redraw_;
+  bool redraw_;
   id tintColor_;
   NSString *tintMode_;
   id<ADDrawable_MeasureTextHelper> measureTextHelper_;
-  jboolean useGC_;
-  jboolean recycleable_;
+  bool useGC_;
+  bool recycleable_;
   id<ADDrawable_AttributeChangeListener> attributeChangeListener_;
-  __unsafe_unretained id<ASIWidget> overlay_;
-  jint minimumHeight_;
+  WEAK_ id<ASIWidget> overlay_;
+  int32_t minimumHeight_;
 }
 
 @end
@@ -74,7 +87,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   self->overlay_ = overlay;
 }
 
-- (void)setUseGCWithBoolean:(jboolean)useGC {
+- (void)setUseGCWithBoolean:(bool)useGC {
   self->useGC_ = useGC;
 }
 
@@ -94,11 +107,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&self->tintColor_, tintColor);
 }
 
-- (jboolean)isRedraw {
+- (bool)isRedraw {
   return redraw_;
 }
 
-- (void)setRedrawWithBoolean:(jboolean)redraw {
+- (void)setRedrawWithBoolean:(bool)redraw {
   self->redraw_ = redraw;
 }
 
@@ -113,12 +126,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return mBounds_;
 }
 
-- (void)setBoundsWithInt:(jint)left
-                 withInt:(jint)top
-                 withInt:(jint)right
-                 withInt:(jint)bottom {
+- (void)setBoundsWithInt:(int32_t)left
+                 withInt:(int32_t)top
+                 withInt:(int32_t)right
+                 withInt:(int32_t)bottom {
   ADRect *oldBounds = JreRetainedLocalValue(mBounds_);
-  if (oldBounds == ADDrawable_ZERO_BOUNDS_RECT) {
+  if (JreObjectEqualsEquals(oldBounds, ADDrawable_ZERO_BOUNDS_RECT)) {
     oldBounds = JreStrongAssignAndConsume(&mBounds_, new_ADRect_init());
   }
   if (((ADRect *) nil_chk(oldBounds))->left_ != left || oldBounds->top_ != top || oldBounds->right_ != right || oldBounds->bottom_ != bottom) {
@@ -139,19 +152,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getTop {
+- (int32_t)getTop {
   return ((ADRect *) nil_chk(mBounds_))->top_;
 }
 
-- (jint)getLeft {
+- (int32_t)getLeft {
   return ((ADRect *) nil_chk(mBounds_))->left_;
 }
 
-- (jint)getRight {
+- (int32_t)getRight {
   return ((ADRect *) nil_chk(mBounds_))->right_;
 }
 
-- (jint)getBottom {
+- (int32_t)getBottom {
   return ((ADRect *) nil_chk(mBounds_))->bottom_;
 }
 
@@ -163,7 +176,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&self->drawable_, drawable);
 }
 
-- (jboolean)setStateWithIntArray:(IOSIntArray *)stateSet {
+- (bool)setStateWithIntArray:(IOSIntArray *)stateSet {
   if (!JavaUtilArrays_equalsWithIntArray_withIntArray_(mStateSet_, stateSet)) {
     JreStrongAssign(&mStateSet_, stateSet);
     return [self onStateChangeWithIntArray:stateSet];
@@ -175,30 +188,30 @@ J2OBJC_IGNORE_DESIGNATED_END
   return mStateSet_;
 }
 
-- (void)setMinimumWidthWithInt:(jint)minimumWidth {
+- (void)setMinimumWidthWithInt:(int32_t)minimumWidth {
   self->minimumWidth_ = minimumWidth;
 }
 
-- (void)setMinimumHeightWithInt:(jint)minimumHeight {
+- (void)setMinimumHeightWithInt:(int32_t)minimumHeight {
   self->minimumHeight_ = minimumHeight;
 }
 
-- (void)setLayoutDirectionWithInt:(jint)layoutDirection {
+- (void)setLayoutDirectionWithInt:(int32_t)layoutDirection {
 }
 
-- (jint)getMinimumHeight {
+- (int32_t)getMinimumHeight {
   return minimumHeight_;
 }
 
-- (jint)getMinimumWidth {
+- (int32_t)getMinimumWidth {
   return minimumWidth_;
 }
 
-- (jboolean)isProjected {
+- (bool)isProjected {
   return false;
 }
 
-- (jboolean)getPaddingWithADRect:(ADRect *)padding {
+- (bool)getPaddingWithADRect:(ADRect *)padding {
   return false;
 }
 
@@ -206,29 +219,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b
-                  withBoolean:(jboolean)c {
+- (void)setVisibleWithBoolean:(bool)b
+                  withBoolean:(bool)c {
 }
 
 - (void)setCallbackWithId:(id)object {
 }
 
-- (jboolean)isStateful {
+- (bool)isStateful {
   return false;
 }
 
-- (jboolean)onStateChangeWithIntArray:(IOSIntArray *)state {
+- (bool)onStateChangeWithIntArray:(IOSIntArray *)state {
   return false;
 }
 
 - (void)setStateWithId:(id)drawableState {
 }
 
-- (jint)getIntrinsicWidth {
+- (int32_t)getIntrinsicWidth {
   return self->minimumWidth_;
 }
 
-- (jint)getIntrinsicHeight {
+- (int32_t)getIntrinsicHeight {
   return self->minimumHeight_;
 }
 
@@ -236,10 +249,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ADCanvas>) nil_chk(canvas)) drawWithADDrawable:self];
 }
 
-- (void)setHotspotBoundsWithInt:(jint)left2
-                        withInt:(jint)top2
-                        withInt:(jint)right2
-                        withInt:(jint)bottom2 {
+- (void)setHotspotBoundsWithInt:(int32_t)left2
+                        withInt:(int32_t)top2
+                        withInt:(int32_t)right2
+                        withInt:(int32_t)bottom2 {
 }
 
 - (void)jumpToCurrentState {
@@ -295,19 +308,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   return measureTextHelper_;
 }
 
-- (jboolean)isRecycleable {
+- (bool)isRecycleable {
   return recycleable_;
 }
 
-- (void)setRecycleableWithBoolean:(jboolean)recycleable {
+- (void)setRecycleableWithBoolean:(bool)recycleable {
   self->recycleable_ = recycleable;
 }
 
-- (jboolean)hasDrawable {
+- (bool)hasDrawable {
   return drawable_ != nil && ![drawable_ isEqual:@"@null"];
 }
 
-- (void)setAlphaWithInt:(jint)alpha {
+- (void)setAlphaWithInt:(int32_t)alpha {
   if (self->attributeChangeListener_ != nil) {
     [self->attributeChangeListener_ onAttributeChangeWithNSString:@"alpha" withId:JavaLangInteger_valueOfWithInt_(alpha)];
   }
@@ -487,6 +500,8 @@ ADDrawable *create_ADDrawable_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDrawable)
+
+J2OBJC_NAME_MAPPING(ADDrawable, "r.android.graphics.drawable", "AD")
 
 @implementation ADDrawable_AttributeChangeListener
 

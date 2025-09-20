@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeSet.h"
 #include "Context.h"
 #include "J2ObjC_source.h"
@@ -13,6 +18,14 @@
 #include "WebSettings.h"
 #include "WebView.h"
 #include "WebViewClient.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADWebView
@@ -36,20 +49,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setWebChromeClientWithADWebChromeClient:(ADWebChromeClient *)client {
 }
 
-- (jboolean)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event {
+- (bool)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event {
   return false;
 }
 
-- (void)setNetworkAvailableWithBoolean:(jboolean)value {
+- (void)setNetworkAvailableWithBoolean:(bool)value {
 }
 
-- (void)setInitialScaleWithInt:(jint)i {
+- (void)setInitialScaleWithInt:(int32_t)i {
 }
 
-- (void)setVerticalScrollBarEnabledWithBoolean:(jboolean)b {
+- (void)setVerticalScrollBarEnabledWithBoolean:(bool)b {
 }
 
-+ (void)setWebContentsDebuggingEnabledWithBoolean:(jboolean)b {
++ (void)setWebContentsDebuggingEnabledWithBoolean:(bool)b {
   ADWebView_setWebContentsDebuggingEnabledWithBoolean_(b);
 }
 
@@ -64,7 +77,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (void)clearCacheWithBoolean:(jboolean)b {
+- (void)clearCacheWithBoolean:(bool)b {
 }
 
 - (void)stopLoading {
@@ -73,7 +86,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)clearHistory {
 }
 
-- (jboolean)canGoBack {
+- (bool)canGoBack {
   return false;
 }
 
@@ -189,8 +202,10 @@ ADWebView *create_ADWebView_init() {
   J2OBJC_CREATE_IMPL(ADWebView, init)
 }
 
-void ADWebView_setWebContentsDebuggingEnabledWithBoolean_(jboolean b) {
+void ADWebView_setWebContentsDebuggingEnabledWithBoolean_(bool b) {
   ADWebView_initialize();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWebView)
+
+J2OBJC_NAME_MAPPING(ADWebView, "r.android.webkit", "AD")

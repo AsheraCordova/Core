@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Bitmap.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Bitmap")
@@ -16,11 +17,13 @@
 #if !defined (ADBitmap_) && (INCLUDE_ALL_Bitmap || defined(INCLUDE_ADBitmap))
 #define ADBitmap_
 
+@class JavaLangInteger;
+
 @protocol ADBitmap < JavaObject >
 
-- (jint)getRowBytes;
+- (int32_t)getRowBytes;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
 - (id)getImage;
 
@@ -31,6 +34,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADBitmap)
 J2OBJC_TYPE_LITERAL_HEADER(ADBitmap)
 
 #define RAndroidGraphicsBitmap ADBitmap
+
 
 #endif
 

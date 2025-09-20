@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\HttpAuthHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HttpAuthHandler")
@@ -15,6 +16,8 @@
 
 #if !defined (ADHttpAuthHandler_) && (INCLUDE_ALL_HttpAuthHandler || defined(INCLUDE_ADHttpAuthHandler))
 #define ADHttpAuthHandler_
+
+@class NSString;
 
 @interface ADHttpAuthHandler : NSObject
 
@@ -40,6 +43,7 @@ FOUNDATION_EXPORT ADHttpAuthHandler *create_ADHttpAuthHandler_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADHttpAuthHandler)
 
 @compatibility_alias RAndroidWebkitHttpAuthHandler ADHttpAuthHandler;
+
 
 #endif
 

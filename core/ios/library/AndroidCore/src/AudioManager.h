@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\media\AudioManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AudioManager")
@@ -16,6 +17,8 @@
 #if !defined (ADAudioManager_) && (INCLUDE_ALL_AudioManager || defined(INCLUDE_ADAudioManager))
 #define ADAudioManager_
 
+@class JavaLangInteger;
+
 @interface ADAudioManager : NSObject
 
 #pragma mark Public
@@ -26,9 +29,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADAudioManager)
 
-inline jint ADAudioManager_get_STREAM_MUSIC(void);
+inline int32_t ADAudioManager_get_STREAM_MUSIC(void);
 #define ADAudioManager_STREAM_MUSIC 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAudioManager, STREAM_MUSIC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAudioManager, STREAM_MUSIC, int32_t)
 
 FOUNDATION_EXPORT void ADAudioManager_init(ADAudioManager *self);
 
@@ -39,6 +42,7 @@ FOUNDATION_EXPORT ADAudioManager *create_ADAudioManager_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADAudioManager)
 
 @compatibility_alias RAndroidMediaAudioManager ADAudioManager;
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\AugmentedIntervalTree.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributedString.h"
 #include "AugmentedIntervalTree.h"
 #include "BulletInterval.h"
@@ -19,7 +24,10 @@
 #include "WidgetAttributeMap.h"
 #include "WidgetAttributeValue.h"
 #include "java/io/PrintStream.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
 #include "java/util/HashMap.h"
@@ -28,8 +36,12 @@
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASAugmentedIntervalTree () {
@@ -121,7 +133,7 @@ __attribute__((unused)) static void ASAugmentedIntervalTree_updateStyleInMapWith
   else {
     if ([tmp getLeft] == nil) {
       if ([newNode getEnd] > [tmp getStart]) {
-        jint newNodeEnd = [newNode getEnd];
+        int32_t newNodeEnd = [newNode getEnd];
         [newNode setEndWithInt:[tmp getStart]];
         if (newNodeEnd > [tmp getEnd]) {
           [self insertNodeWithASInterval:self->root_ withASInterval:[newNode makeNodeWithInt:[tmp getEnd] withInt:newNodeEnd withNSObjectArray:[newNode getArgs]]];
@@ -183,11 +195,11 @@ __attribute__((unused)) static void ASAugmentedIntervalTree_updateStyleInMapWith
   if ([tmp getLeft] != nil) {
     [self applyWithASInterval:[tmp getLeft] withASAttributedString:spannableString];
   }
-  jint start = [tmp getStart];
-  jint end = [tmp getEnd];
+  int32_t start = [tmp getStart];
+  int32_t end = [tmp getEnd];
   [((id<ASAttributedString>) nil_chk(spannableString)) init__WithInt:start withInt:end];
-  jint style = 0;
-  jfloat textSize = 0.0f;
+  int32_t style = 0;
+  float textSize = 0.0f;
   id typeFace = nil;
   if ([tmp isKindOfClass:[ASStyleInterval class]]) {
     id<JavaUtilMap> attributes = JreRetainedLocalValue([self getStyleWithASWidgetAttributeMap:[((ASStyleInterval *) tmp) getStyle]]);
@@ -281,7 +293,7 @@ __attribute__((unused)) static void ASAugmentedIntervalTree_updateStyleInMapWith
           break;
           case 13:
           {
-            jint weight = 0;
+            int32_t weight = 0;
             if ([value isEqual:@"bold"]) {
               weight = 2;
             }
@@ -290,7 +302,7 @@ __attribute__((unused)) static void ASAugmentedIntervalTree_updateStyleInMapWith
           break;
           case 14:
           {
-            jint fontStyle = 0;
+            int32_t fontStyle = 0;
             if ([value isEqual:@"italics"]) {
               fontStyle = 2;
             }
@@ -468,3 +480,5 @@ void ASAugmentedIntervalTree_updateStyleInMapWithASWidgetAttributeMap_withJavaUt
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAugmentedIntervalTree)
+
+J2OBJC_NAME_MAPPING(ASAugmentedIntervalTree, "com.ashera.attributedtext", "AS")

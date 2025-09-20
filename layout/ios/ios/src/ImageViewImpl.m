@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ImageViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractEnumToIntConverter.h"
 #include "BaseWidget.h"
 #include "Bitmap.h"
@@ -52,16 +57,19 @@
 
 #include "ASUIImageView.h"
 
-@class JavaLangInteger;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASImageViewImpl () {
  @public
   ASSimpleWrapableView *simpleWrapableView_;
   ADDrawable *imageFromUrlPlaceHolder_;
-  jboolean measureCalled_;
+  bool measureCalled_;
   ADDrawable *imageFromUrlError_;
   id tintColor_;
 }
@@ -122,14 +130,14 @@
 
 - (void)createSimpleWrapableView;
 
-- (jboolean)hasScrollView;
+- (bool)hasScrollView;
 
-- (jboolean)isViewWrapped;
+- (bool)isViewWrapped;
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b;
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b;
 
 - (void)invalidateWrapViewHolder;
 
@@ -142,9 +150,9 @@
 
 - (id)getSrc;
 
-- (jint)getImageHeightWithId:(id)image;
+- (int32_t)getImageHeightWithId:(id)image;
 
-- (jint)getImageWidthWithId:(id)image;
+- (int32_t)getImageWidthWithId:(id)image;
 
 - (void)setImageFromUrlErrorWithId:(id)objValue;
 
@@ -152,12 +160,12 @@
 
 - (void)setImageFromUrlWithId:(id)objValue;
 
-- (void)postOnMeasureWithInt:(jint)widthMeasureSpec
-                     withInt:(jint)heightMeasureSpec;
+- (void)postOnMeasureWithInt:(int32_t)widthMeasureSpec
+                     withInt:(int32_t)heightMeasureSpec;
 
 - (JavaLangInteger *)nativeGetContentMode;
 
-- (void)nativeSetContentModeWithInt:(jint)contentMode;
+- (void)nativeSetContentModeWithInt:(int32_t)contentMode;
 
 - (void)setTintColorWithId:(id)objValue;
 
@@ -171,10 +179,10 @@
 
 - (void)nativeInvalidate;
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b;
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
 
 @end
 
@@ -256,11 +264,11 @@ __attribute__((unused)) static void ASImageViewImpl_setPaddingWithId_(ASImageVie
 
 __attribute__((unused)) static void ASImageViewImpl_createSimpleWrapableView(ASImageViewImpl *self);
 
-__attribute__((unused)) static jboolean ASImageViewImpl_hasScrollView(ASImageViewImpl *self);
+__attribute__((unused)) static bool ASImageViewImpl_hasScrollView(ASImageViewImpl *self);
 
-__attribute__((unused)) static jboolean ASImageViewImpl_isViewWrapped(ASImageViewImpl *self);
+__attribute__((unused)) static bool ASImageViewImpl_isViewWrapped(ASImageViewImpl *self);
 
-__attribute__((unused)) static void ASImageViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASImageViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static void ASImageViewImpl_invalidateWrapViewHolder(ASImageViewImpl *self);
 
@@ -272,9 +280,9 @@ __attribute__((unused)) static void ASImageViewImpl_setScaleTypeWithNSString_wit
 
 __attribute__((unused)) static id ASImageViewImpl_getSrc(ASImageViewImpl *self);
 
-__attribute__((unused)) static jint ASImageViewImpl_getImageHeightWithId_(ASImageViewImpl *self, id image);
+__attribute__((unused)) static int32_t ASImageViewImpl_getImageHeightWithId_(ASImageViewImpl *self, id image);
 
-__attribute__((unused)) static jint ASImageViewImpl_getImageWidthWithId_(ASImageViewImpl *self, id image);
+__attribute__((unused)) static int32_t ASImageViewImpl_getImageWidthWithId_(ASImageViewImpl *self, id image);
 
 __attribute__((unused)) static void ASImageViewImpl_setImageFromUrlErrorWithId_(ASImageViewImpl *self, id objValue);
 
@@ -282,11 +290,11 @@ __attribute__((unused)) static void ASImageViewImpl_setImageFromUrlPlaceHolderWi
 
 __attribute__((unused)) static void ASImageViewImpl_setImageFromUrlWithId_(ASImageViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASImageViewImpl_postOnMeasureWithInt_withInt_(ASImageViewImpl *self, jint widthMeasureSpec, jint heightMeasureSpec);
+__attribute__((unused)) static void ASImageViewImpl_postOnMeasureWithInt_withInt_(ASImageViewImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec);
 
 __attribute__((unused)) static JavaLangInteger *ASImageViewImpl_nativeGetContentMode(ASImageViewImpl *self);
 
-__attribute__((unused)) static void ASImageViewImpl_nativeSetContentModeWithInt_(ASImageViewImpl *self, jint contentMode);
+__attribute__((unused)) static void ASImageViewImpl_nativeSetContentModeWithInt_(ASImageViewImpl *self, int32_t contentMode);
 
 __attribute__((unused)) static void ASImageViewImpl_setTintColorWithId_(ASImageViewImpl *self, id objValue);
 
@@ -300,7 +308,7 @@ __attribute__((unused)) static void ASImageViewImpl_nativeRequestLayout(ASImageV
 
 __attribute__((unused)) static void ASImageViewImpl_nativeInvalidate(ASImageViewImpl *self);
 
-__attribute__((unused)) static void ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 @interface ASImageViewImpl_ScaleType () {
  @public
@@ -313,7 +321,7 @@ J2OBJC_FIELD_SETTER(ASImageViewImpl_ScaleType, mapping_, id<JavaUtilMap>)
 
 @interface ASImageViewImpl_ImageViewExt () {
  @public
-  __unsafe_unretained ASImageViewImpl *this$0_;
+  WEAK_ ASImageViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -599,7 +607,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASImageViewImpl_getBaselineAlignBottom(self);
 }
 
-- (jint)getBaseLine {
+- (int32_t)getBaseLine {
   return [((ADImageView *) nil_chk(measurableView_)) getBaseline];
 }
 
@@ -714,7 +722,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASImageViewImpl_setPaddingWithId_(self, objValue);
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -725,7 +733,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -753,11 +761,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASImageViewImpl_createSimpleWrapableView(self);
 }
 
-- (jboolean)hasScrollView {
+- (bool)hasScrollView {
   return ASImageViewImpl_hasScrollView(self);
 }
 
-- (jboolean)isViewWrapped {
+- (bool)isViewWrapped {
   return ASImageViewImpl_isViewWrapped(self);
 }
 
@@ -775,10 +783,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((ASSimpleWrapableView *) nil_chk(simpleWrapableView_)) getForeground];
 }
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b {
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b {
   ASImageViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -791,13 +799,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype {
+                      withInt:(int32_t)viewtype {
   uiView_ = [self nativeCreateViewWithInt:viewtype];
   ASViewGroupImpl_nativeAddViewWithId_withId_(ASViewImpl_getFirstChildOrSelfWithId_(wrapperParent), uiView_);
   return uiView_;
 }
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType {
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType {
   return [self createWrapperViewHolderNativeWithInt:viewType];
 }
 
@@ -809,7 +817,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView;
 }
 
-- (id)createWrapperViewHolderNativeWithInt:(jint)viewType {
+- (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType {
   if (viewType == 1) {
     ASUIView* uiView = [ASUIView new];
     uiView.widget = self;
@@ -852,9 +860,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (IOSIntArray *)getImageDimension {
   id image = [self getImage];
   if (image != nil) {
-    return [IOSIntArray newArrayWithInts:(jint[]){ ASImageViewImpl_getImageWidthWithId_(self, image), ASImageViewImpl_getImageHeightWithId_(self, image) } count:2];
+    return [IOSIntArray newArrayWithInts:(int32_t[]){ ASImageViewImpl_getImageWidthWithId_(self, image), ASImageViewImpl_getImageHeightWithId_(self, image) } count:2];
   }
-  return [IOSIntArray newArrayWithInts:(jint[]){ 0, 0 } count:2];
+  return [IOSIntArray newArrayWithInts:(int32_t[]){ 0, 0 } count:2];
 }
 
 - (id)getScaleType {
@@ -876,11 +884,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASImageViewImpl_getSrc(self);
 }
 
-- (jint)getImageHeightWithId:(id)image {
+- (int32_t)getImageHeightWithId:(id)image {
   return ASImageViewImpl_getImageHeightWithId_(self, image);
 }
 
-- (jint)getImageWidthWithId:(id)image {
+- (int32_t)getImageWidthWithId:(id)image {
   return ASImageViewImpl_getImageWidthWithId_(self, image);
 }
 
@@ -928,8 +936,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)postOnMeasureWithInt:(jint)widthMeasureSpec
-                     withInt:(jint)heightMeasureSpec {
+- (void)postOnMeasureWithInt:(int32_t)widthMeasureSpec
+                     withInt:(int32_t)heightMeasureSpec {
   ASImageViewImpl_postOnMeasureWithInt_withInt_(self, widthMeasureSpec, heightMeasureSpec);
 }
 
@@ -959,7 +967,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASImageViewImpl_nativeGetContentMode(self);
 }
 
-- (void)nativeSetContentModeWithInt:(jint)contentMode {
+- (void)nativeSetContentModeWithInt:(int32_t)contentMode {
   ASImageViewImpl_nativeSetContentModeWithInt_(self, contentMode);
 }
 
@@ -984,10 +992,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)createMaskWithId:(id)viewToMask
-                 withInt:(jint)x
-                 withInt:(jint)y
-                 withInt:(jint)width
-                 withInt:(jint)height {
+                 withInt:(int32_t)x
+                 withInt:(int32_t)y
+                 withInt:(int32_t)width
+                 withInt:(int32_t)height {
   // Create a mask layer and the frame to determine what will be visible in the view.
   CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
   CGRect maskRect = CGRectMake(x, y, width, height);
@@ -1013,17 +1021,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASImageViewImpl_nativeInvalidate(self);
 }
 
-- (id)nativeCreateViewWithInt:(jint)viewType {
+- (id)nativeCreateViewWithInt:(int32_t)viewType {
   ASUIImageView* imageView = [ASUIImageView new];
   imageView.commandRegex = ASImageViewImpl_WIDGET_REGEX;
   [imageView setContentMode:UIViewContentModeScaleAspectFit];
   return imageView;
 }
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b {
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b {
   ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -1397,11 +1405,11 @@ void ASImageViewImpl_setPaddingWithId_(ASImageViewImpl *self, id objValue) {
 }
 
 void ASImageViewImpl_createSimpleWrapableView(ASImageViewImpl *self) {
-  jboolean wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
-  jint viewType = -1;
+  bool wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
+  int32_t viewType = -1;
   if (wrapViewFeature) {
-    jboolean hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
-    jboolean vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
+    bool hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
+    bool vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
     viewType = 1;
     if (hscroll) viewType = 2;
     if (vscroll) viewType = 3;
@@ -1409,15 +1417,15 @@ void ASImageViewImpl_createSimpleWrapableView(ASImageViewImpl *self) {
   self->simpleWrapableView_ = new_ASSimpleWrapableView_initWithASIWidget_withInt_(self, viewType);
 }
 
-jboolean ASImageViewImpl_hasScrollView(ASImageViewImpl *self) {
+bool ASImageViewImpl_hasScrollView(ASImageViewImpl *self) {
   return ASImageViewImpl_isViewWrapped(self) && ([((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 2 || [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 3);
 }
 
-jboolean ASImageViewImpl_isViewWrapped(ASImageViewImpl *self) {
+bool ASImageViewImpl_isViewWrapped(ASImageViewImpl *self) {
   return [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) isViewWrapped];
 }
 
-void ASImageViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, jint l, jint t, jint r, jint b) {
+void ASImageViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   id foreground = [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getForeground];
   if (foreground != nil) {
     ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(foreground, 0, 0, r - l, b - t);
@@ -1461,11 +1469,11 @@ id ASImageViewImpl_getSrc(ASImageViewImpl *self) {
   return [((ADImageView *) nil_chk(self->measurableView_)) getImageDrawable];
 }
 
-jint ASImageViewImpl_getImageHeightWithId_(ASImageViewImpl *self, id image) {
+int32_t ASImageViewImpl_getImageHeightWithId_(ASImageViewImpl *self, id image) {
   return ((UIImage*) image).size.height;
 }
 
-jint ASImageViewImpl_getImageWidthWithId_(ASImageViewImpl *self, id image) {
+int32_t ASImageViewImpl_getImageWidthWithId_(ASImageViewImpl *self, id image) {
   return ((UIImage*) image).size.width;
 }
 
@@ -1482,7 +1490,7 @@ void ASImageViewImpl_setImageFromUrlWithId_(ASImageViewImpl *self, id objValue) 
   [((id<ASIImageDownloader>) nil_chk(ASImageDownloaderFactory_get())) downloadWithId:new_ADContext_init() withNSString:(NSString *) cast_chk(objValue, [NSString class]) withId:self->imageFromUrlPlaceHolder_ withId:self->imageFromUrlError_ withASITarget:self];
 }
 
-void ASImageViewImpl_postOnMeasureWithInt_withInt_(ASImageViewImpl *self, jint widthMeasureSpec, jint heightMeasureSpec) {
+void ASImageViewImpl_postOnMeasureWithInt_withInt_(ASImageViewImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec) {
   self->measureCalled_ = true;
 }
 
@@ -1490,7 +1498,7 @@ JavaLangInteger *ASImageViewImpl_nativeGetContentMode(ASImageViewImpl *self) {
   return [JavaLangInteger valueOfWithInt:(jint) ((ASUIImageView*)self->uiView_).contentMode];
 }
 
-void ASImageViewImpl_nativeSetContentModeWithInt_(ASImageViewImpl *self, jint contentMode) {
+void ASImageViewImpl_nativeSetContentModeWithInt_(ASImageViewImpl *self, int32_t contentMode) {
   [((ASUIImageView*)self->uiView_) setContentMode:contentMode];
 }
 
@@ -1523,7 +1531,7 @@ void ASImageViewImpl_nativeInvalidate(ASImageViewImpl *self) {
   ASImageViewImpl_invalidateWrapViewHolder(self);
 }
 
-void ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, jint l, jint t, jint r, jint b) {
+void ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   if (ASImageViewImpl_isViewWrapped(self)) {
     ASRectM *bounds = [((ADImageView *) nil_chk(self->measurableView_)) getImageBoundsWithInt:r - l withInt:b - t];
     id imageView = [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getWrappedView];
@@ -1539,6 +1547,8 @@ void ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withIn
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl)
+
+J2OBJC_NAME_MAPPING(ASImageViewImpl, "com.ashera.layout", "AS")
 
 @implementation ASImageViewImpl_ScaleType
 
@@ -1584,14 +1594,14 @@ void ASImageViewImpl_ScaleType_init(ASImageViewImpl_ScaleType *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"center" withId:JavaLangInteger_valueOfWithInt_((jint) 0x5)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerCrop" withId:JavaLangInteger_valueOfWithInt_((jint) 0x6)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerInside" withId:JavaLangInteger_valueOfWithInt_((jint) 0x7)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitCenter" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitEnd" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitStart" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitXY" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"matrix" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"center" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x5)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerCrop" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x6)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerInside" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x7)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitCenter" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitEnd" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitStart" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitXY" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"matrix" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -1616,8 +1626,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -1628,11 +1638,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
   ASImageViewImpl_postOnMeasureWithInt_withInt_(this$0_, widthMeasureSpec, heightMeasureSpec);
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1660,8 +1670,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1729,12 +1739,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1764,7 +1774,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }

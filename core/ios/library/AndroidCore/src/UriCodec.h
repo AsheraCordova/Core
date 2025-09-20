@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\net\UriCodec.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_UriCodec")
@@ -16,7 +17,9 @@
 #if !defined (ADUriCodec_) && (INCLUDE_ALL_UriCodec || defined(INCLUDE_ADUriCodec))
 #define ADUriCodec_
 
+@class JavaLangBoolean;
 @class JavaNioCharsetCharset;
+@class NSString;
 
 /*!
  @brief Decodes application/x-www-form-urlencoded content.
@@ -34,19 +37,20 @@
     invalid inputs. Else, U+FFFd is emitted to the output in place of invalid input octets.
  */
 + (NSString *)decodeWithNSString:(NSString *)s
-                     withBoolean:(jboolean)convertPlus
+                     withBoolean:(bool)convertPlus
        withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
-                     withBoolean:(jboolean)throwOnFailure;
+                     withBoolean:(bool)throwOnFailure;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADUriCodec)
 
-FOUNDATION_EXPORT NSString *ADUriCodec_decodeWithNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(NSString *s, jboolean convertPlus, JavaNioCharsetCharset *charset, jboolean throwOnFailure);
+FOUNDATION_EXPORT NSString *ADUriCodec_decodeWithNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(NSString *s, bool convertPlus, JavaNioCharsetCharset *charset, bool throwOnFailure);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUriCodec)
 
 @compatibility_alias RAndroidNetUriCodec ADUriCodec;
+
 
 #endif
 

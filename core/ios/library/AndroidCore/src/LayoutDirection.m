@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\LayoutDirection.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "LayoutDirection.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADLayoutDirection ()
@@ -63,3 +75,5 @@ ADLayoutDirection *create_ADLayoutDirection_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLayoutDirection)
+
+J2OBJC_NAME_MAPPING(ADLayoutDirection, "r.android.util", "AD")

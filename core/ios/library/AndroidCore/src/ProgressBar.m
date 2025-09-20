@@ -3,12 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ProgressBar.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseMeasurableView.h"
 #include "Context.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "LinearLayout.h"
 #include "ProgressBar.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADProgressBar
@@ -26,12 +38,12 @@
 - (void)setLayoutParamsWithADLinearLayout_LayoutParams:(ADLinearLayout_LayoutParams *)barLayoutParams {
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return 0;
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return 0;
 }
 
@@ -84,3 +96,5 @@ ADProgressBar *create_ADProgressBar_initWithADContext_(ADContext *context) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADProgressBar)
+
+J2OBJC_NAME_MAPPING(ADProgressBar, "r.android.widget", "AD")

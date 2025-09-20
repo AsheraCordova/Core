@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IWidgetLifeCycleListener.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IWidgetLifeCycleListener")
@@ -38,6 +39,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASIWidgetLifeCycleListener)
 
 #define ComAsheraWidgetIWidgetLifeCycleListener ASIWidgetLifeCycleListener
 
+
 #endif
 
 #if !defined (ASIWidgetLifeCycleListener_EventId_) && (INCLUDE_ALL_IWidgetLifeCycleListener || defined(INCLUDE_ASIWidgetLifeCycleListener_EventId))
@@ -48,11 +50,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASIWidgetLifeCycleListener)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ASIWidgetLifeCycleListener_EventId_Enum) {
-  ASIWidgetLifeCycleListener_EventId_Enum_measureFinished = 0,
-  ASIWidgetLifeCycleListener_EventId_Enum_onLayout = 1,
+typedef NS_ENUM(int32_t, ASIWidgetLifeCycleListener_EventId_Enum) {
+  ASIWidgetLifeCycleListener_EventId_Enum_measureFinished NS_SWIFT_NAME(measurefinished) = 0,
+  ASIWidgetLifeCycleListener_EventId_Enum_onLayout NS_SWIFT_NAME(onlayout) = 1,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASIWidgetLifeCycleListener_EventId_ORDINAL int32_t
+#else
+#define ASIWidgetLifeCycleListener_EventId_ORDINAL ASIWidgetLifeCycleListener_EventId_Enum
+#endif
+
 
 @interface ASIWidgetLifeCycleListener_EventId : JavaLangEnum
 
@@ -65,6 +75,13 @@ typedef NS_ENUM(NSUInteger, ASIWidgetLifeCycleListener_EventId_Enum) {
 #pragma mark Package-Private
 
 - (ASIWidgetLifeCycleListener_EventId_Enum)toNSEnum;
+
+@property(readonly) ASIWidgetLifeCycleListener_EventId_Enum enumValue;
++ (ASIWidgetLifeCycleListener_EventId *)fromNSEnum:(ASIWidgetLifeCycleListener_EventId_Enum)value;
+
+- (ASIWidgetLifeCycleListener_EventId_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithEventId:(ASIWidgetLifeCycleListener_EventId_Enum)value;
 
 @end
 
@@ -83,9 +100,10 @@ FOUNDATION_EXPORT IOSObjectArray *ASIWidgetLifeCycleListener_EventId_values(void
 
 FOUNDATION_EXPORT ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_fromOrdinal(ASIWidgetLifeCycleListener_EventId_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASIWidgetLifeCycleListener_EventId)
+
 
 #endif
 

@@ -3,13 +3,26 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\util\SpannableImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Linkify.h"
 #include "SpannableImpl.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/util/stream/IntStream.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADSpannableImpl
@@ -19,21 +32,21 @@
   return self;
 }
 
-- (jint)java_length {
+- (int32_t)java_length {
   return [((NSString *) nil_chk(self->str_)) java_length];
 }
 
-- (jchar)charAtWithInt:(jint)index {
+- (unichar)charAtWithInt:(int32_t)index {
   return [((NSString *) nil_chk(self->str_)) charAtWithInt:index];
 }
 
-- (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
-                                         to:(jint)end {
+- (id<JavaLangCharSequence>)subSequenceFrom:(int32_t)start
+                                         to:(int32_t)end {
   return [((NSString *) nil_chk(self->str_)) subSequenceFrom:start to:end];
 }
 
-- (IOSObjectArray *)getSpansWithInt:(jint)i
-                            withInt:(jint)length
+- (IOSObjectArray *)getSpansWithInt:(int32_t)i
+                            withInt:(int32_t)length
                        withIOSClass:(IOSClass *)class1 {
   return [IOSObjectArray arrayWithLength:0 type:ADLinkify_URLSpan_class_()];
 }
@@ -103,3 +116,5 @@ ADSpannableImpl *create_ADSpannableImpl_initWithNSString_(NSString *str) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSpannableImpl)
+
+J2OBJC_NAME_MAPPING(ADSpannableImpl, "r.android.text.util", "AD")

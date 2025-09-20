@@ -3,17 +3,29 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierParseException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BezierParseException.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADBezierParseException
 
 - (instancetype)initWithNSString:(NSString *)message
-                         withInt:(jint)line
-                         withInt:(jint)column {
+                         withInt:(int32_t)line
+                         withInt:(int32_t)column {
   ADBezierParseException_initWithNSString_withInt_withInt_(self, message, line, column);
   return self;
 }
@@ -43,11 +55,11 @@
   return exception_;
 }
 
-- (jint)getLineNumber {
+- (int32_t)getLineNumber {
   return lineNumber_;
 }
 
-- (jint)getColumnNumber {
+- (int32_t)getColumnNumber {
   return columnNumber_;
 }
 
@@ -89,18 +101,18 @@
 
 @end
 
-void ADBezierParseException_initWithNSString_withInt_withInt_(ADBezierParseException *self, NSString *message, jint line, jint column) {
+void ADBezierParseException_initWithNSString_withInt_withInt_(ADBezierParseException *self, NSString *message, int32_t line, int32_t column) {
   JavaLangRuntimeException_initWithNSString_(self, message);
   JreStrongAssign(&self->exception_, nil);
   self->lineNumber_ = line;
   self->columnNumber_ = column;
 }
 
-ADBezierParseException *new_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, jint line, jint column) {
+ADBezierParseException *new_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, int32_t line, int32_t column) {
   J2OBJC_NEW_IMPL(ADBezierParseException, initWithNSString_withInt_withInt_, message, line, column)
 }
 
-ADBezierParseException *create_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, jint line, jint column) {
+ADBezierParseException *create_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, int32_t line, int32_t column) {
   J2OBJC_CREATE_IMPL(ADBezierParseException, initWithNSString_withInt_withInt_, message, line, column)
 }
 
@@ -133,3 +145,5 @@ ADBezierParseException *create_ADBezierParseException_initWithNSString_withJavaL
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBezierParseException)
+
+J2OBJC_NAME_MAPPING(ADBezierParseException, "r.android.graphics", "AD")

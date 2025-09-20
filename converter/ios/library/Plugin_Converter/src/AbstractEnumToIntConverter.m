@@ -3,14 +3,26 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractEnumToIntConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractEnumToIntConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASAbstractEnumToIntConverter
@@ -57,7 +69,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return convertValue;
 }
 
-- (jboolean)supportsIntAlso {
+- (bool)supportsIntAlso {
   return false;
 }
 
@@ -113,3 +125,5 @@ void ASAbstractEnumToIntConverter_init(ASAbstractEnumToIntConverter *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAbstractEnumToIntConverter)
+
+J2OBJC_NAME_MAPPING(ASAbstractEnumToIntConverter, "com.ashera.converter", "AS")

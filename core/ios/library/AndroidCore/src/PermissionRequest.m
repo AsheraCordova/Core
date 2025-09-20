@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\PermissionRequest.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "PermissionRequest.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADPermissionRequest
@@ -57,3 +68,5 @@ ADPermissionRequest *create_ADPermissionRequest_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPermissionRequest)
+
+J2OBJC_NAME_MAPPING(ADPermissionRequest, "r.android.webkit", "AD")

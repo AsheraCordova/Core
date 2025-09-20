@@ -3,10 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\widget\AdapterView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AdapterView.h"
 #include "FrameLayout.h"
 #include "J2ObjC_source.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADAdapterView_OnItemLongClickListener : NSObject
@@ -26,9 +40,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)performItemClickWithADView:(ADView *)view
-                               withInt:(jint)position
-                              withLong:(jlong)id_ {
+- (bool)performItemClickWithADView:(ADView *)view
+                           withInt:(int32_t)position
+                          withLong:(int64_t)id_ {
   return false;
 }
 
@@ -67,6 +81,8 @@ ADAdapterView *create_ADAdapterView_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAdapterView)
+
+J2OBJC_NAME_MAPPING(ADAdapterView, "r.android.widget", "AD")
 
 @implementation ADAdapterView_OnItemLongClickListener
 

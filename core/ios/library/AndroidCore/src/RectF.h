@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\RectF.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RectF")
@@ -29,7 +30,11 @@
 @class ADParcelable_Creator;
 @class ADRect;
 @class JavaIoPrintWriter;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 @class JavaLangStringBuilder;
+@class NSString;
 @protocol ADParcel;
 
 /*!
@@ -41,10 +46,10 @@
  */
 @interface ADRectF : NSObject < ADParcelable > {
  @public
-  jfloat left_;
-  jfloat top_;
-  jfloat right_;
-  jfloat bottom_;
+  float left_;
+  float top_;
+  float right_;
+  float bottom_;
 }
 
 #pragma mark Public
@@ -63,10 +68,10 @@
  @param right The X coordinate of the right side of the rectangle
  @param bottom The Y coordinate of the bottom of the rectangle
  */
-- (instancetype)initWithFloat:(jfloat)left
-                    withFloat:(jfloat)top
-                    withFloat:(jfloat)right
-                    withFloat:(jfloat)bottom;
+- (instancetype)initWithFloat:(float)left
+                    withFloat:(float)top
+                    withFloat:(float)right
+                    withFloat:(float)bottom;
 
 - (instancetype)initWithADRect:(ADRect *)r;
 
@@ -81,13 +86,13 @@
  @return the horizontal center of the rectangle. This does not check for
   a valid rectangle (i.e. left <= right)
  */
-- (jfloat)centerX;
+- (float)centerX;
 
 /*!
  @return the vertical center of the rectangle. This does not check for
   a valid rectangle (i.e. top <= bottom)
  */
-- (jfloat)centerY;
+- (float)centerY;
 
 /*!
  @brief Returns true if (x,y) is inside the rectangle.The left and top are
@@ -100,8 +105,8 @@
  @return true iff (x,y) are contained by the rectangle, where containment
                means left <= x < right and top <= y < bottom
  */
-- (jboolean)containsWithFloat:(jfloat)x
-                    withFloat:(jfloat)y;
+- (bool)containsWithFloat:(float)x
+                withFloat:(float)y;
 
 /*!
  @brief Returns true iff the 4 specified sides of a rectangle are inside or equal
@@ -115,10 +120,10 @@
  @return true iff the the 4 specified sides of a rectangle are inside or
                equal to this rectangle
  */
-- (jboolean)containsWithFloat:(jfloat)left
-                    withFloat:(jfloat)top
-                    withFloat:(jfloat)right
-                    withFloat:(jfloat)bottom;
+- (bool)containsWithFloat:(float)left
+                withFloat:(float)top
+                withFloat:(float)right
+                withFloat:(float)bottom;
 
 /*!
  @brief Returns true iff the specified rectangle r is inside or equal to this
@@ -127,14 +132,14 @@
  @return true iff the specified rectangle r is inside or equal to this
                rectangle
  */
-- (jboolean)containsWithADRectF:(ADRectF *)r;
+- (bool)containsWithADRectF:(ADRectF *)r;
 
 /*!
  @brief Parcelable interface methods
  */
-- (jint)describeContents;
+- (int32_t)describeContents;
 
-- (jboolean)isEqual:(id)o;
+- (bool)isEqual:(id)o;
 
 - (NSUInteger)hash;
 
@@ -142,7 +147,7 @@
  @return the rectangle's height. This does not check for a valid rectangle
   (i.e. top <= bottom) so the result may be negative.
  */
-- (jfloat)height;
+- (float)height;
 
 /*!
  @brief Inset the rectangle by (dx,dy).If dx is positive, then the sides are
@@ -153,8 +158,8 @@
  @param dx The amount to add(subtract) from the rectangle's left(right)
  @param dy The amount to add(subtract) from the rectangle's top(bottom)
  */
-- (void)insetWithFloat:(jfloat)dx
-             withFloat:(jfloat)dy;
+- (void)insetWithFloat:(float)dx
+             withFloat:(float)dy;
 
 /*!
  @brief If the rectangle specified by left,top,right,bottom intersects this
@@ -171,10 +176,10 @@
                (and this rectangle is then set to that intersection) else
                return false and do not change this rectangle.
  */
-- (jboolean)intersectWithFloat:(jfloat)left
-                     withFloat:(jfloat)top
-                     withFloat:(jfloat)right
-                     withFloat:(jfloat)bottom;
+- (bool)intersectWithFloat:(float)left
+                 withFloat:(float)top
+                 withFloat:(float)right
+                 withFloat:(float)bottom;
 
 /*!
  @brief If the specified rectangle intersects this rectangle, return true and set
@@ -187,7 +192,7 @@
                (and this rectangle is then set to that intersection) else
                return false and do not change this rectangle.
  */
-- (jboolean)intersectWithADRectF:(ADRectF *)r;
+- (bool)intersectWithADRectF:(ADRectF *)r;
 
 /*!
  @brief Returns true if this rectangle intersects the specified rectangle.
@@ -201,10 +206,10 @@
  @return true iff the specified rectangle intersects this rectangle. In
                no event is this rectangle modified.
  */
-- (jboolean)intersectsWithFloat:(jfloat)left
-                      withFloat:(jfloat)top
-                      withFloat:(jfloat)right
-                      withFloat:(jfloat)bottom;
+- (bool)intersectsWithFloat:(float)left
+                  withFloat:(float)top
+                  withFloat:(float)right
+                  withFloat:(float)bottom;
 
 /*!
  @brief Returns true iff the two specified rectangles intersect.In no event are
@@ -216,13 +221,13 @@
  @return true iff the two specified rectangles intersect. In no event are
                either of the rectangles modified.
  */
-+ (jboolean)intersectsWithADRectF:(ADRectF *)a
-                      withADRectF:(ADRectF *)b;
++ (bool)intersectsWithADRectF:(ADRectF *)a
+                  withADRectF:(ADRectF *)b;
 
 /*!
  @brief Returns true if the rectangle is empty (left >= right or top >= bottom)
  */
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 /*!
  @brief Offset the rectangle by adding dx to its left and right coordinates, and
@@ -230,8 +235,8 @@
  @param dx The amount to add to the rectangle's left and right coordinates
  @param dy The amount to add to the rectangle's top and bottom coordinates
  */
-- (void)offsetWithFloat:(jfloat)dx
-              withFloat:(jfloat)dy;
+- (void)offsetWithFloat:(float)dx
+              withFloat:(float)dy;
 
 /*!
  @brief Offset the rectangle to a specific (left, top) position,
@@ -239,8 +244,8 @@
  @param newLeft The new "left" coordinate for the rectangle
  @param newTop The new "top" coordinate for the rectangle
  */
-- (void)offsetToWithFloat:(jfloat)newLeft
-                withFloat:(jfloat)newTop;
+- (void)offsetToWithFloat:(float)newLeft
+                withFloat:(float)newTop;
 
 /*!
  @brief Print short representation to given writer.
@@ -269,7 +274,7 @@
 /*!
  @brief Scales up the rect by the given scale.
  */
-- (void)scale__WithFloat:(jfloat)scale_;
+- (void)scale__WithFloat:(float)scale_;
 
 /*!
  @brief Set the rectangle's coordinates to the specified values.Note: no range
@@ -280,10 +285,10 @@
  @param right The X coordinate of the right side of the rectangle
  @param bottom The Y coordinate of the bottom of the rectangle
  */
-- (void)setWithFloat:(jfloat)left
-           withFloat:(jfloat)top
-           withFloat:(jfloat)right
-           withFloat:(jfloat)bottom;
+- (void)setWithFloat:(float)left
+           withFloat:(float)top
+           withFloat:(float)right
+           withFloat:(float)bottom;
 
 /*!
  @brief Copy the coordinates from src into this rectangle.
@@ -313,8 +318,8 @@
                this rectangle to that intersection. If they do not, return
                false and do not change this rectangle.
  */
-- (jboolean)setIntersectWithADRectF:(ADRectF *)a
-                        withADRectF:(ADRectF *)b;
+- (bool)setIntersectWithADRectF:(ADRectF *)a
+                    withADRectF:(ADRectF *)b;
 
 /*!
  @brief Swap top/bottom or left/right if there are flipped (i.e.left > right
@@ -344,8 +349,8 @@
  @param x The x coordinate of the point to add to the rectangle
  @param y The y coordinate of the point to add to the rectangle
  */
-- (void)union__WithFloat:(jfloat)x
-               withFloat:(jfloat)y;
+- (void)union__WithFloat:(float)x
+               withFloat:(float)y;
 
 /*!
  @brief Update this Rect to enclose itself and the specified rectangle.If the
@@ -357,10 +362,10 @@
  @param right The right edge being unioned with this rectangle
  @param bottom The bottom edge being unioned with this rectangle
  */
-- (void)union__WithFloat:(jfloat)left
-               withFloat:(jfloat)top
-               withFloat:(jfloat)right
-               withFloat:(jfloat)bottom;
+- (void)union__WithFloat:(float)left
+               withFloat:(float)top
+               withFloat:(float)right
+               withFloat:(float)bottom;
 
 /*!
  @brief Update this Rect to enclose itself and the specified rectangle.If the
@@ -375,7 +380,7 @@
  @return the rectangle's width. This does not check for a valid rectangle
   (i.e. left <= right) so the result may be negative.
  */
-- (jfloat)width;
+- (float)width;
 
 /*!
  @brief Write this rectangle to the specified parcel.To restore a rectangle from
@@ -383,7 +388,7 @@
  @param outArg The parcel to write the rectangle's coordinates into
  */
 - (void)writeToParcelWithADParcel:(id<ADParcel>)outArg
-                          withInt:(jint)flags;
+                          withInt:(int32_t)flags;
 
 @end
 
@@ -400,11 +405,11 @@ FOUNDATION_EXPORT ADRectF *new_ADRectF_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADRectF *create_ADRectF_init(void);
 
-FOUNDATION_EXPORT void ADRectF_initWithFloat_withFloat_withFloat_withFloat_(ADRectF *self, jfloat left, jfloat top, jfloat right, jfloat bottom);
+FOUNDATION_EXPORT void ADRectF_initWithFloat_withFloat_withFloat_withFloat_(ADRectF *self, float left, float top, float right, float bottom);
 
-FOUNDATION_EXPORT ADRectF *new_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(jfloat left, jfloat top, jfloat right, jfloat bottom) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADRectF *new_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(float left, float top, float right, float bottom) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADRectF *create_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(jfloat left, jfloat top, jfloat right, jfloat bottom);
+FOUNDATION_EXPORT ADRectF *create_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(float left, float top, float right, float bottom);
 
 FOUNDATION_EXPORT void ADRectF_initWithADRectF_(ADRectF *self, ADRectF *r);
 
@@ -418,11 +423,12 @@ FOUNDATION_EXPORT ADRectF *new_ADRectF_initWithADRect_(ADRect *r) NS_RETURNS_RET
 
 FOUNDATION_EXPORT ADRectF *create_ADRectF_initWithADRect_(ADRect *r);
 
-FOUNDATION_EXPORT jboolean ADRectF_intersectsWithADRectF_withADRectF_(ADRectF *a, ADRectF *b);
+FOUNDATION_EXPORT bool ADRectF_intersectsWithADRectF_withADRectF_(ADRectF *a, ADRectF *b);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADRectF)
 
 @compatibility_alias RAndroidGraphicsRectF ADRectF;
+
 
 #endif
 

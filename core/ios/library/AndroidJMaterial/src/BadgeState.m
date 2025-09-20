@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\badge\BadgeState.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BadgeDrawable.h"
 #include "BadgeState.h"
 #include "Color.h"
@@ -10,12 +15,16 @@
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/util/Locale.h"
 
-@class JavaLangBoolean;
-@class JavaLangInteger;
-@class JavaUtilLocale;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXBadgeState () {
@@ -31,7 +40,7 @@ J2OBJC_FIELD_SETTER(ADXBadgeState, currentState_, ADXBadgeState_State *)
 
 @interface ADXBadgeState_State () {
  @public
-  jint badgeResId_;
+  int32_t badgeResId_;
   JavaLangInteger *backgroundColor_;
   JavaLangInteger *badgeTextColor_;
   JavaLangInteger *badgeTextAppearanceResId_;
@@ -39,14 +48,14 @@ J2OBJC_FIELD_SETTER(ADXBadgeState, currentState_, ADXBadgeState_State *)
   JavaLangInteger *badgeShapeAppearanceOverlayResId_;
   JavaLangInteger *badgeWithTextShapeAppearanceResId_;
   JavaLangInteger *badgeWithTextShapeAppearanceOverlayResId_;
-  jint alpha_;
+  int32_t alpha_;
   NSString *text_;
-  jint number_;
-  jint maxCharacterCount_;
-  jint maxNumber_;
+  int32_t number_;
+  int32_t maxCharacterCount_;
+  int32_t maxNumber_;
   JavaUtilLocale *numberLocale_;
-  jint contentDescriptionQuantityStrings_;
-  jint contentDescriptionExceedsMaxBadgeNumberRes_;
+  int32_t contentDescriptionQuantityStrings_;
+  int32_t contentDescriptionExceedsMaxBadgeNumberRes_;
   JavaLangInteger *badgeGravity_;
   JavaLangBoolean *isVisible_;
   JavaLangInteger *badgeHorizontalPadding_;
@@ -87,13 +96,13 @@ J2OBJC_FIELD_SETTER(ADXBadgeState_State, largeFontVerticalOffsetAdjustment_, Jav
 J2OBJC_FIELD_SETTER(ADXBadgeState_State, autoAdjustToWithinGrandparentBounds_, JavaLangBoolean *)
 J2OBJC_FIELD_SETTER(ADXBadgeState_State, badgeFixedEdge_, JavaLangInteger *)
 
-inline jint ADXBadgeState_State_get_BADGE_NUMBER_NONE(void);
+inline int32_t ADXBadgeState_State_get_BADGE_NUMBER_NONE(void);
 #define ADXBadgeState_State_BADGE_NUMBER_NONE -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, BADGE_NUMBER_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, BADGE_NUMBER_NONE, int32_t)
 
-inline jint ADXBadgeState_State_get_NOT_SET(void);
+inline int32_t ADXBadgeState_State_get_NOT_SET(void);
 #define ADXBadgeState_State_NOT_SET -2
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, NOT_SET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, NOT_SET, int32_t)
 
 @implementation ADXBadgeState
 
@@ -101,24 +110,24 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, NOT_SET, jint)
   return overridingState_;
 }
 
-- (jboolean)isVisible {
+- (bool)isVisible {
   return [((JavaLangBoolean *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->isVisible_)) booleanValue];
 }
 
-- (void)setVisibleWithBoolean:(jboolean)visible {
+- (void)setVisibleWithBoolean:(bool)visible {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->isVisible_, JavaLangBoolean_valueOfWithBoolean_(visible));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->isVisible_, JavaLangBoolean_valueOfWithBoolean_(visible));
 }
 
-- (jboolean)hasNumber {
+- (bool)hasNumber {
   return ((ADXBadgeState_State *) nil_chk(currentState_))->number_ != ADXBadgeState_State_BADGE_NUMBER_NONE;
 }
 
-- (jint)getNumber {
+- (int32_t)getNumber {
   return ((ADXBadgeState_State *) nil_chk(currentState_))->number_;
 }
 
-- (void)setNumberWithInt:(jint)number {
+- (void)setNumberWithInt:(int32_t)number {
   ((ADXBadgeState_State *) nil_chk(overridingState_))->number_ = number;
   ((ADXBadgeState_State *) nil_chk(currentState_))->number_ = number;
 }
@@ -127,7 +136,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, NOT_SET, jint)
   [self setNumberWithInt:ADXBadgeState_State_BADGE_NUMBER_NONE];
 }
 
-- (jboolean)hasText {
+- (bool)hasText {
   return ((ADXBadgeState_State *) nil_chk(currentState_))->text_ != nil;
 }
 
@@ -144,137 +153,137 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, NOT_SET, jint)
   [self setTextWithNSString:nil];
 }
 
-- (jint)getAlpha {
+- (int32_t)getAlpha {
   return ((ADXBadgeState_State *) nil_chk(currentState_))->alpha_;
 }
 
-- (void)setAlphaWithInt:(jint)alpha {
+- (void)setAlphaWithInt:(int32_t)alpha {
   ((ADXBadgeState_State *) nil_chk(overridingState_))->alpha_ = alpha;
   ((ADXBadgeState_State *) nil_chk(currentState_))->alpha_ = alpha;
 }
 
-- (jint)getMaxCharacterCount {
+- (int32_t)getMaxCharacterCount {
   return ((ADXBadgeState_State *) nil_chk(currentState_))->maxCharacterCount_;
 }
 
-- (void)setMaxCharacterCountWithInt:(jint)maxCharacterCount {
+- (void)setMaxCharacterCountWithInt:(int32_t)maxCharacterCount {
   ((ADXBadgeState_State *) nil_chk(overridingState_))->maxCharacterCount_ = maxCharacterCount;
   ((ADXBadgeState_State *) nil_chk(currentState_))->maxCharacterCount_ = maxCharacterCount;
 }
 
-- (jint)getMaxNumber {
+- (int32_t)getMaxNumber {
   return ((ADXBadgeState_State *) nil_chk(currentState_))->maxNumber_;
 }
 
-- (void)setMaxNumberWithInt:(jint)maxNumber {
+- (void)setMaxNumberWithInt:(int32_t)maxNumber {
   ((ADXBadgeState_State *) nil_chk(overridingState_))->maxNumber_ = maxNumber;
   ((ADXBadgeState_State *) nil_chk(currentState_))->maxNumber_ = maxNumber;
 }
 
-- (jint)getBackgroundColor {
+- (int32_t)getBackgroundColor {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->backgroundColor_)) intValue];
 }
 
-- (void)setBackgroundColorWithInt:(jint)backgroundColor {
+- (void)setBackgroundColorWithInt:(int32_t)backgroundColor {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->backgroundColor_, JavaLangInteger_valueOfWithInt_(backgroundColor));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->backgroundColor_, JavaLangInteger_valueOfWithInt_(backgroundColor));
 }
 
-- (jint)getBadgeTextColor {
+- (int32_t)getBadgeTextColor {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->badgeTextColor_)) intValue];
 }
 
-- (void)setBadgeTextColorWithInt:(jint)badgeTextColor {
+- (void)setBadgeTextColorWithInt:(int32_t)badgeTextColor {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->badgeTextColor_, JavaLangInteger_valueOfWithInt_(badgeTextColor));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->badgeTextColor_, JavaLangInteger_valueOfWithInt_(badgeTextColor));
 }
 
-- (jint)getBadgeGravity {
+- (int32_t)getBadgeGravity {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->badgeGravity_)) intValue];
 }
 
-- (void)setBadgeGravityWithInt:(jint)badgeGravity {
+- (void)setBadgeGravityWithInt:(int32_t)badgeGravity {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->badgeGravity_, JavaLangInteger_valueOfWithInt_(badgeGravity));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->badgeGravity_, JavaLangInteger_valueOfWithInt_(badgeGravity));
 }
 
-- (jint)getBadgeHorizontalPadding {
+- (int32_t)getBadgeHorizontalPadding {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->badgeHorizontalPadding_)) intValue];
 }
 
-- (void)setBadgeHorizontalPaddingWithInt:(jint)horizontalPadding {
+- (void)setBadgeHorizontalPaddingWithInt:(int32_t)horizontalPadding {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->badgeHorizontalPadding_, JavaLangInteger_valueOfWithInt_(horizontalPadding));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->badgeHorizontalPadding_, JavaLangInteger_valueOfWithInt_(horizontalPadding));
 }
 
-- (jint)getBadgeVerticalPadding {
+- (int32_t)getBadgeVerticalPadding {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->badgeVerticalPadding_)) intValue];
 }
 
-- (void)setBadgeVerticalPaddingWithInt:(jint)verticalPadding {
+- (void)setBadgeVerticalPaddingWithInt:(int32_t)verticalPadding {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->badgeVerticalPadding_, JavaLangInteger_valueOfWithInt_(verticalPadding));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->badgeVerticalPadding_, JavaLangInteger_valueOfWithInt_(verticalPadding));
 }
 
-- (jint)getHorizontalOffsetWithoutText {
+- (int32_t)getHorizontalOffsetWithoutText {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->horizontalOffsetWithoutText_)) intValue];
 }
 
-- (void)setHorizontalOffsetWithoutTextWithInt:(jint)offset {
+- (void)setHorizontalOffsetWithoutTextWithInt:(int32_t)offset {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->horizontalOffsetWithoutText_, JavaLangInteger_valueOfWithInt_(offset));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->horizontalOffsetWithoutText_, JavaLangInteger_valueOfWithInt_(offset));
 }
 
-- (jint)getVerticalOffsetWithoutText {
+- (int32_t)getVerticalOffsetWithoutText {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->verticalOffsetWithoutText_)) intValue];
 }
 
-- (void)setVerticalOffsetWithoutTextWithInt:(jint)offset {
+- (void)setVerticalOffsetWithoutTextWithInt:(int32_t)offset {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->verticalOffsetWithoutText_, JavaLangInteger_valueOfWithInt_(offset));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->verticalOffsetWithoutText_, JavaLangInteger_valueOfWithInt_(offset));
 }
 
-- (jint)getHorizontalOffsetWithText {
+- (int32_t)getHorizontalOffsetWithText {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->horizontalOffsetWithText_)) intValue];
 }
 
-- (void)setHorizontalOffsetWithTextWithInt:(jint)offset {
+- (void)setHorizontalOffsetWithTextWithInt:(int32_t)offset {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->horizontalOffsetWithText_, JavaLangInteger_valueOfWithInt_(offset));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->horizontalOffsetWithText_, JavaLangInteger_valueOfWithInt_(offset));
 }
 
-- (jint)getVerticalOffsetWithText {
+- (int32_t)getVerticalOffsetWithText {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->verticalOffsetWithText_)) intValue];
 }
 
-- (void)setVerticalOffsetWithTextWithInt:(jint)offset {
+- (void)setVerticalOffsetWithTextWithInt:(int32_t)offset {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->verticalOffsetWithText_, JavaLangInteger_valueOfWithInt_(offset));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->verticalOffsetWithText_, JavaLangInteger_valueOfWithInt_(offset));
 }
 
-- (jint)getLargeFontVerticalOffsetAdjustment {
+- (int32_t)getLargeFontVerticalOffsetAdjustment {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->largeFontVerticalOffsetAdjustment_)) intValue];
 }
 
-- (void)setLargeFontVerticalOffsetAdjustmentWithInt:(jint)offsetAdjustment {
+- (void)setLargeFontVerticalOffsetAdjustmentWithInt:(int32_t)offsetAdjustment {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->largeFontVerticalOffsetAdjustment_, JavaLangInteger_valueOfWithInt_(offsetAdjustment));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->largeFontVerticalOffsetAdjustment_, JavaLangInteger_valueOfWithInt_(offsetAdjustment));
 }
 
-- (jint)getAdditionalHorizontalOffset {
+- (int32_t)getAdditionalHorizontalOffset {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->additionalHorizontalOffset_)) intValue];
 }
 
-- (void)setAdditionalHorizontalOffsetWithInt:(jint)offset {
+- (void)setAdditionalHorizontalOffsetWithInt:(int32_t)offset {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->additionalHorizontalOffset_, JavaLangInteger_valueOfWithInt_(offset));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->additionalHorizontalOffset_, JavaLangInteger_valueOfWithInt_(offset));
 }
 
-- (jint)getAdditionalVerticalOffset {
+- (int32_t)getAdditionalVerticalOffset {
   return [((JavaLangInteger *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->additionalVerticalOffset_)) intValue];
 }
 
-- (void)setAdditionalVerticalOffsetWithInt:(jint)offset {
+- (void)setAdditionalVerticalOffsetWithInt:(int32_t)offset {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->additionalVerticalOffset_, JavaLangInteger_valueOfWithInt_(offset));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->additionalVerticalOffset_, JavaLangInteger_valueOfWithInt_(offset));
 }
@@ -288,11 +297,11 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeState_State, NOT_SET, jint)
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->numberLocale_, locale);
 }
 
-- (jboolean)isAutoAdjustedToGrandparentBounds {
+- (bool)isAutoAdjustedToGrandparentBounds {
   return [((JavaLangBoolean *) nil_chk(((ADXBadgeState_State *) nil_chk(currentState_))->autoAdjustToWithinGrandparentBounds_)) booleanValue];
 }
 
-- (void)setAutoAdjustToGrandparentBoundsWithBoolean:(jboolean)autoAdjustToGrandparentBounds {
+- (void)setAutoAdjustToGrandparentBoundsWithBoolean:(bool)autoAdjustToGrandparentBounds {
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(overridingState_))->autoAdjustToWithinGrandparentBounds_, JavaLangBoolean_valueOfWithBoolean_(autoAdjustToGrandparentBounds));
   JreStrongAssign(&((ADXBadgeState_State *) nil_chk(currentState_))->autoAdjustToWithinGrandparentBounds_, JavaLangBoolean_valueOfWithBoolean_(autoAdjustToGrandparentBounds));
 }
@@ -471,6 +480,8 @@ ADXBadgeState *create_ADXBadgeState_initWithADContext_withADXBadgeState_State_(A
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXBadgeState)
+
+J2OBJC_NAME_MAPPING(ADXBadgeState, "com.google.android.material.badge", "ADX")
 
 @implementation ADXBadgeState_State
 

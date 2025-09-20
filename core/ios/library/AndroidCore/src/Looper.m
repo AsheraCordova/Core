@@ -3,15 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Looper.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Looper.h"
 #include "MessageQueue.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Thread.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADLooper ()
 
-- (instancetype)initWithBoolean:(jboolean)quitAllowed;
+- (instancetype)initWithBoolean:(bool)quitAllowed;
 
 @end
 
@@ -20,11 +32,11 @@ inline ADLooper *ADLooper_set_sMainLooper(ADLooper *value);
 static ADLooper *ADLooper_sMainLooper;
 J2OBJC_STATIC_FIELD_OBJ(ADLooper, sMainLooper, ADLooper *)
 
-__attribute__((unused)) static void ADLooper_initWithBoolean_(ADLooper *self, jboolean quitAllowed);
+__attribute__((unused)) static void ADLooper_initWithBoolean_(ADLooper *self, bool quitAllowed);
 
-__attribute__((unused)) static ADLooper *new_ADLooper_initWithBoolean_(jboolean quitAllowed) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADLooper *new_ADLooper_initWithBoolean_(bool quitAllowed) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADLooper *create_ADLooper_initWithBoolean_(jboolean quitAllowed);
+__attribute__((unused)) static ADLooper *create_ADLooper_initWithBoolean_(bool quitAllowed);
 
 J2OBJC_INITIALIZED_DEFN(ADLooper)
 
@@ -54,12 +66,12 @@ J2OBJC_INITIALIZED_DEFN(ADLooper)
   return ADLooper_myQueue();
 }
 
-- (instancetype)initWithBoolean:(jboolean)quitAllowed {
+- (instancetype)initWithBoolean:(bool)quitAllowed {
   ADLooper_initWithBoolean_(self, quitAllowed);
   return self;
 }
 
-- (jboolean)isCurrentThread {
+- (bool)isCurrentThread {
   return true;
 }
 
@@ -162,17 +174,19 @@ ADMessageQueue *ADLooper_myQueue() {
   return ((ADLooper *) nil_chk(ADLooper_myLooper()))->mQueue_;
 }
 
-void ADLooper_initWithBoolean_(ADLooper *self, jboolean quitAllowed) {
+void ADLooper_initWithBoolean_(ADLooper *self, bool quitAllowed) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->mQueue_, new_ADMessageQueue_initWithBoolean_(quitAllowed));
 }
 
-ADLooper *new_ADLooper_initWithBoolean_(jboolean quitAllowed) {
+ADLooper *new_ADLooper_initWithBoolean_(bool quitAllowed) {
   J2OBJC_NEW_IMPL(ADLooper, initWithBoolean_, quitAllowed)
 }
 
-ADLooper *create_ADLooper_initWithBoolean_(jboolean quitAllowed) {
+ADLooper *create_ADLooper_initWithBoolean_(bool quitAllowed) {
   J2OBJC_CREATE_IMPL(ADLooper, initWithBoolean_, quitAllowed)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLooper)
+
+J2OBJC_NAME_MAPPING(ADLooper, "r.android.os", "AD")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttributeMap.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetAttributeMap")
@@ -23,6 +24,7 @@
 @class ASWidgetAttribute;
 @class ASWidgetAttributeValue;
 @class JavaUtilHashMap;
+@class NSString;
 @protocol ASWidgetAttributeMapFilter;
 @protocol JavaUtilComparator;
 @protocol JavaUtilFunctionBiFunction;
@@ -39,25 +41,25 @@
 
 - (instancetype)initWithJavaUtilHashMap:(JavaUtilHashMap *)orderMap;
 
-- (ASWidgetAttribute *)ceilingKeyWithId:(ASWidgetAttribute *)arg0;
+- (ASWidgetAttribute *)ceilingKeyWithId:(id)arg0;
 
-- (id<JavaUtilList>)computeIfAbsentWithId:(ASWidgetAttribute *)arg0
+- (id<JavaUtilList>)computeIfAbsentWithId:(id)arg0
              withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg1;
 
-- (id<JavaUtilList>)computeIfPresentWithId:(ASWidgetAttribute *)arg0
+- (id<JavaUtilList>)computeIfPresentWithId:(id)arg0
             withJavaUtilFunctionBiFunction:(id<JavaUtilFunctionBiFunction>)arg1;
 
-- (id<JavaUtilList>)computeWithId:(ASWidgetAttribute *)arg0
+- (id<JavaUtilList>)computeWithId:(id)arg0
    withJavaUtilFunctionBiFunction:(id<JavaUtilFunctionBiFunction>)arg1;
 
 - (ASWidgetAttribute *)firstKey;
 
-- (ASWidgetAttribute *)floorKeyWithId:(ASWidgetAttribute *)arg0;
+- (ASWidgetAttribute *)floorKeyWithId:(id)arg0;
 
 - (id<ASWidgetAttributeMapFilter>)getFilter;
 
 - (id<JavaUtilList>)getOrDefaultWithId:(id)arg0
-                                withId:(id<JavaUtilList>)arg1;
+                                withId:(id)arg1;
 
 - (ASWidgetAttributeMap *)getParent;
 
@@ -65,14 +67,14 @@
 
 - (id<JavaUtilList>)getWithId:(id)arg0;
 
-- (ASWidgetAttribute *)higherKeyWithId:(ASWidgetAttribute *)arg0;
+- (ASWidgetAttribute *)higherKeyWithId:(id)arg0;
 
 - (ASWidgetAttribute *)lastKey;
 
-- (ASWidgetAttribute *)lowerKeyWithId:(ASWidgetAttribute *)arg0;
+- (ASWidgetAttribute *)lowerKeyWithId:(id)arg0;
 
-- (id<JavaUtilList>)mergeWithId:(ASWidgetAttribute *)arg0
-                         withId:(id<JavaUtilList>)arg1
+- (id<JavaUtilList>)mergeWithId:(id)arg0
+                         withId:(id)arg1
  withJavaUtilFunctionBiFunction:(id<JavaUtilFunctionBiFunction>)arg2;
 
 - (id<JavaUtilList>)putWithId:(ASWidgetAttribute *)key
@@ -81,13 +83,13 @@
 - (void)putWithASWidgetAttribute:(ASWidgetAttribute *)key
       withASWidgetAttributeValue:(ASWidgetAttributeValue *)value;
 
-- (id<JavaUtilList>)putIfAbsentWithId:(ASWidgetAttribute *)arg0
-                               withId:(id<JavaUtilList>)arg1;
+- (id<JavaUtilList>)putIfAbsentWithId:(id)arg0
+                               withId:(id)arg1;
 
 - (id<JavaUtilList>)removeWithId:(id)arg0;
 
-- (id<JavaUtilList>)replaceWithId:(ASWidgetAttribute *)arg0
-                           withId:(id<JavaUtilList>)arg1;
+- (id<JavaUtilList>)replaceWithId:(id)arg0
+                           withId:(id)arg1;
 
 - (void)setFilterWithASWidgetAttributeMapFilter:(id<ASWidgetAttributeMapFilter>)filter;
 
@@ -120,6 +122,7 @@ FOUNDATION_EXPORT ASWidgetAttributeMap *create_ASWidgetAttributeMap_initWithJava
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttributeMap)
 
 @compatibility_alias ComAsheraWidgetWidgetAttributeMap ASWidgetAttributeMap;
+
 
 #endif
 

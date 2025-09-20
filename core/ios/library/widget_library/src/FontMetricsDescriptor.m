@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\FontMetricsDescriptor.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FontMetricsDescriptor.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASFontMetricsDescriptor
@@ -51,3 +63,5 @@ ASFontMetricsDescriptor *create_ASFontMetricsDescriptor_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFontMetricsDescriptor)
+
+J2OBJC_NAME_MAPPING(ASFontMetricsDescriptor, "com.ashera.model", "AS")

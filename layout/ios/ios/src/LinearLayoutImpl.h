@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\LinearLayoutImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LinearLayoutImpl")
@@ -22,6 +23,9 @@
 
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -40,13 +44,13 @@
                     withNSString:(NSString *)localname;
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index;
+                 withInt:(int32_t)index;
 
 - (id)asNativeWidget;
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -67,9 +71,9 @@
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)removeWithInt:(jint)index;
+- (bool)removeWithInt:(int32_t)index;
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w;
+- (bool)removeWithASIWidget:(id<ASIWidget>)w;
 
 - (void)requestLayout;
 
@@ -85,7 +89,7 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 @end
 
@@ -123,6 +127,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl)
 
 @compatibility_alias ComAsheraLayoutLinearLayoutImpl ASLinearLayoutImpl;
 
+
 #endif
 
 #if !defined (ASLinearLayoutImpl_Orientation_) && (INCLUDE_ALL_LinearLayoutImpl || defined(INCLUDE_ASLinearLayoutImpl_Orientation))
@@ -158,6 +163,7 @@ FOUNDATION_EXPORT ASLinearLayoutImpl_Orientation *new_ASLinearLayoutImpl_Orienta
 FOUNDATION_EXPORT ASLinearLayoutImpl_Orientation *create_ASLinearLayoutImpl_Orientation_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Orientation)
+
 
 #endif
 
@@ -195,6 +201,7 @@ FOUNDATION_EXPORT ASLinearLayoutImpl_Divider *create_ASLinearLayoutImpl_Divider_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 
+
 #endif
 
 #if !defined (ASLinearLayoutImpl_LinearLayoutExt_) && (INCLUDE_ALL_LinearLayoutImpl || defined(INCLUDE_ASLinearLayoutImpl_LinearLayoutExt))
@@ -219,6 +226,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -239,9 +249,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
@@ -255,12 +265,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -270,9 +280,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setMaxHeightWithInt:(jint)height;
+- (void)setMaxHeightWithInt:(int32_t)height;
 
-- (void)setMaxWidthWithInt:(jint)width;
+- (void)setMaxWidthWithInt:(int32_t)width;
 
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
@@ -287,7 +297,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -303,16 +313,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -331,6 +341,7 @@ FOUNDATION_EXPORT ASLinearLayoutImpl_LinearLayoutExt *new_ASLinearLayoutImpl_Lin
 FOUNDATION_EXPORT ASLinearLayoutImpl_LinearLayoutExt *create_ASLinearLayoutImpl_LinearLayoutExt_initWithASLinearLayoutImpl_(ASLinearLayoutImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
+
 
 #endif
 

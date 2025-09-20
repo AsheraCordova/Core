@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\BulletInterval.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BulletInterval.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -10,40 +15,47 @@
 #include "J2ObjC_source.h"
 #include "StyleInterval.h"
 #include "WidgetAttributeMap.h"
+#include "java/lang/Character.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASBulletInterval () {
  @public
-  jint indent_;
-  jint bulletSpacing_;
+  int32_t indent_;
+  int32_t bulletSpacing_;
 }
 
 @end
 
 @implementation ASBulletInterval
 
-- (jint)getBulletSpacing {
+- (int32_t)getBulletSpacing {
   return bulletSpacing_;
 }
 
-- (void)setBulletSpacingWithInt:(jint)bulletSpacing {
+- (void)setBulletSpacingWithInt:(int32_t)bulletSpacing {
   self->bulletSpacing_ = bulletSpacing;
 }
 
-- (jint)getIndent {
+- (int32_t)getIndent {
   return indent_;
 }
 
-- (void)setIndentWithInt:(jint)indent {
+- (void)setIndentWithInt:(int32_t)indent {
   self->indent_ = indent;
 }
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)style
-                    withInt:(jint)indent
-                    withInt:(jint)bulletSpacing {
+                    withInt:(int32_t)indent
+                    withInt:(int32_t)bulletSpacing {
   ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(self, start, end, style, indent, bulletSpacing);
   return self;
 }
@@ -52,8 +64,8 @@
   return JreStrcat("CI$I$IC", '[', [self getStart], @", ", [self getEnd], @", ", self->indent_, ']');
 }
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments {
   return create_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(start, end, (ASWidgetAttributeMap *) cast_chk(IOSObjectArray_Get(nil_chk(arguments), 0), [ASWidgetAttributeMap class]), [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(arguments, 1), [JavaLangInteger class]))) intValue], [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(arguments, 2), [JavaLangInteger class]))) intValue]);
 }
@@ -96,18 +108,20 @@
 
 @end
 
-void ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(ASBulletInterval *self, jint start, jint end, ASWidgetAttributeMap *style, jint indent, jint bulletSpacing) {
+void ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(ASBulletInterval *self, int32_t start, int32_t end, ASWidgetAttributeMap *style, int32_t indent, int32_t bulletSpacing) {
   ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(self, start, end, style);
   self->indent_ = indent;
   self->bulletSpacing_ = bulletSpacing;
 }
 
-ASBulletInterval *new_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(jint start, jint end, ASWidgetAttributeMap *style, jint indent, jint bulletSpacing) {
+ASBulletInterval *new_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(int32_t start, int32_t end, ASWidgetAttributeMap *style, int32_t indent, int32_t bulletSpacing) {
   J2OBJC_NEW_IMPL(ASBulletInterval, initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_, start, end, style, indent, bulletSpacing)
 }
 
-ASBulletInterval *create_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(jint start, jint end, ASWidgetAttributeMap *style, jint indent, jint bulletSpacing) {
+ASBulletInterval *create_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(int32_t start, int32_t end, ASWidgetAttributeMap *style, int32_t indent, int32_t bulletSpacing) {
   J2OBJC_CREATE_IMPL(ASBulletInterval, initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_, start, end, style, indent, bulletSpacing)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBulletInterval)
+
+J2OBJC_NAME_MAPPING(ASBulletInterval, "com.ashera.attributedtext", "AS")

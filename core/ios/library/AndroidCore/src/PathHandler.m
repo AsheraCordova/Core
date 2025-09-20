@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\PathHandler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "PathHandler.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPathHandler : NSObject
@@ -70,3 +81,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADPathHandler)
+
+J2OBJC_NAME_MAPPING(ADPathHandler, "r.android.graphics", "AD")

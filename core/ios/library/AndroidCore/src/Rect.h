@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\Rect.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Rect")
@@ -16,7 +17,10 @@
 #if !defined (ADRect_) && (INCLUDE_ALL_Rect || defined(INCLUDE_ADRect))
 #define ADRect_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @class JavaLangStringBuilder;
+@class NSString;
 
 /*!
  @brief Rect holds four integer coordinates for a rectangle.The rectangle is
@@ -27,10 +31,10 @@
  */
 @interface ADRect : NSObject {
  @public
-  jint left_;
-  jint top_;
-  jint right_;
-  jint bottom_;
+  int32_t left_;
+  int32_t top_;
+  int32_t right_;
+  int32_t bottom_;
 }
 
 #pragma mark Public
@@ -49,10 +53,10 @@
  @param right The X coordinate of the right side of the rectangle
  @param bottom The Y coordinate of the bottom of the rectangle
  */
-- (instancetype)initWithInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom;
+- (instancetype)initWithInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom;
 
 /*!
  @brief Create a new rectangle, initialized with the values in the specified
@@ -73,16 +77,16 @@
  @return true iff (x,y) are contained by the rectangle, where containment
                means left <= x < right and top <= y < bottom
  */
-- (jboolean)containsWithInt:(jint)x
-                    withInt:(jint)y;
+- (bool)containsWithInt:(int32_t)x
+                withInt:(int32_t)y;
 
-- (jboolean)containsWithADRect:(ADRect *)r;
+- (bool)containsWithADRect:(ADRect *)r;
 
 /*!
  @return the rectangle's height. This does not check for a valid rectangle
           (i.e. top <= bottom) so the result may be negative.
  */
-- (jint)height;
+- (int32_t)height;
 
 /*!
  @brief Inset the rectangle by (dx,dy).If dx is positive, then the sides are
@@ -93,8 +97,8 @@
  @param dx The amount to add(subtract) from the rectangle's left(right)
  @param dy The amount to add(subtract) from the rectangle's top(bottom)
  */
-- (void)insetWithInt:(jint)dx
-             withInt:(jint)dy;
+- (void)insetWithInt:(int32_t)dx
+             withInt:(int32_t)dy;
 
 /*!
  @brief Insets the rectangle on all sides specified by the dimensions of the <code>insets</code>
@@ -103,7 +107,7 @@
  */
 - (void)insetWithADRect:(ADRect *)insets;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 /*!
  @brief Offset the rectangle by adding dx to its left and right coordinates, and
@@ -111,8 +115,8 @@
  @param dx The amount to add to the rectangle's left and right coordinates
  @param dy The amount to add to the rectangle's top and bottom coordinates
  */
-- (void)offsetWithInt:(jint)dx
-              withInt:(jint)dy;
+- (void)offsetWithInt:(int32_t)dx
+              withInt:(int32_t)dy;
 
 /*!
  @brief Set the rectangle's coordinates to the specified values.Note: no range
@@ -123,10 +127,10 @@
  @param right The X coordinate of the right side of the rectangle
  @param bottom The Y coordinate of the bottom of the rectangle
  */
-- (void)setWithInt:(jint)left
-           withInt:(jint)top
-           withInt:(jint)right
-           withInt:(jint)bottom;
+- (void)setWithInt:(int32_t)left
+           withInt:(int32_t)top
+           withInt:(int32_t)right
+           withInt:(int32_t)bottom;
 
 - (void)setWithADRect:(ADRect *)src;
 
@@ -143,7 +147,7 @@
  @return the rectangle's width. This does not check for a valid rectangle
           (i.e. left <= right) so the result may be negative.
  */
-- (jint)width;
+- (int32_t)width;
 
 @end
 
@@ -155,11 +159,11 @@ FOUNDATION_EXPORT ADRect *new_ADRect_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADRect *create_ADRect_init(void);
 
-FOUNDATION_EXPORT void ADRect_initWithInt_withInt_withInt_withInt_(ADRect *self, jint left, jint top, jint right, jint bottom);
+FOUNDATION_EXPORT void ADRect_initWithInt_withInt_withInt_withInt_(ADRect *self, int32_t left, int32_t top, int32_t right, int32_t bottom);
 
-FOUNDATION_EXPORT ADRect *new_ADRect_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADRect *new_ADRect_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADRect *create_ADRect_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom);
+FOUNDATION_EXPORT ADRect *create_ADRect_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom);
 
 FOUNDATION_EXPORT void ADRect_initWithADRect_(ADRect *self, ADRect *r);
 
@@ -170,6 +174,7 @@ FOUNDATION_EXPORT ADRect *create_ADRect_initWithADRect_(ADRect *r);
 J2OBJC_TYPE_LITERAL_HEADER(ADRect)
 
 @compatibility_alias RAndroidGraphicsRect ADRect;
+
 
 #endif
 

@@ -3,10 +3,16 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractBitFlagConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
@@ -15,6 +21,12 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASAbstractBitFlagConverter
@@ -35,8 +47,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   else {
     IOSObjectArray *values = [value java_split:@"\\|"];
-    jint returnInt = 0;
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(values))->size_; i++) {
+    int32_t returnInt = 0;
+    for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(values))->size_; i++) {
       if ([((id<JavaUtilMap>) nil_chk(mapping)) containsKeyWithId:IOSObjectArray_Get(values, i)]) {
         returnInt |= [((JavaLangInteger *) nil_chk([mapping getWithId:IOSObjectArray_Get(values, i)])) intValue];
       }
@@ -58,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       id<JavaUtilSet> keySet = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(mapping)) keySet]);
       for (NSString * __strong key in nil_chk(keySet)) {
         JavaLangInteger *mask = JreRetainedLocalValue([mapping getWithId:key]);
-        if ([value intValue] == 0 && value == mask) {
+        if ([value intValue] == 0 && JreObjectEqualsEquals(value, mask)) {
           [values addWithId:key];
           goto break_outer;
         }
@@ -143,3 +155,5 @@ void ASAbstractBitFlagConverter_init(ASAbstractBitFlagConverter *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAbstractBitFlagConverter)
+
+J2OBJC_NAME_MAPPING(ASAbstractBitFlagConverter, "com.ashera.converter", "AS")

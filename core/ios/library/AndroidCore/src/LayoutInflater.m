@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\LayoutInflater.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Context.h"
 #include "J2ObjC_source.h"
 #include "LayoutInflater.h"
 #include "PluginInvoker.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADLayoutInflater
@@ -24,15 +37,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADLayoutInflater_fromWithADContext_(context);
 }
 
-- (ADView *)inflateWithInt:(jint)layout
+- (ADView *)inflateWithInt:(int32_t)layout
            withADViewGroup:(ADViewGroup *)parent
-               withBoolean:(jboolean)b {
+               withBoolean:(bool)b {
   return nil;
 }
 
 - (ADView *)inflateWithNSString:(NSString *)layout
                 withADViewGroup:(ADViewGroup *)parent
-                    withBoolean:(jboolean)b {
+                    withBoolean:(bool)b {
   return [((ADViewGroup *) nil_chk(parent)) inflateViewWithNSString:layout];
 }
 
@@ -85,7 +98,7 @@ ADLayoutInflater *ADLayoutInflater_fromWithADContext_(ADContext *context) {
 void ADLayoutInflater_recurseSetWithADViewGroup_withADView_OnClickListener_(ADViewGroup *parent, id<ADView_OnClickListener> onClickListener) {
   ADLayoutInflater_initialize();
   if ([((NSString *) nil_chk(ASPluginInvoker_getOS())) java_equalsIgnoreCase:@"swt"]) {
-    for (jint i = 0; i < [((ADViewGroup *) nil_chk(parent)) getChildCount]; i++) {
+    for (int32_t i = 0; i < [((ADViewGroup *) nil_chk(parent)) getChildCount]; i++) {
       ADView *child = JreRetainedLocalValue([parent getChildAtWithInt:i]);
       [((ADView *) nil_chk(child)) setMyAttributeWithNSString:@"onClick" withId:onClickListener];
       if ([child isKindOfClass:[ADViewGroup class]]) {
@@ -96,3 +109,5 @@ void ADLayoutInflater_recurseSetWithADViewGroup_withADView_OnClickListener_(ADVi
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLayoutInflater)
+
+J2OBJC_NAME_MAPPING(ADLayoutInflater, "r.android.view", "AD")

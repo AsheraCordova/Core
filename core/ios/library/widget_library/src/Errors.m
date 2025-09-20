@@ -3,13 +3,24 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\Errors.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Error.h"
 #include "Errors.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASErrors () {
@@ -38,7 +49,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&self->errors_, errors);
 }
 
-- (jboolean)hasErrors {
+- (bool)hasErrors {
   return [((id<JavaUtilList>) nil_chk(errors_)) size] > 0;
 }
 
@@ -98,3 +109,5 @@ ASErrors *create_ASErrors_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASErrors)
+
+J2OBJC_NAME_MAPPING(ASErrors, "com.ashera.model", "AS")

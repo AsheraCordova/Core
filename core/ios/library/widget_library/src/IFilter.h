@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\converter\IFilter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IFilter")
@@ -16,10 +17,13 @@
 #if !defined (ASIFilter_) && (INCLUDE_ALL_IFilter || defined(INCLUDE_ASIFilter))
 #define ASIFilter_
 
+@class JavaLangBoolean;
+@class NSString;
+
 @protocol ASIFilter < JavaObject >
 
-- (jboolean)filterWithNSString:(NSString *)value
-                  withNSString:(NSString *)query;
+- (bool)filterWithNSString:(NSString *)value
+              withNSString:(NSString *)query;
 
 @end
 
@@ -28,6 +32,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIFilter)
 J2OBJC_TYPE_LITERAL_HEADER(ASIFilter)
 
 #define ComAsheraConverterIFilter ASIFilter
+
 
 #endif
 

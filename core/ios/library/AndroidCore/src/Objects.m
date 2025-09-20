@@ -3,14 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Objects.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "Objects.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/NullPointerException.h"
 #include "java/util/Arrays.h"
 #include "java/util/Comparator.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADObjects ()
@@ -34,27 +47,27 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)compareWithId:(id)a
-               withId:(id)b
-withJavaUtilComparator:(id<JavaUtilComparator>)c {
++ (int32_t)compareWithId:(id)a
+                  withId:(id)b
+  withJavaUtilComparator:(id<JavaUtilComparator>)c {
   return ADObjects_compareWithId_withId_withJavaUtilComparator_(a, b, c);
 }
 
-+ (jboolean)deepEqualsWithId:(id)a
-                      withId:(id)b {
++ (bool)deepEqualsWithId:(id)a
+                  withId:(id)b {
   return ADObjects_deepEqualsWithId_withId_(a, b);
 }
 
-+ (jboolean)equalsWithId:(id)a
-                  withId:(id)b {
++ (bool)equalsWithId:(id)a
+              withId:(id)b {
   return ADObjects_equalsWithId_withId_(a, b);
 }
 
-+ (jint)hash__WithNSObjectArray:(IOSObjectArray *)values {
++ (int32_t)hash__WithNSObjectArray:(IOSObjectArray *)values {
   return ADObjects_hash__WithNSObjectArray_(values);
 }
 
-+ (jint)hashCodeWithId:(id)o {
++ (int32_t)hashCodeWithId:(id)o {
   return ADObjects_hashCodeWithId_(o);
 }
 
@@ -76,8 +89,8 @@ withJavaUtilComparator:(id<JavaUtilComparator>)c {
   return ADObjects_toStringWithId_withNSString_(o, nullString);
 }
 
-+ (jboolean)equalWithId:(id)a
-                 withId:(id)b {
++ (bool)equalWithId:(id)a
+             withId:(id)b {
   return ADObjects_equalWithId_withId_(a, b);
 }
 
@@ -129,18 +142,18 @@ ADObjects *create_ADObjects_init() {
   J2OBJC_CREATE_IMPL(ADObjects, init)
 }
 
-jint ADObjects_compareWithId_withId_withJavaUtilComparator_(id a, id b, id<JavaUtilComparator> c) {
+int32_t ADObjects_compareWithId_withId_withJavaUtilComparator_(id a, id b, id<JavaUtilComparator> c) {
   ADObjects_initialize();
-  if (a == b) {
+  if (JreObjectEqualsEquals(a, b)) {
     return 0;
   }
   return [((id<JavaUtilComparator>) nil_chk(c)) compareWithId:a withId:b];
 }
 
-jboolean ADObjects_deepEqualsWithId_withId_(id a, id b) {
+bool ADObjects_deepEqualsWithId_withId_(id a, id b) {
   ADObjects_initialize();
   if (a == nil || b == nil) {
-    return a == b;
+    return JreObjectEqualsEquals(a, b);
   }
   else if ([IOSClass_arrayType(NSObject_class_(), 1) isInstance:a] && [IOSClass_arrayType(NSObject_class_(), 1) isInstance:b]) {
     return JavaUtilArrays_deepEqualsWithNSObjectArray_withNSObjectArray_((IOSObjectArray *) cast_check(a, IOSClass_arrayType(NSObject_class_(), 1)), (IOSObjectArray *) cast_check(b, IOSClass_arrayType(NSObject_class_(), 1)));
@@ -172,19 +185,19 @@ jboolean ADObjects_deepEqualsWithId_withId_(id a, id b) {
   return [a isEqual:b];
 }
 
-jboolean ADObjects_equalsWithId_withId_(id a, id b) {
+bool ADObjects_equalsWithId_withId_(id a, id b) {
   ADObjects_initialize();
   return (a == nil) ? (b == nil) : [nil_chk(a) isEqual:b];
 }
 
-jint ADObjects_hash__WithNSObjectArray_(IOSObjectArray *values) {
+int32_t ADObjects_hash__WithNSObjectArray_(IOSObjectArray *values) {
   ADObjects_initialize();
   return JavaUtilArrays_hashCodeWithNSObjectArray_(values);
 }
 
-jint ADObjects_hashCodeWithId_(id o) {
+int32_t ADObjects_hashCodeWithId_(id o) {
   ADObjects_initialize();
-  return (o == nil) ? 0 : ((jint) [nil_chk(o) hash]);
+  return (o == nil) ? 0 : ((int32_t) [nil_chk(o) hash]);
 }
 
 id ADObjects_requireNonNullWithId_(id o) {
@@ -213,9 +226,11 @@ NSString *ADObjects_toStringWithId_withNSString_(id o, NSString *nullString) {
   return (o == nil) ? nullString : [nil_chk(o) description];
 }
 
-jboolean ADObjects_equalWithId_withId_(id a, id b) {
+bool ADObjects_equalWithId_withId_(id a, id b) {
   ADObjects_initialize();
-  return a == b || (a != nil && [a isEqual:b]);
+  return JreObjectEqualsEquals(a, b) || (a != nil && [a isEqual:b]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADObjects)
+
+J2OBJC_NAME_MAPPING(ADObjects, "r.android.util", "AD")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\internal\CheckableGroup.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CheckableGroup")
@@ -23,6 +24,8 @@
 #define ADXCheckableGroup_
 
 @class ADViewGroup;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADXCheckableGroup_OnCheckedStateChangeListener;
 @protocol ADXMaterialCheckable;
 @protocol JavaUtilList;
@@ -39,7 +42,7 @@
 
 - (void)addCheckableWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable;
 
-- (void)checkWithInt:(jint)id_;
+- (void)checkWithInt:(int32_t)id_;
 
 - (void)clearCheck;
 
@@ -47,21 +50,21 @@
 
 - (id<JavaUtilList>)getCheckedIdsSortedByChildOrderWithADViewGroup:(ADViewGroup *)parent;
 
-- (jint)getSingleCheckedId;
+- (int32_t)getSingleCheckedId;
 
-- (jboolean)isSelectionRequired;
+- (bool)isSelectionRequired;
 
-- (jboolean)isSingleSelection;
+- (bool)isSingleSelection;
 
 - (void)removeCheckableWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable;
 
 - (void)setOnCheckedStateChangeListenerWithADXCheckableGroup_OnCheckedStateChangeListener:(id<ADXCheckableGroup_OnCheckedStateChangeListener>)listener;
 
-- (void)setSelectionRequiredWithBoolean:(jboolean)selectionRequired;
+- (void)setSelectionRequiredWithBoolean:(bool)selectionRequired;
 
-- (void)setSingleSelectionWithBoolean:(jboolean)singleSelection;
+- (void)setSingleSelectionWithBoolean:(bool)singleSelection;
 
-- (void)uncheckWithInt:(jint)id_;
+- (void)uncheckWithInt:(int32_t)id_;
 
 @end
 
@@ -76,6 +79,7 @@ FOUNDATION_EXPORT ADXCheckableGroup *create_ADXCheckableGroup_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADXCheckableGroup)
 
 @compatibility_alias ComGoogleAndroidMaterialInternalCheckableGroup ADXCheckableGroup;
+
 
 #endif
 
@@ -96,6 +100,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXCheckableGroup)
 J2OBJC_EMPTY_STATIC_INIT(ADXCheckableGroup_OnCheckedStateChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXCheckableGroup_OnCheckedStateChangeListener)
+
 
 #endif
 

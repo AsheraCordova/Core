@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\LayoutNativeVars.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LayoutNativeVars")
@@ -16,6 +17,8 @@
 #if !defined (ASLayoutNativeVars_) && (INCLUDE_ALL_LayoutNativeVars || defined(INCLUDE_ASLayoutNativeVars))
 #define ASLayoutNativeVars_
 
+@class JavaLangInteger;
+
 @interface ASLayoutNativeVars : NSObject
 
 #pragma mark Public
@@ -26,761 +29,761 @@
 
 J2OBJC_STATIC_INIT(ASLayoutNativeVars)
 
-inline jint ASLayoutNativeVars_get_NSLineBreakByMarquee(void);
-inline jint ASLayoutNativeVars_set_NSLineBreakByMarquee(jint value);
-inline jint *ASLayoutNativeVars_getRef_NSLineBreakByMarquee(void);
+inline int32_t ASLayoutNativeVars_get_NSLineBreakByMarquee(void);
+inline int32_t ASLayoutNativeVars_set_NSLineBreakByMarquee(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_NSLineBreakByMarquee(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_NSLineBreakByMarquee;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByMarquee, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_NSLineBreakByMarquee;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByMarquee, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIFontDescriptorTraitItalic(void);
-inline jint ASLayoutNativeVars_set_UIFontDescriptorTraitItalic(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIFontDescriptorTraitItalic(void);
+inline int32_t ASLayoutNativeVars_get_UIFontDescriptorTraitItalic(void);
+inline int32_t ASLayoutNativeVars_set_UIFontDescriptorTraitItalic(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIFontDescriptorTraitItalic(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIFontDescriptorTraitItalic;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIFontDescriptorTraitItalic, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIFontDescriptorTraitItalic;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIFontDescriptorTraitItalic, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIFontDescriptorTraitBold(void);
-inline jint ASLayoutNativeVars_set_UIFontDescriptorTraitBold(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIFontDescriptorTraitBold(void);
+inline int32_t ASLayoutNativeVars_get_UIFontDescriptorTraitBold(void);
+inline int32_t ASLayoutNativeVars_set_UIFontDescriptorTraitBold(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIFontDescriptorTraitBold(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIFontDescriptorTraitBold;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIFontDescriptorTraitBold, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIFontDescriptorTraitBold;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIFontDescriptorTraitBold, int32_t)
 
-inline jint ASLayoutNativeVars_get_NSLineBreakByTruncatingTail(void);
-inline jint ASLayoutNativeVars_set_NSLineBreakByTruncatingTail(jint value);
-inline jint *ASLayoutNativeVars_getRef_NSLineBreakByTruncatingTail(void);
+inline int32_t ASLayoutNativeVars_get_NSLineBreakByTruncatingTail(void);
+inline int32_t ASLayoutNativeVars_set_NSLineBreakByTruncatingTail(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_NSLineBreakByTruncatingTail(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_NSLineBreakByTruncatingTail;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByTruncatingTail, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_NSLineBreakByTruncatingTail;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByTruncatingTail, int32_t)
 
-inline jint ASLayoutNativeVars_get_NSLineBreakByTruncatingMiddle(void);
-inline jint ASLayoutNativeVars_set_NSLineBreakByTruncatingMiddle(jint value);
-inline jint *ASLayoutNativeVars_getRef_NSLineBreakByTruncatingMiddle(void);
+inline int32_t ASLayoutNativeVars_get_NSLineBreakByTruncatingMiddle(void);
+inline int32_t ASLayoutNativeVars_set_NSLineBreakByTruncatingMiddle(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_NSLineBreakByTruncatingMiddle(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_NSLineBreakByTruncatingMiddle;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByTruncatingMiddle, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_NSLineBreakByTruncatingMiddle;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByTruncatingMiddle, int32_t)
 
-inline jint ASLayoutNativeVars_get_NSLineBreakByClipping(void);
-inline jint ASLayoutNativeVars_set_NSLineBreakByClipping(jint value);
-inline jint *ASLayoutNativeVars_getRef_NSLineBreakByClipping(void);
+inline int32_t ASLayoutNativeVars_get_NSLineBreakByClipping(void);
+inline int32_t ASLayoutNativeVars_set_NSLineBreakByClipping(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_NSLineBreakByClipping(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_NSLineBreakByClipping;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByClipping, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_NSLineBreakByClipping;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByClipping, int32_t)
 
-inline jint ASLayoutNativeVars_get_NSLineBreakByTruncatingHead(void);
-inline jint ASLayoutNativeVars_set_NSLineBreakByTruncatingHead(jint value);
-inline jint *ASLayoutNativeVars_getRef_NSLineBreakByTruncatingHead(void);
+inline int32_t ASLayoutNativeVars_get_NSLineBreakByTruncatingHead(void);
+inline int32_t ASLayoutNativeVars_set_NSLineBreakByTruncatingHead(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_NSLineBreakByTruncatingHead(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_NSLineBreakByTruncatingHead;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByTruncatingHead, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_NSLineBreakByTruncatingHead;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSLineBreakByTruncatingHead, int32_t)
 
-inline jint ASLayoutNativeVars_get_NSTextAlignmentJustified(void);
-inline jint ASLayoutNativeVars_set_NSTextAlignmentJustified(jint value);
-inline jint *ASLayoutNativeVars_getRef_NSTextAlignmentJustified(void);
+inline int32_t ASLayoutNativeVars_get_NSTextAlignmentJustified(void);
+inline int32_t ASLayoutNativeVars_set_NSTextAlignmentJustified(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_NSTextAlignmentJustified(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_NSTextAlignmentJustified;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSTextAlignmentJustified, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_NSTextAlignmentJustified;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSTextAlignmentJustified, int32_t)
 
-inline jint ASLayoutNativeVars_get_NSTextAlignmentLeft(void);
-inline jint ASLayoutNativeVars_set_NSTextAlignmentLeft(jint value);
-inline jint *ASLayoutNativeVars_getRef_NSTextAlignmentLeft(void);
+inline int32_t ASLayoutNativeVars_get_NSTextAlignmentLeft(void);
+inline int32_t ASLayoutNativeVars_set_NSTextAlignmentLeft(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_NSTextAlignmentLeft(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_NSTextAlignmentLeft;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSTextAlignmentLeft, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_NSTextAlignmentLeft;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, NSTextAlignmentLeft, int32_t)
 
-inline jint ASLayoutNativeVars_get_kCGBlendModeNotSupported(void);
-inline jint ASLayoutNativeVars_set_kCGBlendModeNotSupported(jint value);
-inline jint *ASLayoutNativeVars_getRef_kCGBlendModeNotSupported(void);
+inline int32_t ASLayoutNativeVars_get_kCGBlendModeNotSupported(void);
+inline int32_t ASLayoutNativeVars_set_kCGBlendModeNotSupported(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_kCGBlendModeNotSupported(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_kCGBlendModeNotSupported;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeNotSupported, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_kCGBlendModeNotSupported;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeNotSupported, int32_t)
 
-inline jint ASLayoutNativeVars_get_kCGBlendModeMultiply(void);
-inline jint ASLayoutNativeVars_set_kCGBlendModeMultiply(jint value);
-inline jint *ASLayoutNativeVars_getRef_kCGBlendModeMultiply(void);
+inline int32_t ASLayoutNativeVars_get_kCGBlendModeMultiply(void);
+inline int32_t ASLayoutNativeVars_set_kCGBlendModeMultiply(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_kCGBlendModeMultiply(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_kCGBlendModeMultiply;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeMultiply, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_kCGBlendModeMultiply;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeMultiply, int32_t)
 
-inline jint ASLayoutNativeVars_get_kCGBlendModeSourceAtop(void);
-inline jint ASLayoutNativeVars_set_kCGBlendModeSourceAtop(jint value);
-inline jint *ASLayoutNativeVars_getRef_kCGBlendModeSourceAtop(void);
+inline int32_t ASLayoutNativeVars_get_kCGBlendModeSourceAtop(void);
+inline int32_t ASLayoutNativeVars_set_kCGBlendModeSourceAtop(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_kCGBlendModeSourceAtop(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_kCGBlendModeSourceAtop;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeSourceAtop, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_kCGBlendModeSourceAtop;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeSourceAtop, int32_t)
 
-inline jint ASLayoutNativeVars_get_kCGBlendModeSourceIn(void);
-inline jint ASLayoutNativeVars_set_kCGBlendModeSourceIn(jint value);
-inline jint *ASLayoutNativeVars_getRef_kCGBlendModeSourceIn(void);
+inline int32_t ASLayoutNativeVars_get_kCGBlendModeSourceIn(void);
+inline int32_t ASLayoutNativeVars_set_kCGBlendModeSourceIn(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_kCGBlendModeSourceIn(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_kCGBlendModeSourceIn;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeSourceIn, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_kCGBlendModeSourceIn;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeSourceIn, int32_t)
 
-inline jint ASLayoutNativeVars_get_kCGBlendModeNormal(void);
-inline jint ASLayoutNativeVars_set_kCGBlendModeNormal(jint value);
-inline jint *ASLayoutNativeVars_getRef_kCGBlendModeNormal(void);
+inline int32_t ASLayoutNativeVars_get_kCGBlendModeNormal(void);
+inline int32_t ASLayoutNativeVars_set_kCGBlendModeNormal(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_kCGBlendModeNormal(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_kCGBlendModeNormal;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeNormal, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_kCGBlendModeNormal;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeNormal, int32_t)
 
-inline jint ASLayoutNativeVars_get_kCGBlendModeOverlay(void);
-inline jint ASLayoutNativeVars_set_kCGBlendModeOverlay(jint value);
-inline jint *ASLayoutNativeVars_getRef_kCGBlendModeOverlay(void);
+inline int32_t ASLayoutNativeVars_get_kCGBlendModeOverlay(void);
+inline int32_t ASLayoutNativeVars_set_kCGBlendModeOverlay(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_kCGBlendModeOverlay(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_kCGBlendModeOverlay;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeOverlay, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_kCGBlendModeOverlay;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeOverlay, int32_t)
 
-inline jint ASLayoutNativeVars_get_kCGBlendModeScreen(void);
-inline jint ASLayoutNativeVars_set_kCGBlendModeScreen(jint value);
-inline jint *ASLayoutNativeVars_getRef_kCGBlendModeScreen(void);
+inline int32_t ASLayoutNativeVars_get_kCGBlendModeScreen(void);
+inline int32_t ASLayoutNativeVars_set_kCGBlendModeScreen(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_kCGBlendModeScreen(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_kCGBlendModeScreen;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeScreen, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_kCGBlendModeScreen;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, kCGBlendModeScreen, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIDataDetectorTypeLink(void);
-inline jint ASLayoutNativeVars_set_UIDataDetectorTypeLink(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIDataDetectorTypeLink(void);
+inline int32_t ASLayoutNativeVars_get_UIDataDetectorTypeLink(void);
+inline int32_t ASLayoutNativeVars_set_UIDataDetectorTypeLink(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIDataDetectorTypeLink(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIDataDetectorTypeLink;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeLink, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIDataDetectorTypeLink;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeLink, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIDataDetectorTypeAll(void);
-inline jint ASLayoutNativeVars_set_UIDataDetectorTypeAll(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIDataDetectorTypeAll(void);
+inline int32_t ASLayoutNativeVars_get_UIDataDetectorTypeAll(void);
+inline int32_t ASLayoutNativeVars_set_UIDataDetectorTypeAll(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIDataDetectorTypeAll(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIDataDetectorTypeAll;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeAll, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIDataDetectorTypeAll;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeAll, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIDataDetectorTypeAddress(void);
-inline jint ASLayoutNativeVars_set_UIDataDetectorTypeAddress(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIDataDetectorTypeAddress(void);
+inline int32_t ASLayoutNativeVars_get_UIDataDetectorTypeAddress(void);
+inline int32_t ASLayoutNativeVars_set_UIDataDetectorTypeAddress(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIDataDetectorTypeAddress(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIDataDetectorTypeAddress;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeAddress, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIDataDetectorTypeAddress;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeAddress, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIDataDetectorTypeNone(void);
-inline jint ASLayoutNativeVars_set_UIDataDetectorTypeNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIDataDetectorTypeNone(void);
+inline int32_t ASLayoutNativeVars_get_UIDataDetectorTypeNone(void);
+inline int32_t ASLayoutNativeVars_set_UIDataDetectorTypeNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIDataDetectorTypeNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIDataDetectorTypeNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIDataDetectorTypeNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypeNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIDataDetectorTypePhoneNumber(void);
-inline jint ASLayoutNativeVars_set_UIDataDetectorTypePhoneNumber(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIDataDetectorTypePhoneNumber(void);
+inline int32_t ASLayoutNativeVars_get_UIDataDetectorTypePhoneNumber(void);
+inline int32_t ASLayoutNativeVars_set_UIDataDetectorTypePhoneNumber(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIDataDetectorTypePhoneNumber(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIDataDetectorTypePhoneNumber;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypePhoneNumber, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIDataDetectorTypePhoneNumber;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIDataDetectorTypePhoneNumber, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIViewContentModeCenter(void);
-inline jint ASLayoutNativeVars_set_UIViewContentModeCenter(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIViewContentModeCenter(void);
+inline int32_t ASLayoutNativeVars_get_UIViewContentModeCenter(void);
+inline int32_t ASLayoutNativeVars_set_UIViewContentModeCenter(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIViewContentModeCenter(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIViewContentModeCenter;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeCenter, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIViewContentModeCenter;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeCenter, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIViewContentModeScaleAspectFill(void);
-inline jint ASLayoutNativeVars_set_UIViewContentModeScaleAspectFill(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIViewContentModeScaleAspectFill(void);
+inline int32_t ASLayoutNativeVars_get_UIViewContentModeScaleAspectFill(void);
+inline int32_t ASLayoutNativeVars_set_UIViewContentModeScaleAspectFill(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIViewContentModeScaleAspectFill(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIViewContentModeScaleAspectFill;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeScaleAspectFill, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIViewContentModeScaleAspectFill;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeScaleAspectFill, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIViewContentModeScaleAspectFit(void);
-inline jint ASLayoutNativeVars_set_UIViewContentModeScaleAspectFit(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIViewContentModeScaleAspectFit(void);
+inline int32_t ASLayoutNativeVars_get_UIViewContentModeScaleAspectFit(void);
+inline int32_t ASLayoutNativeVars_set_UIViewContentModeScaleAspectFit(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIViewContentModeScaleAspectFit(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIViewContentModeScaleAspectFit;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeScaleAspectFit, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIViewContentModeScaleAspectFit;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeScaleAspectFit, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIViewContentModeScaleToFill(void);
-inline jint ASLayoutNativeVars_set_UIViewContentModeScaleToFill(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIViewContentModeScaleToFill(void);
+inline int32_t ASLayoutNativeVars_get_UIViewContentModeScaleToFill(void);
+inline int32_t ASLayoutNativeVars_set_UIViewContentModeScaleToFill(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIViewContentModeScaleToFill(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIViewContentModeScaleToFill;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeScaleToFill, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIViewContentModeScaleToFill;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIViewContentModeScaleToFill, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitAdjustable(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitAdjustable(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitAdjustable(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitAdjustable(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitAdjustable(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitAdjustable(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitAdjustable;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitAdjustable, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitAdjustable;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitAdjustable, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitAllowsDirectInteraction(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitAllowsDirectInteraction(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitAllowsDirectInteraction(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitAllowsDirectInteraction(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitAllowsDirectInteraction(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitAllowsDirectInteraction(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitAllowsDirectInteraction;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitAllowsDirectInteraction, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitAllowsDirectInteraction;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitAllowsDirectInteraction, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitButton(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitButton(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitButton(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitButton(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitButton(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitButton(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitButton;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitButton, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitButton;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitButton, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitCausesPageTurn(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitCausesPageTurn(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitCausesPageTurn(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitCausesPageTurn(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitCausesPageTurn(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitCausesPageTurn(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitCausesPageTurn;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitCausesPageTurn, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitCausesPageTurn;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitCausesPageTurn, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitHeader(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitHeader(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitHeader(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitHeader(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitHeader(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitHeader(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitHeader;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitHeader, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitHeader;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitHeader, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitImage(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitImage(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitImage(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitImage(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitImage(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitImage(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitImage;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitImage, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitImage;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitImage, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitKeyboardKey(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitKeyboardKey(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitKeyboardKey(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitKeyboardKey(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitKeyboardKey(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitKeyboardKey(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitKeyboardKey;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitKeyboardKey, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitKeyboardKey;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitKeyboardKey, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitLink(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitLink(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitLink(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitLink(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitLink(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitLink(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitLink;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitLink, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitLink;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitLink, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitNone(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitNone(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitNone(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitNotEnabled(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitNotEnabled(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitNotEnabled(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitNotEnabled(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitNotEnabled(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitNotEnabled(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitNotEnabled;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitNotEnabled, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitNotEnabled;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitNotEnabled, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitPlaysSound(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitPlaysSound(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitPlaysSound(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitPlaysSound(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitPlaysSound(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitPlaysSound(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitPlaysSound;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitPlaysSound, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitPlaysSound;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitPlaysSound, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitSearchField(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitSearchField(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitSearchField(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitSearchField(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitSearchField(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitSearchField(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitSearchField;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitSearchField, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitSearchField;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitSearchField, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitSelected(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitSelected(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitSelected(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitSelected(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitSelected(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitSelected(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitSelected;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitSelected, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitSelected;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitSelected, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitStartsMediaSession(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitStartsMediaSession(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitStartsMediaSession(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitStartsMediaSession(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitStartsMediaSession(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitStartsMediaSession(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitStartsMediaSession;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitStartsMediaSession, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitStartsMediaSession;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitStartsMediaSession, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitStaticText(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitStaticText(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitStaticText(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitStaticText(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitStaticText(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitStaticText(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitStaticText;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitStaticText, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitStaticText;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitStaticText, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitSummaryElement(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitSummaryElement(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitSummaryElement(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitSummaryElement(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitSummaryElement(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitSummaryElement(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitSummaryElement;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitSummaryElement, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitSummaryElement;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitSummaryElement, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitTabBar(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitTabBar(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitTabBar(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitTabBar(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitTabBar(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitTabBar(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitTabBar;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitTabBar, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitTabBar;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitTabBar, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIAccessibilityTraitUpdatesFrequently(void);
-inline jint ASLayoutNativeVars_set_UIAccessibilityTraitUpdatesFrequently(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIAccessibilityTraitUpdatesFrequently(void);
+inline int32_t ASLayoutNativeVars_get_UIAccessibilityTraitUpdatesFrequently(void);
+inline int32_t ASLayoutNativeVars_set_UIAccessibilityTraitUpdatesFrequently(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIAccessibilityTraitUpdatesFrequently(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIAccessibilityTraitUpdatesFrequently;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitUpdatesFrequently, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIAccessibilityTraitUpdatesFrequently;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIAccessibilityTraitUpdatesFrequently, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextAutocapitalizationTypeNone(void);
-inline jint ASLayoutNativeVars_set_UITextAutocapitalizationTypeNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeNone(void);
+inline int32_t ASLayoutNativeVars_get_UITextAutocapitalizationTypeNone(void);
+inline int32_t ASLayoutNativeVars_set_UITextAutocapitalizationTypeNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextAutocapitalizationTypeNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextAutocapitalizationTypeNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextAutocapitalizationTypeWords(void);
-inline jint ASLayoutNativeVars_set_UITextAutocapitalizationTypeWords(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeWords(void);
+inline int32_t ASLayoutNativeVars_get_UITextAutocapitalizationTypeWords(void);
+inline int32_t ASLayoutNativeVars_set_UITextAutocapitalizationTypeWords(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeWords(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextAutocapitalizationTypeWords;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeWords, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextAutocapitalizationTypeWords;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeWords, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextAutocapitalizationTypeSentences(void);
-inline jint ASLayoutNativeVars_set_UITextAutocapitalizationTypeSentences(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeSentences(void);
+inline int32_t ASLayoutNativeVars_get_UITextAutocapitalizationTypeSentences(void);
+inline int32_t ASLayoutNativeVars_set_UITextAutocapitalizationTypeSentences(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeSentences(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextAutocapitalizationTypeSentences;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeSentences, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextAutocapitalizationTypeSentences;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeSentences, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextAutocapitalizationTypeAllCharacters(void);
-inline jint ASLayoutNativeVars_set_UITextAutocapitalizationTypeAllCharacters(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeAllCharacters(void);
+inline int32_t ASLayoutNativeVars_get_UITextAutocapitalizationTypeAllCharacters(void);
+inline int32_t ASLayoutNativeVars_set_UITextAutocapitalizationTypeAllCharacters(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextAutocapitalizationTypeAllCharacters(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextAutocapitalizationTypeAllCharacters;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeAllCharacters, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextAutocapitalizationTypeAllCharacters;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocapitalizationTypeAllCharacters, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextAutocorrectionTypeYes(void);
-inline jint ASLayoutNativeVars_set_UITextAutocorrectionTypeYes(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextAutocorrectionTypeYes(void);
+inline int32_t ASLayoutNativeVars_get_UITextAutocorrectionTypeYes(void);
+inline int32_t ASLayoutNativeVars_set_UITextAutocorrectionTypeYes(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextAutocorrectionTypeYes(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextAutocorrectionTypeYes;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocorrectionTypeYes, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextAutocorrectionTypeYes;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocorrectionTypeYes, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextAutocorrectionTypeNo(void);
-inline jint ASLayoutNativeVars_set_UITextAutocorrectionTypeNo(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextAutocorrectionTypeNo(void);
+inline int32_t ASLayoutNativeVars_get_UITextAutocorrectionTypeNo(void);
+inline int32_t ASLayoutNativeVars_set_UITextAutocorrectionTypeNo(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextAutocorrectionTypeNo(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextAutocorrectionTypeNo;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocorrectionTypeNo, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextAutocorrectionTypeNo;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextAutocorrectionTypeNo, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeDate(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeDate(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeDate(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeDate(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeDate(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeDate(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeDate;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeDate, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeDate;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeDate, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeDatetime(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeDatetime(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeDatetime(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeDatetime(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeDatetime(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeDatetime(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeDatetime;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeDatetime, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeDatetime;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeDatetime, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeNone(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeNone(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeNone(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeNumber(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeNumber(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeNumber(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeNumber(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeNumber(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeNumber(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeNumber;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumber, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeNumber;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumber, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeNumberDecimal(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeNumberDecimal(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeNumberDecimal(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeNumberDecimal(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeNumberDecimal(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeNumberDecimal(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeNumberDecimal;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumberDecimal, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeNumberDecimal;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumberDecimal, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeNumberPassword(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeNumberPassword(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeNumberPassword(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeNumberPassword(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeNumberPassword(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeNumberPassword(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeNumberPassword;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumberPassword, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeNumberPassword;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumberPassword, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeNumberSigned(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeNumberSigned(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeNumberSigned(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeNumberSigned(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeNumberSigned(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeNumberSigned(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeNumberSigned;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumberSigned, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeNumberSigned;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeNumberSigned, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypePhone(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypePhone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypePhone(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypePhone(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypePhone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypePhone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypePhone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypePhone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypePhone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypePhone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeText(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeText(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeText(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeText(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeText(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeText(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeText;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeText, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeText;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeText, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextAutoComplete(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextAutoComplete(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextAutoComplete(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextAutoComplete(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextAutoComplete(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextAutoComplete(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextAutoComplete;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextAutoComplete, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextAutoComplete;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextAutoComplete, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextAutoCorrect(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextAutoCorrect(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextAutoCorrect(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextAutoCorrect(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextAutoCorrect(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextAutoCorrect(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextAutoCorrect;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextAutoCorrect, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextAutoCorrect;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextAutoCorrect, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextCapCharacters(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextCapCharacters(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextCapCharacters(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextCapCharacters(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextCapCharacters(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextCapCharacters(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextCapCharacters;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextCapCharacters, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextCapCharacters;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextCapCharacters, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextCapSentences(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextCapSentences(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextCapSentences(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextCapSentences(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextCapSentences(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextCapSentences(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextCapSentences;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextCapSentences, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextCapSentences;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextCapSentences, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextCapWords(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextCapWords(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextCapWords(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextCapWords(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextCapWords(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextCapWords(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextCapWords;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextCapWords, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextCapWords;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextCapWords, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextEmailAddress(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextEmailAddress(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextEmailAddress(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextEmailAddress(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextEmailAddress(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextEmailAddress(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextEmailAddress;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextEmailAddress, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextEmailAddress;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextEmailAddress, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextEmailSubject(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextEmailSubject(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextEmailSubject(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextEmailSubject(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextEmailSubject(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextEmailSubject(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextEmailSubject;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextEmailSubject, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextEmailSubject;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextEmailSubject, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextFilter(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextFilter(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextFilter(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextFilter(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextFilter(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextFilter(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextFilter;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextFilter, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextFilter;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextFilter, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextImeMultiLine(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextImeMultiLine(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextImeMultiLine(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextImeMultiLine(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextImeMultiLine(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextImeMultiLine(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextImeMultiLine;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextImeMultiLine, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextImeMultiLine;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextImeMultiLine, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextLongMessage(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextLongMessage(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextLongMessage(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextLongMessage(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextLongMessage(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextLongMessage(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextLongMessage;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextLongMessage, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextLongMessage;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextLongMessage, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextMultiLine(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextMultiLine(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextMultiLine(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextMultiLine(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextMultiLine(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextMultiLine(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextMultiLine;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextMultiLine, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextMultiLine;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextMultiLine, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextNoSuggestions(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextNoSuggestions(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextNoSuggestions(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextNoSuggestions(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextNoSuggestions(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextNoSuggestions(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextNoSuggestions;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextNoSuggestions, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextNoSuggestions;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextNoSuggestions, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextPassword(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextPassword(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPassword(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextPassword(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextPassword(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPassword(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextPassword;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPassword, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextPassword;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPassword, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextPersonName(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextPersonName(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPersonName(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextPersonName(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextPersonName(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPersonName(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextPersonName;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPersonName, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextPersonName;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPersonName, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextPhonetic(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextPhonetic(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPhonetic(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextPhonetic(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextPhonetic(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPhonetic(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextPhonetic;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPhonetic, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextPhonetic;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPhonetic, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextPostalAddress(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextPostalAddress(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPostalAddress(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextPostalAddress(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextPostalAddress(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextPostalAddress(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextPostalAddress;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPostalAddress, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextPostalAddress;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextPostalAddress, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextShortMessage(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextShortMessage(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextShortMessage(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextShortMessage(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextShortMessage(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextShortMessage(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextShortMessage;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextShortMessage, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextShortMessage;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextShortMessage, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextUri(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextUri(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextUri(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextUri(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextUri(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextUri(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextUri;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextUri, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextUri;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextUri, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextVisiblePassword(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextVisiblePassword(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextVisiblePassword(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextVisiblePassword(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextVisiblePassword(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextVisiblePassword(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextVisiblePassword;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextVisiblePassword, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextVisiblePassword;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextVisiblePassword, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextWebEditText(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextWebEditText(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextWebEditText(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextWebEditText(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextWebEditText(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextWebEditText(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextWebEditText;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextWebEditText, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextWebEditText;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextWebEditText, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextWebEmailAddress(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextWebEmailAddress(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextWebEmailAddress(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextWebEmailAddress(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextWebEmailAddress(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextWebEmailAddress(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextWebEmailAddress;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextWebEmailAddress, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextWebEmailAddress;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextWebEmailAddress, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTextWebPassword(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTextWebPassword(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTextWebPassword(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTextWebPassword(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTextWebPassword(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTextWebPassword(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTextWebPassword;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextWebPassword, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTextWebPassword;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTextWebPassword, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIKeyboardTypeTime(void);
-inline jint ASLayoutNativeVars_set_UIKeyboardTypeTime(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIKeyboardTypeTime(void);
+inline int32_t ASLayoutNativeVars_get_UIKeyboardTypeTime(void);
+inline int32_t ASLayoutNativeVars_set_UIKeyboardTypeTime(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIKeyboardTypeTime(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIKeyboardTypeTime;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTime, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIKeyboardTypeTime;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIKeyboardTypeTime, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionDone(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionDone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionDone(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionDone(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionDone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionDone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionDone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionDone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionDone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionDone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionGo(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionGo(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionGo(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionGo(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionGo(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionGo(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionGo;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionGo, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionGo;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionGo, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionNext(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionNext(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionNext(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionNext(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionNext(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionNext(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionNext;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionNext, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionNext;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionNext, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionNone(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionNone(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionNone(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionPrevious(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionPrevious(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionPrevious(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionPrevious(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionPrevious(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionPrevious(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionPrevious;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionPrevious, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionPrevious;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionPrevious, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionSearch(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionSearch(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionSearch(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionSearch(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionSearch(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionSearch(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionSearch;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionSearch, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionSearch;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionSearch, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionSend(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionSend(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionSend(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionSend(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionSend(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionSend(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionSend;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionSend, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionSend;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionSend, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeActionUnspecified(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeActionUnspecified(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionUnspecified(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeActionUnspecified(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeActionUnspecified(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeActionUnspecified(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeActionUnspecified;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionUnspecified, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeActionUnspecified;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeActionUnspecified, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagForceAscii(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagForceAscii(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagForceAscii(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagForceAscii(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagForceAscii(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagForceAscii(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagForceAscii;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagForceAscii, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagForceAscii;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagForceAscii, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagNavigateNext(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagNavigateNext(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNavigateNext(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagNavigateNext(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagNavigateNext(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNavigateNext(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagNavigateNext;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNavigateNext, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagNavigateNext;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNavigateNext, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagNavigatePrevious(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagNavigatePrevious(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNavigatePrevious(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagNavigatePrevious(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagNavigatePrevious(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNavigatePrevious(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagNavigatePrevious;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNavigatePrevious, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagNavigatePrevious;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNavigatePrevious, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoAccessoryAction(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoAccessoryAction(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoAccessoryAction(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoAccessoryAction(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoAccessoryAction(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoAccessoryAction(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagNoAccessoryAction;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoAccessoryAction, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagNoAccessoryAction;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoAccessoryAction, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoEnterAction(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoEnterAction(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoEnterAction(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoEnterAction(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoEnterAction(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoEnterAction(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagNoEnterAction;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoEnterAction, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagNoEnterAction;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoEnterAction, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoExtractUi(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoExtractUi(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoExtractUi(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoExtractUi(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoExtractUi(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoExtractUi(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagNoExtractUi;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoExtractUi, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagNoExtractUi;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoExtractUi, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoFullscreen(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoFullscreen(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoFullscreen(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoFullscreen(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoFullscreen(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoFullscreen(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagNoFullscreen;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoFullscreen, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagNoFullscreen;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoFullscreen, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoPersonalizedLearning(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoPersonalizedLearning(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoPersonalizedLearning(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeFlagNoPersonalizedLearning(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeFlagNoPersonalizedLearning(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeFlagNoPersonalizedLearning(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeFlagNoPersonalizedLearning;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoPersonalizedLearning, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeFlagNoPersonalizedLearning;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeFlagNoPersonalizedLearning, int32_t)
 
-inline jint ASLayoutNativeVars_get_UIReturnKeyTypeNormal(void);
-inline jint ASLayoutNativeVars_set_UIReturnKeyTypeNormal(jint value);
-inline jint *ASLayoutNativeVars_getRef_UIReturnKeyTypeNormal(void);
+inline int32_t ASLayoutNativeVars_get_UIReturnKeyTypeNormal(void);
+inline int32_t ASLayoutNativeVars_set_UIReturnKeyTypeNormal(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UIReturnKeyTypeNormal(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UIReturnKeyTypeNormal;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeNormal, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UIReturnKeyTypeNormal;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UIReturnKeyTypeNormal, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextBorderStyleNone(void);
-inline jint ASLayoutNativeVars_set_UITextBorderStyleNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextBorderStyleNone(void);
+inline int32_t ASLayoutNativeVars_get_UITextBorderStyleNone(void);
+inline int32_t ASLayoutNativeVars_set_UITextBorderStyleNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextBorderStyleNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextBorderStyleNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextBorderStyleNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextBorderStyleLine(void);
-inline jint ASLayoutNativeVars_set_UITextBorderStyleLine(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextBorderStyleLine(void);
+inline int32_t ASLayoutNativeVars_get_UITextBorderStyleLine(void);
+inline int32_t ASLayoutNativeVars_set_UITextBorderStyleLine(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextBorderStyleLine(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextBorderStyleLine;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleLine, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextBorderStyleLine;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleLine, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextBorderStyleBezel(void);
-inline jint ASLayoutNativeVars_set_UITextBorderStyleBezel(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextBorderStyleBezel(void);
+inline int32_t ASLayoutNativeVars_get_UITextBorderStyleBezel(void);
+inline int32_t ASLayoutNativeVars_set_UITextBorderStyleBezel(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextBorderStyleBezel(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextBorderStyleBezel;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleBezel, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextBorderStyleBezel;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleBezel, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITextBorderStyleRoundedRect(void);
-inline jint ASLayoutNativeVars_set_UITextBorderStyleRoundedRect(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITextBorderStyleRoundedRect(void);
+inline int32_t ASLayoutNativeVars_get_UITextBorderStyleRoundedRect(void);
+inline int32_t ASLayoutNativeVars_set_UITextBorderStyleRoundedRect(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITextBorderStyleRoundedRect(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITextBorderStyleRoundedRect;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleRoundedRect, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITextBorderStyleRoundedRect;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITextBorderStyleRoundedRect, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITableViewCellSeparatorStyleSingleLine(void);
-inline jint ASLayoutNativeVars_set_UITableViewCellSeparatorStyleSingleLine(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITableViewCellSeparatorStyleSingleLine(void);
+inline int32_t ASLayoutNativeVars_get_UITableViewCellSeparatorStyleSingleLine(void);
+inline int32_t ASLayoutNativeVars_set_UITableViewCellSeparatorStyleSingleLine(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITableViewCellSeparatorStyleSingleLine(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITableViewCellSeparatorStyleSingleLine;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSeparatorStyleSingleLine, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITableViewCellSeparatorStyleSingleLine;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSeparatorStyleSingleLine, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITableViewCellSeparatorStyleNone(void);
-inline jint ASLayoutNativeVars_set_UITableViewCellSeparatorStyleNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITableViewCellSeparatorStyleNone(void);
+inline int32_t ASLayoutNativeVars_get_UITableViewCellSeparatorStyleNone(void);
+inline int32_t ASLayoutNativeVars_set_UITableViewCellSeparatorStyleNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITableViewCellSeparatorStyleNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITableViewCellSeparatorStyleNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSeparatorStyleNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITableViewCellSeparatorStyleNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSeparatorStyleNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITableViewCellSelectionStyleNone(void);
-inline jint ASLayoutNativeVars_set_UITableViewCellSelectionStyleNone(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleNone(void);
+inline int32_t ASLayoutNativeVars_get_UITableViewCellSelectionStyleNone(void);
+inline int32_t ASLayoutNativeVars_set_UITableViewCellSelectionStyleNone(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleNone(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITableViewCellSelectionStyleNone;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleNone, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITableViewCellSelectionStyleNone;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleNone, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITableViewCellSelectionStyleGray(void);
-inline jint ASLayoutNativeVars_set_UITableViewCellSelectionStyleGray(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleGray(void);
+inline int32_t ASLayoutNativeVars_get_UITableViewCellSelectionStyleGray(void);
+inline int32_t ASLayoutNativeVars_set_UITableViewCellSelectionStyleGray(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleGray(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITableViewCellSelectionStyleGray;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleGray, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITableViewCellSelectionStyleGray;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleGray, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITableViewCellSelectionStyleBlue(void);
-inline jint ASLayoutNativeVars_set_UITableViewCellSelectionStyleBlue(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleBlue(void);
+inline int32_t ASLayoutNativeVars_get_UITableViewCellSelectionStyleBlue(void);
+inline int32_t ASLayoutNativeVars_set_UITableViewCellSelectionStyleBlue(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleBlue(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITableViewCellSelectionStyleBlue;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleBlue, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITableViewCellSelectionStyleBlue;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleBlue, int32_t)
 
-inline jint ASLayoutNativeVars_get_UITableViewCellSelectionStyleDefault(void);
-inline jint ASLayoutNativeVars_set_UITableViewCellSelectionStyleDefault(jint value);
-inline jint *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleDefault(void);
+inline int32_t ASLayoutNativeVars_get_UITableViewCellSelectionStyleDefault(void);
+inline int32_t ASLayoutNativeVars_set_UITableViewCellSelectionStyleDefault(int32_t value);
+inline int32_t *ASLayoutNativeVars_getRef_UITableViewCellSelectionStyleDefault(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASLayoutNativeVars_UITableViewCellSelectionStyleDefault;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleDefault, jint)
+FOUNDATION_EXPORT int32_t ASLayoutNativeVars_UITableViewCellSelectionStyleDefault;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASLayoutNativeVars, UITableViewCellSelectionStyleDefault, int32_t)
 
 FOUNDATION_EXPORT void ASLayoutNativeVars_init(ASLayoutNativeVars *self);
 
@@ -791,6 +794,7 @@ FOUNDATION_EXPORT ASLayoutNativeVars *create_ASLayoutNativeVars_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASLayoutNativeVars)
 
 @compatibility_alias ComAsheraLayoutLayoutNativeVars ASLayoutNativeVars;
+
 
 #endif
 

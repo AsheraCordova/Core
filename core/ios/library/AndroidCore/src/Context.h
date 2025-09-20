@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\Context.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Context")
@@ -26,6 +27,8 @@
 @class ADResources;
 @class IOSClass;
 @class JavaIoFile;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaLangCharSequence;
 
 @interface ADContext : NSObject
@@ -45,9 +48,9 @@
 - (ADContentResolver *)getContentResolver;
 
 - (JavaIoFile *)getDirWithNSString:(NSString *)string
-                           withInt:(jint)modePrivate;
+                           withInt:(int32_t)modePrivate;
 
-- (ADDrawable *)getDrawableWithInt:(jint)resId;
+- (ADDrawable *)getDrawableWithInt:(int32_t)resId;
 
 - (JavaIoFile *)getExternalFilesDirWithId:(id)object;
 
@@ -59,7 +62,7 @@
 
 - (id)getSystemServiceWithIOSClass:(IOSClass *)class1;
 
-- (id<JavaLangCharSequence>)getTextWithInt:(jint)hintId;
+- (id<JavaLangCharSequence>)getTextWithInt:(int32_t)hintId;
 
 - (void)registerReceiverWithADBroadcastReceiver:(ADBroadcastReceiver *)telephonyReceiver
                              withADIntentFilter:(ADIntentFilter *)intentFilter;
@@ -70,9 +73,9 @@
 
 J2OBJC_STATIC_INIT(ADContext)
 
-inline jint ADContext_get_MODE_PRIVATE(void);
+inline int32_t ADContext_get_MODE_PRIVATE(void);
 #define ADContext_MODE_PRIVATE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADContext, MODE_PRIVATE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADContext, MODE_PRIVATE, int32_t)
 
 inline IOSClass *ADContext_get_ACTIVITY_SERVICE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -93,6 +96,7 @@ FOUNDATION_EXPORT ADContext *create_ADContext_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADContext)
 
 @compatibility_alias RAndroidContentContext ADContext;
+
 
 #endif
 

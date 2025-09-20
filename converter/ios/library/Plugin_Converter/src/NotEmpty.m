@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\NotEmpty.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,6 +16,13 @@
 #include "NotEmpty.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASNotEmpty
@@ -30,9 +42,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", @"@string/required_error_message", [((id<ASIWidget>) nil_chk(widget)) getFragment]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  return text != nil && ![text java_isEmpty];
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  return text != nil && ![text isEmpty];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -70,3 +82,5 @@ ASNotEmpty *create_ASNotEmpty_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNotEmpty)
+
+J2OBJC_NAME_MAPPING(ASNotEmpty, "com.ashera.validations", "AS")

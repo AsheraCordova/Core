@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\app\Activity.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Activity.h"
 #include "Bundle.h"
 #include "Configuration.h"
@@ -17,7 +22,15 @@
 #include "PluginInvoker.h"
 #include "View.h"
 #include "Window.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADActivity () {
@@ -47,17 +60,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)startActivityForResultWithADIntent:(ADIntent *)intent2
-                                   withInt:(jint)requestCode {
+                                   withInt:(int32_t)requestCode {
 }
 
 - (void)finish {
 }
 
 - (void)requestPermissionsWithNSStringArray:(IOSObjectArray *)permissions
-                                    withInt:(jint)mappedRequestCode {
+                                    withInt:(int32_t)mappedRequestCode {
 }
 
-- (jint)checkSelfPermissionWithNSString:(NSString *)permission {
+- (int32_t)checkSelfPermissionWithNSString:(NSString *)permission {
   return 0;
 }
 
@@ -71,7 +84,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ADWindow_init();
 }
 
-- (void)setVolumeControlStreamWithInt:(jint)streamMusic {
+- (void)setVolumeControlStreamWithInt:(int32_t)streamMusic {
 }
 
 - (void)setContentViewWithADView:(ADView *)view {
@@ -95,35 +108,35 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)onDestroy {
 }
 
-- (void)onWindowFocusChangedWithBoolean:(jboolean)hasFocus {
+- (void)onWindowFocusChangedWithBoolean:(bool)hasFocus {
 }
 
 - (void)startActivityForResultWithADIntent:(ADIntent *)intent2
-                                   withInt:(jint)requestCode
+                                   withInt:(int32_t)requestCode
                               withADBundle:(ADBundle *)options {
 }
 
-- (void)onActivityResultWithInt:(jint)requestCode
-                        withInt:(jint)resultCode
+- (void)onActivityResultWithInt:(int32_t)requestCode
+                        withInt:(int32_t)resultCode
                    withADIntent:(ADIntent *)intent2 {
 }
 
-- (jboolean)onCreateOptionsMenuWithADMenu:(id<ADMenu>)menu {
+- (bool)onCreateOptionsMenuWithADMenu:(id<ADMenu>)menu {
   return false;
 }
 
-- (jboolean)onPrepareOptionsMenuWithADMenu:(id<ADMenu>)menu {
+- (bool)onPrepareOptionsMenuWithADMenu:(id<ADMenu>)menu {
   return false;
 }
 
-- (jboolean)onOptionsItemSelectedWithADMenuItem:(id<ADMenuItem>)item {
+- (bool)onOptionsItemSelectedWithADMenuItem:(id<ADMenuItem>)item {
   return false;
 }
 
 - (void)onConfigurationChangedWithADConfiguration:(ADConfiguration *)newConfig {
 }
 
-- (void)onRequestPermissionsResultWithInt:(jint)requestCode
+- (void)onRequestPermissionsResultWithInt:(int32_t)requestCode
                         withNSStringArray:(IOSObjectArray *)permissions
                              withIntArray:(IOSIntArray *)grantResults {
 }
@@ -229,3 +242,5 @@ ADActivity *create_ADActivity_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADActivity)
+
+J2OBJC_NAME_MAPPING(ADActivity, "r.android.app", "AD")

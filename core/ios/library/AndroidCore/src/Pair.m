@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Pair.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Objects.h"
 #include "Pair.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADPair
@@ -16,7 +29,7 @@
   return self;
 }
 
-- (jboolean)isEqual:(id)o {
+- (bool)isEqual:(id)o {
   if (!([o isKindOfClass:[ADPair class]])) {
     return false;
   }
@@ -25,7 +38,7 @@
 }
 
 - (NSUInteger)hash {
-  return (first_ == nil ? 0 : ((jint) [first_ hash])) ^ (second_ == nil ? 0 : ((jint) [second_ hash]));
+  return (first_ == nil ? 0 : ((int32_t) [first_ hash])) ^ (second_ == nil ? 0 : ((int32_t) [second_ hash]));
 }
 
 + (ADPair *)createWithId:(id)a
@@ -85,3 +98,5 @@ ADPair *ADPair_createWithId_withId_(id a, id b) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPair)
+
+J2OBJC_NAME_MAPPING(ADPair, "r.android.util", "AD")

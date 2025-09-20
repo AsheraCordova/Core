@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Base64.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Base64")
@@ -17,6 +18,7 @@
 #define ADBase64_
 
 @class IOSByteArray;
+@class NSString;
 
 @interface ADBase64 : NSObject
 
@@ -57,6 +59,7 @@ FOUNDATION_EXPORT NSString *ADBase64_encodeToStringWithByteArray_withNSString_(I
 J2OBJC_TYPE_LITERAL_HEADER(ADBase64)
 
 @compatibility_alias RAndroidUtilBase64 ADBase64;
+
 
 #endif
 

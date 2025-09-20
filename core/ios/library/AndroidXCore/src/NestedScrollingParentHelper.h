@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingParentHelper.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollingParentHelper")
@@ -24,6 +25,7 @@
 
 @class ADView;
 @class ADViewGroup;
+@class JavaLangInteger;
 
 /*!
  @brief Helper class for implementing nested scrolling parent views compatible with Android platform
@@ -55,7 +57,7 @@
   subclass method/<code>androidx.core.view.NestedScrollingParent</code> interface method with
   the same signature to implement the standard policy.</p>
  */
-- (jint)getNestedScrollAxes;
+- (int32_t)getNestedScrollAxes;
 
 /*!
  @brief Called when a nested scrolling operation initiated by a descendant view is accepted
@@ -66,7 +68,7 @@
  */
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes;
+                                 withInt:(int32_t)axes;
 
 /*!
  @brief Called when a nested scrolling operation initiated by a descendant view is accepted
@@ -77,8 +79,8 @@
  */
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes
-                                 withInt:(jint)type;
+                                 withInt:(int32_t)axes
+                                 withInt:(int32_t)type;
 
 /*!
  @brief React to a nested scroll operation ending.
@@ -95,7 +97,7 @@
   the same signature to implement the standard policy.</p>
  */
 - (void)onStopNestedScrollWithADView:(ADView *)target
-                             withInt:(jint)type;
+                             withInt:(int32_t)type;
 
 // Disallowed inherited constructors, do not use.
 
@@ -114,6 +116,7 @@ FOUNDATION_EXPORT ADXNestedScrollingParentHelper *create_ADXNestedScrollingParen
 J2OBJC_TYPE_LITERAL_HEADER(ADXNestedScrollingParentHelper)
 
 @compatibility_alias AndroidxCoreViewNestedScrollingParentHelper ADXNestedScrollingParentHelper;
+
 
 #endif
 

@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ImageView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseMeasurableImageView.h"
 #include "IWidget.h"
 #include "ImageView.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADImageView
@@ -45,3 +56,5 @@ ADImageView *create_ADImageView_initWithASIWidget_(id<ASIWidget> widget) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADImageView)
+
+J2OBJC_NAME_MAPPING(ADImageView, "r.android.widget", "AD")

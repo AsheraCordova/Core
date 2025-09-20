@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractBitFlagConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AbstractBitFlagConverter")
@@ -21,6 +22,7 @@
 #include "IConverter.h"
 
 @class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
@@ -58,6 +60,7 @@ FOUNDATION_EXPORT void ASAbstractBitFlagConverter_init(ASAbstractBitFlagConverte
 J2OBJC_TYPE_LITERAL_HEADER(ASAbstractBitFlagConverter)
 
 @compatibility_alias ComAsheraConverterAbstractBitFlagConverter ASAbstractBitFlagConverter;
+
 
 #endif
 

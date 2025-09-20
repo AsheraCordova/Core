@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Path.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Path")
@@ -18,6 +19,9 @@
 
 @class ADBezierPath;
 @class IOSFloatArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class NSString;
 
 @interface ADPath : NSObject
 
@@ -25,11 +29,11 @@
 
 - (instancetype)initWithADBezierPath:(ADBezierPath *)path;
 
-- (IOSFloatArray *)approximateWithFloat:(jfloat)error;
+- (IOSFloatArray *)approximateWithFloat:(float)error;
 
 + (ADPath *)createPathFromPathDataWithNSString:(NSString *)pathData;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 // Disallowed inherited constructors, do not use.
 
@@ -50,6 +54,7 @@ FOUNDATION_EXPORT ADPath *ADPath_createPathFromPathDataWithNSString_(NSString *p
 J2OBJC_TYPE_LITERAL_HEADER(ADPath)
 
 @compatibility_alias RAndroidGraphicsPath ADPath;
+
 
 #endif
 
@@ -73,6 +78,7 @@ FOUNDATION_EXPORT ADPath_PathParser *new_ADPath_PathParser_init(void) NS_RETURNS
 FOUNDATION_EXPORT ADPath_PathParser *create_ADPath_PathParser_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPath_PathParser)
+
 
 #endif
 

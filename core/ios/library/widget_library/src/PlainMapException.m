@@ -3,15 +3,27 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\PlainMapException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "PlainMapException.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Long.h"
 #include "java/lang/Throwable.h"
 
 
-inline jlong ASPlainMapException_get_serialVersionUID(void);
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+inline int64_t ASPlainMapException_get_serialVersionUID(void);
 #define ASPlainMapException_serialVersionUID 934404218689912677LL
-J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMapException, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMapException, serialVersionUID, int64_t)
 
 @implementation ASPlainMapException
 
@@ -72,3 +84,5 @@ ASPlainMapException *create_ASPlainMapException_initWithNSString_withJavaLangThr
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPlainMapException)
+
+J2OBJC_NAME_MAPPING(ASPlainMapException, "com.ashera.model", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\RadioGroupImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "BaseHasWidgets.h"
@@ -55,9 +60,12 @@
 
 #include "ASUIImageView.h"
 
-@class JavaLangInteger;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -168,12 +176,12 @@ J2OBJC_FIELD_SETTER(ASRadioGroupImpl_Divider, mapping_, id<JavaUtilMap>)
 
 @interface ASRadioGroupImpl_RadioGroupExt () {
  @public
-  __unsafe_unretained ASRadioGroupImpl *this$0_;
+  WEAK_ ASRadioGroupImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -186,10 +194,10 @@ J2OBJC_FIELD_SETTER(ASRadioGroupImpl_RadioGroupExt, templates_, id<JavaUtilMap>)
 
 @interface ASRadioGroupImpl_CanvasImpl : NSObject < ADCanvas > {
  @public
-  jboolean canvasReset_;
-  jboolean requiresAttrChangeListener_;
+  bool canvasReset_;
+  bool requiresAttrChangeListener_;
   id<JavaUtilList> imageViews_;
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
 }
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
@@ -214,6 +222,7 @@ __attribute__((unused)) static ASRadioGroupImpl_CanvasImpl *create_ASRadioGroupI
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_CanvasImpl)
 
+
 @interface ASRadioGroupImpl_CanvasImpl_$Lambda$1 : NSObject < ADDrawable_AttributeChangeListener > {
  @public
   id val$imageView_;
@@ -231,6 +240,7 @@ __attribute__((unused)) static void ASRadioGroupImpl_CanvasImpl_$Lambda$1_initWi
 __attribute__((unused)) static ASRadioGroupImpl_CanvasImpl_$Lambda$1 *new_ASRadioGroupImpl_CanvasImpl_$Lambda$1_initWithId_(id capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASRadioGroupImpl_CanvasImpl_$Lambda$1 *create_ASRadioGroupImpl_CanvasImpl_$Lambda$1_initWithId_(id capture$0);
+
 
 @interface ASRadioGroupImpl_OnHierarchyChangeListener : NSObject < ADViewGroup_OnHierarchyChangeListener, ASIListener > {
  @public
@@ -284,6 +294,7 @@ __attribute__((unused)) static ASRadioGroupImpl_OnHierarchyChangeListener *creat
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_OnHierarchyChangeListener)
 
+
 @interface ASRadioGroupImpl_OnCheckedChangeListener : NSObject < ADRadioGroup_OnCheckedChangeListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -302,10 +313,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_OnHierarchyChangeListener)
                      withNSString:(NSString *)action;
 
 - (void)onCheckedChangedWithADRadioGroup:(ADRadioGroup *)group
-                                 withInt:(jint)checkedId;
+                                 withInt:(int32_t)checkedId;
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADRadioGroup:(ADRadioGroup *)group
-                                                      withInt:(jint)checkedId;
+                                                      withInt:(int32_t)checkedId;
 
 @end
 
@@ -330,9 +341,10 @@ __attribute__((unused)) static ASRadioGroupImpl_OnCheckedChangeListener *create_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_OnCheckedChangeListener)
 
+
 @interface ASRadioGroupImpl_RadioGroupSelectionListener : NSObject < ADView_OnClickListener > {
  @public
-  __unsafe_unretained ASRadioGroupImpl *this$0_;
+  WEAK_ ASRadioGroupImpl *this$0_;
   id<ASIsRadioButton> radioButton_;
 }
 
@@ -355,6 +367,7 @@ __attribute__((unused)) static ASRadioGroupImpl_RadioGroupSelectionListener *cre
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupSelectionListener)
 
+
 @interface ASRadioGroupImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   id<ASIWidget> val$widget_;
@@ -371,6 +384,7 @@ __attribute__((unused)) static void ASRadioGroupImpl_$Lambda$1_initWithASIWidget
 __attribute__((unused)) static ASRadioGroupImpl_$Lambda$1 *new_ASRadioGroupImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASRadioGroupImpl_$Lambda$1 *create_ASRadioGroupImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 
 NSString *ASRadioGroupImpl_LOCAL_NAME = @"RadioGroup";
 NSString *ASRadioGroupImpl_GROUP_NAME = @"RadioGroup";
@@ -440,16 +454,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return radioGroup_;
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
-  jboolean remove = [super removeWithASIWidget:w];
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
+  bool remove = [super removeWithASIWidget:w];
   [((ADRadioGroup *) nil_chk(radioGroup_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
   ASRadioGroupImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
-  jboolean remove = [super removeWithInt:index];
+  bool remove = [super removeWithInt:index];
   if (index + 1 <= [((ADRadioGroup *) nil_chk(radioGroup_)) getChildCount]) {
     [((ADRadioGroup *) nil_chk(radioGroup_)) removeViewAtWithInt:index];
     ASRadioGroupImpl_nativeRemoveViewWithASIWidget_(self, widget);
@@ -462,7 +476,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASRadioGroupImpl_createLayoutParamsWithADView_(self, view);
@@ -697,7 +711,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -773,7 +787,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASRadioGroupImpl_setErrorWithId_(self, nil);
   }
@@ -786,7 +800,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASRadioGroupImpl_setErrorWithId_(self, message);
   }
@@ -805,7 +819,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -821,7 +835,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASRadioGroupImpl_getChecked(self) != nil ? @"checked" : @"";
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ADRadioGroup *) nil_chk(radioGroup_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -1047,7 +1061,7 @@ void ASRadioGroupImpl_setCheckedWithId_(ASRadioGroupImpl *self, id objValue) {
     for (id<ASIWidget> __strong widget in nil_chk([self getWidgets])) {
       NSString *id_ = [((id<ASIWidget>) nil_chk(widget)) getId];
       if (id_ != nil) {
-        jint idInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) intValue];
+        int32_t idInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) intValue];
         if ([ASIsRadioButton_class_() isInstance:widget]) {
           [((id<ASIsRadioButton>) cast_check(widget, ASIsRadioButton_class_())) setCheckedWithBoolean:idInt == [((JavaLangInteger *) nil_chk(self->checked_)) intValue]];
         }
@@ -1063,7 +1077,7 @@ id ASRadioGroupImpl_getChecked(ASRadioGroupImpl *self) {
       if ([ASIsRadioButton_class_() isInstance:widget]) {
         id<ASIsRadioButton> impl = (id<ASIsRadioButton>) cast_check(widget, ASIsRadioButton_class_());
         if ([impl isChecked]) {
-          jint idInt = [widget getIdAsInt];
+          int32_t idInt = [widget getIdAsInt];
           return JavaLangInteger_valueOfWithInt_(idInt);
         }
       }
@@ -1076,7 +1090,7 @@ void ASRadioGroupImpl_toggleSelectionWithASIsRadioButton_(ASRadioGroupImpl *self
   for (id<ASIWidget> __strong widget in nil_chk([self getWidgets])) {
     if ([ASIsRadioButton_class_() isInstance:widget]) {
       id<ASIsRadioButton> radioButton = (id<ASIsRadioButton>) cast_check(widget, ASIsRadioButton_class_());
-      if (radioButton != selectedRadioButton) {
+      if (!JreObjectEqualsEquals(radioButton, selectedRadioButton)) {
         [((id<ASIsRadioButton>) nil_chk(radioButton)) setCheckedWithBoolean:false];
       }
       else {
@@ -1117,6 +1131,8 @@ void ASRadioGroupImpl_setOnHierarchyChangeListenerWithADRadioGroup_withId_(ASRad
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl)
+
+J2OBJC_NAME_MAPPING(ASRadioGroupImpl, "com.ashera.layout", "AS")
 
 @implementation ASRadioGroupImpl_Orientation
 
@@ -1162,8 +1178,8 @@ void ASRadioGroupImpl_Orientation_init(ASRadioGroupImpl_Orientation *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"horizontal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"vertical" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
+    (void) [self->mapping_ putWithId:@"horizontal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"vertical" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
   }
 }
 
@@ -1221,10 +1237,10 @@ void ASRadioGroupImpl_Divider_init(ASRadioGroupImpl_Divider *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"beginning" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"end" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"middle" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"beginning" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"end" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"middle" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -1244,19 +1260,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -1265,8 +1281,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -1282,11 +1298,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1315,8 +1331,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1384,12 +1400,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1419,7 +1435,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
@@ -1649,8 +1665,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_RadioGroupExt)
   return imageView;
 }
 
-- (void)translateWithInt:(jint)arg0
-                 withInt:(jint)arg1 {
+- (void)translateWithInt:(int32_t)arg0
+                 withInt:(int32_t)arg1 {
   ADCanvas_translateWithInt_withInt_(self, arg0, arg1);
 }
 
@@ -1711,7 +1727,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_CanvasImpl)
                                withId:(id)value {
   {
     ADRect *rect;
-    jint alpha;
+    int32_t alpha;
     switch (JreIndexOfStr(name, (id[]){ @"bounds", @"alpha" }, 2)) {
       case 0:
       rect = (ADRect *) cast_chk(value, [ADRect class]);
@@ -1784,7 +1800,7 @@ ASRadioGroupImpl_CanvasImpl_$Lambda$1 *create_ASRadioGroupImpl_CanvasImpl_$Lambd
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1817,7 +1833,7 @@ ASRadioGroupImpl_CanvasImpl_$Lambda$1 *create_ASRadioGroupImpl_CanvasImpl_$Lambd
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1946,7 +1962,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_OnHierarchyChangeListener)
 }
 
 - (void)onCheckedChangedWithADRadioGroup:(ADRadioGroup *)group
-                                 withInt:(jint)checkedId {
+                                 withInt:(int32_t)checkedId {
   if (action_ == nil || [action_ isEqual:@"onCheckedChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onCheckedChange"];
     id<JavaUtilMap> obj = [self getOnCheckedChangeEventObjWithADRadioGroup:group withInt:checkedId];
@@ -1968,7 +1984,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_OnHierarchyChangeListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1979,7 +1995,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_OnHierarchyChangeListener)
 }
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADRadioGroup:(ADRadioGroup *)group
-                                                      withInt:(jint)checkedId {
+                                                      withInt:(int32_t)checkedId {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"checkedchange"];
@@ -2066,7 +2082,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_OnCheckedChangeListener)
 }
 
 - (void)onClickWithADView:(ADView *)v {
-  jboolean isChecked = [((id<ASIsRadioButton>) nil_chk(radioButton_)) isChecked];
+  bool isChecked = [((id<ASIsRadioButton>) nil_chk(radioButton_)) isChecked];
   if (!isChecked) {
     ASRadioGroupImpl_handleRadioButtonChangeWithASIsRadioButton_(this$0_, radioButton_);
   }

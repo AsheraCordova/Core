@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Property.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Property")
@@ -17,6 +18,8 @@
 #define ADProperty_
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class NSString;
 
 /*!
  @brief A property is an abstraction that can be used to represent a <emb>mutable</em> value that is held
@@ -60,7 +63,7 @@
   only a <code>getFoo()</code> or <code>isFoo()</code> method, but no matching 
  <code>setFoo()</code> method.
  */
-- (jboolean)isReadOnly;
+- (bool)isReadOnly;
 
 /*!
  @brief This factory method creates and returns a Property given the <code>class</code> and 
@@ -74,6 +77,7 @@
       returned by <code>isName()</code>
       <li>a public <code>name</code> field on the class 
  </ul>
+  
  <p>If either of the get/is method alternatives is found on the class, but an appropriate 
  <code>setName()</code> method is not found, the <code>Property</code> will be 
  <code>readOnly</code>.
@@ -110,6 +114,7 @@ FOUNDATION_EXPORT void ADProperty_initWithIOSClass_withNSString_(ADProperty *sel
 J2OBJC_TYPE_LITERAL_HEADER(ADProperty)
 
 @compatibility_alias RAndroidUtilProperty ADProperty;
+
 
 #endif
 

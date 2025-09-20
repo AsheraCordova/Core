@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\IntEvaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntEvaluator")
@@ -20,6 +21,7 @@
 #define INCLUDE_ADTypeEvaluator 1
 #include "TypeEvaluator.h"
 
+@class JavaLangFloat;
 @class JavaLangInteger;
 
 /*!
@@ -44,7 +46,7 @@
  @return A linear interpolation between the start and end values, given the
           <code>fraction</code> parameter.
  */
-- (JavaLangInteger *)evaluateWithFloat:(jfloat)fraction
+- (JavaLangInteger *)evaluateWithFloat:(float)fraction
                                 withId:(JavaLangInteger *)startValue
                                 withId:(JavaLangInteger *)endValue;
 
@@ -61,6 +63,7 @@ FOUNDATION_EXPORT ADIntEvaluator *create_ADIntEvaluator_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADIntEvaluator)
 
 @compatibility_alias RAndroidAnimationIntEvaluator ADIntEvaluator;
+
 
 #endif
 

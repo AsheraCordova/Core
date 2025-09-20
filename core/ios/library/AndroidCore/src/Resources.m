@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\Resources.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Configuration.h"
 #include "DisplayMetrics.h"
 #include "IOSClass.h"
@@ -12,7 +17,15 @@
 #include "R.h"
 #include "Resources.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(ADResources)
@@ -28,13 +41,13 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getIdentifierWithNSString:(NSString *)string
-                     withNSString:(NSString *)string2
-                     withNSString:(NSString *)name {
+- (int32_t)getIdentifierWithNSString:(NSString *)string
+                        withNSString:(NSString *)string2
+                        withNSString:(NSString *)name {
   return 1;
 }
 
-- (NSString *)getResourceNameWithInt:(jint)id_ {
+- (NSString *)getResourceNameWithInt:(int32_t)id_ {
   return @"";
 }
 
@@ -42,7 +55,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ADConfiguration_init();
 }
 
-- (NSString *)getStringWithInt:(jint)resource
+- (NSString *)getStringWithInt:(int32_t)resource
                   withNSString:(NSString *)text {
   if (resource == JreLoadStatic(ADR_string, negative_duration)) {
     return NSString_java_formatWithNSString_withNSObjectArray_(@"-%s", [IOSObjectArray arrayWithObjects:(id[]){ text } count:1 type:NSObject_class_()]);
@@ -50,7 +63,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (NSString *)getResourceEntryNameWithInt:(jint)id_ {
+- (NSString *)getResourceEntryNameWithInt:(int32_t)id_ {
   return nil;
 }
 
@@ -61,7 +74,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADResources_displayMetric;
 }
 
-- (id<JavaLangCharSequence>)getStringWithInt:(jint)titleRes {
+- (id<JavaLangCharSequence>)getStringWithInt:(int32_t)titleRes {
   return nil;
 }
 
@@ -118,6 +131,8 @@ ADResources *create_ADResources_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADResources)
+
+J2OBJC_NAME_MAPPING(ADResources, "r.android.content.res", "AD")
 
 @implementation ADResources_Theme
 

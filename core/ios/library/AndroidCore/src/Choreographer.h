@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\Choreographer.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Choreographer")
@@ -16,6 +17,8 @@
 #if !defined (ADChoreographer_) && (INCLUDE_ALL_Choreographer || defined(INCLUDE_ADChoreographer))
 #define ADChoreographer_
 
+@class JavaLangInteger;
+@class JavaLangLong;
 @protocol ADChoreographer_FrameCallback;
 @protocol JavaLangRunnable;
 
@@ -25,32 +28,32 @@
 
 - (instancetype)init;
 
-+ (jlong)getFrameDelay;
++ (int64_t)getFrameDelay;
 
-- (jlong)getFrameTime;
+- (int64_t)getFrameTime;
 
 + (ADChoreographer *)getInstance;
 
-- (void)postCallbackWithInt:(jint)callbackCommit
+- (void)postCallbackWithInt:(int32_t)callbackCommit
        withJavaLangRunnable:(id<JavaLangRunnable>)runnable
                      withId:(id)object;
 
 - (void)postFrameCallbackWithADChoreographer_FrameCallback:(id<ADChoreographer_FrameCallback>)callback;
 
 - (void)postFrameCallbackDelayedWithADChoreographer_FrameCallback:(id<ADChoreographer_FrameCallback>)callback
-                                                         withLong:(jlong)backgroundPauseDelay;
+                                                         withLong:(int64_t)backgroundPauseDelay;
 
 - (void)removeFrameCallbackWithADChoreographer_FrameCallback:(id<ADChoreographer_FrameCallback>)mPauser;
 
-+ (void)setFrameDelayWithLong:(jlong)delay;
++ (void)setFrameDelayWithLong:(int64_t)delay;
 
 @end
 
 J2OBJC_STATIC_INIT(ADChoreographer)
 
-inline jint ADChoreographer_get_CALLBACK_COMMIT(void);
+inline int32_t ADChoreographer_get_CALLBACK_COMMIT(void);
 #define ADChoreographer_CALLBACK_COMMIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADChoreographer, CALLBACK_COMMIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADChoreographer, CALLBACK_COMMIT, int32_t)
 
 FOUNDATION_EXPORT void ADChoreographer_init(ADChoreographer *self);
 
@@ -60,28 +63,32 @@ FOUNDATION_EXPORT ADChoreographer *create_ADChoreographer_init(void);
 
 FOUNDATION_EXPORT ADChoreographer *ADChoreographer_getInstance(void);
 
-FOUNDATION_EXPORT jlong ADChoreographer_getFrameDelay(void);
+FOUNDATION_EXPORT int64_t ADChoreographer_getFrameDelay(void);
 
-FOUNDATION_EXPORT void ADChoreographer_setFrameDelayWithLong_(jlong delay);
+FOUNDATION_EXPORT void ADChoreographer_setFrameDelayWithLong_(int64_t delay);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADChoreographer)
 
 @compatibility_alias RAndroidViewChoreographer ADChoreographer;
+
 
 #endif
 
 #if !defined (ADChoreographer_FrameCallback_) && (INCLUDE_ALL_Choreographer || defined(INCLUDE_ADChoreographer_FrameCallback))
 #define ADChoreographer_FrameCallback_
 
+@class JavaLangLong;
+
 @protocol ADChoreographer_FrameCallback < JavaObject >
 
-- (void)doFrameWithLong:(jlong)frameTimeNanos;
+- (void)doFrameWithLong:(int64_t)frameTimeNanos;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADChoreographer_FrameCallback)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADChoreographer_FrameCallback)
+
 
 #endif
 

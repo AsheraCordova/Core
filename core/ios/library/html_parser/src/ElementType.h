@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\ElementType.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ElementType")
@@ -16,6 +17,9 @@
 #if !defined (TSElementType_) && (INCLUDE_ALL_ElementType || defined(INCLUDE_TSElementType))
 #define TSElementType_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @class TSAttributesImpl;
 @class TSSchema;
 
@@ -40,9 +44,9 @@
  @param schema The schema with which this element type will be 	associated
  */
 - (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)model
-                         withInt:(jint)memberOf
-                         withInt:(jint)flags
+                         withInt:(int32_t)model
+                         withInt:(int32_t)memberOf
+                         withInt:(int32_t)flags
                     withTSSchema:(TSSchema *)schema;
 
 /*!
@@ -62,13 +66,13 @@
  	vector.
  @param other The other element type
  */
-- (jboolean)canContainWithTSElementType:(TSElementType *)other;
+- (bool)canContainWithTSElementType:(TSElementType *)other;
 
 /*!
  @brief Returns the flags associated with this element type.
  @return The flags associated with this element type as a vector of bits
  */
-- (jint)flags;
+- (int32_t)flags;
 
 /*!
  @brief Returns the local name of this element type.
@@ -88,13 +92,13 @@
  @return The content models to which this element type belongs as a
  	   vector of bits
  */
-- (jint)memberOf;
+- (int32_t)memberOf;
 
 /*!
  @brief Returns the content models of this element type.
  @return The content models of this element type as a vector of bits
  */
-- (jint)model;
+- (int32_t)model;
 
 /*!
  @brief Returns the name of this element type.
@@ -117,7 +121,7 @@
  @return The namespace name
  */
 - (NSString *)namespace__WithNSString:(NSString *)name
-                          withBoolean:(jboolean)attribute;
+                          withBoolean:(bool)attribute;
 
 /*!
  @brief Normalize an attribute value (ID-style).
@@ -166,19 +170,19 @@
  @brief Sets the flags of this element type.
  @param flags associated with this element type The flags as a vector of bits
  */
-- (void)setFlagsWithInt:(jint)flags;
+- (void)setFlagsWithInt:(int32_t)flags;
 
 /*!
  @brief Sets the content models to which this element type belongs.
  @param memberOf The content models to which this element type belongs as a vector of bits
  */
-- (void)setMemberOfWithInt:(jint)memberOf;
+- (void)setMemberOfWithInt:(int32_t)memberOf;
 
 /*!
  @brief Sets the models of this element type.
  @param model The content models of this element type as a vector of bits
  */
-- (void)setModelWithInt:(jint)model;
+- (void)setModelWithInt:(int32_t)model;
 
 /*!
  @brief Sets the parent element type of this element type.
@@ -194,17 +198,18 @@
 
 J2OBJC_EMPTY_STATIC_INIT(TSElementType)
 
-FOUNDATION_EXPORT void TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(TSElementType *self, NSString *name, jint model, jint memberOf, jint flags, TSSchema *schema);
+FOUNDATION_EXPORT void TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(TSElementType *self, NSString *name, int32_t model, int32_t memberOf, int32_t flags, TSSchema *schema);
 
-FOUNDATION_EXPORT TSElementType *new_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, jint model, jint memberOf, jint flags, TSSchema *schema) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT TSElementType *new_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, int32_t model, int32_t memberOf, int32_t flags, TSSchema *schema) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT TSElementType *create_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, jint model, jint memberOf, jint flags, TSSchema *schema);
+FOUNDATION_EXPORT TSElementType *create_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, int32_t model, int32_t memberOf, int32_t flags, TSSchema *schema);
 
 FOUNDATION_EXPORT NSString *TSElementType_normalizeWithNSString_(NSString *value);
 
 J2OBJC_TYPE_LITERAL_HEADER(TSElementType)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupElementType TSElementType;
+
 
 #endif
 

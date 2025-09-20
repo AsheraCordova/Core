@@ -3,8 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Trace.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Trace.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADTrace
@@ -16,43 +30,43 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (void)traceBeginWithInt:(jint)traceTagView
++ (void)traceBeginWithInt:(int32_t)traceTagView
              withNSString:(NSString *)string {
   ADTrace_traceBeginWithInt_withNSString_(traceTagView, string);
 }
 
-+ (void)traceEndWithInt:(jint)traceTagView {
++ (void)traceEndWithInt:(int32_t)traceTagView {
   ADTrace_traceEndWithInt_(traceTagView);
 }
 
-+ (jboolean)isTagEnabledWithLong:(jlong)traceTag {
++ (bool)isTagEnabledWithLong:(int64_t)traceTag {
   return ADTrace_isTagEnabledWithLong_(traceTag);
 }
 
-+ (void)traceBeginWithLong:(jlong)traceTag
++ (void)traceBeginWithLong:(int64_t)traceTag
               withNSString:(NSString *)traceName {
   ADTrace_traceBeginWithLong_withNSString_(traceTag, traceName);
 }
 
-+ (void)traceEndWithLong:(jlong)traceTag {
++ (void)traceEndWithLong:(int64_t)traceTag {
   ADTrace_traceEndWithLong_(traceTag);
 }
 
-+ (void)asyncTraceEndWithInt:(jint)traceTagView
++ (void)asyncTraceEndWithInt:(int32_t)traceTagView
                 withNSString:(NSString *)nameForTrace
-                     withInt:(jint)identityHashCode {
+                     withInt:(int32_t)identityHashCode {
   ADTrace_asyncTraceEndWithInt_withNSString_withInt_(traceTagView, nameForTrace, identityHashCode);
 }
 
-+ (void)asyncTraceBeginWithInt:(jint)traceTagView
++ (void)asyncTraceBeginWithInt:(int32_t)traceTagView
                   withNSString:(NSString *)nameForTrace
-                       withInt:(jint)identityHashCode {
+                       withInt:(int32_t)identityHashCode {
   ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(traceTagView, nameForTrace, identityHashCode);
 }
 
-+ (void)traceCounterWithInt:(jint)traceTagView
++ (void)traceCounterWithInt:(int32_t)traceTagView
                withNSString:(NSString *)string
-                    withInt:(jint)i {
+                    withInt:(int32_t)i {
   ADTrace_traceCounterWithInt_withNSString_withInt_(traceTagView, string, i);
 }
 
@@ -103,37 +117,39 @@ ADTrace *create_ADTrace_init() {
   J2OBJC_CREATE_IMPL(ADTrace, init)
 }
 
-void ADTrace_traceBeginWithInt_withNSString_(jint traceTagView, NSString *string) {
+void ADTrace_traceBeginWithInt_withNSString_(int32_t traceTagView, NSString *string) {
   ADTrace_initialize();
 }
 
-void ADTrace_traceEndWithInt_(jint traceTagView) {
+void ADTrace_traceEndWithInt_(int32_t traceTagView) {
   ADTrace_initialize();
 }
 
-jboolean ADTrace_isTagEnabledWithLong_(jlong traceTag) {
+bool ADTrace_isTagEnabledWithLong_(int64_t traceTag) {
   ADTrace_initialize();
   return false;
 }
 
-void ADTrace_traceBeginWithLong_withNSString_(jlong traceTag, NSString *traceName) {
+void ADTrace_traceBeginWithLong_withNSString_(int64_t traceTag, NSString *traceName) {
   ADTrace_initialize();
 }
 
-void ADTrace_traceEndWithLong_(jlong traceTag) {
+void ADTrace_traceEndWithLong_(int64_t traceTag) {
   ADTrace_initialize();
 }
 
-void ADTrace_asyncTraceEndWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode) {
+void ADTrace_asyncTraceEndWithInt_withNSString_withInt_(int32_t traceTagView, NSString *nameForTrace, int32_t identityHashCode) {
   ADTrace_initialize();
 }
 
-void ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode) {
+void ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(int32_t traceTagView, NSString *nameForTrace, int32_t identityHashCode) {
   ADTrace_initialize();
 }
 
-void ADTrace_traceCounterWithInt_withNSString_withInt_(jint traceTagView, NSString *string, jint i) {
+void ADTrace_traceCounterWithInt_withNSString_withInt_(int32_t traceTagView, NSString *string, int32_t i) {
   ADTrace_initialize();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTrace)
+
+J2OBJC_NAME_MAPPING(ADTrace, "r.android.os", "AD")

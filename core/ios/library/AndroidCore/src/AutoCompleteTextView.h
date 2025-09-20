@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\AutoCompleteTextView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AutoCompleteTextView")
@@ -30,6 +31,9 @@
 @class ADRelativeLayout_LayoutParams;
 @class ADTextView;
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADAutoCompleteTextView_OnDismissListener;
 @protocol ADFilterable;
 @protocol ADListAdapter;
@@ -47,33 +51,33 @@
 
 - (void)dismissDropDown;
 
-- (jboolean)enoughToFilter;
+- (bool)enoughToFilter;
 
-- (jint)getDropDownHeight;
+- (int32_t)getDropDownHeight;
 
-- (jint)getDropDownHorizontalOffset;
+- (int32_t)getDropDownHorizontalOffset;
 
-- (jint)getDropDownVerticalOffset;
+- (int32_t)getDropDownVerticalOffset;
 
-- (jint)getDropDownWidth;
+- (int32_t)getDropDownWidth;
 
 - (ADDataSetObserver *)getObserver;
 
 - (id<ADTextWatcher>)getTextWatcher;
 
-- (jint)getThreshold;
+- (int32_t)getThreshold;
 
 - (void)init__WithADView:(ADView *)decorView
               withADView:(ADView *)contentView
           withADTextView:(ADTextView *)promptView
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)isPopupShowing;
+- (bool)isPopupShowing;
 
-- (void)onFilterCompleteWithInt:(jint)count;
+- (void)onFilterCompleteWithInt:(int32_t)count;
 
-- (jboolean)onKeyDownWithInt:(jint)keyCode
-              withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onKeyDownWithInt:(int32_t)keyCode
+          withADKeyEvent:(ADKeyEvent *)event;
 
 - (void)performValidation;
 
@@ -83,24 +87,24 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params OBJC_M
 
 - (void)setAnchorViewWithADView:(ADView *)anchorView;
 
-- (void)setDropDownHeightWithInt:(jint)height;
+- (void)setDropDownHeightWithInt:(int32_t)height;
 
-- (void)setDropDownHorizontalOffsetWithInt:(jint)offset;
+- (void)setDropDownHorizontalOffsetWithInt:(int32_t)offset;
 
-- (void)setDropDownVerticalOffsetWithInt:(jint)offset;
+- (void)setDropDownVerticalOffsetWithInt:(int32_t)offset;
 
-- (void)setDropDownWidthWithInt:(jint)width;
+- (void)setDropDownWidthWithInt:(int32_t)width;
 
 - (void)setOnDismissListenerWithADAutoCompleteTextView_OnDismissListener:(id<ADAutoCompleteTextView_OnDismissListener>)dismissListener;
 
-- (void)setThresholdWithInt:(jint)threshold;
+- (void)setThresholdWithInt:(int32_t)threshold;
 
 - (void)showDropDown;
 
 #pragma mark Protected
 
 - (void)performFilteringWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                         withInt:(jint)keyCode;
+                                         withInt:(int32_t)keyCode;
 
 // Disallowed inherited constructors, do not use.
 
@@ -112,24 +116,25 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params OBJC_M
 
 J2OBJC_EMPTY_STATIC_INIT(ADAutoCompleteTextView)
 
-inline jboolean ADAutoCompleteTextView_get_DEBUG(void);
+inline bool ADAutoCompleteTextView_get_DEBUG(void);
 #define ADAutoCompleteTextView_DEBUG false
-J2OBJC_STATIC_FIELD_CONSTANT(ADAutoCompleteTextView, DEBUG, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAutoCompleteTextView, DEBUG, bool)
 
 inline NSString *ADAutoCompleteTextView_get_TAG(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *ADAutoCompleteTextView_TAG;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADAutoCompleteTextView, TAG, NSString *)
 
-inline jint ADAutoCompleteTextView_get_EXPAND_MAX(void);
+inline int32_t ADAutoCompleteTextView_get_EXPAND_MAX(void);
 #define ADAutoCompleteTextView_EXPAND_MAX 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADAutoCompleteTextView, EXPAND_MAX, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAutoCompleteTextView, EXPAND_MAX, int32_t)
 
 FOUNDATION_EXPORT void ADAutoCompleteTextView_initWithASIWidget_(ADAutoCompleteTextView *self, id<ASIWidget> widget);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAutoCompleteTextView)
 
 @compatibility_alias RAndroidWidgetAutoCompleteTextView ADAutoCompleteTextView;
+
 
 #endif
 
@@ -145,6 +150,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAutoCompleteTextView)
 J2OBJC_EMPTY_STATIC_INIT(ADAutoCompleteTextView_OnDismissListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAutoCompleteTextView_OnDismissListener)
+
 
 #endif
 

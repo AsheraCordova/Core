@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\IModelGroup.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IModelGroup")
@@ -20,6 +21,8 @@
 #define INCLUDE_ASIModel 1
 #include "IModel.h"
 
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilList;
 
 @protocol ASIModelGroup < ASIModel, JavaObject >
@@ -35,9 +38,9 @@
 - (void)addAllModelWithId:(id)model;
 
 - (void)addModelWithId:(id)model
-               withInt:(jint)index;
+               withInt:(int32_t)index;
 
-- (void)removeModelAtIndexWithInt:(jint)index;
+- (void)removeModelAtIndexWithInt:(int32_t)index;
 
 - (void)removeModelByIdWithNSString:(NSString *)id_;
 
@@ -52,6 +55,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIModelGroup)
 J2OBJC_TYPE_LITERAL_HEADER(ASIModelGroup)
 
 #define ComAsheraModelIModelGroup ASIModelGroup
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\MultiSelectionSpinnerImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MultiSelectionSpinnerImpl")
@@ -36,6 +37,9 @@
 @class ASLoopParam;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -62,7 +66,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -80,7 +84,7 @@
 
 - (id)getBackground;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getChildAttributeWithASIWidget:(id<ASIWidget>)w
                withASWidgetAttribute:(ASWidgetAttribute *)key;
@@ -93,7 +97,7 @@
 
 - (id)getIsEditing;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (id)getMinimumFontSize;
 
@@ -111,19 +115,19 @@
 
 - (void)invalidate;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value;
+- (void)nativeSetEnabledWithBoolean:(bool)value;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -183,13 +187,13 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)showErrorWithNSString:(NSString *)message;
 
 #pragma mark Protected
 
-- (void)addItemToParentWithInt:(jint)index
+- (void)addItemToParentWithInt:(int32_t)index
                   withNSString:(NSString *)id_
                withASLoopParam:(ASLoopParam *)loopParam;
 
@@ -234,6 +238,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl)
 
 @compatibility_alias ComAsheraLayoutMultiSelectionSpinnerImpl ASMultiSelectionSpinnerImpl;
 
+
 #endif
 
 #if !defined (ASMultiSelectionSpinnerImpl_DrawableTintMode_) && (INCLUDE_ALL_MultiSelectionSpinnerImpl || defined(INCLUDE_ASMultiSelectionSpinnerImpl_DrawableTintMode))
@@ -269,6 +274,7 @@ FOUNDATION_EXPORT ASMultiSelectionSpinnerImpl_DrawableTintMode *new_ASMultiSelec
 FOUNDATION_EXPORT ASMultiSelectionSpinnerImpl_DrawableTintMode *create_ASMultiSelectionSpinnerImpl_DrawableTintMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_DrawableTintMode)
+
 
 #endif
 
@@ -306,6 +312,7 @@ FOUNDATION_EXPORT ASMultiSelectionSpinnerImpl_Font *create_ASMultiSelectionSpinn
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_Font)
 
+
 #endif
 
 #if !defined (ASMultiSelectionSpinnerImpl_TextStyle_) && (INCLUDE_ALL_MultiSelectionSpinnerImpl || defined(INCLUDE_ASMultiSelectionSpinnerImpl_TextStyle))
@@ -342,6 +349,7 @@ FOUNDATION_EXPORT ASMultiSelectionSpinnerImpl_TextStyle *create_ASMultiSelection
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
 
+
 #endif
 
 #if !defined (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt_) && (INCLUDE_ALL_MultiSelectionSpinnerImpl || defined(INCLUDE_ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt))
@@ -365,6 +373,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -383,9 +394,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
@@ -397,19 +408,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -419,9 +430,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setMaxHeightWithInt:(jint)height;
+- (void)setMaxHeightWithInt:(int32_t)height;
 
-- (void)setMaxWidthWithInt:(jint)width;
+- (void)setMaxWidthWithInt:(int32_t)width;
 
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
@@ -436,7 +447,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -452,16 +463,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -478,6 +489,7 @@ FOUNDATION_EXPORT ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt *new_ASMu
 FOUNDATION_EXPORT ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt *create_ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt_initWithASMultiSelectionSpinnerImpl_(ASMultiSelectionSpinnerImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt)
+
 
 #endif
 
@@ -502,6 +514,7 @@ FOUNDATION_EXPORT ASMultiSelectionSpinnerImpl_MultiSelectionSpinner *create_ASMu
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner)
 
+
 #endif
 
 #if !defined (ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener_) && (INCLUDE_ALL_MultiSelectionSpinnerImpl || defined(INCLUDE_ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener))
@@ -518,10 +531,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner)
 
 /*!
  @brief <p>Callback method to be invoked when an item in this view has been
-  selected.
- This callback is invoked only when the newly selected
+  selected.This callback is invoked only when the newly selected
   position is different from the previously selected position or if
-  there was no selected item.</p>
+  there was no selected item.
+ </p>
   Impelmenters can call getItemAtPosition(position) if they need to access the
   data associated with the selected item.
  @param view The view within the AdapterView that was clicked
@@ -545,6 +558,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner)
 J2OBJC_EMPTY_STATIC_INIT(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener)
+
 
 #endif
 

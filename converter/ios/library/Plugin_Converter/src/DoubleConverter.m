@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\DoubleConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DoubleConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
@@ -10,6 +15,12 @@
 #include "java/lang/Double.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASDoubleConverter
@@ -80,3 +91,5 @@ ASDoubleConverter *create_ASDoubleConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDoubleConverter)
+
+J2OBJC_NAME_MAPPING(ASDoubleConverter, "com.ashera.converter", "AS")

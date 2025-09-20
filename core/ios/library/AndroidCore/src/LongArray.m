@@ -3,51 +3,65 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\LongArray.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ArrayUtils.h"
 #include "EmptyArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "LongArray.h"
 #include "Preconditions.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CloneNotSupportedException.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADLongArray () {
  @public
   IOSLongArray *mValues_;
-  jint mSize_;
+  int32_t mSize_;
 }
 
 - (instancetype)initWithLongArray:(IOSLongArray *)array
-                          withInt:(jint)size;
+                          withInt:(int32_t)size;
 
 /*!
  @brief Ensures capacity to append at least <code>count</code> values.
  */
-- (void)ensureCapacityWithInt:(jint)count;
+- (void)ensureCapacityWithInt:(int32_t)count;
 
 @end
 
 J2OBJC_FIELD_SETTER(ADLongArray, mValues_, IOSLongArray *)
 
-inline jint ADLongArray_get_MIN_CAPACITY_INCREMENT(void);
+inline int32_t ADLongArray_get_MIN_CAPACITY_INCREMENT(void);
 #define ADLongArray_MIN_CAPACITY_INCREMENT 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADLongArray, MIN_CAPACITY_INCREMENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLongArray, MIN_CAPACITY_INCREMENT, int32_t)
 
-__attribute__((unused)) static void ADLongArray_initWithLongArray_withInt_(ADLongArray *self, IOSLongArray *array, jint size);
+__attribute__((unused)) static void ADLongArray_initWithLongArray_withInt_(ADLongArray *self, IOSLongArray *array, int32_t size);
 
-__attribute__((unused)) static ADLongArray *new_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, jint size) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADLongArray *new_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, int32_t size) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADLongArray *create_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, jint size);
+__attribute__((unused)) static ADLongArray *create_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, int32_t size);
 
-__attribute__((unused)) static void ADLongArray_ensureCapacityWithInt_(ADLongArray *self, jint count);
+__attribute__((unused)) static void ADLongArray_ensureCapacityWithInt_(ADLongArray *self, int32_t count);
 
 @implementation ADLongArray
 
 - (instancetype)initWithLongArray:(IOSLongArray *)array
-                          withInt:(jint)size {
+                          withInt:(int32_t)size {
   ADLongArray_initWithLongArray_withInt_(self, array, size);
   return self;
 }
@@ -59,7 +73,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)initialCapacity {
+- (instancetype)initWithInt:(int32_t)initialCapacity {
   ADLongArray_initWithInt_(self, initialCapacity);
   return self;
 }
@@ -69,11 +83,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (ADLongArray *)fromArrayWithLongArray:(IOSLongArray *)array
-                                withInt:(jint)size {
+                                withInt:(int32_t)size {
   return ADLongArray_fromArrayWithLongArray_withInt_(array, size);
 }
 
-- (void)resizeWithInt:(jint)newSize {
+- (void)resizeWithInt:(int32_t)newSize {
   ADPreconditions_checkArgumentNonnegativeWithInt_(newSize);
   if (newSize <= ((IOSLongArray *) nil_chk(mValues_))->size_) {
     JavaUtilArrays_fillWithLongArray_withInt_withInt_withLong_(mValues_, newSize, mValues_->size_, 0);
@@ -84,14 +98,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   mSize_ = newSize;
 }
 
-- (void)addWithLong:(jlong)value {
+- (void)addWithLong:(int64_t)value {
   [self addWithInt:mSize_ withLong:value];
 }
 
-- (void)addWithInt:(jint)index
-          withLong:(jlong)value {
+- (void)addWithInt:(int32_t)index
+          withLong:(int64_t)value {
   ADLongArray_ensureCapacityWithInt_(self, 1);
-  jint rightSegment = mSize_ - index;
+  int32_t rightSegment = mSize_ - index;
   mSize_++;
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   if (rightSegment != 0) {
@@ -101,13 +115,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addAllWithADLongArray:(ADLongArray *)values {
-  jint count = ((ADLongArray *) nil_chk(values))->mSize_;
+  int32_t count = ((ADLongArray *) nil_chk(values))->mSize_;
   ADLongArray_ensureCapacityWithInt_(self, count);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(values->mValues_, 0, mValues_, mSize_, count);
   mSize_ += count;
 }
 
-- (void)ensureCapacityWithInt:(jint)count {
+- (void)ensureCapacityWithInt:(int32_t)count {
   ADLongArray_ensureCapacityWithInt_(self, count);
 }
 
@@ -126,20 +140,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return clone;
 }
 
-- (jlong)getWithInt:(jint)index {
+- (int64_t)getWithInt:(int32_t)index {
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   return IOSLongArray_Get(nil_chk(mValues_), index);
 }
 
-- (void)setWithInt:(jint)index
-          withLong:(jlong)value {
+- (void)setWithInt:(int32_t)index
+          withLong:(int64_t)value {
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   *IOSLongArray_GetRef(nil_chk(mValues_), index) = value;
 }
 
-- (jint)indexOfWithLong:(jlong)value {
-  jint n = mSize_;
-  for (jint i = 0; i < n; i++) {
+- (int32_t)indexOfWithLong:(int64_t)value {
+  int32_t n = mSize_;
+  for (int32_t i = 0; i < n; i++) {
     if (IOSLongArray_Get(nil_chk(mValues_), i) == value) {
       return i;
     }
@@ -147,13 +161,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return -1;
 }
 
-- (void)removeWithInt:(jint)index {
+- (void)removeWithInt:(int32_t)index {
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mValues_, index + 1, mValues_, index, mSize_ - index - 1);
   mSize_--;
 }
 
-- (jint)size {
+- (int32_t)size {
   return mSize_;
 }
 
@@ -161,8 +175,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaUtilArrays_copyOfWithLongArray_withInt_(mValues_, mSize_);
 }
 
-+ (jboolean)elementsEqualWithADLongArray:(ADLongArray *)a
-                         withADLongArray:(ADLongArray *)b {
++ (bool)elementsEqualWithADLongArray:(ADLongArray *)a
+                     withADLongArray:(ADLongArray *)b {
   return ADLongArray_elementsEqualWithADLongArray_withADLongArray_(a, b);
 }
 
@@ -232,17 +246,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADLongArray_initWithLongArray_withInt_(ADLongArray *self, IOSLongArray *array, jint size) {
+void ADLongArray_initWithLongArray_withInt_(ADLongArray *self, IOSLongArray *array, int32_t size) {
   NSObject_init(self);
   JreStrongAssign(&self->mValues_, array);
   self->mSize_ = ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(size, 0, ((IOSLongArray *) nil_chk(array))->size_, @"size");
 }
 
-ADLongArray *new_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, jint size) {
+ADLongArray *new_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, int32_t size) {
   J2OBJC_NEW_IMPL(ADLongArray, initWithLongArray_withInt_, array, size)
 }
 
-ADLongArray *create_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, jint size) {
+ADLongArray *create_ADLongArray_initWithLongArray_withInt_(IOSLongArray *array, int32_t size) {
   J2OBJC_CREATE_IMPL(ADLongArray, initWithLongArray_withInt_, array, size)
 }
 
@@ -258,7 +272,7 @@ ADLongArray *create_ADLongArray_init() {
   J2OBJC_CREATE_IMPL(ADLongArray, init)
 }
 
-void ADLongArray_initWithInt_(ADLongArray *self, jint initialCapacity) {
+void ADLongArray_initWithInt_(ADLongArray *self, int32_t initialCapacity) {
   NSObject_init(self);
   if (initialCapacity == 0) {
     JreStrongAssign(&self->mValues_, JreLoadStatic(ADEmptyArray, LONG));
@@ -269,11 +283,11 @@ void ADLongArray_initWithInt_(ADLongArray *self, jint initialCapacity) {
   self->mSize_ = 0;
 }
 
-ADLongArray *new_ADLongArray_initWithInt_(jint initialCapacity) {
+ADLongArray *new_ADLongArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_NEW_IMPL(ADLongArray, initWithInt_, initialCapacity)
 }
 
-ADLongArray *create_ADLongArray_initWithInt_(jint initialCapacity) {
+ADLongArray *create_ADLongArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_CREATE_IMPL(ADLongArray, initWithInt_, initialCapacity)
 }
 
@@ -282,28 +296,28 @@ ADLongArray *ADLongArray_wrapWithLongArray_(IOSLongArray *array) {
   return create_ADLongArray_initWithLongArray_withInt_(array, ((IOSLongArray *) nil_chk(array))->size_);
 }
 
-ADLongArray *ADLongArray_fromArrayWithLongArray_withInt_(IOSLongArray *array, jint size) {
+ADLongArray *ADLongArray_fromArrayWithLongArray_withInt_(IOSLongArray *array, int32_t size) {
   ADLongArray_initialize();
   return ADLongArray_wrapWithLongArray_(JavaUtilArrays_copyOfWithLongArray_withInt_(array, size));
 }
 
-void ADLongArray_ensureCapacityWithInt_(ADLongArray *self, jint count) {
-  jint currentSize = self->mSize_;
-  jint minCapacity = currentSize + count;
+void ADLongArray_ensureCapacityWithInt_(ADLongArray *self, int32_t count) {
+  int32_t currentSize = self->mSize_;
+  int32_t minCapacity = currentSize + count;
   if (minCapacity >= ((IOSLongArray *) nil_chk(self->mValues_))->size_) {
-    jint targetCap = currentSize + (currentSize < (JreIntDiv(ADLongArray_MIN_CAPACITY_INCREMENT, 2)) ? ADLongArray_MIN_CAPACITY_INCREMENT : JreRShift32(currentSize, 1));
-    jint newCapacity = targetCap > minCapacity ? targetCap : minCapacity;
+    int32_t targetCap = currentSize + (currentSize < (JreIntDiv(ADLongArray_MIN_CAPACITY_INCREMENT, 2)) ? ADLongArray_MIN_CAPACITY_INCREMENT : JreRShift32(currentSize, 1));
+    int32_t newCapacity = targetCap > minCapacity ? targetCap : minCapacity;
     IOSLongArray *newValues = ADArrayUtils_newUnpaddedLongArrayWithInt_(newCapacity);
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->mValues_, 0, newValues, 0, currentSize);
     JreStrongAssign(&self->mValues_, newValues);
   }
 }
 
-jboolean ADLongArray_elementsEqualWithADLongArray_withADLongArray_(ADLongArray *a, ADLongArray *b) {
+bool ADLongArray_elementsEqualWithADLongArray_withADLongArray_(ADLongArray *a, ADLongArray *b) {
   ADLongArray_initialize();
-  if (a == nil || b == nil) return a == b;
+  if (a == nil || b == nil) return JreObjectEqualsEquals(a, b);
   if (a->mSize_ != b->mSize_) return false;
-  for (jint i = 0; i < a->mSize_; i++) {
+  for (int32_t i = 0; i < a->mSize_; i++) {
     if ([a getWithInt:i] != [b getWithInt:i]) {
       return false;
     }
@@ -312,3 +326,5 @@ jboolean ADLongArray_elementsEqualWithADLongArray_withADLongArray_(ADLongArray *
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLongArray)
+
+J2OBJC_NAME_MAPPING(ADLongArray, "r.android.util", "AD")

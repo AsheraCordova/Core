@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\ValueAnimator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AccelerateDecelerateInterpolator.h"
 #include "AndroidRuntimeException.h"
 #include "AnimationHandler.h"
@@ -22,9 +27,13 @@
 #include "Trace.h"
 #include "TypeEvaluator.h"
 #include "ValueAnimator.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -36,7 +45,12 @@
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 
-@class JavaUtilArrayList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADValueAnimator () {
@@ -46,12 +60,12 @@
   or delayStartTime which allows the animator to continue from the point at which
   it was paused.If negative, has not yet been set.
    */
-  jlong mPauseTime_;
+  int64_t mPauseTime_;
   /*!
    @brief Set when an animator is resumed.This triggers logic in the next frame which
   actually resumes the animator.
    */
-  jboolean mResumed_;
+  bool mResumed_;
   /*!
    @brief Flag to indicate whether this animator is playing in reverse mode, specifically
   by being started or interrupted by a call to reverse().This flag is different than
@@ -60,25 +74,25 @@
    It is used in corner cases to determine proper end
   behavior.
    */
-  jboolean mReversing_;
+  bool mReversing_;
   /*!
    @brief Tracks the overall fraction of the animation, ranging from 0 to mRepeatCount + 1
    */
-  jfloat mOverallFraction_;
+  float mOverallFraction_;
   /*!
    @brief Tracks current elapsed/eased fraction, for querying in getAnimatedFraction().
    This is calculated by interpolating the fraction (range: [0, 1]) in the current iteration.
    */
-  jfloat mCurrentFraction_;
+  float mCurrentFraction_;
   /*!
    @brief Tracks the time (in milliseconds) when the last frame arrived.
    */
-  jlong mLastFrameTime_;
+  int64_t mLastFrameTime_;
   /*!
    @brief Tracks the time (in milliseconds) when the first frame arrived.Note the frame may arrive
   during the start delay.
    */
-  jlong mFirstFrameTime_;
+  int64_t mFirstFrameTime_;
   /*!
    @brief Additional playing state to indicate whether an animator has been start()'d.There is
   some lag between a call to start() and the first animation frame.
@@ -88,36 +102,36 @@
   Note that delayed animations are different: they are not started until their first
   animation frame, which occurs after their delay elapses.
    */
-  jboolean mRunning_;
+  bool mRunning_;
   /*!
    @brief Additional playing state to indicate whether an animator has been start()'d, whether or
   not there is a nonzero startDelay.
    */
-  jboolean mStarted_;
+  bool mStarted_;
   /*!
    @brief Flag that tracks whether animation has been requested to end.
    */
-  jboolean mAnimationEndRequested_;
-  jlong mDuration_;
-  jlong mStartDelay_;
-  jint mRepeatCount_;
+  bool mAnimationEndRequested_;
+  int64_t mDuration_;
+  int64_t mStartDelay_;
+  int32_t mRepeatCount_;
   /*!
    @brief The type of repetition that will occur when repeatMode is nonzero.RESTART means the
   animation will start from the beginning on every new cycle.
    REVERSE means the animation
   will reverse directions on each iteration.
    */
-  jint mRepeatMode_;
+  int32_t mRepeatMode_;
   /*!
    @brief Whether or not the animator should register for its own animation callback to receive
   animation pulse.
    */
-  jboolean mSelfPulse_;
+  bool mSelfPulse_;
   /*!
    @brief Whether or not the animator has been requested to start without pulsing.This flag gets set
   in startWithoutPulsing(), and reset in start().
    */
-  jboolean mSuppressSelfPulseRequested_;
+  bool mSuppressSelfPulseRequested_;
   /*!
    @brief The time interpolator to be used.The elapsed fraction of the animation will be passed
   through this interpolator to calculate the interpolated fraction, which is then used to
@@ -127,16 +141,16 @@
   /*!
    @brief If set to non-negative value, this will override <code>sDurationScale</code>.
    */
-  jfloat mDurationScale_;
+  float mDurationScale_;
   /*!
    @brief Animation handler used to schedule updates for this animation.
    */
   ADAnimationHandler *mAnimationHandler_;
 }
 
-- (jfloat)resolveDurationScale;
+- (float)resolveDurationScale;
 
-- (jlong)getScaledDuration;
+- (int64_t)getScaledDuration;
 
 /*!
  @brief Calculates current iteration based on the overall fraction.The overall fraction will be
@@ -144,7 +158,7 @@
  Both current iteration and fraction in the current
   iteration can be derived from it.
  */
-- (jint)getCurrentIterationWithFloat:(jfloat)fraction;
+- (int32_t)getCurrentIterationWithFloat:(float)fraction;
 
 /*!
  @brief Calculates the fraction of the current iteration, taking into account whether the animation
@@ -152,8 +166,8 @@
  When the animation is played backwards in an iteration,
   the fraction for that iteration will go from 1f to 0f.
  */
-- (jfloat)getCurrentIterationFractionWithFloat:(jfloat)fraction
-                                   withBoolean:(jboolean)inReverse;
+- (float)getCurrentIterationFractionWithFloat:(float)fraction
+                                  withBoolean:(bool)inReverse;
 
 /*!
  @brief Clamps fraction into the correct range: [0, mRepeatCount + 1].If repeat count is infinite,
@@ -161,15 +175,15 @@
  @param fraction fraction to be clamped
  @return fraction clamped into the range of [0, mRepeatCount + 1]
  */
-- (jfloat)clampFractionWithFloat:(jfloat)fraction;
+- (float)clampFractionWithFloat:(float)fraction;
 
 /*!
  @brief Calculates the direction of animation playing (i.e.forward or backward), based on 1)
   whether the entire animation is being reversed, 2) repeat mode applied to the current
   iteration.
  */
-- (jboolean)shouldPlayBackwardWithInt:(jint)iteration
-                          withBoolean:(jboolean)inReverse;
+- (bool)shouldPlayBackwardWithInt:(int32_t)iteration
+                      withBoolean:(bool)inReverse;
 
 /*!
  @brief Start the animation playing.This version of start() takes a boolean flag that indicates
@@ -183,7 +197,7 @@
   thread for that view hierarchy.</p>
  @param playBackwards Whether the ValueAnimator should start playing in reverse.
  */
-- (void)startWithBoolean:(jboolean)playBackwards;
+- (void)startWithBoolean:(bool)playBackwards;
 
 /*!
  @brief Called internally to end an animation by removing it from the animations list.Must be
@@ -202,13 +216,13 @@
   this is different than <code>isRunning()</code> in that the latter tracks the time after start()
   is called (or after start delay if any), which may be before the animation loop starts.
  */
-- (jboolean)isPulsingInternal;
+- (bool)isPulsingInternal;
 
 - (void)addOneShotCommitCallback;
 
 - (void)removeAnimationCallback;
 
-- (void)addAnimationCallbackWithLong:(jlong)delay;
+- (void)addAnimationCallbackWithLong:(int64_t)delay;
 
 @end
 
@@ -219,23 +233,23 @@ inline NSString *ADValueAnimator_get_TAG(void);
 static NSString *ADValueAnimator_TAG = @"ValueAnimator";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADValueAnimator, TAG, NSString *)
 
-inline jboolean ADValueAnimator_get_DEBUG(void);
+inline bool ADValueAnimator_get_DEBUG(void);
 #define ADValueAnimator_DEBUG false
-J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, DEBUG, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, DEBUG, bool)
 
-inline jboolean ADValueAnimator_get_TRACE_ANIMATION_FRACTION(void);
-static jboolean ADValueAnimator_TRACE_ANIMATION_FRACTION;
-J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(ADValueAnimator, TRACE_ANIMATION_FRACTION, jboolean)
+inline bool ADValueAnimator_get_TRACE_ANIMATION_FRACTION(void);
+static bool ADValueAnimator_TRACE_ANIMATION_FRACTION;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(ADValueAnimator, TRACE_ANIMATION_FRACTION, bool)
 
 /*!
  @brief System-wide animation scale.
  <p>To check whether animations are enabled system-wise use <code>areAnimatorsEnabled()</code>.
  */
-inline jfloat ADValueAnimator_get_sDurationScale(void);
-inline jfloat ADValueAnimator_set_sDurationScale(jfloat value);
-inline jfloat *ADValueAnimator_getRef_sDurationScale(void);
-static jfloat ADValueAnimator_sDurationScale = 1.0f;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADValueAnimator, sDurationScale, jfloat)
+inline float ADValueAnimator_get_sDurationScale(void);
+inline float ADValueAnimator_set_sDurationScale(float value);
+inline float *ADValueAnimator_getRef_sDurationScale(void);
+static float ADValueAnimator_sDurationScale = 1.0f;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADValueAnimator, sDurationScale, float)
 
 inline JavaUtilArrayList *ADValueAnimator_get_sDurationScaleChangeListeners(void);
 static JavaUtilArrayList *ADValueAnimator_sDurationScaleChangeListeners;
@@ -245,33 +259,33 @@ inline id<ADTimeInterpolator> ADValueAnimator_get_sDefaultInterpolator(void);
 static id<ADTimeInterpolator> ADValueAnimator_sDefaultInterpolator;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADValueAnimator, sDefaultInterpolator, id<ADTimeInterpolator>)
 
-__attribute__((unused)) static jfloat ADValueAnimator_resolveDurationScale(ADValueAnimator *self);
+__attribute__((unused)) static float ADValueAnimator_resolveDurationScale(ADValueAnimator *self);
 
-__attribute__((unused)) static jlong ADValueAnimator_getScaledDuration(ADValueAnimator *self);
+__attribute__((unused)) static int64_t ADValueAnimator_getScaledDuration(ADValueAnimator *self);
 
-__attribute__((unused)) static jint ADValueAnimator_getCurrentIterationWithFloat_(ADValueAnimator *self, jfloat fraction);
+__attribute__((unused)) static int32_t ADValueAnimator_getCurrentIterationWithFloat_(ADValueAnimator *self, float fraction);
 
-__attribute__((unused)) static jfloat ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(ADValueAnimator *self, jfloat fraction, jboolean inReverse);
+__attribute__((unused)) static float ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(ADValueAnimator *self, float fraction, bool inReverse);
 
-__attribute__((unused)) static jfloat ADValueAnimator_clampFractionWithFloat_(ADValueAnimator *self, jfloat fraction);
+__attribute__((unused)) static float ADValueAnimator_clampFractionWithFloat_(ADValueAnimator *self, float fraction);
 
-__attribute__((unused)) static jboolean ADValueAnimator_shouldPlayBackwardWithInt_withBoolean_(ADValueAnimator *self, jint iteration, jboolean inReverse);
+__attribute__((unused)) static bool ADValueAnimator_shouldPlayBackwardWithInt_withBoolean_(ADValueAnimator *self, int32_t iteration, bool inReverse);
 
-__attribute__((unused)) static void ADValueAnimator_startWithBoolean_(ADValueAnimator *self, jboolean playBackwards);
+__attribute__((unused)) static void ADValueAnimator_startWithBoolean_(ADValueAnimator *self, bool playBackwards);
 
 __attribute__((unused)) static void ADValueAnimator_endAnimation(ADValueAnimator *self);
 
 __attribute__((unused)) static void ADValueAnimator_startAnimation(ADValueAnimator *self);
 
-__attribute__((unused)) static jboolean ADValueAnimator_isPulsingInternal(ADValueAnimator *self);
+__attribute__((unused)) static bool ADValueAnimator_isPulsingInternal(ADValueAnimator *self);
 
-__attribute__((unused)) static jboolean ADValueAnimator_doAnimationFrameWithLong_(ADValueAnimator *self, jlong frameTime);
+__attribute__((unused)) static bool ADValueAnimator_doAnimationFrameWithLong_(ADValueAnimator *self, int64_t frameTime);
 
 __attribute__((unused)) static void ADValueAnimator_addOneShotCommitCallback(ADValueAnimator *self);
 
 __attribute__((unused)) static void ADValueAnimator_removeAnimationCallback(ADValueAnimator *self);
 
-__attribute__((unused)) static void ADValueAnimator_addAnimationCallbackWithLong_(ADValueAnimator *self, jlong delay);
+__attribute__((unused)) static void ADValueAnimator_addAnimationCallbackWithLong_(ADValueAnimator *self, int64_t delay);
 
 @interface ADValueAnimator_RepeatMode : NSObject
 
@@ -291,23 +305,23 @@ J2OBJC_INITIALIZED_DEFN(ADValueAnimator)
 
 @implementation ADValueAnimator
 
-+ (void)setDurationScaleWithFloat:(jfloat)durationScale {
++ (void)setDurationScaleWithFloat:(float)durationScale {
   ADValueAnimator_setDurationScaleWithFloat_(durationScale);
 }
 
-+ (jfloat)getDurationScale {
++ (float)getDurationScale {
   return ADValueAnimator_getDurationScale();
 }
 
-+ (jboolean)registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener {
++ (bool)registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener {
   return ADValueAnimator_registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(listener);
 }
 
-+ (jboolean)unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener {
++ (bool)unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener {
   return ADValueAnimator_unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(listener);
 }
 
-+ (jboolean)areAnimatorsEnabled {
++ (bool)areAnimatorsEnabled {
   return ADValueAnimator_areAnimatorsEnabled();
 }
 
@@ -382,10 +396,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setValuesWithADPropertyValuesHolderArray:(IOSObjectArray *)values {
-  jint numValues = ((IOSObjectArray *) nil_chk(values))->size_;
+  int32_t numValues = ((IOSObjectArray *) nil_chk(values))->size_;
   JreStrongAssign(&mValues_, values);
   JreStrongAssignAndConsume(&mValuesMap_, new_JavaUtilHashMap_initWithInt_(numValues));
-  for (jint i = 0; i < numValues; ++i) {
+  for (int32_t i = 0; i < numValues; ++i) {
     ADPropertyValuesHolder *valuesHolder = IOSObjectArray_Get(values, i);
     [((JavaUtilHashMap *) nil_chk(mValuesMap_)) putWithId:[((ADPropertyValuesHolder *) nil_chk(valuesHolder)) getPropertyName] withId:valuesHolder];
   }
@@ -399,8 +413,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)initAnimation {
   if (!mInitialized_) {
     if (mValues_ != nil) {
-      jint numValues = mValues_->size_;
-      for (jint i = 0; i < numValues; ++i) {
+      int32_t numValues = mValues_->size_;
+      for (int32_t i = 0; i < numValues; ++i) {
         [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) init__];
       }
     }
@@ -408,7 +422,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (ADValueAnimator *)setDurationWithLong:(jlong)duration {
+- (ADValueAnimator *)setDurationWithLong:(int64_t)duration {
   if (duration < 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J", @"Animators cannot have negative duration: ", duration));
   }
@@ -416,23 +430,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (void)overrideDurationScaleWithFloat:(jfloat)durationScale {
+- (void)overrideDurationScaleWithFloat:(float)durationScale {
   mDurationScale_ = durationScale;
 }
 
-- (jfloat)resolveDurationScale {
+- (float)resolveDurationScale {
   return ADValueAnimator_resolveDurationScale(self);
 }
 
-- (jlong)getScaledDuration {
+- (int64_t)getScaledDuration {
   return ADValueAnimator_getScaledDuration(self);
 }
 
-- (jlong)getDuration {
+- (int64_t)getDuration {
   return mDuration_;
 }
 
-- (jlong)getTotalDuration {
+- (int64_t)getTotalDuration {
   if (mRepeatCount_ == ADValueAnimator_INFINITE) {
     return ADAnimator_DURATION_INFINITE;
   }
@@ -441,65 +455,65 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setCurrentPlayTimeWithLong:(jlong)playTime {
-  jfloat fraction = mDuration_ > 0 ? (jfloat) playTime / mDuration_ : 1;
+- (void)setCurrentPlayTimeWithLong:(int64_t)playTime {
+  float fraction = mDuration_ > 0 ? (float) playTime / mDuration_ : 1;
   [self setCurrentFractionWithFloat:fraction];
 }
 
-- (void)setCurrentFractionWithFloat:(jfloat)fraction {
+- (void)setCurrentFractionWithFloat:(float)fraction {
   [self initAnimation];
   fraction = ADValueAnimator_clampFractionWithFloat_(self, fraction);
   mStartTimeCommitted_ = true;
   if (ADValueAnimator_isPulsingInternal(self)) {
-    jlong seekTime = JreFpToLong((ADValueAnimator_getScaledDuration(self) * fraction));
-    jlong currentTime = ADAnimationUtils_currentAnimationTimeMillis();
+    int64_t seekTime = JreFpToLong((ADValueAnimator_getScaledDuration(self) * fraction));
+    int64_t currentTime = ADAnimationUtils_currentAnimationTimeMillis();
     mStartTime_ = currentTime - seekTime;
   }
   else {
     mSeekFraction_ = fraction;
   }
   mOverallFraction_ = fraction;
-  jfloat currentIterationFraction = ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(self, fraction, mReversing_);
+  float currentIterationFraction = ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(self, fraction, mReversing_);
   [self animateValueWithFloat:currentIterationFraction];
 }
 
-- (jint)getCurrentIterationWithFloat:(jfloat)fraction {
+- (int32_t)getCurrentIterationWithFloat:(float)fraction {
   return ADValueAnimator_getCurrentIterationWithFloat_(self, fraction);
 }
 
-- (jfloat)getCurrentIterationFractionWithFloat:(jfloat)fraction
-                                   withBoolean:(jboolean)inReverse {
+- (float)getCurrentIterationFractionWithFloat:(float)fraction
+                                  withBoolean:(bool)inReverse {
   return ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(self, fraction, inReverse);
 }
 
-- (jfloat)clampFractionWithFloat:(jfloat)fraction {
+- (float)clampFractionWithFloat:(float)fraction {
   return ADValueAnimator_clampFractionWithFloat_(self, fraction);
 }
 
-- (jboolean)shouldPlayBackwardWithInt:(jint)iteration
-                          withBoolean:(jboolean)inReverse {
+- (bool)shouldPlayBackwardWithInt:(int32_t)iteration
+                      withBoolean:(bool)inReverse {
   return ADValueAnimator_shouldPlayBackwardWithInt_withBoolean_(self, iteration, inReverse);
 }
 
-- (jlong)getCurrentPlayTime {
+- (int64_t)getCurrentPlayTime {
   if (!mInitialized_ || (!mStarted_ && mSeekFraction_ < 0)) {
     return 0;
   }
   if (mSeekFraction_ >= 0) {
     return JreFpToLong((mDuration_ * mSeekFraction_));
   }
-  jfloat durationScale = ADValueAnimator_resolveDurationScale(self);
+  float durationScale = ADValueAnimator_resolveDurationScale(self);
   if (durationScale == 0.0f) {
     durationScale = 1.0f;
   }
   return JreFpToLong(((ADAnimationUtils_currentAnimationTimeMillis() - mStartTime_) / durationScale));
 }
 
-- (jlong)getStartDelay {
+- (int64_t)getStartDelay {
   return mStartDelay_;
 }
 
-- (void)setStartDelayWithLong:(jlong)startDelay {
+- (void)setStartDelayWithLong:(int64_t)startDelay {
   if (startDelay < 0) {
     ADLog_wWithNSString_withNSString_(ADValueAnimator_TAG, @"Start delay should always be non-negative");
     startDelay = 0;
@@ -507,11 +521,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   mStartDelay_ = startDelay;
 }
 
-+ (jlong)getFrameDelay {
++ (int64_t)getFrameDelay {
   return ADValueAnimator_getFrameDelay();
 }
 
-+ (void)setFrameDelayWithLong:(jlong)frameDelay {
++ (void)setFrameDelayWithLong:(int64_t)frameDelay {
   ADValueAnimator_setFrameDelayWithLong_(frameDelay);
 }
 
@@ -532,19 +546,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setRepeatCountWithInt:(jint)value {
+- (void)setRepeatCountWithInt:(int32_t)value {
   mRepeatCount_ = value;
 }
 
-- (jint)getRepeatCount {
+- (int32_t)getRepeatCount {
   return mRepeatCount_;
 }
 
-- (void)setRepeatModeWithInt:(jint)value {
+- (void)setRepeatModeWithInt:(int32_t)value {
   mRepeatMode_ = value;
 }
 
-- (jint)getRepeatMode {
+- (int32_t)getRepeatMode {
   return mRepeatMode_;
 }
 
@@ -592,11 +606,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)startWithBoolean:(jboolean)playBackwards {
+- (void)startWithBoolean:(bool)playBackwards {
   ADValueAnimator_startWithBoolean_(self, playBackwards);
 }
 
-- (void)startWithoutPulsingWithBoolean:(jboolean)inReverse {
+- (void)startWithoutPulsingWithBoolean:(bool)inReverse {
   mSuppressSelfPulseRequested_ = true;
   if (inReverse) {
     [self reverse];
@@ -656,7 +670,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)pause {
-  jboolean previouslyPaused = mPaused_;
+  bool previouslyPaused = mPaused_;
   [super pause];
   if (!previouslyPaused && mPaused_) {
     mPauseTime_ = -1;
@@ -664,19 +678,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isRunning {
+- (bool)isRunning {
   return mRunning_;
 }
 
-- (jboolean)isStarted {
+- (bool)isStarted {
   return mStarted_;
 }
 
 - (void)reverse {
   if (ADValueAnimator_isPulsingInternal(self)) {
-    jlong currentTime = ADAnimationUtils_currentAnimationTimeMillis();
-    jlong currentPlayTime = currentTime - mStartTime_;
-    jlong timeLeft = ADValueAnimator_getScaledDuration(self) - currentPlayTime;
+    int64_t currentTime = ADAnimationUtils_currentAnimationTimeMillis();
+    int64_t currentPlayTime = currentTime - mStartTime_;
+    int64_t timeLeft = ADValueAnimator_getScaledDuration(self) - currentPlayTime;
     mStartTime_ = currentTime - timeLeft;
     mStartTimeCommitted_ = true;
     mReversing_ = !mReversing_;
@@ -690,7 +704,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)canReverse {
+- (bool)canReverse {
   return true;
 }
 
@@ -702,7 +716,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADValueAnimator_startAnimation(self);
 }
 
-- (jboolean)isPulsingInternal {
+- (bool)isPulsingInternal {
   return ADValueAnimator_isPulsingInternal(self);
 }
 
@@ -710,24 +724,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   return @"animator";
 }
 
-- (void)commitAnimationFrameWithLong:(jlong)frameTime {
+- (void)commitAnimationFrameWithLong:(int64_t)frameTime {
   if (!mStartTimeCommitted_) {
     mStartTimeCommitted_ = true;
-    jlong adjustment = frameTime - mLastFrameTime_;
+    int64_t adjustment = frameTime - mLastFrameTime_;
     if (adjustment > 0) {
       mStartTime_ += adjustment;
     }
   }
 }
 
-- (jboolean)animateBasedOnTimeWithLong:(jlong)currentTime {
-  jboolean done = false;
+- (bool)animateBasedOnTimeWithLong:(int64_t)currentTime {
+  bool done = false;
   if (mRunning_) {
-    jlong scaledDuration = ADValueAnimator_getScaledDuration(self);
-    jfloat fraction = scaledDuration > 0 ? (jfloat) (currentTime - mStartTime_) / scaledDuration : 1.0f;
-    jfloat lastFraction = mOverallFraction_;
-    jboolean newIteration = JreFpToInt(fraction) > JreFpToInt(lastFraction);
-    jboolean lastIterationFinished = (fraction >= mRepeatCount_ + 1) && (mRepeatCount_ != ADValueAnimator_INFINITE);
+    int64_t scaledDuration = ADValueAnimator_getScaledDuration(self);
+    float fraction = scaledDuration > 0 ? (float) (currentTime - mStartTime_) / scaledDuration : 1.0f;
+    float lastFraction = mOverallFraction_;
+    bool newIteration = JreFpToInt(fraction) > JreFpToInt(lastFraction);
+    bool lastIterationFinished = (fraction >= mRepeatCount_ + 1) && (mRepeatCount_ != ADValueAnimator_INFINITE);
     if (scaledDuration == 0) {
       done = true;
     }
@@ -738,19 +752,19 @@ J2OBJC_IGNORE_DESIGNATED_END
       done = true;
     }
     mOverallFraction_ = ADValueAnimator_clampFractionWithFloat_(self, fraction);
-    jfloat currentIterationFraction = ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(self, mOverallFraction_, mReversing_);
+    float currentIterationFraction = ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(self, mOverallFraction_, mReversing_);
     [self animateValueWithFloat:currentIterationFraction];
   }
   return done;
 }
 
-- (void)animateValuesInRangeWithLong:(jlong)currentPlayTime
-                            withLong:(jlong)lastPlayTime {
+- (void)animateValuesInRangeWithLong:(int64_t)currentPlayTime
+                            withLong:(int64_t)lastPlayTime {
   if (currentPlayTime < 0 || lastPlayTime < -1) {
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Error: Play time should never be negative.");
   }
   [self initAnimation];
-  jlong duration = [self getTotalDuration];
+  int64_t duration = [self getTotalDuration];
   if (lastPlayTime < 0 || (lastPlayTime == 0 && currentPlayTime > 0)) {
     [self notifyStartListenersWithBoolean:false];
   }
@@ -763,8 +777,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   lastPlayTime -= mStartDelay_;
   currentPlayTime -= mStartDelay_;
   if (mRepeatCount_ > 0) {
-    jint iteration = JavaLangMath_maxWithInt_withInt_(0, (jint) (JreLongDiv(currentPlayTime, mDuration_)));
-    jint lastIteration = JavaLangMath_maxWithInt_withInt_(0, (jint) (JreLongDiv(lastPlayTime, mDuration_)));
+    int32_t iteration = JavaLangMath_maxWithInt_withInt_(0, (int32_t) (JreLongDiv(currentPlayTime, mDuration_)));
+    int32_t lastIteration = JavaLangMath_maxWithInt_withInt_(0, (int32_t) (JreLongDiv(lastPlayTime, mDuration_)));
     iteration = JavaLangMath_minWithInt_withInt_(iteration, mRepeatCount_);
     lastIteration = JavaLangMath_minWithInt_withInt_(lastIteration, mRepeatCount_);
     if (iteration != lastIteration) {
@@ -775,21 +789,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"Can't animate a value outside of the duration");
   }
   else {
-    jfloat fraction = JavaLangMath_maxWithLong_withLong_(0, currentPlayTime) / (jfloat) mDuration_;
+    float fraction = JavaLangMath_maxWithLong_withLong_(0, currentPlayTime) / (float) mDuration_;
     fraction = ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(self, fraction, false);
     [self animateValueWithFloat:fraction];
   }
 }
 
-- (void)animateSkipToEndsWithLong:(jlong)currentPlayTime
-                         withLong:(jlong)lastPlayTime {
-  jboolean inReverse = currentPlayTime < lastPlayTime;
-  jboolean doSkip;
+- (void)animateSkipToEndsWithLong:(int64_t)currentPlayTime
+                         withLong:(int64_t)lastPlayTime {
+  bool inReverse = currentPlayTime < lastPlayTime;
+  bool doSkip;
   if (currentPlayTime <= 0 && lastPlayTime > 0) {
     doSkip = true;
   }
   else {
-    jlong duration = [self getTotalDuration];
+    int64_t duration = [self getTotalDuration];
     doSkip = (duration >= 0 && currentPlayTime >= duration && lastPlayTime < duration);
   }
   if (doSkip) {
@@ -799,24 +813,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)skipToEndValueWithBoolean:(jboolean)inReverse {
+- (void)skipToEndValueWithBoolean:(bool)inReverse {
   [self initAnimation];
-  jfloat endFraction = inReverse ? 0.0f : 1.0f;
+  float endFraction = inReverse ? 0.0f : 1.0f;
   if (JreIntMod(mRepeatCount_, 2) == 1 && mRepeatMode_ == ADValueAnimator_REVERSE) {
     endFraction = 0.0f;
   }
   [self animateValueWithFloat:endFraction];
 }
 
-- (jboolean)isInitialized {
+- (bool)isInitialized {
   return mInitialized_;
 }
 
-- (jboolean)doAnimationFrameWithLong:(jlong)frameTime {
+- (bool)doAnimationFrameWithLong:(int64_t)frameTime {
   return ADValueAnimator_doAnimationFrameWithLong_(self, frameTime);
 }
 
-- (jboolean)pulseAnimationFrameWithLong:(jlong)frameTime {
+- (bool)pulseAnimationFrameWithLong:(int64_t)frameTime {
   if (mSelfPulse_) {
     return false;
   }
@@ -831,25 +845,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADValueAnimator_removeAnimationCallback(self);
 }
 
-- (void)addAnimationCallbackWithLong:(jlong)delay {
+- (void)addAnimationCallbackWithLong:(int64_t)delay {
   ADValueAnimator_addAnimationCallbackWithLong_(self, delay);
 }
 
-- (jfloat)getAnimatedFraction {
+- (float)getAnimatedFraction {
   return mCurrentFraction_;
 }
 
-- (void)animateValueWithFloat:(jfloat)fraction {
+- (void)animateValueWithFloat:(float)fraction {
   if (ADValueAnimator_TRACE_ANIMATION_FRACTION) {
-    ADTrace_traceCounterWithInt_withNSString_withInt_(ADTrace_TRACE_TAG_VIEW, JreStrcat("$I", [self getNameForTrace], ((jint) [self hash])), JreFpToInt((fraction * 1000)));
+    ADTrace_traceCounterWithInt_withNSString_withInt_(ADTrace_TRACE_TAG_VIEW, JreStrcat("$I", [self getNameForTrace], ((int32_t) [self hash])), JreFpToInt((fraction * 1000)));
   }
   if (mValues_ == nil) {
     return;
   }
   fraction = [((id<ADTimeInterpolator>) nil_chk(mInterpolator_)) getInterpolationWithFloat:fraction];
   mCurrentFraction_ = fraction;
-  jint numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
-  for (jint i = 0; i < numValues; ++i) {
+  int32_t numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
+  for (int32_t i = 0; i < numValues; ++i) {
     [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) calculateValueWithFloat:fraction];
   }
   if (mSeekFraction_ >= 0 || mStartListenersCalled_) {
@@ -881,10 +895,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   anim->mSuppressSelfPulseRequested_ = false;
   IOSObjectArray *oldValues = mValues_;
   if (oldValues != nil) {
-    jint numValues = oldValues->size_;
+    int32_t numValues = oldValues->size_;
     JreStrongAssignAndConsume(&anim->mValues_, [IOSObjectArray newArrayWithLength:numValues type:ADPropertyValuesHolder_class_()]);
     JreStrongAssignAndConsume(&anim->mValuesMap_, new_JavaUtilHashMap_initWithInt_(numValues));
-    for (jint i = 0; i < numValues; ++i) {
+    for (int32_t i = 0; i < numValues; ++i) {
       ADPropertyValuesHolder *newValuesHolder = JreRetainedLocalValue([((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(oldValues, i))) java_clone]);
       IOSObjectArray_Set(nil_chk(anim->mValues_), i, newValuesHolder);
       [((JavaUtilHashMap *) nil_chk(anim->mValuesMap_)) putWithId:[((ADPropertyValuesHolder *) nil_chk(newValuesHolder)) getPropertyName] withId:newValuesHolder];
@@ -893,21 +907,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   return anim;
 }
 
-+ (jint)getCurrentAnimationsCount {
++ (int32_t)getCurrentAnimationsCount {
   return ADValueAnimator_getCurrentAnimationsCount();
 }
 
 - (NSString *)description {
-  NSString *returnVal = JreStrcat("$$", @"ValueAnimator@", JavaLangInteger_toHexStringWithInt_(((jint) [self hash])));
+  NSString *returnVal = JreStrcat("$$", @"ValueAnimator@", JavaLangInteger_toHexStringWithInt_(((int32_t) [self hash])));
   if (mValues_ != nil) {
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(mValues_))->size_; ++i) {
+    for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(mValues_))->size_; ++i) {
       JreStrAppend(&returnVal, "$$", @"\n    ", [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(mValues_, i))) description]);
     }
   }
   return returnVal;
 }
 
-- (void)setAllowRunningAsynchronouslyWithBoolean:(jboolean)mayRunAsync {
+- (void)setAllowRunningAsynchronouslyWithBoolean:(bool)mayRunAsync {
 }
 
 - (ADAnimationHandler *)getAnimationHandler {
@@ -1147,15 +1161,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADValueAnimator_setDurationScaleWithFloat_(jfloat durationScale) {
+void ADValueAnimator_setDurationScaleWithFloat_(float durationScale) {
   ADValueAnimator_initialize();
   ADValueAnimator_sDurationScale = durationScale;
   id<JavaUtilList> listenerCopy;
   @synchronized(ADValueAnimator_sDurationScaleChangeListeners) {
-    listenerCopy = JreRetainedLocalValue(create_JavaUtilArrayList_initWithJavaUtilCollection_(ADValueAnimator_sDurationScaleChangeListeners));
+    listenerCopy = create_JavaUtilArrayList_initWithJavaUtilCollection_(ADValueAnimator_sDurationScaleChangeListeners);
   }
-  jint listenersSize = [listenerCopy size];
-  for (jint i = 0; i < listenersSize; i++) {
+  int32_t listenersSize = [listenerCopy size];
+  for (int32_t i = 0; i < listenersSize; i++) {
     id<ADValueAnimator_DurationScaleChangeListener> listener = [((JavaLangRefWeakReference *) nil_chk([listenerCopy getWithInt:i])) get];
     if (listener != nil) {
       [listener onChangedWithFloat:durationScale];
@@ -1163,23 +1177,23 @@ void ADValueAnimator_setDurationScaleWithFloat_(jfloat durationScale) {
   }
 }
 
-jfloat ADValueAnimator_getDurationScale() {
+float ADValueAnimator_getDurationScale() {
   ADValueAnimator_initialize();
   return ADValueAnimator_sDurationScale;
 }
 
-jboolean ADValueAnimator_registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener) {
+bool ADValueAnimator_registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener) {
   ADValueAnimator_initialize();
-  jint posToReplace = -1;
+  int32_t posToReplace = -1;
   @synchronized(ADValueAnimator_sDurationScaleChangeListeners) {
-    for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(ADValueAnimator_sDurationScaleChangeListeners)) size]; i++) {
+    for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(ADValueAnimator_sDurationScaleChangeListeners)) size]; i++) {
       JavaLangRefWeakReference *ref = [ADValueAnimator_sDurationScaleChangeListeners getWithInt:i];
       if ([((JavaLangRefWeakReference *) nil_chk(ref)) get] == nil) {
         if (posToReplace == -1) {
           posToReplace = i;
         }
       }
-      else if ([ref get] == listener) {
+      else if (JreObjectEqualsEquals([ref get], listener)) {
         return false;
       }
     }
@@ -1193,12 +1207,12 @@ jboolean ADValueAnimator_registerDurationScaleChangeListenerWithADValueAnimator_
   }
 }
 
-jboolean ADValueAnimator_unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener) {
+bool ADValueAnimator_unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener) {
   ADValueAnimator_initialize();
   @synchronized(ADValueAnimator_sDurationScaleChangeListeners) {
     JavaLangRefWeakReference *listenerRefToRemove = nil;
     for (JavaLangRefWeakReference * __strong listenerRef in nil_chk(ADValueAnimator_sDurationScaleChangeListeners)) {
-      if ([((JavaLangRefWeakReference *) nil_chk(listenerRef)) get] == listener) {
+      if (JreObjectEqualsEquals([((JavaLangRefWeakReference *) nil_chk(listenerRef)) get], listener)) {
         listenerRefToRemove = listenerRef;
         break;
       }
@@ -1207,7 +1221,7 @@ jboolean ADValueAnimator_unregisterDurationScaleChangeListenerWithADValueAnimato
   }
 }
 
-jboolean ADValueAnimator_areAnimatorsEnabled() {
+bool ADValueAnimator_areAnimatorsEnabled() {
   ADValueAnimator_initialize();
   return !(ADValueAnimator_sDurationScale == 0);
 }
@@ -1281,31 +1295,31 @@ ADValueAnimator *ADValueAnimator_ofObjectWithADTypeEvaluator_withNSObjectArray_(
   return anim;
 }
 
-jfloat ADValueAnimator_resolveDurationScale(ADValueAnimator *self) {
+float ADValueAnimator_resolveDurationScale(ADValueAnimator *self) {
   return self->mDurationScale_ >= 0.0f ? self->mDurationScale_ : ADValueAnimator_sDurationScale;
 }
 
-jlong ADValueAnimator_getScaledDuration(ADValueAnimator *self) {
+int64_t ADValueAnimator_getScaledDuration(ADValueAnimator *self) {
   return JreFpToLong((self->mDuration_ * ADValueAnimator_resolveDurationScale(self)));
 }
 
-jint ADValueAnimator_getCurrentIterationWithFloat_(ADValueAnimator *self, jfloat fraction) {
+int32_t ADValueAnimator_getCurrentIterationWithFloat_(ADValueAnimator *self, float fraction) {
   fraction = ADValueAnimator_clampFractionWithFloat_(self, fraction);
-  jdouble iteration = JavaLangMath_floorWithDouble_(fraction);
+  double iteration = JavaLangMath_floorWithDouble_(fraction);
   if (fraction == iteration && fraction > 0) {
     iteration--;
   }
   return JreFpToInt(iteration);
 }
 
-jfloat ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(ADValueAnimator *self, jfloat fraction, jboolean inReverse) {
+float ADValueAnimator_getCurrentIterationFractionWithFloat_withBoolean_(ADValueAnimator *self, float fraction, bool inReverse) {
   fraction = ADValueAnimator_clampFractionWithFloat_(self, fraction);
-  jint iteration = ADValueAnimator_getCurrentIterationWithFloat_(self, fraction);
-  jfloat currentFraction = fraction - iteration;
+  int32_t iteration = ADValueAnimator_getCurrentIterationWithFloat_(self, fraction);
+  float currentFraction = fraction - iteration;
   return ADValueAnimator_shouldPlayBackwardWithInt_withBoolean_(self, iteration, inReverse) ? 1.0f - currentFraction : currentFraction;
 }
 
-jfloat ADValueAnimator_clampFractionWithFloat_(ADValueAnimator *self, jfloat fraction) {
+float ADValueAnimator_clampFractionWithFloat_(ADValueAnimator *self, float fraction) {
   if (fraction < 0) {
     fraction = 0;
   }
@@ -1315,7 +1329,7 @@ jfloat ADValueAnimator_clampFractionWithFloat_(ADValueAnimator *self, jfloat fra
   return fraction;
 }
 
-jboolean ADValueAnimator_shouldPlayBackwardWithInt_withBoolean_(ADValueAnimator *self, jint iteration, jboolean inReverse) {
+bool ADValueAnimator_shouldPlayBackwardWithInt_withBoolean_(ADValueAnimator *self, int32_t iteration, bool inReverse) {
   if (iteration > 0 && self->mRepeatMode_ == ADValueAnimator_REVERSE && (iteration < (self->mRepeatCount_ + 1) || self->mRepeatCount_ == ADValueAnimator_INFINITE)) {
     if (inReverse) {
       return (JreIntMod(iteration, 2)) == 0;
@@ -1329,17 +1343,17 @@ jboolean ADValueAnimator_shouldPlayBackwardWithInt_withBoolean_(ADValueAnimator 
   }
 }
 
-jlong ADValueAnimator_getFrameDelay() {
+int64_t ADValueAnimator_getFrameDelay() {
   ADValueAnimator_initialize();
   return ADAnimationHandler_getFrameDelay();
 }
 
-void ADValueAnimator_setFrameDelayWithLong_(jlong frameDelay) {
+void ADValueAnimator_setFrameDelayWithLong_(int64_t frameDelay) {
   ADValueAnimator_initialize();
   ADAnimationHandler_setFrameDelayWithLong_(frameDelay);
 }
 
-void ADValueAnimator_startWithBoolean_(ADValueAnimator *self, jboolean playBackwards) {
+void ADValueAnimator_startWithBoolean_(ADValueAnimator *self, bool playBackwards) {
   if (ADLooper_myLooper() == nil) {
     @throw create_ADAndroidRuntimeException_initWithNSString_(@"Animators may only be run on Looper threads");
   }
@@ -1347,7 +1361,7 @@ void ADValueAnimator_startWithBoolean_(ADValueAnimator *self, jboolean playBackw
   self->mSelfPulse_ = !self->mSuppressSelfPulseRequested_;
   if (playBackwards && self->mSeekFraction_ != -1 && self->mSeekFraction_ != 0) {
     if (self->mRepeatCount_ == ADValueAnimator_INFINITE) {
-      jfloat fraction = (jfloat) (self->mSeekFraction_ - JavaLangMath_floorWithDouble_(self->mSeekFraction_));
+      float fraction = (float) (self->mSeekFraction_ - JavaLangMath_floorWithDouble_(self->mSeekFraction_));
       self->mSeekFraction_ = 1 - fraction;
     }
     else {
@@ -1380,7 +1394,7 @@ void ADValueAnimator_endAnimation(ADValueAnimator *self) {
   ADValueAnimator_removeAnimationCallback(self);
   self->mAnimationEndRequested_ = true;
   self->mPaused_ = false;
-  jboolean notify = (self->mStarted_ || self->mRunning_) && self->mListeners_ != nil;
+  bool notify = (self->mStarted_ || self->mRunning_) && self->mListeners_ != nil;
   if (notify && !self->mRunning_) {
     [self notifyStartListenersWithBoolean:self->mReversing_];
   }
@@ -1412,11 +1426,11 @@ void ADValueAnimator_startAnimation(ADValueAnimator *self) {
   [self notifyStartListenersWithBoolean:self->mReversing_];
 }
 
-jboolean ADValueAnimator_isPulsingInternal(ADValueAnimator *self) {
+bool ADValueAnimator_isPulsingInternal(ADValueAnimator *self) {
   return self->mLastFrameTime_ >= 0;
 }
 
-jboolean ADValueAnimator_doAnimationFrameWithLong_(ADValueAnimator *self, jlong frameTime) {
+bool ADValueAnimator_doAnimationFrameWithLong_(ADValueAnimator *self, int64_t frameTime) {
   if (self->mStartTime_ < 0) {
     self->mStartTime_ = self->mReversing_ ? frameTime : frameTime + JreFpToLong((self->mStartDelay_ * ADValueAnimator_resolveDurationScale(self)));
   }
@@ -1442,15 +1456,15 @@ jboolean ADValueAnimator_doAnimationFrameWithLong_(ADValueAnimator *self, jlong 
   }
   if (self->mLastFrameTime_ < 0) {
     if (self->mSeekFraction_ >= 0) {
-      jlong seekTime = JreFpToLong((ADValueAnimator_getScaledDuration(self) * self->mSeekFraction_));
+      int64_t seekTime = JreFpToLong((ADValueAnimator_getScaledDuration(self) * self->mSeekFraction_));
       self->mStartTime_ = frameTime - seekTime;
       self->mSeekFraction_ = -1;
     }
     self->mStartTimeCommitted_ = false;
   }
   self->mLastFrameTime_ = frameTime;
-  jlong currentTime = JavaLangMath_maxWithLong_withLong_(frameTime, self->mStartTime_);
-  jboolean finished = [self animateBasedOnTimeWithLong:currentTime];
+  int64_t currentTime = JavaLangMath_maxWithLong_withLong_(frameTime, self->mStartTime_);
+  bool finished = [self animateBasedOnTimeWithLong:currentTime];
   if (finished) {
     ADValueAnimator_endAnimation(self);
   }
@@ -1471,19 +1485,21 @@ void ADValueAnimator_removeAnimationCallback(ADValueAnimator *self) {
   [((ADAnimationHandler *) nil_chk([self getAnimationHandler])) removeCallbackWithADAnimationHandler_AnimationFrameCallback:self];
 }
 
-void ADValueAnimator_addAnimationCallbackWithLong_(ADValueAnimator *self, jlong delay) {
+void ADValueAnimator_addAnimationCallbackWithLong_(ADValueAnimator *self, int64_t delay) {
   if (!self->mSelfPulse_) {
     return;
   }
   [((ADAnimationHandler *) nil_chk([self getAnimationHandler])) addAnimationFrameCallbackWithADAnimationHandler_AnimationFrameCallback:self withLong:delay];
 }
 
-jint ADValueAnimator_getCurrentAnimationsCount() {
+int32_t ADValueAnimator_getCurrentAnimationsCount() {
   ADValueAnimator_initialize();
   return ADAnimationHandler_getAnimationCount();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADValueAnimator)
+
+J2OBJC_NAME_MAPPING(ADValueAnimator, "r.android.animation", "AD")
 
 @implementation ADValueAnimator_RepeatMode
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierPath.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BezierPath")
@@ -19,8 +20,10 @@
 @class ADBezierListProducer;
 @class ADPointF;
 @class IOSFloatArray;
+@class JavaLangFloat;
 @class JavaUtilLinkedList;
 @class JavaUtilRegexMatcher;
+@class NSString;
 
 @interface ADBezierPath : NSObject {
  @public
@@ -34,19 +37,19 @@
  */
 - (instancetype)init;
 
-- (IOSFloatArray *)approximateWithFloat:(jfloat)acceptableError;
+- (IOSFloatArray *)approximateWithFloat:(float)acceptableError;
 
 /*!
  @brief Evaluates this animation element for the passed interpolation time.Interp
   must be on [0..1].
  */
-- (ADPointF *)evalWithFloat:(jfloat)interp;
+- (ADPointF *)evalWithFloat:(float)interp;
 
 - (void)parsePathStringWithNSString:(NSString *)d;
 
 #pragma mark Protected
 
-+ (jfloat)nextFloatWithJavaUtilLinkedList:(JavaUtilLinkedList *)l;
++ (float)nextFloatWithJavaUtilLinkedList:(JavaUtilLinkedList *)l;
 
 - (void)parsePathListWithNSString:(NSString *)list;
 
@@ -67,11 +70,12 @@ FOUNDATION_EXPORT ADBezierPath *new_ADBezierPath_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADBezierPath *create_ADBezierPath_init(void);
 
-FOUNDATION_EXPORT jfloat ADBezierPath_nextFloatWithJavaUtilLinkedList_(JavaUtilLinkedList *l);
+FOUNDATION_EXPORT float ADBezierPath_nextFloatWithJavaUtilLinkedList_(JavaUtilLinkedList *l);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADBezierPath)
 
 @compatibility_alias RAndroidGraphicsBezierPath ADBezierPath;
+
 
 #endif
 

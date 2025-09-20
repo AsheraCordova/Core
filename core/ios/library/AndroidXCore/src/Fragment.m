@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\fragment\app\Fragment.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bundle.h"
 #include "Context.h"
 #include "Fragment.h"
@@ -17,10 +22,15 @@
 #include "LayoutInflater.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXFragment () {
@@ -29,7 +39,7 @@
   ADBundle *bundle_;
   id<ASIFragment> parentFragment_;
   id<JavaUtilList> childFragments_;
-  jboolean paused_;
+  bool paused_;
 }
 
 @end
@@ -53,7 +63,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setParentFragmentWithASIFragment:(id<ASIFragment>)parentFragment
-                             withBoolean:(jboolean)manageLifeCycle {
+                             withBoolean:(bool)manageLifeCycle {
   JreStrongAssign(&self->parentFragment_, parentFragment);
   if (manageLifeCycle) {
     if (((ADXFragment *) nil_chk(((ADXFragment *) cast_chk(parentFragment, [ADXFragment class]))))->childFragments_ == nil) {
@@ -75,7 +85,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     for (ADXFragment * __strong fragment in childFragments_) {
       id<ASIWidget> rootWidget = JreRetainedLocalValue([((id<ASIFragment>) nil_chk(((id<ASIFragment>) cast_check(fragment, ASIFragment_class_())))) getRootWidget]);
       id<ASIWidget> widget = JreRetainedLocalValue([((id<ASIFragmentContainer>) nil_chk(((id<ASIFragmentContainer>) cast_check([((id<ASIWidget>) nil_chk(rootWidget)) getParent], ASIFragmentContainer_class_())))) getActiveRootWidget]);
-      if (rootWidget == widget) {
+      if (JreObjectEqualsEquals(rootWidget, widget)) {
         [((ADXFragment *) nil_chk(fragment)) onResume];
       }
     }
@@ -241,3 +251,5 @@ ADXFragment *create_ADXFragment_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXFragment)
+
+J2OBJC_NAME_MAPPING(ADXFragment, "androidx.fragment.app", "ADX")

@@ -3,18 +3,31 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IWidgetLifeCycleListener.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "IWidgetLifeCycleListener.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASIWidgetLifeCycleListener : NSObject
 
 @end
 
-__attribute__((unused)) static void ASIWidgetLifeCycleListener_EventId_initWithNSString_withInt_(ASIWidgetLifeCycleListener_EventId *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void ASIWidgetLifeCycleListener_EventId_initWithNSString_withInt_(ASIWidgetLifeCycleListener_EventId *self, NSString *__name, int32_t __ordinal);
 
 @implementation ASIWidgetLifeCycleListener
 
@@ -36,6 +49,8 @@ __attribute__((unused)) static void ASIWidgetLifeCycleListener_EventId_initWithN
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASIWidgetLifeCycleListener)
 
+J2OBJC_NAME_MAPPING(ASIWidgetLifeCycleListener, "com.ashera.widget", "AS")
+
 J2OBJC_INITIALIZED_DEFN(ASIWidgetLifeCycleListener_EventId)
 
 ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_values_[2];
@@ -52,6 +67,24 @@ ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_values_[2
 
 - (ASIWidgetLifeCycleListener_EventId_Enum)toNSEnum {
   return (ASIWidgetLifeCycleListener_EventId_Enum)[self ordinal];
+}
+
+- (ASIWidgetLifeCycleListener_EventId_Enum)enumValue {
+  return (ASIWidgetLifeCycleListener_EventId_Enum)[self ordinal];
+}
+
++ (ASIWidgetLifeCycleListener_EventId *)fromNSEnum:(ASIWidgetLifeCycleListener_EventId_Enum)nativeValue {
+  ASIWidgetLifeCycleListener_EventId *javaEnum = ASIWidgetLifeCycleListener_EventId_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ASIWidgetLifeCycleListener_EventId_Enum out of range.");
+  return javaEnum;
+}
+
+- (ASIWidgetLifeCycleListener_EventId_ORDINAL)ordinal {
+  return (ASIWidgetLifeCycleListener_EventId_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithEventId:(ASIWidgetLifeCycleListener_EventId_Enum)value {
+  return RETAIN_(ASIWidgetLifeCycleListener_EventId_fromOrdinal((ASIWidgetLifeCycleListener_EventId_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -80,7 +113,7 @@ ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_values_[2
     size_t allocSize = 2 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 2; i++) {
+    for (int32_t i = 0; i < 2; i++) {
       ((void)(ASIWidgetLifeCycleListener_EventId_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASIWidgetLifeCycleListener_EventId_initWithNSString_withInt_(e, JreEnumConstantName(ASIWidgetLifeCycleListener_EventId_class_(), i), i);
     }
@@ -90,7 +123,7 @@ ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_values_[2
 
 @end
 
-void ASIWidgetLifeCycleListener_EventId_initWithNSString_withInt_(ASIWidgetLifeCycleListener_EventId *self, NSString *__name, jint __ordinal) {
+void ASIWidgetLifeCycleListener_EventId_initWithNSString_withInt_(ASIWidgetLifeCycleListener_EventId *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -108,12 +141,11 @@ ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_valueOfWi
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_fromOrdinal(NSUInteger ordinal) {
+ASIWidgetLifeCycleListener_EventId *ASIWidgetLifeCycleListener_EventId_fromOrdinal(ASIWidgetLifeCycleListener_EventId_ORDINAL ordinal) {
   ASIWidgetLifeCycleListener_EventId_initialize();
-  if (ordinal >= 2) {
+  if (ordinal < 0 || ordinal >= 2) {
     return nil;
   }
   return ASIWidgetLifeCycleListener_EventId_values_[ordinal];

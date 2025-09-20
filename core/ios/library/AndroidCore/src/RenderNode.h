@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\RenderNode.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RenderNode")
@@ -16,30 +17,33 @@
 #if !defined (ADRenderNode_) && (INCLUDE_ALL_RenderNode || defined(INCLUDE_ADRenderNode))
 #define ADRenderNode_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+
 @interface ADRenderNode : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jboolean)isValid;
+- (bool)isValid;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)setBottomWithInt:(jint)mBottom;
+- (void)setBottomWithInt:(int32_t)mBottom;
 
-- (void)setLeftWithInt:(jint)left;
+- (void)setLeftWithInt:(int32_t)left;
 
-- (void)setLeftTopRightBottomWithInt:(jint)mLeft
-                             withInt:(jint)mTop
-                             withInt:(jint)mRight
-                             withInt:(jint)mBottom;
+- (void)setLeftTopRightBottomWithInt:(int32_t)mLeft
+                             withInt:(int32_t)mTop
+                             withInt:(int32_t)mRight
+                             withInt:(int32_t)mBottom;
 
-- (void)setRightWithInt:(jint)mRight;
+- (void)setRightWithInt:(int32_t)mRight;
 
-- (void)setTopWithInt:(jint)mTop;
+- (void)setTopWithInt:(int32_t)mTop;
 
 @end
 
@@ -54,6 +58,7 @@ FOUNDATION_EXPORT ADRenderNode *create_ADRenderNode_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADRenderNode)
 
 @compatibility_alias RAndroidViewRenderNode ADRenderNode;
+
 
 #endif
 

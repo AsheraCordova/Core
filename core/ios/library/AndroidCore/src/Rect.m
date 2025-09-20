@@ -3,9 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\Rect.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Rect.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADRect
@@ -17,10 +31,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom {
+- (instancetype)initWithInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom {
   ADRect_initWithInt_withInt_withInt_withInt_(self, left, top, right, bottom);
   return self;
 }
@@ -30,18 +44,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (jint)width {
+- (int32_t)width {
   return right_ - left_;
 }
 
-- (jint)height {
+- (int32_t)height {
   return bottom_ - top_;
 }
 
-- (void)setWithInt:(jint)left
-           withInt:(jint)top
-           withInt:(jint)right
-           withInt:(jint)bottom {
+- (void)setWithInt:(int32_t)left
+           withInt:(int32_t)top
+           withInt:(int32_t)right
+           withInt:(int32_t)bottom {
   self->left_ = left;
   self->top_ = top;
   self->right_ = right;
@@ -59,24 +73,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   left_ = right_ = top_ = bottom_ = 0;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return left_ >= right_ || top_ >= bottom_;
 }
 
-- (void)offsetWithInt:(jint)dx
-              withInt:(jint)dy {
+- (void)offsetWithInt:(int32_t)dx
+              withInt:(int32_t)dy {
   left_ += dx;
   top_ += dy;
   right_ += dx;
   bottom_ += dy;
 }
 
-- (jboolean)containsWithADRect:(ADRect *)r {
+- (bool)containsWithADRect:(ADRect *)r {
   return self->left_ < self->right_ && self->top_ < self->bottom_ && left_ <= ((ADRect *) nil_chk(r))->left_ && top_ <= r->top_ && right_ >= r->right_ && bottom_ >= r->bottom_;
 }
 
-- (jboolean)containsWithInt:(jint)x
-                    withInt:(jint)y {
+- (bool)containsWithInt:(int32_t)x
+                withInt:(int32_t)y {
   return left_ < right_ && top_ < bottom_ && x >= left_ && x < right_ && y >= top_ && y < bottom_;
 }
 
@@ -105,8 +119,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   bottom_ -= insets->bottom_;
 }
 
-- (void)insetWithInt:(jint)dx
-             withInt:(jint)dy {
+- (void)insetWithInt:(int32_t)dx
+             withInt:(int32_t)dy {
   left_ += dx;
   top_ += dy;
   right_ -= dx;
@@ -177,7 +191,7 @@ ADRect *create_ADRect_init() {
   J2OBJC_CREATE_IMPL(ADRect, init)
 }
 
-void ADRect_initWithInt_withInt_withInt_withInt_(ADRect *self, jint left, jint top, jint right, jint bottom) {
+void ADRect_initWithInt_withInt_withInt_withInt_(ADRect *self, int32_t left, int32_t top, int32_t right, int32_t bottom) {
   NSObject_init(self);
   self->left_ = left;
   self->top_ = top;
@@ -185,11 +199,11 @@ void ADRect_initWithInt_withInt_withInt_withInt_(ADRect *self, jint left, jint t
   self->bottom_ = bottom;
 }
 
-ADRect *new_ADRect_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom) {
+ADRect *new_ADRect_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom) {
   J2OBJC_NEW_IMPL(ADRect, initWithInt_withInt_withInt_withInt_, left, top, right, bottom)
 }
 
-ADRect *create_ADRect_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom) {
+ADRect *create_ADRect_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom) {
   J2OBJC_CREATE_IMPL(ADRect, initWithInt_withInt_withInt_withInt_, left, top, right, bottom)
 }
 
@@ -215,3 +229,5 @@ ADRect *create_ADRect_initWithADRect_(ADRect *r) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRect)
+
+J2OBJC_NAME_MAPPING(ADRect, "r.android.graphics", "AD")

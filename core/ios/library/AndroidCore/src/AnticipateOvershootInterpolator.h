@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\AnticipateOvershootInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AnticipateOvershootInterpolator")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADBaseInterpolator 1
 #include "BaseInterpolator.h"
 
+@class JavaLangFloat;
+@class JavaLangLong;
+
 /*!
  @brief An interpolator where the change starts backward then flings forward and overshoots
   the target value and finally goes back to the final value.
@@ -34,7 +38,7 @@
  @param tension Amount of anticipation/overshoot. When tension equals 0.0f,                 there is no anticipation/overshoot and the interpolator becomes
                   a simple acceleration/deceleration interpolator.
  */
-- (instancetype)initWithFloat:(jfloat)tension;
+- (instancetype)initWithFloat:(float)tension;
 
 /*!
  @param tension Amount of anticipation/overshoot. When tension equals 0.0f,                 there is no anticipation/overshoot and the interpolator becomes
@@ -42,14 +46,14 @@
  @param extraTension Amount by which to multiply the tension. For instance,                      to get the same overshoot as an OvershootInterpolator with
                        a tension of 2.0f, you would use an extraTension of 1.5f.
  */
-- (instancetype)initWithFloat:(jfloat)tension
-                    withFloat:(jfloat)extraTension;
+- (instancetype)initWithFloat:(float)tension
+                    withFloat:(float)extraTension;
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
-- (jfloat)getInterpolationWithFloat:(jfloat)t;
+- (float)getInterpolationWithFloat:(float)t;
 
 @end
 
@@ -61,21 +65,22 @@ FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootIn
 
 FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_init(void);
 
-FOUNDATION_EXPORT void ADAnticipateOvershootInterpolator_initWithFloat_(ADAnticipateOvershootInterpolator *self, jfloat tension);
+FOUNDATION_EXPORT void ADAnticipateOvershootInterpolator_initWithFloat_(ADAnticipateOvershootInterpolator *self, float tension);
 
-FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_(jfloat tension) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_(float tension) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_(jfloat tension);
+FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_(float tension);
 
-FOUNDATION_EXPORT void ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(ADAnticipateOvershootInterpolator *self, jfloat tension, jfloat extraTension);
+FOUNDATION_EXPORT void ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(ADAnticipateOvershootInterpolator *self, float tension, float extraTension);
 
-FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(jfloat tension, jfloat extraTension) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(float tension, float extraTension) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(jfloat tension, jfloat extraTension);
+FOUNDATION_EXPORT ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(float tension, float extraTension);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnticipateOvershootInterpolator)
 
 @compatibility_alias RAndroidViewAnimationAnticipateOvershootInterpolator ADAnticipateOvershootInterpolator;
+
 
 #endif
 

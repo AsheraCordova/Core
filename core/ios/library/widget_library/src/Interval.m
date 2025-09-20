@@ -3,16 +3,28 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\Interval.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "Interval.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASInterval () {
  @public
-  jint start_;
-  jint end_;
-  jint max_;
+  int32_t start_;
+  int32_t end_;
+  int32_t max_;
   ASInterval *left_;
   ASInterval *right_;
 }
@@ -24,27 +36,27 @@ J2OBJC_FIELD_SETTER(ASInterval, right_, ASInterval *)
 
 @implementation ASInterval
 
-- (jint)getStart {
+- (int32_t)getStart {
   return start_;
 }
 
-- (void)setStartWithInt:(jint)start {
+- (void)setStartWithInt:(int32_t)start {
   self->start_ = start;
 }
 
-- (jint)getEnd {
+- (int32_t)getEnd {
   return end_;
 }
 
-- (void)setEndWithInt:(jint)end {
+- (void)setEndWithInt:(int32_t)end {
   self->end_ = end;
 }
 
-- (jint)getMax {
+- (int32_t)getMax {
   return max_;
 }
 
-- (void)setMaxWithInt:(jint)max {
+- (void)setMaxWithInt:(int32_t)max {
   self->max_ = max;
 }
 
@@ -64,13 +76,13 @@ J2OBJC_FIELD_SETTER(ASInterval, right_, ASInterval *)
   JreStrongAssign(&self->right_, right);
 }
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end {
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end {
   ASInterval_initWithInt_withInt_(self, start, end);
   return self;
 }
 
-- (jint)compareToWithId:(ASInterval *)i {
+- (int32_t)compareToWithId:(ASInterval *)i {
   cast_chk(i, [ASInterval class]);
   if (self->start_ < ((ASInterval *) nil_chk(i))->start_) {
     return -1;
@@ -83,8 +95,8 @@ J2OBJC_FIELD_SETTER(ASInterval, right_, ASInterval *)
   }
 }
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -152,7 +164,7 @@ J2OBJC_FIELD_SETTER(ASInterval, right_, ASInterval *)
 
 @end
 
-void ASInterval_initWithInt_withInt_(ASInterval *self, jint start, jint end) {
+void ASInterval_initWithInt_withInt_(ASInterval *self, int32_t start, int32_t end) {
   NSObject_init(self);
   self->start_ = start;
   self->end_ = end;
@@ -160,3 +172,5 @@ void ASInterval_initWithInt_withInt_(ASInterval *self, jint start, jint end) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASInterval)
+
+J2OBJC_NAME_MAPPING(ASInterval, "com.ashera.attributedtext", "AS")

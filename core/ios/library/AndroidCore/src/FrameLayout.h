@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\FrameLayout.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FrameLayout")
@@ -22,50 +23,52 @@
 
 @class ADFrameLayout_LayoutParams;
 @class ADViewGroup_LayoutParams;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADFrameLayout : ADViewGroup {
  @public
-  jboolean mMeasureAllChildren_;
+  bool mMeasureAllChildren_;
 }
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jboolean)getMeasureAllChildren;
+- (bool)getMeasureAllChildren;
 
-- (void)setForegroundGravityWithInt:(jint)foregroundGravity;
+- (void)setForegroundGravityWithInt:(int32_t)foregroundGravity;
 
-- (void)setMeasureAllChildrenWithBoolean:(jboolean)measureAll;
+- (void)setMeasureAllChildrenWithBoolean:(bool)measureAll;
 
 #pragma mark Protected
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
 - (ADFrameLayout_LayoutParams *)generateDefaultLayoutParams;
 
 - (ADViewGroup_LayoutParams *)generateLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)lp;
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 #pragma mark Package-Private
 
-- (jint)getPaddingLeftWithForeground;
+- (int32_t)getPaddingLeftWithForeground;
 
-- (jint)getPaddingRightWithForeground;
+- (int32_t)getPaddingRightWithForeground;
 
-- (void)layoutChildrenWithInt:(jint)left
-                      withInt:(jint)top
-                      withInt:(jint)right
-                      withInt:(jint)bottom
-                  withBoolean:(jboolean)forceLeftGravity;
+- (void)layoutChildrenWithInt:(int32_t)left
+                      withInt:(int32_t)top
+                      withInt:(int32_t)right
+                      withInt:(int32_t)bottom
+                  withBoolean:(bool)forceLeftGravity;
 
 @end
 
@@ -81,6 +84,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFrameLayout)
 
 @compatibility_alias RAndroidWidgetFrameLayout ADFrameLayout;
 
+
 #endif
 
 #if !defined (ADFrameLayout_LayoutParams_) && (INCLUDE_ALL_FrameLayout || defined(INCLUDE_ADFrameLayout_LayoutParams))
@@ -91,20 +95,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFrameLayout)
 #include "ViewGroup.h"
 
 @class ADViewGroup_LayoutParams;
+@class JavaLangInteger;
 
 @interface ADFrameLayout_LayoutParams : ADViewGroup_MarginLayoutParams {
  @public
-  jint gravity_;
+  int32_t gravity_;
 }
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height;
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height;
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height
-                    withInt:(jint)gravity;
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height
+                    withInt:(int32_t)gravity;
 
 - (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)source;
 
@@ -118,21 +123,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFrameLayout)
 
 J2OBJC_EMPTY_STATIC_INIT(ADFrameLayout_LayoutParams)
 
-inline jint ADFrameLayout_LayoutParams_get_UNSPECIFIED_GRAVITY(void);
+inline int32_t ADFrameLayout_LayoutParams_get_UNSPECIFIED_GRAVITY(void);
 #define ADFrameLayout_LayoutParams_UNSPECIFIED_GRAVITY -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADFrameLayout_LayoutParams, UNSPECIFIED_GRAVITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADFrameLayout_LayoutParams, UNSPECIFIED_GRAVITY, int32_t)
 
-FOUNDATION_EXPORT void ADFrameLayout_LayoutParams_initWithInt_withInt_(ADFrameLayout_LayoutParams *self, jint width, jint height);
+FOUNDATION_EXPORT void ADFrameLayout_LayoutParams_initWithInt_withInt_(ADFrameLayout_LayoutParams *self, int32_t width, int32_t height);
 
-FOUNDATION_EXPORT ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_(jint width, jint height) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_(jint width, jint height);
+FOUNDATION_EXPORT ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height);
 
-FOUNDATION_EXPORT void ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(ADFrameLayout_LayoutParams *self, jint width, jint height, jint gravity);
+FOUNDATION_EXPORT void ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(ADFrameLayout_LayoutParams *self, int32_t width, int32_t height, int32_t gravity);
 
-FOUNDATION_EXPORT ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(jint width, jint height, jint gravity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(int32_t width, int32_t height, int32_t gravity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(jint width, jint height, jint gravity);
+FOUNDATION_EXPORT ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(int32_t width, int32_t height, int32_t gravity);
 
 FOUNDATION_EXPORT void ADFrameLayout_LayoutParams_initWithADViewGroup_LayoutParams_(ADFrameLayout_LayoutParams *self, ADViewGroup_LayoutParams *source);
 
@@ -147,6 +152,7 @@ FOUNDATION_EXPORT ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_ini
 FOUNDATION_EXPORT ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithADFrameLayout_LayoutParams_(ADFrameLayout_LayoutParams *source);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFrameLayout_LayoutParams)
+
 
 #endif
 

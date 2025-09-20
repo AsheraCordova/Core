@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\InRange.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSClass.h"
@@ -12,26 +17,33 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/NumberFormatException.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASInRange () {
  @public
-  jint mMin_;
-  jint mMax_;
+  int32_t mMin_;
+  int32_t mMax_;
 }
 
-- (instancetype)initWithInt:(jint)min
-                    withInt:(jint)max;
+- (instancetype)initWithInt:(int32_t)min
+                    withInt:(int32_t)max;
 
 @end
 
-__attribute__((unused)) static void ASInRange_initWithInt_withInt_(ASInRange *self, jint min, jint max);
+__attribute__((unused)) static void ASInRange_initWithInt_withInt_(ASInRange *self, int32_t min, int32_t max);
 
-__attribute__((unused)) static ASInRange *new_ASInRange_initWithInt_withInt_(jint min, jint max) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASInRange *new_ASInRange_initWithInt_withInt_(int32_t min, int32_t max) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASInRange *create_ASInRange_initWithInt_withInt_(jint min, jint max);
+__attribute__((unused)) static ASInRange *create_ASInRange_initWithInt_withInt_(int32_t min, int32_t max);
 
 @implementation ASInRange
 
@@ -46,8 +58,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ASInRange_initWithInt_withInt_(JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(nil_chk(argument), 0)), JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(argument, 1)));
 }
 
-- (instancetype)initWithInt:(jint)min
-                    withInt:(jint)max {
+- (instancetype)initWithInt:(int32_t)min
+                    withInt:(int32_t)max {
   ASInRange_initWithInt_withInt_(self, min, max);
   return self;
 }
@@ -57,13 +69,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return NSString_java_formatWithNSString_withNSObjectArray_(res, [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(mMin_), JavaLangInteger_valueOfWithInt_(mMax_) } count:2 type:NSObject_class_()]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   @try {
-    jint value = JavaLangInteger_parseIntWithNSString_(text);
+    int32_t value = JavaLangInteger_parseIntWithNSString_(text);
     if ((value >= mMin_) && (value <= mMax_)) {
       return true;
     }
@@ -115,18 +127,20 @@ ASInRange *create_ASInRange_init() {
   J2OBJC_CREATE_IMPL(ASInRange, init)
 }
 
-void ASInRange_initWithInt_withInt_(ASInRange *self, jint min, jint max) {
+void ASInRange_initWithInt_withInt_(ASInRange *self, int32_t min, int32_t max) {
   ASBaseValidator_init(self);
   self->mMin_ = min;
   self->mMax_ = max;
 }
 
-ASInRange *new_ASInRange_initWithInt_withInt_(jint min, jint max) {
+ASInRange *new_ASInRange_initWithInt_withInt_(int32_t min, int32_t max) {
   J2OBJC_NEW_IMPL(ASInRange, initWithInt_withInt_, min, max)
 }
 
-ASInRange *create_ASInRange_initWithInt_withInt_(jint min, jint max) {
+ASInRange *create_ASInRange_initWithInt_withInt_(int32_t min, int32_t max) {
   J2OBJC_CREATE_IMPL(ASInRange, initWithInt_withInt_, min, max)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASInRange)
+
+J2OBJC_NAME_MAPPING(ASInRange, "com.ashera.validations", "AS")

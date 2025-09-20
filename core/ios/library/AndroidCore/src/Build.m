@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Build.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Build.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 NSString *ADBuild_MANUFACTURER;
@@ -50,6 +62,8 @@ ADBuild *create_ADBuild_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBuild)
+
+J2OBJC_NAME_MAPPING(ADBuild, "r.android.os", "AD")
 
 @implementation ADBuild_VERSION
 

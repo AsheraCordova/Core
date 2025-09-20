@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\SubMenu.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SubMenu")
@@ -20,11 +21,12 @@
 #define INCLUDE_ADMenu 1
 #include "Menu.h"
 
+@class JavaLangInteger;
 @protocol JavaLangCharSequence;
 
 @protocol ADSubMenu < ADMenu, JavaObject >
 
-- (id<ADSubMenu>)setHeaderTitleWithInt:(jint)titleRes;
+- (id<ADSubMenu>)setHeaderTitleWithInt:(int32_t)titleRes;
 
 - (id<ADSubMenu>)setHeaderTitleWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
@@ -35,6 +37,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADSubMenu)
 J2OBJC_TYPE_LITERAL_HEADER(ADSubMenu)
 
 #define RAndroidViewSubMenu ADSubMenu
+
 
 #endif
 

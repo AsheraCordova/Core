@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\core\IFragmentContainer.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragmentContainer.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASIFragmentContainer : NSObject
@@ -32,3 +43,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASIFragmentContainer)
+
+J2OBJC_NAME_MAPPING(ASIFragmentContainer, "com.ashera.core", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\FloatConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FloatConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
@@ -10,6 +15,12 @@
 #include "java/lang/Float.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASFloatConverter
@@ -80,3 +91,5 @@ ASFloatConverter *create_ASFloatConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFloatConverter)
+
+J2OBJC_NAME_MAPPING(ASFloatConverter, "com.ashera.converter", "AS")

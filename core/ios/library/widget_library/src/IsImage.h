@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IsImage.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IsImage")
@@ -35,6 +36,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIsImage)
 J2OBJC_TYPE_LITERAL_HEADER(ASIsImage)
 
 #define ComAsheraWidgetIsImage ASIsImage
+
 
 #endif
 

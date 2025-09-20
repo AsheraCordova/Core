@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\DimensionFloatConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DimensionFloatConverter")
@@ -21,6 +22,7 @@
 #include "IConverter.h"
 
 @class JavaLangFloat;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -53,6 +55,7 @@ FOUNDATION_EXPORT ASDimensionFloatConverter *create_ASDimensionFloatConverter_in
 J2OBJC_TYPE_LITERAL_HEADER(ASDimensionFloatConverter)
 
 @compatibility_alias ComAsheraConverterDimensionFloatConverter ASDimensionFloatConverter;
+
 
 #endif
 

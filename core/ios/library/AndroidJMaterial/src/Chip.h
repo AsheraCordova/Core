@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\chip\Chip.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Chip")
@@ -26,6 +27,10 @@
 
 @class ADColorStateList;
 @class ADDrawable;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADCompoundButton_OnCheckedChangeListener;
 @protocol ADView_OnClickListener;
 @protocol ADXMaterialCheckable_OnCheckedChangeListener;
@@ -44,41 +49,41 @@
 
 - (ADColorStateList *)getChipBackgroundColor;
 
-- (jfloat)getChipCornerRadius;
+- (float)getChipCornerRadius;
 
-- (jfloat)getChipEndPadding;
+- (float)getChipEndPadding;
 
 - (ADDrawable *)getChipIcon;
 
 - (ADColorStateList *)getChipIconTint;
 
-- (jfloat)getChipMinHeight;
+- (float)getChipMinHeight;
 
-- (jfloat)getChipStartPadding;
+- (float)getChipStartPadding;
 
 - (ADColorStateList *)getChipStrokeColor;
 
-- (jfloat)getChipStrokeWidth;
+- (float)getChipStrokeWidth;
 
 - (ADDrawable *)getCloseIcon;
 
-- (jfloat)getCloseIconEndPadding;
+- (float)getCloseIconEndPadding;
 
-- (jfloat)getCloseIconSize;
+- (float)getCloseIconSize;
 
-- (jfloat)getCloseIconStartPadding;
+- (float)getCloseIconStartPadding;
 
 - (ADColorStateList *)getCloseIconTint;
 
-- (jfloat)getIconEndPadding;
+- (float)getIconEndPadding;
 
-- (jfloat)getIconStartPadding;
+- (float)getIconStartPadding;
 
 - (id<ADView_OnClickListener>)getRippleInternalClickListener;
 
-- (jfloat)getTextEndPadding;
+- (float)getTextEndPadding;
 
-- (jfloat)getTextStartPadding;
+- (float)getTextStartPadding;
 
 - (void)initViewWithASHasWidgets:(id<ASHasWidgets>)parentLL
                    withASIWidget:(id<ASIWidget>)textWidget
@@ -86,67 +91,67 @@
                    withASIWidget:(id<ASIWidget>)checkboxWidget
                    withASIWidget:(id<ASIWidget>)closeIconWidget OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)isChecked;
+- (bool)isChecked;
 
 - (void)requestLayout;
 
-- (void)setCheckableWithBoolean:(jboolean)checkable;
+- (void)setCheckableWithBoolean:(bool)checkable;
 
-- (void)setCheckedWithBoolean:(jboolean)checked;
+- (void)setCheckedWithBoolean:(bool)checked;
 
 - (void)setCheckedIconWithADDrawable:(ADDrawable *)drawable;
 
 - (void)setCheckedIconTintWithADColorStateList:(ADColorStateList *)tint;
 
-- (void)setCheckedIconVisibleWithBoolean:(jboolean)isVisible;
+- (void)setCheckedIconVisibleWithBoolean:(bool)isVisible;
 
 - (void)setChipBackgroundColorWithADColorStateList:(ADColorStateList *)chipBackgroundColor;
 
 - (void)setChipClickListenerWithADView_OnClickListener:(id<ADView_OnClickListener>)chipClickListener;
 
-- (void)setChipCornerRadiusWithFloat:(jfloat)radius;
+- (void)setChipCornerRadiusWithFloat:(float)radius;
 
-- (void)setChipEndPaddingWithFloat:(jfloat)padding;
+- (void)setChipEndPaddingWithFloat:(float)padding;
 
 - (void)setChipIconWithADDrawable:(ADDrawable *)drawable;
 
-- (void)setChipIconSizeWithFloat:(jfloat)iconSize;
+- (void)setChipIconSizeWithFloat:(float)iconSize;
 
 - (void)setChipIconTintWithADColorStateList:(ADColorStateList *)tint;
 
-- (void)setChipIconVisibleWithBoolean:(jboolean)visible;
+- (void)setChipIconVisibleWithBoolean:(bool)visible;
 
-- (void)setChipMinHeightWithFloat:(jfloat)minHeight;
+- (void)setChipMinHeightWithFloat:(float)minHeight;
 
-- (void)setChipStartPaddingWithFloat:(jfloat)padding;
+- (void)setChipStartPaddingWithFloat:(float)padding;
 
 - (void)setChipStrokeColorWithADColorStateList:(ADColorStateList *)chipStrokeColor;
 
-- (void)setChipStrokeWidthWithFloat:(jfloat)chipStrokeWidth;
+- (void)setChipStrokeWidthWithFloat:(float)chipStrokeWidth;
 
 - (void)setCloseIconWithADDrawable:(ADDrawable *)drawable;
 
-- (void)setCloseIconEndPaddingWithFloat:(jfloat)padding;
+- (void)setCloseIconEndPaddingWithFloat:(float)padding;
 
-- (void)setCloseIconSizeWithFloat:(jfloat)iconSize;
+- (void)setCloseIconSizeWithFloat:(float)iconSize;
 
-- (void)setCloseIconStartPaddingWithFloat:(jfloat)padding;
+- (void)setCloseIconStartPaddingWithFloat:(float)padding;
 
 - (void)setCloseIconTintWithADColorStateList:(ADColorStateList *)tint;
 
-- (void)setCloseIconVisibleWithBoolean:(jboolean)isVisible;
+- (void)setCloseIconVisibleWithBoolean:(bool)isVisible;
 
 - (void)setEllipsizeWithNSString:(NSString *)strValue;
 
-- (void)setEnsureMinTouchTargetSizeWithBoolean:(jboolean)shouldEnsureMinTouchTargetSize;
+- (void)setEnsureMinTouchTargetSizeWithBoolean:(bool)shouldEnsureMinTouchTargetSize;
 
-- (void)setIconEndPaddingWithFloat:(jfloat)padding;
+- (void)setIconEndPaddingWithFloat:(float)padding;
 
-- (void)setIconStartPaddingWithFloat:(jfloat)padding;
+- (void)setIconStartPaddingWithFloat:(float)padding;
 
 - (void)setInternalOnCheckedChangeListenerWithADXMaterialCheckable_OnCheckedChangeListener:(id<ADXMaterialCheckable_OnCheckedChangeListener>)listener;
 
-- (void)setMaxWidthWithInt:(jint)width;
+- (void)setMaxWidthWithInt:(int32_t)width;
 
 - (void)setOnCheckedChangeListenerWithADCompoundButton_OnCheckedChangeListener:(id<ADCompoundButton_OnCheckedChangeListener>)onCheckedChangeListener;
 
@@ -158,11 +163,11 @@
 
 - (void)setTextAppearanceWithNSString:(NSString *)strValue;
 
-- (void)setTextEndPaddingWithFloat:(jfloat)padding;
+- (void)setTextEndPaddingWithFloat:(float)padding;
 
-- (void)setTextStartPaddingWithFloat:(jfloat)padding;
+- (void)setTextStartPaddingWithFloat:(float)padding;
 
-- (jboolean)shouldEnsureMinTouchTargetSize;
+- (bool)shouldEnsureMinTouchTargetSize;
 
 - (void)toggle;
 
@@ -179,6 +184,7 @@ FOUNDATION_EXPORT ADXChip *create_ADXChip_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADXChip)
 
 @compatibility_alias ComGoogleAndroidMaterialChipChip ADXChip;
+
 
 #endif
 

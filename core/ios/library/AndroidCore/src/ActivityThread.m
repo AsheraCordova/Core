@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\app\ActivityThread.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ActivityThread.h"
 #include "Application.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADActivityThread
@@ -56,3 +67,5 @@ ADApplication *ADActivityThread_currentApplication() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADActivityThread)
+
+J2OBJC_NAME_MAPPING(ADActivityThread, "r.android.app", "AD")

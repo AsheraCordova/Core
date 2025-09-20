@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\LoopParam.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LoopParam")
@@ -20,6 +21,8 @@
 #define INCLUDE_JavaUtilHashMap 1
 #include "java/util/HashMap.h"
 
+@class JavaLangFloat;
+@class JavaLangInteger;
 @protocol JavaUtilMap;
 
 @interface ASLoopParam : JavaUtilHashMap
@@ -30,10 +33,10 @@
 
 // Disallowed inherited constructors, do not use.
 
-- (instancetype)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+- (instancetype)initWithInt:(int32_t)arg0 NS_UNAVAILABLE;
 
-- (instancetype)initWithInt:(jint)arg0
-                  withFloat:(jfloat)arg1 NS_UNAVAILABLE;
+- (instancetype)initWithInt:(int32_t)arg0
+                  withFloat:(float)arg1 NS_UNAVAILABLE;
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)arg0 NS_UNAVAILABLE;
 
@@ -50,6 +53,7 @@ FOUNDATION_EXPORT ASLoopParam *create_ASLoopParam_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASLoopParam)
 
 @compatibility_alias ComAsheraModelLoopParam ASLoopParam;
+
 
 #endif
 

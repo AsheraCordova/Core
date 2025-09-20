@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\image\IImageDownloader.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IImageDownloader")
@@ -16,6 +17,7 @@
 #if !defined (ASIImageDownloader_) && (INCLUDE_ALL_IImageDownloader || defined(INCLUDE_ASIImageDownloader))
 #define ASIImageDownloader_
 
+@class NSString;
 @protocol ASITarget;
 
 @protocol ASIImageDownloader < JavaObject >
@@ -33,6 +35,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIImageDownloader)
 J2OBJC_TYPE_LITERAL_HEADER(ASIImageDownloader)
 
 #define ComAsheraImageIImageDownloader ASIImageDownloader
+
 
 #endif
 

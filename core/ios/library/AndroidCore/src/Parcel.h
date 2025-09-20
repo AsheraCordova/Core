@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Parcel.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Parcel")
@@ -18,13 +19,16 @@
 
 @class IOSIntArray;
 @class JavaLangClassLoader;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilList;
 
 @protocol ADParcel < JavaObject >
 
-- (jfloat)readFloat;
+- (float)readFloat;
 
-- (void)writeFloatWithFloat:(jfloat)value;
+- (void)writeFloatWithFloat:(float)value;
 
 - (void)readIntArrayWithIntArray:(IOSIntArray *)mGapPerSpan;
 
@@ -32,9 +36,9 @@
 
 - (void)writeListWithJavaUtilList:(id<JavaUtilList>)mFullSpanItems;
 
-- (jint)readInt;
+- (int32_t)readInt;
 
-- (void)writeIntWithInt:(jint)x;
+- (void)writeIntWithInt:(int32_t)x;
 
 - (NSString *)readString8;
 
@@ -47,6 +51,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADParcel)
 J2OBJC_TYPE_LITERAL_HEADER(ADParcel)
 
 #define RAndroidOsParcel ADParcel
+
 
 #endif
 

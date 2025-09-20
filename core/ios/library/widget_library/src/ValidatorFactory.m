@@ -3,13 +3,22 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\ValidatorFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Validation.h"
 #include "ValidatorFactory.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<JavaUtilMap> ASValidatorFactory_get_registrationMap(void);
@@ -104,3 +113,5 @@ void ASValidatorFactory_register__WithNSString_withASValidation_(NSString *local
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASValidatorFactory)
+
+J2OBJC_NAME_MAPPING(ASValidatorFactory, "com.ashera.validations", "AS")

@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\RadioGroup.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "LinearLayout.h"
 #include "RadioGroup.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADRadioGroup_OnCheckedChangeListener : NSObject
@@ -56,6 +68,8 @@ ADRadioGroup *create_ADRadioGroup_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRadioGroup)
+
+J2OBJC_NAME_MAPPING(ADRadioGroup, "r.android.widget", "AD")
 
 @implementation ADRadioGroup_OnCheckedChangeListener
 

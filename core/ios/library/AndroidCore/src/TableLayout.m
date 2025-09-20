@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\TableLayout.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "LinearLayout.h"
@@ -11,8 +16,16 @@
 #include "TableRow.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADTableLayout () {
@@ -21,22 +34,22 @@
   ADSparseBooleanArray *mStretchableColumns_;
   ADSparseBooleanArray *mShrinkableColumns_;
   ADSparseBooleanArray *mCollapsedColumns_;
-  jboolean mShrinkAllColumns_;
-  jboolean mStretchAllColumns_;
-  jboolean mInitialized_;
+  bool mShrinkAllColumns_;
+  bool mStretchAllColumns_;
+  bool mInitialized_;
 }
 
 - (void)requestRowsLayout;
 
-- (void)findLargestCellsWithInt:(jint)widthMeasureSpec
-                        withInt:(jint)heightMeasureSpec;
+- (void)findLargestCellsWithInt:(int32_t)widthMeasureSpec
+                        withInt:(int32_t)heightMeasureSpec;
 
-- (void)shrinkAndStretchColumnsWithInt:(jint)widthMeasureSpec;
+- (void)shrinkAndStretchColumnsWithInt:(int32_t)widthMeasureSpec;
 
 - (void)mutateColumnsWidthWithADSparseBooleanArray:(ADSparseBooleanArray *)columns
-                                       withBoolean:(jboolean)allColumns
-                                           withInt:(jint)size
-                                           withInt:(jint)totalWidth;
+                                       withBoolean:(bool)allColumns
+                                           withInt:(int32_t)size
+                                           withInt:(int32_t)totalWidth;
 
 @end
 
@@ -47,11 +60,11 @@ J2OBJC_FIELD_SETTER(ADTableLayout, mCollapsedColumns_, ADSparseBooleanArray *)
 
 __attribute__((unused)) static void ADTableLayout_requestRowsLayout(ADTableLayout *self);
 
-__attribute__((unused)) static void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, jint widthMeasureSpec, jint heightMeasureSpec);
+__attribute__((unused)) static void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec);
 
-__attribute__((unused)) static void ADTableLayout_shrinkAndStretchColumnsWithInt_(ADTableLayout *self, jint widthMeasureSpec);
+__attribute__((unused)) static void ADTableLayout_shrinkAndStretchColumnsWithInt_(ADTableLayout *self, int32_t widthMeasureSpec);
 
-__attribute__((unused)) static void ADTableLayout_mutateColumnsWidthWithADSparseBooleanArray_withBoolean_withInt_withInt_(ADTableLayout *self, ADSparseBooleanArray *columns, jboolean allColumns, jint size, jint totalWidth);
+__attribute__((unused)) static void ADTableLayout_mutateColumnsWidthWithADSparseBooleanArray_withBoolean_withInt_withInt_(ADTableLayout *self, ADSparseBooleanArray *columns, bool allColumns, int32_t size, int32_t totalWidth);
 
 @implementation ADTableLayout
 
@@ -59,19 +72,19 @@ __attribute__((unused)) static void ADTableLayout_mutateColumnsWidthWithADSparse
   ADTableLayout_requestRowsLayout(self);
 }
 
-- (void)setShrinkAllColumnsWithBoolean:(jboolean)shrinkAllColumns {
+- (void)setShrinkAllColumnsWithBoolean:(bool)shrinkAllColumns {
   mShrinkAllColumns_ = shrinkAllColumns;
 }
 
-- (void)setStretchAllColumnsWithBoolean:(jboolean)stretchAllColumns {
+- (void)setStretchAllColumnsWithBoolean:(bool)stretchAllColumns {
   mStretchAllColumns_ = stretchAllColumns;
 }
 
-- (void)setColumnCollapsedWithInt:(jint)columnIndex
-                      withBoolean:(jboolean)isCollapsed {
+- (void)setColumnCollapsedWithInt:(int32_t)columnIndex
+                      withBoolean:(bool)isCollapsed {
   [((ADSparseBooleanArray *) nil_chk(mCollapsedColumns_)) putWithInt:columnIndex withBoolean:isCollapsed];
-  jint count = [self getChildCount];
-  for (jint i = 0; i < count; i++) {
+  int32_t count = [self getChildCount];
+  for (int32_t i = 0; i < count; i++) {
     ADView *view = [self getChildAtWithInt:i];
     if ([view isKindOfClass:[ADTableRow class]]) {
       [((ADTableRow *) nil_chk(((ADTableRow *) view))) setColumnCollapsedWithInt:columnIndex withBoolean:isCollapsed];
@@ -80,63 +93,63 @@ __attribute__((unused)) static void ADTableLayout_mutateColumnsWidthWithADSparse
   ADTableLayout_requestRowsLayout(self);
 }
 
-- (void)setColumnStretchableWithInt:(jint)columnIndex
-                        withBoolean:(jboolean)isStretchable {
+- (void)setColumnStretchableWithInt:(int32_t)columnIndex
+                        withBoolean:(bool)isStretchable {
   [((ADSparseBooleanArray *) nil_chk(mStretchableColumns_)) putWithInt:columnIndex withBoolean:isStretchable];
   ADTableLayout_requestRowsLayout(self);
 }
 
-- (void)setColumnShrinkableWithInt:(jint)columnIndex
-                       withBoolean:(jboolean)isShrinkable {
+- (void)setColumnShrinkableWithInt:(int32_t)columnIndex
+                       withBoolean:(bool)isShrinkable {
   [((ADSparseBooleanArray *) nil_chk(mShrinkableColumns_)) putWithInt:columnIndex withBoolean:isShrinkable];
   ADTableLayout_requestRowsLayout(self);
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [self measureVerticalWithInt:widthMeasureSpec withInt:heightMeasureSpec];
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [self layoutVerticalWithInt:l withInt:t withInt:r withInt:b];
 }
 
 - (void)measureChildBeforeLayoutWithADView:(ADView *)child
-                                   withInt:(jint)childIndex
-                                   withInt:(jint)widthMeasureSpec
-                                   withInt:(jint)totalWidth
-                                   withInt:(jint)heightMeasureSpec
-                                   withInt:(jint)totalHeight {
+                                   withInt:(int32_t)childIndex
+                                   withInt:(int32_t)widthMeasureSpec
+                                   withInt:(int32_t)totalWidth
+                                   withInt:(int32_t)heightMeasureSpec
+                                   withInt:(int32_t)totalHeight {
   if ([child isKindOfClass:[ADTableRow class]]) {
     [((ADTableRow *) nil_chk(((ADTableRow *) child))) setColumnsWidthConstraintsWithIntArray:mMaxWidths_];
   }
   [super measureChildBeforeLayoutWithADView:child withInt:childIndex withInt:widthMeasureSpec withInt:totalWidth withInt:heightMeasureSpec withInt:totalHeight];
 }
 
-- (void)measureVerticalWithInt:(jint)widthMeasureSpec
-                       withInt:(jint)heightMeasureSpec {
+- (void)measureVerticalWithInt:(int32_t)widthMeasureSpec
+                       withInt:(int32_t)heightMeasureSpec {
   ADTableLayout_findLargestCellsWithInt_withInt_(self, widthMeasureSpec, heightMeasureSpec);
   ADTableLayout_shrinkAndStretchColumnsWithInt_(self, widthMeasureSpec);
   [super measureVerticalWithInt:widthMeasureSpec withInt:heightMeasureSpec];
 }
 
-- (void)findLargestCellsWithInt:(jint)widthMeasureSpec
-                        withInt:(jint)heightMeasureSpec {
+- (void)findLargestCellsWithInt:(int32_t)widthMeasureSpec
+                        withInt:(int32_t)heightMeasureSpec {
   ADTableLayout_findLargestCellsWithInt_withInt_(self, widthMeasureSpec, heightMeasureSpec);
 }
 
-- (void)shrinkAndStretchColumnsWithInt:(jint)widthMeasureSpec {
+- (void)shrinkAndStretchColumnsWithInt:(int32_t)widthMeasureSpec {
   ADTableLayout_shrinkAndStretchColumnsWithInt_(self, widthMeasureSpec);
 }
 
 - (void)mutateColumnsWidthWithADSparseBooleanArray:(ADSparseBooleanArray *)columns
-                                       withBoolean:(jboolean)allColumns
-                                           withInt:(jint)size
-                                           withInt:(jint)totalWidth {
+                                       withBoolean:(bool)allColumns
+                                           withInt:(int32_t)size
+                                           withInt:(int32_t)totalWidth {
   ADTableLayout_mutateColumnsWidthWithADSparseBooleanArray_withBoolean_withInt_withInt_(self, columns, allColumns, size, totalWidth);
 }
 
@@ -144,7 +157,7 @@ __attribute__((unused)) static void ADTableLayout_mutateColumnsWidthWithADSparse
   return create_ADTableLayout_LayoutParams_init();
 }
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return [p isKindOfClass:[ADTableLayout_LayoutParams class]];
 }
 
@@ -226,17 +239,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void ADTableLayout_requestRowsLayout(ADTableLayout *self) {
   if (self->mInitialized_) {
-    jint count = [self getChildCount];
-    for (jint i = 0; i < count; i++) {
+    int32_t count = [self getChildCount];
+    for (int32_t i = 0; i < count; i++) {
       [((ADView *) nil_chk([self getChildAtWithInt:i])) requestLayout];
     }
   }
 }
 
-void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, jint widthMeasureSpec, jint heightMeasureSpec) {
-  jboolean firstRow = true;
-  jint count = [self getChildCount];
-  for (jint i = 0; i < count; i++) {
+void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec) {
+  bool firstRow = true;
+  int32_t count = [self getChildCount];
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = [self getChildAtWithInt:i];
     if ([((ADView *) nil_chk(child)) getVisibility] == ADView_GONE) {
       continue;
@@ -246,7 +259,7 @@ void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, jint wi
       ADViewGroup_LayoutParams *layoutParams = [row getLayoutParams];
       ((ADViewGroup_LayoutParams *) nil_chk(layoutParams))->height_ = ADViewGroup_LayoutParams_WRAP_CONTENT;
       IOSIntArray *widths = [row getColumnsWidthsWithInt:widthMeasureSpec withInt:heightMeasureSpec];
-      jint newLength = ((IOSIntArray *) nil_chk(widths))->size_;
+      int32_t newLength = ((IOSIntArray *) nil_chk(widths))->size_;
       if (firstRow) {
         if (self->mMaxWidths_ == nil || self->mMaxWidths_->size_ != newLength) {
           JreStrongAssignAndConsume(&self->mMaxWidths_, [IOSIntArray newArrayWithLength:newLength]);
@@ -255,8 +268,8 @@ void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, jint wi
         firstRow = false;
       }
       else {
-        jint length = ((IOSIntArray *) nil_chk(self->mMaxWidths_))->size_;
-        jint difference = newLength - length;
+        int32_t length = ((IOSIntArray *) nil_chk(self->mMaxWidths_))->size_;
+        int32_t difference = newLength - length;
         if (difference > 0) {
           IOSIntArray *oldMaxWidths = self->mMaxWidths_;
           JreStrongAssignAndConsume(&self->mMaxWidths_, [IOSIntArray newArrayWithLength:newLength]);
@@ -265,7 +278,7 @@ void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, jint wi
         }
         IOSIntArray *maxWidths = self->mMaxWidths_;
         length = JavaLangMath_minWithInt_withInt_(length, newLength);
-        for (jint j = 0; j < length; j++) {
+        for (int32_t j = 0; j < length; j++) {
           *IOSIntArray_GetRef(nil_chk(maxWidths), j) = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxWidths, j), IOSIntArray_Get(widths, j));
         }
       }
@@ -273,21 +286,21 @@ void ADTableLayout_findLargestCellsWithInt_withInt_(ADTableLayout *self, jint wi
   }
 }
 
-void ADTableLayout_shrinkAndStretchColumnsWithInt_(ADTableLayout *self, jint widthMeasureSpec) {
+void ADTableLayout_shrinkAndStretchColumnsWithInt_(ADTableLayout *self, int32_t widthMeasureSpec) {
   if (self->mMaxWidths_ == nil) {
     return;
   }
-  jint totalWidth = 0;
+  int32_t totalWidth = 0;
   {
     IOSIntArray *a__ = self->mMaxWidths_;
-    jint const *b__ = a__->buffer_;
-    jint const *e__ = b__ + a__->size_;
+    int32_t const *b__ = a__->buffer_;
+    int32_t const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      jint width = *b__++;
+      int32_t width = *b__++;
       totalWidth += width;
     }
   }
-  jint size = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec) - self->mPaddingLeft_ - self->mPaddingRight_;
+  int32_t size = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec) - self->mPaddingLeft_ - self->mPaddingRight_;
   if ((totalWidth > size) && (self->mShrinkAllColumns_ || [((ADSparseBooleanArray *) nil_chk(self->mShrinkableColumns_)) size] > 0)) {
     ADTableLayout_mutateColumnsWidthWithADSparseBooleanArray_withBoolean_withInt_withInt_(self, self->mShrinkableColumns_, self->mShrinkAllColumns_, size, totalWidth);
   }
@@ -296,23 +309,23 @@ void ADTableLayout_shrinkAndStretchColumnsWithInt_(ADTableLayout *self, jint wid
   }
 }
 
-void ADTableLayout_mutateColumnsWidthWithADSparseBooleanArray_withBoolean_withInt_withInt_(ADTableLayout *self, ADSparseBooleanArray *columns, jboolean allColumns, jint size, jint totalWidth) {
-  jint skipped = 0;
+void ADTableLayout_mutateColumnsWidthWithADSparseBooleanArray_withBoolean_withInt_withInt_(ADTableLayout *self, ADSparseBooleanArray *columns, bool allColumns, int32_t size, int32_t totalWidth) {
+  int32_t skipped = 0;
   IOSIntArray *maxWidths = self->mMaxWidths_;
-  jint length = ((IOSIntArray *) nil_chk(maxWidths))->size_;
-  jint count = allColumns ? length : [((ADSparseBooleanArray *) nil_chk(columns)) size];
-  jint totalExtraSpace = size - totalWidth;
-  jint extraSpace = JreIntDiv(totalExtraSpace, count);
-  jint nbChildren = [self getChildCount];
-  for (jint i = 0; i < nbChildren; i++) {
+  int32_t length = ((IOSIntArray *) nil_chk(maxWidths))->size_;
+  int32_t count = allColumns ? length : [((ADSparseBooleanArray *) nil_chk(columns)) size];
+  int32_t totalExtraSpace = size - totalWidth;
+  int32_t extraSpace = JreIntDiv(totalExtraSpace, count);
+  int32_t nbChildren = [self getChildCount];
+  for (int32_t i = 0; i < nbChildren; i++) {
     ADView *child = JreRetainedLocalValue([self getChildAtWithInt:i]);
     if ([child isKindOfClass:[ADTableRow class]]) {
       [((ADView *) nil_chk(child)) forceLayout];
     }
   }
   if (!allColumns) {
-    for (jint i = 0; i < count; i++) {
-      jint column = [((ADSparseBooleanArray *) nil_chk(columns)) keyAtWithInt:i];
+    for (int32_t i = 0; i < count; i++) {
+      int32_t column = [((ADSparseBooleanArray *) nil_chk(columns)) keyAtWithInt:i];
       if ([columns valueAtWithInt:i]) {
         if (column < length) {
           *IOSIntArray_GetRef(maxWidths, column) += extraSpace;
@@ -324,15 +337,15 @@ void ADTableLayout_mutateColumnsWidthWithADSparseBooleanArray_withBoolean_withIn
     }
   }
   else {
-    for (jint i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
       *IOSIntArray_GetRef(maxWidths, i) += extraSpace;
     }
     return;
   }
   if (skipped > 0 && skipped < count) {
     extraSpace = JreIntDiv(skipped * extraSpace, (count - skipped));
-    for (jint i = 0; i < count; i++) {
-      jint column = [((ADSparseBooleanArray *) nil_chk(columns)) keyAtWithInt:i];
+    for (int32_t i = 0; i < count; i++) {
+      int32_t column = [((ADSparseBooleanArray *) nil_chk(columns)) keyAtWithInt:i];
       if ([columns valueAtWithInt:i] && column < length) {
         if (extraSpace > IOSIntArray_Get(maxWidths, column)) {
           *IOSIntArray_GetRef(maxWidths, column) = 0;
@@ -370,10 +383,12 @@ ADTableLayout *create_ADTableLayout_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTableLayout)
 
+J2OBJC_NAME_MAPPING(ADTableLayout, "r.android.widget", "AD")
+
 @implementation ADTableLayout_LayoutParams
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)h {
+- (instancetype)initWithInt:(int32_t)w
+                    withInt:(int32_t)h {
   ADTableLayout_LayoutParams_initWithInt_withInt_(self, w, h);
   return self;
 }
@@ -410,15 +425,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADTableLayout_LayoutParams_initWithInt_withInt_(ADTableLayout_LayoutParams *self, jint w, jint h) {
+void ADTableLayout_LayoutParams_initWithInt_withInt_(ADTableLayout_LayoutParams *self, int32_t w, int32_t h) {
   ADLinearLayout_LayoutParams_initWithInt_withInt_(self, ADViewGroup_LayoutParams_MATCH_PARENT, h);
 }
 
-ADTableLayout_LayoutParams *new_ADTableLayout_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADTableLayout_LayoutParams *new_ADTableLayout_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_NEW_IMPL(ADTableLayout_LayoutParams, initWithInt_withInt_, w, h)
 }
 
-ADTableLayout_LayoutParams *create_ADTableLayout_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADTableLayout_LayoutParams *create_ADTableLayout_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_CREATE_IMPL(ADTableLayout_LayoutParams, initWithInt_withInt_, w, h)
 }
 

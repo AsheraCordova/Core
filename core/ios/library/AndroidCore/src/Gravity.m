@@ -3,27 +3,40 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\Gravity.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Gravity.h"
 #include "J2ObjC_source.h"
 #include "Rect.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 
 
-inline jint ADGravity_get_AXIS_PULL_AFTER__AXIS_X_SHIFT(void);
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+inline int32_t ADGravity_get_AXIS_PULL_AFTER__AXIS_X_SHIFT(void);
 #define ADGravity_AXIS_PULL_AFTER__AXIS_X_SHIFT 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_AFTER__AXIS_X_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_AFTER__AXIS_X_SHIFT, int32_t)
 
-inline jint ADGravity_get_XIS_PULL_BEFORE__AXIS_X_SHIFT(void);
+inline int32_t ADGravity_get_XIS_PULL_BEFORE__AXIS_X_SHIFT(void);
 #define ADGravity_XIS_PULL_BEFORE__AXIS_X_SHIFT 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, XIS_PULL_BEFORE__AXIS_X_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, XIS_PULL_BEFORE__AXIS_X_SHIFT, int32_t)
 
-inline jint ADGravity_get_AXIS_PULL_AFTER__AXIS_Y_SHIFT(void);
+inline int32_t ADGravity_get_AXIS_PULL_AFTER__AXIS_Y_SHIFT(void);
 #define ADGravity_AXIS_PULL_AFTER__AXIS_Y_SHIFT 64
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_AFTER__AXIS_Y_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_AFTER__AXIS_Y_SHIFT, int32_t)
 
-inline jint ADGravity_get_AXIS_PULL_BEFORE__AXIS_Y_SHIFT(void);
+inline int32_t ADGravity_get_AXIS_PULL_BEFORE__AXIS_Y_SHIFT(void);
 #define ADGravity_AXIS_PULL_BEFORE__AXIS_Y_SHIFT 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_BEFORE__AXIS_Y_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_BEFORE__AXIS_Y_SHIFT, int32_t)
 
 @implementation ADGravity
 
@@ -34,67 +47,67 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
           withADRect:(ADRect *)outRect {
   ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_(gravity, w, h, container, outRect);
 }
 
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
           withADRect:(ADRect *)outRect
-             withInt:(jint)layoutDirection {
+             withInt:(int32_t)layoutDirection {
   ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(gravity, w, h, container, outRect, layoutDirection);
 }
 
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
-             withInt:(jint)xAdj
-             withInt:(jint)yAdj
+             withInt:(int32_t)xAdj
+             withInt:(int32_t)yAdj
           withADRect:(ADRect *)outRect {
   ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(gravity, w, h, container, xAdj, yAdj, outRect);
 }
 
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
-             withInt:(jint)xAdj
-             withInt:(jint)yAdj
+             withInt:(int32_t)xAdj
+             withInt:(int32_t)yAdj
           withADRect:(ADRect *)outRect
-             withInt:(jint)layoutDirection {
+             withInt:(int32_t)layoutDirection {
   ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_withInt_(gravity, w, h, container, xAdj, yAdj, outRect, layoutDirection);
 }
 
-+ (void)applyDisplayWithInt:(jint)gravity
++ (void)applyDisplayWithInt:(int32_t)gravity
                  withADRect:(ADRect *)display
                  withADRect:(ADRect *)inoutObj {
   ADGravity_applyDisplayWithInt_withADRect_withADRect_(gravity, display, inoutObj);
 }
 
-+ (void)applyDisplayWithInt:(jint)gravity
++ (void)applyDisplayWithInt:(int32_t)gravity
                  withADRect:(ADRect *)display
                  withADRect:(ADRect *)inoutObj
-                    withInt:(jint)layoutDirection {
+                    withInt:(int32_t)layoutDirection {
   ADGravity_applyDisplayWithInt_withADRect_withADRect_withInt_(gravity, display, inoutObj, layoutDirection);
 }
 
-+ (jboolean)isVerticalWithInt:(jint)gravity {
++ (bool)isVerticalWithInt:(int32_t)gravity {
   return ADGravity_isVerticalWithInt_(gravity);
 }
 
-+ (jboolean)isHorizontalWithInt:(jint)gravity {
++ (bool)isHorizontalWithInt:(int32_t)gravity {
   return ADGravity_isHorizontalWithInt_(gravity);
 }
 
-+ (jint)getAbsoluteGravityWithInt:(jint)gravity
-                          withInt:(jint)layoutDirection {
++ (int32_t)getAbsoluteGravityWithInt:(int32_t)gravity
+                             withInt:(int32_t)layoutDirection {
   return ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
 }
 
@@ -177,18 +190,18 @@ ADGravity *create_ADGravity_init() {
   J2OBJC_CREATE_IMPL(ADGravity, init)
 }
 
-void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_(jint gravity, jint w, jint h, ADRect *container, ADRect *outRect) {
+void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_(int32_t gravity, int32_t w, int32_t h, ADRect *container, ADRect *outRect) {
   ADGravity_initialize();
   ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(gravity, w, h, container, 0, 0, outRect);
 }
 
-void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(jint gravity, jint w, jint h, ADRect *container, ADRect *outRect, jint layoutDirection) {
+void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(int32_t gravity, int32_t w, int32_t h, ADRect *container, ADRect *outRect, int32_t layoutDirection) {
   ADGravity_initialize();
-  jint absGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
+  int32_t absGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
   ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(absGravity, w, h, container, 0, 0, outRect);
 }
 
-void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(jint gravity, jint w, jint h, ADRect *container, jint xAdj, jint yAdj, ADRect *outRect) {
+void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(int32_t gravity, int32_t w, int32_t h, ADRect *container, int32_t xAdj, int32_t yAdj, ADRect *outRect) {
   ADGravity_initialize();
   switch (gravity & (JreLShift32((ADGravity_AXIS_PULL_BEFORE | ADGravity_AXIS_PULL_AFTER), ADGravity_AXIS_X_SHIFT))) {
     case 0:
@@ -264,20 +277,20 @@ void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRec
   }
 }
 
-void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_withInt_(jint gravity, jint w, jint h, ADRect *container, jint xAdj, jint yAdj, ADRect *outRect, jint layoutDirection) {
+void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_withInt_(int32_t gravity, int32_t w, int32_t h, ADRect *container, int32_t xAdj, int32_t yAdj, ADRect *outRect, int32_t layoutDirection) {
   ADGravity_initialize();
-  jint absGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
+  int32_t absGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
   ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(absGravity, w, h, container, xAdj, yAdj, outRect);
 }
 
-void ADGravity_applyDisplayWithInt_withADRect_withADRect_(jint gravity, ADRect *display, ADRect *inoutObj) {
+void ADGravity_applyDisplayWithInt_withADRect_withADRect_(int32_t gravity, ADRect *display, ADRect *inoutObj) {
   ADGravity_initialize();
   if ((gravity & ADGravity_DISPLAY_CLIP_VERTICAL) != 0) {
     if (((ADRect *) nil_chk(inoutObj))->top_ < ((ADRect *) nil_chk(display))->top_) inoutObj->top_ = display->top_;
     if (inoutObj->bottom_ > display->bottom_) inoutObj->bottom_ = display->bottom_;
   }
   else {
-    jint off = 0;
+    int32_t off = 0;
     if (((ADRect *) nil_chk(inoutObj))->top_ < ((ADRect *) nil_chk(display))->top_) off = display->top_ - inoutObj->top_;
     else if (inoutObj->bottom_ > display->bottom_) off = display->bottom_ - inoutObj->bottom_;
     if (off != 0) {
@@ -296,7 +309,7 @@ void ADGravity_applyDisplayWithInt_withADRect_withADRect_(jint gravity, ADRect *
     if (inoutObj->right_ > display->right_) inoutObj->right_ = display->right_;
   }
   else {
-    jint off = 0;
+    int32_t off = 0;
     if (inoutObj->left_ < display->left_) off = display->left_ - inoutObj->left_;
     else if (inoutObj->right_ > display->right_) off = display->right_ - inoutObj->right_;
     if (off != 0) {
@@ -312,25 +325,25 @@ void ADGravity_applyDisplayWithInt_withADRect_withADRect_(jint gravity, ADRect *
   }
 }
 
-void ADGravity_applyDisplayWithInt_withADRect_withADRect_withInt_(jint gravity, ADRect *display, ADRect *inoutObj, jint layoutDirection) {
+void ADGravity_applyDisplayWithInt_withADRect_withADRect_withInt_(int32_t gravity, ADRect *display, ADRect *inoutObj, int32_t layoutDirection) {
   ADGravity_initialize();
-  jint absGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
+  int32_t absGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
   ADGravity_applyDisplayWithInt_withADRect_withADRect_(absGravity, display, inoutObj);
 }
 
-jboolean ADGravity_isVerticalWithInt_(jint gravity) {
+bool ADGravity_isVerticalWithInt_(int32_t gravity) {
   ADGravity_initialize();
   return gravity > 0 && (gravity & ADGravity_VERTICAL_GRAVITY_MASK) != 0;
 }
 
-jboolean ADGravity_isHorizontalWithInt_(jint gravity) {
+bool ADGravity_isHorizontalWithInt_(int32_t gravity) {
   ADGravity_initialize();
   return gravity > 0 && (gravity & ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK) != 0;
 }
 
-jint ADGravity_getAbsoluteGravityWithInt_withInt_(jint gravity, jint layoutDirection) {
+int32_t ADGravity_getAbsoluteGravityWithInt_withInt_(int32_t gravity, int32_t layoutDirection) {
   ADGravity_initialize();
-  jint result = gravity;
+  int32_t result = gravity;
   if ((result & ADGravity_RELATIVE_LAYOUT_DIRECTION) > 0) {
     if ((result & ADGravity_START) == ADGravity_START) {
       result &= ~ADGravity_START;
@@ -356,3 +369,5 @@ jint ADGravity_getAbsoluteGravityWithInt_withInt_(jint gravity, jint layoutDirec
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADGravity)
+
+J2OBJC_NAME_MAPPING(ADGravity, "r.android.view", "AD")

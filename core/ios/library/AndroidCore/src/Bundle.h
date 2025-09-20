@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Bundle.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Bundle")
@@ -15,6 +16,10 @@
 
 #if !defined (ADBundle_) && (INCLUDE_ALL_Bundle || defined(INCLUDE_ADBundle))
 #define ADBundle_
+
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADBundle : NSObject
 
@@ -30,9 +35,9 @@
 
 - (ADBundle *)getBundleWithNSString:(NSString *)name;
 
-- (jfloat)getFloatWithNSString:(NSString *)key;
+- (float)getFloatWithNSString:(NSString *)key;
 
-- (jint)getIntWithNSString:(NSString *)key;
+- (int32_t)getIntWithNSString:(NSString *)key;
 
 - (id)getSerializableWithNSString:(NSString *)key;
 
@@ -45,10 +50,10 @@
                  withNSString:(NSString *)value;
 
 - (void)putFloatWithNSString:(NSString *)name
-                   withFloat:(jfloat)value;
+                   withFloat:(float)value;
 
 - (void)putIntWithNSString:(NSString *)name
-                   withInt:(jint)value;
+                   withInt:(int32_t)value;
 
 - (void)putObjectWithNSString:(NSString *)name
                        withId:(id)value;
@@ -78,6 +83,7 @@ FOUNDATION_EXPORT ADBundle *create_ADBundle_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADBundle)
 
 @compatibility_alias RAndroidOsBundle ADBundle;
+
 
 #endif
 

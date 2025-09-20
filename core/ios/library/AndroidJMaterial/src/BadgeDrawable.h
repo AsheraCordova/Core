@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\badge\BadgeDrawable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BadgeDrawable")
@@ -27,6 +28,9 @@
 @class ADViewGroup;
 @class ADXBadgeState_State;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADXBadgeDrawable : ADDrawable
 
@@ -37,7 +41,7 @@
 
 + (ADXBadgeDrawable *)createWithADContext:(ADContext *)context;
 
-- (jint)getAlpha;
+- (int32_t)getAlpha;
 
 - (id)getAttributeWithNSString:(NSString *)key;
 
@@ -45,17 +49,17 @@
 
 - (ADFrameLayout *)getCustomBadgeParent;
 
-- (jint)getHorizontalOffset;
+- (int32_t)getHorizontalOffset;
 
-- (jint)getMaxCharacterCount;
+- (int32_t)getMaxCharacterCount;
 
-- (jint)getMaxNumber;
+- (int32_t)getMaxNumber;
 
-- (jint)getMinimumHeight;
+- (int32_t)getMinimumHeight;
 
-- (jint)getMinimumWidth;
+- (int32_t)getMinimumWidth;
 
-- (jint)getNumber;
+- (int32_t)getNumber;
 
 - (IOSObjectArray *)getSimulatedWidgetAttrs;
 
@@ -67,41 +71,41 @@
 
 - (NSString *)getTextAppearanceResource;
 
-- (jboolean)hasNumber;
+- (bool)hasNumber;
 
-- (jboolean)hasText;
+- (bool)hasText;
 
-- (void)setAdditionalHorizontalOffsetWithInt:(jint)px;
+- (void)setAdditionalHorizontalOffsetWithInt:(int32_t)px;
 
-- (void)setAdditionalVerticalOffsetWithInt:(jint)px;
+- (void)setAdditionalVerticalOffsetWithInt:(int32_t)px;
 
-- (void)setAlphaWithInt:(jint)alpha;
+- (void)setAlphaWithInt:(int32_t)alpha;
 
-- (void)setBackgroundColorWithInt:(jint)backgroundColor;
+- (void)setBackgroundColorWithInt:(int32_t)backgroundColor;
 
-- (void)setBadgeGravityWithInt:(jint)gravity;
+- (void)setBadgeGravityWithInt:(int32_t)gravity;
 
-- (void)setBadgeTextColorWithInt:(jint)badgeTextColor;
+- (void)setBadgeTextColorWithInt:(int32_t)badgeTextColor;
 
-- (void)setHorizontalOffsetWithInt:(jint)px;
+- (void)setHorizontalOffsetWithInt:(int32_t)px;
 
-- (void)setHorizontalOffsetWithoutTextWithInt:(jint)px;
+- (void)setHorizontalOffsetWithoutTextWithInt:(int32_t)px;
 
-- (void)setHorizontalOffsetWithTextWithInt:(jint)px;
+- (void)setHorizontalOffsetWithTextWithInt:(int32_t)px;
 
-- (void)setMaxCharacterCountWithInt:(jint)maxCharacterCount;
+- (void)setMaxCharacterCountWithInt:(int32_t)maxCharacterCount;
 
-- (void)setNumberWithInt:(jint)number;
+- (void)setNumberWithInt:(int32_t)number;
 
 - (void)setTextAppearanceResourceWithNSString:(NSString *)textAppearanceResource;
 
-- (void)setVerticalOffsetWithInt:(jint)px;
+- (void)setVerticalOffsetWithInt:(int32_t)px;
 
-- (void)setVerticalOffsetWithoutTextWithInt:(jint)px;
+- (void)setVerticalOffsetWithoutTextWithInt:(int32_t)px;
 
-- (void)setVerticalOffsetWithTextWithInt:(jint)px;
+- (void)setVerticalOffsetWithTextWithInt:(int32_t)px;
 
-- (void)setVisibleWithBoolean:(jboolean)visible;
+- (void)setVisibleWithBoolean:(bool)visible;
 
 - (void)updateBadgeCoordinatesWithADView:(ADView *)anchorView;
 
@@ -119,21 +123,21 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADXBadgeDrawable)
 
-inline jint ADXBadgeDrawable_get_TOP_END(void);
+inline int32_t ADXBadgeDrawable_get_TOP_END(void);
 #define ADXBadgeDrawable_TOP_END 8388661
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, TOP_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, TOP_END, int32_t)
 
-inline jint ADXBadgeDrawable_get_TOP_START(void);
+inline int32_t ADXBadgeDrawable_get_TOP_START(void);
 #define ADXBadgeDrawable_TOP_START 8388659
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, TOP_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, TOP_START, int32_t)
 
-inline jint ADXBadgeDrawable_get_BOTTOM_END(void);
+inline int32_t ADXBadgeDrawable_get_BOTTOM_END(void);
 #define ADXBadgeDrawable_BOTTOM_END 8388693
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BOTTOM_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BOTTOM_END, int32_t)
 
-inline jint ADXBadgeDrawable_get_BOTTOM_START(void);
+inline int32_t ADXBadgeDrawable_get_BOTTOM_START(void);
 #define ADXBadgeDrawable_BOTTOM_START 8388691
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BOTTOM_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BOTTOM_START, int32_t)
 
 inline NSString *ADXBadgeDrawable_get_DEFAULT_EXCEED_MAX_BADGE_NUMBER_SUFFIX(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -145,29 +149,29 @@ inline NSString *ADXBadgeDrawable_get_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX(void)
 FOUNDATION_EXPORT NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADXBadgeDrawable, DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX, NSString *)
 
-inline jint ADXBadgeDrawable_get_OFFSET_ALIGNMENT_MODE_EDGE(void);
+inline int32_t ADXBadgeDrawable_get_OFFSET_ALIGNMENT_MODE_EDGE(void);
 #define ADXBadgeDrawable_OFFSET_ALIGNMENT_MODE_EDGE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, OFFSET_ALIGNMENT_MODE_EDGE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, OFFSET_ALIGNMENT_MODE_EDGE, int32_t)
 
-inline jint ADXBadgeDrawable_get_OFFSET_ALIGNMENT_MODE_LEGACY(void);
+inline int32_t ADXBadgeDrawable_get_OFFSET_ALIGNMENT_MODE_LEGACY(void);
 #define ADXBadgeDrawable_OFFSET_ALIGNMENT_MODE_LEGACY 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, OFFSET_ALIGNMENT_MODE_LEGACY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, OFFSET_ALIGNMENT_MODE_LEGACY, int32_t)
 
-inline jint ADXBadgeDrawable_get_BADGE_FIXED_EDGE_START(void);
+inline int32_t ADXBadgeDrawable_get_BADGE_FIXED_EDGE_START(void);
 #define ADXBadgeDrawable_BADGE_FIXED_EDGE_START 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_FIXED_EDGE_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_FIXED_EDGE_START, int32_t)
 
-inline jint ADXBadgeDrawable_get_BADGE_FIXED_EDGE_END(void);
+inline int32_t ADXBadgeDrawable_get_BADGE_FIXED_EDGE_END(void);
 #define ADXBadgeDrawable_BADGE_FIXED_EDGE_END 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_FIXED_EDGE_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_FIXED_EDGE_END, int32_t)
 
-inline jint ADXBadgeDrawable_get_BADGE_RADIUS_NOT_SPECIFIED(void);
+inline int32_t ADXBadgeDrawable_get_BADGE_RADIUS_NOT_SPECIFIED(void);
 #define ADXBadgeDrawable_BADGE_RADIUS_NOT_SPECIFIED -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_RADIUS_NOT_SPECIFIED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_RADIUS_NOT_SPECIFIED, int32_t)
 
-inline jint ADXBadgeDrawable_get_BADGE_CONTENT_NOT_TRUNCATED(void);
+inline int32_t ADXBadgeDrawable_get_BADGE_CONTENT_NOT_TRUNCATED(void);
 #define ADXBadgeDrawable_BADGE_CONTENT_NOT_TRUNCATED -2
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_CONTENT_NOT_TRUNCATED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeDrawable, BADGE_CONTENT_NOT_TRUNCATED, int32_t)
 
 FOUNDATION_EXPORT ADXBadgeDrawable *ADXBadgeDrawable_createWithADContext_(ADContext *context);
 
@@ -181,6 +185,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeDrawable)
 
 @compatibility_alias ComGoogleAndroidMaterialBadgeBadgeDrawable ADXBadgeDrawable;
 
+
 #endif
 
 #if !defined (ADXBadgeDrawable_MaterialShapeDrawable_) && (INCLUDE_ALL_BadgeDrawable || defined(INCLUDE_ADXBadgeDrawable_MaterialShapeDrawable))
@@ -192,16 +197,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeDrawable)
 
 @class ADColorStateList;
 @class ADXBadgeDrawable;
+@class JavaLangFloat;
 
 @interface ADXBadgeDrawable_MaterialShapeDrawable : ADDrawable
 
 #pragma mark Public
 
-- (jfloat)getCornerSize;
+- (float)getCornerSize;
 
 - (ADColorStateList *)getFillColor;
 
-- (void)setCornerSizeWithFloat:(jfloat)cornerSize;
+- (void)setCornerSizeWithFloat:(float)cornerSize;
 
 - (void)setFillColorWithADColorStateList:(ADColorStateList *)backgroundColorStateList;
 
@@ -225,22 +231,24 @@ FOUNDATION_EXPORT ADXBadgeDrawable_MaterialShapeDrawable *create_ADXBadgeDrawabl
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeDrawable_MaterialShapeDrawable)
 
+
 #endif
 
 #if !defined (ADXBadgeDrawable_TextPaint_) && (INCLUDE_ALL_BadgeDrawable || defined(INCLUDE_ADXBadgeDrawable_TextPaint))
 #define ADXBadgeDrawable_TextPaint_
 
 @class ADXBadgeDrawable;
+@class JavaLangInteger;
 
 @interface ADXBadgeDrawable_TextPaint : NSObject
 
 #pragma mark Public
 
-- (jint)getColor;
+- (int32_t)getColor;
 
-- (void)setAlphaWithInt:(jint)alpha;
+- (void)setAlphaWithInt:(int32_t)alpha;
 
-- (void)setColorWithInt:(jint)badgeTextColor;
+- (void)setColorWithInt:(int32_t)badgeTextColor;
 
 #pragma mark Package-Private
 
@@ -262,6 +270,7 @@ FOUNDATION_EXPORT ADXBadgeDrawable_TextPaint *create_ADXBadgeDrawable_TextPaint_
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeDrawable_TextPaint)
 
+
 #endif
 
 #if !defined (ADXBadgeDrawable_TextDrawableHelper_) && (INCLUDE_ALL_BadgeDrawable || defined(INCLUDE_ADXBadgeDrawable_TextDrawableHelper))
@@ -269,18 +278,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeDrawable_TextPaint)
 
 @class ADXBadgeDrawable;
 @class ADXBadgeDrawable_TextPaint;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class NSString;
 
 @interface ADXBadgeDrawable_TextDrawableHelper : NSObject
 
 #pragma mark Public
 
-- (jfloat)getTextHeightWithNSString:(NSString *)badgeContent;
+- (float)getTextHeightWithNSString:(NSString *)badgeContent;
 
 - (ADXBadgeDrawable_TextPaint *)getTextPaint;
 
-- (jfloat)getTextWidthWithNSString:(NSString *)badgeContent;
+- (float)getTextWidthWithNSString:(NSString *)badgeContent;
 
-- (void)setTextSizeDirtyWithBoolean:(jboolean)b;
+- (void)setTextSizeDirtyWithBoolean:(bool)b;
 
 #pragma mark Package-Private
 
@@ -301,6 +313,7 @@ FOUNDATION_EXPORT ADXBadgeDrawable_TextDrawableHelper *new_ADXBadgeDrawable_Text
 FOUNDATION_EXPORT ADXBadgeDrawable_TextDrawableHelper *create_ADXBadgeDrawable_TextDrawableHelper_initWithADXBadgeDrawable_(ADXBadgeDrawable *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeDrawable_TextDrawableHelper)
+
 
 #endif
 

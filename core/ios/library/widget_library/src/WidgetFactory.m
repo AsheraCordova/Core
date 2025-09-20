@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HasWidgets.h"
 #include "IAttributable.h"
 #include "IBehavior.h"
@@ -16,6 +21,7 @@
 #include "WidgetAttribute.h"
 #include "WidgetAttributeMap.h"
 #include "WidgetFactory.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -31,12 +37,12 @@
 #include "java/util/function/ToIntFunction.h"
 #include "java/util/function/ToLongFunction.h"
 
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -104,8 +110,8 @@ __attribute__((unused)) static void ASWidgetFactory_updateStyleAttrsWithNSString
 
 - (instancetype)init;
 
-- (jint)compareWithId:(ASWidgetAttribute *)o1
-               withId:(ASWidgetAttribute *)o2;
+- (int32_t)compareWithId:(ASWidgetAttribute *)o1
+                  withId:(ASWidgetAttribute *)o2;
 
 @end
 
@@ -116,6 +122,7 @@ __attribute__((unused)) static void ASWidgetFactory_1_init(ASWidgetFactory_1 *se
 __attribute__((unused)) static ASWidgetFactory_1 *new_ASWidgetFactory_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASWidgetFactory_1 *create_ASWidgetFactory_1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(ASWidgetFactory)
 
@@ -131,7 +138,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (id<ASIWidget>)createWidgetWithNSString:(NSString *)localName
                              withNSString:(NSString *)themeName
                          withASHasWidgets:(id<ASHasWidgets>)parent
-                              withBoolean:(jboolean)addNativeOnly {
+                              withBoolean:(bool)addNativeOnly {
   return ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(localName, themeName, parent, addNativeOnly);
 }
 
@@ -161,7 +168,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (id<ASIWidget>)getWithNSString:(NSString *)localname
-                     withBoolean:(jboolean)isLazy {
+                     withBoolean:(bool)isLazy {
   return ASWidgetFactory_getWithNSString_withBoolean_(localname, isLazy);
 }
 
@@ -186,7 +193,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASWidgetFactory_registerDecoratorWithASIDecorator_(ui);
 }
 
-+ (jboolean)isAttributeLoadedWithNSString:(NSString *)localname {
++ (bool)isAttributeLoadedWithNSString:(NSString *)localname {
   return ASWidgetFactory_isAttributeLoadedWithNSString_(localname);
 }
 
@@ -345,7 +352,7 @@ ASWidgetFactory *create_ASWidgetFactory_init() {
   J2OBJC_CREATE_IMPL(ASWidgetFactory, init)
 }
 
-id<ASIWidget> ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(NSString *localName, NSString *themeName, id<ASHasWidgets> parent, jboolean addNativeOnly) {
+id<ASIWidget> ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(NSString *localName, NSString *themeName, id<ASHasWidgets> parent, bool addNativeOnly) {
   ASWidgetFactory_initialize();
   id<ASIWidget> widget = ASWidgetFactory_getWithNSString_withBoolean_(localName, false);
   [((id<ASIWidget>) nil_chk(widget)) setParentWithASHasWidgets:parent];
@@ -407,7 +414,7 @@ id<JavaUtilList> ASWidgetFactory_getAttributablesWithNSStringArray_(IOSObjectArr
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *localname = *b__++;
+      NSString *localname = RETAIN_AND_AUTORELEASE(*b__++);
       id<JavaUtilList> list = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributableForMap)) getWithId:localname]);
       if (list != nil) {
         [attributables addAllWithJavaUtilCollection:list];
@@ -417,7 +424,7 @@ id<JavaUtilList> ASWidgetFactory_getAttributablesWithNSStringArray_(IOSObjectArr
   return attributables;
 }
 
-id<ASIWidget> ASWidgetFactory_getWithNSString_withBoolean_(NSString *localname, jboolean isLazy) {
+id<ASIWidget> ASWidgetFactory_getWithNSString_withBoolean_(NSString *localname, bool isLazy) {
   ASWidgetFactory_initialize();
   id<ASIWidget> widgetPrototype = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_registrationMap)) getWithId:localname]);
   if (widgetPrototype != nil) {
@@ -469,7 +476,7 @@ void ASWidgetFactory_registerDecoratorWithASIDecorator_(id<ASIDecorator> ui) {
   [((id<JavaUtilMap>) nil_chk(ASWidgetFactory_decoratorMap)) putWithId:[((id<ASIDecorator>) nil_chk(ui)) getLocalName] withId:ui];
 }
 
-jboolean ASWidgetFactory_isAttributeLoadedWithNSString_(NSString *localname) {
+bool ASWidgetFactory_isAttributeLoadedWithNSString_(NSString *localname) {
   ASWidgetFactory_initialize();
   return [((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributeMap)) containsKeyWithId:localname];
 }
@@ -559,6 +566,8 @@ id<JavaUtilCollection> ASWidgetFactory_getAttributesWithNSString_(NSString *loca
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetFactory)
 
+J2OBJC_NAME_MAPPING(ASWidgetFactory, "com.ashera.widget", "AS")
+
 @implementation ASWidgetFactory_1
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -568,8 +577,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)compareWithId:(ASWidgetAttribute *)o1
-               withId:(ASWidgetAttribute *)o2 {
+- (int32_t)compareWithId:(ASWidgetAttribute *)o1
+                  withId:(ASWidgetAttribute *)o2 {
   if ([((NSString *) nil_chk([((ASWidgetAttribute *) nil_chk(o1)) getAttributeName])) isEqual:[((ASWidgetAttribute *) nil_chk(o2)) getAttributeName]]) {
     return 0;
   }
@@ -617,7 +626,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(compareWithId:withId:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "compare", "LASWidgetAttribute;LASWidgetAttribute;", "LASWidgetFactory;", "updateStyleAttrsWithNSString:withASWidgetAttribute:", "Ljava/lang/Object;Ljava/util/Comparator<Lcom/ashera/widget/WidgetAttribute;>;" };
-  static const J2ObjcClassInfo _ASWidgetFactory_1 = { "", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, 4, -1 };
+  static const J2ObjcClassInfo _ASWidgetFactory_1 = { "", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, 4, -1 };
   return &_ASWidgetFactory_1;
 }
 

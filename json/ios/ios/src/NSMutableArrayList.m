@@ -3,12 +3,19 @@
 //  source: D:\Java\git\core-ios-widgets\IOSJSONAdapter\src\main\java\com\ashera\jsonadapter\NSMutableArrayList.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "NSMutableArrayList.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/IndexOutOfBoundsException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/AbstractList.h"
 #include "java/util/Collection.h"
@@ -19,33 +26,37 @@
 #include "java/util/NoSuchElementException.h"
 #include "java/util/function/Consumer.h"
 
-@protocol JavaUtilFunctionConsumer;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASNSMutableArrayList ()
 
 - (id)getNativeArrayWithId:(id)nsarray;
 
-- (void)removeObjectAtIndexWithInt:(jint)index;
+- (void)removeObjectAtIndexWithInt:(int32_t)index;
 
 @end
 
 __attribute__((unused)) static id ASNSMutableArrayList_getNativeArrayWithId_(ASNSMutableArrayList *self, id nsarray);
 
-__attribute__((unused)) static void ASNSMutableArrayList_removeObjectAtIndexWithInt_(ASNSMutableArrayList *self, jint index);
+__attribute__((unused)) static void ASNSMutableArrayList_removeObjectAtIndexWithInt_(ASNSMutableArrayList *self, int32_t index);
 
 @interface ASNSMutableArrayList_Itr : NSObject < JavaUtilIterator > {
  @public
   ASNSMutableArrayList *this$0_;
-  jint limit_;
-  jint cursor_;
-  jint lastRet_;
-  jint expectedModCount_;
+  int32_t limit_;
+  int32_t cursor_;
+  int32_t lastRet_;
+  int32_t expectedModCount_;
 }
 
 - (instancetype)initWithASNSMutableArrayList:(ASNSMutableArrayList *)outer$;
 
-- (jboolean)hasNext;
+- (bool)hasNext;
 
 - (id)next;
 
@@ -65,6 +76,7 @@ __attribute__((unused)) static ASNSMutableArrayList_Itr *create_ASNSMutableArray
 
 J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_Itr)
 
+
 /*!
  @brief An optimized version of AbstractList.ListItr
  */
@@ -74,13 +86,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_Itr)
 }
 
 - (instancetype)initWithASNSMutableArrayList:(ASNSMutableArrayList *)outer$
-                                     withInt:(jint)index;
+                                     withInt:(int32_t)index;
 
-- (jboolean)hasPrevious;
+- (bool)hasPrevious;
 
-- (jint)nextIndex;
+- (int32_t)nextIndex;
 
-- (jint)previousIndex;
+- (int32_t)previousIndex;
 
 - (id)previous;
 
@@ -92,13 +104,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_Itr)
 
 J2OBJC_EMPTY_STATIC_INIT(ASNSMutableArrayList_ListItr)
 
-__attribute__((unused)) static void ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList_ListItr *self, ASNSMutableArrayList *outer$, jint index);
+__attribute__((unused)) static void ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList_ListItr *self, ASNSMutableArrayList *outer$, int32_t index);
 
-__attribute__((unused)) static ASNSMutableArrayList_ListItr *new_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, jint index) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASNSMutableArrayList_ListItr *new_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, int32_t index) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASNSMutableArrayList_ListItr *create_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, jint index);
+__attribute__((unused)) static ASNSMutableArrayList_ListItr *create_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, int32_t index);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_ListItr)
+
 
 @implementation ASNSMutableArrayList
 
@@ -120,15 +133,15 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_ListItr)
   return self;
 }
 
-- (jint)size {
+- (int32_t)size {
   return (int) [(NSMutableArray*)self->nsmutableArray_ count];
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return nsmutableArray_ == nil || [self size] == 0;
 }
 
-- (jboolean)containsWithId:(id)o {
+- (bool)containsWithId:(id)o {
   return [(NSMutableArray*)self->nsmutableArray_ containsObject:o];
 }
 
@@ -148,13 +161,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_ListItr)
   return ASNSMutableArrayList_getNativeArrayWithId_(self, nsarray);
 }
 
-- (jboolean)addWithId:(id)e {
+- (bool)addWithId:(id)e {
   [self addWithInt:-1 withId:e];
   return true;
 }
 
-- (jboolean)removeWithId:(id)o {
-  jint i = [self indexOfWithId:o];
+- (bool)removeWithId:(id)o {
+  int32_t i = [self indexOfWithId:o];
   if (i >= 0) {
     [self removeObjectWithId:o];
     return true;
@@ -166,24 +179,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_ListItr)
   [(NSMutableArray*)self->nsmutableArray_ removeObject:e];
 }
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
   return [super containsAllWithJavaUtilCollection:c];
 }
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
   return [super addAllWithJavaUtilCollection:c];
 }
 
-- (jboolean)addAllWithInt:(jint)index
-   withJavaUtilCollection:(id<JavaUtilCollection>)c {
+- (bool)addAllWithInt:(int32_t)index
+withJavaUtilCollection:(id<JavaUtilCollection>)c {
   return [super addAllWithInt:index withJavaUtilCollection:c];
 }
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
   return [super removeAllWithJavaUtilCollection:c];
 }
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c {
   return [super retainAllWithJavaUtilCollection:c];
 }
 
@@ -191,23 +204,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_ListItr)
   [(NSMutableArray*)self->nsmutableArray_ removeAllObjects];
 }
 
-- (id)getWithInt:(jint)index {
+- (id)getWithInt:(int32_t)index {
   return [(NSMutableArray*)self->nsmutableArray_ objectAtIndex:index];;
 }
 
-- (id)setWithInt:(jint)index
+- (id)setWithInt:(int32_t)index
           withId:(id)element {
   id oldValue = [self getWithInt:index];
   [self nativeSetWithInt:index withId:element];
   return oldValue;
 }
 
-- (void)nativeSetWithInt:(jint)index
+- (void)nativeSetWithInt:(int32_t)index
                   withId:(id)element {
   [(NSMutableArray*)self->nsmutableArray_ replaceObjectAtIndex:index withObject:element];
 }
 
-- (void)addWithInt:(jint)index
+- (void)addWithInt:(int32_t)index
             withId:(id)element {
   if (index == -1) {
     [(NSMutableArray*)self->nsmutableArray_ addObject:element];
@@ -216,21 +229,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_ListItr)
   }
 }
 
-- (id)removeWithInt:(jint)index {
+- (id)removeWithInt:(int32_t)index {
   id oldValue = [self getWithInt:index];
   ASNSMutableArrayList_removeObjectAtIndexWithInt_(self, index);
   return oldValue;
 }
 
-- (void)removeObjectAtIndexWithInt:(jint)index {
+- (void)removeObjectAtIndexWithInt:(int32_t)index {
   ASNSMutableArrayList_removeObjectAtIndexWithInt_(self, index);
 }
 
-- (jint)indexOfWithId:(id)o {
+- (int32_t)indexOfWithId:(id)o {
   return (int) [(NSMutableArray*)self->nsmutableArray_ indexOfObject: o];
 }
 
-- (jint)lastIndexOfWithId:(id)o {
+- (int32_t)lastIndexOfWithId:(id)o {
   NSMutableArray* rArray=[[[(NSMutableArray*)self->nsmutableArray_ reverseObjectEnumerator] allObjects] mutableCopy];
   return (int) [rArray indexOfObject:o];
 }
@@ -239,12 +252,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList_ListItr)
   return new_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(self, 0);
 }
 
-- (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index {
+- (id<JavaUtilListIterator>)listIteratorWithInt:(int32_t)index {
   return new_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(self, index);
 }
 
-- (id<JavaUtilList>)subListWithInt:(jint)fromIndex
-                           withInt:(jint)toIndex {
+- (id<JavaUtilList>)subListWithInt:(int32_t)fromIndex
+                           withInt:(int32_t)toIndex {
   return [super subListWithInt:fromIndex withInt:toIndex];
 }
 
@@ -344,11 +357,13 @@ id ASNSMutableArrayList_getNativeArrayWithId_(ASNSMutableArrayList *self, id nsa
   return [IOSObjectArray arrayWithNSArray:nsarray type:[IOSClass forName: @"java.lang.Object"]];
 }
 
-void ASNSMutableArrayList_removeObjectAtIndexWithInt_(ASNSMutableArrayList *self, jint index) {
+void ASNSMutableArrayList_removeObjectAtIndexWithInt_(ASNSMutableArrayList *self, int32_t index) {
   [(NSMutableArray*)self->nsmutableArray_ removeObjectAtIndex:index];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNSMutableArrayList)
+
+J2OBJC_NAME_MAPPING(ASNSMutableArrayList, "com.ashera.jsonadapter", "AS")
 
 @implementation ASNSMutableArrayList_Itr
 
@@ -357,13 +372,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNSMutableArrayList)
   return self;
 }
 
-- (jboolean)hasNext {
+- (bool)hasNext {
   return cursor_ < limit_;
 }
 
 - (id)next {
   if (this$0_->modCount_ != expectedModCount_) @throw new_JavaUtilConcurrentModificationException_init();
-  jint i = cursor_;
+  int32_t i = cursor_;
   if (i >= limit_) @throw new_JavaUtilNoSuchElementException_init();
   cursor_ = i + 1;
   return [this$0_ getWithInt:lastRet_ = i];
@@ -440,26 +455,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNSMutableArrayList_Itr)
 @implementation ASNSMutableArrayList_ListItr
 
 - (instancetype)initWithASNSMutableArrayList:(ASNSMutableArrayList *)outer$
-                                     withInt:(jint)index {
+                                     withInt:(int32_t)index {
   ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(self, outer$, index);
   return self;
 }
 
-- (jboolean)hasPrevious {
+- (bool)hasPrevious {
   return cursor_ != 0;
 }
 
-- (jint)nextIndex {
+- (int32_t)nextIndex {
   return cursor_;
 }
 
-- (jint)previousIndex {
+- (int32_t)previousIndex {
   return cursor_ - 1;
 }
 
 - (id)previous {
   if (this$1_->modCount_ != expectedModCount_) @throw new_JavaUtilConcurrentModificationException_init();
-  jint i = cursor_ - 1;
+  int32_t i = cursor_ - 1;
   if (i < 0) @throw new_JavaUtilNoSuchElementException_init();
   cursor_ = i;
   return [this$1_ getWithInt:lastRet_ = i];
@@ -479,7 +494,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNSMutableArrayList_Itr)
 - (void)addWithId:(id)e {
   if (this$1_->modCount_ != expectedModCount_) @throw new_JavaUtilConcurrentModificationException_init();
   @try {
-    jint i = cursor_;
+    int32_t i = cursor_;
     [this$1_ addWithInt:i withId:e];
     cursor_ = i + 1;
     lastRet_ = -1;
@@ -522,17 +537,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNSMutableArrayList_Itr)
 
 @end
 
-void ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList_ListItr *self, ASNSMutableArrayList *outer$, jint index) {
+void ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList_ListItr *self, ASNSMutableArrayList *outer$, int32_t index) {
   self->this$1_ = outer$;
   ASNSMutableArrayList_Itr_initWithASNSMutableArrayList_(self, outer$);
   self->cursor_ = index;
 }
 
-ASNSMutableArrayList_ListItr *new_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, jint index) {
+ASNSMutableArrayList_ListItr *new_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, int32_t index) {
   J2OBJC_NEW_IMPL(ASNSMutableArrayList_ListItr, initWithASNSMutableArrayList_withInt_, outer$, index)
 }
 
-ASNSMutableArrayList_ListItr *create_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, jint index) {
+ASNSMutableArrayList_ListItr *create_ASNSMutableArrayList_ListItr_initWithASNSMutableArrayList_withInt_(ASNSMutableArrayList *outer$, int32_t index) {
   J2OBJC_CREATE_IMPL(ASNSMutableArrayList_ListItr, initWithASNSMutableArrayList_withInt_, outer$, index)
 }
 

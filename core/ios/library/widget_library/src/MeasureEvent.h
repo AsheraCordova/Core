@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\MeasureEvent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MeasureEvent")
@@ -20,19 +21,21 @@
 #define INCLUDE_ASWidgetEvent 1
 #include "WidgetEvent.h"
 
+@class JavaLangInteger;
+
 @interface ASMeasureEvent : ASWidgetEvent
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
-- (jint)getWidth;
+- (int32_t)getWidth;
 
-- (void)setHeightWithInt:(jint)height;
+- (void)setHeightWithInt:(int32_t)height;
 
-- (void)setWidthWithInt:(jint)width;
+- (void)setWidthWithInt:(int32_t)width;
 
 @end
 
@@ -47,6 +50,7 @@ FOUNDATION_EXPORT ASMeasureEvent *create_ASMeasureEvent_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASMeasureEvent)
 
 @compatibility_alias ComAsheraWidgetMeasureEvent ASMeasureEvent;
+
 
 #endif
 

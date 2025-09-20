@@ -3,11 +3,23 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\PasswordCommandConveter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseAttributeCommand.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "PasswordCommandConveter.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASPasswordCommandConveter
@@ -31,7 +43,7 @@
   }
   NSString *text = (NSString *) cast_chk(value, [NSString class]);
   NSString *result = @"";
-  for (jint i = 0; i < [text java_length]; i++) {
+  for (int32_t i = 0; i < [text java_length]; i++) {
     JreStrAppend(&result, "$", @"*");
   }
   text = result;
@@ -76,3 +88,5 @@ ASPasswordCommandConveter *create_ASPasswordCommandConveter_initWithNSString_(NS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPasswordCommandConveter)
+
+J2OBJC_NAME_MAPPING(ASPasswordCommandConveter, "com.ashera.converter", "AS")

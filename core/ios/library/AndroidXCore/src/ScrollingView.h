@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\ScrollingView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ScrollingView")
@@ -15,6 +16,8 @@
 
 #if !defined (ADXScrollingView_) && (INCLUDE_ALL_ScrollingView || defined(INCLUDE_ADXScrollingView))
 #define ADXScrollingView_
+
+@class JavaLangInteger;
 
 /*!
  @brief An interface that can be implemented by Views to provide scroll related APIs.
@@ -36,13 +39,13 @@
  - seealso: #computeHorizontalScrollExtent()
  - seealso: #computeHorizontalScrollOffset()
  */
-- (jint)computeHorizontalScrollRange;
+- (int32_t)computeHorizontalScrollRange;
 
 /*!
  @brief <p>Compute the horizontal offset of the horizontal scrollbar's thumb
-  within the horizontal range.
- This value is used to compute the position
-  of the thumb within the scrollbar's track.</p>
+  within the horizontal range.This value is used to compute the position
+  of the thumb within the scrollbar's track.
+ </p>
   
  <p>The range is expressed in arbitrary units that must be the same as the
   units used by <code>computeHorizontalScrollRange()</code> and 
@@ -53,13 +56,13 @@
  - seealso: #computeHorizontalScrollRange()
  - seealso: #computeHorizontalScrollExtent()
  */
-- (jint)computeHorizontalScrollOffset;
+- (int32_t)computeHorizontalScrollOffset;
 
 /*!
  @brief <p>Compute the horizontal extent of the horizontal scrollbar's thumb
-  within the horizontal range.
- This value is used to compute the length
-  of the thumb within the scrollbar's track.</p>
+  within the horizontal range.This value is used to compute the length
+  of the thumb within the scrollbar's track.
+ </p>
   
  <p>The range is expressed in arbitrary units that must be the same as the
   units used by <code>computeHorizontalScrollRange()</code> and 
@@ -70,7 +73,7 @@
  - seealso: #computeHorizontalScrollRange()
  - seealso: #computeHorizontalScrollOffset()
  */
-- (jint)computeHorizontalScrollExtent;
+- (int32_t)computeHorizontalScrollExtent;
 
 /*!
  @brief <p>Compute the vertical range that the vertical scrollbar represents.
@@ -84,13 +87,13 @@
  - seealso: #computeVerticalScrollExtent()
  - seealso: #computeVerticalScrollOffset()
  */
-- (jint)computeVerticalScrollRange;
+- (int32_t)computeVerticalScrollRange;
 
 /*!
  @brief <p>Compute the vertical offset of the vertical scrollbar's thumb
-  within the horizontal range.
- This value is used to compute the position
-  of the thumb within the scrollbar's track.</p>
+  within the horizontal range.This value is used to compute the position
+  of the thumb within the scrollbar's track.
+ </p>
   
  <p>The range is expressed in arbitrary units that must be the same as the
   units used by <code>computeVerticalScrollRange()</code> and 
@@ -101,13 +104,13 @@
  - seealso: #computeVerticalScrollRange()
  - seealso: #computeVerticalScrollExtent()
  */
-- (jint)computeVerticalScrollOffset;
+- (int32_t)computeVerticalScrollOffset;
 
 /*!
  @brief <p>Compute the vertical extent of the vertical scrollbar's thumb
-  within the vertical range.
- This value is used to compute the length
-  of the thumb within the scrollbar's track.</p>
+  within the vertical range.This value is used to compute the length
+  of the thumb within the scrollbar's track.
+ </p>
   
  <p>The range is expressed in arbitrary units that must be the same as the
   units used by <code>computeVerticalScrollRange()</code> and 
@@ -118,7 +121,7 @@
  - seealso: #computeVerticalScrollRange()
  - seealso: #computeVerticalScrollOffset()
  */
-- (jint)computeVerticalScrollExtent;
+- (int32_t)computeVerticalScrollExtent;
 
 @end
 
@@ -127,6 +130,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXScrollingView)
 J2OBJC_TYPE_LITERAL_HEADER(ADXScrollingView)
 
 #define AndroidxCoreViewScrollingView ADXScrollingView
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\ScanHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ScanHandler")
@@ -17,6 +18,7 @@
 #define TSScanHandler_
 
 @class IOSCharArray;
+@class JavaLangInteger;
 
 /*!
  @brief An interface that Scanners use to report events in the input stream.
@@ -27,112 +29,112 @@
  @brief Reports an attribute name without a value.
  */
 - (void)adupWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 /*!
  @brief Reports an attribute name; a value will follow.
  */
 - (void)anameWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length;
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length;
 
 /*!
  @brief Reports an attribute value.
  */
 - (void)avalWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 /*!
  @brief Reports the content of a CDATA section (not a CDATA element)
  */
 - (void)cdsectWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length;
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length;
 
 /*!
  @brief Reports a <!....
  > declaration - typically a DOCTYPE
  */
 - (void)declWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 /*!
  @brief Reports an entity reference or character reference.
  */
 - (void)entityWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length;
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length;
 
 /*!
  @brief Reports EOF.
  */
 - (void)eofWithCharArray:(IOSCharArray *)buff
-                 withInt:(jint)offset
-                 withInt:(jint)length;
+                 withInt:(int32_t)offset
+                 withInt:(int32_t)length;
 
 /*!
  @brief Reports an end-tag.
  */
 - (void)etagWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 /*!
  @brief Reports the general identifier (element type name) of a start-tag.
  */
 - (void)giWithCharArray:(IOSCharArray *)buff
-                withInt:(jint)offset
-                withInt:(jint)length;
+                withInt:(int32_t)offset
+                withInt:(int32_t)length;
 
 /*!
  @brief Reports character content.
  */
 - (void)pcdataWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length;
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length;
 
 /*!
  @brief Reports the data part of a processing instruction.
  */
 - (void)piWithCharArray:(IOSCharArray *)buff
-                withInt:(jint)offset
-                withInt:(jint)length;
+                withInt:(int32_t)offset
+                withInt:(int32_t)length;
 
 /*!
  @brief Reports the target part of a processing instruction.
  */
 - (void)pitargetWithCharArray:(IOSCharArray *)buff
-                      withInt:(jint)offset
-                      withInt:(jint)length;
+                      withInt:(int32_t)offset
+                      withInt:(int32_t)length;
 
 /*!
  @brief Reports the close of a start-tag.
  */
 - (void)stagcWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length;
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length;
 
 /*!
  @brief Reports the close of an empty-tag.
  */
 - (void)stageWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length;
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length;
 
 /*!
  @brief Reports a comment.
  */
 - (void)cmntWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 /*!
  @brief Returns the value of the last entity or character reference reported.
  */
-- (jint)getEntity;
+- (int32_t)getEntity;
 
 @end
 
@@ -141,6 +143,7 @@ J2OBJC_EMPTY_STATIC_INIT(TSScanHandler)
 J2OBJC_TYPE_LITERAL_HEADER(TSScanHandler)
 
 #define RepackagedOrgCcilCowanTagsoupScanHandler TSScanHandler
+
 
 #endif
 

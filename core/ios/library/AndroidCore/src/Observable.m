@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\database\Observable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Observable.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADObservable
@@ -36,7 +49,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"The observer is null.");
   }
   @synchronized(mObservers_) {
-    jint index = [((JavaUtilArrayList *) nil_chk(mObservers_)) indexOfWithId:observer];
+    int32_t index = [((JavaUtilArrayList *) nil_chk(mObservers_)) indexOfWithId:observer];
     if (index == -1) {
       @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"Observer ", observer, @" was not registered."));
     }
@@ -86,3 +99,5 @@ void ADObservable_init(ADObservable *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADObservable)
+
+J2OBJC_NAME_MAPPING(ADObservable, "r.android.database", "AD")

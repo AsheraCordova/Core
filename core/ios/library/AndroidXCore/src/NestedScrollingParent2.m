@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingParent2.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "NestedScrollingParent2.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXNestedScrollingParent2 : NSObject
@@ -38,3 +49,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADXNestedScrollingParent2)
+
+J2OBJC_NAME_MAPPING(ADXNestedScrollingParent2, "androidx.core.view", "ADX")

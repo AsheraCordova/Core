@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IWrapableWidget.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IWrapableWidget")
@@ -16,12 +17,14 @@
 #if !defined (ASIWrapableWidget_) && (INCLUDE_ALL_IWrapableWidget || defined(INCLUDE_ASIWrapableWidget))
 #define ASIWrapableWidget_
 
+@class JavaLangInteger;
+
 @protocol ASIWrapableWidget < JavaObject >
 
-- (id)createWrapperViewHolderWithInt:(jint)viewtype;
+- (id)createWrapperViewHolderWithInt:(int32_t)viewtype;
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype;
+                      withInt:(int32_t)viewtype;
 
 - (void)addForegroundIfNeeded;
 
@@ -34,6 +37,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIWrapableWidget)
 J2OBJC_TYPE_LITERAL_HEADER(ASIWrapableWidget)
 
 #define ComAsheraWidgetIWrapableWidget ASIWrapableWidget
+
 
 #endif
 

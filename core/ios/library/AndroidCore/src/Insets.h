@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\Insets.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Insets")
@@ -16,6 +17,8 @@
 #if !defined (ADInsets_) && (INCLUDE_ALL_Insets || defined(INCLUDE_ADInsets))
 #define ADInsets_
 
+@class JavaLangInteger;
+
 /*!
  @brief An Insets instance holds four integer offsets which describe changes to the four
   edges of a Rectangle.By convention, positive values move edges towards the
@@ -25,10 +28,10 @@
  */
 @interface ADInsets : NSObject {
  @public
-  jint left_;
-  jint top_;
-  jint right_;
-  jint bottom_;
+  int32_t left_;
+  int32_t top_;
+  int32_t right_;
+  int32_t bottom_;
 }
 
 #pragma mark Public
@@ -41,10 +44,10 @@
  @param bottom the bottom inset
  @return Insets instance with the appropriate values
  */
-+ (ADInsets *)ofWithInt:(jint)left
-                withInt:(jint)top
-                withInt:(jint)right
-                withInt:(jint)bottom;
++ (ADInsets *)ofWithInt:(int32_t)left
+                withInt:(int32_t)top
+                withInt:(int32_t)right
+                withInt:(int32_t)bottom;
 
 // Disallowed inherited constructors, do not use.
 
@@ -59,11 +62,12 @@ inline ADInsets *ADInsets_get_NONE(void);
 FOUNDATION_EXPORT ADInsets *ADInsets_NONE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADInsets, NONE, ADInsets *)
 
-FOUNDATION_EXPORT ADInsets *ADInsets_ofWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom);
+FOUNDATION_EXPORT ADInsets *ADInsets_ofWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADInsets)
 
 @compatibility_alias RAndroidGraphicsInsets ADInsets;
+
 
 #endif
 

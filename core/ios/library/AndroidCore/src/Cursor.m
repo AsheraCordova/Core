@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\database\Cursor.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Cursor.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADCursor
@@ -16,18 +28,18 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getColumnIndexWithNSString:(NSString *)string {
+- (int32_t)getColumnIndexWithNSString:(NSString *)string {
   return 0;
 }
 
-- (jint)getCount {
+- (int32_t)getCount {
   return 0;
 }
 
 - (void)moveToFirst {
 }
 
-- (NSString *)getStringWithInt:(jint)columnIndex {
+- (NSString *)getStringWithInt:(int32_t)columnIndex {
   return nil;
 }
 
@@ -73,3 +85,5 @@ ADCursor *create_ADCursor_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADCursor)
+
+J2OBJC_NAME_MAPPING(ADCursor, "r.android.database", "AD")

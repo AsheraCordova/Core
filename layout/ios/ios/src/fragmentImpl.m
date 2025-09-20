@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\fragmentImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseHasWidgets.h"
 #include "FileUtils.h"
 #include "Fragment.h"
@@ -33,6 +38,7 @@
 #include "WidgetFactory.h"
 #include "fragmentImpl.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -45,10 +51,14 @@
 #include "ASUIView.h"
 #include "HasLifeCycleDecorators.h"
 
-static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, jint);
+static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, int32_t);
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -113,19 +123,19 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, jint
                                        withId:(id)objValue
                     withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (void)addOrReplaceFragmentWithBoolean:(jboolean)add;
+- (void)addOrReplaceFragmentWithBoolean:(bool)add;
 
 - (void)executePendingTransactions;
 
 - (void)createOrReplaceFragmentWithNSString:(NSString *)id_
-                                withBoolean:(jboolean)add
+                                withBoolean:(bool)add
                                withNSString:(NSString *)layout;
 
 - (void)makeCurrentFragmentActive;
 
 - (ASUINavigatorImpl *)getNavigator;
 
-- (jboolean)isValidFragment;
+- (bool)isValidFragment;
 
 - (void)closeDialog;
 
@@ -133,10 +143,10 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, jint
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b;
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
 
 - (id)getViewWithId:(id)navController;
 
@@ -191,17 +201,17 @@ __attribute__((unused)) static void ASfragmentImpl_navigateWithPopBackStackWithI
 
 __attribute__((unused)) static void ASfragmentImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(ASfragmentImpl *self, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
-__attribute__((unused)) static void ASfragmentImpl_addOrReplaceFragmentWithBoolean_(ASfragmentImpl *self, jboolean add);
+__attribute__((unused)) static void ASfragmentImpl_addOrReplaceFragmentWithBoolean_(ASfragmentImpl *self, bool add);
 
 __attribute__((unused)) static void ASfragmentImpl_executePendingTransactions(ASfragmentImpl *self);
 
-__attribute__((unused)) static void ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(ASfragmentImpl *self, NSString *id_, jboolean add, NSString *layout);
+__attribute__((unused)) static void ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(ASfragmentImpl *self, NSString *id_, bool add, NSString *layout);
 
 __attribute__((unused)) static void ASfragmentImpl_makeCurrentFragmentActive(ASfragmentImpl *self);
 
 __attribute__((unused)) static ASUINavigatorImpl *ASfragmentImpl_getNavigator(ASfragmentImpl *self);
 
-__attribute__((unused)) static jboolean ASfragmentImpl_isValidFragment(ASfragmentImpl *self);
+__attribute__((unused)) static bool ASfragmentImpl_isValidFragment(ASfragmentImpl *self);
 
 __attribute__((unused)) static void ASfragmentImpl_closeDialog(ASfragmentImpl *self);
 
@@ -209,7 +219,7 @@ __attribute__((unused)) static void ASfragmentImpl_closeDialogWithId_(ASfragment
 
 __attribute__((unused)) static void ASfragmentImpl_nativeCreateWithJavaUtilMap_(ASfragmentImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static void ASfragmentImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASfragmentImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASfragmentImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASfragmentImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static id ASfragmentImpl_getViewWithId_(ASfragmentImpl *self, id navController);
 
@@ -217,12 +227,12 @@ __attribute__((unused)) static void ASfragmentImpl_remeasureIfRequired(ASfragmen
 
 @interface ASfragmentImpl_fragmentExt () {
  @public
-  __unsafe_unretained ASfragmentImpl *this$0_;
+  WEAK_ ASfragmentImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -235,7 +245,7 @@ J2OBJC_FIELD_SETTER(ASfragmentImpl_fragmentExt, templates_, id<JavaUtilMap>)
 
 @interface ASfragmentImpl_MyFragmentFactory : ASUINavigatorImpl_FragmentFactory {
  @public
-  __unsafe_unretained ASfragmentImpl *this$0_;
+  WEAK_ ASfragmentImpl *this$0_;
 }
 
 - (instancetype)initWithASfragmentImpl:(ASfragmentImpl *)outer$;
@@ -254,9 +264,10 @@ __attribute__((unused)) static ASfragmentImpl_MyFragmentFactory *create_ASfragme
 
 J2OBJC_TYPE_LITERAL_HEADER(ASfragmentImpl_MyFragmentFactory)
 
+
 @interface ASfragmentImpl_MyGenericFragment : ASGenericFragment {
  @public
-  __unsafe_unretained ASfragmentImpl *this$0_;
+  WEAK_ ASfragmentImpl *this$0_;
 }
 
 - (instancetype)initWithASfragmentImpl:(ASfragmentImpl *)outer$;
@@ -275,6 +286,7 @@ __attribute__((unused)) static ASfragmentImpl_MyGenericFragment *create_ASfragme
 
 J2OBJC_TYPE_LITERAL_HEADER(ASfragmentImpl_MyGenericFragment)
 
+
 @interface ASfragmentImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   id<ASIWidget> val$widget_;
@@ -291,6 +303,7 @@ __attribute__((unused)) static void ASfragmentImpl_$Lambda$1_initWithASIWidget_(
 __attribute__((unused)) static ASfragmentImpl_$Lambda$1 *new_ASfragmentImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASfragmentImpl_$Lambda$1 *create_ASfragmentImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 
 @interface ASfragmentImpl_$Lambda$2 : NSObject < JavaLangRunnable > {
  @public
@@ -309,6 +322,7 @@ __attribute__((unused)) static ASfragmentImpl_$Lambda$2 *new_ASfragmentImpl_$Lam
 
 __attribute__((unused)) static ASfragmentImpl_$Lambda$2 *create_ASfragmentImpl_$Lambda$2_initWithASfragmentImpl_(ASfragmentImpl *outer$);
 
+
 @interface ASfragmentImpl_$Lambda$3 : NSObject < JavaLangRunnable > {
  @public
   ASfragmentImpl *this$0_;
@@ -325,6 +339,7 @@ __attribute__((unused)) static void ASfragmentImpl_$Lambda$3_initWithASfragmentI
 __attribute__((unused)) static ASfragmentImpl_$Lambda$3 *new_ASfragmentImpl_$Lambda$3_initWithASfragmentImpl_(ASfragmentImpl *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASfragmentImpl_$Lambda$3 *create_ASfragmentImpl_$Lambda$3_initWithASfragmentImpl_(ASfragmentImpl *outer$);
+
 
 J2OBJC_INITIALIZED_DEFN(ASfragmentImpl)
 
@@ -392,16 +407,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return frameLayout_;
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
-  jboolean remove = [super removeWithASIWidget:w];
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
+  bool remove = [super removeWithASIWidget:w];
   [((ADFrameLayout *) nil_chk(frameLayout_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
   ASfragmentImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
-  jboolean remove = [super removeWithInt:index];
+  bool remove = [super removeWithInt:index];
   if (index + 1 <= [((ADFrameLayout *) nil_chk(frameLayout_)) getChildCount]) {
     [((ADFrameLayout *) nil_chk(frameLayout_)) removeViewAtWithInt:index];
     ASfragmentImpl_nativeRemoveViewWithASIWidget_(self, widget);
@@ -414,7 +429,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASfragmentImpl_createLayoutParamsWithADView_(self, view);
@@ -651,7 +666,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -738,7 +753,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASfragmentImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
 }
 
-- (void)addOrReplaceFragmentWithBoolean:(jboolean)add {
+- (void)addOrReplaceFragmentWithBoolean:(bool)add {
   ASfragmentImpl_addOrReplaceFragmentWithBoolean_(self, add);
 }
 
@@ -747,7 +762,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addOrReplaceFragmentWithNSString:(NSString *)name
-                             withBoolean:(jboolean)add
+                             withBoolean:(bool)add
                             withNSString:(NSString *)layout
                             withNSString:(NSString *)navGraphId
                             withNSString:(NSString *)tag {
@@ -784,7 +799,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)createOrReplaceFragmentWithNSString:(NSString *)id_
-                                withBoolean:(jboolean)add
+                                withBoolean:(bool)add
                                withNSString:(NSString *)layout {
   ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(self, id_, add, layout);
 }
@@ -797,7 +812,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASfragmentImpl_getNavigator(self);
 }
 
-- (jboolean)isValidFragment {
+- (bool)isValidFragment {
   return ASfragmentImpl_isValidFragment(self);
 }
 
@@ -820,7 +835,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -849,10 +864,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   [(UIViewController*)navController didMoveToParentViewController:currentController];
 }
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b {
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b {
   ASfragmentImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -1004,7 +1019,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [ASfragmentImpl class]) {
-    ASfragmentImpl_super$_addWithASIWidget_withInt_ = (void (*)(id, SEL, id, jint))[ASBaseHasWidgets instanceMethodForSelector:@selector(addWithASIWidget:withInt:)];
+    ASfragmentImpl_super$_addWithASIWidget_withInt_ = (void (*)(id, SEL, id, int32_t))[ASBaseHasWidgets instanceMethodForSelector:@selector(addWithASIWidget:withInt:)];
     J2OBJC_SET_INITIALIZED(ASfragmentImpl)
   }
 }
@@ -1168,7 +1183,7 @@ void ASfragmentImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_wi
   }
 }
 
-void ASfragmentImpl_addOrReplaceFragmentWithBoolean_(ASfragmentImpl *self, jboolean add) {
+void ASfragmentImpl_addOrReplaceFragmentWithBoolean_(ASfragmentImpl *self, bool add) {
   ADXFragmentManager *manager = [((ADXFragment *) nil_chk(((ADXFragment *) cast_chk([self getFragment], [ADXFragment class])))) getChildFragmentManager];
   ADXFragmentTransaction *transaction = [((ADXFragmentManager *) nil_chk(manager)) beginTransaction];
   if (add) {
@@ -1186,7 +1201,7 @@ void ASfragmentImpl_executePendingTransactions(ASfragmentImpl *self) {
   }
 }
 
-void ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(ASfragmentImpl *self, NSString *id_, jboolean add, NSString *layout) {
+void ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(ASfragmentImpl *self, NSString *id_, bool add, NSString *layout) {
   if (layout != nil) {
     NSString *mylayout = layout;
     if ([mylayout java_hasPrefix:@"@layout"]) {
@@ -1215,7 +1230,7 @@ ASUINavigatorImpl *ASfragmentImpl_getNavigator(ASfragmentImpl *self) {
   return self->navigator_;
 }
 
-jboolean ASfragmentImpl_isValidFragment(ASfragmentImpl *self) {
+bool ASfragmentImpl_isValidFragment(ASfragmentImpl *self) {
   return [@"androidx.navigation.fragment.NavHostFragment" isEqual:self->name_];
 }
 
@@ -1236,7 +1251,7 @@ void ASfragmentImpl_nativeCreateWithJavaUtilMap_(ASfragmentImpl *self, id<JavaUt
   (void) ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(new_ASfragmentImpl_$Lambda$2_initWithASfragmentImpl_(self), 0);
 }
 
-void ASfragmentImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASfragmentImpl *self, jint l, jint t, jint r, jint b) {
+void ASfragmentImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASfragmentImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(ASfragmentImpl_getViewWithId_(self, self->navController_), 0, 0, r - l, b - t);
 }
 
@@ -1251,25 +1266,27 @@ void ASfragmentImpl_remeasureIfRequired(ASfragmentImpl *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl)
 
+J2OBJC_NAME_MAPPING(ASfragmentImpl, "com.ashera.layout", "AS")
+
 @implementation ASfragmentImpl_fragmentExt
 
 - (id<ASIWidget>)getWidget {
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -1278,8 +1295,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -1295,11 +1312,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1327,8 +1344,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1396,12 +1413,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1431,7 +1448,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }

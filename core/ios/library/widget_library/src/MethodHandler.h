@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\MethodHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MethodHandler")
@@ -16,6 +17,7 @@
 #if !defined (ASMethodHandler_) && (INCLUDE_ALL_MethodHandler || defined(INCLUDE_ASMethodHandler))
 #define ASMethodHandler_
 
+@class NSString;
 @protocol ASIWidget;
 
 @protocol ASMethodHandler < JavaObject >
@@ -36,6 +38,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ASMethodHandler, UNHANDLED, NSString *)
 J2OBJC_TYPE_LITERAL_HEADER(ASMethodHandler)
 
 #define ComAsheraModelMethodHandler ASMethodHandler
+
 
 #endif
 

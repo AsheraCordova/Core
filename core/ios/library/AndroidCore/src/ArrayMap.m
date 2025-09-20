@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\ArrayMap.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ArrayMap.h"
 #include "ContainerHelpers.h"
 #include "IOSClass.h"
@@ -10,9 +15,12 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "MapCollections.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/ClassCastException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
@@ -26,26 +34,31 @@
 #include "java/util/function/BiFunction.h"
 #include "java/util/function/Function.h"
 
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADArrayMap ()
 
-- (void)allocArraysWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+- (void)allocArraysWithInt:(int32_t)size OBJC_METHOD_FAMILY_NONE;
 
 + (void)freeArraysWithIntArray:(IOSIntArray *)hashes
              withNSObjectArray:(IOSObjectArray *)array
-                       withInt:(jint)size;
+                       withInt:(int32_t)size;
 
-- (instancetype)initWithBoolean:(jboolean)immutable;
+- (instancetype)initWithBoolean:(bool)immutable;
 
 - (ADMapCollections *)getCollection;
 
 @end
 
-inline jboolean ADArrayMap_get_DEBUG(void);
+inline bool ADArrayMap_get_DEBUG(void);
 #define ADArrayMap_DEBUG false
-J2OBJC_STATIC_FIELD_CONSTANT(ADArrayMap, DEBUG, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADArrayMap, DEBUG, bool)
 
 inline NSString *ADArrayMap_get_TAG(void);
 static NSString *ADArrayMap_TAG = @"ArrayMap";
@@ -55,54 +68,54 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADArrayMap, TAG, NSString *)
  @brief The minimum amount by which the capacity of a ArrayMap will increase.
  This is tuned to be relatively space-efficient.
  */
-inline jint ADArrayMap_get_BASE_SIZE(void);
+inline int32_t ADArrayMap_get_BASE_SIZE(void);
 #define ADArrayMap_BASE_SIZE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADArrayMap, BASE_SIZE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADArrayMap, BASE_SIZE, int32_t)
 
 /*!
  @brief Maximum number of entries to have in array caches.
  */
-inline jint ADArrayMap_get_CACHE_SIZE(void);
+inline int32_t ADArrayMap_get_CACHE_SIZE(void);
 #define ADArrayMap_CACHE_SIZE 10
-J2OBJC_STATIC_FIELD_CONSTANT(ADArrayMap, CACHE_SIZE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADArrayMap, CACHE_SIZE, int32_t)
 
-__attribute__((unused)) static void ADArrayMap_allocArraysWithInt_(ADArrayMap *self, jint size);
+__attribute__((unused)) static void ADArrayMap_allocArraysWithInt_(ADArrayMap *self, int32_t size);
 
-__attribute__((unused)) static void ADArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, jint size);
+__attribute__((unused)) static void ADArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, int32_t size);
 
-__attribute__((unused)) static void ADArrayMap_initWithBoolean_(ADArrayMap *self, jboolean immutable);
+__attribute__((unused)) static void ADArrayMap_initWithBoolean_(ADArrayMap *self, bool immutable);
 
-__attribute__((unused)) static ADArrayMap *new_ADArrayMap_initWithBoolean_(jboolean immutable) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADArrayMap *new_ADArrayMap_initWithBoolean_(bool immutable) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADArrayMap *create_ADArrayMap_initWithBoolean_(jboolean immutable);
+__attribute__((unused)) static ADArrayMap *create_ADArrayMap_initWithBoolean_(bool immutable);
 
 __attribute__((unused)) static ADMapCollections *ADArrayMap_getCollection(ADArrayMap *self);
 
 @interface ADArrayMap_ArraMapMapCollections : ADMapCollections {
  @public
-  __unsafe_unretained ADArrayMap *this$0_;
+  WEAK_ ADArrayMap *this$0_;
 }
 
 - (instancetype)initWithADArrayMap:(ADArrayMap *)outer$;
 
-- (jint)colGetSize;
+- (int32_t)colGetSize;
 
-- (id)colGetEntryWithInt:(jint)index
-                 withInt:(jint)offset;
+- (id)colGetEntryWithInt:(int32_t)index
+                 withInt:(int32_t)offset;
 
-- (jint)colIndexOfKeyWithId:(id)key;
+- (int32_t)colIndexOfKeyWithId:(id)key;
 
-- (jint)colIndexOfValueWithId:(id)value;
+- (int32_t)colIndexOfValueWithId:(id)value;
 
 - (id<JavaUtilMap>)colGetMap;
 
 - (void)colPutWithId:(id)key
               withId:(id)value;
 
-- (id)colSetValueWithInt:(jint)index
+- (id)colSetValueWithInt:(int32_t)index
                   withId:(id)value;
 
-- (void)colRemoveAtWithInt:(jint)index;
+- (void)colRemoveAtWithInt:(int32_t)index;
 
 - (void)colClear;
 
@@ -118,69 +131,70 @@ __attribute__((unused)) static ADArrayMap_ArraMapMapCollections *create_ADArrayM
 
 J2OBJC_TYPE_LITERAL_HEADER(ADArrayMap_ArraMapMapCollections)
 
+
 J2OBJC_INITIALIZED_DEFN(ADArrayMap)
 
 ADArrayMap *ADArrayMap_EMPTY;
 IOSObjectArray *ADArrayMap_mBaseCache;
-jint ADArrayMap_mBaseCacheSize;
+int32_t ADArrayMap_mBaseCacheSize;
 IOSObjectArray *ADArrayMap_mTwiceBaseCache;
-jint ADArrayMap_mTwiceBaseCacheSize;
+int32_t ADArrayMap_mTwiceBaseCacheSize;
 IOSIntArray *ADArrayMap_EMPTY_IMMUTABLE_INTS;
 
 @implementation ADArrayMap
 
-- (jint)indexOfWithId:(id)key
-              withInt:(jint)hash_ {
-  jint N = mSize_;
+- (int32_t)indexOfWithId:(id)key
+                 withInt:(int32_t)hash_ {
+  int32_t N = mSize_;
   if (N == 0) {
     return ~0;
   }
-  jint index = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mHashes_, N, hash_);
+  int32_t index = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mHashes_, N, hash_);
   if (index < 0) {
     return index;
   }
   if ([nil_chk(key) isEqual:IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(index, 1))]) {
     return index;
   }
-  jint end;
+  int32_t end;
   for (end = index + 1; end < N && IOSIntArray_Get(nil_chk(mHashes_), end) == hash_; end++) {
     if ([key isEqual:IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(end, 1))]) return end;
   }
-  for (jint i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == hash_; i--) {
+  for (int32_t i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == hash_; i--) {
     if ([key isEqual:IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(i, 1))]) return i;
   }
   return ~end;
 }
 
-- (jint)indexOfNull {
-  jint N = mSize_;
+- (int32_t)indexOfNull {
+  int32_t N = mSize_;
   if (N == 0) {
     return ~0;
   }
-  jint index = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mHashes_, N, 0);
+  int32_t index = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mHashes_, N, 0);
   if (index < 0) {
     return index;
   }
   if (nil == IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(index, 1))) {
     return index;
   }
-  jint end;
+  int32_t end;
   for (end = index + 1; end < N && IOSIntArray_Get(nil_chk(mHashes_), end) == 0; end++) {
     if (nil == IOSObjectArray_Get(mArray_, JreLShift32(end, 1))) return end;
   }
-  for (jint i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == 0; i--) {
+  for (int32_t i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == 0; i--) {
     if (nil == IOSObjectArray_Get(mArray_, JreLShift32(i, 1))) return i;
   }
   return ~end;
 }
 
-- (void)allocArraysWithInt:(jint)size {
+- (void)allocArraysWithInt:(int32_t)size {
   ADArrayMap_allocArraysWithInt_(self, size);
 }
 
 + (void)freeArraysWithIntArray:(IOSIntArray *)hashes
              withNSObjectArray:(IOSObjectArray *)array
-                       withInt:(jint)size {
+                       withInt:(int32_t)size {
   ADArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(hashes, array, size);
 }
 
@@ -191,12 +205,12 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)capacity {
+- (instancetype)initWithInt:(int32_t)capacity {
   ADArrayMap_initWithInt_(self, capacity);
   return self;
 }
 
-- (instancetype)initWithBoolean:(jboolean)immutable {
+- (instancetype)initWithBoolean:(bool)immutable {
   ADArrayMap_initWithBoolean_(self, immutable);
   return self;
 }
@@ -217,16 +231,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)erase {
   if (mSize_ > 0) {
-    jint N = JreLShift32(mSize_, 1);
+    int32_t N = JreLShift32(mSize_, 1);
     IOSObjectArray *array = mArray_;
-    for (jint i = 0; i < N; i++) {
+    for (int32_t i = 0; i < N; i++) {
       IOSObjectArray_Set(nil_chk(array), i, nil);
     }
     mSize_ = 0;
   }
 }
 
-- (void)ensureCapacityWithInt:(jint)minimumCapacity {
+- (void)ensureCapacityWithInt:(int32_t)minimumCapacity {
   if (((IOSIntArray *) nil_chk(mHashes_))->size_ < minimumCapacity) {
     IOSIntArray *ohashes = mHashes_;
     IOSObjectArray *oarray = mArray_;
@@ -239,26 +253,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)containsKeyWithId:(id)key {
+- (bool)containsKeyWithId:(id)key {
   return [self indexOfKeyWithId:key] >= 0;
 }
 
-- (jint)indexOfKeyWithId:(id)key {
-  return key == nil ? [self indexOfNull] : [self indexOfWithId:key withInt:((jint) [key hash])];
+- (int32_t)indexOfKeyWithId:(id)key {
+  return key == nil ? [self indexOfNull] : [self indexOfWithId:key withInt:((int32_t) [key hash])];
 }
 
-- (jint)indexOfValueWithId:(id)value {
-  jint N = mSize_ * 2;
+- (int32_t)indexOfValueWithId:(id)value {
+  int32_t N = mSize_ * 2;
   IOSObjectArray *array = mArray_;
   if (value == nil) {
-    for (jint i = 1; i < N; i += 2) {
+    for (int32_t i = 1; i < N; i += 2) {
       if (IOSObjectArray_Get(nil_chk(array), i) == nil) {
         return JreRShift32(i, 1);
       }
     }
   }
   else {
-    for (jint i = 1; i < N; i += 2) {
+    for (int32_t i = 1; i < N; i += 2) {
       if ([value isEqual:IOSObjectArray_Get(nil_chk(array), i)]) {
         return JreRShift32(i, 1);
       }
@@ -267,24 +281,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   return -1;
 }
 
-- (jboolean)containsValueWithId:(id)value {
+- (bool)containsValueWithId:(id)value {
   return [self indexOfValueWithId:value] >= 0;
 }
 
 - (id)getWithId:(id)key {
-  jint index = [self indexOfKeyWithId:key];
+  int32_t index = [self indexOfKeyWithId:key];
   return index >= 0 ? IOSObjectArray_Get(nil_chk(mArray_), (JreLShift32(index, 1)) + 1) : nil;
 }
 
-- (id)keyAtWithInt:(jint)index {
+- (id)keyAtWithInt:(int32_t)index {
   return IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(index, 1));
 }
 
-- (id)valueAtWithInt:(jint)index {
+- (id)valueAtWithInt:(int32_t)index {
   return IOSObjectArray_Get(nil_chk(mArray_), (JreLShift32(index, 1)) + 1);
 }
 
-- (id)setValueAtWithInt:(jint)index
+- (id)setValueAtWithInt:(int32_t)index
                  withId:(id)value {
   index = (JreLShift32(index, 1)) + 1;
   id old = IOSObjectArray_Get(nil_chk(mArray_), index);
@@ -292,20 +306,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return old;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return mSize_ <= 0;
 }
 
 - (id)putWithId:(id)key
          withId:(id)value {
-  jint hash_;
-  jint index;
+  int32_t hash_;
+  int32_t index;
   if (key == nil) {
     hash_ = 0;
     index = [self indexOfNull];
   }
   else {
-    hash_ = ((jint) [key hash]);
+    hash_ = ((int32_t) [key hash]);
     index = [self indexOfWithId:key withInt:hash_];
   }
   if (index >= 0) {
@@ -316,7 +330,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   index = ~index;
   if (mSize_ >= ((IOSIntArray *) nil_chk(mHashes_))->size_) {
-    jint n = mSize_ >= (ADArrayMap_BASE_SIZE * 2) ? (mSize_ + (JreRShift32(mSize_, 1))) : (mSize_ >= ADArrayMap_BASE_SIZE ? (ADArrayMap_BASE_SIZE * 2) : ADArrayMap_BASE_SIZE);
+    int32_t n = mSize_ >= (ADArrayMap_BASE_SIZE * 2) ? (mSize_ + (JreRShift32(mSize_, 1))) : (mSize_ >= ADArrayMap_BASE_SIZE ? (ADArrayMap_BASE_SIZE * 2) : ADArrayMap_BASE_SIZE);
     IOSIntArray *ohashes = mHashes_;
     IOSObjectArray *oarray = mArray_;
     ADArrayMap_allocArraysWithInt_(self, n);
@@ -339,8 +353,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)appendWithId:(id)key
               withId:(id)value {
-  jint index = mSize_;
-  jint hash_ = key == nil ? 0 : ((jint) [key hash]);
+  int32_t index = mSize_;
+  int32_t hash_ = key == nil ? 0 : ((int32_t) [key hash]);
   if (index >= ((IOSIntArray *) nil_chk(mHashes_))->size_) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"Array is full");
   }
@@ -358,23 +372,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)validate {
-  jint N = mSize_;
+  int32_t N = mSize_;
   if (N <= 1) {
     return;
   }
-  jint basehash = IOSIntArray_Get(nil_chk(mHashes_), 0);
-  jint basei = 0;
-  for (jint i = 1; i < N; i++) {
-    jint hash_ = IOSIntArray_Get(nil_chk(mHashes_), i);
+  int32_t basehash = IOSIntArray_Get(nil_chk(mHashes_), 0);
+  int32_t basei = 0;
+  for (int32_t i = 1; i < N; i++) {
+    int32_t hash_ = IOSIntArray_Get(nil_chk(mHashes_), i);
     if (hash_ != basehash) {
       basehash = hash_;
       basei = i;
       continue;
     }
     id cur = IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(i, 1));
-    for (jint j = i - 1; j >= basei; j--) {
+    for (int32_t j = i - 1; j >= basei; j--) {
       id prev = IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(j, 1));
-      if (cur == prev) {
+      if (JreObjectEqualsEquals(cur, prev)) {
         @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Duplicate key in ArrayMap: ", cur));
       }
       if (cur != nil && prev != nil && [cur isEqual:prev]) {
@@ -385,7 +399,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)putAllWithADArrayMap:(ADArrayMap *)array {
-  jint N = ((ADArrayMap *) nil_chk(array))->mSize_;
+  int32_t N = ((ADArrayMap *) nil_chk(array))->mSize_;
   [self ensureCapacityWithInt:mSize_ + N];
   if (mSize_ == 0) {
     if (N > 0) {
@@ -395,21 +409,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
   }
   else {
-    for (jint i = 0; i < N; i++) {
+    for (int32_t i = 0; i < N; i++) {
       [self putWithId:[array keyAtWithInt:i] withId:[array valueAtWithInt:i]];
     }
   }
 }
 
 - (id)removeWithId:(id)key {
-  jint index = [self indexOfKeyWithId:key];
+  int32_t index = [self indexOfKeyWithId:key];
   if (index >= 0) {
     return [self removeAtWithInt:index];
   }
   return nil;
 }
 
-- (id)removeAtWithInt:(jint)index {
+- (id)removeAtWithInt:(int32_t)index {
   id old = IOSObjectArray_Get(nil_chk(mArray_), (JreLShift32(index, 1)) + 1);
   if (mSize_ <= 1) {
     ADArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(mHashes_, mArray_, mSize_);
@@ -419,7 +433,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   else {
     if (((IOSIntArray *) nil_chk(mHashes_))->size_ > (ADArrayMap_BASE_SIZE * 2) && mSize_ < JreIntDiv(mHashes_->size_, 3)) {
-      jint n = mSize_ > (ADArrayMap_BASE_SIZE * 2) ? (mSize_ + (JreRShift32(mSize_, 1))) : (ADArrayMap_BASE_SIZE * 2);
+      int32_t n = mSize_ > (ADArrayMap_BASE_SIZE * 2) ? (mSize_ + (JreRShift32(mSize_, 1))) : (ADArrayMap_BASE_SIZE * 2);
       IOSIntArray *ohashes = mHashes_;
       IOSObjectArray *oarray = mArray_;
       ADArrayMap_allocArraysWithInt_(self, n);
@@ -446,12 +460,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return old;
 }
 
-- (jint)size {
+- (int32_t)size {
   return mSize_;
 }
 
-- (jboolean)isEqual:(id)object {
-  if (self == object) {
+- (bool)isEqual:(id)object {
+  if (JreObjectEqualsEquals(self, object)) {
     return true;
   }
   if ([JavaUtilMap_class_() isInstance:object]) {
@@ -460,7 +474,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       return false;
     }
     @try {
-      for (jint i = 0; i < mSize_; i++) {
+      for (int32_t i = 0; i < mSize_; i++) {
         id key = JreRetainedLocalValue([self keyAtWithInt:i]);
         id mine = JreRetainedLocalValue([self valueAtWithInt:i]);
         id theirs = JreRetainedLocalValue([map getWithId:key]);
@@ -488,10 +502,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (NSUInteger)hash {
   IOSIntArray *hashes = mHashes_;
   IOSObjectArray *array = mArray_;
-  jint result = 0;
-  for (jint i = 0, v = 1, s = mSize_; i < s; i++, v += 2) {
+  int32_t result = 0;
+  for (int32_t i = 0, v = 1, s = mSize_; i < s; i++, v += 2) {
     id value = IOSObjectArray_Get(nil_chk(array), v);
-    result += IOSIntArray_Get(nil_chk(hashes), i) ^ (value == nil ? 0 : ((jint) [value hash]));
+    result += IOSIntArray_Get(nil_chk(hashes), i) ^ (value == nil ? 0 : ((int32_t) [value hash]));
   }
   return result;
 }
@@ -502,12 +516,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_initWithInt_(mSize_ * 28);
   [buffer appendWithChar:'{'];
-  for (jint i = 0; i < mSize_; i++) {
+  for (int32_t i = 0; i < mSize_; i++) {
     if (i > 0) {
       [buffer appendWithNSString:@", "];
     }
     id key = JreRetainedLocalValue([self keyAtWithInt:i]);
-    if (key != self) {
+    if (!JreObjectEqualsEquals(key, self)) {
       [buffer appendWithId:key];
     }
     else {
@@ -515,7 +529,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     [buffer appendWithChar:'='];
     id value = JreRetainedLocalValue([self valueAtWithInt:i]);
-    if (value != self) {
+    if (!JreObjectEqualsEquals(value, self)) {
       [buffer appendWithId:value];
     }
     else {
@@ -530,7 +544,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADArrayMap_getCollection(self);
 }
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_(self, collection);
 }
 
@@ -541,11 +555,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_(self, collection);
 }
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_(self, collection);
 }
 
@@ -579,14 +593,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaUtilMap_putIfAbsentWithId_withId_(self, arg0, arg1);
 }
 
-- (jboolean)removeWithId:(id)arg0
-                  withId:(id)arg1 {
+- (bool)removeWithId:(id)arg0
+              withId:(id)arg1 {
   return JavaUtilMap_removeWithId_withId_(self, arg0, arg1);
 }
 
-- (jboolean)replaceWithId:(id)arg0
-                   withId:(id)arg1
-                   withId:(id)arg2 {
+- (bool)replaceWithId:(id)arg0
+               withId:(id)arg1
+               withId:(id)arg2 {
   return JavaUtilMap_replaceWithId_withId_withId_(self, arg0, arg1, arg2);
 }
 
@@ -737,8 +751,8 @@ withJavaUtilFunctionBiFunction:(id<JavaUtilFunctionBiFunction>)arg2 {
 
 @end
 
-void ADArrayMap_allocArraysWithInt_(ADArrayMap *self, jint size) {
-  if (self->mHashes_ == ADArrayMap_EMPTY_IMMUTABLE_INTS) {
+void ADArrayMap_allocArraysWithInt_(ADArrayMap *self, int32_t size) {
+  if (JreObjectEqualsEquals(self->mHashes_, ADArrayMap_EMPTY_IMMUTABLE_INTS)) {
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"ArrayMap is immutable");
   }
   if (size == (ADArrayMap_BASE_SIZE * 2)) {
@@ -771,14 +785,14 @@ void ADArrayMap_allocArraysWithInt_(ADArrayMap *self, jint size) {
   JreStrongAssignAndConsume(&self->mArray_, [IOSObjectArray newArrayWithLength:JreLShift32(size, 1) type:NSObject_class_()]);
 }
 
-void ADArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, jint size) {
+void ADArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, int32_t size) {
   ADArrayMap_initialize();
   if (((IOSIntArray *) nil_chk(hashes))->size_ == (ADArrayMap_BASE_SIZE * 2)) {
     @synchronized(ADArrayMap_class_()) {
       if (ADArrayMap_mTwiceBaseCacheSize < ADArrayMap_CACHE_SIZE) {
         IOSObjectArray_Set(nil_chk(array), 0, ADArrayMap_mTwiceBaseCache);
         IOSObjectArray_Set(array, 1, hashes);
-        for (jint i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
+        for (int32_t i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
           IOSObjectArray_Set(array, i, nil);
         }
         JreStrongAssign(&ADArrayMap_mTwiceBaseCache, array);
@@ -791,7 +805,7 @@ void ADArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *h
       if (ADArrayMap_mBaseCacheSize < ADArrayMap_CACHE_SIZE) {
         IOSObjectArray_Set(nil_chk(array), 0, ADArrayMap_mBaseCache);
         IOSObjectArray_Set(array, 1, hashes);
-        for (jint i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
+        for (int32_t i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
           IOSObjectArray_Set(array, i, nil);
         }
         JreStrongAssign(&ADArrayMap_mBaseCache, array);
@@ -816,7 +830,7 @@ ADArrayMap *create_ADArrayMap_init() {
   J2OBJC_CREATE_IMPL(ADArrayMap, init)
 }
 
-void ADArrayMap_initWithInt_(ADArrayMap *self, jint capacity) {
+void ADArrayMap_initWithInt_(ADArrayMap *self, int32_t capacity) {
   NSObject_init(self);
   if (capacity == 0) {
     JreStrongAssignAndConsume(&self->mHashes_, [IOSIntArray newArrayWithLength:0]);
@@ -828,26 +842,26 @@ void ADArrayMap_initWithInt_(ADArrayMap *self, jint capacity) {
   self->mSize_ = 0;
 }
 
-ADArrayMap *new_ADArrayMap_initWithInt_(jint capacity) {
+ADArrayMap *new_ADArrayMap_initWithInt_(int32_t capacity) {
   J2OBJC_NEW_IMPL(ADArrayMap, initWithInt_, capacity)
 }
 
-ADArrayMap *create_ADArrayMap_initWithInt_(jint capacity) {
+ADArrayMap *create_ADArrayMap_initWithInt_(int32_t capacity) {
   J2OBJC_CREATE_IMPL(ADArrayMap, initWithInt_, capacity)
 }
 
-void ADArrayMap_initWithBoolean_(ADArrayMap *self, jboolean immutable) {
+void ADArrayMap_initWithBoolean_(ADArrayMap *self, bool immutable) {
   NSObject_init(self);
   JreStrongAssign(&self->mHashes_, immutable ? ADArrayMap_EMPTY_IMMUTABLE_INTS : [IOSIntArray arrayWithLength:0]);
   JreStrongAssignAndConsume(&self->mArray_, [IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]);
   self->mSize_ = 0;
 }
 
-ADArrayMap *new_ADArrayMap_initWithBoolean_(jboolean immutable) {
+ADArrayMap *new_ADArrayMap_initWithBoolean_(bool immutable) {
   J2OBJC_NEW_IMPL(ADArrayMap, initWithBoolean_, immutable)
 }
 
-ADArrayMap *create_ADArrayMap_initWithBoolean_(jboolean immutable) {
+ADArrayMap *create_ADArrayMap_initWithBoolean_(bool immutable) {
   J2OBJC_CREATE_IMPL(ADArrayMap, initWithBoolean_, immutable)
 }
 
@@ -875,6 +889,8 @@ ADMapCollections *ADArrayMap_getCollection(ADArrayMap *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADArrayMap)
 
+J2OBJC_NAME_MAPPING(ADArrayMap, "r.android.util", "AD")
+
 @implementation ADArrayMap_ArraMapMapCollections
 
 - (instancetype)initWithADArrayMap:(ADArrayMap *)outer$ {
@@ -882,20 +898,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADArrayMap)
   return self;
 }
 
-- (jint)colGetSize {
+- (int32_t)colGetSize {
   return this$0_->mSize_;
 }
 
-- (id)colGetEntryWithInt:(jint)index
-                 withInt:(jint)offset {
+- (id)colGetEntryWithInt:(int32_t)index
+                 withInt:(int32_t)offset {
   return IOSObjectArray_Get(nil_chk(this$0_->mArray_), (JreLShift32(index, 1)) + offset);
 }
 
-- (jint)colIndexOfKeyWithId:(id)key {
+- (int32_t)colIndexOfKeyWithId:(id)key {
   return [this$0_ indexOfKeyWithId:key];
 }
 
-- (jint)colIndexOfValueWithId:(id)value {
+- (int32_t)colIndexOfValueWithId:(id)value {
   return [this$0_ indexOfValueWithId:value];
 }
 
@@ -908,12 +924,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADArrayMap)
   [this$0_ putWithId:key withId:value];
 }
 
-- (id)colSetValueWithInt:(jint)index
+- (id)colSetValueWithInt:(int32_t)index
                   withId:(id)value {
   return [this$0_ setValueAtWithInt:index withId:value];
 }
 
-- (void)colRemoveAtWithInt:(jint)index {
+- (void)colRemoveAtWithInt:(int32_t)index {
   [this$0_ removeAtWithInt:index];
 }
 

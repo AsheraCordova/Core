@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\CheckBoxImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
@@ -55,6 +60,8 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -73,13 +80,14 @@
 
 #include "ASUILabel.h"
 
+
 @class ASCheckBoxImpl_DellocHandler;
 @class ASCheckBoxImpl_MarqueeTask;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@protocol JavaLangRunnable;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -90,20 +98,20 @@
   NSString *ellipsize_;
   ADColorStateList *drawableTint_;
   id timer_;
-  jboolean isDisposed_;
+  bool isDisposed_;
   ASCheckBoxImpl_DellocHandler *dellocHandler_;
   ASCheckBoxImpl_PostMeasureHandler *postMeasureHandler_;
   NSString *POST_MEASURE_EVENT_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   id<JavaUtilMap> fontDescriptors_;
   ASCheckBoxImpl_MarqueeTask *marqueeTask_;
-  jint marqueeRepeatLimit_;
+  int32_t marqueeRepeatLimit_;
   ASMarqueeCommandConverter *marqueeCommandConverter_;
-  jint autoSizeMin_;
-  jint autoSizeMax_;
-  jint autoSizeGranular_;
+  int32_t autoSizeMin_;
+  int32_t autoSizeMax_;
+  int32_t autoSizeGranular_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -142,7 +150,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -160,7 +168,7 @@
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)nativeSetVerticalAligmentBottom;
 
@@ -170,9 +178,9 @@
 
 - (void)addMinMaxListener;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (id)getEllipsize;
 
@@ -181,12 +189,12 @@
 
 - (JavaLangInteger *)nativeGetLinBreakMode;
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode;
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode;
 
 - (void)setJustificationModeWithId:(id)objValue
                       withNSString:(NSString *)strValue;
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment;
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment;
 
 - (id)getJustificationMode;
 
@@ -208,14 +216,14 @@
 
 - (void)setEnabledWithId:(id)objValue;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -235,9 +243,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -247,11 +255,11 @@
 
 - (void)setScrollHorizontallyWithId:(id)objValue;
 
-- (jboolean)canMarquee;
+- (bool)canMarquee;
 
 - (void)cancelNativeTimer;
 
-- (jboolean)isDisposed;
+- (bool)isDisposed;
 
 - (void)addDeallocHandler;
 
@@ -266,11 +274,11 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor;
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor;
 
 - (void)syncPlaceholderLabel;
 
-- (jint)nativeGetBaseLine;
+- (int32_t)nativeGetBaseLine;
 
 - (id)getFont;
 
@@ -314,11 +322,11 @@
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType;
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType;
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue;
 
@@ -342,7 +350,7 @@
 
 - (void)setTextStyleWithId:(id)objValue;
 
-- (jint)calcNumberOfWhiteSpaces;
+- (int32_t)calcNumberOfWhiteSpaces;
 
 - (void)cancelTimer;
 
@@ -354,15 +362,15 @@
 
 - (void)startOrStopMarqueeWithId:(id)objValue;
 
-- (jint)getLabelWidth;
+- (int32_t)getLabelWidth;
 
-- (jboolean)isLabelMeasured;
+- (bool)isLabelMeasured;
 
 - (void)setPasswordWithId:(id)objValue;
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -414,7 +422,7 @@
 
 - (void)setButtonTintModeWithId:(id)objValue;
 
-- (jboolean)allowUnCheck;
+- (bool)allowUnCheck;
 
 - (void)setErrorWithId:(id)object;
 
@@ -432,33 +440,33 @@ J2OBJC_FIELD_SETTER(ASCheckBoxImpl, fontDescriptors_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(ASCheckBoxImpl, marqueeTask_, ASCheckBoxImpl_MarqueeTask *)
 J2OBJC_FIELD_SETTER(ASCheckBoxImpl, marqueeCommandConverter_, ASMarqueeCommandConverter *)
 
-inline jint ASCheckBoxImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASCheckBoxImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASCheckBoxImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASCheckBoxImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASCheckBoxImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASCheckBoxImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASCheckBoxImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASCheckBoxImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASCheckBoxImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, TEXT_ALIGN_RIGHT, int32_t)
 
-inline jint ASCheckBoxImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASCheckBoxImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASCheckBoxImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASCheckBoxImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASCheckBoxImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASCheckBoxImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASCheckBoxImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASCheckBoxImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASCheckBoxImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASCheckBoxImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASCheckBoxImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASCheckBoxImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASCheckBoxImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASCheckBoxImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASCheckBoxImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASCheckBoxImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASCheckBoxImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASCheckBoxImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASCheckBoxImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASCheckBoxImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASCheckBoxImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASCheckBoxImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASCheckBoxImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASCheckBoxImpl, NORMAL_FONT_TRAIT, int32_t)
 
 __attribute__((unused)) static void ASCheckBoxImpl_setWidgetOnNativeClass(ASCheckBoxImpl *self);
 
@@ -496,7 +504,7 @@ __attribute__((unused)) static id ASCheckBoxImpl_getTextSize(ASCheckBoxImpl *sel
 
 __attribute__((unused)) static void ASCheckBoxImpl_setMyTextSizeWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static void ASCheckBoxImpl_nativeSetTextSizeWithInt_(ASCheckBoxImpl *self, jint value);
+__attribute__((unused)) static void ASCheckBoxImpl_nativeSetTextSizeWithInt_(ASCheckBoxImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASCheckBoxImpl_setVerticalAligmentCenter(ASCheckBoxImpl *self);
 
@@ -514,7 +522,7 @@ __attribute__((unused)) static void ASCheckBoxImpl_setHorizontalAligmentLeft(ASC
 
 __attribute__((unused)) static void ASCheckBoxImpl_setHorizontalAligmentLeftInternal(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getTextAlignment(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getTextAlignment(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static void ASCheckBoxImpl_nativeSetVerticalAligmentBottom(ASCheckBoxImpl *self);
 
@@ -524,9 +532,9 @@ __attribute__((unused)) static void ASCheckBoxImpl_nativeSetVerticalAligmentCent
 
 __attribute__((unused)) static void ASCheckBoxImpl_addMinMaxListener(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getLineHeight(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getLineHeight(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getBorderWidth(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getBorderWidth(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static id ASCheckBoxImpl_getEllipsize(ASCheckBoxImpl *self);
 
@@ -534,11 +542,11 @@ __attribute__((unused)) static void ASCheckBoxImpl_setEllipsizeWithId_withNSStri
 
 __attribute__((unused)) static JavaLangInteger *ASCheckBoxImpl_nativeGetLinBreakMode(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static void ASCheckBoxImpl_nativeSetLineBreakModeWithInt_(ASCheckBoxImpl *self, jint lineBreakMode);
+__attribute__((unused)) static void ASCheckBoxImpl_nativeSetLineBreakModeWithInt_(ASCheckBoxImpl *self, int32_t lineBreakMode);
 
 __attribute__((unused)) static void ASCheckBoxImpl_setJustificationModeWithId_withNSString_(ASCheckBoxImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASCheckBoxImpl_nativeSetTextAligmentWithInt_(ASCheckBoxImpl *self, jint textAlignment);
+__attribute__((unused)) static void ASCheckBoxImpl_nativeSetTextAligmentWithInt_(ASCheckBoxImpl *self, int32_t textAlignment);
 
 __attribute__((unused)) static id ASCheckBoxImpl_getJustificationMode(ASCheckBoxImpl *self);
 
@@ -558,13 +566,13 @@ __attribute__((unused)) static id ASCheckBoxImpl_getSingleLine(ASCheckBoxImpl *s
 
 __attribute__((unused)) static void ASCheckBoxImpl_setEnabledWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_nativeGetFontSize(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_nativeGetFontSize(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_nativeGetFontStyle(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_nativeGetFontStyle(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static void ASCheckBoxImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASCheckBoxImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASCheckBoxImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASCheckBoxImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASCheckBoxImpl_nativeSetFontStyleWithInt_(ASCheckBoxImpl *self, jint style);
+__attribute__((unused)) static void ASCheckBoxImpl_nativeSetFontStyleWithInt_(ASCheckBoxImpl *self, int32_t style);
 
 __attribute__((unused)) static void ASCheckBoxImpl_setDrawablePaddingWithId_(ASCheckBoxImpl *self, id objValue);
 
@@ -580,9 +588,9 @@ __attribute__((unused)) static void ASCheckBoxImpl_setDrawableLeftWithNSString_w
 
 __attribute__((unused)) static void ASCheckBoxImpl_setDrawableLeftInternalWithNSString_withId_(ASCheckBoxImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getImageHeightWithId_(ASCheckBoxImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getImageHeightWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getImageWidthWithId_(ASCheckBoxImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getImageWidthWithId_(ASCheckBoxImpl *self, id objValue);
 
 __attribute__((unused)) static id ASCheckBoxImpl_getDrawablePadding(ASCheckBoxImpl *self);
 
@@ -592,11 +600,11 @@ __attribute__((unused)) static void ASCheckBoxImpl_setDrawableTintWithId_(ASChec
 
 __attribute__((unused)) static void ASCheckBoxImpl_setScrollHorizontallyWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASCheckBoxImpl_canMarquee(ASCheckBoxImpl *self);
+__attribute__((unused)) static bool ASCheckBoxImpl_canMarquee(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static void ASCheckBoxImpl_cancelNativeTimer(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jboolean ASCheckBoxImpl_isDisposed(ASCheckBoxImpl *self);
+__attribute__((unused)) static bool ASCheckBoxImpl_isDisposed(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static void ASCheckBoxImpl_addDeallocHandler(ASCheckBoxImpl *self);
 
@@ -610,11 +618,11 @@ __attribute__((unused)) static id ASCheckBoxImpl_getTextColorState(ASCheckBoxImp
 
 __attribute__((unused)) static void ASCheckBoxImpl_drawableStateChangeWithNSString_withADDrawable_(ASCheckBoxImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static void ASCheckBoxImpl_setHintColorWithInt_(ASCheckBoxImpl *self, jint currentHintTextColor);
+__attribute__((unused)) static void ASCheckBoxImpl_setHintColorWithInt_(ASCheckBoxImpl *self, int32_t currentHintTextColor);
 
 __attribute__((unused)) static void ASCheckBoxImpl_syncPlaceholderLabel(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_nativeGetBaseLine(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_nativeGetBaseLine(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static id ASCheckBoxImpl_getFont(ASCheckBoxImpl *self);
 
@@ -658,11 +666,11 @@ __attribute__((unused)) static void ASCheckBoxImpl_setMinWidthWithId_(ASCheckBox
 
 __attribute__((unused)) static id ASCheckBoxImpl_getWidth(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getHeight(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getHeight(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getAutoSizeTextTypeWithADTextView_(ASCheckBoxImpl *self, ADTextView *measurableView);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getAutoSizeTextTypeWithADTextView_(ASCheckBoxImpl *self, ADTextView *measurableView);
 
-__attribute__((unused)) static void ASCheckBoxImpl_setAutoSizeTextTypeInternalWithInt_(ASCheckBoxImpl *self, jint autoTextType);
+__attribute__((unused)) static void ASCheckBoxImpl_setAutoSizeTextTypeInternalWithInt_(ASCheckBoxImpl *self, int32_t autoTextType);
 
 __attribute__((unused)) static void ASCheckBoxImpl_setAutoSizePresetSizesWithId_(ASCheckBoxImpl *self, id objValue);
 
@@ -684,7 +692,7 @@ __attribute__((unused)) static void ASCheckBoxImpl_setFontFamilyWithId_withNSStr
 
 __attribute__((unused)) static void ASCheckBoxImpl_setTextStyleWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_calcNumberOfWhiteSpaces(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_calcNumberOfWhiteSpaces(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static void ASCheckBoxImpl_cancelTimer(ASCheckBoxImpl *self);
 
@@ -696,15 +704,15 @@ __attribute__((unused)) static void ASCheckBoxImpl_setMarqueeRepeatLimitWithId_(
 
 __attribute__((unused)) static void ASCheckBoxImpl_startOrStopMarqueeWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASCheckBoxImpl_getLabelWidth(ASCheckBoxImpl *self);
+__attribute__((unused)) static int32_t ASCheckBoxImpl_getLabelWidth(ASCheckBoxImpl *self);
 
-__attribute__((unused)) static jboolean ASCheckBoxImpl_isLabelMeasured(ASCheckBoxImpl *self);
+__attribute__((unused)) static bool ASCheckBoxImpl_isLabelMeasured(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static void ASCheckBoxImpl_setPasswordWithId_(ASCheckBoxImpl *self, id objValue);
 
 __attribute__((unused)) static void ASCheckBoxImpl_setFirstBaselineToTopHeightWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASCheckBoxImpl_getIncludeFontPadding(ASCheckBoxImpl *self);
+__attribute__((unused)) static bool ASCheckBoxImpl_getIncludeFontPadding(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static id ASCheckBoxImpl_getFirstBaselineToTopHeight(ASCheckBoxImpl *self);
 
@@ -752,7 +760,7 @@ __attribute__((unused)) static void ASCheckBoxImpl_setButtonTintWithId_(ASCheckB
 
 __attribute__((unused)) static void ASCheckBoxImpl_setButtonTintModeWithId_(ASCheckBoxImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASCheckBoxImpl_allowUnCheck(ASCheckBoxImpl *self);
+__attribute__((unused)) static bool ASCheckBoxImpl_allowUnCheck(ASCheckBoxImpl *self);
 
 __attribute__((unused)) static void ASCheckBoxImpl_setErrorWithId_(ASCheckBoxImpl *self, id object);
 
@@ -821,7 +829,7 @@ J2OBJC_FIELD_SETTER(ASCheckBoxImpl_DrawableTintMode, mapping_, id<JavaUtilMap>)
 
 @interface ASCheckBoxImpl_CheckBoxExt () {
  @public
-  __unsafe_unretained ASCheckBoxImpl *this$0_;
+  WEAK_ ASCheckBoxImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -837,7 +845,7 @@ J2OBJC_FIELD_SETTER(ASCheckBoxImpl_CheckBoxExt, templates_, id<JavaUtilMap>)
 
 @interface ASCheckBoxImpl_DellocHandler : ASEventBusHandler {
  @public
-  __unsafe_unretained ASCheckBoxImpl *this$0_;
+  WEAK_ ASCheckBoxImpl *this$0_;
 }
 
 - (instancetype)initWithASCheckBoxImpl:(ASCheckBoxImpl *)outer$
@@ -857,20 +865,21 @@ __attribute__((unused)) static ASCheckBoxImpl_DellocHandler *create_ASCheckBoxIm
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DellocHandler)
 
+
 @interface ASCheckBoxImpl_PostMeasureHandler () {
  @public
-  __unsafe_unretained ASCheckBoxImpl *this$0_;
-  jboolean onlyOnce_;
+  WEAK_ ASCheckBoxImpl *this$0_;
+  bool onlyOnce_;
 }
 
 @end
 
 @interface ASCheckBoxImpl_MarqueeTask : NSObject < JavaLangRunnable > {
  @public
-  __unsafe_unretained ASCheckBoxImpl *this$0_;
-  jint slideLength_;
-  jint cycles_;
-  jboolean cancel_;
+  WEAK_ ASCheckBoxImpl *this$0_;
+  int32_t slideLength_;
+  int32_t cycles_;
+  bool cancel_;
   NSString *direction_;
 }
 
@@ -897,10 +906,11 @@ __attribute__((unused)) static ASCheckBoxImpl_MarqueeTask *create_ASCheckBoxImpl
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_MarqueeTask)
 
+
 @interface ASCheckBoxImpl_MarqueeTask_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   ASCheckBoxImpl_MarqueeTask *this$0_;
-  jint val$numberOfBlankSpaces_;
+  int32_t val$numberOfBlankSpaces_;
 }
 
 - (void)run;
@@ -909,11 +919,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_MarqueeTask)
 
 J2OBJC_EMPTY_STATIC_INIT(ASCheckBoxImpl_MarqueeTask_$Lambda$1)
 
-__attribute__((unused)) static void ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask_$Lambda$1 *self, ASCheckBoxImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static void ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask_$Lambda$1 *self, ASCheckBoxImpl_MarqueeTask *outer$, int32_t capture$0);
 
-__attribute__((unused)) static ASCheckBoxImpl_MarqueeTask_$Lambda$1 *new_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, jint capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASCheckBoxImpl_MarqueeTask_$Lambda$1 *new_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, int32_t capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, int32_t capture$0);
+
 
 @interface ASCheckBoxImpl_OnCheckedChangeListener : NSObject < ADCompoundButton_OnCheckedChangeListener, ASIListener > {
  @public
@@ -933,10 +944,10 @@ __attribute__((unused)) static ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCh
                      withNSString:(NSString *)action;
 
 - (void)onCheckedChangedWithADCompoundButton:(ADCompoundButton *)buttonView
-                                 withBoolean:(jboolean)isChecked;
+                                 withBoolean:(bool)isChecked;
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADCompoundButton:(ADCompoundButton *)buttonView
-                                                      withBoolean:(jboolean)isChecked;
+                                                      withBoolean:(bool)isChecked;
 
 @end
 
@@ -961,9 +972,10 @@ __attribute__((unused)) static ASCheckBoxImpl_OnCheckedChangeListener *create_AS
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_OnCheckedChangeListener)
 
+
 @interface ASCheckBoxImpl_StateToggler : NSObject < ADView_OnClickListener > {
  @public
-  __unsafe_unretained ASCheckBoxImpl *this$0_;
+  WEAK_ ASCheckBoxImpl *this$0_;
 }
 
 - (instancetype)initWithASCheckBoxImpl:(ASCheckBoxImpl *)outer$;
@@ -981,6 +993,7 @@ __attribute__((unused)) static ASCheckBoxImpl_StateToggler *new_ASCheckBoxImpl_S
 __attribute__((unused)) static ASCheckBoxImpl_StateToggler *create_ASCheckBoxImpl_StateToggler_initWithASCheckBoxImpl_(ASCheckBoxImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_StateToggler)
+
 
 @interface ASCheckBoxImpl_MyCanvas : NSObject < ADCanvas >
 
@@ -1001,6 +1014,7 @@ __attribute__((unused)) static ASCheckBoxImpl_MyCanvas *new_ASCheckBoxImpl_MyCan
 __attribute__((unused)) static ASCheckBoxImpl_MyCanvas *create_ASCheckBoxImpl_MyCanvas_initWithASCheckBoxImpl_(ASCheckBoxImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_MyCanvas)
+
 
 J2OBJC_INITIALIZED_DEFN(ASCheckBoxImpl)
 
@@ -1691,31 +1705,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -1768,7 +1782,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASCheckBoxImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -1804,7 +1818,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASCheckBoxImpl_getTextAlignment(self);
 }
 
@@ -1824,19 +1838,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_addMinMaxListener(self);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASCheckBoxImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASCheckBoxImpl_getBorderWidth(self);
 }
 
@@ -1853,7 +1867,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASCheckBoxImpl_nativeGetLinBreakMode(self);
 }
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode {
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode {
   ASCheckBoxImpl_nativeSetLineBreakModeWithInt_(self, lineBreakMode);
 }
 
@@ -1862,7 +1876,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment {
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment {
   ASCheckBoxImpl_nativeSetTextAligmentWithInt_(self, textAlignment);
 }
 
@@ -1908,20 +1922,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASCheckBoxImpl_toUpperCaseWithNSString_(text);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASCheckBoxImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASCheckBoxImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASCheckBoxImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASCheckBoxImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
@@ -1957,11 +1971,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASCheckBoxImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASCheckBoxImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -1984,7 +1998,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setScrollHorizontallyWithId_(self, objValue);
 }
 
-- (jboolean)canMarquee {
+- (bool)canMarquee {
   return ASCheckBoxImpl_canMarquee(self);
 }
 
@@ -1992,7 +2006,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_cancelNativeTimer(self);
 }
 
-- (jboolean)isDisposed {
+- (bool)isDisposed {
   return ASCheckBoxImpl_isDisposed(self);
 }
 
@@ -2048,7 +2062,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor {
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor {
   ASCheckBoxImpl_setHintColorWithInt_(self, currentHintTextColor);
 }
 
@@ -2056,11 +2070,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_syncPlaceholderLabel(self);
 }
 
-- (jint)getBaseLine {
+- (int32_t)getBaseLine {
   return ASCheckBoxImpl_nativeGetBaseLine(self) + [((ADCheckBox *) nil_chk(measurableView_)) getPaddingTop];
 }
 
-- (jint)nativeGetBaseLine {
+- (int32_t)nativeGetBaseLine {
   return ASCheckBoxImpl_nativeGetBaseLine(self);
 }
 
@@ -2073,7 +2087,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASCheckBoxImpl_setErrorWithId_(self, nil);
   }
@@ -2086,7 +2100,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASCheckBoxImpl_setErrorWithId_(self, message);
   }
@@ -2110,7 +2124,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASCheckBoxImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADCheckBox *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADCheckBox *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASCheckBoxImpl_updateTextAlignment(self);
   }
@@ -2132,11 +2146,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADCheckBox *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADCheckBox *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -2144,11 +2158,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADCheckBox *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADCheckBox *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -2184,11 +2198,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADCheckBox *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADCheckBox *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -2204,15 +2218,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASCheckBoxImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASCheckBoxImpl_getHeight(self);
 }
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
   return ASCheckBoxImpl_getAutoSizeTextTypeWithADTextView_(self, measurableView);
 }
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType {
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType {
   ASCheckBoxImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -2258,7 +2272,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setTextStyleWithId_(self, objValue);
 }
 
-- (jint)calcNumberOfWhiteSpaces {
+- (int32_t)calcNumberOfWhiteSpaces {
   return ASCheckBoxImpl_calcNumberOfWhiteSpaces(self);
 }
 
@@ -2282,11 +2296,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_startOrStopMarqueeWithId_(self, objValue);
 }
 
-- (jint)getLabelWidth {
+- (int32_t)getLabelWidth {
   return ASCheckBoxImpl_getLabelWidth(self);
 }
 
-- (jboolean)isLabelMeasured {
+- (bool)isLabelMeasured {
   return ASCheckBoxImpl_isLabelMeasured(self);
 }
 
@@ -2298,7 +2312,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASCheckBoxImpl_getIncludeFontPadding(self);
 }
 
@@ -2348,7 +2362,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setErrorMessageWithNSString:(NSString *)message {
   [self setAttributeWithNSString:@"text" withId:message withBoolean:false];
-  [self setAttributeWithNSString:@"visibility" withId:message == nil || [message java_isEmpty] ? @"gone" : @"visible" withBoolean:false];
+  [self setAttributeWithNSString:@"visibility" withId:message == nil || [message isEmpty] ? @"gone" : @"visible" withBoolean:false];
 }
 
 - (void)setTextFormatWithId:(id)objValue {
@@ -2463,7 +2477,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).userInteractionEnabled];
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -2474,7 +2488,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -2542,11 +2556,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCheckBoxImpl_setButtonTintModeWithId_(self, objValue);
 }
 
-- (jint)measureWidth {
+- (int32_t)measureWidth {
   return [((ADCheckBox *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_] + [((ADDrawable *) nil_chk([((ADCheckBox *) nil_chk(measurableView_)) getButtonDrawable])) getMinimumWidth];
 }
 
-- (jboolean)allowUnCheck {
+- (bool)allowUnCheck {
   return ASCheckBoxImpl_allowUnCheck(self);
 }
 
@@ -2558,7 +2572,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((ADCheckBox *) nil_chk(measurableView_)) isChecked] ? @"checked" : @"";
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ADCheckBox *) nil_chk(measurableView_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -3166,11 +3180,11 @@ id ASCheckBoxImpl_getTextSize(ASCheckBoxImpl *self) {
 }
 
 void ASCheckBoxImpl_setMyTextSizeWithId_(ASCheckBoxImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASCheckBoxImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASCheckBoxImpl_nativeSetTextSizeWithInt_(ASCheckBoxImpl *self, jint value) {
+void ASCheckBoxImpl_nativeSetTextSizeWithInt_(ASCheckBoxImpl *self, int32_t value) {
   [((ASUILabel*)self.uiView) setFont: [((ASUILabel*)self.uiView).font fontWithSize: value]];
 }
 
@@ -3209,7 +3223,7 @@ void ASCheckBoxImpl_setHorizontalAligmentLeftInternal(ASCheckBoxImpl *self) {
   ((ASUILabel*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASCheckBoxImpl_getTextAlignment(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_getTextAlignment(ASCheckBoxImpl *self) {
   int alignment = (int) ((ASUILabel*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -3239,11 +3253,11 @@ void ASCheckBoxImpl_nativeSetVerticalAligmentCenter(ASCheckBoxImpl *self) {
 void ASCheckBoxImpl_addMinMaxListener(ASCheckBoxImpl *self) {
 }
 
-jint ASCheckBoxImpl_getLineHeight(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_getLineHeight(ASCheckBoxImpl *self) {
   return ceil(((ASUILabel*)self.uiView).font.lineHeight);
 }
 
-jint ASCheckBoxImpl_getBorderWidth(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_getBorderWidth(ASCheckBoxImpl *self) {
   return 0;
 }
 
@@ -3256,7 +3270,7 @@ id ASCheckBoxImpl_getEllipsize(ASCheckBoxImpl *self) {
 
 void ASCheckBoxImpl_setEllipsizeWithId_withNSString_(ASCheckBoxImpl *self, id objValue, NSString *strValue) {
   self->ellipsize_ = strValue;
-  jint lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (lineBreakMode == JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee)) {
     lineBreakMode = JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping);
   }
@@ -3279,7 +3293,7 @@ JavaLangInteger *ASCheckBoxImpl_nativeGetLinBreakMode(ASCheckBoxImpl *self) {
   return [JavaLangInteger valueOfWithInt:(jint) ((ASUILabel*)self->uiView_).lineBreakMode];
 }
 
-void ASCheckBoxImpl_nativeSetLineBreakModeWithInt_(ASCheckBoxImpl *self, jint lineBreakMode) {
+void ASCheckBoxImpl_nativeSetLineBreakModeWithInt_(ASCheckBoxImpl *self, int32_t lineBreakMode) {
   [((ASUILabel*)self->uiView_) setLineBreakMode:lineBreakMode];
 }
 
@@ -3287,7 +3301,7 @@ void ASCheckBoxImpl_setJustificationModeWithId_withNSString_(ASCheckBoxImpl *sel
   ASCheckBoxImpl_nativeSetTextAligmentWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASCheckBoxImpl_nativeSetTextAligmentWithInt_(ASCheckBoxImpl *self, jint textAlignment) {
+void ASCheckBoxImpl_nativeSetTextAligmentWithInt_(ASCheckBoxImpl *self, int32_t textAlignment) {
   [((ASUILabel*)self->uiView_) setTextAlignment:textAlignment];
 }
 
@@ -3339,16 +3353,16 @@ NSString *ASCheckBoxImpl_toUpperCaseWithNSString_(NSString *text) {
   return [((NSString *) nil_chk(text)) java_uppercaseStringWithJRELocale:JavaUtilLocale_getDefault()];
 }
 
-jint ASCheckBoxImpl_nativeGetFontSize(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_nativeGetFontSize(ASCheckBoxImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASCheckBoxImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASCheckBoxImpl_nativeGetFontStyle(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_nativeGetFontStyle(ASCheckBoxImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASCheckBoxImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASCheckBoxImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASCheckBoxImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASCheckBoxImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -3362,7 +3376,7 @@ void ASCheckBoxImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASCheckBoxI
   }
 }
 
-void ASCheckBoxImpl_nativeSetFontStyleWithInt_(ASCheckBoxImpl *self, jint style) {
+void ASCheckBoxImpl_nativeSetFontStyleWithInt_(ASCheckBoxImpl *self, int32_t style) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUILabel*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -3441,7 +3455,7 @@ void ASCheckBoxImpl_setDrawableLeftInternalWithNSString_withId_(ASCheckBoxImpl *
   }
 }
 
-jint ASCheckBoxImpl_getImageHeightWithId_(ASCheckBoxImpl *self, id objValue) {
+int32_t ASCheckBoxImpl_getImageHeightWithId_(ASCheckBoxImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -3450,7 +3464,7 @@ jint ASCheckBoxImpl_getImageHeightWithId_(ASCheckBoxImpl *self, id objValue) {
   return 0;
 }
 
-jint ASCheckBoxImpl_getImageWidthWithId_(ASCheckBoxImpl *self, id objValue) {
+int32_t ASCheckBoxImpl_getImageWidthWithId_(ASCheckBoxImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -3506,7 +3520,7 @@ void ASCheckBoxImpl_setScrollHorizontallyWithId_(ASCheckBoxImpl *self, id objVal
   [((ADCheckBox *) nil_chk(self->measurableView_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
 }
 
-jboolean ASCheckBoxImpl_canMarquee(ASCheckBoxImpl *self) {
+bool ASCheckBoxImpl_canMarquee(ASCheckBoxImpl *self) {
   return [nil_chk(ASCheckBoxImpl_getSingleLine(self)) isEqual:JreLoadStatic(JavaLangBoolean, TRUE)];
 }
 
@@ -3517,7 +3531,7 @@ void ASCheckBoxImpl_cancelNativeTimer(ASCheckBoxImpl *self) {
   }
 }
 
-jboolean ASCheckBoxImpl_isDisposed(ASCheckBoxImpl *self) {
+bool ASCheckBoxImpl_isDisposed(ASCheckBoxImpl *self) {
   return self->isDisposed_;
 }
 
@@ -3580,13 +3594,13 @@ void ASCheckBoxImpl_drawableStateChangeWithNSString_withADDrawable_(ASCheckBoxIm
   [self invalidate];
 }
 
-void ASCheckBoxImpl_setHintColorWithInt_(ASCheckBoxImpl *self, jint currentHintTextColor) {
+void ASCheckBoxImpl_setHintColorWithInt_(ASCheckBoxImpl *self, int32_t currentHintTextColor) {
 }
 
 void ASCheckBoxImpl_syncPlaceholderLabel(ASCheckBoxImpl *self) {
 }
 
-jint ASCheckBoxImpl_nativeGetBaseLine(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_nativeGetBaseLine(ASCheckBoxImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.ascender;
 }
@@ -3600,9 +3614,9 @@ void ASCheckBoxImpl_setTextColorLinkWithADColorStateList_(ASCheckBoxImpl *self, 
 }
 
 void ASCheckBoxImpl_setGravityWithId_(ASCheckBoxImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADCheckBox *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASCheckBoxImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -3622,8 +3636,8 @@ void ASCheckBoxImpl_setGravityWithId_(ASCheckBoxImpl *self, id objValue) {
 
 void ASCheckBoxImpl_updateTextAlignment(ASCheckBoxImpl *self) {
   ADLayout_Alignment *minor = [((ADCheckBox *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADCheckBox *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADCheckBox *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADCheckBox *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASCheckBoxImpl_getMyText(self), [NSString class]);
@@ -3676,7 +3690,7 @@ id ASCheckBoxImpl_getGravity(ASCheckBoxImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -3690,8 +3704,8 @@ id ASCheckBoxImpl_getGravity(ASCheckBoxImpl *self) {
     default:
     break;
   }
-  jint aligment = ASCheckBoxImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASCheckBoxImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASCheckBoxImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -3705,7 +3719,7 @@ id ASCheckBoxImpl_getGravity(ASCheckBoxImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -3788,15 +3802,15 @@ id ASCheckBoxImpl_getWidth(ASCheckBoxImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADCheckBox *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASCheckBoxImpl_getHeight(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_getHeight(ASCheckBoxImpl *self) {
   return [((ADCheckBox *) nil_chk(self->measurableView_)) getHeight];
 }
 
-jint ASCheckBoxImpl_getAutoSizeTextTypeWithADTextView_(ASCheckBoxImpl *self, ADTextView *measurableView) {
+int32_t ASCheckBoxImpl_getAutoSizeTextTypeWithADTextView_(ASCheckBoxImpl *self, ADTextView *measurableView) {
   return [((ADTextView *) nil_chk(measurableView)) getAutoSizeTextType];
 }
 
-void ASCheckBoxImpl_setAutoSizeTextTypeInternalWithInt_(ASCheckBoxImpl *self, jint autoTextType) {
+void ASCheckBoxImpl_setAutoSizeTextTypeInternalWithInt_(ASCheckBoxImpl *self, int32_t autoTextType) {
   ASCheckBoxImpl_removeResizeListener(self);
   if ([((ADCheckBox *) nil_chk(self->measurableView_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
     [((ADCheckBox *) nil_chk(self->measurableView_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
@@ -3879,8 +3893,8 @@ void ASCheckBoxImpl_setFontFamilyWithId_withNSString_(ASCheckBoxImpl *self, id o
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASCheckBoxImpl_nativeGetFontStyle(self);
-  jint height = ASCheckBoxImpl_nativeGetFontSize(self);
+  int32_t style = ASCheckBoxImpl_nativeGetFontStyle(self);
+  int32_t height = ASCheckBoxImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASCheckBoxImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -3894,39 +3908,39 @@ void ASCheckBoxImpl_setFontFamilyWithId_withNSString_(ASCheckBoxImpl *self, id o
 }
 
 void ASCheckBoxImpl_setTextStyleWithId_(ASCheckBoxImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASCheckBoxImpl_nativeGetFontSize(self);
+    int32_t height = ASCheckBoxImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASCheckBoxImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASCheckBoxImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASCheckBoxImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASCheckBoxImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASCheckBoxImpl_ITALIC_FONT_TRAIT;
     }
     ASCheckBoxImpl_nativeSetFontStyleWithInt_(self, style);
   }
 }
 
-jint ASCheckBoxImpl_calcNumberOfWhiteSpaces(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_calcNumberOfWhiteSpaces(ASCheckBoxImpl *self) {
   if (!ASCheckBoxImpl_isLabelMeasured(self)) {
     return 0;
   }
-  jfloat blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASCheckBoxImpl_getTextSize(self), [NSNumber class])))) floatValue];
-  jint width = JreIntDiv(ASCheckBoxImpl_getLabelWidth(self), 3);
-  jint numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
+  float blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASCheckBoxImpl_getTextSize(self), [NSNumber class])))) floatValue];
+  int32_t width = JreIntDiv(ASCheckBoxImpl_getLabelWidth(self), 3);
+  int32_t numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
   return numberOfBlankSpaces;
 }
 
@@ -3969,14 +3983,14 @@ void ASCheckBoxImpl_startOrStopMarqueeWithId_(ASCheckBoxImpl *self, id objValue)
   }
 }
 
-jint ASCheckBoxImpl_getLabelWidth(ASCheckBoxImpl *self) {
+int32_t ASCheckBoxImpl_getLabelWidth(ASCheckBoxImpl *self) {
   if ([((ADCheckBox *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
     return [((ADCheckBox *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADCheckBox *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADCheckBox *) nil_chk(self->measurableView_)) getPaddingRight];
   }
   return [((ADCheckBox *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADCheckBox *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADCheckBox *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
-jboolean ASCheckBoxImpl_isLabelMeasured(ASCheckBoxImpl *self) {
+bool ASCheckBoxImpl_isLabelMeasured(ASCheckBoxImpl *self) {
   return !ASCheckBoxImpl_isDisposed(self) && ASCheckBoxImpl_getLabelWidth(self) > 0;
 }
 
@@ -3991,8 +4005,8 @@ void ASCheckBoxImpl_setPasswordWithId_(ASCheckBoxImpl *self, id objValue) {
 
 void ASCheckBoxImpl_setFirstBaselineToTopHeightWithId_(ASCheckBoxImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASCheckBoxImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASCheckBoxImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -4000,12 +4014,12 @@ void ASCheckBoxImpl_setFirstBaselineToTopHeightWithId_(ASCheckBoxImpl *self, id 
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADCheckBox *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASCheckBoxImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASCheckBoxImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASCheckBoxImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASCheckBoxImpl_getIncludeFontPadding(ASCheckBoxImpl *self) {
+bool ASCheckBoxImpl_getIncludeFontPadding(ASCheckBoxImpl *self) {
   return false;
 }
 
@@ -4016,8 +4030,8 @@ id ASCheckBoxImpl_getFirstBaselineToTopHeight(ASCheckBoxImpl *self) {
 
 void ASCheckBoxImpl_setLastBaselineToBottomHeightWithId_(ASCheckBoxImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASCheckBoxImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASCheckBoxImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -4025,7 +4039,7 @@ void ASCheckBoxImpl_setLastBaselineToBottomHeightWithId_(ASCheckBoxImpl *self, i
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADCheckBox *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASCheckBoxImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASCheckBoxImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASCheckBoxImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -4057,7 +4071,7 @@ void ASCheckBoxImpl_setAutoMaxTextSizeWithId_(ASCheckBoxImpl *self, id objValue)
 }
 
 void ASCheckBoxImpl_setAutoSizeTextTypeWithId_(ASCheckBoxImpl *self, id objValue) {
-  jint autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ASCheckBoxImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -4153,7 +4167,7 @@ void ASCheckBoxImpl_setButtonTintModeWithId_(ASCheckBoxImpl *self, id objValue) 
   [self applyAttributeCommandWithNSString:@"button" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"buttonTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", objValue } count:2 type:NSObject_class_()]];
 }
 
-jboolean ASCheckBoxImpl_allowUnCheck(ASCheckBoxImpl *self) {
+bool ASCheckBoxImpl_allowUnCheck(ASCheckBoxImpl *self) {
   return true;
 }
 
@@ -4161,6 +4175,8 @@ void ASCheckBoxImpl_setErrorWithId_(ASCheckBoxImpl *self, id object) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl)
+
+J2OBJC_NAME_MAPPING(ASCheckBoxImpl, "com.ashera.layout", "AS")
 
 @implementation ASCheckBoxImpl_ButtonTinttMode
 
@@ -4304,7 +4320,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangInteger_valueOfWithInt_(0);
 }
 
-- (jboolean)supportsIntAlso {
+- (bool)supportsIntAlso {
   return true;
 }
 
@@ -4337,7 +4353,7 @@ void ASCheckBoxImpl_MarqueeRepeatLimit_init(ASCheckBoxImpl_MarqueeRepeatLimit *s
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((jint) 0xffffffff)];
+    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0xffffffff)];
   }
 }
 
@@ -4454,10 +4470,10 @@ void ASCheckBoxImpl_Font_init(ASCheckBoxImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -4515,9 +4531,9 @@ void ASCheckBoxImpl_TextStyle_init(ASCheckBoxImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -4605,8 +4621,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_DrawableTintMode)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -4616,11 +4632,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_DrawableTintMode)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -4649,8 +4665,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_DrawableTintMode)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -4718,12 +4734,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_DrawableTintMode)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -4753,37 +4769,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_DrawableTintMode)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASCheckBoxImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASCheckBoxImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -5094,7 +5110,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_PostMeasureHandler)
 }
 
 - (void)run {
-  jint numberOfBlankSpaces = ASCheckBoxImpl_calcNumberOfWhiteSpaces(this$0_);
+  int32_t numberOfBlankSpaces = ASCheckBoxImpl_calcNumberOfWhiteSpaces(this$0_);
   if (this$0_->marqueeCommandConverter_ == nil) {
     this$0_->marqueeCommandConverter_ = (ASMarqueeCommandConverter *) cast_chk([this$0_ getAttributeCommandWithNSString:@"text" withNSString:ASCommonConverters_command_marquee withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(numberOfBlankSpaces), JavaLangInteger_valueOfWithInt_(0), direction_ } count:3 type:NSObject_class_()]], [ASMarqueeCommandConverter class]);
   }
@@ -5181,17 +5197,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_MarqueeTask)
 
 @end
 
-void ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask_$Lambda$1 *self, ASCheckBoxImpl_MarqueeTask *outer$, jint capture$0) {
+void ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask_$Lambda$1 *self, ASCheckBoxImpl_MarqueeTask *outer$, int32_t capture$0) {
   self->this$0_ = outer$;
   self->val$numberOfBlankSpaces_ = capture$0;
   NSObject_init(self);
 }
 
-ASCheckBoxImpl_MarqueeTask_$Lambda$1 *new_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, jint capture$0) {
+ASCheckBoxImpl_MarqueeTask_$Lambda$1 *new_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_NEW_IMPL(ASCheckBoxImpl_MarqueeTask_$Lambda$1, initWithASCheckBoxImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
-ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, jint capture$0) {
+ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCheckBoxImpl_MarqueeTask_$Lambda$1_initWithASCheckBoxImpl_MarqueeTask_withInt_(ASCheckBoxImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_CREATE_IMPL(ASCheckBoxImpl_MarqueeTask_$Lambda$1, initWithASCheckBoxImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
@@ -5215,7 +5231,7 @@ ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCheckBoxImpl_MarqueeTask_$Lambda$
 }
 
 - (void)onCheckedChangedWithADCompoundButton:(ADCompoundButton *)buttonView
-                                 withBoolean:(jboolean)isChecked {
+                                 withBoolean:(bool)isChecked {
   if (action_ == nil || [action_ isEqual:@"onCheckedChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onCheckedChange"];
     id<JavaUtilMap> obj = [self getOnCheckedChangeEventObjWithADCompoundButton:buttonView withBoolean:isChecked];
@@ -5237,7 +5253,7 @@ ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCheckBoxImpl_MarqueeTask_$Lambda$
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -5248,7 +5264,7 @@ ASCheckBoxImpl_MarqueeTask_$Lambda$1 *create_ASCheckBoxImpl_MarqueeTask_$Lambda$
 }
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADCompoundButton:(ADCompoundButton *)buttonView
-                                                      withBoolean:(jboolean)isChecked {
+                                                      withBoolean:(bool)isChecked {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"checkedchange"];
@@ -5335,7 +5351,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_OnCheckedChangeListener)
 
 - (void)onClickWithADView:(ADView *)v {
   if ([((ADCheckBox *) nil_chk(this$0_->measurableView_)) isEnabled]) {
-    jboolean isChecked = [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(ASCheckBoxImpl_getChecked(this$0_), [JavaLangBoolean class]))) booleanValue];
+    bool isChecked = [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(ASCheckBoxImpl_getChecked(this$0_), [JavaLangBoolean class]))) booleanValue];
     if (!isChecked || (isChecked && ASCheckBoxImpl_allowUnCheck(this$0_))) {
       [((ADCheckBox *) nil_chk(this$0_->measurableView_)) toggle];
     }
@@ -5396,8 +5412,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCheckBoxImpl_StateToggler)
 - (void)reset {
 }
 
-- (void)translateWithInt:(jint)arg0
-                 withInt:(jint)arg1 {
+- (void)translateWithInt:(int32_t)arg0
+                 withInt:(int32_t)arg1 {
   ADCanvas_translateWithInt_withInt_(self, arg0, arg1);
 }
 

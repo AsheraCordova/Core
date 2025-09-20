@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\CookieManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CookieManager.h"
 #include "J2ObjC_source.h"
 #include "WebView.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADCookieManager
@@ -21,14 +33,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADCookieManager_getInstance();
 }
 
-- (void)setAcceptFileSchemeCookiesWithBoolean:(jboolean)b {
+- (void)setAcceptFileSchemeCookiesWithBoolean:(bool)b {
 }
 
 - (void)setAcceptThirdPartyCookiesWithADWebView:(ADWebView *)webView
-                                    withBoolean:(jboolean)b {
+                                    withBoolean:(bool)b {
 }
 
-- (void)setAcceptCookieWithBoolean:(jboolean)accept {
+- (void)setAcceptCookieWithBoolean:(bool)accept {
 }
 
 - (void)setCookieWithNSString:(NSString *)url
@@ -100,3 +112,5 @@ ADCookieManager *ADCookieManager_getInstance() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADCookieManager)
+
+J2OBJC_NAME_MAPPING(ADCookieManager, "r.android.webkit", "AD")

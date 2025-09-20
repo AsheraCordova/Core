@@ -3,10 +3,23 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\Element.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributesImpl.h"
 #include "Element.h"
 #include "ElementType.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSElement () {
@@ -14,7 +27,7 @@
   TSElementType *theType_;
   TSAttributesImpl *theAtts_;
   TSElement *theNext_;
-  jboolean preclosed_;
+  bool preclosed_;
 }
 
 @end
@@ -26,7 +39,7 @@ J2OBJC_FIELD_SETTER(TSElement, theNext_, TSElement *)
 @implementation TSElement
 
 - (instancetype)initWithTSElementType:(TSElementType *)type
-                          withBoolean:(jboolean)defaultAttributes {
+                          withBoolean:(bool)defaultAttributes {
   TSElement_initWithTSElementType_withBoolean_(self, type, defaultAttributes);
   return self;
 }
@@ -59,15 +72,15 @@ J2OBJC_FIELD_SETTER(TSElement, theNext_, TSElement *)
   return [((TSElementType *) nil_chk(theType_)) localName];
 }
 
-- (jint)model {
+- (int32_t)model {
   return [((TSElementType *) nil_chk(theType_)) model];
 }
 
-- (jint)memberOf {
+- (int32_t)memberOf {
   return [((TSElementType *) nil_chk(theType_)) memberOf];
 }
 
-- (jint)flags {
+- (int32_t)flags {
   return [((TSElementType *) nil_chk(theType_)) flags];
 }
 
@@ -75,7 +88,7 @@ J2OBJC_FIELD_SETTER(TSElement, theNext_, TSElement *)
   return [((TSElementType *) nil_chk(theType_)) parent];
 }
 
-- (jboolean)canContainWithTSElement:(TSElement *)other {
+- (bool)canContainWithTSElement:(TSElement *)other {
   return [((TSElementType *) nil_chk(theType_)) canContainWithTSElementType:((TSElement *) nil_chk(other))->theType_];
 }
 
@@ -86,7 +99,7 @@ J2OBJC_FIELD_SETTER(TSElement, theNext_, TSElement *)
 }
 
 - (void)anonymize {
-  for (jint i = [((TSAttributesImpl *) nil_chk(theAtts_)) getLength] - 1; i >= 0; i--) {
+  for (int32_t i = [((TSAttributesImpl *) nil_chk(theAtts_)) getLength] - 1; i >= 0; i--) {
     if ([((NSString *) nil_chk([((TSAttributesImpl *) nil_chk(theAtts_)) getTypeWithInt:i])) isEqual:@"ID"] || [((NSString *) nil_chk([((TSAttributesImpl *) nil_chk(theAtts_)) getQNameWithInt:i])) isEqual:@"name"]) {
       [((TSAttributesImpl *) nil_chk(theAtts_)) removeAttributeWithInt:i];
     }
@@ -94,7 +107,7 @@ J2OBJC_FIELD_SETTER(TSElement, theNext_, TSElement *)
 }
 
 - (void)clean {
-  for (jint i = [((TSAttributesImpl *) nil_chk(theAtts_)) getLength] - 1; i >= 0; i--) {
+  for (int32_t i = [((TSAttributesImpl *) nil_chk(theAtts_)) getLength] - 1; i >= 0; i--) {
     NSString *name = JreRetainedLocalValue([((TSAttributesImpl *) nil_chk(theAtts_)) getLocalNameWithInt:i]);
     if ([((TSAttributesImpl *) nil_chk(theAtts_)) getValueWithInt:i] == nil || name == nil || [name java_length] == 0) {
       [((TSAttributesImpl *) nil_chk(theAtts_)) removeAttributeWithInt:i];
@@ -107,7 +120,7 @@ J2OBJC_FIELD_SETTER(TSElement, theNext_, TSElement *)
   preclosed_ = true;
 }
 
-- (jboolean)isPreclosed {
+- (bool)isPreclosed {
   return preclosed_;
 }
 
@@ -174,7 +187,7 @@ J2OBJC_FIELD_SETTER(TSElement, theNext_, TSElement *)
 
 @end
 
-void TSElement_initWithTSElementType_withBoolean_(TSElement *self, TSElementType *type, jboolean defaultAttributes) {
+void TSElement_initWithTSElementType_withBoolean_(TSElement *self, TSElementType *type, bool defaultAttributes) {
   NSObject_init(self);
   JreStrongAssign(&self->theType_, type);
   if (defaultAttributes) JreStrongAssignAndConsume(&self->theAtts_, new_TSAttributesImpl_initWithOrgXmlSaxAttributes_([((TSElementType *) nil_chk(type)) atts]));
@@ -183,12 +196,14 @@ void TSElement_initWithTSElementType_withBoolean_(TSElement *self, TSElementType
   self->preclosed_ = false;
 }
 
-TSElement *new_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, jboolean defaultAttributes) {
+TSElement *new_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, bool defaultAttributes) {
   J2OBJC_NEW_IMPL(TSElement, initWithTSElementType_withBoolean_, type, defaultAttributes)
 }
 
-TSElement *create_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, jboolean defaultAttributes) {
+TSElement *create_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, bool defaultAttributes) {
   J2OBJC_CREATE_IMPL(TSElement, initWithTSElementType_withBoolean_, type, defaultAttributes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSElement)
+
+J2OBJC_NAME_MAPPING(TSElement, "repackaged.org.ccil.cowan.tagsoup", "TS")

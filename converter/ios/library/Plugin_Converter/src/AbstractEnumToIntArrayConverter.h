@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractEnumToIntArrayConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AbstractEnumToIntArrayConverter")
@@ -21,6 +22,7 @@
 #include "IConverter.h"
 
 @class IOSIntArray;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
@@ -58,6 +60,7 @@ FOUNDATION_EXPORT void ASAbstractEnumToIntArrayConverter_init(ASAbstractEnumToIn
 J2OBJC_TYPE_LITERAL_HEADER(ASAbstractEnumToIntArrayConverter)
 
 @compatibility_alias ComAsheraConverterAbstractEnumToIntArrayConverter ASAbstractEnumToIntArrayConverter;
+
 
 #endif
 

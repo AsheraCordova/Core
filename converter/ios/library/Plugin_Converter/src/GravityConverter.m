@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\GravityConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "GravityConverter.h"
 #include "IOSClass.h"
@@ -15,7 +20,11 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<JavaUtilMap> ASGravityConverter_get_gravityMap(void);
@@ -108,7 +117,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"fill_vertical" withId:JavaLangInteger_valueOfWithInt_(ASGravityConverter_FILL_VERTICAL)];
       [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"center_horizontal" withId:JavaLangInteger_valueOfWithInt_(ASGravityConverter_CENTER_HORIZONTAL)];
       [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"center" withId:JavaLangInteger_valueOfWithInt_(ASGravityConverter_CENTER)];
-      [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"fill" withId:JavaLangInteger_valueOfWithInt_((jint) 0x77)];
+      [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"fill" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x77)];
       [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"clip_vertical" withId:JavaLangInteger_valueOfWithInt_(ASGravityConverter_CLIP_VERTICAL)];
       [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"clip_horizontal" withId:JavaLangInteger_valueOfWithInt_(ASGravityConverter_CLIP_HORIZONTAL)];
       [((id<JavaUtilMap>) nil_chk(ASGravityConverter_gravityMap)) putWithId:@"start" withId:JavaLangInteger_valueOfWithInt_(ASGravityConverter_START)];
@@ -134,3 +143,5 @@ ASGravityConverter *create_ASGravityConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASGravityConverter)
+
+J2OBJC_NAME_MAPPING(ASGravityConverter, "com.ashera.converter", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AccelerateInterpolator.h"
@@ -77,6 +82,7 @@
 #include "WidgetFactory.h"
 #include "java/io/PrintStream.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
@@ -103,16 +109,12 @@
 #include "ASUISwipeGestureRecognizer.h"
 #include "ASUILongTapGestureRecognizer.h"
 
-@class JavaLangFloat;
-@class JavaUtilStack;
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-@protocol OrgXmlSaxAttributes;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -328,7 +330,7 @@
                              withNSString:(NSString *)type
                              withNSString:(NSString *)conveterType;
 
-+ (jboolean)isResizableImageWithId:(id)obj;
++ (bool)isResizableImageWithId:(id)obj;
 
 + (void)clearBgColorWithId:(id)view
                     withId:(id)value;
@@ -340,7 +342,7 @@
                          withId:(id)nativeView
                          withId:(id)objValue;
 
-+ (jboolean)isNativeRtlSupported;
++ (bool)isNativeRtlSupported;
 
 + (void)setBackgroundTintModeWithASIWidget:(id<ASIWidget>)w
                                     withId:(id)objValue;
@@ -364,14 +366,14 @@
 
 + (id)getClickableWithId:(id)nativeWidget;
 
-+ (jboolean)nativeGetClickableWithId:(id)view;
++ (bool)nativeGetClickableWithId:(id)view;
 
 + (void)setClickableWithASIWidget:(id<ASIWidget>)w
                            withId:(id)nativeWidget
                            withId:(id)objValue;
 
 + (void)nativeSetClickableWithId:(id)view
-                     withBoolean:(jboolean)clickable;
+                     withBoolean:(bool)clickable;
 
 + (void)setOnLongClickWithASIWidget:(id<ASIWidget>)w
                              withId:(id)nativeView
@@ -437,7 +439,7 @@
 
 + (id)getBackgroundTintWithASIWidget:(id<ASIWidget>)w;
 
-+ (jboolean)isMirrorSupported;
++ (bool)isMirrorSupported;
 
 + (void)setOnTouchWithASIWidget:(id<ASIWidget>)w
                          withId:(id)nativeView
@@ -462,7 +464,7 @@
                             withId:(id)objValue;
 
 + (void)nativeSetLayerCornerRadiusWithId:(id)nativeWidget
-                               withFloat:(jfloat)value;
+                               withFloat:(float)value;
 
 + (void)setLayerBorderColorWithId:(id)nativeWidget
                            withId:(id)objValue;
@@ -474,13 +476,13 @@
                            withId:(id)objValue;
 
 + (void)nativeLayerBorderWidthWithId:(id)nativeWidget
-                           withFloat:(jfloat)value;
+                           withFloat:(float)value;
 
 + (void)setLayerMasksToBoundsWithId:(id)nativeWidget
                              withId:(id)objValue;
 
 + (void)nativeLayerBMasksToBoundsWithId:(id)nativeWidget
-                            withBoolean:(jboolean)value;
+                            withBoolean:(bool)value;
 
 + (void)nativeBringToFrontWithJavaUtilList:(id<JavaUtilList>)widgets;
 
@@ -509,7 +511,7 @@
                               withId:(id)objValue;
 
 + (void)setCornerRadiusOnViewWithId:(id)view
-                          withFloat:(jfloat)radius;
+                          withFloat:(float)radius;
 
 @end
 
@@ -653,7 +655,7 @@ __attribute__((unused)) static void ASViewImpl_setBackgroundWithASIWidget_withId
 
 __attribute__((unused)) static void ASViewImpl_updateWidthAndHeightWithASIWidget_withADStateListDrawable_withId_withNSString_withNSString_(id<ASIWidget> w, ADStateListDrawable *background, id value, NSString *type, NSString *conveterType);
 
-__attribute__((unused)) static jboolean ASViewImpl_isResizableImageWithId_(id obj);
+__attribute__((unused)) static bool ASViewImpl_isResizableImageWithId_(id obj);
 
 __attribute__((unused)) static void ASViewImpl_clearBgColorWithId_withId_(id view, id value);
 
@@ -661,7 +663,7 @@ __attribute__((unused)) static void ASViewImpl_nativeSetBgColorWithId_withId_(id
 
 __attribute__((unused)) static void ASViewImpl_setOnClickWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeView, id objValue);
 
-__attribute__((unused)) static jboolean ASViewImpl_isNativeRtlSupported(void);
+__attribute__((unused)) static bool ASViewImpl_isNativeRtlSupported(void);
 
 __attribute__((unused)) static void ASViewImpl_setBackgroundTintModeWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
@@ -677,11 +679,11 @@ __attribute__((unused)) static void ASViewImpl_setFgOnControlWithASIWidget_withI
 
 __attribute__((unused)) static id ASViewImpl_getClickableWithId_(id nativeWidget);
 
-__attribute__((unused)) static jboolean ASViewImpl_nativeGetClickableWithId_(id view);
+__attribute__((unused)) static bool ASViewImpl_nativeGetClickableWithId_(id view);
 
 __attribute__((unused)) static void ASViewImpl_setClickableWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_nativeSetClickableWithId_withBoolean_(id view, jboolean clickable);
+__attribute__((unused)) static void ASViewImpl_nativeSetClickableWithId_withBoolean_(id view, bool clickable);
 
 __attribute__((unused)) static void ASViewImpl_setOnLongClickWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeView, id objValue);
 
@@ -735,7 +737,7 @@ __attribute__((unused)) static id ASViewImpl_getBackgroundTintModeWithASIWidget_
 
 __attribute__((unused)) static id ASViewImpl_getBackgroundTintWithASIWidget_(id<ASIWidget> w);
 
-__attribute__((unused)) static jboolean ASViewImpl_isMirrorSupported(void);
+__attribute__((unused)) static bool ASViewImpl_isMirrorSupported(void);
 
 __attribute__((unused)) static void ASViewImpl_setOnTouchWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeView, id objValue);
 
@@ -751,7 +753,7 @@ __attribute__((unused)) static void ASViewImpl_setOnKeyWithASIWidget_withId_(id<
 
 __attribute__((unused)) static void ASViewImpl_setLayerCornerRadiusWithId_withId_(id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_nativeSetLayerCornerRadiusWithId_withFloat_(id nativeWidget, jfloat value);
+__attribute__((unused)) static void ASViewImpl_nativeSetLayerCornerRadiusWithId_withFloat_(id nativeWidget, float value);
 
 __attribute__((unused)) static void ASViewImpl_setLayerBorderColorWithId_withId_(id nativeWidget, id objValue);
 
@@ -759,11 +761,11 @@ __attribute__((unused)) static void ASViewImpl_nativeLayerBorderColorWithId_with
 
 __attribute__((unused)) static void ASViewImpl_setLayerBorderWidthWithId_withId_(id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_nativeLayerBorderWidthWithId_withFloat_(id nativeWidget, jfloat value);
+__attribute__((unused)) static void ASViewImpl_nativeLayerBorderWidthWithId_withFloat_(id nativeWidget, float value);
 
 __attribute__((unused)) static void ASViewImpl_setLayerMasksToBoundsWithId_withId_(id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_nativeLayerBMasksToBoundsWithId_withBoolean_(id nativeWidget, jboolean value);
+__attribute__((unused)) static void ASViewImpl_nativeLayerBMasksToBoundsWithId_withBoolean_(id nativeWidget, bool value);
 
 __attribute__((unused)) static void ASViewImpl_nativeBringToFrontWithJavaUtilList_(id<JavaUtilList> widgets);
 
@@ -781,7 +783,7 @@ __attribute__((unused)) static void ASViewImpl_setShadowColorWithId_withId_(id v
 
 __attribute__((unused)) static void ASViewImpl_setCornerRadiusWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(id view, jfloat radius);
+__attribute__((unused)) static void ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(id view, float radius);
 
 @interface ASViewImpl_IosAccessibilityTraits () {
  @public
@@ -886,8 +888,8 @@ J2OBJC_FIELD_SETTER(ASViewImpl_TextAlignment, mapping_, id<JavaUtilMap>)
 
 - (instancetype)init;
 
-- (jint)compareWithId:(id<ASIWidget>)arg0
-               withId:(id<ASIWidget>)arg1;
+- (int32_t)compareWithId:(id<ASIWidget>)arg0
+                  withId:(id<ASIWidget>)arg1;
 
 @end
 
@@ -898,6 +900,7 @@ __attribute__((unused)) static void ASViewImpl_1_init(ASViewImpl_1 *self);
 __attribute__((unused)) static ASViewImpl_1 *new_ASViewImpl_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASViewImpl_1 *create_ASViewImpl_1_init(void);
+
 
 @interface ASViewImpl_AddRemoveCallBack : NSObject
 
@@ -918,9 +921,9 @@ __attribute__((unused)) static ASViewImpl_1 *create_ASViewImpl_1_init(void);
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)capture$0;
 
-- (jfloat)getTextWidth;
+- (float)getTextWidth;
 
-- (jfloat)getTextHeight;
+- (float)getTextHeight;
 
 @end
 
@@ -932,21 +935,22 @@ __attribute__((unused)) static ASViewImpl_2 *new_ASViewImpl_2_initWithASIWidget_
 
 __attribute__((unused)) static ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0);
 
+
 @interface ASViewImpl_AnimationContentHandler : ASContentHandlerAdapter {
  @public
-  jint valueType_;
+  int32_t valueType_;
   NSString *valueTo_;
   NSString *valueFrom_;
   JavaUtilStack *sequenceOrderings_;
-  jint sequenceOrdering_;
+  int32_t sequenceOrdering_;
   id<ASIWidget> w_;
   JavaUtilStack *childAnimators_;
   JavaUtilStack *animatorSets_;
   ADAnimatorSet *animatorSet_;
-  jfloat arg0_;
-  jfloat arg1_;
-  jfloat extraTension_;
-  jfloat cycles_;
+  float arg0_;
+  float arg1_;
+  float extraTension_;
+  float cycles_;
   id<ADInterpolator> timeInterpolator_;
   NSString *pathData_;
   NSString *propertyYName_;
@@ -981,8 +985,8 @@ __attribute__((unused)) static ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidg
                   withNSString:(NSString *)qName;
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length;
 
 - (void)setStartOffsetWithASIWidget:(id<ASIWidget>)w
                 withADValueAnimator:(ADValueAnimator *)animator
@@ -1020,19 +1024,19 @@ __attribute__((unused)) static ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidg
                withADAnimatorSet:(ADAnimatorSet *)animatorSet
                     withNSString:(NSString *)value;
 
-+ (jint)inferValueTypeFromValuesWithASIWidget:(id<ASIWidget>)w
-                                 withNSString:(NSString *)valueFromId
-                                 withNSString:(NSString *)valueToId;
++ (int32_t)inferValueTypeFromValuesWithASIWidget:(id<ASIWidget>)w
+                                    withNSString:(NSString *)valueFromId
+                                    withNSString:(NSString *)valueToId;
 
 + (ADPropertyValuesHolder *)getPVHWithASIWidget:(id<ASIWidget>)w
-                                        withInt:(jint)valueType
+                                        withInt:(int32_t)valueType
                                    withNSString:(NSString *)valueFromId
                                    withNSString:(NSString *)valueToId
                                    withNSString:(NSString *)propertyName;
 
-+ (jboolean)isColorWithNSString:(NSString *)val;
++ (bool)isColorWithNSString:(NSString *)val;
 
-+ (jboolean)isDimenWithNSString:(NSString *)val;
++ (bool)isDimenWithNSString:(NSString *)val;
 
 - (void)parseAnimatorWithASIWidget:(id<ASIWidget>)w
                withADValueAnimator:(ADValueAnimator *)animator
@@ -1042,20 +1046,20 @@ __attribute__((unused)) static ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidg
              withADValueAnimator:(ADValueAnimator *)animator
                     withNSString:(NSString *)strValue;
 
-- (jint)getRepeatCountWithNSString:(NSString *)value
-                     withASIWidget:(id<ASIWidget>)w;
+- (int32_t)getRepeatCountWithNSString:(NSString *)value
+                        withASIWidget:(id<ASIWidget>)w;
 
 - (void)setRepeatCountWithASIWidget:(id<ASIWidget>)w
                 withADValueAnimator:(ADValueAnimator *)animator
                        withNSString:(NSString *)strValue;
 
-- (jint)getRepeatModeWithNSString:(NSString *)value;
+- (int32_t)getRepeatModeWithNSString:(NSString *)value;
 
 - (void)setRepeatModeWithASIWidget:(id<ASIWidget>)w
                withADValueAnimator:(ADValueAnimator *)animator
                       withNSString:(NSString *)strValue;
 
-- (jint)getValueTypeWithNSString:(NSString *)value;
+- (int32_t)getValueTypeWithNSString:(NSString *)value;
 
 - (void)parsePropertyAnimatorWithASIWidget:(id<ASIWidget>)w
                       withADObjectAnimator:(ADObjectAnimator *)animator
@@ -1069,7 +1073,7 @@ __attribute__((unused)) static ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidg
                     withADAnimatorSet:(ADAnimatorSet *)animatorSet
               withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
 
-- (jint)getOrderingWithNSString:(NSString *)value;
+- (int32_t)getOrderingWithNSString:(NSString *)value;
 
 - (void)parseAccelerateInterpolatorWithASIWidget:(id<ASIWidget>)w
                          withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
@@ -1105,33 +1109,33 @@ J2OBJC_FIELD_SETTER(ASViewImpl_AnimationContentHandler, pathData_, NSString *)
 J2OBJC_FIELD_SETTER(ASViewImpl_AnimationContentHandler, propertyYName_, NSString *)
 J2OBJC_FIELD_SETTER(ASViewImpl_AnimationContentHandler, propertyXName_, NSString *)
 
-inline jint ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_FLOAT(void);
+inline int32_t ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_FLOAT(void);
 #define ASViewImpl_AnimationContentHandler_VALUE_TYPE_FLOAT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_FLOAT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_FLOAT, int32_t)
 
-inline jint ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_INT(void);
+inline int32_t ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_INT(void);
 #define ASViewImpl_AnimationContentHandler_VALUE_TYPE_INT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_INT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_INT, int32_t)
 
-inline jint ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_PATH(void);
+inline int32_t ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_PATH(void);
 #define ASViewImpl_AnimationContentHandler_VALUE_TYPE_PATH 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_PATH, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_PATH, int32_t)
 
-inline jint ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_COLOR(void);
+inline int32_t ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_COLOR(void);
 #define ASViewImpl_AnimationContentHandler_VALUE_TYPE_COLOR 3
-J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_COLOR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_COLOR, int32_t)
 
-inline jint ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_UNDEFINED(void);
+inline int32_t ASViewImpl_AnimationContentHandler_get_VALUE_TYPE_UNDEFINED(void);
 #define ASViewImpl_AnimationContentHandler_VALUE_TYPE_UNDEFINED 4
-J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_UNDEFINED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, VALUE_TYPE_UNDEFINED, int32_t)
 
-inline jint ASViewImpl_AnimationContentHandler_get_TOGETHER(void);
+inline int32_t ASViewImpl_AnimationContentHandler_get_TOGETHER(void);
 #define ASViewImpl_AnimationContentHandler_TOGETHER 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, TOGETHER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, TOGETHER, int32_t)
 
-inline jint ASViewImpl_AnimationContentHandler_get_SEQUENTIALLY(void);
+inline int32_t ASViewImpl_AnimationContentHandler_get_SEQUENTIALLY(void);
 #define ASViewImpl_AnimationContentHandler_SEQUENTIALLY 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, SEQUENTIALLY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASViewImpl_AnimationContentHandler, SEQUENTIALLY, int32_t)
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_setFactorWithASIWidget_withNSString_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, NSString *value);
 
@@ -1167,27 +1171,27 @@ __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_setProper
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_setOrderingWithASIWidget_withADAnimatorSet_withNSString_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADAnimatorSet *animatorSet, NSString *value);
 
-__attribute__((unused)) static jint ASViewImpl_AnimationContentHandler_inferValueTypeFromValuesWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *valueFromId, NSString *valueToId);
+__attribute__((unused)) static int32_t ASViewImpl_AnimationContentHandler_inferValueTypeFromValuesWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *valueFromId, NSString *valueToId);
 
-__attribute__((unused)) static ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_withInt_withNSString_withNSString_withNSString_(id<ASIWidget> w, jint valueType, NSString *valueFromId, NSString *valueToId, NSString *propertyName);
+__attribute__((unused)) static ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_withInt_withNSString_withNSString_withNSString_(id<ASIWidget> w, int32_t valueType, NSString *valueFromId, NSString *valueToId, NSString *propertyName);
 
-__attribute__((unused)) static jboolean ASViewImpl_AnimationContentHandler_isColorWithNSString_(NSString *val);
+__attribute__((unused)) static bool ASViewImpl_AnimationContentHandler_isColorWithNSString_(NSString *val);
 
-__attribute__((unused)) static jboolean ASViewImpl_AnimationContentHandler_isDimenWithNSString_(NSString *val);
+__attribute__((unused)) static bool ASViewImpl_AnimationContentHandler_isDimenWithNSString_(NSString *val);
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parseAnimatorWithASIWidget_withADValueAnimator_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADValueAnimator *animator, id<OrgXmlSaxAttributes> atts);
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_setDurationWithASIWidget_withADValueAnimator_withNSString_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADValueAnimator *animator, NSString *strValue);
 
-__attribute__((unused)) static jint ASViewImpl_AnimationContentHandler_getRepeatCountWithNSString_withASIWidget_(ASViewImpl_AnimationContentHandler *self, NSString *value, id<ASIWidget> w);
+__attribute__((unused)) static int32_t ASViewImpl_AnimationContentHandler_getRepeatCountWithNSString_withASIWidget_(ASViewImpl_AnimationContentHandler *self, NSString *value, id<ASIWidget> w);
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_setRepeatCountWithASIWidget_withADValueAnimator_withNSString_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADValueAnimator *animator, NSString *strValue);
 
-__attribute__((unused)) static jint ASViewImpl_AnimationContentHandler_getRepeatModeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value);
+__attribute__((unused)) static int32_t ASViewImpl_AnimationContentHandler_getRepeatModeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value);
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_setRepeatModeWithASIWidget_withADValueAnimator_withNSString_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADValueAnimator *animator, NSString *strValue);
 
-__attribute__((unused)) static jint ASViewImpl_AnimationContentHandler_getValueTypeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value);
+__attribute__((unused)) static int32_t ASViewImpl_AnimationContentHandler_getValueTypeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value);
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parsePropertyAnimatorWithASIWidget_withADObjectAnimator_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADObjectAnimator *animator, id<OrgXmlSaxAttributes> atts);
 
@@ -1195,7 +1199,7 @@ __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_setProper
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parseAnimatorSetWithASIWidget_withADAnimatorSet_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADAnimatorSet *animatorSet, id<OrgXmlSaxAttributes> atts);
 
-__attribute__((unused)) static jint ASViewImpl_AnimationContentHandler_getOrderingWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value);
+__attribute__((unused)) static int32_t ASViewImpl_AnimationContentHandler_getOrderingWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value);
 
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parseAccelerateInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts);
 
@@ -1210,6 +1214,7 @@ __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parseOver
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parseAnticipateOvershootInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationContentHandler)
+
 
 @interface ASViewImpl_AnimationContentHandler_CustomTypeConverterX : ADTypeConverter
 
@@ -1231,6 +1236,7 @@ __attribute__((unused)) static ASViewImpl_AnimationContentHandler_CustomTypeConv
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationContentHandler_CustomTypeConverterX)
 
+
 @interface ASViewImpl_AnimationContentHandler_CustomTypeConverterY : ADTypeConverter
 
 - (instancetype)initWithASViewImpl_AnimationContentHandler:(ASViewImpl_AnimationContentHandler *)outer$
@@ -1250,6 +1256,7 @@ __attribute__((unused)) static ASViewImpl_AnimationContentHandler_CustomTypeConv
 __attribute__((unused)) static ASViewImpl_AnimationContentHandler_CustomTypeConverterY *create_ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationContentHandler_CustomTypeConverterY)
+
 
 @interface ASViewImpl_CustomProperty : ADProperty {
  @public
@@ -1277,6 +1284,7 @@ __attribute__((unused)) static ASViewImpl_CustomProperty *new_ASViewImpl_CustomP
 __attribute__((unused)) static ASViewImpl_CustomProperty *create_ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(IOSClass *type, NSString *name);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_CustomProperty)
+
 
 @interface ASViewImpl_AnimatorListener : NSObject < ADAnimator_AnimatorListener, ASIListener > {
  @public
@@ -1334,6 +1342,7 @@ __attribute__((unused)) static ASViewImpl_AnimatorListener *create_ASViewImpl_An
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimatorListener)
 
+
 @interface ASViewImpl_OnClickListener : NSObject < ADView_OnClickListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1378,6 +1387,7 @@ __attribute__((unused)) static ASViewImpl_OnClickListener *create_ASViewImpl_OnC
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnClickListener)
 
+
 @interface ASViewImpl_OnTouchListener : NSObject < ADView_OnTouchListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1395,8 +1405,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnClickListener)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onTouchWithADView:(ADView *)v
-            withADMotionEvent:(ADMotionEvent *)event;
+- (bool)onTouchWithADView:(ADView *)v
+        withADMotionEvent:(ADMotionEvent *)event;
 
 - (id<JavaUtilMap>)getOnTouchEventObjWithADView:(ADView *)v
                               withADMotionEvent:(ADMotionEvent *)event;
@@ -1424,6 +1434,7 @@ __attribute__((unused)) static ASViewImpl_OnTouchListener *create_ASViewImpl_OnT
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnTouchListener)
 
+
 @interface ASViewImpl_OnLongClickListener : NSObject < ADView_OnLongClickListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1441,7 +1452,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnTouchListener)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onLongClickWithADView:(ADView *)v;
+- (bool)onLongClickWithADView:(ADView *)v;
 
 - (id<JavaUtilMap>)getOnLongClickEventObjWithADView:(ADView *)v;
 
@@ -1468,6 +1479,7 @@ __attribute__((unused)) static ASViewImpl_OnLongClickListener *create_ASViewImpl
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnLongClickListener)
 
+
 @interface ASViewImpl_OnDragListener : NSObject < ADView_OnDragListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1485,8 +1497,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnLongClickListener)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onDragWithADView:(ADView *)v
-        withADView_DragEvent:(ADView_DragEvent *)event;
+- (bool)onDragWithADView:(ADView *)v
+    withADView_DragEvent:(ADView_DragEvent *)event;
 
 - (id<JavaUtilMap>)getOnDragEventObjWithADView:(ADView *)v
                           withADView_DragEvent:(ADView_DragEvent *)event;
@@ -1514,6 +1526,7 @@ __attribute__((unused)) static ASViewImpl_OnDragListener *create_ASViewImpl_OnDr
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnDragListener)
 
+
 @interface ASViewImpl_OnKeyListener : NSObject < ADView_OnKeyListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1531,12 +1544,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnDragListener)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onKeyWithADView:(ADView *)v
-                    withInt:(jint)keyCode
-             withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onKeyWithADView:(ADView *)v
+                withInt:(int32_t)keyCode
+         withADKeyEvent:(ADKeyEvent *)event;
 
 - (id<JavaUtilMap>)getOnKeyEventObjWithADView:(ADView *)v
-                                      withInt:(jint)keyCode
+                                      withInt:(int32_t)keyCode
                                withADKeyEvent:(ADKeyEvent *)event;
 
 @end
@@ -1562,6 +1575,7 @@ __attribute__((unused)) static ASViewImpl_OnKeyListener *create_ASViewImpl_OnKey
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnKeyListener)
 
+
 @interface ASViewImpl_SwipeListener : NSObject < ASSwipeHelper_SwipeListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1579,7 +1593,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_OnKeyListener)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onSwipedWithNSString:(NSString *)direction;
+- (bool)onSwipedWithNSString:(NSString *)direction;
 
 - (id<JavaUtilMap>)getOnSwipedEventObjWithNSString:(NSString *)direction;
 
@@ -1606,9 +1620,10 @@ __attribute__((unused)) static ASViewImpl_SwipeListener *create_ASViewImpl_Swipe
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_SwipeListener)
 
+
 @interface ASViewImpl_UIControlEventTouchDelegate () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
   id<ADView_OnTouchListener> listener_;
 }
 
@@ -1618,7 +1633,7 @@ J2OBJC_FIELD_SETTER(ASViewImpl_UIControlEventTouchDelegate, listener_, id<ADView
 
 @interface ASViewImpl_UILongTapGestureRecognizerDelegate () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
   id<ADView_OnLongClickListener> listener_;
 }
 
@@ -1628,7 +1643,7 @@ J2OBJC_FIELD_SETTER(ASViewImpl_UILongTapGestureRecognizerDelegate, listener_, id
 
 @interface ASViewImpl_UITapGestureRecognizerDelegate () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
   id<ADView_OnClickListener> listener_;
 }
 
@@ -1644,10 +1659,10 @@ J2OBJC_FIELD_SETTER(ASViewImpl_UITapGestureRecognizerDelegate, listener_, id<ADV
 
 - (id)getEventObjWithASIWidget:(id<ASIWidget>)w;
 
-- (void)sendEventWithInt:(jint)x
-                 withInt:(jint)y
-                 withInt:(jint)action
-             withBoolean:(jboolean)dragCanAccept;
+- (void)sendEventWithInt:(int32_t)x
+                 withInt:(int32_t)y
+                 withInt:(int32_t)action
+             withBoolean:(bool)dragCanAccept;
 
 @end
 
@@ -1656,11 +1671,11 @@ J2OBJC_FIELD_SETTER(ASViewImpl_UIDragInteractionDelegate, eventArgs_, NSString *
 
 __attribute__((unused)) static id ASViewImpl_UIDragInteractionDelegate_getEventObjWithASIWidget_(ASViewImpl_UIDragInteractionDelegate *self, id<ASIWidget> w);
 
-__attribute__((unused)) static void ASViewImpl_UIDragInteractionDelegate_sendEventWithInt_withInt_withInt_withBoolean_(ASViewImpl_UIDragInteractionDelegate *self, jint x, jint y, jint action, jboolean dragCanAccept);
+__attribute__((unused)) static void ASViewImpl_UIDragInteractionDelegate_sendEventWithInt_withInt_withInt_withBoolean_(ASViewImpl_UIDragInteractionDelegate *self, int32_t x, int32_t y, int32_t action, bool dragCanAccept);
 
 @interface ASViewImpl_UIDropInteractionDelegate () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
   id<ADView_OnDragListener> listener_;
 }
 
@@ -1670,7 +1685,7 @@ J2OBJC_FIELD_SETTER(ASViewImpl_UIDropInteractionDelegate, listener_, id<ADView_O
 
 @interface ASViewImpl_UISwipeGestureRecognizerDelegate () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
   id<ASSwipeHelper_SwipeListener> listener_;
 }
 
@@ -1680,7 +1695,7 @@ J2OBJC_FIELD_SETTER(ASViewImpl_UISwipeGestureRecognizerDelegate, listener_, id<A
 
 @interface ASViewImpl_PanGestureRecognizer () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
   id uiView_;
   id uiLocationView_;
   id<ASViewImpl_PanCallBack> callback_;
@@ -1702,16 +1717,16 @@ __attribute__((unused)) static void ASViewImpl_PanGestureRecognizer_addUIPanGest
   id<ASViewImpl_AnimationCallBack> callBack_;
 }
 
-- (void)nativeAnimateWithInt:(jint)x
-                     withInt:(jint)y
-                     withInt:(jint)animationDurationInMs;
+- (void)nativeAnimateWithInt:(int32_t)x
+                     withInt:(int32_t)y
+                     withInt:(int32_t)animationDurationInMs;
 
 @end
 
 J2OBJC_FIELD_SETTER(ASViewImpl_AnimationUtils, objview_, id)
 J2OBJC_FIELD_SETTER(ASViewImpl_AnimationUtils, callBack_, id<ASViewImpl_AnimationCallBack>)
 
-__attribute__((unused)) static void ASViewImpl_AnimationUtils_nativeAnimateWithInt_withInt_withInt_(ASViewImpl_AnimationUtils *self, jint x, jint y, jint animationDurationInMs);
+__attribute__((unused)) static void ASViewImpl_AnimationUtils_nativeAnimateWithInt_withInt_withInt_(ASViewImpl_AnimationUtils *self, int32_t x, int32_t y, int32_t animationDurationInMs);
 
 @interface ASViewImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -1729,6 +1744,7 @@ __attribute__((unused)) static void ASViewImpl_$Lambda$1_initWithADAnimator_(ASV
 __attribute__((unused)) static ASViewImpl_$Lambda$1 *new_ASViewImpl_$Lambda$1_initWithADAnimator_(ADAnimator *capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASViewImpl_$Lambda$1 *create_ASViewImpl_$Lambda$1_initWithADAnimator_(ADAnimator *capture$0);
+
 
 @implementation ASViewImpl
 
@@ -1782,7 +1798,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASViewImpl_getAttributeWithASIWidget_withId_withASWidgetAttribute_withASILifeCycleDecorator_(w, nativeWidget, key, decorator);
 }
 
-+ (jboolean)checkIosVersionWithNSString:(NSString *)v {
++ (bool)checkIosVersionWithNSString:(NSString *)v {
   return ASViewImpl_checkIosVersionWithNSString_(v);
 }
 
@@ -1915,7 +1931,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)refreshUiFromModelWithASIWidget:(id<ASIWidget>)w
                                  withId:(id)objValue
-                            withBoolean:(jboolean)remeasure {
+                            withBoolean:(bool)remeasure {
   ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w, objValue, remeasure);
 }
 
@@ -2102,12 +2118,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)stateWithASIWidget:(id<ASIWidget>)w
-                   withInt:(jint)i {
+                   withInt:(int32_t)i {
   ASViewImpl_stateWithASIWidget_withInt_(w, i);
 }
 
 + (void)setStateWithASIWidget:(id<ASIWidget>)w
-                      withInt:(jint)i
+                      withInt:(int32_t)i
                        withId:(id)value {
   ASViewImpl_setStateWithASIWidget_withInt_withId_(w, i, value);
 }
@@ -2162,7 +2178,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASViewImpl_getTextDirectionWithASIWidget_(w);
 }
 
-+ (jboolean)isRTLLayoutDirectionWithASIWidget:(id<ASIWidget>)widget {
++ (bool)isRTLLayoutDirectionWithASIWidget:(id<ASIWidget>)widget {
   return ASViewImpl_isRTLLayoutDirectionWithASIWidget_(widget);
 }
 
@@ -2175,10 +2191,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)setDrawableBoundsWithASIWidget:(id<ASIWidget>)widget
-                               withInt:(jint)l
-                               withInt:(jint)t
-                               withInt:(jint)r
-                               withInt:(jint)b {
+                               withInt:(int32_t)l
+                               withInt:(int32_t)t
+                               withInt:(int32_t)r
+                               withInt:(int32_t)b {
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(widget, l, t, r, b);
 }
 
@@ -2560,19 +2576,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)nativeMakeFrameWithId:(id)uiView
-                      withInt:(jint)l
-                      withInt:(jint)t
-                      withInt:(jint)r
-                      withInt:(jint)b
-                      withInt:(jint)height {
+                      withInt:(int32_t)l
+                      withInt:(int32_t)t
+                      withInt:(int32_t)r
+                      withInt:(int32_t)b
+                      withInt:(int32_t)height {
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_(uiView, l, t, r, b, height);
 }
 
 + (void)updateBoundsWithId:(id)objview
-                   withInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)width
-                   withInt:(jint)height {
+                   withInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)width
+                   withInt:(int32_t)height {
   ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(objview, x, y, width, height);
 }
 
@@ -2581,27 +2597,27 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)nativeMakeFrameForHorizontalScrollViewWithId:(id)uiView
-                                             withInt:(jint)l
-                                             withInt:(jint)t
-                                             withInt:(jint)r
-                                             withInt:(jint)b
-                                             withInt:(jint)width {
+                                             withInt:(int32_t)l
+                                             withInt:(int32_t)t
+                                             withInt:(int32_t)r
+                                             withInt:(int32_t)b
+                                             withInt:(int32_t)width {
   ASViewImpl_nativeMakeFrameForHorizontalScrollViewWithId_withInt_withInt_withInt_withInt_withInt_(uiView, l, t, r, b, width);
 }
 
 + (void)nativeMakeFrameWithId:(id)uiView
-                      withInt:(jint)l
-                      withInt:(jint)t
-                      withInt:(jint)r
-                      withInt:(jint)b {
+                      withInt:(int32_t)l
+                      withInt:(int32_t)t
+                      withInt:(int32_t)r
+                      withInt:(int32_t)b {
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, l, t, r, b);
 }
 
-+ (jboolean)isRTLLayoutWithASIWidget:(id<ASIWidget>)widget {
++ (bool)isRTLLayoutWithASIWidget:(id<ASIWidget>)widget {
   return ASViewImpl_isRTLLayoutWithASIWidget_(widget);
 }
 
-+ (jboolean)isRTLLayout {
++ (bool)isRTLLayout {
   return ASViewImpl_isRTLLayout();
 }
 
@@ -2625,29 +2641,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewImpl_updateWidthAndHeightWithASIWidget_withADStateListDrawable_withId_withNSString_withNSString_(w, background, value, type, conveterType);
 }
 
-+ (void)setBgDrawabeOnViewWithInt:(jint)width
-                          withInt:(jint)height
++ (void)setBgDrawabeOnViewWithInt:(int32_t)width
+                          withInt:(int32_t)height
                        withADView:(ADView *)view {
   ASViewImpl_setBgDrawabeOnViewWithInt_withInt_withADView_(width, height, view);
 }
 
-+ (jboolean)isColorWithId:(id)value {
++ (bool)isColorWithId:(id)value {
   return ASViewImpl_isColorWithId_(value);
 }
 
-+ (jboolean)isResizableImageWithId:(id)obj {
++ (bool)isResizableImageWithId:(id)obj {
   return ASViewImpl_isResizableImageWithId_(obj);
 }
 
-+ (jboolean)isImageWithId:(id)value {
++ (bool)isImageWithId:(id)value {
   return ASViewImpl_isImageWithId_(value);
 }
 
-+ (jint)getImageWidthWithId:(id)value {
++ (int32_t)getImageWidthWithId:(id)value {
   return ASViewImpl_getImageWidthWithId_(value);
 }
 
-+ (jint)getImageHeightWithId:(id)value {
++ (int32_t)getImageHeightWithId:(id)value {
   return ASViewImpl_getImageHeightWithId_(value);
 }
 
@@ -2678,7 +2694,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewImpl_registerCommandConveterWithASIWidget_(widget);
 }
 
-+ (jboolean)isNativeRtlSupported {
++ (bool)isNativeRtlSupported {
   return ASViewImpl_isNativeRtlSupported();
 }
 
@@ -2725,7 +2741,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)nativeSetVisibilityWithId:(id)view
-                      withBoolean:(jboolean)hidden {
+                      withBoolean:(bool)hidden {
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_(view, hidden);
 }
 
@@ -2733,7 +2749,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASViewImpl_getClickableWithId_(nativeWidget);
 }
 
-+ (jboolean)nativeGetClickableWithId:(id)view {
++ (bool)nativeGetClickableWithId:(id)view {
   return ASViewImpl_nativeGetClickableWithId_(view);
 }
 
@@ -2744,7 +2760,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)nativeSetClickableWithId:(id)view
-                     withBoolean:(jboolean)clickable {
+                     withBoolean:(bool)clickable {
   ASViewImpl_nativeSetClickableWithId_withBoolean_(view, clickable);
 }
 
@@ -2897,7 +2913,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASViewImpl_getKeepScreenOnWithId_(uiView);
 }
 
-+ (jboolean)isMirrorSupported {
++ (bool)isMirrorSupported {
   return ASViewImpl_isMirrorSupported();
 }
 
@@ -2943,7 +2959,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)nativeSetLayerCornerRadiusWithId:(id)nativeWidget
-                               withFloat:(jfloat)value {
+                               withFloat:(float)value {
   ASViewImpl_nativeSetLayerCornerRadiusWithId_withFloat_(nativeWidget, value);
 }
 
@@ -2963,7 +2979,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)nativeLayerBorderWidthWithId:(id)nativeWidget
-                           withFloat:(jfloat)value {
+                           withFloat:(float)value {
   ASViewImpl_nativeLayerBorderWidthWithId_withFloat_(nativeWidget, value);
 }
 
@@ -2973,7 +2989,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)nativeLayerBMasksToBoundsWithId:(id)nativeWidget
-                            withBoolean:(jboolean)value {
+                            withBoolean:(bool)value {
   ASViewImpl_nativeLayerBMasksToBoundsWithId_withBoolean_(nativeWidget, value);
 }
 
@@ -2990,11 +3006,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewImpl_setNativeIdWithASIWidget_withNSString_(w, strValue);
 }
 
-+ (jint)getLocationXOnScreenWithId:(id)nativeWidget {
++ (int32_t)getLocationXOnScreenWithId:(id)nativeWidget {
   return ASViewImpl_getLocationXOnScreenWithId_(nativeWidget);
 }
 
-+ (jint)getLocationYOnScreenWithId:(id)nativeWidget {
++ (int32_t)getLocationYOnScreenWithId:(id)nativeWidget {
   return ASViewImpl_getLocationYOnScreenWithId_(nativeWidget);
 }
 
@@ -3005,12 +3021,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewImpl_setOutsideTouchableWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
 }
 
-+ (jint)nativeMeasureWidthWithId:(id)uiView {
++ (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-+ (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
++ (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
@@ -3032,23 +3048,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewImpl_addPanListenerWithASIWidget_withId_withId_withASViewImpl_PanCallBack_(widget, uiView, uiLocationView, callback);
 }
 
-+ (jint)getXWithId:(id)objview {
++ (int32_t)getXWithId:(id)objview {
   return ASViewImpl_getXWithId_(objview);
 }
 
-+ (jint)getYWithId:(id)objview {
++ (int32_t)getYWithId:(id)objview {
   return ASViewImpl_getYWithId_(objview);
 }
 
 + (void)updateBoundsXWithId:(id)objview
-                    withInt:(jint)x {
+                    withInt:(int32_t)x {
   ASViewImpl_updateBoundsXWithId_withInt_(objview, x);
 }
 
 + (void)translateWithAnimationWithId:(id)objview
-                             withInt:(jint)x
-                             withInt:(jint)y
-                             withInt:(jint)animationDurationInMs
+                             withInt:(int32_t)x
+                             withInt:(int32_t)y
+                             withInt:(int32_t)animationDurationInMs
     withASViewImpl_AnimationCallBack:(id<ASViewImpl_AnimationCallBack>)callBack {
   ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(objview, x, y, animationDurationInMs, callBack);
 }
@@ -3075,7 +3091,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)setCornerRadiusOnViewWithId:(id)view
-                          withFloat:(jfloat)radius {
+                          withFloat:(float)radius {
   ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(view, radius);
 }
 
@@ -4788,38 +4804,38 @@ id ASViewImpl_getAttributeWithASIWidget_withId_withASWidgetAttribute_withASILife
   return nil;
 }
 
-jboolean ASViewImpl_checkIosVersionWithNSString_(NSString *v) {
+bool ASViewImpl_checkIosVersionWithNSString_(NSString *v) {
   ASViewImpl_initialize();
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
 void ASViewImpl_setPaddingWithId_withADView_(id objValue, ADView *view) {
   ASViewImpl_initialize();
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, value, value, value, value);
 }
 
 void ASViewImpl_setPaddingLeftWithId_withADView_(id objValue, ADView *view) {
   ASViewImpl_initialize();
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, value, [((ADView *) nil_chk(view)) getPaddingTop], ADXViewCompat_getPaddingEndWithADView_(view), [view getPaddingBottom]);
 }
 
 void ASViewImpl_setPaddingRightWithId_withADView_(id objValue, ADView *view) {
   ASViewImpl_initialize();
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, ADXViewCompat_getPaddingStartWithADView_(view), [((ADView *) nil_chk(view)) getPaddingTop], value, [view getPaddingBottom]);
 }
 
 void ASViewImpl_setPaddingTopWithId_withADView_(id objValue, ADView *view) {
   ASViewImpl_initialize();
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, ADXViewCompat_getPaddingStartWithADView_(view), value, ADXViewCompat_getPaddingEndWithADView_(view), [((ADView *) nil_chk(view)) getPaddingBottom]);
 }
 
 void ASViewImpl_setPaddingBottomWithId_withADView_(id objValue, ADView *view) {
   ASViewImpl_initialize();
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, ADXViewCompat_getPaddingStartWithADView_(view), [((ADView *) nil_chk(view)) getPaddingTop], ADXViewCompat_getPaddingEndWithADView_(view), value);
 }
 
@@ -4845,13 +4861,13 @@ id ASViewImpl_getPaddingRightWithASIWidget_withADView_(id<ASIWidget> w, ADView *
 
 void ASViewImpl_setPaddingHorizontalWithId_withADView_(id objValue, ADView *view) {
   ASViewImpl_initialize();
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, value, [((ADView *) nil_chk(view)) getPaddingTop], value, [view getPaddingBottom]);
 }
 
 void ASViewImpl_setPaddingVerticalWithId_withADView_(id objValue, ADView *view) {
   ASViewImpl_initialize();
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, ADXViewCompat_getPaddingStartWithADView_(view), value, ADXViewCompat_getPaddingEndWithADView_(view), value);
 }
 
@@ -4924,7 +4940,7 @@ void ASViewImpl_refreshUiFromModelWithASIWidget_withId_(id<ASIWidget> w, id objV
   ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w, objValue, false);
 }
 
-void ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(id<ASIWidget> w, id objValue, jboolean remeasure) {
+void ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(id<ASIWidget> w, id objValue, bool remeasure) {
   ASViewImpl_initialize();
   if ([((id<ASIWidget>) nil_chk(w)) isInitialised] && objValue != nil) {
     IOSObjectArray *ids = [((NSString *) cast_chk(objValue, [NSString class])) java_split:@","];
@@ -4933,8 +4949,8 @@ void ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(id<ASIWidget
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *id_ = *b__++;
-        if ([((NSString *) nil_chk(id_)) java_contains:@"#"]) {
+        NSString *id_ = RETAIN_AND_AUTORELEASE(*b__++);
+        if ([id_ java_contains:@"#"]) {
           NSString *componentId = [id_ java_substring:0 endIndex:[id_ java_lastIndexOfString:@"#"]];
           NSString *myId = [id_ java_substring:[id_ java_lastIndexOfString:@"#"] + 1];
           id_ = JreStrcat("$$$", componentId, @"#@+id/", myId);
@@ -5069,7 +5085,7 @@ void ASViewImpl_addEventInfoWithJavaUtilMap_withJavaUtilList_withASIFragment_(id
   ASViewImpl_initialize();
   id<JavaUtilList> ids = new_JavaUtilArrayList_init();
   for (JavaLangInteger *boxed__ in nil_chk(checkedIds)) {
-    jint id_ = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
+    int32_t id_ = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
     [ids addWithId:[((id<ASIWidget>) nil_chk([((id<ASIFragment>) nil_chk(fragment)) getRootWidget])) quickConvertBackWithId:JavaLangInteger_valueOfWithInt_(id_) withNSString:@"id"]];
   }
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"checkedIds" withId:ASPluginInvoker_getJSONSafeObjWithId_(ids)];
@@ -5103,8 +5119,8 @@ void ASViewImpl_setValidationWithASIWidget_withId_(id<ASIWidget> w, id objValue)
           id<ASFormElement> formElement = (id<ASFormElement>) cast_check(w, ASFormElement_class_());
           ASField *field = ASField_using__WithASFormElement_withInt_(formElement, ASField_DEFAULT_ORDER);
           IOSObjectArray *params = nil;
-          jint startIndex = [((NSString *) nil_chk(validation)) java_indexOfString:@"("];
-          jint endIndex = [validation java_indexOfString:@")"];
+          int32_t startIndex = [((NSString *) nil_chk(validation)) java_indexOfString:@"("];
+          int32_t endIndex = [validation java_indexOfString:@")"];
           if (startIndex != -1 && endIndex != -1) {
             params = [((NSString *) nil_chk([validation java_substring:startIndex + 1 endIndex:endIndex])) java_split:@"\\-"];
             validation = [validation java_substring:0 endIndex:startIndex];
@@ -5137,7 +5153,7 @@ id<JavaUtilList> ASViewImpl_getFormsWithASIWidget_(id<ASIWidget> w) {
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *formGroupId = *b__++;
+        NSString *formGroupId = RETAIN_AND_AUTORELEASE(*b__++);
         ASForm *form = (ASForm *) cast_chk([((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w)) getFragment])) getFromTempCacheWithNSString:formGroupId], [ASForm class]);
         if (form == nil) {
           form = new_ASForm_init();
@@ -5313,14 +5329,14 @@ void ASViewImpl_setMessageOnLabelWithASIWidget_withNSString_(id<ASIWidget> w, NS
   }
 }
 
-void ASViewImpl_stateWithASIWidget_withInt_(id<ASIWidget> w, jint i) {
+void ASViewImpl_stateWithASIWidget_withInt_(id<ASIWidget> w, int32_t i) {
   ASViewImpl_initialize();
   NSString *attributeName = (NSString *) cast_chk([((id<ASIWidget>) nil_chk(w)) getUserDataWithNSString:JreStrcat("$I", @"state", i)], [NSString class]);
   id val = [w getUserDataWithNSString:JreStrcat("$I", @"val", i)];
   [w setAttributeWithNSString:attributeName withId:val withBoolean:false];
 }
 
-void ASViewImpl_setStateWithASIWidget_withInt_withId_(id<ASIWidget> w, jint i, id value) {
+void ASViewImpl_setStateWithASIWidget_withInt_withId_(id<ASIWidget> w, int32_t i, id value) {
   ASViewImpl_initialize();
   NSString *attributeName = (NSString *) cast_chk([((id<ASIWidget>) nil_chk(w)) getUserDataWithNSString:JreStrcat("$I", @"state", i)], [NSString class]);
   NSString *attributeConverter = (NSString *) cast_chk([w getUserDataWithNSString:JreStrcat("$I", @"stateConverter", i)], [NSString class]);
@@ -5389,7 +5405,7 @@ void ASViewImpl_startAnimatorWithASIWidget_withId_(id<ASIWidget> w, id objValue)
 void ASViewImpl_setLayoutDirectionWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewImpl_initialize();
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (ASViewImpl_isMirrorSupported() && ASViewImpl_isRTLLayout()) {
     if (value == ADView_LAYOUT_DIRECTION_RTL) {
       value = ADView_LAYOUT_DIRECTION_LTR;
@@ -5431,7 +5447,7 @@ id ASViewImpl_getTextDirectionWithASIWidget_(id<ASIWidget> w) {
   return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getTextDirection]);
 }
 
-jboolean ASViewImpl_isRTLLayoutDirectionWithASIWidget_(id<ASIWidget> widget) {
+bool ASViewImpl_isRTLLayoutDirectionWithASIWidget_(id<ASIWidget> widget) {
   ASViewImpl_initialize();
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
   return [((ADView *) nil_chk(view)) isLayoutRtl];
@@ -5472,7 +5488,7 @@ id ASViewImpl_getColorWithId_(id objValue) {
   @throw new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"unknown color :", objValue));
 }
 
-void ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(id<ASIWidget> widget, jint l, jint t, jint r, jint b) {
+void ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(id<ASIWidget> widget, int32_t l, int32_t t, int32_t r, int32_t b) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(widget)) setDrawableBoundsWithInt:l withInt:t withInt:r withInt:b];
   ADView *view = (ADView *) cast_chk([widget asWidget], [ADView class]);
@@ -5581,7 +5597,7 @@ ADDrawable *ASViewImpl_getDrawableWithADColorStateList_(ADColorStateList *colorS
   IOSObjectArray *states = [((ADColorStateList *) nil_chk(colorStateList)) getStates];
   IOSIntArray *colors = [colorStateList getColors];
   ADStateListDrawable *stateListDrawable = new_ADStateListDrawable_init();
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(states))->size_; i++) {
+  for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(states))->size_; i++) {
     IOSIntArray *state = IOSObjectArray_Get(states, i);
     ADDrawable *drawable = new_ADColorDrawable_init();
     [drawable setDrawableWithId:ASViewImpl_getColorWithId_(JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(nil_chk(colors), i)))];
@@ -5608,10 +5624,10 @@ void ASViewImpl_setBottomWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewImpl_initialize();
   id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
   ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setBottomWithInt:value];
-  jint top = value - [view getMeasuredHeight];
-  jint x = ASViewImpl_getXWithId_(uiView);
+  int32_t top = value - [view getMeasuredHeight];
+  int32_t x = ASViewImpl_getXWithId_(uiView);
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, x, top, x + [view getMeasuredWidth], value);
 }
 
@@ -5619,9 +5635,9 @@ void ASViewImpl_setTopWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewImpl_initialize();
   id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
   ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setTopWithInt:value];
-  jint x = ASViewImpl_getXWithId_(uiView);
+  int32_t x = ASViewImpl_getXWithId_(uiView);
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, x, value, x + [view getMeasuredWidth], value + [view getMeasuredHeight]);
 }
 
@@ -5629,9 +5645,9 @@ void ASViewImpl_setRightWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewImpl_initialize();
   id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
   ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setRightWithInt:value];
-  jint y = ASViewImpl_getYWithId_(uiView);
+  int32_t y = ASViewImpl_getYWithId_(uiView);
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, value - [view getMeasuredWidth], y, value, y + [view getMeasuredHeight]);
 }
 
@@ -5639,9 +5655,9 @@ void ASViewImpl_setLeftWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewImpl_initialize();
   id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
   ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setLeftWithInt:value];
-  jint y = ASViewImpl_getYWithId_(uiView);
+  int32_t y = ASViewImpl_getYWithId_(uiView);
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, value, y, value + [view getMeasuredWidth], y + [view getMeasuredHeight]);
 }
 
@@ -5679,7 +5695,7 @@ id<JavaUtilList> ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(id<ASIWid
       overlays = new_JavaUtilArrayList_init();
     }
     else {
-      for (jint i = [overlays size] - 1; i >= 0; i--) {
+      for (int32_t i = [overlays size] - 1; i >= 0; i--) {
         [((id<ASHasWidgets>) nil_chk([overlayWrapper getParent])) removeWithASIWidget:[overlays getWithInt:i]];
       }
       [overlays clear];
@@ -5690,7 +5706,7 @@ id<JavaUtilList> ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(id<ASIWid
         id<ASIWidget> w = ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_([drawable getSimulatedWidgetLocalName], [drawable getSimulatedWidgetGroupName], [overlayWrapper getParent], false);
         IOSObjectArray *simulatedWidgetAttrs = [drawable getSimulatedWidgetAttrs];
         if (simulatedWidgetAttrs != nil) {
-          for (jint i = 0; i < simulatedWidgetAttrs->size_; i++) {
+          for (int32_t i = 0; i < simulatedWidgetAttrs->size_; i++) {
             NSString *attrName = IOSObjectArray_Get(simulatedWidgetAttrs, i);
             id value = [drawable getAttributeWithNSString:attrName];
             [((id<ASIWidget>) nil_chk(w)) setAttributeWithNSString:attrName withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
@@ -5710,7 +5726,7 @@ id<JavaUtilList> ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(id<ASIWid
       }
       IOSObjectArray *viewAttrs = [drawable getViewAttrs];
       if (viewAttrs != nil) {
-        for (jint i = 0; i < viewAttrs->size_; i++) {
+        for (int32_t i = 0; i < viewAttrs->size_; i++) {
           NSString *attrName = IOSObjectArray_Get(viewAttrs, i);
           (void) [drawable getBounds];
           id value = [drawable getAttributeWithNSString:attrName];
@@ -6047,13 +6063,13 @@ id ASViewImpl_getAccessibilityTraitsWithId_(id uiView) {
   return [JavaLangInteger valueOfWithInt :((UIView*) uiView).accessibilityTraits];
 }
 
-void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, jint l, jint t, jint r, jint b, jint height) {
+void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, int32_t l, int32_t t, int32_t r, int32_t b, int32_t height) {
   ASViewImpl_initialize();
   [((UIView*) uiView) setFrame:CGRectMake(l, t, r-l, b-t)];
   ((UIScrollView*) uiView).contentSize = CGSizeMake(r-l, height);
 }
 
-void ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(id objview, jint x, jint y, jint width, jint height) {
+void ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(id objview, int32_t x, int32_t y, int32_t width, int32_t height) {
   ASViewImpl_initialize();
   UIView* uiview = ((UIView*) objview);
   uiview.frame = CGRectMake(x, y, width, height);
@@ -6065,13 +6081,13 @@ id ASViewImpl_getFirstChildOrSelfWithId_(id objview) {
   return uiview.subviews.count > 0 ? uiview.subviews[0] : uiview;
 }
 
-void ASViewImpl_nativeMakeFrameForHorizontalScrollViewWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, jint l, jint t, jint r, jint b, jint width) {
+void ASViewImpl_nativeMakeFrameForHorizontalScrollViewWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, int32_t l, int32_t t, int32_t r, int32_t b, int32_t width) {
   ASViewImpl_initialize();
   [((UIView*) uiView) setFrame:CGRectMake(l, t, r-l, b-t)];
   ((UIScrollView*) uiView).contentSize = CGSizeMake(width, b-t);
 }
 
-void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(id uiView, jint l, jint t, jint r, jint b) {
+void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(id uiView, int32_t l, int32_t t, int32_t r, int32_t b) {
   ASViewImpl_initialize();
   if ([uiView isKindOfClass:[UIViewController class]]) {
     [((UIViewController*) uiView).view setFrame:CGRectMake(l, t, r-l, b-t)];
@@ -6080,12 +6096,12 @@ void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(id uiView
   }
 }
 
-jboolean ASViewImpl_isRTLLayoutWithASIWidget_(id<ASIWidget> widget) {
+bool ASViewImpl_isRTLLayoutWithASIWidget_(id<ASIWidget> widget) {
   ASViewImpl_initialize();
   return ASViewImpl_isRTLLayout();
 }
 
-jboolean ASViewImpl_isRTLLayout() {
+bool ASViewImpl_isRTLLayout() {
   ASViewImpl_initialize();
   return [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
 }
@@ -6145,7 +6161,7 @@ void ASViewImpl_updateWidthAndHeightWithASIWidget_withADStateListDrawable_withId
   }
 }
 
-void ASViewImpl_setBgDrawabeOnViewWithInt_withInt_withADView_(jint width, jint height, ADView *view) {
+void ASViewImpl_setBgDrawabeOnViewWithInt_withInt_withADView_(int32_t width, int32_t height, ADView *view) {
   ASViewImpl_initialize();
   ADDrawable *background = [((ADView *) nil_chk(view)) getBackground];
   if (background == nil) {
@@ -6156,28 +6172,28 @@ void ASViewImpl_setBgDrawabeOnViewWithInt_withInt_withADView_(jint width, jint h
   [view setBackgroundWithADDrawable:background];
 }
 
-jboolean ASViewImpl_isColorWithId_(id value) {
+bool ASViewImpl_isColorWithId_(id value) {
   ASViewImpl_initialize();
   return[value isKindOfClass:[UIColor class]];
 }
 
-jboolean ASViewImpl_isResizableImageWithId_(id obj) {
+bool ASViewImpl_isResizableImageWithId_(id obj) {
   ASViewImpl_initialize();
   return (obj != nil && [((NSString *) nil_chk([[obj java_getClass] getName])) isEqual:@"_UIResizableImage"]);
 }
 
-jboolean ASViewImpl_isImageWithId_(id value) {
+bool ASViewImpl_isImageWithId_(id value) {
   ASViewImpl_initialize();
   return[value isKindOfClass:[UIImage class]];
 }
 
-jint ASViewImpl_getImageWidthWithId_(id value) {
+int32_t ASViewImpl_getImageWidthWithId_(id value) {
   ASViewImpl_initialize();
   UIImage* image = ((UIImage*) value);
   return image.size.width;
 }
 
-jint ASViewImpl_getImageHeightWithId_(id value) {
+int32_t ASViewImpl_getImageHeightWithId_(id value) {
   ASViewImpl_initialize();
   UIImage* image = ((UIImage*) value);
   return image.size.height;
@@ -6222,7 +6238,7 @@ void ASViewImpl_registerCommandConveterWithASIWidget_(id<ASIWidget> widget) {
   [widget registerForAttributeCommandChainWithPhaseWithNSString:@"postframe" withNSStringArray:tranformAttrs];
 }
 
-jboolean ASViewImpl_isNativeRtlSupported() {
+bool ASViewImpl_isNativeRtlSupported() {
   ASViewImpl_initialize();
   return false;
 }
@@ -6286,7 +6302,7 @@ void ASViewImpl_setVisibilityWithASIWidget_withId_withId_(id<ASIWidget> w, id na
   [((ADView *) nil_chk(view)) setVisibilityWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
 }
 
-void ASViewImpl_nativeSetVisibilityWithId_withBoolean_(id view, jboolean hidden) {
+void ASViewImpl_nativeSetVisibilityWithId_withBoolean_(id view, bool hidden) {
   ASViewImpl_initialize();
   [((UIView *) view) setHidden:  hidden];
 }
@@ -6296,7 +6312,7 @@ id ASViewImpl_getClickableWithId_(id nativeWidget) {
   return JavaLangBoolean_valueOfWithBoolean_(ASViewImpl_nativeGetClickableWithId_(nativeWidget));
 }
 
-jboolean ASViewImpl_nativeGetClickableWithId_(id view) {
+bool ASViewImpl_nativeGetClickableWithId_(id view) {
   ASViewImpl_initialize();
   return ((UIView *) view).userInteractionEnabled;
 }
@@ -6308,7 +6324,7 @@ void ASViewImpl_setClickableWithASIWidget_withId_withId_(id<ASIWidget> w, id nat
   [((ADView *) nil_chk(view)) setClickableWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
 }
 
-void ASViewImpl_nativeSetClickableWithId_withBoolean_(id view, jboolean clickable) {
+void ASViewImpl_nativeSetClickableWithId_withBoolean_(id view, bool clickable) {
   ASViewImpl_initialize();
   ((UIView *) view).userInteractionEnabled = clickable;
 }
@@ -6501,7 +6517,7 @@ id ASViewImpl_getKeepScreenOnWithId_(id uiView) {
   return [JavaLangBoolean valueOfWithBoolean :[UIApplication sharedApplication].idleTimerDisabled];
 }
 
-jboolean ASViewImpl_isMirrorSupported() {
+bool ASViewImpl_isMirrorSupported() {
   ASViewImpl_initialize();
   return false;
 }
@@ -6592,7 +6608,7 @@ void ASViewImpl_setLayerCornerRadiusWithId_withId_(id nativeWidget, id objValue)
   ASViewImpl_nativeSetLayerCornerRadiusWithId_withFloat_(nativeWidget, [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]))) floatValue]);
 }
 
-void ASViewImpl_nativeSetLayerCornerRadiusWithId_withFloat_(id nativeWidget, jfloat value) {
+void ASViewImpl_nativeSetLayerCornerRadiusWithId_withFloat_(id nativeWidget, float value) {
   ASViewImpl_initialize();
   UIView* view = ((UIView*)nativeWidget);
   view.layer.cornerRadius = value;
@@ -6614,7 +6630,7 @@ void ASViewImpl_setLayerBorderWidthWithId_withId_(id nativeWidget, id objValue) 
   ASViewImpl_nativeLayerBorderWidthWithId_withFloat_(nativeWidget, [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]))) floatValue]);
 }
 
-void ASViewImpl_nativeLayerBorderWidthWithId_withFloat_(id nativeWidget, jfloat value) {
+void ASViewImpl_nativeLayerBorderWidthWithId_withFloat_(id nativeWidget, float value) {
   ASViewImpl_initialize();
   UIView* view = ((UIView*)nativeWidget);
   view.layer.borderWidth = value;
@@ -6625,7 +6641,7 @@ void ASViewImpl_setLayerMasksToBoundsWithId_withId_(id nativeWidget, id objValue
   ASViewImpl_nativeLayerBMasksToBoundsWithId_withBoolean_(nativeWidget, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASViewImpl_nativeLayerBMasksToBoundsWithId_withBoolean_(id nativeWidget, jboolean value) {
+void ASViewImpl_nativeLayerBMasksToBoundsWithId_withBoolean_(id nativeWidget, bool value) {
   ASViewImpl_initialize();
   UIView* view = ((UIView*)nativeWidget);
   view.layer.masksToBounds = value;
@@ -6648,14 +6664,14 @@ void ASViewImpl_setNativeIdWithASIWidget_withNSString_(id<ASIWidget> w, NSString
   ASViewImpl_initialize();
 }
 
-jint ASViewImpl_getLocationXOnScreenWithId_(id nativeWidget) {
+int32_t ASViewImpl_getLocationXOnScreenWithId_(id nativeWidget) {
   ASViewImpl_initialize();
   UIView* view = ((UIView*)nativeWidget);
   CGPoint point = [view.superview convertPoint:view.frame.origin toView:nil];
   return point.x;
 }
 
-jint ASViewImpl_getLocationYOnScreenWithId_(id nativeWidget) {
+int32_t ASViewImpl_getLocationYOnScreenWithId_(id nativeWidget) {
   ASViewImpl_initialize();
   UIView* view = ((UIView*)nativeWidget);
   CGPoint point = [view.superview convertPoint:view.frame.origin toView:nil];
@@ -6672,14 +6688,14 @@ void ASViewImpl_setOutsideTouchableWithASIWidget_withNSString_withId_withADView_
   }
 }
 
-jint ASViewImpl_nativeMeasureWidthWithId_(id uiView) {
+int32_t ASViewImpl_nativeMeasureWidthWithId_(id uiView) {
   ASViewImpl_initialize();
   CGSize maximumLabelSize = CGSizeMake(CGFLOAT_MAX,CGFLOAT_MAX);
   CGSize requiredSize = [((UIView*)uiView) sizeThatFits:maximumLabelSize];
   return ceil(requiredSize.width);
 }
 
-jint ASViewImpl_nativeMeasureHeightWithId_withInt_(id uiView, jint width) {
+int32_t ASViewImpl_nativeMeasureHeightWithId_withInt_(id uiView, int32_t width) {
   ASViewImpl_initialize();
   CGSize maximumLabelSize = CGSizeMake(width,CGFLOAT_MAX);
   CGSize requiredSize = [((UIView*)uiView) sizeThatFits:maximumLabelSize];
@@ -6702,19 +6718,19 @@ void ASViewImpl_addPanListenerWithASIWidget_withId_withId_withASViewImpl_PanCall
   ASViewImpl_PanGestureRecognizer_addUIPanGestureRecognizer(new_ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withId_withASViewImpl_PanCallBack_(widget, uiView, uiLocationView, callback));
 }
 
-jint ASViewImpl_getXWithId_(id objview) {
+int32_t ASViewImpl_getXWithId_(id objview) {
   ASViewImpl_initialize();
   UIView* uiview = ((UIView*) objview);
   return uiview.frame.origin.x;
 }
 
-jint ASViewImpl_getYWithId_(id objview) {
+int32_t ASViewImpl_getYWithId_(id objview) {
   ASViewImpl_initialize();
   UIView* uiview = ((UIView*) objview);
   return uiview.frame.origin.y;
 }
 
-void ASViewImpl_updateBoundsXWithId_withInt_(id objview, jint x) {
+void ASViewImpl_updateBoundsXWithId_withInt_(id objview, int32_t x) {
   ASViewImpl_initialize();
   UIView* uiview = ((UIView*) objview);
   CGRect frame = uiview.frame;
@@ -6722,7 +6738,7 @@ void ASViewImpl_updateBoundsXWithId_withInt_(id objview, jint x) {
   uiview.frame = frame;
 }
 
-void ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(id objview, jint x, jint y, jint animationDurationInMs, id<ASViewImpl_AnimationCallBack> callBack) {
+void ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(id objview, int32_t x, int32_t y, int32_t animationDurationInMs, id<ASViewImpl_AnimationCallBack> callBack) {
   ASViewImpl_initialize();
   ASViewImpl_AnimationUtils_nativeAnimateWithInt_withInt_withInt_(new_ASViewImpl_AnimationUtils_initWithId_withASViewImpl_AnimationCallBack_(objview, callBack), x, y, animationDurationInMs);
 }
@@ -6744,17 +6760,19 @@ void ASViewImpl_setShadowColorWithId_withId_(id view, id color) {
 
 void ASViewImpl_setCornerRadiusWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
-  jfloat radius = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(objValue, [NSNumber class])))) floatValue];
+  float radius = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(objValue, [NSNumber class])))) floatValue];
   ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(nativeWidget, radius);
 }
 
-void ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(id view, jfloat radius) {
+void ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(id view, float radius) {
   ASViewImpl_initialize();
   ((UIView*)view).layer.cornerRadius = radius;
   ((UIView*)view).clipsToBounds = YES;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl)
+
+J2OBJC_NAME_MAPPING(ASViewImpl, "com.ashera.layout", "AS")
 
 @implementation ASViewImpl_IosAccessibilityTraits
 
@@ -6875,11 +6893,11 @@ void ASViewImpl_Vtype_init(ASViewImpl_Vtype *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"email" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"time" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"date" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"url" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"tel" withId:JavaLangInteger_valueOfWithInt_((jint) 0x5)];
+    (void) [self->mapping_ putWithId:@"email" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"time" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"date" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"url" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"tel" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x5)];
   }
 }
 
@@ -6937,9 +6955,9 @@ void ASViewImpl_ValidationErrorDisplay_init(ASViewImpl_ValidationErrorDisplay *s
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"popup" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"label" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"style" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
+    (void) [self->mapping_ putWithId:@"popup" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"label" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"style" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
   }
 }
 
@@ -6997,8 +7015,8 @@ void ASViewImpl_BackgroundRepeat_init(ASViewImpl_BackgroundRepeat *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"no-repeat" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"repeat" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
+    (void) [self->mapping_ putWithId:@"no-repeat" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"repeat" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
   }
 }
 
@@ -7119,8 +7137,8 @@ void ASViewImpl_ForegroundRepeat_init(ASViewImpl_ForegroundRepeat *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"no-repeat" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"repeat" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
+    (void) [self->mapping_ putWithId:@"no-repeat" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"repeat" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
   }
 }
 
@@ -7241,9 +7259,9 @@ void ASViewImpl_Visibility_init(ASViewImpl_Visibility *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"gone" withId:JavaLangInteger_valueOfWithInt_((jint) 0x8)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"invisible" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"visible" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"gone" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x8)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"invisible" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"visible" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -7301,10 +7319,10 @@ void ASViewImpl_LayoutDirection_init(ASViewImpl_LayoutDirection *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"inherit" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"locale" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"ltr" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"rtl" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
+    (void) [self->mapping_ putWithId:@"inherit" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"locale" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"ltr" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"rtl" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
   }
 }
 
@@ -7362,14 +7380,14 @@ void ASViewImpl_TextDirection_init(ASViewImpl_TextDirection *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"anyRtl" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"firstStrong" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"firstStrongLtr" withId:JavaLangInteger_valueOfWithInt_((jint) 0x6)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"firstStrongRtl" withId:JavaLangInteger_valueOfWithInt_((jint) 0x7)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"inherit" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"locale" withId:JavaLangInteger_valueOfWithInt_((jint) 0x5)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"ltr" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"rtl" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
+    (void) [self->mapping_ putWithId:@"anyRtl" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"firstStrong" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"firstStrongLtr" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x6)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"firstStrongRtl" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x7)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"inherit" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"locale" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x5)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"ltr" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"rtl" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
   }
 }
 
@@ -7427,13 +7445,13 @@ void ASViewImpl_TextAlignment_init(ASViewImpl_TextAlignment *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"center" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"gravity" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"inherit" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"textEnd" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"textStart" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"viewEnd" withId:JavaLangInteger_valueOfWithInt_((jint) 0x6)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"viewStart" withId:JavaLangInteger_valueOfWithInt_((jint) 0x5)];
+    (void) [self->mapping_ putWithId:@"center" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"gravity" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"inherit" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"textEnd" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"textStart" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"viewEnd" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x6)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"viewStart" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x5)];
   }
 }
 
@@ -7456,8 +7474,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)compareWithId:(id<ASIWidget>)arg0
-               withId:(id<ASIWidget>)arg1 {
+- (int32_t)compareWithId:(id<ASIWidget>)arg0
+                  withId:(id<ASIWidget>)arg1 {
   return [((id<ASIWidget>) nil_chk(arg0)) getZIndex] - [((id<ASIWidget>) nil_chk(arg1)) getZIndex];
 }
 
@@ -7502,7 +7520,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(compareWithId:withId:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "compare", "LASIWidget;LASIWidget;", "LASViewImpl;", "setZIndexWithASIWidget:withId:", "Ljava/lang/Object;Ljava/util/Comparator<Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASViewImpl_1 = { "", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, 4, -1 };
+  static const J2ObjcClassInfo _ASViewImpl_1 = { "", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, 4, -1 };
   return &_ASViewImpl_1;
 }
 
@@ -7593,13 +7611,13 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationCallBack)
   return self;
 }
 
-- (jfloat)getTextWidth {
+- (float)getTextWidth {
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(val$w_)) asWidget], [ADView class]);
   [((ADView *) nil_chk(view)) measureWithInt:0 withInt:0];
   return [view getMeasuredWidth];
 }
 
-- (jfloat)getTextHeight {
+- (float)getTextHeight {
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(val$w_)) asWidget], [ADView class]);
   [((ADView *) nil_chk(view)) measureWithInt:0 withInt:0];
   return [view getMeasuredHeight];
@@ -7622,7 +7640,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationCallBack)
     { "val$w_", "LASIWidget;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASIWidget;", "LASViewImpl;", "drawOverlayWithASIWidget:withJavaUtilList:" };
-  static const J2ObjcClassInfo _ASViewImpl_2 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8018, 3, 1, 1, -1, 2, -1, -1 };
+  static const J2ObjcClassInfo _ASViewImpl_2 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8000, 3, 1, 1, -1, 2, -1, -1 };
   return &_ASViewImpl_2;
 }
 
@@ -7764,10 +7782,10 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
     {
       JavaUtilArrayList *childAnims = [((JavaUtilStack *) nil_chk(childAnimators_)) pop];
       ADAnimatorSet *animatorSet = [((JavaUtilStack *) nil_chk(animatorSets_)) pop];
-      jint sequenceOrdering = [((JavaLangInteger *) nil_chk([((JavaUtilStack *) nil_chk(sequenceOrderings_)) pop])) intValue];
+      int32_t sequenceOrdering = [((JavaLangInteger *) nil_chk([((JavaUtilStack *) nil_chk(sequenceOrderings_)) pop])) intValue];
       if (animatorSet != nil && childAnims != nil) {
         IOSObjectArray *animsArray = [IOSObjectArray newArrayWithLength:[childAnims size] type:ADAnimator_class_()];
-        jint index = 0;
+        int32_t index = 0;
         for (ADAnimator * __strong a in childAnims) {
           (void) IOSObjectArray_Set(animsArray, index++, a);
         }
@@ -7795,8 +7813,8 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
 }
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length {
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length {
 }
 
 - (void)setStartOffsetWithASIWidget:(id<ASIWidget>)w
@@ -7853,25 +7871,25 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
   ASViewImpl_AnimationContentHandler_setOrderingWithASIWidget_withADAnimatorSet_withNSString_(self, w, animatorSet, value);
 }
 
-+ (jint)inferValueTypeFromValuesWithASIWidget:(id<ASIWidget>)w
-                                 withNSString:(NSString *)valueFromId
-                                 withNSString:(NSString *)valueToId {
++ (int32_t)inferValueTypeFromValuesWithASIWidget:(id<ASIWidget>)w
+                                    withNSString:(NSString *)valueFromId
+                                    withNSString:(NSString *)valueToId {
   return ASViewImpl_AnimationContentHandler_inferValueTypeFromValuesWithASIWidget_withNSString_withNSString_(w, valueFromId, valueToId);
 }
 
 + (ADPropertyValuesHolder *)getPVHWithASIWidget:(id<ASIWidget>)w
-                                        withInt:(jint)valueType
+                                        withInt:(int32_t)valueType
                                    withNSString:(NSString *)valueFromId
                                    withNSString:(NSString *)valueToId
                                    withNSString:(NSString *)propertyName {
   return ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_withInt_withNSString_withNSString_withNSString_(w, valueType, valueFromId, valueToId, propertyName);
 }
 
-+ (jboolean)isColorWithNSString:(NSString *)val {
++ (bool)isColorWithNSString:(NSString *)val {
   return ASViewImpl_AnimationContentHandler_isColorWithNSString_(val);
 }
 
-+ (jboolean)isDimenWithNSString:(NSString *)val {
++ (bool)isDimenWithNSString:(NSString *)val {
   return ASViewImpl_AnimationContentHandler_isDimenWithNSString_(val);
 }
 
@@ -7887,8 +7905,8 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
   ASViewImpl_AnimationContentHandler_setDurationWithASIWidget_withADValueAnimator_withNSString_(self, w, animator, strValue);
 }
 
-- (jint)getRepeatCountWithNSString:(NSString *)value
-                     withASIWidget:(id<ASIWidget>)w {
+- (int32_t)getRepeatCountWithNSString:(NSString *)value
+                        withASIWidget:(id<ASIWidget>)w {
   return ASViewImpl_AnimationContentHandler_getRepeatCountWithNSString_withASIWidget_(self, value, w);
 }
 
@@ -7898,7 +7916,7 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
   ASViewImpl_AnimationContentHandler_setRepeatCountWithASIWidget_withADValueAnimator_withNSString_(self, w, animator, strValue);
 }
 
-- (jint)getRepeatModeWithNSString:(NSString *)value {
+- (int32_t)getRepeatModeWithNSString:(NSString *)value {
   return ASViewImpl_AnimationContentHandler_getRepeatModeWithNSString_(self, value);
 }
 
@@ -7908,7 +7926,7 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
   ASViewImpl_AnimationContentHandler_setRepeatModeWithASIWidget_withADValueAnimator_withNSString_(self, w, animator, strValue);
 }
 
-- (jint)getValueTypeWithNSString:(NSString *)value {
+- (int32_t)getValueTypeWithNSString:(NSString *)value {
   return ASViewImpl_AnimationContentHandler_getValueTypeWithNSString_(self, value);
 }
 
@@ -7930,7 +7948,7 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
   ASViewImpl_AnimationContentHandler_parseAnimatorSetWithASIWidget_withADAnimatorSet_withOrgXmlSaxAttributes_(self, w, animatorSet, atts);
 }
 
-- (jint)getOrderingWithNSString:(NSString *)value {
+- (int32_t)getOrderingWithNSString:(NSString *)value {
   return ASViewImpl_AnimationContentHandler_getOrderingWithNSString_(self, value);
 }
 
@@ -8188,11 +8206,11 @@ void ASViewImpl_AnimationContentHandler_setOrderingWithASIWidget_withADAnimatorS
   self->sequenceOrdering_ = ASViewImpl_AnimationContentHandler_getOrderingWithNSString_(self, value);
 }
 
-jint ASViewImpl_AnimationContentHandler_inferValueTypeFromValuesWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *valueFromId, NSString *valueToId) {
+int32_t ASViewImpl_AnimationContentHandler_inferValueTypeFromValuesWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *valueFromId, NSString *valueToId) {
   ASViewImpl_AnimationContentHandler_initialize();
-  jboolean hasFrom = (valueFromId != nil);
-  jboolean hasTo = (valueToId != nil);
-  jint valueType;
+  bool hasFrom = (valueFromId != nil);
+  bool hasTo = (valueToId != nil);
+  int32_t valueType;
   if ((hasFrom && ASViewImpl_AnimationContentHandler_isColorWithNSString_(valueFromId)) || (hasTo && ASViewImpl_AnimationContentHandler_isColorWithNSString_(valueToId))) {
     valueType = ASViewImpl_AnimationContentHandler_VALUE_TYPE_COLOR;
   }
@@ -8202,10 +8220,10 @@ jint ASViewImpl_AnimationContentHandler_inferValueTypeFromValuesWithASIWidget_wi
   return valueType;
 }
 
-ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_withInt_withNSString_withNSString_withNSString_(id<ASIWidget> w, jint valueType, NSString *valueFromId, NSString *valueToId, NSString *propertyName) {
+ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_withInt_withNSString_withNSString_withNSString_(id<ASIWidget> w, int32_t valueType, NSString *valueFromId, NSString *valueToId, NSString *propertyName) {
   ASViewImpl_AnimationContentHandler_initialize();
-  jboolean hasFrom = (valueFromId != nil);
-  jboolean hasTo = (valueToId != nil);
+  bool hasFrom = (valueFromId != nil);
+  bool hasTo = (valueToId != nil);
   if (valueType == ASViewImpl_AnimationContentHandler_VALUE_TYPE_UNDEFINED) {
     if ((hasFrom && ASViewImpl_AnimationContentHandler_isColorWithNSString_(valueFromId)) || (hasTo && ASViewImpl_AnimationContentHandler_isColorWithNSString_(valueToId))) {
       valueType = ASViewImpl_AnimationContentHandler_VALUE_TYPE_COLOR;
@@ -8214,7 +8232,7 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
       valueType = ASViewImpl_AnimationContentHandler_VALUE_TYPE_FLOAT;
     }
   }
-  jboolean getFloats = valueType == ASViewImpl_AnimationContentHandler_VALUE_TYPE_FLOAT;
+  bool getFloats = valueType == ASViewImpl_AnimationContentHandler_VALUE_TYPE_FLOAT;
   ADPropertyValuesHolder *returnValue = nil;
   if (valueType == ASViewImpl_AnimationContentHandler_VALUE_TYPE_PATH) {
   }
@@ -8224,8 +8242,8 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
       evaluator = new_ADArgbEvaluator_init();
     }
     if (getFloats) {
-      jfloat valueFrom;
-      jfloat valueTo;
+      float valueFrom;
+      float valueTo;
       if (hasFrom) {
         if (ASViewImpl_AnimationContentHandler_isDimenWithNSString_(valueFromId)) {
           valueFrom = [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk([((id<ASIWidget>) nil_chk(w)) quickConvertWithId:valueFromId withNSString:@"dimensionfloat"], [JavaLangFloat class]))) floatValue];
@@ -8240,10 +8258,10 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
           else {
             valueTo = [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk([w quickConvertWithId:valueToId withNSString:@"float"], [JavaLangFloat class]))) floatValue];
           }
-          returnValue = ADPropertyValuesHolder_ofFloatWithNSString_withFloatArray_(propertyName, [IOSFloatArray newArrayWithFloats:(jfloat[]){ valueFrom, valueTo } count:2]);
+          returnValue = ADPropertyValuesHolder_ofFloatWithNSString_withFloatArray_(propertyName, [IOSFloatArray newArrayWithFloats:(float[]){ valueFrom, valueTo } count:2]);
         }
         else {
-          returnValue = ADPropertyValuesHolder_ofFloatWithNSString_withFloatArray_(propertyName, [IOSFloatArray newArrayWithFloats:(jfloat[]){ valueFrom } count:1]);
+          returnValue = ADPropertyValuesHolder_ofFloatWithNSString_withFloatArray_(propertyName, [IOSFloatArray newArrayWithFloats:(float[]){ valueFrom } count:1]);
         }
       }
       else {
@@ -8253,12 +8271,12 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
         else {
           valueTo = [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk([((id<ASIWidget>) nil_chk(w)) quickConvertWithId:valueToId withNSString:@"float"], [JavaLangFloat class]))) floatValue];
         }
-        returnValue = ADPropertyValuesHolder_ofFloatWithNSString_withFloatArray_(propertyName, [IOSFloatArray newArrayWithFloats:(jfloat[]){ valueTo } count:1]);
+        returnValue = ADPropertyValuesHolder_ofFloatWithNSString_withFloatArray_(propertyName, [IOSFloatArray newArrayWithFloats:(float[]){ valueTo } count:1]);
       }
     }
     else {
-      jint valueFrom;
-      jint valueTo;
+      int32_t valueFrom;
+      int32_t valueTo;
       if (hasFrom) {
         if (ASViewImpl_AnimationContentHandler_isDimenWithNSString_(valueFromId)) {
           valueFrom = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIWidget>) nil_chk(w)) quickConvertWithId:valueFromId withNSString:@"dimension"], [JavaLangInteger class]))) intValue];
@@ -8279,10 +8297,10 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
           else {
             valueTo = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIWidget>) nil_chk(w)) quickConvertWithId:valueToId withNSString:@"int"], [JavaLangInteger class]))) intValue];
           }
-          returnValue = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(propertyName, [IOSIntArray newArrayWithInts:(jint[]){ valueFrom, valueTo } count:2]);
+          returnValue = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(propertyName, [IOSIntArray newArrayWithInts:(int32_t[]){ valueFrom, valueTo } count:2]);
         }
         else {
-          returnValue = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(propertyName, [IOSIntArray newArrayWithInts:(jint[]){ valueFrom } count:1]);
+          returnValue = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(propertyName, [IOSIntArray newArrayWithInts:(int32_t[]){ valueFrom } count:1]);
         }
       }
       else {
@@ -8296,7 +8314,7 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
           else {
             valueTo = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIWidget>) nil_chk(w)) quickConvertWithId:valueToId withNSString:@"int"], [JavaLangInteger class]))) intValue];
           }
-          returnValue = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(propertyName, [IOSIntArray newArrayWithInts:(jint[]){ valueTo } count:1]);
+          returnValue = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(propertyName, [IOSIntArray newArrayWithInts:(int32_t[]){ valueTo } count:1]);
         }
       }
     }
@@ -8307,18 +8325,18 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
   return returnValue;
 }
 
-jboolean ASViewImpl_AnimationContentHandler_isColorWithNSString_(NSString *val) {
+bool ASViewImpl_AnimationContentHandler_isColorWithNSString_(NSString *val) {
   ASViewImpl_AnimationContentHandler_initialize();
   return [((NSString *) nil_chk(val)) java_hasPrefix:@"#"] || [val java_hasPrefix:@"@color/"];
 }
 
-jboolean ASViewImpl_AnimationContentHandler_isDimenWithNSString_(NSString *val) {
+bool ASViewImpl_AnimationContentHandler_isDimenWithNSString_(NSString *val) {
   ASViewImpl_AnimationContentHandler_initialize();
   return [((NSString *) nil_chk(val)) java_hasSuffix:@"dp"] || [val java_hasSuffix:@"sp"];
 }
 
 void ASViewImpl_AnimationContentHandler_parseAnimatorWithASIWidget_withADValueAnimator_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADValueAnimator *animator, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"interpolator", @"duration", @"startOffset", @"repeatCount", @"repeatMode", @"valueFrom", @"valueTo", @"valueType" }, 8)) {
@@ -8354,7 +8372,7 @@ void ASViewImpl_AnimationContentHandler_setDurationWithASIWidget_withADValueAnim
   (void) [((ADValueAnimator *) nil_chk(animator)) setDurationWithLong:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIWidget>) nil_chk(w)) quickConvertWithId:strValue withNSString:@"int"], [JavaLangInteger class]))) intValue]];
 }
 
-jint ASViewImpl_AnimationContentHandler_getRepeatCountWithNSString_withASIWidget_(ASViewImpl_AnimationContentHandler *self, NSString *value, id<ASIWidget> w) {
+int32_t ASViewImpl_AnimationContentHandler_getRepeatCountWithNSString_withASIWidget_(ASViewImpl_AnimationContentHandler *self, NSString *value, id<ASIWidget> w) {
   switch (JreIndexOfStr(value, (id[]){ @"infinite" }, 1)) {
     case 0:
     return -1;
@@ -8368,7 +8386,7 @@ void ASViewImpl_AnimationContentHandler_setRepeatCountWithASIWidget_withADValueA
   [((ADValueAnimator *) nil_chk(animator)) setRepeatCountWithInt:ASViewImpl_AnimationContentHandler_getRepeatCountWithNSString_withASIWidget_(self, strValue, w)];
 }
 
-jint ASViewImpl_AnimationContentHandler_getRepeatModeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value) {
+int32_t ASViewImpl_AnimationContentHandler_getRepeatModeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value) {
   switch (JreIndexOfStr(value, (id[]){ @"restart", @"reverse" }, 2)) {
     case 0:
     return 1;
@@ -8384,7 +8402,7 @@ void ASViewImpl_AnimationContentHandler_setRepeatModeWithASIWidget_withADValueAn
   [((ADValueAnimator *) nil_chk(animator)) setRepeatModeWithInt:ASViewImpl_AnimationContentHandler_getRepeatModeWithNSString_(self, strValue)];
 }
 
-jint ASViewImpl_AnimationContentHandler_getValueTypeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value) {
+int32_t ASViewImpl_AnimationContentHandler_getValueTypeWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value) {
   switch (JreIndexOfStr(value, (id[]){ @"floatType", @"intType", @"pathType", @"colorType" }, 4)) {
     case 0:
     return 0;
@@ -8401,7 +8419,7 @@ jint ASViewImpl_AnimationContentHandler_getValueTypeWithNSString_(ASViewImpl_Ani
 }
 
 void ASViewImpl_AnimationContentHandler_parsePropertyAnimatorWithASIWidget_withADObjectAnimator_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADObjectAnimator *animator, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"propertyName", @"propertyXName", @"propertyYName", @"pathData" }, 4)) {
@@ -8426,7 +8444,7 @@ void ASViewImpl_AnimationContentHandler_setPropertyNameWithASIWidget_withADObjec
 }
 
 void ASViewImpl_AnimationContentHandler_parseAnimatorSetWithASIWidget_withADAnimatorSet_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADAnimatorSet *animatorSet, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"ordering" }, 1)) {
@@ -8437,7 +8455,7 @@ void ASViewImpl_AnimationContentHandler_parseAnimatorSetWithASIWidget_withADAnim
   }
 }
 
-jint ASViewImpl_AnimationContentHandler_getOrderingWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value) {
+int32_t ASViewImpl_AnimationContentHandler_getOrderingWithNSString_(ASViewImpl_AnimationContentHandler *self, NSString *value) {
   switch (JreIndexOfStr(value, (id[]){ @"together", @"sequentially" }, 2)) {
     case 0:
     return 0;
@@ -8450,7 +8468,7 @@ jint ASViewImpl_AnimationContentHandler_getOrderingWithNSString_(ASViewImpl_Anim
 }
 
 void ASViewImpl_AnimationContentHandler_parseAccelerateInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"factor" }, 1)) {
@@ -8462,7 +8480,7 @@ void ASViewImpl_AnimationContentHandler_parseAccelerateInterpolatorWithASIWidget
 }
 
 void ASViewImpl_AnimationContentHandler_parseDecelerateInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"factor" }, 1)) {
@@ -8474,7 +8492,7 @@ void ASViewImpl_AnimationContentHandler_parseDecelerateInterpolatorWithASIWidget
 }
 
 void ASViewImpl_AnimationContentHandler_parseCycleInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"cycles" }, 1)) {
@@ -8486,7 +8504,7 @@ void ASViewImpl_AnimationContentHandler_parseCycleInterpolatorWithASIWidget_with
 }
 
 void ASViewImpl_AnimationContentHandler_parseAnticipateInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"tension" }, 1)) {
@@ -8498,7 +8516,7 @@ void ASViewImpl_AnimationContentHandler_parseAnticipateInterpolatorWithASIWidget
 }
 
 void ASViewImpl_AnimationContentHandler_parseOvershootInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"tension" }, 1)) {
@@ -8510,7 +8528,7 @@ void ASViewImpl_AnimationContentHandler_parseOvershootInterpolatorWithASIWidget_
 }
 
 void ASViewImpl_AnimationContentHandler_parseAnticipateOvershootInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts) {
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *name = [atts getLocalNameWithInt:i];
     NSString *value = ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(name, atts);
     switch (JreIndexOfStr([atts getLocalNameWithInt:i], (id[]){ @"tension", @"extraTension" }, 2)) {
@@ -8714,7 +8732,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_CustomProperty)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -8762,7 +8780,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_CustomProperty)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -8810,7 +8828,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_CustomProperty)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -8858,7 +8876,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_CustomProperty)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -8885,12 +8903,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_CustomProperty)
 }
 
 - (void)onAnimationStartWithADAnimator:(ADAnimator *)arg0
-                           withBoolean:(jboolean)arg1 {
+                           withBoolean:(bool)arg1 {
   ADAnimator_AnimatorListener_onAnimationStartWithADAnimator_withBoolean_(self, arg0, arg1);
 }
 
 - (void)onAnimationEndWithADAnimator:(ADAnimator *)arg0
-                         withBoolean:(jboolean)arg1 {
+                         withBoolean:(bool)arg1 {
   ADAnimator_AnimatorListener_onAnimationEndWithADAnimator_withBoolean_(self, arg0, arg1);
 }
 
@@ -9008,7 +9026,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimatorListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -9114,9 +9132,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnClickListener)
   return self;
 }
 
-- (jboolean)onTouchWithADView:(ADView *)v
-            withADMotionEvent:(ADMotionEvent *)event {
-  jboolean result = true;
+- (bool)onTouchWithADView:(ADView *)v
+        withADMotionEvent:(ADMotionEvent *)event {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onTouch"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onTouch"];
     id<JavaUtilMap> obj = [self getOnTouchEventObjWithADView:v withADMotionEvent:event];
@@ -9141,7 +9159,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnClickListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -9249,8 +9267,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnTouchListener)
   return self;
 }
 
-- (jboolean)onLongClickWithADView:(ADView *)v {
-  jboolean result = true;
+- (bool)onLongClickWithADView:(ADView *)v {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onLongClick"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onLongClick"];
     id<JavaUtilMap> obj = [self getOnLongClickEventObjWithADView:v];
@@ -9275,7 +9293,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnTouchListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -9381,9 +9399,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnLongClickListener)
   return self;
 }
 
-- (jboolean)onDragWithADView:(ADView *)v
-        withADView_DragEvent:(ADView_DragEvent *)event {
-  jboolean result = true;
+- (bool)onDragWithADView:(ADView *)v
+    withADView_DragEvent:(ADView_DragEvent *)event {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onDrag"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onDrag"];
     id<JavaUtilMap> obj = [self getOnDragEventObjWithADView:v withADView_DragEvent:event];
@@ -9408,7 +9426,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnLongClickListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -9516,10 +9534,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnDragListener)
   return self;
 }
 
-- (jboolean)onKeyWithADView:(ADView *)v
-                    withInt:(jint)keyCode
-             withADKeyEvent:(ADKeyEvent *)event {
-  jboolean result = true;
+- (bool)onKeyWithADView:(ADView *)v
+                withInt:(int32_t)keyCode
+         withADKeyEvent:(ADKeyEvent *)event {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onKey"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onKey"];
     id<JavaUtilMap> obj = [self getOnKeyEventObjWithADView:v withInt:keyCode withADKeyEvent:event];
@@ -9544,7 +9562,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnDragListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -9555,7 +9573,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnDragListener)
 }
 
 - (id<JavaUtilMap>)getOnKeyEventObjWithADView:(ADView *)v
-                                      withInt:(jint)keyCode
+                                      withInt:(int32_t)keyCode
                                withADKeyEvent:(ADKeyEvent *)event {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
@@ -9654,8 +9672,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnKeyListener)
   return self;
 }
 
-- (jboolean)onSwipedWithNSString:(NSString *)direction {
-  jboolean result = true;
+- (bool)onSwipedWithNSString:(NSString *)direction {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onSwiped"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onSwiped"];
     id<JavaUtilMap> obj = [self getOnSwipedEventObjWithNSString:direction];
@@ -9680,7 +9698,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnKeyListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -9776,46 +9794,46 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_SwipeListener)
   return self;
 }
 
-- (void)onTouchDownWithInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)rawX
-                   withInt:(jint)rawY {
+- (void)onTouchDownWithInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)rawX
+                   withInt:(int32_t)rawY {
   [self sendEventWithInt:x withInt:y withInt:rawX withInt:rawY withInt:ADMotionEvent_ACTION_DOWN];
 }
 
-- (void)onTouchUpWithInt:(jint)x
-                 withInt:(jint)y
-                 withInt:(jint)rawX
-                 withInt:(jint)rawY {
+- (void)onTouchUpWithInt:(int32_t)x
+                 withInt:(int32_t)y
+                 withInt:(int32_t)rawX
+                 withInt:(int32_t)rawY {
   [self sendEventWithInt:x withInt:y withInt:rawX withInt:rawY withInt:ADMotionEvent_ACTION_UP];
 }
 
-- (void)onTouchMoveWithInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)rawX
-                   withInt:(jint)rawY {
+- (void)onTouchMoveWithInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)rawX
+                   withInt:(int32_t)rawY {
   [self sendEventWithInt:x withInt:y withInt:rawX withInt:rawY withInt:ADMotionEvent_ACTION_MOVE];
 }
 
-- (void)onTouchCancelWithInt:(jint)x
-                     withInt:(jint)y
-                     withInt:(jint)rawX
-                     withInt:(jint)rawY {
+- (void)onTouchCancelWithInt:(int32_t)x
+                     withInt:(int32_t)y
+                     withInt:(int32_t)rawX
+                     withInt:(int32_t)rawY {
   [self sendEventWithInt:x withInt:y withInt:rawX withInt:rawY withInt:ADMotionEvent_ACTION_CANCEL];
 }
 
-- (void)onTouchOutsideWithInt:(jint)x
-                      withInt:(jint)y
-                      withInt:(jint)rawX
-                      withInt:(jint)rawY {
+- (void)onTouchOutsideWithInt:(int32_t)x
+                      withInt:(int32_t)y
+                      withInt:(int32_t)rawX
+                      withInt:(int32_t)rawY {
   [self sendEventWithInt:x withInt:y withInt:rawX withInt:rawY withInt:ADMotionEvent_ACTION_OUTSIDE];
 }
 
-- (void)sendEventWithInt:(jint)x
-                 withInt:(jint)y
-                 withInt:(jint)rawX
-                 withInt:(jint)rawY
-                 withInt:(jint)action {
+- (void)sendEventWithInt:(int32_t)x
+                 withInt:(int32_t)y
+                 withInt:(int32_t)rawX
+                 withInt:(int32_t)rawY
+                 withInt:(int32_t)action {
   ADMotionEvent *motionEvent = new_ADMotionEvent_init();
   [motionEvent setActionWithInt:action];
   [motionEvent setXWithInt:x];
@@ -10101,20 +10119,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_UITapGestureRecognizerDelegate)
   return ASViewImpl_UIDragInteractionDelegate_getEventObjWithASIWidget_(self, w);
 }
 
-- (void)sendStartEventWithInt:(jint)x
-                      withInt:(jint)y {
+- (void)sendStartEventWithInt:(int32_t)x
+                      withInt:(int32_t)y {
   ASViewImpl_UIDragInteractionDelegate_sendEventWithInt_withInt_withInt_withBoolean_(self, x, y, ADView_DragEvent_ACTION_DRAG_STARTED, true);
 }
 
-- (void)sendEndEventWithInt:(jint)x
-                    withInt:(jint)y {
+- (void)sendEndEventWithInt:(int32_t)x
+                    withInt:(int32_t)y {
   ASViewImpl_UIDragInteractionDelegate_sendEventWithInt_withInt_withInt_withBoolean_(self, x, y, ADView_DragEvent_ACTION_DRAG_ENDED, false);
 }
 
-- (void)sendEventWithInt:(jint)x
-                 withInt:(jint)y
-                 withInt:(jint)action
-             withBoolean:(jboolean)dragCanAccept {
+- (void)sendEventWithInt:(int32_t)x
+                 withInt:(int32_t)y
+                 withInt:(int32_t)action
+             withBoolean:(bool)dragCanAccept {
   ASViewImpl_UIDragInteractionDelegate_sendEventWithInt_withInt_withInt_withBoolean_(self, x, y, action, dragCanAccept);
 }
 
@@ -10194,7 +10212,7 @@ id ASViewImpl_UIDragInteractionDelegate_getEventObjWithASIWidget_(ASViewImpl_UID
   return ASPluginInvoker_marshalWithId_(eventData);
 }
 
-void ASViewImpl_UIDragInteractionDelegate_sendEventWithInt_withInt_withInt_withBoolean_(ASViewImpl_UIDragInteractionDelegate *self, jint x, jint y, jint action, jboolean dragCanAccept) {
+void ASViewImpl_UIDragInteractionDelegate_sendEventWithInt_withInt_withInt_withBoolean_(ASViewImpl_UIDragInteractionDelegate *self, int32_t x, int32_t y, int32_t action, bool dragCanAccept) {
   id<JavaUtilList> listeners = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(self->widget_)) getFragment])) getListenerWithIOSClass:ASViewImpl_OnDragListener_class_()];
   if (listeners != nil) {
     for (ASViewImpl_OnDragListener * __strong listener in listeners) {
@@ -10219,35 +10237,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_UIDragInteractionDelegate)
   return self;
 }
 
-- (void)dragEnterWithInt:(jint)x
-                 withInt:(jint)y {
+- (void)dragEnterWithInt:(int32_t)x
+                 withInt:(int32_t)y {
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget_)) asWidget], [ADView class]);
   [((ADView *) nil_chk(view)) setDragHoveredWithBoolean:true];
   [self sendEventWithInt:x withInt:y withNSString:nil withInt:ADView_DragEvent_ACTION_DRAG_ENTERED];
 }
 
-- (void)dragLeaveWithInt:(jint)x
-                 withInt:(jint)y {
+- (void)dragLeaveWithInt:(int32_t)x
+                 withInt:(int32_t)y {
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget_)) asWidget], [ADView class]);
   [((ADView *) nil_chk(view)) setDragHoveredWithBoolean:false];
   [self sendEventWithInt:x withInt:y withNSString:nil withInt:ADView_DragEvent_ACTION_DRAG_ENDED];
 }
 
-- (void)dragOverWithInt:(jint)x
-                withInt:(jint)y {
+- (void)dragOverWithInt:(int32_t)x
+                withInt:(int32_t)y {
   [self sendEventWithInt:x withInt:y withNSString:nil withInt:ADView_DragEvent_ACTION_DRAG_LOCATION];
 }
 
-- (void)dropWithInt:(jint)x
-            withInt:(jint)y
+- (void)dropWithInt:(int32_t)x
+            withInt:(int32_t)y
        withNSString:(NSString *)data {
   [self sendEventWithInt:x withInt:y withNSString:data withInt:ADView_DragEvent_ACTION_DROP];
 }
 
-- (void)sendEventWithInt:(jint)x
-                 withInt:(jint)y
+- (void)sendEventWithInt:(int32_t)x
+                 withInt:(int32_t)y
             withNSString:(NSString *)data
-                 withInt:(jint)action {
+                 withInt:(int32_t)action {
   ADView_DragEvent *dragEvent = new_ADView_DragEvent_init();
   [dragEvent setActionWithInt:action];
   [dragEvent setXWithInt:x];
@@ -10545,9 +10563,9 @@ withASViewImpl_AnimationCallBack:(id<ASViewImpl_AnimationCallBack>)callBack {
   return self;
 }
 
-- (void)nativeAnimateWithInt:(jint)x
-                     withInt:(jint)y
-                     withInt:(jint)animationDurationInMs {
+- (void)nativeAnimateWithInt:(int32_t)x
+                     withInt:(int32_t)y
+                     withInt:(int32_t)animationDurationInMs {
   ASViewImpl_AnimationUtils_nativeAnimateWithInt_withInt_withInt_(self, x, y, animationDurationInMs);
 }
 
@@ -10593,7 +10611,7 @@ ASViewImpl_AnimationUtils *create_ASViewImpl_AnimationUtils_initWithId_withASVie
   J2OBJC_CREATE_IMPL(ASViewImpl_AnimationUtils, initWithId_withASViewImpl_AnimationCallBack_, objview, callBack)
 }
 
-void ASViewImpl_AnimationUtils_nativeAnimateWithInt_withInt_withInt_(ASViewImpl_AnimationUtils *self, jint x, jint y, jint animationDurationInMs) {
+void ASViewImpl_AnimationUtils_nativeAnimateWithInt_withInt_withInt_(ASViewImpl_AnimationUtils *self, int32_t x, int32_t y, int32_t animationDurationInMs) {
   UIView* uiview = ((UIView*) self->objview_);
   CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(animationDidUpdate)];
   displayLink.frameInterval = 1;

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\BaseMenuPresenter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseMenuPresenter.h"
 #include "Context.h"
 #include "IOSClass.h"
@@ -12,16 +17,24 @@
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewParent.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ADXBaseMenuPresenter () {
  @public
-  jint mMenuLayoutRes_;
-  jint mItemLayoutRes_;
-  jint mId_;
+  int32_t mMenuLayoutRes_;
+  int32_t mItemLayoutRes_;
+  int32_t mId_;
 }
 
 @end
@@ -43,25 +56,25 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)updateMenuViewWithBoolean:(jboolean)cleared {
+- (void)updateMenuViewWithBoolean:(bool)cleared {
   ADViewGroup *parent = (ADViewGroup *) cast_chk(mMenuView_, [ADViewGroup class]);
   if (parent == nil) return;
-  jint childIndex = 0;
+  int32_t childIndex = 0;
   if (mMenu_ != nil) {
     [mMenu_ flagActionItems];
     JavaUtilArrayList *visibleItems = JreRetainedLocalValue([((ADXMenuBuilder *) nil_chk(mMenu_)) getVisibleItems]);
-    jint itemCount = [((JavaUtilArrayList *) nil_chk(visibleItems)) size];
-    for (jint i = 0; i < itemCount; i++) {
+    int32_t itemCount = [((JavaUtilArrayList *) nil_chk(visibleItems)) size];
+    for (int32_t i = 0; i < itemCount; i++) {
       ADXMenuItemImpl *item = JreRetainedLocalValue([visibleItems getWithInt:i]);
       if ([self shouldIncludeItemWithInt:childIndex withADXMenuItemImpl:item]) {
         ADView *convertView = [parent getChildAtWithInt:childIndex];
         ADXMenuItemImpl *oldItem = [ADXBaseMenuPresenter_MenuView_ItemView_class_() isInstance:convertView] ? [((id<ADXBaseMenuPresenter_MenuView_ItemView>) nil_chk(((id<ADXBaseMenuPresenter_MenuView_ItemView>) cast_check(convertView, ADXBaseMenuPresenter_MenuView_ItemView_class_())))) getItemData] : nil;
         ADView *itemView = [self getItemViewWithADXMenuItemImpl:item withADView:convertView withADViewGroup:parent];
-        if (item != oldItem) {
+        if (!JreObjectEqualsEquals(item, oldItem)) {
           [((ADView *) nil_chk(itemView)) setPressedWithBoolean:false];
           [itemView jumpDrawablesToCurrentState];
         }
-        if (itemView != convertView) {
+        if (!JreObjectEqualsEquals(itemView, convertView)) {
           [self addItemViewWithADView:itemView withInt:childIndex];
         }
         childIndex++;
@@ -76,7 +89,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addItemViewWithADView:(ADView *)itemView
-                      withInt:(jint)childIndex {
+                      withInt:(int32_t)childIndex {
   ADViewGroup *currentParent = (ADViewGroup *) cast_chk([((ADView *) nil_chk(itemView)) getParent], [ADViewGroup class]);
   if (currentParent != nil) {
     [currentParent removeViewWithADView:itemView];
@@ -84,18 +97,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADViewGroup *) nil_chk(((ADViewGroup *) cast_chk(mMenuView_, [ADViewGroup class])))) addViewWithADView:itemView withInt:childIndex];
 }
 
-- (jboolean)filterLeftoverViewWithADViewGroup:(ADViewGroup *)parent
-                                      withInt:(jint)childIndex {
+- (bool)filterLeftoverViewWithADViewGroup:(ADViewGroup *)parent
+                                  withInt:(int32_t)childIndex {
   [((ADViewGroup *) nil_chk(parent)) removeViewAtWithInt:childIndex];
   return true;
 }
 
-- (jboolean)shouldIncludeItemWithInt:(jint)childIndex
-                 withADXMenuItemImpl:(ADXMenuItemImpl *)item {
+- (bool)shouldIncludeItemWithInt:(int32_t)childIndex
+             withADXMenuItemImpl:(ADXMenuItemImpl *)item {
   return true;
 }
 
-- (jboolean)flagActionItems {
+- (bool)flagActionItems {
   return false;
 }
 
@@ -120,7 +133,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)isMenuItemViewWithADView:(ADView *)convertView {
+- (bool)isMenuItemViewWithADView:(ADView *)convertView {
   return false;
 }
 
@@ -178,6 +191,8 @@ void ADXBaseMenuPresenter_init(ADXBaseMenuPresenter *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXBaseMenuPresenter)
+
+J2OBJC_NAME_MAPPING(ADXBaseMenuPresenter, "androidx.appcompat.view.menu", "ADX")
 
 @implementation ADXBaseMenuPresenter_MenuView
 

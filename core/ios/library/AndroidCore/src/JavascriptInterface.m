@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\JavascriptInterface.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "JavascriptInterface.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADJavascriptInterface
@@ -18,7 +31,7 @@
   return @"@r.android.webkit.JavascriptInterface()";
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -39,3 +52,5 @@ id<ADJavascriptInterface> create_ADJavascriptInterface() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADJavascriptInterface)
+
+J2OBJC_NAME_MAPPING(ADJavascriptInterface, "r.android.webkit", "AD")

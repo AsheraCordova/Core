@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\SpannableStringBuilder.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SpannableStringBuilder")
@@ -22,6 +23,8 @@
 
 @class IOSCharArray;
 @class IOSObjectArray;
+@class JavaLangCharacter;
+@class JavaLangInteger;
 @protocol JavaLangCharSequence;
 @protocol JavaUtilStreamIntStream;
 
@@ -31,54 +34,54 @@
 
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)source;
 
-- (id<ADEditable>)appendWithChar:(jchar)text;
+- (id<ADEditable>)appendWithChar:(unichar)text;
 
 - (id<ADEditable>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 - (id<ADEditable>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                         withInt:(jint)start
-                                         withInt:(jint)end;
+                                         withInt:(int32_t)start
+                                         withInt:(int32_t)end;
 
-- (jchar)charAtWithInt:(jint)index;
+- (unichar)charAtWithInt:(int32_t)index;
 
 - (void)clear;
 
 - (void)clearSpans;
 
-- (id<ADEditable>)delete__WithInt:(jint)st
-                          withInt:(jint)en;
+- (id<ADEditable>)delete__WithInt:(int32_t)st
+                          withInt:(int32_t)en;
 
-- (void)getCharsWithInt:(jint)start
-                withInt:(jint)end
+- (void)getCharsWithInt:(int32_t)start
+                withInt:(int32_t)end
           withCharArray:(IOSCharArray *)dest
-                withInt:(jint)destoff;
+                withInt:(int32_t)destoff;
 
 - (IOSObjectArray *)getFilters;
 
-- (id<ADEditable>)insertWithInt:(jint)where
+- (id<ADEditable>)insertWithInt:(int32_t)where
        withJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
-- (id<ADEditable>)insertWithInt:(jint)where
+- (id<ADEditable>)insertWithInt:(int32_t)where
        withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                        withInt:(jint)start
-                        withInt:(jint)end;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)end;
 
-- (jint)java_length;
+- (int32_t)java_length;
 
-- (id<ADEditable>)replaceWithInt:(jint)st
-                         withInt:(jint)en
+- (id<ADEditable>)replaceWithInt:(int32_t)st
+                         withInt:(int32_t)en
         withJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
-- (id<ADEditable>)replaceWithInt:(jint)st
-                         withInt:(jint)en
+- (id<ADEditable>)replaceWithInt:(int32_t)st
+                         withInt:(int32_t)en
         withJavaLangCharSequence:(id<JavaLangCharSequence>)source
-                         withInt:(jint)start
-                         withInt:(jint)end;
+                         withInt:(int32_t)start
+                         withInt:(int32_t)end;
 
 - (void)setFiltersWithADInputFilterArray:(IOSObjectArray *)filters;
 
-- (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
-                                         to:(jint)end;
+- (id<JavaLangCharSequence>)subSequenceFrom:(int32_t)start
+                                         to:(int32_t)end;
 
 // Disallowed inherited constructors, do not use.
 
@@ -97,6 +100,7 @@ FOUNDATION_EXPORT ADSpannableStringBuilder *create_ADSpannableStringBuilder_init
 J2OBJC_TYPE_LITERAL_HEADER(ADSpannableStringBuilder)
 
 @compatibility_alias RAndroidTextSpannableStringBuilder ADSpannableStringBuilder;
+
 
 #endif
 

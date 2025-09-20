@@ -3,44 +3,56 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\TextDirectionHeuristics.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "TextDirectionHeuristic.h"
 #include "TextDirectionHeuristics.h"
 #include "TextUtils.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Byte.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/nio/CharBuffer.h"
 #include "java/util/Locale.h"
 
+
 @protocol ADTextDirectionHeuristics_TextDirectionAlgorithm;
-@protocol JavaLangCharSequence;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADTextDirectionHeuristics ()
 
-+ (jint)isRtlCodePointWithInt:(jint)codePoint;
++ (int32_t)isRtlCodePointWithInt:(int32_t)codePoint;
 
 @end
 
 /*!
  @brief State constants for taking care about true / false / unknown
  */
-inline jint ADTextDirectionHeuristics_get_STATE_TRUE(void);
+inline int32_t ADTextDirectionHeuristics_get_STATE_TRUE(void);
 #define ADTextDirectionHeuristics_STATE_TRUE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextDirectionHeuristics, STATE_TRUE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextDirectionHeuristics, STATE_TRUE, int32_t)
 
-inline jint ADTextDirectionHeuristics_get_STATE_FALSE(void);
+inline int32_t ADTextDirectionHeuristics_get_STATE_FALSE(void);
 #define ADTextDirectionHeuristics_STATE_FALSE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextDirectionHeuristics, STATE_FALSE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextDirectionHeuristics, STATE_FALSE, int32_t)
 
-inline jint ADTextDirectionHeuristics_get_STATE_UNKNOWN(void);
+inline int32_t ADTextDirectionHeuristics_get_STATE_UNKNOWN(void);
 #define ADTextDirectionHeuristics_STATE_UNKNOWN 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextDirectionHeuristics, STATE_UNKNOWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextDirectionHeuristics, STATE_UNKNOWN, int32_t)
 
-__attribute__((unused)) static jint ADTextDirectionHeuristics_isRtlCodePointWithInt_(jint codePoint);
+__attribute__((unused)) static int32_t ADTextDirectionHeuristics_isRtlCodePointWithInt_(int32_t codePoint);
 
 /*!
  @brief Computes the text direction based on an algorithm.Subclasses implement 
@@ -57,19 +69,19 @@ __attribute__((unused)) static jint ADTextDirectionHeuristics_isRtlCodePointWith
 /*!
  @brief Return true if the default text direction is rtl.
  */
-- (jboolean)defaultIsRtl;
+- (bool)defaultIsRtl;
 
-- (jboolean)isRtlWithCharArray:(IOSCharArray *)array
-                       withInt:(jint)start
-                       withInt:(jint)count;
+- (bool)isRtlWithCharArray:(IOSCharArray *)array
+                   withInt:(int32_t)start
+                   withInt:(int32_t)count;
 
-- (jboolean)isRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                  withInt:(jint)start
-                                  withInt:(jint)count;
+- (bool)isRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                              withInt:(int32_t)start
+                              withInt:(int32_t)count;
 
-- (jboolean)doCheckWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                    withInt:(jint)start
-                                    withInt:(jint)count;
+- (bool)doCheckWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                withInt:(int32_t)start
+                                withInt:(int32_t)count;
 
 @end
 
@@ -79,31 +91,33 @@ J2OBJC_FIELD_SETTER(ADTextDirectionHeuristics_TextDirectionHeuristicImpl, mAlgor
 
 __attribute__((unused)) static void ADTextDirectionHeuristics_TextDirectionHeuristicImpl_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_(ADTextDirectionHeuristics_TextDirectionHeuristicImpl *self, id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm);
 
-__attribute__((unused)) static jboolean ADTextDirectionHeuristics_TextDirectionHeuristicImpl_doCheckWithJavaLangCharSequence_withInt_withInt_(ADTextDirectionHeuristics_TextDirectionHeuristicImpl *self, id<JavaLangCharSequence> cs, jint start, jint count);
+__attribute__((unused)) static bool ADTextDirectionHeuristics_TextDirectionHeuristicImpl_doCheckWithJavaLangCharSequence_withInt_withInt_(ADTextDirectionHeuristics_TextDirectionHeuristicImpl *self, id<JavaLangCharSequence> cs, int32_t start, int32_t count);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_TextDirectionHeuristicImpl)
 
+
 @interface ADTextDirectionHeuristics_TextDirectionHeuristicInternal : ADTextDirectionHeuristics_TextDirectionHeuristicImpl {
  @public
-  jboolean mDefaultIsRtl_;
+  bool mDefaultIsRtl_;
 }
 
 - (instancetype)initWithADTextDirectionHeuristics_TextDirectionAlgorithm:(id<ADTextDirectionHeuristics_TextDirectionAlgorithm>)algorithm
-                                                             withBoolean:(jboolean)defaultIsRtl;
+                                                             withBoolean:(bool)defaultIsRtl;
 
-- (jboolean)defaultIsRtl;
+- (bool)defaultIsRtl;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADTextDirectionHeuristics_TextDirectionHeuristicInternal)
 
-__attribute__((unused)) static void ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(ADTextDirectionHeuristics_TextDirectionHeuristicInternal *self, id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, jboolean defaultIsRtl);
+__attribute__((unused)) static void ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(ADTextDirectionHeuristics_TextDirectionHeuristicInternal *self, id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, bool defaultIsRtl);
 
-__attribute__((unused)) static ADTextDirectionHeuristics_TextDirectionHeuristicInternal *new_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, jboolean defaultIsRtl) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADTextDirectionHeuristics_TextDirectionHeuristicInternal *new_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, bool defaultIsRtl) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADTextDirectionHeuristics_TextDirectionHeuristicInternal *create_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, jboolean defaultIsRtl);
+__attribute__((unused)) static ADTextDirectionHeuristics_TextDirectionHeuristicInternal *create_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, bool defaultIsRtl);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_TextDirectionHeuristicInternal)
+
 
 /*!
  @brief Interface for an algorithm to guess the direction of a paragraph of text.
@@ -113,9 +127,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_TextDirectionHeuristicInter
 /*!
  @brief Returns whether the range of text is RTL according to the algorithm.
  */
-- (jint)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                 withInt:(jint)start
-                                 withInt:(jint)count;
+- (int32_t)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)count;
 
 @end
 
@@ -127,6 +141,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADTextDirectionHeuristics_TextDirectionAlgorithm)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_TextDirectionAlgorithm)
 
+
 /*!
  @brief Algorithm that uses the first strong directional character to determine the paragraph
   direction.This is the standard Unicode Bidirectional Algorithm (steps P2 and P3), with the
@@ -134,9 +149,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_TextDirectionAlgorithm)
  */
 @interface ADTextDirectionHeuristics_FirstStrong : NSObject < ADTextDirectionHeuristics_TextDirectionAlgorithm >
 
-- (jint)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                 withInt:(jint)start
-                                 withInt:(jint)count;
+- (int32_t)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)count;
 
 - (instancetype)init;
 
@@ -156,6 +171,7 @@ __attribute__((unused)) static ADTextDirectionHeuristics_FirstStrong *create_ADT
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_FirstStrong)
 
+
 /*!
  @brief Algorithm that uses the presence of any strong directional character of the type indicated
   in the constructor parameter to determine the direction of text.
@@ -163,14 +179,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_FirstStrong)
  */
 @interface ADTextDirectionHeuristics_AnyStrong : NSObject < ADTextDirectionHeuristics_TextDirectionAlgorithm > {
  @public
-  jboolean mLookForRtl_;
+  bool mLookForRtl_;
 }
 
-- (jint)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                 withInt:(jint)start
-                                 withInt:(jint)count;
+- (int32_t)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)count;
 
-- (instancetype)initWithBoolean:(jboolean)lookForRtl;
+- (instancetype)initWithBoolean:(bool)lookForRtl;
 
 @end
 
@@ -184,13 +200,14 @@ inline ADTextDirectionHeuristics_AnyStrong *ADTextDirectionHeuristics_AnyStrong_
 static ADTextDirectionHeuristics_AnyStrong *ADTextDirectionHeuristics_AnyStrong_INSTANCE_LTR;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADTextDirectionHeuristics_AnyStrong, INSTANCE_LTR, ADTextDirectionHeuristics_AnyStrong *)
 
-__attribute__((unused)) static void ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(ADTextDirectionHeuristics_AnyStrong *self, jboolean lookForRtl);
+__attribute__((unused)) static void ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(ADTextDirectionHeuristics_AnyStrong *self, bool lookForRtl);
 
-__attribute__((unused)) static ADTextDirectionHeuristics_AnyStrong *new_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(jboolean lookForRtl) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADTextDirectionHeuristics_AnyStrong *new_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(bool lookForRtl) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADTextDirectionHeuristics_AnyStrong *create_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(jboolean lookForRtl);
+__attribute__((unused)) static ADTextDirectionHeuristics_AnyStrong *create_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(bool lookForRtl);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_AnyStrong)
+
 
 /*!
  @brief Algorithm that uses the Locale direction to force the direction of a paragraph.
@@ -199,7 +216,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_AnyStrong)
 
 - (instancetype)init;
 
-- (jboolean)defaultIsRtl;
+- (bool)defaultIsRtl;
 
 @end
 
@@ -216,6 +233,7 @@ __attribute__((unused)) static ADTextDirectionHeuristics_TextDirectionHeuristicL
 __attribute__((unused)) static ADTextDirectionHeuristics_TextDirectionHeuristicLocale *create_ADTextDirectionHeuristics_TextDirectionHeuristicLocale_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristics_TextDirectionHeuristicLocale)
+
 
 J2OBJC_INITIALIZED_DEFN(ADTextDirectionHeuristics)
 
@@ -235,7 +253,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)isRtlCodePointWithInt:(jint)codePoint {
++ (int32_t)isRtlCodePointWithInt:(int32_t)codePoint {
   return ADTextDirectionHeuristics_isRtlCodePointWithInt_(codePoint);
 }
 
@@ -292,7 +310,7 @@ ADTextDirectionHeuristics *create_ADTextDirectionHeuristics_init() {
   J2OBJC_CREATE_IMPL(ADTextDirectionHeuristics, init)
 }
 
-jint ADTextDirectionHeuristics_isRtlCodePointWithInt_(jint codePoint) {
+int32_t ADTextDirectionHeuristics_isRtlCodePointWithInt_(int32_t codePoint) {
   ADTextDirectionHeuristics_initialize();
   switch (JavaLangCharacter_getDirectionalityWithInt_(codePoint)) {
     case JavaLangCharacter_DIRECTIONALITY_LEFT_TO_RIGHT:
@@ -301,10 +319,10 @@ jint ADTextDirectionHeuristics_isRtlCodePointWithInt_(jint codePoint) {
     case JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC:
     return ADTextDirectionHeuristics_STATE_TRUE;
     case JavaLangCharacter_DIRECTIONALITY_UNDEFINED:
-    if (((jint) 0x0590 <= codePoint && codePoint <= (jint) 0x08FF) || ((jint) 0xFB1D <= codePoint && codePoint <= (jint) 0xFDCF) || ((jint) 0xFDF0 <= codePoint && codePoint <= (jint) 0xFDFF) || ((jint) 0xFE70 <= codePoint && codePoint <= (jint) 0xFEFF) || ((jint) 0x10800 <= codePoint && codePoint <= (jint) 0x10FFF) || ((jint) 0x1E800 <= codePoint && codePoint <= (jint) 0x1EFFF)) {
+    if (((int32_t) 0x0590 <= codePoint && codePoint <= (int32_t) 0x08FF) || ((int32_t) 0xFB1D <= codePoint && codePoint <= (int32_t) 0xFDCF) || ((int32_t) 0xFDF0 <= codePoint && codePoint <= (int32_t) 0xFDFF) || ((int32_t) 0xFE70 <= codePoint && codePoint <= (int32_t) 0xFEFF) || ((int32_t) 0x10800 <= codePoint && codePoint <= (int32_t) 0x10FFF) || ((int32_t) 0x1E800 <= codePoint && codePoint <= (int32_t) 0x1EFFF)) {
       return ADTextDirectionHeuristics_STATE_TRUE;
     }
-    else if (((jint) 0x2065 <= codePoint && codePoint <= (jint) 0x2069) || ((jint) 0xFFF0 <= codePoint && codePoint <= (jint) 0xFFF8) || ((jint) 0xE0000 <= codePoint && codePoint <= (jint) 0xE0FFF) || ((jint) 0xFDD0 <= codePoint && codePoint <= (jint) 0xFDEF) || ((codePoint & (jint) 0xFFFE) == (jint) 0xFFFE) || ((jint) 0x20A0 <= codePoint && codePoint <= (jint) 0x20CF) || ((jint) 0xD800 <= codePoint && codePoint <= (jint) 0xDFFF)) {
+    else if (((int32_t) 0x2065 <= codePoint && codePoint <= (int32_t) 0x2069) || ((int32_t) 0xFFF0 <= codePoint && codePoint <= (int32_t) 0xFFF8) || ((int32_t) 0xE0000 <= codePoint && codePoint <= (int32_t) 0xE0FFF) || ((int32_t) 0xFDD0 <= codePoint && codePoint <= (int32_t) 0xFDEF) || ((codePoint & (int32_t) 0xFFFE) == (int32_t) 0xFFFE) || ((int32_t) 0x20A0 <= codePoint && codePoint <= (int32_t) 0x20CF) || ((int32_t) 0xD800 <= codePoint && codePoint <= (int32_t) 0xDFFF)) {
       return ADTextDirectionHeuristics_STATE_UNKNOWN;
     }
     else {
@@ -317,6 +335,8 @@ jint ADTextDirectionHeuristics_isRtlCodePointWithInt_(jint codePoint) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextDirectionHeuristics)
 
+J2OBJC_NAME_MAPPING(ADTextDirectionHeuristics, "r.android.text", "AD")
+
 @implementation ADTextDirectionHeuristics_TextDirectionHeuristicImpl
 
 - (instancetype)initWithADTextDirectionHeuristics_TextDirectionAlgorithm:(id<ADTextDirectionHeuristics_TextDirectionAlgorithm>)algorithm {
@@ -324,21 +344,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextDirectionHeuristics)
   return self;
 }
 
-- (jboolean)defaultIsRtl {
+- (bool)defaultIsRtl {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jboolean)isRtlWithCharArray:(IOSCharArray *)array
-                       withInt:(jint)start
-                       withInt:(jint)count {
+- (bool)isRtlWithCharArray:(IOSCharArray *)array
+                   withInt:(int32_t)start
+                   withInt:(int32_t)count {
   return [self isRtlWithJavaLangCharSequence:JavaNioCharBuffer_wrapWithCharArray_(array) withInt:start withInt:count];
 }
 
-- (jboolean)isRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                  withInt:(jint)start
-                                  withInt:(jint)count {
+- (bool)isRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                              withInt:(int32_t)start
+                              withInt:(int32_t)count {
   if (cs == nil || start < 0 || count < 0 || [cs java_length] - count < start) {
     @throw create_JavaLangIllegalArgumentException_init();
   }
@@ -348,9 +368,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextDirectionHeuristics)
   return ADTextDirectionHeuristics_TextDirectionHeuristicImpl_doCheckWithJavaLangCharSequence_withInt_withInt_(self, cs, start, count);
 }
 
-- (jboolean)doCheckWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                    withInt:(jint)start
-                                    withInt:(jint)count {
+- (bool)doCheckWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                withInt:(int32_t)start
+                                withInt:(int32_t)count {
   return ADTextDirectionHeuristics_TextDirectionHeuristicImpl_doCheckWithJavaLangCharSequence_withInt_withInt_(self, cs, start, count);
 }
 
@@ -391,7 +411,7 @@ void ADTextDirectionHeuristics_TextDirectionHeuristicImpl_initWithADTextDirectio
   JreStrongAssign(&self->mAlgorithm_, algorithm);
 }
 
-jboolean ADTextDirectionHeuristics_TextDirectionHeuristicImpl_doCheckWithJavaLangCharSequence_withInt_withInt_(ADTextDirectionHeuristics_TextDirectionHeuristicImpl *self, id<JavaLangCharSequence> cs, jint start, jint count) {
+bool ADTextDirectionHeuristics_TextDirectionHeuristicImpl_doCheckWithJavaLangCharSequence_withInt_withInt_(ADTextDirectionHeuristics_TextDirectionHeuristicImpl *self, id<JavaLangCharSequence> cs, int32_t start, int32_t count) {
   switch ([((id<ADTextDirectionHeuristics_TextDirectionAlgorithm>) nil_chk(self->mAlgorithm_)) checkRtlWithJavaLangCharSequence:cs withInt:start withInt:count]) {
     case ADTextDirectionHeuristics_STATE_TRUE:
     return true;
@@ -407,12 +427,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextDirectionHeuristics_TextDirectionHeuristi
 @implementation ADTextDirectionHeuristics_TextDirectionHeuristicInternal
 
 - (instancetype)initWithADTextDirectionHeuristics_TextDirectionAlgorithm:(id<ADTextDirectionHeuristics_TextDirectionAlgorithm>)algorithm
-                                                             withBoolean:(jboolean)defaultIsRtl {
+                                                             withBoolean:(bool)defaultIsRtl {
   ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(self, algorithm, defaultIsRtl);
   return self;
 }
 
-- (jboolean)defaultIsRtl {
+- (bool)defaultIsRtl {
   return mDefaultIsRtl_;
 }
 
@@ -437,16 +457,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextDirectionHeuristics_TextDirectionHeuristi
 
 @end
 
-void ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(ADTextDirectionHeuristics_TextDirectionHeuristicInternal *self, id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, jboolean defaultIsRtl) {
+void ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(ADTextDirectionHeuristics_TextDirectionHeuristicInternal *self, id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, bool defaultIsRtl) {
   ADTextDirectionHeuristics_TextDirectionHeuristicImpl_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_(self, algorithm);
   self->mDefaultIsRtl_ = defaultIsRtl;
 }
 
-ADTextDirectionHeuristics_TextDirectionHeuristicInternal *new_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, jboolean defaultIsRtl) {
+ADTextDirectionHeuristics_TextDirectionHeuristicInternal *new_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, bool defaultIsRtl) {
   J2OBJC_NEW_IMPL(ADTextDirectionHeuristics_TextDirectionHeuristicInternal, initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_, algorithm, defaultIsRtl)
 }
 
-ADTextDirectionHeuristics_TextDirectionHeuristicInternal *create_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, jboolean defaultIsRtl) {
+ADTextDirectionHeuristics_TextDirectionHeuristicInternal *create_ADTextDirectionHeuristics_TextDirectionHeuristicInternal_initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_(id<ADTextDirectionHeuristics_TextDirectionAlgorithm> algorithm, bool defaultIsRtl) {
   J2OBJC_CREATE_IMPL(ADTextDirectionHeuristics_TextDirectionHeuristicInternal, initWithADTextDirectionHeuristics_TextDirectionAlgorithm_withBoolean_, algorithm, defaultIsRtl)
 }
 
@@ -476,17 +496,17 @@ J2OBJC_INITIALIZED_DEFN(ADTextDirectionHeuristics_FirstStrong)
 
 @implementation ADTextDirectionHeuristics_FirstStrong
 
-- (jint)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                 withInt:(jint)start
-                                 withInt:(jint)count {
-  jint result = ADTextDirectionHeuristics_STATE_UNKNOWN;
-  jint openIsolateCount = 0;
-  for (jint cp, i = start, end = start + count; i < end && result == ADTextDirectionHeuristics_STATE_UNKNOWN; i += JavaLangCharacter_charCountWithInt_(cp)) {
+- (int32_t)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)count {
+  int32_t result = ADTextDirectionHeuristics_STATE_UNKNOWN;
+  int32_t openIsolateCount = 0;
+  for (int32_t cp, i = start, end = start + count; i < end && result == ADTextDirectionHeuristics_STATE_UNKNOWN; i += JavaLangCharacter_charCountWithInt_(cp)) {
     cp = JavaLangCharacter_codePointAtWithJavaLangCharSequence_withInt_(cs, i);
-    if ((jint) 0x2066 <= cp && cp <= (jint) 0x2068) {
+    if ((int32_t) 0x2066 <= cp && cp <= (int32_t) 0x2068) {
       openIsolateCount += 1;
     }
-    else if (cp == (jint) 0x2069) {
+    else if (cp == (int32_t) 0x2069) {
       if (openIsolateCount > 0) openIsolateCount -= 1;
     }
     else if (openIsolateCount == 0) {
@@ -549,17 +569,17 @@ J2OBJC_INITIALIZED_DEFN(ADTextDirectionHeuristics_AnyStrong)
 
 @implementation ADTextDirectionHeuristics_AnyStrong
 
-- (jint)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                 withInt:(jint)start
-                                 withInt:(jint)count {
-  jboolean haveUnlookedFor = false;
-  jint openIsolateCount = 0;
-  for (jint cp, i = start, end = start + count; i < end; i += JavaLangCharacter_charCountWithInt_(cp)) {
+- (int32_t)checkRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)count {
+  bool haveUnlookedFor = false;
+  int32_t openIsolateCount = 0;
+  for (int32_t cp, i = start, end = start + count; i < end; i += JavaLangCharacter_charCountWithInt_(cp)) {
     cp = JavaLangCharacter_codePointAtWithJavaLangCharSequence_withInt_(cs, i);
-    if ((jint) 0x2066 <= cp && cp <= (jint) 0x2068) {
+    if ((int32_t) 0x2066 <= cp && cp <= (int32_t) 0x2068) {
       openIsolateCount += 1;
     }
-    else if (cp == (jint) 0x2069) {
+    else if (cp == (int32_t) 0x2069) {
       if (openIsolateCount > 0) openIsolateCount -= 1;
     }
     else if (openIsolateCount == 0) {
@@ -587,7 +607,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextDirectionHeuristics_AnyStrong)
   return ADTextDirectionHeuristics_STATE_UNKNOWN;
 }
 
-- (instancetype)initWithBoolean:(jboolean)lookForRtl {
+- (instancetype)initWithBoolean:(bool)lookForRtl {
   ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(self, lookForRtl);
   return self;
 }
@@ -623,16 +643,16 @@ J2OBJC_INITIALIZED_DEFN(ADTextDirectionHeuristics_AnyStrong)
 
 @end
 
-void ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(ADTextDirectionHeuristics_AnyStrong *self, jboolean lookForRtl) {
+void ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(ADTextDirectionHeuristics_AnyStrong *self, bool lookForRtl) {
   NSObject_init(self);
   self->mLookForRtl_ = lookForRtl;
 }
 
-ADTextDirectionHeuristics_AnyStrong *new_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(jboolean lookForRtl) {
+ADTextDirectionHeuristics_AnyStrong *new_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(bool lookForRtl) {
   J2OBJC_NEW_IMPL(ADTextDirectionHeuristics_AnyStrong, initWithBoolean_, lookForRtl)
 }
 
-ADTextDirectionHeuristics_AnyStrong *create_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(jboolean lookForRtl) {
+ADTextDirectionHeuristics_AnyStrong *create_ADTextDirectionHeuristics_AnyStrong_initWithBoolean_(bool lookForRtl) {
   J2OBJC_CREATE_IMPL(ADTextDirectionHeuristics_AnyStrong, initWithBoolean_, lookForRtl)
 }
 
@@ -649,8 +669,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)defaultIsRtl {
-  jint dir = ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale_getDefault());
+- (bool)defaultIsRtl {
+  int32_t dir = ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale_getDefault());
   return dir == ADView_LAYOUT_DIRECTION_RTL;
 }
 

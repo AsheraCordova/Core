@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\BitmapFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bitmap.h"
 #include "BitmapFactory.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "java/io/InputStream.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADBitmapFactory
@@ -62,6 +75,8 @@ id<ADBitmap> ADBitmapFactory_decodeStreamWithJavaIoInputStream_withId_withADBitm
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBitmapFactory)
+
+J2OBJC_NAME_MAPPING(ADBitmapFactory, "r.android.graphics", "AD")
 
 @implementation ADBitmapFactory_Options
 

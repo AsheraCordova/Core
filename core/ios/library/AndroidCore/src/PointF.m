@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\PointF.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
@@ -10,8 +15,18 @@
 #include "Parcelable.h"
 #include "Point.h"
 #include "PointF.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPointF_1 : ADParcelable_Creator
@@ -26,7 +41,7 @@
 /*!
  @brief Return an array of rectangles of the specified size.
  */
-- (IOSObjectArray *)newArrayWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -37,6 +52,7 @@ __attribute__((unused)) static void ADPointF_1_init(ADPointF_1 *self);
 __attribute__((unused)) static ADPointF_1 *new_ADPointF_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADPointF_1 *create_ADPointF_1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(ADPointF)
 
@@ -51,8 +67,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithFloat:(jfloat)x
-                    withFloat:(jfloat)y {
+- (instancetype)initWithFloat:(float)x
+                    withFloat:(float)y {
   ADPointF_initWithFloat_withFloat_(self, x, y);
   return self;
 }
@@ -67,8 +83,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (void)setWithFloat:(jfloat)x
-           withFloat:(jfloat)y {
+- (void)setWithFloat:(float)x
+           withFloat:(float)y {
   self->x_ = x;
   self->y_ = y;
 }
@@ -83,20 +99,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   y_ = -y_;
 }
 
-- (void)offsetWithFloat:(jfloat)dx
-              withFloat:(jfloat)dy {
+- (void)offsetWithFloat:(float)dx
+              withFloat:(float)dy {
   JrePlusAssignFloatF(&x_, dx);
   JrePlusAssignFloatF(&y_, dy);
 }
 
-- (jboolean)equalsWithFloat:(jfloat)x
-                  withFloat:(jfloat)y {
+- (bool)equalsWithFloat:(float)x
+              withFloat:(float)y {
   return self->x_ == x && self->y_ == y;
 }
 
-- (jboolean)isEqual:(id)o {
-  if (self == o) return true;
-  if (o == nil || [self java_getClass] != [o java_getClass]) return false;
+- (bool)isEqual:(id)o {
+  if (JreObjectEqualsEquals(self, o)) return true;
+  if (o == nil || !JreObjectEqualsEquals([self java_getClass], [o java_getClass])) return false;
   ADPointF *pointF = (ADPointF *) cast_chk(o, [ADPointF class]);
   if (JavaLangFloat_compareWithFloat_withFloat_(pointF->x_, x_) != 0) return false;
   if (JavaLangFloat_compareWithFloat_withFloat_(pointF->y_, y_) != 0) return false;
@@ -104,7 +120,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSUInteger)hash {
-  jint result = (x_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(x_) : 0);
+  int32_t result = (x_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(x_) : 0);
   result = 31 * result + (y_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(y_) : 0);
   return result;
 }
@@ -113,21 +129,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JreStrcat("$F$FC", @"PointF(", x_, @", ", y_, ')');
 }
 
-- (jfloat)length {
+- (float)length {
   return ADPointF_lengthWithFloat_withFloat_(x_, y_);
 }
 
-+ (jfloat)lengthWithFloat:(jfloat)x
-                withFloat:(jfloat)y {
++ (float)lengthWithFloat:(float)x
+               withFloat:(float)y {
   return ADPointF_lengthWithFloat_withFloat_(x, y);
 }
 
-- (jint)describeContents {
+- (int32_t)describeContents {
   return 0;
 }
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)outArg
-                          withInt:(jint)flags {
+                          withInt:(int32_t)flags {
   [((id<ADParcel>) nil_chk(outArg)) writeFloatWithFloat:x_];
   [outArg writeFloatWithFloat:y_];
 }
@@ -209,17 +225,17 @@ ADPointF *create_ADPointF_init() {
   J2OBJC_CREATE_IMPL(ADPointF, init)
 }
 
-void ADPointF_initWithFloat_withFloat_(ADPointF *self, jfloat x, jfloat y) {
+void ADPointF_initWithFloat_withFloat_(ADPointF *self, float x, float y) {
   NSObject_init(self);
   self->x_ = x;
   self->y_ = y;
 }
 
-ADPointF *new_ADPointF_initWithFloat_withFloat_(jfloat x, jfloat y) {
+ADPointF *new_ADPointF_initWithFloat_withFloat_(float x, float y) {
   J2OBJC_NEW_IMPL(ADPointF, initWithFloat_withFloat_, x, y)
 }
 
-ADPointF *create_ADPointF_initWithFloat_withFloat_(jfloat x, jfloat y) {
+ADPointF *create_ADPointF_initWithFloat_withFloat_(float x, float y) {
   J2OBJC_CREATE_IMPL(ADPointF, initWithFloat_withFloat_, x, y)
 }
 
@@ -251,12 +267,14 @@ ADPointF *create_ADPointF_initWithADPointF_(ADPointF *p) {
   J2OBJC_CREATE_IMPL(ADPointF, initWithADPointF_, p)
 }
 
-jfloat ADPointF_lengthWithFloat_withFloat_(jfloat x, jfloat y) {
+float ADPointF_lengthWithFloat_withFloat_(float x, float y) {
   ADPointF_initialize();
-  return (jfloat) JavaLangMath_hypotWithDouble_withDouble_(x, y);
+  return (float) JavaLangMath_hypotWithDouble_withDouble_(x, y);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPointF)
+
+J2OBJC_NAME_MAPPING(ADPointF, "r.android.graphics", "AD")
 
 @implementation ADPointF_1
 
@@ -270,11 +288,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (ADPointF *)createFromParcelWithADParcel:(id<ADParcel>)inArg {
   ADPointF *r = create_ADPointF_init();
   [r readFromParcelWithADParcel:inArg];
-  return r;
+  return JreRetainedLocalValue(r);
 }
 
-- (IOSObjectArray *)newArrayWithInt:(jint)size {
-  return [IOSObjectArray arrayWithLength:size type:ADPointF_class_()];
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size {
+  return JreRetainedLocalValue([IOSObjectArray arrayWithLength:size type:ADPointF_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -291,7 +309,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(newArrayWithInt:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "createFromParcel", "LADParcel;", "newArray", "I", "LADPointF;", "Lr/android/os/Parcelable$Creator<Lr/android/graphics/PointF;>;" };
-  static const J2ObjcClassInfo _ADPointF_1 = { "", "r.android.graphics", ptrTable, methods, NULL, 7, 0x8018, 3, 0, 4, -1, -1, 5, -1 };
+  static const J2ObjcClassInfo _ADPointF_1 = { "", "r.android.graphics", ptrTable, methods, NULL, 7, 0x8000, 3, 0, 4, -1, -1, 5, -1 };
   return &_ADPointF_1;
 }
 

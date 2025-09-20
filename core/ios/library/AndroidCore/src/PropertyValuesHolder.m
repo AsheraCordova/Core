@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\PropertyValuesHolder.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BidirectionalTypeConverter.h"
 #include "FloatArrayEvaluator.h"
 #include "FloatEvaluator.h"
@@ -29,6 +34,7 @@
 #include "TypeConverter.h"
 #include "TypeEvaluator.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Character.h"
 #include "java/lang/ClassCastException.h"
 #include "java/lang/CloneNotSupportedException.h"
@@ -47,8 +53,12 @@
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 
-@class JavaLangReflectMethod;
-@class JavaUtilHashMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPropertyValuesHolder () {
@@ -151,31 +161,31 @@
 
 + (NSString *)nGetMultipleIntMethodWithIOSClass:(IOSClass *)targetClass
                                    withNSString:(NSString *)methodName
-                                        withInt:(jint)numParams;
+                                        withInt:(int32_t)numParams;
 
 + (NSString *)nGetMultipleFloatMethodWithIOSClass:(IOSClass *)targetClass
                                      withNSString:(NSString *)methodName
-                                          withInt:(jint)numParams;
+                                          withInt:(int32_t)numParams;
 
 + (void)nCallIntMethodWithId:(id)target
                 withNSString:(NSString *)methodID
-                     withInt:(jint)arg;
+                     withInt:(int32_t)arg;
 
 + (void)nCallFloatMethodWithId:(id)target
                   withNSString:(NSString *)methodID
-                     withFloat:(jfloat)arg;
+                     withFloat:(float)arg;
 
 + (void)nCallTwoIntMethodWithId:(id)target
                    withNSString:(NSString *)methodID
-                        withInt:(jint)arg1
-                        withInt:(jint)arg2;
+                        withInt:(int32_t)arg1
+                        withInt:(int32_t)arg2;
 
 + (void)nCallFourIntMethodWithId:(id)target
                     withNSString:(NSString *)methodID
-                         withInt:(jint)arg1
-                         withInt:(jint)arg2
-                         withInt:(jint)arg3
-                         withInt:(jint)arg4;
+                         withInt:(int32_t)arg1
+                         withInt:(int32_t)arg2
+                         withInt:(int32_t)arg3
+                         withInt:(int32_t)arg4;
 
 + (void)nCallMultipleIntMethodWithId:(id)target
                         withNSString:(NSString *)methodID
@@ -183,15 +193,15 @@
 
 + (void)nCallTwoFloatMethodWithId:(id)target
                      withNSString:(NSString *)methodID
-                        withFloat:(jfloat)arg1
-                        withFloat:(jfloat)arg2;
+                        withFloat:(float)arg1
+                        withFloat:(float)arg2;
 
 + (void)nCallFourFloatMethodWithId:(id)target
                       withNSString:(NSString *)methodID
-                         withFloat:(jfloat)arg1
-                         withFloat:(jfloat)arg2
-                         withFloat:(jfloat)arg3
-                         withFloat:(jfloat)arg4;
+                         withFloat:(float)arg1
+                         withFloat:(float)arg2
+                         withFloat:(float)arg3
+                         withFloat:(float)arg4;
 
 + (void)nCallMultipleFloatMethodWithId:(id)target
                           withNSString:(NSString *)methodID
@@ -269,23 +279,23 @@ __attribute__((unused)) static NSString *ADPropertyValuesHolder_nGetIntMethodWit
 
 __attribute__((unused)) static NSString *ADPropertyValuesHolder_nGetFloatMethodWithIOSClass_withNSString_(IOSClass *targetClass, NSString *methodName);
 
-__attribute__((unused)) static NSString *ADPropertyValuesHolder_nGetMultipleIntMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, jint numParams);
+__attribute__((unused)) static NSString *ADPropertyValuesHolder_nGetMultipleIntMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, int32_t numParams);
 
-__attribute__((unused)) static NSString *ADPropertyValuesHolder_nGetMultipleFloatMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, jint numParams);
+__attribute__((unused)) static NSString *ADPropertyValuesHolder_nGetMultipleFloatMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, int32_t numParams);
 
-__attribute__((unused)) static void ADPropertyValuesHolder_nCallIntMethodWithId_withNSString_withInt_(id target, NSString *methodID, jint arg);
+__attribute__((unused)) static void ADPropertyValuesHolder_nCallIntMethodWithId_withNSString_withInt_(id target, NSString *methodID, int32_t arg);
 
-__attribute__((unused)) static void ADPropertyValuesHolder_nCallFloatMethodWithId_withNSString_withFloat_(id target, NSString *methodID, jfloat arg);
+__attribute__((unused)) static void ADPropertyValuesHolder_nCallFloatMethodWithId_withNSString_withFloat_(id target, NSString *methodID, float arg);
 
-__attribute__((unused)) static void ADPropertyValuesHolder_nCallTwoIntMethodWithId_withNSString_withInt_withInt_(id target, NSString *methodID, jint arg1, jint arg2);
+__attribute__((unused)) static void ADPropertyValuesHolder_nCallTwoIntMethodWithId_withNSString_withInt_withInt_(id target, NSString *methodID, int32_t arg1, int32_t arg2);
 
-__attribute__((unused)) static void ADPropertyValuesHolder_nCallFourIntMethodWithId_withNSString_withInt_withInt_withInt_withInt_(id target, NSString *methodID, jint arg1, jint arg2, jint arg3, jint arg4);
+__attribute__((unused)) static void ADPropertyValuesHolder_nCallFourIntMethodWithId_withNSString_withInt_withInt_withInt_withInt_(id target, NSString *methodID, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4);
 
 __attribute__((unused)) static void ADPropertyValuesHolder_nCallMultipleIntMethodWithId_withNSString_withIntArray_(id target, NSString *methodID, IOSIntArray *args);
 
-__attribute__((unused)) static void ADPropertyValuesHolder_nCallTwoFloatMethodWithId_withNSString_withFloat_withFloat_(id target, NSString *methodID, jfloat arg1, jfloat arg2);
+__attribute__((unused)) static void ADPropertyValuesHolder_nCallTwoFloatMethodWithId_withNSString_withFloat_withFloat_(id target, NSString *methodID, float arg1, float arg2);
 
-__attribute__((unused)) static void ADPropertyValuesHolder_nCallFourFloatMethodWithId_withNSString_withFloat_withFloat_withFloat_withFloat_(id target, NSString *methodID, jfloat arg1, jfloat arg2, jfloat arg3, jfloat arg4);
+__attribute__((unused)) static void ADPropertyValuesHolder_nCallFourFloatMethodWithId_withNSString_withFloat_withFloat_withFloat_withFloat_(id target, NSString *methodID, float arg1, float arg2, float arg3, float arg4);
 
 __attribute__((unused)) static void ADPropertyValuesHolder_nCallMultipleFloatMethodWithId_withNSString_withFloatArray_(id target, NSString *methodID, IOSFloatArray *args);
 
@@ -308,7 +318,7 @@ __attribute__((unused)) static IOSObjectArray *ADPropertyValuesHolder__Annotatio
 
 - (instancetype)initWithADPropertyValuesHolder:(ADPropertyValuesHolder *)outer$;
 
-- (id)getValueAtFractionWithFloat:(jfloat)fraction;
+- (id)getValueAtFractionWithFloat:(float)fraction;
 
 @end
 
@@ -319,6 +329,7 @@ __attribute__((unused)) static void ADPropertyValuesHolder_1_initWithADPropertyV
 __attribute__((unused)) static ADPropertyValuesHolder_1 *new_ADPropertyValuesHolder_1_initWithADPropertyValuesHolder_(ADPropertyValuesHolder *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADPropertyValuesHolder_1 *create_ADPropertyValuesHolder_1_initWithADPropertyValuesHolder_(ADPropertyValuesHolder *outer$);
+
 
 @interface ADPropertyValuesHolder_IntPropertyValuesHolder () {
  @public
@@ -398,6 +409,7 @@ __attribute__((unused)) static ADPropertyValuesHolder_PointFToFloatArray *create
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PointFToFloatArray)
 
+
 /*!
  @brief Convert from PointF to int[] for multi-int setters a String a Path.
  */
@@ -423,6 +435,7 @@ __attribute__((unused)) static ADPropertyValuesHolder_PointFToIntArray *new_ADPr
 __attribute__((unused)) static ADPropertyValuesHolder_PointFToIntArray *create_ADPropertyValuesHolder_PointFToIntArray_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PointFToIntArray)
+
 
 J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 
@@ -566,10 +579,10 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 }
 
 - (void)setIKeyframesWithADKeyframeArray:(IOSObjectArray *)values {
-  jint numKeyframes = ((IOSObjectArray *) nil_chk(values))->size_;
+  int32_t numKeyframes = ((IOSObjectArray *) nil_chk(values))->size_;
   IOSObjectArray *keyframes = [IOSObjectArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(numKeyframes, 2) type:ADKeyframe_class_()];
   JreStrongAssign(&mValueType_, [((ADKeyframe *) nil_chk((IOSObjectArray_Get(values, 0)))) getType]);
-  for (jint i = 0; i < numKeyframes; ++i) {
+  for (int32_t i = 0; i < numKeyframes; ++i) {
     IOSObjectArray_Set(keyframes, i, IOSObjectArray_Get(values, i));
   }
   JreStrongAssignAndConsume(&mKeyframes_, new_ADKeyframeSet_initWithADKeyframeArray_(keyframes));
@@ -613,8 +626,8 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
     @try {
       id testValue = nil;
       id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes]);
-      jint keyframeCount = keyframes == nil ? 0 : [keyframes size];
-      for (jint i = 0; i < keyframeCount; i++) {
+      int32_t keyframeCount = keyframes == nil ? 0 : [keyframes size];
+      for (int32_t i = 0; i < keyframeCount; i++) {
         ADKeyframe *kf = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i]);
         if (![((ADKeyframe *) nil_chk(kf)) hasValue] || [kf valueWasSetOnStart]) {
           if (testValue == nil) {
@@ -637,8 +650,8 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
       [self setupSetterWithIOSClass:targetClass];
     }
     id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes]);
-    jint keyframeCount = keyframes == nil ? 0 : [keyframes size];
-    for (jint i = 0; i < keyframeCount; i++) {
+    int32_t keyframeCount = keyframes == nil ? 0 : [keyframes size];
+    for (int32_t i = 0; i < keyframeCount; i++) {
       ADKeyframe *kf = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i]);
       if (![((ADKeyframe *) nil_chk(kf)) hasValue] || [kf valueWasSetOnStart]) {
         if (mGetter_ == nil) {
@@ -720,7 +733,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 
 - (void)init__ {
   if (mEvaluator_ == nil) {
-    JreStrongAssign(&mEvaluator_, (mValueType_ == JavaLangInteger_class_()) ? ADPropertyValuesHolder_sIntEvaluator : (mValueType_ == JavaLangFloat_class_()) ? ADPropertyValuesHolder_sFloatEvaluator : nil);
+    JreStrongAssign(&mEvaluator_, (JreObjectEqualsEquals(mValueType_, JavaLangInteger_class_())) ? ADPropertyValuesHolder_sIntEvaluator : (JreObjectEqualsEquals(mValueType_, JavaLangFloat_class_())) ? ADPropertyValuesHolder_sFloatEvaluator : nil);
   }
   if (mEvaluator_ != nil) {
     [((id<ADIKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:mEvaluator_];
@@ -732,7 +745,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
   [((id<ADIKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:evaluator];
 }
 
-- (void)calculateValueWithFloat:(jfloat)fraction {
+- (void)calculateValueWithFloat:(float)fraction {
   id value = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getValueWithFloat:fraction]);
   JreStrongAssign(&mAnimatedValue_, mConverter_ == nil ? value : [mConverter_ convertWithId:value]);
 }
@@ -798,41 +811,41 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 
 + (NSString *)nGetMultipleIntMethodWithIOSClass:(IOSClass *)targetClass
                                    withNSString:(NSString *)methodName
-                                        withInt:(jint)numParams {
+                                        withInt:(int32_t)numParams {
   return ADPropertyValuesHolder_nGetMultipleIntMethodWithIOSClass_withNSString_withInt_(targetClass, methodName, numParams);
 }
 
 + (NSString *)nGetMultipleFloatMethodWithIOSClass:(IOSClass *)targetClass
                                      withNSString:(NSString *)methodName
-                                          withInt:(jint)numParams {
+                                          withInt:(int32_t)numParams {
   return ADPropertyValuesHolder_nGetMultipleFloatMethodWithIOSClass_withNSString_withInt_(targetClass, methodName, numParams);
 }
 
 + (void)nCallIntMethodWithId:(id)target
                 withNSString:(NSString *)methodID
-                     withInt:(jint)arg {
+                     withInt:(int32_t)arg {
   ADPropertyValuesHolder_nCallIntMethodWithId_withNSString_withInt_(target, methodID, arg);
 }
 
 + (void)nCallFloatMethodWithId:(id)target
                   withNSString:(NSString *)methodID
-                     withFloat:(jfloat)arg {
+                     withFloat:(float)arg {
   ADPropertyValuesHolder_nCallFloatMethodWithId_withNSString_withFloat_(target, methodID, arg);
 }
 
 + (void)nCallTwoIntMethodWithId:(id)target
                    withNSString:(NSString *)methodID
-                        withInt:(jint)arg1
-                        withInt:(jint)arg2 {
+                        withInt:(int32_t)arg1
+                        withInt:(int32_t)arg2 {
   ADPropertyValuesHolder_nCallTwoIntMethodWithId_withNSString_withInt_withInt_(target, methodID, arg1, arg2);
 }
 
 + (void)nCallFourIntMethodWithId:(id)target
                     withNSString:(NSString *)methodID
-                         withInt:(jint)arg1
-                         withInt:(jint)arg2
-                         withInt:(jint)arg3
-                         withInt:(jint)arg4 {
+                         withInt:(int32_t)arg1
+                         withInt:(int32_t)arg2
+                         withInt:(int32_t)arg3
+                         withInt:(int32_t)arg4 {
   ADPropertyValuesHolder_nCallFourIntMethodWithId_withNSString_withInt_withInt_withInt_withInt_(target, methodID, arg1, arg2, arg3, arg4);
 }
 
@@ -844,17 +857,17 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 
 + (void)nCallTwoFloatMethodWithId:(id)target
                      withNSString:(NSString *)methodID
-                        withFloat:(jfloat)arg1
-                        withFloat:(jfloat)arg2 {
+                        withFloat:(float)arg1
+                        withFloat:(float)arg2 {
   ADPropertyValuesHolder_nCallTwoFloatMethodWithId_withNSString_withFloat_withFloat_(target, methodID, arg1, arg2);
 }
 
 + (void)nCallFourFloatMethodWithId:(id)target
                       withNSString:(NSString *)methodID
-                         withFloat:(jfloat)arg1
-                         withFloat:(jfloat)arg2
-                         withFloat:(jfloat)arg3
-                         withFloat:(jfloat)arg4 {
+                         withFloat:(float)arg1
+                         withFloat:(float)arg2
+                         withFloat:(float)arg3
+                         withFloat:(float)arg4 {
   ADPropertyValuesHolder_nCallFourFloatMethodWithId_withNSString_withFloat_withFloat_withFloat_withFloat_(target, methodID, arg1, arg2, arg3, arg4);
 }
 
@@ -1104,12 +1117,12 @@ ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiIntWithNSString_withIntArr
   if (((IOSObjectArray *) nil_chk(values))->size_ < 2) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"At least 2 values must be supplied");
   }
-  jint numParameters = 0;
-  for (jint i = 0; i < values->size_; i++) {
+  int32_t numParameters = 0;
+  for (int32_t i = 0; i < values->size_; i++) {
     if (IOSObjectArray_Get(values, i) == nil) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"values must not be null");
     }
-    jint length = ((IOSIntArray *) nil_chk(IOSObjectArray_Get(values, i)))->size_;
+    int32_t length = ((IOSIntArray *) nil_chk(IOSObjectArray_Get(values, i)))->size_;
     if (i == 0) {
       numParameters = length;
     }
@@ -1154,12 +1167,12 @@ ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiFloatWithNSString_withFloa
   if (((IOSObjectArray *) nil_chk(values))->size_ < 2) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"At least 2 values must be supplied");
   }
-  jint numParameters = 0;
-  for (jint i = 0; i < values->size_; i++) {
+  int32_t numParameters = 0;
+  for (int32_t i = 0; i < values->size_; i++) {
     if (IOSObjectArray_Get(values, i) == nil) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"values must not be null");
     }
-    jint length = ((IOSFloatArray *) nil_chk(IOSObjectArray_Get(values, i)))->size_;
+    int32_t length = ((IOSFloatArray *) nil_chk(IOSObjectArray_Get(values, i)))->size_;
     if (i == 0) {
       numParameters = length;
     }
@@ -1318,7 +1331,7 @@ JavaLangReflectMethod *ADPropertyValuesHolder_getPropertyFunctionWithIOSClass_wi
       IOSClass * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       IOSClass * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        IOSClass *typeVariant = *b__++;
+        IOSClass *typeVariant = RETAIN_AND_AUTORELEASE(*b__++);
         IOSObjectArray_Set(args, 0, typeVariant);
         @try {
           returnVal = [((IOSClass *) nil_chk(targetClass)) getMethod:methodName parameterTypes:args];
@@ -1342,7 +1355,7 @@ JavaLangReflectMethod *ADPropertyValuesHolder_setupSetterOrGetterWithIOSClass_wi
   JavaLangReflectMethod *setterOrGetter = nil;
   @synchronized(propertyMapMap) {
     JavaUtilHashMap *propertyMap = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(propertyMapMap)) getWithId:targetClass]);
-    jboolean wasInMap = false;
+    bool wasInMap = false;
     if (propertyMap != nil) {
       wasInMap = [propertyMap containsKeyWithId:self->mPropertyName_];
       if (wasInMap) {
@@ -1350,7 +1363,7 @@ JavaLangReflectMethod *ADPropertyValuesHolder_setupSetterOrGetterWithIOSClass_wi
       }
     }
     if (!wasInMap) {
-      setterOrGetter = JreRetainedLocalValue(ADPropertyValuesHolder_getPropertyFunctionWithIOSClass_withNSString_withIOSClass_(self, targetClass, prefix, valueType));
+      setterOrGetter = ADPropertyValuesHolder_getPropertyFunctionWithIOSClass_withNSString_withIOSClass_(self, targetClass, prefix, valueType);
       if (propertyMap == nil) {
         propertyMap = create_JavaUtilHashMap_init();
         [propertyMapMap putWithId:targetClass withId:propertyMap];
@@ -1420,7 +1433,7 @@ NSString *ADPropertyValuesHolder_getMethodNameWithNSString_withNSString_(NSStrin
   if (propertyName == nil || [propertyName java_length] == 0) {
     return prefix;
   }
-  jchar firstLetter = JavaLangCharacter_toUpperCaseWithChar_([propertyName charAtWithInt:0]);
+  unichar firstLetter = JavaLangCharacter_toUpperCaseWithChar_([propertyName charAtWithInt:0]);
   NSString *theRest = [propertyName java_substring:1];
   return JreStrcat("$C$", prefix, firstLetter, theRest);
 }
@@ -1435,17 +1448,17 @@ NSString *ADPropertyValuesHolder_nGetFloatMethodWithIOSClass_withNSString_(IOSCl
   return methodName;
 }
 
-NSString *ADPropertyValuesHolder_nGetMultipleIntMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, jint numParams) {
+NSString *ADPropertyValuesHolder_nGetMultipleIntMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, int32_t numParams) {
   ADPropertyValuesHolder_initialize();
   return methodName;
 }
 
-NSString *ADPropertyValuesHolder_nGetMultipleFloatMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, jint numParams) {
+NSString *ADPropertyValuesHolder_nGetMultipleFloatMethodWithIOSClass_withNSString_withInt_(IOSClass *targetClass, NSString *methodName, int32_t numParams) {
   ADPropertyValuesHolder_initialize();
   return methodName;
 }
 
-void ADPropertyValuesHolder_nCallIntMethodWithId_withNSString_withInt_(id target, NSString *methodID, jint arg) {
+void ADPropertyValuesHolder_nCallIntMethodWithId_withNSString_withInt_(id target, NSString *methodID, int32_t arg) {
   ADPropertyValuesHolder_initialize();
   if ([target isKindOfClass:[ADView class]]) {
     if ([((NSString *) nil_chk(methodID)) java_hasPrefix:@"scroll"]) {
@@ -1455,18 +1468,18 @@ void ADPropertyValuesHolder_nCallIntMethodWithId_withNSString_withInt_(id target
   }
 }
 
-void ADPropertyValuesHolder_nCallFloatMethodWithId_withNSString_withFloat_(id target, NSString *methodID, jfloat arg) {
+void ADPropertyValuesHolder_nCallFloatMethodWithId_withNSString_withFloat_(id target, NSString *methodID, float arg) {
   ADPropertyValuesHolder_initialize();
   if ([target isKindOfClass:[ADView class]]) {
     [((ADView *) nil_chk(((ADView *) target))) setMyAttributeWithNSString:methodID withId:JavaLangFloat_valueOfWithFloat_(arg)];
   }
 }
 
-void ADPropertyValuesHolder_nCallTwoIntMethodWithId_withNSString_withInt_withInt_(id target, NSString *methodID, jint arg1, jint arg2) {
+void ADPropertyValuesHolder_nCallTwoIntMethodWithId_withNSString_withInt_withInt_(id target, NSString *methodID, int32_t arg1, int32_t arg2) {
   ADPropertyValuesHolder_initialize();
 }
 
-void ADPropertyValuesHolder_nCallFourIntMethodWithId_withNSString_withInt_withInt_withInt_withInt_(id target, NSString *methodID, jint arg1, jint arg2, jint arg3, jint arg4) {
+void ADPropertyValuesHolder_nCallFourIntMethodWithId_withNSString_withInt_withInt_withInt_withInt_(id target, NSString *methodID, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4) {
   ADPropertyValuesHolder_initialize();
 }
 
@@ -1474,11 +1487,11 @@ void ADPropertyValuesHolder_nCallMultipleIntMethodWithId_withNSString_withIntArr
   ADPropertyValuesHolder_initialize();
 }
 
-void ADPropertyValuesHolder_nCallTwoFloatMethodWithId_withNSString_withFloat_withFloat_(id target, NSString *methodID, jfloat arg1, jfloat arg2) {
+void ADPropertyValuesHolder_nCallTwoFloatMethodWithId_withNSString_withFloat_withFloat_(id target, NSString *methodID, float arg1, float arg2) {
   ADPropertyValuesHolder_initialize();
 }
 
-void ADPropertyValuesHolder_nCallFourFloatMethodWithId_withNSString_withFloat_withFloat_withFloat_withFloat_(id target, NSString *methodID, jfloat arg1, jfloat arg2, jfloat arg3, jfloat arg4) {
+void ADPropertyValuesHolder_nCallFourFloatMethodWithId_withNSString_withFloat_withFloat_withFloat_withFloat_(id target, NSString *methodID, float arg1, float arg2, float arg3, float arg4) {
   ADPropertyValuesHolder_initialize();
 }
 
@@ -1503,6 +1516,8 @@ IOSObjectArray *ADPropertyValuesHolder__Annotations$3() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPropertyValuesHolder)
+
+J2OBJC_NAME_MAPPING(ADPropertyValuesHolder, "r.android.animation", "AD")
 
 @implementation ADPropertyValuesHolder_PropertyValues_DataSource
 
@@ -1531,8 +1546,8 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADPropertyValuesHolder_PropertyValues_DataS
   return self;
 }
 
-- (id)getValueAtFractionWithFloat:(jfloat)fraction {
-  return [((id<ADIKeyframes>) nil_chk(this$0_->mKeyframes_)) getValueWithFloat:fraction];
+- (id)getValueAtFractionWithFloat:(float)fraction {
+  return JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(this$0_->mKeyframes_)) getValueWithFloat:fraction]);
 }
 
 - (void)dealloc {
@@ -1555,7 +1570,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADPropertyValuesHolder_PropertyValues_DataS
     { "this$0_", "LADPropertyValuesHolder;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADPropertyValuesHolder;", "getValueAtFraction", "F", "getPropertyValuesWithADPropertyValuesHolder_PropertyValues:" };
-  static const J2ObjcClassInfo _ADPropertyValuesHolder_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ADPropertyValuesHolder_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ADPropertyValuesHolder_1;
 }
 
@@ -1616,7 +1631,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
   JreStrongAssign(&mIntIKeyframes_, (id<ADIKeyframes_IntIKeyframes>) cast_check(mKeyframes_, ADIKeyframes_IntIKeyframes_class_()));
 }
 
-- (void)calculateValueWithFloat:(jfloat)fraction {
+- (void)calculateValueWithFloat:(float)fraction {
   mIntAnimatedValue_ = [((id<ADIKeyframes_IntIKeyframes>) nil_chk(mIntIKeyframes_)) getIntValueWithFloat:fraction];
 }
 
@@ -1663,7 +1678,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
   }
   @synchronized(ADPropertyValuesHolder_IntPropertyValuesHolder_sJNISetterPropertyMap) {
     JavaUtilHashMap *propertyMap = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(ADPropertyValuesHolder_IntPropertyValuesHolder_sJNISetterPropertyMap)) getWithId:targetClass]);
-    jboolean wasInMap = false;
+    bool wasInMap = false;
     if (propertyMap != nil) {
       wasInMap = [propertyMap containsKeyWithId:mPropertyName_];
       if (wasInMap) {
@@ -1855,7 +1870,7 @@ withADIKeyframes_FloatIKeyframes:(id<ADIKeyframes_FloatIKeyframes>)keyframes {
   JreStrongAssign(&mFloatIKeyframes_, (id<ADIKeyframes_FloatIKeyframes>) cast_check(mKeyframes_, ADIKeyframes_FloatIKeyframes_class_()));
 }
 
-- (void)calculateValueWithFloat:(jfloat)fraction {
+- (void)calculateValueWithFloat:(float)fraction {
   mFloatAnimatedValue_ = [((id<ADIKeyframes_FloatIKeyframes>) nil_chk(mFloatIKeyframes_)) getFloatValueWithFloat:fraction];
 }
 
@@ -1902,7 +1917,7 @@ withADIKeyframes_FloatIKeyframes:(id<ADIKeyframes_FloatIKeyframes>)keyframes {
   }
   @synchronized(ADPropertyValuesHolder_FloatPropertyValuesHolder_sJNISetterPropertyMap) {
     JavaUtilHashMap *propertyMap = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(ADPropertyValuesHolder_FloatPropertyValuesHolder_sJNISetterPropertyMap)) getWithId:targetClass]);
-    jboolean wasInMap = false;
+    bool wasInMap = false;
     if (propertyMap != nil) {
       wasInMap = [propertyMap containsKeyWithId:mPropertyName_];
       if (wasInMap) {
@@ -2074,7 +2089,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiFloatValuesHolder)
 
 - (void)setAnimatedValueWithId:(id)target {
   IOSFloatArray *values = (IOSFloatArray *) cast_chk([self getAnimatedValue], [IOSFloatArray class]);
-  jint numParameters = ((IOSFloatArray *) nil_chk(values))->size_;
+  int32_t numParameters = ((IOSFloatArray *) nil_chk(values))->size_;
   if (mJniSetter_ != nil) {
     switch (numParameters) {
       case 1:
@@ -2105,7 +2120,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiFloatValuesHolder)
   }
   @synchronized(ADPropertyValuesHolder_MultiFloatValuesHolder_sJNISetterPropertyMap) {
     JavaUtilHashMap *propertyMap = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(ADPropertyValuesHolder_MultiFloatValuesHolder_sJNISetterPropertyMap)) getWithId:targetClass]);
-    jboolean wasInMap = false;
+    bool wasInMap = false;
     if (propertyMap != nil) {
       wasInMap = [propertyMap containsKeyWithId:mPropertyName_];
       if (wasInMap) {
@@ -2119,7 +2134,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiFloatValuesHolder)
       NSString *methodName = ADPropertyValuesHolder_getMethodNameWithNSString_withNSString_(@"set", mPropertyName_);
       [self calculateValueWithFloat:0.0f];
       IOSFloatArray *values = (IOSFloatArray *) cast_chk([self getAnimatedValue], [IOSFloatArray class]);
-      jint numParams = ((IOSFloatArray *) nil_chk(values))->size_;
+      int32_t numParams = ((IOSFloatArray *) nil_chk(values))->size_;
       @try {
         JreStrongAssign(&mJniSetter_, ADPropertyValuesHolder_nGetMultipleFloatMethodWithIOSClass_withNSString_withInt_(targetClass, mPropertyName_, numParams));
       }
@@ -2233,7 +2248,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiIntValuesHolder)
 
 - (void)setAnimatedValueWithId:(id)target {
   IOSIntArray *values = (IOSIntArray *) cast_chk([self getAnimatedValue], [IOSIntArray class]);
-  jint numParameters = ((IOSIntArray *) nil_chk(values))->size_;
+  int32_t numParameters = ((IOSIntArray *) nil_chk(values))->size_;
   if (mJniSetter_ != nil) {
     switch (numParameters) {
       case 1:
@@ -2264,7 +2279,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiIntValuesHolder)
   }
   @synchronized(ADPropertyValuesHolder_MultiIntValuesHolder_sJNISetterPropertyMap) {
     JavaUtilHashMap *propertyMap = JreRetainedLocalValue([((JavaUtilHashMap *) nil_chk(ADPropertyValuesHolder_MultiIntValuesHolder_sJNISetterPropertyMap)) getWithId:targetClass]);
-    jboolean wasInMap = false;
+    bool wasInMap = false;
     if (propertyMap != nil) {
       wasInMap = [propertyMap containsKeyWithId:mPropertyName_];
       if (wasInMap) {
@@ -2278,7 +2293,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiIntValuesHolder)
       NSString *methodName = ADPropertyValuesHolder_getMethodNameWithNSString_withNSString_(@"set", mPropertyName_);
       [self calculateValueWithFloat:0.0f];
       IOSIntArray *values = (IOSIntArray *) cast_chk([self getAnimatedValue], [IOSIntArray class]);
-      jint numParams = ((IOSIntArray *) nil_chk(values))->size_;
+      int32_t numParams = ((IOSIntArray *) nil_chk(values))->size_;
       @try {
         JreStrongAssign(&mJniSetter_, ADPropertyValuesHolder_nGetMultipleIntMethodWithIOSClass_withNSString_withInt_(targetClass, mPropertyName_, numParams));
       }

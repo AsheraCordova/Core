@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\JavaCharStream.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_JavaCharStream")
@@ -20,6 +21,10 @@
 @class IOSIntArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
+@class JavaLangBoolean;
+@class JavaLangCharacter;
+@class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief An implementation of interface CharStream, where the stream is assumed to
@@ -30,24 +35,24 @@
   /*!
    @brief Position in buffer.
    */
-  jint bufpos_;
-  jint bufsize_;
-  jint available_;
-  jint tokenBegin_;
+  int32_t bufpos_;
+  int32_t bufsize_;
+  int32_t available_;
+  int32_t tokenBegin_;
   IOSIntArray *bufline_;
   IOSIntArray *bufcolumn_;
-  jint column_;
-  jint line_;
-  jboolean prevCharIsCR_;
-  jboolean prevCharIsLF_;
+  int32_t column_;
+  int32_t line_;
+  bool prevCharIsCR_;
+  bool prevCharIsLF_;
   JavaIoReader *inputStream_;
   IOSCharArray *nextCharBuf_;
   IOSCharArray *buffer_;
-  jint maxNextCharInd_;
-  jint nextCharInd_;
-  jint inBuf_;
-  jint tabSize_;
-  jboolean trackLineColumn_;
+  int32_t maxNextCharInd_;
+  int32_t nextCharInd_;
+  int32_t inBuf_;
+  int32_t tabSize_;
+  bool trackLineColumn_;
 }
 
 #pragma mark Public
@@ -61,16 +66,16 @@
  @brief Constructor.
  */
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn;
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn;
 
 /*!
  @brief Constructor.
  */
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn
-                                                withInt:(jint)buffersize;
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn
+                                                withInt:(int32_t)buffersize;
 
 /*!
  @brief Constructor.
@@ -83,17 +88,17 @@
  */
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
                                            withNSString:(NSString *)encoding
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn;
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn;
 
 /*!
  @brief Constructor.
  */
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
                                            withNSString:(NSString *)encoding
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn
-                                                withInt:(jint)buffersize;
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn
+                                                withInt:(int32_t)buffersize;
 
 /*!
  @brief Constructor.
@@ -104,32 +109,32 @@
  @brief Constructor.
  */
 - (instancetype)initPackagePrivateWithJavaIoReader:(JavaIoReader *)dstream
-                                           withInt:(jint)startline
-                                           withInt:(jint)startcolumn;
+                                           withInt:(int32_t)startline
+                                           withInt:(int32_t)startcolumn;
 
 /*!
  @brief Constructor.
  */
 - (instancetype)initPackagePrivateWithJavaIoReader:(JavaIoReader *)dstream
-                                           withInt:(jint)startline
-                                           withInt:(jint)startcolumn
-                                           withInt:(jint)buffersize;
+                                           withInt:(int32_t)startline
+                                           withInt:(int32_t)startcolumn
+                                           withInt:(int32_t)buffersize;
 
 /*!
  @brief Method to adjust line and column numbers for the start of a token.
  */
-- (void)adjustBeginLineColumnWithInt:(jint)newLine
-                             withInt:(jint)newCol;
+- (void)adjustBeginLineColumnWithInt:(int32_t)newLine
+                             withInt:(int32_t)newCol;
 
 /*!
  @brief Retreat.
  */
-- (void)backupWithInt:(jint)amount;
+- (void)backupWithInt:(int32_t)amount;
 
 /*!
  @return starting character for token.
  */
-- (jchar)BeginToken;
+- (unichar)BeginToken;
 
 /*!
  @brief Set buffers back to null when finished.
@@ -139,27 +144,27 @@
 /*!
  @return column of token start
  */
-- (jint)getBeginColumn;
+- (int32_t)getBeginColumn;
 
 /*!
  @return line number of token start
  */
-- (jint)getBeginLine;
+- (int32_t)getBeginLine;
 
 /*!
  - seealso: #getEndColumn
  */
-- (jint)getColumn;
+- (int32_t)getColumn;
 
 /*!
  @brief Get end column.
  */
-- (jint)getEndColumn;
+- (int32_t)getEndColumn;
 
 /*!
  @brief Get end line.
  */
-- (jint)getEndLine;
+- (int32_t)getEndLine;
 
 /*!
  @return token image as String
@@ -169,19 +174,19 @@
 /*!
  - seealso: #getEndLine
  */
-- (jint)getLine;
+- (int32_t)getLine;
 
 /*!
  @return suffix
  */
-- (IOSCharArray *)GetSuffixWithInt:(jint)len;
+- (IOSCharArray *)GetSuffixWithInt:(int32_t)len;
 
-- (jint)getTabSize;
+- (int32_t)getTabSize;
 
 /*!
  @brief Read a character.
  */
-- (jchar)readChar;
+- (unichar)readChar;
 
 /*!
  @brief Reinitialise.
@@ -192,16 +197,16 @@
  @brief Reinitialise.
  */
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn;
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn;
 
 /*!
  @brief Reinitialise.
  */
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn
-                            withInt:(jint)buffersize;
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn
+                            withInt:(int32_t)buffersize;
 
 /*!
  @brief Reinitialise.
@@ -214,17 +219,17 @@
  */
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
                        withNSString:(NSString *)encoding
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn;
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn;
 
 /*!
  @brief Reinitialise.
  */
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
                        withNSString:(NSString *)encoding
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn
-                            withInt:(jint)buffersize;
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn
+                            withInt:(int32_t)buffersize;
 
 /*!
  @brief Reinitialise.
@@ -235,38 +240,38 @@
  @brief Reinitialise.
  */
 - (void)ReInitWithJavaIoReader:(JavaIoReader *)dstream
-                       withInt:(jint)startline
-                       withInt:(jint)startcolumn;
+                       withInt:(int32_t)startline
+                       withInt:(int32_t)startcolumn;
 
 /*!
  @brief Reinitialise.
  */
 - (void)ReInitWithJavaIoReader:(JavaIoReader *)dstream
-                       withInt:(jint)startline
-                       withInt:(jint)startcolumn
-                       withInt:(jint)buffersize;
+                       withInt:(int32_t)startline
+                       withInt:(int32_t)startcolumn
+                       withInt:(int32_t)buffersize;
 
-- (void)setTabSizeWithInt:(jint)i;
+- (void)setTabSizeWithInt:(int32_t)i;
 
 #pragma mark Protected
 
 - (void)AdjustBuffSize;
 
-- (void)ExpandBuffWithBoolean:(jboolean)wrapAround;
+- (void)ExpandBuffWithBoolean:(bool)wrapAround;
 
 - (void)FillBuff;
 
-- (jchar)ReadByte;
+- (unichar)ReadByte;
 
-- (void)UpdateLineColumnWithChar:(jchar)c;
+- (void)UpdateLineColumnWithChar:(unichar)c;
 
 #pragma mark Package-Private
 
-- (jboolean)getTrackLineColumn;
+- (bool)getTrackLineColumn;
 
-+ (jint)hexvalWithChar:(jchar)c;
++ (int32_t)hexvalWithChar:(unichar)c;
 
-- (void)setTrackLineColumnWithBoolean:(jboolean)tlc;
+- (void)setTrackLineColumnWithBoolean:(bool)tlc;
 
 // Disallowed inherited constructors, do not use.
 
@@ -285,23 +290,23 @@ J2OBJC_FIELD_SETTER(CSSJavaCharStream, buffer_, IOSCharArray *)
 /*!
  @brief Whether parser is static.
  */
-inline jboolean CSSJavaCharStream_get_staticFlag(void);
+inline bool CSSJavaCharStream_get_staticFlag(void);
 #define CSSJavaCharStream_staticFlag false
-J2OBJC_STATIC_FIELD_CONSTANT(CSSJavaCharStream, staticFlag, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSJavaCharStream, staticFlag, bool)
 
-FOUNDATION_EXPORT jint CSSJavaCharStream_hexvalWithChar_(jchar c);
+FOUNDATION_EXPORT int32_t CSSJavaCharStream_hexvalWithChar_(unichar c);
 
-FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, jint startline, jint startcolumn, jint buffersize);
+FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize);
 
-FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn, jint buffersize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn, jint buffersize);
+FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize);
 
-FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, jint startline, jint startcolumn);
+FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, int32_t startline, int32_t startcolumn);
 
-FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn);
+FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn);
 
 FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_(CSSJavaCharStream *self, JavaIoReader *dstream);
 
@@ -309,29 +314,29 @@ FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWit
 
 FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_(JavaIoReader *dstream);
 
-FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn, jint buffersize);
+FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn, int32_t buffersize);
 
-FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn, jint buffersize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn, int32_t buffersize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn, jint buffersize);
+FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn, int32_t buffersize);
 
-FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, jint startline, jint startcolumn, jint buffersize);
+FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize);
 
-FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn, jint buffersize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn, jint buffersize);
+FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize);
 
-FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn);
+FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn);
 
-FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn);
+FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn);
 
-FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, jint startline, jint startcolumn);
+FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn);
 
-FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn);
+FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn);
 
 FOUNDATION_EXPORT void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding);
 
@@ -348,6 +353,7 @@ FOUNDATION_EXPORT CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivate
 J2OBJC_TYPE_LITERAL_HEADER(CSSJavaCharStream)
 
 @compatibility_alias ComAsheraCssJavaCharStream CSSJavaCharStream;
+
 
 #endif
 

@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\ActivityNotFoundException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ActivityNotFoundException.h"
 #include "J2ObjC_source.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADActivityNotFoundException
@@ -45,3 +56,5 @@ ADActivityNotFoundException *create_ADActivityNotFoundException_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADActivityNotFoundException)
+
+J2OBJC_NAME_MAPPING(ADActivityNotFoundException, "r.android.content", "AD")

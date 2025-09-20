@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\FloatArrayEvaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FloatArrayEvaluator")
@@ -21,6 +22,7 @@
 #include "TypeEvaluator.h"
 
 @class IOSFloatArray;
+@class JavaLangFloat;
 
 /*!
  @brief This evaluator can be used to perform type interpolation between <code>float[]</code> values.
@@ -61,7 +63,7 @@
  @return A <code>float[]</code> where each element is an interpolation between
           the same index in startValue and endValue.
  */
-- (IOSFloatArray *)evaluateWithFloat:(jfloat)fraction
+- (IOSFloatArray *)evaluateWithFloat:(float)fraction
                               withId:(IOSFloatArray *)startValue
                               withId:(IOSFloatArray *)endValue;
 
@@ -84,6 +86,7 @@ FOUNDATION_EXPORT ADFloatArrayEvaluator *create_ADFloatArrayEvaluator_initWithFl
 J2OBJC_TYPE_LITERAL_HEADER(ADFloatArrayEvaluator)
 
 @compatibility_alias RAndroidAnimationFloatArrayEvaluator ADFloatArrayEvaluator;
+
 
 #endif
 

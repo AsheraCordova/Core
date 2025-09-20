@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Spinner.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "Spinner.h"
 #include "TextView.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADSpinner
@@ -21,7 +34,7 @@
   @throw create_JavaLangRuntimeException_initWithNSString_(@"cannot be called by view.");
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   @throw create_JavaLangRuntimeException_initWithNSString_(@"cannot be called by view.");
 }
 
@@ -50,3 +63,5 @@ void ADSpinner_initWithASIWidget_(ADSpinner *self, id<ASIWidget> widget) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSpinner)
+
+J2OBJC_NAME_MAPPING(ADSpinner, "r.android.widget", "AD")

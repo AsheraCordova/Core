@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\ParseException.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ParseException")
@@ -22,7 +23,9 @@
 
 @class CSSToken;
 @class IOSObjectArray;
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 
 /*!
  @brief This exception is thrown when parse errors are encountered.
@@ -105,8 +108,8 @@
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -140,6 +143,7 @@ FOUNDATION_EXPORT NSString *CSSParseException_add_escapesWithNSString_(NSString 
 J2OBJC_TYPE_LITERAL_HEADER(CSSParseException)
 
 @compatibility_alias ComAsheraCssParseException CSSParseException;
+
 
 #endif
 

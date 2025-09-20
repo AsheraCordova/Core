@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\TokenMgrError.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TokenMgrError")
@@ -20,7 +21,11 @@
 #define INCLUDE_JavaLangError 1
 #include "java/lang/Error.h"
 
+@class JavaLangBoolean;
+@class JavaLangCharacter;
+@class JavaLangInteger;
 @class JavaLangThrowable;
+@class NSString;
 
 /*!
  @brief Token Manager Error.
@@ -31,7 +36,7 @@
    @brief Indicates the reason why the exception is thrown.It will have
   one of the above 4 values.
    */
-  jint errorCode_;
+  int32_t errorCode_;
 }
 
 #pragma mark Public
@@ -44,19 +49,19 @@
 /*!
  @brief Full Constructor.
  */
-- (instancetype)initPackagePrivateWithBoolean:(jboolean)EOFSeen
-                                      withInt:(jint)lexState
-                                      withInt:(jint)errorLine
-                                      withInt:(jint)errorColumn
+- (instancetype)initPackagePrivateWithBoolean:(bool)EOFSeen
+                                      withInt:(int32_t)lexState
+                                      withInt:(int32_t)errorLine
+                                      withInt:(int32_t)errorColumn
                                  withNSString:(NSString *)errorAfter
-                                     withChar:(jchar)curChar
-                                      withInt:(jint)reason;
+                                     withChar:(unichar)curChar
+                                      withInt:(int32_t)reason;
 
 /*!
  @brief Constructor with message and reason.
  */
 - (instancetype)initPackagePrivateWithNSString:(NSString *)message
-                                       withInt:(jint)reason;
+                                       withInt:(int32_t)reason;
 
 /*!
  @brief You can also modify the body of this method to customize your error messages.
@@ -87,12 +92,12 @@
      curchar     : the offending character
   Note: You can customize the lexical error message by modifying this method.
  */
-+ (NSString *)LexicalErrorWithBoolean:(jboolean)EOFSeen
-                              withInt:(jint)lexState
-                              withInt:(jint)errorLine
-                              withInt:(jint)errorColumn
++ (NSString *)LexicalErrorWithBoolean:(bool)EOFSeen
+                              withInt:(int32_t)lexState
+                              withInt:(int32_t)errorLine
+                              withInt:(int32_t)errorColumn
                          withNSString:(NSString *)errorAfter
-                             withChar:(jchar)curChar;
+                             withChar:(unichar)curChar;
 
 // Disallowed inherited constructors, do not use.
 
@@ -107,8 +112,8 @@
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -117,34 +122,34 @@ J2OBJC_EMPTY_STATIC_INIT(CSSTokenMgrError)
 /*!
  @brief Lexical error occurred.
  */
-inline jint CSSTokenMgrError_get_LEXICAL_ERROR(void);
+inline int32_t CSSTokenMgrError_get_LEXICAL_ERROR(void);
 #define CSSTokenMgrError_LEXICAL_ERROR 0
-J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, LEXICAL_ERROR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, LEXICAL_ERROR, int32_t)
 
 /*!
  @brief An attempt was made to create a second instance of a static token manager.
  */
-inline jint CSSTokenMgrError_get_STATIC_LEXER_ERROR(void);
+inline int32_t CSSTokenMgrError_get_STATIC_LEXER_ERROR(void);
 #define CSSTokenMgrError_STATIC_LEXER_ERROR 1
-J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, STATIC_LEXER_ERROR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, STATIC_LEXER_ERROR, int32_t)
 
 /*!
  @brief Tried to change to an invalid lexical state.
  */
-inline jint CSSTokenMgrError_get_INVALID_LEXICAL_STATE(void);
+inline int32_t CSSTokenMgrError_get_INVALID_LEXICAL_STATE(void);
 #define CSSTokenMgrError_INVALID_LEXICAL_STATE 2
-J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, INVALID_LEXICAL_STATE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, INVALID_LEXICAL_STATE, int32_t)
 
 /*!
  @brief Detected (and bailed out of) an infinite loop in the token manager.
  */
-inline jint CSSTokenMgrError_get_LOOP_DETECTED(void);
+inline int32_t CSSTokenMgrError_get_LOOP_DETECTED(void);
 #define CSSTokenMgrError_LOOP_DETECTED 3
-J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, LOOP_DETECTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, LOOP_DETECTED, int32_t)
 
 FOUNDATION_EXPORT NSString *CSSTokenMgrError_addEscapesWithNSString_(NSString *str);
 
-FOUNDATION_EXPORT NSString *CSSTokenMgrError_LexicalErrorWithBoolean_withInt_withInt_withInt_withNSString_withChar_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar);
+FOUNDATION_EXPORT NSString *CSSTokenMgrError_LexicalErrorWithBoolean_withInt_withInt_withInt_withNSString_withChar_(bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar);
 
 FOUNDATION_EXPORT void CSSTokenMgrError_initPackagePrivate(CSSTokenMgrError *self);
 
@@ -152,21 +157,22 @@ FOUNDATION_EXPORT CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivate(void
 
 FOUNDATION_EXPORT CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivate(void);
 
-FOUNDATION_EXPORT void CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(CSSTokenMgrError *self, NSString *message, jint reason);
+FOUNDATION_EXPORT void CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(CSSTokenMgrError *self, NSString *message, int32_t reason);
 
-FOUNDATION_EXPORT CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, jint reason) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, int32_t reason) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, jint reason);
+FOUNDATION_EXPORT CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, int32_t reason);
 
-FOUNDATION_EXPORT void CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(CSSTokenMgrError *self, jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason);
+FOUNDATION_EXPORT void CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(CSSTokenMgrError *self, bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar, int32_t reason);
 
-FOUNDATION_EXPORT CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar, int32_t reason) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason);
+FOUNDATION_EXPORT CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar, int32_t reason);
 
 J2OBJC_TYPE_LITERAL_HEADER(CSSTokenMgrError)
 
 @compatibility_alias ComAsheraCssTokenMgrError CSSTokenMgrError;
+
 
 #endif
 

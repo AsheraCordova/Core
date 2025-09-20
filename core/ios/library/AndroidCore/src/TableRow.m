@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\TableRow.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Gravity.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
@@ -11,13 +16,21 @@
 #include "TableRow.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADTableRow () {
  @public
-  jint mNumColumns_;
+  int32_t mNumColumns_;
   IOSIntArray *mColumnWidths_;
   IOSIntArray *mConstrainedColumnWidths_;
   ADSparseIntArray *mColumnToChildIndex_;
@@ -42,13 +55,13 @@ __attribute__((unused)) static void ADTableRow_mapIndexAndColumns(ADTableRow *se
 
 J2OBJC_FIELD_SETTER(ADTableRow_LayoutParams, mOffset_, IOSIntArray *)
 
-inline jint ADTableRow_LayoutParams_get_LOCATION(void);
+inline int32_t ADTableRow_LayoutParams_get_LOCATION(void);
 #define ADTableRow_LayoutParams_LOCATION 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADTableRow_LayoutParams, LOCATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTableRow_LayoutParams, LOCATION, int32_t)
 
-inline jint ADTableRow_LayoutParams_get_LOCATION_NEXT(void);
+inline int32_t ADTableRow_LayoutParams_get_LOCATION_NEXT(void);
 #define ADTableRow_LayoutParams_LOCATION_NEXT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADTableRow_LayoutParams, LOCATION_NEXT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTableRow_LayoutParams, LOCATION_NEXT, int32_t)
 
 @implementation ADTableRow
 
@@ -59,39 +72,39 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setColumnCollapsedWithInt:(jint)columnIndex
-                      withBoolean:(jboolean)collapsed {
+- (void)setColumnCollapsedWithInt:(int32_t)columnIndex
+                      withBoolean:(bool)collapsed {
   ADView *child = [self getVirtualChildAtWithInt:columnIndex];
   if (child != nil) {
     [child setVisibilityWithInt:collapsed ? ADView_GONE : ADView_VISIBLE];
   }
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [self measureHorizontalWithInt:widthMeasureSpec withInt:heightMeasureSpec];
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [self layoutHorizontalWithInt:l withInt:t withInt:r withInt:b];
 }
 
-- (ADView *)getVirtualChildAtWithInt:(jint)i {
+- (ADView *)getVirtualChildAtWithInt:(int32_t)i {
   if (mColumnToChildIndex_ == nil) {
     ADTableRow_mapIndexAndColumns(self);
   }
-  jint deflectedIndex = [((ADSparseIntArray *) nil_chk(mColumnToChildIndex_)) getWithInt:i withInt:-1];
+  int32_t deflectedIndex = [((ADSparseIntArray *) nil_chk(mColumnToChildIndex_)) getWithInt:i withInt:-1];
   if (deflectedIndex != -1) {
     return [self getChildAtWithInt:deflectedIndex];
   }
   return nil;
 }
 
-- (jint)getVirtualChildCount {
+- (int32_t)getVirtualChildCount {
   if (mColumnToChildIndex_ == nil) {
     ADTableRow_mapIndexAndColumns(self);
   }
@@ -102,38 +115,38 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADTableRow_mapIndexAndColumns(self);
 }
 
-- (jint)measureNullChildWithInt:(jint)childIndex {
+- (int32_t)measureNullChildWithInt:(int32_t)childIndex {
   return IOSIntArray_Get(nil_chk(mConstrainedColumnWidths_), childIndex);
 }
 
 - (void)measureChildBeforeLayoutWithADView:(ADView *)child
-                                   withInt:(jint)childIndex
-                                   withInt:(jint)widthMeasureSpec
-                                   withInt:(jint)totalWidth
-                                   withInt:(jint)heightMeasureSpec
-                                   withInt:(jint)totalHeight {
+                                   withInt:(int32_t)childIndex
+                                   withInt:(int32_t)widthMeasureSpec
+                                   withInt:(int32_t)totalWidth
+                                   withInt:(int32_t)heightMeasureSpec
+                                   withInt:(int32_t)totalHeight {
   if (mConstrainedColumnWidths_ != nil) {
     ADTableRow_LayoutParams *lp = (ADTableRow_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADTableRow_LayoutParams class]);
-    jint measureMode = ADView_MeasureSpec_EXACTLY;
-    jint columnWidth = 0;
-    jint span = ((ADTableRow_LayoutParams *) nil_chk(lp))->span_;
+    int32_t measureMode = ADView_MeasureSpec_EXACTLY;
+    int32_t columnWidth = 0;
+    int32_t span = ((ADTableRow_LayoutParams *) nil_chk(lp))->span_;
     IOSIntArray *constrainedColumnWidths = mConstrainedColumnWidths_;
-    for (jint i = 0; i < span; i++) {
+    for (int32_t i = 0; i < span; i++) {
       columnWidth += IOSIntArray_Get(nil_chk(constrainedColumnWidths), childIndex + i);
     }
-    jint gravity = lp->gravity_;
-    jboolean isHorizontalGravity = ADGravity_isHorizontalWithInt_(gravity);
+    int32_t gravity = lp->gravity_;
+    bool isHorizontalGravity = ADGravity_isHorizontalWithInt_(gravity);
     if (isHorizontalGravity) {
       measureMode = ADView_MeasureSpec_AT_MOST;
     }
-    jint childWidthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(0, columnWidth - lp->leftMargin_ - lp->rightMargin_), measureMode);
-    jint childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(heightMeasureSpec, mPaddingTop_ + mPaddingBottom_ + lp->topMargin_ + lp->bottomMargin_ + totalHeight, lp->height_);
+    int32_t childWidthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(0, columnWidth - lp->leftMargin_ - lp->rightMargin_), measureMode);
+    int32_t childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(heightMeasureSpec, mPaddingTop_ + mPaddingBottom_ + lp->topMargin_ + lp->bottomMargin_ + totalHeight, lp->height_);
     [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
     if (isHorizontalGravity) {
-      jint childWidth = [child getMeasuredWidth];
+      int32_t childWidth = [child getMeasuredWidth];
       *IOSIntArray_GetRef(nil_chk(lp->mOffset_), ADTableRow_LayoutParams_LOCATION_NEXT) = columnWidth - childWidth;
-      jint layoutDirection = [self getLayoutDirection];
-      jint absoluteGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
+      int32_t layoutDirection = [self getLayoutDirection];
+      int32_t absoluteGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
       switch (absoluteGravity & ADGravity_HORIZONTAL_GRAVITY_MASK) {
         case ADGravity_LEFT:
         break;
@@ -154,33 +167,33 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getChildrenSkipCountWithADView:(ADView *)child
-                               withInt:(jint)index {
+- (int32_t)getChildrenSkipCountWithADView:(ADView *)child
+                                  withInt:(int32_t)index {
   ADTableRow_LayoutParams *layoutParams = (ADTableRow_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADTableRow_LayoutParams class]);
   return ((ADTableRow_LayoutParams *) nil_chk(layoutParams))->span_ - 1;
 }
 
-- (jint)getLocationOffsetWithADView:(ADView *)child {
+- (int32_t)getLocationOffsetWithADView:(ADView *)child {
   return IOSIntArray_Get(nil_chk(((ADTableRow_LayoutParams *) nil_chk(((ADTableRow_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADTableRow_LayoutParams class]))))->mOffset_), ADTableRow_LayoutParams_LOCATION);
 }
 
-- (jint)getNextLocationOffsetWithADView:(ADView *)child {
+- (int32_t)getNextLocationOffsetWithADView:(ADView *)child {
   return IOSIntArray_Get(nil_chk(((ADTableRow_LayoutParams *) nil_chk(((ADTableRow_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADTableRow_LayoutParams class]))))->mOffset_), ADTableRow_LayoutParams_LOCATION_NEXT);
 }
 
-- (IOSIntArray *)getColumnsWidthsWithInt:(jint)widthMeasureSpec
-                                 withInt:(jint)heightMeasureSpec {
-  jint numColumns = [self getVirtualChildCount];
+- (IOSIntArray *)getColumnsWidthsWithInt:(int32_t)widthMeasureSpec
+                                 withInt:(int32_t)heightMeasureSpec {
+  int32_t numColumns = [self getVirtualChildCount];
   if (mColumnWidths_ == nil || numColumns != mColumnWidths_->size_) {
     JreStrongAssignAndConsume(&mColumnWidths_, [IOSIntArray newArrayWithLength:numColumns]);
   }
   IOSIntArray *columnWidths = mColumnWidths_;
-  for (jint i = 0; i < numColumns; i++) {
+  for (int32_t i = 0; i < numColumns; i++) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if (child != nil && [child getVisibility] != ADView_GONE) {
       ADTableRow_LayoutParams *layoutParams = (ADTableRow_LayoutParams *) cast_chk([child getLayoutParams], [ADTableRow_LayoutParams class]);
       if (((ADTableRow_LayoutParams *) nil_chk(layoutParams))->span_ == 1) {
-        jint spec;
+        int32_t spec;
         switch (layoutParams->width_) {
           case ADViewGroup_LayoutParams_WRAP_CONTENT:
           spec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, 0, ADViewGroup_LayoutParams_WRAP_CONTENT);
@@ -192,7 +205,7 @@ J2OBJC_IGNORE_DESIGNATED_END
           spec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(layoutParams->width_, ADView_MeasureSpec_EXACTLY);
         }
         [child measureWithInt:spec withInt:spec];
-        jint width = [child getMeasuredWidth] + layoutParams->leftMargin_ + layoutParams->rightMargin_;
+        int32_t width = [child getMeasuredWidth] + layoutParams->leftMargin_ + layoutParams->rightMargin_;
         *IOSIntArray_GetRef(columnWidths, i) = width;
       }
       else {
@@ -217,7 +230,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ADTableRow_LayoutParams_init();
 }
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return [p isKindOfClass:[ADTableRow_LayoutParams class]];
 }
 
@@ -301,17 +314,17 @@ ADTableRow *create_ADTableRow_init() {
 
 void ADTableRow_mapIndexAndColumns(ADTableRow *self) {
   if (self->mColumnToChildIndex_ == nil) {
-    jint virtualCount = 0;
-    jint count = [self getChildCount];
+    int32_t virtualCount = 0;
+    int32_t count = [self getChildCount];
     JreStrongAssignAndConsume(&self->mColumnToChildIndex_, new_ADSparseIntArray_init());
     ADSparseIntArray *columnToChild = self->mColumnToChildIndex_;
-    for (jint i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
       ADView *child = [self getChildAtWithInt:i];
       ADTableRow_LayoutParams *layoutParams = (ADTableRow_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADTableRow_LayoutParams class]);
       if (((ADTableRow_LayoutParams *) nil_chk(layoutParams))->column_ >= virtualCount) {
         virtualCount = layoutParams->column_;
       }
-      for (jint j = 0; j < layoutParams->span_; j++) {
+      for (int32_t j = 0; j < layoutParams->span_; j++) {
         [columnToChild putWithInt:virtualCount++ withInt:i];
       }
     }
@@ -321,10 +334,12 @@ void ADTableRow_mapIndexAndColumns(ADTableRow *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTableRow)
 
+J2OBJC_NAME_MAPPING(ADTableRow, "r.android.widget", "AD")
+
 @implementation ADTableRow_LayoutParams
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)h {
+- (instancetype)initWithInt:(int32_t)w
+                    withInt:(int32_t)h {
   ADTableRow_LayoutParams_initWithInt_withInt_(self, w, h);
   return self;
 }
@@ -373,18 +388,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADTableRow_LayoutParams_initWithInt_withInt_(ADTableRow_LayoutParams *self, jint w, jint h) {
+void ADTableRow_LayoutParams_initWithInt_withInt_(ADTableRow_LayoutParams *self, int32_t w, int32_t h) {
   ADLinearLayout_LayoutParams_initWithInt_withInt_(self, w, h);
   JreStrongAssignAndConsume(&self->mOffset_, [IOSIntArray newArrayWithLength:2]);
   self->column_ = -1;
   self->span_ = 1;
 }
 
-ADTableRow_LayoutParams *new_ADTableRow_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADTableRow_LayoutParams *new_ADTableRow_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_NEW_IMPL(ADTableRow_LayoutParams, initWithInt_withInt_, w, h)
 }
 
-ADTableRow_LayoutParams *create_ADTableRow_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADTableRow_LayoutParams *create_ADTableRow_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_CREATE_IMPL(ADTableRow_LayoutParams, initWithInt_withInt_, w, h)
 }
 

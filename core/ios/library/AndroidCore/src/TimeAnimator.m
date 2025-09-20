@@ -3,17 +3,32 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\TimeAnimator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AnimationUtils.h"
 #include "J2ObjC_source.h"
 #include "TimeAnimator.h"
 #include "ValueAnimator.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADTimeAnimator () {
  @public
   id<ADTimeAnimator_TimeListener> mListener_;
-  jlong mPreviousTime_;
+  int64_t mPreviousTime_;
 }
 
 @end
@@ -38,18 +53,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super start];
 }
 
-- (jboolean)animateBasedOnTimeWithLong:(jlong)currentTime {
+- (bool)animateBasedOnTimeWithLong:(int64_t)currentTime {
   if (mListener_ != nil) {
-    jlong totalTime = currentTime - mStartTime_;
-    jlong deltaTime = (mPreviousTime_ < 0) ? 0 : (currentTime - mPreviousTime_);
+    int64_t totalTime = currentTime - mStartTime_;
+    int64_t deltaTime = (mPreviousTime_ < 0) ? 0 : (currentTime - mPreviousTime_);
     mPreviousTime_ = currentTime;
     [mListener_ onTimeUpdateWithADTimeAnimator:self withLong:totalTime withLong:deltaTime];
   }
   return false;
 }
 
-- (void)setCurrentPlayTimeWithLong:(jlong)playTime {
-  jlong currentTime = ADAnimationUtils_currentAnimationTimeMillis();
+- (void)setCurrentPlayTimeWithLong:(int64_t)playTime {
+  int64_t currentTime = ADAnimationUtils_currentAnimationTimeMillis();
   mStartTime_ = JavaLangMath_maxWithLong_withLong_(mStartTime_, currentTime - playTime);
   mStartTimeCommitted_ = true;
   [self animateBasedOnTimeWithLong:currentTime];
@@ -59,7 +74,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&mListener_, listener);
 }
 
-- (void)animateValueWithFloat:(jfloat)fraction {
+- (void)animateValueWithFloat:(float)fraction {
 }
 
 - (void)initAnimation {
@@ -116,6 +131,8 @@ ADTimeAnimator *create_ADTimeAnimator_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTimeAnimator)
+
+J2OBJC_NAME_MAPPING(ADTimeAnimator, "r.android.animation", "AD")
 
 @implementation ADTimeAnimator_TimeListener
 

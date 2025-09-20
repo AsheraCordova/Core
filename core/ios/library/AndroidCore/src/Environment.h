@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Environment.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Environment")
@@ -17,6 +18,8 @@
 #define ADEnvironment_
 
 @class JavaIoFile;
+@class JavaLangBoolean;
+@class NSString;
 
 @interface ADEnvironment : NSObject
 
@@ -30,7 +33,7 @@
 
 + (id)getLegacyExternalStorageDirectory;
 
-+ (jboolean)isExternalStorageEmulated;
++ (bool)isExternalStorageEmulated;
 
 @end
 
@@ -51,13 +54,14 @@ FOUNDATION_EXPORT NSString *ADEnvironment_getExternalStorageState(void);
 
 FOUNDATION_EXPORT JavaIoFile *ADEnvironment_getExternalStorageDirectory(void);
 
-FOUNDATION_EXPORT jboolean ADEnvironment_isExternalStorageEmulated(void);
+FOUNDATION_EXPORT bool ADEnvironment_isExternalStorageEmulated(void);
 
 FOUNDATION_EXPORT id ADEnvironment_getLegacyExternalStorageDirectory(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADEnvironment)
 
 @compatibility_alias RAndroidOsEnvironment ADEnvironment;
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\AutoCompleteTextViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AdapterView.h"
@@ -70,9 +75,11 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/StringBuilder.h"
@@ -99,13 +106,14 @@
 
 static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissDropDown)(id, SEL);
 
+
 @class ASAutoCompleteTextViewImpl_OutsideEventListener;
 @class ASAutoCompleteTextViewImpl_PopupDataObserver;
-@class JavaUtilLocale;
-@class JavaUtilRegexPattern;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -113,43 +121,43 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 @interface ASAutoCompleteTextViewImpl () {
  @public
   id originalTintColor_;
-  jint maxLength_;
+  int32_t maxLength_;
   JavaUtilRegexPattern *numericPattern_;
   id editorAction_;
   id onFocusChange_;
-  jboolean selectAllOnFocus_;
-  jboolean selectOnceOnFocus_;
-  jboolean scrollHorizontally_;
+  bool selectAllOnFocus_;
+  bool selectOnceOnFocus_;
+  bool scrollHorizontally_;
   id onAfterTextChange_;
   id onBeforeTextChange_;
   id onTextChange_;
-  jint start_;
-  jint end_;
-  jint count_;
-  jint after_;
+  int32_t start_;
+  int32_t end_;
+  int32_t count_;
+  int32_t after_;
   NSString *str_;
   id<JavaUtilMap> textWatchers_;
   id<ADTextWatcher> textChangedListener_;
-  jboolean textAllCaps_;
-  jboolean callMeasureOnChange_;
+  bool textAllCaps_;
+  bool callMeasureOnChange_;
   id<JavaUtilList> entries_;
   ASListViewImpl *listViewWidget_;
   id<ASIWidget> popupContainer_;
   ASAutoCompleteTextViewImpl_PopupDataObserver *observer_;
   NSString *hintText_;
-  jint mPromptPosition_;
+  int32_t mPromptPosition_;
   NSString *hintViewPath_;
   id dropDownlistSelector_;
-  jint dropDownWidth_;
-  jint dropDownVerticalOffset_;
-  jint dropDownHorizontalOffset_;
-  jint dropDownHeight_;
-  jint dropDownAnchor_;
+  int32_t dropDownWidth_;
+  int32_t dropDownVerticalOffset_;
+  int32_t dropDownHorizontalOffset_;
+  int32_t dropDownHeight_;
+  int32_t dropDownAnchor_;
   id<ADAutoCompleteTextView_OnDismissListener> onDismissListener_;
   ASAutoCompleteTextViewImpl_OutsideEventListener *outsideEventListener_;
   id<JavaUtilMap> fontDescriptors_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   JavaUtilLocale *locale_;
   ADColorStateList *drawableTint_;
@@ -164,17 +172,17 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setCursorVisibleWithId:(id)objValue;
 
-- (id)nativeGetTintColorWithBoolean:(jboolean)clearColor;
+- (id)nativeGetTintColorWithBoolean:(bool)clearColor;
 
 - (void)setCapitalizeWithId:(id)objValue;
 
-- (void)nativeSetCapitalizeWithInt:(jint)capitalizeType;
+- (void)nativeSetCapitalizeWithInt:(int32_t)capitalizeType;
 
 - (void)setAutoTextWithId:(id)objValue;
 
-- (void)nativeSetCorrectionTypeWithInt:(jint)capitalizeType;
+- (void)nativeSetCorrectionTypeWithInt:(int32_t)capitalizeType;
 
-- (jboolean)getCursorVisible;
+- (bool)getCursorVisible;
 
 - (void)setMaxLengthWithId:(id)objValue;
 
@@ -189,7 +197,7 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (NSString *)getDecimalCharacter;
 
-- (jboolean)numericPatternMatchesWithNSString:(NSString *)str;
+- (bool)numericPatternMatchesWithNSString:(NSString *)str;
 
 - (void)removeNumericListener;
 
@@ -197,24 +205,24 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setPhoneNumberWithId:(id)objValue;
 
-- (void)nativeSetPhoneNumberWithBoolean:(jboolean)value;
+- (void)nativeSetPhoneNumberWithBoolean:(bool)value;
 
 - (id)getFont;
 
 - (void)setInputTypeWithId:(id)objValue;
 
-- (void)nativeSetKeyboardTypeWithInt:(jint)value;
+- (void)nativeSetKeyboardTypeWithInt:(int32_t)value;
 
 - (id)getInputType;
 
-- (jint)nativeGetKeyboardType;
+- (int32_t)nativeGetKeyboardType;
 
 - (void)setImeOptionsWithId:(id)objValue
                withNSString:(NSString *)strValue;
 
-- (void)nativeSetImeOptionsWithInt:(jint)imeOptions;
+- (void)nativeSetImeOptionsWithInt:(int32_t)imeOptions;
 
-- (jint)nativeGetImeOptions;
+- (int32_t)nativeGetImeOptions;
 
 - (id)getImeOptions;
 
@@ -236,11 +244,11 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setSelectAllWithId:(id)objValue;
 
-- (jboolean)isFirstResponder;
+- (bool)isFirstResponder;
 
 - (void)becomeFirstResponder;
 
-- (void)nativeSetSelectAllWithFloat:(jfloat)delay;
+- (void)nativeSetSelectAllWithFloat:(float)delay;
 
 - (void)setSingleLineWithId:(id)objValue;
 
@@ -251,14 +259,14 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 - (void)nativeAddTapGesture;
 
 - (void)nativeSetScrollEnabledWithId:(id)scrollView
-                         withBoolean:(jboolean)scrollEnabled;
+                         withBoolean:(bool)scrollEnabled;
 
 - (void)setTextColorLinkWithADColorStateList:(ADColorStateList *)linkTextColors;
 
 - (void)handleOnBeforeTextChangeWithNSString:(NSString *)s
-                                     withInt:(jint)start
-                                     withInt:(jint)count
-                                     withInt:(jint)after;
+                                     withInt:(int32_t)start
+                                     withInt:(int32_t)count
+                                     withInt:(int32_t)after;
 
 - (id<ADTextWatcher>)getTextChangedListenerWithId:(id)objValue
                                      withNSString:(NSString *)name;
@@ -278,8 +286,8 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 - (void)forceRedraw;
 
 - (void)nativeSetContentSizeWithId:(id)uiView
-                           withInt:(jint)contentWidth
-                           withInt:(jint)height;
+                           withInt:(int32_t)contentWidth
+                           withInt:(int32_t)height;
 
 - (void)remeasure;
 
@@ -297,7 +305,7 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
-- (id)nativeCreateViewWithInt:(jint)viewType;
+- (id)nativeCreateViewWithInt:(int32_t)viewType;
 
 - (void)addMinMaxListener;
 
@@ -305,12 +313,12 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setPasswordTypeWithId:(id)objValue;
 
-- (void)nativeSetSecureTextEntryWithBoolean:(jboolean)value;
+- (void)nativeSetSecureTextEntryWithBoolean:(bool)value;
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b;
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
 
 - (void)postSetAttributeEditTextWithASWidgetAttribute:(ASWidgetAttribute *)key
                                          withNSString:(NSString *)strValue
@@ -319,7 +327,7 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setBorderStyleWithId:(id)value;
 
-- (void)nativeSetBorderStyleWithInt:(jint)value;
+- (void)nativeSetBorderStyleWithInt:(int32_t)value;
 
 - (void)updatePadding;
 
@@ -346,8 +354,8 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 - (void)createEntries;
 
 - (void)beforetextChangeWithNSString:(NSString *)s
-                             withInt:(jint)start
-                             withInt:(jint)count;
+                             withInt:(int32_t)start
+                             withInt:(int32_t)count;
 
 - (void)createPopUpIfRequired;
 
@@ -444,11 +452,11 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -468,14 +476,14 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setDigitsWithId:(id)objValue;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (id)getPaddingTop;
 
@@ -509,7 +517,7 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -527,7 +535,7 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -547,9 +555,9 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -564,9 +572,9 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (void)setTextColorHighlightWithId:(id)objValue;
 
@@ -574,14 +582,14 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)createSimpleWrapableView;
 
-- (jboolean)hasScrollView;
+- (bool)hasScrollView;
 
-- (jboolean)isViewWrapped;
+- (bool)isViewWrapped;
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b;
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b;
 
 - (void)invalidateWrapViewHolder;
 
@@ -595,7 +603,7 @@ static void (*ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_super$_dismissD
 
 - (void)showHidePopup;
 
-- (jboolean)islinearlayout;
+- (bool)islinearlayout;
 
 @end
 
@@ -640,44 +648,44 @@ inline NSString *ASAutoCompleteTextViewImpl_get_DEFAULT_MODEL_FOR(void);
 static NSString *ASAutoCompleteTextViewImpl_DEFAULT_MODEL_FOR = @"let item in . from entries->local into loopvar as map";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASAutoCompleteTextViewImpl, DEFAULT_MODEL_FOR, NSString *)
 
-inline jboolean ASAutoCompleteTextViewImpl_get_prepare(void);
-inline jboolean ASAutoCompleteTextViewImpl_set_prepare(jboolean value);
-inline jboolean *ASAutoCompleteTextViewImpl_getRef_prepare(void);
-static jboolean ASAutoCompleteTextViewImpl_prepare;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASAutoCompleteTextViewImpl, prepare, jboolean)
+inline bool ASAutoCompleteTextViewImpl_get_prepare(void);
+inline bool ASAutoCompleteTextViewImpl_set_prepare(bool value);
+inline bool *ASAutoCompleteTextViewImpl_getRef_prepare(void);
+static bool ASAutoCompleteTextViewImpl_prepare;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASAutoCompleteTextViewImpl, prepare, bool)
 
 inline id<JavaUtilList> ASAutoCompleteTextViewImpl_get_regexSpecialCharacters(void);
 inline id<JavaUtilList> ASAutoCompleteTextViewImpl_set_regexSpecialCharacters(id<JavaUtilList> value);
 static id<JavaUtilList> ASAutoCompleteTextViewImpl_regexSpecialCharacters;
 J2OBJC_STATIC_FIELD_OBJ(ASAutoCompleteTextViewImpl, regexSpecialCharacters, id<JavaUtilList>)
 
-inline jint ASAutoCompleteTextViewImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASAutoCompleteTextViewImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASAutoCompleteTextViewImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASAutoCompleteTextViewImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASAutoCompleteTextViewImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASAutoCompleteTextViewImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASAutoCompleteTextViewImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASAutoCompleteTextViewImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASAutoCompleteTextViewImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASAutoCompleteTextViewImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASAutoCompleteTextViewImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASAutoCompleteTextViewImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASAutoCompleteTextViewImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASAutoCompleteTextViewImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASAutoCompleteTextViewImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASAutoCompleteTextViewImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASAutoCompleteTextViewImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASAutoCompleteTextViewImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASAutoCompleteTextViewImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASAutoCompleteTextViewImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASAutoCompleteTextViewImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASAutoCompleteTextViewImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASAutoCompleteTextViewImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, NORMAL_FONT_TRAIT, int32_t)
 
-inline jint ASAutoCompleteTextViewImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASAutoCompleteTextViewImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASAutoCompleteTextViewImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASAutoCompleteTextViewImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASAutoCompleteTextViewImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASAutoCompleteTextViewImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASAutoCompleteTextViewImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASAutoCompleteTextViewImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASAutoCompleteTextViewImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASAutoCompleteTextViewImpl, TEXT_ALIGN_RIGHT, int32_t)
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setWidgetOnNativeClass(ASAutoCompleteTextViewImpl *self);
 
@@ -687,17 +695,17 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeTriggerBefo
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setCursorVisibleWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static id ASAutoCompleteTextViewImpl_nativeGetTintColorWithBoolean_(ASAutoCompleteTextViewImpl *self, jboolean clearColor);
+__attribute__((unused)) static id ASAutoCompleteTextViewImpl_nativeGetTintColorWithBoolean_(ASAutoCompleteTextViewImpl *self, bool clearColor);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setCapitalizeWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetCapitalizeWithInt_(ASAutoCompleteTextViewImpl *self, jint capitalizeType);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetCapitalizeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t capitalizeType);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setAutoTextWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetCorrectionTypeWithInt_(ASAutoCompleteTextViewImpl *self, jint capitalizeType);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetCorrectionTypeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t capitalizeType);
 
-__attribute__((unused)) static jboolean ASAutoCompleteTextViewImpl_getCursorVisible(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static bool ASAutoCompleteTextViewImpl_getCursorVisible(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setMaxLengthWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
@@ -711,7 +719,7 @@ __attribute__((unused)) static NSString *ASAutoCompleteTextViewImpl_getMinusStri
 
 __attribute__((unused)) static NSString *ASAutoCompleteTextViewImpl_getDecimalCharacter(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jboolean ASAutoCompleteTextViewImpl_numericPatternMatchesWithNSString_(ASAutoCompleteTextViewImpl *self, NSString *str);
+__attribute__((unused)) static bool ASAutoCompleteTextViewImpl_numericPatternMatchesWithNSString_(ASAutoCompleteTextViewImpl *self, NSString *str);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_removeNumericListener(ASAutoCompleteTextViewImpl *self);
 
@@ -719,23 +727,23 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_addNumericListene
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setPhoneNumberWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetPhoneNumberWithBoolean_(ASAutoCompleteTextViewImpl *self, jboolean value);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetPhoneNumberWithBoolean_(ASAutoCompleteTextViewImpl *self, bool value);
 
 __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getFont(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setInputTypeWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetKeyboardTypeWithInt_(ASAutoCompleteTextViewImpl *self, jint value);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetKeyboardTypeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t value);
 
 __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getInputType(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_nativeGetKeyboardType(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_nativeGetKeyboardType(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setImeOptionsWithId_withNSString_(ASAutoCompleteTextViewImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetImeOptionsWithInt_(ASAutoCompleteTextViewImpl *self, jint imeOptions);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetImeOptionsWithInt_(ASAutoCompleteTextViewImpl *self, int32_t imeOptions);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_nativeGetImeOptions(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_nativeGetImeOptions(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getImeOptions(ASAutoCompleteTextViewImpl *self);
 
@@ -757,11 +765,11 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setSelectAllOnFoc
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setSelectAllWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASAutoCompleteTextViewImpl_isFirstResponder(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static bool ASAutoCompleteTextViewImpl_isFirstResponder(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_becomeFirstResponder(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetSelectAllWithFloat_(ASAutoCompleteTextViewImpl *self, jfloat delay);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetSelectAllWithFloat_(ASAutoCompleteTextViewImpl *self, float delay);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setSingleLineWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
@@ -771,11 +779,11 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setScrollHorizont
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeAddTapGesture(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetScrollEnabledWithId_withBoolean_(ASAutoCompleteTextViewImpl *self, id scrollView, jboolean scrollEnabled);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetScrollEnabledWithId_withBoolean_(ASAutoCompleteTextViewImpl *self, id scrollView, bool scrollEnabled);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setTextColorLinkWithADColorStateList_(ASAutoCompleteTextViewImpl *self, ADColorStateList *linkTextColors);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, jint start, jint count, jint after);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, int32_t start, int32_t count, int32_t after);
 
 __attribute__((unused)) static id<ADTextWatcher> ASAutoCompleteTextViewImpl_getTextChangedListenerWithId_withNSString_(ASAutoCompleteTextViewImpl *self, id objValue, NSString *name);
 
@@ -793,7 +801,7 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setTextAllCapsWit
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_forceRedraw(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetContentSizeWithId_withInt_withInt_(ASAutoCompleteTextViewImpl *self, id uiView, jint contentWidth, jint height);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetContentSizeWithId_withInt_withInt_(ASAutoCompleteTextViewImpl *self, id uiView, int32_t contentWidth, int32_t height);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_remeasure(ASAutoCompleteTextViewImpl *self);
 
@@ -811,7 +819,7 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setErrorWithNSStr
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeCreateWithJavaUtilMap_(ASAutoCompleteTextViewImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static id ASAutoCompleteTextViewImpl_nativeCreateViewWithInt_(ASAutoCompleteTextViewImpl *self, jint viewType);
+__attribute__((unused)) static id ASAutoCompleteTextViewImpl_nativeCreateViewWithInt_(ASAutoCompleteTextViewImpl *self, int32_t viewType);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_addMinMaxListener(ASAutoCompleteTextViewImpl *self);
 
@@ -819,15 +827,15 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeAddTextFiel
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setPasswordTypeWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetSecureTextEntryWithBoolean_(ASAutoCompleteTextViewImpl *self, jboolean value);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetSecureTextEntryWithBoolean_(ASAutoCompleteTextViewImpl *self, bool value);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_postSetAttributeEditTextWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(ASAutoCompleteTextViewImpl *self, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setBorderStyleWithId_(ASAutoCompleteTextViewImpl *self, id value);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetBorderStyleWithInt_(ASAutoCompleteTextViewImpl *self, jint value);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetBorderStyleWithInt_(ASAutoCompleteTextViewImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_updatePadding(ASAutoCompleteTextViewImpl *self);
 
@@ -853,7 +861,7 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_unregisterDataSet
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_createEntries(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_beforetextChangeWithNSString_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, jint start, jint count);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_beforetextChangeWithNSString_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, int32_t start, int32_t count);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_createPopUpIfRequired(ASAutoCompleteTextViewImpl *self);
 
@@ -945,11 +953,11 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setMinWidthWithId
 
 __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getWidth(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_getHeight(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_getHeight(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setFirstBaselineToTopHeightWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASAutoCompleteTextViewImpl_getIncludeFontPadding(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static bool ASAutoCompleteTextViewImpl_getIncludeFontPadding(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getFirstBaselineToTopHeight(ASAutoCompleteTextViewImpl *self);
 
@@ -969,13 +977,13 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setNumericWithId_
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setDigitsWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_nativeGetFontSize(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_nativeGetFontSize(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_nativeGetFontStyle(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_nativeGetFontStyle(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASAutoCompleteTextViewImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASAutoCompleteTextViewImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetFontStyleWithInt_(ASAutoCompleteTextViewImpl *self, jint style);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetFontStyleWithInt_(ASAutoCompleteTextViewImpl *self, int32_t style);
 
 __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getPaddingTop(ASAutoCompleteTextViewImpl *self);
 
@@ -1009,7 +1017,7 @@ __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getTextSize(ASAutoC
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setMyTextSizeWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetTextSizeWithInt_(ASAutoCompleteTextViewImpl *self, jint value);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_nativeSetTextSizeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setVerticalAligmentCenter(ASAutoCompleteTextViewImpl *self);
 
@@ -1027,7 +1035,7 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setHorizontalAlig
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setHorizontalAligmentLeftInternal(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_getTextAlignment(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_getTextAlignment(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setDrawablePaddingWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
@@ -1043,9 +1051,9 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setDrawableLeftWi
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setDrawableLeftInternalWithNSString_withId_(ASAutoCompleteTextViewImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_getImageHeightWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_getImageHeightWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_getImageWidthWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_getImageWidthWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
 __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getDrawablePadding(ASAutoCompleteTextViewImpl *self);
 
@@ -1059,9 +1067,9 @@ __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getTextColorState(A
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_drawableStateChangeWithNSString_withADDrawable_(ASAutoCompleteTextViewImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_getLineHeight(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_getLineHeight(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jint ASAutoCompleteTextViewImpl_getBorderWidth(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static int32_t ASAutoCompleteTextViewImpl_getBorderWidth(ASAutoCompleteTextViewImpl *self);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_setTextColorHighlightWithId_(ASAutoCompleteTextViewImpl *self, id objValue);
 
@@ -1069,11 +1077,11 @@ __attribute__((unused)) static id ASAutoCompleteTextViewImpl_getTextColorHighlig
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_createSimpleWrapableView(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jboolean ASAutoCompleteTextViewImpl_hasScrollView(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static bool ASAutoCompleteTextViewImpl_hasScrollView(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jboolean ASAutoCompleteTextViewImpl_isViewWrapped(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static bool ASAutoCompleteTextViewImpl_isViewWrapped(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static void ASAutoCompleteTextViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASAutoCompleteTextViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_invalidateWrapViewHolder(ASAutoCompleteTextViewImpl *self);
 
@@ -1087,7 +1095,7 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_movePopUpContaine
 
 __attribute__((unused)) static void ASAutoCompleteTextViewImpl_showHidePopup(ASAutoCompleteTextViewImpl *self);
 
-__attribute__((unused)) static jboolean ASAutoCompleteTextViewImpl_islinearlayout(ASAutoCompleteTextViewImpl *self);
+__attribute__((unused)) static bool ASAutoCompleteTextViewImpl_islinearlayout(ASAutoCompleteTextViewImpl *self);
 
 @interface ASAutoCompleteTextViewImpl_DrawableTintMode () {
  @public
@@ -1172,7 +1180,7 @@ J2OBJC_FIELD_SETTER(ASAutoCompleteTextViewImpl_InputView, mapping_, id<JavaUtilM
 
 @interface ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt () {
  @public
-  __unsafe_unretained ASAutoCompleteTextViewImpl *this$0_;
+  WEAK_ ASAutoCompleteTextViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -1203,6 +1211,7 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_AutoCompleteTextViewEx
 
 __attribute__((unused)) static ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_$Lambda$1 *create_ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_$Lambda$1_initWithASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt *outer$);
 
+
 @interface ASAutoCompleteTextViewImpl_1 : NSObject < ADAdapterView_OnItemClickListener > {
  @public
   ASAutoCompleteTextViewImpl *this$0_;
@@ -1212,8 +1221,8 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_AutoCompleteTextViewEx
 
 - (void)onItemClickWithADAdapterView:(ADAdapterView *)parent
                           withADView:(ADView *)view
-                             withInt:(jint)position
-                            withLong:(jlong)id_;
+                             withInt:(int32_t)position
+                            withLong:(int64_t)id_;
 
 @end
 
@@ -1224,6 +1233,7 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_1_initWithASAutoC
 __attribute__((unused)) static ASAutoCompleteTextViewImpl_1 *new_ASAutoCompleteTextViewImpl_1_initWithASAutoCompleteTextViewImpl_(ASAutoCompleteTextViewImpl *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASAutoCompleteTextViewImpl_1 *create_ASAutoCompleteTextViewImpl_1_initWithASAutoCompleteTextViewImpl_(ASAutoCompleteTextViewImpl *outer$);
+
 
 @interface ASAutoCompleteTextViewImpl_PopupDataObserver : ADDataSetObserver {
  @public
@@ -1246,6 +1256,7 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_PopupDataObserver *cre
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_PopupDataObserver)
 
+
 @interface ASAutoCompleteTextViewImpl_2 : ASLoopParam {
  @public
   NSString *val$entry_;
@@ -1264,6 +1275,7 @@ __attribute__((unused)) static void ASAutoCompleteTextViewImpl_2_initWithNSStrin
 __attribute__((unused)) static ASAutoCompleteTextViewImpl_2 *new_ASAutoCompleteTextViewImpl_2_initWithNSString_(NSString *capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASAutoCompleteTextViewImpl_2 *create_ASAutoCompleteTextViewImpl_2_initWithNSString_(NSString *capture$0);
+
 
 @interface ASAutoCompleteTextViewImpl_OutsideEventListener : ASEventBusHandler {
  @public
@@ -1288,6 +1300,7 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_OutsideEventListener *
 __attribute__((unused)) static ASAutoCompleteTextViewImpl_OutsideEventListener *create_ASAutoCompleteTextViewImpl_OutsideEventListener_initWithASAutoCompleteTextViewImpl_withNSString_(ASAutoCompleteTextViewImpl *window, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_OutsideEventListener)
+
 
 @interface ASAutoCompleteTextViewImpl_OnDismissListener : NSObject < ADAutoCompleteTextView_OnDismissListener, ASIListener > {
  @public
@@ -1333,6 +1346,7 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_OnDismissListener *cre
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_OnDismissListener)
 
+
 @interface ASAutoCompleteTextViewImpl_OnEditorActionListener : NSObject < ADTextView_OnEditorActionListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1350,12 +1364,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_OnDismissListener)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onEditorActionWithADTextView:(ADTextView *)v
-                                 withInt:(jint)actionId
-                          withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onEditorActionWithADTextView:(ADTextView *)v
+                             withInt:(int32_t)actionId
+                      withADKeyEvent:(ADKeyEvent *)event;
 
 - (id<JavaUtilMap>)getOnEditorActionEventObjWithADTextView:(ADTextView *)v
-                                                   withInt:(jint)actionId
+                                                   withInt:(int32_t)actionId
                                             withADKeyEvent:(ADKeyEvent *)event;
 
 @end
@@ -1381,6 +1395,7 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_OnEditorActionListener
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_OnEditorActionListener)
 
+
 @interface ASAutoCompleteTextViewImpl_OnFocusChangeListener : NSObject < ADView_OnFocusChangeListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1399,10 +1414,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_OnEditorActionListener)
                      withNSString:(NSString *)action;
 
 - (void)onFocusChangeWithADView:(ADView *)v
-                    withBoolean:(jboolean)hasFocus;
+                    withBoolean:(bool)hasFocus;
 
 - (id<JavaUtilMap>)getOnFocusChangeEventObjWithADView:(ADView *)v
-                                          withBoolean:(jboolean)hasFocus;
+                                          withBoolean:(bool)hasFocus;
 
 @end
 
@@ -1427,6 +1442,7 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_OnFocusChangeListener 
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_OnFocusChangeListener)
 
+
 @interface ASAutoCompleteTextViewImpl_TextChangedListener : NSObject < ADTextWatcher, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1447,24 +1463,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_OnFocusChangeListener)
 - (void)afterTextChangedWithADEditable:(id<ADEditable>)s;
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after;
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after;
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count;
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count;
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after;
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after;
 
 - (id<JavaUtilMap>)getOnafterTextChangeEventObjWithADEditable:(id<ADEditable>)s;
 
@@ -1490,6 +1506,7 @@ __attribute__((unused)) static ASAutoCompleteTextViewImpl_TextChangedListener *n
 __attribute__((unused)) static ASAutoCompleteTextViewImpl_TextChangedListener *create_ASAutoCompleteTextViewImpl_TextChangedListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_TextChangedListener)
+
 
 J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl)
 
@@ -2340,7 +2357,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setCursorVisibleWithId_(self, objValue);
 }
 
-- (id)nativeGetTintColorWithBoolean:(jboolean)clearColor {
+- (id)nativeGetTintColorWithBoolean:(bool)clearColor {
   return ASAutoCompleteTextViewImpl_nativeGetTintColorWithBoolean_(self, clearColor);
 }
 
@@ -2348,7 +2365,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setCapitalizeWithId_(self, objValue);
 }
 
-- (void)nativeSetCapitalizeWithInt:(jint)capitalizeType {
+- (void)nativeSetCapitalizeWithInt:(int32_t)capitalizeType {
   ASAutoCompleteTextViewImpl_nativeSetCapitalizeWithInt_(self, capitalizeType);
 }
 
@@ -2356,11 +2373,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setAutoTextWithId_(self, objValue);
 }
 
-- (void)nativeSetCorrectionTypeWithInt:(jint)capitalizeType {
+- (void)nativeSetCorrectionTypeWithInt:(int32_t)capitalizeType {
   ASAutoCompleteTextViewImpl_nativeSetCorrectionTypeWithInt_(self, capitalizeType);
 }
 
-- (jboolean)getCursorVisible {
+- (bool)getCursorVisible {
   return ASAutoCompleteTextViewImpl_getCursorVisible(self);
 }
 
@@ -2369,7 +2386,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setEnabledWithId:(id)objValue {
-  jboolean isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
+  bool isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
   [self nativeSetEnabledWithBoolean:isEnabled];
 }
 
@@ -2394,7 +2411,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASAutoCompleteTextViewImpl_getDecimalCharacter(self);
 }
 
-- (jboolean)numericPatternMatchesWithNSString:(NSString *)str {
+- (bool)numericPatternMatchesWithNSString:(NSString *)str {
   return ASAutoCompleteTextViewImpl_numericPatternMatchesWithNSString_(self, str);
 }
 
@@ -2420,7 +2437,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setPhoneNumberWithId_(self, objValue);
 }
 
-- (void)nativeSetPhoneNumberWithBoolean:(jboolean)value {
+- (void)nativeSetPhoneNumberWithBoolean:(bool)value {
   ASAutoCompleteTextViewImpl_nativeSetPhoneNumberWithBoolean_(self, value);
 }
 
@@ -2432,7 +2449,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setInputTypeWithId_(self, objValue);
 }
 
-- (void)nativeSetKeyboardTypeWithInt:(jint)value {
+- (void)nativeSetKeyboardTypeWithInt:(int32_t)value {
   ASAutoCompleteTextViewImpl_nativeSetKeyboardTypeWithInt_(self, value);
 }
 
@@ -2440,7 +2457,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASAutoCompleteTextViewImpl_getInputType(self);
 }
 
-- (jint)nativeGetKeyboardType {
+- (int32_t)nativeGetKeyboardType {
   return ASAutoCompleteTextViewImpl_nativeGetKeyboardType(self);
 }
 
@@ -2449,11 +2466,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setImeOptionsWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetImeOptionsWithInt:(jint)imeOptions {
+- (void)nativeSetImeOptionsWithInt:(int32_t)imeOptions {
   ASAutoCompleteTextViewImpl_nativeSetImeOptionsWithInt_(self, imeOptions);
 }
 
-- (jint)nativeGetImeOptions {
+- (int32_t)nativeGetImeOptions {
   return ASAutoCompleteTextViewImpl_nativeGetImeOptions(self);
 }
 
@@ -2550,7 +2567,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setSelectAllWithId_(self, objValue);
 }
 
-- (jboolean)isFirstResponder {
+- (bool)isFirstResponder {
   return ASAutoCompleteTextViewImpl_isFirstResponder(self);
 }
 
@@ -2558,7 +2575,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_becomeFirstResponder(self);
 }
 
-- (void)nativeSetSelectAllWithFloat:(jfloat)delay {
+- (void)nativeSetSelectAllWithFloat:(float)delay {
   ASAutoCompleteTextViewImpl_nativeSetSelectAllWithFloat_(self, delay);
 }
 
@@ -2592,7 +2609,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetScrollEnabledWithId:(id)scrollView
-                         withBoolean:(jboolean)scrollEnabled {
+                         withBoolean:(bool)scrollEnabled {
   ASAutoCompleteTextViewImpl_nativeSetScrollEnabledWithId_withBoolean_(self, scrollView, scrollEnabled);
 }
 
@@ -2601,9 +2618,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)handleOnBeforeTextChangeWithNSString:(NSString *)s
-                                     withInt:(jint)start
-                                     withInt:(jint)count
-                                     withInt:(jint)after {
+                                     withInt:(int32_t)start
+                                     withInt:(int32_t)count
+                                     withInt:(int32_t)after {
   ASAutoCompleteTextViewImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(self, s, start, count, after);
 }
 
@@ -2641,8 +2658,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetContentSizeWithId:(id)uiView
-                           withInt:(jint)contentWidth
-                           withInt:(jint)height {
+                           withInt:(int32_t)contentWidth
+                           withInt:(int32_t)height {
   ASAutoCompleteTextViewImpl_nativeSetContentSizeWithId_withInt_withInt_(self, uiView, contentWidth, height);
 }
 
@@ -2674,7 +2691,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return (NSString *) cast_chk(ASAutoCompleteTextViewImpl_getMyText(self), [NSString class]);
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -2690,7 +2707,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
 
-- (id)nativeCreateViewWithInt:(jint)viewType {
+- (id)nativeCreateViewWithInt:(int32_t)viewType {
   return ASAutoCompleteTextViewImpl_nativeCreateViewWithInt_(self, viewType);
 }
 
@@ -2714,14 +2731,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setPasswordTypeWithId_(self, objValue);
 }
 
-- (void)nativeSetSecureTextEntryWithBoolean:(jboolean)value {
+- (void)nativeSetSecureTextEntryWithBoolean:(bool)value {
   ASAutoCompleteTextViewImpl_nativeSetSecureTextEntryWithBoolean_(self, value);
 }
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b {
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b {
   ASAutoCompleteTextViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -2736,17 +2753,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setBorderStyleWithId_(self, value);
 }
 
-- (void)nativeSetBorderStyleWithInt:(jint)value {
+- (void)nativeSetBorderStyleWithInt:(int32_t)value {
   ASAutoCompleteTextViewImpl_nativeSetBorderStyleWithInt_(self, value);
 }
 
-- (jint)measureWidth {
-  jint width = [((ADAutoCompleteTextView *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
+- (int32_t)measureWidth {
+  int32_t width = [((ADAutoCompleteTextView *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
   return width;
 }
 
-- (jint)measureHeightWithInt:(jint)width {
-  jint height = [((ADAutoCompleteTextView *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
+- (int32_t)measureHeightWithInt:(int32_t)width {
+  int32_t height = [((ADAutoCompleteTextView *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
   return height;
 }
 
@@ -2778,7 +2795,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_syncPlaceholderLabel(self);
 }
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value {
+- (void)nativeSetEnabledWithBoolean:(bool)value {
   ((ASUITextField*)self.uiView).enabled = value;
 }
 
@@ -2839,8 +2856,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)beforetextChangeWithNSString:(NSString *)s
-                             withInt:(jint)start
-                             withInt:(jint)count {
+                             withInt:(int32_t)start
+                             withInt:(int32_t)count {
   ASAutoCompleteTextViewImpl_beforetextChangeWithNSString_withInt_withInt_(self, s, start, count);
 }
 
@@ -2978,7 +2995,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
 }
 
-- (void)addOutsideTouchListenerWithBoolean:(jboolean)add {
+- (void)addOutsideTouchListenerWithBoolean:(bool)add {
   ASEvent_StandardEvents *type = JreLoadEnum(ASEvent_StandardEvents, outsideClicked);
   if (outsideEventListener_ != nil) {
     [((ASEventBus *) nil_chk([((id<ASIFragment>) nil_chk(fragment_)) getEventBus])) offWithASEventBusHandlerArray:[IOSObjectArray newArrayWithObjects:(id[]){ outsideEventListener_ } count:1 type:ASEventBusHandler_class_()]];
@@ -2991,7 +3008,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASAutoCompleteTextViewImpl_setErrorWithNSString_(self, nil);
   }
@@ -3004,7 +3021,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASAutoCompleteTextViewImpl_setErrorWithNSString_(self, message);
   }
@@ -3032,7 +3049,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASAutoCompleteTextViewImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADAutoCompleteTextView *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASAutoCompleteTextViewImpl_updateTextAlignment(self);
   }
@@ -3068,11 +3085,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -3080,11 +3097,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -3120,11 +3137,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADAutoCompleteTextView *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -3140,7 +3157,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASAutoCompleteTextViewImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASAutoCompleteTextViewImpl_getHeight(self);
 }
 
@@ -3148,7 +3165,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASAutoCompleteTextViewImpl_getIncludeFontPadding(self);
 }
 
@@ -3188,49 +3205,49 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setDigitsWithId_(self, objValue);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASAutoCompleteTextViewImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASAutoCompleteTextViewImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASAutoCompleteTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASAutoCompleteTextViewImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -3299,7 +3316,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASAutoCompleteTextViewImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -3335,7 +3352,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASAutoCompleteTextViewImpl_getTextAlignment(self);
 }
 
@@ -3371,11 +3388,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASAutoCompleteTextViewImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASAutoCompleteTextViewImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -3426,19 +3443,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASAutoCompleteTextViewImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASAutoCompleteTextViewImpl_getBorderWidth(self);
 }
 
@@ -3544,7 +3561,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ((ASUITextField*) uiView_).disabledBackground;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -3555,7 +3572,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -3581,11 +3598,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_createSimpleWrapableView(self);
 }
 
-- (jboolean)hasScrollView {
+- (bool)hasScrollView {
   return ASAutoCompleteTextViewImpl_hasScrollView(self);
 }
 
-- (jboolean)isViewWrapped {
+- (bool)isViewWrapped {
   return ASAutoCompleteTextViewImpl_isViewWrapped(self);
 }
 
@@ -3603,10 +3620,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((ASSimpleWrapableView *) nil_chk(simpleWrapableView_)) getForeground];
 }
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b {
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b {
   ASAutoCompleteTextViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -3619,13 +3636,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype {
+                      withInt:(int32_t)viewtype {
   uiView_ = ASAutoCompleteTextViewImpl_nativeCreateViewWithInt_(self, viewtype);
   ASViewGroupImpl_nativeAddViewWithId_withId_(ASViewImpl_getFirstChildOrSelfWithId_(wrapperParent), uiView_);
   return uiView_;
 }
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType {
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType {
   return [self createWrapperViewHolderNativeWithInt:viewType];
 }
 
@@ -3637,7 +3654,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView;
 }
 
-- (id)createWrapperViewHolderNativeWithInt:(jint)viewType {
+- (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType {
   if (viewType == 1) {
     ASUIView* uiView = [ASUIView new];
     uiView.widget = self;
@@ -3693,24 +3710,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASAutoCompleteTextViewImpl_showHidePopup(self);
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   CGSize maximumLabelSize = CGSizeMake(CGFLOAT_MAX,CGFLOAT_MAX);
   CGSize requiredSize = [((UIView*)uiView) sizeThatFits:maximumLabelSize];
   return ceil(requiredSize.width);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   CGSize maximumLabelSize = CGSizeMake(width,CGFLOAT_MAX);
   CGSize requiredSize = [((UIView*)uiView) sizeThatFits:maximumLabelSize];
   return ceil(requiredSize.height);
 }
 
-- (jboolean)islinearlayout {
+- (bool)islinearlayout {
   return ASAutoCompleteTextViewImpl_islinearlayout(self);
 }
 
-- (jboolean)isFocused {
+- (bool)isFocused {
   return ASAutoCompleteTextViewImpl_isFirstResponder(self);
 }
 
@@ -4452,7 +4469,7 @@ void ASAutoCompleteTextViewImpl_setCursorVisibleWithId_(ASAutoCompleteTextViewIm
   ASViewImpl_setTintColorWithId_withId_(self->uiView_, ASAutoCompleteTextViewImpl_nativeGetTintColorWithBoolean_(self, ![((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]));
 }
 
-id ASAutoCompleteTextViewImpl_nativeGetTintColorWithBoolean_(ASAutoCompleteTextViewImpl *self, jboolean clearColor) {
+id ASAutoCompleteTextViewImpl_nativeGetTintColorWithBoolean_(ASAutoCompleteTextViewImpl *self, bool clearColor) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   
   if (self->originalTintColor_ == nil) {
@@ -4473,7 +4490,7 @@ void ASAutoCompleteTextViewImpl_setCapitalizeWithId_(ASAutoCompleteTextViewImpl 
   ASAutoCompleteTextViewImpl_nativeSetCapitalizeWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetCapitalizeWithInt_(ASAutoCompleteTextViewImpl *self, jint capitalizeType) {
+void ASAutoCompleteTextViewImpl_nativeSetCapitalizeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t capitalizeType) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   tv.autocapitalizationType = capitalizeType;
 }
@@ -4487,12 +4504,12 @@ void ASAutoCompleteTextViewImpl_setAutoTextWithId_(ASAutoCompleteTextViewImpl *s
   }
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetCorrectionTypeWithInt_(ASAutoCompleteTextViewImpl *self, jint capitalizeType) {
+void ASAutoCompleteTextViewImpl_nativeSetCorrectionTypeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t capitalizeType) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   tv.autocorrectionType = capitalizeType;
 }
 
-jboolean ASAutoCompleteTextViewImpl_getCursorVisible(ASAutoCompleteTextViewImpl *self) {
+bool ASAutoCompleteTextViewImpl_getCursorVisible(ASAutoCompleteTextViewImpl *self) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   return CGColorEqualToColor(tv.tintColor.CGColor, [UIColor clearColor].CGColor);
 }
@@ -4529,7 +4546,7 @@ NSString *ASAutoCompleteTextViewImpl_getDecimalCharacter(ASAutoCompleteTextViewI
   return JreStrcat("C", [symbols getDecimalSeparator]);
 }
 
-jboolean ASAutoCompleteTextViewImpl_numericPatternMatchesWithNSString_(ASAutoCompleteTextViewImpl *self, NSString *str) {
+bool ASAutoCompleteTextViewImpl_numericPatternMatchesWithNSString_(ASAutoCompleteTextViewImpl *self, NSString *str) {
   return [((JavaUtilRegexMatcher *) nil_chk([((JavaUtilRegexPattern *) nil_chk(self->numericPattern_)) matcherWithJavaLangCharSequence:str])) matches];
 }
 
@@ -4545,7 +4562,7 @@ void ASAutoCompleteTextViewImpl_setPhoneNumberWithId_(ASAutoCompleteTextViewImpl
   ASAutoCompleteTextViewImpl_nativeSetPhoneNumberWithBoolean_(self, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetPhoneNumberWithBoolean_(ASAutoCompleteTextViewImpl *self, jboolean value) {
+void ASAutoCompleteTextViewImpl_nativeSetPhoneNumberWithBoolean_(ASAutoCompleteTextViewImpl *self, bool value) {
   if (value) {
     [((ASUITextField*)self.uiView) setKeyboardType: UIKeyboardTypePhonePad];
   } else {
@@ -4561,7 +4578,7 @@ void ASAutoCompleteTextViewImpl_setInputTypeWithId_(ASAutoCompleteTextViewImpl *
   ASAutoCompleteTextViewImpl_nativeSetKeyboardTypeWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetKeyboardTypeWithInt_(ASAutoCompleteTextViewImpl *self, jint value) {
+void ASAutoCompleteTextViewImpl_nativeSetKeyboardTypeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setKeyboardType: value];
 }
 
@@ -4569,7 +4586,7 @@ id ASAutoCompleteTextViewImpl_getInputType(ASAutoCompleteTextViewImpl *self) {
   return JavaLangInteger_valueOfWithInt_(ASAutoCompleteTextViewImpl_nativeGetKeyboardType(self));
 }
 
-jint ASAutoCompleteTextViewImpl_nativeGetKeyboardType(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_nativeGetKeyboardType(ASAutoCompleteTextViewImpl *self) {
   return ((ASUITextField*)self.uiView).keyboardType;
 }
 
@@ -4577,11 +4594,11 @@ void ASAutoCompleteTextViewImpl_setImeOptionsWithId_withNSString_(ASAutoComplete
   ASAutoCompleteTextViewImpl_nativeSetImeOptionsWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetImeOptionsWithInt_(ASAutoCompleteTextViewImpl *self, jint imeOptions) {
+void ASAutoCompleteTextViewImpl_nativeSetImeOptionsWithInt_(ASAutoCompleteTextViewImpl *self, int32_t imeOptions) {
   [((ASUITextField*)self->uiView_) setReturnKeyType:imeOptions];
 }
 
-jint ASAutoCompleteTextViewImpl_nativeGetImeOptions(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_nativeGetImeOptions(ASAutoCompleteTextViewImpl *self) {
   return ((ASUITextField*)self->uiView_).returnKeyType;
 }
 
@@ -4670,7 +4687,7 @@ void ASAutoCompleteTextViewImpl_setSelectAllWithId_(ASAutoCompleteTextViewImpl *
   }
 }
 
-jboolean ASAutoCompleteTextViewImpl_isFirstResponder(ASAutoCompleteTextViewImpl *self) {
+bool ASAutoCompleteTextViewImpl_isFirstResponder(ASAutoCompleteTextViewImpl *self) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   return [tv isFirstResponder];
 }
@@ -4680,7 +4697,7 @@ void ASAutoCompleteTextViewImpl_becomeFirstResponder(ASAutoCompleteTextViewImpl 
   [tv becomeFirstResponder];
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetSelectAllWithFloat_(ASAutoCompleteTextViewImpl *self, jfloat delay) {
+void ASAutoCompleteTextViewImpl_nativeSetSelectAllWithFloat_(ASAutoCompleteTextViewImpl *self, float delay) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   [self performSelector:@selector(nativeSetSelectAllActual:) withObject:tv afterDelay:delay];
 }
@@ -4718,14 +4735,14 @@ void ASAutoCompleteTextViewImpl_nativeAddTapGesture(ASAutoCompleteTextViewImpl *
   [((ASUITextField*)self.uiView) addGestureRecognizer:tapGesture];
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetScrollEnabledWithId_withBoolean_(ASAutoCompleteTextViewImpl *self, id scrollView, jboolean scrollEnabled) {
+void ASAutoCompleteTextViewImpl_nativeSetScrollEnabledWithId_withBoolean_(ASAutoCompleteTextViewImpl *self, id scrollView, bool scrollEnabled) {
   ((ASUIScrollView*)scrollView).scrollEnabled = scrollEnabled;
 }
 
 void ASAutoCompleteTextViewImpl_setTextColorLinkWithADColorStateList_(ASAutoCompleteTextViewImpl *self, ADColorStateList *linkTextColors) {
 }
 
-void ASAutoCompleteTextViewImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, jint start, jint count, jint after) {
+void ASAutoCompleteTextViewImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, int32_t start, int32_t count, int32_t after) {
   self->start_ = start;
   self->count_ = count;
   self->after_ = after;
@@ -4793,7 +4810,7 @@ void ASAutoCompleteTextViewImpl_forceRedraw(ASAutoCompleteTextViewImpl *self) {
   [((ASUITextField*) self->uiView_) setText:text];
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetContentSizeWithId_withInt_withInt_(ASAutoCompleteTextViewImpl *self, id uiView, jint contentWidth, jint height) {
+void ASAutoCompleteTextViewImpl_nativeSetContentSizeWithId_withInt_withInt_(ASAutoCompleteTextViewImpl *self, id uiView, int32_t contentWidth, int32_t height) {
   ((UIScrollView*) uiView).contentSize = CGSizeMake(contentWidth, height);
 }
 
@@ -4819,7 +4836,7 @@ void ASAutoCompleteTextViewImpl_updateScrollViewContentOffset(ASAutoCompleteText
 
 void ASAutoCompleteTextViewImpl_setInputViewWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
   if ([objValue isKindOfClass:[JavaLangInteger class]]) {
-    jint inputView = [((JavaLangInteger *) nil_chk((JavaLangInteger *) objValue)) intValue];
+    int32_t inputView = [((JavaLangInteger *) nil_chk((JavaLangInteger *) objValue)) intValue];
     switch (inputView) {
       case 1:
       ASAutoCompleteTextViewImpl_setPickerView(self);
@@ -4861,7 +4878,7 @@ void ASAutoCompleteTextViewImpl_nativeCreateWithJavaUtilMap_(ASAutoCompleteTextV
   [self registerForAttributeCommandChainWithPhaseWithNSString:@"predraw" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableStart", @"drawableEnd", @"drawableLeft", @"drawableTop", @"drawableRight", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode" } count:9 type:NSString_class_()]];
 }
 
-id ASAutoCompleteTextViewImpl_nativeCreateViewWithInt_(ASAutoCompleteTextViewImpl *self, jint viewType) {
+id ASAutoCompleteTextViewImpl_nativeCreateViewWithInt_(ASAutoCompleteTextViewImpl *self, int32_t viewType) {
   ASUITextField* uiView = [ASUITextField new];
   uiView.delegate = self;
   if (viewType != -1) {
@@ -4886,15 +4903,15 @@ void ASAutoCompleteTextViewImpl_setPasswordTypeWithId_(ASAutoCompleteTextViewImp
   ASAutoCompleteTextViewImpl_nativeSetSecureTextEntryWithBoolean_(self, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetSecureTextEntryWithBoolean_(ASAutoCompleteTextViewImpl *self, jboolean value) {
+void ASAutoCompleteTextViewImpl_nativeSetSecureTextEntryWithBoolean_(ASAutoCompleteTextViewImpl *self, bool value) {
   ((ASUITextField*)self.uiView).secureTextEntry = value;
 }
 
-void ASAutoCompleteTextViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, jint l, jint t, jint r, jint b) {
+void ASAutoCompleteTextViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   if (ASAutoCompleteTextViewImpl_isViewWrapped(self)) {
     if (ASAutoCompleteTextViewImpl_hasScrollView(self)) {
-      jint textWidth = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) nativeMeasureWidthWithId:self->uiView_];
-      jint horizontalPadding = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getCompoundPaddingLeft] + [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getCompoundPaddingRight];
+      int32_t textWidth = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) nativeMeasureWidthWithId:self->uiView_];
+      int32_t horizontalPadding = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getCompoundPaddingLeft] + [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getCompoundPaddingRight];
       if (textWidth < (r - l - horizontalPadding)) {
         textWidth = r - l - horizontalPadding;
       }
@@ -4922,7 +4939,7 @@ void ASAutoCompleteTextViewImpl_setBorderStyleWithId_(ASAutoCompleteTextViewImpl
   ASAutoCompleteTextViewImpl_nativeSetBorderStyleWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(value, [JavaLangInteger class]))) intValue]);
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetBorderStyleWithInt_(ASAutoCompleteTextViewImpl *self, jint value) {
+void ASAutoCompleteTextViewImpl_nativeSetBorderStyleWithInt_(ASAutoCompleteTextViewImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setBorderStyle:value];
 }
 
@@ -5040,7 +5057,7 @@ void ASAutoCompleteTextViewImpl_createEntries(ASAutoCompleteTextViewImpl *self) 
   }
 }
 
-void ASAutoCompleteTextViewImpl_beforetextChangeWithNSString_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, jint start, jint count) {
+void ASAutoCompleteTextViewImpl_beforetextChangeWithNSString_withInt_withInt_(ASAutoCompleteTextViewImpl *self, NSString *s, int32_t start, int32_t count) {
   if ([self isInitialised]) {
     ASAutoCompleteTextViewImpl_createPopUpIfRequired(self);
     [((id<ADTextWatcher>) nil_chk([((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getTextWatcher])) beforeTextChangedWithJavaLangCharSequence:s withInt:start withInt:count withInt:[((NSString *) nil_chk(s)) java_length]];
@@ -5168,9 +5185,9 @@ void ASAutoCompleteTextViewImpl_setHintTextFormatWithId_(ASAutoCompleteTextViewI
 }
 
 void ASAutoCompleteTextViewImpl_setGravityWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASAutoCompleteTextViewImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -5190,8 +5207,8 @@ void ASAutoCompleteTextViewImpl_setGravityWithId_(ASAutoCompleteTextViewImpl *se
 
 void ASAutoCompleteTextViewImpl_updateTextAlignment(ASAutoCompleteTextViewImpl *self) {
   ADLayout_Alignment *minor = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASAutoCompleteTextViewImpl_getMyText(self), [NSString class]);
@@ -5244,7 +5261,7 @@ id ASAutoCompleteTextViewImpl_getGravity(ASAutoCompleteTextViewImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -5258,8 +5275,8 @@ id ASAutoCompleteTextViewImpl_getGravity(ASAutoCompleteTextViewImpl *self) {
     default:
     break;
   }
-  jint aligment = ASAutoCompleteTextViewImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASAutoCompleteTextViewImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASAutoCompleteTextViewImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -5273,7 +5290,7 @@ id ASAutoCompleteTextViewImpl_getGravity(ASAutoCompleteTextViewImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -5293,8 +5310,8 @@ void ASAutoCompleteTextViewImpl_setFontFamilyWithId_withNSString_(ASAutoComplete
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASAutoCompleteTextViewImpl_nativeGetFontStyle(self);
-  jint height = ASAutoCompleteTextViewImpl_nativeGetFontSize(self);
+  int32_t style = ASAutoCompleteTextViewImpl_nativeGetFontStyle(self);
+  int32_t height = ASAutoCompleteTextViewImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASAutoCompleteTextViewImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -5308,26 +5325,26 @@ void ASAutoCompleteTextViewImpl_setFontFamilyWithId_withNSString_(ASAutoComplete
 }
 
 void ASAutoCompleteTextViewImpl_setTextStyleWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASAutoCompleteTextViewImpl_nativeGetFontSize(self);
+    int32_t height = ASAutoCompleteTextViewImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASAutoCompleteTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASAutoCompleteTextViewImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASAutoCompleteTextViewImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASAutoCompleteTextViewImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASAutoCompleteTextViewImpl_ITALIC_FONT_TRAIT;
     }
     ASAutoCompleteTextViewImpl_nativeSetFontStyleWithInt_(self, style);
@@ -5406,14 +5423,14 @@ id ASAutoCompleteTextViewImpl_getWidth(ASAutoCompleteTextViewImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASAutoCompleteTextViewImpl_getHeight(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_getHeight(ASAutoCompleteTextViewImpl *self) {
   return [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) getHeight];
 }
 
 void ASAutoCompleteTextViewImpl_setFirstBaselineToTopHeightWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASAutoCompleteTextViewImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASAutoCompleteTextViewImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -5421,12 +5438,12 @@ void ASAutoCompleteTextViewImpl_setFirstBaselineToTopHeightWithId_(ASAutoComplet
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASAutoCompleteTextViewImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASAutoCompleteTextViewImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASAutoCompleteTextViewImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASAutoCompleteTextViewImpl_getIncludeFontPadding(ASAutoCompleteTextViewImpl *self) {
+bool ASAutoCompleteTextViewImpl_getIncludeFontPadding(ASAutoCompleteTextViewImpl *self) {
   return false;
 }
 
@@ -5437,8 +5454,8 @@ id ASAutoCompleteTextViewImpl_getFirstBaselineToTopHeight(ASAutoCompleteTextView
 
 void ASAutoCompleteTextViewImpl_setLastBaselineToBottomHeightWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASAutoCompleteTextViewImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASAutoCompleteTextViewImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -5446,7 +5463,7 @@ void ASAutoCompleteTextViewImpl_setLastBaselineToBottomHeightWithId_(ASAutoCompl
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADAutoCompleteTextView *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASAutoCompleteTextViewImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASAutoCompleteTextViewImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASAutoCompleteTextViewImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -5474,7 +5491,7 @@ NSString *ASAutoCompleteTextViewImpl_getDigitString(ASAutoCompleteTextViewImpl *
   NSString *defaultDigits = @"0123456789";
   IOSObjectArray *digits = ASAutoCompleteTextViewImpl_getDigitStrings(self);
   JavaLangStringBuilder *stringBuilder = new_JavaLangStringBuilder_init();
-  for (jint i = 0; i < 10; i++) {
+  for (int32_t i = 0; i < 10; i++) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(digits), i))) java_length] > 1) {
       return defaultDigits;
     }
@@ -5515,15 +5532,15 @@ NSString *ASAutoCompleteTextViewImpl_getDecimalChars(ASAutoCompleteTextViewImpl 
 }
 
 void ASAutoCompleteTextViewImpl_setNumericWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ASAutoCompleteTextViewImpl_removeNumericListener(self);
   JavaLangStringBuilder *regex = new_JavaLangStringBuilder_init();
   NSString *digits = ASAutoCompleteTextViewImpl_getDigitString(self);
-  if ((value & (jint) 0x3) != 1) {
+  if ((value & (int32_t) 0x3) != 1) {
     NSString *signedChars = ASAutoCompleteTextViewImpl_getSignedChars(self);
     (void) [regex appendWithNSString:NSString_java_formatWithNSString_withNSObjectArray_(@"[%s]?", [IOSObjectArray newArrayWithObjects:(id[]){ signedChars } count:1 type:NSObject_class_()])];
   }
-  if ((value & (jint) 0x5) != 1) {
+  if ((value & (int32_t) 0x5) != 1) {
     NSString *decimalChars = ASAutoCompleteTextViewImpl_getDecimalChars(self);
     (void) [regex appendWithNSString:NSString_java_formatWithNSString_withNSObjectArray_(@"[%s]*[%s]?[%s]*", [IOSObjectArray newArrayWithObjects:(id[]){ digits, decimalChars, digits } count:3 type:NSObject_class_()])];
   }
@@ -5547,16 +5564,16 @@ void ASAutoCompleteTextViewImpl_setDigitsWithId_(ASAutoCompleteTextViewImpl *sel
   }
 }
 
-jint ASAutoCompleteTextViewImpl_nativeGetFontSize(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_nativeGetFontSize(ASAutoCompleteTextViewImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASAutoCompleteTextViewImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASAutoCompleteTextViewImpl_nativeGetFontStyle(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_nativeGetFontStyle(ASAutoCompleteTextViewImpl *self) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASAutoCompleteTextViewImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASAutoCompleteTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASAutoCompleteTextViewImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -5570,7 +5587,7 @@ void ASAutoCompleteTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_
   }
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetFontStyleWithInt_(ASAutoCompleteTextViewImpl *self, jint style) {
+void ASAutoCompleteTextViewImpl_nativeSetFontStyleWithInt_(ASAutoCompleteTextViewImpl *self, int32_t style) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUITextField*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -5639,11 +5656,11 @@ id ASAutoCompleteTextViewImpl_getTextSize(ASAutoCompleteTextViewImpl *self) {
 }
 
 void ASAutoCompleteTextViewImpl_setMyTextSizeWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASAutoCompleteTextViewImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASAutoCompleteTextViewImpl_nativeSetTextSizeWithInt_(ASAutoCompleteTextViewImpl *self, jint value) {
+void ASAutoCompleteTextViewImpl_nativeSetTextSizeWithInt_(ASAutoCompleteTextViewImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setFont: [((ASUITextField*)self.uiView).font fontWithSize: value]];
 }
 
@@ -5682,7 +5699,7 @@ void ASAutoCompleteTextViewImpl_setHorizontalAligmentLeftInternal(ASAutoComplete
   ((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASAutoCompleteTextViewImpl_getTextAlignment(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_getTextAlignment(ASAutoCompleteTextViewImpl *self) {
   int alignment = (int) ((ASUITextField*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -5773,7 +5790,7 @@ void ASAutoCompleteTextViewImpl_setDrawableLeftInternalWithNSString_withId_(ASAu
   }
 }
 
-jint ASAutoCompleteTextViewImpl_getImageHeightWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
+int32_t ASAutoCompleteTextViewImpl_getImageHeightWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -5782,7 +5799,7 @@ jint ASAutoCompleteTextViewImpl_getImageHeightWithId_(ASAutoCompleteTextViewImpl
   return 0;
 }
 
-jint ASAutoCompleteTextViewImpl_getImageWidthWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
+int32_t ASAutoCompleteTextViewImpl_getImageWidthWithId_(ASAutoCompleteTextViewImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -5870,11 +5887,11 @@ void ASAutoCompleteTextViewImpl_drawableStateChangeWithNSString_withADDrawable_(
   [self invalidate];
 }
 
-jint ASAutoCompleteTextViewImpl_getLineHeight(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_getLineHeight(ASAutoCompleteTextViewImpl *self) {
   return ceil(((ASUITextField*)self.uiView).font.lineHeight);
 }
 
-jint ASAutoCompleteTextViewImpl_getBorderWidth(ASAutoCompleteTextViewImpl *self) {
+int32_t ASAutoCompleteTextViewImpl_getBorderWidth(ASAutoCompleteTextViewImpl *self) {
   return 0;
 }
 
@@ -5887,11 +5904,11 @@ id ASAutoCompleteTextViewImpl_getTextColorHighlight(ASAutoCompleteTextViewImpl *
 }
 
 void ASAutoCompleteTextViewImpl_createSimpleWrapableView(ASAutoCompleteTextViewImpl *self) {
-  jboolean wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
-  jint viewType = -1;
+  bool wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
+  int32_t viewType = -1;
   if (wrapViewFeature) {
-    jboolean hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
-    jboolean vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
+    bool hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
+    bool vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
     viewType = 1;
     if (hscroll) viewType = 2;
     if (vscroll) viewType = 3;
@@ -5899,15 +5916,15 @@ void ASAutoCompleteTextViewImpl_createSimpleWrapableView(ASAutoCompleteTextViewI
   self->simpleWrapableView_ = new_ASSimpleWrapableView_initWithASIWidget_withInt_(self, viewType);
 }
 
-jboolean ASAutoCompleteTextViewImpl_hasScrollView(ASAutoCompleteTextViewImpl *self) {
+bool ASAutoCompleteTextViewImpl_hasScrollView(ASAutoCompleteTextViewImpl *self) {
   return ASAutoCompleteTextViewImpl_isViewWrapped(self) && ([((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 2 || [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 3);
 }
 
-jboolean ASAutoCompleteTextViewImpl_isViewWrapped(ASAutoCompleteTextViewImpl *self) {
+bool ASAutoCompleteTextViewImpl_isViewWrapped(ASAutoCompleteTextViewImpl *self) {
   return [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) isViewWrapped];
 }
 
-void ASAutoCompleteTextViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, jint l, jint t, jint r, jint b) {
+void ASAutoCompleteTextViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASAutoCompleteTextViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   id foreground = [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getForeground];
   if (foreground != nil) {
     ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(foreground, 0, 0, r - l, b - t);
@@ -5941,11 +5958,13 @@ void ASAutoCompleteTextViewImpl_showHidePopup(ASAutoCompleteTextViewImpl *self) 
   ASAutoCompleteTextViewImpl_afterTextChanged(self);
 }
 
-jboolean ASAutoCompleteTextViewImpl_islinearlayout(ASAutoCompleteTextViewImpl *self) {
+bool ASAutoCompleteTextViewImpl_islinearlayout(ASAutoCompleteTextViewImpl *self) {
   return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl)
+
+J2OBJC_NAME_MAPPING(ASAutoCompleteTextViewImpl, "com.ashera.layout", "AS")
 
 @implementation ASAutoCompleteTextViewImpl_DrawableTintMode
 
@@ -6054,10 +6073,10 @@ void ASAutoCompleteTextViewImpl_Font_init(ASAutoCompleteTextViewImpl_Font *self)
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -6115,9 +6134,9 @@ void ASAutoCompleteTextViewImpl_TextStyle_init(ASAutoCompleteTextViewImpl_TextSt
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -6236,9 +6255,9 @@ void ASAutoCompleteTextViewImpl_Numeric_init(ASAutoCompleteTextViewImpl_Numeric 
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"decimal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x5)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"integer" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"signed" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
+    (void) [self->mapping_ putWithId:@"decimal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x5)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"integer" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"signed" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
   }
 }
 
@@ -6520,8 +6539,8 @@ void ASAutoCompleteTextViewImpl_InputView_init(ASAutoCompleteTextViewImpl_InputV
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"picker" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"datepicker" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"picker" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"datepicker" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -6548,8 +6567,8 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -6559,11 +6578,11 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -6591,8 +6610,8 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -6660,12 +6679,12 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -6695,37 +6714,37 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASAutoCompleteTextViewImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASAutoCompleteTextViewImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -6950,8 +6969,8 @@ ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_$Lambda$1 *create_ASAutoCompl
 
 - (void)onItemClickWithADAdapterView:(ADAdapterView *)parent
                           withADView:(ADView *)view
-                             withInt:(jint)position
-                            withLong:(jlong)id_ {
+                             withInt:(int32_t)position
+                            withLong:(int64_t)id_ {
   NSString *desc = [nil_chk([((ASListViewImpl_ListAdapter *) nil_chk([((ASListViewImpl *) nil_chk(this$0_->listViewWidget_)) getListAdapter])) getItemWithInt:position]) description];
   [this$0_ setMyTextWithId:desc];
   [((ADAutoCompleteTextView *) nil_chk(this$0_->measurableView_)) dismissDropDown];
@@ -6972,7 +6991,7 @@ ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_$Lambda$1 *create_ASAutoCompl
     { "this$0_", "LASAutoCompleteTextViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASAutoCompleteTextViewImpl;", "onItemClick", "LADAdapterView;LADView;IJ", "(Lr/android/widget/AdapterView<*>;Lr/android/view/View;IJ)V", "setAttrsOnListView" };
-  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_1 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 4, -1, -1 };
+  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_1 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 4, -1, -1 };
   return &_ASAutoCompleteTextViewImpl_1;
 }
 
@@ -7000,7 +7019,7 @@ ASAutoCompleteTextViewImpl_1 *create_ASAutoCompleteTextViewImpl_1_initWithASAuto
 
 - (void)onChanged {
   JavaUtilArrayList *items = new_JavaUtilArrayList_init();
-  for (jint i = 0; i < [((ASListViewImpl_ListAdapter *) nil_chk([((ASListViewImpl *) nil_chk(this$0_->listViewWidget_)) getListAdapter])) getCount]; i++) {
+  for (int32_t i = 0; i < [((ASListViewImpl_ListAdapter *) nil_chk([((ASListViewImpl *) nil_chk(this$0_->listViewWidget_)) getListAdapter])) getCount]; i++) {
     [items addWithId:(ASLoopParam *) cast_chk([((ASListViewImpl_ListAdapter *) nil_chk([((ASListViewImpl *) nil_chk(this$0_->listViewWidget_)) getListAdapter])) getItemWithInt:i], [ASLoopParam class])];
   }
   [((ASListViewImpl *) nil_chk(this$0_->listViewWidget_)) storeUserDataWithNSString:@"entries" withId:items];
@@ -7072,7 +7091,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_PopupDataObserver)
     { "val$entry_", "LNSString;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LNSString;", "toString", "LASAutoCompleteTextViewImpl;", "createEntries" };
-  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_2 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8010, 2, 1, 2, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_2 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8000, 2, 1, 2, -1, 3, -1, -1 };
   return &_ASAutoCompleteTextViewImpl_2;
 }
 
@@ -7182,7 +7201,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OutsideEventListener
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -7288,10 +7307,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnDismissListener)
   return self;
 }
 
-- (jboolean)onEditorActionWithADTextView:(ADTextView *)v
-                                 withInt:(jint)actionId
-                          withADKeyEvent:(ADKeyEvent *)event {
-  jboolean result = true;
+- (bool)onEditorActionWithADTextView:(ADTextView *)v
+                             withInt:(int32_t)actionId
+                      withADKeyEvent:(ADKeyEvent *)event {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onEditorAction"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onEditorAction"];
     id<JavaUtilMap> obj = [self getOnEditorActionEventObjWithADTextView:v withInt:actionId withADKeyEvent:event];
@@ -7316,7 +7335,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnDismissListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -7327,7 +7346,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnDismissListener)
 }
 
 - (id<JavaUtilMap>)getOnEditorActionEventObjWithADTextView:(ADTextView *)v
-                                                   withInt:(jint)actionId
+                                                   withInt:(int32_t)actionId
                                             withADKeyEvent:(ADKeyEvent *)event {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
@@ -7427,7 +7446,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnEditorActionListen
 }
 
 - (void)onFocusChangeWithADView:(ADView *)v
-                    withBoolean:(jboolean)hasFocus {
+                    withBoolean:(bool)hasFocus {
   if (action_ == nil || [action_ isEqual:@"onFocusChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onFocusChange"];
     id<JavaUtilMap> obj = [self getOnFocusChangeEventObjWithADView:v withBoolean:hasFocus];
@@ -7449,7 +7468,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnEditorActionListen
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -7460,7 +7479,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnEditorActionListen
 }
 
 - (id<JavaUtilMap>)getOnFocusChangeEventObjWithADView:(ADView *)v
-                                          withBoolean:(jboolean)hasFocus {
+                                          withBoolean:(bool)hasFocus {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"focuschange"];
@@ -7579,7 +7598,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -7590,9 +7609,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
 }
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after {
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after {
   if (action_ == nil || [action_ isEqual:@"onbeforeTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onbeforeTextChange"];
     id<JavaUtilMap> obj = [self getOnbeforeTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:count withInt:after];
@@ -7614,7 +7633,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -7625,9 +7644,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
 }
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count {
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count {
   if (action_ == nil || [action_ isEqual:@"onTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onTextChange"];
     id<JavaUtilMap> obj = [self getOnTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:before withInt:count];
@@ -7649,7 +7668,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -7660,9 +7679,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
 }
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count {
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"textchange"];
@@ -7683,9 +7702,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
 }
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after {
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"beforetextchange"];

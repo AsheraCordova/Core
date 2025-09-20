@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\WindowInsetsCompat.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WindowInsetsCompat")
@@ -16,19 +17,21 @@
 #if !defined (ADXWindowInsetsCompat_) && (INCLUDE_ALL_WindowInsetsCompat || defined(INCLUDE_ADXWindowInsetsCompat))
 #define ADXWindowInsetsCompat_
 
+@class JavaLangInteger;
+
 @interface ADXWindowInsetsCompat : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)getSystemWindowInsetBottom;
+- (int32_t)getSystemWindowInsetBottom;
 
-- (jint)getSystemWindowInsetLeft;
+- (int32_t)getSystemWindowInsetLeft;
 
-- (jint)getSystemWindowInsetRight;
+- (int32_t)getSystemWindowInsetRight;
 
-- (jint)getSystemWindowInsetTop;
+- (int32_t)getSystemWindowInsetTop;
 
 @end
 
@@ -43,6 +46,7 @@ FOUNDATION_EXPORT ADXWindowInsetsCompat *create_ADXWindowInsetsCompat_init(void)
 J2OBJC_TYPE_LITERAL_HEADER(ADXWindowInsetsCompat)
 
 @compatibility_alias AndroidxCoreViewWindowInsetsCompat ADXWindowInsetsCompat;
+
 
 #endif
 

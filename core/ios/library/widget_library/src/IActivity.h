@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\core\IActivity.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IActivity")
@@ -16,6 +17,8 @@
 #if !defined (ASIActivity_) && (INCLUDE_ALL_IActivity || defined(INCLUDE_ASIActivity))
 #define ASIActivity_
 
+@class JavaLangFloat;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilMap;
 
@@ -43,7 +46,7 @@
 
 - (id)getRootWidget;
 
-- (jfloat)getScaleFactor;
+- (float)getScaleFactor;
 
 - (NSString *)getPreferenceWithNSString:(NSString *)name;
 
@@ -54,6 +57,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIActivity)
 J2OBJC_TYPE_LITERAL_HEADER(ASIActivity)
 
 #define ComAsheraCoreIActivity ASIActivity
+
 
 #endif
 

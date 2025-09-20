@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\ValueCallback.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "ValueCallback.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADValueCallback
@@ -50,3 +61,5 @@ ADValueCallback *create_ADValueCallback_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADValueCallback)
+
+J2OBJC_NAME_MAPPING(ADValueCallback, "r.android.webkit", "AD")

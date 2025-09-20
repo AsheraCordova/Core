@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\EventBusHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EventBusHandler")
@@ -16,6 +17,7 @@
 #if !defined (ASEventBusHandler_) && (INCLUDE_ALL_EventBusHandler || defined(INCLUDE_ASEventBusHandler))
 #define ASEventBusHandler_
 
+@class NSString;
 @protocol ASEventBusHandler_OnCompletedListener;
 
 @interface ASEventBusHandler : NSObject
@@ -61,6 +63,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEventBusHandler)
 
 @compatibility_alias ComAsheraWidgetBusEventBusHandler ASEventBusHandler;
 
+
 #endif
 
 #if !defined (ASEventBusHandler_OnCompletedListener_) && (INCLUDE_ALL_EventBusHandler || defined(INCLUDE_ASEventBusHandler_OnCompletedListener))
@@ -75,6 +78,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEventBusHandler)
 J2OBJC_EMPTY_STATIC_INIT(ASEventBusHandler_OnCompletedListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEventBusHandler_OnCompletedListener)
+
 
 #endif
 

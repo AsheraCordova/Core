@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\TagSoupParser.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TagSoupParser")
@@ -33,6 +34,9 @@
 #include "org/xml/sax/ext/LexicalHandler.h"
 
 @class IOSCharArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @class OrgXmlSaxInputSource;
 @protocol OrgXmlSaxContentHandler;
 @protocol OrgXmlSaxDTDHandler;
@@ -49,41 +53,41 @@
 - (instancetype)init;
 
 - (void)adupWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 - (void)anameWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length;
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length;
 
 - (void)avalWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 - (void)cdsectWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length;
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length;
 
 - (void)cmntWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 - (void)commentWithCharArray:(IOSCharArray *)ch
-                     withInt:(jint)start
-                     withInt:(jint)length;
+                     withInt:(int32_t)start
+                     withInt:(int32_t)length;
 
 /*!
  @brief Parsing the complete XML Document Type Definition is way too complex,
   but for many simple cases we can extract something useful from it.
- doctypedecl  ::= '<!DOCTYPE' S Name (S ExternalID)? S? ('[' intSubset ']' S?)? '>'
+ doctypedecl  ::= ''
    DeclSep     ::= PEReference | S
    intSubset   ::= (markupdecl | DeclSep)*
    markupdecl  ::= elementdecl | AttlistDecl | EntityDecl | NotationDecl | PI | Comment
    ExternalID  ::= 'SYSTEM' S SystemLiteral | 'PUBLIC' S PubidLiteral S SystemLiteral
  */
 - (void)declWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 - (void)endCDATA;
 
@@ -92,58 +96,58 @@
 - (void)endEntityWithNSString:(NSString *)name;
 
 - (void)entityWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length;
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length;
 
 - (void)eofWithCharArray:(IOSCharArray *)buff
-                 withInt:(jint)offset
-                 withInt:(jint)length;
+                 withInt:(int32_t)offset
+                 withInt:(int32_t)length;
 
 - (void)etagWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length;
 
 - (void)etag_basicWithCharArray:(IOSCharArray *)buff
-                        withInt:(jint)offset
-                        withInt:(jint)length;
+                        withInt:(int32_t)offset
+                        withInt:(int32_t)length;
 
-- (jboolean)etag_cdataWithCharArray:(IOSCharArray *)buff
-                            withInt:(jint)offset
-                            withInt:(jint)length;
+- (bool)etag_cdataWithCharArray:(IOSCharArray *)buff
+                        withInt:(int32_t)offset
+                        withInt:(int32_t)length;
 
 - (id<OrgXmlSaxContentHandler>)getContentHandler;
 
 - (id<OrgXmlSaxDTDHandler>)getDTDHandler;
 
-- (jint)getEntity;
+- (int32_t)getEntity;
 
 - (id<OrgXmlSaxEntityResolver>)getEntityResolver;
 
 - (id<OrgXmlSaxErrorHandler>)getErrorHandler;
 
-- (jboolean)getFeatureWithNSString:(NSString *)name;
+- (bool)getFeatureWithNSString:(NSString *)name;
 
 - (id)getPropertyWithNSString:(NSString *)name;
 
 - (void)giWithCharArray:(IOSCharArray *)buff
-                withInt:(jint)offset
-                withInt:(jint)length;
+                withInt:(int32_t)offset
+                withInt:(int32_t)length;
 
 - (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)input;
 
 - (void)parseWithNSString:(NSString *)systemid;
 
 - (void)pcdataWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length;
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length;
 
 - (void)piWithCharArray:(IOSCharArray *)buff
-                withInt:(jint)offset
-                withInt:(jint)length;
+                withInt:(int32_t)offset
+                withInt:(int32_t)length;
 
 - (void)pitargetWithCharArray:(IOSCharArray *)buff
-                      withInt:(jint)offset
-                      withInt:(jint)length;
+                      withInt:(int32_t)offset
+                      withInt:(int32_t)length;
 
 - (void)setContentHandlerWithOrgXmlSaxContentHandler:(id<OrgXmlSaxContentHandler>)handler;
 
@@ -154,18 +158,18 @@
 - (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)handler;
 
 - (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)value;
+                   withBoolean:(bool)value;
 
 - (void)setPropertyWithNSString:(NSString *)name
                          withId:(id)value;
 
 - (void)stagcWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length;
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length;
 
 - (void)stageWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length;
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length;
 
 - (void)startCDATA;
 
@@ -456,6 +460,7 @@ FOUNDATION_EXPORT TSTagSoupParser *create_TSTagSoupParser_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(TSTagSoupParser)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupTagSoupParser TSTagSoupParser;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\fragment\app\FragmentManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FragmentManager")
@@ -42,6 +43,7 @@ FOUNDATION_EXPORT ADXFragmentManager *create_ADXFragmentManager_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADXFragmentManager)
 
 @compatibility_alias AndroidxFragmentAppFragmentManager ADXFragmentManager;
+
 
 #endif
 

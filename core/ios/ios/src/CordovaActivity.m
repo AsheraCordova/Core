@@ -3,21 +3,31 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\CordovaActivity.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Activity.h"
 #include "CordovaActivity.h"
 #include "IActivity.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASCordovaActivity () {
  @public
-  __unsafe_unretained id<ASIActivity> delegate_;
+  WEAK_ id<ASIActivity> delegate_;
   id<JavaUtilMap> userData_;
   id<JavaUtilMap> tempCache_;
 }
@@ -88,8 +98,8 @@ J2OBJC_FIELD_SETTER(ASCordovaActivity, tempCache_, id<JavaUtilMap>)
   @throw new_JavaLangRuntimeException_initWithNSString_(@"Method not implemented in ios");
 }
 
-- (jfloat)getScaleFactor {
-  return (jfloat) [((id<ASIActivity>) nil_chk(delegate_)) getScaleFactor];
+- (float)getScaleFactor {
+  return (float) [((id<ASIActivity>) nil_chk(delegate_)) getScaleFactor];
 }
 
 - (NSString *)getPreferenceWithNSString:(NSString *)name {
@@ -160,3 +170,5 @@ ASCordovaActivity *create_ASCordovaActivity_initWithASIActivity_(id<ASIActivity>
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCordovaActivity)
+
+J2OBJC_NAME_MAPPING(ASCordovaActivity, "com.ashera.core", "AS")

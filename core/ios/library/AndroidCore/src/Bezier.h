@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Bezier.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Bezier")
@@ -18,24 +19,27 @@
 
 @class ADPointF;
 @class IOSFloatArray;
+@class JavaLangDouble;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 /*!
  @brief Class that represents a Bèzier curve
  */
 @interface ADBezier : NSObject {
  @public
-  jfloat length_;
+  float length_;
   IOSFloatArray *coord_;
 }
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)sx
-                    withFloat:(jfloat)sy
+- (instancetype)initWithFloat:(float)sx
+                    withFloat:(float)sy
                withFloatArray:(IOSFloatArray *)coords
-                      withInt:(jint)numCoords;
+                      withInt:(int32_t)numCoords;
 
-- (ADPointF *)evalWithDouble:(jdouble)param
+- (ADPointF *)evalWithDouble:(double)param
                 withADPointF:(ADPointF *)point;
 
 - (ADPointF *)getFinalPointWithADPointF:(ADPointF *)point;
@@ -43,12 +47,12 @@
 /*!
  @brief Retuns aproximation of the length of the bezier
  */
-- (jfloat)getLength;
+- (float)getLength;
 
-- (void)setCoordsWithFloat:(jfloat)sx
-                 withFloat:(jfloat)sy
+- (void)setCoordsWithFloat:(float)sx
+                 withFloat:(float)sy
             withFloatArray:(IOSFloatArray *)coords
-                   withInt:(jint)numCoords;
+                   withInt:(int32_t)numCoords;
 
 // Disallowed inherited constructors, do not use.
 
@@ -60,15 +64,16 @@ J2OBJC_EMPTY_STATIC_INIT(ADBezier)
 
 J2OBJC_FIELD_SETTER(ADBezier, coord_, IOSFloatArray *)
 
-FOUNDATION_EXPORT void ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(ADBezier *self, jfloat sx, jfloat sy, IOSFloatArray *coords, jint numCoords);
+FOUNDATION_EXPORT void ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(ADBezier *self, float sx, float sy, IOSFloatArray *coords, int32_t numCoords);
 
-FOUNDATION_EXPORT ADBezier *new_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(jfloat sx, jfloat sy, IOSFloatArray *coords, jint numCoords) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADBezier *new_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(float sx, float sy, IOSFloatArray *coords, int32_t numCoords) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADBezier *create_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(jfloat sx, jfloat sy, IOSFloatArray *coords, jint numCoords);
+FOUNDATION_EXPORT ADBezier *create_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(float sx, float sy, IOSFloatArray *coords, int32_t numCoords);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADBezier)
 
 @compatibility_alias RAndroidGraphicsBezier ADBezier;
+
 
 #endif
 

@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\FormElement.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FormElement.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASFormElement : NSObject
@@ -59,3 +71,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASFormElement)
+
+J2OBJC_NAME_MAPPING(ASFormElement, "com.ashera.validations", "AS")

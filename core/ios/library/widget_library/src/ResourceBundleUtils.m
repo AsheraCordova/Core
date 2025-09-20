@@ -3,12 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\ResourceBundleUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "ResourceBundleUtils.h"
 #include "java/io/IOException.h"
 #include "java/io/StringReader.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/Throwable.h"
@@ -19,11 +27,12 @@
 #include "java/util/Properties.h"
 #include "java/util/ResourceBundle.h"
 
-@class JavaUtilHashMap;
-@class JavaUtilLocale;
-@class JavaUtilProperties;
-@class JavaUtilResourceBundle;
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASResourceBundleUtils ()
@@ -83,8 +92,8 @@ __attribute__((unused)) static NSString *ASResourceBundleUtils_toSuffixWithJavaU
 - (NSString *)getPropertyWithId:(id)properties
                    withNSString:(NSString *)key;
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key;
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key;
 
 - (id)loadProperties;
 
@@ -98,6 +107,7 @@ __attribute__((unused)) static ASResourceBundleUtils_1 *new_ASResourceBundleUtil
 
 __attribute__((unused)) static ASResourceBundleUtils_1 *create_ASResourceBundleUtils_1_initWithASIFragment_withNSString_(id<ASIFragment> capture$0, NSString *capture$1);
 
+
 @interface ASResourceBundleUtils_2 : ASResourceBundleUtils_GetPropertiesTemplate {
  @public
   NSString *val$bundle_;
@@ -108,8 +118,8 @@ __attribute__((unused)) static ASResourceBundleUtils_1 *create_ASResourceBundleU
 - (NSString *)getPropertyWithId:(id)properties
                    withNSString:(NSString *)key;
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key;
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key;
 
 - (id)loadProperties;
 
@@ -122,6 +132,7 @@ __attribute__((unused)) static void ASResourceBundleUtils_2_initWithNSString_(AS
 __attribute__((unused)) static ASResourceBundleUtils_2 *new_ASResourceBundleUtils_2_initWithNSString_(NSString *capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASResourceBundleUtils_2 *create_ASResourceBundleUtils_2_initWithNSString_(NSString *capture$0);
+
 
 @interface ASResourceBundleUtils_3 : ASResourceBundleUtils_GetPropertiesTemplate {
  @public
@@ -137,8 +148,8 @@ __attribute__((unused)) static ASResourceBundleUtils_2 *create_ASResourceBundleU
 - (NSString *)getPropertyWithId:(id)properties
                    withNSString:(NSString *)key;
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key;
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key;
 
 - (id)loadProperties;
 
@@ -151,6 +162,7 @@ __attribute__((unused)) static void ASResourceBundleUtils_3_initWithNSString_wit
 __attribute__((unused)) static ASResourceBundleUtils_3 *new_ASResourceBundleUtils_3_initWithNSString_withNSString_withASIFragment_(NSString *capture$0, NSString *capture$1, id<ASIFragment> capture$2) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASResourceBundleUtils_3 *create_ASResourceBundleUtils_3_initWithNSString_withNSString_withASIFragment_(NSString *capture$0, NSString *capture$1, id<ASIFragment> capture$2);
+
 
 J2OBJC_INITIALIZED_DEFN(ASResourceBundleUtils)
 
@@ -349,7 +361,7 @@ JavaUtilProperties *ASResourceBundleUtils_loadMergedPropertiesWithNSString_withJ
   ASResourceBundleUtils_initialize();
   id<JavaUtilList> fallbackLocales = ASResourceBundleUtils_getLocaleFallbackChainWithJavaUtilLocale_(locale);
   JavaUtilProperties *mergedProps = create_JavaUtilProperties_init();
-  for (jint i = [((id<JavaUtilList>) nil_chk(fallbackLocales)) size] - 1; i >= 0; i--) {
+  for (int32_t i = [((id<JavaUtilList>) nil_chk(fallbackLocales)) size] - 1; i >= 0; i--) {
     JavaUtilLocale *loc = JreRetainedLocalValue([fallbackLocales getWithInt:i]);
     NSString *suffix = ASResourceBundleUtils_toSuffixWithJavaUtilLocale_(loc);
     NSString *fileName = JreStrcat("$$$", baseName, suffix, @".properties");
@@ -409,9 +421,9 @@ id<JavaUtilList> ASResourceBundleUtils_getLocaleFallbackChainWithJavaUtilLocale_
   NSString *language = JreRetainedLocalValue([((JavaUtilLocale *) nil_chk(locale)) getLanguage]);
   NSString *country = JreRetainedLocalValue([locale getCountry]);
   NSString *variant = JreRetainedLocalValue([locale getVariant]);
-  if (![((NSString *) nil_chk(variant)) java_isEmpty]) [locales addWithId:create_JavaUtilLocale_initWithNSString_withNSString_withNSString_(language, country, variant)];
-  if (![((NSString *) nil_chk(country)) java_isEmpty]) [locales addWithId:create_JavaUtilLocale_initWithNSString_withNSString_(language, country)];
-  if (![((NSString *) nil_chk(language)) java_isEmpty]) [locales addWithId:create_JavaUtilLocale_initWithNSString_(language)];
+  if (![((NSString *) nil_chk(variant)) isEmpty]) [locales addWithId:create_JavaUtilLocale_initWithNSString_withNSString_withNSString_(language, country, variant)];
+  if (![((NSString *) nil_chk(country)) isEmpty]) [locales addWithId:create_JavaUtilLocale_initWithNSString_withNSString_(language, country)];
+  if (![((NSString *) nil_chk(language)) isEmpty]) [locales addWithId:create_JavaUtilLocale_initWithNSString_(language)];
   [locales addWithId:JreLoadStatic(JavaUtilLocale, ROOT)];
   return locales;
 }
@@ -420,13 +432,15 @@ NSString *ASResourceBundleUtils_toSuffixWithJavaUtilLocale_(JavaUtilLocale *loca
   ASResourceBundleUtils_initialize();
   if ([((JavaUtilLocale *) nil_chk(locale)) isEqual:JreLoadStatic(JavaUtilLocale, ROOT)]) return @"";
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
-  if (![((NSString *) nil_chk([locale getLanguage])) java_isEmpty]) [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"_"])) appendWithNSString:[locale getLanguage]];
-  if (![((NSString *) nil_chk([locale getCountry])) java_isEmpty]) [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"_"])) appendWithNSString:[locale getCountry]];
-  if (![((NSString *) nil_chk([locale getVariant])) java_isEmpty]) [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"_"])) appendWithNSString:[locale getVariant]];
+  if (![((NSString *) nil_chk([locale getLanguage])) isEmpty]) [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"_"])) appendWithNSString:[locale getLanguage]];
+  if (![((NSString *) nil_chk([locale getCountry])) isEmpty]) [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"_"])) appendWithNSString:[locale getCountry]];
+  if (![((NSString *) nil_chk([locale getVariant])) isEmpty]) [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"_"])) appendWithNSString:[locale getVariant]];
   return [sb description];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASResourceBundleUtils)
+
+J2OBJC_NAME_MAPPING(ASResourceBundleUtils, "com.ashera.utils", "AS")
 
 @implementation ASResourceBundleUtils_GetPropertiesTemplate
 
@@ -467,8 +481,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key {
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -520,17 +534,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASResourceBundleUtils_GetPropertiesTemplate)
 
 - (NSString *)getPropertyWithId:(id)properties
                    withNSString:(NSString *)key {
-  return [((JavaUtilProperties *) nil_chk(((JavaUtilProperties *) cast_chk(properties, [JavaUtilProperties class])))) getPropertyWithNSString:key];
+  return JreRetainedLocalValue([((JavaUtilProperties *) nil_chk(((JavaUtilProperties *) cast_chk(properties, [JavaUtilProperties class])))) getPropertyWithNSString:key]);
 }
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key {
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key {
   return [((JavaUtilProperties *) nil_chk(((JavaUtilProperties *) cast_chk(properties, [JavaUtilProperties class])))) containsKeyWithId:key];
 }
 
 - (id)loadProperties {
   JavaUtilProperties *properties = (JavaUtilProperties *) cast_chk([((id<ASIFragment>) nil_chk(val$fragment_)) getDevDataWithNSString:val$bundle_], [JavaUtilProperties class]);
-  return properties;
+  return JreRetainedLocalValue(properties);
 }
 
 - (void)dealloc {
@@ -559,7 +573,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASResourceBundleUtils_GetPropertiesTemplate)
     { "val$bundle_", "LNSString;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASIFragment;LNSString;", "getProperty", "LNSObject;LNSString;", "containsKey", "LASResourceBundleUtils;", "getStringWithNSString:withNSString:withNSString:withASIFragment:" };
-  static const J2ObjcClassInfo _ASResourceBundleUtils_1 = { "", "com.ashera.utils", ptrTable, methods, fields, 7, 0x8018, 4, 2, 4, -1, 5, -1, -1 };
+  static const J2ObjcClassInfo _ASResourceBundleUtils_1 = { "", "com.ashera.utils", ptrTable, methods, fields, 7, 0x8000, 4, 2, 4, -1, 5, -1, -1 };
   return &_ASResourceBundleUtils_1;
 }
 
@@ -588,17 +602,17 @@ ASResourceBundleUtils_1 *create_ASResourceBundleUtils_1_initWithASIFragment_with
 
 - (NSString *)getPropertyWithId:(id)properties
                    withNSString:(NSString *)key {
-  return [((JavaUtilResourceBundle *) nil_chk(((JavaUtilResourceBundle *) cast_chk(properties, [JavaUtilResourceBundle class])))) getStringWithNSString:key];
+  return JreRetainedLocalValue([((JavaUtilResourceBundle *) nil_chk(((JavaUtilResourceBundle *) cast_chk(properties, [JavaUtilResourceBundle class])))) getStringWithNSString:key]);
 }
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key {
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key {
   return [((JavaUtilResourceBundle *) nil_chk(((JavaUtilResourceBundle *) cast_chk(properties, [JavaUtilResourceBundle class])))) containsKeyWithNSString:key];
 }
 
 - (id)loadProperties {
   JavaUtilResourceBundle *resourceBundle = ASResourceBundleUtils_getRSWithNSString_(val$bundle_);
-  return resourceBundle;
+  return JreRetainedLocalValue(resourceBundle);
 }
 
 - (void)dealloc {
@@ -625,7 +639,7 @@ ASResourceBundleUtils_1 *create_ASResourceBundleUtils_1_initWithASIFragment_with
     { "val$bundle_", "LNSString;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LNSString;", "getProperty", "LNSObject;LNSString;", "containsKey", "LASResourceBundleUtils;", "getStringWithNSString:withNSString:withNSString:withASIFragment:" };
-  static const J2ObjcClassInfo _ASResourceBundleUtils_2 = { "", "com.ashera.utils", ptrTable, methods, fields, 7, 0x8018, 4, 1, 4, -1, 5, -1, -1 };
+  static const J2ObjcClassInfo _ASResourceBundleUtils_2 = { "", "com.ashera.utils", ptrTable, methods, fields, 7, 0x8000, 4, 1, 4, -1, 5, -1, -1 };
   return &_ASResourceBundleUtils_2;
 }
 
@@ -655,11 +669,11 @@ ASResourceBundleUtils_2 *create_ASResourceBundleUtils_2_initWithNSString_(NSStri
 
 - (NSString *)getPropertyWithId:(id)properties
                    withNSString:(NSString *)key {
-  return [((JavaUtilProperties *) nil_chk(((JavaUtilProperties *) cast_chk(properties, [JavaUtilProperties class])))) getPropertyWithNSString:key];
+  return JreRetainedLocalValue([((JavaUtilProperties *) nil_chk(((JavaUtilProperties *) cast_chk(properties, [JavaUtilProperties class])))) getPropertyWithNSString:key]);
 }
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key {
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key {
   return [((JavaUtilProperties *) nil_chk(((JavaUtilProperties *) cast_chk(properties, [JavaUtilProperties class])))) containsKeyWithId:key];
 }
 
@@ -669,7 +683,7 @@ ASResourceBundleUtils_2 *create_ASResourceBundleUtils_2_initWithNSString_(NSStri
     properties = ASResourceBundleUtils_loadMergedPropertiesWithNSString_withJavaUtilLocale_withNSString_withASIFragment_(val$bundle_, JavaUtilLocale_getDefault(), val$rootDirectory_, val$fragment_);
     [((JavaUtilHashMap *) nil_chk(JreLoadStatic(ASResourceBundleUtils, cacheByRootDir))) putWithId:JreStrcat("$$", val$rootDirectory_, val$bundle_) withId:properties];
   }
-  return properties;
+  return JreRetainedLocalValue(properties);
 }
 
 - (void)dealloc {
@@ -700,7 +714,7 @@ ASResourceBundleUtils_2 *create_ASResourceBundleUtils_2_initWithNSString_(NSStri
     { "val$fragment_", "LASIFragment;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LNSString;LNSString;LASIFragment;", "getProperty", "LNSObject;LNSString;", "containsKey", "LASResourceBundleUtils;", "getStringWithNSString:withNSString:withNSString:withNSString:withASIFragment:" };
-  static const J2ObjcClassInfo _ASResourceBundleUtils_3 = { "", "com.ashera.utils", ptrTable, methods, fields, 7, 0x8018, 4, 3, 4, -1, 5, -1, -1 };
+  static const J2ObjcClassInfo _ASResourceBundleUtils_3 = { "", "com.ashera.utils", ptrTable, methods, fields, 7, 0x8000, 4, 3, 4, -1, 5, -1, -1 };
   return &_ASResourceBundleUtils_3;
 }
 

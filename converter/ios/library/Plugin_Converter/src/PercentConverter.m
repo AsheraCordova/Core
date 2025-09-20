@@ -3,15 +3,27 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\PercentConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "PercentConverter.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/RuntimeException.h"
 #include "java/text/DecimalFormat.h"
 #include "java/text/ParseException.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASPercentConverter
@@ -30,7 +42,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     if (value == nil) {
       return nil;
     }
-    jfloat floatValue = [((NSNumber *) nil_chk([create_JavaTextDecimalFormat_initWithNSString_(@"0.0#%") parseWithNSString:value])) floatValue];
+    float floatValue = [((NSNumber *) nil_chk([create_JavaTextDecimalFormat_initWithNSString_(@"0.0#%") parseWithNSString:value])) floatValue];
     return JavaLangFloat_valueOfWithFloat_(floatValue);
   }
   @catch (JavaTextParseException *e) {
@@ -85,3 +97,5 @@ ASPercentConverter *create_ASPercentConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPercentConverter)
+
+J2OBJC_NAME_MAPPING(ASPercentConverter, "com.ashera.converter", "AS")

@@ -3,12 +3,23 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttribute.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "WidgetAttribute.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 
-@class JavaLangInteger;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASWidgetAttribute () {
@@ -17,14 +28,14 @@
   NSString *attributeType_;
   NSString *arrayType_;
   NSString *arrayListToFinalType_;
-  jint order_;
-  jboolean isForChild_;
+  int32_t order_;
+  bool isForChild_;
   NSString *decorator_;
-  jint bufferStrategy_;
-  jint updateUiFlag_;
-  jboolean applyBeforeChildAdd_;
+  int32_t bufferStrategy_;
+  int32_t updateUiFlag_;
+  bool applyBeforeChildAdd_;
   JavaLangInteger *stylePriority_;
-  jint simpleWrapableViewStrategy_;
+  int32_t simpleWrapableViewStrategy_;
 }
 
 - (instancetype)initWithASWidgetAttribute_Builder:(ASWidgetAttribute_Builder *)builder;
@@ -48,13 +59,13 @@ __attribute__((unused)) static ASWidgetAttribute *create_ASWidgetAttribute_initW
  @public
   NSString *attributeName_;
   NSString *attributeType_;
-  jint order_;
-  jint simpleWrapableViewStrategy_;
-  jboolean isForChild_;
+  int32_t order_;
+  int32_t simpleWrapableViewStrategy_;
+  bool isForChild_;
   NSString *decorator_;
-  jint bufferStrategy_;
-  jint updateUiFlag_;
-  jboolean applyBeforeChildAdd_;
+  int32_t bufferStrategy_;
+  int32_t updateUiFlag_;
+  bool applyBeforeChildAdd_;
   NSString *arrayType_;
   NSString *arrayListToFinalType_;
   JavaLangInteger *stylePriority_;
@@ -88,7 +99,7 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, stylePriority_, JavaLangInteger *
   JreStrongAssign(&self->arrayListToFinalType_, arrayListToFinalType);
 }
 
-- (jboolean)isApplyBeforeChildAdd {
+- (bool)isApplyBeforeChildAdd {
   return applyBeforeChildAdd_;
 }
 
@@ -108,7 +119,7 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, stylePriority_, JavaLangInteger *
   JreStrongAssign(&self->attributeType_, attributeType);
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   if ([obj isKindOfClass:[NSString class]]) {
     return [((NSString *) nil_chk(attributeName_)) java_equalsIgnoreCase:(NSString *) obj];
   }
@@ -116,22 +127,22 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, stylePriority_, JavaLangInteger *
 }
 
 - (NSUInteger)hash {
-  return ((jint) [((NSString *) nil_chk(attributeName_)) hash]);
+  return ((int32_t) [((NSString *) nil_chk(attributeName_)) hash]);
 }
 
-- (jint)getOrder {
+- (int32_t)getOrder {
   return order_;
 }
 
-- (void)setOrderWithInt:(jint)order {
+- (void)setOrderWithInt:(int32_t)order {
   self->order_ = order;
 }
 
-- (jboolean)isForChild {
+- (bool)isForChild {
   return isForChild_;
 }
 
-- (void)setForChildWithBoolean:(jboolean)isForChild {
+- (void)setForChildWithBoolean:(bool)isForChild {
   self->isForChild_ = isForChild;
 }
 
@@ -143,19 +154,19 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, stylePriority_, JavaLangInteger *
   JreStrongAssign(&self->decorator_, decorator);
 }
 
-- (jint)getBufferStrategy {
+- (int32_t)getBufferStrategy {
   return bufferStrategy_;
 }
 
-- (void)setBufferStrategyWithInt:(jint)bufferStrategy {
+- (void)setBufferStrategyWithInt:(int32_t)bufferStrategy {
   self->bufferStrategy_ = bufferStrategy;
 }
 
-- (jint)getUpdateUiFlag {
+- (int32_t)getUpdateUiFlag {
   return updateUiFlag_;
 }
 
-- (void)setUpdateUiFlagWithInt:(jint)updateUiFlag {
+- (void)setUpdateUiFlagWithInt:(int32_t)updateUiFlag {
   self->updateUiFlag_ = updateUiFlag;
 }
 
@@ -175,11 +186,11 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, stylePriority_, JavaLangInteger *
   return ASWidgetAttribute_builder();
 }
 
-- (jint)getSimpleWrapableViewStrategy {
+- (int32_t)getSimpleWrapableViewStrategy {
   return simpleWrapableViewStrategy_;
 }
 
-- (void)setSimpleWrapableViewStrategyWithInt:(jint)simpleWrapableViewStrategy {
+- (void)setSimpleWrapableViewStrategyWithInt:(int32_t)simpleWrapableViewStrategy {
   self->simpleWrapableViewStrategy_ = simpleWrapableViewStrategy;
 }
 
@@ -307,6 +318,8 @@ ASWidgetAttribute_Builder *ASWidgetAttribute_builder() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetAttribute)
 
+J2OBJC_NAME_MAPPING(ASWidgetAttribute, "com.ashera.widget", "AS")
+
 @implementation ASWidgetAttribute_Builder
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -336,7 +349,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (ASWidgetAttribute_Builder *)withOrderWithInt:(jint)order {
+- (ASWidgetAttribute_Builder *)withOrderWithInt:(int32_t)order {
   self->order_ = order;
   return self;
 }
@@ -356,17 +369,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (ASWidgetAttribute_Builder *)withBufferStrategyWithInt:(jint)bufferStrategy {
+- (ASWidgetAttribute_Builder *)withBufferStrategyWithInt:(int32_t)bufferStrategy {
   self->bufferStrategy_ = bufferStrategy;
   return self;
 }
 
-- (ASWidgetAttribute_Builder *)withSimpleWrapableViewStrategyWithInt:(jint)simpleWrapableViewStrategy {
+- (ASWidgetAttribute_Builder *)withSimpleWrapableViewStrategyWithInt:(int32_t)simpleWrapableViewStrategy {
   self->simpleWrapableViewStrategy_ = simpleWrapableViewStrategy;
   return self;
 }
 
-- (ASWidgetAttribute_Builder *)withUiFlagWithInt:(jint)updateUiFlag {
+- (ASWidgetAttribute_Builder *)withUiFlagWithInt:(int32_t)updateUiFlag {
   self->updateUiFlag_ = updateUiFlag;
   return self;
 }

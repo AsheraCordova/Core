@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\app\ActivityManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ActivityManager.h"
 #include "Context.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADActivityManager () {
@@ -25,7 +37,7 @@ J2OBJC_FIELD_SETTER(ADActivityManager, context_, ADContext *)
   return self;
 }
 
-- (jint)getMemoryClass {
+- (int32_t)getMemoryClass {
   return ASPluginInvoker_getMaxMemoryWithId_(context_);
 }
 
@@ -69,3 +81,5 @@ ADActivityManager *create_ADActivityManager_initWithADContext_(ADContext *contex
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADActivityManager)
+
+J2OBJC_NAME_MAPPING(ADActivityManager, "r.android.app", "AD")

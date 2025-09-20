@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractStringToEnumConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AbstractStringToEnumConverter")
@@ -20,6 +21,7 @@
 #define INCLUDE_ASIConverter 1
 #include "IConverter.h"
 
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -52,6 +54,7 @@ FOUNDATION_EXPORT void ASAbstractStringToEnumConverter_init(ASAbstractStringToEn
 J2OBJC_TYPE_LITERAL_HEADER(ASAbstractStringToEnumConverter)
 
 @compatibility_alias ComAsheraConverterAbstractStringToEnumConverter ASAbstractStringToEnumConverter;
+
 
 #endif
 

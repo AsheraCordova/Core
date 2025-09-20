@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\IsEmail.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,8 +16,15 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(ASIsEmail)
@@ -37,9 +49,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return res;
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [((JavaUtilRegexMatcher *) nil_chk([((JavaUtilRegexPattern *) nil_chk(ASIsEmail_EMAIL_ADDRESS)) matcherWithJavaLangCharSequence:text])) matches];
@@ -90,3 +102,5 @@ ASIsEmail *create_ASIsEmail_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASIsEmail)
+
+J2OBJC_NAME_MAPPING(ASIsEmail, "com.ashera.validations", "AS")

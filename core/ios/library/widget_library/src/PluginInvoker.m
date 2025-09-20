@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\PluginInvoker.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributedString.h"
 #include "FontMetricsDescriptor.h"
 #include "HasWidgets.h"
@@ -25,6 +30,12 @@
 #include "java/lang/Runnable.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASPluginInvoker
@@ -61,21 +72,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASPluginInvoker_getColorWithNSString_(color);
 }
 
-+ (jfloat)convertDpToPixelWithNSString:(NSString *)dimen {
++ (float)convertDpToPixelWithNSString:(NSString *)dimen {
   return ASPluginInvoker_convertDpToPixelWithNSString_(dimen);
 }
 
-+ (jfloat)convertSpToPixelWithNSString:(NSString *)dimen {
++ (float)convertSpToPixelWithNSString:(NSString *)dimen {
   return ASPluginInvoker_convertSpToPixelWithNSString_(dimen);
 }
 
 + (NSString *)convertPixelToDpWithId:(id)dimen
-                         withBoolean:(jboolean)isInt {
+                         withBoolean:(bool)isInt {
   return ASPluginInvoker_convertPixelToDpWithId_withBoolean_(dimen, isInt);
 }
 
 + (NSString *)convertPixelToSpWithId:(id)dimen
-                         withBoolean:(jboolean)isInt {
+                         withBoolean:(bool)isInt {
   return ASPluginInvoker_convertPixelToSpWithId_withBoolean_(dimen, isInt);
 }
 
@@ -101,7 +112,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASPluginInvoker_getListWithId_(payLoad);
 }
 
-+ (jboolean)isBooleanWithId:(id)obj {
++ (bool)isBooleanWithId:(id)obj {
   return ASPluginInvoker_isBooleanWithId_(obj);
 }
 
@@ -146,7 +157,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASPluginInvoker_getJSONSafeObjWithId_(obj);
 }
 
-+ (jboolean)isNullWithId:(id)obj {
++ (bool)isNullWithId:(id)obj {
   return ASPluginInvoker_isNullWithId_(obj);
 }
 
@@ -158,26 +169,26 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (id<ASIWidget>)parseWithNSString:(NSString *)html
-                       withBoolean:(jboolean)template_
+                       withBoolean:(bool)template_
                    withASIFragment:(id<ASIFragment>)fragment {
   return ASPluginInvoker_parseWithNSString_withBoolean_withASIFragment_(html, template_, fragment);
 }
 
 + (id<ASIWidget>)parseWithParentWithNSString:(NSString *)html
-                                 withBoolean:(jboolean)template_
+                                 withBoolean:(bool)template_
                             withASHasWidgets:(id<ASHasWidgets>)parent
                              withASIFragment:(id<ASIFragment>)fragment {
   return ASPluginInvoker_parseWithParentWithNSString_withBoolean_withASHasWidgets_withASIFragment_(html, template_, parent, fragment);
 }
 
 + (id<ASIWidget>)parseFileWithNSString:(NSString *)fileName
-                           withBoolean:(jboolean)template_
+                           withBoolean:(bool)template_
                        withASIFragment:(id<ASIFragment>)fragment {
   return ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(fileName, template_, fragment);
 }
 
 + (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileName
-                               withBoolean:(jboolean)template_
+                               withBoolean:(bool)template_
                            withASIFragment:(id<ASIFragment>)fragment {
   return ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(fileName, template_, fragment);
 }
@@ -185,20 +196,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
                         withNSString:(NSString *)componentId
-                         withBoolean:(jboolean)template_
+                         withBoolean:(bool)template_
                      withASIFragment:(id<ASIFragment>)fragment {
   ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(parent, fileName, componentId, template_, fragment);
 }
 
 + (id)getHandlerWithASHasWidgets:(id<ASHasWidgets>)parent
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                  withASIFragment:(id<ASIFragment>)fragment {
   return ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(parent, index, fragment);
 }
 
 + (id<ASIWidget>)handlerStartWithId:(id)handler
                       withASIWidget:(id<ASIWidget>)widget
-                            withInt:(jint)index {
+                            withInt:(int32_t)index {
   return ASPluginInvoker_handlerStartWithId_withASIWidget_withInt_(handler, widget, index);
 }
 
@@ -229,19 +240,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASPluginInvoker_getOrientation();
 }
 
-+ (jint)getScreenWidth {
++ (int32_t)getScreenWidth {
   return ASPluginInvoker_getScreenWidth();
 }
 
-+ (jint)getScreenHeight {
++ (int32_t)getScreenHeight {
   return ASPluginInvoker_getScreenHeight();
 }
 
-+ (jint)getScreenWidthDp {
++ (int32_t)getScreenWidthDp {
   return ASPluginInvoker_getScreenWidthDp();
 }
 
-+ (jint)getScreenHeightDp {
++ (int32_t)getScreenHeightDp {
   return ASPluginInvoker_getScreenHeightDp();
 }
 
@@ -258,12 +269,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASPluginInvoker_getDensityName();
 }
 
-+ (jint)getDensity {
++ (int32_t)getDensity {
   return ASPluginInvoker_getDensity();
 }
 
 + (id)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                              withInt:(jint)delay {
+                              withInt:(int32_t)delay {
   return ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(mTickRunnable, delay);
 }
 
@@ -295,7 +306,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASPluginInvoker_createAttributedStringWithASIFragment_withNSString_(fragment, text);
 }
 
-+ (jfloat)getDisplayMetricDensity {
++ (float)getDisplayMetricDensity {
   return ASPluginInvoker_getDisplayMetricDensity();
 }
 
@@ -307,7 +318,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASPluginInvoker_getExternalFilesDirWithId_(context);
 }
 
-+ (jint)getMaxMemoryWithId:(id)context {
++ (int32_t)getMaxMemoryWithId:(id)context {
   return ASPluginInvoker_getMaxMemoryWithId_(context);
 }
 
@@ -321,7 +332,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                           withLong:(jlong)delay {
+                                           withLong:(int64_t)delay {
   ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(runnable, delay);
 }
 
@@ -532,25 +543,25 @@ id ASPluginInvoker_getColorWithNSString_(NSString *color) {
   return [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getColor" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ color } count:1 type:NSObject_class_()]];
 }
 
-jfloat ASPluginInvoker_convertDpToPixelWithNSString_(NSString *dimen) {
+float ASPluginInvoker_convertDpToPixelWithNSString_(NSString *dimen) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"converter");
   return [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"convertDpToPixel" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ dimen } count:1 type:NSObject_class_()]], [JavaLangFloat class]))) floatValue];
 }
 
-jfloat ASPluginInvoker_convertSpToPixelWithNSString_(NSString *dimen) {
+float ASPluginInvoker_convertSpToPixelWithNSString_(NSString *dimen) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"converter");
   return [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"convertSpToPixel" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ dimen } count:1 type:NSObject_class_()]], [JavaLangFloat class]))) floatValue];
 }
 
-NSString *ASPluginInvoker_convertPixelToDpWithId_withBoolean_(id dimen, jboolean isInt) {
+NSString *ASPluginInvoker_convertPixelToDpWithId_withBoolean_(id dimen, bool isInt) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"converter");
   return (NSString *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"convertPixelToDp" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ dimen, JavaLangBoolean_valueOfWithBoolean_(isInt) } count:2 type:NSObject_class_()]], [NSString class]);
 }
 
-NSString *ASPluginInvoker_convertPixelToSpWithId_withBoolean_(id dimen, jboolean isInt) {
+NSString *ASPluginInvoker_convertPixelToSpWithId_withBoolean_(id dimen, bool isInt) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"converter");
   return (NSString *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"convertPixelToSp" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ dimen, JavaLangBoolean_valueOfWithBoolean_(isInt) } count:2 type:NSObject_class_()]], [NSString class]);
@@ -586,7 +597,7 @@ id<JavaUtilList> ASPluginInvoker_getListWithId_(id payLoad) {
   return (id<JavaUtilList>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getList" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ payLoad } count:1 type:NSObject_class_()]], JavaUtilList_class_());
 }
 
-jboolean ASPluginInvoker_isBooleanWithId_(id obj) {
+bool ASPluginInvoker_isBooleanWithId_(id obj) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"jsonadapter");
   return [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"isBoolean" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ obj } count:1 type:NSObject_class_()]], [JavaLangBoolean class]))) booleanValue];
@@ -652,7 +663,7 @@ id ASPluginInvoker_getJSONSafeObjWithId_(id obj) {
   return [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getJSONSafeObj" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ obj } count:1 type:NSObject_class_()]];
 }
 
-jboolean ASPluginInvoker_isNullWithId_(id obj) {
+bool ASPluginInvoker_isNullWithId_(id obj) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"jsonadapter");
   return [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"isNull" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ obj } count:1 type:NSObject_class_()]], [JavaLangBoolean class]))) booleanValue];
@@ -664,43 +675,43 @@ void ASPluginInvoker_navigateWithNSString_withNSString_withId_withASIFragment_(N
   [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"navigate" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ actionId, varExpression, payload, fragment } count:4 type:NSObject_class_()]];
 }
 
-id<ASIWidget> ASPluginInvoker_parseWithNSString_withBoolean_withASIFragment_(NSString *html, jboolean template_, id<ASIFragment> fragment) {
+id<ASIWidget> ASPluginInvoker_parseWithNSString_withBoolean_withASIFragment_(NSString *html, bool template_, id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
   return (id<ASIWidget>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parse" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ html, JavaLangBoolean_valueOfWithBoolean_(template_), fragment } count:3 type:NSObject_class_()]], ASIWidget_class_());
 }
 
-id<ASIWidget> ASPluginInvoker_parseWithParentWithNSString_withBoolean_withASHasWidgets_withASIFragment_(NSString *html, jboolean template_, id<ASHasWidgets> parent, id<ASIFragment> fragment) {
+id<ASIWidget> ASPluginInvoker_parseWithParentWithNSString_withBoolean_withASHasWidgets_withASIFragment_(NSString *html, bool template_, id<ASHasWidgets> parent, id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
   return (id<ASIWidget>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parseWithParent" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ html, JavaLangBoolean_valueOfWithBoolean_(template_), parent, fragment } count:4 type:NSObject_class_()]], ASIWidget_class_());
 }
 
-id<ASIWidget> ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(NSString *fileName, jboolean template_, id<ASIFragment> fragment) {
+id<ASIWidget> ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(NSString *fileName, bool template_, id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
   return (id<ASIWidget>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parseFile" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ fileName, JavaLangBoolean_valueOfWithBoolean_(template_), fragment } count:3 type:NSObject_class_()]], ASIWidget_class_());
 }
 
-id<ASIWidget> ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(NSString *fileName, jboolean template_, id<ASIFragment> fragment) {
+id<ASIWidget> ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(NSString *fileName, bool template_, id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
   return (id<ASIWidget>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parseFragment" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ fileName, JavaLangBoolean_valueOfWithBoolean_(template_), fragment } count:3 type:NSObject_class_()]], ASIWidget_class_());
 }
 
-void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, NSString *componentId, jboolean template_, id<ASIFragment> fragment) {
+void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, NSString *componentId, bool template_, id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
   [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parseInclude" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ parent, fileName, componentId, JavaLangBoolean_valueOfWithBoolean_(template_), fragment } count:5 type:NSObject_class_()]];
 }
 
-id ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(id<ASHasWidgets> parent, jint index, id<ASIFragment> fragment) {
+id ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(id<ASHasWidgets> parent, int32_t index, id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
   return [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getHandler" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ parent, JavaLangInteger_valueOfWithInt_(index), fragment } count:3 type:NSObject_class_()]];
 }
 
-id<ASIWidget> ASPluginInvoker_handlerStartWithId_withASIWidget_withInt_(id handler, id<ASIWidget> widget, jint index) {
+id<ASIWidget> ASPluginInvoker_handlerStartWithId_withASIWidget_withInt_(id handler, id<ASIWidget> widget, int32_t index) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
   return (id<ASIWidget>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"handlerStart" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ handler, widget, JavaLangInteger_valueOfWithInt_(index) } count:3 type:NSObject_class_()]], ASIWidget_class_());
@@ -742,25 +753,25 @@ NSString *ASPluginInvoker_getOrientation() {
   return (NSString *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getOrientation" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [NSString class]);
 }
 
-jint ASPluginInvoker_getScreenWidth() {
+int32_t ASPluginInvoker_getScreenWidth() {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getScreenWidth" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [JavaLangInteger class]))) intValue];
 }
 
-jint ASPluginInvoker_getScreenHeight() {
+int32_t ASPluginInvoker_getScreenHeight() {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getScreenHeight" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [JavaLangInteger class]))) intValue];
 }
 
-jint ASPluginInvoker_getScreenWidthDp() {
+int32_t ASPluginInvoker_getScreenWidthDp() {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getScreenWidthDp" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [JavaLangInteger class]))) intValue];
 }
 
-jint ASPluginInvoker_getScreenHeightDp() {
+int32_t ASPluginInvoker_getScreenHeightDp() {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getScreenHeightDp" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [JavaLangInteger class]))) intValue];
@@ -784,13 +795,13 @@ NSString *ASPluginInvoker_getDensityName() {
   return (NSString *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getDensityName" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [NSString class]);
 }
 
-jint ASPluginInvoker_getDensity() {
+int32_t ASPluginInvoker_getDensity() {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getDensity" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [JavaLangInteger class]))) intValue];
 }
 
-id ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(id<JavaLangRunnable> mTickRunnable, jint delay) {
+id ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(id<JavaLangRunnable> mTickRunnable, int32_t delay) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"postDelayed" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ mTickRunnable, JavaLangInteger_valueOfWithInt_(delay) } count:2 type:NSObject_class_()]];
@@ -832,7 +843,7 @@ id<ASAttributedString> ASPluginInvoker_createAttributedStringWithASIFragment_wit
   return (id<ASAttributedString>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"createAttributedString" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ fragment, text } count:2 type:NSObject_class_()]], ASAttributedString_class_());
 }
 
-jfloat ASPluginInvoker_getDisplayMetricDensity() {
+float ASPluginInvoker_getDisplayMetricDensity() {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getDisplayMetricDensity" withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]], [JavaLangFloat class]))) floatValue];
@@ -850,7 +861,7 @@ JavaIoFile *ASPluginInvoker_getExternalFilesDirWithId_(id context) {
   return (JavaIoFile *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getExternalFilesDir" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ context } count:1 type:NSObject_class_()]], [JavaIoFile class]);
 }
 
-jint ASPluginInvoker_getMaxMemoryWithId_(id context) {
+int32_t ASPluginInvoker_getMaxMemoryWithId_(id context) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"getMaxMemory" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ context } count:1 type:NSObject_class_()]], [JavaLangInteger class]))) intValue];
@@ -868,7 +879,7 @@ void ASPluginInvoker_runOnMainThreadWithJavaLangRunnable_(id<JavaLangRunnable> r
   [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"runOnMainThread" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ runnable } count:1 type:NSObject_class_()]];
 }
 
-void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<JavaLangRunnable> runnable, jlong delay) {
+void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<JavaLangRunnable> runnable, int64_t delay) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"enqueueTaskForEventLoop" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ runnable, JavaLangLong_valueOfWithLong_(delay) } count:2 type:NSObject_class_()]];
@@ -893,3 +904,5 @@ void ASPluginInvoker_registerFontWithNSString_withNSString_withNSString_withNSSt
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPluginInvoker)
+
+J2OBJC_NAME_MAPPING(ASPluginInvoker, "com.ashera.widget", "AS")

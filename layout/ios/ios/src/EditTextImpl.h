@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\EditTextImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EditTextImpl")
@@ -36,6 +37,9 @@
 @class ASWidgetAttribute;
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -63,17 +67,17 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype;
+                      withInt:(int32_t)viewtype;
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType;
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType;
 
-- (id)createWrapperViewHolderNativeWithInt:(jint)viewType;
+- (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType;
 
 - (void)drawableStateChanged;
 
@@ -88,7 +92,7 @@
 
 - (id)getBackground;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getClearsOnBeginEditing;
 
@@ -100,21 +104,21 @@
 
 - (id)getIsEditing;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
 - (id)getMinimumFontSize;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getPlaceholder;
 
@@ -131,21 +135,21 @@
 - (id)invokeMethodWithNSString:(NSString *)methodName
              withNSObjectArray:(IOSObjectArray *)args;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 - (id)nativeAddForeGroundWithASIWidget:(id<ASIWidget>)w;
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value;
+- (void)nativeSetEnabledWithBoolean:(bool)value;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -202,7 +206,7 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)showErrorWithNSString:(NSString *)message;
 
@@ -247,6 +251,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl)
 
 @compatibility_alias ComAsheraLayoutEditTextImpl ASEditTextImpl;
 
+
 #endif
 
 #if !defined (ASEditTextImpl_DrawableTintMode_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_DrawableTintMode))
@@ -282,6 +287,7 @@ FOUNDATION_EXPORT ASEditTextImpl_DrawableTintMode *new_ASEditTextImpl_DrawableTi
 FOUNDATION_EXPORT ASEditTextImpl_DrawableTintMode *create_ASEditTextImpl_DrawableTintMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_DrawableTintMode)
+
 
 #endif
 
@@ -319,6 +325,7 @@ FOUNDATION_EXPORT ASEditTextImpl_Font *create_ASEditTextImpl_Font_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_Font)
 
+
 #endif
 
 #if !defined (ASEditTextImpl_TextStyle_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_TextStyle))
@@ -354,6 +361,7 @@ FOUNDATION_EXPORT ASEditTextImpl_TextStyle *new_ASEditTextImpl_TextStyle_init(vo
 FOUNDATION_EXPORT ASEditTextImpl_TextStyle *create_ASEditTextImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_TextStyle)
+
 
 #endif
 
@@ -391,6 +399,7 @@ FOUNDATION_EXPORT ASEditTextImpl_Capitalize *create_ASEditTextImpl_Capitalize_in
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_Capitalize)
 
+
 #endif
 
 #if !defined (ASEditTextImpl_Numeric_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_Numeric))
@@ -426,6 +435,7 @@ FOUNDATION_EXPORT ASEditTextImpl_Numeric *new_ASEditTextImpl_Numeric_init(void) 
 FOUNDATION_EXPORT ASEditTextImpl_Numeric *create_ASEditTextImpl_Numeric_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_Numeric)
+
 
 #endif
 
@@ -463,6 +473,7 @@ FOUNDATION_EXPORT ASEditTextImpl_InputType *create_ASEditTextImpl_InputType_init
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputType)
 
+
 #endif
 
 #if !defined (ASEditTextImpl_ImeOptions_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_ImeOptions))
@@ -498,6 +509,7 @@ FOUNDATION_EXPORT ASEditTextImpl_ImeOptions *new_ASEditTextImpl_ImeOptions_init(
 FOUNDATION_EXPORT ASEditTextImpl_ImeOptions *create_ASEditTextImpl_ImeOptions_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_ImeOptions)
+
 
 #endif
 
@@ -535,6 +547,7 @@ FOUNDATION_EXPORT ASEditTextImpl_IosBorderStyle *create_ASEditTextImpl_IosBorder
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_IosBorderStyle)
 
+
 #endif
 
 #if !defined (ASEditTextImpl_InputView_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_InputView))
@@ -571,6 +584,7 @@ FOUNDATION_EXPORT ASEditTextImpl_InputView *create_ASEditTextImpl_InputView_init
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
+
 #endif
 
 #if !defined (ASEditTextImpl_EditTextExt_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_EditTextExt))
@@ -591,6 +605,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -600,7 +618,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
 - (instancetype)initWithASEditTextImpl:(ASEditTextImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -609,13 +627,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -631,19 +649,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -666,7 +684,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -682,16 +700,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -712,6 +730,7 @@ FOUNDATION_EXPORT ASEditTextImpl_EditTextExt *new_ASEditTextImpl_EditTextExt_ini
 FOUNDATION_EXPORT ASEditTextImpl_EditTextExt *create_ASEditTextImpl_EditTextExt_initWithASEditTextImpl_(ASEditTextImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
+
 
 #endif
 

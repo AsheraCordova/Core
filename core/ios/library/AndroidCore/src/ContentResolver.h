@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\ContentResolver.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ContentResolver")
@@ -20,6 +21,7 @@
 @class ADCursor;
 @class ADUri;
 @class IOSObjectArray;
+@class NSString;
 
 @interface ADContentResolver : NSObject
 
@@ -66,6 +68,7 @@ FOUNDATION_EXPORT ADContentResolver *create_ADContentResolver_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADContentResolver)
 
 @compatibility_alias RAndroidContentContentResolver ADContentResolver;
+
 
 #endif
 

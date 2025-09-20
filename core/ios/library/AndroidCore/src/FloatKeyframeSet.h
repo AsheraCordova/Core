@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\FloatKeyframeSet.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FloatKeyframeSet")
@@ -26,6 +27,7 @@
 
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangFloat;
 
 /*!
  @brief This class holds a collection of FloatKeyframe objects and is called by ValueAnimator to calculate
@@ -44,11 +46,11 @@
 
 - (ADFloatKeyframeSet *)java_clone;
 
-- (jfloat)getFloatValueWithFloat:(jfloat)fraction;
+- (float)getFloatValueWithFloat:(float)fraction;
 
 - (IOSClass *)getType;
 
-- (id)getValueWithFloat:(jfloat)fraction;
+- (id)getValueWithFloat:(float)fraction;
 
 // Disallowed inherited constructors, do not use.
 
@@ -67,6 +69,7 @@ FOUNDATION_EXPORT ADFloatKeyframeSet *create_ADFloatKeyframeSet_initPackagePriva
 J2OBJC_TYPE_LITERAL_HEADER(ADFloatKeyframeSet)
 
 @compatibility_alias RAndroidAnimationFloatKeyframeSet ADFloatKeyframeSet;
+
 
 #endif
 

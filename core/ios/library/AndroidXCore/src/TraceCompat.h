@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\os\TraceCompat.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TraceCompat")
@@ -15,6 +16,8 @@
 
 #if !defined (ADXTraceCompat_) && (INCLUDE_ALL_TraceCompat || defined(INCLUDE_ADXTraceCompat))
 #define ADXTraceCompat_
+
+@class NSString;
 
 @interface ADXTraceCompat : NSObject
 
@@ -43,6 +46,7 @@ FOUNDATION_EXPORT void ADXTraceCompat_beginSectionWithNSString_(NSString *traceO
 J2OBJC_TYPE_LITERAL_HEADER(ADXTraceCompat)
 
 @compatibility_alias AndroidxCoreOsTraceCompat ADXTraceCompat;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingParent2.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollingParent2")
@@ -28,6 +29,8 @@
 
 @class ADView;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief This interface should be implemented by <code>ViewGroup</code> subclasses
@@ -64,10 +67,10 @@
  @param type the type of input which cause this scroll event
  @return true if this ViewParent accepts the nested scroll operation
  */
-- (jboolean)onStartNestedScrollWithADView:(ADView *)child
-                               withADView:(ADView *)target
-                                  withInt:(jint)axes
-                                  withInt:(jint)type;
+- (bool)onStartNestedScrollWithADView:(ADView *)child
+                           withADView:(ADView *)target
+                              withInt:(int32_t)axes
+                              withInt:(int32_t)type;
 
 /*!
  @brief React to the successful claiming of a nested scroll operation.
@@ -86,8 +89,8 @@
  */
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes
-                                 withInt:(jint)type;
+                                 withInt:(int32_t)axes
+                                 withInt:(int32_t)type;
 
 /*!
  @brief React to a nested scroll operation ending.
@@ -100,7 +103,7 @@
  @param type the type of input which cause this scroll event
  */
 - (void)onStopNestedScrollWithADView:(ADView *)target
-                             withInt:(jint)type;
+                             withInt:(int32_t)type;
 
 /*!
  @brief React to a nested scroll in progress.
@@ -123,11 +126,11 @@
  @param type the type of input which cause this scroll event
  */
 - (void)onNestedScrollWithADView:(ADView *)target
-                         withInt:(jint)dxConsumed
-                         withInt:(jint)dyConsumed
-                         withInt:(jint)dxUnconsumed
-                         withInt:(jint)dyUnconsumed
-                         withInt:(jint)type;
+                         withInt:(int32_t)dxConsumed
+                         withInt:(int32_t)dyConsumed
+                         withInt:(int32_t)dxUnconsumed
+                         withInt:(int32_t)dyUnconsumed
+                         withInt:(int32_t)type;
 
 /*!
  @brief React to a nested scroll in progress before the target view consumes a portion of the scroll.
@@ -149,10 +152,10 @@
  @param type the type of input which cause this scroll event
  */
 - (void)onNestedPreScrollWithADView:(ADView *)target
-                            withInt:(jint)dx
-                            withInt:(jint)dy
+                            withInt:(int32_t)dx
+                            withInt:(int32_t)dy
                        withIntArray:(IOSIntArray *)consumed
-                            withInt:(jint)type;
+                            withInt:(int32_t)type;
 
 @end
 
@@ -161,6 +164,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXNestedScrollingParent2)
 J2OBJC_TYPE_LITERAL_HEADER(ADXNestedScrollingParent2)
 
 #define AndroidxCoreViewNestedScrollingParent2 ADXNestedScrollingParent2
+
 
 #endif
 

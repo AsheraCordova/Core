@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\EvaluatorConstants.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "EvaluatorConstants.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(CSSEvaluatorConstants)

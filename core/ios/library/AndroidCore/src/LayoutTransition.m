@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\LayoutTransition.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AccelerateDecelerateInterpolator.h"
 #include "Animator.h"
 #include "AnimatorListenerAdapter.h"
@@ -23,6 +28,10 @@
 #include "ViewGroup.h"
 #include "ViewParent.h"
 #include "ViewTreeObserver.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/HashMap.h"
@@ -31,10 +40,11 @@
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 
-@class JavaUtilArrayList;
-@class JavaUtilHashMap;
-@class JavaUtilLinkedHashMap;
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADLayoutTransition () {
@@ -52,11 +62,11 @@
   /*!
    @brief The durations of the different animations
    */
-  jlong mChangingAppearingDuration_;
-  jlong mChangingDisappearingDuration_;
-  jlong mChangingDuration_;
-  jlong mAppearingDuration_;
-  jlong mDisappearingDuration_;
+  int64_t mChangingAppearingDuration_;
+  int64_t mChangingDisappearingDuration_;
+  int64_t mChangingDuration_;
+  int64_t mAppearingDuration_;
+  int64_t mDisappearingDuration_;
   /*!
    @brief The start delays of the different animations.Note that the default behavior of
   the appearing item is the default duration, since it should wait for the items to move
@@ -64,17 +74,17 @@
    Same for the changing animation when disappearing; it waits for the item
   to fade out before moving the other items.
    */
-  jlong mAppearingDelay_;
-  jlong mDisappearingDelay_;
-  jlong mChangingAppearingDelay_;
-  jlong mChangingDisappearingDelay_;
-  jlong mChangingDelay_;
+  int64_t mAppearingDelay_;
+  int64_t mDisappearingDelay_;
+  int64_t mChangingAppearingDelay_;
+  int64_t mChangingDisappearingDelay_;
+  int64_t mChangingDelay_;
   /*!
    @brief The inter-animation delays used on the changing animations
    */
-  jlong mChangingAppearingStagger_;
-  jlong mChangingDisappearingStagger_;
-  jlong mChangingStagger_;
+  int64_t mChangingAppearingStagger_;
+  int64_t mChangingDisappearingStagger_;
+  int64_t mChangingStagger_;
   /*!
    @brief The default interpolators used for the animations
    */
@@ -111,13 +121,13 @@
   started.This value is incremented for each new animation, then zeroed before the next
   transition begins.
    */
-  jlong staggerDelay_;
+  int64_t staggerDelay_;
   /*!
    @brief These are the types of transition animations that the LayoutTransition is reacting
   to.By default, appearing/disappearing and the change animations related to them are
   enabled (not CHANGING).
    */
-  jint mTransitionTypes_;
+  int32_t mTransitionTypes_;
   /*!
    @brief The set of listeners that should be notified when APPEARING/DISAPPEARING transitions
   start and end.
@@ -129,7 +139,7 @@
   transition begins, causing visual glitches and clipping.
   Default value is true.
    */
-  jboolean mAnimateParentHierarchy_;
+  bool mAnimateParentHierarchy_;
 }
 
 /*!
@@ -146,16 +156,16 @@
  */
 - (void)runChangeTransitionWithADViewGroup:(ADViewGroup *)parent
                                 withADView:(ADView *)newView
-                                   withInt:(jint)changeReason;
+                                   withInt:(int32_t)changeReason;
 
 /*!
  @brief Utility function called by runChangingTransition for both the children and the parent
   hierarchy.
  */
 - (void)setupChangeAnimationWithADViewGroup:(ADViewGroup *)parent
-                                    withInt:(jint)changeReason
+                                    withInt:(int32_t)changeReason
                              withADAnimator:(ADAnimator *)baseAnimator
-                                   withLong:(jlong)duration
+                                   withLong:(int64_t)duration
                                  withADView:(ADView *)child;
 
 /*!
@@ -186,9 +196,9 @@
  */
 - (void)addChildWithADViewGroup:(ADViewGroup *)parent
                      withADView:(ADView *)child
-                    withBoolean:(jboolean)changesLayout;
+                    withBoolean:(bool)changesLayout;
 
-- (jboolean)hasListeners;
+- (bool)hasListeners;
 
 /*!
  @brief This method is called by ViewGroup when a child view is about to be removed from the
@@ -202,7 +212,7 @@
  */
 - (void)removeChildWithADViewGroup:(ADViewGroup *)parent
                         withADView:(ADView *)child
-                       withBoolean:(jboolean)changesLayout;
+                       withBoolean:(bool)changesLayout;
 
 @end
 
@@ -226,25 +236,25 @@ J2OBJC_FIELD_SETTER(ADLayoutTransition, mListeners_, JavaUtilArrayList *)
  @brief Private bit fields used to set the collection of enabled transition types for
   mTransitionTypes.
  */
-inline jint ADLayoutTransition_get_FLAG_APPEARING(void);
+inline int32_t ADLayoutTransition_get_FLAG_APPEARING(void);
 #define ADLayoutTransition_FLAG_APPEARING 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_APPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_APPEARING, int32_t)
 
-inline jint ADLayoutTransition_get_FLAG_DISAPPEARING(void);
+inline int32_t ADLayoutTransition_get_FLAG_DISAPPEARING(void);
 #define ADLayoutTransition_FLAG_DISAPPEARING 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_DISAPPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_DISAPPEARING, int32_t)
 
-inline jint ADLayoutTransition_get_FLAG_CHANGE_APPEARING(void);
+inline int32_t ADLayoutTransition_get_FLAG_CHANGE_APPEARING(void);
 #define ADLayoutTransition_FLAG_CHANGE_APPEARING 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_CHANGE_APPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_CHANGE_APPEARING, int32_t)
 
-inline jint ADLayoutTransition_get_FLAG_CHANGE_DISAPPEARING(void);
+inline int32_t ADLayoutTransition_get_FLAG_CHANGE_DISAPPEARING(void);
 #define ADLayoutTransition_FLAG_CHANGE_DISAPPEARING 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_CHANGE_DISAPPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_CHANGE_DISAPPEARING, int32_t)
 
-inline jint ADLayoutTransition_get_FLAG_CHANGING(void);
+inline int32_t ADLayoutTransition_get_FLAG_CHANGING(void);
 #define ADLayoutTransition_FLAG_CHANGING 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_CHANGING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, FLAG_CHANGING, int32_t)
 
 /*!
  @brief These are the default animations, defined in the constructor, that will be used
@@ -278,11 +288,11 @@ J2OBJC_STATIC_FIELD_OBJ(ADLayoutTransition, defaultFadeOut, ADObjectAnimator *)
 /*!
  @brief The default duration used by all animations.
  */
-inline jlong ADLayoutTransition_get_DEFAULT_DURATION(void);
-inline jlong ADLayoutTransition_set_DEFAULT_DURATION(jlong value);
-inline jlong *ADLayoutTransition_getRef_DEFAULT_DURATION(void);
-static jlong ADLayoutTransition_DEFAULT_DURATION = 300;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADLayoutTransition, DEFAULT_DURATION, jlong)
+inline int64_t ADLayoutTransition_get_DEFAULT_DURATION(void);
+inline int64_t ADLayoutTransition_set_DEFAULT_DURATION(int64_t value);
+inline int64_t *ADLayoutTransition_getRef_DEFAULT_DURATION(void);
+static int64_t ADLayoutTransition_DEFAULT_DURATION = 300;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADLayoutTransition, DEFAULT_DURATION, int64_t)
 
 /*!
  @brief Static interpolators - these are stateless and can be shared across the instances
@@ -322,19 +332,19 @@ inline id<ADTimeInterpolator> ADLayoutTransition_set_sChangingInterpolator(id<AD
 static id<ADTimeInterpolator> ADLayoutTransition_sChangingInterpolator;
 J2OBJC_STATIC_FIELD_OBJ(ADLayoutTransition, sChangingInterpolator, id<ADTimeInterpolator>)
 
-__attribute__((unused)) static void ADLayoutTransition_runChangeTransitionWithADViewGroup_withADView_withInt_(ADLayoutTransition *self, ADViewGroup *parent, ADView *newView, jint changeReason);
+__attribute__((unused)) static void ADLayoutTransition_runChangeTransitionWithADViewGroup_withADView_withInt_(ADLayoutTransition *self, ADViewGroup *parent, ADView *newView, int32_t changeReason);
 
-__attribute__((unused)) static void ADLayoutTransition_setupChangeAnimationWithADViewGroup_withInt_withADAnimator_withLong_withADView_(ADLayoutTransition *self, ADViewGroup *parent, jint changeReason, ADAnimator *baseAnimator, jlong duration, ADView *child);
+__attribute__((unused)) static void ADLayoutTransition_setupChangeAnimationWithADViewGroup_withInt_withADAnimator_withLong_withADView_(ADLayoutTransition *self, ADViewGroup *parent, int32_t changeReason, ADAnimator *baseAnimator, int64_t duration, ADView *child);
 
 __attribute__((unused)) static void ADLayoutTransition_runAppearingTransitionWithADViewGroup_withADView_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child);
 
 __attribute__((unused)) static void ADLayoutTransition_runDisappearingTransitionWithADViewGroup_withADView_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child);
 
-__attribute__((unused)) static void ADLayoutTransition_addChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, jboolean changesLayout);
+__attribute__((unused)) static void ADLayoutTransition_addChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, bool changesLayout);
 
-__attribute__((unused)) static jboolean ADLayoutTransition_hasListeners(ADLayoutTransition *self);
+__attribute__((unused)) static bool ADLayoutTransition_hasListeners(ADLayoutTransition *self);
 
-__attribute__((unused)) static void ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, jboolean changesLayout);
+__attribute__((unused)) static void ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, bool changesLayout);
 
 @interface ADLayoutTransition_1 : ADAnimatorListenerAdapter {
  @public
@@ -357,56 +367,58 @@ __attribute__((unused)) static ADLayoutTransition_1 *new_ADLayoutTransition_1_in
 
 __attribute__((unused)) static ADLayoutTransition_1 *create_ADLayoutTransition_1_initWithADLayoutTransition_withADView_(ADLayoutTransition *outer$, ADView *capture$0);
 
+
 @interface ADLayoutTransition_2 : NSObject < ADView_OnLayoutChangeListener > {
  @public
   ADLayoutTransition *this$0_;
   ADAnimator *val$anim_;
-  jint val$changeReason_;
-  jlong val$duration_;
+  int32_t val$changeReason_;
+  int64_t val$duration_;
   ADView *val$child_;
   ADViewGroup *val$parent_;
 }
 
 - (instancetype)initWithADLayoutTransition:(ADLayoutTransition *)outer$
                             withADAnimator:(ADAnimator *)capture$0
-                                   withInt:(jint)capture$1
-                                  withLong:(jlong)capture$2
+                                   withInt:(int32_t)capture$1
+                                  withLong:(int64_t)capture$2
                                 withADView:(ADView *)capture$3
                            withADViewGroup:(ADViewGroup *)capture$4;
 
 - (void)onLayoutChangeWithADView:(ADView *)v
-                         withInt:(jint)left
-                         withInt:(jint)top
-                         withInt:(jint)right
-                         withInt:(jint)bottom
-                         withInt:(jint)oldLeft
-                         withInt:(jint)oldTop
-                         withInt:(jint)oldRight
-                         withInt:(jint)oldBottom;
+                         withInt:(int32_t)left
+                         withInt:(int32_t)top
+                         withInt:(int32_t)right
+                         withInt:(int32_t)bottom
+                         withInt:(int32_t)oldLeft
+                         withInt:(int32_t)oldTop
+                         withInt:(int32_t)oldRight
+                         withInt:(int32_t)oldBottom;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADLayoutTransition_2)
 
-__attribute__((unused)) static void ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition_2 *self, ADLayoutTransition *outer$, ADAnimator *capture$0, jint capture$1, jlong capture$2, ADView *capture$3, ADViewGroup *capture$4);
+__attribute__((unused)) static void ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition_2 *self, ADLayoutTransition *outer$, ADAnimator *capture$0, int32_t capture$1, int64_t capture$2, ADView *capture$3, ADViewGroup *capture$4);
 
-__attribute__((unused)) static ADLayoutTransition_2 *new_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, jint capture$1, jlong capture$2, ADView *capture$3, ADViewGroup *capture$4) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADLayoutTransition_2 *new_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, int32_t capture$1, int64_t capture$2, ADView *capture$3, ADViewGroup *capture$4) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADLayoutTransition_2 *create_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, jint capture$1, jlong capture$2, ADView *capture$3, ADViewGroup *capture$4);
+__attribute__((unused)) static ADLayoutTransition_2 *create_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, int32_t capture$1, int64_t capture$2, ADView *capture$3, ADViewGroup *capture$4);
+
 
 @interface ADLayoutTransition_3 : ADAnimatorListenerAdapter {
  @public
   ADLayoutTransition *this$0_;
   ADViewGroup *val$parent_;
   ADView *val$child_;
-  jint val$changeReason_;
+  int32_t val$changeReason_;
   id<ADView_OnLayoutChangeListener> val$listener_;
 }
 
 - (instancetype)initWithADLayoutTransition:(ADLayoutTransition *)outer$
                            withADViewGroup:(ADViewGroup *)capture$0
                                 withADView:(ADView *)capture$1
-                                   withInt:(jint)capture$2
+                                   withInt:(int32_t)capture$2
          withADView_OnLayoutChangeListener:(id<ADView_OnLayoutChangeListener>)capture$3;
 
 - (void)onAnimationStartWithADAnimator:(ADAnimator *)animator;
@@ -419,11 +431,12 @@ __attribute__((unused)) static ADLayoutTransition_2 *create_ADLayoutTransition_2
 
 J2OBJC_EMPTY_STATIC_INIT(ADLayoutTransition_3)
 
-__attribute__((unused)) static void ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition_3 *self, ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, jint capture$2, id<ADView_OnLayoutChangeListener> capture$3);
+__attribute__((unused)) static void ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition_3 *self, ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, int32_t capture$2, id<ADView_OnLayoutChangeListener> capture$3);
 
-__attribute__((unused)) static ADLayoutTransition_3 *new_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, jint capture$2, id<ADView_OnLayoutChangeListener> capture$3) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADLayoutTransition_3 *new_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, int32_t capture$2, id<ADView_OnLayoutChangeListener> capture$3) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADLayoutTransition_3 *create_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, jint capture$2, id<ADView_OnLayoutChangeListener> capture$3);
+__attribute__((unused)) static ADLayoutTransition_3 *create_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, int32_t capture$2, id<ADView_OnLayoutChangeListener> capture$3);
+
 
 @interface ADLayoutTransition_4 : ADAnimatorListenerAdapter {
  @public
@@ -448,17 +461,18 @@ __attribute__((unused)) static ADLayoutTransition_4 *new_ADLayoutTransition_4_in
 
 __attribute__((unused)) static ADLayoutTransition_4 *create_ADLayoutTransition_4_initWithADLayoutTransition_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, ADViewGroup *capture$1);
 
+
 @interface ADLayoutTransition_5 : ADAnimatorListenerAdapter {
  @public
   ADLayoutTransition *this$0_;
   ADView *val$child_;
-  jfloat val$preAnimAlpha_;
+  float val$preAnimAlpha_;
   ADViewGroup *val$parent_;
 }
 
 - (instancetype)initWithADLayoutTransition:(ADLayoutTransition *)outer$
                                 withADView:(ADView *)capture$0
-                                 withFloat:(jfloat)capture$1
+                                 withFloat:(float)capture$1
                            withADViewGroup:(ADViewGroup *)capture$2;
 
 - (void)onAnimationEndWithADAnimator:(ADAnimator *)anim;
@@ -467,11 +481,12 @@ __attribute__((unused)) static ADLayoutTransition_4 *create_ADLayoutTransition_4
 
 J2OBJC_EMPTY_STATIC_INIT(ADLayoutTransition_5)
 
-__attribute__((unused)) static void ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition_5 *self, ADLayoutTransition *outer$, ADView *capture$0, jfloat capture$1, ADViewGroup *capture$2);
+__attribute__((unused)) static void ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition_5 *self, ADLayoutTransition *outer$, ADView *capture$0, float capture$1, ADViewGroup *capture$2);
 
-__attribute__((unused)) static ADLayoutTransition_5 *new_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, jfloat capture$1, ADViewGroup *capture$2) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADLayoutTransition_5 *new_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, float capture$1, ADViewGroup *capture$2) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADLayoutTransition_5 *create_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, jfloat capture$1, ADViewGroup *capture$2);
+__attribute__((unused)) static ADLayoutTransition_5 *create_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, float capture$1, ADViewGroup *capture$2);
+
 
 @interface ADLayoutTransition_TransitionListener : NSObject
 
@@ -497,7 +512,7 @@ __attribute__((unused)) static ADLayoutTransition_5 *create_ADLayoutTransition_5
 
 - (void)onViewDetachedFromWindowWithADView:(ADView *)v;
 
-- (jboolean)onPreDraw;
+- (bool)onPreDraw;
 
 @end
 
@@ -516,6 +531,7 @@ __attribute__((unused)) static void ADLayoutTransition_CleanupCallback_cleanup(A
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLayoutTransition_CleanupCallback)
 
+
 J2OBJC_INITIALIZED_DEFN(ADLayoutTransition)
 
 @implementation ADLayoutTransition
@@ -527,7 +543,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setDurationWithLong:(jlong)duration {
+- (void)setDurationWithLong:(int64_t)duration {
   mChangingAppearingDuration_ = duration;
   mChangingDisappearingDuration_ = duration;
   mChangingDuration_ = duration;
@@ -535,7 +551,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   mDisappearingDuration_ = duration;
 }
 
-- (void)enableTransitionTypeWithInt:(jint)transitionType {
+- (void)enableTransitionTypeWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_APPEARING:
     mTransitionTypes_ |= ADLayoutTransition_FLAG_APPEARING;
@@ -555,7 +571,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)disableTransitionTypeWithInt:(jint)transitionType {
+- (void)disableTransitionTypeWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_APPEARING:
     mTransitionTypes_ &= ~ADLayoutTransition_FLAG_APPEARING;
@@ -575,7 +591,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isTransitionTypeEnabledWithInt:(jint)transitionType {
+- (bool)isTransitionTypeEnabledWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_APPEARING:
     return (mTransitionTypes_ & ADLayoutTransition_FLAG_APPEARING) == ADLayoutTransition_FLAG_APPEARING;
@@ -591,8 +607,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (void)setStartDelayWithInt:(jint)transitionType
-                    withLong:(jlong)delay {
+- (void)setStartDelayWithInt:(int32_t)transitionType
+                    withLong:(int64_t)delay {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     mChangingAppearingDelay_ = delay;
@@ -612,7 +628,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jlong)getStartDelayWithInt:(jint)transitionType {
+- (int64_t)getStartDelayWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     return mChangingAppearingDelay_;
@@ -628,8 +644,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
-- (void)setDurationWithInt:(jint)transitionType
-                  withLong:(jlong)duration {
+- (void)setDurationWithInt:(int32_t)transitionType
+                  withLong:(int64_t)duration {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     mChangingAppearingDuration_ = duration;
@@ -649,7 +665,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jlong)getDurationWithInt:(jint)transitionType {
+- (int64_t)getDurationWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     return mChangingAppearingDuration_;
@@ -665,8 +681,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
-- (void)setStaggerWithInt:(jint)transitionType
-                 withLong:(jlong)duration {
+- (void)setStaggerWithInt:(int32_t)transitionType
+                 withLong:(int64_t)duration {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     mChangingAppearingStagger_ = duration;
@@ -680,7 +696,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jlong)getStaggerWithInt:(jint)transitionType {
+- (int64_t)getStaggerWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     return mChangingAppearingStagger_;
@@ -692,7 +708,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
-- (void)setInterpolatorWithInt:(jint)transitionType
+- (void)setInterpolatorWithInt:(int32_t)transitionType
         withADTimeInterpolator:(id<ADTimeInterpolator>)interpolator {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
@@ -713,7 +729,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (id<ADTimeInterpolator>)getInterpolatorWithInt:(jint)transitionType {
+- (id<ADTimeInterpolator>)getInterpolatorWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     return mChangingAppearingInterpolator_;
@@ -729,7 +745,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (void)setAnimatorWithInt:(jint)transitionType
+- (void)setAnimatorWithInt:(int32_t)transitionType
             withADAnimator:(ADAnimator *)animator {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
@@ -750,7 +766,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (ADAnimator *)getAnimatorWithInt:(jint)transitionType {
+- (ADAnimator *)getAnimatorWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     return mChangingAppearingAnim_;
@@ -768,18 +784,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)runChangeTransitionWithADViewGroup:(ADViewGroup *)parent
                                 withADView:(ADView *)newView
-                                   withInt:(jint)changeReason {
+                                   withInt:(int32_t)changeReason {
   ADLayoutTransition_runChangeTransitionWithADViewGroup_withADView_withInt_(self, parent, newView, changeReason);
 }
 
-- (void)setAnimateParentHierarchyWithBoolean:(jboolean)animateParentHierarchy {
+- (void)setAnimateParentHierarchyWithBoolean:(bool)animateParentHierarchy {
   mAnimateParentHierarchy_ = animateParentHierarchy;
 }
 
 - (void)setupChangeAnimationWithADViewGroup:(ADViewGroup *)parent
-                                    withInt:(jint)changeReason
+                                    withInt:(int32_t)changeReason
                              withADAnimator:(ADAnimator *)baseAnimator
-                                   withLong:(jlong)duration
+                                   withLong:(int64_t)duration
                                  withADView:(ADView *)child {
   ADLayoutTransition_setupChangeAnimationWithADViewGroup_withInt_withADAnimator_withLong_withADView_(self, parent, changeReason, baseAnimator, duration, child);
 }
@@ -803,11 +819,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   [currentChangingAnimations_ clear];
 }
 
-- (jboolean)isChangingLayout {
+- (bool)isChangingLayout {
   return ([((JavaUtilLinkedHashMap *) nil_chk(currentChangingAnimations_)) size] > 0);
 }
 
-- (jboolean)isRunning {
+- (bool)isRunning {
   return ([((JavaUtilLinkedHashMap *) nil_chk(currentChangingAnimations_)) size] > 0 || [((JavaUtilLinkedHashMap *) nil_chk(currentAppearingAnimations_)) size] > 0 || [((JavaUtilLinkedHashMap *) nil_chk(currentDisappearingAnimations_)) size] > 0);
 }
 
@@ -835,7 +851,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)cancelWithInt:(jint)transitionType {
+- (void)cancelWithInt:(int32_t)transitionType {
   switch (transitionType) {
     case ADLayoutTransition_CHANGE_APPEARING:
     case ADLayoutTransition_CHANGE_DISAPPEARING:
@@ -881,11 +897,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addChildWithADViewGroup:(ADViewGroup *)parent
                      withADView:(ADView *)child
-                    withBoolean:(jboolean)changesLayout {
+                    withBoolean:(bool)changesLayout {
   ADLayoutTransition_addChildWithADViewGroup_withADView_withBoolean_(self, parent, child, changesLayout);
 }
 
-- (jboolean)hasListeners {
+- (bool)hasListeners {
   return ADLayoutTransition_hasListeners(self);
 }
 
@@ -910,13 +926,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)showChildWithADViewGroup:(ADViewGroup *)parent
                       withADView:(ADView *)child
-                         withInt:(jint)oldVisibility {
+                         withInt:(int32_t)oldVisibility {
   ADLayoutTransition_addChildWithADViewGroup_withADView_withBoolean_(self, parent, child, oldVisibility == ADView_GONE);
 }
 
 - (void)removeChildWithADViewGroup:(ADViewGroup *)parent
                         withADView:(ADView *)child
-                       withBoolean:(jboolean)changesLayout {
+                       withBoolean:(bool)changesLayout {
   ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(self, parent, child, changesLayout);
 }
 
@@ -932,7 +948,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)hideChildWithADViewGroup:(ADViewGroup *)parent
                       withADView:(ADView *)child
-                         withInt:(jint)newVisibility {
+                         withInt:(int32_t)newVisibility {
   ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(self, parent, child, newVisibility == ADView_GONE);
 }
 
@@ -1169,12 +1185,12 @@ void ADLayoutTransition_init(ADLayoutTransition *self) {
   self->mTransitionTypes_ = ADLayoutTransition_FLAG_CHANGE_APPEARING | ADLayoutTransition_FLAG_CHANGE_DISAPPEARING | ADLayoutTransition_FLAG_APPEARING | ADLayoutTransition_FLAG_DISAPPEARING;
   self->mAnimateParentHierarchy_ = true;
   if (ADLayoutTransition_defaultChangeIn == nil) {
-    ADPropertyValuesHolder *pvhLeft = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"left", [IOSIntArray arrayWithInts:(jint[]){ 0, 1 } count:2]);
-    ADPropertyValuesHolder *pvhTop = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"top", [IOSIntArray arrayWithInts:(jint[]){ 0, 1 } count:2]);
-    ADPropertyValuesHolder *pvhRight = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"right", [IOSIntArray arrayWithInts:(jint[]){ 0, 1 } count:2]);
-    ADPropertyValuesHolder *pvhBottom = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"bottom", [IOSIntArray arrayWithInts:(jint[]){ 0, 1 } count:2]);
-    ADPropertyValuesHolder *pvhScrollX = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"scrollX", [IOSIntArray arrayWithInts:(jint[]){ 0, 1 } count:2]);
-    ADPropertyValuesHolder *pvhScrollY = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"scrollY", [IOSIntArray arrayWithInts:(jint[]){ 0, 1 } count:2]);
+    ADPropertyValuesHolder *pvhLeft = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"left", [IOSIntArray arrayWithInts:(int32_t[]){ 0, 1 } count:2]);
+    ADPropertyValuesHolder *pvhTop = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"top", [IOSIntArray arrayWithInts:(int32_t[]){ 0, 1 } count:2]);
+    ADPropertyValuesHolder *pvhRight = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"right", [IOSIntArray arrayWithInts:(int32_t[]){ 0, 1 } count:2]);
+    ADPropertyValuesHolder *pvhBottom = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"bottom", [IOSIntArray arrayWithInts:(int32_t[]){ 0, 1 } count:2]);
+    ADPropertyValuesHolder *pvhScrollX = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"scrollX", [IOSIntArray arrayWithInts:(int32_t[]){ 0, 1 } count:2]);
+    ADPropertyValuesHolder *pvhScrollY = ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(@"scrollY", [IOSIntArray arrayWithInts:(int32_t[]){ 0, 1 } count:2]);
     JreStrongAssign(&ADLayoutTransition_defaultChangeIn, ADObjectAnimator_ofPropertyValuesHolderWithId_withADPropertyValuesHolderArray_(nil, [IOSObjectArray arrayWithObjects:(id[]){ pvhLeft, pvhTop, pvhRight, pvhBottom, pvhScrollX, pvhScrollY } count:6 type:ADPropertyValuesHolder_class_()]));
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultChangeIn)) setDurationWithLong:ADLayoutTransition_DEFAULT_DURATION];
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultChangeIn)) setStartDelayWithLong:self->mChangingAppearingDelay_];
@@ -1185,11 +1201,11 @@ void ADLayoutTransition_init(ADLayoutTransition *self) {
     JreStrongAssign(&ADLayoutTransition_defaultChange, [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultChangeIn)) java_clone]);
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultChange)) setStartDelayWithLong:self->mChangingDelay_];
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultChange)) setInterpolatorWithADTimeInterpolator:self->mChangingInterpolator_];
-    JreStrongAssign(&ADLayoutTransition_defaultFadeIn, ADObjectAnimator_ofFloatWithId_withNSString_withFloatArray_(nil, @"alpha", [IOSFloatArray arrayWithFloats:(jfloat[]){ 0.0f, 1.0f } count:2]));
+    JreStrongAssign(&ADLayoutTransition_defaultFadeIn, ADObjectAnimator_ofFloatWithId_withNSString_withFloatArray_(nil, @"alpha", [IOSFloatArray arrayWithFloats:(float[]){ 0.0f, 1.0f } count:2]));
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultFadeIn)) setDurationWithLong:ADLayoutTransition_DEFAULT_DURATION];
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultFadeIn)) setStartDelayWithLong:self->mAppearingDelay_];
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultFadeIn)) setInterpolatorWithADTimeInterpolator:self->mAppearingInterpolator_];
-    JreStrongAssign(&ADLayoutTransition_defaultFadeOut, ADObjectAnimator_ofFloatWithId_withNSString_withFloatArray_(nil, @"alpha", [IOSFloatArray arrayWithFloats:(jfloat[]){ 1.0f, 0.0f } count:2]));
+    JreStrongAssign(&ADLayoutTransition_defaultFadeOut, ADObjectAnimator_ofFloatWithId_withNSString_withFloatArray_(nil, @"alpha", [IOSFloatArray arrayWithFloats:(float[]){ 1.0f, 0.0f } count:2]));
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultFadeOut)) setDurationWithLong:ADLayoutTransition_DEFAULT_DURATION];
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultFadeOut)) setStartDelayWithLong:self->mDisappearingDelay_];
     [((ADObjectAnimator *) nil_chk(ADLayoutTransition_defaultFadeOut)) setInterpolatorWithADTimeInterpolator:self->mDisappearingInterpolator_];
@@ -1209,10 +1225,10 @@ ADLayoutTransition *create_ADLayoutTransition_init() {
   J2OBJC_CREATE_IMPL(ADLayoutTransition, init)
 }
 
-void ADLayoutTransition_runChangeTransitionWithADViewGroup_withADView_withInt_(ADLayoutTransition *self, ADViewGroup *parent, ADView *newView, jint changeReason) {
+void ADLayoutTransition_runChangeTransitionWithADViewGroup_withADView_withInt_(ADLayoutTransition *self, ADViewGroup *parent, ADView *newView, int32_t changeReason) {
   ADAnimator *baseAnimator = nil;
   ADAnimator *parentAnimator = nil;
-  jlong duration;
+  int64_t duration;
   switch (changeReason) {
     case ADLayoutTransition_APPEARING:
     baseAnimator = self->mChangingAppearingAnim_;
@@ -1241,10 +1257,10 @@ void ADLayoutTransition_runChangeTransitionWithADViewGroup_withADView_withInt_(A
   if (![((ADViewTreeObserver *) nil_chk(observer)) isAlive]) {
     return;
   }
-  jint numChildren = [parent getChildCount];
-  for (jint i = 0; i < numChildren; ++i) {
+  int32_t numChildren = [parent getChildCount];
+  for (int32_t i = 0; i < numChildren; ++i) {
     ADView *child = [parent getChildAtWithInt:i];
-    if (child != newView) {
+    if (!JreObjectEqualsEquals(child, newView)) {
       ADLayoutTransition_setupChangeAnimationWithADViewGroup_withInt_withADAnimator_withLong_withADView_(self, parent, changeReason, baseAnimator, duration, child);
     }
   }
@@ -1266,7 +1282,7 @@ void ADLayoutTransition_runChangeTransitionWithADViewGroup_withADView_withInt_(A
   [parent addOnAttachStateChangeListenerWithADView_OnAttachStateChangeListener:callback];
 }
 
-void ADLayoutTransition_setupChangeAnimationWithADViewGroup_withInt_withADAnimator_withLong_withADView_(ADLayoutTransition *self, ADViewGroup *parent, jint changeReason, ADAnimator *baseAnimator, jlong duration, ADView *child) {
+void ADLayoutTransition_setupChangeAnimationWithADViewGroup_withInt_withADAnimator_withLong_withADView_(ADLayoutTransition *self, ADViewGroup *parent, int32_t changeReason, ADAnimator *baseAnimator, int64_t duration, ADView *child) {
   if ([((JavaUtilHashMap *) nil_chk(self->layoutChangeListenerMap_)) getWithId:child] != nil) {
     return;
   }
@@ -1282,7 +1298,7 @@ void ADLayoutTransition_setupChangeAnimationWithADViewGroup_withInt_withADAnimat
     [self->pendingAnimations_ removeWithId:child];
   }
   [self->pendingAnimations_ putWithId:child withId:anim];
-  ADValueAnimator *pendingAnimRemover = JreRetainedLocalValue([((ADValueAnimator *) nil_chk(ADValueAnimator_ofFloatWithFloatArray_([IOSFloatArray arrayWithFloats:(jfloat[]){ 0.0f, 1.0f } count:2]))) setDurationWithLong:duration + 100]);
+  ADValueAnimator *pendingAnimRemover = JreRetainedLocalValue([((ADValueAnimator *) nil_chk(ADValueAnimator_ofFloatWithFloatArray_([IOSFloatArray arrayWithFloats:(float[]){ 0.0f, 1.0f } count:2]))) setDurationWithLong:duration + 100]);
   [((ADValueAnimator *) nil_chk(pendingAnimRemover)) addListenerWithADAnimator_AnimatorListener:create_ADLayoutTransition_1_initWithADLayoutTransition_withADView_(self, child)];
   [pendingAnimRemover start];
   id<ADView_OnLayoutChangeListener> listener = create_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(self, anim, changeReason, duration, child, parent);
@@ -1309,7 +1325,7 @@ void ADLayoutTransition_runAppearingTransitionWithADViewGroup_withADView_(ADLayo
   [((ADAnimator *) nil_chk(anim)) setTargetWithId:child];
   [anim setStartDelayWithLong:self->mAppearingDelay_];
   [anim setDurationWithLong:self->mAppearingDuration_];
-  if (self->mAppearingInterpolator_ != ADLayoutTransition_sAppearingInterpolator) {
+  if (!JreObjectEqualsEquals(self->mAppearingInterpolator_, ADLayoutTransition_sAppearingInterpolator)) {
     [anim setInterpolatorWithADTimeInterpolator:self->mAppearingInterpolator_];
   }
   if ([anim isKindOfClass:[ADObjectAnimator class]]) {
@@ -1337,11 +1353,11 @@ void ADLayoutTransition_runDisappearingTransitionWithADViewGroup_withADView_(ADL
   ADAnimator *anim = JreRetainedLocalValue([self->mDisappearingAnim_ java_clone]);
   [((ADAnimator *) nil_chk(anim)) setStartDelayWithLong:self->mDisappearingDelay_];
   [anim setDurationWithLong:self->mDisappearingDuration_];
-  if (self->mDisappearingInterpolator_ != ADLayoutTransition_sDisappearingInterpolator) {
+  if (!JreObjectEqualsEquals(self->mDisappearingInterpolator_, ADLayoutTransition_sDisappearingInterpolator)) {
     [anim setInterpolatorWithADTimeInterpolator:self->mDisappearingInterpolator_];
   }
   [anim setTargetWithId:child];
-  jfloat preAnimAlpha = [((ADView *) nil_chk(child)) getAlpha];
+  float preAnimAlpha = [((ADView *) nil_chk(child)) getAlpha];
   [anim addListenerWithADAnimator_AnimatorListener:create_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(self, child, preAnimAlpha, parent)];
   if ([anim isKindOfClass:[ADObjectAnimator class]]) {
     [((ADObjectAnimator *) anim) setCurrentPlayTimeWithLong:0];
@@ -1350,7 +1366,7 @@ void ADLayoutTransition_runDisappearingTransitionWithADViewGroup_withADView_(ADL
   [anim start];
 }
 
-void ADLayoutTransition_addChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, jboolean changesLayout) {
+void ADLayoutTransition_addChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, bool changesLayout) {
   if ([((ADViewGroup *) nil_chk(parent)) getWindowVisibility] != ADView_VISIBLE) {
     return;
   }
@@ -1375,11 +1391,11 @@ void ADLayoutTransition_addChildWithADViewGroup_withADView_withBoolean_(ADLayout
   }
 }
 
-jboolean ADLayoutTransition_hasListeners(ADLayoutTransition *self) {
+bool ADLayoutTransition_hasListeners(ADLayoutTransition *self) {
   return self->mListeners_ != nil && [self->mListeners_ size] > 0;
 }
 
-void ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, jboolean changesLayout) {
+void ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, bool changesLayout) {
   if ([((ADViewGroup *) nil_chk(parent)) getWindowVisibility] != ADView_VISIBLE) {
     return;
   }
@@ -1405,6 +1421,8 @@ void ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(ADLay
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLayoutTransition)
+
+J2OBJC_NAME_MAPPING(ADLayoutTransition, "r.android.animation", "AD")
 
 @implementation ADLayoutTransition_1
 
@@ -1440,7 +1458,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLayoutTransition)
     { "val$child_", "LADView;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADLayoutTransition;LADView;", "onAnimationEnd", "LADAnimator;", "LADLayoutTransition;", "setupChangeAnimationWithADViewGroup:withInt:withADAnimator:withLong:withADView:" };
-  static const J2ObjcClassInfo _ADLayoutTransition_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 2, 3, -1, 4, -1, -1 };
+  static const J2ObjcClassInfo _ADLayoutTransition_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 2, 3, -1, 4, -1, -1 };
   return &_ADLayoutTransition_1;
 }
 
@@ -1464,8 +1482,8 @@ ADLayoutTransition_1 *create_ADLayoutTransition_1_initWithADLayoutTransition_wit
 
 - (instancetype)initWithADLayoutTransition:(ADLayoutTransition *)outer$
                             withADAnimator:(ADAnimator *)capture$0
-                                   withInt:(jint)capture$1
-                                  withLong:(jlong)capture$2
+                                   withInt:(int32_t)capture$1
+                                  withLong:(int64_t)capture$2
                                 withADView:(ADView *)capture$3
                            withADViewGroup:(ADViewGroup *)capture$4 {
   ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(self, outer$, capture$0, capture$1, capture$2, capture$3, capture$4);
@@ -1473,20 +1491,20 @@ ADLayoutTransition_1 *create_ADLayoutTransition_1_initWithADLayoutTransition_wit
 }
 
 - (void)onLayoutChangeWithADView:(ADView *)v
-                         withInt:(jint)left
-                         withInt:(jint)top
-                         withInt:(jint)right
-                         withInt:(jint)bottom
-                         withInt:(jint)oldLeft
-                         withInt:(jint)oldTop
-                         withInt:(jint)oldRight
-                         withInt:(jint)oldBottom {
+                         withInt:(int32_t)left
+                         withInt:(int32_t)top
+                         withInt:(int32_t)right
+                         withInt:(int32_t)bottom
+                         withInt:(int32_t)oldLeft
+                         withInt:(int32_t)oldTop
+                         withInt:(int32_t)oldRight
+                         withInt:(int32_t)oldBottom {
   [((ADAnimator *) nil_chk(val$anim_)) setupEndValues];
   if ([val$anim_ isKindOfClass:[ADValueAnimator class]]) {
-    jboolean valuesDiffer = false;
+    bool valuesDiffer = false;
     ADValueAnimator *valueAnim = (ADValueAnimator *) val$anim_;
     IOSObjectArray *oldValues = [valueAnim getValues];
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(oldValues))->size_; ++i) {
+    for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(oldValues))->size_; ++i) {
       ADPropertyValuesHolder *pvh = IOSObjectArray_Get(oldValues, i);
       if ([((ADPropertyValuesHolder *) nil_chk(pvh))->mKeyframes_ isKindOfClass:[ADKeyframeSet class]]) {
         ADKeyframeSet *keyframeSet = (ADKeyframeSet *) pvh->mKeyframes_;
@@ -1502,26 +1520,26 @@ ADLayoutTransition_1 *create_ADLayoutTransition_1_initWithADLayoutTransition_wit
       return;
     }
   }
-  jlong startDelay = 0;
+  int64_t startDelay = 0;
   switch (val$changeReason_) {
     case ADLayoutTransition_APPEARING:
     startDelay = this$0_->mChangingAppearingDelay_ + this$0_->staggerDelay_;
     this$0_->staggerDelay_ += this$0_->mChangingAppearingStagger_;
-    if (this$0_->mChangingAppearingInterpolator_ != JreLoadStatic(ADLayoutTransition, sChangingAppearingInterpolator)) {
+    if (!JreObjectEqualsEquals(this$0_->mChangingAppearingInterpolator_, JreLoadStatic(ADLayoutTransition, sChangingAppearingInterpolator))) {
       [val$anim_ setInterpolatorWithADTimeInterpolator:this$0_->mChangingAppearingInterpolator_];
     }
     break;
     case ADLayoutTransition_DISAPPEARING:
     startDelay = this$0_->mChangingDisappearingDelay_ + this$0_->staggerDelay_;
     this$0_->staggerDelay_ += this$0_->mChangingDisappearingStagger_;
-    if (this$0_->mChangingDisappearingInterpolator_ != JreLoadStatic(ADLayoutTransition, sChangingDisappearingInterpolator)) {
+    if (!JreObjectEqualsEquals(this$0_->mChangingDisappearingInterpolator_, JreLoadStatic(ADLayoutTransition, sChangingDisappearingInterpolator))) {
       [val$anim_ setInterpolatorWithADTimeInterpolator:this$0_->mChangingDisappearingInterpolator_];
     }
     break;
     case ADLayoutTransition_CHANGING:
     startDelay = this$0_->mChangingDelay_ + this$0_->staggerDelay_;
     this$0_->staggerDelay_ += this$0_->mChangingStagger_;
-    if (this$0_->mChangingInterpolator_ != JreLoadStatic(ADLayoutTransition, sChangingInterpolator)) {
+    if (!JreObjectEqualsEquals(this$0_->mChangingInterpolator_, JreLoadStatic(ADLayoutTransition, sChangingInterpolator))) {
       [val$anim_ setInterpolatorWithADTimeInterpolator:this$0_->mChangingInterpolator_];
     }
     break;
@@ -1570,13 +1588,13 @@ ADLayoutTransition_1 *create_ADLayoutTransition_1_initWithADLayoutTransition_wit
     { "val$parent_", "LADViewGroup;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADLayoutTransition;LADAnimator;IJLADView;LADViewGroup;", "onLayoutChange", "LADView;IIIIIIII", "LADLayoutTransition;", "setupChangeAnimationWithADViewGroup:withInt:withADAnimator:withLong:withADView:" };
-  static const J2ObjcClassInfo _ADLayoutTransition_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 6, 3, -1, 4, -1, -1 };
+  static const J2ObjcClassInfo _ADLayoutTransition_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 6, 3, -1, 4, -1, -1 };
   return &_ADLayoutTransition_2;
 }
 
 @end
 
-void ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition_2 *self, ADLayoutTransition *outer$, ADAnimator *capture$0, jint capture$1, jlong capture$2, ADView *capture$3, ADViewGroup *capture$4) {
+void ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition_2 *self, ADLayoutTransition *outer$, ADAnimator *capture$0, int32_t capture$1, int64_t capture$2, ADView *capture$3, ADViewGroup *capture$4) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$anim_, capture$0);
   self->val$changeReason_ = capture$1;
@@ -1586,11 +1604,11 @@ void ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_with
   NSObject_init(self);
 }
 
-ADLayoutTransition_2 *new_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, jint capture$1, jlong capture$2, ADView *capture$3, ADViewGroup *capture$4) {
+ADLayoutTransition_2 *new_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, int32_t capture$1, int64_t capture$2, ADView *capture$3, ADViewGroup *capture$4) {
   J2OBJC_NEW_IMPL(ADLayoutTransition_2, initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_, outer$, capture$0, capture$1, capture$2, capture$3, capture$4)
 }
 
-ADLayoutTransition_2 *create_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, jint capture$1, jlong capture$2, ADView *capture$3, ADViewGroup *capture$4) {
+ADLayoutTransition_2 *create_ADLayoutTransition_2_initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_(ADLayoutTransition *outer$, ADAnimator *capture$0, int32_t capture$1, int64_t capture$2, ADView *capture$3, ADViewGroup *capture$4) {
   J2OBJC_CREATE_IMPL(ADLayoutTransition_2, initWithADLayoutTransition_withADAnimator_withInt_withLong_withADView_withADViewGroup_, outer$, capture$0, capture$1, capture$2, capture$3, capture$4)
 }
 
@@ -1599,7 +1617,7 @@ ADLayoutTransition_2 *create_ADLayoutTransition_2_initWithADLayoutTransition_wit
 - (instancetype)initWithADLayoutTransition:(ADLayoutTransition *)outer$
                            withADViewGroup:(ADViewGroup *)capture$0
                                 withADView:(ADView *)capture$1
-                                   withInt:(jint)capture$2
+                                   withInt:(int32_t)capture$2
          withADView_OnLayoutChangeListener:(id<ADView_OnLayoutChangeListener>)capture$3 {
   ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(self, outer$, capture$0, capture$1, capture$2, capture$3);
   return self;
@@ -1660,13 +1678,13 @@ ADLayoutTransition_2 *create_ADLayoutTransition_2_initWithADLayoutTransition_wit
     { "val$listener_", "LADView_OnLayoutChangeListener;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADLayoutTransition;LADViewGroup;LADView;ILADView_OnLayoutChangeListener;", "onAnimationStart", "LADAnimator;", "onAnimationCancel", "onAnimationEnd", "LADLayoutTransition;", "setupChangeAnimationWithADViewGroup:withInt:withADAnimator:withLong:withADView:" };
-  static const J2ObjcClassInfo _ADLayoutTransition_3 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 4, 5, 5, -1, 6, -1, -1 };
+  static const J2ObjcClassInfo _ADLayoutTransition_3 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 4, 5, 5, -1, 6, -1, -1 };
   return &_ADLayoutTransition_3;
 }
 
 @end
 
-void ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition_3 *self, ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, jint capture$2, id<ADView_OnLayoutChangeListener> capture$3) {
+void ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition_3 *self, ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, int32_t capture$2, id<ADView_OnLayoutChangeListener> capture$3) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$parent_, capture$0);
   JreStrongAssign(&self->val$child_, capture$1);
@@ -1675,11 +1693,11 @@ void ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_
   ADAnimatorListenerAdapter_init(self);
 }
 
-ADLayoutTransition_3 *new_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, jint capture$2, id<ADView_OnLayoutChangeListener> capture$3) {
+ADLayoutTransition_3 *new_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, int32_t capture$2, id<ADView_OnLayoutChangeListener> capture$3) {
   J2OBJC_NEW_IMPL(ADLayoutTransition_3, initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_, outer$, capture$0, capture$1, capture$2, capture$3)
 }
 
-ADLayoutTransition_3 *create_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, jint capture$2, id<ADView_OnLayoutChangeListener> capture$3) {
+ADLayoutTransition_3 *create_ADLayoutTransition_3_initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_(ADLayoutTransition *outer$, ADViewGroup *capture$0, ADView *capture$1, int32_t capture$2, id<ADView_OnLayoutChangeListener> capture$3) {
   J2OBJC_CREATE_IMPL(ADLayoutTransition_3, initWithADLayoutTransition_withADViewGroup_withADView_withInt_withADView_OnLayoutChangeListener_, outer$, capture$0, capture$1, capture$2, capture$3)
 }
 
@@ -1726,7 +1744,7 @@ ADLayoutTransition_3 *create_ADLayoutTransition_3_initWithADLayoutTransition_wit
     { "val$parent_", "LADViewGroup;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADLayoutTransition;LADView;LADViewGroup;", "onAnimationEnd", "LADAnimator;", "LADLayoutTransition;", "runAppearingTransitionWithADViewGroup:withADView:" };
-  static const J2ObjcClassInfo _ADLayoutTransition_4 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  static const J2ObjcClassInfo _ADLayoutTransition_4 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 3, 3, -1, 4, -1, -1 };
   return &_ADLayoutTransition_4;
 }
 
@@ -1751,7 +1769,7 @@ ADLayoutTransition_4 *create_ADLayoutTransition_4_initWithADLayoutTransition_wit
 
 - (instancetype)initWithADLayoutTransition:(ADLayoutTransition *)outer$
                                 withADView:(ADView *)capture$0
-                                 withFloat:(jfloat)capture$1
+                                 withFloat:(float)capture$1
                            withADViewGroup:(ADViewGroup *)capture$2 {
   ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(self, outer$, capture$0, capture$1, capture$2);
   return self;
@@ -1793,13 +1811,13 @@ ADLayoutTransition_4 *create_ADLayoutTransition_4_initWithADLayoutTransition_wit
     { "val$parent_", "LADViewGroup;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADLayoutTransition;LADView;FLADViewGroup;", "onAnimationEnd", "LADAnimator;", "LADLayoutTransition;", "runDisappearingTransitionWithADViewGroup:withADView:" };
-  static const J2ObjcClassInfo _ADLayoutTransition_5 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 4, 3, -1, 4, -1, -1 };
+  static const J2ObjcClassInfo _ADLayoutTransition_5 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 4, 3, -1, 4, -1, -1 };
   return &_ADLayoutTransition_5;
 }
 
 @end
 
-void ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition_5 *self, ADLayoutTransition *outer$, ADView *capture$0, jfloat capture$1, ADViewGroup *capture$2) {
+void ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition_5 *self, ADLayoutTransition *outer$, ADView *capture$0, float capture$1, ADViewGroup *capture$2) {
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$child_, capture$0);
   self->val$preAnimAlpha_ = capture$1;
@@ -1807,11 +1825,11 @@ void ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withAD
   ADAnimatorListenerAdapter_init(self);
 }
 
-ADLayoutTransition_5 *new_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, jfloat capture$1, ADViewGroup *capture$2) {
+ADLayoutTransition_5 *new_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, float capture$1, ADViewGroup *capture$2) {
   J2OBJC_NEW_IMPL(ADLayoutTransition_5, initWithADLayoutTransition_withADView_withFloat_withADViewGroup_, outer$, capture$0, capture$1, capture$2)
 }
 
-ADLayoutTransition_5 *create_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, jfloat capture$1, ADViewGroup *capture$2) {
+ADLayoutTransition_5 *create_ADLayoutTransition_5_initWithADLayoutTransition_withADView_withFloat_withADViewGroup_(ADLayoutTransition *outer$, ADView *capture$0, float capture$1, ADViewGroup *capture$2) {
   J2OBJC_CREATE_IMPL(ADLayoutTransition_5, initWithADLayoutTransition_withADView_withFloat_withADViewGroup_, outer$, capture$0, capture$1, capture$2)
 }
 
@@ -1856,7 +1874,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADLayoutTransition_TransitionListener)
   ADLayoutTransition_CleanupCallback_cleanup(self);
 }
 
-- (jboolean)onPreDraw {
+- (bool)onPreDraw {
   ADLayoutTransition_CleanupCallback_cleanup(self);
   return true;
 }
@@ -1912,7 +1930,7 @@ ADLayoutTransition_CleanupCallback *create_ADLayoutTransition_CleanupCallback_in
 void ADLayoutTransition_CleanupCallback_cleanup(ADLayoutTransition_CleanupCallback *self) {
   [((ADViewTreeObserver *) nil_chk([((ADViewGroup *) nil_chk(self->parent_)) getViewTreeObserver])) removeOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:self];
   [self->parent_ removeOnAttachStateChangeListenerWithADView_OnAttachStateChangeListener:self];
-  jint count = [((id<JavaUtilMap>) nil_chk(self->layoutChangeListenerMap_)) size];
+  int32_t count = [((id<JavaUtilMap>) nil_chk(self->layoutChangeListenerMap_)) size];
   if (count > 0) {
     id<JavaUtilCollection> views = JreRetainedLocalValue([self->layoutChangeListenerMap_ keySet]);
     for (ADView * __strong view in nil_chk(views)) {

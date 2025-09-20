@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ScrollViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseHasWidgets.h"
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
@@ -48,8 +53,12 @@
 
 #include "ASUIScrollView.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -79,7 +88,7 @@
 
 - (void)setPreventAutoScrollWithId:(id)objValue;
 
-- (void)nativeSetPreventAutoScrollWithBoolean:(jboolean)preventAutoScroll;
+- (void)nativeSetPreventAutoScrollWithBoolean:(bool)preventAutoScroll;
 
 @end
 
@@ -105,16 +114,16 @@ __attribute__((unused)) static void ASScrollViewImpl_setOnScrollWithId_(ASScroll
 
 __attribute__((unused)) static void ASScrollViewImpl_setPreventAutoScrollWithId_(ASScrollViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(ASScrollViewImpl *self, jboolean preventAutoScroll);
+__attribute__((unused)) static void ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(ASScrollViewImpl *self, bool preventAutoScroll);
 
 @interface ASScrollViewImpl_ScrollViewExt () {
  @public
-  __unsafe_unretained ASScrollViewImpl *this$0_;
+  WEAK_ ASScrollViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -143,16 +152,16 @@ J2OBJC_FIELD_SETTER(ASScrollViewImpl_ScrollViewExt, templates_, id<JavaUtilMap>)
                      withNSString:(NSString *)action;
 
 - (void)onScrollChangeWithADView:(ADView *)v
-                         withInt:(jint)scrollX
-                         withInt:(jint)scrollY
-                         withInt:(jint)oldScrollX
-                         withInt:(jint)oldScrollY;
+                         withInt:(int32_t)scrollX
+                         withInt:(int32_t)scrollY
+                         withInt:(int32_t)oldScrollX
+                         withInt:(int32_t)oldScrollY;
 
 - (id<JavaUtilMap>)getOnScrollChangeEventObjWithADView:(ADView *)v
-                                               withInt:(jint)scrollX
-                                               withInt:(jint)scrollY
-                                               withInt:(jint)oldScrollX
-                                               withInt:(jint)oldScrollY;
+                                               withInt:(int32_t)scrollX
+                                               withInt:(int32_t)scrollY
+                                               withInt:(int32_t)oldScrollX
+                                               withInt:(int32_t)oldScrollY;
 
 @end
 
@@ -177,9 +186,10 @@ __attribute__((unused)) static ASScrollViewImpl_OnScrollChangeListener *create_A
 
 J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_OnScrollChangeListener)
 
+
 @interface ASScrollViewImpl_MyUIScrollViewDelegate () {
  @public
-  __unsafe_unretained ASScrollViewImpl *this$0_;
+  WEAK_ ASScrollViewImpl *this$0_;
   id<ADView_OnScrollChangeListener> listener_;
 }
 
@@ -203,6 +213,7 @@ __attribute__((unused)) static void ASScrollViewImpl_$Lambda$1_initWithASIWidget
 __attribute__((unused)) static ASScrollViewImpl_$Lambda$1 *new_ASScrollViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASScrollViewImpl_$Lambda$1 *create_ASScrollViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 
 NSString *ASScrollViewImpl_LOCAL_NAME = @"ScrollView";
 NSString *ASScrollViewImpl_GROUP_NAME = @"ScrollView";
@@ -261,16 +272,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return scrollView_;
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
-  jboolean remove = [super removeWithASIWidget:w];
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
+  bool remove = [super removeWithASIWidget:w];
   [((ADScrollView *) nil_chk(scrollView_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
   ASScrollViewImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
-  jboolean remove = [super removeWithInt:index];
+  bool remove = [super removeWithInt:index];
   if (index + 1 <= [((ADScrollView *) nil_chk(scrollView_)) getChildCount]) {
     [((ADScrollView *) nil_chk(scrollView_)) removeViewAtWithInt:index];
     ASScrollViewImpl_nativeRemoveViewWithASIWidget_(self, widget);
@@ -283,7 +294,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASScrollViewImpl_createLayoutParamsWithADView_(self, view);
@@ -428,7 +439,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -451,7 +462,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -474,7 +485,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetScrollXWithId:(id)view
-                       withInt:(jint)value {
+                       withInt:(int32_t)value {
   [((ASUIScrollView*)view) setContentOffset:CGPointMake(value ,((ASUIScrollView*)view).contentOffset.y)];
 }
 
@@ -483,7 +494,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetScrollYWithId:(id)view
-                       withInt:(jint)value {
+                       withInt:(int32_t)value {
   [((ASUIScrollView*)view) setContentOffset:CGPointMake(((ASUIScrollView*)view).contentOffset.x, value)];
 }
 
@@ -491,7 +502,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangDouble_valueOfWithDouble_([self nativeGetScrollXWithId:[self asNativeWidget]]);
 }
 
-- (jdouble)nativeGetScrollXWithId:(id)view {
+- (double)nativeGetScrollXWithId:(id)view {
   return ((ASUIScrollView*)view).contentOffset.x;
 }
 
@@ -499,7 +510,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangDouble_valueOfWithDouble_([self nativeGetScrollYWithId:[self asNativeWidget]]);
 }
 
-- (jdouble)nativeGetScrollYWithId:(id)view {
+- (double)nativeGetScrollYWithId:(id)view {
   return ((ASUIScrollView*)view).contentOffset.y;
 }
 
@@ -511,7 +522,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASScrollViewImpl_setPreventAutoScrollWithId_(self, objValue);
 }
 
-- (void)nativeSetPreventAutoScrollWithBoolean:(jboolean)preventAutoScroll {
+- (void)nativeSetPreventAutoScrollWithBoolean:(bool)preventAutoScroll {
   ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(self, preventAutoScroll);
 }
 
@@ -706,12 +717,14 @@ void ASScrollViewImpl_setPreventAutoScrollWithId_(ASScrollViewImpl *self, id obj
   ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(self, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(ASScrollViewImpl *self, jboolean preventAutoScroll) {
+void ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(ASScrollViewImpl *self, bool preventAutoScroll) {
   ASUIScrollView* scrollview = ((ASUIScrollView*)self.uiView);
   scrollview.preventAutoScroll = preventAutoScroll;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
+
+J2OBJC_NAME_MAPPING(ASScrollViewImpl, "com.ashera.layout", "AS")
 
 @implementation ASScrollViewImpl_ScrollViewExt
 
@@ -719,19 +732,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -740,8 +753,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -757,15 +770,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
-    ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b, (jint) ([self computeVerticalScrollRange]));
+    ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b, (int32_t) ([self computeVerticalScrollRange]));
   }
   [this$0_ replayBufferedEvents];
   ASViewImpl_redrawDrawablesWithASIWidget_(this$0_);
@@ -788,8 +801,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -857,12 +870,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -892,7 +905,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
@@ -1093,10 +1106,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_ScrollViewExt)
 }
 
 - (void)onScrollChangeWithADView:(ADView *)v
-                         withInt:(jint)scrollX
-                         withInt:(jint)scrollY
-                         withInt:(jint)oldScrollX
-                         withInt:(jint)oldScrollY {
+                         withInt:(int32_t)scrollX
+                         withInt:(int32_t)scrollY
+                         withInt:(int32_t)oldScrollX
+                         withInt:(int32_t)oldScrollY {
   if (action_ == nil || [action_ isEqual:@"onScrollChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onScrollChange"];
     id<JavaUtilMap> obj = [self getOnScrollChangeEventObjWithADView:v withInt:scrollX withInt:scrollY withInt:oldScrollX withInt:oldScrollY];
@@ -1118,7 +1131,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_ScrollViewExt)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1129,10 +1142,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_ScrollViewExt)
 }
 
 - (id<JavaUtilMap>)getOnScrollChangeEventObjWithADView:(ADView *)v
-                                               withInt:(jint)scrollX
-                                               withInt:(jint)scrollY
-                                               withInt:(jint)oldScrollX
-                                               withInt:(jint)oldScrollY {
+                                               withInt:(int32_t)scrollX
+                                               withInt:(int32_t)scrollY
+                                               withInt:(int32_t)oldScrollX
+                                               withInt:(int32_t)oldScrollY {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"scrollchange"];
@@ -1225,8 +1238,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_OnScrollChangeListener)
   scrollview.delegate = self;
 }
 
-- (void)onscrollWithInt:(jint)scrollX
-                withInt:(jint)scrollY {
+- (void)onscrollWithInt:(int32_t)scrollX
+                withInt:(int32_t)scrollY {
   if (listener_ != nil) {
     [listener_ onScrollChangeWithADView:(ADView *) cast_chk([this$0_ asWidget], [ADView class]) withInt:scrollX withInt:scrollY withInt:oldScrollX_ withInt:oldScrollY_];
   }

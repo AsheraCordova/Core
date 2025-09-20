@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\TimeInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TimeInterpolator")
@@ -15,6 +16,8 @@
 
 #if !defined (ADTimeInterpolator_) && (INCLUDE_ALL_TimeInterpolator || defined(INCLUDE_ADTimeInterpolator))
 #define ADTimeInterpolator_
+
+@class JavaLangFloat;
 
 /*!
  @brief A time interpolator defines the rate of change of an animation.This allows animations
@@ -32,7 +35,7 @@
           interpolators which overshoot their targets, or less than 0 for
           interpolators that undershoot their targets.
  */
-- (jfloat)getInterpolationWithFloat:(jfloat)input;
+- (float)getInterpolationWithFloat:(float)input;
 
 @end
 
@@ -41,6 +44,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADTimeInterpolator)
 J2OBJC_TYPE_LITERAL_HEADER(ADTimeInterpolator)
 
 #define RAndroidAnimationTimeInterpolator ADTimeInterpolator
+
 
 #endif
 

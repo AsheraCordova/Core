@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetEvent.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "WidgetEvent.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASWidgetEvent
@@ -44,3 +55,5 @@ ASWidgetEvent *create_ASWidgetEvent_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetEvent)
+
+J2OBJC_NAME_MAPPING(ASWidgetEvent, "com.ashera.widget", "AS")

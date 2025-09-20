@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\BaseConverterPlugin.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseConverterPlugin")
@@ -25,6 +26,7 @@
 #include "IPlugin.h"
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASIConverter;
 @protocol ASIFragment;
 @protocol JavaUtilList;
@@ -63,6 +65,7 @@ FOUNDATION_EXPORT void ASBaseConverterPlugin_init(ASBaseConverterPlugin *self);
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseConverterPlugin)
 
 @compatibility_alias ComAsheraConverterBaseConverterPlugin ASBaseConverterPlugin;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\app\ActivityManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ActivityManager")
@@ -17,6 +18,7 @@
 #define ADActivityManager_
 
 @class ADContext;
+@class JavaLangInteger;
 
 @interface ADActivityManager : NSObject
 
@@ -24,7 +26,7 @@
 
 - (instancetype)initWithADContext:(ADContext *)context;
 
-- (jint)getMemoryClass;
+- (int32_t)getMemoryClass;
 
 // Disallowed inherited constructors, do not use.
 
@@ -43,6 +45,7 @@ FOUNDATION_EXPORT ADActivityManager *create_ADActivityManager_initWithADContext_
 J2OBJC_TYPE_LITERAL_HEADER(ADActivityManager)
 
 @compatibility_alias RAndroidAppActivityManager ADActivityManager;
+
 
 #endif
 

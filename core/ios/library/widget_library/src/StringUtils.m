@@ -3,17 +3,28 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\StringUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "StringUtils.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Character.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/List.h"
 
-@class JavaLangBoolean;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASStringUtils ()
@@ -41,7 +52,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASStringUtils_trimStringWithNSString_(myString);
 }
 
-+ (NSString *)floatToStringWithFloat:(jfloat)f {
++ (NSString *)floatToStringWithFloat:(float)f {
   return ASStringUtils_floatToStringWithFloat_(f);
 }
 
@@ -111,10 +122,10 @@ NSString *ASStringUtils_unescapeJavaStringWithNSString_(NSString *st) {
     return nil;
   }
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithInt_([st java_length]);
-  for (jint i = 0; i < [st java_length]; i++) {
-    jchar ch = [st charAtWithInt:i];
+  for (int32_t i = 0; i < [st java_length]; i++) {
+    unichar ch = [st charAtWithInt:i];
     if (ch == '\\') {
-      jchar nextChar = (i == [st java_length] - 1) ? '\\' : [st charAtWithInt:i + 1];
+      unichar nextChar = (i == [st java_length] - 1) ? '\\' : [st charAtWithInt:i + 1];
       if (nextChar >= '0' && nextChar <= '7') {
         NSString *code = JreStrcat("C", nextChar);
         i++;
@@ -126,11 +137,11 @@ NSString *ASStringUtils_unescapeJavaStringWithNSString_(NSString *st) {
             i++;
           }
         }
-        [sb appendWithChar:(jchar) JavaLangInteger_parseIntWithNSString_withInt_(code, 8)];
+        [sb appendWithChar:(unichar) JavaLangInteger_parseIntWithNSString_withInt_(code, 8)];
         continue;
       }
       {
-        jint code;
+        int32_t code;
         switch (nextChar) {
           case '\\':
           ch = '\\';
@@ -183,9 +194,9 @@ NSString *ASStringUtils_trimStringWithNSString_(NSString *myString) {
   return allRemoved;
 }
 
-NSString *ASStringUtils_floatToStringWithFloat_(jfloat f) {
+NSString *ASStringUtils_floatToStringWithFloat_(float f) {
   ASStringUtils_initialize();
-  jint i = JreFpToInt(f);
+  int32_t i = JreFpToInt(f);
   return (f == i ? NSString_java_valueOfInt_(i) : NSString_java_valueOfFloat_(f));
 }
 
@@ -193,7 +204,7 @@ NSString *ASStringUtils_joinWithNSString_withJavaUtilList_(NSString *separator, 
   ASStringUtils_initialize();
   if (input == nil || [input size] <= 0) return @"";
   JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
-  for (jint i = 0; i < [input size]; i++) {
+  for (int32_t i = 0; i < [input size]; i++) {
     [sb appendWithNSString:[input getWithInt:i]];
     if (i != [input size] - 1) {
       [sb appendWithNSString:separator];
@@ -228,3 +239,5 @@ IOSObjectArray *ASStringUtils_splitWithNSString_withNSString_(NSString *formGrou
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASStringUtils)
+
+J2OBJC_NAME_MAPPING(ASStringUtils, "com.ashera.utils", "AS")

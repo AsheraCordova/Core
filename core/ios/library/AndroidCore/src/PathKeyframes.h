@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\PathKeyframes.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PathKeyframes")
@@ -26,8 +27,10 @@
 #define INCLUDE_ADIKeyframes 1
 #include "IKeyframes.h"
 
+
 @class ADPath;
 @class IOSClass;
+@class JavaLangFloat;
 @class JavaUtilArrayList;
 @protocol ADIKeyframes_FloatIKeyframes;
 @protocol ADIKeyframes_IntIKeyframes;
@@ -55,7 +58,7 @@
 - (instancetype)initWithADPath:(ADPath *)path;
 
 - (instancetype)initWithADPath:(ADPath *)path
-                     withFloat:(jfloat)error;
+                     withFloat:(float)error;
 
 - (id<ADIKeyframes>)java_clone;
 
@@ -87,7 +90,7 @@
 
 - (IOSClass *)getType;
 
-- (id)getValueWithFloat:(jfloat)fraction;
+- (id)getValueWithFloat:(float)fraction;
 
 - (void)setEvaluatorWithADTypeEvaluator:(id<ADTypeEvaluator>)evaluator;
 
@@ -105,15 +108,16 @@ FOUNDATION_EXPORT ADPathKeyframes *new_ADPathKeyframes_initWithADPath_(ADPath *p
 
 FOUNDATION_EXPORT ADPathKeyframes *create_ADPathKeyframes_initWithADPath_(ADPath *path);
 
-FOUNDATION_EXPORT void ADPathKeyframes_initWithADPath_withFloat_(ADPathKeyframes *self, ADPath *path, jfloat error);
+FOUNDATION_EXPORT void ADPathKeyframes_initWithADPath_withFloat_(ADPathKeyframes *self, ADPath *path, float error);
 
-FOUNDATION_EXPORT ADPathKeyframes *new_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, jfloat error) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPathKeyframes *new_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, float error) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPathKeyframes *create_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, jfloat error);
+FOUNDATION_EXPORT ADPathKeyframes *create_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, float error);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes)
 
 @compatibility_alias RAndroidAnimationPathKeyframes ADPathKeyframes;
+
 
 #endif
 
@@ -123,6 +127,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes)
 #define RESTRICT_IKeyframes 1
 #define INCLUDE_ADIKeyframes 1
 #include "IKeyframes.h"
+
 
 @class JavaUtilArrayList;
 @protocol ADTypeEvaluator;
@@ -143,6 +148,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_SimpleIKeyframes)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_SimpleIKeyframes)
 
+
 #endif
 
 #if !defined (ADPathKeyframes_FloatIKeyframesBase_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_FloatIKeyframesBase))
@@ -153,6 +159,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_SimpleIKeyframes)
 #include "IKeyframes.h"
 
 @class IOSClass;
+@class JavaLangFloat;
 @class JavaUtilArrayList;
 @protocol ADIKeyframes;
 
@@ -164,7 +171,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_SimpleIKeyframes)
 
 - (IOSClass *)getType;
 
-- (id)getValueWithFloat:(jfloat)fraction;
+- (id)getValueWithFloat:(float)fraction;
 
 - (id<ADIKeyframes>)java_clone;
 
@@ -180,6 +187,7 @@ FOUNDATION_EXPORT void ADPathKeyframes_FloatIKeyframesBase_init(ADPathKeyframes_
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_FloatIKeyframesBase)
 
+
 #endif
 
 #if !defined (ADPathKeyframes_IntIKeyframesBase_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_IntIKeyframesBase))
@@ -190,6 +198,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_FloatIKeyframesBase)
 #include "IKeyframes.h"
 
 @class IOSClass;
+@class JavaLangFloat;
 @class JavaUtilArrayList;
 @protocol ADIKeyframes;
 
@@ -201,7 +210,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_FloatIKeyframesBase)
 
 - (IOSClass *)getType;
 
-- (id)getValueWithFloat:(jfloat)fraction;
+- (id)getValueWithFloat:(float)fraction;
 
 - (id<ADIKeyframes>)java_clone;
 
@@ -216,6 +225,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_IntIKeyframesBase)
 FOUNDATION_EXPORT void ADPathKeyframes_IntIKeyframesBase_init(ADPathKeyframes_IntIKeyframesBase *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_IntIKeyframesBase)
+
 
 #endif
 

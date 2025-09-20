@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\UITextViewImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_UITextViewImpl")
@@ -35,6 +36,9 @@
 @class ADTextView;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -63,17 +67,17 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype;
+                      withInt:(int32_t)viewtype;
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType;
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType;
 
-- (id)createWrapperViewHolderNativeWithInt:(jint)viewType;
+- (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType;
 
 - (void)drawableStateChanged;
 
@@ -84,7 +88,7 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getClearsOnInsertion;
 
@@ -94,19 +98,19 @@
 
 - (id)getIsSelectable;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getPaddingBottom;
 
@@ -128,19 +132,19 @@
 
 - (void)invalidate;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 - (id)nativeAddForeGroundWithASIWidget:(id<ASIWidget>)w;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -186,7 +190,7 @@
 - (void)setUsesStandardTextScalingWithId:(id)nativeWidget
                                   withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)showErrorWithNSString:(NSString *)message;
 
@@ -234,6 +238,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl)
 
 @compatibility_alias ComAsheraLayoutUITextViewImpl ASUITextViewImpl;
 
+
 #endif
 
 #if !defined (ASUITextViewImpl_DrawableTintMode_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_DrawableTintMode))
@@ -269,6 +274,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_DrawableTintMode *new_ASUITextViewImpl_Drawab
 FOUNDATION_EXPORT ASUITextViewImpl_DrawableTintMode *create_ASUITextViewImpl_DrawableTintMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_DrawableTintMode)
+
 
 #endif
 
@@ -306,6 +312,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_Font *create_ASUITextViewImpl_Font_init(void)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_Font)
 
+
 #endif
 
 #if !defined (ASUITextViewImpl_TextStyle_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_TextStyle))
@@ -341,6 +348,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_TextStyle *new_ASUITextViewImpl_TextStyle_ini
 FOUNDATION_EXPORT ASUITextViewImpl_TextStyle *create_ASUITextViewImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_TextStyle)
+
 
 #endif
 
@@ -378,6 +386,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_Capitalize *create_ASUITextViewImpl_Capitaliz
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_Capitalize)
 
+
 #endif
 
 #if !defined (ASUITextViewImpl_Numeric_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_Numeric))
@@ -413,6 +422,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_Numeric *new_ASUITextViewImpl_Numeric_init(vo
 FOUNDATION_EXPORT ASUITextViewImpl_Numeric *create_ASUITextViewImpl_Numeric_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_Numeric)
+
 
 #endif
 
@@ -450,6 +460,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_InputType *create_ASUITextViewImpl_InputType_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputType)
 
+
 #endif
 
 #if !defined (ASUITextViewImpl_ImeOptions_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_ImeOptions))
@@ -485,6 +496,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_ImeOptions *new_ASUITextViewImpl_ImeOptions_i
 FOUNDATION_EXPORT ASUITextViewImpl_ImeOptions *create_ASUITextViewImpl_ImeOptions_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_ImeOptions)
+
 
 #endif
 
@@ -522,6 +534,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_InputView *create_ASUITextViewImpl_InputView_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 
+
 #endif
 
 #if !defined (ASUITextViewImpl_UITextViewExt_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_UITextViewExt))
@@ -541,6 +554,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -550,7 +567,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 
 - (instancetype)initWithASUITextViewImpl:(ASUITextViewImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -559,13 +576,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -581,19 +598,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -616,7 +633,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -632,16 +649,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -658,6 +675,7 @@ FOUNDATION_EXPORT ASUITextViewImpl_UITextViewExt *new_ASUITextViewImpl_UITextVie
 FOUNDATION_EXPORT ASUITextViewImpl_UITextViewExt *create_ASUITextViewImpl_UITextViewExt_initWithASUITextViewImpl_(ASUITextViewImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
+
 
 #endif
 

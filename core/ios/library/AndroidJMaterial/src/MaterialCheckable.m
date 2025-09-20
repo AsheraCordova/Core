@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\internal\MaterialCheckable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "MaterialCheckable.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXMaterialCheckable : NSObject
@@ -36,6 +47,8 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADXMaterialCheckable)
+
+J2OBJC_NAME_MAPPING(ADXMaterialCheckable, "com.google.android.material.internal", "ADX")
 
 @implementation ADXMaterialCheckable_OnCheckedChangeListener
 

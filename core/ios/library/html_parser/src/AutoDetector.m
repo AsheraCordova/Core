@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\AutoDetector.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AutoDetector.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSAutoDetector : NSObject
@@ -30,3 +41,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(TSAutoDetector)
+
+J2OBJC_NAME_MAPPING(TSAutoDetector, "repackaged.org.ccil.cowan.tagsoup", "TS")

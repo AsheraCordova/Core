@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\LongSparseLongArray.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LongSparseLongArray")
@@ -15,6 +16,9 @@
 
 #if !defined (ADLongSparseLongArray_) && (INCLUDE_ALL_LongSparseLongArray || defined(INCLUDE_ADLongSparseLongArray))
 #define ADLongSparseLongArray_
+
+@class JavaLangInteger;
+@class JavaLangLong;
 
 @interface ADLongSparseLongArray : NSObject
 
@@ -32,7 +36,7 @@
   sparse array will be initialized with a light-weight representation
   not requiring any additional array allocations.
  */
-- (instancetype)initWithInt:(jint)initialCapacity;
+- (instancetype)initWithInt:(int32_t)initialCapacity;
 
 /*!
  @brief Removes all key-value mappings from this SparseIntArray.
@@ -42,27 +46,27 @@
 /*!
  @brief Removes the mapping from the specified key, if there was any.
  */
-- (void)delete__WithLong:(jlong)key;
+- (void)delete__WithLong:(int64_t)key;
 
 /*!
  @brief Gets the long mapped from the specified key, or <code>0</code>
   if no such mapping has been made.
  */
-- (jlong)getWithLong:(jlong)key;
+- (int64_t)getWithLong:(int64_t)key;
 
 /*!
  @brief Gets the long mapped from the specified key, or the specified value
   if no such mapping has been made.
  */
-- (jlong)getWithLong:(jlong)key
-            withLong:(jlong)valueIfKeyNotFound;
+- (int64_t)getWithLong:(int64_t)key
+              withLong:(int64_t)valueIfKeyNotFound;
 
 /*!
  @brief Returns the index for which <code>keyAt</code> would return the
   specified key, or a negative number if the specified
   key is not mapped.
  */
-- (jint)indexOfKeyWithLong:(jlong)key;
+- (int32_t)indexOfKeyWithLong:(int64_t)key;
 
 /*!
  @brief Returns an index for which <code>valueAt</code> would return the
@@ -72,7 +76,7 @@
   and that multiple keys can map to the same value and this will
   find only one of them.
  */
-- (jint)indexOfValueWithLong:(jlong)value;
+- (int32_t)indexOfValueWithLong:(int64_t)value;
 
 /*!
  @brief Given an index in the range <code>0...size()-1</code>, returns
@@ -83,26 +87,26 @@
   smallest key and <code>keyAt(size()-1)</code> will return the largest
   key.</p>
  */
-- (jlong)keyAtWithInt:(jint)index;
+- (int64_t)keyAtWithInt:(int32_t)index;
 
 /*!
  @brief Adds a mapping from the specified key to the specified value,
   replacing the previous mapping from the specified key if there
   was one.
  */
-- (void)putWithLong:(jlong)key
-           withLong:(jlong)value;
+- (void)putWithLong:(int64_t)key
+           withLong:(int64_t)value;
 
 /*!
  @brief Removes the mapping at the given index.
  */
-- (void)removeAtWithInt:(jint)index;
+- (void)removeAtWithInt:(int32_t)index;
 
 /*!
  @brief Returns the number of key-value mappings that this SparseIntArray
   currently stores.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
  @brief Given an index in the range <code>0...size()-1</code>, returns
@@ -114,7 +118,7 @@
   smallest key and <code>valueAt(size()-1)</code> will return the value
   associated with the largest key.</p>
  */
-- (jlong)valueAtWithInt:(jint)index;
+- (int64_t)valueAtWithInt:(int32_t)index;
 
 @end
 
@@ -126,15 +130,16 @@ FOUNDATION_EXPORT ADLongSparseLongArray *new_ADLongSparseLongArray_init(void) NS
 
 FOUNDATION_EXPORT ADLongSparseLongArray *create_ADLongSparseLongArray_init(void);
 
-FOUNDATION_EXPORT void ADLongSparseLongArray_initWithInt_(ADLongSparseLongArray *self, jint initialCapacity);
+FOUNDATION_EXPORT void ADLongSparseLongArray_initWithInt_(ADLongSparseLongArray *self, int32_t initialCapacity);
 
-FOUNDATION_EXPORT ADLongSparseLongArray *new_ADLongSparseLongArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADLongSparseLongArray *new_ADLongSparseLongArray_initWithInt_(int32_t initialCapacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADLongSparseLongArray *create_ADLongSparseLongArray_initWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT ADLongSparseLongArray *create_ADLongSparseLongArray_initWithInt_(int32_t initialCapacity);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLongSparseLongArray)
 
 @compatibility_alias RAndroidUtilLongSparseLongArray ADLongSparseLongArray;
+
 
 #endif
 

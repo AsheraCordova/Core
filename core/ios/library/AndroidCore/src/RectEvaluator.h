@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\RectEvaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RectEvaluator")
@@ -21,6 +22,7 @@
 #include "TypeEvaluator.h"
 
 @class ADRect;
+@class JavaLangFloat;
 
 /*!
  @brief This evaluator can be used to perform type interpolation between <code>Rect</code> values.
@@ -63,7 +65,7 @@
  @return A linear interpolation between the start and end values, given the
           <code>fraction</code> parameter.
  */
-- (ADRect *)evaluateWithFloat:(jfloat)fraction
+- (ADRect *)evaluateWithFloat:(float)fraction
                        withId:(ADRect *)startValue
                        withId:(ADRect *)endValue;
 
@@ -86,6 +88,7 @@ FOUNDATION_EXPORT ADRectEvaluator *create_ADRectEvaluator_initWithADRect_(ADRect
 J2OBJC_TYPE_LITERAL_HEADER(ADRectEvaluator)
 
 @compatibility_alias RAndroidAnimationRectEvaluator ADRectEvaluator;
+
 
 #endif
 

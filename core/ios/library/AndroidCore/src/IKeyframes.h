@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\IKeyframes.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IKeyframes")
@@ -22,7 +23,9 @@
 #if !defined (ADIKeyframes_) && (INCLUDE_ALL_IKeyframes || defined(INCLUDE_ADIKeyframes))
 #define ADIKeyframes_
 
+
 @class IOSClass;
+@class JavaLangFloat;
 @protocol ADTypeEvaluator;
 @protocol JavaUtilList;
 
@@ -58,7 +61,7 @@
  @param fraction The elapsed fraction of the animation
  @return The animated value.
  */
-- (id)getValueWithFloat:(jfloat)fraction;
+- (id)getValueWithFloat:(float)fraction;
 
 /*!
  @return A list of all IKeyframes contained by this. This may return null if this is
@@ -76,10 +79,15 @@ J2OBJC_TYPE_LITERAL_HEADER(ADIKeyframes)
 
 #define RAndroidAnimationIKeyframes ADIKeyframes
 
+
 #endif
 
 #if !defined (ADIKeyframes_IntIKeyframes_) && (INCLUDE_ALL_IKeyframes || defined(INCLUDE_ADIKeyframes_IntIKeyframes))
 #define ADIKeyframes_IntIKeyframes_
+
+
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 /*!
  @brief A specialization of IKeyframes that has integer primitive value calculation.
@@ -91,7 +99,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADIKeyframes)
  @param fraction The elapsed fraction of the animation
  @return The animated value.
  */
-- (jint)getIntValueWithFloat:(jfloat)fraction;
+- (int32_t)getIntValueWithFloat:(float)fraction;
 
 @end
 
@@ -99,10 +107,14 @@ J2OBJC_EMPTY_STATIC_INIT(ADIKeyframes_IntIKeyframes)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIKeyframes_IntIKeyframes)
 
+
 #endif
 
 #if !defined (ADIKeyframes_FloatIKeyframes_) && (INCLUDE_ALL_IKeyframes || defined(INCLUDE_ADIKeyframes_FloatIKeyframes))
 #define ADIKeyframes_FloatIKeyframes_
+
+
+@class JavaLangFloat;
 
 /*!
  @brief A specialization of IKeyframes that has float primitive value calculation.
@@ -114,13 +126,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADIKeyframes_IntIKeyframes)
  @param fraction The elapsed fraction of the animation
  @return The animated value.
  */
-- (jfloat)getFloatValueWithFloat:(jfloat)fraction;
+- (float)getFloatValueWithFloat:(float)fraction;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADIKeyframes_FloatIKeyframes)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIKeyframes_FloatIKeyframes)
+
 
 #endif
 

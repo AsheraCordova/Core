@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\ViewGroup.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
@@ -14,19 +19,24 @@
 #include "ViewGroup.h"
 #include "ViewParent.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Byte.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/IndexOutOfBoundsException.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
 #include "java/util/HashSet.h"
 #include "java/util/List.h"
 
-@class JavaUtilArrayList;
-@class JavaUtilHashSet;
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADViewGroup () {
@@ -34,20 +44,20 @@
   ADView *mFocused_;
   ADView *mDefaultFocus_;
   ADViewGroup_DragEvent *mCurrentDragStartEvent_;
-  jboolean mIsInterestedInDrag_;
+  bool mIsInterestedInDrag_;
   JavaUtilHashSet *mChildrenInterestedInDrag_;
-  jlong mLastTouchDownTime_;
-  jint mLastTouchDownIndex_;
-  jboolean mHoveredSelf_;
-  jboolean mTooltipHoveredSelf_;
-  jint mLayoutMode_;
-  jint mChildrenCount_;
-  jboolean mLayoutCalledWhileSuppressed_;
+  int64_t mLastTouchDownTime_;
+  int32_t mLastTouchDownIndex_;
+  bool mHoveredSelf_;
+  bool mTooltipHoveredSelf_;
+  int32_t mLayoutMode_;
+  int32_t mChildrenCount_;
+  bool mLayoutCalledWhileSuppressed_;
   ADLayoutTransition *mTransition_;
   JavaUtilArrayList *mTransitioningViews_;
   JavaUtilArrayList *mVisibilityChangingChildren_;
-  jint mChildCountWithTransientState_;
-  jint mNestedScrollAxes_;
+  int32_t mChildCountWithTransientState_;
+  int32_t mNestedScrollAxes_;
   id<JavaUtilList> mTransientIndices_;
   id<JavaUtilList> mTransientViews_;
   id<ADLayoutTransition_TransitionListener> mLayoutTransitionListener_;
@@ -55,30 +65,30 @@
 }
 
 - (void)addViewInnerWithADView:(ADView *)child
-                       withInt:(jint)index
+                       withInt:(int32_t)index
   withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params
-                   withBoolean:(jboolean)preventRequestLayout;
+                   withBoolean:(bool)preventRequestLayout;
 
 - (void)addInArrayWithADView:(ADView *)child
-                     withInt:(jint)index;
+                     withInt:(int32_t)index;
 
-- (void)removeFromArrayWithInt:(jint)index;
+- (void)removeFromArrayWithInt:(int32_t)index;
 
-- (void)removeFromArrayWithInt:(jint)start
-                       withInt:(jint)count;
+- (void)removeFromArrayWithInt:(int32_t)start
+                       withInt:(int32_t)count;
 
-- (jboolean)removeViewInternalWithADView:(ADView *)view;
+- (bool)removeViewInternalWithADView:(ADView *)view;
 
-- (void)removeViewInternalWithInt:(jint)index
+- (void)removeViewInternalWithInt:(int32_t)index
                        withADView:(ADView *)view;
 
-- (jboolean)hasBooleanFlagWithInt:(jint)flag;
+- (bool)hasBooleanFlagWithInt:(int32_t)flag;
 
-- (void)setBooleanFlagWithInt:(jint)flag
-                  withBoolean:(jboolean)value;
+- (void)setBooleanFlagWithInt:(int32_t)flag
+                  withBoolean:(bool)value;
 
-- (void)setLayoutModeWithInt:(jint)layoutMode
-                 withBoolean:(jboolean)explicitly;
+- (void)setLayoutModeWithInt:(int32_t)layoutMode
+                 withBoolean:(bool)explicitly;
 
 - (void)addDisappearingViewWithADView:(ADView *)v;
 
@@ -86,11 +96,11 @@
                              withId:(id)findFocus;
 
 - (void)childHasTransientStateChangedWithADView:(ADView *)child
-                                    withBoolean:(jboolean)b;
+                                    withBoolean:(bool)b;
 
 - (void)notifyGlobalFocusClearedWithId:(id)viewGroup;
 
-- (jboolean)rootViewRequestFocus;
+- (bool)rootViewRequestFocus;
 
 - (void)clearChildFocusWithADView:(ADView *)view;
 
@@ -104,7 +114,7 @@
 
 - (void)notifyChildOfDragStartWithADView:(ADView *)child;
 
-- (void)dispatchVisibilityAggregatedWithBoolean:(jboolean)b;
+- (void)dispatchVisibilityAggregatedWithBoolean:(bool)b;
 
 - (void)clearFocusedInClusterWithADView:(ADView *)view;
 
@@ -126,121 +136,121 @@ J2OBJC_FIELD_SETTER(ADViewGroup, mTransientViews_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mLayoutTransitionListener_, id<ADLayoutTransition_TransitionListener>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mChildren_, IOSObjectArray *)
 
-inline jboolean ADViewGroup_get_DBG(void);
+inline bool ADViewGroup_get_DBG(void);
 #define ADViewGroup_DBG false
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, DBG, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, DBG, bool)
 
-inline jint ADViewGroup_get_FLAG_CLIP_TO_PADDING(void);
+inline int32_t ADViewGroup_get_FLAG_CLIP_TO_PADDING(void);
 #define ADViewGroup_FLAG_CLIP_TO_PADDING 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_CLIP_TO_PADDING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_CLIP_TO_PADDING, int32_t)
 
-inline jint ADViewGroup_get_FLAG_RUN_ANIMATION(void);
+inline int32_t ADViewGroup_get_FLAG_RUN_ANIMATION(void);
 #define ADViewGroup_FLAG_RUN_ANIMATION 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_RUN_ANIMATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_RUN_ANIMATION, int32_t)
 
-inline jint ADViewGroup_get_FLAG_PADDING_NOT_NULL(void);
+inline int32_t ADViewGroup_get_FLAG_PADDING_NOT_NULL(void);
 #define ADViewGroup_FLAG_PADDING_NOT_NULL 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_PADDING_NOT_NULL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_PADDING_NOT_NULL, int32_t)
 
-inline jint ADViewGroup_get_FLAG_ANIMATION_CACHE(void);
+inline int32_t ADViewGroup_get_FLAG_ANIMATION_CACHE(void);
 #define ADViewGroup_FLAG_ANIMATION_CACHE 64
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_ANIMATION_CACHE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_ANIMATION_CACHE, int32_t)
 
-inline jint ADViewGroup_get_FLAG_NOTIFY_ANIMATION_LISTENER(void);
+inline int32_t ADViewGroup_get_FLAG_NOTIFY_ANIMATION_LISTENER(void);
 #define ADViewGroup_FLAG_NOTIFY_ANIMATION_LISTENER 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_NOTIFY_ANIMATION_LISTENER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_NOTIFY_ANIMATION_LISTENER, int32_t)
 
-inline jint ADViewGroup_get_FLAG_ADD_STATES_FROM_CHILDREN(void);
+inline int32_t ADViewGroup_get_FLAG_ADD_STATES_FROM_CHILDREN(void);
 #define ADViewGroup_FLAG_ADD_STATES_FROM_CHILDREN 8192
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_ADD_STATES_FROM_CHILDREN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_ADD_STATES_FROM_CHILDREN, int32_t)
 
-inline jint ADViewGroup_get_FLAG_ALWAYS_DRAWN_WITH_CACHE(void);
+inline int32_t ADViewGroup_get_FLAG_ALWAYS_DRAWN_WITH_CACHE(void);
 #define ADViewGroup_FLAG_ALWAYS_DRAWN_WITH_CACHE 16384
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_ALWAYS_DRAWN_WITH_CACHE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_ALWAYS_DRAWN_WITH_CACHE, int32_t)
 
-inline jint ADViewGroup_get_FLAG_CHILDREN_DRAWN_WITH_CACHE(void);
+inline int32_t ADViewGroup_get_FLAG_CHILDREN_DRAWN_WITH_CACHE(void);
 #define ADViewGroup_FLAG_CHILDREN_DRAWN_WITH_CACHE 32768
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_CHILDREN_DRAWN_WITH_CACHE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_CHILDREN_DRAWN_WITH_CACHE, int32_t)
 
-inline jint ADViewGroup_get_FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE(void);
+inline int32_t ADViewGroup_get_FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE(void);
 #define ADViewGroup_FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE, int32_t)
 
-inline jint ADViewGroup_get_FLAG_MASK_FOCUSABILITY(void);
+inline int32_t ADViewGroup_get_FLAG_MASK_FOCUSABILITY(void);
 #define ADViewGroup_FLAG_MASK_FOCUSABILITY 393216
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_MASK_FOCUSABILITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_MASK_FOCUSABILITY, int32_t)
 
-inline jint ADViewGroup_get_FLAG_SPLIT_MOTION_EVENTS(void);
+inline int32_t ADViewGroup_get_FLAG_SPLIT_MOTION_EVENTS(void);
 #define ADViewGroup_FLAG_SPLIT_MOTION_EVENTS 2097152
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_SPLIT_MOTION_EVENTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_SPLIT_MOTION_EVENTS, int32_t)
 
-inline jint ADViewGroup_get_FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW(void);
+inline int32_t ADViewGroup_get_FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW(void);
 #define ADViewGroup_FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW 4194304
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW, int32_t)
 
-inline jint ADViewGroup_get_FLAG_LAYOUT_MODE_WAS_EXPLICITLY_SET(void);
+inline int32_t ADViewGroup_get_FLAG_LAYOUT_MODE_WAS_EXPLICITLY_SET(void);
 #define ADViewGroup_FLAG_LAYOUT_MODE_WAS_EXPLICITLY_SET 8388608
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_LAYOUT_MODE_WAS_EXPLICITLY_SET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_LAYOUT_MODE_WAS_EXPLICITLY_SET, int32_t)
 
-inline jint ADViewGroup_get_FLAG_START_ACTION_MODE_FOR_CHILD_IS_TYPED(void);
+inline int32_t ADViewGroup_get_FLAG_START_ACTION_MODE_FOR_CHILD_IS_TYPED(void);
 #define ADViewGroup_FLAG_START_ACTION_MODE_FOR_CHILD_IS_TYPED 134217728
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_START_ACTION_MODE_FOR_CHILD_IS_TYPED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_START_ACTION_MODE_FOR_CHILD_IS_TYPED, int32_t)
 
-inline jint ADViewGroup_get_FLAG_START_ACTION_MODE_FOR_CHILD_IS_NOT_TYPED(void);
+inline int32_t ADViewGroup_get_FLAG_START_ACTION_MODE_FOR_CHILD_IS_NOT_TYPED(void);
 #define ADViewGroup_FLAG_START_ACTION_MODE_FOR_CHILD_IS_NOT_TYPED 268435456
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_START_ACTION_MODE_FOR_CHILD_IS_NOT_TYPED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_START_ACTION_MODE_FOR_CHILD_IS_NOT_TYPED, int32_t)
 
-inline jint ADViewGroup_get_FLAG_SHOW_CONTEXT_MENU_WITH_COORDS(void);
+inline int32_t ADViewGroup_get_FLAG_SHOW_CONTEXT_MENU_WITH_COORDS(void);
 #define ADViewGroup_FLAG_SHOW_CONTEXT_MENU_WITH_COORDS 536870912
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_SHOW_CONTEXT_MENU_WITH_COORDS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, FLAG_SHOW_CONTEXT_MENU_WITH_COORDS, int32_t)
 
-inline jint ADViewGroup_get_LAYOUT_MODE_UNDEFINED(void);
+inline int32_t ADViewGroup_get_LAYOUT_MODE_UNDEFINED(void);
 #define ADViewGroup_LAYOUT_MODE_UNDEFINED -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, LAYOUT_MODE_UNDEFINED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, LAYOUT_MODE_UNDEFINED, int32_t)
 
-inline jint ADViewGroup_get_CHILD_LEFT_INDEX(void);
+inline int32_t ADViewGroup_get_CHILD_LEFT_INDEX(void);
 #define ADViewGroup_CHILD_LEFT_INDEX 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, CHILD_LEFT_INDEX, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, CHILD_LEFT_INDEX, int32_t)
 
-inline jint ADViewGroup_get_CHILD_TOP_INDEX(void);
+inline int32_t ADViewGroup_get_CHILD_TOP_INDEX(void);
 #define ADViewGroup_CHILD_TOP_INDEX 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, CHILD_TOP_INDEX, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, CHILD_TOP_INDEX, int32_t)
 
-inline jint ADViewGroup_get_ARRAY_INITIAL_CAPACITY(void);
+inline int32_t ADViewGroup_get_ARRAY_INITIAL_CAPACITY(void);
 #define ADViewGroup_ARRAY_INITIAL_CAPACITY 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, ARRAY_INITIAL_CAPACITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, ARRAY_INITIAL_CAPACITY, int32_t)
 
-inline jint ADViewGroup_get_ARRAY_CAPACITY_INCREMENT(void);
+inline int32_t ADViewGroup_get_ARRAY_CAPACITY_INCREMENT(void);
 #define ADViewGroup_ARRAY_CAPACITY_INCREMENT 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, ARRAY_CAPACITY_INCREMENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, ARRAY_CAPACITY_INCREMENT, int32_t)
 
-__attribute__((unused)) static void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(ADViewGroup *self, ADView *child, jint index, ADViewGroup_LayoutParams *params, jboolean preventRequestLayout);
+__attribute__((unused)) static void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(ADViewGroup *self, ADView *child, int32_t index, ADViewGroup_LayoutParams *params, bool preventRequestLayout);
 
-__attribute__((unused)) static void ADViewGroup_addInArrayWithADView_withInt_(ADViewGroup *self, ADView *child, jint index);
+__attribute__((unused)) static void ADViewGroup_addInArrayWithADView_withInt_(ADViewGroup *self, ADView *child, int32_t index);
 
-__attribute__((unused)) static void ADViewGroup_removeFromArrayWithInt_(ADViewGroup *self, jint index);
+__attribute__((unused)) static void ADViewGroup_removeFromArrayWithInt_(ADViewGroup *self, int32_t index);
 
-__attribute__((unused)) static void ADViewGroup_removeFromArrayWithInt_withInt_(ADViewGroup *self, jint start, jint count);
+__attribute__((unused)) static void ADViewGroup_removeFromArrayWithInt_withInt_(ADViewGroup *self, int32_t start, int32_t count);
 
-__attribute__((unused)) static jboolean ADViewGroup_removeViewInternalWithADView_(ADViewGroup *self, ADView *view);
+__attribute__((unused)) static bool ADViewGroup_removeViewInternalWithADView_(ADViewGroup *self, ADView *view);
 
-__attribute__((unused)) static void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, jint index, ADView *view);
+__attribute__((unused)) static void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, int32_t index, ADView *view);
 
-__attribute__((unused)) static jboolean ADViewGroup_hasBooleanFlagWithInt_(ADViewGroup *self, jint flag);
+__attribute__((unused)) static bool ADViewGroup_hasBooleanFlagWithInt_(ADViewGroup *self, int32_t flag);
 
-__attribute__((unused)) static void ADViewGroup_setBooleanFlagWithInt_withBoolean_(ADViewGroup *self, jint flag, jboolean value);
+__attribute__((unused)) static void ADViewGroup_setBooleanFlagWithInt_withBoolean_(ADViewGroup *self, int32_t flag, bool value);
 
-__attribute__((unused)) static void ADViewGroup_setLayoutModeWithInt_withBoolean_(ADViewGroup *self, jint layoutMode, jboolean explicitly);
+__attribute__((unused)) static void ADViewGroup_setLayoutModeWithInt_withBoolean_(ADViewGroup *self, int32_t layoutMode, bool explicitly);
 
 __attribute__((unused)) static void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *v);
 
 __attribute__((unused)) static void ADViewGroup_requestChildFocusWithADView_withId_(ADViewGroup *self, ADView *child, id findFocus);
 
-__attribute__((unused)) static void ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(ADViewGroup *self, ADView *child, jboolean b);
+__attribute__((unused)) static void ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(ADViewGroup *self, ADView *child, bool b);
 
 __attribute__((unused)) static void ADViewGroup_notifyGlobalFocusClearedWithId_(ADViewGroup *self, id viewGroup);
 
-__attribute__((unused)) static jboolean ADViewGroup_rootViewRequestFocus(ADViewGroup *self);
+__attribute__((unused)) static bool ADViewGroup_rootViewRequestFocus(ADViewGroup *self);
 
 __attribute__((unused)) static void ADViewGroup_clearChildFocusWithADView_(ADViewGroup *self, ADView *view);
 
@@ -254,7 +264,7 @@ __attribute__((unused)) static void ADViewGroup_setDefaultFocusWithADView_(ADVie
 
 __attribute__((unused)) static void ADViewGroup_notifyChildOfDragStartWithADView_(ADViewGroup *self, ADView *child);
 
-__attribute__((unused)) static void ADViewGroup_dispatchVisibilityAggregatedWithBoolean_(ADViewGroup *self, jboolean b);
+__attribute__((unused)) static void ADViewGroup_dispatchVisibilityAggregatedWithBoolean_(ADViewGroup *self, bool b);
 
 __attribute__((unused)) static void ADViewGroup_clearFocusedInClusterWithADView_(ADViewGroup *self, ADView *view);
 
@@ -276,12 +286,12 @@ __attribute__((unused)) static void ADViewGroup_clearDefaultFocusWithADView_(ADV
 - (void)startTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
                               withADViewGroup:(ADViewGroup *)container
                                    withADView:(ADView *)view
-                                      withInt:(jint)transitionType;
+                                      withInt:(int32_t)transitionType;
 
 - (void)endTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
                             withADViewGroup:(ADViewGroup *)container
                                  withADView:(ADView *)view
-                                    withInt:(jint)transitionType;
+                                    withInt:(int32_t)transitionType;
 
 @end
 
@@ -293,47 +303,48 @@ __attribute__((unused)) static ADViewGroup_1 *new_ADViewGroup_1_initWithADViewGr
 
 __attribute__((unused)) static ADViewGroup_1 *create_ADViewGroup_1_initWithADViewGroup_(ADViewGroup *outer$);
 
+
 @interface ADViewGroup_MarginLayoutParams () {
  @public
-  jint startMargin_;
-  jint endMargin_;
+  int32_t startMargin_;
+  int32_t endMargin_;
 }
 
 - (void)doResolveMargins;
 
 @end
 
-inline jint ADViewGroup_MarginLayoutParams_get_LAYOUT_DIRECTION_MASK(void);
+inline int32_t ADViewGroup_MarginLayoutParams_get_LAYOUT_DIRECTION_MASK(void);
 #define ADViewGroup_MarginLayoutParams_LAYOUT_DIRECTION_MASK 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, LAYOUT_DIRECTION_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, LAYOUT_DIRECTION_MASK, int32_t)
 
-inline jint ADViewGroup_MarginLayoutParams_get_LEFT_MARGIN_UNDEFINED_MASK(void);
+inline int32_t ADViewGroup_MarginLayoutParams_get_LEFT_MARGIN_UNDEFINED_MASK(void);
 #define ADViewGroup_MarginLayoutParams_LEFT_MARGIN_UNDEFINED_MASK 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, LEFT_MARGIN_UNDEFINED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, LEFT_MARGIN_UNDEFINED_MASK, int32_t)
 
-inline jint ADViewGroup_MarginLayoutParams_get_RIGHT_MARGIN_UNDEFINED_MASK(void);
+inline int32_t ADViewGroup_MarginLayoutParams_get_RIGHT_MARGIN_UNDEFINED_MASK(void);
 #define ADViewGroup_MarginLayoutParams_RIGHT_MARGIN_UNDEFINED_MASK 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, RIGHT_MARGIN_UNDEFINED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, RIGHT_MARGIN_UNDEFINED_MASK, int32_t)
 
-inline jint ADViewGroup_MarginLayoutParams_get_RTL_COMPATIBILITY_MODE_MASK(void);
+inline int32_t ADViewGroup_MarginLayoutParams_get_RTL_COMPATIBILITY_MODE_MASK(void);
 #define ADViewGroup_MarginLayoutParams_RTL_COMPATIBILITY_MODE_MASK 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, RTL_COMPATIBILITY_MODE_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, RTL_COMPATIBILITY_MODE_MASK, int32_t)
 
-inline jint ADViewGroup_MarginLayoutParams_get_NEED_RESOLUTION_MASK(void);
+inline int32_t ADViewGroup_MarginLayoutParams_get_NEED_RESOLUTION_MASK(void);
 #define ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, NEED_RESOLUTION_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, NEED_RESOLUTION_MASK, int32_t)
 
-inline jint ADViewGroup_MarginLayoutParams_get_DEFAULT_MARGIN_RESOLVED(void);
+inline int32_t ADViewGroup_MarginLayoutParams_get_DEFAULT_MARGIN_RESOLVED(void);
 #define ADViewGroup_MarginLayoutParams_DEFAULT_MARGIN_RESOLVED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, DEFAULT_MARGIN_RESOLVED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, DEFAULT_MARGIN_RESOLVED, int32_t)
 
-inline jint ADViewGroup_MarginLayoutParams_get_UNDEFINED_MARGIN(void);
-#define ADViewGroup_MarginLayoutParams_UNDEFINED_MARGIN ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, UNDEFINED_MARGIN, jint)
+inline int32_t ADViewGroup_MarginLayoutParams_get_UNDEFINED_MARGIN(void);
+#define ADViewGroup_MarginLayoutParams_UNDEFINED_MARGIN ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, UNDEFINED_MARGIN, int32_t)
 
 __attribute__((unused)) static void ADViewGroup_MarginLayoutParams_doResolveMargins(ADViewGroup_MarginLayoutParams *self);
 
-jint ADViewGroup_LAYOUT_MODE_DEFAULT = 0;
+int32_t ADViewGroup_LAYOUT_MODE_DEFAULT = 0;
 
 @implementation ADViewGroup
 
@@ -345,8 +356,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onChildVisibilityChangedWithADView:(ADView *)child
-                                   withInt:(jint)oldVisibility
-                                   withInt:(jint)newVisibility {
+                                   withInt:(int32_t)oldVisibility
+                                   withInt:(int32_t)newVisibility {
   if (mTransition_ != nil) {
     if (newVisibility == ADView_VISIBLE) {
       [mTransition_ showChildWithADViewGroup:self withADView:child withInt:oldVisibility];
@@ -370,42 +381,42 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)info
-                                              withInt:(jint)visibility {
+                                              withInt:(int32_t)visibility {
   mGroupFlags_ |= ADViewGroup_FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW;
   [super dispatchAttachedToWindowWithADView_AttachInfo:info withInt:visibility];
   mGroupFlags_ &= ~ADViewGroup_FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW;
-  jint count = mChildrenCount_;
+  int32_t count = mChildrenCount_;
   IOSObjectArray *children = mChildren_;
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = IOSObjectArray_Get(nil_chk(children), i);
     [((ADView *) nil_chk(child)) dispatchAttachedToWindowWithADView_AttachInfo:info withInt:[self combineVisibilityWithInt:visibility withInt:[child getVisibility]]];
   }
-  jint transientCount = mTransientIndices_ == nil ? 0 : [mTransientIndices_ size];
-  for (jint i = 0; i < transientCount; ++i) {
+  int32_t transientCount = mTransientIndices_ == nil ? 0 : [mTransientIndices_ size];
+  for (int32_t i = 0; i < transientCount; ++i) {
     ADView *view = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(mTransientViews_)) getWithInt:i]);
     [((ADView *) nil_chk(view)) dispatchAttachedToWindowWithADView_AttachInfo:info withInt:[self combineVisibilityWithInt:visibility withInt:[view getVisibility]]];
   }
 }
 
-- (jboolean)isLayoutModeOptical {
+- (bool)isLayoutModeOptical {
   return mLayoutMode_ == ADViewGroup_LAYOUT_MODE_OPTICAL_BOUNDS;
 }
 
-- (void)setClipToPaddingWithBoolean:(jboolean)clipToPadding {
+- (void)setClipToPaddingWithBoolean:(bool)clipToPadding {
   if (ADViewGroup_hasBooleanFlagWithInt_(self, ADViewGroup_FLAG_CLIP_TO_PADDING) != clipToPadding) {
     ADViewGroup_setBooleanFlagWithInt_withBoolean_(self, ADViewGroup_FLAG_CLIP_TO_PADDING, clipToPadding);
     [self invalidateWithBoolean:true];
   }
 }
 
-- (jboolean)getClipToPadding {
+- (bool)getClipToPadding {
   return ADViewGroup_hasBooleanFlagWithInt_(self, ADViewGroup_FLAG_CLIP_TO_PADDING);
 }
 
-- (void)dispatchSetPressedWithBoolean:(jboolean)pressed {
+- (void)dispatchSetPressedWithBoolean:(bool)pressed {
   IOSObjectArray *children = mChildren_;
-  jint count = mChildrenCount_;
-  for (jint i = 0; i < count; i++) {
+  int32_t count = mChildrenCount_;
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = IOSObjectArray_Get(nil_chk(children), i);
     if (!pressed || (![((ADView *) nil_chk(child)) isClickable] && ![child isLongClickable])) {
       [((ADView *) nil_chk(child)) setPressedWithBoolean:pressed];
@@ -413,13 +424,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (ADView *)findViewTraversalWithInt:(jint)id_ {
+- (ADView *)findViewTraversalWithInt:(int32_t)id_ {
   if (id_ == mID_) {
     return self;
   }
   IOSObjectArray *where = mChildren_;
-  jint len = mChildrenCount_;
-  for (jint i = 0; i < len; i++) {
+  int32_t len = mChildrenCount_;
+  for (int32_t i = 0; i < len; i++) {
     ADView *v = IOSObjectArray_Get(nil_chk(where), i);
     if ((((ADView *) nil_chk(v))->mPrivateFlags_ & ADView_PFLAG_IS_ROOT_NAMESPACE) == 0) {
       v = [v findViewByIdWithInt:id_];
@@ -436,7 +447,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addViewWithADView:(ADView *)child
-                  withInt:(jint)index {
+                  withInt:(int32_t)index {
   if (child == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot add a null child view to a ViewGroup");
   }
@@ -451,8 +462,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addViewWithADView:(ADView *)child
-                  withInt:(jint)width
-                  withInt:(jint)height {
+                  withInt:(int32_t)width
+                  withInt:(int32_t)height {
   ADViewGroup_LayoutParams *params = [self generateDefaultLayoutParams];
   ((ADViewGroup_LayoutParams *) nil_chk(params))->width_ = width;
   params->height_ = height;
@@ -465,7 +476,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)addViewWithADView:(ADView *)child
-                  withInt:(jint)index
+                  withInt:(int32_t)index
 withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   if (child == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot add a null child view to a ViewGroup");
@@ -475,7 +486,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(self, child, index, params, false);
 }
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return p != nil;
 }
 
@@ -503,16 +514,16 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 - (void)onViewRemovedWithADView:(ADView *)child {
 }
 
-- (jboolean)addViewInLayoutWithADView:(ADView *)child
-                              withInt:(jint)index
-         withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
+- (bool)addViewInLayoutWithADView:(ADView *)child
+                          withInt:(int32_t)index
+     withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return [self addViewInLayoutWithADView:child withInt:index withADViewGroup_LayoutParams:params withBoolean:false];
 }
 
-- (jboolean)addViewInLayoutWithADView:(ADView *)child
-                              withInt:(jint)index
-         withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params
-                          withBoolean:(jboolean)preventRequestLayout {
+- (bool)addViewInLayoutWithADView:(ADView *)child
+                          withInt:(int32_t)index
+     withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params
+                      withBoolean:(bool)preventRequestLayout {
   if (child == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot add a null child view to a ViewGroup");
   }
@@ -527,23 +538,23 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)addViewInnerWithADView:(ADView *)child
-                       withInt:(jint)index
+                       withInt:(int32_t)index
   withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params
-                   withBoolean:(jboolean)preventRequestLayout {
+                   withBoolean:(bool)preventRequestLayout {
   ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(self, child, index, params, preventRequestLayout);
 }
 
 - (void)addInArrayWithADView:(ADView *)child
-                     withInt:(jint)index {
+                     withInt:(int32_t)index {
   ADViewGroup_addInArrayWithADView_withInt_(self, child, index);
 }
 
-- (void)removeFromArrayWithInt:(jint)index {
+- (void)removeFromArrayWithInt:(int32_t)index {
   ADViewGroup_removeFromArrayWithInt_(self, index);
 }
 
-- (void)removeFromArrayWithInt:(jint)start
-                       withInt:(jint)count {
+- (void)removeFromArrayWithInt:(int32_t)start
+                       withInt:(int32_t)count {
   ADViewGroup_removeFromArrayWithInt_withInt_(self, start, count);
 }
 
@@ -554,17 +565,17 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   }
 }
 
-- (void)removeViewAtWithInt:(jint)index {
+- (void)removeViewAtWithInt:(int32_t)index {
   ADViewGroup_removeViewInternalWithInt_withADView_(self, index, [self getChildAtWithInt:index]);
   [self requestLayout];
   [self invalidateWithBoolean:true];
 }
 
-- (jboolean)removeViewInternalWithADView:(ADView *)view {
+- (bool)removeViewInternalWithADView:(ADView *)view {
   return ADViewGroup_removeViewInternalWithADView_(self, view);
 }
 
-- (void)removeViewInternalWithInt:(jint)index
+- (void)removeViewInternalWithInt:(int32_t)index
                        withADView:(ADView *)view {
   ADViewGroup_removeViewInternalWithInt_withADView_(self, index, view);
 }
@@ -592,22 +603,22 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)removeAllViewsInLayout {
-  jint count = mChildrenCount_;
+  int32_t count = mChildrenCount_;
   if (count <= 0) {
     return;
   }
   IOSObjectArray *children = mChildren_;
   mChildrenCount_ = 0;
   ADView *focused = mFocused_;
-  jboolean detach = mAttachInfo_ != nil;
-  jboolean clearChildFocus = false;
+  bool detach = mAttachInfo_ != nil;
+  bool clearChildFocus = false;
   [self needGlobalAttributesUpdateWithBoolean:false];
-  for (jint i = count - 1; i >= 0; i--) {
+  for (int32_t i = count - 1; i >= 0; i--) {
     ADView *view = IOSObjectArray_Get(nil_chk(children), i);
     if (mTransition_ != nil) {
       [mTransition_ removeChildWithADViewGroup:self withADView:view];
     }
-    if (view == focused) {
+    if (JreObjectEqualsEquals(view, focused)) {
       [((ADView *) nil_chk(view)) unFocusWithId:nil];
       clearChildFocus = true;
     }
@@ -642,7 +653,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)attachViewToParentWithADView:(ADView *)child
-                             withInt:(jint)index
+                             withInt:(int32_t)index
         withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   JreStrongAssign(&((ADView *) nil_chk(child))->mLayoutParams_, params);
   if (index < 0) {
@@ -663,33 +674,33 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   ADViewGroup_removeFromArrayWithInt_(self, [self indexOfChildWithADView:child]);
 }
 
-- (void)detachViewFromParentWithInt:(jint)index {
+- (void)detachViewFromParentWithInt:(int32_t)index {
   ADViewGroup_removeFromArrayWithInt_(self, index);
 }
 
-- (void)detachViewsFromParentWithInt:(jint)start
-                             withInt:(jint)count {
+- (void)detachViewsFromParentWithInt:(int32_t)start
+                             withInt:(int32_t)count {
   ADViewGroup_removeFromArrayWithInt_withInt_(self, start, count);
 }
 
 - (void)detachAllViewsFromParent {
-  jint count = mChildrenCount_;
+  int32_t count = mChildrenCount_;
   if (count <= 0) {
     return;
   }
   IOSObjectArray *children = mChildren_;
   mChildrenCount_ = 0;
-  for (jint i = count - 1; i >= 0; i--) {
+  for (int32_t i = count - 1; i >= 0; i--) {
     ((ADView *) nil_chk(IOSObjectArray_Get(nil_chk(children), i)))->mParent_ = nil;
     IOSObjectArray_Set(children, i, nil);
   }
 }
 
-- (void)offsetChildrenTopAndBottomWithInt:(jint)offset {
-  jint count = mChildrenCount_;
+- (void)offsetChildrenTopAndBottomWithInt:(int32_t)offset {
+  int32_t count = mChildrenCount_;
   IOSObjectArray *children = mChildren_;
-  jboolean invalidate = false;
-  for (jint i = 0; i < count; i++) {
+  bool invalidate = false;
+  for (int32_t i = 0; i < count; i++) {
     ADView *v = IOSObjectArray_Get(nil_chk(children), i);
     ((ADView *) nil_chk(v))->mTop_ += offset;
     v->mBottom_ += offset;
@@ -704,39 +715,39 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   [self notifySubtreeAccessibilityStateChangedIfNeeded];
 }
 
-- (jboolean)hasBooleanFlagWithInt:(jint)flag {
+- (bool)hasBooleanFlagWithInt:(int32_t)flag {
   return ADViewGroup_hasBooleanFlagWithInt_(self, flag);
 }
 
-- (void)setBooleanFlagWithInt:(jint)flag
-                  withBoolean:(jboolean)value {
+- (void)setBooleanFlagWithInt:(int32_t)flag
+                  withBoolean:(bool)value {
   ADViewGroup_setBooleanFlagWithInt_withBoolean_(self, flag, value);
 }
 
-- (void)setLayoutModeWithInt:(jint)layoutMode
-                 withBoolean:(jboolean)explicitly {
+- (void)setLayoutModeWithInt:(int32_t)layoutMode
+                 withBoolean:(bool)explicitly {
   ADViewGroup_setLayoutModeWithInt_withBoolean_(self, layoutMode, explicitly);
 }
 
-- (void)invalidateInheritedLayoutModeWithInt:(jint)layoutModeOfRoot {
+- (void)invalidateInheritedLayoutModeWithInt:(int32_t)layoutModeOfRoot {
   if (mLayoutMode_ == ADViewGroup_LAYOUT_MODE_UNDEFINED || mLayoutMode_ == layoutModeOfRoot || ADViewGroup_hasBooleanFlagWithInt_(self, ADViewGroup_FLAG_LAYOUT_MODE_WAS_EXPLICITLY_SET)) {
     return;
   }
   ADViewGroup_setLayoutModeWithInt_withBoolean_(self, ADViewGroup_LAYOUT_MODE_UNDEFINED, false);
-  for (jint i = 0, N = [self getChildCount]; i < N; i++) {
+  for (int32_t i = 0, N = [self getChildCount]; i < N; i++) {
     [((ADView *) nil_chk([self getChildAtWithInt:i])) invalidateInheritedLayoutModeWithInt:layoutModeOfRoot];
   }
 }
 
-- (jint)getLayoutMode {
+- (int32_t)getLayoutMode {
   if (mLayoutMode_ == ADViewGroup_LAYOUT_MODE_UNDEFINED) {
-    jint inheritedLayoutMode = ([mParent_ isKindOfClass:[ADViewGroup class]]) ? [((ADViewGroup *) nil_chk(((ADViewGroup *) cast_chk(mParent_, [ADViewGroup class])))) getLayoutMode] : ADViewGroup_LAYOUT_MODE_DEFAULT;
+    int32_t inheritedLayoutMode = ([mParent_ isKindOfClass:[ADViewGroup class]]) ? [((ADViewGroup *) nil_chk(((ADViewGroup *) cast_chk(mParent_, [ADViewGroup class])))) getLayoutMode] : ADViewGroup_LAYOUT_MODE_DEFAULT;
     ADViewGroup_setLayoutModeWithInt_withBoolean_(self, inheritedLayoutMode, false);
   }
   return mLayoutMode_;
 }
 
-- (void)setLayoutModeWithInt:(jint)layoutMode {
+- (void)setLayoutModeWithInt:(int32_t)layoutMode {
   if (mLayoutMode_ != layoutMode) {
     [self invalidateInheritedLayoutModeWithInt:layoutMode];
     ADViewGroup_setLayoutModeWithInt_withBoolean_(self, layoutMode, layoutMode != ADViewGroup_LAYOUT_MODE_UNDEFINED);
@@ -748,33 +759,33 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return create_ADViewGroup_LayoutParams_initWithInt_withInt_(ADViewGroup_LayoutParams_WRAP_CONTENT, ADViewGroup_LayoutParams_WRAP_CONTENT);
 }
 
-- (jint)indexOfChildWithADView:(ADView *)child {
-  jint count = mChildrenCount_;
+- (int32_t)indexOfChildWithADView:(ADView *)child {
+  int32_t count = mChildrenCount_;
   IOSObjectArray *children = mChildren_;
-  for (jint i = 0; i < count; i++) {
-    if (IOSObjectArray_Get(nil_chk(children), i) == child) {
+  for (int32_t i = 0; i < count; i++) {
+    if (JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(children), i), child)) {
       return i;
     }
   }
   return -1;
 }
 
-- (jint)getChildCount {
+- (int32_t)getChildCount {
   return mChildrenCount_;
 }
 
-- (ADView *)getChildAtWithInt:(jint)index {
+- (ADView *)getChildAtWithInt:(int32_t)index {
   if (index < 0 || index >= mChildrenCount_) {
     return nil;
   }
   return IOSObjectArray_Get(nil_chk(mChildren_), index);
 }
 
-- (void)measureChildrenWithInt:(jint)widthMeasureSpec
-                       withInt:(jint)heightMeasureSpec {
-  jint size = mChildrenCount_;
+- (void)measureChildrenWithInt:(int32_t)widthMeasureSpec
+                       withInt:(int32_t)heightMeasureSpec {
+  int32_t size = mChildrenCount_;
   IOSObjectArray *children = mChildren_;
-  for (jint i = 0; i < size; ++i) {
+  for (int32_t i = 0; i < size; ++i) {
     ADView *child = IOSObjectArray_Get(nil_chk(children), i);
     if ((((ADView *) nil_chk(child))->mViewFlags_ & ADView_VISIBILITY_MASK) != ADView_GONE) {
       [self measureChildWithADView:child withInt:widthMeasureSpec withInt:heightMeasureSpec];
@@ -783,28 +794,28 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)measureChildWithADView:(ADView *)child
-                       withInt:(jint)parentWidthMeasureSpec
-                       withInt:(jint)parentHeightMeasureSpec {
+                       withInt:(int32_t)parentWidthMeasureSpec
+                       withInt:(int32_t)parentHeightMeasureSpec {
   ADViewGroup_LayoutParams *lp = [((ADView *) nil_chk(child)) getLayoutParams];
-  jint childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, mPaddingLeft_ + mPaddingRight_, ((ADViewGroup_LayoutParams *) nil_chk(lp))->width_);
-  jint childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentHeightMeasureSpec, mPaddingTop_ + mPaddingBottom_, lp->height_);
+  int32_t childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, mPaddingLeft_ + mPaddingRight_, ((ADViewGroup_LayoutParams *) nil_chk(lp))->width_);
+  int32_t childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentHeightMeasureSpec, mPaddingTop_ + mPaddingBottom_, lp->height_);
   [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
 - (void)measureChildWithMarginsWithADView:(ADView *)child
-                                  withInt:(jint)parentWidthMeasureSpec
-                                  withInt:(jint)widthUsed
-                                  withInt:(jint)parentHeightMeasureSpec
-                                  withInt:(jint)heightUsed {
+                                  withInt:(int32_t)parentWidthMeasureSpec
+                                  withInt:(int32_t)widthUsed
+                                  withInt:(int32_t)parentHeightMeasureSpec
+                                  withInt:(int32_t)heightUsed {
   ADViewGroup_MarginLayoutParams *lp = (ADViewGroup_MarginLayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADViewGroup_MarginLayoutParams class]);
-  jint childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, mPaddingLeft_ + mPaddingRight_ + ((ADViewGroup_MarginLayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + widthUsed, lp->width_);
-  jint childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentHeightMeasureSpec, mPaddingTop_ + mPaddingBottom_ + lp->topMargin_ + lp->bottomMargin_ + heightUsed, lp->height_);
+  int32_t childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, mPaddingLeft_ + mPaddingRight_ + ((ADViewGroup_MarginLayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + widthUsed, lp->width_);
+  int32_t childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentHeightMeasureSpec, mPaddingTop_ + mPaddingBottom_ + lp->topMargin_ + lp->bottomMargin_ + heightUsed, lp->height_);
   [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
-+ (jint)getChildMeasureSpecWithInt:(jint)spec
-                           withInt:(jint)padding
-                           withInt:(jint)childDimension {
++ (int32_t)getChildMeasureSpecWithInt:(int32_t)spec
+                              withInt:(int32_t)padding
+                              withInt:(int32_t)childDimension {
   return ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(spec, padding, childDimension);
 }
 
@@ -813,7 +824,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)startViewTransitionWithADView:(ADView *)view {
-  if (((ADView *) nil_chk(view))->mParent_ == self) {
+  if (JreObjectEqualsEquals(((ADView *) nil_chk(view))->mParent_, self)) {
     if (mTransitioningViews_ == nil) {
       JreStrongAssignAndConsume(&mTransitioningViews_, new_JavaUtilArrayList_init());
     }
@@ -850,8 +861,8 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
       @throw create_JavaLangIllegalStateException_initWithNSString_(@"addStateFromChildren cannot be enabled if a child has duplicateParentState set to true");
     }
     IOSObjectArray *children = mChildren_;
-    jint count = mChildrenCount_;
-    for (jint i = 0; i < count; i++) {
+    int32_t count = mChildrenCount_;
+    for (int32_t i = 0; i < count; i++) {
       ADView *child = IOSObjectArray_Get(nil_chk(children), i);
       if ((((ADView *) nil_chk(child))->mViewFlags_ & ADView_DUPLICATE_PARENT_STATE) != 0) {
         [child refreshDrawableState];
@@ -860,20 +871,20 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   }
 }
 
-- (IOSIntArray *)onCreateDrawableStateWithInt:(jint)extraSpace {
+- (IOSIntArray *)onCreateDrawableStateWithInt:(int32_t)extraSpace {
   if ((mGroupFlags_ & ADViewGroup_FLAG_ADD_STATES_FROM_CHILDREN) == 0) {
     return [super onCreateDrawableStateWithInt:extraSpace];
   }
-  jint need = 0;
-  jint n = [self getChildCount];
-  for (jint i = 0; i < n; i++) {
+  int32_t need = 0;
+  int32_t n = [self getChildCount];
+  for (int32_t i = 0; i < n; i++) {
     IOSIntArray *childState = [((ADView *) nil_chk([self getChildAtWithInt:i])) getDrawableState];
     if (childState != nil) {
       need += childState->size_;
     }
   }
   IOSIntArray *state = [super onCreateDrawableStateWithInt:extraSpace + need];
-  for (jint i = 0; i < n; i++) {
+  for (int32_t i = 0; i < n; i++) {
     IOSIntArray *childState = [((ADView *) nil_chk([self getChildAtWithInt:i])) getDrawableState];
     if (childState != nil) {
       state = ADView_mergeDrawableStatesWithIntArray_withIntArray_(state, childState);
@@ -882,7 +893,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return state;
 }
 
-- (void)setAddStatesFromChildrenWithBoolean:(jboolean)addsStates {
+- (void)setAddStatesFromChildrenWithBoolean:(bool)addsStates {
   if (addsStates) {
     mGroupFlags_ |= ADViewGroup_FLAG_ADD_STATES_FROM_CHILDREN;
   }
@@ -892,7 +903,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   [self refreshDrawableState];
 }
 
-- (jboolean)addStatesFromChildren {
+- (bool)addStatesFromChildren {
   return (mGroupFlags_ & ADViewGroup_FLAG_ADD_STATES_FROM_CHILDREN) != 0;
 }
 
@@ -909,15 +920,15 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   }
 }
 
-- (jboolean)onStartNestedScrollWithADView:(ADView *)child
-                               withADView:(ADView *)target
-                                  withInt:(jint)nestedScrollAxes {
+- (bool)onStartNestedScrollWithADView:(ADView *)child
+                           withADView:(ADView *)target
+                              withInt:(int32_t)nestedScrollAxes {
   return false;
 }
 
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes {
+                                 withInt:(int32_t)axes {
   mNestedScrollAxes_ = axes;
 }
 
@@ -927,30 +938,30 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)onNestedScrollWithADView:(ADView *)target
-                         withInt:(jint)dxConsumed
-                         withInt:(jint)dyConsumed
-                         withInt:(jint)dxUnconsumed
-                         withInt:(jint)dyUnconsumed {
+                         withInt:(int32_t)dxConsumed
+                         withInt:(int32_t)dyConsumed
+                         withInt:(int32_t)dxUnconsumed
+                         withInt:(int32_t)dyUnconsumed {
   [self dispatchNestedScrollWithInt:dxConsumed withInt:dyConsumed withInt:dxUnconsumed withInt:dyUnconsumed withIntArray:nil];
 }
 
 - (void)onNestedPreScrollWithADView:(ADView *)target
-                            withInt:(jint)dx
-                            withInt:(jint)dy
+                            withInt:(int32_t)dx
+                            withInt:(int32_t)dy
                        withIntArray:(IOSIntArray *)consumed {
   [self dispatchNestedPreScrollWithInt:dx withInt:dy withIntArray:consumed withIntArray:nil];
 }
 
-- (jboolean)onNestedFlingWithADView:(ADView *)target
-                          withFloat:(jfloat)velocityX
-                          withFloat:(jfloat)velocityY
-                        withBoolean:(jboolean)consumed {
+- (bool)onNestedFlingWithADView:(ADView *)target
+                      withFloat:(float)velocityX
+                      withFloat:(float)velocityY
+                    withBoolean:(bool)consumed {
   return [self dispatchNestedFlingWithFloat:velocityX withFloat:velocityY withBoolean:consumed];
 }
 
-- (jboolean)onNestedPreFlingWithADView:(ADView *)target
-                             withFloat:(jfloat)velocityX
-                             withFloat:(jfloat)velocityY {
+- (bool)onNestedPreFlingWithADView:(ADView *)target
+                         withFloat:(float)velocityX
+                         withFloat:(float)velocityY {
   return [self dispatchNestedPreFlingWithFloat:velocityX withFloat:velocityY];
 }
 
@@ -959,13 +970,13 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   [self requestLayout];
 }
 
-- (jboolean)isViewTransitioningWithADView:(ADView *)view {
+- (bool)isViewTransitioningWithADView:(ADView *)view {
   return false;
 }
 
 - (ADRect *)getPaddingMaskBounds {
-  jint flags = mGroupFlags_;
-  jboolean clipToPadding = (flags & ADViewGroup_FLAG_CLIP_TO_PADDING) == ADViewGroup_FLAG_CLIP_TO_PADDING;
+  int32_t flags = mGroupFlags_;
+  bool clipToPadding = (flags & ADViewGroup_FLAG_CLIP_TO_PADDING) == ADViewGroup_FLAG_CLIP_TO_PADDING;
   ADRect *rect = create_ADRect_init();
   if (clipToPadding) {
     rect->left_ = mPaddingLeft_;
@@ -1002,7 +1013,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)childHasTransientStateChangedWithADView:(ADView *)child
-                                    withBoolean:(jboolean)b {
+                                    withBoolean:(bool)b {
   ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(self, child, b);
 }
 
@@ -1010,7 +1021,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   ADViewGroup_notifyGlobalFocusClearedWithId_(self, viewGroup);
 }
 
-- (jboolean)rootViewRequestFocus {
+- (bool)rootViewRequestFocus {
   return ADViewGroup_rootViewRequestFocus(self);
 }
 
@@ -1038,7 +1049,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   ADViewGroup_notifyChildOfDragStartWithADView_(self, child);
 }
 
-- (void)dispatchVisibilityAggregatedWithBoolean:(jboolean)b {
+- (void)dispatchVisibilityAggregatedWithBoolean:(bool)b {
   ADViewGroup_dispatchVisibilityAggregatedWithBoolean_(self, b);
 }
 
@@ -1054,15 +1065,15 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   ADViewGroup_clearDefaultFocusWithADView_(self, view);
 }
 
-- (jint)measureHeightOfChildrenWithInt:(jint)widthMeasureSpec
-                               withInt:(jint)startPosition
-                               withInt:(jint)endPosition
-                               withInt:(jint)maxHeight
-                               withInt:(jint)disallowPartialChildPosition {
-  jint height = 0;
-  jint size = mChildrenCount_;
+- (int32_t)measureHeightOfChildrenWithInt:(int32_t)widthMeasureSpec
+                                  withInt:(int32_t)startPosition
+                                  withInt:(int32_t)endPosition
+                                  withInt:(int32_t)maxHeight
+                                  withInt:(int32_t)disallowPartialChildPosition {
+  int32_t height = 0;
+  int32_t size = mChildrenCount_;
   IOSObjectArray *children = mChildren_;
-  for (jint i = 0; i < size; ++i) {
+  for (int32_t i = 0; i < size; ++i) {
     ADView *child = IOSObjectArray_Get(nil_chk(children), i);
     if ((((ADView *) nil_chk(child))->mViewFlags_ & ADView_VISIBILITY_MASK) != ADView_GONE) {
       [self measureChildWithADView:child withInt:widthMeasureSpec withInt:-2];
@@ -1072,17 +1083,17 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return height;
 }
 
-- (void)setRedrawWithBoolean:(jboolean)flag {
-  for (jint i = 0; i < [self getChildCount]; i++) {
+- (void)setRedrawWithBoolean:(bool)flag {
+  for (int32_t i = 0; i < [self getChildCount]; i++) {
     ADView *child = [self getChildAtWithInt:i];
     [((ADView *) nil_chk(child)) setMyAttributeWithNSString:@"swtRedraw" withId:JavaLangBoolean_valueOfWithBoolean_(flag)];
   }
 }
 
-- (jboolean)hasChildWithADView:(ADView *)child {
-  for (jint i = 0; i < [self getChildCount]; i++) {
+- (bool)hasChildWithADView:(ADView *)child {
+  for (int32_t i = 0; i < [self getChildCount]; i++) {
     ADView *view = JreRetainedLocalValue([self getChildAtWithInt:i]);
-    if (view == child) {
+    if (JreObjectEqualsEquals(view, child)) {
       return true;
     }
   }
@@ -1401,12 +1412,12 @@ void ADViewGroup_init(ADViewGroup *self) {
   JreStrongAssignAndConsume(&self->mChildren_, [IOSObjectArray newArrayWithLength:ADViewGroup_ARRAY_INITIAL_CAPACITY type:ADView_class_()]);
 }
 
-void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(ADViewGroup *self, ADView *child, jint index, ADViewGroup_LayoutParams *params, jboolean preventRequestLayout) {
+void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(ADViewGroup *self, ADView *child, int32_t index, ADViewGroup_LayoutParams *params, bool preventRequestLayout) {
   if (self->mTransition_ != nil) {
     [self->mTransition_ cancelWithInt:ADLayoutTransition_DISAPPEARING];
   }
   if ([((ADView *) nil_chk(child)) getParent] != nil) {
-    if ([child getParent] == self) {
+    if (JreObjectEqualsEquals([child getParent], self)) {
       JreStrongAssign(&child->mLayoutParams_, params);
       return;
     }
@@ -1437,13 +1448,13 @@ void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_wit
   if ([child hasUnhandledKeyListener]) {
     [self incrementChildUnhandledKeyListeners];
   }
-  jboolean childHasFocus = [child hasFocus];
+  bool childHasFocus = [child hasFocus];
   if (childHasFocus) {
     ADViewGroup_requestChildFocusWithADView_withId_(self, child, [child findFocus]);
   }
   ADView_AttachInfo *ai = JreRetainedLocalValue(self->mAttachInfo_);
   if (ai != nil && (self->mGroupFlags_ & ADViewGroup_FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW) == 0) {
-    jboolean lastKeepOn = ai->mKeepScreenOn_;
+    bool lastKeepOn = ai->mKeepScreenOn_;
     ai->mKeepScreenOn_ = false;
     [child dispatchAttachedToWindowWithADView_AttachInfo:self->mAttachInfo_ withInt:(self->mViewFlags_ & ADView_VISIBILITY_MASK)];
     if (ai->mKeepScreenOn_) {
@@ -1465,9 +1476,9 @@ void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_wit
     [self notifySubtreeAccessibilityStateChangedIfNeeded];
   }
   if (self->mTransientIndices_ != nil) {
-    jint transientCount = [self->mTransientIndices_ size];
-    for (jint i = 0; i < transientCount; ++i) {
-      jint oldIndex = [((JavaLangInteger *) nil_chk([((id<JavaUtilList>) nil_chk(self->mTransientIndices_)) getWithInt:i])) intValue];
+    int32_t transientCount = [self->mTransientIndices_ size];
+    for (int32_t i = 0; i < transientCount; ++i) {
+      int32_t oldIndex = [((JavaLangInteger *) nil_chk([((id<JavaUtilList>) nil_chk(self->mTransientIndices_)) getWithInt:i])) intValue];
       if (index <= oldIndex) {
         [((id<JavaUtilList>) nil_chk(self->mTransientIndices_)) setWithInt:i withId:JavaLangInteger_valueOfWithInt_(oldIndex + 1)];
       }
@@ -1482,10 +1493,10 @@ void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_wit
   ADViewGroup_touchAccessibilityNodeProviderIfNeededWithADView_(self, child);
 }
 
-void ADViewGroup_addInArrayWithADView_withInt_(ADViewGroup *self, ADView *child, jint index) {
+void ADViewGroup_addInArrayWithADView_withInt_(ADViewGroup *self, ADView *child, int32_t index) {
   IOSObjectArray *children = self->mChildren_;
-  jint count = self->mChildrenCount_;
-  jint size = ((IOSObjectArray *) nil_chk(children))->size_;
+  int32_t count = self->mChildrenCount_;
+  int32_t size = ((IOSObjectArray *) nil_chk(children))->size_;
   if (index == count) {
     if (size == count) {
       JreStrongAssignAndConsume(&self->mChildren_, [IOSObjectArray newArrayWithLength:size + ADViewGroup_ARRAY_CAPACITY_INCREMENT type:ADView_class_()]);
@@ -1515,12 +1526,12 @@ void ADViewGroup_addInArrayWithADView_withInt_(ADViewGroup *self, ADView *child,
   }
 }
 
-void ADViewGroup_removeFromArrayWithInt_(ADViewGroup *self, jint index) {
+void ADViewGroup_removeFromArrayWithInt_(ADViewGroup *self, int32_t index) {
   IOSObjectArray *children = self->mChildren_;
   if (!(self->mTransitioningViews_ != nil && [self->mTransitioningViews_ containsWithId:IOSObjectArray_Get(nil_chk(children), index)])) {
     ((ADView *) nil_chk(IOSObjectArray_Get(nil_chk(children), index)))->mParent_ = nil;
   }
-  jint count = self->mChildrenCount_;
+  int32_t count = self->mChildrenCount_;
   if (index == count - 1) {
     IOSObjectArray_Set(nil_chk(children), --self->mChildrenCount_, nil);
   }
@@ -1540,34 +1551,34 @@ void ADViewGroup_removeFromArrayWithInt_(ADViewGroup *self, jint index) {
   }
 }
 
-void ADViewGroup_removeFromArrayWithInt_withInt_(ADViewGroup *self, jint start, jint count) {
+void ADViewGroup_removeFromArrayWithInt_withInt_(ADViewGroup *self, int32_t start, int32_t count) {
   IOSObjectArray *children = self->mChildren_;
-  jint childrenCount = self->mChildrenCount_;
+  int32_t childrenCount = self->mChildrenCount_;
   start = JavaLangMath_maxWithInt_withInt_(0, start);
-  jint end = JavaLangMath_minWithInt_withInt_(childrenCount, start + count);
+  int32_t end = JavaLangMath_minWithInt_withInt_(childrenCount, start + count);
   if (start == end) {
     return;
   }
   if (end == childrenCount) {
-    for (jint i = start; i < end; i++) {
+    for (int32_t i = start; i < end; i++) {
       ((ADView *) nil_chk(IOSObjectArray_Get(nil_chk(children), i)))->mParent_ = nil;
       IOSObjectArray_Set(children, i, nil);
     }
   }
   else {
-    for (jint i = start; i < end; i++) {
+    for (int32_t i = start; i < end; i++) {
       ((ADView *) nil_chk(IOSObjectArray_Get(nil_chk(children), i)))->mParent_ = nil;
     }
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(children, end, children, start, childrenCount - end);
-    for (jint i = childrenCount - (end - start); i < childrenCount; i++) {
+    for (int32_t i = childrenCount - (end - start); i < childrenCount; i++) {
       IOSObjectArray_Set(nil_chk(children), i, nil);
     }
   }
   self->mChildrenCount_ -= (end - start);
 }
 
-jboolean ADViewGroup_removeViewInternalWithADView_(ADViewGroup *self, ADView *view) {
-  jint index = [self indexOfChildWithADView:view];
+bool ADViewGroup_removeViewInternalWithADView_(ADViewGroup *self, ADView *view) {
+  int32_t index = [self indexOfChildWithADView:view];
   if (index >= 0) {
     ADViewGroup_removeViewInternalWithInt_withADView_(self, index, view);
     return true;
@@ -1575,16 +1586,16 @@ jboolean ADViewGroup_removeViewInternalWithADView_(ADViewGroup *self, ADView *vi
   return false;
 }
 
-void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, jint index, ADView *view) {
+void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, int32_t index, ADView *view) {
   if (self->mTransition_ != nil) {
     [self->mTransition_ removeChildWithADViewGroup:self withADView:view];
   }
-  jboolean clearChildFocus = false;
-  if (view == self->mFocused_) {
+  bool clearChildFocus = false;
+  if (JreObjectEqualsEquals(view, self->mFocused_)) {
     [((ADView *) nil_chk(view)) unFocusWithId:nil];
     clearChildFocus = true;
   }
-  if (view == self->mFocusedInCluster_) {
+  if (JreObjectEqualsEquals(view, self->mFocusedInCluster_)) {
     ADViewGroup_clearFocusedInClusterWithADView_(self, view);
   }
   [((ADView *) nil_chk(view)) clearAccessibilityFocus];
@@ -1604,7 +1615,7 @@ void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, jint i
   if ([view hasUnhandledKeyListener]) {
     ADViewGroup_decrementChildUnhandledKeyListeners(self);
   }
-  if (view == self->mDefaultFocus_) {
+  if (JreObjectEqualsEquals(view, self->mDefaultFocus_)) {
     ADViewGroup_clearDefaultFocusWithADView_(self, view);
   }
   if (clearChildFocus) {
@@ -1617,9 +1628,9 @@ void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, jint i
   if ([view getVisibility] != ADView_GONE) {
     [self notifySubtreeAccessibilityStateChangedIfNeeded];
   }
-  jint transientCount = self->mTransientIndices_ == nil ? 0 : [self->mTransientIndices_ size];
-  for (jint i = 0; i < transientCount; ++i) {
-    jint oldIndex = [((JavaLangInteger *) nil_chk([((id<JavaUtilList>) nil_chk(self->mTransientIndices_)) getWithInt:i])) intValue];
+  int32_t transientCount = self->mTransientIndices_ == nil ? 0 : [self->mTransientIndices_ size];
+  for (int32_t i = 0; i < transientCount; ++i) {
+    int32_t oldIndex = [((JavaLangInteger *) nil_chk([((id<JavaUtilList>) nil_chk(self->mTransientIndices_)) getWithInt:i])) intValue];
     if (index < oldIndex) {
       [((id<JavaUtilList>) nil_chk(self->mTransientIndices_)) setWithInt:i withId:JavaLangInteger_valueOfWithInt_(oldIndex - 1)];
     }
@@ -1629,11 +1640,11 @@ void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, jint i
   }
 }
 
-jboolean ADViewGroup_hasBooleanFlagWithInt_(ADViewGroup *self, jint flag) {
+bool ADViewGroup_hasBooleanFlagWithInt_(ADViewGroup *self, int32_t flag) {
   return (self->mGroupFlags_ & flag) == flag;
 }
 
-void ADViewGroup_setBooleanFlagWithInt_withBoolean_(ADViewGroup *self, jint flag, jboolean value) {
+void ADViewGroup_setBooleanFlagWithInt_withBoolean_(ADViewGroup *self, int32_t flag, bool value) {
   if (value) {
     self->mGroupFlags_ |= flag;
   }
@@ -1642,18 +1653,18 @@ void ADViewGroup_setBooleanFlagWithInt_withBoolean_(ADViewGroup *self, jint flag
   }
 }
 
-void ADViewGroup_setLayoutModeWithInt_withBoolean_(ADViewGroup *self, jint layoutMode, jboolean explicitly) {
+void ADViewGroup_setLayoutModeWithInt_withBoolean_(ADViewGroup *self, int32_t layoutMode, bool explicitly) {
   self->mLayoutMode_ = layoutMode;
   ADViewGroup_setBooleanFlagWithInt_withBoolean_(self, ADViewGroup_FLAG_LAYOUT_MODE_WAS_EXPLICITLY_SET, explicitly);
 }
 
-jint ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(jint spec, jint padding, jint childDimension) {
+int32_t ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(int32_t spec, int32_t padding, int32_t childDimension) {
   ADViewGroup_initialize();
-  jint specMode = ADView_MeasureSpec_getModeWithInt_(spec);
-  jint specSize = ADView_MeasureSpec_getSizeWithInt_(spec);
-  jint size = JavaLangMath_maxWithInt_withInt_(0, specSize - padding);
-  jint resultSize = 0;
-  jint resultMode = 0;
+  int32_t specMode = ADView_MeasureSpec_getModeWithInt_(spec);
+  int32_t specSize = ADView_MeasureSpec_getSizeWithInt_(spec);
+  int32_t size = JavaLangMath_maxWithInt_withInt_(0, specSize - padding);
+  int32_t resultSize = 0;
+  int32_t resultMode = 0;
   switch (specMode) {
     case ADView_MeasureSpec_EXACTLY:
     if (childDimension >= 0) {
@@ -1712,13 +1723,13 @@ void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *v) {
 void ADViewGroup_requestChildFocusWithADView_withId_(ADViewGroup *self, ADView *child, id findFocus) {
 }
 
-void ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(ADViewGroup *self, ADView *child, jboolean b) {
+void ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(ADViewGroup *self, ADView *child, bool b) {
 }
 
 void ADViewGroup_notifyGlobalFocusClearedWithId_(ADViewGroup *self, id viewGroup) {
 }
 
-jboolean ADViewGroup_rootViewRequestFocus(ADViewGroup *self) {
+bool ADViewGroup_rootViewRequestFocus(ADViewGroup *self) {
   return false;
 }
 
@@ -1740,7 +1751,7 @@ void ADViewGroup_setDefaultFocusWithADView_(ADViewGroup *self, ADView *child) {
 void ADViewGroup_notifyChildOfDragStartWithADView_(ADViewGroup *self, ADView *child) {
 }
 
-void ADViewGroup_dispatchVisibilityAggregatedWithBoolean_(ADViewGroup *self, jboolean b) {
+void ADViewGroup_dispatchVisibilityAggregatedWithBoolean_(ADViewGroup *self, bool b) {
 }
 
 void ADViewGroup_clearFocusedInClusterWithADView_(ADViewGroup *self, ADView *view) {
@@ -1753,6 +1764,8 @@ void ADViewGroup_clearDefaultFocusWithADView_(ADViewGroup *self, ADView *view) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup)
+
+J2OBJC_NAME_MAPPING(ADViewGroup, "r.android.view", "AD")
 
 @implementation ADViewGroup_OnHierarchyChangeListener
 
@@ -1786,7 +1799,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADViewGroup_OnHierarchyChangeListener)
 - (void)startTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
                               withADViewGroup:(ADViewGroup *)container
                                    withADView:(ADView *)view
-                                      withInt:(jint)transitionType {
+                                      withInt:(int32_t)transitionType {
   if (transitionType == ADLayoutTransition_DISAPPEARING) {
     [this$0_ startViewTransitionWithADView:view];
   }
@@ -1795,7 +1808,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADViewGroup_OnHierarchyChangeListener)
 - (void)endTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
                             withADViewGroup:(ADViewGroup *)container
                                  withADView:(ADView *)view
-                                    withInt:(jint)transitionType {
+                                    withInt:(int32_t)transitionType {
   if (this$0_->mLayoutCalledWhileSuppressed_ && ![((ADLayoutTransition *) nil_chk(transition)) isChangingLayout]) {
     [this$0_ requestLayout];
     this$0_->mLayoutCalledWhileSuppressed_ = false;
@@ -1827,7 +1840,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADViewGroup_OnHierarchyChangeListener)
     { "this$0_", "LADViewGroup;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADViewGroup;", "startTransition", "LADLayoutTransition;LADViewGroup;LADView;I", "endTransition" };
-  static const J2ObjcClassInfo _ADViewGroup_1 = { "", "r.android.view", ptrTable, methods, fields, 7, 0x8010, 3, 1, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADViewGroup_1 = { "", "r.android.view", ptrTable, methods, fields, 7, 0x8000, 3, 1, 0, -1, -1, -1, -1 };
   return &_ADViewGroup_1;
 }
 
@@ -1848,8 +1861,8 @@ ADViewGroup_1 *create_ADViewGroup_1_initWithADViewGroup_(ADViewGroup *outer$) {
 
 @implementation ADViewGroup_LayoutParams
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height {
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height {
   ADViewGroup_LayoutParams_initWithInt_withInt_(self, width, height);
   return self;
 }
@@ -1866,10 +1879,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)resolveLayoutDirectionWithInt:(jint)layoutDirection {
+- (void)resolveLayoutDirectionWithInt:(int32_t)layoutDirection {
 }
 
-+ (NSString *)sizeToStringWithInt:(jint)size {
++ (NSString *)sizeToStringWithInt:(int32_t)size {
   return ADViewGroup_LayoutParams_sizeToStringWithInt_(size);
 }
 
@@ -1904,17 +1917,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADViewGroup_LayoutParams_initWithInt_withInt_(ADViewGroup_LayoutParams *self, jint width, jint height) {
+void ADViewGroup_LayoutParams_initWithInt_withInt_(ADViewGroup_LayoutParams *self, int32_t width, int32_t height) {
   NSObject_init(self);
   self->width_ = width;
   self->height_ = height;
 }
 
-ADViewGroup_LayoutParams *new_ADViewGroup_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADViewGroup_LayoutParams *new_ADViewGroup_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_NEW_IMPL(ADViewGroup_LayoutParams, initWithInt_withInt_, width, height)
 }
 
-ADViewGroup_LayoutParams *create_ADViewGroup_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADViewGroup_LayoutParams *create_ADViewGroup_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_CREATE_IMPL(ADViewGroup_LayoutParams, initWithInt_withInt_, width, height)
 }
 
@@ -1944,7 +1957,7 @@ ADViewGroup_LayoutParams *create_ADViewGroup_LayoutParams_init() {
   J2OBJC_CREATE_IMPL(ADViewGroup_LayoutParams, init)
 }
 
-NSString *ADViewGroup_LayoutParams_sizeToStringWithInt_(jint size) {
+NSString *ADViewGroup_LayoutParams_sizeToStringWithInt_(int32_t size) {
   ADViewGroup_LayoutParams_initialize();
   if (size == ADViewGroup_LayoutParams_WRAP_CONTENT) {
     return @"wrap-content";
@@ -1959,8 +1972,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
 
 @implementation ADViewGroup_MarginLayoutParams
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height {
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height {
   ADViewGroup_MarginLayoutParams_initWithInt_withInt_(self, width, height);
   return self;
 }
@@ -1985,10 +1998,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
   self->mMarginFlags_ = source->mMarginFlags_;
 }
 
-- (void)setMarginsWithInt:(jint)left
-                  withInt:(jint)top
-                  withInt:(jint)right
-                  withInt:(jint)bottom {
+- (void)setMarginsWithInt:(int32_t)left
+                  withInt:(int32_t)top
+                  withInt:(int32_t)right
+                  withInt:(int32_t)bottom {
   leftMargin_ = left;
   topMargin_ = top;
   rightMargin_ = right;
@@ -2003,10 +2016,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
   }
 }
 
-- (void)setMarginsRelativeWithInt:(jint)start
-                          withInt:(jint)top
-                          withInt:(jint)end
-                          withInt:(jint)bottom {
+- (void)setMarginsRelativeWithInt:(int32_t)start
+                          withInt:(int32_t)top
+                          withInt:(int32_t)end
+                          withInt:(int32_t)bottom {
   startMargin_ = start;
   topMargin_ = top;
   endMargin_ = end;
@@ -2014,12 +2027,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
   mMarginFlags_ |= ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK;
 }
 
-- (void)setMarginStartWithInt:(jint)start {
+- (void)setMarginStartWithInt:(int32_t)start {
   startMargin_ = start;
   mMarginFlags_ |= ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK;
 }
 
-- (jint)getMarginStart {
+- (int32_t)getMarginStart {
   if (startMargin_ != ADViewGroup_MarginLayoutParams_DEFAULT_MARGIN_RELATIVE) return startMargin_;
   if ((mMarginFlags_ & ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK) == ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK) {
     ADViewGroup_MarginLayoutParams_doResolveMargins(self);
@@ -2033,12 +2046,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
   }
 }
 
-- (void)setMarginEndWithInt:(jint)end {
+- (void)setMarginEndWithInt:(int32_t)end {
   endMargin_ = end;
   mMarginFlags_ |= ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK;
 }
 
-- (jint)getMarginEnd {
+- (int32_t)getMarginEnd {
   if (endMargin_ != ADViewGroup_MarginLayoutParams_DEFAULT_MARGIN_RELATIVE) return endMargin_;
   if ((mMarginFlags_ & ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK) == ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK) {
     ADViewGroup_MarginLayoutParams_doResolveMargins(self);
@@ -2052,11 +2065,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
   }
 }
 
-- (jboolean)isMarginRelative {
+- (bool)isMarginRelative {
   return (startMargin_ != ADViewGroup_MarginLayoutParams_DEFAULT_MARGIN_RELATIVE || endMargin_ != ADViewGroup_MarginLayoutParams_DEFAULT_MARGIN_RELATIVE);
 }
 
-- (void)setLayoutDirectionWithInt:(jint)layoutDirection {
+- (void)setLayoutDirectionWithInt:(int32_t)layoutDirection {
   if (layoutDirection != ADView_LAYOUT_DIRECTION_LTR && layoutDirection != ADView_LAYOUT_DIRECTION_RTL) return;
   if (layoutDirection != (mMarginFlags_ & ADViewGroup_MarginLayoutParams_LAYOUT_DIRECTION_MASK)) {
     mMarginFlags_ &= ~ADViewGroup_MarginLayoutParams_LAYOUT_DIRECTION_MASK;
@@ -2070,11 +2083,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
   }
 }
 
-- (jint)getLayoutDirection {
+- (int32_t)getLayoutDirection {
   return (mMarginFlags_ & ADViewGroup_MarginLayoutParams_LAYOUT_DIRECTION_MASK);
 }
 
-- (void)resolveLayoutDirectionWithInt:(jint)layoutDirection {
+- (void)resolveLayoutDirectionWithInt:(int32_t)layoutDirection {
   [self setLayoutDirectionWithInt:layoutDirection];
   if (![self isMarginRelative] || (mMarginFlags_ & ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK) != ADViewGroup_MarginLayoutParams_NEED_RESOLUTION_MASK) return;
   ADViewGroup_MarginLayoutParams_doResolveMargins(self);
@@ -2084,7 +2097,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
   ADViewGroup_MarginLayoutParams_doResolveMargins(self);
 }
 
-- (jboolean)isLayoutRtl {
+- (bool)isLayoutRtl {
   return (mMarginFlags_ & ADViewGroup_MarginLayoutParams_LAYOUT_DIRECTION_MASK) == ADView_LAYOUT_DIRECTION_RTL;
 }
 
@@ -2151,7 +2164,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutParams)
 
 @end
 
-void ADViewGroup_MarginLayoutParams_initWithInt_withInt_(ADViewGroup_MarginLayoutParams *self, jint width, jint height) {
+void ADViewGroup_MarginLayoutParams_initWithInt_withInt_(ADViewGroup_MarginLayoutParams *self, int32_t width, int32_t height) {
   ADViewGroup_LayoutParams_initWithInt_withInt_(self, width, height);
   self->startMargin_ = ADViewGroup_MarginLayoutParams_DEFAULT_MARGIN_RELATIVE;
   self->endMargin_ = ADViewGroup_MarginLayoutParams_DEFAULT_MARGIN_RELATIVE;
@@ -2161,11 +2174,11 @@ void ADViewGroup_MarginLayoutParams_initWithInt_withInt_(ADViewGroup_MarginLayou
   self->mMarginFlags_ &= ~ADViewGroup_MarginLayoutParams_RTL_COMPATIBILITY_MODE_MASK;
 }
 
-ADViewGroup_MarginLayoutParams *new_ADViewGroup_MarginLayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADViewGroup_MarginLayoutParams *new_ADViewGroup_MarginLayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_NEW_IMPL(ADViewGroup_MarginLayoutParams, initWithInt_withInt_, width, height)
 }
 
-ADViewGroup_MarginLayoutParams *create_ADViewGroup_MarginLayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADViewGroup_MarginLayoutParams *create_ADViewGroup_MarginLayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_CREATE_IMPL(ADViewGroup_MarginLayoutParams, initWithInt_withInt_, width, height)
 }
 

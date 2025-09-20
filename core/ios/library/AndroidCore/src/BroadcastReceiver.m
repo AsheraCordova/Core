@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\BroadcastReceiver.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BroadcastReceiver.h"
 #include "Context.h"
 #include "Intent.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADBroadcastReceiver
@@ -53,3 +64,5 @@ ADBroadcastReceiver *create_ADBroadcastReceiver_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBroadcastReceiver)
+
+J2OBJC_NAME_MAPPING(ADBroadcastReceiver, "r.android.content", "AD")

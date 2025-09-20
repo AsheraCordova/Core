@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\CompoundButton.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CompoundButton")
@@ -24,6 +25,8 @@
 @class ADDrawable;
 @class ASRectM;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADCanvas;
 @protocol ADCompoundButton_OnCheckedChangeListener;
 @protocol ASIWidget;
@@ -40,30 +43,30 @@
 
 - (ADColorStateList *)getButtonTintList;
 
-- (jint)getCompoundPaddingLeft;
+- (int32_t)getCompoundPaddingLeft;
 
-- (jint)getCompoundPaddingRight;
+- (int32_t)getCompoundPaddingRight;
 
-- (jint)getHorizontalOffsetForDrawables;
+- (int32_t)getHorizontalOffsetForDrawables;
 
-- (ASRectM *)getLeftDrawableBoundsWithInt:(jint)x
-                                  withInt:(jint)y
-                                  withInt:(jint)width
-                                  withInt:(jint)height;
+- (ASRectM *)getLeftDrawableBoundsWithInt:(int32_t)x
+                                  withInt:(int32_t)y
+                                  withInt:(int32_t)width
+                                  withInt:(int32_t)height;
 
-- (jboolean)hasDrawables;
+- (bool)hasDrawables;
 
 - (void)invalidateDrawableWithADDrawable:(ADDrawable *)drawable;
 
-- (jboolean)isChecked;
+- (bool)isChecked;
 
 - (void)setButtonDrawableWithADDrawable:(ADDrawable *)drawable;
 
-- (void)setButtonDrawableWithInt:(jint)resId;
+- (void)setButtonDrawableWithInt:(int32_t)resId;
 
 - (void)setButtonTintListWithADColorStateList:(ADColorStateList *)tint;
 
-- (void)setCheckedWithBoolean:(jboolean)checked;
+- (void)setCheckedWithBoolean:(bool)checked;
 
 - (void)setDefaultStateDescritption;
 
@@ -73,7 +76,7 @@
 
 #pragma mark Protected
 
-- (IOSIntArray *)onCreateDrawableStateWithInt:(jint)extraSpace;
+- (IOSIntArray *)onCreateDrawableStateWithInt:(int32_t)extraSpace;
 
 - (void)onDrawWithADCanvas:(id<ADCanvas>)canvas;
 
@@ -91,23 +94,26 @@ J2OBJC_TYPE_LITERAL_HEADER(ADCompoundButton)
 
 @compatibility_alias RAndroidWidgetCompoundButton ADCompoundButton;
 
+
 #endif
 
 #if !defined (ADCompoundButton_OnCheckedChangeListener_) && (INCLUDE_ALL_CompoundButton || defined(INCLUDE_ADCompoundButton_OnCheckedChangeListener))
 #define ADCompoundButton_OnCheckedChangeListener_
 
 @class ADCompoundButton;
+@class JavaLangBoolean;
 
 @protocol ADCompoundButton_OnCheckedChangeListener < JavaObject >
 
 - (void)onCheckedChangedWithADCompoundButton:(ADCompoundButton *)buttonView
-                                 withBoolean:(jboolean)isChecked;
+                                 withBoolean:(bool)isChecked;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADCompoundButton_OnCheckedChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADCompoundButton_OnCheckedChangeListener)
+
 
 #endif
 
@@ -125,6 +131,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADCompoundButton_OnCheckedChangeListener)
 J2OBJC_EMPTY_STATIC_INIT(ADCompoundButton_AutofillManager)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADCompoundButton_AutofillManager)
+
 
 #endif
 

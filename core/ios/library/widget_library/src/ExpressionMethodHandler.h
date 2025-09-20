@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ExpressionMethodHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ExpressionMethodHandler")
@@ -16,6 +17,8 @@
 #if !defined (ASExpressionMethodHandler_) && (INCLUDE_ALL_ExpressionMethodHandler || defined(INCLUDE_ASExpressionMethodHandler))
 #define ASExpressionMethodHandler_
 
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIWidget;
 
 @interface ASExpressionMethodHandler : NSObject
@@ -28,7 +31,7 @@
                     withId:(id)obj
              withASIWidget:(id<ASIWidget>)widget;
 
-+ (jboolean)isVisibleWithId:(id)obj;
++ (bool)isVisibleWithId:(id)obj;
 
 @end
 
@@ -42,11 +45,12 @@ FOUNDATION_EXPORT ASExpressionMethodHandler *create_ASExpressionMethodHandler_in
 
 FOUNDATION_EXPORT id ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(NSString *methodName, id obj, id<ASIWidget> widget);
 
-FOUNDATION_EXPORT jboolean ASExpressionMethodHandler_isVisibleWithId_(id obj);
+FOUNDATION_EXPORT bool ASExpressionMethodHandler_isVisibleWithId_(id obj);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASExpressionMethodHandler)
 
 @compatibility_alias ComAsheraModelExpressionMethodHandler ASExpressionMethodHandler;
+
 
 #endif
 

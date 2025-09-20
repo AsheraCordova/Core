@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\Interval.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Interval")
@@ -21,41 +22,42 @@
 #include "java/lang/Comparable.h"
 
 @class IOSObjectArray;
+@class JavaLangInteger;
 
 @interface ASInterval : NSObject < JavaLangComparable >
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end;
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end;
 
-- (jint)compareToWithId:(ASInterval *)i;
+- (int32_t)compareToWithId:(ASInterval *)i;
 
 - (IOSObjectArray *)getArgs;
 
-- (jint)getEnd;
+- (int32_t)getEnd;
 
 - (ASInterval *)getLeft;
 
-- (jint)getMax;
+- (int32_t)getMax;
 
 - (ASInterval *)getRight;
 
-- (jint)getStart;
+- (int32_t)getStart;
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments;
 
-- (void)setEndWithInt:(jint)end;
+- (void)setEndWithInt:(int32_t)end;
 
 - (void)setLeftWithASInterval:(ASInterval *)left;
 
-- (void)setMaxWithInt:(jint)max;
+- (void)setMaxWithInt:(int32_t)max;
 
 - (void)setRightWithASInterval:(ASInterval *)right;
 
-- (void)setStartWithInt:(jint)start;
+- (void)setStartWithInt:(int32_t)start;
 
 // Disallowed inherited constructors, do not use.
 
@@ -65,11 +67,12 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASInterval)
 
-FOUNDATION_EXPORT void ASInterval_initWithInt_withInt_(ASInterval *self, jint start, jint end);
+FOUNDATION_EXPORT void ASInterval_initWithInt_withInt_(ASInterval *self, int32_t start, int32_t end);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASInterval)
 
 @compatibility_alias ComAsheraAttributedtextInterval ASInterval;
+
 
 #endif
 

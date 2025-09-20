@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\UrlInterval.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_UrlInterval")
@@ -23,13 +24,15 @@
 @class ASInterval;
 @class ASWidgetAttributeMap;
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ASUrlInterval : ASStyleInterval
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)style
                withNSString:(NSString *)href;
 
@@ -37,8 +40,8 @@
 
 - (NSString *)getHref;
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments;
 
 - (void)setHrefWithNSString:(NSString *)href;
@@ -47,23 +50,24 @@
 
 // Disallowed inherited constructors, do not use.
 
-- (instancetype)initWithInt:(jint)arg0
-                    withInt:(jint)arg1
+- (instancetype)initWithInt:(int32_t)arg0
+                    withInt:(int32_t)arg1
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)arg2 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASUrlInterval)
 
-FOUNDATION_EXPORT void ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(ASUrlInterval *self, jint start, jint end, ASWidgetAttributeMap *style, NSString *href);
+FOUNDATION_EXPORT void ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(ASUrlInterval *self, int32_t start, int32_t end, ASWidgetAttributeMap *style, NSString *href);
 
-FOUNDATION_EXPORT ASUrlInterval *new_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(jint start, jint end, ASWidgetAttributeMap *style, NSString *href) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASUrlInterval *new_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(int32_t start, int32_t end, ASWidgetAttributeMap *style, NSString *href) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASUrlInterval *create_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(jint start, jint end, ASWidgetAttributeMap *style, NSString *href);
+FOUNDATION_EXPORT ASUrlInterval *create_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(int32_t start, int32_t end, ASWidgetAttributeMap *style, NSString *href);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUrlInterval)
 
 @compatibility_alias ComAsheraAttributedtextUrlInterval ASUrlInterval;
+
 
 #endif
 

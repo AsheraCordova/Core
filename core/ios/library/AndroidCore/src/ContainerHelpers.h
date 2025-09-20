@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\ContainerHelpers.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ContainerHelpers")
@@ -19,6 +20,9 @@
 @class IOSIntArray;
 @class IOSLongArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 @interface ADContainerHelpers : NSObject
 
@@ -26,22 +30,22 @@
 
 - (instancetype)init;
 
-+ (jint)binarySearchWithIntArray:(IOSIntArray *)array
-                         withInt:(jint)size
-                         withInt:(jint)value;
++ (int32_t)binarySearchWithIntArray:(IOSIntArray *)array
+                            withInt:(int32_t)size
+                            withInt:(int32_t)value;
 
-+ (jint)binarySearchWithLongArray:(IOSLongArray *)array
-                          withInt:(jint)size
-                         withLong:(jlong)value;
++ (int32_t)binarySearchWithLongArray:(IOSLongArray *)array
+                             withInt:(int32_t)size
+                            withLong:(int64_t)value;
 
-+ (jboolean)equalWithId:(id)a
-                 withId:(id)b;
++ (bool)equalWithId:(id)a
+             withId:(id)b;
 
-+ (jint)idealByteArraySizeWithInt:(jint)need;
++ (int32_t)idealByteArraySizeWithInt:(int32_t)need;
 
-+ (jint)idealIntArraySizeWithInt:(jint)need;
++ (int32_t)idealIntArraySizeWithInt:(int32_t)need;
 
-+ (jint)idealLongArraySizeWithInt:(jint)need;
++ (int32_t)idealLongArraySizeWithInt:(int32_t)need;
 
 @end
 
@@ -68,21 +72,22 @@ FOUNDATION_EXPORT ADContainerHelpers *new_ADContainerHelpers_init(void) NS_RETUR
 
 FOUNDATION_EXPORT ADContainerHelpers *create_ADContainerHelpers_init(void);
 
-FOUNDATION_EXPORT jint ADContainerHelpers_idealIntArraySizeWithInt_(jint need);
+FOUNDATION_EXPORT int32_t ADContainerHelpers_idealIntArraySizeWithInt_(int32_t need);
 
-FOUNDATION_EXPORT jint ADContainerHelpers_idealLongArraySizeWithInt_(jint need);
+FOUNDATION_EXPORT int32_t ADContainerHelpers_idealLongArraySizeWithInt_(int32_t need);
 
-FOUNDATION_EXPORT jint ADContainerHelpers_idealByteArraySizeWithInt_(jint need);
+FOUNDATION_EXPORT int32_t ADContainerHelpers_idealByteArraySizeWithInt_(int32_t need);
 
-FOUNDATION_EXPORT jboolean ADContainerHelpers_equalWithId_withId_(id a, id b);
+FOUNDATION_EXPORT bool ADContainerHelpers_equalWithId_withId_(id a, id b);
 
-FOUNDATION_EXPORT jint ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *array, jint size, jint value);
+FOUNDATION_EXPORT int32_t ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *array, int32_t size, int32_t value);
 
-FOUNDATION_EXPORT jint ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray *array, jint size, jlong value);
+FOUNDATION_EXPORT int32_t ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray *array, int32_t size, int64_t value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADContainerHelpers)
 
 @compatibility_alias RAndroidUtilContainerHelpers ADContainerHelpers;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\InputFilter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_InputFilter")
@@ -35,6 +36,7 @@ FOUNDATION_EXPORT ADInputFilter *create_ADInputFilter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADInputFilter)
 
 @compatibility_alias RAndroidTextInputFilter ADInputFilter;
+
 
 #endif
 

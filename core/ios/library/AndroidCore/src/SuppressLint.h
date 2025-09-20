@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\SuppressLint.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SuppressLint")
@@ -22,12 +23,15 @@
 
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADSuppressLint < JavaLangAnnotationAnnotation >
 
 @property (readonly) IOSObjectArray *value;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -47,6 +51,7 @@ FOUNDATION_EXPORT id<ADSuppressLint> create_ADSuppressLint(IOSObjectArray *value
 J2OBJC_TYPE_LITERAL_HEADER(ADSuppressLint)
 
 #define RAndroidAnnotationSuppressLint ADSuppressLint
+
 
 #endif
 

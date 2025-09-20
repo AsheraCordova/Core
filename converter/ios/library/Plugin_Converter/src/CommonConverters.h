@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\CommonConverters.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CommonConverters")
@@ -15,6 +16,8 @@
 
 #if !defined (ASCommonConverters_) && (INCLUDE_ALL_CommonConverters || defined(INCLUDE_ASCommonConverters))
 #define ASCommonConverters_
+
+@class NSString;
 
 @interface ASCommonConverters : NSObject
 
@@ -219,6 +222,7 @@ FOUNDATION_EXPORT void ASCommonConverters_init__(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASCommonConverters)
 
 @compatibility_alias ComAsheraConverterCommonConverters ASCommonConverters;
+
 
 #endif
 

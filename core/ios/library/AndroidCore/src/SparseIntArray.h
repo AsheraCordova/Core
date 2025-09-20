@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\SparseIntArray.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SparseIntArray")
@@ -15,6 +16,9 @@
 
 #if !defined (ADSparseIntArray_) && (INCLUDE_ALL_SparseIntArray || defined(INCLUDE_ADSparseIntArray))
 #define ADSparseIntArray_
+
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADSparseIntArray : NSObject
 
@@ -32,14 +36,14 @@
   sparse array will be initialized with a light-weight representation
   not requiring any additional array allocations.
  */
-- (instancetype)initWithInt:(jint)initialCapacity;
+- (instancetype)initWithInt:(int32_t)initialCapacity;
 
 /*!
  @brief Puts a key/value pair into the array, optimizing for the case where
   the key is greater than all existing keys in the array.
  */
-- (void)appendWithInt:(jint)key
-              withInt:(jint)value;
+- (void)appendWithInt:(int32_t)key
+              withInt:(int32_t)value;
 
 /*!
  @brief Removes all key-value mappings from this SparseIntArray.
@@ -51,27 +55,27 @@
 /*!
  @brief Removes the mapping from the specified key, if there was any.
  */
-- (void)delete__WithInt:(jint)key;
+- (void)delete__WithInt:(int32_t)key;
 
 /*!
  @brief Gets the int mapped from the specified key, or <code>0</code>
   if no such mapping has been made.
  */
-- (jint)getWithInt:(jint)key;
+- (int32_t)getWithInt:(int32_t)key;
 
 /*!
  @brief Gets the int mapped from the specified key, or the specified value
   if no such mapping has been made.
  */
-- (jint)getWithInt:(jint)key
-           withInt:(jint)valueIfKeyNotFound;
+- (int32_t)getWithInt:(int32_t)key
+              withInt:(int32_t)valueIfKeyNotFound;
 
 /*!
  @brief Returns the index for which <code>keyAt</code> would return the
   specified key, or a negative number if the specified
   key is not mapped.
  */
-- (jint)indexOfKeyWithInt:(jint)key;
+- (int32_t)indexOfKeyWithInt:(int32_t)key;
 
 /*!
  @brief Returns an index for which <code>valueAt</code> would return the
@@ -81,7 +85,7 @@
   and that multiple keys can map to the same value and this will
   find only one of them.
  */
-- (jint)indexOfValueWithInt:(jint)value;
+- (int32_t)indexOfValueWithInt:(int32_t)value;
 
 /*!
  @brief Given an index in the range <code>0...size()-1</code>, returns
@@ -92,35 +96,36 @@
   smallest key and <code>keyAt(size()-1)</code> will return the largest
   key.</p>
  */
-- (jint)keyAtWithInt:(jint)index;
+- (int32_t)keyAtWithInt:(int32_t)index;
 
 /*!
  @brief Adds a mapping from the specified key to the specified value,
   replacing the previous mapping from the specified key if there
   was one.
  */
-- (void)putWithInt:(jint)key
-           withInt:(jint)value;
+- (void)putWithInt:(int32_t)key
+           withInt:(int32_t)value;
 
 /*!
  @brief Removes the mapping at the given index.
  */
-- (void)removeAtWithInt:(jint)index;
+- (void)removeAtWithInt:(int32_t)index;
 
 /*!
  @brief Directly set the value at a particular index.
  */
-- (void)setValueAtWithInt:(jint)index
-                  withInt:(jint)value;
+- (void)setValueAtWithInt:(int32_t)index
+                  withInt:(int32_t)value;
 
 /*!
  @brief Returns the number of key-value mappings that this SparseIntArray
   currently stores.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
- @brief <p>This implementation composes a string by iterating over its mappings.
+ @brief  
+ <p>This implementation composes a string by iterating over its mappings.
  */
 - (NSString *)description;
 
@@ -134,7 +139,7 @@
   smallest key and <code>valueAt(size()-1)</code> will return the value
   associated with the largest key.</p>
  */
-- (jint)valueAtWithInt:(jint)index;
+- (int32_t)valueAtWithInt:(int32_t)index;
 
 @end
 
@@ -146,15 +151,16 @@ FOUNDATION_EXPORT ADSparseIntArray *new_ADSparseIntArray_init(void) NS_RETURNS_R
 
 FOUNDATION_EXPORT ADSparseIntArray *create_ADSparseIntArray_init(void);
 
-FOUNDATION_EXPORT void ADSparseIntArray_initWithInt_(ADSparseIntArray *self, jint initialCapacity);
+FOUNDATION_EXPORT void ADSparseIntArray_initWithInt_(ADSparseIntArray *self, int32_t initialCapacity);
 
-FOUNDATION_EXPORT ADSparseIntArray *new_ADSparseIntArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADSparseIntArray *new_ADSparseIntArray_initWithInt_(int32_t initialCapacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADSparseIntArray *create_ADSparseIntArray_initWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT ADSparseIntArray *create_ADSparseIntArray_initWithInt_(int32_t initialCapacity);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADSparseIntArray)
 
 @compatibility_alias RAndroidUtilSparseIntArray ADSparseIntArray;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\net\Uri.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Uri")
@@ -39,6 +40,9 @@
 @class ADParcelable_Creator;
 @class ADUri_Builder;
 @class JavaIoFile;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADParcel;
 @protocol JavaUtilList;
 @protocol JavaUtilSet;
@@ -69,7 +73,7 @@
   reported to <code>StrictMode</code>.
  */
 - (void)checkContentUriWithoutPermissionWithNSString:(NSString *)location
-                                             withInt:(jint)flags;
+                                             withInt:(int32_t)flags;
 
 /*!
  @brief If this is a <code>file://</code> Uri, it will be reported to 
@@ -81,7 +85,7 @@
  @brief Compares the string representation of this Uri with that of
   another.
  */
-- (jint)compareToWithId:(ADUri *)other;
+- (int32_t)compareToWithId:(ADUri *)other;
 
 /*!
  @brief Decodes '%'-escaped octets in the given string using the UTF-8 scheme.
@@ -144,7 +148,7 @@
   default port explicitly and the other leaves it implicit, they will not
   be considered equal.
  */
-- (jboolean)isEqual:(id)o;
+- (bool)isEqual:(id)o;
 
 /*!
  @brief Creates a Uri from a file.The URI has the form
@@ -191,8 +195,8 @@
  @param defaultValue the default value to return if there is no query parameter for key
  @return the boolean interpretation of the query parameter key
  */
-- (jboolean)getBooleanQueryParameterWithNSString:(NSString *)key
-                                     withBoolean:(jboolean)defaultValue;
+- (bool)getBooleanQueryParameterWithNSString:(NSString *)key
+                                 withBoolean:(bool)defaultValue;
 
 /*!
  @brief If this <code>Uri</code> is <code>file://</code>, then resolve and return its
@@ -293,7 +297,7 @@
   if the authority is "google.com:80", this method will return 80.
  @return the port for this URI or -1 if invalid or not present
  */
-- (jint)getPort;
+- (int32_t)getPort;
 
 /*!
  @brief Gets the decoded query component from this URI.The query comes after
@@ -369,26 +373,26 @@
   explicit scheme.
  @return true if this URI is absolute, false if it's relative
  */
-- (jboolean)isAbsolute;
+- (bool)isAbsolute;
 
 /*!
  @brief Returns true if this URI is hierarchical like "http://google.com".
  Absolute URIs are hierarchical if the scheme-specific part starts with
   a '/'. Relative URIs are always hierarchical.
  */
-- (jboolean)isHierarchical;
+- (bool)isHierarchical;
 
 /*!
  @brief Returns true if this URI is opaque like "mailto:nobody@@google.com".The
   scheme-specific part of an opaque URI cannot start with a '/'.
  */
-- (jboolean)isOpaque;
+- (bool)isOpaque;
 
 /*!
  @brief Test if this is a path prefix match against the given Uri.Verifies that
   scheme, authority, and atomic path segments match.
  */
-- (jboolean)isPathPrefixMatchWithADUri:(ADUri *)prefix;
+- (bool)isPathPrefixMatchWithADUri:(ADUri *)prefix;
 
 /*!
  @brief Returns true if this URI is relative, i.e.
@@ -396,7 +400,7 @@
   explicit scheme.
  @return true if this URI is relative, false if it's absolute
  */
-- (jboolean)isRelative;
+- (bool)isRelative;
 
 /*!
  @brief Return an equivalent URI with a lowercase scheme component.
@@ -506,10 +510,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri)
 
 @compatibility_alias RAndroidNetUri ADUri;
 
+
 #endif
 
 #if !defined (ADUri_NotCachedHolder_) && (INCLUDE_ALL_Uri || defined(INCLUDE_ADUri_NotCachedHolder))
 #define ADUri_NotCachedHolder_
+
+@class NSString;
 
 /*!
  @brief Holds a placeholder for strings which haven't been cached.This enables us
@@ -536,6 +543,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADUri_NotCachedHolder, NOT_CACHED, NSString *)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_NotCachedHolder)
 
+
 #endif
 
 #if !defined (ADUri_PathSegments_) && (INCLUDE_ALL_Uri || defined(INCLUDE_ADUri_PathSegments))
@@ -550,6 +558,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_NotCachedHolder)
 #include "java/util/RandomAccess.h"
 
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief Wrapper for path segment array.
@@ -557,24 +567,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_NotCachedHolder)
 @interface ADUri_PathSegments : JavaUtilAbstractList < JavaUtilRandomAccess > {
  @public
   IOSObjectArray *segments_;
-  jint size_;
+  int32_t size_;
 }
 
 #pragma mark Public
 
-- (NSString *)getWithInt:(jint)index;
+- (NSString *)getWithInt:(int32_t)index;
 
-- (NSString *)removeWithInt:(jint)arg0;
+- (NSString *)removeWithInt:(int32_t)arg0;
 
-- (NSString *)setWithInt:(jint)arg0
-                  withId:(NSString *)arg1;
+- (NSString *)setWithInt:(int32_t)arg0
+                  withId:(id)arg1;
 
-- (jint)size;
+- (int32_t)size;
 
 #pragma mark Package-Private
 
 - (instancetype)initWithNSStringArray:(IOSObjectArray *)segments
-                              withInt:(jint)size;
+                              withInt:(int32_t)size;
 
 // Disallowed inherited constructors, do not use.
 
@@ -591,13 +601,14 @@ inline ADUri_PathSegments *ADUri_PathSegments_get_EMPTY(void);
 FOUNDATION_EXPORT ADUri_PathSegments *ADUri_PathSegments_EMPTY;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADUri_PathSegments, EMPTY, ADUri_PathSegments *)
 
-FOUNDATION_EXPORT void ADUri_PathSegments_initWithNSStringArray_withInt_(ADUri_PathSegments *self, IOSObjectArray *segments, jint size);
+FOUNDATION_EXPORT void ADUri_PathSegments_initWithNSStringArray_withInt_(ADUri_PathSegments *self, IOSObjectArray *segments, int32_t size);
 
-FOUNDATION_EXPORT ADUri_PathSegments *new_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADUri_PathSegments *new_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, int32_t size) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADUri_PathSegments *create_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, jint size);
+FOUNDATION_EXPORT ADUri_PathSegments *create_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, int32_t size);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_PathSegments)
+
 
 #endif
 
@@ -606,6 +617,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_PathSegments)
 
 @class ADUri_PathSegments;
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief Builds PathSegments.
@@ -613,7 +626,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_PathSegments)
 @interface ADUri_PathSegmentsBuilder : NSObject {
  @public
   IOSObjectArray *segments_;
-  jint size_;
+  int32_t size_;
 }
 
 #pragma mark Package-Private
@@ -638,6 +651,7 @@ FOUNDATION_EXPORT ADUri_PathSegmentsBuilder *create_ADUri_PathSegmentsBuilder_in
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_PathSegmentsBuilder)
 
+
 #endif
 
 #if !defined (ADUri_Builder_) && (INCLUDE_ALL_Uri || defined(INCLUDE_ADUri_Builder))
@@ -646,6 +660,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_PathSegmentsBuilder)
 @class ADUri;
 @class ADUri_Part;
 @class ADUri_PathPart;
+@class NSString;
 
 /*!
  @brief Helper class for building or manipulating URI references.Not safe for
@@ -793,10 +808,13 @@ FOUNDATION_EXPORT ADUri_Builder *create_ADUri_Builder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_Builder)
 
+
 #endif
 
 #if !defined (ADUri_AbstractPart_) && (INCLUDE_ALL_Uri || defined(INCLUDE_ADUri_AbstractPart))
 #define ADUri_AbstractPart_
+
+@class NSString;
 
 /*!
  @brief Support for part implementations.
@@ -831,10 +849,14 @@ FOUNDATION_EXPORT void ADUri_AbstractPart_initWithNSString_withNSString_(ADUri_A
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_AbstractPart)
 
+
 #endif
 
 #if !defined (ADUri_Part_) && (INCLUDE_ALL_Uri || defined(INCLUDE_ADUri_Part))
 #define ADUri_Part_
+
+@class JavaLangBoolean;
+@class NSString;
 
 /*!
  @brief Immutable wrapper of encoded and decoded versions of a URI part.Lazily
@@ -866,7 +888,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_AbstractPart)
 
 - (NSString *)getEncoded;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 /*!
  @brief Returns given part or <code>NULL</code> if the given part is null.
@@ -903,12 +925,14 @@ FOUNDATION_EXPORT ADUri_Part *ADUri_Part_fromWithNSString_withNSString_(NSString
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_Part)
 
+
 #endif
 
 #if !defined (ADUri_PathPart_) && (INCLUDE_ALL_Uri || defined(INCLUDE_ADUri_PathPart))
 #define ADUri_PathPart_
 
 @class ADUri_PathSegments;
+@class NSString;
 
 /*!
  @brief Immutable wrapper of encoded and decoded versions of a path part.Lazily
@@ -992,6 +1016,7 @@ FOUNDATION_EXPORT ADUri_PathPart *ADUri_PathPart_fromWithNSString_withNSString_(
 FOUNDATION_EXPORT ADUri_PathPart *ADUri_PathPart_makeAbsoluteWithADUri_PathPart_(ADUri_PathPart *oldPart);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_PathPart)
+
 
 #endif
 

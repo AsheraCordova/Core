@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\EventBusHandler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "EventBusHandler.h"
 #include "J2ObjC_source.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASEventBusHandler () {
@@ -90,6 +102,8 @@ void ASEventBusHandler_initWithNSString_(ASEventBusHandler *self, NSString *type
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEventBusHandler)
+
+J2OBJC_NAME_MAPPING(ASEventBusHandler, "com.ashera.widget.bus", "AS")
 
 @implementation ASEventBusHandler_OnCompletedListener
 

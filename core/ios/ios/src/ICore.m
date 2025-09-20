@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\ICore.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ICore.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASICore : NSObject

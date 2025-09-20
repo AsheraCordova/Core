@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\jaxp\SAXParserImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "SAX1ParserAdapter.h"
@@ -17,6 +22,12 @@
 #include "org/xml/sax/Parser.h"
 #include "org/xml/sax/SAXException.h"
 #include "org/xml/sax/XMLReader.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation TSSAXParserImpl
@@ -40,7 +51,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return parser_;
 }
 
-- (jboolean)isNamespaceAware {
+- (bool)isNamespaceAware {
   @try {
     return [((TSTagSoupParser *) nil_chk(parser_)) getFeatureWithNSString:TSTagSoupParser_namespacesFeature];
   }
@@ -49,7 +60,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isValidating {
+- (bool)isValidating {
   @try {
     return [((TSTagSoupParser *) nil_chk(parser_)) getFeatureWithNSString:TSTagSoupParser_validationFeature];
   }
@@ -68,11 +79,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)value {
+                   withBoolean:(bool)value {
   [((TSTagSoupParser *) nil_chk(parser_)) setFeatureWithNSString:name withBoolean:value];
 }
 
-- (jboolean)getFeatureWithNSString:(NSString *)name {
+- (bool)getFeatureWithNSString:(NSString *)name {
   return [((TSTagSoupParser *) nil_chk(parser_)) getFeatureWithNSString:name];
 }
 
@@ -145,3 +156,5 @@ TSSAXParserImpl *TSSAXParserImpl_newInstanceWithJavaUtilMap_(id<JavaUtilMap> fea
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSSAXParserImpl)
+
+J2OBJC_NAME_MAPPING(TSSAXParserImpl, "repackaged.org.ccil.cowan.tagsoup.jaxp", "TS")

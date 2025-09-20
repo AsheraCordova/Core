@@ -3,53 +3,64 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\Field.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Field.h"
 #include "FieldValidationException.h"
 #include "FormElement.h"
 #include "J2ObjC_source.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/util/LinkedList.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASField () {
  @public
-  __unsafe_unretained id<ASFormElement> mViewWrapper_;
+  WEAK_ id<ASFormElement> mViewWrapper_;
   id<JavaUtilList> mValidations_;
   id metaData_;
-  jint mOrder_;
+  int32_t mOrder_;
 }
 
 - (instancetype)initWithASFormElement:(id<ASFormElement>)viewWrapper
-                              withInt:(jint)order;
+                              withInt:(int32_t)order;
 
 @end
 
 J2OBJC_FIELD_SETTER(ASField, mValidations_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASField, metaData_, id)
 
-__attribute__((unused)) static void ASField_initWithASFormElement_withInt_(ASField *self, id<ASFormElement> viewWrapper, jint order);
+__attribute__((unused)) static void ASField_initWithASFormElement_withInt_(ASField *self, id<ASFormElement> viewWrapper, int32_t order);
 
-__attribute__((unused)) static ASField *new_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, jint order) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASField *new_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, int32_t order) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASField *create_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, jint order);
+__attribute__((unused)) static ASField *create_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, int32_t order);
 
 @implementation ASField
 
-- (jint)getOrder {
+- (int32_t)getOrder {
   return mOrder_;
 }
 
 + (ASField *)using__WithASFormElement:(id<ASFormElement>)viewWrapper
-                              withInt:(jint)order {
+                              withInt:(int32_t)order {
   return ASField_using__WithASFormElement_withInt_(viewWrapper, order);
 }
 
 - (instancetype)initWithASFormElement:(id<ASFormElement>)viewWrapper
-                              withInt:(jint)order {
+                              withInt:(int32_t)order {
   ASField_initWithASFormElement_withInt_(self, viewWrapper, order);
   return self;
 }
@@ -63,7 +74,7 @@ __attribute__((unused)) static ASField *create_ASField_initWithASFormElement_wit
   return mViewWrapper_;
 }
 
-- (jboolean)isValid {
+- (bool)isValid {
   if ([((id<ASFormElement>) nil_chk(mViewWrapper_)) isViewVisible]) {
     for (id<ASValidation> __strong validation in nil_chk(mValidations_)) {
       if (![((id<ASValidation>) nil_chk(validation)) isValidWithNSString:[mViewWrapper_ getTextEntered] withASIWidget:mViewWrapper_]) {
@@ -125,7 +136,7 @@ __attribute__((unused)) static ASField *create_ASField_initWithASFormElement_wit
 
 @end
 
-ASField *ASField_using__WithASFormElement_withInt_(id<ASFormElement> viewWrapper, jint order) {
+ASField *ASField_using__WithASFormElement_withInt_(id<ASFormElement> viewWrapper, int32_t order) {
   ASField_initialize();
   if (viewWrapper == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"EditText field may not be null");
@@ -133,7 +144,7 @@ ASField *ASField_using__WithASFormElement_withInt_(id<ASFormElement> viewWrapper
   return create_ASField_initWithASFormElement_withInt_(viewWrapper, order);
 }
 
-void ASField_initWithASFormElement_withInt_(ASField *self, id<ASFormElement> viewWrapper, jint order) {
+void ASField_initWithASFormElement_withInt_(ASField *self, id<ASFormElement> viewWrapper, int32_t order) {
   NSObject_init(self);
   self->mOrder_ = 0;
   self->mOrder_ = order;
@@ -141,12 +152,14 @@ void ASField_initWithASFormElement_withInt_(ASField *self, id<ASFormElement> vie
   JreStrongAssignAndConsume(&self->mValidations_, new_JavaUtilLinkedList_init());
 }
 
-ASField *new_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, jint order) {
+ASField *new_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, int32_t order) {
   J2OBJC_NEW_IMPL(ASField, initWithASFormElement_withInt_, viewWrapper, order)
 }
 
-ASField *create_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, jint order) {
+ASField *create_ASField_initWithASFormElement_withInt_(id<ASFormElement> viewWrapper, int32_t order) {
   J2OBJC_CREATE_IMPL(ASField, initWithASFormElement_withInt_, viewWrapper, order)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASField)
+
+J2OBJC_NAME_MAPPING(ASField, "com.ashera.validations", "AS")

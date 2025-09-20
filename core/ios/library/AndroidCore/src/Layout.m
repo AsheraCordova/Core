@@ -3,14 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\Layout.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Layout.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 
 
-__attribute__((unused)) static void ADLayout_Alignment_initWithNSString_withInt_(ADLayout_Alignment *self, NSString *__name, jint __ordinal);
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+__attribute__((unused)) static void ADLayout_Alignment_initWithNSString_withInt_(ADLayout_Alignment *self, NSString *__name, int32_t __ordinal);
 
 @implementation ADLayout
 
@@ -21,7 +34,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getWidth {
+- (int32_t)getWidth {
   return 0;
 }
 
@@ -57,6 +70,8 @@ ADLayout *create_ADLayout_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLayout)
 
+J2OBJC_NAME_MAPPING(ADLayout, "r.android.text", "AD")
+
 J2OBJC_INITIALIZED_DEFN(ADLayout_Alignment)
 
 ADLayout_Alignment *ADLayout_Alignment_values_[5];
@@ -73,6 +88,24 @@ ADLayout_Alignment *ADLayout_Alignment_values_[5];
 
 - (ADLayout_Alignment_Enum)toNSEnum {
   return (ADLayout_Alignment_Enum)[self ordinal];
+}
+
+- (ADLayout_Alignment_Enum)enumValue {
+  return (ADLayout_Alignment_Enum)[self ordinal];
+}
+
++ (ADLayout_Alignment *)fromNSEnum:(ADLayout_Alignment_Enum)nativeValue {
+  ADLayout_Alignment *javaEnum = ADLayout_Alignment_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ADLayout_Alignment_Enum out of range.");
+  return javaEnum;
+}
+
+- (ADLayout_Alignment_ORDINAL)ordinal {
+  return (ADLayout_Alignment_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithAlignment:(ADLayout_Alignment_Enum)value {
+  return RETAIN_(ADLayout_Alignment_fromOrdinal((ADLayout_Alignment_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -104,7 +137,7 @@ ADLayout_Alignment *ADLayout_Alignment_values_[5];
     size_t allocSize = 5 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 5; i++) {
+    for (int32_t i = 0; i < 5; i++) {
       ((void)(ADLayout_Alignment_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ADLayout_Alignment_initWithNSString_withInt_(e, JreEnumConstantName(ADLayout_Alignment_class_(), i), i);
     }
@@ -114,7 +147,7 @@ ADLayout_Alignment *ADLayout_Alignment_values_[5];
 
 @end
 
-void ADLayout_Alignment_initWithNSString_withInt_(ADLayout_Alignment *self, NSString *__name, jint __ordinal) {
+void ADLayout_Alignment_initWithNSString_withInt_(ADLayout_Alignment *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -132,12 +165,11 @@ ADLayout_Alignment *ADLayout_Alignment_valueOfWithNSString_(NSString *name) {
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ADLayout_Alignment *ADLayout_Alignment_fromOrdinal(NSUInteger ordinal) {
+ADLayout_Alignment *ADLayout_Alignment_fromOrdinal(ADLayout_Alignment_ORDINAL ordinal) {
   ADLayout_Alignment_initialize();
-  if (ordinal >= 5) {
+  if (ordinal < 0 || ordinal >= 5) {
     return nil;
   }
   return ADLayout_Alignment_values_[ordinal];

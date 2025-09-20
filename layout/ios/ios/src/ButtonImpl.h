@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ButtonImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ButtonImpl")
@@ -31,6 +32,9 @@
 @class ADButton;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -56,7 +60,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -66,21 +70,21 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getPaddingBottom;
 
@@ -96,13 +100,13 @@
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -123,7 +127,7 @@
 
 - (void)setPaddingTopWithId:(id)paddingTop;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)updatePadding;
 
@@ -168,6 +172,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl)
 
 @compatibility_alias ComAsheraLayoutButtonImpl ASButtonImpl;
 
+
 #endif
 
 #if !defined (ASButtonImpl_DrawableTintMode_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_DrawableTintMode))
@@ -204,6 +209,7 @@ FOUNDATION_EXPORT ASButtonImpl_DrawableTintMode *create_ASButtonImpl_DrawableTin
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASButtonImpl_MarqueeRepeatLimit_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_MarqueeRepeatLimit))
@@ -213,6 +219,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_DrawableTintMode)
 #define INCLUDE_ASAbstractEnumToIntConverter 1
 #include "AbstractEnumToIntConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
 @protocol JavaUtilMap;
 
@@ -224,7 +231,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_DrawableTintMode)
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 #pragma mark Package-Private
 
@@ -241,6 +248,7 @@ FOUNDATION_EXPORT ASButtonImpl_MarqueeRepeatLimit *new_ASButtonImpl_MarqueeRepea
 FOUNDATION_EXPORT ASButtonImpl_MarqueeRepeatLimit *create_ASButtonImpl_MarqueeRepeatLimit_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_MarqueeRepeatLimit)
+
 
 #endif
 
@@ -278,6 +286,7 @@ FOUNDATION_EXPORT ASButtonImpl_Font *create_ASButtonImpl_Font_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_Font)
 
+
 #endif
 
 #if !defined (ASButtonImpl_TextStyle_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_TextStyle))
@@ -313,6 +322,7 @@ FOUNDATION_EXPORT ASButtonImpl_TextStyle *new_ASButtonImpl_TextStyle_init(void) 
 FOUNDATION_EXPORT ASButtonImpl_TextStyle *create_ASButtonImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_TextStyle)
+
 
 #endif
 
@@ -350,6 +360,7 @@ FOUNDATION_EXPORT ASButtonImpl_Ellipsize *create_ASButtonImpl_Ellipsize_init(voi
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_Ellipsize)
 
+
 #endif
 
 #if !defined (ASButtonImpl_JustificationMode_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_JustificationMode))
@@ -386,6 +397,7 @@ FOUNDATION_EXPORT ASButtonImpl_JustificationMode *create_ASButtonImpl_Justificat
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 
+
 #endif
 
 #if !defined (ASButtonImpl_ButtonExt_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_ButtonExt))
@@ -405,6 +417,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -414,7 +430,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 
 - (instancetype)initWithASButtonImpl:(ASButtonImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -423,13 +439,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -445,19 +461,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -480,7 +496,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -496,16 +512,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -522,6 +538,7 @@ FOUNDATION_EXPORT ASButtonImpl_ButtonExt *new_ASButtonImpl_ButtonExt_initWithASB
 FOUNDATION_EXPORT ASButtonImpl_ButtonExt *create_ASButtonImpl_ButtonExt_initWithASButtonImpl_(ASButtonImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
+
 
 #endif
 

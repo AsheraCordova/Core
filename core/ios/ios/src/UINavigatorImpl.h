@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\UINavigatorImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_UINavigatorImpl")
@@ -17,6 +18,9 @@
 #define ASUINavigatorImpl_
 
 @class ASUINavigatorImpl_FragmentFactory;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 
@@ -28,7 +32,7 @@
 
 - (instancetype)initWithASUINavigatorImpl_FragmentFactory:(ASUINavigatorImpl_FragmentFactory *)fragmentFactory
                                                    withId:(id)navController
-                                              withBoolean:(jboolean)remeasure;
+                                              withBoolean:(bool)remeasure;
 
 - (void)closeDialog;
 
@@ -36,14 +40,14 @@
 
 - (id<ASIFragment>)getActiveFragmentWithASIFragment:(id<ASIFragment>)fragment;
 
-- (jint)getPopCountWithNSString:(NSString *)destinationId
-                    withBoolean:(jboolean)inclusive;
+- (int32_t)getPopCountWithNSString:(NSString *)destinationId
+                       withBoolean:(bool)inclusive;
 
 - (void)navigateWithNSString:(NSString *)actionId
             withJavaUtilList:(id<JavaUtilList>)scopedObjects
-                 withBoolean:(jboolean)finish
-                     withInt:(jint)popCount
-                 withBoolean:(jboolean)clear
+                 withBoolean:(bool)finish
+                     withInt:(int32_t)popCount
+                 withBoolean:(bool)clear
              withASIFragment:(id<ASIFragment>)fragment;
 
 - (void)navigateWithNSString:(NSString *)actionId
@@ -52,8 +56,8 @@
 
 - (void)navigateWithNSString:(NSString *)actionId
                 withNSString:(NSString *)destinationId
-                 withBoolean:(jboolean)inclusive
-                 withBoolean:(jboolean)finish
+                 withBoolean:(bool)inclusive
+                 withBoolean:(bool)finish
             withJavaUtilList:(id<JavaUtilList>)scopedObjects
              withASIFragment:(id<ASIFragment>)fragment;
 
@@ -67,7 +71,7 @@
 
 - (void)navigateWithPopBackStackToWithNSString:(NSString *)actionId
                                   withNSString:(NSString *)destinationId
-                                   withBoolean:(jboolean)inclusive
+                                   withBoolean:(bool)inclusive
                               withJavaUtilList:(id<JavaUtilList>)scopedObjects
                                withASIFragment:(id<ASIFragment>)fragment;
 
@@ -75,7 +79,7 @@
 
 - (void)popBackStackWithASIFragment:(id<ASIFragment>)fragment
                        withNSString:(NSString *)destinationId
-                        withBoolean:(jboolean)inclusive;
+                        withBoolean:(bool)inclusive;
 
 - (void)setNamespaceWithNSString:(NSString *)namespace_;
 
@@ -91,15 +95,16 @@ FOUNDATION_EXPORT ASUINavigatorImpl *new_ASUINavigatorImpl_init(void) NS_RETURNS
 
 FOUNDATION_EXPORT ASUINavigatorImpl *create_ASUINavigatorImpl_init(void);
 
-FOUNDATION_EXPORT void ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl *self, ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure);
+FOUNDATION_EXPORT void ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl *self, ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, bool remeasure);
 
-FOUNDATION_EXPORT ASUINavigatorImpl *new_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASUINavigatorImpl *new_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, bool remeasure) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure);
+FOUNDATION_EXPORT ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, bool remeasure);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl)
 
 @compatibility_alias ComAsheraCoreUINavigatorImpl ASUINavigatorImpl;
+
 
 #endif
 
@@ -111,7 +116,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl)
 #include "java/lang/Exception.h"
 
 @class ASUINavigatorImpl;
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 
 @interface ASUINavigatorImpl_DestinatinNotFoundException : JavaLangException
 
@@ -133,8 +140,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl)
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -147,6 +154,7 @@ FOUNDATION_EXPORT ASUINavigatorImpl_DestinatinNotFoundException *new_ASUINavigat
 FOUNDATION_EXPORT ASUINavigatorImpl_DestinatinNotFoundException *create_ASUINavigatorImpl_DestinatinNotFoundException_initWithASUINavigatorImpl_withNSString_(ASUINavigatorImpl *outer$, NSString *message);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_DestinatinNotFoundException)
+
 
 #endif
 
@@ -174,6 +182,7 @@ FOUNDATION_EXPORT ASUINavigatorImpl_FragmentFactory *new_ASUINavigatorImpl_Fragm
 FOUNDATION_EXPORT ASUINavigatorImpl_FragmentFactory *create_ASUINavigatorImpl_FragmentFactory_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_FragmentFactory)
+
 
 #endif
 

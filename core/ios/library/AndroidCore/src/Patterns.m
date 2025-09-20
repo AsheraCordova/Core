@@ -3,12 +3,26 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Patterns.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Patterns.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPatterns ()
@@ -257,7 +271,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [ADPatterns class]) {
-    JreStrongAssign(&ADPatterns_UCS_CHAR, [NSString stringWithCharacters:(jchar[]) { (int) 0x5b, (int) 0xa0, (int) 0x2d, (int) 0xd7ff, (int) 0xf900, (int) 0x2d, (int) 0xfdcf, (int) 0xfdf0, (int) 0x2d, (int) 0xffef, (int) 0xd800, (int) 0xdc00, (int) 0x2d, (int) 0xd83f, (int) 0xdffd, (int) 0xd840, (int) 0xdc00, (int) 0x2d, (int) 0xd87f, (int) 0xdffd, (int) 0xd880, (int) 0xdc00, (int) 0x2d, (int) 0xd8bf, (int) 0xdffd, (int) 0xd8c0, (int) 0xdc00, (int) 0x2d, (int) 0xd8ff, (int) 0xdffd, (int) 0xd900, (int) 0xdc00, (int) 0x2d, (int) 0xd93f, (int) 0xdffd, (int) 0xd940, (int) 0xdc00, (int) 0x2d, (int) 0xd97f, (int) 0xdffd, (int) 0xd980, (int) 0xdc00, (int) 0x2d, (int) 0xd9bf, (int) 0xdffd, (int) 0xd9c0, (int) 0xdc00, (int) 0x2d, (int) 0xd9ff, (int) 0xdffd, (int) 0xda00, (int) 0xdc00, (int) 0x2d, (int) 0xda3f, (int) 0xdffd, (int) 0xda40, (int) 0xdc00, (int) 0x2d, (int) 0xda7f, (int) 0xdffd, (int) 0xda80, (int) 0xdc00, (int) 0x2d, (int) 0xdabf, (int) 0xdffd, (int) 0xdac0, (int) 0xdc00, (int) 0x2d, (int) 0xdaff, (int) 0xdffd, (int) 0xdb00, (int) 0xdc00, (int) 0x2d, (int) 0xdb3f, (int) 0xdffd, (int) 0xdb44, (int) 0xdc00, (int) 0x2d, (int) 0xdb7f, (int) 0xdffd, (int) 0x26, (int) 0x26, (int) 0x5b, (int) 0x5e, (int) 0xa0, (int) 0x5b, (int) 0x2000, (int) 0x2d, (int) 0x200a, (int) 0x5d, (int) 0x2028, (int) 0x2029, (int) 0x202f, (int) 0x3000, (int) 0x5d, (int) 0x5d } length:96]);
+    JreStrongAssign(&ADPatterns_UCS_CHAR, [NSString stringWithCharacters:(unichar[]) { (int) 0x5b, (int) 0xa0, (int) 0x2d, (int) 0xd7ff, (int) 0xf900, (int) 0x2d, (int) 0xfdcf, (int) 0xfdf0, (int) 0x2d, (int) 0xffef, (int) 0xd800, (int) 0xdc00, (int) 0x2d, (int) 0xd83f, (int) 0xdffd, (int) 0xd840, (int) 0xdc00, (int) 0x2d, (int) 0xd87f, (int) 0xdffd, (int) 0xd880, (int) 0xdc00, (int) 0x2d, (int) 0xd8bf, (int) 0xdffd, (int) 0xd8c0, (int) 0xdc00, (int) 0x2d, (int) 0xd8ff, (int) 0xdffd, (int) 0xd900, (int) 0xdc00, (int) 0x2d, (int) 0xd93f, (int) 0xdffd, (int) 0xd940, (int) 0xdc00, (int) 0x2d, (int) 0xd97f, (int) 0xdffd, (int) 0xd980, (int) 0xdc00, (int) 0x2d, (int) 0xd9bf, (int) 0xdffd, (int) 0xd9c0, (int) 0xdc00, (int) 0x2d, (int) 0xd9ff, (int) 0xdffd, (int) 0xda00, (int) 0xdc00, (int) 0x2d, (int) 0xda3f, (int) 0xdffd, (int) 0xda40, (int) 0xdc00, (int) 0x2d, (int) 0xda7f, (int) 0xdffd, (int) 0xda80, (int) 0xdc00, (int) 0x2d, (int) 0xdabf, (int) 0xdffd, (int) 0xdac0, (int) 0xdc00, (int) 0x2d, (int) 0xdaff, (int) 0xdffd, (int) 0xdb00, (int) 0xdc00, (int) 0x2d, (int) 0xdb3f, (int) 0xdffd, (int) 0xdb44, (int) 0xdc00, (int) 0x2d, (int) 0xdb7f, (int) 0xdffd, (int) 0x26, (int) 0x26, (int) 0x5b, (int) 0x5e, (int) 0xa0, (int) 0x5b, (int) 0x2000, (int) 0x2d, (int) 0x200a, (int) 0x5d, (int) 0x2028, (int) 0x2029, (int) 0x202f, (int) 0x3000, (int) 0x5d, (int) 0x5d } length:96]);
     JreStrongAssign(&ADPatterns_LABEL_CHAR, JreStrcat("$$", @"a-zA-Z0-9", ADPatterns_UCS_CHAR));
     JreStrongAssign(&ADPatterns_TLD_CHAR, JreStrcat("$$", @"a-zA-Z", ADPatterns_UCS_CHAR));
     JreStrongAssign(&ADPatterns_IRI_LABEL, JreStrcat("C$$$$$$", '[', ADPatterns_LABEL_CHAR, @"](?:[", ADPatterns_LABEL_CHAR, @"_\\-]{0,61}[", ADPatterns_LABEL_CHAR, @"]){0,1}"));
@@ -290,8 +304,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 NSString *ADPatterns_concatGroupsWithJavaUtilRegexMatcher_(JavaUtilRegexMatcher *matcher) {
   ADPatterns_initialize();
   JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
-  jint numGroups = [((JavaUtilRegexMatcher *) nil_chk(matcher)) groupCount];
-  for (jint i = 1; i <= numGroups; i++) {
+  int32_t numGroups = [((JavaUtilRegexMatcher *) nil_chk(matcher)) groupCount];
+  for (int32_t i = 1; i <= numGroups; i++) {
     NSString *s = JreRetainedLocalValue([matcher groupWithInt:i]);
     if (s != nil) {
       [b appendWithNSString:s];
@@ -304,8 +318,8 @@ NSString *ADPatterns_digitsAndPlusOnlyWithJavaUtilRegexMatcher_(JavaUtilRegexMat
   ADPatterns_initialize();
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   NSString *matchingRegion = JreRetainedLocalValue([((JavaUtilRegexMatcher *) nil_chk(matcher)) group]);
-  for (jint i = 0, size = [((NSString *) nil_chk(matchingRegion)) java_length]; i < size; i++) {
-    jchar character = [matchingRegion charAtWithInt:i];
+  for (int32_t i = 0, size = [((NSString *) nil_chk(matchingRegion)) java_length]; i < size; i++) {
+    unichar character = [matchingRegion charAtWithInt:i];
     if (character == '+' || JavaLangCharacter_isDigitWithChar_(character)) {
       [buffer appendWithChar:character];
     }
@@ -326,3 +340,5 @@ ADPatterns *create_ADPatterns_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPatterns)
+
+J2OBJC_NAME_MAPPING(ADPatterns, "r.android.util", "AD")

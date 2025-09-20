@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\IntConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "IntConverter.h"
 #include "J2ObjC_source.h"
@@ -12,6 +17,12 @@
 #include "java/lang/Integer.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASIntConverter
@@ -82,3 +93,5 @@ ASIntConverter *create_ASIntConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASIntConverter)
+
+J2OBJC_NAME_MAPPING(ASIntConverter, "com.ashera.converter", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\MultiSelectionSpinnerImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "BaseHasWidgets.h"
@@ -48,6 +53,8 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -67,8 +74,12 @@
 
 #include "ASUITextField.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASMultiSelectionSpinnerImpl () {
@@ -115,14 +126,14 @@
 
 - (id)getSelectedValues;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (id)getPaddingTop;
 
@@ -148,7 +159,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -166,7 +177,7 @@
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -186,9 +197,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -203,9 +214,9 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (void)setHintTextFormatWithId:(id)objValue;
 
@@ -261,33 +272,33 @@ J2OBJC_FIELD_SETTER(ASMultiSelectionSpinnerImpl, entries_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASMultiSelectionSpinnerImpl, selectedItem_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASMultiSelectionSpinnerImpl, onMultiItemSelectedListener_, id<ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener>)
 
-inline jint ASMultiSelectionSpinnerImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASMultiSelectionSpinnerImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASMultiSelectionSpinnerImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASMultiSelectionSpinnerImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASMultiSelectionSpinnerImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASMultiSelectionSpinnerImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASMultiSelectionSpinnerImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASMultiSelectionSpinnerImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASMultiSelectionSpinnerImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASMultiSelectionSpinnerImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASMultiSelectionSpinnerImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASMultiSelectionSpinnerImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASMultiSelectionSpinnerImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASMultiSelectionSpinnerImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASMultiSelectionSpinnerImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASMultiSelectionSpinnerImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASMultiSelectionSpinnerImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASMultiSelectionSpinnerImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASMultiSelectionSpinnerImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASMultiSelectionSpinnerImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASMultiSelectionSpinnerImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASMultiSelectionSpinnerImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASMultiSelectionSpinnerImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, NORMAL_FONT_TRAIT, int32_t)
 
-inline jint ASMultiSelectionSpinnerImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASMultiSelectionSpinnerImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASMultiSelectionSpinnerImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASMultiSelectionSpinnerImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASMultiSelectionSpinnerImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASMultiSelectionSpinnerImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASMultiSelectionSpinnerImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASMultiSelectionSpinnerImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASMultiSelectionSpinnerImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASMultiSelectionSpinnerImpl, TEXT_ALIGN_RIGHT, int32_t)
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setWidgetOnNativeClass(ASMultiSelectionSpinnerImpl *self);
 
@@ -317,13 +328,13 @@ __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setSelectedValue
 
 __attribute__((unused)) static id ASMultiSelectionSpinnerImpl_getSelectedValues(ASMultiSelectionSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASMultiSelectionSpinnerImpl_nativeGetFontSize(ASMultiSelectionSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASMultiSelectionSpinnerImpl_nativeGetFontSize(ASMultiSelectionSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASMultiSelectionSpinnerImpl_nativeGetFontStyle(ASMultiSelectionSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASMultiSelectionSpinnerImpl_nativeGetFontStyle(ASMultiSelectionSpinnerImpl *self);
 
-__attribute__((unused)) static void ASMultiSelectionSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASMultiSelectionSpinnerImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASMultiSelectionSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASMultiSelectionSpinnerImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASMultiSelectionSpinnerImpl_nativeSetFontStyleWithInt_(ASMultiSelectionSpinnerImpl *self, jint style);
+__attribute__((unused)) static void ASMultiSelectionSpinnerImpl_nativeSetFontStyleWithInt_(ASMultiSelectionSpinnerImpl *self, int32_t style);
 
 __attribute__((unused)) static id ASMultiSelectionSpinnerImpl_getPaddingTop(ASMultiSelectionSpinnerImpl *self);
 
@@ -349,7 +360,7 @@ __attribute__((unused)) static id ASMultiSelectionSpinnerImpl_getTextSize(ASMult
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setMyTextSizeWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
 
-__attribute__((unused)) static void ASMultiSelectionSpinnerImpl_nativeSetTextSizeWithInt_(ASMultiSelectionSpinnerImpl *self, jint value);
+__attribute__((unused)) static void ASMultiSelectionSpinnerImpl_nativeSetTextSizeWithInt_(ASMultiSelectionSpinnerImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setVerticalAligmentCenter(ASMultiSelectionSpinnerImpl *self);
 
@@ -367,7 +378,7 @@ __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setHorizontalAli
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setHorizontalAligmentLeftInternal(ASMultiSelectionSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASMultiSelectionSpinnerImpl_getTextAlignment(ASMultiSelectionSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASMultiSelectionSpinnerImpl_getTextAlignment(ASMultiSelectionSpinnerImpl *self);
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setDrawablePaddingWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
 
@@ -383,9 +394,9 @@ __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setDrawableLeftW
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setDrawableLeftInternalWithNSString_withId_(ASMultiSelectionSpinnerImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASMultiSelectionSpinnerImpl_getImageHeightWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASMultiSelectionSpinnerImpl_getImageHeightWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASMultiSelectionSpinnerImpl_getImageWidthWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASMultiSelectionSpinnerImpl_getImageWidthWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
 
 __attribute__((unused)) static id ASMultiSelectionSpinnerImpl_getDrawablePadding(ASMultiSelectionSpinnerImpl *self);
 
@@ -399,9 +410,9 @@ __attribute__((unused)) static id ASMultiSelectionSpinnerImpl_getTextColorState(
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_drawableStateChangeWithNSString_withADDrawable_(ASMultiSelectionSpinnerImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static jint ASMultiSelectionSpinnerImpl_getLineHeight(ASMultiSelectionSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASMultiSelectionSpinnerImpl_getLineHeight(ASMultiSelectionSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASMultiSelectionSpinnerImpl_getBorderWidth(ASMultiSelectionSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASMultiSelectionSpinnerImpl_getBorderWidth(ASMultiSelectionSpinnerImpl *self);
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setHintTextFormatWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
 
@@ -474,12 +485,12 @@ J2OBJC_FIELD_SETTER(ASMultiSelectionSpinnerImpl_TextStyle, mapping_, id<JavaUtil
 
 @interface ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt () {
  @public
-  __unsafe_unretained ASMultiSelectionSpinnerImpl *this$0_;
+  WEAK_ ASMultiSelectionSpinnerImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_MultiSelectionSpinnerExt_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_MultiSelectionSpinnerExt_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -545,6 +556,7 @@ __attribute__((unused)) static ASMultiSelectionSpinnerImpl_OnMultiItemSelectedLi
 __attribute__((unused)) static ASMultiSelectionSpinnerImpl_OnMultiItemSelectedListener *create_ASMultiSelectionSpinnerImpl_OnMultiItemSelectedListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_OnMultiItemSelectedListener)
+
 
 J2OBJC_INITIALIZED_DEFN(ASMultiSelectionSpinnerImpl)
 
@@ -1031,7 +1043,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASMultiSelectionSpinnerImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADSpinner *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADSpinner *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASMultiSelectionSpinnerImpl_updateTextAlignment(self);
   }
@@ -1080,49 +1092,49 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASMultiSelectionSpinnerImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASMultiSelectionSpinnerImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASMultiSelectionSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASMultiSelectionSpinnerImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -1175,7 +1187,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASMultiSelectionSpinnerImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASMultiSelectionSpinnerImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -1211,7 +1223,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASMultiSelectionSpinnerImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASMultiSelectionSpinnerImpl_getTextAlignment(self);
 }
 
@@ -1247,11 +1259,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASMultiSelectionSpinnerImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASMultiSelectionSpinnerImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASMultiSelectionSpinnerImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -1302,24 +1314,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASMultiSelectionSpinnerImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASMultiSelectionSpinnerImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASMultiSelectionSpinnerImpl_getBorderWidth(self);
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASMultiSelectionSpinnerImpl_setErrorWithId_(self, nil);
   }
@@ -1332,7 +1344,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASMultiSelectionSpinnerImpl_setErrorWithId_(self, message);
   }
@@ -1348,13 +1360,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASMultiSelectionSpinnerImpl_setHintTextFormatWithId_(self, objValue);
 }
 
-- (jint)measureWidth {
-  jint width = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
+- (int32_t)measureWidth {
+  int32_t width = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
   return width;
 }
 
-- (jint)measureHeightWithInt:(jint)width {
-  jint height = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
+- (int32_t)measureHeightWithInt:(int32_t)width {
+  int32_t height = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
   return height;
 }
 
@@ -1386,12 +1398,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASMultiSelectionSpinnerImpl_syncPlaceholderLabel(self);
 }
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value {
+- (void)nativeSetEnabledWithBoolean:(bool)value {
   ((ASUITextField*)self.uiView).enabled = value;
 }
 
 - (void)setEnabledWithId:(id)objValue {
-  jboolean isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
+  bool isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
   [self nativeSetEnabledWithBoolean:isEnabled];
 }
 
@@ -1497,7 +1509,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -1508,7 +1520,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -1617,7 +1629,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASMultiSelectionSpinnerImpl_reloadAllComponents(self);
 }
 
-- (void)addItemToParentWithInt:(jint)index
+- (void)addItemToParentWithInt:(int32_t)index
                   withNSString:(NSString *)id_
                withASLoopParam:(ASLoopParam *)loopParam {
   if (modelOptionTextPath_ != nil) {
@@ -1641,7 +1653,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASMultiSelectionSpinnerImpl_getSelectedItemPositions(self);
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ADSpinner *) nil_chk(measurableView_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -2036,9 +2048,9 @@ id ASMultiSelectionSpinnerImpl_getOptionValueFromLoopParamWithASLoopParam_withNS
 }
 
 void ASMultiSelectionSpinnerImpl_setGravityWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADSpinner *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASMultiSelectionSpinnerImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -2058,8 +2070,8 @@ void ASMultiSelectionSpinnerImpl_setGravityWithId_(ASMultiSelectionSpinnerImpl *
 
 void ASMultiSelectionSpinnerImpl_updateTextAlignment(ASMultiSelectionSpinnerImpl *self) {
   ADLayout_Alignment *minor = [((ADSpinner *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADSpinner *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADSpinner *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADSpinner *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = ASMultiSelectionSpinnerImpl_getMyText(self);
@@ -2112,7 +2124,7 @@ id ASMultiSelectionSpinnerImpl_getGravity(ASMultiSelectionSpinnerImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -2126,8 +2138,8 @@ id ASMultiSelectionSpinnerImpl_getGravity(ASMultiSelectionSpinnerImpl *self) {
     default:
     break;
   }
-  jint aligment = ASMultiSelectionSpinnerImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASMultiSelectionSpinnerImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASMultiSelectionSpinnerImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -2141,7 +2153,7 @@ id ASMultiSelectionSpinnerImpl_getGravity(ASMultiSelectionSpinnerImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -2161,8 +2173,8 @@ void ASMultiSelectionSpinnerImpl_setFontFamilyWithId_withNSString_(ASMultiSelect
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASMultiSelectionSpinnerImpl_nativeGetFontStyle(self);
-  jint height = ASMultiSelectionSpinnerImpl_nativeGetFontSize(self);
+  int32_t style = ASMultiSelectionSpinnerImpl_nativeGetFontStyle(self);
+  int32_t height = ASMultiSelectionSpinnerImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASMultiSelectionSpinnerImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -2176,26 +2188,26 @@ void ASMultiSelectionSpinnerImpl_setFontFamilyWithId_withNSString_(ASMultiSelect
 }
 
 void ASMultiSelectionSpinnerImpl_setTextStyleWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASMultiSelectionSpinnerImpl_nativeGetFontSize(self);
+    int32_t height = ASMultiSelectionSpinnerImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASMultiSelectionSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASMultiSelectionSpinnerImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASMultiSelectionSpinnerImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASMultiSelectionSpinnerImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASMultiSelectionSpinnerImpl_ITALIC_FONT_TRAIT;
     }
     ASMultiSelectionSpinnerImpl_nativeSetFontStyleWithInt_(self, style);
@@ -2217,7 +2229,7 @@ void ASMultiSelectionSpinnerImpl_setSelectedValuesWithId_(ASMultiSelectionSpinne
     id<JavaUtilList> selectedValues = ASPluginInvoker_getListWithId_(objValue);
     id<JavaUtilList> selectedItemPositions = new_JavaUtilArrayList_init();
     for (id __strong selectedValue in nil_chk(selectedValues)) {
-      jint index = [((id<JavaUtilList>) nil_chk(self->values_)) indexOfWithId:selectedValue];
+      int32_t index = [((id<JavaUtilList>) nil_chk(self->values_)) indexOfWithId:selectedValue];
       if (index != -1) {
         [selectedItemPositions addWithId:JavaLangInteger_valueOfWithInt_(index)];
       }
@@ -2227,7 +2239,7 @@ void ASMultiSelectionSpinnerImpl_setSelectedValuesWithId_(ASMultiSelectionSpinne
   else if (self->dataList_ != nil && [self->dataList_ size] > 0) {
     id<JavaUtilList> selectedItemPositions = new_JavaUtilArrayList_init();
     id<JavaUtilList> selectedValues = ASPluginInvoker_getListWithId_(objValue);
-    for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(self->dataList_)) size]; i++) {
+    for (int32_t i = 0; i < [((id<JavaUtilList>) nil_chk(self->dataList_)) size]; i++) {
       ASLoopParam *loopParam = [((id<JavaUtilList>) nil_chk(self->dataList_)) getWithInt:i];
       if (self->modelOptionValuePath_ != nil) {
         id data = ASMultiSelectionSpinnerImpl_getOptionValueFromLoopParamWithASLoopParam_withNSString_(self, loopParam, self->modelOptionValuePath_);
@@ -2282,16 +2294,16 @@ id ASMultiSelectionSpinnerImpl_getSelectedValues(ASMultiSelectionSpinnerImpl *se
   return nil;
 }
 
-jint ASMultiSelectionSpinnerImpl_nativeGetFontSize(ASMultiSelectionSpinnerImpl *self) {
+int32_t ASMultiSelectionSpinnerImpl_nativeGetFontSize(ASMultiSelectionSpinnerImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASMultiSelectionSpinnerImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASMultiSelectionSpinnerImpl_nativeGetFontStyle(ASMultiSelectionSpinnerImpl *self) {
+int32_t ASMultiSelectionSpinnerImpl_nativeGetFontStyle(ASMultiSelectionSpinnerImpl *self) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASMultiSelectionSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASMultiSelectionSpinnerImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASMultiSelectionSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASMultiSelectionSpinnerImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -2305,7 +2317,7 @@ void ASMultiSelectionSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor
   }
 }
 
-void ASMultiSelectionSpinnerImpl_nativeSetFontStyleWithInt_(ASMultiSelectionSpinnerImpl *self, jint style) {
+void ASMultiSelectionSpinnerImpl_nativeSetFontStyleWithInt_(ASMultiSelectionSpinnerImpl *self, int32_t style) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUITextField*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -2358,11 +2370,11 @@ id ASMultiSelectionSpinnerImpl_getTextSize(ASMultiSelectionSpinnerImpl *self) {
 }
 
 void ASMultiSelectionSpinnerImpl_setMyTextSizeWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASMultiSelectionSpinnerImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASMultiSelectionSpinnerImpl_nativeSetTextSizeWithInt_(ASMultiSelectionSpinnerImpl *self, jint value) {
+void ASMultiSelectionSpinnerImpl_nativeSetTextSizeWithInt_(ASMultiSelectionSpinnerImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setFont: [((ASUITextField*)self.uiView).font fontWithSize: value]];
 }
 
@@ -2401,7 +2413,7 @@ void ASMultiSelectionSpinnerImpl_setHorizontalAligmentLeftInternal(ASMultiSelect
   ((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASMultiSelectionSpinnerImpl_getTextAlignment(ASMultiSelectionSpinnerImpl *self) {
+int32_t ASMultiSelectionSpinnerImpl_getTextAlignment(ASMultiSelectionSpinnerImpl *self) {
   int alignment = (int) ((ASUITextField*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -2492,7 +2504,7 @@ void ASMultiSelectionSpinnerImpl_setDrawableLeftInternalWithNSString_withId_(ASM
   }
 }
 
-jint ASMultiSelectionSpinnerImpl_getImageHeightWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
+int32_t ASMultiSelectionSpinnerImpl_getImageHeightWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -2501,7 +2513,7 @@ jint ASMultiSelectionSpinnerImpl_getImageHeightWithId_(ASMultiSelectionSpinnerIm
   return 0;
 }
 
-jint ASMultiSelectionSpinnerImpl_getImageWidthWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
+int32_t ASMultiSelectionSpinnerImpl_getImageWidthWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -2589,11 +2601,11 @@ void ASMultiSelectionSpinnerImpl_drawableStateChangeWithNSString_withADDrawable_
   [self invalidate];
 }
 
-jint ASMultiSelectionSpinnerImpl_getLineHeight(ASMultiSelectionSpinnerImpl *self) {
+int32_t ASMultiSelectionSpinnerImpl_getLineHeight(ASMultiSelectionSpinnerImpl *self) {
   return ceil(((ASUITextField*)self.uiView).font.lineHeight);
 }
 
-jint ASMultiSelectionSpinnerImpl_getBorderWidth(ASMultiSelectionSpinnerImpl *self) {
+int32_t ASMultiSelectionSpinnerImpl_getBorderWidth(ASMultiSelectionSpinnerImpl *self) {
   return 0;
 }
 
@@ -2677,7 +2689,7 @@ NSString *ASMultiSelectionSpinnerImpl_getSelectedText(ASMultiSelectionSpinnerImp
   JavaLangStringBuffer *stringBuffer = new_JavaLangStringBuffer_init();
   NSString *seperator = @"";
   for (JavaLangInteger *boxed__ in nil_chk(self->selectedItem_)) {
-    jint selectedPosition = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
+    int32_t selectedPosition = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
     (void) [((JavaLangStringBuffer *) nil_chk([stringBuffer appendWithNSString:seperator])) appendWithNSString:[((id<JavaUtilList>) nil_chk(self->entries_)) getWithInt:selectedPosition]];
     seperator = @",";
   }
@@ -2689,7 +2701,7 @@ void ASMultiSelectionSpinnerImpl_setOnMultiItemSelectedListenerWithASMultiSelect
 }
 
 void ASMultiSelectionSpinnerImpl_setSelectionWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
-  if (self->selectedItem_ != objValue) {
+  if (!JreObjectEqualsEquals(self->selectedItem_, objValue)) {
     [((id<JavaUtilList>) nil_chk(self->selectedItem_)) clear];
     [((id<JavaUtilList>) nil_chk(self->selectedItem_)) addAllWithJavaUtilCollection:(id<JavaUtilList>) cast_check(objValue, JavaUtilList_class_())];
   }
@@ -2717,6 +2729,8 @@ void ASMultiSelectionSpinnerImpl_setErrorWithId_(ASMultiSelectionSpinnerImpl *se
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl)
+
+J2OBJC_NAME_MAPPING(ASMultiSelectionSpinnerImpl, "com.ashera.layout", "AS")
 
 @implementation ASMultiSelectionSpinnerImpl_DrawableTintMode
 
@@ -2825,10 +2839,10 @@ void ASMultiSelectionSpinnerImpl_Font_init(ASMultiSelectionSpinnerImpl_Font *sel
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -2886,9 +2900,9 @@ void ASMultiSelectionSpinnerImpl_TextStyle_init(ASMultiSelectionSpinnerImpl_Text
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -2908,19 +2922,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_MultiSelectionSpinnerExt_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_MultiSelectionSpinnerExt_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -2929,8 +2943,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_MultiSelectionSpinnerExt_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_MultiSelectionSpinnerExt_, ADView_MeasureSpec_AT_MOST);
   }
@@ -2946,11 +2960,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -2977,8 +2991,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -3046,12 +3060,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -3081,17 +3095,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
@@ -3371,7 +3385,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionS
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -3426,7 +3440,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionS
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];

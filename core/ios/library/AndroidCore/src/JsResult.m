@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\JsResult.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "JsResult.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADJsResult
@@ -54,3 +65,5 @@ ADJsResult *create_ADJsResult_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADJsResult)
+
+J2OBJC_NAME_MAPPING(ADJsResult, "r.android.webkit", "AD")

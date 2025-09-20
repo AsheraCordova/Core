@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IDecorator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IDecorator")
@@ -17,6 +18,8 @@
 #define ASIDecorator_
 
 @class ASWidgetAttribute;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASICompositeDecorator;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -34,10 +37,10 @@
 
 - (void)createWithJavaUtilMap:(id<JavaUtilMap>)metadata;
 
-- (jboolean)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
-                                 withNSString:(NSString *)strValue
-                                       withId:(id)objValue
-                    withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)lifeCycleDecorator;
+- (bool)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
+                             withNSString:(NSString *)strValue
+                                   withId:(id)objValue
+                withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)lifeCycleDecorator;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -52,6 +55,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIDecorator)
 J2OBJC_TYPE_LITERAL_HEADER(ASIDecorator)
 
 #define ComAsheraWidgetIDecorator ASIDecorator
+
 
 #endif
 

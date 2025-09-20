@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Filterable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Filterable")
@@ -19,9 +20,9 @@
 @class ADFilter;
 
 /*!
- @brief <p>Defines a filterable behavior.
- A filterable class can have its data
-  constrained by a filter. Filterable classes are usually 
+ @brief <p>Defines a filterable behavior.A filterable class can have its data
+  constrained by a filter.
+ Filterable classes are usually 
  <code>android.widget.Adapter</code> implementations.</p>
  - seealso: android.widget.Filter
  */
@@ -45,6 +46,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADFilterable)
 J2OBJC_TYPE_LITERAL_HEADER(ADFilterable)
 
 #define RAndroidWidgetFilterable ADFilterable
+
 
 #endif
 

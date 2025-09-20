@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\FieldValidationException.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FieldValidationException")
@@ -20,7 +21,9 @@
 #define INCLUDE_JavaLangException 1
 #include "java/lang/Exception.h"
 
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 @protocol ASFormElement;
 
 /*!
@@ -51,8 +54,8 @@
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -67,6 +70,7 @@ FOUNDATION_EXPORT ASFieldValidationException *create_ASFieldValidationException_
 J2OBJC_TYPE_LITERAL_HEADER(ASFieldValidationException)
 
 @compatibility_alias ComAsheraValidationsFieldValidationException ASFieldValidationException;
+
 
 #endif
 

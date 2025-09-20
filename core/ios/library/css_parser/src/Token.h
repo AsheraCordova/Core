@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\Token.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Token")
@@ -20,6 +21,9 @@
 #define INCLUDE_JavaIoSerializable 1
 #include "java/io/Serializable.h"
 
+@class JavaLangInteger;
+@class NSString;
+
 /*!
  @brief Describes the input token stream.
  */
@@ -30,23 +34,23 @@
   system is determined by JavaCCParser, and a table of these numbers is
   stored in the file ...Constants.java.
    */
-  jint kind_;
+  int32_t kind_;
   /*!
    @brief The line number of the first character of this Token.
    */
-  jint beginLine_;
+  int32_t beginLine_;
   /*!
    @brief The column number of the first character of this Token.
    */
-  jint beginColumn_;
+  int32_t beginColumn_;
   /*!
    @brief The line number of the last character of this Token.
    */
-  jint endLine_;
+  int32_t endLine_;
   /*!
    @brief The column number of the last character of this Token.
    */
-  jint endColumn_;
+  int32_t endColumn_;
   /*!
    @brief The string image of the token.
    */
@@ -86,12 +90,12 @@
 /*!
  @brief Constructs a new token for the specified Image.
  */
-- (instancetype)initPackagePrivateWithInt:(jint)kind;
+- (instancetype)initPackagePrivateWithInt:(int32_t)kind;
 
 /*!
  @brief Constructs a new token for the specified Image and Kind.
  */
-- (instancetype)initPackagePrivateWithInt:(jint)kind
+- (instancetype)initPackagePrivateWithInt:(int32_t)kind
                              withNSString:(NSString *)image;
 
 /*!
@@ -104,7 +108,7 @@
  */
 - (id)getValue;
 
-+ (CSSToken *)newTokenWithInt:(jint)ofKind OBJC_METHOD_FAMILY_NONE;
++ (CSSToken *)newTokenWithInt:(int32_t)ofKind OBJC_METHOD_FAMILY_NONE;
 
 /*!
  @brief Returns a new Token object, by default.However, if you want, you
@@ -116,7 +120,7 @@
   to the following switch statement. Then you can cast matchedToken
   variable to the appropriate type and use sit in your lexical actions.
  */
-+ (CSSToken *)newTokenWithInt:(jint)ofKind
++ (CSSToken *)newTokenWithInt:(int32_t)ofKind
                  withNSString:(NSString *)image OBJC_METHOD_FAMILY_NONE;
 
 /*!
@@ -142,25 +146,26 @@ FOUNDATION_EXPORT CSSToken *new_CSSToken_initPackagePrivate(void) NS_RETURNS_RET
 
 FOUNDATION_EXPORT CSSToken *create_CSSToken_initPackagePrivate(void);
 
-FOUNDATION_EXPORT void CSSToken_initPackagePrivateWithInt_(CSSToken *self, jint kind);
+FOUNDATION_EXPORT void CSSToken_initPackagePrivateWithInt_(CSSToken *self, int32_t kind);
 
-FOUNDATION_EXPORT CSSToken *new_CSSToken_initPackagePrivateWithInt_(jint kind) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSToken *new_CSSToken_initPackagePrivateWithInt_(int32_t kind) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSToken *create_CSSToken_initPackagePrivateWithInt_(jint kind);
+FOUNDATION_EXPORT CSSToken *create_CSSToken_initPackagePrivateWithInt_(int32_t kind);
 
-FOUNDATION_EXPORT void CSSToken_initPackagePrivateWithInt_withNSString_(CSSToken *self, jint kind, NSString *image);
+FOUNDATION_EXPORT void CSSToken_initPackagePrivateWithInt_withNSString_(CSSToken *self, int32_t kind, NSString *image);
 
-FOUNDATION_EXPORT CSSToken *new_CSSToken_initPackagePrivateWithInt_withNSString_(jint kind, NSString *image) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSToken *new_CSSToken_initPackagePrivateWithInt_withNSString_(int32_t kind, NSString *image) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSToken *create_CSSToken_initPackagePrivateWithInt_withNSString_(jint kind, NSString *image);
+FOUNDATION_EXPORT CSSToken *create_CSSToken_initPackagePrivateWithInt_withNSString_(int32_t kind, NSString *image);
 
-FOUNDATION_EXPORT CSSToken *CSSToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image);
+FOUNDATION_EXPORT CSSToken *CSSToken_newTokenWithInt_withNSString_(int32_t ofKind, NSString *image);
 
-FOUNDATION_EXPORT CSSToken *CSSToken_newTokenWithInt_(jint ofKind);
+FOUNDATION_EXPORT CSSToken *CSSToken_newTokenWithInt_(int32_t ofKind);
 
 J2OBJC_TYPE_LITERAL_HEADER(CSSToken)
 
 @compatibility_alias ComAsheraCssToken CSSToken;
+
 
 #endif
 

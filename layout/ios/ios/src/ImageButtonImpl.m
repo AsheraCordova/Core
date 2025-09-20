@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ImageButtonImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractEnumToIntConverter.h"
 #include "BaseWidget.h"
 #include "Bitmap.h"
@@ -47,14 +52,18 @@
 
 #include "ASUIButton.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASImageButtonImpl () {
  @public
   ADDrawable *imageFromUrlPlaceHolder_;
-  jboolean measureCalled_;
+  bool measureCalled_;
   ADDrawable *imageFromUrlError_;
   id tintColor_;
 }
@@ -68,9 +77,9 @@
 
 - (id)getSrc;
 
-- (jint)getImageHeightWithId:(id)image;
+- (int32_t)getImageHeightWithId:(id)image;
 
-- (jint)getImageWidthWithId:(id)image;
+- (int32_t)getImageWidthWithId:(id)image;
 
 - (void)setImageFromUrlErrorWithId:(id)objValue;
 
@@ -78,8 +87,8 @@
 
 - (void)setImageFromUrlWithId:(id)objValue;
 
-- (void)postOnMeasureWithInt:(jint)widthMeasureSpec
-                     withInt:(jint)heightMeasureSpec;
+- (void)postOnMeasureWithInt:(int32_t)widthMeasureSpec
+                     withInt:(int32_t)heightMeasureSpec;
 
 - (id)getBaselineAlignBottom;
 
@@ -117,19 +126,19 @@
 
 - (void)setPaddingWithId:(id)objValue;
 
-- (void)nativeSetPaddingBottomWithInt:(jint)value;
+- (void)nativeSetPaddingBottomWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingLeftWithInt:(jint)value;
+- (void)nativeSetPaddingLeftWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingRightWithInt:(jint)value;
+- (void)nativeSetPaddingRightWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingTopWithInt:(jint)value;
+- (void)nativeSetPaddingTopWithInt:(int32_t)value;
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
 - (void)createButton;
 
-- (jboolean)isViewWrapped;
+- (bool)isViewWrapped;
 
 - (void)setTintColorWithId:(id)objValue;
 
@@ -145,7 +154,7 @@
 - (void)setImageNativeWithTemplateWithId:(id)value
                                   withId:(id)tintColor;
 
-- (void)nativeSetContentModeWithInt:(jint)contentMode;
+- (void)nativeSetContentModeWithInt:(int32_t)contentMode;
 
 @end
 
@@ -166,9 +175,9 @@ __attribute__((unused)) static void ASImageButtonImpl_setScaleTypeWithNSString_w
 
 __attribute__((unused)) static id ASImageButtonImpl_getSrc(ASImageButtonImpl *self);
 
-__attribute__((unused)) static jint ASImageButtonImpl_getImageHeightWithId_(ASImageButtonImpl *self, id image);
+__attribute__((unused)) static int32_t ASImageButtonImpl_getImageHeightWithId_(ASImageButtonImpl *self, id image);
 
-__attribute__((unused)) static jint ASImageButtonImpl_getImageWidthWithId_(ASImageButtonImpl *self, id image);
+__attribute__((unused)) static int32_t ASImageButtonImpl_getImageWidthWithId_(ASImageButtonImpl *self, id image);
 
 __attribute__((unused)) static void ASImageButtonImpl_setImageFromUrlErrorWithId_(ASImageButtonImpl *self, id objValue);
 
@@ -176,7 +185,7 @@ __attribute__((unused)) static void ASImageButtonImpl_setImageFromUrlPlaceHolder
 
 __attribute__((unused)) static void ASImageButtonImpl_setImageFromUrlWithId_(ASImageButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASImageButtonImpl_postOnMeasureWithInt_withInt_(ASImageButtonImpl *self, jint widthMeasureSpec, jint heightMeasureSpec);
+__attribute__((unused)) static void ASImageButtonImpl_postOnMeasureWithInt_withInt_(ASImageButtonImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec);
 
 __attribute__((unused)) static id ASImageButtonImpl_getBaselineAlignBottom(ASImageButtonImpl *self);
 
@@ -214,19 +223,19 @@ __attribute__((unused)) static void ASImageButtonImpl_setPaddingStartWithId_(ASI
 
 __attribute__((unused)) static void ASImageButtonImpl_setPaddingWithId_(ASImageButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingBottomWithInt_(ASImageButtonImpl *self, jint value);
+__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingBottomWithInt_(ASImageButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingLeftWithInt_(ASImageButtonImpl *self, jint value);
+__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingLeftWithInt_(ASImageButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingRightWithInt_(ASImageButtonImpl *self, jint value);
+__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingRightWithInt_(ASImageButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingTopWithInt_(ASImageButtonImpl *self, jint value);
+__attribute__((unused)) static void ASImageButtonImpl_nativeSetPaddingTopWithInt_(ASImageButtonImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASImageButtonImpl_nativeCreateWithJavaUtilMap_(ASImageButtonImpl *self, id<JavaUtilMap> params);
 
 __attribute__((unused)) static void ASImageButtonImpl_createButton(ASImageButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASImageButtonImpl_isViewWrapped(ASImageButtonImpl *self);
+__attribute__((unused)) static bool ASImageButtonImpl_isViewWrapped(ASImageButtonImpl *self);
 
 __attribute__((unused)) static void ASImageButtonImpl_setTintColorWithId_(ASImageButtonImpl *self, id objValue);
 
@@ -240,7 +249,7 @@ __attribute__((unused)) static void ASImageButtonImpl_setImageNativeSimpleWithId
 
 __attribute__((unused)) static void ASImageButtonImpl_setImageNativeWithTemplateWithId_withId_(ASImageButtonImpl *self, id value, id tintColor);
 
-__attribute__((unused)) static void ASImageButtonImpl_nativeSetContentModeWithInt_(ASImageButtonImpl *self, jint contentMode);
+__attribute__((unused)) static void ASImageButtonImpl_nativeSetContentModeWithInt_(ASImageButtonImpl *self, int32_t contentMode);
 
 @interface ASImageButtonImpl_ScaleType () {
  @public
@@ -253,7 +262,7 @@ J2OBJC_FIELD_SETTER(ASImageButtonImpl_ScaleType, mapping_, id<JavaUtilMap>)
 
 @interface ASImageButtonImpl_ImageButtonExt () {
  @public
-  __unsafe_unretained ASImageButtonImpl *this$0_;
+  WEAK_ ASImageButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -531,9 +540,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (IOSIntArray *)getImageDimension {
   id image = [self getImage];
   if (image != nil) {
-    return [IOSIntArray newArrayWithInts:(jint[]){ ASImageButtonImpl_getImageWidthWithId_(self, image), ASImageButtonImpl_getImageHeightWithId_(self, image) } count:2];
+    return [IOSIntArray newArrayWithInts:(int32_t[]){ ASImageButtonImpl_getImageWidthWithId_(self, image), ASImageButtonImpl_getImageHeightWithId_(self, image) } count:2];
   }
-  return [IOSIntArray newArrayWithInts:(jint[]){ 0, 0 } count:2];
+  return [IOSIntArray newArrayWithInts:(int32_t[]){ 0, 0 } count:2];
 }
 
 - (id)getScaleType {
@@ -555,11 +564,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASImageButtonImpl_getSrc(self);
 }
 
-- (jint)getImageHeightWithId:(id)image {
+- (int32_t)getImageHeightWithId:(id)image {
   return ASImageButtonImpl_getImageHeightWithId_(self, image);
 }
 
-- (jint)getImageWidthWithId:(id)image {
+- (int32_t)getImageWidthWithId:(id)image {
   return ASImageButtonImpl_getImageWidthWithId_(self, image);
 }
 
@@ -607,8 +616,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)postOnMeasureWithInt:(jint)widthMeasureSpec
-                     withInt:(jint)heightMeasureSpec {
+- (void)postOnMeasureWithInt:(int32_t)widthMeasureSpec
+                     withInt:(int32_t)heightMeasureSpec {
   ASImageButtonImpl_postOnMeasureWithInt_withInt_(self, widthMeasureSpec, heightMeasureSpec);
 }
 
@@ -616,7 +625,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASImageButtonImpl_getBaselineAlignBottom(self);
 }
 
-- (jint)getBaseLine {
+- (int32_t)getBaseLine {
   return [((ADImageView *) nil_chk(measurableView_)) getBaseline];
 }
 
@@ -742,23 +751,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self setPaddingBottomWithId:JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(measurableView_)) getPaddingBottom])];
 }
 
-- (void)nativeSetPaddingBottomWithInt:(jint)value {
+- (void)nativeSetPaddingBottomWithInt:(int32_t)value {
   ASImageButtonImpl_nativeSetPaddingBottomWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingLeftWithInt:(jint)value {
+- (void)nativeSetPaddingLeftWithInt:(int32_t)value {
   ASImageButtonImpl_nativeSetPaddingLeftWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingRightWithInt:(jint)value {
+- (void)nativeSetPaddingRightWithInt:(int32_t)value {
   ASImageButtonImpl_nativeSetPaddingRightWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingTopWithInt:(jint)value {
+- (void)nativeSetPaddingTopWithInt:(int32_t)value {
   ASImageButtonImpl_nativeSetPaddingTopWithInt_(self, value);
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -769,7 +778,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -797,7 +806,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)isViewWrapped {
+- (bool)isViewWrapped {
   return ASImageButtonImpl_isViewWrapped(self);
 }
 
@@ -827,7 +836,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASImageButtonImpl_setImageNativeWithTemplateWithId_withId_(self, value, tintColor);
 }
 
-- (void)nativeSetContentModeWithInt:(jint)contentMode {
+- (void)nativeSetContentModeWithInt:(int32_t)contentMode {
   ASImageButtonImpl_nativeSetContentModeWithInt_(self, contentMode);
 }
 
@@ -1091,11 +1100,11 @@ id ASImageButtonImpl_getSrc(ASImageButtonImpl *self) {
   return [((ADImageView *) nil_chk(self->measurableView_)) getImageDrawable];
 }
 
-jint ASImageButtonImpl_getImageHeightWithId_(ASImageButtonImpl *self, id image) {
+int32_t ASImageButtonImpl_getImageHeightWithId_(ASImageButtonImpl *self, id image) {
   return ((UIImage*) image).size.height;
 }
 
-jint ASImageButtonImpl_getImageWidthWithId_(ASImageButtonImpl *self, id image) {
+int32_t ASImageButtonImpl_getImageWidthWithId_(ASImageButtonImpl *self, id image) {
   return ((UIImage*) image).size.width;
 }
 
@@ -1112,7 +1121,7 @@ void ASImageButtonImpl_setImageFromUrlWithId_(ASImageButtonImpl *self, id objVal
   [((id<ASIImageDownloader>) nil_chk(ASImageDownloaderFactory_get())) downloadWithId:new_ADContext_init() withNSString:(NSString *) cast_chk(objValue, [NSString class]) withId:self->imageFromUrlPlaceHolder_ withId:self->imageFromUrlError_ withASITarget:self];
 }
 
-void ASImageButtonImpl_postOnMeasureWithInt_withInt_(ASImageButtonImpl *self, jint widthMeasureSpec, jint heightMeasureSpec) {
+void ASImageButtonImpl_postOnMeasureWithInt_withInt_(ASImageButtonImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec) {
   self->measureCalled_ = true;
 }
 
@@ -1191,25 +1200,25 @@ void ASImageButtonImpl_setPaddingWithId_(ASImageButtonImpl *self, id objValue) {
   ASImageButtonImpl_setPaddingHorizontalWithId_(self, objValue);
 }
 
-void ASImageButtonImpl_nativeSetPaddingBottomWithInt_(ASImageButtonImpl *self, jint value) {
+void ASImageButtonImpl_nativeSetPaddingBottomWithInt_(ASImageButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.imageEdgeInsets;
   [label setImageEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, value, edgeInsets.right)];
 }
 
-void ASImageButtonImpl_nativeSetPaddingLeftWithInt_(ASImageButtonImpl *self, jint value) {
+void ASImageButtonImpl_nativeSetPaddingLeftWithInt_(ASImageButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.imageEdgeInsets;
   [label setImageEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, value, edgeInsets.bottom, edgeInsets.right)];
 }
 
-void ASImageButtonImpl_nativeSetPaddingRightWithInt_(ASImageButtonImpl *self, jint value) {
+void ASImageButtonImpl_nativeSetPaddingRightWithInt_(ASImageButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.imageEdgeInsets;
   [label setImageEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, value)];
 }
 
-void ASImageButtonImpl_nativeSetPaddingTopWithInt_(ASImageButtonImpl *self, jint value) {
+void ASImageButtonImpl_nativeSetPaddingTopWithInt_(ASImageButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.imageEdgeInsets;
   [label setImageEdgeInsets:UIEdgeInsetsMake(value, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)];
@@ -1231,7 +1240,7 @@ void ASImageButtonImpl_createButton(ASImageButtonImpl *self) {
   ((ASUIButton*)self.uiView).imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
-jboolean ASImageButtonImpl_isViewWrapped(ASImageButtonImpl *self) {
+bool ASImageButtonImpl_isViewWrapped(ASImageButtonImpl *self) {
   return false;
 }
 
@@ -1281,11 +1290,13 @@ void ASImageButtonImpl_setImageNativeWithTemplateWithId_withId_(ASImageButtonImp
   [((ASUIButton*) self->uiView_) setImage:[(UIImage*) value imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
 }
 
-void ASImageButtonImpl_nativeSetContentModeWithInt_(ASImageButtonImpl *self, jint contentMode) {
+void ASImageButtonImpl_nativeSetContentModeWithInt_(ASImageButtonImpl *self, int32_t contentMode) {
   [((ASUIButton*)self->uiView_).imageView setContentMode:contentMode];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl)
+
+J2OBJC_NAME_MAPPING(ASImageButtonImpl, "com.ashera.layout", "AS")
 
 @implementation ASImageButtonImpl_ScaleType
 
@@ -1331,14 +1342,14 @@ void ASImageButtonImpl_ScaleType_init(ASImageButtonImpl_ScaleType *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"center" withId:JavaLangInteger_valueOfWithInt_((jint) 0x5)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerCrop" withId:JavaLangInteger_valueOfWithInt_((jint) 0x6)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerInside" withId:JavaLangInteger_valueOfWithInt_((jint) 0x7)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitCenter" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitEnd" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitStart" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitXY" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"matrix" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"center" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x5)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerCrop" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x6)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"centerInside" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x7)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitCenter" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitEnd" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitStart" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"fitXY" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"matrix" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -1363,8 +1374,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -1375,11 +1386,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
   ASImageButtonImpl_postOnMeasureWithInt_withInt_(this$0_, widthMeasureSpec, heightMeasureSpec);
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1406,8 +1417,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1475,12 +1486,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1510,7 +1521,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }

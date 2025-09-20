@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\AutoCompleteTextView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AutoCompleteTextView.h"
 #include "DataSetObserver.h"
 #include "EditText.h"
@@ -20,35 +25,39 @@
 #include "TextView.h"
 #include "TextWatcher.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/ref/WeakReference.h"
 
+
 @class ADAutoCompleteTextView_MyWatcher;
 @class ADAutoCompleteTextView_PopupDataSetObserver;
-@class JavaLangRefWeakReference;
-@protocol JavaLangCharSequence;
-@protocol JavaLangRunnable;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADAutoCompleteTextView () {
  @public
   ADListPopupWindow *mPopup_;
-  jint mHintResource_;
+  int32_t mHintResource_;
   id<ADListAdapter> mAdapter_;
   ADFilter *mFilter_;
-  jint mThreshold_;
-  jint mDropDownAnchorId_;
-  jboolean mDropDownDismissedOnCompletion_;
-  jint mLastKeyCode_;
+  int32_t mThreshold_;
+  int32_t mDropDownAnchorId_;
+  bool mDropDownDismissedOnCompletion_;
+  int32_t mLastKeyCode_;
   ADAutoCompleteTextView_MyWatcher *mAutoCompleteTextWatcher_;
-  jboolean mBlockCompletion_;
-  jboolean mPopupCanBeUpdated_;
+  bool mBlockCompletion_;
+  bool mPopupCanBeUpdated_;
   ADAutoCompleteTextView_PopupDataSetObserver *mObserver_;
-  jboolean mBackCallbackRegistered_;
+  bool mBackCallbackRegistered_;
 }
 
-- (void)updateDropDownForFilterWithInt:(jint)count;
+- (void)updateDropDownForFilterWithInt:(int32_t)count;
 
 - (void)registerOnBackInvokedCallback;
 
@@ -64,7 +73,7 @@ J2OBJC_FIELD_SETTER(ADAutoCompleteTextView, mObserver_, ADAutoCompleteTextView_P
 
 __attribute__((unused)) static void ADAutoCompleteTextView_refreshAutoCompleteResults(ADAutoCompleteTextView *self);
 
-__attribute__((unused)) static void ADAutoCompleteTextView_updateDropDownForFilterWithInt_(ADAutoCompleteTextView *self, jint count);
+__attribute__((unused)) static void ADAutoCompleteTextView_updateDropDownForFilterWithInt_(ADAutoCompleteTextView *self, int32_t count);
 
 __attribute__((unused)) static void ADAutoCompleteTextView_registerOnBackInvokedCallback(ADAutoCompleteTextView *self);
 
@@ -91,25 +100,26 @@ __attribute__((unused)) static ADAutoCompleteTextView_1 *new_ADAutoCompleteTextV
 
 __attribute__((unused)) static ADAutoCompleteTextView_1 *create_ADAutoCompleteTextView_1_initWithADAutoCompleteTextView_withADAutoCompleteTextView_OnDismissListener_(ADAutoCompleteTextView *outer$, id<ADAutoCompleteTextView_OnDismissListener> capture$0);
 
+
 @interface ADAutoCompleteTextView_MyWatcher : NSObject < ADTextWatcher > {
  @public
   ADAutoCompleteTextView *this$0_;
-  jboolean mOpenBefore_;
+  bool mOpenBefore_;
 }
 
 - (instancetype)initWithADAutoCompleteTextView:(ADAutoCompleteTextView *)outer$;
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after;
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after;
 
 - (void)afterTextChangedWithADEditable:(id<ADEditable>)s;
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count;
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count;
 
 @end
 
@@ -122,6 +132,7 @@ __attribute__((unused)) static ADAutoCompleteTextView_MyWatcher *new_ADAutoCompl
 __attribute__((unused)) static ADAutoCompleteTextView_MyWatcher *create_ADAutoCompleteTextView_MyWatcher_initWithADAutoCompleteTextView_(ADAutoCompleteTextView *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAutoCompleteTextView_MyWatcher)
+
 
 @interface ADAutoCompleteTextView_OnDismissListener : NSObject
 
@@ -152,6 +163,7 @@ __attribute__((unused)) static ADAutoCompleteTextView_PopupDataSetObserver *crea
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAutoCompleteTextView_PopupDataSetObserver)
 
+
 @interface ADAutoCompleteTextView_PopupDataSetObserver_1 : NSObject < JavaLangRunnable > {
  @public
   ADAutoCompleteTextView_PopupDataSetObserver *this$0_;
@@ -171,47 +183,48 @@ __attribute__((unused)) static ADAutoCompleteTextView_PopupDataSetObserver_1 *ne
 
 __attribute__((unused)) static ADAutoCompleteTextView_PopupDataSetObserver_1 *create_ADAutoCompleteTextView_PopupDataSetObserver_1_initWithADAutoCompleteTextView_PopupDataSetObserver_(ADAutoCompleteTextView_PopupDataSetObserver *outer$);
 
+
 NSString *ADAutoCompleteTextView_TAG = @"AutoCompleteTextView";
 
 @implementation ADAutoCompleteTextView
 
-- (jint)getDropDownWidth {
+- (int32_t)getDropDownWidth {
   return [((ADListPopupWindow *) nil_chk(mPopup_)) getWidth];
 }
 
-- (void)setDropDownWidthWithInt:(jint)width {
+- (void)setDropDownWidthWithInt:(int32_t)width {
   [((ADListPopupWindow *) nil_chk(mPopup_)) setWidthWithInt:width];
 }
 
-- (jint)getDropDownHeight {
+- (int32_t)getDropDownHeight {
   return [((ADListPopupWindow *) nil_chk(mPopup_)) getHeight];
 }
 
-- (void)setDropDownHeightWithInt:(jint)height {
+- (void)setDropDownHeightWithInt:(int32_t)height {
   [((ADListPopupWindow *) nil_chk(mPopup_)) setHeightWithInt:height];
 }
 
-- (void)setDropDownVerticalOffsetWithInt:(jint)offset {
+- (void)setDropDownVerticalOffsetWithInt:(int32_t)offset {
   [((ADListPopupWindow *) nil_chk(mPopup_)) setVerticalOffsetWithInt:offset];
 }
 
-- (jint)getDropDownVerticalOffset {
+- (int32_t)getDropDownVerticalOffset {
   return [((ADListPopupWindow *) nil_chk(mPopup_)) getVerticalOffset];
 }
 
-- (void)setDropDownHorizontalOffsetWithInt:(jint)offset {
+- (void)setDropDownHorizontalOffsetWithInt:(int32_t)offset {
   [((ADListPopupWindow *) nil_chk(mPopup_)) setHorizontalOffsetWithInt:offset];
 }
 
-- (jint)getDropDownHorizontalOffset {
+- (int32_t)getDropDownHorizontalOffset {
   return [((ADListPopupWindow *) nil_chk(mPopup_)) getHorizontalOffset];
 }
 
-- (jint)getThreshold {
+- (int32_t)getThreshold {
   return mThreshold_;
 }
 
-- (void)setThresholdWithInt:(jint)threshold {
+- (void)setThresholdWithInt:(int32_t)threshold {
   if (threshold <= 0) {
     threshold = 1;
   }
@@ -243,8 +256,8 @@ NSString *ADAutoCompleteTextView_TAG = @"AutoCompleteTextView";
   }
 }
 
-- (jboolean)onKeyDownWithInt:(jint)keyCode
-              withADKeyEvent:(ADKeyEvent *)event {
+- (bool)onKeyDownWithInt:(int32_t)keyCode
+          withADKeyEvent:(ADKeyEvent *)event {
   if ([((ADListPopupWindow *) nil_chk(mPopup_)) onKeyDownWithInt:keyCode withADKeyEvent:event]) {
     return true;
   }
@@ -260,7 +273,7 @@ NSString *ADAutoCompleteTextView_TAG = @"AutoCompleteTextView";
     return true;
   }
   mLastKeyCode_ = keyCode;
-  jboolean handled = [super onKeyDownWithInt:keyCode withADKeyEvent:event];
+  bool handled = [super onKeyDownWithInt:keyCode withADKeyEvent:event];
   mLastKeyCode_ = ADKeyEvent_KEYCODE_UNKNOWN;
   if (handled && [self isPopupShowing]) {
     [self clearListSelection];
@@ -268,7 +281,7 @@ NSString *ADAutoCompleteTextView_TAG = @"AutoCompleteTextView";
   return handled;
 }
 
-- (jboolean)enoughToFilter {
+- (bool)enoughToFilter {
   return [((NSString *) nil_chk([self getText])) java_length] >= mThreshold_;
 }
 
@@ -276,7 +289,7 @@ NSString *ADAutoCompleteTextView_TAG = @"AutoCompleteTextView";
   ADAutoCompleteTextView_refreshAutoCompleteResults(self);
 }
 
-- (jboolean)isPopupShowing {
+- (bool)isPopupShowing {
   return [((ADListPopupWindow *) nil_chk(mPopup_)) isShowing];
 }
 
@@ -285,15 +298,15 @@ NSString *ADAutoCompleteTextView_TAG = @"AutoCompleteTextView";
 }
 
 - (void)performFilteringWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                         withInt:(jint)keyCode {
+                                         withInt:(int32_t)keyCode {
   [((ADFilter *) nil_chk(mFilter_)) filterWithJavaLangCharSequence:text withADFilter_FilterListener:self];
 }
 
-- (void)onFilterCompleteWithInt:(jint)count {
+- (void)onFilterCompleteWithInt:(int32_t)count {
   ADAutoCompleteTextView_updateDropDownForFilterWithInt_(self, count);
 }
 
-- (void)updateDropDownForFilterWithInt:(jint)count {
+- (void)updateDropDownForFilterWithInt:(int32_t)count {
   ADAutoCompleteTextView_updateDropDownForFilterWithInt_(self, count);
 }
 
@@ -477,10 +490,10 @@ void ADAutoCompleteTextView_refreshAutoCompleteResults(ADAutoCompleteTextView *s
   }
 }
 
-void ADAutoCompleteTextView_updateDropDownForFilterWithInt_(ADAutoCompleteTextView *self, jint count) {
+void ADAutoCompleteTextView_updateDropDownForFilterWithInt_(ADAutoCompleteTextView *self, int32_t count) {
   if ([self getWindowVisibility] == ADView_GONE) return;
-  jboolean dropDownAlwaysVisible = [((ADListPopupWindow *) nil_chk(self->mPopup_)) isDropDownAlwaysVisible];
-  jboolean enoughToFilter = [self enoughToFilter];
+  bool dropDownAlwaysVisible = [((ADListPopupWindow *) nil_chk(self->mPopup_)) isDropDownAlwaysVisible];
+  bool enoughToFilter = [self enoughToFilter];
   if ((count > 0 || dropDownAlwaysVisible) && enoughToFilter) {
     if (self->mPopupCanBeUpdated_) {
       [self showDropDown];
@@ -507,6 +520,8 @@ void ADAutoCompleteTextView_unregisterOnBackInvokedCallback(ADAutoCompleteTextVi
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAutoCompleteTextView)
+
+J2OBJC_NAME_MAPPING(ADAutoCompleteTextView, "r.android.widget", "AD")
 
 @implementation ADAutoCompleteTextView_1
 
@@ -543,7 +558,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAutoCompleteTextView)
     { "val$dismissListener_", "LADAutoCompleteTextView_OnDismissListener;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADAutoCompleteTextView;LADAutoCompleteTextView_OnDismissListener;", "LADAutoCompleteTextView;", "setOnDismissListenerWithADAutoCompleteTextView_OnDismissListener:" };
-  static const J2ObjcClassInfo _ADAutoCompleteTextView_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8010, 2, 2, 1, -1, 2, -1, -1 };
+  static const J2ObjcClassInfo _ADAutoCompleteTextView_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8000, 2, 2, 1, -1, 2, -1, -1 };
   return &_ADAutoCompleteTextView_1;
 }
 
@@ -571,9 +586,9 @@ ADAutoCompleteTextView_1 *create_ADAutoCompleteTextView_1_initWithADAutoComplete
 }
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after {
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after {
   if (this$0_->mBlockCompletion_) return;
   mOpenBefore_ = [this$0_ isPopupShowing];
 }
@@ -585,9 +600,9 @@ ADAutoCompleteTextView_1 *create_ADAutoCompleteTextView_1_initWithADAutoComplete
 }
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count {
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count {
 }
 
 - (void)dealloc {
@@ -754,7 +769,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAutoCompleteTextView_PopupDataSetObserver)
     { "this$0_", "LADAutoCompleteTextView_PopupDataSetObserver;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADAutoCompleteTextView_PopupDataSetObserver;" };
-  static const J2ObjcClassInfo _ADAutoCompleteTextView_PopupDataSetObserver_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADAutoCompleteTextView_PopupDataSetObserver_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, -1, -1, -1 };
   return &_ADAutoCompleteTextView_PopupDataSetObserver_1;
 }
 

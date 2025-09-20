@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\SparseArray.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SparseArray")
@@ -15,6 +16,10 @@
 
 #if !defined (ADSparseArray_) && (INCLUDE_ALL_SparseArray || defined(INCLUDE_ADSparseArray))
 #define ADSparseArray_
+
+
+@class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief SparseArrays map integers to Objects.Unlike a normal array of Objects,
@@ -60,13 +65,13 @@
   sparse array will be initialized with a light-weight representation
   not requiring any additional array allocations.
  */
-- (instancetype)initWithInt:(jint)initialCapacity;
+- (instancetype)initWithInt:(int32_t)initialCapacity;
 
 /*!
  @brief Puts a key/value pair into the array, optimizing for the case where
   the key is greater than all existing keys in the array.
  */
-- (void)appendWithInt:(jint)key
+- (void)appendWithInt:(int32_t)key
                withId:(id)value;
 
 /*!
@@ -79,19 +84,19 @@
 /*!
  @brief Removes the mapping from the specified key, if there was any.
  */
-- (void)delete__WithInt:(jint)key;
+- (void)delete__WithInt:(int32_t)key;
 
 /*!
  @brief Gets the Object mapped from the specified key, or <code>null</code>
   if no such mapping has been made.
  */
-- (id)getWithInt:(jint)key;
+- (id)getWithInt:(int32_t)key;
 
 /*!
  @brief Gets the Object mapped from the specified key, or the specified Object
   if no such mapping has been made.
  */
-- (id)getWithInt:(jint)key
+- (id)getWithInt:(int32_t)key
           withId:(id)valueIfKeyNotFound;
 
 /*!
@@ -99,7 +104,7 @@
   specified key, or a negative number if the specified
   key is not mapped.
  */
-- (jint)indexOfKeyWithInt:(jint)key;
+- (int32_t)indexOfKeyWithInt:(int32_t)key;
 
 /*!
  @brief Returns an index for which <code>valueAt</code> would return the
@@ -111,7 +116,7 @@
  <p>Note also that unlike most collections' <code>indexOf</code> methods,
   this method compares values using <code>==</code> rather than <code>equals</code>.
  */
-- (jint)indexOfValueWithId:(id)value;
+- (int32_t)indexOfValueWithId:(id)value;
 
 /*!
  @brief Given an index in the range <code>0...size()-1</code>, returns
@@ -122,54 +127,55 @@
   smallest key and <code>keyAt(size()-1)</code> will return the largest
   key.</p>
  */
-- (jint)keyAtWithInt:(jint)index;
+- (int32_t)keyAtWithInt:(int32_t)index;
 
 /*!
  @brief Adds a mapping from the specified key to the specified value,
   replacing the previous mapping from the specified key if there
   was one.
  */
-- (void)putWithInt:(jint)key
+- (void)putWithInt:(int32_t)key
             withId:(id)value;
 
 /*!
  @brief Alias for <code>delete(int)</code>.
  */
-- (void)removeWithInt:(jint)key;
+- (void)removeWithInt:(int32_t)key;
 
 /*!
  @brief Removes the mapping at the specified index.
  */
-- (void)removeAtWithInt:(jint)index;
+- (void)removeAtWithInt:(int32_t)index;
 
 /*!
  @brief Remove a range of mappings as a batch.
  @param index Index to begin at
  @param size Number of mappings to remove
  */
-- (void)removeAtRangeWithInt:(jint)index
-                     withInt:(jint)size;
+- (void)removeAtRangeWithInt:(int32_t)index
+                     withInt:(int32_t)size;
 
 /*!
  */
-- (id)removeReturnOldWithInt:(jint)key;
+- (id)removeReturnOldWithInt:(int32_t)key;
 
 /*!
  @brief Given an index in the range <code>0...size()-1</code>, sets a new
   value for the <code>index</code>th key-value mapping that this
   SparseArray stores.
  */
-- (void)setValueAtWithInt:(jint)index
+- (void)setValueAtWithInt:(int32_t)index
                    withId:(id)value;
 
 /*!
  @brief Returns the number of key-value mappings that this SparseArray
   currently stores.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
- @brief <p>This implementation composes a string by iterating over its mappings.
+ @brief  
+ <p>This implementation composes a string by iterating over its mappings.
  If
   this map contains itself as a value, the string "(this Map)"
   will appear in its place.
@@ -186,7 +192,7 @@
   smallest key and <code>valueAt(size()-1)</code> will return the value
   associated with the largest key.</p>
  */
-- (id)valueAtWithInt:(jint)index;
+- (id)valueAtWithInt:(int32_t)index;
 
 @end
 
@@ -198,15 +204,16 @@ FOUNDATION_EXPORT ADSparseArray *new_ADSparseArray_init(void) NS_RETURNS_RETAINE
 
 FOUNDATION_EXPORT ADSparseArray *create_ADSparseArray_init(void);
 
-FOUNDATION_EXPORT void ADSparseArray_initWithInt_(ADSparseArray *self, jint initialCapacity);
+FOUNDATION_EXPORT void ADSparseArray_initWithInt_(ADSparseArray *self, int32_t initialCapacity);
 
-FOUNDATION_EXPORT ADSparseArray *new_ADSparseArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADSparseArray *new_ADSparseArray_initWithInt_(int32_t initialCapacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADSparseArray *create_ADSparseArray_initWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT ADSparseArray *create_ADSparseArray_initWithInt_(int32_t initialCapacity);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADSparseArray)
 
 @compatibility_alias RAndroidUtilSparseArray ADSparseArray;
+
 
 #endif
 

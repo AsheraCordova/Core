@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\JavaCharStream.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "JavaCharStream.h"
@@ -10,26 +15,35 @@
 #include "java/io/InputStream.h"
 #include "java/io/InputStreamReader.h"
 #include "java/io/Reader.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Error.h"
+#include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/lang/Throwable.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @implementation CSSJavaCharStream
 
-+ (jint)hexvalWithChar:(jchar)c {
++ (int32_t)hexvalWithChar:(unichar)c {
   return CSSJavaCharStream_hexvalWithChar_(c);
 }
 
-- (void)setTabSizeWithInt:(jint)i {
+- (void)setTabSizeWithInt:(int32_t)i {
   tabSize_ = i;
 }
 
-- (jint)getTabSize {
+- (int32_t)getTabSize {
   return tabSize_;
 }
 
-- (void)ExpandBuffWithBoolean:(jboolean)wrapAround {
+- (void)ExpandBuffWithBoolean:(bool)wrapAround {
   IOSCharArray *newbuffer = [IOSCharArray arrayWithLength:bufsize_ + 2048];
   IOSIntArray *newbufline = [IOSIntArray arrayWithLength:bufsize_ + 2048];
   IOSIntArray *newbufcolumn = [IOSIntArray arrayWithLength:bufsize_ + 2048];
@@ -64,7 +78,7 @@
 }
 
 - (void)FillBuff {
-  jint i;
+  int32_t i;
   if (maxNextCharInd_ == 4096) maxNextCharInd_ = nextCharInd_ = 0;
   @try {
     if ((i = [((JavaIoReader *) nil_chk(inputStream_)) readWithCharArray:nextCharBuf_ withInt:maxNextCharInd_ withInt:4096 - maxNextCharInd_]) == -1) {
@@ -87,12 +101,12 @@
   }
 }
 
-- (jchar)ReadByte {
+- (unichar)ReadByte {
   if (++nextCharInd_ >= maxNextCharInd_) [self FillBuff];
   return IOSCharArray_Get(nil_chk(nextCharBuf_), nextCharInd_);
 }
 
-- (jchar)BeginToken {
+- (unichar)BeginToken {
   if (inBuf_ > 0) {
     --inBuf_;
     if (++bufpos_ == bufsize_) bufpos_ = 0;
@@ -117,7 +131,7 @@
   else available_ = tokenBegin_;
 }
 
-- (void)UpdateLineColumnWithChar:(jchar)c {
+- (void)UpdateLineColumnWithChar:(unichar)c {
   column_++;
   if (prevCharIsLF_) {
     prevCharIsLF_ = false;
@@ -148,19 +162,19 @@
   *IOSIntArray_GetRef(nil_chk(bufcolumn_), bufpos_) = column_;
 }
 
-- (jchar)readChar {
+- (unichar)readChar {
   if (inBuf_ > 0) {
     --inBuf_;
     if (++bufpos_ == bufsize_) bufpos_ = 0;
     return IOSCharArray_Get(nil_chk(buffer_), bufpos_);
   }
-  jchar c;
+  unichar c;
   if (++bufpos_ == available_) [self AdjustBuffSize];
   if ((*IOSCharArray_GetRef(nil_chk(buffer_), bufpos_) = c = [self ReadByte]) == '\\') {
     if (trackLineColumn_) {
       [self UpdateLineColumnWithChar:c];
     }
-    jint backSlashCnt = 1;
+    int32_t backSlashCnt = 1;
     for (; ; ) {
       if (++bufpos_ == available_) [self AdjustBuffSize];
       @try {
@@ -187,7 +201,7 @@
     }
     @try {
       while ((c = [self ReadByte]) == 'u') ++column_;
-      *IOSCharArray_GetRef(nil_chk(buffer_), bufpos_) = c = (jchar) ((JreLShift32(CSSJavaCharStream_hexvalWithChar_(c), 12)) | (JreLShift32(CSSJavaCharStream_hexvalWithChar_([self ReadByte]), 8)) | (JreLShift32(CSSJavaCharStream_hexvalWithChar_([self ReadByte]), 4)) | CSSJavaCharStream_hexvalWithChar_([self ReadByte]));
+      *IOSCharArray_GetRef(nil_chk(buffer_), bufpos_) = c = (unichar) ((JreLShift32(CSSJavaCharStream_hexvalWithChar_(c), 12)) | (JreLShift32(CSSJavaCharStream_hexvalWithChar_([self ReadByte]), 8)) | (JreLShift32(CSSJavaCharStream_hexvalWithChar_([self ReadByte]), 4)) | CSSJavaCharStream_hexvalWithChar_([self ReadByte]));
       column_ += 4;
     }
     @catch (JavaIoIOException *e) {
@@ -205,46 +219,46 @@
   }
 }
 
-- (jint)getColumn {
+- (int32_t)getColumn {
   return IOSIntArray_Get(nil_chk(bufcolumn_), bufpos_);
 }
 
-- (jint)getLine {
+- (int32_t)getLine {
   return IOSIntArray_Get(nil_chk(bufline_), bufpos_);
 }
 
-- (jint)getEndColumn {
+- (int32_t)getEndColumn {
   return IOSIntArray_Get(nil_chk(bufcolumn_), bufpos_);
 }
 
-- (jint)getEndLine {
+- (int32_t)getEndLine {
   return IOSIntArray_Get(nil_chk(bufline_), bufpos_);
 }
 
-- (jint)getBeginColumn {
+- (int32_t)getBeginColumn {
   return IOSIntArray_Get(nil_chk(bufcolumn_), tokenBegin_);
 }
 
-- (jint)getBeginLine {
+- (int32_t)getBeginLine {
   return IOSIntArray_Get(nil_chk(bufline_), tokenBegin_);
 }
 
-- (void)backupWithInt:(jint)amount {
+- (void)backupWithInt:(int32_t)amount {
   inBuf_ += amount;
   if ((bufpos_ -= amount) < 0) bufpos_ += bufsize_;
 }
 
 - (instancetype)initPackagePrivateWithJavaIoReader:(JavaIoReader *)dstream
-                                           withInt:(jint)startline
-                                           withInt:(jint)startcolumn
-                                           withInt:(jint)buffersize {
+                                           withInt:(int32_t)startline
+                                           withInt:(int32_t)startcolumn
+                                           withInt:(int32_t)buffersize {
   CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(self, dstream, startline, startcolumn, buffersize);
   return self;
 }
 
 - (instancetype)initPackagePrivateWithJavaIoReader:(JavaIoReader *)dstream
-                                           withInt:(jint)startline
-                                           withInt:(jint)startcolumn {
+                                           withInt:(int32_t)startline
+                                           withInt:(int32_t)startcolumn {
   CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(self, dstream, startline, startcolumn);
   return self;
 }
@@ -255,9 +269,9 @@
 }
 
 - (void)ReInitWithJavaIoReader:(JavaIoReader *)dstream
-                       withInt:(jint)startline
-                       withInt:(jint)startcolumn
-                       withInt:(jint)buffersize {
+                       withInt:(int32_t)startline
+                       withInt:(int32_t)startcolumn
+                       withInt:(int32_t)buffersize {
   JreStrongAssign(&inputStream_, dstream);
   line_ = startline;
   column_ = startcolumn - 1;
@@ -274,8 +288,8 @@
 }
 
 - (void)ReInitWithJavaIoReader:(JavaIoReader *)dstream
-                       withInt:(jint)startline
-                       withInt:(jint)startcolumn {
+                       withInt:(int32_t)startline
+                       withInt:(int32_t)startcolumn {
   [self ReInitWithJavaIoReader:dstream withInt:startline withInt:startcolumn withInt:4096];
 }
 
@@ -285,32 +299,32 @@
 
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
                                            withNSString:(NSString *)encoding
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn
-                                                withInt:(jint)buffersize {
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn
+                                                withInt:(int32_t)buffersize {
   CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(self, dstream, encoding, startline, startcolumn, buffersize);
   return self;
 }
 
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn
-                                                withInt:(jint)buffersize {
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn
+                                                withInt:(int32_t)buffersize {
   CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(self, dstream, startline, startcolumn, buffersize);
   return self;
 }
 
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
                                            withNSString:(NSString *)encoding
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn {
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn {
   CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(self, dstream, encoding, startline, startcolumn);
   return self;
 }
 
 - (instancetype)initPackagePrivateWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                                                withInt:(jint)startline
-                                                withInt:(jint)startcolumn {
+                                                withInt:(int32_t)startline
+                                                withInt:(int32_t)startcolumn {
   CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(self, dstream, startline, startcolumn);
   return self;
 }
@@ -328,29 +342,29 @@
 
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
                        withNSString:(NSString *)encoding
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn
-                            withInt:(jint)buffersize {
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn
+                            withInt:(int32_t)buffersize {
   [self ReInitWithJavaIoReader:encoding == nil ? create_JavaIoInputStreamReader_initWithJavaIoInputStream_(dstream) : create_JavaIoInputStreamReader_initWithJavaIoInputStream_withNSString_(dstream, encoding) withInt:startline withInt:startcolumn withInt:buffersize];
 }
 
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn
-                            withInt:(jint)buffersize {
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn
+                            withInt:(int32_t)buffersize {
   [self ReInitWithJavaIoReader:create_JavaIoInputStreamReader_initWithJavaIoInputStream_(dstream) withInt:startline withInt:startcolumn withInt:buffersize];
 }
 
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
                        withNSString:(NSString *)encoding
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn {
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn {
   [self ReInitWithJavaIoInputStream:dstream withNSString:encoding withInt:startline withInt:startcolumn withInt:4096];
 }
 
 - (void)ReInitWithJavaIoInputStream:(JavaIoInputStream *)dstream
-                            withInt:(jint)startline
-                            withInt:(jint)startcolumn {
+                            withInt:(int32_t)startline
+                            withInt:(int32_t)startcolumn {
   [self ReInitWithJavaIoInputStream:dstream withInt:startline withInt:startcolumn withInt:4096];
 }
 
@@ -368,7 +382,7 @@
   else return JreStrcat("$$", [NSString java_stringWithCharacters:buffer_ offset:tokenBegin_ length:bufsize_ - tokenBegin_], [NSString java_stringWithCharacters:buffer_ offset:0 length:bufpos_ + 1]);
 }
 
-- (IOSCharArray *)GetSuffixWithInt:(jint)len {
+- (IOSCharArray *)GetSuffixWithInt:(int32_t)len {
   IOSCharArray *ret = [IOSCharArray arrayWithLength:len];
   if ((bufpos_ + 1) >= len) JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, bufpos_ - len + 1, ret, 0, len);
   else {
@@ -385,25 +399,25 @@
   JreStrongAssign(&bufcolumn_, nil);
 }
 
-- (void)adjustBeginLineColumnWithInt:(jint)newLine
-                             withInt:(jint)newCol {
-  jint start = tokenBegin_;
-  jint len;
+- (void)adjustBeginLineColumnWithInt:(int32_t)newLine
+                             withInt:(int32_t)newCol {
+  int32_t start = tokenBegin_;
+  int32_t len;
   if (bufpos_ >= tokenBegin_) {
     len = bufpos_ - tokenBegin_ + inBuf_ + 1;
   }
   else {
     len = bufsize_ - tokenBegin_ + bufpos_ + 1 + inBuf_;
   }
-  jint i = 0;
-  jint j = 0;
-  jint k = 0;
-  jint nextColDiff = 0;
-  jint columnDiff = 0;
+  int32_t i = 0;
+  int32_t j = 0;
+  int32_t k = 0;
+  int32_t nextColDiff = 0;
+  int32_t columnDiff = 0;
   while (true) {
-    jboolean unseq$1;
+    bool unseq$1;
     if ((unseq$1 = (i < len))) {
-      jint unseq$2 = start;
+      int32_t unseq$2 = start;
       unseq$1 = (unseq$1 && IOSIntArray_Get(nil_chk(bufline_), j = JreIntMod(unseq$2, bufsize_)) == IOSIntArray_Get(bufline_, k = JreIntMod(++start, bufsize_)));
     }
     if (!(unseq$1)) break;
@@ -417,7 +431,7 @@
     *IOSIntArray_GetRef(nil_chk(bufline_), j) = newLine++;
     *IOSIntArray_GetRef(nil_chk(bufcolumn_), j) = newCol + columnDiff;
     while (i++ < len) {
-      jint unseq$3 = start;
+      int32_t unseq$3 = start;
       if (IOSIntArray_Get(bufline_, j = JreIntMod(unseq$3, bufsize_)) != IOSIntArray_Get(bufline_, JreIntMod(++start, bufsize_))) *IOSIntArray_GetRef(bufline_, j) = newLine++;
       else *IOSIntArray_GetRef(bufline_, j) = newLine;
     }
@@ -426,11 +440,11 @@
   column_ = IOSIntArray_Get(nil_chk(bufcolumn_), j);
 }
 
-- (jboolean)getTrackLineColumn {
+- (bool)getTrackLineColumn {
   return trackLineColumn_;
 }
 
-- (void)setTrackLineColumnWithBoolean:(jboolean)tlc {
+- (void)setTrackLineColumnWithBoolean:(bool)tlc {
   trackLineColumn_ = tlc;
 }
 
@@ -560,7 +574,7 @@
 
 @end
 
-jint CSSJavaCharStream_hexvalWithChar_(jchar c) {
+int32_t CSSJavaCharStream_hexvalWithChar_(unichar c) {
   CSSJavaCharStream_initialize();
   switch (c) {
     case '0':
@@ -605,7 +619,7 @@ jint CSSJavaCharStream_hexvalWithChar_(jchar c) {
   @throw create_JavaIoIOException_init();
 }
 
-void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, jint startline, jint startcolumn, jint buffersize) {
+void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   NSObject_init(self);
   self->bufpos_ = -1;
   self->column_ = 0;
@@ -627,23 +641,23 @@ void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withIn
   JreStrongAssignAndConsume(&self->nextCharBuf_, [IOSCharArray newArrayWithLength:4096]);
 }
 
-CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn, jint buffersize) {
+CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   J2OBJC_NEW_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_, dstream, startline, startcolumn, buffersize)
 }
 
-CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn, jint buffersize) {
+CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_, dstream, startline, startcolumn, buffersize)
 }
 
-void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, jint startline, jint startcolumn) {
+void CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(CSSJavaCharStream *self, JavaIoReader *dstream, int32_t startline, int32_t startcolumn) {
   CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(self, dstream, startline, startcolumn, 4096);
 }
 
-CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn) {
+CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn) {
   J2OBJC_NEW_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoReader_withInt_withInt_, dstream, startline, startcolumn)
 }
 
-CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, jint startline, jint startcolumn) {
+CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_(JavaIoReader *dstream, int32_t startline, int32_t startcolumn) {
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoReader_withInt_withInt_, dstream, startline, startcolumn)
 }
 
@@ -659,51 +673,51 @@ CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoReader_(
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoReader_, dstream)
 }
 
-void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn, jint buffersize) {
+void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(self, encoding == nil ? create_JavaIoInputStreamReader_initWithJavaIoInputStream_(dstream) : create_JavaIoInputStreamReader_initWithJavaIoInputStream_withNSString_(dstream, encoding), startline, startcolumn, buffersize);
 }
 
-CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn, jint buffersize) {
+CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   J2OBJC_NEW_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_, dstream, encoding, startline, startcolumn, buffersize)
 }
 
-CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn, jint buffersize) {
+CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_, dstream, encoding, startline, startcolumn, buffersize)
 }
 
-void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, jint startline, jint startcolumn, jint buffersize) {
+void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   CSSJavaCharStream_initPackagePrivateWithJavaIoReader_withInt_withInt_withInt_(self, create_JavaIoInputStreamReader_initWithJavaIoInputStream_(dstream), startline, startcolumn, 4096);
 }
 
-CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn, jint buffersize) {
+CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   J2OBJC_NEW_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_, dstream, startline, startcolumn, buffersize)
 }
 
-CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn, jint buffersize) {
+CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn, int32_t buffersize) {
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_, dstream, startline, startcolumn, buffersize)
 }
 
-void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn) {
+void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn) {
   CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_withInt_(self, dstream, encoding, startline, startcolumn, 4096);
 }
 
-CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn) {
+CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn) {
   J2OBJC_NEW_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_, dstream, encoding, startline, startcolumn)
 }
 
-CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, jint startline, jint startcolumn) {
+CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_(JavaIoInputStream *dstream, NSString *encoding, int32_t startline, int32_t startcolumn) {
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withNSString_withInt_withInt_, dstream, encoding, startline, startcolumn)
 }
 
-void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, jint startline, jint startcolumn) {
+void CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(CSSJavaCharStream *self, JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn) {
   CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_withInt_(self, dstream, startline, startcolumn, 4096);
 }
 
-CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn) {
+CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn) {
   J2OBJC_NEW_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withInt_withInt_, dstream, startline, startcolumn)
 }
 
-CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, jint startline, jint startcolumn) {
+CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_withInt_withInt_(JavaIoInputStream *dstream, int32_t startline, int32_t startcolumn) {
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_withInt_withInt_, dstream, startline, startcolumn)
 }
 

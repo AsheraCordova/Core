@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IMeasureHeight.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IMeasureHeight")
@@ -16,11 +17,13 @@
 #if !defined (ASIMeasureHeight_) && (INCLUDE_ALL_IMeasureHeight || defined(INCLUDE_ASIMeasureHeight))
 #define ASIMeasureHeight_
 
+@class JavaLangInteger;
+
 @protocol ASIMeasureHeight < JavaObject >
 
-- (jint)measureHeightWithInt:(jint)heightMode
-                     withInt:(jint)heightSize
-                     withInt:(jint)height;
+- (int32_t)measureHeightWithInt:(int32_t)heightMode
+                        withInt:(int32_t)heightSize
+                        withInt:(int32_t)height;
 
 @end
 
@@ -29,6 +32,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIMeasureHeight)
 J2OBJC_TYPE_LITERAL_HEADER(ASIMeasureHeight)
 
 #define ComAsheraWidgetIMeasureHeight ASIMeasureHeight
+
 
 #endif
 

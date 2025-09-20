@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\LayoutPlugin.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AutoCompleteTextViewImpl.h"
 #include "ButtonImpl.h"
 #include "CheckBoxImpl.h"
@@ -43,6 +48,12 @@
 #include "WidgetFactory.h"
 #include "fragmentImpl.h"
 #include "mergeImpl.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASLayoutPlugin
@@ -128,3 +139,5 @@ void ASLayoutPlugin_initPlugin() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLayoutPlugin)
+
+J2OBJC_NAME_MAPPING(ASLayoutPlugin, "com.ashera.layout", "AS")

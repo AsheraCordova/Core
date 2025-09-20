@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\Html.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributedString.h"
 #include "HTMLSchema.h"
 #include "Html.h"
@@ -19,6 +24,12 @@
 #include "org/xml/sax/SAXException.h"
 #include "org/xml/sax/SAXNotRecognizedException.h"
 #include "org/xml/sax/SAXNotSupportedException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASHtml ()
@@ -57,6 +68,7 @@ __attribute__((unused)) static ASHtml_HtmlParser *new_ASHtml_HtmlParser_init(voi
 __attribute__((unused)) static ASHtml_HtmlParser *create_ASHtml_HtmlParser_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASHtml_HtmlParser)
+
 
 NSString *ASHtml_UNORDERED_LIST = @"ul";
 NSString *ASHtml_ORDERED_LIST = @"ol";
@@ -164,6 +176,8 @@ void ASHtml_parseHtmlWithNSString_withOrgXmlSaxContentHandler_(NSString *source,
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHtml)
+
+J2OBJC_NAME_MAPPING(ASHtml, "com.ashera.parser.html", "AS")
 
 J2OBJC_INITIALIZED_DEFN(ASHtml_HtmlParser)
 

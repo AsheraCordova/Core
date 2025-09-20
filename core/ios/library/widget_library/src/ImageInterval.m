@@ -3,11 +3,25 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\ImageInterval.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "ImageInterval.h"
 #include "Interval.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASImageInterval () {
@@ -29,8 +43,8 @@ J2OBJC_FIELD_SETTER(ASImageInterval, src_, NSString *)
   JreStrongAssign(&self->src_, src);
 }
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
                withNSString:(NSString *)src {
   ASImageInterval_initWithInt_withInt_withNSString_(self, start, end, src);
   return self;
@@ -40,8 +54,8 @@ J2OBJC_FIELD_SETTER(ASImageInterval, src_, NSString *)
   return JreStrcat("CI$I$$C", '[', [self getStart], @", ", [self getEnd], @", ", self->src_, ']');
 }
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments {
   return create_ASImageInterval_initWithInt_withInt_withNSString_(start, end, (NSString *) cast_chk(IOSObjectArray_Get(nil_chk(arguments), 0), [NSString class]));
 }
@@ -84,17 +98,19 @@ J2OBJC_FIELD_SETTER(ASImageInterval, src_, NSString *)
 
 @end
 
-void ASImageInterval_initWithInt_withInt_withNSString_(ASImageInterval *self, jint start, jint end, NSString *src) {
+void ASImageInterval_initWithInt_withInt_withNSString_(ASImageInterval *self, int32_t start, int32_t end, NSString *src) {
   ASInterval_initWithInt_withInt_(self, start, end);
   JreStrongAssign(&self->src_, src);
 }
 
-ASImageInterval *new_ASImageInterval_initWithInt_withInt_withNSString_(jint start, jint end, NSString *src) {
+ASImageInterval *new_ASImageInterval_initWithInt_withInt_withNSString_(int32_t start, int32_t end, NSString *src) {
   J2OBJC_NEW_IMPL(ASImageInterval, initWithInt_withInt_withNSString_, start, end, src)
 }
 
-ASImageInterval *create_ASImageInterval_initWithInt_withInt_withNSString_(jint start, jint end, NSString *src) {
+ASImageInterval *create_ASImageInterval_initWithInt_withInt_withNSString_(int32_t start, int32_t end, NSString *src) {
   J2OBJC_CREATE_IMPL(ASImageInterval, initWithInt_withInt_withNSString_, start, end, src)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageInterval)
+
+J2OBJC_NAME_MAPPING(ASImageInterval, "com.ashera.attributedtext", "AS")

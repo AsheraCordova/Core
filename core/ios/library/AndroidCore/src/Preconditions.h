@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\android\internal\util\Preconditions.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Preconditions")
@@ -16,26 +17,30 @@
 #if !defined (ADPreconditions_) && (INCLUDE_ALL_Preconditions || defined(INCLUDE_ADPreconditions))
 #define ADPreconditions_
 
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
+
 @interface ADPreconditions : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (jfloat)checkArgumentInRangeWithFloat:(jfloat)value
-                              withFloat:(jfloat)lower
-                              withFloat:(jfloat)upper
-                           withNSString:(NSString *)valueName;
++ (float)checkArgumentInRangeWithFloat:(float)value
+                             withFloat:(float)lower
+                             withFloat:(float)upper
+                          withNSString:(NSString *)valueName;
 
-+ (jint)checkArgumentInRangeWithInt:(jint)value
-                            withInt:(jint)lower
-                            withInt:(jint)upper
-                       withNSString:(NSString *)valueName;
++ (int32_t)checkArgumentInRangeWithInt:(int32_t)value
+                               withInt:(int32_t)lower
+                               withInt:(int32_t)upper
+                          withNSString:(NSString *)valueName;
 
-+ (jint)checkArgumentNonnegativeWithInt:(jint)value;
++ (int32_t)checkArgumentNonnegativeWithInt:(int32_t)value;
 
-+ (jint)checkArgumentNonnegativeWithInt:(jint)value
-                           withNSString:(NSString *)errorMessage;
++ (int32_t)checkArgumentNonnegativeWithInt:(int32_t)value
+                              withNSString:(NSString *)errorMessage;
 
 @end
 
@@ -47,17 +52,18 @@ FOUNDATION_EXPORT ADPreconditions *new_ADPreconditions_init(void) NS_RETURNS_RET
 
 FOUNDATION_EXPORT ADPreconditions *create_ADPreconditions_init(void);
 
-FOUNDATION_EXPORT jfloat ADPreconditions_checkArgumentInRangeWithFloat_withFloat_withFloat_withNSString_(jfloat value, jfloat lower, jfloat upper, NSString *valueName);
+FOUNDATION_EXPORT float ADPreconditions_checkArgumentInRangeWithFloat_withFloat_withFloat_withNSString_(float value, float lower, float upper, NSString *valueName);
 
-FOUNDATION_EXPORT jint ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(jint value, jint lower, jint upper, NSString *valueName);
+FOUNDATION_EXPORT int32_t ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(int32_t value, int32_t lower, int32_t upper, NSString *valueName);
 
-FOUNDATION_EXPORT jint ADPreconditions_checkArgumentNonnegativeWithInt_withNSString_(jint value, NSString *errorMessage);
+FOUNDATION_EXPORT int32_t ADPreconditions_checkArgumentNonnegativeWithInt_withNSString_(int32_t value, NSString *errorMessage);
 
-FOUNDATION_EXPORT jint ADPreconditions_checkArgumentNonnegativeWithInt_(jint value);
+FOUNDATION_EXPORT int32_t ADPreconditions_checkArgumentNonnegativeWithInt_(int32_t value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPreconditions)
 
 @compatibility_alias RComAndroidInternalUtilPreconditions ADPreconditions;
+
 
 #endif
 

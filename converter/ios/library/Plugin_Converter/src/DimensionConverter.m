@@ -3,11 +3,19 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\DimensionConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DimensionConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "ResourceBundleUtils.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
@@ -15,13 +23,19 @@
 #include "java/util/Map.h"
 
 
-inline jint ASDimensionConverter_get_MATCH_PARENT(void);
-#define ASDimensionConverter_MATCH_PARENT -1
-J2OBJC_STATIC_FIELD_CONSTANT(ASDimensionConverter, MATCH_PARENT, jint)
 
-inline jint ASDimensionConverter_get_WRAP_CONTENT(void);
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+inline int32_t ASDimensionConverter_get_MATCH_PARENT(void);
+#define ASDimensionConverter_MATCH_PARENT -1
+J2OBJC_STATIC_FIELD_CONSTANT(ASDimensionConverter, MATCH_PARENT, int32_t)
+
+inline int32_t ASDimensionConverter_get_WRAP_CONTENT(void);
 #define ASDimensionConverter_WRAP_CONTENT -2
-J2OBJC_STATIC_FIELD_CONSTANT(ASDimensionConverter, WRAP_CONTENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASDimensionConverter, WRAP_CONTENT, int32_t)
 
 @implementation ASDimensionConverter
 
@@ -35,7 +49,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (JavaLangInteger *)convertFromWithId:(NSString *)dimen
                        withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
                        withASIFragment:(id<ASIFragment>)fragment {
-  jint paramDimen = ASDimensionConverter_WRAP_CONTENT;
+  int32_t paramDimen = ASDimensionConverter_WRAP_CONTENT;
   if (dimen != nil) {
     dimen = [dimen java_trim];
     dimen = ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/dimens", @"dimen", dimen, fragment);
@@ -115,3 +129,5 @@ ASDimensionConverter *create_ASDimensionConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDimensionConverter)
+
+J2OBJC_NAME_MAPPING(ASDimensionConverter, "com.ashera.converter", "AS")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\GetChars.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_GetChars")
@@ -21,6 +22,7 @@
 #include "java/lang/CharSequence.h"
 
 @class IOSCharArray;
+@class JavaLangInteger;
 
 /*!
  @brief Please implement this interface if your CharSequence has a
@@ -34,10 +36,10 @@
   through <code>end - 1</code> from this CharSequence into <code>dest</code>
   beginning at offset <code>destoff</code>.
  */
-- (void)getCharsWithInt:(jint)start
-                withInt:(jint)end
+- (void)getCharsWithInt:(int32_t)start
+                withInt:(int32_t)end
           withCharArray:(IOSCharArray *)dest
-                withInt:(jint)destoff;
+                withInt:(int32_t)destoff;
 
 @end
 
@@ -46,6 +48,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADGetChars)
 J2OBJC_TYPE_LITERAL_HEADER(ADGetChars)
 
 #define RAndroidTextGetChars ADGetChars
+
 
 #endif
 

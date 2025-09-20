@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\AnimationHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AnimationHandler")
@@ -23,6 +24,9 @@
 #define ADAnimationHandler_
 
 @class ADObjectAnimator;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 @class JavaLangThreadLocal;
 @protocol ADAnimationHandler_AnimationFrameCallback;
 @protocol ADAnimationHandler_AnimationFrameCallbackProvider;
@@ -46,7 +50,7 @@
  @brief Register to get a callback on the next frame after the delay.
  */
 - (void)addAnimationFrameCallbackWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
-                                                                      withLong:(jlong)delay;
+                                                                      withLong:(int64_t)delay;
 
 /*!
  @brief Register to get a one shot callback for frame commit timing.Frame commit timing is the
@@ -64,9 +68,9 @@
 /*!
  @brief Return the number of callbacks that have registered for frame callbacks.
  */
-+ (jint)getAnimationCount;
++ (int32_t)getAnimationCount;
 
-+ (jlong)getFrameDelay;
++ (int64_t)getFrameDelay;
 
 + (ADAnimationHandler *)getInstance;
 
@@ -92,7 +96,7 @@
   pause all un-paused infinite animators, and resume them when any window in the process
   becomes visible.
  */
-+ (void)requestAnimatorsEnabledWithBoolean:(jboolean)enable
++ (void)requestAnimatorsEnabledWithBoolean:(bool)enable
                                     withId:(id)requestor;
 
 /*!
@@ -100,9 +104,9 @@
   apps go into the background.
  @param enable Enable (default behavior) or disable background pausing behavior.
  */
-+ (void)setAnimatorPausingEnabledWithBoolean:(jboolean)enable;
++ (void)setAnimatorPausingEnabledWithBoolean:(bool)enable;
 
-+ (void)setFrameDelayWithLong:(jlong)delay;
++ (void)setFrameDelayWithLong:(int64_t)delay;
 
 /*!
  @brief Prevents the setAnimatorPausingEnabled behavior from being overridden
@@ -110,7 +114,7 @@
  This is for testing purposes only.
  @param enable Enable or disable (default behavior) overriding the system                property.
  */
-+ (void)setOverrideAnimatorPausingSystemPropertyWithBoolean:(jboolean)enable;
++ (void)setOverrideAnimatorPausingSystemPropertyWithBoolean:(bool)enable;
 
 /*!
  @brief By default, the Choreographer is used to provide timing for frame callbacks.A custom
@@ -147,29 +151,31 @@ FOUNDATION_EXPORT ADAnimationHandler *ADAnimationHandler_getInstance(void);
 
 FOUNDATION_EXPORT ADAnimationHandler *ADAnimationHandler_setTestHandlerWithADAnimationHandler_(ADAnimationHandler *handler);
 
-FOUNDATION_EXPORT void ADAnimationHandler_setAnimatorPausingEnabledWithBoolean_(jboolean enable);
+FOUNDATION_EXPORT void ADAnimationHandler_setAnimatorPausingEnabledWithBoolean_(bool enable);
 
-FOUNDATION_EXPORT void ADAnimationHandler_setOverrideAnimatorPausingSystemPropertyWithBoolean_(jboolean enable);
+FOUNDATION_EXPORT void ADAnimationHandler_setOverrideAnimatorPausingSystemPropertyWithBoolean_(bool enable);
 
 FOUNDATION_EXPORT void ADAnimationHandler_removeRequestorWithId_(id requestor);
 
-FOUNDATION_EXPORT void ADAnimationHandler_requestAnimatorsEnabledWithBoolean_withId_(jboolean enable, id requestor);
+FOUNDATION_EXPORT void ADAnimationHandler_requestAnimatorsEnabledWithBoolean_withId_(bool enable, id requestor);
 
-FOUNDATION_EXPORT jint ADAnimationHandler_getAnimationCount(void);
+FOUNDATION_EXPORT int32_t ADAnimationHandler_getAnimationCount(void);
 
-FOUNDATION_EXPORT void ADAnimationHandler_setFrameDelayWithLong_(jlong delay);
+FOUNDATION_EXPORT void ADAnimationHandler_setFrameDelayWithLong_(int64_t delay);
 
-FOUNDATION_EXPORT jlong ADAnimationHandler_getFrameDelay(void);
+FOUNDATION_EXPORT int64_t ADAnimationHandler_getFrameDelay(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler)
 
 @compatibility_alias RAndroidAnimationAnimationHandler ADAnimationHandler;
+
 
 #endif
 
 #if !defined (ADAnimationHandler_AnimationFrameCallbackProvider_) && (INCLUDE_ALL_AnimationHandler || defined(INCLUDE_ADAnimationHandler_AnimationFrameCallbackProvider))
 #define ADAnimationHandler_AnimationFrameCallbackProvider_
 
+@class JavaLangLong;
 @protocol ADChoreographer_FrameCallback;
 @protocol JavaLangRunnable;
 
@@ -185,11 +191,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler)
 
 - (void)postCommitCallbackWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
-- (jlong)getFrameTime;
+- (int64_t)getFrameTime;
 
-- (jlong)getFrameDelay;
+- (int64_t)getFrameDelay;
 
-- (void)setFrameDelayWithLong:(jlong)delay;
+- (void)setFrameDelayWithLong:(int64_t)delay;
 
 @end
 
@@ -197,10 +203,14 @@ J2OBJC_EMPTY_STATIC_INIT(ADAnimationHandler_AnimationFrameCallbackProvider)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler_AnimationFrameCallbackProvider)
 
+
 #endif
 
 #if !defined (ADAnimationHandler_AnimationFrameCallback_) && (INCLUDE_ALL_AnimationHandler || defined(INCLUDE_ADAnimationHandler_AnimationFrameCallback))
 #define ADAnimationHandler_AnimationFrameCallback_
+
+@class JavaLangBoolean;
+@class JavaLangLong;
 
 /*!
  @brief Callbacks that receives notifications for animation timing and frame commit timing.
@@ -213,7 +223,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler_AnimationFrameCallbackProvider)
                     base.
  @return if the animation has finished.
  */
-- (jboolean)doAnimationFrameWithLong:(jlong)frameTime;
+- (bool)doAnimationFrameWithLong:(int64_t)frameTime;
 
 /*!
  @brief This notifies the callback of frame commit time.Frame commit time is the time after
@@ -230,13 +240,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler_AnimationFrameCallbackProvider)
  @param frameTime The frame time after traversals happen, if any, in the                   
  <code>SystemClock.uptimeMillis()</code>  time base.
  */
-- (void)commitAnimationFrameWithLong:(jlong)frameTime;
+- (void)commitAnimationFrameWithLong:(int64_t)frameTime;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADAnimationHandler_AnimationFrameCallback)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler_AnimationFrameCallback)
+
 
 #endif
 

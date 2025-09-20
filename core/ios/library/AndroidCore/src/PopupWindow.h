@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\PopupWindow.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PopupWindow")
@@ -18,6 +19,8 @@
 
 @class ADRelativeLayout_LayoutParams;
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADIBinder;
 @protocol ADPopupWindow_OnDismissListener;
 
@@ -27,129 +30,129 @@
 
 - (instancetype)init;
 
-- (jint)computeFlagsWithInt:(jint)curFlags;
+- (int32_t)computeFlagsWithInt:(int32_t)curFlags;
 
 - (void)dismiss;
 
-- (jint)getMaxAvailableHeightWithADView:(ADView *)anchor;
+- (int32_t)getMaxAvailableHeightWithADView:(ADView *)anchor;
 
-- (jint)getMaxAvailableHeightWithADView:(ADView *)anchor
-                                withInt:(jint)yOffset;
+- (int32_t)getMaxAvailableHeightWithADView:(ADView *)anchor
+                                   withInt:(int32_t)yOffset;
 
-- (jint)getMaxAvailableHeightWithADView:(ADView *)anchor
-                                withInt:(jint)yOffset
-                            withBoolean:(jboolean)ignoreBottomDecorations;
+- (int32_t)getMaxAvailableHeightWithADView:(ADView *)anchor
+                                   withInt:(int32_t)yOffset
+                               withBoolean:(bool)ignoreBottomDecorations;
 
-- (jboolean)isAboveAnchor;
+- (bool)isAboveAnchor;
 
-- (jboolean)isShowing;
+- (bool)isShowing;
 
 - (void)remeasure;
 
-- (void)setAttachedInDecorWithBoolean:(jboolean)enabled;
+- (void)setAttachedInDecorWithBoolean:(bool)enabled;
 
 - (void)setContentViewWithADView:(ADView *)contentView;
 
-- (void)setHeightWithInt:(jint)height;
+- (void)setHeightWithInt:(int32_t)height;
 
 - (void)setOnDismissListenerWithADPopupWindow_OnDismissListener:(id<ADPopupWindow_OnDismissListener>)onDismissListener;
 
-- (void)setOverlapAnchorWithBoolean:(jboolean)overlapAnchor;
+- (void)setOverlapAnchorWithBoolean:(bool)overlapAnchor;
 
-- (void)setWidthWithInt:(jint)width;
+- (void)setWidthWithInt:(int32_t)width;
 
 - (void)showAsDropDownWithADView:(ADView *)anchor;
 
 - (void)showAsDropDownWithADView:(ADView *)anchor
-                         withInt:(jint)xoff
-                         withInt:(jint)yoff;
+                         withInt:(int32_t)xoff
+                         withInt:(int32_t)yoff;
 
 - (void)showAsDropDownWithADView:(ADView *)anchor
-                         withInt:(jint)xoff
-                         withInt:(jint)yoff
-                         withInt:(jint)gravity;
+                         withInt:(int32_t)xoff
+                         withInt:(int32_t)yoff
+                         withInt:(int32_t)gravity;
 
 - (void)showAsDropDownWithADView:(ADView *)decorView
                       withADView:(ADView *)anchor
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                         withInt:(jint)xOffset
-                         withInt:(jint)yOffset
-                         withInt:(jint)gravity;
+                         withInt:(int32_t)xOffset
+                         withInt:(int32_t)yOffset
+                         withInt:(int32_t)gravity;
 
 - (void)showAtLocationWithADIBinder:(id<ADIBinder>)token
-                            withInt:(jint)gravity
-                            withInt:(jint)x
-                            withInt:(jint)y;
+                            withInt:(int32_t)gravity
+                            withInt:(int32_t)x
+                            withInt:(int32_t)y;
 
 - (void)showAtLocationWithADView:(ADView *)parent
-                         withInt:(jint)gravity
-                         withInt:(jint)x
-                         withInt:(jint)y;
+                         withInt:(int32_t)gravity
+                         withInt:(int32_t)x
+                         withInt:(int32_t)y;
 
 - (void)showAtLocationWithADView:(ADView *)decorView
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                         withInt:(jint)x
-                         withInt:(jint)y
-                         withInt:(jint)gravity;
+                         withInt:(int32_t)x
+                         withInt:(int32_t)y
+                         withInt:(int32_t)gravity;
 
 - (void)update;
 
-- (void)updateWithInt:(jint)width
-              withInt:(jint)height;
+- (void)updateWithInt:(int32_t)width
+              withInt:(int32_t)height;
 
-- (void)updateWithInt:(jint)x
-              withInt:(jint)y
-              withInt:(jint)width
-              withInt:(jint)height;
+- (void)updateWithInt:(int32_t)x
+              withInt:(int32_t)y
+              withInt:(int32_t)width
+              withInt:(int32_t)height;
 
-- (void)updateWithInt:(jint)x
-              withInt:(jint)y
-              withInt:(jint)width
-              withInt:(jint)height
-          withBoolean:(jboolean)force;
-
-- (void)updateWithADView:(ADView *)anchor
-                 withInt:(jint)width
-                 withInt:(jint)height;
+- (void)updateWithInt:(int32_t)x
+              withInt:(int32_t)y
+              withInt:(int32_t)width
+              withInt:(int32_t)height
+          withBoolean:(bool)force;
 
 - (void)updateWithADView:(ADView *)anchor
-                 withInt:(jint)xoff
-                 withInt:(jint)yoff
-                 withInt:(jint)width
-                 withInt:(jint)height;
+                 withInt:(int32_t)width
+                 withInt:(int32_t)height;
+
+- (void)updateWithADView:(ADView *)anchor
+                 withInt:(int32_t)xoff
+                 withInt:(int32_t)yoff
+                 withInt:(int32_t)width
+                 withInt:(int32_t)height;
 
 #pragma mark Protected
 
 - (void)attachToAnchorWithADView:(ADView *)anchor
-                         withInt:(jint)xoff
-                         withInt:(jint)yoff
-                         withInt:(jint)gravity;
+                         withInt:(int32_t)xoff
+                         withInt:(int32_t)yoff
+                         withInt:(int32_t)gravity;
 
 - (ADRelativeLayout_LayoutParams *)createPopupLayoutParamsWithADIBinder:(id<ADIBinder>)token;
 
 - (void)detachFromAnchor;
 
-- (jboolean)findDropDownPositionWithADView:(ADView *)anchor
-         withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                   withInt:(jint)xOffset
-                                   withInt:(jint)yOffset
-                                   withInt:(jint)width
-                                   withInt:(jint)height
-                                   withInt:(jint)gravity
-                               withBoolean:(jboolean)allowScroll;
+- (bool)findDropDownPositionWithADView:(ADView *)anchor
+     withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                               withInt:(int32_t)xOffset
+                               withInt:(int32_t)yOffset
+                               withInt:(int32_t)width
+                               withInt:(int32_t)height
+                               withInt:(int32_t)gravity
+                           withBoolean:(bool)allowScroll;
 
 - (ADView *)getAnchor;
 
 - (ADRelativeLayout_LayoutParams *)getDecorViewLayoutParams;
 
-- (jboolean)hasContentView;
+- (bool)hasContentView;
 
-- (jboolean)hasDecorView;
+- (bool)hasDecorView;
 
 - (void)updateWithADView:(ADView *)anchor
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params;
 
-- (void)updateAboveAnchorWithBoolean:(jboolean)aboveAnchor;
+- (void)updateAboveAnchorWithBoolean:(bool)aboveAnchor;
 
 #pragma mark Package-Private
 
@@ -159,17 +162,17 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params;
 
 J2OBJC_EMPTY_STATIC_INIT(ADPopupWindow)
 
-inline jint ADPopupWindow_get_INPUT_METHOD_FROM_FOCUSABLE(void);
+inline int32_t ADPopupWindow_get_INPUT_METHOD_FROM_FOCUSABLE(void);
 #define ADPopupWindow_INPUT_METHOD_FROM_FOCUSABLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, INPUT_METHOD_FROM_FOCUSABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, INPUT_METHOD_FROM_FOCUSABLE, int32_t)
 
-inline jint ADPopupWindow_get_INPUT_METHOD_NEEDED(void);
+inline int32_t ADPopupWindow_get_INPUT_METHOD_NEEDED(void);
 #define ADPopupWindow_INPUT_METHOD_NEEDED 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, INPUT_METHOD_NEEDED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, INPUT_METHOD_NEEDED, int32_t)
 
-inline jint ADPopupWindow_get_INPUT_METHOD_NOT_NEEDED(void);
+inline int32_t ADPopupWindow_get_INPUT_METHOD_NOT_NEEDED(void);
 #define ADPopupWindow_INPUT_METHOD_NOT_NEEDED 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, INPUT_METHOD_NOT_NEEDED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, INPUT_METHOD_NOT_NEEDED, int32_t)
 
 FOUNDATION_EXPORT void ADPopupWindow_init(ADPopupWindow *self);
 
@@ -180,6 +183,7 @@ FOUNDATION_EXPORT ADPopupWindow *create_ADPopupWindow_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADPopupWindow)
 
 @compatibility_alias RAndroidWidgetPopupWindow ADPopupWindow;
+
 
 #endif
 
@@ -195,6 +199,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPopupWindow)
 J2OBJC_EMPTY_STATIC_INIT(ADPopupWindow_OnDismissListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPopupWindow_OnDismissListener)
+
 
 #endif
 
@@ -227,6 +232,7 @@ FOUNDATION_EXPORT void ADPopupWindow_TransitionManager_endTransitionsWithADView_
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPopupWindow_TransitionManager)
 
+
 #endif
 
 #if !defined (ADPopupWindow_Transition_) && (INCLUDE_ALL_PopupWindow || defined(INCLUDE_ADPopupWindow_Transition))
@@ -255,6 +261,7 @@ FOUNDATION_EXPORT ADPopupWindow_Transition *new_ADPopupWindow_Transition_initWit
 FOUNDATION_EXPORT ADPopupWindow_Transition *create_ADPopupWindow_Transition_initWithADPopupWindow_(ADPopupWindow *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPopupWindow_Transition)
+
 
 #endif
 

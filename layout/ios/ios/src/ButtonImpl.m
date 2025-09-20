@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ButtonImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
@@ -45,6 +50,8 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -62,13 +69,14 @@
 
 #include "ASUIButton.h"
 
+
 @class ASButtonImpl_DellocHandler;
 @class ASButtonImpl_MarqueeTask;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@protocol JavaLangRunnable;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -76,16 +84,16 @@
 @interface ASButtonImpl () {
  @public
   id<JavaUtilMap> fontDescriptors_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   ASButtonImpl_MarqueeTask *marqueeTask_;
-  jint marqueeRepeatLimit_;
+  int32_t marqueeRepeatLimit_;
   ASMarqueeCommandConverter *marqueeCommandConverter_;
   ADColorStateList *drawableTint_;
   NSString *ellipsize_;
   id timer_;
-  jboolean isDisposed_;
+  bool isDisposed_;
   ASButtonImpl_DellocHandler *dellocHandler_;
 }
 
@@ -129,7 +137,7 @@
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
 - (void)setTypeFaceWithId:(id)objValue
              withNSString:(NSString *)strValue;
@@ -145,7 +153,7 @@
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -155,7 +163,7 @@
 
 - (void)initHtmlWithJavaUtilMap:(id<JavaUtilMap>)params OBJC_METHOD_FAMILY_NONE;
 
-- (jint)calcNumberOfWhiteSpaces;
+- (int32_t)calcNumberOfWhiteSpaces;
 
 - (void)cancelTimer;
 
@@ -167,9 +175,9 @@
 
 - (void)startOrStopMarqueeWithId:(id)objValue;
 
-- (jint)getLabelWidth;
+- (int32_t)getLabelWidth;
 
-- (jboolean)isLabelMeasured;
+- (bool)isLabelMeasured;
 
 - (void)setTextFormatWithId:(id)objValue;
 
@@ -177,7 +185,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setTextColorWithId:(id)objValue;
 
@@ -201,9 +209,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -214,14 +222,14 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (void)setSingleLineWithId:(id)objValue;
 
@@ -230,15 +238,15 @@
 - (void)setEllipsizeWithId:(id)objValue
               withNSString:(NSString *)strValue;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jboolean)canMarquee;
+- (bool)canMarquee;
 
 - (void)cancelNativeTimer;
 
-- (jboolean)isDisposed;
+- (bool)isDisposed;
 
 - (void)addDeallocHandler;
 
@@ -250,8 +258,8 @@
 
 - (void)createNativeWidgetWithJavaUtilMap:(id<JavaUtilMap>)params;
 
-- (jint)nativeMeasureHeightButtonWithId:(id)uiView
-                                withInt:(jint)width;
+- (int32_t)nativeMeasureHeightButtonWithId:(id)uiView
+                                   withInt:(int32_t)width;
 
 - (void)nativeSetTextWithId:(id)uiView
                withNSString:(NSString *)text;
@@ -278,7 +286,7 @@
 
 - (void)setVerticalAligmentTop;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (id)getPaddingEnd;
 
@@ -294,13 +302,13 @@
 
 - (void)setPaddingWithId:(id)objValue;
 
-- (void)nativeSetPaddingBottomWithInt:(jint)value;
+- (void)nativeSetPaddingBottomWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingLeftWithInt:(jint)value;
+- (void)nativeSetPaddingLeftWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingRightWithInt:(jint)value;
+- (void)nativeSetPaddingRightWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingTopWithInt:(jint)value;
+- (void)nativeSetPaddingTopWithInt:(int32_t)value;
 
 - (void)postSetAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                                  withNSString:(NSString *)strValue
@@ -316,18 +324,18 @@
 
 - (void)syncPlaceholderLabel;
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor;
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor;
 
 - (void)setEnabledWithId:(id)objValue;
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)enabled;
+- (void)nativeSetEnabledWithBoolean:(bool)enabled;
 
-- (jint)nativeMeasureWidthButtonWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthButtonWithId:(id)uiView;
 
 - (void)setNumberOfLinesWithId:(id)uiView
-                       withInt:(jint)lines;
+                       withInt:(int32_t)lines;
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode;
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode;
 
 - (id)nativeGetLinBreakMode;
 
@@ -338,7 +346,7 @@
 - (void)setJustificationModeWithId:(id)objValue
                       withNSString:(NSString *)strValue;
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment;
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment;
 
 - (id)getJustificationMode;
 
@@ -361,10 +369,10 @@
 
 - (id)getShadowDx;
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b;
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
 
 @end
 
@@ -377,33 +385,33 @@ J2OBJC_FIELD_SETTER(ASButtonImpl, ellipsize_, NSString *)
 J2OBJC_FIELD_SETTER(ASButtonImpl, timer_, id)
 J2OBJC_FIELD_SETTER(ASButtonImpl, dellocHandler_, ASButtonImpl_DellocHandler *)
 
-inline jint ASButtonImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASButtonImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASButtonImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASButtonImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASButtonImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASButtonImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASButtonImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASButtonImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASButtonImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASButtonImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASButtonImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASButtonImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASButtonImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASButtonImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASButtonImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASButtonImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASButtonImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASButtonImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASButtonImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASButtonImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASButtonImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASButtonImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASButtonImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, NORMAL_FONT_TRAIT, int32_t)
 
-inline jint ASButtonImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASButtonImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASButtonImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASButtonImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASButtonImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASButtonImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASButtonImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASButtonImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASButtonImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASButtonImpl, TEXT_ALIGN_RIGHT, int32_t)
 
 __attribute__((unused)) static void ASButtonImpl_setWidgetOnNativeClass(ASButtonImpl *self);
 
@@ -445,7 +453,7 @@ __attribute__((unused)) static void ASButtonImpl_setMinWidthWithId_(ASButtonImpl
 
 __attribute__((unused)) static id ASButtonImpl_getWidth(ASButtonImpl *self);
 
-__attribute__((unused)) static jint ASButtonImpl_getHeight(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_getHeight(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_setTypeFaceWithId_withNSString_(ASButtonImpl *self, id objValue, NSString *strValue);
 
@@ -459,7 +467,7 @@ __attribute__((unused)) static void ASButtonImpl_setTextAllCapsWithId_(ASButtonI
 
 __attribute__((unused)) static void ASButtonImpl_setFirstBaselineToTopHeightWithId_(ASButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASButtonImpl_getIncludeFontPadding(ASButtonImpl *self);
+__attribute__((unused)) static bool ASButtonImpl_getIncludeFontPadding(ASButtonImpl *self);
 
 __attribute__((unused)) static id ASButtonImpl_getFirstBaselineToTopHeight(ASButtonImpl *self);
 
@@ -469,7 +477,7 @@ __attribute__((unused)) static id ASButtonImpl_getLastBaselineToBottomHeight(ASB
 
 __attribute__((unused)) static void ASButtonImpl_initHtmlWithJavaUtilMap_(ASButtonImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static jint ASButtonImpl_calcNumberOfWhiteSpaces(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_calcNumberOfWhiteSpaces(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_cancelTimer(ASButtonImpl *self);
 
@@ -481,9 +489,9 @@ __attribute__((unused)) static void ASButtonImpl_setMarqueeRepeatLimitWithId_(AS
 
 __attribute__((unused)) static void ASButtonImpl_startOrStopMarqueeWithId_(ASButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASButtonImpl_getLabelWidth(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_getLabelWidth(ASButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASButtonImpl_isLabelMeasured(ASButtonImpl *self);
+__attribute__((unused)) static bool ASButtonImpl_isLabelMeasured(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_setTextFormatWithId_(ASButtonImpl *self, id objValue);
 
@@ -491,7 +499,7 @@ __attribute__((unused)) static id ASButtonImpl_getTextSize(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_setMyTextSizeWithId_(ASButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetTextSizeWithInt_(ASButtonImpl *self, jint value);
+__attribute__((unused)) static void ASButtonImpl_nativeSetTextSizeWithInt_(ASButtonImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASButtonImpl_setTextColorWithId_(ASButtonImpl *self, id objValue);
 
@@ -511,9 +519,9 @@ __attribute__((unused)) static void ASButtonImpl_setDrawableLeftWithNSString_wit
 
 __attribute__((unused)) static void ASButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASButtonImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASButtonImpl_getImageHeightWithId_(ASButtonImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASButtonImpl_getImageHeightWithId_(ASButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASButtonImpl_getImageWidthWithId_(ASButtonImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASButtonImpl_getImageWidthWithId_(ASButtonImpl *self, id objValue);
 
 __attribute__((unused)) static id ASButtonImpl_getDrawablePadding(ASButtonImpl *self);
 
@@ -523,13 +531,13 @@ __attribute__((unused)) static void ASButtonImpl_setDrawableTintWithId_(ASButton
 
 __attribute__((unused)) static void ASButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASButtonImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static jint ASButtonImpl_nativeGetFontSize(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_nativeGetFontSize(ASButtonImpl *self);
 
-__attribute__((unused)) static jint ASButtonImpl_nativeGetFontStyle(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_nativeGetFontStyle(ASButtonImpl *self);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASButtonImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASButtonImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetFontStyleWithInt_(ASButtonImpl *self, jint style);
+__attribute__((unused)) static void ASButtonImpl_nativeSetFontStyleWithInt_(ASButtonImpl *self, int32_t style);
 
 __attribute__((unused)) static void ASButtonImpl_setSingleLineWithId_(ASButtonImpl *self, id objValue);
 
@@ -537,15 +545,15 @@ __attribute__((unused)) static id ASButtonImpl_getEllipsize(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_setEllipsizeWithId_withNSString_(ASButtonImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static jint ASButtonImpl_getLineHeight(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_getLineHeight(ASButtonImpl *self);
 
-__attribute__((unused)) static jint ASButtonImpl_getBorderWidth(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_getBorderWidth(ASButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASButtonImpl_canMarquee(ASButtonImpl *self);
+__attribute__((unused)) static bool ASButtonImpl_canMarquee(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_cancelNativeTimer(ASButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASButtonImpl_isDisposed(ASButtonImpl *self);
+__attribute__((unused)) static bool ASButtonImpl_isDisposed(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_addDeallocHandler(ASButtonImpl *self);
 
@@ -557,7 +565,7 @@ __attribute__((unused)) static void ASButtonImpl_nativeCreateWithJavaUtilMap_(AS
 
 __attribute__((unused)) static void ASButtonImpl_createNativeWidgetWithJavaUtilMap_(ASButtonImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static jint ASButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASButtonImpl *self, id uiView, jint width);
+__attribute__((unused)) static int32_t ASButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASButtonImpl *self, id uiView, int32_t width);
 
 __attribute__((unused)) static void ASButtonImpl_nativeSetTextWithId_withNSString_(ASButtonImpl *self, id uiView, NSString *text);
 
@@ -583,7 +591,7 @@ __attribute__((unused)) static void ASButtonImpl_setVerticalAligmentBottom(ASBut
 
 __attribute__((unused)) static void ASButtonImpl_setVerticalAligmentTop(ASButtonImpl *self);
 
-__attribute__((unused)) static jint ASButtonImpl_getTextAlignment(ASButtonImpl *self);
+__attribute__((unused)) static int32_t ASButtonImpl_getTextAlignment(ASButtonImpl *self);
 
 __attribute__((unused)) static id ASButtonImpl_getPaddingEnd(ASButtonImpl *self);
 
@@ -599,13 +607,13 @@ __attribute__((unused)) static void ASButtonImpl_setPaddingStartWithId_(ASButton
 
 __attribute__((unused)) static void ASButtonImpl_setPaddingWithId_(ASButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingBottomWithInt_(ASButtonImpl *self, jint value);
+__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingBottomWithInt_(ASButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingLeftWithInt_(ASButtonImpl *self, jint value);
+__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingLeftWithInt_(ASButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingRightWithInt_(ASButtonImpl *self, jint value);
+__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingRightWithInt_(ASButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingTopWithInt_(ASButtonImpl *self, jint value);
+__attribute__((unused)) static void ASButtonImpl_nativeSetPaddingTopWithInt_(ASButtonImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASButtonImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(ASButtonImpl *self, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
@@ -617,17 +625,17 @@ __attribute__((unused)) static void ASButtonImpl_setTextColorLinkWithADColorStat
 
 __attribute__((unused)) static void ASButtonImpl_syncPlaceholderLabel(ASButtonImpl *self);
 
-__attribute__((unused)) static void ASButtonImpl_setHintColorWithInt_(ASButtonImpl *self, jint currentHintTextColor);
+__attribute__((unused)) static void ASButtonImpl_setHintColorWithInt_(ASButtonImpl *self, int32_t currentHintTextColor);
 
 __attribute__((unused)) static void ASButtonImpl_setEnabledWithId_(ASButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetEnabledWithBoolean_(ASButtonImpl *self, jboolean enabled);
+__attribute__((unused)) static void ASButtonImpl_nativeSetEnabledWithBoolean_(ASButtonImpl *self, bool enabled);
 
-__attribute__((unused)) static jint ASButtonImpl_nativeMeasureWidthButtonWithId_(ASButtonImpl *self, id uiView);
+__attribute__((unused)) static int32_t ASButtonImpl_nativeMeasureWidthButtonWithId_(ASButtonImpl *self, id uiView);
 
-__attribute__((unused)) static void ASButtonImpl_setNumberOfLinesWithId_withInt_(ASButtonImpl *self, id uiView, jint lines);
+__attribute__((unused)) static void ASButtonImpl_setNumberOfLinesWithId_withInt_(ASButtonImpl *self, id uiView, int32_t lines);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetLineBreakModeWithInt_(ASButtonImpl *self, jint lineBreakMode);
+__attribute__((unused)) static void ASButtonImpl_nativeSetLineBreakModeWithInt_(ASButtonImpl *self, int32_t lineBreakMode);
 
 __attribute__((unused)) static id ASButtonImpl_nativeGetLinBreakMode(ASButtonImpl *self);
 
@@ -637,7 +645,7 @@ __attribute__((unused)) static id ASButtonImpl_getFont(ASButtonImpl *self);
 
 __attribute__((unused)) static void ASButtonImpl_setJustificationModeWithId_withNSString_(ASButtonImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASButtonImpl_nativeSetTextAligmentWithInt_(ASButtonImpl *self, jint textAlignment);
+__attribute__((unused)) static void ASButtonImpl_nativeSetTextAligmentWithInt_(ASButtonImpl *self, int32_t textAlignment);
 
 __attribute__((unused)) static id ASButtonImpl_getJustificationMode(ASButtonImpl *self);
 
@@ -657,7 +665,7 @@ __attribute__((unused)) static id ASButtonImpl_getShadowDy(ASButtonImpl *self);
 
 __attribute__((unused)) static id ASButtonImpl_getShadowDx(ASButtonImpl *self);
 
-__attribute__((unused)) static void ASButtonImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASButtonImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASButtonImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASButtonImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 @interface ASButtonImpl_DrawableTintMode () {
  @public
@@ -715,7 +723,7 @@ J2OBJC_FIELD_SETTER(ASButtonImpl_JustificationMode, mapping_, id<JavaUtilMap>)
 
 @interface ASButtonImpl_ButtonExt () {
  @public
-  __unsafe_unretained ASButtonImpl *this$0_;
+  WEAK_ ASButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -731,10 +739,10 @@ J2OBJC_FIELD_SETTER(ASButtonImpl_ButtonExt, templates_, id<JavaUtilMap>)
 
 @interface ASButtonImpl_MarqueeTask : NSObject < JavaLangRunnable > {
  @public
-  __unsafe_unretained ASButtonImpl *this$0_;
-  jint slideLength_;
-  jint cycles_;
-  jboolean cancel_;
+  WEAK_ ASButtonImpl *this$0_;
+  int32_t slideLength_;
+  int32_t cycles_;
+  bool cancel_;
   NSString *direction_;
 }
 
@@ -761,10 +769,11 @@ __attribute__((unused)) static ASButtonImpl_MarqueeTask *create_ASButtonImpl_Mar
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_MarqueeTask)
 
+
 @interface ASButtonImpl_MarqueeTask_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   ASButtonImpl_MarqueeTask *this$0_;
-  jint val$numberOfBlankSpaces_;
+  int32_t val$numberOfBlankSpaces_;
 }
 
 - (void)run;
@@ -773,15 +782,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_MarqueeTask)
 
 J2OBJC_EMPTY_STATIC_INIT(ASButtonImpl_MarqueeTask_$Lambda$1)
 
-__attribute__((unused)) static void ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask_$Lambda$1 *self, ASButtonImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static void ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask_$Lambda$1 *self, ASButtonImpl_MarqueeTask *outer$, int32_t capture$0);
 
-__attribute__((unused)) static ASButtonImpl_MarqueeTask_$Lambda$1 *new_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, jint capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASButtonImpl_MarqueeTask_$Lambda$1 *new_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, int32_t capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASButtonImpl_MarqueeTask_$Lambda$1 *create_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static ASButtonImpl_MarqueeTask_$Lambda$1 *create_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, int32_t capture$0);
+
 
 @interface ASButtonImpl_DellocHandler : ASEventBusHandler {
  @public
-  __unsafe_unretained ASButtonImpl *this$0_;
+  WEAK_ ASButtonImpl *this$0_;
 }
 
 - (instancetype)initWithASButtonImpl:(ASButtonImpl *)outer$
@@ -800,6 +810,7 @@ __attribute__((unused)) static ASButtonImpl_DellocHandler *new_ASButtonImpl_Dell
 __attribute__((unused)) static ASButtonImpl_DellocHandler *create_ASButtonImpl_DellocHandler_initWithASButtonImpl_withNSString_(ASButtonImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_DellocHandler)
+
 
 J2OBJC_INITIALIZED_DEFN(ASButtonImpl)
 
@@ -1322,7 +1333,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASButtonImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADButton *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADButton *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASButtonImpl_updateTextAlignment(self);
   }
@@ -1344,11 +1355,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADButton *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADButton *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -1356,11 +1367,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADButton *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADButton *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -1396,11 +1407,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADButton *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADButton *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -1416,7 +1427,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASButtonImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASButtonImpl_getHeight(self);
 }
 
@@ -1446,7 +1457,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASButtonImpl_getIncludeFontPadding(self);
 }
 
@@ -1466,7 +1477,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_initHtmlWithJavaUtilMap_(self, params);
 }
 
-- (jint)calcNumberOfWhiteSpaces {
+- (int32_t)calcNumberOfWhiteSpaces {
   return ASButtonImpl_calcNumberOfWhiteSpaces(self);
 }
 
@@ -1490,11 +1501,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_startOrStopMarqueeWithId_(self, objValue);
 }
 
-- (jint)getLabelWidth {
+- (int32_t)getLabelWidth {
   return ASButtonImpl_getLabelWidth(self);
 }
 
-- (jboolean)isLabelMeasured {
+- (bool)isLabelMeasured {
   return ASButtonImpl_isLabelMeasured(self);
 }
 
@@ -1510,7 +1521,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASButtonImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -1554,11 +1565,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASButtonImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASButtonImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -1601,20 +1612,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASButtonImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASButtonImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASButtonImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
@@ -1631,23 +1642,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setEllipsizeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASButtonImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASButtonImpl_getBorderWidth(self);
 }
 
-- (jboolean)canMarquee {
+- (bool)canMarquee {
   return ASButtonImpl_canMarquee(self);
 }
 
@@ -1655,7 +1666,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_cancelNativeTimer(self);
 }
 
-- (jboolean)isDisposed {
+- (bool)isDisposed {
   return ASButtonImpl_isDisposed(self);
 }
 
@@ -1679,7 +1690,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -1690,7 +1701,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -1714,12 +1725,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_createNativeWidgetWithJavaUtilMap_(self, params);
 }
 
-- (jint)measureHeightWithInt:(jint)width {
+- (int32_t)measureHeightWithInt:(int32_t)width {
   return ASButtonImpl_nativeMeasureHeightButtonWithId_withInt_(self, [self asNativeWidget], width);
 }
 
-- (jint)nativeMeasureHeightButtonWithId:(id)uiView
-                                withInt:(jint)width {
+- (int32_t)nativeMeasureHeightButtonWithId:(id)uiView
+                                   withInt:(int32_t)width {
   return ASButtonImpl_nativeMeasureHeightButtonWithId_withInt_(self, uiView, width);
 }
 
@@ -1776,7 +1787,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setVerticalAligmentTop(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASButtonImpl_getTextAlignment(self);
 }
 
@@ -1851,19 +1862,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self setPaddingBottomWithId:JavaLangInteger_valueOfWithInt_([((ADButton *) nil_chk(measurableView_)) getPaddingBottom])];
 }
 
-- (void)nativeSetPaddingBottomWithInt:(jint)value {
+- (void)nativeSetPaddingBottomWithInt:(int32_t)value {
   ASButtonImpl_nativeSetPaddingBottomWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingLeftWithInt:(jint)value {
+- (void)nativeSetPaddingLeftWithInt:(int32_t)value {
   ASButtonImpl_nativeSetPaddingLeftWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingRightWithInt:(jint)value {
+- (void)nativeSetPaddingRightWithInt:(int32_t)value {
   ASButtonImpl_nativeSetPaddingRightWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingTopWithInt:(jint)value {
+- (void)nativeSetPaddingTopWithInt:(int32_t)value {
   ASButtonImpl_nativeSetPaddingTopWithInt_(self, value);
 }
 
@@ -1891,7 +1902,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_syncPlaceholderLabel(self);
 }
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor {
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor {
   ASButtonImpl_setHintColorWithInt_(self, currentHintTextColor);
 }
 
@@ -1899,24 +1910,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setEnabledWithId_(self, objValue);
 }
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)enabled {
+- (void)nativeSetEnabledWithBoolean:(bool)enabled {
   ASButtonImpl_nativeSetEnabledWithBoolean_(self, enabled);
 }
 
-- (jint)measureWidth {
+- (int32_t)measureWidth {
   return ASButtonImpl_nativeMeasureWidthButtonWithId_(self, [self asNativeWidget]);
 }
 
-- (jint)nativeMeasureWidthButtonWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthButtonWithId:(id)uiView {
   return ASButtonImpl_nativeMeasureWidthButtonWithId_(self, uiView);
 }
 
 - (void)setNumberOfLinesWithId:(id)uiView
-                       withInt:(jint)lines {
+                       withInt:(int32_t)lines {
   ASButtonImpl_setNumberOfLinesWithId_withInt_(self, uiView, lines);
 }
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode {
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode {
   ASButtonImpl_nativeSetLineBreakModeWithInt_(self, lineBreakMode);
 }
 
@@ -1937,7 +1948,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASButtonImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment {
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment {
   ASButtonImpl_nativeSetTextAligmentWithInt_(self, textAlignment);
 }
 
@@ -1980,10 +1991,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASButtonImpl_getShadowDx(self);
 }
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b {
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b {
   ASButtonImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -2404,9 +2415,9 @@ void ASButtonImpl_setWidgetOnNativeClass(ASButtonImpl *self) {
 }
 
 void ASButtonImpl_setGravityWithId_(ASButtonImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADButton *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASButtonImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -2426,8 +2437,8 @@ void ASButtonImpl_setGravityWithId_(ASButtonImpl *self, id objValue) {
 
 void ASButtonImpl_updateTextAlignment(ASButtonImpl *self) {
   ADLayout_Alignment *minor = [((ADButton *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADButton *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASButtonImpl_getMyText(self), [NSString class]);
@@ -2480,7 +2491,7 @@ id ASButtonImpl_getGravity(ASButtonImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -2494,8 +2505,8 @@ id ASButtonImpl_getGravity(ASButtonImpl *self) {
     default:
     break;
   }
-  jint aligment = ASButtonImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASButtonImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASButtonImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -2509,7 +2520,7 @@ id ASButtonImpl_getGravity(ASButtonImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -2592,7 +2603,7 @@ id ASButtonImpl_getWidth(ASButtonImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADButton *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASButtonImpl_getHeight(ASButtonImpl *self) {
+int32_t ASButtonImpl_getHeight(ASButtonImpl *self) {
   return [((ADButton *) nil_chk(self->measurableView_)) getHeight];
 }
 
@@ -2605,8 +2616,8 @@ void ASButtonImpl_setFontFamilyWithId_withNSString_(ASButtonImpl *self, id objVa
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASButtonImpl_nativeGetFontStyle(self);
-  jint height = ASButtonImpl_nativeGetFontSize(self);
+  int32_t style = ASButtonImpl_nativeGetFontStyle(self);
+  int32_t height = ASButtonImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASButtonImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -2620,26 +2631,26 @@ void ASButtonImpl_setFontFamilyWithId_withNSString_(ASButtonImpl *self, id objVa
 }
 
 void ASButtonImpl_setTextStyleWithId_(ASButtonImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASButtonImpl_nativeGetFontSize(self);
+    int32_t height = ASButtonImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASButtonImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASButtonImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASButtonImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASButtonImpl_ITALIC_FONT_TRAIT;
     }
     ASButtonImpl_nativeSetFontStyleWithInt_(self, style);
@@ -2666,8 +2677,8 @@ void ASButtonImpl_setTextAllCapsWithId_(ASButtonImpl *self, id objValue) {
 
 void ASButtonImpl_setFirstBaselineToTopHeightWithId_(ASButtonImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASButtonImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASButtonImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -2675,12 +2686,12 @@ void ASButtonImpl_setFirstBaselineToTopHeightWithId_(ASButtonImpl *self, id objV
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingBottom], [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASButtonImpl_getIncludeFontPadding(ASButtonImpl *self) {
+bool ASButtonImpl_getIncludeFontPadding(ASButtonImpl *self) {
   return false;
 }
 
@@ -2691,8 +2702,8 @@ id ASButtonImpl_getFirstBaselineToTopHeight(ASButtonImpl *self) {
 
 void ASButtonImpl_setLastBaselineToBottomHeightWithId_(ASButtonImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASButtonImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASButtonImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -2700,7 +2711,7 @@ void ASButtonImpl_setLastBaselineToBottomHeightWithId_(ASButtonImpl *self, id ob
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingTop], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -2724,13 +2735,13 @@ void ASButtonImpl_initHtmlWithJavaUtilMap_(ASButtonImpl *self, id<JavaUtilMap> p
   }
 }
 
-jint ASButtonImpl_calcNumberOfWhiteSpaces(ASButtonImpl *self) {
+int32_t ASButtonImpl_calcNumberOfWhiteSpaces(ASButtonImpl *self) {
   if (!ASButtonImpl_isLabelMeasured(self)) {
     return 0;
   }
-  jfloat blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASButtonImpl_getTextSize(self), [NSNumber class])))) floatValue];
-  jint width = JreIntDiv(ASButtonImpl_getLabelWidth(self), 3);
-  jint numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
+  float blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASButtonImpl_getTextSize(self), [NSNumber class])))) floatValue];
+  int32_t width = JreIntDiv(ASButtonImpl_getLabelWidth(self), 3);
+  int32_t numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
   return numberOfBlankSpaces;
 }
 
@@ -2773,14 +2784,14 @@ void ASButtonImpl_startOrStopMarqueeWithId_(ASButtonImpl *self, id objValue) {
   }
 }
 
-jint ASButtonImpl_getLabelWidth(ASButtonImpl *self) {
+int32_t ASButtonImpl_getLabelWidth(ASButtonImpl *self) {
   if ([((ADButton *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
     return [((ADButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADButton *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADButton *) nil_chk(self->measurableView_)) getPaddingRight];
   }
   return [((ADButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADButton *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADButton *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
-jboolean ASButtonImpl_isLabelMeasured(ASButtonImpl *self) {
+bool ASButtonImpl_isLabelMeasured(ASButtonImpl *self) {
   return !ASButtonImpl_isDisposed(self) && ASButtonImpl_getLabelWidth(self) > 0;
 }
 
@@ -2793,11 +2804,11 @@ id ASButtonImpl_getTextSize(ASButtonImpl *self) {
 }
 
 void ASButtonImpl_setMyTextSizeWithId_(ASButtonImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASButtonImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASButtonImpl_nativeSetTextSizeWithInt_(ASButtonImpl *self, jint value) {
+void ASButtonImpl_nativeSetTextSizeWithInt_(ASButtonImpl *self, int32_t value) {
   [((ASUIButton*)self.uiView) setFont: [((ASUIButton*)self.uiView).font fontWithSize: value]];
 }
 
@@ -2887,7 +2898,7 @@ void ASButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASButtonImpl *self
   }
 }
 
-jint ASButtonImpl_getImageHeightWithId_(ASButtonImpl *self, id objValue) {
+int32_t ASButtonImpl_getImageHeightWithId_(ASButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -2896,7 +2907,7 @@ jint ASButtonImpl_getImageHeightWithId_(ASButtonImpl *self, id objValue) {
   return 0;
 }
 
-jint ASButtonImpl_getImageWidthWithId_(ASButtonImpl *self, id objValue) {
+int32_t ASButtonImpl_getImageWidthWithId_(ASButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -2971,16 +2982,16 @@ void ASButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASButtonImpl *
   [self invalidate];
 }
 
-jint ASButtonImpl_nativeGetFontSize(ASButtonImpl *self) {
+int32_t ASButtonImpl_nativeGetFontSize(ASButtonImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASButtonImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASButtonImpl_nativeGetFontStyle(ASButtonImpl *self) {
+int32_t ASButtonImpl_nativeGetFontStyle(ASButtonImpl *self) {
   ASUIButton* label = ((ASUIButton*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASButtonImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASButtonImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUIButton* label = ((ASUIButton*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -2994,7 +3005,7 @@ void ASButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASButtonImpl 
   }
 }
 
-void ASButtonImpl_nativeSetFontStyleWithInt_(ASButtonImpl *self, jint style) {
+void ASButtonImpl_nativeSetFontStyleWithInt_(ASButtonImpl *self, int32_t style) {
   ASUIButton* label = ((ASUIButton*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUIButton*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -3018,7 +3029,7 @@ id ASButtonImpl_getEllipsize(ASButtonImpl *self) {
 
 void ASButtonImpl_setEllipsizeWithId_withNSString_(ASButtonImpl *self, id objValue, NSString *strValue) {
   self->ellipsize_ = strValue;
-  jint lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (lineBreakMode == JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee)) {
     lineBreakMode = JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping);
   }
@@ -3037,15 +3048,15 @@ void ASButtonImpl_setEllipsizeWithId_withNSString_(ASButtonImpl *self, id objVal
   }
 }
 
-jint ASButtonImpl_getLineHeight(ASButtonImpl *self) {
+int32_t ASButtonImpl_getLineHeight(ASButtonImpl *self) {
   return ceil(((ASUIButton*)self.uiView).font.lineHeight);
 }
 
-jint ASButtonImpl_getBorderWidth(ASButtonImpl *self) {
+int32_t ASButtonImpl_getBorderWidth(ASButtonImpl *self) {
   return 0;
 }
 
-jboolean ASButtonImpl_canMarquee(ASButtonImpl *self) {
+bool ASButtonImpl_canMarquee(ASButtonImpl *self) {
   return [nil_chk(ASButtonImpl_getSingleLine(self)) isEqual:JreLoadStatic(JavaLangBoolean, TRUE)];
 }
 
@@ -3056,7 +3067,7 @@ void ASButtonImpl_cancelNativeTimer(ASButtonImpl *self) {
   }
 }
 
-jboolean ASButtonImpl_isDisposed(ASButtonImpl *self) {
+bool ASButtonImpl_isDisposed(ASButtonImpl *self) {
   return self->isDisposed_;
 }
 
@@ -3102,7 +3113,7 @@ void ASButtonImpl_createNativeWidgetWithJavaUtilMap_(ASButtonImpl *self, id<Java
   [((ASUIButton*)self.uiView) setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
-jint ASButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASButtonImpl *self, id uiView, jint width) {
+int32_t ASButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASButtonImpl *self, id uiView, int32_t width) {
   CGSize maximumLabelSize = CGSizeMake(width,CGFLOAT_MAX);
   CGSize requiredSize = [((ASUIButton*)uiView).titleLabel sizeThatFits:maximumLabelSize];
   return ceil(requiredSize.height);
@@ -3160,7 +3171,7 @@ void ASButtonImpl_setVerticalAligmentTop(ASButtonImpl *self) {
   ASButtonImpl_nativeSetVerticalAligmentTop(self);
 }
 
-jint ASButtonImpl_getTextAlignment(ASButtonImpl *self) {
+int32_t ASButtonImpl_getTextAlignment(ASButtonImpl *self) {
   int alignment = (int) ((ASUIButton*)self.uiView).contentHorizontalAlignment;
   
   if (alignment == UIControlContentHorizontalAlignmentCenter) {
@@ -3209,25 +3220,25 @@ void ASButtonImpl_setPaddingWithId_(ASButtonImpl *self, id objValue) {
   ASButtonImpl_setPaddingHorizontalWithId_(self, objValue);
 }
 
-void ASButtonImpl_nativeSetPaddingBottomWithInt_(ASButtonImpl *self, jint value) {
+void ASButtonImpl_nativeSetPaddingBottomWithInt_(ASButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, value, edgeInsets.right)];
 }
 
-void ASButtonImpl_nativeSetPaddingLeftWithInt_(ASButtonImpl *self, jint value) {
+void ASButtonImpl_nativeSetPaddingLeftWithInt_(ASButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, value, edgeInsets.bottom, edgeInsets.right)];
 }
 
-void ASButtonImpl_nativeSetPaddingRightWithInt_(ASButtonImpl *self, jint value) {
+void ASButtonImpl_nativeSetPaddingRightWithInt_(ASButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, value)];
 }
 
-void ASButtonImpl_nativeSetPaddingTopWithInt_(ASButtonImpl *self, jint value) {
+void ASButtonImpl_nativeSetPaddingTopWithInt_(ASButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(value, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)];
@@ -3249,28 +3260,28 @@ void ASButtonImpl_setTextColorLinkWithADColorStateList_(ASButtonImpl *self, ADCo
 void ASButtonImpl_syncPlaceholderLabel(ASButtonImpl *self) {
 }
 
-void ASButtonImpl_setHintColorWithInt_(ASButtonImpl *self, jint currentHintTextColor) {
+void ASButtonImpl_setHintColorWithInt_(ASButtonImpl *self, int32_t currentHintTextColor) {
 }
 
 void ASButtonImpl_setEnabledWithId_(ASButtonImpl *self, id objValue) {
   ASButtonImpl_nativeSetEnabledWithBoolean_(self, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASButtonImpl_nativeSetEnabledWithBoolean_(ASButtonImpl *self, jboolean enabled) {
+void ASButtonImpl_nativeSetEnabledWithBoolean_(ASButtonImpl *self, bool enabled) {
   [((ASUIButton*)self.uiView) setEnabled:enabled];
 }
 
-jint ASButtonImpl_nativeMeasureWidthButtonWithId_(ASButtonImpl *self, id uiView) {
+int32_t ASButtonImpl_nativeMeasureWidthButtonWithId_(ASButtonImpl *self, id uiView) {
   CGSize maximumLabelSize = CGSizeMake(CGFLOAT_MAX,CGFLOAT_MAX);
   CGSize requiredSize = [((ASUIButton*)uiView).titleLabel sizeThatFits:maximumLabelSize];
   return ceil(requiredSize.width);
 }
 
-void ASButtonImpl_setNumberOfLinesWithId_withInt_(ASButtonImpl *self, id uiView, jint lines) {
+void ASButtonImpl_setNumberOfLinesWithId_withInt_(ASButtonImpl *self, id uiView, int32_t lines) {
   ((ASUIButton*)uiView).titleLabel.numberOfLines = lines;
 }
 
-void ASButtonImpl_nativeSetLineBreakModeWithInt_(ASButtonImpl *self, jint lineBreakMode) {
+void ASButtonImpl_nativeSetLineBreakModeWithInt_(ASButtonImpl *self, int32_t lineBreakMode) {
   ((ASUIButton*)self.uiView).titleLabel.lineBreakMode = lineBreakMode;
   ((ASUIButton*)self.uiView).titleLabel.adjustsFontSizeToFitWidth = false;
 }
@@ -3292,7 +3303,7 @@ void ASButtonImpl_setJustificationModeWithId_withNSString_(ASButtonImpl *self, i
   ASButtonImpl_nativeSetTextAligmentWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASButtonImpl_nativeSetTextAligmentWithInt_(ASButtonImpl *self, jint textAlignment) {
+void ASButtonImpl_nativeSetTextAligmentWithInt_(ASButtonImpl *self, int32_t textAlignment) {
   [((ASUIButton*)self->uiView_).titleLabel setTextAlignment:textAlignment];
 }
 
@@ -3334,13 +3345,15 @@ id ASButtonImpl_getShadowDx(ASButtonImpl *self) {
   return [JavaLangFloat valueOfWithFloat:(jint)((ASUIButton*)self->uiView_).titleLabel.shadowOffset.width];
 }
 
-void ASButtonImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASButtonImpl *self, jint l, jint t, jint r, jint b) {
+void ASButtonImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASButtonImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   if ([self isInitialised]) {
     [self updatePadding];
   }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl)
+
+J2OBJC_NAME_MAPPING(ASButtonImpl, "com.ashera.layout", "AS")
 
 @implementation ASButtonImpl_DrawableTintMode
 
@@ -3422,7 +3435,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangInteger_valueOfWithInt_(0);
 }
 
-- (jboolean)supportsIntAlso {
+- (bool)supportsIntAlso {
   return true;
 }
 
@@ -3455,7 +3468,7 @@ void ASButtonImpl_MarqueeRepeatLimit_init(ASButtonImpl_MarqueeRepeatLimit *self)
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((jint) 0xffffffff)];
+    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0xffffffff)];
   }
 }
 
@@ -3513,10 +3526,10 @@ void ASButtonImpl_Font_init(ASButtonImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -3574,9 +3587,9 @@ void ASButtonImpl_TextStyle_init(ASButtonImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -3722,8 +3735,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_JustificationMode)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -3733,11 +3746,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_JustificationMode)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -3765,8 +3778,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_JustificationMode)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -3834,12 +3847,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_JustificationMode)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -3869,37 +3882,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_JustificationMode)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASButtonImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASButtonImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -4099,7 +4112,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonExt)
 }
 
 - (void)run {
-  jint numberOfBlankSpaces = ASButtonImpl_calcNumberOfWhiteSpaces(this$0_);
+  int32_t numberOfBlankSpaces = ASButtonImpl_calcNumberOfWhiteSpaces(this$0_);
   if (this$0_->marqueeCommandConverter_ == nil) {
     this$0_->marqueeCommandConverter_ = (ASMarqueeCommandConverter *) cast_chk([this$0_ getAttributeCommandWithNSString:@"text" withNSString:ASCommonConverters_command_marquee withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(numberOfBlankSpaces), JavaLangInteger_valueOfWithInt_(0), direction_ } count:3 type:NSObject_class_()]], [ASMarqueeCommandConverter class]);
   }
@@ -4186,17 +4199,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_MarqueeTask)
 
 @end
 
-void ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask_$Lambda$1 *self, ASButtonImpl_MarqueeTask *outer$, jint capture$0) {
+void ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask_$Lambda$1 *self, ASButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   self->this$0_ = outer$;
   self->val$numberOfBlankSpaces_ = capture$0;
   NSObject_init(self);
 }
 
-ASButtonImpl_MarqueeTask_$Lambda$1 *new_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, jint capture$0) {
+ASButtonImpl_MarqueeTask_$Lambda$1 *new_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_NEW_IMPL(ASButtonImpl_MarqueeTask_$Lambda$1, initWithASButtonImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
-ASButtonImpl_MarqueeTask_$Lambda$1 *create_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, jint capture$0) {
+ASButtonImpl_MarqueeTask_$Lambda$1 *create_ASButtonImpl_MarqueeTask_$Lambda$1_initWithASButtonImpl_MarqueeTask_withInt_(ASButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_CREATE_IMPL(ASButtonImpl_MarqueeTask_$Lambda$1, initWithASButtonImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 

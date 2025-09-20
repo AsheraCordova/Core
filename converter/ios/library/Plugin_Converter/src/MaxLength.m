@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\MaxLength.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSClass.h"
@@ -12,23 +17,30 @@
 #include "MaxLength.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASMaxLength () {
  @public
-  jint mMaxLength_;
+  int32_t mMaxLength_;
 }
 
-- (instancetype)initWithInt:(jint)maxLength;
+- (instancetype)initWithInt:(int32_t)maxLength;
 
 @end
 
-__attribute__((unused)) static void ASMaxLength_initWithInt_(ASMaxLength *self, jint maxLength);
+__attribute__((unused)) static void ASMaxLength_initWithInt_(ASMaxLength *self, int32_t maxLength);
 
-__attribute__((unused)) static ASMaxLength *new_ASMaxLength_initWithInt_(jint maxLength) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASMaxLength *new_ASMaxLength_initWithInt_(int32_t maxLength) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASMaxLength *create_ASMaxLength_initWithInt_(jint maxLength);
+__attribute__((unused)) static ASMaxLength *create_ASMaxLength_initWithInt_(int32_t maxLength);
 
 @implementation ASMaxLength
 
@@ -43,7 +55,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ASMaxLength_initWithInt_(JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(nil_chk(argument), 0)));
 }
 
-- (instancetype)initWithInt:(jint)maxLength {
+- (instancetype)initWithInt:(int32_t)maxLength {
   ASMaxLength_initWithInt_(self, maxLength);
   return self;
 }
@@ -53,8 +65,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return NSString_java_formatWithNSString_withNSObjectArray_(res, [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(mMaxLength_) } count:1 type:NSObject_class_()]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
   if (text == nil) {
     text = @"";
   }
@@ -101,17 +113,19 @@ ASMaxLength *create_ASMaxLength_init() {
   J2OBJC_CREATE_IMPL(ASMaxLength, init)
 }
 
-void ASMaxLength_initWithInt_(ASMaxLength *self, jint maxLength) {
+void ASMaxLength_initWithInt_(ASMaxLength *self, int32_t maxLength) {
   ASBaseValidator_init(self);
   self->mMaxLength_ = maxLength;
 }
 
-ASMaxLength *new_ASMaxLength_initWithInt_(jint maxLength) {
+ASMaxLength *new_ASMaxLength_initWithInt_(int32_t maxLength) {
   J2OBJC_NEW_IMPL(ASMaxLength, initWithInt_, maxLength)
 }
 
-ASMaxLength *create_ASMaxLength_initWithInt_(jint maxLength) {
+ASMaxLength *create_ASMaxLength_initWithInt_(int32_t maxLength) {
   J2OBJC_CREATE_IMPL(ASMaxLength, initWithInt_, maxLength)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMaxLength)
+
+J2OBJC_NAME_MAPPING(ASMaxLength, "com.ashera.validations", "AS")

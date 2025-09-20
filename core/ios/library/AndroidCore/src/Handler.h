@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Handler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Handler")
@@ -25,6 +26,10 @@
 @class ADLooper;
 @class ADMessage;
 @class ADMessageQueue;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
 @protocol ADHandler_Callback;
 @protocol ADIMessenger;
 @protocol JavaLangRunnable;
@@ -70,7 +75,7 @@
   ADLooper *mLooper_;
   ADMessageQueue *mQueue_;
   id<ADHandler_Callback> mCallback_;
-  jboolean mAsynchronous_;
+  bool mAsynchronous_;
   id<ADIMessenger> mMessenger_;
 }
 
@@ -95,7 +100,7 @@
  @param async If true, the handler calls <code>Message.setAsynchronous(boolean)</code>  for
    each <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
  */
-- (instancetype)initWithBoolean:(jboolean)async;
+- (instancetype)initWithBoolean:(bool)async;
 
 /*!
  @brief Constructor associates this handler with the <code>Looper</code> for the
@@ -120,7 +125,7 @@
    each <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
  */
 - (instancetype)initWithADHandler_Callback:(id<ADHandler_Callback>)callback
-                               withBoolean:(jboolean)async;
+                               withBoolean:(bool)async;
 
 /*!
  @brief Use the provided <code>Looper</code> instead of the default one.
@@ -153,7 +158,7 @@
  */
 - (instancetype)initWithADLooper:(ADLooper *)looper
           withADHandler_Callback:(id<ADHandler_Callback>)callback
-                     withBoolean:(jboolean)async;
+                     withBoolean:(bool)async;
 
 /*!
  @brief Create a new Handler whose posted messages and runnables are not subject to
@@ -190,7 +195,7 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)executeOrSendMessageWithADMessage:(ADMessage *)msg;
+- (bool)executeOrSendMessageWithADMessage:(ADMessage *)msg;
 
 - (ADLooper *)getLooper;
 
@@ -220,32 +225,32 @@
  @brief Check if there are any pending posts of messages with callback r in
   the message queue.
  */
-- (jboolean)hasCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)r;
+- (bool)hasCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)r;
 
 /*!
  @brief Check if there are any pending posts of messages with code 'what' and
   whose obj is 'object' in the message queue.
  */
-- (jboolean)hasEqualMessagesWithInt:(jint)what
-                             withId:(id)object;
+- (bool)hasEqualMessagesWithInt:(int32_t)what
+                         withId:(id)object;
 
 /*!
  @brief Check if there are any pending posts of messages with code 'what' in
   the message queue.
  */
-- (jboolean)hasMessagesWithInt:(jint)what;
+- (bool)hasMessagesWithInt:(int32_t)what;
 
 /*!
  @brief Check if there are any pending posts of messages with code 'what' and
   whose obj is 'object' in the message queue.
  */
-- (jboolean)hasMessagesWithInt:(jint)what
-                        withId:(id)object;
+- (bool)hasMessagesWithInt:(int32_t)what
+                    withId:(id)object;
 
 /*!
  @brief Return whether there are any messages or callbacks currently scheduled on this handler.
  */
-- (jboolean)hasMessagesOrCallbacks;
+- (bool)hasMessagesOrCallbacks;
 
 /*!
  */
@@ -264,7 +269,7 @@
  @param what Value to assign to the returned Message.what field.
  @return A Message from the global message pool.
  */
-- (ADMessage *)obtainMessageWithInt:(jint)what;
+- (ADMessage *)obtainMessageWithInt:(int32_t)what;
 
 /*!
  @brief Same as <code>obtainMessage()</code>, except that it also sets the what, arg1 and arg2 members of the returned
@@ -274,9 +279,9 @@
  @param arg2 Value to assign to the returned Message.arg2 field.
  @return A Message from the global message pool.
  */
-- (ADMessage *)obtainMessageWithInt:(jint)what
-                            withInt:(jint)arg1
-                            withInt:(jint)arg2;
+- (ADMessage *)obtainMessageWithInt:(int32_t)what
+                            withInt:(int32_t)arg1
+                            withInt:(int32_t)arg2;
 
 /*!
  @brief Same as <code>obtainMessage()</code>, except that it also sets the what, obj, arg1,and arg2 values on the 
@@ -287,9 +292,9 @@
  @param obj Value to assign to the returned Message.obj field.
  @return A Message from the global message pool.
  */
-- (ADMessage *)obtainMessageWithInt:(jint)what
-                            withInt:(jint)arg1
-                            withInt:(jint)arg2
+- (ADMessage *)obtainMessageWithInt:(int32_t)what
+                            withInt:(int32_t)arg1
+                            withInt:(int32_t)arg2
                              withId:(id)obj;
 
 /*!
@@ -299,7 +304,7 @@
  @param obj Value to assign to the returned Message.obj field.
  @return A Message from the global message pool.
  */
-- (ADMessage *)obtainMessageWithInt:(jint)what
+- (ADMessage *)obtainMessageWithInt:(int32_t)what
                              withId:(id)obj;
 
 /*!
@@ -311,7 +316,7 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)postWithJavaLangRunnable:(id<JavaLangRunnable>)r;
+- (bool)postWithJavaLangRunnable:(id<JavaLangRunnable>)r;
 
 /*!
  @brief Posts a message to an object that implements Runnable.
@@ -326,7 +331,7 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)postAtFrontOfQueueWithJavaLangRunnable:(id<JavaLangRunnable>)r;
+- (bool)postAtFrontOfQueueWithJavaLangRunnable:(id<JavaLangRunnable>)r;
 
 /*!
  @brief Causes the Runnable r to be added to the message queue, to be run
@@ -344,8 +349,8 @@
           the looper is quit before the delivery time of the message
           occurs then the message will be dropped.
  */
-- (jboolean)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                  withLong:(jlong)uptimeMillis;
+- (bool)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                              withLong:(int64_t)uptimeMillis;
 
 /*!
  @brief Causes the Runnable r to be added to the message queue, to be run
@@ -366,15 +371,15 @@
           occurs then the message will be dropped.
  - seealso: r.android.os.SystemClock#uptimeMillis
  */
-- (jboolean)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                    withId:(id)token
-                                  withLong:(jlong)uptimeMillis;
+- (bool)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                withId:(id)token
+                              withLong:(int64_t)uptimeMillis;
 
 /*!
  */
-- (jboolean)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                    withInt:(jint)what
-                                   withLong:(jlong)delayMillis;
+- (bool)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                withInt:(int32_t)what
+                               withLong:(int64_t)delayMillis;
 
 /*!
  @brief Causes the Runnable r to be added to the message queue, to be run
@@ -392,8 +397,8 @@
           if the looper is quit before the delivery time of the message
           occurs then the message will be dropped.
  */
-- (jboolean)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                   withLong:(jlong)delayMillis;
+- (bool)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                               withLong:(int64_t)delayMillis;
 
 /*!
  @brief Causes the Runnable r to be added to the message queue, to be run
@@ -413,9 +418,9 @@
           if the looper is quit before the delivery time of the message
           occurs then the message will be dropped.
  */
-- (jboolean)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                     withId:(id)token
-                                   withLong:(jlong)delayMillis;
+- (bool)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                 withId:(id)token
+                               withLong:(int64_t)delayMillis;
 
 /*!
  @brief Remove any pending posts of Runnable r that are in the message queue.
@@ -453,21 +458,21 @@
   (<code>Object.equals(Object)</code>) instead of reference equality (==) in
   determining whether object is the message's obj'.
  */
-- (void)removeEqualMessagesWithInt:(jint)what
+- (void)removeEqualMessagesWithInt:(int32_t)what
                             withId:(id)object;
 
 /*!
  @brief Remove any pending posts of messages with code 'what' that are in the
   message queue.
  */
-- (void)removeMessagesWithInt:(jint)what;
+- (void)removeMessagesWithInt:(int32_t)what;
 
 /*!
  @brief Remove any pending posts of messages with code 'what' and whose obj is
   'object' that are in the message queue.If <var>object</var> is null,
   all messages will be removed.
  */
-- (void)removeMessagesWithInt:(jint)what
+- (void)removeMessagesWithInt:(int32_t)what
                        withId:(id)object;
 
 /*!
@@ -504,8 +509,8 @@
           Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)runWithScissorsWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                       withLong:(jlong)timeout;
+- (bool)runWithScissorsWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                   withLong:(int64_t)timeout;
 
 /*!
  @brief Sends a Message containing only the what value.
@@ -513,7 +518,7 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)sendEmptyMessageWithInt:(jint)what;
+- (bool)sendEmptyMessageWithInt:(int32_t)what;
 
 /*!
  @brief Sends a Message containing only the what value, to be delivered 
@@ -523,8 +528,8 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)sendEmptyMessageAtTimeWithInt:(jint)what
-                                 withLong:(jlong)uptimeMillis;
+- (bool)sendEmptyMessageAtTimeWithInt:(int32_t)what
+                             withLong:(int64_t)uptimeMillis;
 
 /*!
  @brief Sends a Message containing only the what value, to be delivered
@@ -534,8 +539,8 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)sendEmptyMessageDelayedWithInt:(jint)what
-                                  withLong:(jlong)delayMillis;
+- (bool)sendEmptyMessageDelayedWithInt:(int32_t)what
+                              withLong:(int64_t)delayMillis;
 
 /*!
  @brief Pushes a message onto the end of the message queue after all pending messages
@@ -545,7 +550,7 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)sendMessageWithADMessage:(ADMessage *)msg;
+- (bool)sendMessageWithADMessage:(ADMessage *)msg;
 
 /*!
  @brief Enqueue a message at the front of the message queue, to be processed on
@@ -558,7 +563,7 @@
           message queue.  Returns false on failure, usually because the
           looper processing the message queue is exiting.
  */
-- (jboolean)sendMessageAtFrontOfQueueWithADMessage:(ADMessage *)msg;
+- (bool)sendMessageAtFrontOfQueueWithADMessage:(ADMessage *)msg;
 
 /*!
  @brief Enqueue a message into the message queue after all pending messages
@@ -577,8 +582,8 @@
           the looper is quit before the delivery time of the message
           occurs then the message will be dropped.
  */
-- (jboolean)sendMessageAtTimeWithADMessage:(ADMessage *)msg
-                                  withLong:(jlong)uptimeMillis;
+- (bool)sendMessageAtTimeWithADMessage:(ADMessage *)msg
+                              withLong:(int64_t)uptimeMillis;
 
 /*!
  @brief Enqueue a message into the message queue after all pending messages
@@ -591,8 +596,8 @@
           the looper is quit before the delivery time of the message
           occurs then the message will be dropped.
  */
-- (jboolean)sendMessageDelayedWithADMessage:(ADMessage *)msg
-                                   withLong:(jlong)delayMillis;
+- (bool)sendMessageDelayedWithADMessage:(ADMessage *)msg
+                               withLong:(int64_t)delayMillis;
 
 - (NSString *)description;
 
@@ -633,23 +638,23 @@ FOUNDATION_EXPORT ADHandler *new_ADHandler_initWithADLooper_withADHandler_Callba
 
 FOUNDATION_EXPORT ADHandler *create_ADHandler_initWithADLooper_withADHandler_Callback_(ADLooper *looper, id<ADHandler_Callback> callback);
 
-FOUNDATION_EXPORT void ADHandler_initWithBoolean_(ADHandler *self, jboolean async);
+FOUNDATION_EXPORT void ADHandler_initWithBoolean_(ADHandler *self, bool async);
 
-FOUNDATION_EXPORT ADHandler *new_ADHandler_initWithBoolean_(jboolean async) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADHandler *new_ADHandler_initWithBoolean_(bool async) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADHandler *create_ADHandler_initWithBoolean_(jboolean async);
+FOUNDATION_EXPORT ADHandler *create_ADHandler_initWithBoolean_(bool async);
 
-FOUNDATION_EXPORT void ADHandler_initWithADHandler_Callback_withBoolean_(ADHandler *self, id<ADHandler_Callback> callback, jboolean async);
+FOUNDATION_EXPORT void ADHandler_initWithADHandler_Callback_withBoolean_(ADHandler *self, id<ADHandler_Callback> callback, bool async);
 
-FOUNDATION_EXPORT ADHandler *new_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, jboolean async) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADHandler *new_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, bool async) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADHandler *create_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, jboolean async);
+FOUNDATION_EXPORT ADHandler *create_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, bool async);
 
-FOUNDATION_EXPORT void ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADHandler *self, ADLooper *looper, id<ADHandler_Callback> callback, jboolean async);
+FOUNDATION_EXPORT void ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADHandler *self, ADLooper *looper, id<ADHandler_Callback> callback, bool async);
 
-FOUNDATION_EXPORT ADHandler *new_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, jboolean async) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADHandler *new_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, bool async) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADHandler *create_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, jboolean async);
+FOUNDATION_EXPORT ADHandler *create_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, bool async);
 
 FOUNDATION_EXPORT ADHandler *ADHandler_createAsyncWithADLooper_(ADLooper *looper);
 
@@ -663,12 +668,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADHandler)
 
 @compatibility_alias RAndroidOsHandler ADHandler;
 
+
 #endif
 
 #if !defined (ADHandler_Callback_) && (INCLUDE_ALL_Handler || defined(INCLUDE_ADHandler_Callback))
 #define ADHandler_Callback_
 
 @class ADMessage;
+@class JavaLangBoolean;
 
 /*!
  @brief Callback interface you can use when instantiating a Handler to avoid
@@ -680,13 +687,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADHandler)
  @param msg A <code>Message</code>  object
  @return True if no further handling is desired
  */
-- (jboolean)handleMessageWithADMessage:(ADMessage *)msg;
+- (bool)handleMessageWithADMessage:(ADMessage *)msg;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADHandler_Callback)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADHandler_Callback)
+
 
 #endif
 

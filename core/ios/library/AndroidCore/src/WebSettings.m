@@ -3,8 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebSettings.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "WebSettings.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADWebSettings
@@ -16,28 +29,28 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setJavaScriptEnabledWithBoolean:(jboolean)b {
+- (void)setJavaScriptEnabledWithBoolean:(bool)b {
 }
 
-- (void)setJavaScriptCanOpenWindowsAutomaticallyWithBoolean:(jboolean)b {
+- (void)setJavaScriptCanOpenWindowsAutomaticallyWithBoolean:(bool)b {
 }
 
-- (void)setLayoutAlgorithmWithInt:(jint)normal {
+- (void)setLayoutAlgorithmWithInt:(int32_t)normal {
 }
 
-- (void)setSaveFormDataWithBoolean:(jboolean)b {
+- (void)setSaveFormDataWithBoolean:(bool)b {
 }
 
-- (void)setSavePasswordWithBoolean:(jboolean)b {
+- (void)setSavePasswordWithBoolean:(bool)b {
 }
 
-- (void)setAllowUniversalAccessFromFileURLsWithBoolean:(jboolean)b {
+- (void)setAllowUniversalAccessFromFileURLsWithBoolean:(bool)b {
 }
 
-- (void)setMediaPlaybackRequiresUserGestureWithBoolean:(jboolean)b {
+- (void)setMediaPlaybackRequiresUserGestureWithBoolean:(bool)b {
 }
 
-- (void)setDatabaseEnabledWithBoolean:(jboolean)b {
+- (void)setDatabaseEnabledWithBoolean:(bool)b {
 }
 
 - (void)setDatabasePathWithNSString:(NSString *)databasePath {
@@ -46,25 +59,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setGeolocationDatabasePathWithNSString:(NSString *)databasePath {
 }
 
-- (void)setDomStorageEnabledWithBoolean:(jboolean)b {
+- (void)setDomStorageEnabledWithBoolean:(bool)b {
 }
 
-- (void)setGeolocationEnabledWithBoolean:(jboolean)b {
+- (void)setGeolocationEnabledWithBoolean:(bool)b {
 }
 
-- (void)setAppCacheMaxSizeWithInt:(jint)i {
+- (void)setAppCacheMaxSizeWithInt:(int32_t)i {
 }
 
 - (void)setAppCachePathWithNSString:(NSString *)databasePath {
 }
 
-- (void)setAppCacheEnabledWithBoolean:(jboolean)b {
+- (void)setAppCacheEnabledWithBoolean:(bool)b {
 }
 
-- (void)setUseWideViewPortWithBoolean:(jboolean)b {
+- (void)setUseWideViewPortWithBoolean:(bool)b {
 }
 
-- (void)setLoadWithOverviewModeWithBoolean:(jboolean)b {
+- (void)setLoadWithOverviewModeWithBoolean:(bool)b {
 }
 
 - (NSString *)getUserAgentString {
@@ -141,6 +154,8 @@ ADWebSettings *create_ADWebSettings_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWebSettings)
+
+J2OBJC_NAME_MAPPING(ADWebSettings, "r.android.webkit", "AD")
 
 @implementation ADWebSettings_LayoutAlgorithm
 

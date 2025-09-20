@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\CompoundButton.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Button.h"
 #include "Canvas.h"
 #include "ColorStateList.h"
@@ -17,19 +22,27 @@
 #include "R.h"
 #include "RectM.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADCompoundButton () {
  @public
-  jboolean mChecked_;
-  jboolean mBroadcasting_;
+  bool mChecked_;
+  bool mBroadcasting_;
   ADDrawable *mButtonDrawable_;
   ADColorStateList *mButtonTintList_;
-  jboolean mHasButtonTint_;
-  jboolean mHasButtonBlendMode_;
+  bool mHasButtonTint_;
+  bool mHasButtonBlendMode_;
   id<ADCompoundButton_OnCheckedChangeListener> mOnCheckedChangeListener_;
   id<ADCompoundButton_OnCheckedChangeListener> mOnCheckedChangeWidgetListener_;
-  jboolean mCheckedFromResource_;
+  bool mCheckedFromResource_;
 }
 
 @end
@@ -59,11 +72,11 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   [self setCheckedWithBoolean:!mChecked_];
 }
 
-- (jboolean)isChecked {
+- (bool)isChecked {
   return mChecked_;
 }
 
-- (void)setCheckedWithBoolean:(jboolean)checked {
+- (void)setCheckedWithBoolean:(bool)checked {
   if (mChecked_ != checked) {
     mCheckedFromResource_ = false;
     mChecked_ = checked;
@@ -95,7 +108,7 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   JreStrongAssign(&mOnCheckedChangeWidgetListener_, listener);
 }
 
-- (void)setButtonDrawableWithInt:(jint)resId {
+- (void)setButtonDrawableWithInt:(int32_t)resId {
   ADDrawable *d;
   if (resId != 0) {
     d = [((ADContext *) nil_chk([self getContext])) getDrawableWithInt:resId];
@@ -107,7 +120,7 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
 }
 
 - (void)setButtonDrawableWithADDrawable:(ADDrawable *)drawable {
-  if (mButtonDrawable_ != drawable) {
+  if (!JreObjectEqualsEquals(mButtonDrawable_, drawable)) {
     if (mButtonDrawable_ != nil) {
       [mButtonDrawable_ setCallbackWithId:nil];
       [self unscheduleDrawableWithId:mButtonDrawable_];
@@ -140,8 +153,8 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   return mButtonTintList_;
 }
 
-- (jint)getCompoundPaddingLeft {
-  jint padding = [super getCompoundPaddingLeft];
+- (int32_t)getCompoundPaddingLeft {
+  int32_t padding = [super getCompoundPaddingLeft];
   if (![self isLayoutRtl]) {
     ADDrawable *buttonDrawable = mButtonDrawable_;
     if (buttonDrawable != nil) {
@@ -151,8 +164,8 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   return padding;
 }
 
-- (jint)getCompoundPaddingRight {
-  jint padding = [super getCompoundPaddingRight];
+- (int32_t)getCompoundPaddingRight {
+  int32_t padding = [super getCompoundPaddingRight];
   if ([self isLayoutRtl]) {
     ADDrawable *buttonDrawable = mButtonDrawable_;
     if (buttonDrawable != nil) {
@@ -162,7 +175,7 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   return padding;
 }
 
-- (jint)getHorizontalOffsetForDrawables {
+- (int32_t)getHorizontalOffsetForDrawables {
   ADDrawable *buttonDrawable = mButtonDrawable_;
   return (buttonDrawable != nil) ? [((ADDrawable *) nil_chk(buttonDrawable)) getIntrinsicWidth] : 0;
 }
@@ -170,10 +183,10 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
 - (void)onDrawWithADCanvas:(id<ADCanvas>)canvas {
   ADDrawable *buttonDrawable = mButtonDrawable_;
   if (buttonDrawable != nil) {
-    jint verticalGravity = [self getGravity] & ADGravity_VERTICAL_GRAVITY_MASK;
-    jint drawableHeight = [buttonDrawable getIntrinsicHeight];
-    jint drawableWidth = [buttonDrawable getIntrinsicWidth];
-    jint top;
+    int32_t verticalGravity = [self getGravity] & ADGravity_VERTICAL_GRAVITY_MASK;
+    int32_t drawableHeight = [buttonDrawable getIntrinsicHeight];
+    int32_t drawableWidth = [buttonDrawable getIntrinsicWidth];
+    int32_t top;
     switch (verticalGravity) {
       case ADGravity_BOTTOM:
       top = [self getHeight] - drawableHeight;
@@ -184,9 +197,9 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
       default:
       top = 0;
     }
-    jint bottom = top + drawableHeight;
-    jint left = [self isLayoutRtl] ? [self getWidth] - drawableWidth : 0;
-    jint right = [self isLayoutRtl] ? [self getWidth] : drawableWidth;
+    int32_t bottom = top + drawableHeight;
+    int32_t left = [self isLayoutRtl] ? [self getWidth] - drawableWidth : 0;
+    int32_t right = [self isLayoutRtl] ? [self getWidth] : drawableWidth;
     [buttonDrawable setBoundsWithInt:left withInt:top withInt:right withInt:bottom];
     ADDrawable *background = [self getBackground];
     if (background != nil) {
@@ -195,8 +208,8 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   }
   [super onDrawWithADCanvas:canvas];
   if (buttonDrawable != nil) {
-    jint scrollX = mScrollX_;
-    jint scrollY = mScrollY_;
+    int32_t scrollX = mScrollX_;
+    int32_t scrollY = mScrollY_;
     if (scrollX == 0 && scrollY == 0) {
       [buttonDrawable drawWithADCanvas:canvas];
     }
@@ -208,7 +221,7 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   }
 }
 
-- (IOSIntArray *)onCreateDrawableStateWithInt:(jint)extraSpace {
+- (IOSIntArray *)onCreateDrawableStateWithInt:(int32_t)extraSpace {
   IOSIntArray *drawableState = [super onCreateDrawableStateWithInt:extraSpace + 1];
   if ([self isChecked]) {
     ADView_mergeDrawableStatesWithIntArray_withIntArray_(drawableState, ADCompoundButton_CHECKED_STATE_SET);
@@ -230,10 +243,10 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
 - (void)setDefaultStateDescritption {
 }
 
-- (ASRectM *)getLeftDrawableBoundsWithInt:(jint)x
-                                  withInt:(jint)y
-                                  withInt:(jint)width
-                                  withInt:(jint)height {
+- (ASRectM *)getLeftDrawableBoundsWithInt:(int32_t)x
+                                  withInt:(int32_t)y
+                                  withInt:(int32_t)width
+                                  withInt:(int32_t)height {
   ASRectM *leftBounds = [super getLeftDrawableBoundsWithInt:x withInt:y withInt:width withInt:height];
   if (mButtonDrawable_ != nil) {
     ((ASRectM *) nil_chk(leftBounds))->x_ = leftBounds->x_ + [mButtonDrawable_ getMinimumWidth];
@@ -241,7 +254,7 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
   return leftBounds;
 }
 
-- (jboolean)hasDrawables {
+- (bool)hasDrawables {
   return mButtonDrawable_ != nil || [super hasDrawables];
 }
 
@@ -321,7 +334,7 @@ J2OBJC_INITIALIZED_DEFN(ADCompoundButton)
 
 + (void)initialize {
   if (self == [ADCompoundButton class]) {
-    JreStrongAssignAndConsume(&ADCompoundButton_CHECKED_STATE_SET, [IOSIntArray newArrayWithInts:(jint[]){ ADR_attr_state_checked } count:1]);
+    JreStrongAssignAndConsume(&ADCompoundButton_CHECKED_STATE_SET, [IOSIntArray newArrayWithInts:(int32_t[]){ ADR_attr_state_checked } count:1]);
     J2OBJC_SET_INITIALIZED(ADCompoundButton)
   }
 }
@@ -338,6 +351,8 @@ void ADCompoundButton_initWithASIWidget_(ADCompoundButton *self, id<ASIWidget> w
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADCompoundButton)
+
+J2OBJC_NAME_MAPPING(ADCompoundButton, "r.android.widget", "AD")
 
 @implementation ADCompoundButton_OnCheckedChangeListener
 

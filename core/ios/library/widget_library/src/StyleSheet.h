@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\css\StyleSheet.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_StyleSheet")
@@ -25,6 +26,7 @@ J2OBJC_EMPTY_STATIC_INIT(CSSStyleSheet)
 J2OBJC_TYPE_LITERAL_HEADER(CSSStyleSheet)
 
 #define ComAsheraCssStyleSheet CSSStyleSheet
+
 
 #endif
 

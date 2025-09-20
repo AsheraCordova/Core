@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\CordovaActivity.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CordovaActivity")
@@ -24,6 +25,8 @@
 #define INCLUDE_ASIActivity 1
 #include "IActivity.h"
 
+@class JavaLangFloat;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilMap;
 
@@ -45,7 +48,7 @@
 
 - (id)getRootWidget;
 
-- (jfloat)getScaleFactor;
+- (float)getScaleFactor;
 
 - (id)getUserDataWithNSString:(NSString *)key;
 
@@ -76,6 +79,7 @@ FOUNDATION_EXPORT ASCordovaActivity *create_ASCordovaActivity_initWithASIActivit
 J2OBJC_TYPE_LITERAL_HEADER(ASCordovaActivity)
 
 @compatibility_alias ComAsheraCoreCordovaActivity ASCordovaActivity;
+
 
 #endif
 

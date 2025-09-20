@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\core\IAsyncCallBack.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IAsyncCallBack.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASIAsyncCallBack : NSObject
@@ -29,3 +40,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASIAsyncCallBack)
+
+J2OBJC_NAME_MAPPING(ASIAsyncCallBack, "com.ashera.core", "AS")

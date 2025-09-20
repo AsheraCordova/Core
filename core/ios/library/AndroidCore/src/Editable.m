@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\Editable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Editable.h"
 #include "J2ObjC_source.h"
 #include "SpannableStringBuilder.h"
 #include "java/lang/CharSequence.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADEditable : NSObject
@@ -59,6 +70,8 @@ J2OBJC_STATIC_FIELD_OBJ(ADEditable_Factory, sInstance, ADEditable_Factory *)
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADEditable)
+
+J2OBJC_NAME_MAPPING(ADEditable, "r.android.text", "AD")
 
 J2OBJC_INITIALIZED_DEFN(ADEditable_Factory)
 

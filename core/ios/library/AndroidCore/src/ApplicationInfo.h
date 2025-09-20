@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\pm\ApplicationInfo.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ApplicationInfo")
@@ -16,10 +17,12 @@
 #if !defined (ADApplicationInfo_) && (INCLUDE_ALL_ApplicationInfo || defined(INCLUDE_ADApplicationInfo))
 #define ADApplicationInfo_
 
+@class JavaLangInteger;
+
 @interface ADApplicationInfo : NSObject {
  @public
-  jint targetSdkVersion_;
-  jint flags_;
+  int32_t targetSdkVersion_;
+  int32_t flags_;
 }
 
 #pragma mark Public
@@ -30,13 +33,13 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADApplicationInfo)
 
-inline jint ADApplicationInfo_get_FLAG_DEBUGGABLE(void);
+inline int32_t ADApplicationInfo_get_FLAG_DEBUGGABLE(void);
 #define ADApplicationInfo_FLAG_DEBUGGABLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADApplicationInfo, FLAG_DEBUGGABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADApplicationInfo, FLAG_DEBUGGABLE, int32_t)
 
-inline jint ADApplicationInfo_get_FLAG_SUPPORTS_RTL(void);
+inline int32_t ADApplicationInfo_get_FLAG_SUPPORTS_RTL(void);
 #define ADApplicationInfo_FLAG_SUPPORTS_RTL 4194304
-J2OBJC_STATIC_FIELD_CONSTANT(ADApplicationInfo, FLAG_SUPPORTS_RTL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADApplicationInfo, FLAG_SUPPORTS_RTL, int32_t)
 
 FOUNDATION_EXPORT void ADApplicationInfo_init(ADApplicationInfo *self);
 
@@ -47,6 +50,7 @@ FOUNDATION_EXPORT ADApplicationInfo *create_ADApplicationInfo_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADApplicationInfo)
 
 @compatibility_alias RAndroidContentPmApplicationInfo ADApplicationInfo;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\SubMenuBuilder.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SubMenuBuilder")
@@ -26,6 +27,8 @@
 
 @class ADContext;
 @class ADXMenuItemImpl;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADMenuItem;
 @protocol ADXMenuBuilder_Callback;
 @protocol JavaLangCharSequence;
@@ -44,12 +47,12 @@
 
 - (id<ADSubMenu>)setHeaderTitleWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (id<ADSubMenu>)setHeaderTitleWithInt:(jint)titleRes;
+- (id<ADSubMenu>)setHeaderTitleWithInt:(int32_t)titleRes;
 
 #pragma mark Package-Private
 
-- (jboolean)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
-                                        withADMenuItem:(id<ADMenuItem>)item;
+- (bool)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
+                                    withADMenuItem:(id<ADMenuItem>)item;
 
 // Disallowed inherited constructors, do not use.
 
@@ -68,6 +71,7 @@ FOUNDATION_EXPORT ADXSubMenuBuilder *create_ADXSubMenuBuilder_initWithADContext_
 J2OBJC_TYPE_LITERAL_HEADER(ADXSubMenuBuilder)
 
 @compatibility_alias AndroidxAppcompatViewMenuSubMenuBuilder ADXSubMenuBuilder;
+
 
 #endif
 

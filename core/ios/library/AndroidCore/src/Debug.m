@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Debug.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Debug.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADDebug
@@ -16,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jboolean)isDebuggerConnected {
++ (bool)isDebuggerConnected {
   return ADDebug_isDebuggerConnected();
 }
 
@@ -49,9 +61,11 @@ ADDebug *create_ADDebug_init() {
   J2OBJC_CREATE_IMPL(ADDebug, init)
 }
 
-jboolean ADDebug_isDebuggerConnected() {
+bool ADDebug_isDebuggerConnected() {
   ADDebug_initialize();
   return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDebug)
+
+J2OBJC_NAME_MAPPING(ADDebug, "r.android.os", "AD")

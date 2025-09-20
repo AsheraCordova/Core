@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\Interpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Interpolator")
@@ -34,6 +35,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADInterpolator)
 J2OBJC_TYPE_LITERAL_HEADER(ADInterpolator)
 
 #define RAndroidViewAnimationInterpolator ADInterpolator
+
 
 #endif
 

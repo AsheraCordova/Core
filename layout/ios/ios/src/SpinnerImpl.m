@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\SpinnerImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "BaseHasWidgets.h"
@@ -51,6 +56,8 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
@@ -69,8 +76,12 @@
 
 #include "ASUITextField.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASSpinnerImpl () {
@@ -105,14 +116,14 @@
 
 - (void)setTextStyleWithId:(id)objValue;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (id)getPaddingTop;
 
@@ -138,7 +149,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -156,7 +167,7 @@
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -176,9 +187,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -193,9 +204,9 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (void)setModelOptionTextPathWithId:(id)objValue;
 
@@ -232,9 +243,9 @@
 
 - (id)nativeCreateView;
 
-- (NSString *)getSelectedTextWithInt:(jint)selectedIndex;
+- (NSString *)getSelectedTextWithInt:(int32_t)selectedIndex;
 
-- (void)triggerOnSelectWithInt:(jint)selectedIndex;
+- (void)triggerOnSelectWithInt:(int32_t)selectedIndex;
 
 - (void)setOnItemSelectedListenerWithASSpinnerImpl_AdapterView_OnItemSelectedListener:(id<ASSpinnerImpl_AdapterView_OnItemSelectedListener>)onItemSelectedListener;
 
@@ -242,13 +253,13 @@
 
 - (void)setSelectionWithId:(id)objValue;
 
-- (void)nativeSetSelectionWithInt:(jint)selectedIndex;
+- (void)nativeSetSelectionWithInt:(int32_t)selectedIndex;
 
 - (void)setTextColorLinkWithADColorStateList:(ADColorStateList *)linkTextColors;
 
 - (id)getMyText;
 
-- (jint)getSelectedItemPosition;
+- (int32_t)getSelectedItemPosition;
 
 - (void)setErrorWithId:(id)object;
 
@@ -271,33 +282,33 @@ J2OBJC_FIELD_SETTER(ASSpinnerImpl, onItemSelectedListener_, id<ASSpinnerImpl_Ada
 J2OBJC_FIELD_SETTER(ASSpinnerImpl, postMeasureHandler_, ASSpinnerImpl_PostMeasureHandler *)
 J2OBJC_FIELD_SETTER(ASSpinnerImpl, POST_MEASURE_EVENT_, NSString *)
 
-inline jint ASSpinnerImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASSpinnerImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASSpinnerImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASSpinnerImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASSpinnerImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASSpinnerImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASSpinnerImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASSpinnerImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASSpinnerImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASSpinnerImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASSpinnerImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASSpinnerImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASSpinnerImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASSpinnerImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASSpinnerImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASSpinnerImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASSpinnerImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASSpinnerImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASSpinnerImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASSpinnerImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASSpinnerImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASSpinnerImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASSpinnerImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, NORMAL_FONT_TRAIT, int32_t)
 
-inline jint ASSpinnerImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASSpinnerImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASSpinnerImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASSpinnerImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASSpinnerImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASSpinnerImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASSpinnerImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASSpinnerImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASSpinnerImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASSpinnerImpl, TEXT_ALIGN_RIGHT, int32_t)
 
 __attribute__((unused)) static void ASSpinnerImpl_setWidgetOnNativeClass(ASSpinnerImpl *self);
 
@@ -315,13 +326,13 @@ __attribute__((unused)) static void ASSpinnerImpl_setFontFamilyWithId_withNSStri
 
 __attribute__((unused)) static void ASSpinnerImpl_setTextStyleWithId_(ASSpinnerImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASSpinnerImpl_nativeGetFontSize(ASSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASSpinnerImpl_nativeGetFontSize(ASSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASSpinnerImpl_nativeGetFontStyle(ASSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASSpinnerImpl_nativeGetFontStyle(ASSpinnerImpl *self);
 
-__attribute__((unused)) static void ASSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASSpinnerImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASSpinnerImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASSpinnerImpl_nativeSetFontStyleWithInt_(ASSpinnerImpl *self, jint style);
+__attribute__((unused)) static void ASSpinnerImpl_nativeSetFontStyleWithInt_(ASSpinnerImpl *self, int32_t style);
 
 __attribute__((unused)) static id ASSpinnerImpl_getPaddingTop(ASSpinnerImpl *self);
 
@@ -347,7 +358,7 @@ __attribute__((unused)) static id ASSpinnerImpl_getTextSize(ASSpinnerImpl *self)
 
 __attribute__((unused)) static void ASSpinnerImpl_setMyTextSizeWithId_(ASSpinnerImpl *self, id objValue);
 
-__attribute__((unused)) static void ASSpinnerImpl_nativeSetTextSizeWithInt_(ASSpinnerImpl *self, jint value);
+__attribute__((unused)) static void ASSpinnerImpl_nativeSetTextSizeWithInt_(ASSpinnerImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASSpinnerImpl_setVerticalAligmentCenter(ASSpinnerImpl *self);
 
@@ -365,7 +376,7 @@ __attribute__((unused)) static void ASSpinnerImpl_setHorizontalAligmentLeft(ASSp
 
 __attribute__((unused)) static void ASSpinnerImpl_setHorizontalAligmentLeftInternal(ASSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASSpinnerImpl_getTextAlignment(ASSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASSpinnerImpl_getTextAlignment(ASSpinnerImpl *self);
 
 __attribute__((unused)) static void ASSpinnerImpl_setDrawablePaddingWithId_(ASSpinnerImpl *self, id objValue);
 
@@ -381,9 +392,9 @@ __attribute__((unused)) static void ASSpinnerImpl_setDrawableLeftWithNSString_wi
 
 __attribute__((unused)) static void ASSpinnerImpl_setDrawableLeftInternalWithNSString_withId_(ASSpinnerImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASSpinnerImpl_getImageHeightWithId_(ASSpinnerImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASSpinnerImpl_getImageHeightWithId_(ASSpinnerImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASSpinnerImpl_getImageWidthWithId_(ASSpinnerImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASSpinnerImpl_getImageWidthWithId_(ASSpinnerImpl *self, id objValue);
 
 __attribute__((unused)) static id ASSpinnerImpl_getDrawablePadding(ASSpinnerImpl *self);
 
@@ -397,9 +408,9 @@ __attribute__((unused)) static id ASSpinnerImpl_getTextColorState(ASSpinnerImpl 
 
 __attribute__((unused)) static void ASSpinnerImpl_drawableStateChangeWithNSString_withADDrawable_(ASSpinnerImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static jint ASSpinnerImpl_getLineHeight(ASSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASSpinnerImpl_getLineHeight(ASSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASSpinnerImpl_getBorderWidth(ASSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASSpinnerImpl_getBorderWidth(ASSpinnerImpl *self);
 
 __attribute__((unused)) static void ASSpinnerImpl_setModelOptionTextPathWithId_(ASSpinnerImpl *self, id objValue);
 
@@ -435,9 +446,9 @@ __attribute__((unused)) static void ASSpinnerImpl_nativeCreateWithJavaUtilMap_(A
 
 __attribute__((unused)) static id ASSpinnerImpl_nativeCreateView(ASSpinnerImpl *self);
 
-__attribute__((unused)) static NSString *ASSpinnerImpl_getSelectedTextWithInt_(ASSpinnerImpl *self, jint selectedIndex);
+__attribute__((unused)) static NSString *ASSpinnerImpl_getSelectedTextWithInt_(ASSpinnerImpl *self, int32_t selectedIndex);
 
-__attribute__((unused)) static void ASSpinnerImpl_triggerOnSelectWithInt_(ASSpinnerImpl *self, jint selectedIndex);
+__attribute__((unused)) static void ASSpinnerImpl_triggerOnSelectWithInt_(ASSpinnerImpl *self, int32_t selectedIndex);
 
 __attribute__((unused)) static void ASSpinnerImpl_setOnItemSelectedListenerWithASSpinnerImpl_AdapterView_OnItemSelectedListener_(ASSpinnerImpl *self, id<ASSpinnerImpl_AdapterView_OnItemSelectedListener> onItemSelectedListener);
 
@@ -445,13 +456,13 @@ __attribute__((unused)) static void ASSpinnerImpl_setEntriesWithId_(ASSpinnerImp
 
 __attribute__((unused)) static void ASSpinnerImpl_setSelectionWithId_(ASSpinnerImpl *self, id objValue);
 
-__attribute__((unused)) static void ASSpinnerImpl_nativeSetSelectionWithInt_(ASSpinnerImpl *self, jint selectedIndex);
+__attribute__((unused)) static void ASSpinnerImpl_nativeSetSelectionWithInt_(ASSpinnerImpl *self, int32_t selectedIndex);
 
 __attribute__((unused)) static void ASSpinnerImpl_setTextColorLinkWithADColorStateList_(ASSpinnerImpl *self, ADColorStateList *linkTextColors);
 
 __attribute__((unused)) static id ASSpinnerImpl_getMyText(ASSpinnerImpl *self);
 
-__attribute__((unused)) static jint ASSpinnerImpl_getSelectedItemPosition(ASSpinnerImpl *self);
+__attribute__((unused)) static int32_t ASSpinnerImpl_getSelectedItemPosition(ASSpinnerImpl *self);
 
 __attribute__((unused)) static void ASSpinnerImpl_setErrorWithId_(ASSpinnerImpl *self, id object);
 
@@ -490,12 +501,12 @@ J2OBJC_FIELD_SETTER(ASSpinnerImpl_TextStyle, mapping_, id<JavaUtilMap>)
 
 @interface ASSpinnerImpl_SpinnerExt () {
  @public
-  __unsafe_unretained ASSpinnerImpl *this$0_;
+  WEAK_ ASSpinnerImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_SpinnerExt_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_SpinnerExt_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -529,13 +540,13 @@ J2OBJC_FIELD_SETTER(ASSpinnerImpl_SpinnerExt, templates_, id<JavaUtilMap>)
 
 - (void)onItemSelectedWithASSpinnerImpl_AdapterView:(ASSpinnerImpl_AdapterView *)parent
                                          withADView:(ADView *)view
-                                            withInt:(jint)position
-                                           withLong:(jlong)id_;
+                                            withInt:(int32_t)position
+                                           withLong:(int64_t)id_;
 
 - (id<JavaUtilMap>)getOnItemSelectedEventObjWithASSpinnerImpl_AdapterView:(ASSpinnerImpl_AdapterView *)parent
                                                                withADView:(ADView *)view
-                                                                  withInt:(jint)position
-                                                                 withLong:(jlong)id_;
+                                                                  withInt:(int32_t)position
+                                                                 withLong:(int64_t)id_;
 
 - (void)onNothingSelectedWithASSpinnerImpl_AdapterView:(ASSpinnerImpl_AdapterView *)parent;
 
@@ -564,9 +575,10 @@ __attribute__((unused)) static ASSpinnerImpl_OnItemSelectedListener *create_ASSp
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_OnItemSelectedListener)
 
+
 @interface ASSpinnerImpl_PostMeasureHandler () {
  @public
-  __unsafe_unretained ASSpinnerImpl *this$0_;
+  WEAK_ ASSpinnerImpl *this$0_;
 }
 
 @end
@@ -1031,7 +1043,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASSpinnerImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADSpinner *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADSpinner *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASSpinnerImpl_updateTextAlignment(self);
   }
@@ -1055,49 +1067,49 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_setTextStyleWithId_(self, objValue);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASSpinnerImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASSpinnerImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASSpinnerImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -1150,7 +1162,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASSpinnerImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -1186,7 +1198,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASSpinnerImpl_getTextAlignment(self);
 }
 
@@ -1222,11 +1234,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASSpinnerImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASSpinnerImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -1277,19 +1289,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASSpinnerImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASSpinnerImpl_getBorderWidth(self);
 }
 
@@ -1345,13 +1357,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_selectSpinnerIfRequired(self);
 }
 
-- (jint)measureWidth {
-  jint width = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
+- (int32_t)measureWidth {
+  int32_t width = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
   return width;
 }
 
-- (jint)measureHeightWithInt:(jint)width {
-  jint height = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
+- (int32_t)measureHeightWithInt:(int32_t)width {
+  int32_t height = [((ADSpinner *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
   return height;
 }
 
@@ -1383,12 +1395,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_syncPlaceholderLabel(self);
 }
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value {
+- (void)nativeSetEnabledWithBoolean:(bool)value {
   ((ASUITextField*)self.uiView).enabled = value;
 }
 
 - (void)setEnabledWithId:(id)objValue {
-  jboolean isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
+  bool isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
   [self nativeSetEnabledWithBoolean:isEnabled];
 }
 
@@ -1397,7 +1409,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASSpinnerImpl_setErrorWithId_(self, nil);
   }
@@ -1410,7 +1422,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASSpinnerImpl_setErrorWithId_(self, message);
   }
@@ -1524,7 +1536,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -1535,7 +1547,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -1559,7 +1571,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASSpinnerImpl_nativeCreateView(self);
 }
 
-- (void)addItemToParentWithInt:(jint)index
+- (void)addItemToParentWithInt:(int32_t)index
                   withNSString:(NSString *)id_
                withASLoopParam:(ASLoopParam *)loopParam {
   if (modelOptionTextPath_ != nil) {
@@ -1588,11 +1600,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ASUITextField*) [self asNativeWidget]) sendActionsForControlEvents:UIControlEventEditingChanged];
 }
 
-- (NSString *)getSelectedTextWithInt:(jint)selectedIndex {
+- (NSString *)getSelectedTextWithInt:(int32_t)selectedIndex {
   return ASSpinnerImpl_getSelectedTextWithInt_(self, selectedIndex);
 }
 
-- (void)triggerOnSelectWithInt:(jint)selectedIndex {
+- (void)triggerOnSelectWithInt:(int32_t)selectedIndex {
   ASSpinnerImpl_triggerOnSelectWithInt_(self, selectedIndex);
 }
 
@@ -1608,7 +1620,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_setSelectionWithId_(self, objValue);
 }
 
-- (void)nativeSetSelectionWithInt:(jint)selectedIndex {
+- (void)nativeSetSelectionWithInt:(int32_t)selectedIndex {
   ASSpinnerImpl_nativeSetSelectionWithInt_(self, selectedIndex);
 }
 
@@ -1620,11 +1632,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASSpinnerImpl_getMyText(self);
 }
 
-- (jint)getSelectedItemPosition {
+- (int32_t)getSelectedItemPosition {
   return ASSpinnerImpl_getSelectedItemPosition(self);
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ADSpinner *) nil_chk(measurableView_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -2016,9 +2028,9 @@ void ASSpinnerImpl_setWidgetOnNativeClass(ASSpinnerImpl *self) {
 }
 
 void ASSpinnerImpl_setGravityWithId_(ASSpinnerImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADSpinner *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASSpinnerImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -2038,8 +2050,8 @@ void ASSpinnerImpl_setGravityWithId_(ASSpinnerImpl *self, id objValue) {
 
 void ASSpinnerImpl_updateTextAlignment(ASSpinnerImpl *self) {
   ADLayout_Alignment *minor = [((ADSpinner *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADSpinner *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADSpinner *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADSpinner *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASSpinnerImpl_getMyText(self), [NSString class]);
@@ -2092,7 +2104,7 @@ id ASSpinnerImpl_getGravity(ASSpinnerImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -2106,8 +2118,8 @@ id ASSpinnerImpl_getGravity(ASSpinnerImpl *self) {
     default:
     break;
   }
-  jint aligment = ASSpinnerImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASSpinnerImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASSpinnerImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -2121,7 +2133,7 @@ id ASSpinnerImpl_getGravity(ASSpinnerImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -2141,8 +2153,8 @@ void ASSpinnerImpl_setFontFamilyWithId_withNSString_(ASSpinnerImpl *self, id obj
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASSpinnerImpl_nativeGetFontStyle(self);
-  jint height = ASSpinnerImpl_nativeGetFontSize(self);
+  int32_t style = ASSpinnerImpl_nativeGetFontStyle(self);
+  int32_t height = ASSpinnerImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASSpinnerImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -2156,42 +2168,42 @@ void ASSpinnerImpl_setFontFamilyWithId_withNSString_(ASSpinnerImpl *self, id obj
 }
 
 void ASSpinnerImpl_setTextStyleWithId_(ASSpinnerImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASSpinnerImpl_nativeGetFontSize(self);
+    int32_t height = ASSpinnerImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASSpinnerImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASSpinnerImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASSpinnerImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASSpinnerImpl_ITALIC_FONT_TRAIT;
     }
     ASSpinnerImpl_nativeSetFontStyleWithInt_(self, style);
   }
 }
 
-jint ASSpinnerImpl_nativeGetFontSize(ASSpinnerImpl *self) {
+int32_t ASSpinnerImpl_nativeGetFontSize(ASSpinnerImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASSpinnerImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASSpinnerImpl_nativeGetFontStyle(ASSpinnerImpl *self) {
+int32_t ASSpinnerImpl_nativeGetFontStyle(ASSpinnerImpl *self) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASSpinnerImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASSpinnerImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -2205,7 +2217,7 @@ void ASSpinnerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASSpinnerImp
   }
 }
 
-void ASSpinnerImpl_nativeSetFontStyleWithInt_(ASSpinnerImpl *self, jint style) {
+void ASSpinnerImpl_nativeSetFontStyleWithInt_(ASSpinnerImpl *self, int32_t style) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUITextField*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -2258,11 +2270,11 @@ id ASSpinnerImpl_getTextSize(ASSpinnerImpl *self) {
 }
 
 void ASSpinnerImpl_setMyTextSizeWithId_(ASSpinnerImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASSpinnerImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASSpinnerImpl_nativeSetTextSizeWithInt_(ASSpinnerImpl *self, jint value) {
+void ASSpinnerImpl_nativeSetTextSizeWithInt_(ASSpinnerImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setFont: [((ASUITextField*)self.uiView).font fontWithSize: value]];
 }
 
@@ -2301,7 +2313,7 @@ void ASSpinnerImpl_setHorizontalAligmentLeftInternal(ASSpinnerImpl *self) {
   ((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASSpinnerImpl_getTextAlignment(ASSpinnerImpl *self) {
+int32_t ASSpinnerImpl_getTextAlignment(ASSpinnerImpl *self) {
   int alignment = (int) ((ASUITextField*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -2392,7 +2404,7 @@ void ASSpinnerImpl_setDrawableLeftInternalWithNSString_withId_(ASSpinnerImpl *se
   }
 }
 
-jint ASSpinnerImpl_getImageHeightWithId_(ASSpinnerImpl *self, id objValue) {
+int32_t ASSpinnerImpl_getImageHeightWithId_(ASSpinnerImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -2401,7 +2413,7 @@ jint ASSpinnerImpl_getImageHeightWithId_(ASSpinnerImpl *self, id objValue) {
   return 0;
 }
 
-jint ASSpinnerImpl_getImageWidthWithId_(ASSpinnerImpl *self, id objValue) {
+int32_t ASSpinnerImpl_getImageWidthWithId_(ASSpinnerImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -2489,11 +2501,11 @@ void ASSpinnerImpl_drawableStateChangeWithNSString_withADDrawable_(ASSpinnerImpl
   [self invalidate];
 }
 
-jint ASSpinnerImpl_getLineHeight(ASSpinnerImpl *self) {
+int32_t ASSpinnerImpl_getLineHeight(ASSpinnerImpl *self) {
   return ceil(((ASUITextField*)self.uiView).font.lineHeight);
 }
 
-jint ASSpinnerImpl_getBorderWidth(ASSpinnerImpl *self) {
+int32_t ASSpinnerImpl_getBorderWidth(ASSpinnerImpl *self) {
   return 0;
 }
 
@@ -2525,11 +2537,11 @@ void ASSpinnerImpl_setSelectedValueWithId_(ASSpinnerImpl *self, id objValue) {
     objValue = [self quickConvertWithId:objValue withNSString:ASCommonConverters_resourcestring];
   }
   if (self->values_ != nil) {
-    jint index = [self->values_ indexOfWithId:objValue];
+    int32_t index = [self->values_ indexOfWithId:objValue];
     ASSpinnerImpl_setSelectionWithId_(self, JavaLangInteger_valueOfWithInt_(index));
   }
   else if (self->dataList_ != nil && [self->dataList_ size] > 0) {
-    for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(self->dataList_)) size]; i++) {
+    for (int32_t i = 0; i < [((id<JavaUtilList>) nil_chk(self->dataList_)) size]; i++) {
       ASLoopParam *loopParam = [((id<JavaUtilList>) nil_chk(self->dataList_)) getWithInt:i];
       if (self->modelOptionValuePath_ != nil) {
         id data = ASSpinnerImpl_getOptionValueFromLoopParamWithASLoopParam_withNSString_(self, loopParam, self->modelOptionValuePath_);
@@ -2553,7 +2565,7 @@ void ASSpinnerImpl_setSelectedValueWithId_(ASSpinnerImpl *self, id objValue) {
 }
 
 id ASSpinnerImpl_getSelectedValue(ASSpinnerImpl *self) {
-  jint selectedItemPosition = ASSpinnerImpl_getSelectedItemPosition(self);
+  int32_t selectedItemPosition = ASSpinnerImpl_getSelectedItemPosition(self);
   if (self->values_ != nil && [self->values_ size] > selectedItemPosition) {
     return [self->values_ getWithInt:selectedItemPosition];
   }
@@ -2625,11 +2637,11 @@ id ASSpinnerImpl_nativeCreateView(ASSpinnerImpl *self) {
   return uiView;
 }
 
-NSString *ASSpinnerImpl_getSelectedTextWithInt_(ASSpinnerImpl *self, jint selectedIndex) {
+NSString *ASSpinnerImpl_getSelectedTextWithInt_(ASSpinnerImpl *self, int32_t selectedIndex) {
   return [((id<JavaUtilList>) nil_chk(self->entries_)) getWithInt:selectedIndex];
 }
 
-void ASSpinnerImpl_triggerOnSelectWithInt_(ASSpinnerImpl *self, jint selectedIndex) {
+void ASSpinnerImpl_triggerOnSelectWithInt_(ASSpinnerImpl *self, int32_t selectedIndex) {
   if (self->onItemSelectedListener_ != nil) {
     [self->onItemSelectedListener_ onItemSelectedWithASSpinnerImpl_AdapterView:new_ASSpinnerImpl_AdapterView_init() withADView:self->measurableView_ withInt:selectedIndex withLong:0];
   }
@@ -2647,7 +2659,7 @@ void ASSpinnerImpl_setSelectionWithId_(ASSpinnerImpl *self, id objValue) {
   ASSpinnerImpl_nativeSetSelectionWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASSpinnerImpl_nativeSetSelectionWithInt_(ASSpinnerImpl *self, jint selectedIndex) {
+void ASSpinnerImpl_nativeSetSelectionWithInt_(ASSpinnerImpl *self, int32_t selectedIndex) {
   UIPickerView *picker = ((UIPickerView*) ((ASUITextField*)[self asNativeWidget]).inputView);
   [picker selectRow:selectedIndex inComponent:0 animated:NO];
   ((ASUITextField*) [self asNativeWidget]).text = [self getSelectedTextWithInt: selectedIndex];
@@ -2660,7 +2672,7 @@ id ASSpinnerImpl_getMyText(ASSpinnerImpl *self) {
   return ((ASUITextField*)self.uiView).text;
 }
 
-jint ASSpinnerImpl_getSelectedItemPosition(ASSpinnerImpl *self) {
+int32_t ASSpinnerImpl_getSelectedItemPosition(ASSpinnerImpl *self) {
   UIPickerView *picker = ((UIPickerView*) ((ASUITextField*)[self asNativeWidget]).inputView);
   return (int) [picker selectedRowInComponent:0];
 }
@@ -2669,7 +2681,7 @@ void ASSpinnerImpl_setErrorWithId_(ASSpinnerImpl *self, id object) {
 }
 
 void ASSpinnerImpl_triggerChangeOnLoad(ASSpinnerImpl *self) {
-  jint selectedPosition = ASSpinnerImpl_getSelectedItemPosition(self);
+  int32_t selectedPosition = ASSpinnerImpl_getSelectedItemPosition(self);
   if (selectedPosition == 0) {
     ASSpinnerImpl_triggerOnSelectWithInt_(self, 0);
   }
@@ -2687,6 +2699,8 @@ void ASSpinnerImpl_selectSpinnerIfRequired(ASSpinnerImpl *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl)
+
+J2OBJC_NAME_MAPPING(ASSpinnerImpl, "com.ashera.layout", "AS")
 
 @implementation ASSpinnerImpl_DrawableTintMode
 
@@ -2795,10 +2809,10 @@ void ASSpinnerImpl_Font_init(ASSpinnerImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -2856,9 +2870,9 @@ void ASSpinnerImpl_TextStyle_init(ASSpinnerImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -2878,19 +2892,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_TextStyle)
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_SpinnerExt_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_SpinnerExt_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -2899,8 +2913,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_TextStyle)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_SpinnerExt_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_SpinnerExt_, ADView_MeasureSpec_AT_MOST);
   }
@@ -2916,11 +2930,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_TextStyle)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -2947,8 +2961,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_TextStyle)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -3016,12 +3030,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_TextStyle)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -3051,17 +3065,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_TextStyle)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
@@ -3318,8 +3332,8 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASSpinnerImpl_AdapterView_OnItemSelectedLis
 
 - (void)onItemSelectedWithASSpinnerImpl_AdapterView:(ASSpinnerImpl_AdapterView *)parent
                                          withADView:(ADView *)view
-                                            withInt:(jint)position
-                                           withLong:(jlong)id_ {
+                                            withInt:(int32_t)position
+                                           withLong:(int64_t)id_ {
   if (action_ == nil || [action_ isEqual:@"onItemSelected"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onItemSelected"];
     id<JavaUtilMap> obj = [self getOnItemSelectedEventObjWithASSpinnerImpl_AdapterView:parent withADView:view withInt:position withLong:id_];
@@ -3341,7 +3355,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASSpinnerImpl_AdapterView_OnItemSelectedLis
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -3353,8 +3367,8 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASSpinnerImpl_AdapterView_OnItemSelectedLis
 
 - (id<JavaUtilMap>)getOnItemSelectedEventObjWithASSpinnerImpl_AdapterView:(ASSpinnerImpl_AdapterView *)parent
                                                                withADView:(ADView *)view
-                                                                  withInt:(jint)position
-                                                                 withLong:(jlong)id_ {
+                                                                  withInt:(int32_t)position
+                                                                 withLong:(int64_t)id_ {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"itemselected"];
@@ -3397,7 +3411,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASSpinnerImpl_AdapterView_OnItemSelectedLis
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];

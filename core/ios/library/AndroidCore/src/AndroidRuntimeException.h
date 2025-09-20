@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\util\AndroidRuntimeException.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AndroidRuntimeException")
@@ -20,7 +21,9 @@
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 
 @interface ADAndroidRuntimeException : JavaLangRuntimeException
 
@@ -39,8 +42,8 @@
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -55,6 +58,7 @@ FOUNDATION_EXPORT ADAndroidRuntimeException *create_ADAndroidRuntimeException_in
 J2OBJC_TYPE_LITERAL_HEADER(ADAndroidRuntimeException)
 
 @compatibility_alias RAndroidUtilAndroidRuntimeException ADAndroidRuntimeException;
+
 
 #endif
 

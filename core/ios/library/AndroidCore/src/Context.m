@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\Context.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ActivityManager.h"
 #include "ApplicationInfo.h"
 #include "AssetManager.h"
@@ -18,7 +23,15 @@
 #include "Resources.h"
 #include "WindowManager.h"
 #include "java/io/File.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(ADContext)
@@ -67,16 +80,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (JavaIoFile *)getDirWithNSString:(NSString *)string
-                           withInt:(jint)modePrivate {
+                           withInt:(int32_t)modePrivate {
   return create_JavaIoFile_initWithNSString_(@".");
 }
 
-- (ADDrawable *)getDrawableWithInt:(jint)resId {
+- (ADDrawable *)getDrawableWithInt:(int32_t)resId {
   return nil;
 }
 
 - (id)getSystemServiceWithIOSClass:(IOSClass *)class1 {
-  if (class1 == ADActivityManager_class_()) {
+  if (JreObjectEqualsEquals(class1, ADActivityManager_class_())) {
     return create_ADActivityManager_initWithADContext_(self);
   }
   return nil;
@@ -94,7 +107,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ADPackageManager_init();
 }
 
-- (id<JavaLangCharSequence>)getTextWithInt:(jint)hintId {
+- (id<JavaLangCharSequence>)getTextWithInt:(int32_t)hintId {
   return nil;
 }
 
@@ -170,3 +183,5 @@ ADContext *create_ADContext_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADContext)
+
+J2OBJC_NAME_MAPPING(ADContext, "r.android.content", "AD")

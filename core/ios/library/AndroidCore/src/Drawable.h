@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\Drawable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Drawable")
@@ -20,6 +21,9 @@
 @class ADRect;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADCanvas;
 @protocol ADDrawable_AttributeChangeListener;
 @protocol ADDrawable_MeasureTextHelper;
@@ -35,29 +39,29 @@
 
 - (id)getAttributeWithNSString:(NSString *)key;
 
-- (jint)getBottom;
+- (int32_t)getBottom;
 
 - (ADRect *)getBounds;
 
 - (id)getDrawable;
 
-- (jint)getIntrinsicHeight;
+- (int32_t)getIntrinsicHeight;
 
-- (jint)getIntrinsicWidth;
+- (int32_t)getIntrinsicWidth;
 
-- (jint)getLeft;
+- (int32_t)getLeft;
 
 - (id<ADDrawable_MeasureTextHelper>)getMeasureTextHelper;
 
-- (jint)getMinimumHeight;
+- (int32_t)getMinimumHeight;
 
-- (jint)getMinimumWidth;
+- (int32_t)getMinimumWidth;
 
 - (ADInsets *)getOpticalInsets;
 
-- (jboolean)getPaddingWithADRect:(ADRect *)padding;
+- (bool)getPaddingWithADRect:(ADRect *)padding;
 
-- (jint)getRight;
+- (int32_t)getRight;
 
 - (IOSObjectArray *)getSimulatedWidgetAttrs;
 
@@ -78,25 +82,25 @@
 
 - (NSString *)getTintMode;
 
-- (jint)getTop;
+- (int32_t)getTop;
 
 - (IOSObjectArray *)getViewAttrs;
 
-- (jboolean)hasDrawable;
+- (bool)hasDrawable;
 
 - (void)invalidateSelf;
 
-- (jboolean)isProjected;
+- (bool)isProjected;
 
-- (jboolean)isRecycleable;
+- (bool)isRecycleable;
 
-- (jboolean)isRedraw;
+- (bool)isRedraw;
 
-- (jboolean)isStateful;
+- (bool)isStateful;
 
 - (void)jumpToCurrentState;
 
-- (void)setAlphaWithInt:(jint)alpha;
+- (void)setAlphaWithInt:(int32_t)alpha;
 
 - (void)setAttributeChangeListenerWithADDrawable_AttributeChangeListener:(id<ADDrawable_AttributeChangeListener>)attributeChangeListener;
 
@@ -104,10 +108,10 @@
  @brief Specify a bounding rectangle for the Drawable.This is where the drawable
   will draw when its draw() method is called.
  */
-- (void)setBoundsWithInt:(jint)left
-                 withInt:(jint)top
-                 withInt:(jint)right
-                 withInt:(jint)bottom;
+- (void)setBoundsWithInt:(int32_t)left
+                 withInt:(int32_t)top
+                 withInt:(int32_t)right
+                 withInt:(int32_t)bottom;
 
 /*!
  @brief Specify a bounding rectangle for the Drawable.This is where the drawable
@@ -119,26 +123,26 @@
 
 - (void)setDrawableWithId:(id)drawable;
 
-- (void)setHotspotBoundsWithInt:(jint)left2
-                        withInt:(jint)top2
-                        withInt:(jint)right2
-                        withInt:(jint)bottom2;
+- (void)setHotspotBoundsWithInt:(int32_t)left2
+                        withInt:(int32_t)top2
+                        withInt:(int32_t)right2
+                        withInt:(int32_t)bottom2;
 
-- (void)setLayoutDirectionWithInt:(jint)layoutDirection;
+- (void)setLayoutDirectionWithInt:(int32_t)layoutDirection;
 
 - (void)setMeasureTextHelperWithADDrawable_MeasureTextHelper:(id<ADDrawable_MeasureTextHelper>)helper;
 
-- (void)setMinimumHeightWithInt:(jint)minimumHeight;
+- (void)setMinimumHeightWithInt:(int32_t)minimumHeight;
 
-- (void)setMinimumWidthWithInt:(jint)minimumWidth;
+- (void)setMinimumWidthWithInt:(int32_t)minimumWidth;
 
 - (void)setOverlayWithASIWidget:(id<ASIWidget>)overlay;
 
-- (void)setRecycleableWithBoolean:(jboolean)recycleable;
+- (void)setRecycleableWithBoolean:(bool)recycleable;
 
-- (void)setRedrawWithBoolean:(jboolean)redraw;
+- (void)setRedrawWithBoolean:(bool)redraw;
 
-- (jboolean)setStateWithIntArray:(IOSIntArray *)stateSet;
+- (bool)setStateWithIntArray:(IOSIntArray *)stateSet;
 
 - (void)setStateWithId:(id)drawableState;
 
@@ -146,16 +150,16 @@
 
 - (void)setTintModeWithNSString:(NSString *)tintMode;
 
-- (void)setUseGCWithBoolean:(jboolean)useGC;
+- (void)setUseGCWithBoolean:(bool)useGC;
 
-- (void)setVisibleWithBoolean:(jboolean)b
-                  withBoolean:(jboolean)c;
+- (void)setVisibleWithBoolean:(bool)b
+                  withBoolean:(bool)c;
 
 #pragma mark Protected
 
 - (void)onBoundsChangeWithADRect:(ADRect *)bounds;
 
-- (jboolean)onStateChangeWithIntArray:(IOSIntArray *)state;
+- (bool)onStateChangeWithIntArray:(IOSIntArray *)state;
 
 @end
 
@@ -181,10 +185,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADDrawable)
 
 @compatibility_alias RAndroidGraphicsDrawableDrawable ADDrawable;
 
+
 #endif
 
 #if !defined (ADDrawable_AttributeChangeListener_) && (INCLUDE_ALL_Drawable || defined(INCLUDE_ADDrawable_AttributeChangeListener))
 #define ADDrawable_AttributeChangeListener_
+
+@class NSString;
 
 @protocol ADDrawable_AttributeChangeListener < JavaObject >
 
@@ -197,22 +204,26 @@ J2OBJC_EMPTY_STATIC_INIT(ADDrawable_AttributeChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDrawable_AttributeChangeListener)
 
+
 #endif
 
 #if !defined (ADDrawable_MeasureTextHelper_) && (INCLUDE_ALL_Drawable || defined(INCLUDE_ADDrawable_MeasureTextHelper))
 #define ADDrawable_MeasureTextHelper_
 
+@class JavaLangFloat;
+
 @protocol ADDrawable_MeasureTextHelper < JavaObject >
 
-- (jfloat)getTextWidth;
+- (float)getTextWidth;
 
-- (jfloat)getTextHeight;
+- (float)getTextHeight;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADDrawable_MeasureTextHelper)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDrawable_MeasureTextHelper)
+
 
 #endif
 

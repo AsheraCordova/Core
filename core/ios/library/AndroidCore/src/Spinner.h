@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Spinner.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Spinner")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADTextView 1
 #include "TextView.h"
 
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 
 @interface ADSpinner : ADTextView
@@ -28,7 +32,7 @@
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (NSString *)getText;
 
@@ -41,6 +45,7 @@ FOUNDATION_EXPORT void ADSpinner_initWithASIWidget_(ADSpinner *self, id<ASIWidge
 J2OBJC_TYPE_LITERAL_HEADER(ADSpinner)
 
 @compatibility_alias RAndroidWidgetSpinner ADSpinner;
+
 
 #endif
 

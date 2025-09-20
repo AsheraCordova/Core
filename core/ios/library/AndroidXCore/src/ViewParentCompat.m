@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\ViewParentCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AccessibilityEvent.h"
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
@@ -15,6 +20,16 @@
 #include "ViewParent.h"
 #include "ViewParentCompat.h"
 #include "java/lang/AbstractMethodError.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXViewParentCompat ()
@@ -63,23 +78,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jboolean)requestSendAccessibilityEventWithADViewParent:(id<ADViewParent>)parent
-                                               withADView:(ADView *)child
-                                 withADAccessibilityEvent:(ADAccessibilityEvent *)event {
++ (bool)requestSendAccessibilityEventWithADViewParent:(id<ADViewParent>)parent
+                                           withADView:(ADView *)child
+                             withADAccessibilityEvent:(ADAccessibilityEvent *)event {
   return ADXViewParentCompat_requestSendAccessibilityEventWithADViewParent_withADView_withADAccessibilityEvent_(parent, child, event);
 }
 
-+ (jboolean)onStartNestedScrollWithADViewParent:(id<ADViewParent>)parent
-                                     withADView:(ADView *)child
-                                     withADView:(ADView *)target
-                                        withInt:(jint)nestedScrollAxes {
++ (bool)onStartNestedScrollWithADViewParent:(id<ADViewParent>)parent
+                                 withADView:(ADView *)child
+                                 withADView:(ADView *)target
+                                    withInt:(int32_t)nestedScrollAxes {
   return ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_(parent, child, target, nestedScrollAxes);
 }
 
 + (void)onNestedScrollAcceptedWithADViewParent:(id<ADViewParent>)parent
                                     withADView:(ADView *)child
                                     withADView:(ADView *)target
-                                       withInt:(jint)nestedScrollAxes {
+                                       withInt:(int32_t)nestedScrollAxes {
   ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_(parent, child, target, nestedScrollAxes);
 }
 
@@ -90,92 +105,92 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)onNestedScrollWithADViewParent:(id<ADViewParent>)parent
                             withADView:(ADView *)target
-                               withInt:(jint)dxConsumed
-                               withInt:(jint)dyConsumed
-                               withInt:(jint)dxUnconsumed
-                               withInt:(jint)dyUnconsumed {
+                               withInt:(int32_t)dxConsumed
+                               withInt:(int32_t)dyConsumed
+                               withInt:(int32_t)dxUnconsumed
+                               withInt:(int32_t)dyUnconsumed {
   ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_(parent, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
 }
 
 + (void)onNestedScrollWithADViewParent:(id<ADViewParent>)parent
                             withADView:(ADView *)target
-                               withInt:(jint)dxConsumed
-                               withInt:(jint)dyConsumed
-                               withInt:(jint)dxUnconsumed
-                               withInt:(jint)dyUnconsumed
-                               withInt:(jint)type {
+                               withInt:(int32_t)dxConsumed
+                               withInt:(int32_t)dyConsumed
+                               withInt:(int32_t)dxUnconsumed
+                               withInt:(int32_t)dyUnconsumed
+                               withInt:(int32_t)type {
   ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_(parent, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type);
 }
 
 + (void)onNestedPreScrollWithADViewParent:(id<ADViewParent>)parent
                                withADView:(ADView *)target
-                                  withInt:(jint)dx
-                                  withInt:(jint)dy
+                                  withInt:(int32_t)dx
+                                  withInt:(int32_t)dy
                              withIntArray:(IOSIntArray *)consumed {
   ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_(parent, target, dx, dy, consumed);
 }
 
-+ (jboolean)onStartNestedScrollWithADViewParent:(id<ADViewParent>)parent
-                                     withADView:(ADView *)child
-                                     withADView:(ADView *)target
-                                        withInt:(jint)nestedScrollAxes
-                                        withInt:(jint)type {
++ (bool)onStartNestedScrollWithADViewParent:(id<ADViewParent>)parent
+                                 withADView:(ADView *)child
+                                 withADView:(ADView *)target
+                                    withInt:(int32_t)nestedScrollAxes
+                                    withInt:(int32_t)type {
   return ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_withInt_(parent, child, target, nestedScrollAxes, type);
 }
 
 + (void)onNestedScrollAcceptedWithADViewParent:(id<ADViewParent>)parent
                                     withADView:(ADView *)child
                                     withADView:(ADView *)target
-                                       withInt:(jint)nestedScrollAxes
-                                       withInt:(jint)type {
+                                       withInt:(int32_t)nestedScrollAxes
+                                       withInt:(int32_t)type {
   ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_withInt_(parent, child, target, nestedScrollAxes, type);
 }
 
 + (void)onStopNestedScrollWithADViewParent:(id<ADViewParent>)parent
                                 withADView:(ADView *)target
-                                   withInt:(jint)type {
+                                   withInt:(int32_t)type {
   ADXViewParentCompat_onStopNestedScrollWithADViewParent_withADView_withInt_(parent, target, type);
 }
 
 + (void)onNestedScrollWithADViewParent:(id<ADViewParent>)parent
                             withADView:(ADView *)target
-                               withInt:(jint)dxConsumed
-                               withInt:(jint)dyConsumed
-                               withInt:(jint)dxUnconsumed
-                               withInt:(jint)dyUnconsumed
-                               withInt:(jint)type
+                               withInt:(int32_t)dxConsumed
+                               withInt:(int32_t)dyConsumed
+                               withInt:(int32_t)dxUnconsumed
+                               withInt:(int32_t)dyUnconsumed
+                               withInt:(int32_t)type
                           withIntArray:(IOSIntArray *)consumed {
   ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_withIntArray_(parent, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed);
 }
 
 + (void)onNestedPreScrollWithADViewParent:(id<ADViewParent>)parent
                                withADView:(ADView *)target
-                                  withInt:(jint)dx
-                                  withInt:(jint)dy
+                                  withInt:(int32_t)dx
+                                  withInt:(int32_t)dy
                              withIntArray:(IOSIntArray *)consumed
-                                  withInt:(jint)type {
+                                  withInt:(int32_t)type {
   ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_withInt_(parent, target, dx, dy, consumed, type);
 }
 
-+ (jboolean)onNestedFlingWithADViewParent:(id<ADViewParent>)parent
-                               withADView:(ADView *)target
-                                withFloat:(jfloat)velocityX
-                                withFloat:(jfloat)velocityY
-                              withBoolean:(jboolean)consumed {
++ (bool)onNestedFlingWithADViewParent:(id<ADViewParent>)parent
+                           withADView:(ADView *)target
+                            withFloat:(float)velocityX
+                            withFloat:(float)velocityY
+                          withBoolean:(bool)consumed {
   return ADXViewParentCompat_onNestedFlingWithADViewParent_withADView_withFloat_withFloat_withBoolean_(parent, target, velocityX, velocityY, consumed);
 }
 
-+ (jboolean)onNestedPreFlingWithADViewParent:(id<ADViewParent>)parent
-                                  withADView:(ADView *)target
-                                   withFloat:(jfloat)velocityX
-                                   withFloat:(jfloat)velocityY {
++ (bool)onNestedPreFlingWithADViewParent:(id<ADViewParent>)parent
+                              withADView:(ADView *)target
+                               withFloat:(float)velocityX
+                               withFloat:(float)velocityY {
   return ADXViewParentCompat_onNestedPreFlingWithADViewParent_withADView_withFloat_withFloat_(parent, target, velocityX, velocityY);
 }
 
 + (void)notifySubtreeAccessibilityStateChangedWithADViewParent:(id<ADViewParent>)parent
                                                     withADView:(ADView *)child
                                                     withADView:(ADView *)source
-                                                       withInt:(jint)changeType {
+                                                       withInt:(int32_t)changeType {
   ADXViewParentCompat_notifySubtreeAccessibilityStateChangedWithADViewParent_withADView_withADView_withInt_(parent, child, source, changeType);
 }
 
@@ -247,17 +262,17 @@ ADXViewParentCompat *create_ADXViewParentCompat_init() {
   J2OBJC_CREATE_IMPL(ADXViewParentCompat, init)
 }
 
-jboolean ADXViewParentCompat_requestSendAccessibilityEventWithADViewParent_withADView_withADAccessibilityEvent_(id<ADViewParent> parent, ADView *child, ADAccessibilityEvent *event) {
+bool ADXViewParentCompat_requestSendAccessibilityEventWithADViewParent_withADView_withADAccessibilityEvent_(id<ADViewParent> parent, ADView *child, ADAccessibilityEvent *event) {
   ADXViewParentCompat_initialize();
   return false;
 }
 
-jboolean ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, jint nestedScrollAxes) {
+bool ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, int32_t nestedScrollAxes) {
   ADXViewParentCompat_initialize();
   return ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_withInt_(parent, child, target, nestedScrollAxes, ADXViewCompat_TYPE_TOUCH);
 }
 
-void ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, jint nestedScrollAxes) {
+void ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, int32_t nestedScrollAxes) {
   ADXViewParentCompat_initialize();
   ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_withInt_(parent, child, target, nestedScrollAxes, ADXViewCompat_TYPE_TOUCH);
 }
@@ -267,22 +282,22 @@ void ADXViewParentCompat_onStopNestedScrollWithADViewParent_withADView_(id<ADVie
   ADXViewParentCompat_onStopNestedScrollWithADViewParent_withADView_withInt_(parent, target, ADXViewCompat_TYPE_TOUCH);
 }
 
-void ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_(id<ADViewParent> parent, ADView *target, jint dxConsumed, jint dyConsumed, jint dxUnconsumed, jint dyUnconsumed) {
+void ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_(id<ADViewParent> parent, ADView *target, int32_t dxConsumed, int32_t dyConsumed, int32_t dxUnconsumed, int32_t dyUnconsumed) {
   ADXViewParentCompat_initialize();
   ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_withIntArray_(parent, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, ADXViewCompat_TYPE_TOUCH, ADXViewParentCompat_getTempNestedScrollConsumed());
 }
 
-void ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_(id<ADViewParent> parent, ADView *target, jint dxConsumed, jint dyConsumed, jint dxUnconsumed, jint dyUnconsumed, jint type) {
+void ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_(id<ADViewParent> parent, ADView *target, int32_t dxConsumed, int32_t dyConsumed, int32_t dxUnconsumed, int32_t dyUnconsumed, int32_t type) {
   ADXViewParentCompat_initialize();
   ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_withIntArray_(parent, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, ADXViewParentCompat_getTempNestedScrollConsumed());
 }
 
-void ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_(id<ADViewParent> parent, ADView *target, jint dx, jint dy, IOSIntArray *consumed) {
+void ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_(id<ADViewParent> parent, ADView *target, int32_t dx, int32_t dy, IOSIntArray *consumed) {
   ADXViewParentCompat_initialize();
   ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_withInt_(parent, target, dx, dy, consumed, ADXViewCompat_TYPE_TOUCH);
 }
 
-jboolean ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, jint nestedScrollAxes, jint type) {
+bool ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, int32_t nestedScrollAxes, int32_t type) {
   ADXViewParentCompat_initialize();
   if ([ADXNestedScrollingParent2_class_() isInstance:parent]) {
     return [((id<ADXNestedScrollingParent2>) nil_chk(((id<ADXNestedScrollingParent2>) cast_check(parent, ADXNestedScrollingParent2_class_())))) onStartNestedScrollWithADView:child withADView:target withInt:nestedScrollAxes withInt:type];
@@ -300,7 +315,7 @@ jboolean ADXViewParentCompat_onStartNestedScrollWithADViewParent_withADView_with
   return false;
 }
 
-void ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, jint nestedScrollAxes, jint type) {
+void ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_withInt_(id<ADViewParent> parent, ADView *child, ADView *target, int32_t nestedScrollAxes, int32_t type) {
   ADXViewParentCompat_initialize();
   if ([ADXNestedScrollingParent2_class_() isInstance:parent]) {
     [((id<ADXNestedScrollingParent2>) nil_chk(((id<ADXNestedScrollingParent2>) cast_check(parent, ADXNestedScrollingParent2_class_())))) onNestedScrollAcceptedWithADView:child withADView:target withInt:nestedScrollAxes withInt:type];
@@ -317,7 +332,7 @@ void ADXViewParentCompat_onNestedScrollAcceptedWithADViewParent_withADView_withA
   }
 }
 
-void ADXViewParentCompat_onStopNestedScrollWithADViewParent_withADView_withInt_(id<ADViewParent> parent, ADView *target, jint type) {
+void ADXViewParentCompat_onStopNestedScrollWithADViewParent_withADView_withInt_(id<ADViewParent> parent, ADView *target, int32_t type) {
   ADXViewParentCompat_initialize();
   if ([ADXNestedScrollingParent2_class_() isInstance:parent]) {
     [((id<ADXNestedScrollingParent2>) nil_chk(((id<ADXNestedScrollingParent2>) cast_check(parent, ADXNestedScrollingParent2_class_())))) onStopNestedScrollWithADView:target withInt:type];
@@ -334,7 +349,7 @@ void ADXViewParentCompat_onStopNestedScrollWithADViewParent_withADView_withInt_(
   }
 }
 
-void ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_withIntArray_(id<ADViewParent> parent, ADView *target, jint dxConsumed, jint dyConsumed, jint dxUnconsumed, jint dyUnconsumed, jint type, IOSIntArray *consumed) {
+void ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_withInt_withIntArray_(id<ADViewParent> parent, ADView *target, int32_t dxConsumed, int32_t dyConsumed, int32_t dxUnconsumed, int32_t dyUnconsumed, int32_t type, IOSIntArray *consumed) {
   ADXViewParentCompat_initialize();
   if ([ADXNestedScrollingParent3_class_() isInstance:parent]) {
     [((id<ADXNestedScrollingParent3>) nil_chk(((id<ADXNestedScrollingParent3>) cast_check(parent, ADXNestedScrollingParent3_class_())))) onNestedScrollWithADView:target withInt:dxConsumed withInt:dyConsumed withInt:dxUnconsumed withInt:dyUnconsumed withInt:type withIntArray:consumed];
@@ -358,7 +373,7 @@ void ADXViewParentCompat_onNestedScrollWithADViewParent_withADView_withInt_withI
   }
 }
 
-void ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_withInt_(id<ADViewParent> parent, ADView *target, jint dx, jint dy, IOSIntArray *consumed, jint type) {
+void ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_withInt_(id<ADViewParent> parent, ADView *target, int32_t dx, int32_t dy, IOSIntArray *consumed, int32_t type) {
   ADXViewParentCompat_initialize();
   if ([ADXNestedScrollingParent2_class_() isInstance:parent]) {
     [((id<ADXNestedScrollingParent2>) nil_chk(((id<ADXNestedScrollingParent2>) cast_check(parent, ADXNestedScrollingParent2_class_())))) onNestedPreScrollWithADView:target withInt:dx withInt:dy withIntArray:consumed withInt:type];
@@ -375,7 +390,7 @@ void ADXViewParentCompat_onNestedPreScrollWithADViewParent_withADView_withInt_wi
   }
 }
 
-jboolean ADXViewParentCompat_onNestedFlingWithADViewParent_withADView_withFloat_withFloat_withBoolean_(id<ADViewParent> parent, ADView *target, jfloat velocityX, jfloat velocityY, jboolean consumed) {
+bool ADXViewParentCompat_onNestedFlingWithADViewParent_withADView_withFloat_withFloat_withBoolean_(id<ADViewParent> parent, ADView *target, float velocityX, float velocityY, bool consumed) {
   ADXViewParentCompat_initialize();
   {
     @try {
@@ -388,7 +403,7 @@ jboolean ADXViewParentCompat_onNestedFlingWithADViewParent_withADView_withFloat_
   return false;
 }
 
-jboolean ADXViewParentCompat_onNestedPreFlingWithADViewParent_withADView_withFloat_withFloat_(id<ADViewParent> parent, ADView *target, jfloat velocityX, jfloat velocityY) {
+bool ADXViewParentCompat_onNestedPreFlingWithADViewParent_withADView_withFloat_withFloat_(id<ADViewParent> parent, ADView *target, float velocityX, float velocityY) {
   ADXViewParentCompat_initialize();
   {
     @try {
@@ -401,7 +416,7 @@ jboolean ADXViewParentCompat_onNestedPreFlingWithADViewParent_withADView_withFlo
   return false;
 }
 
-void ADXViewParentCompat_notifySubtreeAccessibilityStateChangedWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> parent, ADView *child, ADView *source, jint changeType) {
+void ADXViewParentCompat_notifySubtreeAccessibilityStateChangedWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> parent, ADView *child, ADView *source, int32_t changeType) {
   ADXViewParentCompat_initialize();
 }
 
@@ -419,6 +434,8 @@ IOSIntArray *ADXViewParentCompat_getTempNestedScrollConsumed() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXViewParentCompat)
 
+J2OBJC_NAME_MAPPING(ADXViewParentCompat, "androidx.core.view", "ADX")
+
 @implementation ADXViewParentCompat_Api21Impl
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -428,17 +445,17 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jboolean)onStartNestedScrollWithADViewParent:(id<ADViewParent>)viewParent
-                                     withADView:(ADView *)view
-                                     withADView:(ADView *)view1
-                                        withInt:(jint)i {
++ (bool)onStartNestedScrollWithADViewParent:(id<ADViewParent>)viewParent
+                                 withADView:(ADView *)view
+                                 withADView:(ADView *)view1
+                                    withInt:(int32_t)i {
   return ADXViewParentCompat_Api21Impl_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_(viewParent, view, view1, i);
 }
 
 + (void)onNestedScrollAcceptedWithADViewParent:(id<ADViewParent>)viewParent
                                     withADView:(ADView *)view
                                     withADView:(ADView *)view1
-                                       withInt:(jint)i {
+                                       withInt:(int32_t)i {
   ADXViewParentCompat_Api21Impl_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_(viewParent, view, view1, i);
 }
 
@@ -449,33 +466,33 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)onNestedScrollWithADViewParent:(id<ADViewParent>)viewParent
                             withADView:(ADView *)view
-                               withInt:(jint)i
-                               withInt:(jint)i1
-                               withInt:(jint)i2
-                               withInt:(jint)i3 {
+                               withInt:(int32_t)i
+                               withInt:(int32_t)i1
+                               withInt:(int32_t)i2
+                               withInt:(int32_t)i3 {
   ADXViewParentCompat_Api21Impl_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_(viewParent, view, i, i1, i2, i3);
 }
 
 + (void)onNestedPreScrollWithADViewParent:(id<ADViewParent>)viewParent
                                withADView:(ADView *)view
-                                  withInt:(jint)i
-                                  withInt:(jint)i1
+                                  withInt:(int32_t)i
+                                  withInt:(int32_t)i1
                              withIntArray:(IOSIntArray *)ints {
   ADXViewParentCompat_Api21Impl_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_(viewParent, view, i, i1, ints);
 }
 
-+ (jboolean)onNestedFlingWithADViewParent:(id<ADViewParent>)viewParent
-                               withADView:(ADView *)view
-                                withFloat:(jfloat)v
-                                withFloat:(jfloat)v1
-                              withBoolean:(jboolean)b {
++ (bool)onNestedFlingWithADViewParent:(id<ADViewParent>)viewParent
+                           withADView:(ADView *)view
+                            withFloat:(float)v
+                            withFloat:(float)v1
+                          withBoolean:(bool)b {
   return ADXViewParentCompat_Api21Impl_onNestedFlingWithADViewParent_withADView_withFloat_withFloat_withBoolean_(viewParent, view, v, v1, b);
 }
 
-+ (jboolean)onNestedPreFlingWithADViewParent:(id<ADViewParent>)viewParent
-                                  withADView:(ADView *)view
-                                   withFloat:(jfloat)v
-                                   withFloat:(jfloat)v1 {
++ (bool)onNestedPreFlingWithADViewParent:(id<ADViewParent>)viewParent
+                              withADView:(ADView *)view
+                               withFloat:(float)v
+                               withFloat:(float)v1 {
   return ADXViewParentCompat_Api21Impl_onNestedPreFlingWithADViewParent_withADView_withFloat_withFloat_(viewParent, view, v, v1);
 }
 
@@ -521,12 +538,12 @@ ADXViewParentCompat_Api21Impl *create_ADXViewParentCompat_Api21Impl_init() {
   J2OBJC_CREATE_IMPL(ADXViewParentCompat_Api21Impl, init)
 }
 
-jboolean ADXViewParentCompat_Api21Impl_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> viewParent, ADView *view, ADView *view1, jint i) {
+bool ADXViewParentCompat_Api21Impl_onStartNestedScrollWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> viewParent, ADView *view, ADView *view1, int32_t i) {
   ADXViewParentCompat_Api21Impl_initialize();
   return [((id<ADViewParent>) nil_chk(viewParent)) onStartNestedScrollWithADView:view withADView:view1 withInt:i];
 }
 
-void ADXViewParentCompat_Api21Impl_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> viewParent, ADView *view, ADView *view1, jint i) {
+void ADXViewParentCompat_Api21Impl_onNestedScrollAcceptedWithADViewParent_withADView_withADView_withInt_(id<ADViewParent> viewParent, ADView *view, ADView *view1, int32_t i) {
   ADXViewParentCompat_Api21Impl_initialize();
   [((id<ADViewParent>) nil_chk(viewParent)) onNestedScrollAcceptedWithADView:view withADView:view1 withInt:i];
 }
@@ -536,22 +553,22 @@ void ADXViewParentCompat_Api21Impl_onStopNestedScrollWithADViewParent_withADView
   [((id<ADViewParent>) nil_chk(viewParent)) onStopNestedScrollWithADView:view];
 }
 
-void ADXViewParentCompat_Api21Impl_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_(id<ADViewParent> viewParent, ADView *view, jint i, jint i1, jint i2, jint i3) {
+void ADXViewParentCompat_Api21Impl_onNestedScrollWithADViewParent_withADView_withInt_withInt_withInt_withInt_(id<ADViewParent> viewParent, ADView *view, int32_t i, int32_t i1, int32_t i2, int32_t i3) {
   ADXViewParentCompat_Api21Impl_initialize();
   [((id<ADViewParent>) nil_chk(viewParent)) onNestedScrollWithADView:view withInt:i withInt:i1 withInt:i2 withInt:i3];
 }
 
-void ADXViewParentCompat_Api21Impl_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_(id<ADViewParent> viewParent, ADView *view, jint i, jint i1, IOSIntArray *ints) {
+void ADXViewParentCompat_Api21Impl_onNestedPreScrollWithADViewParent_withADView_withInt_withInt_withIntArray_(id<ADViewParent> viewParent, ADView *view, int32_t i, int32_t i1, IOSIntArray *ints) {
   ADXViewParentCompat_Api21Impl_initialize();
   [((id<ADViewParent>) nil_chk(viewParent)) onNestedPreScrollWithADView:view withInt:i withInt:i1 withIntArray:ints];
 }
 
-jboolean ADXViewParentCompat_Api21Impl_onNestedFlingWithADViewParent_withADView_withFloat_withFloat_withBoolean_(id<ADViewParent> viewParent, ADView *view, jfloat v, jfloat v1, jboolean b) {
+bool ADXViewParentCompat_Api21Impl_onNestedFlingWithADViewParent_withADView_withFloat_withFloat_withBoolean_(id<ADViewParent> viewParent, ADView *view, float v, float v1, bool b) {
   ADXViewParentCompat_Api21Impl_initialize();
   return [((id<ADViewParent>) nil_chk(viewParent)) onNestedFlingWithADView:view withFloat:v withFloat:v1 withBoolean:b];
 }
 
-jboolean ADXViewParentCompat_Api21Impl_onNestedPreFlingWithADViewParent_withADView_withFloat_withFloat_(id<ADViewParent> viewParent, ADView *view, jfloat v, jfloat v1) {
+bool ADXViewParentCompat_Api21Impl_onNestedPreFlingWithADViewParent_withADView_withFloat_withFloat_(id<ADViewParent> viewParent, ADView *view, float v, float v1) {
   ADXViewParentCompat_Api21Impl_initialize();
   return [((id<ADViewParent>) nil_chk(viewParent)) onNestedPreFlingWithADView:view withFloat:v withFloat:v1];
 }

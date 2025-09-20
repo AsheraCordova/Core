@@ -3,29 +3,43 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\AnticipateOvershootInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AnticipateOvershootInterpolator.h"
 #include "BaseInterpolator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADAnticipateOvershootInterpolator () {
  @public
-  jfloat mTension_;
+  float mTension_;
 }
 
 /*!
  */
-+ (jfloat)aWithFloat:(jfloat)t
-           withFloat:(jfloat)s;
++ (float)aWithFloat:(float)t
+          withFloat:(float)s;
 
-+ (jfloat)oWithFloat:(jfloat)t
-           withFloat:(jfloat)s;
++ (float)oWithFloat:(float)t
+          withFloat:(float)s;
 
 @end
 
-__attribute__((unused)) static jfloat ADAnticipateOvershootInterpolator_aWithFloat_withFloat_(jfloat t, jfloat s);
+__attribute__((unused)) static float ADAnticipateOvershootInterpolator_aWithFloat_withFloat_(float t, float s);
 
-__attribute__((unused)) static jfloat ADAnticipateOvershootInterpolator_oWithFloat_withFloat_(jfloat t, jfloat s);
+__attribute__((unused)) static float ADAnticipateOvershootInterpolator_oWithFloat_withFloat_(float t, float s);
 
 @implementation ADAnticipateOvershootInterpolator
 
@@ -36,33 +50,33 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithFloat:(jfloat)tension {
+- (instancetype)initWithFloat:(float)tension {
   ADAnticipateOvershootInterpolator_initWithFloat_(self, tension);
   return self;
 }
 
-- (instancetype)initWithFloat:(jfloat)tension
-                    withFloat:(jfloat)extraTension {
+- (instancetype)initWithFloat:(float)tension
+                    withFloat:(float)extraTension {
   ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(self, tension, extraTension);
   return self;
 }
 
-+ (jfloat)aWithFloat:(jfloat)t
-           withFloat:(jfloat)s {
++ (float)aWithFloat:(float)t
+          withFloat:(float)s {
   return ADAnticipateOvershootInterpolator_aWithFloat_withFloat_(t, s);
 }
 
-+ (jfloat)oWithFloat:(jfloat)t
-           withFloat:(jfloat)s {
++ (float)oWithFloat:(float)t
+          withFloat:(float)s {
   return ADAnticipateOvershootInterpolator_oWithFloat_withFloat_(t, s);
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)t {
+- (float)getInterpolationWithFloat:(float)t {
   if (t < 0.5f) return 0.5f * ADAnticipateOvershootInterpolator_aWithFloat_withFloat_(t * 2.0f, mTension_);
   else return 0.5f * (ADAnticipateOvershootInterpolator_oWithFloat_withFloat_(t * 2.0f - 2.0f, mTension_) + 2.0f);
 }
 
-- (jlong)createNativeInterpolator {
+- (int64_t)createNativeInterpolator {
   return 0;
 }
 
@@ -110,40 +124,42 @@ ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_init
   J2OBJC_CREATE_IMPL(ADAnticipateOvershootInterpolator, init)
 }
 
-void ADAnticipateOvershootInterpolator_initWithFloat_(ADAnticipateOvershootInterpolator *self, jfloat tension) {
+void ADAnticipateOvershootInterpolator_initWithFloat_(ADAnticipateOvershootInterpolator *self, float tension) {
   ADBaseInterpolator_init(self);
   self->mTension_ = tension * 1.5f;
 }
 
-ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_(jfloat tension) {
+ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_(float tension) {
   J2OBJC_NEW_IMPL(ADAnticipateOvershootInterpolator, initWithFloat_, tension)
 }
 
-ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_(jfloat tension) {
+ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_(float tension) {
   J2OBJC_CREATE_IMPL(ADAnticipateOvershootInterpolator, initWithFloat_, tension)
 }
 
-void ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(ADAnticipateOvershootInterpolator *self, jfloat tension, jfloat extraTension) {
+void ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(ADAnticipateOvershootInterpolator *self, float tension, float extraTension) {
   ADBaseInterpolator_init(self);
   self->mTension_ = tension * extraTension;
 }
 
-ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(jfloat tension, jfloat extraTension) {
+ADAnticipateOvershootInterpolator *new_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(float tension, float extraTension) {
   J2OBJC_NEW_IMPL(ADAnticipateOvershootInterpolator, initWithFloat_withFloat_, tension, extraTension)
 }
 
-ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(jfloat tension, jfloat extraTension) {
+ADAnticipateOvershootInterpolator *create_ADAnticipateOvershootInterpolator_initWithFloat_withFloat_(float tension, float extraTension) {
   J2OBJC_CREATE_IMPL(ADAnticipateOvershootInterpolator, initWithFloat_withFloat_, tension, extraTension)
 }
 
-jfloat ADAnticipateOvershootInterpolator_aWithFloat_withFloat_(jfloat t, jfloat s) {
+float ADAnticipateOvershootInterpolator_aWithFloat_withFloat_(float t, float s) {
   ADAnticipateOvershootInterpolator_initialize();
   return t * t * ((s + 1) * t - s);
 }
 
-jfloat ADAnticipateOvershootInterpolator_oWithFloat_withFloat_(jfloat t, jfloat s) {
+float ADAnticipateOvershootInterpolator_oWithFloat_withFloat_(float t, float s) {
   ADAnticipateOvershootInterpolator_initialize();
   return t * t * ((s + 1) * t + s);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnticipateOvershootInterpolator)
+
+J2OBJC_NAME_MAPPING(ADAnticipateOvershootInterpolator, "r.android.view.animation", "AD")

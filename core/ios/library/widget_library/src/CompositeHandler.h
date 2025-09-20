@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\CompositeHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CompositeHandler")
@@ -21,6 +22,7 @@
 #include "EventBusHandler.h"
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASEventBusHandler_OnCompletedListener;
 @protocol JavaUtilList;
 
@@ -63,6 +65,7 @@ FOUNDATION_EXPORT ASCompositeHandler *create_ASCompositeHandler_initWithNSString
 J2OBJC_TYPE_LITERAL_HEADER(ASCompositeHandler)
 
 @compatibility_alias ComAsheraWidgetBusCompositeHandler ASCompositeHandler;
+
 
 #endif
 

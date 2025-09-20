@@ -3,12 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\AccelerateDecelerateInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AccelerateDecelerateInterpolator.h"
 #include "AttributeSet.h"
 #include "BaseInterpolator.h"
 #include "Context.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAccelerateDecelerateInterpolator
@@ -26,11 +41,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)input {
-  return (jfloat) (JavaLangMath_cosWithDouble_((input + 1) * JavaLangMath_PI) / 2.0f) + 0.5f;
+- (float)getInterpolationWithFloat:(float)input {
+  return (float) (JavaLangMath_cosWithDouble_((input + 1) * JavaLangMath_PI) / 2.0f) + 0.5f;
 }
 
-- (jlong)createNativeInterpolator {
+- (int64_t)createNativeInterpolator {
   return 0;
 }
 
@@ -81,3 +96,5 @@ ADAccelerateDecelerateInterpolator *create_ADAccelerateDecelerateInterpolator_in
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAccelerateDecelerateInterpolator)
+
+J2OBJC_NAME_MAPPING(ADAccelerateDecelerateInterpolator, "r.android.view.animation", "AD")

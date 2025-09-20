@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\MarqueeCommandConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MarqueeCommandConverter")
@@ -21,6 +22,8 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -31,11 +34,11 @@
 - (instancetype)initWithNSString:(NSString *)id_;
 
 - (instancetype)initWithNSString:(NSString *)id_
-                         withInt:(jint)whiteSpace
-                         withInt:(jint)offset
+                         withInt:(int32_t)whiteSpace
+                         withInt:(int32_t)offset
                     withNSString:(NSString *)direction;
 
-- (jint)getOffset;
+- (int32_t)getOffset;
 
 - (id)modifyValueWithASIWidget:(id<ASIWidget>)widget
                         withId:(id)nativeView
@@ -57,15 +60,16 @@ FOUNDATION_EXPORT ASMarqueeCommandConverter *new_ASMarqueeCommandConverter_initW
 
 FOUNDATION_EXPORT ASMarqueeCommandConverter *create_ASMarqueeCommandConverter_initWithNSString_(NSString *id_);
 
-FOUNDATION_EXPORT void ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(ASMarqueeCommandConverter *self, NSString *id_, jint whiteSpace, jint offset, NSString *direction);
+FOUNDATION_EXPORT void ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(ASMarqueeCommandConverter *self, NSString *id_, int32_t whiteSpace, int32_t offset, NSString *direction);
 
-FOUNDATION_EXPORT ASMarqueeCommandConverter *new_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, jint whiteSpace, jint offset, NSString *direction) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASMarqueeCommandConverter *new_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, int32_t whiteSpace, int32_t offset, NSString *direction) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASMarqueeCommandConverter *create_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, jint whiteSpace, jint offset, NSString *direction);
+FOUNDATION_EXPORT ASMarqueeCommandConverter *create_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, int32_t whiteSpace, int32_t offset, NSString *direction);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMarqueeCommandConverter)
 
 @compatibility_alias ComAsheraConverterMarqueeCommandConverter ASMarqueeCommandConverter;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\interpolator\view\animation\FastOutSlowInInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FastOutSlowInInterpolator")
@@ -53,6 +54,7 @@ FOUNDATION_EXPORT ADXFastOutSlowInInterpolator *create_ADXFastOutSlowInInterpola
 J2OBJC_TYPE_LITERAL_HEADER(ADXFastOutSlowInInterpolator)
 
 @compatibility_alias AndroidxInterpolatorViewAnimationFastOutSlowInInterpolator ADXFastOutSlowInInterpolator;
+
 
 #endif
 

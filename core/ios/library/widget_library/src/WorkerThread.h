@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\WorkerThread.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WorkerThread")
@@ -21,6 +22,7 @@
 #include "java/lang/Runnable.h"
 
 @class JavaUtilConcurrentCountDownLatch;
+@class NSString;
 @protocol JavaUtilMap;
 
 @interface ASWorkerThread : NSObject < JavaLangRunnable >
@@ -51,6 +53,7 @@ FOUNDATION_EXPORT ASWorkerThread *create_ASWorkerThread_initWithNSString_withJav
 J2OBJC_TYPE_LITERAL_HEADER(ASWorkerThread)
 
 @compatibility_alias ComAsheraUtilsWorkerThread ASWorkerThread;
+
 
 #endif
 

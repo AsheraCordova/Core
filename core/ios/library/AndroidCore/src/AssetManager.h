@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\AssetManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AssetManager")
@@ -18,6 +19,7 @@
 
 @class ADAssetFileDescriptor;
 @class JavaIoInputStream;
+@class NSString;
 
 @interface ADAssetManager : NSObject
 
@@ -42,6 +44,7 @@ FOUNDATION_EXPORT ADAssetManager *create_ADAssetManager_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADAssetManager)
 
 @compatibility_alias RAndroidContentResAssetManager ADAssetManager;
+
 
 #endif
 

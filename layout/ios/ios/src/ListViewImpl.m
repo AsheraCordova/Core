@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ListViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbsListView.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AdapterView.h"
@@ -73,11 +78,14 @@
 #include "ASUILongTapGestureRecognizer.h"
 #include "java/lang/Float.h"
 
+
 @class ASListViewImpl_FilterStatus;
 @class ASListViewImpl_ListAdapter_ArrayFilter;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -86,31 +94,31 @@
  @public
   id uiView_;
   ADListView *listView_;
-  jboolean disableUpdate_;
+  bool disableUpdate_;
   ASListViewImpl_ListAdapter *listAdapter_;
   ASListViewImpl_FilterStatus *filter_;
   NSString *query_;
-  jint filterDelay_;
+  int32_t filterDelay_;
   ADHandler *handler_;
   NSString *filterId_;
   IOSObjectArray *filterItemPaths_;
   id<ASHasWidgets> headerTemplate_;
   id<ASHasWidgets> footerTemplate_;
-  jboolean autoLayout_;
+  bool autoLayout_;
   id onItemClick_;
   id<JavaUtilMap> heightCache_;
   id<ASIWidget> header_;
   id<ASIWidget> footer_;
   id<ADAdapterView_OnItemLongClickListener> onItemLongClickListener_;
   ADDrawable *listSelector_;
-  jint cellSelectionStyle_;
+  int32_t cellSelectionStyle_;
   id<ADAbsListView_OnScrollListener> onScrollChangeListener_;
-  jboolean headerDividersEnabled_;
-  jboolean footerDividersEnabled_;
+  bool headerDividersEnabled_;
+  bool footerDividersEnabled_;
   ADDrawable *divider_;
-  jint dividerHeight_;
-  jint separatorInsetRight_;
-  jboolean reloadTableAfterPostMeasure_;
+  int32_t dividerHeight_;
+  int32_t separatorInsetRight_;
+  bool reloadTableAfterPostMeasure_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -142,30 +150,30 @@
 
 - (void)initListAdapter OBJC_METHOD_FAMILY_NONE;
 
-- (jint)updatePositionWithJavaUtilMap:(id<JavaUtilMap>)eventMap
-                              withInt:(jint)position;
+- (int32_t)updatePositionWithJavaUtilMap:(id<JavaUtilMap>)eventMap
+                                 withInt:(int32_t)position;
 
 - (void)addFooterTemplateWithId:(id)objValue;
 
 - (void)addHeaderTemplateWithId:(id)objValue;
 
-- (void)handleItemClickWithInt:(jint)position;
+- (void)handleItemClickWithInt:(int32_t)position;
 
-- (id)getCellWithInt:(jint)index;
+- (id)getCellWithInt:(int32_t)index;
 
-- (void)setCellDividerInsetsWithInt:(jint)index
+- (void)setCellDividerInsetsWithInt:(int32_t)index
                              withId:(id)cell;
 
 - (void)nativeSetSeparatorCellInsetRightWithId:(id)cell
-                                       withInt:(jint)val;
+                                       withInt:(int32_t)val;
 
-- (id)createCellWithInt:(jint)index;
+- (id)createCellWithInt:(int32_t)index;
 
 - (ADView *)updateLayoutWithASIWidget:(id<ASIWidget>)myWidget
-                              withInt:(jint)index;
+                              withInt:(int32_t)index;
 
 - (void)setCustomDividerAttributesWithASIWidget:(id<ASIWidget>)cellwidget
-                                    withBoolean:(jboolean)visible;
+                                    withBoolean:(bool)visible;
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
@@ -177,7 +185,7 @@
 
 - (void)updateTableSelection;
 
-- (jint)nativeGetWidth;
+- (int32_t)nativeGetWidth;
 
 - (id)getCellContentViewWithId:(id)cell;
 
@@ -202,17 +210,17 @@
 
 - (void)setSeparatorStyleWithId:(id)objValue;
 
-- (void)nativeSetSeparatorStyleWithInt:(jint)separatorStyle;
+- (void)nativeSetSeparatorStyleWithInt:(int32_t)separatorStyle;
 
 - (id)getStackFromBottom;
 
-- (jboolean)isStackFromBottom;
+- (bool)isStackFromBottom;
 
 - (void)setStackFromBottomWithId:(id)objValue;
 
-- (jboolean)nativeGetStackFromBottom;
+- (bool)nativeGetStackFromBottom;
 
-- (void)nativeSetStackFromBottomWithBoolean:(jboolean)stackFromBottom;
+- (void)nativeSetStackFromBottomWithBoolean:(bool)stackFromBottom;
 
 - (void)nativesetStackFromBottom;
 
@@ -220,7 +228,7 @@
 
 - (void)setOnItemLongClickWithId:(id)objValue;
 
-- (void)longPressWithInt:(jint)position;
+- (void)longPressWithInt:(int32_t)position;
 
 - (void)nativeAddLongClickListenerWithId:(id)nativeWidget;
 
@@ -235,7 +243,7 @@
 - (void)setListSelectorWithNSString:(NSString *)strValue
                              withId:(id)objValue;
 
-- (void)nativesetTrackSelectedCellWithBoolean:(jboolean)trackSelectedCell;
+- (void)nativesetTrackSelectedCellWithBoolean:(bool)trackSelectedCell;
 
 - (void)setSelectionStyleWithId:(id)objValue;
 
@@ -264,19 +272,19 @@
 
 - (void)setSeparatorInsetRightWithId:(id)objValue;
 
-- (void)nativeSetSeparatorInsetRightWithInt:(jint)val;
+- (void)nativeSetSeparatorInsetRightWithInt:(int32_t)val;
 
 - (void)setSeparatorInsetLeftWithId:(id)objValue;
 
-- (void)nativeSetSeparatorInsetLeftWithInt:(jint)val;
+- (void)nativeSetSeparatorInsetLeftWithInt:(int32_t)val;
 
 - (void)setSeparatorInsetBottomWithId:(id)objValue;
 
-- (void)nativeSetSeparatorInsetBottomWithInt:(jint)val;
+- (void)nativeSetSeparatorInsetBottomWithInt:(int32_t)val;
 
 - (void)setSeparatorInsetTopWithId:(id)objValue;
 
-- (void)nativeSetSeparatorInsetTopWithInt:(jint)val;
+- (void)nativeSetSeparatorInsetTopWithInt:(int32_t)val;
 
 - (void)nativeRequestLayout;
 
@@ -333,25 +341,25 @@ __attribute__((unused)) static id ASListViewImpl_getChoiceMode(ASListViewImpl *s
 
 __attribute__((unused)) static void ASListViewImpl_initListAdapter(ASListViewImpl *self);
 
-__attribute__((unused)) static jint ASListViewImpl_updatePositionWithJavaUtilMap_withInt_(ASListViewImpl *self, id<JavaUtilMap> eventMap, jint position);
+__attribute__((unused)) static int32_t ASListViewImpl_updatePositionWithJavaUtilMap_withInt_(ASListViewImpl *self, id<JavaUtilMap> eventMap, int32_t position);
 
 __attribute__((unused)) static void ASListViewImpl_addFooterTemplateWithId_(ASListViewImpl *self, id objValue);
 
 __attribute__((unused)) static void ASListViewImpl_addHeaderTemplateWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_handleItemClickWithInt_(ASListViewImpl *self, jint position);
+__attribute__((unused)) static void ASListViewImpl_handleItemClickWithInt_(ASListViewImpl *self, int32_t position);
 
-__attribute__((unused)) static id ASListViewImpl_getCellWithInt_(ASListViewImpl *self, jint index);
+__attribute__((unused)) static id ASListViewImpl_getCellWithInt_(ASListViewImpl *self, int32_t index);
 
-__attribute__((unused)) static void ASListViewImpl_setCellDividerInsetsWithInt_withId_(ASListViewImpl *self, jint index, id cell);
+__attribute__((unused)) static void ASListViewImpl_setCellDividerInsetsWithInt_withId_(ASListViewImpl *self, int32_t index, id cell);
 
-__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorCellInsetRightWithId_withInt_(ASListViewImpl *self, id cell, jint val);
+__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorCellInsetRightWithId_withInt_(ASListViewImpl *self, id cell, int32_t val);
 
-__attribute__((unused)) static id ASListViewImpl_createCellWithInt_(ASListViewImpl *self, jint index);
+__attribute__((unused)) static id ASListViewImpl_createCellWithInt_(ASListViewImpl *self, int32_t index);
 
-__attribute__((unused)) static ADView *ASListViewImpl_updateLayoutWithASIWidget_withInt_(ASListViewImpl *self, id<ASIWidget> myWidget, jint index);
+__attribute__((unused)) static ADView *ASListViewImpl_updateLayoutWithASIWidget_withInt_(ASListViewImpl *self, id<ASIWidget> myWidget, int32_t index);
 
-__attribute__((unused)) static void ASListViewImpl_setCustomDividerAttributesWithASIWidget_withBoolean_(ASListViewImpl *self, id<ASIWidget> cellwidget, jboolean visible);
+__attribute__((unused)) static void ASListViewImpl_setCustomDividerAttributesWithASIWidget_withBoolean_(ASListViewImpl *self, id<ASIWidget> cellwidget, bool visible);
 
 __attribute__((unused)) static void ASListViewImpl_nativeCreateWithJavaUtilMap_(ASListViewImpl *self, id<JavaUtilMap> params);
 
@@ -363,7 +371,7 @@ __attribute__((unused)) static void ASListViewImpl_addFooterWidgetWithId_(ASList
 
 __attribute__((unused)) static void ASListViewImpl_updateTableSelection(ASListViewImpl *self);
 
-__attribute__((unused)) static jint ASListViewImpl_nativeGetWidth(ASListViewImpl *self);
+__attribute__((unused)) static int32_t ASListViewImpl_nativeGetWidth(ASListViewImpl *self);
 
 __attribute__((unused)) static id ASListViewImpl_getCellContentViewWithId_(ASListViewImpl *self, id cell);
 
@@ -385,17 +393,17 @@ __attribute__((unused)) static void ASListViewImpl_reloadTable(ASListViewImpl *s
 
 __attribute__((unused)) static void ASListViewImpl_setSeparatorStyleWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorStyleWithInt_(ASListViewImpl *self, jint separatorStyle);
+__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorStyleWithInt_(ASListViewImpl *self, int32_t separatorStyle);
 
 __attribute__((unused)) static id ASListViewImpl_getStackFromBottom(ASListViewImpl *self);
 
-__attribute__((unused)) static jboolean ASListViewImpl_isStackFromBottom(ASListViewImpl *self);
+__attribute__((unused)) static bool ASListViewImpl_isStackFromBottom(ASListViewImpl *self);
 
 __attribute__((unused)) static void ASListViewImpl_setStackFromBottomWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASListViewImpl_nativeGetStackFromBottom(ASListViewImpl *self);
+__attribute__((unused)) static bool ASListViewImpl_nativeGetStackFromBottom(ASListViewImpl *self);
 
-__attribute__((unused)) static void ASListViewImpl_nativeSetStackFromBottomWithBoolean_(ASListViewImpl *self, jboolean stackFromBottom);
+__attribute__((unused)) static void ASListViewImpl_nativeSetStackFromBottomWithBoolean_(ASListViewImpl *self, bool stackFromBottom);
 
 __attribute__((unused)) static void ASListViewImpl_nativesetStackFromBottom(ASListViewImpl *self);
 
@@ -403,7 +411,7 @@ __attribute__((unused)) static void ASListViewImpl_nativesetStackFromTop(ASListV
 
 __attribute__((unused)) static void ASListViewImpl_setOnItemLongClickWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_longPressWithInt_(ASListViewImpl *self, jint position);
+__attribute__((unused)) static void ASListViewImpl_longPressWithInt_(ASListViewImpl *self, int32_t position);
 
 __attribute__((unused)) static void ASListViewImpl_nativeAddLongClickListenerWithId_(ASListViewImpl *self, id nativeWidget);
 
@@ -415,7 +423,7 @@ __attribute__((unused)) static void ASListViewImpl_nativeSelectedBackgroundViewW
 
 __attribute__((unused)) static void ASListViewImpl_setListSelectorWithNSString_withId_(ASListViewImpl *self, NSString *strValue, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_nativesetTrackSelectedCellWithBoolean_(ASListViewImpl *self, jboolean trackSelectedCell);
+__attribute__((unused)) static void ASListViewImpl_nativesetTrackSelectedCellWithBoolean_(ASListViewImpl *self, bool trackSelectedCell);
 
 __attribute__((unused)) static void ASListViewImpl_setSelectionStyleWithId_(ASListViewImpl *self, id objValue);
 
@@ -437,19 +445,19 @@ __attribute__((unused)) static id ASListViewImpl_getDividerHeight(ASListViewImpl
 
 __attribute__((unused)) static void ASListViewImpl_setSeparatorInsetRightWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetRightWithInt_(ASListViewImpl *self, jint val);
+__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetRightWithInt_(ASListViewImpl *self, int32_t val);
 
 __attribute__((unused)) static void ASListViewImpl_setSeparatorInsetLeftWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetLeftWithInt_(ASListViewImpl *self, jint val);
+__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetLeftWithInt_(ASListViewImpl *self, int32_t val);
 
 __attribute__((unused)) static void ASListViewImpl_setSeparatorInsetBottomWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetBottomWithInt_(ASListViewImpl *self, jint val);
+__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetBottomWithInt_(ASListViewImpl *self, int32_t val);
 
 __attribute__((unused)) static void ASListViewImpl_setSeparatorInsetTopWithId_(ASListViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetTopWithInt_(ASListViewImpl *self, jint val);
+__attribute__((unused)) static void ASListViewImpl_nativeSetSeparatorInsetTopWithInt_(ASListViewImpl *self, int32_t val);
 
 __attribute__((unused)) static void ASListViewImpl_nativeRequestLayout(ASListViewImpl *self);
 
@@ -486,12 +494,12 @@ J2OBJC_FIELD_SETTER(ASListViewImpl_IosCellSelectionStyle, mapping_, id<JavaUtilM
 
 @interface ASListViewImpl_ListViewExt () {
  @public
-  __unsafe_unretained ASListViewImpl *this$0_;
+  WEAK_ ASListViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -540,12 +548,20 @@ __attribute__((unused)) static ASListViewImpl_ListAdapter_ArrayFilter *create_AS
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter_ArrayFilter)
 
-typedef NS_ENUM(NSUInteger, ASListViewImpl_FilterStatus_Enum) {
-  ASListViewImpl_FilterStatus_Enum_None = 0,
-  ASListViewImpl_FilterStatus_Enum_Restore = 1,
-  ASListViewImpl_FilterStatus_Enum_Filtering = 2,
-  ASListViewImpl_FilterStatus_Enum_Done = 3,
+
+typedef NS_ENUM(int32_t, ASListViewImpl_FilterStatus_Enum) {
+  ASListViewImpl_FilterStatus_Enum_None NS_SWIFT_NAME(none) = 0,
+  ASListViewImpl_FilterStatus_Enum_Restore NS_SWIFT_NAME(restore) = 1,
+  ASListViewImpl_FilterStatus_Enum_Filtering NS_SWIFT_NAME(filtering) = 2,
+  ASListViewImpl_FilterStatus_Enum_Done NS_SWIFT_NAME(done) = 3,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASListViewImpl_FilterStatus_ORDINAL int32_t
+#else
+#define ASListViewImpl_FilterStatus_ORDINAL ASListViewImpl_FilterStatus_Enum
+#endif
+
 
 @interface ASListViewImpl_FilterStatus : JavaLangEnum
 
@@ -554,6 +570,13 @@ typedef NS_ENUM(NSUInteger, ASListViewImpl_FilterStatus_Enum) {
 + (ASListViewImpl_FilterStatus *)valueOfWithNSString:(NSString *)name;
 
 - (ASListViewImpl_FilterStatus_Enum)toNSEnum;
+
+@property(readonly) ASListViewImpl_FilterStatus_Enum enumValue;
++ (ASListViewImpl_FilterStatus *)fromNSEnum:(ASListViewImpl_FilterStatus_Enum)value;
+
+- (ASListViewImpl_FilterStatus_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithFilterStatus:(ASListViewImpl_FilterStatus_Enum)value;
 
 @end
 
@@ -574,17 +597,18 @@ J2OBJC_ENUM_CONSTANT(ASListViewImpl_FilterStatus, Filtering)
 inline ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_get_Done(void);
 J2OBJC_ENUM_CONSTANT(ASListViewImpl_FilterStatus, Done)
 
-__attribute__((unused)) static void ASListViewImpl_FilterStatus_initWithNSString_withInt_(ASListViewImpl_FilterStatus *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void ASListViewImpl_FilterStatus_initWithNSString_withInt_(ASListViewImpl_FilterStatus *self, NSString *__name, int32_t __ordinal);
 
-__attribute__((unused)) static ASListViewImpl_FilterStatus *new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASListViewImpl_FilterStatus *new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(NSString *__name, int32_t __ordinal) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static IOSObjectArray *ASListViewImpl_FilterStatus_values(void);
 
 __attribute__((unused)) static ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_fromOrdinal(ASListViewImpl_FilterStatus_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_FilterStatus)
+
 
 @interface ASListViewImpl_OnItemClickListener : NSObject < ADAdapterView_OnItemClickListener, ASIListener > {
  @public
@@ -605,13 +629,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_FilterStatus)
 
 - (void)onItemClickWithADAdapterView:(ADAdapterView *)parent
                           withADView:(ADView *)view
-                             withInt:(jint)position
-                            withLong:(jlong)id_;
+                             withInt:(int32_t)position
+                            withLong:(int64_t)id_;
 
 - (id<JavaUtilMap>)getOnItemClickEventObjWithADAdapterView:(ADAdapterView *)parent
                                                 withADView:(ADView *)view
-                                                   withInt:(jint)position
-                                                  withLong:(jlong)id_;
+                                                   withInt:(int32_t)position
+                                                  withLong:(int64_t)id_;
 
 @end
 
@@ -636,6 +660,7 @@ __attribute__((unused)) static ASListViewImpl_OnItemClickListener *create_ASList
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_OnItemClickListener)
 
+
 @interface ASListViewImpl_OnItemLongClickListener : NSObject < ADAdapterView_OnItemLongClickListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -653,15 +678,15 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_OnItemClickListener)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onItemLongClickWithADAdapterView:(ADAdapterView *)parent
-                                  withADView:(ADView *)view
-                                     withInt:(jint)position
-                                    withLong:(jlong)id_;
+- (bool)onItemLongClickWithADAdapterView:(ADAdapterView *)parent
+                              withADView:(ADView *)view
+                                 withInt:(int32_t)position
+                                withLong:(int64_t)id_;
 
 - (id<JavaUtilMap>)getOnItemLongClickEventObjWithADAdapterView:(ADAdapterView *)parent
                                                     withADView:(ADView *)view
-                                                       withInt:(jint)position
-                                                      withLong:(jlong)id_;
+                                                       withInt:(int32_t)position
+                                                      withLong:(int64_t)id_;
 
 @end
 
@@ -686,6 +711,7 @@ __attribute__((unused)) static ASListViewImpl_OnItemLongClickListener *create_AS
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_OnItemLongClickListener)
 
+
 @interface ASListViewImpl_OnScrollListener : NSObject < ADAbsListView_OnScrollListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -704,20 +730,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_OnItemLongClickListener)
                      withNSString:(NSString *)action;
 
 - (void)onScrollWithADAbsListView:(ADAbsListView *)view
-                          withInt:(jint)firstVisibleItem
-                          withInt:(jint)visibleItemCount
-                          withInt:(jint)totalItemCount;
+                          withInt:(int32_t)firstVisibleItem
+                          withInt:(int32_t)visibleItemCount
+                          withInt:(int32_t)totalItemCount;
 
 - (void)onScrollStateChangedWithADAbsListView:(ADAbsListView *)view
-                                      withInt:(jint)scrollState;
+                                      withInt:(int32_t)scrollState;
 
 - (id<JavaUtilMap>)getOnScrollStateChangeEventObjWithADAbsListView:(ADAbsListView *)view
-                                                           withInt:(jint)scrollState;
+                                                           withInt:(int32_t)scrollState;
 
 - (id<JavaUtilMap>)getOnScrollChangeEventObjWithADAbsListView:(ADAbsListView *)view
-                                                      withInt:(jint)firstVisibleItem
-                                                      withInt:(jint)visibleItemCount
-                                                      withInt:(jint)totalItemCount;
+                                                      withInt:(int32_t)firstVisibleItem
+                                                      withInt:(int32_t)visibleItemCount
+                                                      withInt:(int32_t)totalItemCount;
 
 @end
 
@@ -742,9 +768,10 @@ __attribute__((unused)) static ASListViewImpl_OnScrollListener *create_ASListVie
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_OnScrollListener)
 
+
 @interface ASListViewImpl_PostMeasureEventHandler () {
  @public
-  __unsafe_unretained ASListViewImpl *this$0_;
+  WEAK_ ASListViewImpl *this$0_;
 }
 
 @end
@@ -766,6 +793,7 @@ __attribute__((unused)) static ASListViewImpl_$Lambda$1 *new_ASListViewImpl_$Lam
 
 __attribute__((unused)) static ASListViewImpl_$Lambda$1 *create_ASListViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
 
+
 @interface ASListViewImpl_$Lambda$2 : NSObject < JavaLangRunnable > {
  @public
   ASListViewImpl *this$0_;
@@ -782,6 +810,7 @@ __attribute__((unused)) static void ASListViewImpl_$Lambda$2_initWithASListViewI
 __attribute__((unused)) static ASListViewImpl_$Lambda$2 *new_ASListViewImpl_$Lambda$2_initWithASListViewImpl_(ASListViewImpl *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASListViewImpl_$Lambda$2 *create_ASListViewImpl_$Lambda$2_initWithASListViewImpl_(ASListViewImpl *outer$);
+
 
 NSString *ASListViewImpl_LOCAL_NAME = @"ListView";
 NSString *ASListViewImpl_GROUP_NAME = @"ListView";
@@ -896,7 +925,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASListViewImpl_createLayoutParamsWithADView_(self, view);
@@ -1416,7 +1445,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -1437,7 +1466,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                 withNSString:(NSString *)eventType
                                 withNSString:(NSString *)eventParams {
   if ([((id<JavaUtilMap>) nil_chk(eventMap)) containsKeyWithId:@"position"] && [((NSString *) nil_chk(eventType)) java_hasPrefix:@"onItem"]) {
-    jint position = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_([eventMap getWithId:@"position"]))) intValue];
+    int32_t position = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_([eventMap getWithId:@"position"]))) intValue];
     position = ASListViewImpl_updatePositionWithJavaUtilMap_withInt_(self, eventMap, position);
     if (position >= 0 && position < [((id<JavaUtilList>) nil_chk(dataList_)) size]) {
       ASLoopParam *loopParam = [((id<JavaUtilList>) nil_chk(dataList_)) getWithInt:position];
@@ -1451,7 +1480,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addObjectWithASLoopParam:(ASLoopParam *)childModel
                     withNSString:(NSString *)modelIdPath
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                     withNSString:(NSString *)currentLoopVar {
   NSString *id_ = nil;
   if (modelIdPath != nil) {
@@ -1483,7 +1512,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_reloadTable(self);
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   if (index + 1 <= [((id<JavaUtilList>) nil_chk(ids_)) size]) {
     (void) [((id<JavaUtilList>) nil_chk(ids_)) removeWithInt:index];
   }
@@ -1494,7 +1523,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return true;
 }
 
-- (jboolean)areWidgetItemsRecycled {
+- (bool)areWidgetItemsRecycled {
   return true;
 }
 
@@ -1546,7 +1575,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetScrollXWithId:(id)view
-                       withInt:(jint)value {
+                       withInt:(int32_t)value {
   [((ASUITableView*)view) setContentOffset:CGPointMake(value ,((ASUITableView*)view).contentOffset.y)];
 }
 
@@ -1555,7 +1584,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetScrollYWithId:(id)view
-                       withInt:(jint)value {
+                       withInt:(int32_t)value {
   [((ASUITableView*)view) setContentOffset:CGPointMake(((ASUITableView*)view).contentOffset.x, value)];
 }
 
@@ -1563,7 +1592,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangDouble_valueOfWithDouble_([self nativeGetScrollXWithId:[self asNativeWidget]]);
 }
 
-- (jdouble)nativeGetScrollXWithId:(id)view {
+- (double)nativeGetScrollXWithId:(id)view {
   return ((ASUITableView*)view).contentOffset.x;
 }
 
@@ -1571,7 +1600,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangDouble_valueOfWithDouble_([self nativeGetScrollYWithId:[self asNativeWidget]]);
 }
 
-- (jdouble)nativeGetScrollYWithId:(id)view {
+- (double)nativeGetScrollYWithId:(id)view {
   return ((ASUITableView*)view).contentOffset.y;
 }
 
@@ -1587,8 +1616,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_initListAdapter(self);
 }
 
-- (jint)updatePositionWithJavaUtilMap:(id<JavaUtilMap>)eventMap
-                              withInt:(jint)position {
+- (int32_t)updatePositionWithJavaUtilMap:(id<JavaUtilMap>)eventMap
+                                 withInt:(int32_t)position {
   return ASListViewImpl_updatePositionWithJavaUtilMap_withInt_(self, eventMap, position);
 }
 
@@ -1849,7 +1878,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -1866,29 +1895,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_updateTableSelection(self);
 }
 
-- (void)handleItemClickWithInt:(jint)position {
+- (void)handleItemClickWithInt:(int32_t)position {
   ASListViewImpl_handleItemClickWithInt_(self, position);
 }
 
-- (id)getCellWithInt:(jint)index {
+- (id)getCellWithInt:(int32_t)index {
   return ASListViewImpl_getCellWithInt_(self, index);
 }
 
-- (void)setCellDividerInsetsWithInt:(jint)index
+- (void)setCellDividerInsetsWithInt:(int32_t)index
                              withId:(id)cell {
   ASListViewImpl_setCellDividerInsetsWithInt_withId_(self, index, cell);
 }
 
 - (void)nativeSetSeparatorCellInsetRightWithId:(id)cell
-                                       withInt:(jint)val {
+                                       withInt:(int32_t)val {
   ASListViewImpl_nativeSetSeparatorCellInsetRightWithId_withInt_(self, cell, val);
 }
 
-- (id)createCellWithInt:(jint)index {
+- (id)createCellWithInt:(int32_t)index {
   return ASListViewImpl_createCellWithInt_(self, index);
 }
 
-- (jint)calculateHeightOfRowWithInt:(jint)index {
+- (int32_t)calculateHeightOfRowWithInt:(int32_t)index {
   if ([((id<JavaUtilMap>) nil_chk(heightCache_)) containsKeyWithId:JavaLangInteger_valueOfWithInt_(index)]) {
     return [((JavaLangInteger *) nil_chk([((id<JavaUtilMap>) nil_chk(heightCache_)) getWithId:JavaLangInteger_valueOfWithInt_(index)])) intValue];
   }
@@ -1897,12 +1926,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (ADView *)updateLayoutWithASIWidget:(id<ASIWidget>)myWidget
-                              withInt:(jint)index {
+                              withInt:(int32_t)index {
   return ASListViewImpl_updateLayoutWithASIWidget_withInt_(self, myWidget, index);
 }
 
 - (void)setCustomDividerAttributesWithASIWidget:(id<ASIWidget>)cellwidget
-                                    withBoolean:(jboolean)visible {
+                                    withBoolean:(bool)visible {
   ASListViewImpl_setCustomDividerAttributesWithASIWidget_withBoolean_(self, cellwidget, visible);
 }
 
@@ -1926,7 +1955,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_updateTableSelection(self);
 }
 
-- (jint)nativeGetWidth {
+- (int32_t)nativeGetWidth {
   return ASListViewImpl_nativeGetWidth(self);
 }
 
@@ -2018,7 +2047,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setSeparatorStyleWithId_(self, objValue);
 }
 
-- (void)nativeSetSeparatorStyleWithInt:(jint)separatorStyle {
+- (void)nativeSetSeparatorStyleWithInt:(int32_t)separatorStyle {
   ASListViewImpl_nativeSetSeparatorStyleWithInt_(self, separatorStyle);
 }
 
@@ -2026,7 +2055,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASListViewImpl_getStackFromBottom(self);
 }
 
-- (jboolean)isStackFromBottom {
+- (bool)isStackFromBottom {
   return ASListViewImpl_isStackFromBottom(self);
 }
 
@@ -2034,11 +2063,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setStackFromBottomWithId_(self, objValue);
 }
 
-- (jboolean)nativeGetStackFromBottom {
+- (bool)nativeGetStackFromBottom {
   return ASListViewImpl_nativeGetStackFromBottom(self);
 }
 
-- (void)nativeSetStackFromBottomWithBoolean:(jboolean)stackFromBottom {
+- (void)nativeSetStackFromBottomWithBoolean:(bool)stackFromBottom {
   ASListViewImpl_nativeSetStackFromBottomWithBoolean_(self, stackFromBottom);
 }
 
@@ -2054,7 +2083,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setOnItemLongClickWithId_(self, objValue);
 }
 
-- (void)longPressWithInt:(jint)position {
+- (void)longPressWithInt:(int32_t)position {
   ASListViewImpl_longPressWithInt_(self, position);
 }
 
@@ -2096,7 +2125,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setListSelectorWithNSString_withId_(self, strValue, objValue);
 }
 
-- (void)nativesetTrackSelectedCellWithBoolean:(jboolean)trackSelectedCell {
+- (void)nativesetTrackSelectedCellWithBoolean:(bool)trackSelectedCell {
   ASListViewImpl_nativesetTrackSelectedCellWithBoolean_(self, trackSelectedCell);
 }
 
@@ -2158,7 +2187,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setSeparatorInsetRightWithId_(self, objValue);
 }
 
-- (void)nativeSetSeparatorInsetRightWithInt:(jint)val {
+- (void)nativeSetSeparatorInsetRightWithInt:(int32_t)val {
   ASListViewImpl_nativeSetSeparatorInsetRightWithInt_(self, val);
 }
 
@@ -2166,7 +2195,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setSeparatorInsetLeftWithId_(self, objValue);
 }
 
-- (void)nativeSetSeparatorInsetLeftWithInt:(jint)val {
+- (void)nativeSetSeparatorInsetLeftWithInt:(int32_t)val {
   ASListViewImpl_nativeSetSeparatorInsetLeftWithInt_(self, val);
 }
 
@@ -2174,7 +2203,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setSeparatorInsetBottomWithId_(self, objValue);
 }
 
-- (void)nativeSetSeparatorInsetBottomWithInt:(jint)val {
+- (void)nativeSetSeparatorInsetBottomWithInt:(int32_t)val {
   ASListViewImpl_nativeSetSeparatorInsetBottomWithInt_(self, val);
 }
 
@@ -2182,7 +2211,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASListViewImpl_setSeparatorInsetTopWithId_(self, objValue);
 }
 
-- (void)nativeSetSeparatorInsetTopWithInt:(jint)val {
+- (void)nativeSetSeparatorInsetTopWithInt:(int32_t)val {
   ASListViewImpl_nativeSetSeparatorInsetTopWithInt_(self, val);
 }
 
@@ -2696,11 +2725,11 @@ void ASListViewImpl_addCheckItemInfoWithJavaUtilMap_withADAdapterView_(id<JavaUt
     id<JavaUtilList> ids = new_JavaUtilArrayList_init();
     {
       IOSLongArray *a__ = checkedItemIds;
-      jlong const *b__ = ((IOSLongArray *) nil_chk(a__))->buffer_;
-      jlong const *e__ = b__ + a__->size_;
+      int64_t const *b__ = ((IOSLongArray *) nil_chk(a__))->buffer_;
+      int64_t const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        jlong checkedItemId = *b__++;
-        [ids addWithId:ASIdGenerator_getNameWithInt_((jint) checkedItemId)];
+        int64_t checkedItemId = *b__++;
+        [ids addWithId:ASIdGenerator_getNameWithInt_((int32_t) checkedItemId)];
       }
     }
     ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"checkedItemIds", ids);
@@ -2751,7 +2780,7 @@ void ASListViewImpl_initListAdapter(ASListViewImpl *self) {
   [((ADListView *) nil_chk(self->listView_)) setAdapterWithADListAdapter:self->listAdapter_];
 }
 
-jint ASListViewImpl_updatePositionWithJavaUtilMap_withInt_(ASListViewImpl *self, id<JavaUtilMap> eventMap, jint position) {
+int32_t ASListViewImpl_updatePositionWithJavaUtilMap_withInt_(ASListViewImpl *self, id<JavaUtilMap> eventMap, int32_t position) {
   return position;
 }
 
@@ -2773,7 +2802,7 @@ void ASListViewImpl_addHeaderTemplateWithId_(ASListViewImpl *self, id objValue) 
   }
 }
 
-void ASListViewImpl_handleItemClickWithInt_(ASListViewImpl *self, jint position) {
+void ASListViewImpl_handleItemClickWithInt_(ASListViewImpl *self, int32_t position) {
   id<ADAdapterView_OnItemClickListener> onItemClickListener;
   if ([self->onItemClick_ isKindOfClass:[NSString class]]) {
     onItemClickListener = new_ASListViewImpl_OnItemClickListener_initWithASIWidget_withNSString_(self, (NSString *) self->onItemClick_);
@@ -2785,7 +2814,7 @@ void ASListViewImpl_handleItemClickWithInt_(ASListViewImpl *self, jint position)
   [((id<ADAdapterView_OnItemClickListener>) nil_chk(onItemClickListener)) onItemClickWithADAdapterView:self->listView_ withADView:(ADView *) cast_chk([self asWidget], [ADView class]) withInt:position withLong:-1l];
 }
 
-id ASListViewImpl_getCellWithInt_(ASListViewImpl *self, jint index) {
+id ASListViewImpl_getCellWithInt_(ASListViewImpl *self, int32_t index) {
   id cell = ASListViewImpl_getReusableCellWithNSString_(self, ASListViewImpl_simpleTableIdentifier);
   if (cell == nil) {
     cell = ASListViewImpl_createCellWithInt_(self, index);
@@ -2798,7 +2827,7 @@ id ASListViewImpl_getCellWithInt_(ASListViewImpl *self, jint index) {
   return cell;
 }
 
-void ASListViewImpl_setCellDividerInsetsWithInt_withId_(ASListViewImpl *self, jint index, id cell) {
+void ASListViewImpl_setCellDividerInsetsWithInt_withId_(ASListViewImpl *self, int32_t index, id cell) {
   if (self->footerTemplate_ != nil && index == [((ASListViewImpl_ListAdapter *) nil_chk(self->listAdapter_)) getCount] - 1 && !self->footerDividersEnabled_) {
     ASListViewImpl_nativeSetSeparatorCellInsetRightWithId_withInt_(self, cell, 100000);
   }
@@ -2807,12 +2836,12 @@ void ASListViewImpl_setCellDividerInsetsWithInt_withId_(ASListViewImpl *self, ji
   }
 }
 
-void ASListViewImpl_nativeSetSeparatorCellInsetRightWithId_withInt_(ASListViewImpl *self, id cell, jint val) {
+void ASListViewImpl_nativeSetSeparatorCellInsetRightWithId_withInt_(ASListViewImpl *self, id cell, int32_t val) {
   CustomUITableViewCell* mycell = (UITableView*) self.uiView;
   mycell.separatorInset = UIEdgeInsetsMake(mycell.separatorInset.top, mycell.separatorInset.left, mycell.separatorInset.bottom, val);
 }
 
-id ASListViewImpl_createCellWithInt_(ASListViewImpl *self, jint index) {
+id ASListViewImpl_createCellWithInt_(ASListViewImpl *self, int32_t index) {
   ASLoopParam *model = (ASLoopParam *) cast_chk([((ASListViewImpl_ListAdapter *) nil_chk(self->listAdapter_)) getItemWithInt:index], [ASLoopParam class]);
   id<ASIWidget> widget = nil;
   if (self->autoLayout_) {
@@ -2826,7 +2855,7 @@ id ASListViewImpl_createCellWithInt_(ASListViewImpl *self, jint index) {
   return cell;
 }
 
-ADView *ASListViewImpl_updateLayoutWithASIWidget_withInt_(ASListViewImpl *self, id<ASIWidget> myWidget, jint index) {
+ADView *ASListViewImpl_updateLayoutWithASIWidget_withInt_(ASListViewImpl *self, id<ASIWidget> myWidget, int32_t index) {
   ASLoopParam *model = (ASLoopParam *) cast_chk([((ASListViewImpl_ListAdapter *) nil_chk(self->listAdapter_)) getItemWithInt:index], [ASLoopParam class]);
   [self updateModelRecurseWithASIWidget:myWidget withASLoopParam:model];
   if (self->footerTemplate_ != nil && index == [((ASListViewImpl_ListAdapter *) nil_chk(self->listAdapter_)) getCount] - 1) {
@@ -2845,13 +2874,13 @@ ADView *ASListViewImpl_updateLayoutWithASIWidget_withInt_(ASListViewImpl *self, 
   return nil;
 }
 
-void ASListViewImpl_setCustomDividerAttributesWithASIWidget_withBoolean_(ASListViewImpl *self, id<ASIWidget> cellwidget, jboolean visible) {
+void ASListViewImpl_setCustomDividerAttributesWithASIWidget_withBoolean_(ASListViewImpl *self, id<ASIWidget> cellwidget, bool visible) {
   if (self->divider_ != nil && [ASHasWidgets_class_() isInstance:cellwidget]) {
     id<JavaUtilList> childwidgets = [((id<ASHasWidgets>) nil_chk(((id<ASHasWidgets>) cast_check(cellwidget, ASHasWidgets_class_())))) getWidgets];
     id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(childwidgets)) getWithInt:[childwidgets size] - 1];
     if ([((NSString *) nil_chk([((id<ASIWidget>) nil_chk(widget)) getId])) isEqual:@"@+id/divider"]) {
       ADView *view = (ADView *) cast_chk(([widget asWidget]), [ADView class]);
-      jint visibility = visible ? ADView_VISIBLE : ADView_GONE;
+      int32_t visibility = visible ? ADView_VISIBLE : ADView_GONE;
       if ([((ADView *) nil_chk(view)) getVisibility] != visibility) {
         ASViewImpl_setVisibilityWithASIWidget_withId_withId_(widget, [widget asNativeWidget], JavaLangInteger_valueOfWithInt_(visibility));
         [view requestLayout];
@@ -2900,7 +2929,7 @@ void ASListViewImpl_updateTableSelection(ASListViewImpl *self) {
   tableView.allowsSelection = YES;
 }
 
-jint ASListViewImpl_nativeGetWidth(ASListViewImpl *self) {
+int32_t ASListViewImpl_nativeGetWidth(ASListViewImpl *self) {
   UITableView* tableView = (UITableView*) self.uiView;
   return tableView.frame.size.width;
 }
@@ -2951,7 +2980,7 @@ void ASListViewImpl_setSeparatorStyleWithId_(ASListViewImpl *self, id objValue) 
   ASListViewImpl_nativeSetSeparatorStyleWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASListViewImpl_nativeSetSeparatorStyleWithInt_(ASListViewImpl *self, jint separatorStyle) {
+void ASListViewImpl_nativeSetSeparatorStyleWithInt_(ASListViewImpl *self, int32_t separatorStyle) {
   [((UITableView*)self->uiView_) setSeparatorStyle:separatorStyle];
 }
 
@@ -2959,12 +2988,12 @@ id ASListViewImpl_getStackFromBottom(ASListViewImpl *self) {
   return JavaLangBoolean_valueOfWithBoolean_(ASListViewImpl_isStackFromBottom(self));
 }
 
-jboolean ASListViewImpl_isStackFromBottom(ASListViewImpl *self) {
+bool ASListViewImpl_isStackFromBottom(ASListViewImpl *self) {
   return ASListViewImpl_nativeGetStackFromBottom(self);
 }
 
 void ASListViewImpl_setStackFromBottomWithId_(ASListViewImpl *self, id objValue) {
-  jboolean stackFromBottom = [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue];
+  bool stackFromBottom = [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue];
   ASListViewImpl_nativeSetStackFromBottomWithBoolean_(self, stackFromBottom);
   if (stackFromBottom) {
     ASListViewImpl_nativesetStackFromBottom(self);
@@ -2974,11 +3003,11 @@ void ASListViewImpl_setStackFromBottomWithId_(ASListViewImpl *self, id objValue)
   }
 }
 
-jboolean ASListViewImpl_nativeGetStackFromBottom(ASListViewImpl *self) {
+bool ASListViewImpl_nativeGetStackFromBottom(ASListViewImpl *self) {
   return ((ASUITableView*)self->uiView_).stackFromBottom;
 }
 
-void ASListViewImpl_nativeSetStackFromBottomWithBoolean_(ASListViewImpl *self, jboolean stackFromBottom) {
+void ASListViewImpl_nativeSetStackFromBottomWithBoolean_(ASListViewImpl *self, bool stackFromBottom) {
   ((ASUITableView*)self->uiView_).stackFromBottom = stackFromBottom;
 }
 
@@ -3001,7 +3030,7 @@ void ASListViewImpl_setOnItemLongClickWithId_(ASListViewImpl *self, id objValue)
   ASListViewImpl_updateTableSelection(self);
 }
 
-void ASListViewImpl_longPressWithInt_(ASListViewImpl *self, jint position) {
+void ASListViewImpl_longPressWithInt_(ASListViewImpl *self, int32_t position) {
   [((id<ADAdapterView_OnItemLongClickListener>) nil_chk(self->onItemLongClickListener_)) onItemLongClickWithADAdapterView:self->listView_ withADView:(ADView *) cast_chk([self asWidget], [ADView class]) withInt:position withLong:-1];
 }
 
@@ -3057,7 +3086,7 @@ void ASListViewImpl_setListSelectorWithNSString_withId_(ASListViewImpl *self, NS
   ASListViewImpl_nativesetTrackSelectedCellWithBoolean_(self, self->listSelector_ != nil && [self->listSelector_ isStateful]);
 }
 
-void ASListViewImpl_nativesetTrackSelectedCellWithBoolean_(ASListViewImpl *self, jboolean trackSelectedCell) {
+void ASListViewImpl_nativesetTrackSelectedCellWithBoolean_(ASListViewImpl *self, bool trackSelectedCell) {
   ((ASUITableView*)self->uiView_).trackSelectedCell = trackSelectedCell;
 }
 
@@ -3114,7 +3143,7 @@ void ASListViewImpl_setSeparatorInsetRightWithId_(ASListViewImpl *self, id objVa
   ASListViewImpl_nativeSetSeparatorInsetRightWithInt_(self, self->separatorInsetRight_);
 }
 
-void ASListViewImpl_nativeSetSeparatorInsetRightWithInt_(ASListViewImpl *self, jint val) {
+void ASListViewImpl_nativeSetSeparatorInsetRightWithInt_(ASListViewImpl *self, int32_t val) {
   ASUITableView* tableView = (ASUITableView*) self.uiView;
   tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, tableView.separatorInset.left, tableView.separatorInset.bottom, val);
 }
@@ -3123,7 +3152,7 @@ void ASListViewImpl_setSeparatorInsetLeftWithId_(ASListViewImpl *self, id objVal
   ASListViewImpl_nativeSetSeparatorInsetLeftWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASListViewImpl_nativeSetSeparatorInsetLeftWithInt_(ASListViewImpl *self, jint val) {
+void ASListViewImpl_nativeSetSeparatorInsetLeftWithInt_(ASListViewImpl *self, int32_t val) {
   ASUITableView* tableView = (ASUITableView*) self.uiView;
   tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, val, tableView.separatorInset.bottom, tableView.separatorInset.right);
 }
@@ -3132,7 +3161,7 @@ void ASListViewImpl_setSeparatorInsetBottomWithId_(ASListViewImpl *self, id objV
   ASListViewImpl_nativeSetSeparatorInsetBottomWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASListViewImpl_nativeSetSeparatorInsetBottomWithInt_(ASListViewImpl *self, jint val) {
+void ASListViewImpl_nativeSetSeparatorInsetBottomWithInt_(ASListViewImpl *self, int32_t val) {
   ASUITableView* tableView = (ASUITableView*) self.uiView;
   tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, tableView.separatorInset.left, val, tableView.separatorInset.right);
 }
@@ -3141,7 +3170,7 @@ void ASListViewImpl_setSeparatorInsetTopWithId_(ASListViewImpl *self, id objValu
   ASListViewImpl_nativeSetSeparatorInsetTopWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASListViewImpl_nativeSetSeparatorInsetTopWithInt_(ASListViewImpl *self, jint val) {
+void ASListViewImpl_nativeSetSeparatorInsetTopWithInt_(ASListViewImpl *self, int32_t val) {
   ASUITableView* tableView = (ASUITableView*) self.uiView;
   tableView.separatorInset = UIEdgeInsetsMake(val, tableView.separatorInset.left, tableView.separatorInset.bottom, tableView.separatorInset.right);
 }
@@ -3158,6 +3187,8 @@ void ASListViewImpl_preFilter(ASListViewImpl *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl)
+
+J2OBJC_NAME_MAPPING(ASListViewImpl, "com.ashera.layout", "AS")
 
 @implementation ASListViewImpl_ChoiceMode
 
@@ -3203,10 +3234,10 @@ void ASListViewImpl_ChoiceMode_init(ASListViewImpl_ChoiceMode *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"multipleChoice" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"multipleChoiceModal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"singleChoice" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
+    (void) [self->mapping_ putWithId:@"multipleChoice" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"multipleChoiceModal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"singleChoice" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
   }
 }
 
@@ -3346,19 +3377,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -3367,8 +3398,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -3384,11 +3415,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -3415,8 +3446,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -3484,12 +3515,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -3519,18 +3550,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)measureHeightOfChildrenWithInt:(jint)widthMeasureSpec
-                               withInt:(jint)startPosition
-                               withInt:(jint)endPosition
-                               withInt:(jint)maxHeight
-                               withInt:(jint)disallowPartialChildPosition {
-  jint height = 0;
-  for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(this$0_->dataList_)) size]; i++) {
+- (int32_t)measureHeightOfChildrenWithInt:(int32_t)widthMeasureSpec
+                                  withInt:(int32_t)startPosition
+                                  withInt:(int32_t)endPosition
+                                  withInt:(int32_t)maxHeight
+                                  withInt:(int32_t)disallowPartialChildPosition {
+  int32_t height = 0;
+  for (int32_t i = 0; i < [((id<JavaUtilList>) nil_chk(this$0_->dataList_)) size]; i++) {
     height += [this$0_ calculateHeightOfRowWithInt:i];
   }
   return height;
@@ -3716,7 +3747,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListViewExt)
 
 @implementation ASListViewImpl_ListAdapter
 
-- (jboolean)isEnabledWithInt:(jint)position {
+- (bool)isEnabledWithInt:(int32_t)position {
   return true;
 }
 
@@ -3725,27 +3756,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListViewExt)
   return self;
 }
 
-- (jint)getCount {
+- (int32_t)getCount {
   return [((id<JavaUtilList>) nil_chk(mObjects_)) size];
 }
 
-- (id)getItemWithInt:(jint)position {
+- (id)getItemWithInt:(int32_t)position {
   return [((id<JavaUtilList>) nil_chk(mObjects_)) getWithInt:position];
 }
 
-- (jlong)getItemIdWithInt:(jint)position {
+- (int64_t)getItemIdWithInt:(int32_t)position {
   NSString *id_ = [((id<JavaUtilList>) nil_chk(this$0_->ids_)) getWithInt:position];
   if (id_ == nil) {
     return 0;
   }
-  return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([this$0_ quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) intValue];
+  return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([this$0_ quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) longLongValue];
 }
 
-- (jboolean)hasStableIds {
+- (bool)hasStableIds {
   return true;
 }
 
-- (ADView *)getViewWithInt:(jint)position
+- (ADView *)getViewWithInt:(int32_t)position
                 withADView:(ADView *)convertView
            withADViewGroup:(ADViewGroup *)parent {
   ASLoopParam *model = [((id<JavaUtilList>) nil_chk(mObjects_)) getWithInt:position];
@@ -3843,15 +3874,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListAdapter)
   NSString *prefixString = [prefix description];
   JavaUtilArrayList *values;
   @synchronized(this$0_->mLock_) {
-    values = JreRetainedLocalValue(new_JavaUtilArrayList_initWithJavaUtilCollection_(this$0_->this$0_->dataList_));
+    values = new_JavaUtilArrayList_initWithJavaUtilCollection_(this$0_->this$0_->dataList_);
   }
-  jint count = [values size];
+  int32_t count = [values size];
   JavaUtilArrayList *newValues = new_JavaUtilArrayList_init();
   id<ASIFilter> filter = ASFilterFactory_getWithNSString_(this$0_->this$0_->filterId_);
   if (filter == nil) {
     filter = ASFilterFactory_getWithNSString_(JreLoadStatic(ASFilterFactory, DEFAULT_FILTER));
   }
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     ASLoopParam *value = [values getWithInt:i];
     if (this$0_->this$0_->filterItemPaths_ != nil) {
       {
@@ -3859,7 +3890,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListAdapter)
         NSString * const *b__ = a__->buffer_;
         NSString * const *e__ = b__ + a__->size_;
         while (b__ < e__) {
-          NSString *path = *b__++;
+          NSString *path = RETAIN_AND_AUTORELEASE(*b__++);
           ASModelExpressionParser_ModelLoopHolder *modelLoopHolder = ASModelExpressionParser_parseModelLoopExpressionWithNSString_([this$0_->this$0_ getModelFor]);
           NSString *varName = ((ASModelExpressionParser_ModelLoopHolder *) nil_chk(modelLoopHolder))->varName_;
           id modelVal = [this$0_->this$0_ getModelByPathWithNSString:varName withId:value];
@@ -3952,6 +3983,24 @@ ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_values_[4];
   return (ASListViewImpl_FilterStatus_Enum)[self ordinal];
 }
 
+- (ASListViewImpl_FilterStatus_Enum)enumValue {
+  return (ASListViewImpl_FilterStatus_Enum)[self ordinal];
+}
+
++ (ASListViewImpl_FilterStatus *)fromNSEnum:(ASListViewImpl_FilterStatus_Enum)nativeValue {
+  ASListViewImpl_FilterStatus *javaEnum = ASListViewImpl_FilterStatus_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ASListViewImpl_FilterStatus_Enum out of range.");
+  return javaEnum;
+}
+
+- (ASListViewImpl_FilterStatus_ORDINAL)ordinal {
+  return (ASListViewImpl_FilterStatus_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithFilterStatus:(ASListViewImpl_FilterStatus_Enum)value {
+  return RETAIN_(ASListViewImpl_FilterStatus_fromOrdinal((ASListViewImpl_FilterStatus_ORDINAL)value));
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "[LASListViewImpl_FilterStatus;", 0x9, -1, -1, -1, -1, -1, -1 },
@@ -3976,21 +4025,21 @@ ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_values_[4];
 
 + (void)initialize {
   if (self == [ASListViewImpl_FilterStatus class]) {
-    JreEnum(ASListViewImpl_FilterStatus, None) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(JreEnumConstantName(ASListViewImpl_FilterStatus_class_(), 0), 0);
-    JreEnum(ASListViewImpl_FilterStatus, Restore) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(JreEnumConstantName(ASListViewImpl_FilterStatus_class_(), 1), 1);
-    JreEnum(ASListViewImpl_FilterStatus, Filtering) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(JreEnumConstantName(ASListViewImpl_FilterStatus_class_(), 2), 2);
-    JreEnum(ASListViewImpl_FilterStatus, Done) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(JreEnumConstantName(ASListViewImpl_FilterStatus_class_(), 3), 3);
+    JreEnum(ASListViewImpl_FilterStatus, None) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(@"None", 0);
+    JreEnum(ASListViewImpl_FilterStatus, Restore) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(@"Restore", 1);
+    JreEnum(ASListViewImpl_FilterStatus, Filtering) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(@"Filtering", 2);
+    JreEnum(ASListViewImpl_FilterStatus, Done) = new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(@"Done", 3);
     J2OBJC_SET_INITIALIZED(ASListViewImpl_FilterStatus)
   }
 }
 
 @end
 
-void ASListViewImpl_FilterStatus_initWithNSString_withInt_(ASListViewImpl_FilterStatus *self, NSString *__name, jint __ordinal) {
+void ASListViewImpl_FilterStatus_initWithNSString_withInt_(ASListViewImpl_FilterStatus *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-ASListViewImpl_FilterStatus *new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
+ASListViewImpl_FilterStatus *new_ASListViewImpl_FilterStatus_initWithNSString_withInt_(NSString *__name, int32_t __ordinal) {
   J2OBJC_NEW_IMPL(ASListViewImpl_FilterStatus, initWithNSString_withInt_, __name, __ordinal)
 }
 
@@ -4008,12 +4057,11 @@ ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_valueOfWithNSString_(NS
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_fromOrdinal(NSUInteger ordinal) {
+ASListViewImpl_FilterStatus *ASListViewImpl_FilterStatus_fromOrdinal(ASListViewImpl_FilterStatus_ORDINAL ordinal) {
   ASListViewImpl_FilterStatus_initialize();
-  if (ordinal >= 4) {
+  if (ordinal < 0 || ordinal >= 4) {
     return nil;
   }
   return ASListViewImpl_FilterStatus_values_[ordinal];
@@ -4042,8 +4090,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_FilterStatus)
 
 - (void)onItemClickWithADAdapterView:(ADAdapterView *)parent
                           withADView:(ADView *)view
-                             withInt:(jint)position
-                            withLong:(jlong)id_ {
+                             withInt:(int32_t)position
+                            withLong:(int64_t)id_ {
   if (action_ == nil || [action_ isEqual:@"onItemClick"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onItemClick"];
     id<JavaUtilMap> obj = [self getOnItemClickEventObjWithADAdapterView:parent withADView:view withInt:position withLong:id_];
@@ -4065,7 +4113,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_FilterStatus)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -4077,8 +4125,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_FilterStatus)
 
 - (id<JavaUtilMap>)getOnItemClickEventObjWithADAdapterView:(ADAdapterView *)parent
                                                 withADView:(ADView *)view
-                                                   withInt:(jint)position
-                                                  withLong:(jlong)id_ {
+                                                   withInt:(int32_t)position
+                                                  withLong:(int64_t)id_ {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"itemclick"];
@@ -4176,11 +4224,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemClickListener)
   return self;
 }
 
-- (jboolean)onItemLongClickWithADAdapterView:(ADAdapterView *)parent
-                                  withADView:(ADView *)view
-                                     withInt:(jint)position
-                                    withLong:(jlong)id_ {
-  jboolean result = true;
+- (bool)onItemLongClickWithADAdapterView:(ADAdapterView *)parent
+                              withADView:(ADView *)view
+                                 withInt:(int32_t)position
+                                withLong:(int64_t)id_ {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onItemLongClick"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onItemLongClick"];
     id<JavaUtilMap> obj = [self getOnItemLongClickEventObjWithADAdapterView:parent withADView:view withInt:position withLong:id_];
@@ -4205,7 +4253,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemClickListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -4217,8 +4265,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemClickListener)
 
 - (id<JavaUtilMap>)getOnItemLongClickEventObjWithADAdapterView:(ADAdapterView *)parent
                                                     withADView:(ADView *)view
-                                                       withInt:(jint)position
-                                                      withLong:(jlong)id_ {
+                                                       withInt:(int32_t)position
+                                                      withLong:(int64_t)id_ {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"itemlongclick"];
@@ -4316,9 +4364,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemLongClickListener)
 }
 
 - (void)onScrollWithADAbsListView:(ADAbsListView *)view
-                          withInt:(jint)firstVisibleItem
-                          withInt:(jint)visibleItemCount
-                          withInt:(jint)totalItemCount {
+                          withInt:(int32_t)firstVisibleItem
+                          withInt:(int32_t)visibleItemCount
+                          withInt:(int32_t)totalItemCount {
   if (action_ == nil || [action_ isEqual:@"onScrollChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onScrollChange"];
     id<JavaUtilMap> obj = [self getOnScrollChangeEventObjWithADAbsListView:view withInt:firstVisibleItem withInt:visibleItemCount withInt:totalItemCount];
@@ -4340,7 +4388,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemLongClickListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -4351,7 +4399,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemLongClickListener)
 }
 
 - (void)onScrollStateChangedWithADAbsListView:(ADAbsListView *)view
-                                      withInt:(jint)scrollState {
+                                      withInt:(int32_t)scrollState {
   if (action_ == nil || [action_ isEqual:@"onScrollStateChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onScrollStateChange"];
     id<JavaUtilMap> obj = [self getOnScrollStateChangeEventObjWithADAbsListView:view withInt:scrollState];
@@ -4373,7 +4421,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemLongClickListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -4384,7 +4432,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemLongClickListener)
 }
 
 - (id<JavaUtilMap>)getOnScrollStateChangeEventObjWithADAbsListView:(ADAbsListView *)view
-                                                           withInt:(jint)scrollState {
+                                                           withInt:(int32_t)scrollState {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"scrollstatechange"];
@@ -4402,9 +4450,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnItemLongClickListener)
 }
 
 - (id<JavaUtilMap>)getOnScrollChangeEventObjWithADAbsListView:(ADAbsListView *)view
-                                                      withInt:(jint)firstVisibleItem
-                                                      withInt:(jint)visibleItemCount
-                                                      withInt:(jint)totalItemCount {
+                                                      withInt:(int32_t)firstVisibleItem
+                                                      withInt:(int32_t)visibleItemCount
+                                                      withInt:(int32_t)totalItemCount {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"scrollchange"];

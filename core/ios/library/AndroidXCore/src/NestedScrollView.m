@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\widget\NestedScrollView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ApplicationInfo.h"
 #include "Build.h"
 #include "Context.h"
@@ -15,40 +20,49 @@
 #include "View.h"
 #include "ViewCompat.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXNestedScrollView () {
  @public
-  jint mLastMotionY_;
-  jboolean mIsLayoutDirty_;
-  jboolean mIsLaidOut_;
-  jboolean mIsBeingDragged_;
-  jboolean mFillViewport_;
-  jboolean mSmoothScrollingEnabled_;
-  jint mTouchSlop_NestedScrollView_;
-  jint mMinimumVelocity_;
-  jint mMaximumVelocity_;
-  jint mActivePointerId_;
+  int32_t mLastMotionY_;
+  bool mIsLayoutDirty_;
+  bool mIsLaidOut_;
+  bool mIsBeingDragged_;
+  bool mFillViewport_;
+  bool mSmoothScrollingEnabled_;
+  int32_t mTouchSlop_NestedScrollView_;
+  int32_t mMinimumVelocity_;
+  int32_t mMaximumVelocity_;
+  int32_t mActivePointerId_;
   IOSIntArray *mScrollOffset_;
   IOSIntArray *mScrollConsumed_;
-  jint mNestedYOffset_;
-  jint mLastScrollerY_;
+  int32_t mNestedYOffset_;
+  int32_t mLastScrollerY_;
   ADXNestedScrollingParentHelper *mParentHelper_;
   ADXNestedScrollingChildHelper *mChildHelper_;
   id<ADXNestedScrollView_OnScrollChangeListener> mOnScrollChangeListener_;
-  jint originalRightPadding_;
+  int32_t originalRightPadding_;
 }
 
-- (void)onNestedScrollInternalWithInt:(jint)dyUnconsumed
-                              withInt:(jint)type
+- (void)onNestedScrollInternalWithInt:(int32_t)dyUnconsumed
+                              withInt:(int32_t)type
                          withIntArray:(IOSIntArray *)consumed;
 
-- (void)scrollByWithInt:(jint)i
-                withInt:(jint)dyUnconsumed;
+- (void)scrollByWithInt:(int32_t)i
+                withInt:(int32_t)dyUnconsumed;
 
-- (void)flingWithInt:(jint)velocityY;
+- (void)flingWithInt:(int32_t)velocityY;
 
 @end
 
@@ -58,19 +72,19 @@ J2OBJC_FIELD_SETTER(ADXNestedScrollView, mParentHelper_, ADXNestedScrollingParen
 J2OBJC_FIELD_SETTER(ADXNestedScrollView, mChildHelper_, ADXNestedScrollingChildHelper *)
 J2OBJC_FIELD_SETTER(ADXNestedScrollView, mOnScrollChangeListener_, id<ADXNestedScrollView_OnScrollChangeListener>)
 
-inline jint ADXNestedScrollView_get_DEFAULT_SMOOTH_SCROLL_DURATION(void);
+inline int32_t ADXNestedScrollView_get_DEFAULT_SMOOTH_SCROLL_DURATION(void);
 #define ADXNestedScrollView_DEFAULT_SMOOTH_SCROLL_DURATION 250
-J2OBJC_STATIC_FIELD_CONSTANT(ADXNestedScrollView, DEFAULT_SMOOTH_SCROLL_DURATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXNestedScrollView, DEFAULT_SMOOTH_SCROLL_DURATION, int32_t)
 
-inline jint ADXNestedScrollView_get_INVALID_POINTER(void);
+inline int32_t ADXNestedScrollView_get_INVALID_POINTER(void);
 #define ADXNestedScrollView_INVALID_POINTER -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADXNestedScrollView, INVALID_POINTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXNestedScrollView, INVALID_POINTER, int32_t)
 
-__attribute__((unused)) static void ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(ADXNestedScrollView *self, jint dyUnconsumed, jint type, IOSIntArray *consumed);
+__attribute__((unused)) static void ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(ADXNestedScrollView *self, int32_t dyUnconsumed, int32_t type, IOSIntArray *consumed);
 
-__attribute__((unused)) static void ADXNestedScrollView_scrollByWithInt_withInt_(ADXNestedScrollView *self, jint i, jint dyUnconsumed);
+__attribute__((unused)) static void ADXNestedScrollView_scrollByWithInt_withInt_(ADXNestedScrollView *self, int32_t i, int32_t dyUnconsumed);
 
-__attribute__((unused)) static void ADXNestedScrollView_flingWithInt_(ADXNestedScrollView *self, jint velocityY);
+__attribute__((unused)) static void ADXNestedScrollView_flingWithInt_(ADXNestedScrollView *self, int32_t velocityY);
 
 @interface ADXNestedScrollView_OnScrollChangeListener : NSObject
 
@@ -78,55 +92,55 @@ __attribute__((unused)) static void ADXNestedScrollView_flingWithInt_(ADXNestedS
 
 @implementation ADXNestedScrollView
 
-- (void)dispatchNestedScrollWithInt:(jint)dxConsumed
-                            withInt:(jint)dyConsumed
-                            withInt:(jint)dxUnconsumed
-                            withInt:(jint)dyUnconsumed
+- (void)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
                        withIntArray:(IOSIntArray *)offsetInWindow
-                            withInt:(jint)type
+                            withInt:(int32_t)type
                        withIntArray:(IOSIntArray *)consumed {
   [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) dispatchNestedScrollWithInt:dxConsumed withInt:dyConsumed withInt:dxUnconsumed withInt:dyUnconsumed withIntArray:offsetInWindow withInt:type withIntArray:consumed];
 }
 
-- (jboolean)startNestedScrollWithInt:(jint)axes
-                             withInt:(jint)type {
+- (bool)startNestedScrollWithInt:(int32_t)axes
+                         withInt:(int32_t)type {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) startNestedScrollWithInt:axes withInt:type];
 }
 
-- (void)stopNestedScrollWithInt:(jint)type {
+- (void)stopNestedScrollWithInt:(int32_t)type {
   [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) stopNestedScrollWithInt:type];
 }
 
-- (jboolean)hasNestedScrollingParentWithInt:(jint)type {
+- (bool)hasNestedScrollingParentWithInt:(int32_t)type {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) hasNestedScrollingParentWithInt:type];
 }
 
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow
-                                withInt:(jint)type {
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow
+                            withInt:(int32_t)type {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) dispatchNestedScrollWithInt:dxConsumed withInt:dyConsumed withInt:dxUnconsumed withInt:dyUnconsumed withIntArray:offsetInWindow withInt:type];
 }
 
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow
-                                   withInt:(jint)type {
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow
+                               withInt:(int32_t)type {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) dispatchNestedPreScrollWithInt:dx withInt:dy withIntArray:consumed withIntArray:offsetInWindow withInt:type];
 }
 
-- (void)setNestedScrollingEnabledWithBoolean:(jboolean)enabled {
+- (void)setNestedScrollingEnabledWithBoolean:(bool)enabled {
   [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) setNestedScrollingEnabledWithBoolean:enabled];
 }
 
-- (jboolean)isNestedScrollingEnabled {
+- (bool)isNestedScrollingEnabled {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) isNestedScrollingEnabled];
 }
 
-- (jboolean)startNestedScrollWithInt:(jint)axes {
+- (bool)startNestedScrollWithInt:(int32_t)axes {
   return [self startNestedScrollWithInt:axes withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
@@ -134,99 +148,99 @@ __attribute__((unused)) static void ADXNestedScrollView_flingWithInt_(ADXNestedS
   [self stopNestedScrollWithInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (jboolean)hasNestedScrollingParent {
+- (bool)hasNestedScrollingParent {
   return [self hasNestedScrollingParentWithInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow {
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) dispatchNestedScrollWithInt:dxConsumed withInt:dyConsumed withInt:dxUnconsumed withInt:dyUnconsumed withIntArray:offsetInWindow];
 }
 
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow {
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow {
   return [self dispatchNestedPreScrollWithInt:dx withInt:dy withIntArray:consumed withIntArray:offsetInWindow withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (jboolean)dispatchNestedFlingWithFloat:(jfloat)velocityX
-                               withFloat:(jfloat)velocityY
-                             withBoolean:(jboolean)consumed {
+- (bool)dispatchNestedFlingWithFloat:(float)velocityX
+                           withFloat:(float)velocityY
+                         withBoolean:(bool)consumed {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) dispatchNestedFlingWithFloat:velocityX withFloat:velocityY withBoolean:consumed];
 }
 
-- (jboolean)dispatchNestedPreFlingWithFloat:(jfloat)velocityX
-                                  withFloat:(jfloat)velocityY {
+- (bool)dispatchNestedPreFlingWithFloat:(float)velocityX
+                              withFloat:(float)velocityY {
   return [((ADXNestedScrollingChildHelper *) nil_chk(mChildHelper_)) dispatchNestedPreFlingWithFloat:velocityX withFloat:velocityY];
 }
 
 - (void)onNestedScrollWithADView:(ADView *)target
-                         withInt:(jint)dxConsumed
-                         withInt:(jint)dyConsumed
-                         withInt:(jint)dxUnconsumed
-                         withInt:(jint)dyUnconsumed
-                         withInt:(jint)type
+                         withInt:(int32_t)dxConsumed
+                         withInt:(int32_t)dyConsumed
+                         withInt:(int32_t)dxUnconsumed
+                         withInt:(int32_t)dyUnconsumed
+                         withInt:(int32_t)type
                     withIntArray:(IOSIntArray *)consumed {
   ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(self, dyUnconsumed, type, consumed);
 }
 
-- (void)onNestedScrollInternalWithInt:(jint)dyUnconsumed
-                              withInt:(jint)type
+- (void)onNestedScrollInternalWithInt:(int32_t)dyUnconsumed
+                              withInt:(int32_t)type
                          withIntArray:(IOSIntArray *)consumed {
   ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(self, dyUnconsumed, type, consumed);
 }
 
-- (jboolean)onStartNestedScrollWithADView:(ADView *)child
-                               withADView:(ADView *)target
-                                  withInt:(jint)axes
-                                  withInt:(jint)type {
+- (bool)onStartNestedScrollWithADView:(ADView *)child
+                           withADView:(ADView *)target
+                              withInt:(int32_t)axes
+                              withInt:(int32_t)type {
   return (axes & ADXViewCompat_SCROLL_AXIS_VERTICAL) != 0;
 }
 
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes
-                                 withInt:(jint)type {
+                                 withInt:(int32_t)axes
+                                 withInt:(int32_t)type {
   [((ADXNestedScrollingParentHelper *) nil_chk(mParentHelper_)) onNestedScrollAcceptedWithADView:child withADView:target withInt:axes withInt:type];
   [self startNestedScrollWithInt:ADXViewCompat_SCROLL_AXIS_VERTICAL withInt:type];
 }
 
 - (void)onStopNestedScrollWithADView:(ADView *)target
-                             withInt:(jint)type {
+                             withInt:(int32_t)type {
   [((ADXNestedScrollingParentHelper *) nil_chk(mParentHelper_)) onStopNestedScrollWithADView:target withInt:type];
   [self stopNestedScrollWithInt:type];
 }
 
 - (void)onNestedScrollWithADView:(ADView *)target
-                         withInt:(jint)dxConsumed
-                         withInt:(jint)dyConsumed
-                         withInt:(jint)dxUnconsumed
-                         withInt:(jint)dyUnconsumed
-                         withInt:(jint)type {
+                         withInt:(int32_t)dxConsumed
+                         withInt:(int32_t)dyConsumed
+                         withInt:(int32_t)dxUnconsumed
+                         withInt:(int32_t)dyUnconsumed
+                         withInt:(int32_t)type {
   ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(self, dyUnconsumed, type, nil);
 }
 
 - (void)onNestedPreScrollWithADView:(ADView *)target
-                            withInt:(jint)dx
-                            withInt:(jint)dy
+                            withInt:(int32_t)dx
+                            withInt:(int32_t)dy
                        withIntArray:(IOSIntArray *)consumed
-                            withInt:(jint)type {
+                            withInt:(int32_t)type {
   [self dispatchNestedPreScrollWithInt:dx withInt:dy withIntArray:consumed withIntArray:nil withInt:type];
 }
 
-- (jboolean)onStartNestedScrollWithADView:(ADView *)child
-                               withADView:(ADView *)target
-                                  withInt:(jint)axes {
+- (bool)onStartNestedScrollWithADView:(ADView *)child
+                           withADView:(ADView *)target
+                              withInt:(int32_t)axes {
   return [self onStartNestedScrollWithADView:child withADView:target withInt:axes withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes {
+                                 withInt:(int32_t)axes {
   [self onNestedScrollAcceptedWithADView:child withADView:target withInt:axes withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
@@ -235,24 +249,24 @@ __attribute__((unused)) static void ADXNestedScrollView_flingWithInt_(ADXNestedS
 }
 
 - (void)onNestedScrollWithADView:(ADView *)target
-                         withInt:(jint)dxConsumed
-                         withInt:(jint)dyConsumed
-                         withInt:(jint)dxUnconsumed
-                         withInt:(jint)dyUnconsumed {
+                         withInt:(int32_t)dxConsumed
+                         withInt:(int32_t)dyConsumed
+                         withInt:(int32_t)dxUnconsumed
+                         withInt:(int32_t)dyUnconsumed {
   ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(self, dyUnconsumed, ADXViewCompat_TYPE_TOUCH, nil);
 }
 
 - (void)onNestedPreScrollWithADView:(ADView *)target
-                            withInt:(jint)dx
-                            withInt:(jint)dy
+                            withInt:(int32_t)dx
+                            withInt:(int32_t)dy
                        withIntArray:(IOSIntArray *)consumed {
   [self onNestedPreScrollWithADView:target withInt:dx withInt:dy withIntArray:consumed withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (jboolean)onNestedFlingWithADView:(ADView *)target
-                          withFloat:(jfloat)velocityX
-                          withFloat:(jfloat)velocityY
-                        withBoolean:(jboolean)consumed {
+- (bool)onNestedFlingWithADView:(ADView *)target
+                      withFloat:(float)velocityX
+                      withFloat:(float)velocityY
+                    withBoolean:(bool)consumed {
   if (!consumed) {
     [self dispatchNestedFlingWithFloat:0 withFloat:velocityY withBoolean:true];
     ADXNestedScrollView_flingWithInt_(self, JreFpToInt(velocityY));
@@ -261,13 +275,13 @@ __attribute__((unused)) static void ADXNestedScrollView_flingWithInt_(ADXNestedS
   return false;
 }
 
-- (jboolean)onNestedPreFlingWithADView:(ADView *)target
-                             withFloat:(jfloat)velocityX
-                             withFloat:(jfloat)velocityY {
+- (bool)onNestedPreFlingWithADView:(ADView *)target
+                         withFloat:(float)velocityX
+                         withFloat:(float)velocityY {
   return [self dispatchNestedPreFlingWithFloat:velocityX withFloat:velocityY];
 }
 
-- (jint)getNestedScrollAxes {
+- (int32_t)getNestedScrollAxes {
   return [((ADXNestedScrollingParentHelper *) nil_chk(mParentHelper_)) getNestedScrollAxes];
 }
 
@@ -279,7 +293,7 @@ __attribute__((unused)) static void ADXNestedScrollView_flingWithInt_(ADXNestedS
 }
 
 - (void)addViewWithADView:(ADView *)child
-                  withInt:(jint)index {
+                  withInt:(int32_t)index {
   if ([self getChildCount] > 0) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"ScrollView can host only one direct child");
   }
@@ -295,7 +309,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 }
 
 - (void)addViewWithADView:(ADView *)child
-                  withInt:(jint)index
+                  withInt:(int32_t)index
 withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   if ([self getChildCount] > 0) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"ScrollView can host only one direct child");
@@ -307,63 +321,63 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   JreStrongAssign(&mOnScrollChangeListener_, l);
 }
 
-- (jboolean)isFillViewport {
+- (bool)isFillViewport {
   return mFillViewport_;
 }
 
-- (void)setFillViewportWithBoolean:(jboolean)fillViewport {
+- (void)setFillViewportWithBoolean:(bool)fillViewport {
   if (fillViewport != mFillViewport_) {
     mFillViewport_ = fillViewport;
     [self requestLayout];
   }
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   if (!mFillViewport_) {
     return;
   }
-  jint heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  int32_t heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
   if (heightMode == ADView_MeasureSpec_UNSPECIFIED) {
     return;
   }
   if ([self getChildCount] > 0) {
     ADView *child = JreRetainedLocalValue([self getChildAtWithInt:0]);
     ADFrameLayout_LayoutParams *lp = (ADFrameLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADFrameLayout_LayoutParams class]);
-    jint childSize = [child getMeasuredHeight];
-    jint parentSpace = [self getMeasuredHeight] - [self getPaddingTop] - [self getPaddingBottom] - ((ADFrameLayout_LayoutParams *) nil_chk(lp))->topMargin_ - lp->bottomMargin_;
+    int32_t childSize = [child getMeasuredHeight];
+    int32_t parentSpace = [self getMeasuredHeight] - [self getPaddingTop] - [self getPaddingBottom] - ((ADFrameLayout_LayoutParams *) nil_chk(lp))->topMargin_ - lp->bottomMargin_;
     if (childSize < parentSpace) {
-      jint childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, [self getPaddingLeft] + [self getPaddingRight] + lp->leftMargin_ + lp->rightMargin_, lp->width_);
-      jint childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(parentSpace, ADView_MeasureSpec_EXACTLY);
+      int32_t childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, [self getPaddingLeft] + [self getPaddingRight] + lp->leftMargin_ + lp->rightMargin_, lp->width_);
+      int32_t childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(parentSpace, ADView_MeasureSpec_EXACTLY);
       [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
     }
   }
 }
 
-- (jint)getScrollRange {
-  jint scrollRange = 0;
+- (int32_t)getScrollRange {
+  int32_t scrollRange = 0;
   if ([self getChildCount] > 0) {
     ADView *child = JreRetainedLocalValue([self getChildAtWithInt:0]);
     ADFrameLayout_LayoutParams *lp = (ADFrameLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADFrameLayout_LayoutParams class]);
-    jint childSize = [child getHeight] + ((ADFrameLayout_LayoutParams *) nil_chk(lp))->topMargin_ + lp->bottomMargin_;
-    jint parentSpace = [self getHeight] - [self getPaddingTop] - [self getPaddingBottom];
+    int32_t childSize = [child getHeight] + ((ADFrameLayout_LayoutParams *) nil_chk(lp))->topMargin_ + lp->bottomMargin_;
+    int32_t parentSpace = [self getHeight] - [self getPaddingTop] - [self getPaddingBottom];
     scrollRange = JavaLangMath_maxWithInt_withInt_(0, childSize - parentSpace);
   }
   return scrollRange;
 }
 
-- (jint)computeVerticalScrollRange {
-  jint count = [self getChildCount];
-  jint parentSpace = [self getHeight] - [self getPaddingBottom] - [self getPaddingTop];
+- (int32_t)computeVerticalScrollRange {
+  int32_t count = [self getChildCount];
+  int32_t parentSpace = [self getHeight] - [self getPaddingBottom] - [self getPaddingTop];
   if (count == 0) {
     return parentSpace;
   }
   ADView *child = JreRetainedLocalValue([self getChildAtWithInt:0]);
   ADFrameLayout_LayoutParams *lp = (ADFrameLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADFrameLayout_LayoutParams class]);
-  jint scrollRange = [child getBottom] + ((ADFrameLayout_LayoutParams *) nil_chk(lp))->bottomMargin_;
-  jint scrollY = [self getScrollY];
-  jint overscrollBottom = JavaLangMath_maxWithInt_withInt_(0, scrollRange - parentSpace);
+  int32_t scrollRange = [child getBottom] + ((ADFrameLayout_LayoutParams *) nil_chk(lp))->bottomMargin_;
+  int32_t scrollY = [self getScrollY];
+  int32_t overscrollBottom = JavaLangMath_maxWithInt_withInt_(0, scrollRange - parentSpace);
   if (scrollY < 0) {
     scrollRange -= scrollY;
   }
@@ -373,45 +387,45 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return scrollRange;
 }
 
-- (jint)computeVerticalScrollOffset {
+- (int32_t)computeVerticalScrollOffset {
   return JavaLangMath_maxWithInt_withInt_(0, [super computeVerticalScrollOffset]);
 }
 
-- (jint)computeVerticalScrollExtent {
+- (int32_t)computeVerticalScrollExtent {
   return [super computeVerticalScrollExtent];
 }
 
-- (jint)computeHorizontalScrollRange {
+- (int32_t)computeHorizontalScrollRange {
   return [super computeHorizontalScrollRange];
 }
 
-- (jint)computeHorizontalScrollOffset {
+- (int32_t)computeHorizontalScrollOffset {
   return [super computeHorizontalScrollOffset];
 }
 
-- (jint)computeHorizontalScrollExtent {
+- (int32_t)computeHorizontalScrollExtent {
   return [super computeHorizontalScrollExtent];
 }
 
 - (void)measureChildWithADView:(ADView *)child
-                       withInt:(jint)parentWidthMeasureSpec
-                       withInt:(jint)parentHeightMeasureSpec {
+                       withInt:(int32_t)parentWidthMeasureSpec
+                       withInt:(int32_t)parentHeightMeasureSpec {
   ADViewGroup_LayoutParams *lp = JreRetainedLocalValue([((ADView *) nil_chk(child)) getLayoutParams]);
-  jint childWidthMeasureSpec;
-  jint childHeightMeasureSpec;
+  int32_t childWidthMeasureSpec;
+  int32_t childHeightMeasureSpec;
   childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, [self getPaddingLeft] + [self getPaddingRight], ((ADViewGroup_LayoutParams *) nil_chk(lp))->width_);
   childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(0, ADView_MeasureSpec_UNSPECIFIED);
   [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
 - (void)measureChildWithMarginsWithADView:(ADView *)child
-                                  withInt:(jint)parentWidthMeasureSpec
-                                  withInt:(jint)widthUsed
-                                  withInt:(jint)parentHeightMeasureSpec
-                                  withInt:(jint)heightUsed {
+                                  withInt:(int32_t)parentWidthMeasureSpec
+                                  withInt:(int32_t)widthUsed
+                                  withInt:(int32_t)parentHeightMeasureSpec
+                                  withInt:(int32_t)heightUsed {
   ADViewGroup_MarginLayoutParams *lp = (ADViewGroup_MarginLayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADViewGroup_MarginLayoutParams class]);
-  jint childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, [self getPaddingLeft] + [self getPaddingRight] + ((ADViewGroup_MarginLayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + widthUsed, lp->width_);
-  jint childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(lp->topMargin_ + lp->bottomMargin_, ADView_MeasureSpec_UNSPECIFIED);
+  int32_t childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, [self getPaddingLeft] + [self getPaddingRight] + ((ADViewGroup_MarginLayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + widthUsed, lp->width_);
+  int32_t childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(lp->topMargin_ + lp->bottomMargin_, ADView_MeasureSpec_UNSPECIFIED);
   [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
@@ -427,23 +441,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)scrollByWithInt:(jint)i
-                withInt:(jint)dyUnconsumed {
+- (void)scrollByWithInt:(int32_t)i
+                withInt:(int32_t)dyUnconsumed {
   ADXNestedScrollView_scrollByWithInt_withInt_(self, i, dyUnconsumed);
 }
 
-- (void)flingWithInt:(jint)velocityY {
+- (void)flingWithInt:(int32_t)velocityY {
   ADXNestedScrollView_flingWithInt_(self, velocityY);
 }
 
-- (void)adjustPaddingIfScrollBarPresentWithInt:(jint)widthMeasureSpec
-                                       withInt:(jint)heightMeasureSpec
-                                       withInt:(jint)thumbWidth {
+- (void)adjustPaddingIfScrollBarPresentWithInt:(int32_t)widthMeasureSpec
+                                       withInt:(int32_t)heightMeasureSpec
+                                       withInt:(int32_t)thumbWidth {
   if ([self getChildCount] > 0) {
     ADView *child = [self getChildAtWithInt:0];
-    jint widthPadding;
-    jint heightPadding;
-    jint targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
+    int32_t widthPadding;
+    int32_t heightPadding;
+    int32_t targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
     ADFrameLayout_LayoutParams *lp = (ADFrameLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADFrameLayout_LayoutParams class]);
     if (targetSdkVersion >= ADBuild_VERSION_CODES_M) {
       widthPadding = mPaddingLeft_ + mPaddingRight_ + ((ADFrameLayout_LayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_;
@@ -453,7 +467,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       widthPadding = mPaddingLeft_ + mPaddingRight_;
       heightPadding = mPaddingTop_ + mPaddingBottom_;
     }
-    jint desiredHeight = [self getMeasuredHeight] - heightPadding;
+    int32_t desiredHeight = [self getMeasuredHeight] - heightPadding;
     if (desiredHeight >= [child getMeasuredHeight]) {
       if (mPaddingRight_ == thumbWidth && originalRightPadding_ != thumbWidth) {
         mPaddingRight_ = originalRightPadding_;
@@ -473,7 +487,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setOnTouchListenerWithADView_OnTouchListener:(id<ADView_OnTouchListener>)onTouchListener {
 }
 
-- (void)setSmoothScrollingEnabledWithBoolean:(jboolean)objValue {
+- (void)setSmoothScrollingEnabledWithBoolean:(bool)objValue {
 }
 
 - (id<ADXNestedScrollView_OnScrollChangeListener>)getOnScrollChangeListener {
@@ -636,14 +650,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(ADXNestedScrollView *self, jint dyUnconsumed, jint type, IOSIntArray *consumed) {
-  jint oldScrollY = [self getScrollY];
+void ADXNestedScrollView_onNestedScrollInternalWithInt_withInt_withIntArray_(ADXNestedScrollView *self, int32_t dyUnconsumed, int32_t type, IOSIntArray *consumed) {
+  int32_t oldScrollY = [self getScrollY];
   ADXNestedScrollView_scrollByWithInt_withInt_(self, 0, dyUnconsumed);
-  jint myConsumed = [self getScrollY] - oldScrollY;
+  int32_t myConsumed = [self getScrollY] - oldScrollY;
   if (consumed != nil) {
     *IOSIntArray_GetRef(consumed, 1) += myConsumed;
   }
-  jint myUnconsumed = dyUnconsumed - myConsumed;
+  int32_t myUnconsumed = dyUnconsumed - myConsumed;
   [((ADXNestedScrollingChildHelper *) nil_chk(self->mChildHelper_)) dispatchNestedScrollWithInt:0 withInt:myConsumed withInt:0 withInt:myUnconsumed withIntArray:nil withInt:type withIntArray:consumed];
 }
 
@@ -670,13 +684,15 @@ ADXNestedScrollView *create_ADXNestedScrollView_init() {
   J2OBJC_CREATE_IMPL(ADXNestedScrollView, init)
 }
 
-void ADXNestedScrollView_scrollByWithInt_withInt_(ADXNestedScrollView *self, jint i, jint dyUnconsumed) {
+void ADXNestedScrollView_scrollByWithInt_withInt_(ADXNestedScrollView *self, int32_t i, int32_t dyUnconsumed) {
 }
 
-void ADXNestedScrollView_flingWithInt_(ADXNestedScrollView *self, jint velocityY) {
+void ADXNestedScrollView_flingWithInt_(ADXNestedScrollView *self, int32_t velocityY) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXNestedScrollView)
+
+J2OBJC_NAME_MAPPING(ADXNestedScrollView, "androidx.core.widget", "ADX")
 
 @implementation ADXNestedScrollView_OnScrollChangeListener
 

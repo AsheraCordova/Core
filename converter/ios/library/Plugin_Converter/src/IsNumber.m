@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\IsNumber.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,6 +16,13 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASIsNumber
@@ -31,9 +43,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return res;
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [text java_matches:@"-?\\d*"];
@@ -74,3 +86,5 @@ ASIsNumber *create_ASIsNumber_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASIsNumber)
+
+J2OBJC_NAME_MAPPING(ASIsNumber, "com.ashera.validations", "AS")

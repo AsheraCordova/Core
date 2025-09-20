@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\Pattern.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,6 +16,15 @@
 #include "Pattern.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASPattern () {
@@ -41,9 +55,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", @"@string/pattern_error_message", [((id<ASIWidget>) nil_chk(widget)) getFragment]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [text java_matches:format_];
@@ -92,3 +106,5 @@ ASPattern *create_ASPattern_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPattern)
+
+J2OBJC_NAME_MAPPING(ASPattern, "com.ashera.validations", "AS")

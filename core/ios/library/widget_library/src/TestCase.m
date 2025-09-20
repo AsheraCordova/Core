@@ -3,12 +3,21 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\TestCase.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "TestCase.h"
 #include "java/util/HashMap.h"
 #include "java/util/LinkedHashMap.h"
 
-@class JavaUtilHashMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASTestCase () {
@@ -79,3 +88,5 @@ ASTestCase *create_ASTestCase_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTestCase)
+
+J2OBJC_NAME_MAPPING(ASTestCase, "com.ashera.model", "AS")

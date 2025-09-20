@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\Html2JsonSaxHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Html2JsonSaxHandler")
@@ -21,6 +22,8 @@
 #include "org/xml/sax/ContentHandler.h"
 
 @class IOSCharArray;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilMap;
 @protocol OrgXmlSaxAttributes;
 @protocol OrgXmlSaxLocator;
@@ -36,8 +39,8 @@
 - (instancetype)init;
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length;
 
 - (void)endDocument;
 
@@ -50,8 +53,8 @@
 - (id<JavaUtilMap>)getRoot;
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length;
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length;
 
 - (void)processingInstructionWithNSString:(NSString *)target
                              withNSString:(NSString *)data;
@@ -85,6 +88,7 @@ FOUNDATION_EXPORT ASHtml2JsonSaxHandler *create_ASHtml2JsonSaxHandler_init(void)
 J2OBJC_TYPE_LITERAL_HEADER(ASHtml2JsonSaxHandler)
 
 @compatibility_alias ComAsheraParserHtmlHtml2JsonSaxHandler ASHtml2JsonSaxHandler;
+
 
 #endif
 

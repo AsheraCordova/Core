@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\converter\ConverterFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ConverterFactory")
@@ -17,6 +18,7 @@
 #define ASConverterFactory_
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIConverter;
 
@@ -57,6 +59,7 @@ FOUNDATION_EXPORT void ASConverterFactory_registerCommandConverterWithASAttribut
 J2OBJC_TYPE_LITERAL_HEADER(ASConverterFactory)
 
 @compatibility_alias ComAsheraConverterConverterFactory ASConverterFactory;
+
 
 #endif
 

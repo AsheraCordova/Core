@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\Time.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,11 +16,16 @@
 #include "ResourceBundleUtils.h"
 #include "Time.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 
-@class JavaUtilRegexMatcher;
-@class JavaUtilRegexPattern;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASTime () {
@@ -51,15 +61,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return res;
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [self validateWithNSString:text];
 }
 
-- (jboolean)validateWithNSString:(NSString *)time {
+- (bool)validateWithNSString:(NSString *)time {
   JreStrongAssign(&pattern_, JavaUtilRegexPattern_compileWithNSString_(ASTime_TIME24HOURS_PATTERN));
   JreStrongAssign(&matcher_, [((JavaUtilRegexPattern *) nil_chk(pattern_)) matcherWithJavaLangCharSequence:time]);
   return [((JavaUtilRegexMatcher *) nil_chk(matcher_)) matches];
@@ -113,3 +123,5 @@ ASTime *create_ASTime_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTime)
+
+J2OBJC_NAME_MAPPING(ASTime, "com.ashera.validations", "AS")

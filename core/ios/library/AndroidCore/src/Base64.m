@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Base64.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Base64.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 NSString *ADBase64_DEFAULT;
@@ -77,3 +88,5 @@ NSString *ADBase64_encodeToStringWithByteArray_withNSString_(IOSByteArray *data,
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBase64)
+
+J2OBJC_NAME_MAPPING(ADBase64, "r.android.util", "AD")

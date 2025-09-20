@@ -3,18 +3,30 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\CssTree.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CssResult.h"
 #include "CssTree.h"
 #include "FontFace.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
-@class JavaUtilHashMap;
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSCssTree () {
@@ -73,7 +85,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (![((NSString *) nil_chk(gaurdKeys)) isEqual:@"default"]) {
     IOSObjectArray *keys = [gaurdKeys java_split:@","];
     IOSObjectArray *values = [((NSString *) nil_chk(gaurdValues)) java_split:@","];
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(keys))->size_; i++) {
+    for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(keys))->size_; i++) {
       NSString *gaurdKey = IOSObjectArray_Get(keys, i);
       switch (JreIndexOfStr(gaurdKey, (id[]){ @"orientation", @"min-width", @"max-width", @"min-height", @"max-height" }, 5)) {
         case 0:
@@ -114,7 +126,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *selector = *b__++;
+        NSString *selector = RETAIN_AND_AUTORELEASE(*b__++);
         CSSCssTree_updateAttributesWithNSString_withCSSCssResult_(self, JreStrcat("C$", '.', selector), cssResult);
       }
     }
@@ -196,6 +208,8 @@ void CSSCssTree_updateAttributesWithNSString_withCSSCssResult_(CSSCssTree *self,
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(CSSCssTree)
+
+J2OBJC_NAME_MAPPING(CSSCssTree, "com.ashera.css", "CSS")
 
 @implementation CSSCssTree_Attribute
 

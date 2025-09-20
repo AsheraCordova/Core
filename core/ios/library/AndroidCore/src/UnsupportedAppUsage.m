@@ -3,16 +3,29 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\compat\annotation\UnsupportedAppUsage.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "UnsupportedAppUsage.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADUnsupportedAppUsage
 
 @synthesize maxTargetSdk = maxTargetSdk_;
 
-+ (jint)maxTargetSdkDefault {
++ (int32_t)maxTargetSdkDefault {
   return 0;
 }
 
@@ -24,7 +37,7 @@
   return [NSString stringWithFormat:@"@r.android.compat.annotation.UnsupportedAppUsage(maxTargetSdk=%d)", maxTargetSdk_];
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -50,10 +63,12 @@
 
 @end
 
-id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(jint maxTargetSdk) {
+id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(int32_t maxTargetSdk) {
   ADUnsupportedAppUsage *self = AUTORELEASE([[ADUnsupportedAppUsage alloc] init]);
   self->maxTargetSdk_ = maxTargetSdk;
   return self;
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADUnsupportedAppUsage)
+
+J2OBJC_NAME_MAPPING(ADUnsupportedAppUsage, "r.android.compat.annotation", "AD")

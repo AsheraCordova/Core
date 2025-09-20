@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\database\Observable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Observable")
@@ -71,6 +72,7 @@ FOUNDATION_EXPORT void ADObservable_init(ADObservable *self);
 J2OBJC_TYPE_LITERAL_HEADER(ADObservable)
 
 @compatibility_alias RAndroidDatabaseObservable ADObservable;
+
 
 #endif
 

@@ -3,20 +3,31 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\ViewTreeObserver.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Context.h"
 #include "J2ObjC_source.h"
 #include "ViewTreeObserver.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 
-@class JavaUtilArrayList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADViewTreeObserver () {
  @public
   ADViewTreeObserver_CopyOnWriteArray *mOnScrollChangedListeners_;
   ADViewTreeObserver_CopyOnWriteArray *mOnPreDrawListeners_;
-  jboolean mAlive_;
+  bool mAlive_;
 }
 
 - (void)checkIsAlive;
@@ -45,7 +56,7 @@ __attribute__((unused)) static void ADViewTreeObserver_kill(ADViewTreeObserver *
   JavaUtilArrayList *mData_;
   JavaUtilArrayList *mDataCopy_;
   ADViewTreeObserver_Access *mAccess_;
-  jboolean mStart_;
+  bool mStart_;
 }
 
 - (JavaUtilArrayList *)getArray;
@@ -61,7 +72,7 @@ __attribute__((unused)) static JavaUtilArrayList *ADViewTreeObserver_CopyOnWrite
 @interface ADViewTreeObserver_Access () {
  @public
   JavaUtilArrayList *mData_;
-  jint mSize_;
+  int32_t mSize_;
 }
 
 @end
@@ -106,7 +117,7 @@ J2OBJC_FIELD_SETTER(ADViewTreeObserver_Access, mData_, JavaUtilArrayList *)
   ADViewTreeObserver_checkIsAlive(self);
 }
 
-- (jboolean)isAlive {
+- (bool)isAlive {
   return mAlive_;
 }
 
@@ -119,8 +130,8 @@ J2OBJC_FIELD_SETTER(ADViewTreeObserver_Access, mData_, JavaUtilArrayList *)
   if (listeners != nil && [listeners size] > 0) {
     ADViewTreeObserver_Access *access = JreRetainedLocalValue([listeners start]);
     @try {
-      jint count = [((ADViewTreeObserver_Access *) nil_chk(access)) size];
-      for (jint i = 0; i < count; i++) {
+      int32_t count = [((ADViewTreeObserver_Access *) nil_chk(access)) size];
+      for (int32_t i = 0; i < count; i++) {
         [((id<ADViewTreeObserver_OnScrollChangedListener>) nil_chk([access getWithInt:i])) onScrollChanged];
       }
     }
@@ -216,6 +227,8 @@ ADViewTreeObserver *create_ADViewTreeObserver_initWithADContext_(ADContext *mCon
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewTreeObserver)
 
+J2OBJC_NAME_MAPPING(ADViewTreeObserver, "r.android.view", "AD")
+
 @implementation ADViewTreeObserver_OnPreDrawListener
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -289,7 +302,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&mDataCopy_, nil);
 }
 
-- (jint)size {
+- (int32_t)size {
   return [((JavaUtilArrayList *) nil_chk(ADViewTreeObserver_CopyOnWriteArray_getArray(self))) size];
 }
 
@@ -387,11 +400,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (id)getWithInt:(jint)index {
+- (id)getWithInt:(int32_t)index {
   return [((JavaUtilArrayList *) nil_chk(mData_)) getWithInt:index];
 }
 
-- (jint)size {
+- (int32_t)size {
   return mSize_;
 }
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\Time.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Time")
@@ -21,6 +22,8 @@
 #include "BaseValidator.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIWidget;
 @protocol ASValidation;
 
@@ -35,8 +38,8 @@
 
 - (NSString *)getDefaultErrorMessageWithASIWidget:(id<ASIWidget>)widget;
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget;
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget;
 
 - (id<ASValidation>)newInstanceWithNSStringArray:(IOSObjectArray *)argument OBJC_METHOD_FAMILY_NONE;
 
@@ -45,7 +48,7 @@
  @param time time address for validation
  @return true valid time format, false invalid time format
  */
-- (jboolean)validateWithNSString:(NSString *)time;
+- (bool)validateWithNSString:(NSString *)time;
 
 @end
 
@@ -60,6 +63,7 @@ FOUNDATION_EXPORT ASTime *create_ASTime_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASTime)
 
 @compatibility_alias ComAsheraValidationsTime ASTime;
+
 
 #endif
 

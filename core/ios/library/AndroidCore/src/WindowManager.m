@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\WindowManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IBinder.h"
 #include "J2ObjC_source.h"
 #include "RelativeLayout.h"
 #include "View.h"
 #include "WindowManager.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADWindowManager : NSObject
@@ -34,10 +47,12 @@
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADWindowManager)
 
+J2OBJC_NAME_MAPPING(ADWindowManager, "r.android.view", "AD")
+
 @implementation ADWindowManager_LayoutParams
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)h {
+- (instancetype)initWithInt:(int32_t)w
+                    withInt:(int32_t)h {
   ADWindowManager_LayoutParams_initWithInt_withInt_(self, w, h);
   return self;
 }
@@ -50,8 +65,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setSurfaceInsetsWithADView:(ADView *)mBackgroundView
-                       withBoolean:(jboolean)b
-                       withBoolean:(jboolean)c {
+                       withBoolean:(bool)b
+                       withBoolean:(bool)c {
 }
 
 - (void)setTitleWithNSString:(NSString *)string {
@@ -105,15 +120,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADWindowManager_LayoutParams_initWithInt_withInt_(ADWindowManager_LayoutParams *self, jint w, jint h) {
+void ADWindowManager_LayoutParams_initWithInt_withInt_(ADWindowManager_LayoutParams *self, int32_t w, int32_t h) {
   ADRelativeLayout_LayoutParams_initWithInt_withInt_(self, w, h);
 }
 
-ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_NEW_IMPL(ADWindowManager_LayoutParams, initWithInt_withInt_, w, h)
 }
 
-ADWindowManager_LayoutParams *create_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADWindowManager_LayoutParams *create_ADWindowManager_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_CREATE_IMPL(ADWindowManager_LayoutParams, initWithInt_withInt_, w, h)
 }
 

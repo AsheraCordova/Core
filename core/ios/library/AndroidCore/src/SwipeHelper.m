@@ -3,19 +3,33 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\layout\SwipeHelper.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "SwipeHelper.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASSwipeHelper () {
  @public
-  jint swipedThreshold_;
+  int32_t swipedThreshold_;
   id<ASSwipeHelper_SwipeListener> swipeListener_;
-  jfloat xDown_;
-  jfloat xUp_;
-  jfloat yDown_;
-  jfloat yUp_;
+  float xDown_;
+  float xUp_;
+  float yDown_;
+  float yUp_;
 }
 
 @end
@@ -28,7 +42,7 @@ J2OBJC_FIELD_SETTER(ASSwipeHelper, swipeListener_, id<ASSwipeHelper_SwipeListene
 
 @implementation ASSwipeHelper
 
-- (instancetype)initWithInt:(jint)swipedThreshold {
+- (instancetype)initWithInt:(int32_t)swipedThreshold {
   ASSwipeHelper_initWithInt_(self, swipedThreshold);
   return self;
 }
@@ -37,26 +51,26 @@ J2OBJC_FIELD_SETTER(ASSwipeHelper, swipeListener_, id<ASSwipeHelper_SwipeListene
   JreStrongAssign(&self->swipeListener_, swipeListener);
 }
 
-- (jint)getSwipedThreshold {
+- (int32_t)getSwipedThreshold {
   return swipedThreshold_;
 }
 
-- (void)onActionDownWithFloat:(jfloat)x
-                    withFloat:(jfloat)y {
+- (void)onActionDownWithFloat:(float)x
+                    withFloat:(float)y {
   xDown_ = x;
   yDown_ = y;
 }
 
-- (jboolean)onActionUpWithFloat:(jfloat)x
-                      withFloat:(jfloat)y {
+- (bool)onActionUpWithFloat:(float)x
+                  withFloat:(float)y {
   xUp_ = x;
   yUp_ = y;
-  jboolean swipedHorizontally = JavaLangMath_absWithFloat_(xUp_ - xDown_) > [self getSwipedThreshold];
-  jboolean swipedVertically = JavaLangMath_absWithFloat_(yUp_ - yDown_) > [self getSwipedThreshold];
-  jboolean isEventConsumed = false;
+  bool swipedHorizontally = JavaLangMath_absWithFloat_(xUp_ - xDown_) > [self getSwipedThreshold];
+  bool swipedVertically = JavaLangMath_absWithFloat_(yUp_ - yDown_) > [self getSwipedThreshold];
+  bool isEventConsumed = false;
   if (swipedHorizontally) {
-    jboolean swipedRight = xUp_ > xDown_;
-    jboolean swipedLeft = xUp_ < xDown_;
+    bool swipedRight = xUp_ > xDown_;
+    bool swipedLeft = xUp_ < xDown_;
     if (swipedRight) {
       isEventConsumed = [((id<ASSwipeHelper_SwipeListener>) nil_chk(swipeListener_)) onSwipedWithNSString:@"right"];
     }
@@ -65,8 +79,8 @@ J2OBJC_FIELD_SETTER(ASSwipeHelper, swipeListener_, id<ASSwipeHelper_SwipeListene
     }
   }
   if (swipedVertically) {
-    jboolean swipedDown = yDown_ < yUp_;
-    jboolean swipedUp = yDown_ > yUp_;
+    bool swipedDown = yDown_ < yUp_;
+    bool swipedUp = yDown_ > yUp_;
     if (swipedDown) {
       isEventConsumed |= [((id<ASSwipeHelper_SwipeListener>) nil_chk(swipeListener_)) onSwipedWithNSString:@"down"];
     }
@@ -114,20 +128,22 @@ J2OBJC_FIELD_SETTER(ASSwipeHelper, swipeListener_, id<ASSwipeHelper_SwipeListene
 
 @end
 
-void ASSwipeHelper_initWithInt_(ASSwipeHelper *self, jint swipedThreshold) {
+void ASSwipeHelper_initWithInt_(ASSwipeHelper *self, int32_t swipedThreshold) {
   NSObject_init(self);
   self->swipedThreshold_ = swipedThreshold;
 }
 
-ASSwipeHelper *new_ASSwipeHelper_initWithInt_(jint swipedThreshold) {
+ASSwipeHelper *new_ASSwipeHelper_initWithInt_(int32_t swipedThreshold) {
   J2OBJC_NEW_IMPL(ASSwipeHelper, initWithInt_, swipedThreshold)
 }
 
-ASSwipeHelper *create_ASSwipeHelper_initWithInt_(jint swipedThreshold) {
+ASSwipeHelper *create_ASSwipeHelper_initWithInt_(int32_t swipedThreshold) {
   J2OBJC_CREATE_IMPL(ASSwipeHelper, initWithInt_, swipedThreshold)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwipeHelper)
+
+J2OBJC_NAME_MAPPING(ASSwipeHelper, "com.ashera.layout", "AS")
 
 @implementation ASSwipeHelper_SwipeListener
 

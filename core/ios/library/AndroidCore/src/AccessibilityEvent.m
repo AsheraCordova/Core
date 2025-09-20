@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\accessibility\AccessibilityEvent.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AccessibilityEvent.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAccessibilityEvent
@@ -50,3 +62,5 @@ ADAccessibilityEvent *create_ADAccessibilityEvent_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAccessibilityEvent)
+
+J2OBJC_NAME_MAPPING(ADAccessibilityEvent, "r.android.view.accessibility", "AD")

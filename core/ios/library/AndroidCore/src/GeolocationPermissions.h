@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\GeolocationPermissions.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_GeolocationPermissions")
@@ -36,10 +37,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADGeolocationPermissions)
 
 @compatibility_alias RAndroidWebkitGeolocationPermissions ADGeolocationPermissions;
 
+
 #endif
 
 #if !defined (ADGeolocationPermissions_Callback_) && (INCLUDE_ALL_GeolocationPermissions || defined(INCLUDE_ADGeolocationPermissions_Callback))
 #define ADGeolocationPermissions_Callback_
+
+@class JavaLangBoolean;
+@class NSString;
 
 @interface ADGeolocationPermissions_Callback : NSObject
 
@@ -48,8 +53,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADGeolocationPermissions)
 - (instancetype)init;
 
 - (void)invokeWithNSString:(NSString *)origin
-               withBoolean:(jboolean)b
-               withBoolean:(jboolean)c;
+               withBoolean:(bool)b
+               withBoolean:(bool)c;
 
 @end
 
@@ -62,6 +67,7 @@ FOUNDATION_EXPORT ADGeolocationPermissions_Callback *new_ADGeolocationPermission
 FOUNDATION_EXPORT ADGeolocationPermissions_Callback *create_ADGeolocationPermissions_Callback_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADGeolocationPermissions_Callback)
+
 
 #endif
 

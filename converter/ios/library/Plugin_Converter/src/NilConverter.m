@@ -3,11 +3,22 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\NilConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "NilConverter.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASNilConverter
@@ -69,3 +80,5 @@ ASNilConverter *create_ASNilConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNilConverter)
+
+J2OBJC_NAME_MAPPING(ASNilConverter, "com.ashera.converter", "AS")

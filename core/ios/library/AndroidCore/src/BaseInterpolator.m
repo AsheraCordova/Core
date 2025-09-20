@@ -3,15 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\BaseInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseInterpolator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ADBaseInterpolator () {
  @public
-  jint mChangingConfiguration_;
+  int32_t mChangingConfiguration_;
 }
 
 @end
@@ -25,11 +37,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getChangingConfiguration {
+- (int32_t)getChangingConfiguration {
   return mChangingConfiguration_;
 }
 
-- (void)setChangingConfigurationWithInt:(jint)changingConfiguration {
+- (void)setChangingConfigurationWithInt:(int32_t)changingConfiguration {
   mChangingConfiguration_ = changingConfiguration;
 }
 
@@ -61,3 +73,5 @@ void ADBaseInterpolator_init(ADBaseInterpolator *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBaseInterpolator)
+
+J2OBJC_NAME_MAPPING(ADBaseInterpolator, "r.android.view.animation", "AD")

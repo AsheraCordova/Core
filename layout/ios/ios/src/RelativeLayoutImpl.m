@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\RelativeLayoutImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "BaseHasWidgets.h"
 #include "ConverterFactory.h"
@@ -45,9 +50,12 @@
 #include "ASUIView.h"
 #include "HasLifeCycleDecorators.h"
 
-@class JavaUtilHashMap;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -70,23 +78,23 @@
 - (ADRelativeLayout_LayoutParams *)getLayoutParamsWithADView:(ADView *)view;
 
 - (void)addRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                         withInt:(jint)rule
+                                         withInt:(int32_t)rule
                                           withId:(id)objValue;
 
 - (void)addRemoveRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                               withInt:(jint)rule
+                                               withInt:(int32_t)rule
                                                 withId:(id)objValue;
 
 - (void)removeRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                            withInt:(jint)rule;
+                                            withInt:(int32_t)rule;
 
 - (id)getRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                       withInt:(jint)rule;
+                                       withInt:(int32_t)rule;
 
 - (id)getBoolRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                           withInt:(jint)rule;
+                                           withInt:(int32_t)rule;
 
-- (jint)getInferredRuleWithInt:(jint)rule;
+- (int32_t)getInferredRuleWithInt:(int32_t)rule;
 
 - (void)removeAllRulesWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams;
 
@@ -115,17 +123,17 @@ __attribute__((unused)) static void ASRelativeLayoutImpl_createLayoutParamsWithA
 
 __attribute__((unused)) static ADRelativeLayout_LayoutParams *ASRelativeLayoutImpl_getLayoutParamsWithADView_(ASRelativeLayoutImpl *self, ADView *view);
 
-__attribute__((unused)) static void ASRelativeLayoutImpl_addRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule, id objValue);
+__attribute__((unused)) static void ASRelativeLayoutImpl_addRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule, id objValue);
 
-__attribute__((unused)) static void ASRelativeLayoutImpl_addRemoveRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule, id objValue);
+__attribute__((unused)) static void ASRelativeLayoutImpl_addRemoveRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule, id objValue);
 
-__attribute__((unused)) static void ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule);
+__attribute__((unused)) static void ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule);
 
-__attribute__((unused)) static id ASRelativeLayoutImpl_getRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule);
+__attribute__((unused)) static id ASRelativeLayoutImpl_getRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule);
 
-__attribute__((unused)) static id ASRelativeLayoutImpl_getBoolRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule);
+__attribute__((unused)) static id ASRelativeLayoutImpl_getBoolRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule);
 
-__attribute__((unused)) static jint ASRelativeLayoutImpl_getInferredRuleWithInt_(ASRelativeLayoutImpl *self, jint rule);
+__attribute__((unused)) static int32_t ASRelativeLayoutImpl_getInferredRuleWithInt_(ASRelativeLayoutImpl *self, int32_t rule);
 
 __attribute__((unused)) static void ASRelativeLayoutImpl_removeAllRulesWithADRelativeLayout_LayoutParams_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams);
 
@@ -135,7 +143,7 @@ __attribute__((unused)) static void ASRelativeLayoutImpl_removeRuleWithADRelativ
 
 @interface ASRelativeLayoutImpl_DallocHandler () {
  @public
-  __unsafe_unretained ASRelativeLayoutImpl *this$0_;
+  WEAK_ ASRelativeLayoutImpl *this$0_;
 }
 
 @end
@@ -151,12 +159,12 @@ J2OBJC_FIELD_SETTER(ASRelativeLayoutImpl_RemoveRule, mapping_, id<JavaUtilMap>)
 
 @interface ASRelativeLayoutImpl_RelativeLayoutExt () {
  @public
-  __unsafe_unretained ASRelativeLayoutImpl *this$0_;
+  WEAK_ ASRelativeLayoutImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -183,6 +191,7 @@ __attribute__((unused)) static void ASRelativeLayoutImpl_$Lambda$1_initWithASIWi
 __attribute__((unused)) static ASRelativeLayoutImpl_$Lambda$1 *new_ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASRelativeLayoutImpl_$Lambda$1 *create_ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 
 J2OBJC_INITIALIZED_DEFN(ASRelativeLayoutImpl)
 
@@ -269,16 +278,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return relativeLayout_;
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
-  jboolean remove = [super removeWithASIWidget:w];
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
+  bool remove = [super removeWithASIWidget:w];
   [((ADRelativeLayout *) nil_chk(relativeLayout_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
   ASRelativeLayoutImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
-  jboolean remove = [super removeWithInt:index];
+  bool remove = [super removeWithInt:index];
   if (index + 1 <= [((ADRelativeLayout *) nil_chk(relativeLayout_)) getChildCount]) {
     [((ADRelativeLayout *) nil_chk(relativeLayout_)) removeViewAtWithInt:index];
     ASRelativeLayoutImpl_nativeRemoveViewWithASIWidget_(self, widget);
@@ -291,7 +300,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASRelativeLayoutImpl_createLayoutParamsWithADView_(self, view);
@@ -614,7 +623,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -637,33 +646,33 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                         withInt:(jint)rule
+                                         withInt:(int32_t)rule
                                           withId:(id)objValue {
   ASRelativeLayoutImpl_addRuleWithADRelativeLayout_LayoutParams_withInt_withId_(self, layoutParams, rule, objValue);
 }
 
 - (void)addRemoveRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                               withInt:(jint)rule
+                                               withInt:(int32_t)rule
                                                 withId:(id)objValue {
   ASRelativeLayoutImpl_addRemoveRuleWithADRelativeLayout_LayoutParams_withInt_withId_(self, layoutParams, rule, objValue);
 }
 
 - (void)removeRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                            withInt:(jint)rule {
+                                            withInt:(int32_t)rule {
   ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, rule);
 }
 
 - (id)getRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                       withInt:(jint)rule {
+                                       withInt:(int32_t)rule {
   return ASRelativeLayoutImpl_getRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, rule);
 }
 
 - (id)getBoolRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
-                                           withInt:(jint)rule {
+                                           withInt:(int32_t)rule {
   return ASRelativeLayoutImpl_getBoolRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, rule);
 }
 
-- (jint)getInferredRuleWithInt:(jint)rule {
+- (int32_t)getInferredRuleWithInt:(int32_t)rule {
   return ASRelativeLayoutImpl_getInferredRuleWithInt_(self, rule);
 }
 
@@ -687,7 +696,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -938,11 +947,11 @@ ADRelativeLayout_LayoutParams *ASRelativeLayoutImpl_getLayoutParamsWithADView_(A
   return (ADRelativeLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(view)) getLayoutParams], [ADRelativeLayout_LayoutParams class]);
 }
 
-void ASRelativeLayoutImpl_addRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule, id objValue) {
+void ASRelativeLayoutImpl_addRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule, id objValue) {
   [((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) addRuleWithInt:rule withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
 }
 
-void ASRelativeLayoutImpl_addRemoveRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule, id objValue) {
+void ASRelativeLayoutImpl_addRemoveRuleWithADRelativeLayout_LayoutParams_withInt_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule, id objValue) {
   if ([((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]) {
     [((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) addRuleWithInt:rule];
   }
@@ -953,27 +962,27 @@ void ASRelativeLayoutImpl_addRemoveRuleWithADRelativeLayout_LayoutParams_withInt
   }
 }
 
-void ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule) {
+void ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule) {
   {
     [((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) removeRuleWithInt:rule];
   }
 }
 
-id ASRelativeLayoutImpl_getRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule) {
+id ASRelativeLayoutImpl_getRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule) {
   {
     rule = ASRelativeLayoutImpl_getInferredRuleWithInt_(self, rule);
     return JavaLangInteger_valueOfWithInt_([((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) getRuleWithInt:rule]);
   }
 }
 
-id ASRelativeLayoutImpl_getBoolRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, jint rule) {
+id ASRelativeLayoutImpl_getBoolRuleWithADRelativeLayout_LayoutParams_withInt_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, int32_t rule) {
   {
     rule = ASRelativeLayoutImpl_getInferredRuleWithInt_(self, rule);
     return JavaLangBoolean_valueOfWithBoolean_([((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) getRuleWithInt:rule] != 0);
   }
 }
 
-jint ASRelativeLayoutImpl_getInferredRuleWithInt_(ASRelativeLayoutImpl *self, jint rule) {
+int32_t ASRelativeLayoutImpl_getInferredRuleWithInt_(ASRelativeLayoutImpl *self, int32_t rule) {
   if (rule == ADRelativeLayout_ALIGN_PARENT_END) {
     rule = ASViewImpl_isRTLLayoutDirectionWithASIWidget_(self) ? ADRelativeLayout_ALIGN_PARENT_LEFT : ADRelativeLayout_ALIGN_PARENT_RIGHT;
   }
@@ -999,7 +1008,7 @@ void ASRelativeLayoutImpl_removeAllRulesWithADRelativeLayout_LayoutParams_(ASRel
   ASRelativeLayoutImpl_RemoveRule *removeRule = (ASRelativeLayoutImpl_RemoveRule *) cast_chk(ASConverterFactory_getWithNSString_(@"RelativeLayout.removeRule"), [ASRelativeLayoutImpl_RemoveRule class]);
   id<JavaUtilCollection> keys = [((id<JavaUtilMap>) nil_chk(((ASRelativeLayoutImpl_RemoveRule *) nil_chk(removeRule))->mapping_)) keySet];
   for (NSString * __strong key in nil_chk(keys)) {
-    jint rule = [((JavaLangInteger *) nil_chk([((JavaUtilHashMap *) nil_chk(self->ruleMapper_)) getWithId:key])) intValue];
+    int32_t rule = [((JavaLangInteger *) nil_chk([((JavaUtilHashMap *) nil_chk(self->ruleMapper_)) getWithId:key])) intValue];
     ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, rule);
     rule = ASRelativeLayoutImpl_getInferredRuleWithInt_(self, rule);
     ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, rule);
@@ -1016,13 +1025,13 @@ id<JavaUtilMap> ASRelativeLayoutImpl_invertMapWithJavaUtilMap_(ASRelativeLayoutI
 
 void ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withId_(ASRelativeLayoutImpl *self, ADRelativeLayout_LayoutParams *layoutParams, id objValue) {
   ASRelativeLayoutImpl_RemoveRule *removeRule = (ASRelativeLayoutImpl_RemoveRule *) cast_chk(ASConverterFactory_getWithNSString_(@"RelativeLayout.removeRule"), [ASRelativeLayoutImpl_RemoveRule class]);
-  jint rule = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t rule = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   id<JavaUtilMap> reverseMap = ASRelativeLayoutImpl_invertMapWithJavaUtilMap_(self, ((ASRelativeLayoutImpl_RemoveRule *) nil_chk(removeRule))->mapping_);
   id<JavaUtilCollection> flags = [removeRule getReverseMappingFlags];
   for (JavaLangInteger *boxed__ in nil_chk(flags)) {
-    jint flag = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
+    int32_t flag = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
     if ((rule & flag) != 0) {
-      jint finalRule = [((JavaLangInteger *) nil_chk([((JavaUtilHashMap *) nil_chk(self->ruleMapper_)) getWithId:[((id<JavaUtilMap>) nil_chk(reverseMap)) getWithId:JavaLangInteger_valueOfWithInt_(flag)]])) intValue];
+      int32_t finalRule = [((JavaLangInteger *) nil_chk([((JavaUtilHashMap *) nil_chk(self->ruleMapper_)) getWithId:[((id<JavaUtilMap>) nil_chk(reverseMap)) getWithId:JavaLangInteger_valueOfWithInt_(flag)]])) intValue];
       ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, finalRule);
       finalRule = ASRelativeLayoutImpl_getInferredRuleWithInt_(self, finalRule);
       ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, finalRule);
@@ -1031,6 +1040,8 @@ void ASRelativeLayoutImpl_removeRuleWithADRelativeLayout_LayoutParams_withId_(AS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl)
+
+J2OBJC_NAME_MAPPING(ASRelativeLayoutImpl, "com.ashera.layout", "AS")
 
 @implementation ASRelativeLayoutImpl_DallocHandler
 
@@ -1129,28 +1140,28 @@ void ASRelativeLayoutImpl_RemoveRule_init(ASRelativeLayoutImpl_RemoveRule *self)
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"layout_above" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignBaseline" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignBottom" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignEnd" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x8)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignLeft" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x16)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentBottom" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x32)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentEnd" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x64)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentLeft" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x128)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentRight" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x256)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentStart" withId:JavaLangInteger_valueOfWithInt_(-(jint) 0x1024)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentTop" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignRight" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignStart" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignTop" withId:JavaLangInteger_valueOfWithInt_((jint) 0x4)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_below" withId:JavaLangInteger_valueOfWithInt_((jint) 0x8)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_centerHorizontal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x16)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_centerInParent" withId:JavaLangInteger_valueOfWithInt_((jint) 0x32)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_centerVertical" withId:JavaLangInteger_valueOfWithInt_((jint) 0x64)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toEndOf" withId:JavaLangInteger_valueOfWithInt_((jint) 0x128)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toLeftOf" withId:JavaLangInteger_valueOfWithInt_((jint) 0x256)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toRightOf" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1024)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toStartOf" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2048)];
+    (void) [self->mapping_ putWithId:@"layout_above" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignBaseline" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignBottom" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignEnd" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x8)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignLeft" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x16)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentBottom" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x32)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentEnd" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x64)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentLeft" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x128)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentRight" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x256)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentStart" withId:JavaLangInteger_valueOfWithInt_(-(int32_t) 0x1024)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignParentTop" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignRight" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignStart" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_alignTop" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_below" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x8)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_centerHorizontal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x16)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_centerInParent" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x32)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_centerVertical" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x64)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toEndOf" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x128)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toLeftOf" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x256)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toRightOf" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1024)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"layout_toStartOf" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2048)];
   }
 }
 
@@ -1170,19 +1181,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -1191,8 +1202,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -1208,11 +1219,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1239,8 +1250,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1308,12 +1319,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1343,7 +1354,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }

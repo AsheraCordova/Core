@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\TextViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
@@ -47,6 +52,8 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -65,13 +72,14 @@
 
 #include "ASUILabel.h"
 
+
 @class ASTextViewImpl_DellocHandler;
 @class ASTextViewImpl_MarqueeTask;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@protocol JavaLangRunnable;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -80,20 +88,20 @@
  @public
   ASTextViewImpl_PostMeasureHandler *postMeasureHandler_;
   NSString *POST_MEASURE_EVENT_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   id<JavaUtilMap> fontDescriptors_;
   ASTextViewImpl_MarqueeTask *marqueeTask_;
-  jint marqueeRepeatLimit_;
+  int32_t marqueeRepeatLimit_;
   ASMarqueeCommandConverter *marqueeCommandConverter_;
-  jint autoSizeMin_;
-  jint autoSizeMax_;
-  jint autoSizeGranular_;
+  int32_t autoSizeMin_;
+  int32_t autoSizeMax_;
+  int32_t autoSizeGranular_;
   NSString *ellipsize_;
   ADColorStateList *drawableTint_;
   id timer_;
-  jboolean isDisposed_;
+  bool isDisposed_;
   ASTextViewImpl_DellocHandler *dellocHandler_;
 }
 
@@ -137,11 +145,11 @@
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType;
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType;
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue;
 
@@ -165,7 +173,7 @@
 
 - (void)setTextStyleWithId:(id)objValue;
 
-- (jint)calcNumberOfWhiteSpaces;
+- (int32_t)calcNumberOfWhiteSpaces;
 
 - (void)cancelTimer;
 
@@ -177,15 +185,15 @@
 
 - (void)startOrStopMarqueeWithId:(id)objValue;
 
-- (jint)getLabelWidth;
+- (int32_t)getLabelWidth;
 
-- (jboolean)isLabelMeasured;
+- (bool)isLabelMeasured;
 
 - (void)setPasswordWithId:(id)objValue;
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -248,7 +256,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -266,7 +274,7 @@
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)nativeSetVerticalAligmentBottom;
 
@@ -276,9 +284,9 @@
 
 - (void)addMinMaxListener;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (id)getEllipsize;
 
@@ -287,12 +295,12 @@
 
 - (JavaLangInteger *)nativeGetLinBreakMode;
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode;
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode;
 
 - (void)setJustificationModeWithId:(id)objValue
                       withNSString:(NSString *)strValue;
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment;
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment;
 
 - (id)getJustificationMode;
 
@@ -314,14 +322,14 @@
 
 - (void)setEnabledWithId:(id)objValue;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -341,9 +349,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -353,11 +361,11 @@
 
 - (void)setScrollHorizontallyWithId:(id)objValue;
 
-- (jboolean)canMarquee;
+- (bool)canMarquee;
 
 - (void)cancelNativeTimer;
 
-- (jboolean)isDisposed;
+- (bool)isDisposed;
 
 - (void)addDeallocHandler;
 
@@ -372,11 +380,11 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor;
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor;
 
 - (void)syncPlaceholderLabel;
 
-- (jint)nativeGetBaseLine;
+- (int32_t)nativeGetBaseLine;
 
 - (id)getFont;
 
@@ -395,33 +403,33 @@ J2OBJC_FIELD_SETTER(ASTextViewImpl, drawableTint_, ADColorStateList *)
 J2OBJC_FIELD_SETTER(ASTextViewImpl, timer_, id)
 J2OBJC_FIELD_SETTER(ASTextViewImpl, dellocHandler_, ASTextViewImpl_DellocHandler *)
 
-inline jint ASTextViewImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASTextViewImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASTextViewImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASTextViewImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASTextViewImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASTextViewImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASTextViewImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASTextViewImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASTextViewImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, TEXT_ALIGN_RIGHT, int32_t)
 
-inline jint ASTextViewImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASTextViewImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASTextViewImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASTextViewImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASTextViewImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASTextViewImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASTextViewImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASTextViewImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASTextViewImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASTextViewImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASTextViewImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASTextViewImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASTextViewImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASTextViewImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASTextViewImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASTextViewImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASTextViewImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASTextViewImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASTextViewImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASTextViewImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASTextViewImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASTextViewImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASTextViewImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASTextViewImpl, NORMAL_FONT_TRAIT, int32_t)
 
 __attribute__((unused)) static void ASTextViewImpl_setWidgetOnNativeClass(ASTextViewImpl *self);
 
@@ -463,11 +471,11 @@ __attribute__((unused)) static void ASTextViewImpl_setMinWidthWithId_(ASTextView
 
 __attribute__((unused)) static id ASTextViewImpl_getWidth(ASTextViewImpl *self);
 
-__attribute__((unused)) static jint ASTextViewImpl_getHeight(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_getHeight(ASTextViewImpl *self);
 
-__attribute__((unused)) static jint ASTextViewImpl_getAutoSizeTextTypeWithADTextView_(ASTextViewImpl *self, ADTextView *measurableView);
+__attribute__((unused)) static int32_t ASTextViewImpl_getAutoSizeTextTypeWithADTextView_(ASTextViewImpl *self, ADTextView *measurableView);
 
-__attribute__((unused)) static void ASTextViewImpl_setAutoSizeTextTypeInternalWithInt_(ASTextViewImpl *self, jint autoTextType);
+__attribute__((unused)) static void ASTextViewImpl_setAutoSizeTextTypeInternalWithInt_(ASTextViewImpl *self, int32_t autoTextType);
 
 __attribute__((unused)) static void ASTextViewImpl_setAutoSizePresetSizesWithId_(ASTextViewImpl *self, id objValue);
 
@@ -489,7 +497,7 @@ __attribute__((unused)) static void ASTextViewImpl_setFontFamilyWithId_withNSStr
 
 __attribute__((unused)) static void ASTextViewImpl_setTextStyleWithId_(ASTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASTextViewImpl_calcNumberOfWhiteSpaces(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_calcNumberOfWhiteSpaces(ASTextViewImpl *self);
 
 __attribute__((unused)) static void ASTextViewImpl_cancelTimer(ASTextViewImpl *self);
 
@@ -501,15 +509,15 @@ __attribute__((unused)) static void ASTextViewImpl_setMarqueeRepeatLimitWithId_(
 
 __attribute__((unused)) static void ASTextViewImpl_startOrStopMarqueeWithId_(ASTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASTextViewImpl_getLabelWidth(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_getLabelWidth(ASTextViewImpl *self);
 
-__attribute__((unused)) static jboolean ASTextViewImpl_isLabelMeasured(ASTextViewImpl *self);
+__attribute__((unused)) static bool ASTextViewImpl_isLabelMeasured(ASTextViewImpl *self);
 
 __attribute__((unused)) static void ASTextViewImpl_setPasswordWithId_(ASTextViewImpl *self, id objValue);
 
 __attribute__((unused)) static void ASTextViewImpl_setFirstBaselineToTopHeightWithId_(ASTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASTextViewImpl_getIncludeFontPadding(ASTextViewImpl *self);
+__attribute__((unused)) static bool ASTextViewImpl_getIncludeFontPadding(ASTextViewImpl *self);
 
 __attribute__((unused)) static id ASTextViewImpl_getFirstBaselineToTopHeight(ASTextViewImpl *self);
 
@@ -571,7 +579,7 @@ __attribute__((unused)) static id ASTextViewImpl_getTextSize(ASTextViewImpl *sel
 
 __attribute__((unused)) static void ASTextViewImpl_setMyTextSizeWithId_(ASTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASTextViewImpl_nativeSetTextSizeWithInt_(ASTextViewImpl *self, jint value);
+__attribute__((unused)) static void ASTextViewImpl_nativeSetTextSizeWithInt_(ASTextViewImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASTextViewImpl_setVerticalAligmentCenter(ASTextViewImpl *self);
 
@@ -589,7 +597,7 @@ __attribute__((unused)) static void ASTextViewImpl_setHorizontalAligmentLeft(AST
 
 __attribute__((unused)) static void ASTextViewImpl_setHorizontalAligmentLeftInternal(ASTextViewImpl *self);
 
-__attribute__((unused)) static jint ASTextViewImpl_getTextAlignment(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_getTextAlignment(ASTextViewImpl *self);
 
 __attribute__((unused)) static void ASTextViewImpl_nativeSetVerticalAligmentBottom(ASTextViewImpl *self);
 
@@ -599,9 +607,9 @@ __attribute__((unused)) static void ASTextViewImpl_nativeSetVerticalAligmentCent
 
 __attribute__((unused)) static void ASTextViewImpl_addMinMaxListener(ASTextViewImpl *self);
 
-__attribute__((unused)) static jint ASTextViewImpl_getLineHeight(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_getLineHeight(ASTextViewImpl *self);
 
-__attribute__((unused)) static jint ASTextViewImpl_getBorderWidth(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_getBorderWidth(ASTextViewImpl *self);
 
 __attribute__((unused)) static id ASTextViewImpl_getEllipsize(ASTextViewImpl *self);
 
@@ -609,11 +617,11 @@ __attribute__((unused)) static void ASTextViewImpl_setEllipsizeWithId_withNSStri
 
 __attribute__((unused)) static JavaLangInteger *ASTextViewImpl_nativeGetLinBreakMode(ASTextViewImpl *self);
 
-__attribute__((unused)) static void ASTextViewImpl_nativeSetLineBreakModeWithInt_(ASTextViewImpl *self, jint lineBreakMode);
+__attribute__((unused)) static void ASTextViewImpl_nativeSetLineBreakModeWithInt_(ASTextViewImpl *self, int32_t lineBreakMode);
 
 __attribute__((unused)) static void ASTextViewImpl_setJustificationModeWithId_withNSString_(ASTextViewImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASTextViewImpl_nativeSetTextAligmentWithInt_(ASTextViewImpl *self, jint textAlignment);
+__attribute__((unused)) static void ASTextViewImpl_nativeSetTextAligmentWithInt_(ASTextViewImpl *self, int32_t textAlignment);
 
 __attribute__((unused)) static id ASTextViewImpl_getJustificationMode(ASTextViewImpl *self);
 
@@ -633,13 +641,13 @@ __attribute__((unused)) static id ASTextViewImpl_getSingleLine(ASTextViewImpl *s
 
 __attribute__((unused)) static void ASTextViewImpl_setEnabledWithId_(ASTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASTextViewImpl_nativeGetFontSize(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_nativeGetFontSize(ASTextViewImpl *self);
 
-__attribute__((unused)) static jint ASTextViewImpl_nativeGetFontStyle(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_nativeGetFontStyle(ASTextViewImpl *self);
 
-__attribute__((unused)) static void ASTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASTextViewImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASTextViewImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASTextViewImpl_nativeSetFontStyleWithInt_(ASTextViewImpl *self, jint style);
+__attribute__((unused)) static void ASTextViewImpl_nativeSetFontStyleWithInt_(ASTextViewImpl *self, int32_t style);
 
 __attribute__((unused)) static void ASTextViewImpl_setDrawablePaddingWithId_(ASTextViewImpl *self, id objValue);
 
@@ -655,9 +663,9 @@ __attribute__((unused)) static void ASTextViewImpl_setDrawableLeftWithNSString_w
 
 __attribute__((unused)) static void ASTextViewImpl_setDrawableLeftInternalWithNSString_withId_(ASTextViewImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASTextViewImpl_getImageHeightWithId_(ASTextViewImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASTextViewImpl_getImageHeightWithId_(ASTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASTextViewImpl_getImageWidthWithId_(ASTextViewImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASTextViewImpl_getImageWidthWithId_(ASTextViewImpl *self, id objValue);
 
 __attribute__((unused)) static id ASTextViewImpl_getDrawablePadding(ASTextViewImpl *self);
 
@@ -667,11 +675,11 @@ __attribute__((unused)) static void ASTextViewImpl_setDrawableTintWithId_(ASText
 
 __attribute__((unused)) static void ASTextViewImpl_setScrollHorizontallyWithId_(ASTextViewImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASTextViewImpl_canMarquee(ASTextViewImpl *self);
+__attribute__((unused)) static bool ASTextViewImpl_canMarquee(ASTextViewImpl *self);
 
 __attribute__((unused)) static void ASTextViewImpl_cancelNativeTimer(ASTextViewImpl *self);
 
-__attribute__((unused)) static jboolean ASTextViewImpl_isDisposed(ASTextViewImpl *self);
+__attribute__((unused)) static bool ASTextViewImpl_isDisposed(ASTextViewImpl *self);
 
 __attribute__((unused)) static void ASTextViewImpl_addDeallocHandler(ASTextViewImpl *self);
 
@@ -685,11 +693,11 @@ __attribute__((unused)) static id ASTextViewImpl_getTextColorState(ASTextViewImp
 
 __attribute__((unused)) static void ASTextViewImpl_drawableStateChangeWithNSString_withADDrawable_(ASTextViewImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static void ASTextViewImpl_setHintColorWithInt_(ASTextViewImpl *self, jint currentHintTextColor);
+__attribute__((unused)) static void ASTextViewImpl_setHintColorWithInt_(ASTextViewImpl *self, int32_t currentHintTextColor);
 
 __attribute__((unused)) static void ASTextViewImpl_syncPlaceholderLabel(ASTextViewImpl *self);
 
-__attribute__((unused)) static jint ASTextViewImpl_nativeGetBaseLine(ASTextViewImpl *self);
+__attribute__((unused)) static int32_t ASTextViewImpl_nativeGetBaseLine(ASTextViewImpl *self);
 
 __attribute__((unused)) static id ASTextViewImpl_getFont(ASTextViewImpl *self);
 
@@ -760,7 +768,7 @@ J2OBJC_FIELD_SETTER(ASTextViewImpl_DrawableTintMode, mapping_, id<JavaUtilMap>)
 
 @interface ASTextViewImpl_TextViewExt () {
  @public
-  __unsafe_unretained ASTextViewImpl *this$0_;
+  WEAK_ ASTextViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -776,18 +784,18 @@ J2OBJC_FIELD_SETTER(ASTextViewImpl_TextViewExt, templates_, id<JavaUtilMap>)
 
 @interface ASTextViewImpl_PostMeasureHandler () {
  @public
-  __unsafe_unretained ASTextViewImpl *this$0_;
-  jboolean onlyOnce_;
+  WEAK_ ASTextViewImpl *this$0_;
+  bool onlyOnce_;
 }
 
 @end
 
 @interface ASTextViewImpl_MarqueeTask : NSObject < JavaLangRunnable > {
  @public
-  __unsafe_unretained ASTextViewImpl *this$0_;
-  jint slideLength_;
-  jint cycles_;
-  jboolean cancel_;
+  WEAK_ ASTextViewImpl *this$0_;
+  int32_t slideLength_;
+  int32_t cycles_;
+  bool cancel_;
   NSString *direction_;
 }
 
@@ -814,10 +822,11 @@ __attribute__((unused)) static ASTextViewImpl_MarqueeTask *create_ASTextViewImpl
 
 J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_MarqueeTask)
 
+
 @interface ASTextViewImpl_MarqueeTask_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   ASTextViewImpl_MarqueeTask *this$0_;
-  jint val$numberOfBlankSpaces_;
+  int32_t val$numberOfBlankSpaces_;
 }
 
 - (void)run;
@@ -826,15 +835,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_MarqueeTask)
 
 J2OBJC_EMPTY_STATIC_INIT(ASTextViewImpl_MarqueeTask_$Lambda$1)
 
-__attribute__((unused)) static void ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask_$Lambda$1 *self, ASTextViewImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static void ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask_$Lambda$1 *self, ASTextViewImpl_MarqueeTask *outer$, int32_t capture$0);
 
-__attribute__((unused)) static ASTextViewImpl_MarqueeTask_$Lambda$1 *new_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, jint capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASTextViewImpl_MarqueeTask_$Lambda$1 *new_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, int32_t capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASTextViewImpl_MarqueeTask_$Lambda$1 *create_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static ASTextViewImpl_MarqueeTask_$Lambda$1 *create_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, int32_t capture$0);
+
 
 @interface ASTextViewImpl_DellocHandler : ASEventBusHandler {
  @public
-  __unsafe_unretained ASTextViewImpl *this$0_;
+  WEAK_ ASTextViewImpl *this$0_;
 }
 
 - (instancetype)initWithASTextViewImpl:(ASTextViewImpl *)outer$
@@ -853,6 +863,7 @@ __attribute__((unused)) static ASTextViewImpl_DellocHandler *new_ASTextViewImpl_
 __attribute__((unused)) static ASTextViewImpl_DellocHandler *create_ASTextViewImpl_DellocHandler_initWithASTextViewImpl_withNSString_(ASTextViewImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_DellocHandler)
+
 
 J2OBJC_INITIALIZED_DEFN(ASTextViewImpl)
 
@@ -1553,7 +1564,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASTextViewImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADTextView *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADTextView *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASTextViewImpl_updateTextAlignment(self);
   }
@@ -1575,11 +1586,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADTextView *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADTextView *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -1587,11 +1598,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADTextView *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADTextView *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -1627,11 +1638,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADTextView *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADTextView *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -1647,15 +1658,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASTextViewImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASTextViewImpl_getHeight(self);
 }
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
   return ASTextViewImpl_getAutoSizeTextTypeWithADTextView_(self, measurableView);
 }
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType {
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType {
   ASTextViewImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -1701,7 +1712,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setTextStyleWithId_(self, objValue);
 }
 
-- (jint)calcNumberOfWhiteSpaces {
+- (int32_t)calcNumberOfWhiteSpaces {
   return ASTextViewImpl_calcNumberOfWhiteSpaces(self);
 }
 
@@ -1725,11 +1736,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_startOrStopMarqueeWithId_(self, objValue);
 }
 
-- (jint)getLabelWidth {
+- (int32_t)getLabelWidth {
   return ASTextViewImpl_getLabelWidth(self);
 }
 
-- (jboolean)isLabelMeasured {
+- (bool)isLabelMeasured {
   return ASTextViewImpl_isLabelMeasured(self);
 }
 
@@ -1741,7 +1752,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASTextViewImpl_getIncludeFontPadding(self);
 }
 
@@ -1791,7 +1802,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setErrorMessageWithNSString:(NSString *)message {
   [self setAttributeWithNSString:@"text" withId:message withBoolean:false];
-  [self setAttributeWithNSString:@"visibility" withId:message == nil || [message java_isEmpty] ? @"gone" : @"visible" withBoolean:false];
+  [self setAttributeWithNSString:@"visibility" withId:message == nil || [message isEmpty] ? @"gone" : @"visible" withBoolean:false];
 }
 
 - (void)setTextFormatWithId:(id)objValue {
@@ -1910,7 +1921,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -1921,7 +1932,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -1963,31 +1974,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -2040,7 +2051,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASTextViewImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -2076,7 +2087,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASTextViewImpl_getTextAlignment(self);
 }
 
@@ -2096,19 +2107,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_addMinMaxListener(self);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASTextViewImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASTextViewImpl_getBorderWidth(self);
 }
 
@@ -2125,7 +2136,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASTextViewImpl_nativeGetLinBreakMode(self);
 }
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode {
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode {
   ASTextViewImpl_nativeSetLineBreakModeWithInt_(self, lineBreakMode);
 }
 
@@ -2134,7 +2145,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment {
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment {
   ASTextViewImpl_nativeSetTextAligmentWithInt_(self, textAlignment);
 }
 
@@ -2180,20 +2191,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASTextViewImpl_toUpperCaseWithNSString_(text);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASTextViewImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASTextViewImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASTextViewImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
@@ -2229,11 +2240,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASTextViewImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASTextViewImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -2256,7 +2267,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_setScrollHorizontallyWithId_(self, objValue);
 }
 
-- (jboolean)canMarquee {
+- (bool)canMarquee {
   return ASTextViewImpl_canMarquee(self);
 }
 
@@ -2264,7 +2275,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_cancelNativeTimer(self);
 }
 
-- (jboolean)isDisposed {
+- (bool)isDisposed {
   return ASTextViewImpl_isDisposed(self);
 }
 
@@ -2319,7 +2330,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor {
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor {
   ASTextViewImpl_setHintColorWithInt_(self, currentHintTextColor);
 }
 
@@ -2327,11 +2338,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTextViewImpl_syncPlaceholderLabel(self);
 }
 
-- (jint)getBaseLine {
+- (int32_t)getBaseLine {
   return ASTextViewImpl_nativeGetBaseLine(self) + [((ADTextView *) nil_chk(measurableView_)) getPaddingTop];
 }
 
-- (jint)nativeGetBaseLine {
+- (int32_t)nativeGetBaseLine {
   return ASTextViewImpl_nativeGetBaseLine(self);
 }
 
@@ -2837,9 +2848,9 @@ void ASTextViewImpl_setWidgetOnNativeClass(ASTextViewImpl *self) {
 }
 
 void ASTextViewImpl_setGravityWithId_(ASTextViewImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADTextView *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASTextViewImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -2859,8 +2870,8 @@ void ASTextViewImpl_setGravityWithId_(ASTextViewImpl *self, id objValue) {
 
 void ASTextViewImpl_updateTextAlignment(ASTextViewImpl *self) {
   ADLayout_Alignment *minor = [((ADTextView *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADTextView *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADTextView *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADTextView *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASTextViewImpl_getMyText(self), [NSString class]);
@@ -2913,7 +2924,7 @@ id ASTextViewImpl_getGravity(ASTextViewImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -2927,8 +2938,8 @@ id ASTextViewImpl_getGravity(ASTextViewImpl *self) {
     default:
     break;
   }
-  jint aligment = ASTextViewImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASTextViewImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASTextViewImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -2942,7 +2953,7 @@ id ASTextViewImpl_getGravity(ASTextViewImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -3025,15 +3036,15 @@ id ASTextViewImpl_getWidth(ASTextViewImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASTextViewImpl_getHeight(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_getHeight(ASTextViewImpl *self) {
   return [((ADTextView *) nil_chk(self->measurableView_)) getHeight];
 }
 
-jint ASTextViewImpl_getAutoSizeTextTypeWithADTextView_(ASTextViewImpl *self, ADTextView *measurableView) {
+int32_t ASTextViewImpl_getAutoSizeTextTypeWithADTextView_(ASTextViewImpl *self, ADTextView *measurableView) {
   return [((ADTextView *) nil_chk(measurableView)) getAutoSizeTextType];
 }
 
-void ASTextViewImpl_setAutoSizeTextTypeInternalWithInt_(ASTextViewImpl *self, jint autoTextType) {
+void ASTextViewImpl_setAutoSizeTextTypeInternalWithInt_(ASTextViewImpl *self, int32_t autoTextType) {
   ASTextViewImpl_removeResizeListener(self);
   if ([((ADTextView *) nil_chk(self->measurableView_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
     [((ADTextView *) nil_chk(self->measurableView_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
@@ -3116,8 +3127,8 @@ void ASTextViewImpl_setFontFamilyWithId_withNSString_(ASTextViewImpl *self, id o
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASTextViewImpl_nativeGetFontStyle(self);
-  jint height = ASTextViewImpl_nativeGetFontSize(self);
+  int32_t style = ASTextViewImpl_nativeGetFontStyle(self);
+  int32_t height = ASTextViewImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASTextViewImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -3131,39 +3142,39 @@ void ASTextViewImpl_setFontFamilyWithId_withNSString_(ASTextViewImpl *self, id o
 }
 
 void ASTextViewImpl_setTextStyleWithId_(ASTextViewImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASTextViewImpl_nativeGetFontSize(self);
+    int32_t height = ASTextViewImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASTextViewImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASTextViewImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASTextViewImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASTextViewImpl_ITALIC_FONT_TRAIT;
     }
     ASTextViewImpl_nativeSetFontStyleWithInt_(self, style);
   }
 }
 
-jint ASTextViewImpl_calcNumberOfWhiteSpaces(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_calcNumberOfWhiteSpaces(ASTextViewImpl *self) {
   if (!ASTextViewImpl_isLabelMeasured(self)) {
     return 0;
   }
-  jfloat blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASTextViewImpl_getTextSize(self), [NSNumber class])))) floatValue];
-  jint width = JreIntDiv(ASTextViewImpl_getLabelWidth(self), 3);
-  jint numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
+  float blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASTextViewImpl_getTextSize(self), [NSNumber class])))) floatValue];
+  int32_t width = JreIntDiv(ASTextViewImpl_getLabelWidth(self), 3);
+  int32_t numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
   return numberOfBlankSpaces;
 }
 
@@ -3206,14 +3217,14 @@ void ASTextViewImpl_startOrStopMarqueeWithId_(ASTextViewImpl *self, id objValue)
   }
 }
 
-jint ASTextViewImpl_getLabelWidth(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_getLabelWidth(ASTextViewImpl *self) {
   if ([((ADTextView *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
     return [((ADTextView *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADTextView *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADTextView *) nil_chk(self->measurableView_)) getPaddingRight];
   }
   return [((ADTextView *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADTextView *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADTextView *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
-jboolean ASTextViewImpl_isLabelMeasured(ASTextViewImpl *self) {
+bool ASTextViewImpl_isLabelMeasured(ASTextViewImpl *self) {
   return !ASTextViewImpl_isDisposed(self) && ASTextViewImpl_getLabelWidth(self) > 0;
 }
 
@@ -3228,8 +3239,8 @@ void ASTextViewImpl_setPasswordWithId_(ASTextViewImpl *self, id objValue) {
 
 void ASTextViewImpl_setFirstBaselineToTopHeightWithId_(ASTextViewImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASTextViewImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASTextViewImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -3237,12 +3248,12 @@ void ASTextViewImpl_setFirstBaselineToTopHeightWithId_(ASTextViewImpl *self, id 
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADTextView *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASTextViewImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASTextViewImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASTextViewImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASTextViewImpl_getIncludeFontPadding(ASTextViewImpl *self) {
+bool ASTextViewImpl_getIncludeFontPadding(ASTextViewImpl *self) {
   return false;
 }
 
@@ -3253,8 +3264,8 @@ id ASTextViewImpl_getFirstBaselineToTopHeight(ASTextViewImpl *self) {
 
 void ASTextViewImpl_setLastBaselineToBottomHeightWithId_(ASTextViewImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASTextViewImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASTextViewImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -3262,7 +3273,7 @@ void ASTextViewImpl_setLastBaselineToBottomHeightWithId_(ASTextViewImpl *self, i
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADTextView *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASTextViewImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASTextViewImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASTextViewImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -3294,7 +3305,7 @@ void ASTextViewImpl_setAutoMaxTextSizeWithId_(ASTextViewImpl *self, id objValue)
 }
 
 void ASTextViewImpl_setAutoSizeTextTypeWithId_(ASTextViewImpl *self, id objValue) {
-  jint autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ASTextViewImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -3395,11 +3406,11 @@ id ASTextViewImpl_getTextSize(ASTextViewImpl *self) {
 }
 
 void ASTextViewImpl_setMyTextSizeWithId_(ASTextViewImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASTextViewImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASTextViewImpl_nativeSetTextSizeWithInt_(ASTextViewImpl *self, jint value) {
+void ASTextViewImpl_nativeSetTextSizeWithInt_(ASTextViewImpl *self, int32_t value) {
   [((ASUILabel*)self.uiView) setFont: [((ASUILabel*)self.uiView).font fontWithSize: value]];
 }
 
@@ -3438,7 +3449,7 @@ void ASTextViewImpl_setHorizontalAligmentLeftInternal(ASTextViewImpl *self) {
   ((ASUILabel*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASTextViewImpl_getTextAlignment(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_getTextAlignment(ASTextViewImpl *self) {
   int alignment = (int) ((ASUILabel*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -3468,11 +3479,11 @@ void ASTextViewImpl_nativeSetVerticalAligmentCenter(ASTextViewImpl *self) {
 void ASTextViewImpl_addMinMaxListener(ASTextViewImpl *self) {
 }
 
-jint ASTextViewImpl_getLineHeight(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_getLineHeight(ASTextViewImpl *self) {
   return ceil(((ASUILabel*)self.uiView).font.lineHeight);
 }
 
-jint ASTextViewImpl_getBorderWidth(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_getBorderWidth(ASTextViewImpl *self) {
   return 0;
 }
 
@@ -3485,7 +3496,7 @@ id ASTextViewImpl_getEllipsize(ASTextViewImpl *self) {
 
 void ASTextViewImpl_setEllipsizeWithId_withNSString_(ASTextViewImpl *self, id objValue, NSString *strValue) {
   self->ellipsize_ = strValue;
-  jint lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (lineBreakMode == JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee)) {
     lineBreakMode = JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping);
   }
@@ -3508,7 +3519,7 @@ JavaLangInteger *ASTextViewImpl_nativeGetLinBreakMode(ASTextViewImpl *self) {
   return [JavaLangInteger valueOfWithInt:(jint) ((ASUILabel*)self->uiView_).lineBreakMode];
 }
 
-void ASTextViewImpl_nativeSetLineBreakModeWithInt_(ASTextViewImpl *self, jint lineBreakMode) {
+void ASTextViewImpl_nativeSetLineBreakModeWithInt_(ASTextViewImpl *self, int32_t lineBreakMode) {
   [((ASUILabel*)self->uiView_) setLineBreakMode:lineBreakMode];
 }
 
@@ -3516,7 +3527,7 @@ void ASTextViewImpl_setJustificationModeWithId_withNSString_(ASTextViewImpl *sel
   ASTextViewImpl_nativeSetTextAligmentWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASTextViewImpl_nativeSetTextAligmentWithInt_(ASTextViewImpl *self, jint textAlignment) {
+void ASTextViewImpl_nativeSetTextAligmentWithInt_(ASTextViewImpl *self, int32_t textAlignment) {
   [((ASUILabel*)self->uiView_) setTextAlignment:textAlignment];
 }
 
@@ -3568,16 +3579,16 @@ NSString *ASTextViewImpl_toUpperCaseWithNSString_(NSString *text) {
   return [((NSString *) nil_chk(text)) java_uppercaseStringWithJRELocale:JavaUtilLocale_getDefault()];
 }
 
-jint ASTextViewImpl_nativeGetFontSize(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_nativeGetFontSize(ASTextViewImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASTextViewImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASTextViewImpl_nativeGetFontStyle(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_nativeGetFontStyle(ASTextViewImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASTextViewImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASTextViewImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -3591,7 +3602,7 @@ void ASTextViewImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASTextViewI
   }
 }
 
-void ASTextViewImpl_nativeSetFontStyleWithInt_(ASTextViewImpl *self, jint style) {
+void ASTextViewImpl_nativeSetFontStyleWithInt_(ASTextViewImpl *self, int32_t style) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUILabel*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -3670,7 +3681,7 @@ void ASTextViewImpl_setDrawableLeftInternalWithNSString_withId_(ASTextViewImpl *
   }
 }
 
-jint ASTextViewImpl_getImageHeightWithId_(ASTextViewImpl *self, id objValue) {
+int32_t ASTextViewImpl_getImageHeightWithId_(ASTextViewImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -3679,7 +3690,7 @@ jint ASTextViewImpl_getImageHeightWithId_(ASTextViewImpl *self, id objValue) {
   return 0;
 }
 
-jint ASTextViewImpl_getImageWidthWithId_(ASTextViewImpl *self, id objValue) {
+int32_t ASTextViewImpl_getImageWidthWithId_(ASTextViewImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -3735,7 +3746,7 @@ void ASTextViewImpl_setScrollHorizontallyWithId_(ASTextViewImpl *self, id objVal
   [((ADTextView *) nil_chk(self->measurableView_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
 }
 
-jboolean ASTextViewImpl_canMarquee(ASTextViewImpl *self) {
+bool ASTextViewImpl_canMarquee(ASTextViewImpl *self) {
   return [nil_chk(ASTextViewImpl_getSingleLine(self)) isEqual:JreLoadStatic(JavaLangBoolean, TRUE)];
 }
 
@@ -3746,7 +3757,7 @@ void ASTextViewImpl_cancelNativeTimer(ASTextViewImpl *self) {
   }
 }
 
-jboolean ASTextViewImpl_isDisposed(ASTextViewImpl *self) {
+bool ASTextViewImpl_isDisposed(ASTextViewImpl *self) {
   return self->isDisposed_;
 }
 
@@ -3809,13 +3820,13 @@ void ASTextViewImpl_drawableStateChangeWithNSString_withADDrawable_(ASTextViewIm
   [self invalidate];
 }
 
-void ASTextViewImpl_setHintColorWithInt_(ASTextViewImpl *self, jint currentHintTextColor) {
+void ASTextViewImpl_setHintColorWithInt_(ASTextViewImpl *self, int32_t currentHintTextColor) {
 }
 
 void ASTextViewImpl_syncPlaceholderLabel(ASTextViewImpl *self) {
 }
 
-jint ASTextViewImpl_nativeGetBaseLine(ASTextViewImpl *self) {
+int32_t ASTextViewImpl_nativeGetBaseLine(ASTextViewImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.ascender;
 }
@@ -3829,6 +3840,8 @@ void ASTextViewImpl_setTextColorLinkWithADColorStateList_(ASTextViewImpl *self, 
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl)
+
+J2OBJC_NAME_MAPPING(ASTextViewImpl, "com.ashera.layout", "AS")
 
 @implementation ASTextViewImpl_AutoSizeTextType
 
@@ -3874,8 +3887,8 @@ void ASTextViewImpl_AutoSizeTextType_init(ASTextViewImpl_AutoSizeTextType *self)
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"uniform" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
+    (void) [self->mapping_ putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"uniform" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
   }
 }
 
@@ -3968,7 +3981,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangInteger_valueOfWithInt_(0);
 }
 
-- (jboolean)supportsIntAlso {
+- (bool)supportsIntAlso {
   return true;
 }
 
@@ -4001,7 +4014,7 @@ void ASTextViewImpl_MarqueeRepeatLimit_init(ASTextViewImpl_MarqueeRepeatLimit *s
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((jint) 0xffffffff)];
+    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0xffffffff)];
   }
 }
 
@@ -4118,10 +4131,10 @@ void ASTextViewImpl_Font_init(ASTextViewImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -4179,9 +4192,9 @@ void ASTextViewImpl_TextStyle_init(ASTextViewImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -4269,8 +4282,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -4280,11 +4293,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -4311,8 +4324,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -4380,12 +4393,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -4415,41 +4428,41 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASTextViewImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASTextViewImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   [this$0_ onRtlPropertiesChangedWithInt:layoutDirection];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -4708,7 +4721,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_PostMeasureHandler)
 }
 
 - (void)run {
-  jint numberOfBlankSpaces = ASTextViewImpl_calcNumberOfWhiteSpaces(this$0_);
+  int32_t numberOfBlankSpaces = ASTextViewImpl_calcNumberOfWhiteSpaces(this$0_);
   if (this$0_->marqueeCommandConverter_ == nil) {
     this$0_->marqueeCommandConverter_ = (ASMarqueeCommandConverter *) cast_chk([this$0_ getAttributeCommandWithNSString:@"text" withNSString:ASCommonConverters_command_marquee withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(numberOfBlankSpaces), JavaLangInteger_valueOfWithInt_(0), direction_ } count:3 type:NSObject_class_()]], [ASMarqueeCommandConverter class]);
   }
@@ -4795,17 +4808,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_MarqueeTask)
 
 @end
 
-void ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask_$Lambda$1 *self, ASTextViewImpl_MarqueeTask *outer$, jint capture$0) {
+void ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask_$Lambda$1 *self, ASTextViewImpl_MarqueeTask *outer$, int32_t capture$0) {
   self->this$0_ = outer$;
   self->val$numberOfBlankSpaces_ = capture$0;
   NSObject_init(self);
 }
 
-ASTextViewImpl_MarqueeTask_$Lambda$1 *new_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, jint capture$0) {
+ASTextViewImpl_MarqueeTask_$Lambda$1 *new_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_NEW_IMPL(ASTextViewImpl_MarqueeTask_$Lambda$1, initWithASTextViewImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
-ASTextViewImpl_MarqueeTask_$Lambda$1 *create_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, jint capture$0) {
+ASTextViewImpl_MarqueeTask_$Lambda$1 *create_ASTextViewImpl_MarqueeTask_$Lambda$1_initWithASTextViewImpl_MarqueeTask_withInt_(ASTextViewImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_CREATE_IMPL(ASTextViewImpl_MarqueeTask_$Lambda$1, initWithASTextViewImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 

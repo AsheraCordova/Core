@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\ViewParent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewParent")
@@ -19,12 +20,15 @@
 @class ADRect;
 @class ADView;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 @protocol ADViewParent < JavaObject >
 
 - (void)requestLayout;
 
-- (jboolean)isLayoutRequested;
+- (bool)isLayoutRequested;
 
 - (void)invalidateChildWithADView:(ADView *)child
                        withADRect:(ADRect *)r;
@@ -37,53 +41,53 @@
 
 - (void)childDrawableStateChangedWithADView:(ADView *)child;
 
-- (jboolean)canResolveLayoutDirection;
+- (bool)canResolveLayoutDirection;
 
-- (jboolean)isLayoutDirectionResolved;
+- (bool)isLayoutDirectionResolved;
 
-- (jint)getLayoutDirection;
+- (int32_t)getLayoutDirection;
 
-- (jboolean)canResolveTextDirection;
+- (bool)canResolveTextDirection;
 
-- (jboolean)isTextDirectionResolved;
+- (bool)isTextDirectionResolved;
 
-- (jint)getTextDirection;
+- (int32_t)getTextDirection;
 
-- (jboolean)canResolveTextAlignment;
+- (bool)canResolveTextAlignment;
 
-- (jboolean)isTextAlignmentResolved;
+- (bool)isTextAlignmentResolved;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
-- (jboolean)onStartNestedScrollWithADView:(ADView *)child
-                               withADView:(ADView *)target
-                                  withInt:(jint)nestedScrollAxes;
+- (bool)onStartNestedScrollWithADView:(ADView *)child
+                           withADView:(ADView *)target
+                              withInt:(int32_t)nestedScrollAxes;
 
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)nestedScrollAxes;
+                                 withInt:(int32_t)nestedScrollAxes;
 
 - (void)onStopNestedScrollWithADView:(ADView *)target;
 
 - (void)onNestedScrollWithADView:(ADView *)target
-                         withInt:(jint)dxConsumed
-                         withInt:(jint)dyConsumed
-                         withInt:(jint)dxUnconsumed
-                         withInt:(jint)dyUnconsumed;
+                         withInt:(int32_t)dxConsumed
+                         withInt:(int32_t)dyConsumed
+                         withInt:(int32_t)dxUnconsumed
+                         withInt:(int32_t)dyUnconsumed;
 
 - (void)onNestedPreScrollWithADView:(ADView *)target
-                            withInt:(jint)dx
-                            withInt:(jint)dy
+                            withInt:(int32_t)dx
+                            withInt:(int32_t)dy
                        withIntArray:(IOSIntArray *)consumed;
 
-- (jboolean)onNestedFlingWithADView:(ADView *)target
-                          withFloat:(jfloat)velocityX
-                          withFloat:(jfloat)velocityY
-                        withBoolean:(jboolean)consumed;
+- (bool)onNestedFlingWithADView:(ADView *)target
+                      withFloat:(float)velocityX
+                      withFloat:(float)velocityY
+                    withBoolean:(bool)consumed;
 
-- (jboolean)onNestedPreFlingWithADView:(ADView *)target
-                             withFloat:(jfloat)velocityX
-                             withFloat:(jfloat)velocityY;
+- (bool)onNestedPreFlingWithADView:(ADView *)target
+                         withFloat:(float)velocityX
+                         withFloat:(float)velocityY;
 
 @end
 
@@ -92,6 +96,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADViewParent)
 J2OBJC_TYPE_LITERAL_HEADER(ADViewParent)
 
 #define RAndroidViewViewParent ADViewParent
+
 
 #endif
 

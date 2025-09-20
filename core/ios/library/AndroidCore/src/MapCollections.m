@@ -3,13 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\MapCollections.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "MapCollections.h"
 #include "Objects.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/ClassCastException.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Iterable.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -20,43 +28,50 @@
 #include "java/util/Set.h"
 #include "java/util/Spliterator.h"
 #include "java/util/function/Consumer.h"
+#include "java/util/function/IntFunction.h"
 #include "java/util/function/Predicate.h"
 #include "java/util/stream/Stream.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ADMapCollections_ArrayIterator () {
  @public
-  __unsafe_unretained ADMapCollections *this$0_;
+  WEAK_ ADMapCollections *this$0_;
 }
 
 @end
 
 @interface ADMapCollections_MapIterator () {
  @public
-  __unsafe_unretained ADMapCollections *this$0_;
+  WEAK_ ADMapCollections *this$0_;
 }
 
 @end
 
 @interface ADMapCollections_EntrySet () {
  @public
-  __unsafe_unretained ADMapCollections *this$0_;
+  WEAK_ ADMapCollections *this$0_;
 }
 
 @end
 
 @interface ADMapCollections_KeySet () {
  @public
-  __unsafe_unretained ADMapCollections *this$0_;
+  WEAK_ ADMapCollections *this$0_;
 }
 
 @end
 
 @interface ADMapCollections_ValuesCollection () {
  @public
-  __unsafe_unretained ADMapCollections *this$0_;
+  WEAK_ ADMapCollections *this$0_;
 }
 
 @end
@@ -68,38 +83,38 @@
   return self;
 }
 
-+ (jboolean)containsAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
-                      withJavaUtilCollection:(id<JavaUtilCollection>)collection {
++ (bool)containsAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
+                  withJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_(map, collection);
 }
 
-+ (jboolean)removeAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
-                    withJavaUtilCollection:(id<JavaUtilCollection>)collection {
++ (bool)removeAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
+                withJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_(map, collection);
 }
 
-+ (jboolean)retainAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
-                    withJavaUtilCollection:(id<JavaUtilCollection>)collection {
++ (bool)retainAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
+                withJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_(map, collection);
 }
 
-- (IOSObjectArray *)toArrayHelperWithInt:(jint)offset {
-  jint N = [self colGetSize];
+- (IOSObjectArray *)toArrayHelperWithInt:(int32_t)offset {
+  int32_t N = [self colGetSize];
   IOSObjectArray *result = [IOSObjectArray arrayWithLength:N type:NSObject_class_()];
-  for (jint i = 0; i < N; i++) {
+  for (int32_t i = 0; i < N; i++) {
     IOSObjectArray_Set(result, i, [self colGetEntryWithInt:i withInt:offset]);
   }
   return result;
 }
 
 - (IOSObjectArray *)toArrayHelperWithNSObjectArray:(IOSObjectArray *)array
-                                           withInt:(jint)offset {
-  jint N = [self colGetSize];
+                                           withInt:(int32_t)offset {
+  int32_t N = [self colGetSize];
   if (((IOSObjectArray *) nil_chk(array))->size_ < N) {
     IOSObjectArray *newArray = (IOSObjectArray *) cast_check(JavaLangReflectArray_newInstanceWithIOSClass_withInt_([[array java_getClass] getComponentType], N), IOSClass_arrayType(NSObject_class_(), 1));
     array = newArray;
   }
-  for (jint i = 0; i < N; i++) {
+  for (int32_t i = 0; i < N; i++) {
     IOSObjectArray_Set(nil_chk(array), i, [self colGetEntryWithInt:i withInt:offset]);
   }
   if (((IOSObjectArray *) nil_chk(array))->size_ > N) {
@@ -108,8 +123,8 @@
   return array;
 }
 
-+ (jboolean)equalsSetHelperWithJavaUtilSet:(id<JavaUtilSet>)set
-                                    withId:(id)object {
++ (bool)equalsSetHelperWithJavaUtilSet:(id<JavaUtilSet>)set
+                                withId:(id)object {
   return ADMapCollections_equalsSetHelperWithJavaUtilSet_withId_(set, object);
 }
 
@@ -134,26 +149,26 @@
   return mValues_;
 }
 
-- (jint)colGetSize {
+- (int32_t)colGetSize {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (id)colGetEntryWithInt:(jint)index
-                 withInt:(jint)offset {
+- (id)colGetEntryWithInt:(int32_t)index
+                 withInt:(int32_t)offset {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jint)colIndexOfKeyWithId:(id)key {
+- (int32_t)colIndexOfKeyWithId:(id)key {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jint)colIndexOfValueWithId:(id)key {
+- (int32_t)colIndexOfValueWithId:(id)key {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -171,14 +186,14 @@
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (id)colSetValueWithInt:(jint)index
+- (id)colSetValueWithInt:(int32_t)index
                   withId:(id)value {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (void)colRemoveAtWithInt:(jint)index {
+- (void)colRemoveAtWithInt:(int32_t)index {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
 }
@@ -256,7 +271,7 @@ void ADMapCollections_initPackagePrivate(ADMapCollections *self) {
   NSObject_init(self);
 }
 
-jboolean ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection) {
+bool ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection) {
   ADMapCollections_initialize();
   id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilCollection>) nil_chk(collection)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
@@ -267,9 +282,9 @@ jboolean ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollectio
   return true;
 }
 
-jboolean ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection) {
+bool ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection) {
   ADMapCollections_initialize();
-  jint oldSize = [((id<JavaUtilMap>) nil_chk(map)) size];
+  int32_t oldSize = [((id<JavaUtilMap>) nil_chk(map)) size];
   id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilCollection>) nil_chk(collection)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
     [map removeWithId:[it next]];
@@ -277,9 +292,9 @@ jboolean ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_
   return oldSize != [map size];
 }
 
-jboolean ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection) {
+bool ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection) {
   ADMapCollections_initialize();
-  jint oldSize = [((id<JavaUtilMap>) nil_chk(map)) size];
+  int32_t oldSize = [((id<JavaUtilMap>) nil_chk(map)) size];
   id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilSet>) nil_chk([map keySet])) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
     if (![((id<JavaUtilCollection>) nil_chk(collection)) containsWithId:[it next]]) {
@@ -289,9 +304,9 @@ jboolean ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_
   return oldSize != [map size];
 }
 
-jboolean ADMapCollections_equalsSetHelperWithJavaUtilSet_withId_(id<JavaUtilSet> set, id object) {
+bool ADMapCollections_equalsSetHelperWithJavaUtilSet_withId_(id<JavaUtilSet> set, id object) {
   ADMapCollections_initialize();
-  if (set == object) {
+  if (JreObjectEqualsEquals(set, object)) {
     return true;
   }
   if ([JavaUtilSet_class_() isInstance:object]) {
@@ -314,12 +329,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections)
 @implementation ADMapCollections_ArrayIterator
 
 - (instancetype)initWithADMapCollections:(ADMapCollections *)outer$
-                                 withInt:(jint)offset {
+                                 withInt:(int32_t)offset {
   ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(self, outer$, offset);
   return self;
 }
 
-- (jboolean)hasNext {
+- (bool)hasNext {
   return mIndex_ < mSize_;
 }
 
@@ -378,7 +393,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections)
 
 @end
 
-void ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections_ArrayIterator *self, ADMapCollections *outer$, jint offset) {
+void ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections_ArrayIterator *self, ADMapCollections *outer$, int32_t offset) {
   self->this$0_ = outer$;
   NSObject_init(self);
   self->mCanRemove_ = false;
@@ -386,11 +401,11 @@ void ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapColle
   self->mSize_ = [outer$ colGetSize];
 }
 
-ADMapCollections_ArrayIterator *new_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, jint offset) {
+ADMapCollections_ArrayIterator *new_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, int32_t offset) {
   J2OBJC_NEW_IMPL(ADMapCollections_ArrayIterator, initWithADMapCollections_withInt_, outer$, offset)
 }
 
-ADMapCollections_ArrayIterator *create_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, jint offset) {
+ADMapCollections_ArrayIterator *create_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, int32_t offset) {
   J2OBJC_CREATE_IMPL(ADMapCollections_ArrayIterator, initWithADMapCollections_withInt_, outer$, offset)
 }
 
@@ -403,7 +418,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_ArrayIterator)
   return self;
 }
 
-- (jboolean)hasNext {
+- (bool)hasNext {
   return mIndex_ < mEnd_;
 }
 
@@ -444,7 +459,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_ArrayIterator)
   return [this$0_ colSetValueWithInt:mIndex_ withId:object];
 }
 
-- (jboolean)isEqual:(id)o {
+- (bool)isEqual:(id)o {
   if (!mEntryValid_) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"This container does not support retaining Map.Entry objects");
   }
@@ -461,7 +476,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_ArrayIterator)
   }
   id key = [this$0_ colGetEntryWithInt:mIndex_ withInt:0];
   id value = [this$0_ colGetEntryWithInt:mIndex_ withInt:1];
-  return (key == nil ? 0 : ((jint) [key hash])) ^ (value == nil ? 0 : ((jint) [value hash]));
+  return (key == nil ? 0 : ((int32_t) [key hash])) ^ (value == nil ? 0 : ((int32_t) [value hash]));
 }
 
 - (NSString *)description {
@@ -542,12 +557,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   return self;
 }
 
-- (jboolean)addWithId:(id<JavaUtilMap_Entry>)object {
+- (bool)addWithId:(id<JavaUtilMap_Entry>)object {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
-  jint oldSize = [this$0_ colGetSize];
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+  int32_t oldSize = [this$0_ colGetSize];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk(collection)) {
     [this$0_ colPutWithId:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withId:[entry_ getValue]];
   }
@@ -558,10 +573,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   [this$0_ colClear];
 }
 
-- (jboolean)containsWithId:(id)o {
+- (bool)containsWithId:(id)o {
   if (!([JavaUtilMap_Entry_class_() isInstance:o])) return false;
   id<JavaUtilMap_Entry> e = (id<JavaUtilMap_Entry>) cast_check(o, JavaUtilMap_Entry_class_());
-  jint index = [this$0_ colIndexOfKeyWithId:[((id<JavaUtilMap_Entry>) nil_chk(e)) getKey]];
+  int32_t index = [this$0_ colIndexOfKeyWithId:[((id<JavaUtilMap_Entry>) nil_chk(e)) getKey]];
   if (index < 0) {
     return false;
   }
@@ -569,7 +584,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   return ADObjects_equalWithId_withId_(foundVal, [e getValue]);
 }
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilCollection>) nil_chk(collection)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
     if (![self containsWithId:[it next]]) {
@@ -579,7 +594,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   return true;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return [this$0_ colGetSize] == 0;
 }
 
@@ -587,19 +602,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   return create_ADMapCollections_MapIterator_initWithADMapCollections_(this$0_);
 }
 
-- (jboolean)removeWithId:(id)object {
+- (bool)removeWithId:(id)object {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (jint)size {
+- (int32_t)size {
   return [this$0_ colGetSize];
 }
 
@@ -611,16 +626,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (jboolean)isEqual:(id)object {
+- (bool)isEqual:(id)object {
   return ADMapCollections_equalsSetHelperWithJavaUtilSet_withId_(self, object);
 }
 
 - (NSUInteger)hash {
-  jint result = 0;
-  for (jint i = [this$0_ colGetSize] - 1; i >= 0; i--) {
+  int32_t result = 0;
+  for (int32_t i = [this$0_ colGetSize] - 1; i >= 0; i--) {
     id key = [this$0_ colGetEntryWithInt:i withInt:0];
     id value = [this$0_ colGetEntryWithInt:i withInt:1];
-    result += ((key == nil ? 0 : ((jint) [key hash])) ^ (value == nil ? 0 : ((jint) [value hash])));
+    result += ((key == nil ? 0 : ((int32_t) [key hash])) ^ (value == nil ? 0 : ((int32_t) [value hash])));
   }
   return result;
 }
@@ -629,7 +644,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   return JavaUtilSet_spliterator(self);
 }
 
-- (jboolean)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
+- (bool)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
   return JavaUtilCollection_removeIfWithJavaUtilFunctionPredicate_(self, arg0);
 }
 
@@ -725,11 +740,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_EntrySet)
   return self;
 }
 
-- (jboolean)addWithId:(id)object {
+- (bool)addWithId:(id)object {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
@@ -737,15 +752,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_EntrySet)
   [this$0_ colClear];
 }
 
-- (jboolean)containsWithId:(id)object {
+- (bool)containsWithId:(id)object {
   return [this$0_ colIndexOfKeyWithId:object] >= 0;
 }
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_([this$0_ colGetMap], collection);
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return [this$0_ colGetSize] == 0;
 }
 
@@ -753,8 +768,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_EntrySet)
   return create_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(this$0_, 0);
 }
 
-- (jboolean)removeWithId:(id)object {
-  jint index = [this$0_ colIndexOfKeyWithId:object];
+- (bool)removeWithId:(id)object {
+  int32_t index = [this$0_ colIndexOfKeyWithId:object];
   if (index >= 0) {
     [this$0_ colRemoveAtWithInt:index];
     return true;
@@ -762,15 +777,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_EntrySet)
   return false;
 }
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_([this$0_ colGetMap], collection);
 }
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   return ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_([this$0_ colGetMap], collection);
 }
 
-- (jint)size {
+- (int32_t)size {
   return [this$0_ colGetSize];
 }
 
@@ -782,15 +797,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_EntrySet)
   return [this$0_ toArrayHelperWithNSObjectArray:array withInt:0];
 }
 
-- (jboolean)isEqual:(id)object {
+- (bool)isEqual:(id)object {
   return ADMapCollections_equalsSetHelperWithJavaUtilSet_withId_(self, object);
 }
 
 - (NSUInteger)hash {
-  jint result = 0;
-  for (jint i = [this$0_ colGetSize] - 1; i >= 0; i--) {
+  int32_t result = 0;
+  for (int32_t i = [this$0_ colGetSize] - 1; i >= 0; i--) {
     id obj = JreRetainedLocalValue([this$0_ colGetEntryWithInt:i withInt:0]);
-    result += obj == nil ? 0 : ((jint) [obj hash]);
+    result += obj == nil ? 0 : ((int32_t) [obj hash]);
   }
   return result;
 }
@@ -799,7 +814,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_EntrySet)
   return JavaUtilSet_spliterator(self);
 }
 
-- (jboolean)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
+- (bool)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
   return JavaUtilCollection_removeIfWithJavaUtilFunctionPredicate_(self, arg0);
 }
 
@@ -895,11 +910,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   return self;
 }
 
-- (jboolean)addWithId:(id)object {
+- (bool)addWithId:(id)object {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   @throw create_JavaLangUnsupportedOperationException_init();
 }
 
@@ -907,11 +922,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   [this$0_ colClear];
 }
 
-- (jboolean)containsWithId:(id)object {
+- (bool)containsWithId:(id)object {
   return [this$0_ colIndexOfValueWithId:object] >= 0;
 }
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
   id<JavaUtilIterator> it = JreRetainedLocalValue([((id<JavaUtilCollection>) nil_chk(collection)) iterator]);
   while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
     if (![self containsWithId:[it next]]) {
@@ -921,7 +936,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   return true;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return [this$0_ colGetSize] == 0;
 }
 
@@ -929,8 +944,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   return create_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(this$0_, 1);
 }
 
-- (jboolean)removeWithId:(id)object {
-  jint index = [this$0_ colIndexOfValueWithId:object];
+- (bool)removeWithId:(id)object {
+  int32_t index = [this$0_ colIndexOfValueWithId:object];
   if (index >= 0) {
     [this$0_ colRemoveAtWithInt:index];
     return true;
@@ -938,10 +953,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   return false;
 }
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
-  jint N = [this$0_ colGetSize];
-  jboolean changed = false;
-  for (jint i = 0; i < N; i++) {
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+  int32_t N = [this$0_ colGetSize];
+  bool changed = false;
+  for (int32_t i = 0; i < N; i++) {
     id cur = JreRetainedLocalValue([this$0_ colGetEntryWithInt:i withInt:1]);
     if ([((id<JavaUtilCollection>) nil_chk(collection)) containsWithId:cur]) {
       [this$0_ colRemoveAtWithInt:i];
@@ -953,10 +968,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   return changed;
 }
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
-  jint N = [this$0_ colGetSize];
-  jboolean changed = false;
-  for (jint i = 0; i < N; i++) {
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection {
+  int32_t N = [this$0_ colGetSize];
+  bool changed = false;
+  for (int32_t i = 0; i < N; i++) {
     id cur = JreRetainedLocalValue([this$0_ colGetEntryWithInt:i withInt:1]);
     if (![((id<JavaUtilCollection>) nil_chk(collection)) containsWithId:cur]) {
       [this$0_ colRemoveAtWithInt:i];
@@ -968,7 +983,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   return changed;
 }
 
-- (jint)size {
+- (int32_t)size {
   return [this$0_ colGetSize];
 }
 
@@ -980,7 +995,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
   return [this$0_ toArrayHelperWithNSObjectArray:array withInt:1];
 }
 
-- (jboolean)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
+- (bool)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
   return JavaUtilCollection_removeIfWithJavaUtilFunctionPredicate_(self, arg0);
 }
 

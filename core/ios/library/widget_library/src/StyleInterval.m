@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\StyleInterval.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "Interval.h"
 #include "J2ObjC_source.h"
 #include "StyleInterval.h"
 #include "WidgetAttributeMap.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASStyleInterval () {
@@ -30,8 +43,8 @@ J2OBJC_FIELD_SETTER(ASStyleInterval, style_, ASWidgetAttributeMap *)
   JreStrongAssign(&self->style_, style);
 }
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)style {
   ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(self, start, end, style);
   return self;
@@ -41,8 +54,8 @@ J2OBJC_FIELD_SETTER(ASStyleInterval, style_, ASWidgetAttributeMap *)
   return JreStrcat("CI$I$@C", '[', [self getStart], @", ", [self getEnd], @", ", self->style_, ']');
 }
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments {
   return create_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(start, end, (ASWidgetAttributeMap *) cast_chk(IOSObjectArray_Get(nil_chk(arguments), 0), [ASWidgetAttributeMap class]));
 }
@@ -85,17 +98,19 @@ J2OBJC_FIELD_SETTER(ASStyleInterval, style_, ASWidgetAttributeMap *)
 
 @end
 
-void ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(ASStyleInterval *self, jint start, jint end, ASWidgetAttributeMap *style) {
+void ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(ASStyleInterval *self, int32_t start, int32_t end, ASWidgetAttributeMap *style) {
   ASInterval_initWithInt_withInt_(self, start, end);
   JreStrongAssign(&self->style_, style);
 }
 
-ASStyleInterval *new_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(jint start, jint end, ASWidgetAttributeMap *style) {
+ASStyleInterval *new_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(int32_t start, int32_t end, ASWidgetAttributeMap *style) {
   J2OBJC_NEW_IMPL(ASStyleInterval, initWithInt_withInt_withASWidgetAttributeMap_, start, end, style)
 }
 
-ASStyleInterval *create_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(jint start, jint end, ASWidgetAttributeMap *style) {
+ASStyleInterval *create_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(int32_t start, int32_t end, ASWidgetAttributeMap *style) {
   J2OBJC_CREATE_IMPL(ASStyleInterval, initWithInt_withInt_withASWidgetAttributeMap_, start, end, style)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASStyleInterval)
+
+J2OBJC_NAME_MAPPING(ASStyleInterval, "com.ashera.attributedtext", "AS")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\OverlayBoundsConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_OverlayBoundsConverter")
@@ -54,6 +55,7 @@ FOUNDATION_EXPORT ASOverlayBoundsConverter *create_ASOverlayBoundsConverter_init
 J2OBJC_TYPE_LITERAL_HEADER(ASOverlayBoundsConverter)
 
 @compatibility_alias ComAsheraConverterOverlayBoundsConverter ASOverlayBoundsConverter;
+
 
 #endif
 

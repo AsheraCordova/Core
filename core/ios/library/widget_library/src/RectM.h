@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\RectM.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RectM")
@@ -16,24 +17,26 @@
 #if !defined (ASRectM_) && (INCLUDE_ALL_RectM || defined(INCLUDE_ASRectM))
 #define ASRectM_
 
+@class JavaLangInteger;
+
 @interface ASRectM : NSObject {
  @public
   /*!
    @brief the x coordinate of the rectangle
    */
-  jint x_;
+  int32_t x_;
   /*!
    @brief the y coordinate of the rectangle
    */
-  jint y_;
+  int32_t y_;
   /*!
    @brief the width of the rectangle
    */
-  jint width_;
+  int32_t width_;
   /*!
    @brief the height of the rectangle
    */
-  jint height_;
+  int32_t height_;
 }
 
 #pragma mark Public
@@ -46,10 +49,10 @@
  @param width the width of the rectangle
  @param height the height of the rectangle
  */
-- (instancetype)initWithInt:(jint)x
-                    withInt:(jint)y
-                    withInt:(jint)width
-                    withInt:(jint)height;
+- (instancetype)initWithInt:(int32_t)x
+                    withInt:(int32_t)y
+                    withInt:(int32_t)width
+                    withInt:(int32_t)height;
 
 // Disallowed inherited constructors, do not use.
 
@@ -59,15 +62,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASRectM)
 
-FOUNDATION_EXPORT void ASRectM_initWithInt_withInt_withInt_withInt_(ASRectM *self, jint x, jint y, jint width, jint height);
+FOUNDATION_EXPORT void ASRectM_initWithInt_withInt_withInt_withInt_(ASRectM *self, int32_t x, int32_t y, int32_t width, int32_t height);
 
-FOUNDATION_EXPORT ASRectM *new_ASRectM_initWithInt_withInt_withInt_withInt_(jint x, jint y, jint width, jint height) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASRectM *new_ASRectM_initWithInt_withInt_withInt_withInt_(int32_t x, int32_t y, int32_t width, int32_t height) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASRectM *create_ASRectM_initWithInt_withInt_withInt_withInt_(jint x, jint y, jint width, jint height);
+FOUNDATION_EXPORT ASRectM *create_ASRectM_initWithInt_withInt_withInt_withInt_(int32_t x, int32_t y, int32_t width, int32_t height);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRectM)
 
 @compatibility_alias ComAsheraModelRectM ASRectM;
+
 
 #endif
 

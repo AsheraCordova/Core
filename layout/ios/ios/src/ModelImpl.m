@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ModelImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseWidget.h"
 #include "HasWidgets.h"
 #include "IFragment.h"
@@ -16,13 +21,19 @@
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
 #include <UIKit/UIKit.h>
 #include "ASUIView.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASModelImpl () {
@@ -118,7 +129,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)applyModelAttributes {
+- (bool)applyModelAttributes {
   return false;
 }
 
@@ -195,6 +206,8 @@ void ASModelImpl_nativeCreateWithASIFragment_withJavaUtilMap_(ASModelImpl *self,
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelImpl)
+
+J2OBJC_NAME_MAPPING(ASModelImpl, "com.ashera.layout", "AS")
 
 @implementation ASModelImpl_ViewExt
 

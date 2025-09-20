@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\GenericFragment.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_GenericFragment")
@@ -32,7 +33,10 @@
 @class ASError;
 @class ASEventBus;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @class JavaUtilProperties;
+@class NSString;
 @protocol ASIActivity;
 @protocol ASIWidget;
 @protocol CSSStyleSheet;
@@ -108,13 +112,13 @@
 
 - (id)getUserDataWithNSString:(NSString *)key;
 
-- (jboolean)hasDevDataWithNSString:(NSString *)key;
+- (bool)hasDevDataWithNSString:(NSString *)key;
 
-- (jboolean)hasErrors;
+- (bool)hasErrors;
 
-- (jboolean)isMeasuring;
+- (bool)isMeasuring;
 
-- (jboolean)isViewLoaded;
+- (bool)isViewLoaded;
 
 - (void)onActivityCreatedWithADBundle:(ADBundle *)savedInstanceState;
 
@@ -128,7 +132,7 @@
 
 - (void)onCreateWithADBundle:(ADBundle *)savedInstanceState;
 
-- (id)onCreateViewWithBoolean:(jboolean)measure;
+- (id)onCreateViewWithBoolean:(bool)measure;
 
 - (ADView *)onCreateViewWithADLayoutInflater:(ADLayoutInflater *)inflater
                              withADViewGroup:(ADViewGroup *)parent
@@ -150,17 +154,17 @@
 - (void)removeListenerWithASIWidget:(id<ASIWidget>)widget
                              withId:(id)listener;
 
-- (void)resizeWindowWithInt:(jint)width
-                    withInt:(jint)height;
+- (void)resizeWindowWithInt:(int32_t)width
+                    withInt:(int32_t)height;
 
-- (void)setFrameWithInt:(jint)x
-                withInt:(jint)y
-                withInt:(jint)width
-                withInt:(jint)height;
+- (void)setFrameWithInt:(int32_t)x
+                withInt:(int32_t)y
+                withInt:(int32_t)width
+                withInt:(int32_t)height;
 
 - (void)setInlineResourceWithNSString:(NSString *)key
                          withNSString:(NSString *)value
-                          withBoolean:(jboolean)append;
+                          withBoolean:(bool)append;
 
 - (void)setRootWidgetWithASIWidget:(id<ASIWidget>)widget;
 
@@ -187,6 +191,7 @@ FOUNDATION_EXPORT ADBundle *ASGenericFragment_getInitialBundleWithNSString_withN
 J2OBJC_TYPE_LITERAL_HEADER(ASGenericFragment)
 
 @compatibility_alias ComAsheraCoreGenericFragment ASGenericFragment;
+
 
 #endif
 

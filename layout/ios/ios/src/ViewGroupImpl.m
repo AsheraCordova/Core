@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewGroupImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
@@ -36,7 +41,12 @@
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASViewGroupImpl ()
@@ -134,7 +144,7 @@
                                     withId:(id)objValue;
 
 + (void)applyClipToPaddingCommandWithASIWidget:(id<ASIWidget>)w
-                                   withBoolean:(jboolean)add;
+                                   withBoolean:(bool)add;
 
 @end
 
@@ -202,7 +212,7 @@ __attribute__((unused)) static void ASViewGroupImpl_setOnChildViewRemovedWithADV
 
 __attribute__((unused)) static void ASViewGroupImpl_setOnChildViewAddedWithADViewGroup_withASIWidget_withId_(ADViewGroup *viewGroup, id<ASIWidget> w, id objValue);
 
-__attribute__((unused)) static void ASViewGroupImpl_applyClipToPaddingCommandWithASIWidget_withBoolean_(id<ASIWidget> w, jboolean add);
+__attribute__((unused)) static void ASViewGroupImpl_applyClipToPaddingCommandWithASIWidget_withBoolean_(id<ASIWidget> w, bool add);
 
 @interface ASViewGroupImpl_LayoutTransition () {
  @public
@@ -274,21 +284,22 @@ __attribute__((unused)) static ASViewGroupImpl_OnHierarchyChangeListener *create
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_OnHierarchyChangeListener)
 
+
 @interface ASViewGroupImpl_ClipPaddingMaskCommand ()
 
 - (void)createMaskLayerWithASIWidget:(id<ASIWidget>)w;
 
 - (void)nativeCreateMaskLayerWithId:(id)uiView
-                            withInt:(jint)left
-                            withInt:(jint)top
-                            withInt:(jint)width
-                            withInt:(jint)height;
+                            withInt:(int32_t)left
+                            withInt:(int32_t)top
+                            withInt:(int32_t)width
+                            withInt:(int32_t)height;
 
 @end
 
 __attribute__((unused)) static void ASViewGroupImpl_ClipPaddingMaskCommand_createMaskLayerWithASIWidget_(ASViewGroupImpl_ClipPaddingMaskCommand *self, id<ASIWidget> w);
 
-__attribute__((unused)) static void ASViewGroupImpl_ClipPaddingMaskCommand_nativeCreateMaskLayerWithId_withInt_withInt_withInt_withInt_(ASViewGroupImpl_ClipPaddingMaskCommand *self, id uiView, jint left, jint top, jint width, jint height);
+__attribute__((unused)) static void ASViewGroupImpl_ClipPaddingMaskCommand_nativeCreateMaskLayerWithId_withInt_withInt_withInt_withInt_(ASViewGroupImpl_ClipPaddingMaskCommand *self, id uiView, int32_t left, int32_t top, int32_t width, int32_t height);
 
 @implementation ASViewGroupImpl
 
@@ -526,7 +537,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewGroupImpl_setOnChildViewAddedWithADViewGroup_withASIWidget_withId_(viewGroup, w, objValue);
 }
 
-+ (jboolean)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key {
++ (bool)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key {
   return ASViewGroupImpl_isAttributeSupportedWithASWidgetAttribute_(key);
 }
 
@@ -535,7 +546,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)applyClipToPaddingCommandWithASIWidget:(id<ASIWidget>)w
-                                   withBoolean:(jboolean)add {
+                                   withBoolean:(bool)add {
   ASViewGroupImpl_applyClipToPaddingCommandWithASIWidget_withBoolean_(w, add);
 }
 
@@ -1011,7 +1022,7 @@ void ASViewGroupImpl_setMarginWithId_withId_withASIWidget_(id objValue, id layou
 
 void ASViewGroupImpl_setBottomMarginWithId_withId_(id objValue, id layoutParams) {
   ASViewGroupImpl_initialize();
-  jint valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([layoutParams isKindOfClass:[ADViewGroup_MarginLayoutParams class]]) {
     ((ADViewGroup_MarginLayoutParams *) nil_chk(((ADViewGroup_MarginLayoutParams *) layoutParams)))->bottomMargin_ = valueInt;
   }
@@ -1019,7 +1030,7 @@ void ASViewGroupImpl_setBottomMarginWithId_withId_(id objValue, id layoutParams)
 
 void ASViewGroupImpl_setTopMarginWithId_withId_(id objValue, id layoutParams) {
   ASViewGroupImpl_initialize();
-  jint valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([layoutParams isKindOfClass:[ADViewGroup_MarginLayoutParams class]]) {
     ((ADViewGroup_MarginLayoutParams *) nil_chk(((ADViewGroup_MarginLayoutParams *) layoutParams)))->topMargin_ = valueInt;
   }
@@ -1027,7 +1038,7 @@ void ASViewGroupImpl_setTopMarginWithId_withId_(id objValue, id layoutParams) {
 
 void ASViewGroupImpl_setVerticalMarginWithId_withId_withASIWidget_(id objValue, id layoutParams, id<ASIWidget> w) {
   ASViewGroupImpl_initialize();
-  jint valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([layoutParams isKindOfClass:[ADViewGroup_MarginLayoutParams class]]) {
     ((ADViewGroup_MarginLayoutParams *) nil_chk(((ADViewGroup_MarginLayoutParams *) layoutParams)))->topMargin_ = valueInt;
     ((ADViewGroup_MarginLayoutParams *) nil_chk(((ADViewGroup_MarginLayoutParams *) layoutParams)))->bottomMargin_ = valueInt;
@@ -1058,7 +1069,7 @@ void ASViewGroupImpl_setHorizontalMarginWithId_withId_withASIWidget_(id objValue
 
 void ASViewGroupImpl_setEndMarginWithId_withId_withASIWidget_(id objValue, id layoutParams, id<ASIWidget> w) {
   ASViewGroupImpl_initialize();
-  jint valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([layoutParams isKindOfClass:[ADViewGroup_MarginLayoutParams class]]) {
     ADViewGroup_MarginLayoutParams *marginParams = (ADViewGroup_MarginLayoutParams *) layoutParams;
     [((ADViewGroup_MarginLayoutParams *) nil_chk(marginParams)) setMarginEndWithInt:valueInt];
@@ -1068,7 +1079,7 @@ void ASViewGroupImpl_setEndMarginWithId_withId_withASIWidget_(id objValue, id la
 
 void ASViewGroupImpl_setStartMarginWithId_withId_withASIWidget_(id objValue, id layoutParams, id<ASIWidget> w) {
   ASViewGroupImpl_initialize();
-  jint valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t valueInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([layoutParams isKindOfClass:[ADViewGroup_MarginLayoutParams class]]) {
     ADViewGroup_MarginLayoutParams *marginParams = (ADViewGroup_MarginLayoutParams *) layoutParams;
     [((ADViewGroup_MarginLayoutParams *) nil_chk(marginParams)) setMarginStartWithInt:valueInt];
@@ -1157,20 +1168,20 @@ void ASViewGroupImpl_setLayoutTransitionWithId_withADViewGroup_(id objValue, ADV
   [lt disableTransitionTypeWithInt:ADLayoutTransition_APPEARING];
   [lt disableTransitionTypeWithInt:ADLayoutTransition_DISAPPEARING];
   [lt disableTransitionTypeWithInt:ADLayoutTransition_CHANGING];
-  jint flag = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  if ((flag & (jint) 0x1) != 0) {
+  int32_t flag = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  if ((flag & (int32_t) 0x1) != 0) {
     [lt enableTransitionTypeWithInt:ADLayoutTransition_CHANGE_APPEARING];
   }
-  if ((flag & (jint) 0x02) != 0) {
+  if ((flag & (int32_t) 0x02) != 0) {
     [lt enableTransitionTypeWithInt:ADLayoutTransition_CHANGE_DISAPPEARING];
   }
-  if ((flag & (jint) 0x04) != 0) {
+  if ((flag & (int32_t) 0x04) != 0) {
     [lt enableTransitionTypeWithInt:ADLayoutTransition_APPEARING];
   }
-  if ((flag & (jint) 0x08) != 0) {
+  if ((flag & (int32_t) 0x08) != 0) {
     [lt enableTransitionTypeWithInt:ADLayoutTransition_DISAPPEARING];
   }
-  if ((flag & (jint) 0x10) != 0) {
+  if ((flag & (int32_t) 0x10) != 0) {
     [lt enableTransitionTypeWithInt:ADLayoutTransition_CHANGING];
   }
   [((ADViewGroup *) nil_chk(viewGroup)) setLayoutTransitionWithADLayoutTransition:lt];
@@ -1265,7 +1276,7 @@ void ASViewGroupImpl_setOnChildViewAddedWithADViewGroup_withASIWidget_withId_(AD
   [((ADViewGroup *) nil_chk(viewGroup)) setOnHierarchyChangeListenerWithADViewGroup_OnHierarchyChangeListener:listener];
 }
 
-jboolean ASViewGroupImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key) {
+bool ASViewGroupImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key) {
   ASViewGroupImpl_initialize();
   switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"animateLayoutChanges", @"layoutTransition", @"layoutTransitionDuration", @"animateParentHierarchy", @"listitem", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"addStatesFromChildren", @"onChildViewAdded", @"clipChildren", @"clipToPadding", @"layoutMode", @"onChildViewRemoved", @"childXml" }, 21)) {
     case 0:
@@ -1364,7 +1375,7 @@ void ASViewGroupImpl_registerCommandConveterWithASIWidget_(id<ASIWidget> widget)
   [((id<ASIWidget>) nil_chk(widget)) registerForAttributeCommandChainWithPhaseWithNSString:@"predraw" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"clipToPadding" } count:1 type:NSString_class_()]];
 }
 
-void ASViewGroupImpl_applyClipToPaddingCommandWithASIWidget_withBoolean_(id<ASIWidget> w, jboolean add) {
+void ASViewGroupImpl_applyClipToPaddingCommandWithASIWidget_withBoolean_(id<ASIWidget> w, bool add) {
   ASViewGroupImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"clipToPadding" withNSString:@"clipToPadding" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:add withNSObjectArray:[IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]];
 }
@@ -1385,6 +1396,8 @@ void ASViewGroupImpl_nativeAddViewWithId_withId_(id uiView, id w) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl)
+
+J2OBJC_NAME_MAPPING(ASViewGroupImpl, "com.ashera.layout", "AS")
 
 @implementation ASViewGroupImpl_LayoutTransition
 
@@ -1430,11 +1443,11 @@ void ASViewGroupImpl_LayoutTransition_init(ASViewGroupImpl_LayoutTransition *sel
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"change_appearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x01)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"change_disappearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x02)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"appearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x04)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"disappearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x08)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"changing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x10)];
+    (void) [self->mapping_ putWithId:@"change_appearing" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x01)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"change_disappearing" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x02)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"appearing" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x04)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"disappearing" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x08)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"changing" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x10)];
   }
 }
 
@@ -1492,8 +1505,8 @@ void ASViewGroupImpl_LayoutMode_init(ASViewGroupImpl_LayoutMode *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"clipBounds" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"opticalBounds" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
+    (void) [self->mapping_ putWithId:@"clipBounds" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"opticalBounds" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
   }
 }
 
@@ -1549,7 +1562,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_LayoutMode)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1582,7 +1595,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_LayoutMode)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1703,10 +1716,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_OnHierarchyChangeListener)
 }
 
 - (void)nativeCreateMaskLayerWithId:(id)uiView
-                            withInt:(jint)left
-                            withInt:(jint)top
-                            withInt:(jint)width
-                            withInt:(jint)height {
+                            withInt:(int32_t)left
+                            withInt:(int32_t)top
+                            withInt:(int32_t)width
+                            withInt:(int32_t)height {
   ASViewGroupImpl_ClipPaddingMaskCommand_nativeCreateMaskLayerWithId_withInt_withInt_withInt_withInt_(self, uiView, left, top, width, height);
 }
 
@@ -1726,7 +1739,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_OnHierarchyChangeListener)
 - (void)updateArgsWithNSObjectArray:(IOSObjectArray *)args {
 }
 
-- (jboolean)executeAfterPostMeasure {
+- (bool)executeAfterPostMeasure {
   return true;
 }
 
@@ -1776,7 +1789,7 @@ void ASViewGroupImpl_ClipPaddingMaskCommand_createMaskLayerWithASIWidget_(ASView
   ASViewGroupImpl_ClipPaddingMaskCommand_nativeCreateMaskLayerWithId_withInt_withInt_withInt_withInt_(self, [w asNativeWidget], ((ADRect *) nil_chk(rect))->left_, rect->top_, [rect width], [rect height]);
 }
 
-void ASViewGroupImpl_ClipPaddingMaskCommand_nativeCreateMaskLayerWithId_withInt_withInt_withInt_withInt_(ASViewGroupImpl_ClipPaddingMaskCommand *self, id uiView, jint left, jint top, jint width, jint height) {
+void ASViewGroupImpl_ClipPaddingMaskCommand_nativeCreateMaskLayerWithId_withInt_withInt_withInt_withInt_(ASViewGroupImpl_ClipPaddingMaskCommand *self, id uiView, int32_t left, int32_t top, int32_t width, int32_t height) {
   // Create a mask layer and the frame to determine what will be visible in the view.
   CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
   CGRect maskRect = CGRectMake(left, top, width, height);

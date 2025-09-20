@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\AttributedStringImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributedStringImpl.h"
 #include "Drawable.h"
 #include "FontDescriptor.h"
@@ -10,14 +15,22 @@
 #include "IFragment.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
 #include <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASAttributedStringImpl () {
@@ -28,7 +41,7 @@
   NSString *text_;
 }
 
-- (jfloat)getSystemFontSize;
+- (float)getSystemFontSize;
 
 @end
 
@@ -37,7 +50,7 @@ J2OBJC_FIELD_SETTER(ASAttributedStringImpl, fragment_, id<ASIFragment>)
 J2OBJC_FIELD_SETTER(ASAttributedStringImpl, textSizes_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(ASAttributedStringImpl, text_, NSString *)
 
-__attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(ASAttributedStringImpl *self);
+__attribute__((unused)) static float ASAttributedStringImpl_getSystemFontSize(ASAttributedStringImpl *self);
 
 @implementation ASAttributedStringImpl
 
@@ -51,8 +64,8 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
   return attributedString_;
 }
 
-- (void)init__WithInt:(jint)start
-              withInt:(jint)end {
+- (void)init__WithInt:(int32_t)start
+              withInt:(int32_t)end {
 }
 
 - (void)init__WithNSString:(NSString *)text {
@@ -60,35 +73,35 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
   initWithString:text];
 }
 
-- (void)applyUnderLineWithInt:(jint)start
-                      withInt:(jint)end {
+- (void)applyUnderLineWithInt:(int32_t)start
+                      withInt:(int32_t)end {
   [((NSMutableAttributedString*)attributedString_) addAttributes: @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:NSMakeRange(start,end-start)];
 }
 
 - (void)applyColorWithId:(id)color
-                 withInt:(jint)start
-                 withInt:(jint)end {
+                 withInt:(int32_t)start
+                 withInt:(int32_t)end {
   [((NSMutableAttributedString*)attributedString_) addAttributes: @{NSForegroundColorAttributeName:(UIColor*)color} range:NSMakeRange(start,end-start)];
 }
 
-- (void)applyStrikeThroughWithInt:(jint)start
-                          withInt:(jint)end {
+- (void)applyStrikeThroughWithInt:(int32_t)start
+                          withInt:(int32_t)end {
   [((NSMutableAttributedString*)attributedString_) addAttributes: @{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:NSMakeRange(start,end-start)];
 }
 
 - (void)applyFontWithId:(id)typeFace
-              withFloat:(jfloat)textSize
-                withInt:(jint)style
-                withInt:(jint)start
-                withInt:(jint)end {
+              withFloat:(float)textSize
+                withInt:(int32_t)style
+                withInt:(int32_t)start
+                withInt:(int32_t)end {
   id<JavaUtilMap> fontDescriptors = (id<JavaUtilMap>) cast_check(typeFace, JavaUtilMap_class_());
   if (fontDescriptors != nil) {
     NSString *weight = @"400";
-    if ((style & (jint) 0x1) != 0) {
+    if ((style & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((style & (jint) 0x2) != 0) {
+    if ((style & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [fontDescriptors getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
@@ -106,11 +119,11 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
 }
 
 - (id)applyFontWithId:(id)font
-            withFloat:(jfloat)textSize
-          withBoolean:(jboolean)isBold
-          withBoolean:(jboolean)isItalics
-              withInt:(jint)start
-              withInt:(jint)end {
+            withFloat:(float)textSize
+          withBoolean:(bool)isBold
+          withBoolean:(bool)isItalics
+              withInt:(int32_t)start
+              withInt:(int32_t)end {
   if (isBold) {
     UIFontDescriptor* fontD = [((UIFont*) font).fontDescriptor
     fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold
@@ -132,8 +145,8 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
 }
 
 - (void)applyVerticalAlignWithNSString:(NSString *)verticalAlign
-                               withInt:(jint)start
-                               withInt:(jint)end {
+                               withInt:(int32_t)start
+                               withInt:(int32_t)end {
   NSString *key = JreStrcat("ICI", start, '_', end);
   JavaLangFloat *textSize = [((id<JavaUtilMap>) nil_chk(textSizes_)) getWithId:key];
   if (textSize == nil || [textSize floatValue] == 0) {
@@ -147,26 +160,26 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
   }
 }
 
-- (void)applySuperscriptWithFloat:(jfloat)textSize
-                          withInt:(jint)start
-                          withInt:(jint)end {
+- (void)applySuperscriptWithFloat:(float)textSize
+                          withInt:(int32_t)start
+                          withInt:(int32_t)end {
   [((NSMutableAttributedString*)attributedString_)  addAttribute:NSBaselineOffsetAttributeName
   value:@(textSize/2) range:NSMakeRange(start, end - start)];
 }
 
-- (void)applySubscriptWithFloat:(jfloat)textSize
-                        withInt:(jint)start
-                        withInt:(jint)end {
+- (void)applySubscriptWithFloat:(float)textSize
+                        withInt:(int32_t)start
+                        withInt:(int32_t)end {
   [((NSMutableAttributedString*)attributedString_)  addAttribute:NSBaselineOffsetAttributeName
   value:@(-textSize/2) range:NSMakeRange(start, end - start)];
 }
 
-- (jfloat)getSystemFontSize {
+- (float)getSystemFontSize {
   return ASAttributedStringImpl_getSystemFontSize(self);
 }
 
 - (id)getFontWithNSString:(NSString *)typeFace
-                withFloat:(jfloat)textSize {
+                withFloat:(float)textSize {
   UIFont* font = nil;
   if (typeFace == nil) {
     font = [UIFont systemFontOfSize:textSize];
@@ -176,9 +189,9 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
   return font;
 }
 
-- (void)applyLineHeightWithFloat:(jfloat)height
-                         withInt:(jint)start
-                         withInt:(jint)end {
+- (void)applyLineHeightWithFloat:(float)height
+                         withInt:(int32_t)start
+                         withInt:(int32_t)end {
   NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
   [style setLineSpacing:height];
   [((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
@@ -187,8 +200,8 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
 }
 
 - (void)applyTextAlignWithNSString:(NSString *)value
-                           withInt:(jint)start
-                           withInt:(jint)end {
+                           withInt:(int32_t)start
+                           withInt:(int32_t)end {
   if ([((NSString *) nil_chk(value)) isEqual:@"center"]) {
     [self applyTextAlignCenterWithInt:start withInt:end];
   }
@@ -200,24 +213,24 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
   }
 }
 
-- (void)applyTextAlignCenterWithInt:(jint)start
-                            withInt:(jint)end {
+- (void)applyTextAlignCenterWithInt:(int32_t)start
+                            withInt:(int32_t)end {
   NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
   [paragraphStyle setAlignment:NSTextAlignmentCenter];
   [((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
   value:paragraphStyle range:NSMakeRange(start, end - start)];
 }
 
-- (void)applyTextAlignLeftWithInt:(jint)start
-                          withInt:(jint)end {
+- (void)applyTextAlignLeftWithInt:(int32_t)start
+                          withInt:(int32_t)end {
   NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
   [paragraphStyle setAlignment:NSTextAlignmentLeft];
   [((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
   value:paragraphStyle range:NSMakeRange(start, end - start)];
 }
 
-- (void)applyTextAlignRightWithInt:(jint)start
-                           withInt:(jint)end {
+- (void)applyTextAlignRightWithInt:(int32_t)start
+                           withInt:(int32_t)end {
   NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
   [paragraphStyle setAlignment:NSTextAlignmentRight];
   [((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
@@ -225,28 +238,28 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
 }
 
 - (void)applyBackgroundColorWithId:(id)color
-                           withInt:(jint)start
-                           withInt:(jint)end {
+                           withInt:(int32_t)start
+                           withInt:(int32_t)end {
   [((NSMutableAttributedString*)attributedString_) addAttributes: @{NSBackgroundColorAttributeName:(UIColor*)color} range:NSMakeRange(start,end-start)];
 }
 
 - (void)applyUrlWithNSString:(NSString *)href
                       withId:(id)color
-                     withInt:(jint)start
-                     withInt:(jint)end {
+                     withInt:(int32_t)start
+                     withInt:(int32_t)end {
   [((NSMutableAttributedString*)attributedString_) addAttribute: NSLinkAttributeName value: href range: NSMakeRange(start, end - start)];
 }
 
 - (void)applyImgWithId:(id)image
-               withInt:(jint)start
-               withInt:(jint)end {
+               withInt:(int32_t)start
+               withInt:(int32_t)end {
   id drawable = [((ADDrawable *) nil_chk(((ADDrawable *) cast_chk(image, [ADDrawable class])))) getDrawable];
   [self nativeApplyImgWithId:drawable withInt:start withInt:end];
 }
 
 - (void)nativeApplyImgWithId:(id)image
-                     withInt:(jint)start
-                     withInt:(jint)end {
+                     withInt:(int32_t)start
+                     withInt:(int32_t)end {
   NSMutableAttributedString *attributedString = ((NSMutableAttributedString*)attributedString_);
   NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
   textAttachment.image = (UIImage*) image;
@@ -254,10 +267,10 @@ __attribute__((unused)) static jfloat ASAttributedStringImpl_getSystemFontSize(A
   [attributedString replaceCharactersInRange:NSMakeRange(start, end - start) withAttributedString:attrStringWithImage];
 }
 
-- (void)applyBulletWithInt:(jint)indent
-                   withInt:(jint)spacing
-                   withInt:(jint)start
-                   withInt:(jint)end {
+- (void)applyBulletWithInt:(int32_t)indent
+                   withInt:(int32_t)spacing
+                   withInt:(int32_t)start
+                   withInt:(int32_t)end {
   NSMutableParagraphStyle *const bulletParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
   bulletParagraphStyle.headIndent = indent + spacing;
   bulletParagraphStyle.firstLineHeadIndent = indent;
@@ -357,8 +370,10 @@ ASAttributedStringImpl *create_ASAttributedStringImpl_initWithASIFragment_withNS
   J2OBJC_CREATE_IMPL(ASAttributedStringImpl, initWithASIFragment_withNSString_, fragment, text)
 }
 
-jfloat ASAttributedStringImpl_getSystemFontSize(ASAttributedStringImpl *self) {
+float ASAttributedStringImpl_getSystemFontSize(ASAttributedStringImpl *self) {
   return [UIFont labelFontSize];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAttributedStringImpl)
+
+J2OBJC_NAME_MAPPING(ASAttributedStringImpl, "com.ashera.core", "AS")

@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Adapter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Adapter.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADAdapter : NSObject
@@ -59,3 +71,5 @@ IOSObjectArray *ADAdapter_getAutofillOptions(id<ADAdapter> self) {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADAdapter)
+
+J2OBJC_NAME_MAPPING(ADAdapter, "r.android.widget", "AD")

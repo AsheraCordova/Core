@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\badge\BadgeState.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BadgeState")
@@ -18,20 +19,24 @@
 
 @class ADContext;
 @class ADXBadgeState_State;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 @class JavaUtilLocale;
+@class NSString;
 
 @interface ADXBadgeState : NSObject {
  @public
-  jfloat badgeRadius_;
-  jfloat badgeWithTextRadius_;
-  jfloat badgeWidth_;
-  jfloat badgeHeight_;
-  jfloat badgeWithTextWidth_;
-  jfloat badgeWithTextHeight_;
-  jint horizontalInset_;
-  jint horizontalInsetWithText_;
-  jint offsetAlignmentMode_;
-  jint badgeFixedEdge_;
+  float badgeRadius_;
+  float badgeWithTextRadius_;
+  float badgeWidth_;
+  float badgeHeight_;
+  float badgeWithTextWidth_;
+  float badgeWithTextHeight_;
+  int32_t horizontalInset_;
+  int32_t horizontalInsetWithText_;
+  int32_t offsetAlignmentMode_;
+  int32_t badgeFixedEdge_;
 }
 
 #pragma mark Public
@@ -45,33 +50,33 @@
 
 - (void)clearText;
 
-- (jint)getAdditionalHorizontalOffset;
+- (int32_t)getAdditionalHorizontalOffset;
 
-- (jint)getAdditionalVerticalOffset;
+- (int32_t)getAdditionalVerticalOffset;
 
-- (jint)getAlpha;
+- (int32_t)getAlpha;
 
-- (jint)getBackgroundColor;
+- (int32_t)getBackgroundColor;
 
-- (jint)getBadgeGravity;
+- (int32_t)getBadgeGravity;
 
-- (jint)getBadgeHorizontalPadding;
+- (int32_t)getBadgeHorizontalPadding;
 
-- (jint)getBadgeTextColor;
+- (int32_t)getBadgeTextColor;
 
-- (jint)getBadgeVerticalPadding;
+- (int32_t)getBadgeVerticalPadding;
 
-- (jint)getHorizontalOffsetWithoutText;
+- (int32_t)getHorizontalOffsetWithoutText;
 
-- (jint)getHorizontalOffsetWithText;
+- (int32_t)getHorizontalOffsetWithText;
 
-- (jint)getLargeFontVerticalOffsetAdjustment;
+- (int32_t)getLargeFontVerticalOffsetAdjustment;
 
-- (jint)getMaxCharacterCount;
+- (int32_t)getMaxCharacterCount;
 
-- (jint)getMaxNumber;
+- (int32_t)getMaxNumber;
 
-- (jint)getNumber;
+- (int32_t)getNumber;
 
 - (JavaUtilLocale *)getNumberLocale;
 
@@ -79,57 +84,57 @@
 
 - (NSString *)getText;
 
-- (jint)getVerticalOffsetWithoutText;
+- (int32_t)getVerticalOffsetWithoutText;
 
-- (jint)getVerticalOffsetWithText;
+- (int32_t)getVerticalOffsetWithText;
 
-- (jboolean)hasNumber;
+- (bool)hasNumber;
 
-- (jboolean)hasText;
+- (bool)hasText;
 
-- (jboolean)isAutoAdjustedToGrandparentBounds;
+- (bool)isAutoAdjustedToGrandparentBounds;
 
-- (jboolean)isVisible;
+- (bool)isVisible;
 
-- (void)setAdditionalHorizontalOffsetWithInt:(jint)offset;
+- (void)setAdditionalHorizontalOffsetWithInt:(int32_t)offset;
 
-- (void)setAdditionalVerticalOffsetWithInt:(jint)offset;
+- (void)setAdditionalVerticalOffsetWithInt:(int32_t)offset;
 
-- (void)setAlphaWithInt:(jint)alpha;
+- (void)setAlphaWithInt:(int32_t)alpha;
 
-- (void)setAutoAdjustToGrandparentBoundsWithBoolean:(jboolean)autoAdjustToGrandparentBounds;
+- (void)setAutoAdjustToGrandparentBoundsWithBoolean:(bool)autoAdjustToGrandparentBounds;
 
-- (void)setBackgroundColorWithInt:(jint)backgroundColor;
+- (void)setBackgroundColorWithInt:(int32_t)backgroundColor;
 
-- (void)setBadgeGravityWithInt:(jint)badgeGravity;
+- (void)setBadgeGravityWithInt:(int32_t)badgeGravity;
 
-- (void)setBadgeHorizontalPaddingWithInt:(jint)horizontalPadding;
+- (void)setBadgeHorizontalPaddingWithInt:(int32_t)horizontalPadding;
 
-- (void)setBadgeTextColorWithInt:(jint)badgeTextColor;
+- (void)setBadgeTextColorWithInt:(int32_t)badgeTextColor;
 
-- (void)setBadgeVerticalPaddingWithInt:(jint)verticalPadding;
+- (void)setBadgeVerticalPaddingWithInt:(int32_t)verticalPadding;
 
-- (void)setHorizontalOffsetWithoutTextWithInt:(jint)offset;
+- (void)setHorizontalOffsetWithoutTextWithInt:(int32_t)offset;
 
-- (void)setHorizontalOffsetWithTextWithInt:(jint)offset;
+- (void)setHorizontalOffsetWithTextWithInt:(int32_t)offset;
 
-- (void)setLargeFontVerticalOffsetAdjustmentWithInt:(jint)offsetAdjustment;
+- (void)setLargeFontVerticalOffsetAdjustmentWithInt:(int32_t)offsetAdjustment;
 
-- (void)setMaxCharacterCountWithInt:(jint)maxCharacterCount;
+- (void)setMaxCharacterCountWithInt:(int32_t)maxCharacterCount;
 
-- (void)setMaxNumberWithInt:(jint)maxNumber;
+- (void)setMaxNumberWithInt:(int32_t)maxNumber;
 
-- (void)setNumberWithInt:(jint)number;
+- (void)setNumberWithInt:(int32_t)number;
 
 - (void)setNumberLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (void)setTextWithNSString:(NSString *)text;
 
-- (void)setVerticalOffsetWithoutTextWithInt:(jint)offset;
+- (void)setVerticalOffsetWithoutTextWithInt:(int32_t)offset;
 
-- (void)setVerticalOffsetWithTextWithInt:(jint)offset;
+- (void)setVerticalOffsetWithTextWithInt:(int32_t)offset;
 
-- (void)setVisibleWithBoolean:(jboolean)visible;
+- (void)setVisibleWithBoolean:(bool)visible;
 
 // Disallowed inherited constructors, do not use.
 
@@ -148,6 +153,7 @@ FOUNDATION_EXPORT ADXBadgeState *create_ADXBadgeState_initWithADContext_withADXB
 J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeState)
 
 @compatibility_alias ComGoogleAndroidMaterialBadgeBadgeState ADXBadgeState;
+
 
 #endif
 
@@ -171,6 +177,7 @@ FOUNDATION_EXPORT ADXBadgeState_State *new_ADXBadgeState_State_init(void) NS_RET
 FOUNDATION_EXPORT ADXBadgeState_State *create_ADXBadgeState_State_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeState_State)
+
 
 #endif
 

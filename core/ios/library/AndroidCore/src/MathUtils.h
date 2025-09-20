@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\MathUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MathUtils")
@@ -16,35 +17,40 @@
 #if !defined (ADMathUtils_) && (INCLUDE_ALL_MathUtils || defined(INCLUDE_ADMathUtils))
 #define ADMathUtils_
 
+@class JavaLangDouble;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class JavaLangLong;
+
 @interface ADMathUtils : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (jdouble)clampWithDouble:(jdouble)value
-                withDouble:(jdouble)min
-                withDouble:(jdouble)max;
++ (double)clampWithDouble:(double)value
+               withDouble:(double)min
+               withDouble:(double)max;
 
-+ (jfloat)clampWithFloat:(jfloat)value
-               withFloat:(jfloat)min
-               withFloat:(jfloat)max;
++ (float)clampWithFloat:(float)value
+              withFloat:(float)min
+              withFloat:(float)max;
 
-+ (jint)clampWithInt:(jint)value
-             withInt:(jint)min
-             withInt:(jint)max;
++ (int32_t)clampWithInt:(int32_t)value
+                withInt:(int32_t)min
+                withInt:(int32_t)max;
 
-+ (jlong)clampWithLong:(jlong)value
-              withLong:(jlong)min
-              withLong:(jlong)max;
++ (int64_t)clampWithLong:(int64_t)value
+                withLong:(int64_t)min
+                withLong:(int64_t)max;
 
-+ (jfloat)constrainWithFloat:(jfloat)amount
-                   withFloat:(jfloat)low
-                   withFloat:(jfloat)high;
++ (float)constrainWithFloat:(float)amount
+                  withFloat:(float)low
+                  withFloat:(float)high;
 
-+ (jint)constrainWithInt:(jint)amount
-                 withInt:(jint)low
-                 withInt:(jint)high;
++ (int32_t)constrainWithInt:(int32_t)amount
+                    withInt:(int32_t)low
+                    withInt:(int32_t)high;
 
 @end
 
@@ -56,21 +62,22 @@ FOUNDATION_EXPORT ADMathUtils *new_ADMathUtils_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADMathUtils *create_ADMathUtils_init(void);
 
-FOUNDATION_EXPORT jint ADMathUtils_constrainWithInt_withInt_withInt_(jint amount, jint low, jint high);
+FOUNDATION_EXPORT int32_t ADMathUtils_constrainWithInt_withInt_withInt_(int32_t amount, int32_t low, int32_t high);
 
-FOUNDATION_EXPORT jfloat ADMathUtils_constrainWithFloat_withFloat_withFloat_(jfloat amount, jfloat low, jfloat high);
+FOUNDATION_EXPORT float ADMathUtils_constrainWithFloat_withFloat_withFloat_(float amount, float low, float high);
 
-FOUNDATION_EXPORT jfloat ADMathUtils_clampWithFloat_withFloat_withFloat_(jfloat value, jfloat min, jfloat max);
+FOUNDATION_EXPORT float ADMathUtils_clampWithFloat_withFloat_withFloat_(float value, float min, float max);
 
-FOUNDATION_EXPORT jint ADMathUtils_clampWithInt_withInt_withInt_(jint value, jint min, jint max);
+FOUNDATION_EXPORT int32_t ADMathUtils_clampWithInt_withInt_withInt_(int32_t value, int32_t min, int32_t max);
 
-FOUNDATION_EXPORT jdouble ADMathUtils_clampWithDouble_withDouble_withDouble_(jdouble value, jdouble min, jdouble max);
+FOUNDATION_EXPORT double ADMathUtils_clampWithDouble_withDouble_withDouble_(double value, double min, double max);
 
-FOUNDATION_EXPORT jlong ADMathUtils_clampWithLong_withLong_withLong_(jlong value, jlong min, jlong max);
+FOUNDATION_EXPORT int64_t ADMathUtils_clampWithLong_withLong_withLong_(int64_t value, int64_t min, int64_t max);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMathUtils)
 
 @compatibility_alias RAndroidUtilMathUtils ADMathUtils;
+
 
 #endif
 

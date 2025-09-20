@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\Date.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "Date.h"
 #include "IFragment.h"
@@ -11,9 +16,18 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Integer.h"
 #include "java/text/SimpleDateFormat.h"
 #include "java/util/Date.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASDate () {
@@ -48,15 +62,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", @"@string/date_error_message", [((id<ASIWidget>) nil_chk(widget)) getFragment]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
   if (text == nil || [((NSString *) nil_chk([text java_trim])) isEqual:@""]) {
     return true;
   }
   JavaTextSimpleDateFormat *dateFormat = create_JavaTextSimpleDateFormat_initWithNSString_(format_);
   [dateFormat setLenientWithBoolean:false];
   JavaUtilDate *date = nil;
-  jboolean result = false;
+  bool result = false;
   @try {
     date = [dateFormat parseWithNSString:text];
     result = [((NSString *) nil_chk([dateFormat formatWithJavaUtilDate:date])) isEqual:text];
@@ -120,3 +134,5 @@ ASDate *create_ASDate_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDate)
+
+J2OBJC_NAME_MAPPING(ASDate, "com.ashera.validations", "AS")

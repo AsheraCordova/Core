@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\KeyframeSet.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_KeyframeSet")
@@ -20,6 +21,7 @@
 #define INCLUDE_ADIKeyframes 1
 #include "IKeyframes.h"
 
+
 @class ADKeyframe;
 @class ADPath;
 @class ADPathKeyframes;
@@ -27,6 +29,9 @@
 @class IOSFloatArray;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADTimeInterpolator;
 @protocol ADTypeEvaluator;
 @protocol JavaUtilList;
@@ -38,7 +43,7 @@
  */
 @interface ADKeyframeSet : NSObject < ADIKeyframes > {
  @public
-  jint mNumKeyframes_;
+  int32_t mNumKeyframes_;
   ADKeyframe *mFirstKeyframe_;
   ADKeyframe *mLastKeyframe_;
   id<ADTimeInterpolator> mInterpolator_;
@@ -68,7 +73,7 @@
  @param fraction The elapsed fraction of the animation
  @return The animated value.
  */
-- (id)getValueWithFloat:(jfloat)fraction;
+- (id)getValueWithFloat:(float)fraction;
 
 + (ADKeyframeSet *)ofFloatWithFloatArray:(IOSFloatArray *)values;
 
@@ -81,7 +86,7 @@
 + (ADPathKeyframes *)ofPathWithADPath:(ADPath *)path;
 
 + (ADPathKeyframes *)ofPathWithADPath:(ADPath *)path
-                            withFloat:(jfloat)error;
+                            withFloat:(float)error;
 
 /*!
  @brief Sets the TypeEvaluator to be used when calculating animated values.This object
@@ -124,11 +129,12 @@ FOUNDATION_EXPORT ADKeyframeSet *ADKeyframeSet_ofObjectWithNSObjectArray_(IOSObj
 
 FOUNDATION_EXPORT ADPathKeyframes *ADKeyframeSet_ofPathWithADPath_(ADPath *path);
 
-FOUNDATION_EXPORT ADPathKeyframes *ADKeyframeSet_ofPathWithADPath_withFloat_(ADPath *path, jfloat error);
+FOUNDATION_EXPORT ADPathKeyframes *ADKeyframeSet_ofPathWithADPath_withFloat_(ADPath *path, float error);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADKeyframeSet)
 
 @compatibility_alias RAndroidAnimationKeyframeSet ADKeyframeSet;
+
 
 #endif
 

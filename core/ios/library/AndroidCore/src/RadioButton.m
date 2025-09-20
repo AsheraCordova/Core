@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\RadioButton.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CompoundButton.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "RadioButton.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADRadioButton
@@ -37,3 +48,5 @@ void ADRadioButton_initWithASIWidget_(ADRadioButton *self, id<ASIWidget> widget)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRadioButton)
+
+J2OBJC_NAME_MAPPING(ADRadioButton, "r.android.widget", "AD")

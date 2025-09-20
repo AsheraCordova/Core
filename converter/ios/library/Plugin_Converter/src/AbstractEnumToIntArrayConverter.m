@@ -3,11 +3,17 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractEnumToIntArrayConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractEnumToIntArrayConverter.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
@@ -16,6 +22,12 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASAbstractEnumToIntArrayConverter
@@ -37,7 +49,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   else {
     IOSObjectArray *values = [value java_split:@"\\|"];
     IOSIntArray *returnInt = [IOSIntArray arrayWithLength:((IOSObjectArray *) nil_chk(values))->size_];
-    for (jint i = 0; i < values->size_; i++) {
+    for (int32_t i = 0; i < values->size_; i++) {
       if ([((id<JavaUtilMap>) nil_chk(mapping)) containsKeyWithId:IOSObjectArray_Get(values, i)]) {
         *IOSIntArray_GetRef(returnInt, i) = [((JavaLangInteger *) nil_chk([mapping getWithId:IOSObjectArray_Get(values, i)])) intValue];
       }
@@ -55,10 +67,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   id<JavaUtilList> values = create_JavaUtilArrayList_init();
   {
     IOSIntArray *a__ = value;
-    jint const *b__ = ((IOSIntArray *) nil_chk(a__))->buffer_;
-    jint const *e__ = b__ + a__->size_;
+    int32_t const *b__ = ((IOSIntArray *) nil_chk(a__))->buffer_;
+    int32_t const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      jint currentValue = *b__++;
+      int32_t currentValue = *b__++;
       id<JavaUtilSet> keySet = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(mapping)) keySet]);
       for (NSString * __strong key in nil_chk(keySet)) {
         JavaLangInteger *keyValue = JreRetainedLocalValue([mapping getWithId:key]);
@@ -137,3 +149,5 @@ void ASAbstractEnumToIntArrayConverter_init(ASAbstractEnumToIntArrayConverter *s
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAbstractEnumToIntArrayConverter)
+
+J2OBJC_NAME_MAPPING(ASAbstractEnumToIntArrayConverter, "com.ashera.converter", "AS")

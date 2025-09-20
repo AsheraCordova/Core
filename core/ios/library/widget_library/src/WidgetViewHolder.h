@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetViewHolder.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetViewHolder")
@@ -49,6 +50,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWidgetViewHolder)
 
 @compatibility_alias ComAsheraWidgetWidgetViewHolder ASWidgetViewHolder;
 
+
 #endif
 
 #if !defined (ASWidgetViewHolder_AttributeViewHolder_) && (INCLUDE_ALL_WidgetViewHolder || defined(INCLUDE_ASWidgetViewHolder_AttributeViewHolder))
@@ -84,6 +86,7 @@ FOUNDATION_EXPORT ASWidgetViewHolder_AttributeViewHolder *new_ASWidgetViewHolder
 FOUNDATION_EXPORT ASWidgetViewHolder_AttributeViewHolder *create_ASWidgetViewHolder_AttributeViewHolder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetViewHolder_AttributeViewHolder)
+
 
 #endif
 

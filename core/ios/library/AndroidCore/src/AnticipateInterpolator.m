@@ -3,14 +3,28 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\AnticipateInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AnticipateInterpolator.h"
 #include "BaseInterpolator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADAnticipateInterpolator () {
  @public
-  jfloat mTension_;
+  float mTension_;
 }
 
 @end
@@ -24,16 +38,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithFloat:(jfloat)tension {
+- (instancetype)initWithFloat:(float)tension {
   ADAnticipateInterpolator_initWithFloat_(self, tension);
   return self;
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)t {
+- (float)getInterpolationWithFloat:(float)t {
   return t * t * ((mTension_ + 1) * t - mTension_);
 }
 
-- (jlong)createNativeInterpolator {
+- (int64_t)createNativeInterpolator {
   return 0;
 }
 
@@ -75,17 +89,19 @@ ADAnticipateInterpolator *create_ADAnticipateInterpolator_init() {
   J2OBJC_CREATE_IMPL(ADAnticipateInterpolator, init)
 }
 
-void ADAnticipateInterpolator_initWithFloat_(ADAnticipateInterpolator *self, jfloat tension) {
+void ADAnticipateInterpolator_initWithFloat_(ADAnticipateInterpolator *self, float tension) {
   ADBaseInterpolator_init(self);
   self->mTension_ = tension;
 }
 
-ADAnticipateInterpolator *new_ADAnticipateInterpolator_initWithFloat_(jfloat tension) {
+ADAnticipateInterpolator *new_ADAnticipateInterpolator_initWithFloat_(float tension) {
   J2OBJC_NEW_IMPL(ADAnticipateInterpolator, initWithFloat_, tension)
 }
 
-ADAnticipateInterpolator *create_ADAnticipateInterpolator_initWithFloat_(jfloat tension) {
+ADAnticipateInterpolator *create_ADAnticipateInterpolator_initWithFloat_(float tension) {
   J2OBJC_CREATE_IMPL(ADAnticipateInterpolator, initWithFloat_, tension)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnticipateInterpolator)
+
+J2OBJC_NAME_MAPPING(ADAnticipateInterpolator, "r.android.view.animation", "AD")

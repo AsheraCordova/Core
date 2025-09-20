@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetEvent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetEvent")
@@ -35,6 +36,7 @@ FOUNDATION_EXPORT ASWidgetEvent *create_ASWidgetEvent_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetEvent)
 
 @compatibility_alias ComAsheraWidgetWidgetEvent ASWidgetEvent;
+
 
 #endif
 

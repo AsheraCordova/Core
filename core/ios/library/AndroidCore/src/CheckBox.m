@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\CheckBox.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CheckBox.h"
 #include "CompoundButton.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADCheckBox
@@ -37,3 +48,5 @@ void ADCheckBox_initWithASIWidget_(ADCheckBox *self, id<ASIWidget> widget) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADCheckBox)
+
+J2OBJC_NAME_MAPPING(ADCheckBox, "r.android.widget", "AD")

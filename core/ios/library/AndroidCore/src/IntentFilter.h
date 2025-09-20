@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\IntentFilter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntentFilter")
@@ -15,6 +16,8 @@
 
 #if !defined (ADIntentFilter_) && (INCLUDE_ALL_IntentFilter || defined(INCLUDE_ADIntentFilter))
 #define ADIntentFilter_
+
+@class NSString;
 
 @interface ADIntentFilter : NSObject
 
@@ -37,6 +40,7 @@ FOUNDATION_EXPORT ADIntentFilter *create_ADIntentFilter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADIntentFilter)
 
 @compatibility_alias RAndroidContentIntentFilter ADIntentFilter;
+
 
 #endif
 

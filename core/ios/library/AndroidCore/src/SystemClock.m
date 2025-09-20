@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\SystemClock.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "SystemClock.h"
+#include "java/lang/Long.h"
 #include "java/lang/System.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADSystemClock
@@ -17,11 +29,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jlong)elapsedRealtime {
++ (int64_t)elapsedRealtime {
   return ADSystemClock_elapsedRealtime();
 }
 
-+ (jlong)uptimeMillis {
++ (int64_t)uptimeMillis {
   return ADSystemClock_uptimeMillis();
 }
 
@@ -56,14 +68,16 @@ ADSystemClock *create_ADSystemClock_init() {
   J2OBJC_CREATE_IMPL(ADSystemClock, init)
 }
 
-jlong ADSystemClock_elapsedRealtime() {
+int64_t ADSystemClock_elapsedRealtime() {
   ADSystemClock_initialize();
   return JavaLangSystem_currentTimeMillis();
 }
 
-jlong ADSystemClock_uptimeMillis() {
+int64_t ADSystemClock_uptimeMillis() {
   ADSystemClock_initialize();
   return JavaLangSystem_currentTimeMillis();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSystemClock)
+
+J2OBJC_NAME_MAPPING(ADSystemClock, "r.android.os", "AD")

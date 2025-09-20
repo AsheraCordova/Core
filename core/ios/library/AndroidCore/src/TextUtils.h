@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\TextUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TextUtils")
@@ -16,7 +17,10 @@
 #if !defined (ADTextUtils_) && (INCLUDE_ALL_TextUtils || defined(INCLUDE_ADTextUtils))
 #define ADTextUtils_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @class JavaUtilLocale;
+@class NSString;
 @protocol JavaLangCharSequence;
 
 @interface ADTextUtils : NSObject
@@ -25,16 +29,16 @@
 
 - (instancetype)init;
 
-+ (jboolean)equalsWithJavaLangCharSequence:(id<JavaLangCharSequence>)a
-                  withJavaLangCharSequence:(id<JavaLangCharSequence>)b;
++ (bool)equalsWithJavaLangCharSequence:(id<JavaLangCharSequence>)a
+              withJavaLangCharSequence:(id<JavaLangCharSequence>)b;
 
-+ (jint)getLayoutDirectionFromLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
++ (int32_t)getLayoutDirectionFromLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
-+ (jint)getTrimmedLengthWithJavaLangCharSequence:(id<JavaLangCharSequence>)s;
++ (int32_t)getTrimmedLengthWithJavaLangCharSequence:(id<JavaLangCharSequence>)s;
 
-+ (jboolean)isEmptyWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
++ (bool)isEmptyWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
-+ (jboolean)isEmptyWithNSString:(NSString *)text;
++ (bool)isEmptyWithNSString:(NSString *)text;
 
 @end
 
@@ -46,19 +50,20 @@ FOUNDATION_EXPORT ADTextUtils *new_ADTextUtils_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADTextUtils *create_ADTextUtils_init(void);
 
-FOUNDATION_EXPORT jint ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale *locale);
+FOUNDATION_EXPORT int32_t ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale *locale);
 
-FOUNDATION_EXPORT jboolean ADTextUtils_isEmptyWithNSString_(NSString *text);
+FOUNDATION_EXPORT bool ADTextUtils_isEmptyWithNSString_(NSString *text);
 
-FOUNDATION_EXPORT jboolean ADTextUtils_isEmptyWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
+FOUNDATION_EXPORT bool ADTextUtils_isEmptyWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
 
-FOUNDATION_EXPORT jint ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(id<JavaLangCharSequence> s);
+FOUNDATION_EXPORT int32_t ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(id<JavaLangCharSequence> s);
 
-FOUNDATION_EXPORT jboolean ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> a, id<JavaLangCharSequence> b);
+FOUNDATION_EXPORT bool ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> a, id<JavaLangCharSequence> b);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextUtils)
 
 @compatibility_alias RAndroidTextTextUtils ADTextUtils;
+
 
 #endif
 

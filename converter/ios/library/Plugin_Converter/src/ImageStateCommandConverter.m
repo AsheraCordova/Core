@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ImageStateCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "ImageStateCommandConverter.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASImageStateCommandConverter () {
@@ -49,7 +62,7 @@ J2OBJC_FIELD_SETTER(ASImageStateCommandConverter, value_, id)
   JreStrongAssign(&self->value_, IOSObjectArray_Get(nil_chk(args), 0));
 }
 
-- (jboolean)executeAfterPostMeasure {
+- (bool)executeAfterPostMeasure {
   return true;
 }
 
@@ -98,3 +111,5 @@ ASImageStateCommandConverter *create_ASImageStateCommandConverter_initWithNSStri
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageStateCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASImageStateCommandConverter, "com.ashera.converter", "AS")

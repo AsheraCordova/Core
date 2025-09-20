@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\database\DataSetObserver.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DataSetObserver")
@@ -49,6 +50,7 @@ FOUNDATION_EXPORT void ADDataSetObserver_init(ADDataSetObserver *self);
 J2OBJC_TYPE_LITERAL_HEADER(ADDataSetObserver)
 
 @compatibility_alias RAndroidDatabaseDataSetObserver ADDataSetObserver;
+
 
 #endif
 

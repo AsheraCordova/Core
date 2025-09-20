@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ListAdapter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ListAdapter")
@@ -19,6 +20,9 @@
 #define RESTRICT_Adapter 1
 #define INCLUDE_ADAdapter 1
 #include "Adapter.h"
+
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief Extended <code>Adapter</code> that is the bridge between a <code>ListView</code>
@@ -39,7 +43,7 @@
  @return True if all items are enabled, false otherwise.
  - seealso: #isEnabled(int)
  */
-- (jboolean)areAllItemsEnabled;
+- (bool)areAllItemsEnabled;
 
 /*!
  @brief Returns true if the item at the specified position is not a separator.
@@ -50,7 +54,7 @@
  @return True if the item is not a separator
  - seealso: #areAllItemsEnabled()
  */
-- (jboolean)isEnabledWithInt:(jint)position;
+- (bool)isEnabledWithInt:(int32_t)position;
 
 @end
 
@@ -59,6 +63,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADListAdapter)
 J2OBJC_TYPE_LITERAL_HEADER(ADListAdapter)
 
 #define RAndroidWidgetListAdapter ADListAdapter
+
 
 #endif
 

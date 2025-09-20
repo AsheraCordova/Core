@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Adapter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Adapter")
@@ -26,6 +27,9 @@
 @class ADView;
 @class ADViewGroup;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 /*!
  @brief An Adapter object acts as a bridge between an <code>AdapterView</code> and the
@@ -55,28 +59,28 @@
  @brief How many items are in the data set represented by this Adapter.
  @return Count of items.
  */
-- (jint)getCount;
+- (int32_t)getCount;
 
 /*!
  @brief Get the data item associated with the specified position in the data set.
  @param position Position of the item whose data we want within the adapter's   data set.
  @return The data at the specified position.
  */
-- (id)getItemWithInt:(jint)position;
+- (id)getItemWithInt:(int32_t)position;
 
 /*!
  @brief Get the row id associated with the specified position in the list.
  @param position The position of the item within the adapter's data set whose row id we want.
  @return The id of the item at the specified position.
  */
-- (jlong)getItemIdWithInt:(jint)position;
+- (int64_t)getItemIdWithInt:(int32_t)position;
 
 /*!
  @brief Indicates whether the item ids are stable across changes to the
   underlying data.
  @return True if the same id always refers to the same object.
  */
-- (jboolean)hasStableIds;
+- (bool)hasStableIds;
 
 /*!
  @brief Get a View that displays the data at the specified position in the data set.You can either
@@ -95,7 +99,7 @@
  @param parent The parent that this view will eventually be attached to
  @return A View corresponding to the data at the specified position.
  */
-- (ADView *)getViewWithInt:(jint)position
+- (ADView *)getViewWithInt:(int32_t)position
                 withADView:(ADView *)convertView
            withADViewGroup:(ADViewGroup *)parent;
 
@@ -108,14 +112,14 @@
           also be returned.
  - seealso: #IGNORE_ITEM_VIEW_TYPE
  */
-- (jint)getItemViewTypeWithInt:(jint)position;
+- (int32_t)getItemViewTypeWithInt:(int32_t)position;
 
 /*!
  @brief <p>
   Returns the number of types of Views that will be created by 
- <code>getView</code>.
- Each type represents a set of views that can be
-  converted in <code>getView</code>. If the adapter always returns the same
+ <code>getView</code>.Each type represents a set of views that can be
+  converted in <code>getView</code>.
+ If the adapter always returns the same
   type of View for all items, this method should return 1. 
  </p>
   <p>
@@ -123,7 +127,7 @@
   </p>
  @return The number of types of Views that will be created by this adapter
  */
-- (jint)getViewTypeCount;
+- (int32_t)getViewTypeCount;
 
 /*!
  @return true if this adapter doesn't contain any data.  This is used to determine
@@ -131,7 +135,7 @@
   getCount() == 0 but since getCount() includes the headers and footers, specialized
   adapters might want a different behavior.
  */
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 /*!
  @brief Gets a string representation of the adapter data that can help 
@@ -159,19 +163,20 @@ J2OBJC_EMPTY_STATIC_INIT(ADAdapter)
  - seealso: #getItemViewType(int)
  - seealso: #getViewTypeCount()
  */
-inline jint ADAdapter_get_IGNORE_ITEM_VIEW_TYPE(void);
+inline int32_t ADAdapter_get_IGNORE_ITEM_VIEW_TYPE(void);
 #define ADAdapter_IGNORE_ITEM_VIEW_TYPE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAdapter, IGNORE_ITEM_VIEW_TYPE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAdapter, IGNORE_ITEM_VIEW_TYPE, int32_t)
 
-inline jint ADAdapter_get_NO_SELECTION(void);
-#define ADAdapter_NO_SELECTION ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADAdapter, NO_SELECTION, jint)
+inline int32_t ADAdapter_get_NO_SELECTION(void);
+#define ADAdapter_NO_SELECTION ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAdapter, NO_SELECTION, int32_t)
 
 FOUNDATION_EXPORT IOSObjectArray *ADAdapter_getAutofillOptions(id<ADAdapter> self);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAdapter)
 
 #define RAndroidWidgetAdapter ADAdapter
+
 
 #endif
 

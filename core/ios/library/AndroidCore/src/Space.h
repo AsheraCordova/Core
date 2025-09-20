@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Space.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Space")
@@ -20,6 +21,8 @@
 #define INCLUDE_ADView 1
 #include "View.h"
 
+@class JavaLangInteger;
+
 @interface ADSpace : ADView
 
 #pragma mark Public
@@ -28,8 +31,8 @@
 
 #pragma mark Protected
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 @end
 
@@ -44,6 +47,7 @@ FOUNDATION_EXPORT ADSpace *create_ADSpace_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADSpace)
 
 @compatibility_alias RAndroidWidgetSpace ADSpace;
+
 
 #endif
 

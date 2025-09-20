@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\Menu.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Menu")
@@ -16,6 +17,7 @@
 #if !defined (ADMenu_) && (INCLUDE_ALL_Menu || defined(INCLUDE_ADMenu))
 #define ADMenu_
 
+@class JavaLangInteger;
 @protocol ADMenuItem;
 @protocol ADSubMenu;
 @protocol JavaLangCharSequence;
@@ -24,17 +26,17 @@
 
 - (id<ADMenuItem>)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (id<ADMenuItem>)addWithInt:(jint)titleRes;
+- (id<ADMenuItem>)addWithInt:(int32_t)titleRes;
 
-- (id<ADMenuItem>)addWithInt:(jint)groupId
-                     withInt:(jint)itemId
-                     withInt:(jint)order
+- (id<ADMenuItem>)addWithInt:(int32_t)groupId
+                     withInt:(int32_t)itemId
+                     withInt:(int32_t)order
     withJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (id<ADMenuItem>)addWithInt:(jint)groupId
-                     withInt:(jint)itemId
-                     withInt:(jint)order
-                     withInt:(jint)titleRes;
+- (id<ADMenuItem>)addWithInt:(int32_t)groupId
+                     withInt:(int32_t)itemId
+                     withInt:(int32_t)order
+                     withInt:(int32_t)titleRes;
 
 - (id<ADSubMenu>)addSubMenuWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
@@ -42,61 +44,62 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADMenu)
 
-inline jint ADMenu_get_USER_MASK(void);
+inline int32_t ADMenu_get_USER_MASK(void);
 #define ADMenu_USER_MASK 65535
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, USER_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, USER_MASK, int32_t)
 
-inline jint ADMenu_get_USER_SHIFT(void);
+inline int32_t ADMenu_get_USER_SHIFT(void);
 #define ADMenu_USER_SHIFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, USER_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, USER_SHIFT, int32_t)
 
-inline jint ADMenu_get_CATEGORY_MASK(void);
+inline int32_t ADMenu_get_CATEGORY_MASK(void);
 #define ADMenu_CATEGORY_MASK -65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_MASK, int32_t)
 
-inline jint ADMenu_get_CATEGORY_SHIFT(void);
+inline int32_t ADMenu_get_CATEGORY_SHIFT(void);
 #define ADMenu_CATEGORY_SHIFT 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_SHIFT, int32_t)
 
-inline jint ADMenu_get_NONE(void);
+inline int32_t ADMenu_get_NONE(void);
 #define ADMenu_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, NONE, int32_t)
 
-inline jint ADMenu_get_FIRST(void);
+inline int32_t ADMenu_get_FIRST(void);
 #define ADMenu_FIRST 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FIRST, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FIRST, int32_t)
 
-inline jint ADMenu_get_CATEGORY_CONTAINER(void);
+inline int32_t ADMenu_get_CATEGORY_CONTAINER(void);
 #define ADMenu_CATEGORY_CONTAINER 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_CONTAINER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_CONTAINER, int32_t)
 
-inline jint ADMenu_get_CATEGORY_SYSTEM(void);
+inline int32_t ADMenu_get_CATEGORY_SYSTEM(void);
 #define ADMenu_CATEGORY_SYSTEM 131072
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_SYSTEM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_SYSTEM, int32_t)
 
-inline jint ADMenu_get_CATEGORY_SECONDARY(void);
+inline int32_t ADMenu_get_CATEGORY_SECONDARY(void);
 #define ADMenu_CATEGORY_SECONDARY 196608
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_SECONDARY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_SECONDARY, int32_t)
 
-inline jint ADMenu_get_CATEGORY_ALTERNATIVE(void);
+inline int32_t ADMenu_get_CATEGORY_ALTERNATIVE(void);
 #define ADMenu_CATEGORY_ALTERNATIVE 262144
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_ALTERNATIVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, CATEGORY_ALTERNATIVE, int32_t)
 
-inline jint ADMenu_get_FLAG_APPEND_TO_GROUP(void);
+inline int32_t ADMenu_get_FLAG_APPEND_TO_GROUP(void);
 #define ADMenu_FLAG_APPEND_TO_GROUP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FLAG_APPEND_TO_GROUP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FLAG_APPEND_TO_GROUP, int32_t)
 
-inline jint ADMenu_get_FLAG_PERFORM_NO_CLOSE(void);
+inline int32_t ADMenu_get_FLAG_PERFORM_NO_CLOSE(void);
 #define ADMenu_FLAG_PERFORM_NO_CLOSE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FLAG_PERFORM_NO_CLOSE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FLAG_PERFORM_NO_CLOSE, int32_t)
 
-inline jint ADMenu_get_FLAG_ALWAYS_PERFORM_CLOSE(void);
+inline int32_t ADMenu_get_FLAG_ALWAYS_PERFORM_CLOSE(void);
 #define ADMenu_FLAG_ALWAYS_PERFORM_CLOSE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FLAG_ALWAYS_PERFORM_CLOSE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenu, FLAG_ALWAYS_PERFORM_CLOSE, int32_t)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMenu)
 
 #define RAndroidViewMenu ADMenu
+
 
 #endif
 

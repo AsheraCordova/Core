@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\TemplateConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FileUtils.h"
 #include "IActivity.h"
 #include "IFragment.h"
@@ -12,9 +17,17 @@
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "TemplateConverter.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASTemplateConverter
@@ -92,3 +105,5 @@ ASTemplateConverter *create_ASTemplateConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTemplateConverter)
+
+J2OBJC_NAME_MAPPING(ASTemplateConverter, "com.ashera.converter", "AS")

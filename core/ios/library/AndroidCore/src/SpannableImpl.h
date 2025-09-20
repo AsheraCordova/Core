@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\util\SpannableImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SpannableImpl")
@@ -23,6 +24,9 @@
 @class ADLinkify_URLSpan;
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangCharacter;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaLangCharSequence;
 @protocol JavaUtilStreamIntStream;
 
@@ -35,18 +39,18 @@
 
 - (instancetype)initWithNSString:(NSString *)str;
 
-- (jchar)charAtWithInt:(jint)index;
+- (unichar)charAtWithInt:(int32_t)index;
 
-- (IOSObjectArray *)getSpansWithInt:(jint)i
-                            withInt:(jint)length
+- (IOSObjectArray *)getSpansWithInt:(int32_t)i
+                            withInt:(int32_t)length
                        withIOSClass:(IOSClass *)class1;
 
-- (jint)java_length;
+- (int32_t)java_length;
 
 - (void)removeSpanWithADLinkify_URLSpan:(ADLinkify_URLSpan *)urlSpan;
 
-- (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
-                                         to:(jint)end;
+- (id<JavaLangCharSequence>)subSequenceFrom:(int32_t)start
+                                         to:(int32_t)end;
 
 - (NSString *)description;
 
@@ -69,6 +73,7 @@ FOUNDATION_EXPORT ADSpannableImpl *create_ADSpannableImpl_initWithNSString_(NSSt
 J2OBJC_TYPE_LITERAL_HEADER(ADSpannableImpl)
 
 @compatibility_alias RAndroidTextUtilSpannableImpl ADSpannableImpl;
+
 
 #endif
 

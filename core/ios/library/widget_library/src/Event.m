@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\Event.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Event.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASEvent () {
@@ -21,7 +34,7 @@
 J2OBJC_FIELD_SETTER(ASEvent, type_, ASEvent_StandardEvents *)
 J2OBJC_FIELD_SETTER(ASEvent, additionalData_, id)
 
-__attribute__((unused)) static void ASEvent_StandardEvents_initWithNSString_withInt_(ASEvent_StandardEvents *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void ASEvent_StandardEvents_initWithNSString_withInt_(ASEvent_StandardEvents *self, NSString *__name, int32_t __ordinal);
 
 @implementation ASEvent
 
@@ -117,6 +130,8 @@ ASEvent *create_ASEvent_initWithASEvent_StandardEvents_(ASEvent_StandardEvents *
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEvent)
 
+J2OBJC_NAME_MAPPING(ASEvent, "com.ashera.widget.bus", "AS")
+
 J2OBJC_INITIALIZED_DEFN(ASEvent_StandardEvents)
 
 ASEvent_StandardEvents *ASEvent_StandardEvents_values_[8];
@@ -133,6 +148,24 @@ ASEvent_StandardEvents *ASEvent_StandardEvents_values_[8];
 
 - (ASEvent_StandardEvents_Enum)toNSEnum {
   return (ASEvent_StandardEvents_Enum)[self ordinal];
+}
+
+- (ASEvent_StandardEvents_Enum)enumValue {
+  return (ASEvent_StandardEvents_Enum)[self ordinal];
+}
+
++ (ASEvent_StandardEvents *)fromNSEnum:(ASEvent_StandardEvents_Enum)nativeValue {
+  ASEvent_StandardEvents *javaEnum = ASEvent_StandardEvents_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ASEvent_StandardEvents_Enum out of range.");
+  return javaEnum;
+}
+
+- (ASEvent_StandardEvents_ORDINAL)ordinal {
+  return (ASEvent_StandardEvents_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithStandardEvents:(ASEvent_StandardEvents_Enum)value {
+  return RETAIN_(ASEvent_StandardEvents_fromOrdinal((ASEvent_StandardEvents_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -167,7 +200,7 @@ ASEvent_StandardEvents *ASEvent_StandardEvents_values_[8];
     size_t allocSize = 8 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 8; i++) {
+    for (int32_t i = 0; i < 8; i++) {
       ((void)(ASEvent_StandardEvents_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASEvent_StandardEvents_initWithNSString_withInt_(e, JreEnumConstantName(ASEvent_StandardEvents_class_(), i), i);
     }
@@ -177,7 +210,7 @@ ASEvent_StandardEvents *ASEvent_StandardEvents_values_[8];
 
 @end
 
-void ASEvent_StandardEvents_initWithNSString_withInt_(ASEvent_StandardEvents *self, NSString *__name, jint __ordinal) {
+void ASEvent_StandardEvents_initWithNSString_withInt_(ASEvent_StandardEvents *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -195,12 +228,11 @@ ASEvent_StandardEvents *ASEvent_StandardEvents_valueOfWithNSString_(NSString *na
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ASEvent_StandardEvents *ASEvent_StandardEvents_fromOrdinal(NSUInteger ordinal) {
+ASEvent_StandardEvents *ASEvent_StandardEvents_fromOrdinal(ASEvent_StandardEvents_ORDINAL ordinal) {
   ASEvent_StandardEvents_initialize();
-  if (ordinal >= 8) {
+  if (ordinal < 0 || ordinal >= 8) {
     return nil;
   }
   return ASEvent_StandardEvents_values_[ordinal];

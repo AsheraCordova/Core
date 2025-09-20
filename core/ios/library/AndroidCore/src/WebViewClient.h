@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebViewClient.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WebViewClient")
@@ -22,6 +23,9 @@
 @class ADSslErrorHandler;
 @class ADWebResourceResponse;
 @class ADWebView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADBitmap;
 
 @interface ADWebViewClient : NSObject
@@ -41,7 +45,7 @@
                          withADClientCertRequest:(ADClientCertRequest *)request;
 
 - (void)onReceivedErrorWithADWebView:(ADWebView *)view
-                             withInt:(jint)errorCode
+                             withInt:(int32_t)errorCode
                         withNSString:(NSString *)description_
                         withNSString:(NSString *)failingUrl;
 
@@ -57,20 +61,20 @@
 - (ADWebResourceResponse *)shouldInterceptRequestWithADWebView:(ADWebView *)view
                                                   withNSString:(NSString *)url;
 
-- (jboolean)shouldOverrideUrlLoadingWithADWebView:(ADWebView *)view
-                                     withNSString:(NSString *)url;
+- (bool)shouldOverrideUrlLoadingWithADWebView:(ADWebView *)view
+                                 withNSString:(NSString *)url;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADWebViewClient)
 
-inline jint ADWebViewClient_get_ERROR_HOST_LOOKUP(void);
+inline int32_t ADWebViewClient_get_ERROR_HOST_LOOKUP(void);
 #define ADWebViewClient_ERROR_HOST_LOOKUP 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADWebViewClient, ERROR_HOST_LOOKUP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWebViewClient, ERROR_HOST_LOOKUP, int32_t)
 
-inline jint ADWebViewClient_get_ERROR_UNSUPPORTED_SCHEME(void);
+inline int32_t ADWebViewClient_get_ERROR_UNSUPPORTED_SCHEME(void);
 #define ADWebViewClient_ERROR_UNSUPPORTED_SCHEME 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADWebViewClient, ERROR_UNSUPPORTED_SCHEME, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWebViewClient, ERROR_UNSUPPORTED_SCHEME, int32_t)
 
 FOUNDATION_EXPORT void ADWebViewClient_init(ADWebViewClient *self);
 
@@ -81,6 +85,7 @@ FOUNDATION_EXPORT ADWebViewClient *create_ADWebViewClient_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADWebViewClient)
 
 @compatibility_alias RAndroidWebkitWebViewClient ADWebViewClient;
+
 
 #endif
 

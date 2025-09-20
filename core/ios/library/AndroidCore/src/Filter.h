@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Filter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Filter")
@@ -46,9 +47,9 @@
 - (instancetype)init;
 
 /*!
- @brief <p>Converts a value from the filtered set into a CharSequence.
- Subclasses
-  should override this method to convert their results. The default
+ @brief <p>Converts a value from the filtered set into a CharSequence.Subclasses
+  should override this method to convert their results.
+ The default
   implementation returns an empty String for null values or the default
   String representation of the value.</p>
  @param resultValue the value to convert to a CharSequence
@@ -57,20 +58,20 @@
 - (id<JavaLangCharSequence>)convertResultToStringWithId:(id)resultValue;
 
 /*!
- @brief <p>Starts an asynchronous filtering operation.
- Calling this method
+ @brief <p>Starts an asynchronous filtering operation.Calling this method
   cancels all previous non-executed filtering requests and posts a new
-  filtering request that will be executed later.</p>
+  filtering request that will be executed later.
+ </p>
  @param constraint the constraint used to filter the data
  - seealso: #filter(CharSequence, r.android.widget.Filter.FilterListener)
  */
 - (void)filterWithJavaLangCharSequence:(id<JavaLangCharSequence>)constraint;
 
 /*!
- @brief <p>Starts an asynchronous filtering operation.
- Calling this method
+ @brief <p>Starts an asynchronous filtering operation.Calling this method
   cancels all previous non-executed filtering requests and posts a new
-  filtering request that will be executed later.</p>
+  filtering request that will be executed later.
+ </p>
   
  <p>Upon completion, the listener is notified.</p>
  @param constraint the constraint used to filter the data
@@ -94,9 +95,9 @@
 
 /*!
  @brief <p>Invoked in a worker thread to filter the data according to the
-  constraint.
- Subclasses must implement this method to perform the
-  filtering operation. Results computed by the filtering operation
+  constraint.Subclasses must implement this method to perform the
+  filtering operation.
+ Results computed by the filtering operation
   must be returned as a <code>r.android.widget.Filter.FilterResults</code> that
   will then be published in the UI thread through 
  <code>publishResults(CharSequence,
@@ -115,9 +116,9 @@
 
 /*!
  @brief <p>Invoked in the UI thread to publish the filtering results in the
-  user interface.
- Subclasses must implement this method to display the
-  results computed in <code>performFiltering</code>.</p>
+  user interface.Subclasses must implement this method to display the
+  results computed in <code>performFiltering</code>.
+ </p>
  @param constraint the constraint used to filter the data
  @param results the results of the filtering operation
  - seealso: #filter(CharSequence, r.android.widget.Filter.FilterListener)
@@ -137,15 +138,18 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFilter)
 
 @compatibility_alias RAndroidWidgetFilter ADFilter;
 
+
 #endif
 
 #if !defined (ADFilter_FilterResults_) && (INCLUDE_ALL_Filter || defined(INCLUDE_ADFilter_FilterResults))
 #define ADFilter_FilterResults_
 
+@class JavaLangInteger;
+
 /*!
- @brief <p>Holds the results of a filtering operation.
- The results are the values
-  computed by the filtering operation and the number of these values.</p>
+ @brief <p>Holds the results of a filtering operation.The results are the values
+  computed by the filtering operation and the number of these values.
+ </p>
  */
 @interface ADFilter_FilterResults : NSObject {
  @public
@@ -159,7 +163,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFilter)
   operation.
    </p>
    */
-  jint count_;
+  int32_t count_;
 }
 
 #pragma mark Public
@@ -180,10 +184,13 @@ FOUNDATION_EXPORT ADFilter_FilterResults *create_ADFilter_FilterResults_init(voi
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFilter_FilterResults)
 
+
 #endif
 
 #if !defined (ADFilter_FilterListener_) && (INCLUDE_ALL_Filter || defined(INCLUDE_ADFilter_FilterListener))
 #define ADFilter_FilterListener_
+
+@class JavaLangInteger;
 
 /*!
  @brief <p>Listener used to receive a notification upon completion of a filtering
@@ -197,7 +204,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFilter_FilterResults)
  </p>
  @param count the number of values computed by the filter
  */
-- (void)onFilterCompleteWithInt:(jint)count;
+- (void)onFilterCompleteWithInt:(int32_t)count;
 
 @end
 
@@ -205,11 +212,13 @@ J2OBJC_EMPTY_STATIC_INIT(ADFilter_FilterListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFilter_FilterListener)
 
+
 #endif
 
 #if !defined (ADFilter_Delayer_) && (INCLUDE_ALL_Filter || defined(INCLUDE_ADFilter_Delayer))
 #define ADFilter_Delayer_
 
+@class JavaLangLong;
 @protocol JavaLangCharSequence;
 
 /*!
@@ -221,13 +230,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFilter_FilterListener)
  @return The delay that should be used for
           <code>Handler.sendMessageDelayed(r.android.os.Message, long)</code>
  */
-- (jlong)getPostingDelayWithJavaLangCharSequence:(id<JavaLangCharSequence>)constraint;
+- (int64_t)getPostingDelayWithJavaLangCharSequence:(id<JavaLangCharSequence>)constraint;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADFilter_Delayer)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFilter_Delayer)
+
 
 #endif
 

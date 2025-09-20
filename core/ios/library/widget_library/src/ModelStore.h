@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelStore.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ModelStore")
@@ -19,6 +20,7 @@
 @class ASLoopParam;
 @class ASModelDataType;
 @class ASModelScope;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASIWidget;
 @protocol JavaUtilMap;
@@ -64,6 +66,7 @@ FOUNDATION_EXPORT id ASModelStore_changeModelDataTypeWithASModelDataType_withId_
 J2OBJC_TYPE_LITERAL_HEADER(ASModelStore)
 
 @compatibility_alias ComAsheraModelModelStore ASModelStore;
+
 
 #endif
 

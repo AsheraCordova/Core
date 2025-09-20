@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\ResourceBundleUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ResourceBundleUtils")
@@ -17,6 +18,7 @@
 #define ASResourceBundleUtils_
 
 @class JavaUtilProperties;
+@class NSString;
 @protocol ASIFragment;
 
 @interface ASResourceBundleUtils : NSObject
@@ -64,11 +66,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASResourceBundleUtils)
 
 @compatibility_alias ComAsheraUtilsResourceBundleUtils ASResourceBundleUtils;
 
+
 #endif
 
 #if !defined (ASResourceBundleUtils_GetPropertiesTemplate_) && (INCLUDE_ALL_ResourceBundleUtils || defined(INCLUDE_ASResourceBundleUtils_GetPropertiesTemplate))
 #define ASResourceBundleUtils_GetPropertiesTemplate_
 
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIFragment;
 
 @interface ASResourceBundleUtils_GetPropertiesTemplate : NSObject
@@ -81,8 +86,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASResourceBundleUtils)
 
 #pragma mark Protected
 
-- (jboolean)containsKeyWithId:(id)properties
-                 withNSString:(NSString *)key;
+- (bool)containsKeyWithId:(id)properties
+             withNSString:(NSString *)key;
 
 - (NSString *)getPropertyWithId:(id)properties
                    withNSString:(NSString *)key;
@@ -101,6 +106,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASResourceBundleUtils_GetPropertiesTemplate)
 FOUNDATION_EXPORT void ASResourceBundleUtils_GetPropertiesTemplate_init(ASResourceBundleUtils_GetPropertiesTemplate *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASResourceBundleUtils_GetPropertiesTemplate)
+
 
 #endif
 

@@ -3,15 +3,26 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\Intent.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bundle.h"
 #include "IOSClass.h"
 #include "Intent.h"
 #include "J2ObjC_source.h"
 #include "Uri.h"
 #include "java/io/Serializable.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 
-@class JavaUtilHashMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADIntent () {
@@ -29,7 +40,7 @@ NSString *ADIntent_EXTRA_MIME_TYPES = @"android.intent.extra.MIME_TYPES";
 
 @implementation ADIntent
 
-- (instancetype)initWithInt:(jint)actionView {
+- (instancetype)initWithInt:(int32_t)actionView {
   ADIntent_initWithInt_(self, actionView);
   return self;
 }
@@ -83,11 +94,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)hasExtraWithNSString:(NSString *)extraState {
+- (bool)hasExtraWithNSString:(NSString *)extraState {
   return false;
 }
 
-- (void)addCategoryWithInt:(jint)categoryBrowsable {
+- (void)addCategoryWithInt:(int32_t)categoryBrowsable {
 }
 
 - (void)setDataAndTypeWithADUri:(ADUri *)uri
@@ -108,7 +119,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-+ (jboolean)isAccessUriModeWithInt:(jint)flags {
++ (bool)isAccessUriModeWithInt:(int32_t)flags {
   return ADIntent_isAccessUriModeWithInt_(flags);
 }
 
@@ -178,15 +189,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADIntent_initWithInt_(ADIntent *self, jint actionView) {
+void ADIntent_initWithInt_(ADIntent *self, int32_t actionView) {
   NSObject_init(self);
 }
 
-ADIntent *new_ADIntent_initWithInt_(jint actionView) {
+ADIntent *new_ADIntent_initWithInt_(int32_t actionView) {
   J2OBJC_NEW_IMPL(ADIntent, initWithInt_, actionView)
 }
 
-ADIntent *create_ADIntent_initWithInt_(jint actionView) {
+ADIntent *create_ADIntent_initWithInt_(int32_t actionView) {
   J2OBJC_CREATE_IMPL(ADIntent, initWithInt_, actionView)
 }
 
@@ -202,12 +213,14 @@ ADIntent *create_ADIntent_init() {
   J2OBJC_CREATE_IMPL(ADIntent, init)
 }
 
-jboolean ADIntent_isAccessUriModeWithInt_(jint flags) {
+bool ADIntent_isAccessUriModeWithInt_(int32_t flags) {
   ADIntent_initialize();
   return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADIntent)
+
+J2OBJC_NAME_MAPPING(ADIntent, "r.android.content", "AD")
 
 @implementation ADIntent_ClipData
 
@@ -216,11 +229,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADIntent)
   return self;
 }
 
-- (jint)getItemCount {
+- (int32_t)getItemCount {
   return 0;
 }
 
-- (ADIntent_Item *)getItemAtWithInt:(jint)i {
+- (ADIntent_Item *)getItemAtWithInt:(int32_t)i {
   return nil;
 }
 

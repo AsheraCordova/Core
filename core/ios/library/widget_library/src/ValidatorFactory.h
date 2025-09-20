@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\ValidatorFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ValidatorFactory")
@@ -16,6 +17,7 @@
 #if !defined (ASValidatorFactory_) && (INCLUDE_ALL_ValidatorFactory || defined(INCLUDE_ASValidatorFactory))
 #define ASValidatorFactory_
 
+@class NSString;
 @protocol ASValidation;
 
 @interface ASValidatorFactory : NSObject
@@ -50,6 +52,7 @@ FOUNDATION_EXPORT void ASValidatorFactory_register__WithNSString_withASValidatio
 J2OBJC_TYPE_LITERAL_HEADER(ASValidatorFactory)
 
 @compatibility_alias ComAsheraValidationsValidatorFactory ASValidatorFactory;
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\IntArray.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ArrayUtils.h"
 #include "ContainerHelpers.h"
 #include "EmptyArray.h"
@@ -10,44 +15,51 @@
 #include "IntArray.h"
 #include "J2ObjC_source.h"
 #include "Preconditions.h"
+#include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADIntArray () {
  @public
   IOSIntArray *mValues_;
-  jint mSize_;
+  int32_t mSize_;
 }
 
 - (instancetype)initWithIntArray:(IOSIntArray *)array
-                         withInt:(jint)size;
+                         withInt:(int32_t)size;
 
 /*!
  @brief Ensures capacity to append at least <code>count</code> values.
  */
-- (void)ensureCapacityWithInt:(jint)count;
+- (void)ensureCapacityWithInt:(int32_t)count;
 
 @end
 
 J2OBJC_FIELD_SETTER(ADIntArray, mValues_, IOSIntArray *)
 
-inline jint ADIntArray_get_MIN_CAPACITY_INCREMENT(void);
+inline int32_t ADIntArray_get_MIN_CAPACITY_INCREMENT(void);
 #define ADIntArray_MIN_CAPACITY_INCREMENT 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntArray, MIN_CAPACITY_INCREMENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntArray, MIN_CAPACITY_INCREMENT, int32_t)
 
-__attribute__((unused)) static void ADIntArray_initWithIntArray_withInt_(ADIntArray *self, IOSIntArray *array, jint size);
+__attribute__((unused)) static void ADIntArray_initWithIntArray_withInt_(ADIntArray *self, IOSIntArray *array, int32_t size);
 
-__attribute__((unused)) static ADIntArray *new_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, jint size) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADIntArray *new_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, int32_t size) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADIntArray *create_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, jint size);
+__attribute__((unused)) static ADIntArray *create_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, int32_t size);
 
-__attribute__((unused)) static void ADIntArray_ensureCapacityWithInt_(ADIntArray *self, jint count);
+__attribute__((unused)) static void ADIntArray_ensureCapacityWithInt_(ADIntArray *self, int32_t count);
 
 @implementation ADIntArray
 
 - (instancetype)initWithIntArray:(IOSIntArray *)array
-                         withInt:(jint)size {
+                         withInt:(int32_t)size {
   ADIntArray_initWithIntArray_withInt_(self, array, size);
   return self;
 }
@@ -59,7 +71,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)initialCapacity {
+- (instancetype)initWithInt:(int32_t)initialCapacity {
   ADIntArray_initWithInt_(self, initialCapacity);
   return self;
 }
@@ -69,11 +81,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (ADIntArray *)fromArrayWithIntArray:(IOSIntArray *)array
-                              withInt:(jint)size {
+                              withInt:(int32_t)size {
   return ADIntArray_fromArrayWithIntArray_withInt_(array, size);
 }
 
-- (void)resizeWithInt:(jint)newSize {
+- (void)resizeWithInt:(int32_t)newSize {
   ADPreconditions_checkArgumentNonnegativeWithInt_(newSize);
   if (newSize <= ((IOSIntArray *) nil_chk(mValues_))->size_) {
     JavaUtilArrays_fillWithIntArray_withInt_withInt_withInt_(mValues_, newSize, mValues_->size_, 0);
@@ -84,14 +96,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   mSize_ = newSize;
 }
 
-- (void)addWithInt:(jint)value {
+- (void)addWithInt:(int32_t)value {
   [self addWithInt:mSize_ withInt:value];
 }
 
-- (void)addWithInt:(jint)index
-           withInt:(jint)value {
+- (void)addWithInt:(int32_t)index
+           withInt:(int32_t)value {
   ADIntArray_ensureCapacityWithInt_(self, 1);
-  jint rightSegment = mSize_ - index;
+  int32_t rightSegment = mSize_ - index;
   mSize_++;
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   if (rightSegment != 0) {
@@ -100,18 +112,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   *IOSIntArray_GetRef(nil_chk(mValues_), index) = value;
 }
 
-- (jint)binarySearchWithInt:(jint)value {
+- (int32_t)binarySearchWithInt:(int32_t)value {
   return ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mValues_, mSize_, value);
 }
 
 - (void)addAllWithADIntArray:(ADIntArray *)values {
-  jint count = ((ADIntArray *) nil_chk(values))->mSize_;
+  int32_t count = ((ADIntArray *) nil_chk(values))->mSize_;
   ADIntArray_ensureCapacityWithInt_(self, count);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(values->mValues_, 0, mValues_, mSize_, count);
   mSize_ += count;
 }
 
-- (void)ensureCapacityWithInt:(jint)count {
+- (void)ensureCapacityWithInt:(int32_t)count {
   ADIntArray_ensureCapacityWithInt_(self, count);
 }
 
@@ -125,20 +137,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return clone;
 }
 
-- (jint)getWithInt:(jint)index {
+- (int32_t)getWithInt:(int32_t)index {
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   return IOSIntArray_Get(nil_chk(mValues_), index);
 }
 
-- (void)setWithInt:(jint)index
-           withInt:(jint)value {
+- (void)setWithInt:(int32_t)index
+           withInt:(int32_t)value {
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   *IOSIntArray_GetRef(nil_chk(mValues_), index) = value;
 }
 
-- (jint)indexOfWithInt:(jint)value {
-  jint n = mSize_;
-  for (jint i = 0; i < n; i++) {
+- (int32_t)indexOfWithInt:(int32_t)value {
+  int32_t n = mSize_;
+  for (int32_t i = 0; i < n; i++) {
     if (IOSIntArray_Get(nil_chk(mValues_), i) == value) {
       return i;
     }
@@ -146,13 +158,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return -1;
 }
 
-- (void)removeWithInt:(jint)index {
+- (void)removeWithInt:(int32_t)index {
   ADArrayUtils_checkBoundsWithInt_withInt_(mSize_, index);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mValues_, index + 1, mValues_, index, mSize_ - index - 1);
   mSize_--;
 }
 
-- (jint)size {
+- (int32_t)size {
   return mSize_;
 }
 
@@ -226,17 +238,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADIntArray_initWithIntArray_withInt_(ADIntArray *self, IOSIntArray *array, jint size) {
+void ADIntArray_initWithIntArray_withInt_(ADIntArray *self, IOSIntArray *array, int32_t size) {
   NSObject_init(self);
   JreStrongAssign(&self->mValues_, array);
   self->mSize_ = ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(size, 0, ((IOSIntArray *) nil_chk(array))->size_, @"size");
 }
 
-ADIntArray *new_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, jint size) {
+ADIntArray *new_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, int32_t size) {
   J2OBJC_NEW_IMPL(ADIntArray, initWithIntArray_withInt_, array, size)
 }
 
-ADIntArray *create_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, jint size) {
+ADIntArray *create_ADIntArray_initWithIntArray_withInt_(IOSIntArray *array, int32_t size) {
   J2OBJC_CREATE_IMPL(ADIntArray, initWithIntArray_withInt_, array, size)
 }
 
@@ -252,7 +264,7 @@ ADIntArray *create_ADIntArray_init() {
   J2OBJC_CREATE_IMPL(ADIntArray, init)
 }
 
-void ADIntArray_initWithInt_(ADIntArray *self, jint initialCapacity) {
+void ADIntArray_initWithInt_(ADIntArray *self, int32_t initialCapacity) {
   NSObject_init(self);
   if (initialCapacity == 0) {
     JreStrongAssign(&self->mValues_, JreLoadStatic(ADEmptyArray, INT));
@@ -263,11 +275,11 @@ void ADIntArray_initWithInt_(ADIntArray *self, jint initialCapacity) {
   self->mSize_ = 0;
 }
 
-ADIntArray *new_ADIntArray_initWithInt_(jint initialCapacity) {
+ADIntArray *new_ADIntArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_NEW_IMPL(ADIntArray, initWithInt_, initialCapacity)
 }
 
-ADIntArray *create_ADIntArray_initWithInt_(jint initialCapacity) {
+ADIntArray *create_ADIntArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_CREATE_IMPL(ADIntArray, initWithInt_, initialCapacity)
 }
 
@@ -276,17 +288,17 @@ ADIntArray *ADIntArray_wrapWithIntArray_(IOSIntArray *array) {
   return create_ADIntArray_initWithIntArray_withInt_(array, ((IOSIntArray *) nil_chk(array))->size_);
 }
 
-ADIntArray *ADIntArray_fromArrayWithIntArray_withInt_(IOSIntArray *array, jint size) {
+ADIntArray *ADIntArray_fromArrayWithIntArray_withInt_(IOSIntArray *array, int32_t size) {
   ADIntArray_initialize();
   return ADIntArray_wrapWithIntArray_(JavaUtilArrays_copyOfWithIntArray_withInt_(array, size));
 }
 
-void ADIntArray_ensureCapacityWithInt_(ADIntArray *self, jint count) {
-  jint currentSize = self->mSize_;
-  jint minCapacity = currentSize + count;
+void ADIntArray_ensureCapacityWithInt_(ADIntArray *self, int32_t count) {
+  int32_t currentSize = self->mSize_;
+  int32_t minCapacity = currentSize + count;
   if (minCapacity >= ((IOSIntArray *) nil_chk(self->mValues_))->size_) {
-    jint targetCap = currentSize + (currentSize < (JreIntDiv(ADIntArray_MIN_CAPACITY_INCREMENT, 2)) ? ADIntArray_MIN_CAPACITY_INCREMENT : JreRShift32(currentSize, 1));
-    jint newCapacity = targetCap > minCapacity ? targetCap : minCapacity;
+    int32_t targetCap = currentSize + (currentSize < (JreIntDiv(ADIntArray_MIN_CAPACITY_INCREMENT, 2)) ? ADIntArray_MIN_CAPACITY_INCREMENT : JreRShift32(currentSize, 1));
+    int32_t newCapacity = targetCap > minCapacity ? targetCap : minCapacity;
     IOSIntArray *newValues = ADArrayUtils_newUnpaddedIntArrayWithInt_(newCapacity);
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->mValues_, 0, newValues, 0, currentSize);
     JreStrongAssign(&self->mValues_, newValues);
@@ -294,3 +306,5 @@ void ADIntArray_ensureCapacityWithInt_(ADIntArray *self, jint count) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADIntArray)
+
+J2OBJC_NAME_MAPPING(ADIntArray, "r.android.util", "AD")

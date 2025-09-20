@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\animation\MaterialAnimationUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MaterialAnimationUtils")
@@ -16,6 +17,8 @@
 #if !defined (ADXMaterialAnimationUtils_) && (INCLUDE_ALL_MaterialAnimationUtils || defined(INCLUDE_ADXMaterialAnimationUtils))
 #define ADXMaterialAnimationUtils_
 
+@class JavaLangFloat;
+@class JavaLangInteger;
 @protocol ADTimeInterpolator;
 
 /*!
@@ -30,9 +33,9 @@
 /*!
  @brief Linear interpolation between <code>startValue</code> and <code>endValue</code> by <code>fraction</code>.
  */
-+ (jfloat)lerpWithFloat:(jfloat)startValue
-              withFloat:(jfloat)endValue
-              withFloat:(jfloat)fraction;
++ (float)lerpWithFloat:(float)startValue
+             withFloat:(float)endValue
+             withFloat:(float)fraction;
 
 /*!
  @brief Linear interpolation between <code>outputMin</code> and <code>outputMax</code> when <code>value</code> is
@@ -40,18 +43,18 @@
  <p>Note that <code>value</code> will be coerced into <code>inputMin</code> and <code>inputMax</code>.This
   function can handle input and output ranges that span positive and negative numbers.
  */
-+ (jfloat)lerpWithFloat:(jfloat)outputMin
-              withFloat:(jfloat)outputMax
-              withFloat:(jfloat)inputMin
-              withFloat:(jfloat)inputMax
-              withFloat:(jfloat)value;
++ (float)lerpWithFloat:(float)outputMin
+             withFloat:(float)outputMax
+             withFloat:(float)inputMin
+             withFloat:(float)inputMax
+             withFloat:(float)value;
 
 /*!
  @brief Linear interpolation between <code>startValue</code> and <code>endValue</code> by <code>fraction</code>.
  */
-+ (jint)lerpWithInt:(jint)startValue
-            withInt:(jint)endValue
-          withFloat:(jfloat)fraction;
++ (int32_t)lerpWithInt:(int32_t)startValue
+               withInt:(int32_t)endValue
+             withFloat:(float)fraction;
 
 @end
 
@@ -88,15 +91,16 @@ FOUNDATION_EXPORT ADXMaterialAnimationUtils *new_ADXMaterialAnimationUtils_init(
 
 FOUNDATION_EXPORT ADXMaterialAnimationUtils *create_ADXMaterialAnimationUtils_init(void);
 
-FOUNDATION_EXPORT jfloat ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_(jfloat startValue, jfloat endValue, jfloat fraction);
+FOUNDATION_EXPORT float ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_(float startValue, float endValue, float fraction);
 
-FOUNDATION_EXPORT jint ADXMaterialAnimationUtils_lerpWithInt_withInt_withFloat_(jint startValue, jint endValue, jfloat fraction);
+FOUNDATION_EXPORT int32_t ADXMaterialAnimationUtils_lerpWithInt_withInt_withFloat_(int32_t startValue, int32_t endValue, float fraction);
 
-FOUNDATION_EXPORT jfloat ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_withFloat_withFloat_(jfloat outputMin, jfloat outputMax, jfloat inputMin, jfloat inputMax, jfloat value);
+FOUNDATION_EXPORT float ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_withFloat_withFloat_(float outputMin, float outputMax, float inputMin, float inputMax, float value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMaterialAnimationUtils)
 
 @compatibility_alias ComGoogleAndroidMaterialAnimationMaterialAnimationUtils ADXMaterialAnimationUtils;
+
 
 #endif
 

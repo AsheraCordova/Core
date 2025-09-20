@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\CheckBox.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CheckBox")
@@ -37,6 +38,7 @@ FOUNDATION_EXPORT void ADCheckBox_initWithASIWidget_(ADCheckBox *self, id<ASIWid
 J2OBJC_TYPE_LITERAL_HEADER(ADCheckBox)
 
 @compatibility_alias RAndroidWidgetCheckBox ADCheckBox;
+
 
 #endif
 

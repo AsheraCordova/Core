@@ -3,13 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Bundle.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bundle.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 
-@class JavaUtilHashMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADBundle () {
@@ -60,7 +69,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)putIntWithNSString:(NSString *)name
-                   withInt:(jint)value {
+                   withInt:(int32_t)value {
   [self putObjectWithNSString:name withId:JavaLangInteger_valueOfWithInt_(value)];
 }
 
@@ -86,7 +95,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [self getWithNSString:key];
 }
 
-- (jint)getIntWithNSString:(NSString *)key {
+- (int32_t)getIntWithNSString:(NSString *)key {
   id object = JreRetainedLocalValue([self getWithNSString:key]);
   return object == nil ? 0 : [(JavaLangInteger *) cast_chk(object, [JavaLangInteger class]) intValue];
 }
@@ -96,11 +105,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)putFloatWithNSString:(NSString *)name
-                   withFloat:(jfloat)value {
+                   withFloat:(float)value {
   [self putObjectWithNSString:name withId:JavaLangFloat_valueOfWithFloat_(value)];
 }
 
-- (jfloat)getFloatWithNSString:(NSString *)key {
+- (float)getFloatWithNSString:(NSString *)key {
   id object = JreRetainedLocalValue([self getWithNSString:key]);
   return object == nil ? 0 : [(JavaLangFloat *) cast_chk(object, [JavaLangFloat class]) floatValue];
 }
@@ -184,3 +193,5 @@ ADBundle *create_ADBundle_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBundle)
+
+J2OBJC_NAME_MAPPING(ADBundle, "r.android.os", "AD")

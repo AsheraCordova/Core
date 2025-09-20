@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\EscapeHtmlCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "EscapeHtmlCommandConverter.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASEscapeHtmlCommandConverter ()
@@ -93,3 +106,5 @@ id ASEscapeHtmlCommandConverter_escapeHtmlWithNSString_(ASEscapeHtmlCommandConve
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEscapeHtmlCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASEscapeHtmlCommandConverter, "com.ashera.converter", "AS")

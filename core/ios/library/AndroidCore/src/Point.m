@@ -3,13 +3,26 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\Point.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Parcel.h"
 #include "Parcelable.h"
 #include "Point.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPoint_1 : ADParcelable_Creator
@@ -24,7 +37,7 @@
 /*!
  @brief Return an array of rectangles of the specified size.
  */
-- (IOSObjectArray *)newArrayWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -35,6 +48,7 @@ __attribute__((unused)) static void ADPoint_1_init(ADPoint_1 *self);
 __attribute__((unused)) static ADPoint_1 *new_ADPoint_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADPoint_1 *create_ADPoint_1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(ADPoint)
 
@@ -49,8 +63,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)x
-                    withInt:(jint)y {
+- (instancetype)initWithInt:(int32_t)x
+                    withInt:(int32_t)y {
   ADPoint_initWithInt_withInt_(self, x, y);
   return self;
 }
@@ -60,8 +74,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (void)setWithInt:(jint)x
-           withInt:(jint)y {
+- (void)setWithInt:(int32_t)x
+           withInt:(int32_t)y {
   self->x_ = x;
   self->y_ = y;
 }
@@ -76,20 +90,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   y_ = -y_;
 }
 
-- (void)offsetWithInt:(jint)dx
-              withInt:(jint)dy {
+- (void)offsetWithInt:(int32_t)dx
+              withInt:(int32_t)dy {
   x_ += dx;
   y_ += dy;
 }
 
-- (jboolean)equalsWithInt:(jint)x
-                  withInt:(jint)y {
+- (bool)equalsWithInt:(int32_t)x
+              withInt:(int32_t)y {
   return self->x_ == x && self->y_ == y;
 }
 
-- (jboolean)isEqual:(id)o {
-  if (self == o) return true;
-  if (o == nil || [self java_getClass] != [o java_getClass]) return false;
+- (bool)isEqual:(id)o {
+  if (JreObjectEqualsEquals(self, o)) return true;
+  if (o == nil || !JreObjectEqualsEquals([self java_getClass], [o java_getClass])) return false;
   ADPoint *point = (ADPoint *) cast_chk(o, [ADPoint class]);
   if (x_ != point->x_) return false;
   if (y_ != point->y_) return false;
@@ -97,7 +111,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSUInteger)hash {
-  jint result = x_;
+  int32_t result = x_;
   result = 31 * result + y_;
   return result;
 }
@@ -114,12 +128,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADPoint_unflattenFromStringWithNSString_(s);
 }
 
-- (jint)describeContents {
+- (int32_t)describeContents {
   return 0;
 }
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)outArg
-                          withInt:(jint)flags {
+                          withInt:(int32_t)flags {
   [((id<ADParcel>) nil_chk(outArg)) writeIntWithInt:x_];
   [outArg writeIntWithInt:y_];
 }
@@ -199,17 +213,17 @@ ADPoint *create_ADPoint_init() {
   J2OBJC_CREATE_IMPL(ADPoint, init)
 }
 
-void ADPoint_initWithInt_withInt_(ADPoint *self, jint x, jint y) {
+void ADPoint_initWithInt_withInt_(ADPoint *self, int32_t x, int32_t y) {
   NSObject_init(self);
   self->x_ = x;
   self->y_ = y;
 }
 
-ADPoint *new_ADPoint_initWithInt_withInt_(jint x, jint y) {
+ADPoint *new_ADPoint_initWithInt_withInt_(int32_t x, int32_t y) {
   J2OBJC_NEW_IMPL(ADPoint, initWithInt_withInt_, x, y)
 }
 
-ADPoint *create_ADPoint_initWithInt_withInt_(jint x, jint y) {
+ADPoint *create_ADPoint_initWithInt_withInt_(int32_t x, int32_t y) {
   J2OBJC_CREATE_IMPL(ADPoint, initWithInt_withInt_, x, y)
 }
 
@@ -228,11 +242,13 @@ ADPoint *create_ADPoint_initWithADPoint_(ADPoint *src) {
 
 ADPoint *ADPoint_unflattenFromStringWithNSString_(NSString *s) {
   ADPoint_initialize();
-  jint sep_ix = [((NSString *) nil_chk(s)) java_indexOfString:@"x"];
+  int32_t sep_ix = [((NSString *) nil_chk(s)) java_indexOfString:@"x"];
   return create_ADPoint_initWithInt_withInt_(JavaLangInteger_parseIntWithNSString_([s java_substring:0 endIndex:sep_ix]), JavaLangInteger_parseIntWithNSString_([s java_substring:sep_ix + 1]));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPoint)
+
+J2OBJC_NAME_MAPPING(ADPoint, "r.android.graphics", "AD")
 
 @implementation ADPoint_1
 
@@ -246,11 +262,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (ADPoint *)createFromParcelWithADParcel:(id<ADParcel>)inArg {
   ADPoint *r = create_ADPoint_init();
   [r readFromParcelWithADParcel:inArg];
-  return r;
+  return JreRetainedLocalValue(r);
 }
 
-- (IOSObjectArray *)newArrayWithInt:(jint)size {
-  return [IOSObjectArray arrayWithLength:size type:ADPoint_class_()];
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size {
+  return JreRetainedLocalValue([IOSObjectArray arrayWithLength:size type:ADPoint_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -267,7 +283,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(newArrayWithInt:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "createFromParcel", "LADParcel;", "newArray", "I", "LADPoint;", "Lr/android/os/Parcelable$Creator<Lr/android/graphics/Point;>;" };
-  static const J2ObjcClassInfo _ADPoint_1 = { "", "r.android.graphics", ptrTable, methods, NULL, 7, 0x8018, 3, 0, 4, -1, -1, 5, -1 };
+  static const J2ObjcClassInfo _ADPoint_1 = { "", "r.android.graphics", ptrTable, methods, NULL, 7, 0x8000, 3, 0, 4, -1, -1, 5, -1 };
   return &_ADPoint_1;
 }
 

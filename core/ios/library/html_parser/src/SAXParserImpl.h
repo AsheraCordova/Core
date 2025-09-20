@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\jaxp\SAXParserImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SAXParserImpl")
@@ -20,6 +21,8 @@
 #define INCLUDE_JavaxXmlParsersSAXParser 1
 #include "javax/xml/parsers/SAXParser.h"
 
+@class JavaLangBoolean;
+@class NSString;
 @class TSTagSoupParser;
 @protocol JavaUtilMap;
 @protocol OrgXmlSaxParser;
@@ -38,7 +41,7 @@
 
 #pragma mark Public
 
-- (jboolean)getFeatureWithNSString:(NSString *)name;
+- (bool)getFeatureWithNSString:(NSString *)name;
 
 /*!
  @brief To support SAX1 interface, we'll need to use an adapter.
@@ -49,14 +52,14 @@
 
 - (id<OrgXmlSaxXMLReader>)getXMLReader;
 
-- (jboolean)isNamespaceAware;
+- (bool)isNamespaceAware;
 
-- (jboolean)isValidating;
+- (bool)isValidating;
 
 + (TSSAXParserImpl *)newInstanceWithJavaUtilMap:(id<JavaUtilMap>)features OBJC_METHOD_FAMILY_NONE;
 
 - (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)value;
+                   withBoolean:(bool)value;
 
 - (void)setPropertyWithNSString:(NSString *)name
                          withId:(id)value;
@@ -82,6 +85,7 @@ FOUNDATION_EXPORT TSSAXParserImpl *TSSAXParserImpl_newInstanceWithJavaUtilMap_(i
 J2OBJC_TYPE_LITERAL_HEADER(TSSAXParserImpl)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupJaxpSAXParserImpl TSSAXParserImpl;
+
 
 #endif
 

@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\pm\PackageManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ApplicationInfo.h"
 #include "J2ObjC_source.h"
 #include "PackageManager.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 NSString *ADPackageManager_GET_META_DATA;
@@ -26,7 +38,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (ADPackageManager_PackageInfo *)getPackageInfoWithNSString:(NSString *)packageName
-                                                     withInt:(jint)i {
+                                                     withInt:(int32_t)i {
   return create_ADPackageManager_PackageInfo_initWithADPackageManager_(self);
 }
 
@@ -67,6 +79,8 @@ ADPackageManager *create_ADPackageManager_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPackageManager)
+
+J2OBJC_NAME_MAPPING(ADPackageManager, "r.android.content.pm", "AD")
 
 @implementation ADPackageManager_NameNotFoundException
 

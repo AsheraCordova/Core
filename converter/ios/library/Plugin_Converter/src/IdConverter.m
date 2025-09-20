@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\IdConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "IdConverter.h"
 #include "IdGenerator.h"
@@ -10,6 +15,12 @@
 #include "java/lang/Integer.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASIdConverter
@@ -71,3 +82,5 @@ ASIdConverter *create_ASIdConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASIdConverter)
+
+J2OBJC_NAME_MAPPING(ASIdConverter, "com.ashera.converter", "AS")

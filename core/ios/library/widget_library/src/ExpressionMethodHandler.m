@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ExpressionMethodHandler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseWidget.h"
 #include "ExpressionMethodHandler.h"
 #include "IFlatMap.h"
@@ -22,6 +27,7 @@
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/text/DecimalFormat.h"
@@ -32,7 +38,12 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASExpressionMethodHandler ()
@@ -204,7 +215,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASExpressionMethodHandler_getMapWithId_(obj);
 }
 
-+ (jboolean)isVisibleWithId:(id)obj {
++ (bool)isVisibleWithId:(id)obj {
   return ASExpressionMethodHandler_isVisibleWithId_(obj);
 }
 
@@ -380,7 +391,7 @@ id ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(NSString
       handlers = ASMethodHandlerFactory_getRegistrations();
       for (id<ASMethodHandler> __strong methodHandler in nil_chk(handlers)) {
         id result = JreRetainedLocalValue([((id<ASMethodHandler>) nil_chk(methodHandler)) handleWithNSString:methodName withId:obj withASIWidget:widget]);
-        if (result != ASMethodHandler_UNHANDLED) {
+        if (!JreObjectEqualsEquals(result, ASMethodHandler_UNHANDLED)) {
           val = result;
           break;
         }
@@ -422,13 +433,13 @@ id ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(NSString
 id ASExpressionMethodHandler_sumWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap) {
   ASExpressionMethodHandler_initialize();
   IOSObjectArray *fields = [((NSString *) nil_chk(((NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(configMap)) getWithId:@"fields"], [NSString class])))) java_split:@","];
-  jfloat sum = 0;
+  float sum = 0;
   {
     IOSObjectArray *a__ = fields;
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *path = *b__++;
+      NSString *path = RETAIN_AND_AUTORELEASE(*b__++);
       JrePlusAssignFloatF(&sum, [((JavaLangFloat *) nil_chk((ASPluginInvoker_getFloatWithId_([((id<ASIWidget>) nil_chk(widget)) getModelByPathWithNSString:path withId:obj])))) floatValue]);
     }
   }
@@ -452,8 +463,8 @@ id ASExpressionMethodHandler_ternaryWithASIWidget_withId_withJavaUtilMap_(id<ASI
 id ASExpressionMethodHandler_baseElapsedTimeInMillisWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap) {
   ASExpressionMethodHandler_initialize();
   NSString *dateFormat = @"dd/MM/yyyy HH:mm";
-  jint defaultValue = 0;
-  jboolean allowNegativeValues = false;
+  int32_t defaultValue = 0;
+  bool allowNegativeValues = false;
   if (configMap != nil) {
     if ([configMap containsKeyWithId:@"dateFormat"]) {
       dateFormat = (NSString *) cast_chk([configMap getWithId:@"dateFormat"], [NSString class]);
@@ -471,7 +482,7 @@ id ASExpressionMethodHandler_baseElapsedTimeInMillisWithASIWidget_withId_withJav
   JavaTextSimpleDateFormat *sdateFormat = create_JavaTextSimpleDateFormat_initWithNSString_(dateFormat);
   @try {
     JavaUtilDate *d = JreRetainedLocalValue([sdateFormat parseWithNSString:(NSString *) cast_chk(obj, [NSString class])]);
-    jint timeInMillis = (jint) ([((JavaUtilDate *) nil_chk(d)) getTime] - JavaLangSystem_currentTimeMillis());
+    int32_t timeInMillis = (int32_t) ([((JavaUtilDate *) nil_chk(d)) getTime] - JavaLangSystem_currentTimeMillis());
     if (!allowNegativeValues && timeInMillis < 0) {
       timeInMillis = 0;
     }
@@ -495,7 +506,7 @@ id ASExpressionMethodHandler_getDescFromResWithId_withASIWidget_withJavaUtilMap_
       [listStrs addWithId:obj];
     }
     for (id __strong listStr in listStrs) {
-      for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(values)) size]; i++) {
+      for (int32_t i = 0; i < [((id<JavaUtilList>) nil_chk(values)) size]; i++) {
         NSString *value = JreRetainedLocalValue([values getWithInt:i]);
         if ([((NSString *) nil_chk(value)) isEqual:listStr]) {
           [descs addWithId:[((id<JavaUtilList>) nil_chk(entries)) getWithInt:i]];
@@ -518,7 +529,7 @@ id ASExpressionMethodHandler_formatStringWithId_withASIWidget_withJavaUtilMap_(i
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *path = *b__++;
+        NSString *path = RETAIN_AND_AUTORELEASE(*b__++);
         [objParams addWithId:ASPluginInvoker_getStringWithId_([widget getModelByPathWithNSString:path withId:obj])];
       }
     }
@@ -572,7 +583,7 @@ id ASExpressionMethodHandler_concatWithId_withASIWidget_withJavaUtilMap_(id obj,
     }
     NSString *fields = (NSString *) cast_chk([configMap getWithId:@"fields"], [NSString class]);
     IOSObjectArray *props = [((NSString *) nil_chk(fields)) java_split:@","];
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(props))->size_; i++) {
+    for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(props))->size_; i++) {
       NSString *prop = IOSObjectArray_Get(props, i);
       if (![result isEqual:@""]) {
         JreStrAppend(&result, "$", delimiter);
@@ -624,7 +635,7 @@ id ASExpressionMethodHandler_not__WithId_(id obj) {
 id ASExpressionMethodHandler_totalWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap) {
   ASExpressionMethodHandler_initialize();
   id<JavaUtilList> objList = ASPluginInvoker_getListWithId_(obj);
-  jfloat sum = 0;
+  float sum = 0;
   if (objList != nil) {
     for (id __strong object in objList) {
       JrePlusAssignFloatF(&sum, [((JavaLangFloat *) nil_chk(ASPluginInvoker_getFloatWithId_([((id<ASIWidget>) nil_chk(widget)) getModelByPathWithNSString:(NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(configMap)) getWithId:@"path"], [NSString class]) withId:object]))) floatValue]);
@@ -653,13 +664,13 @@ id<JavaUtilMap> ASExpressionMethodHandler_getMapWithId_(id obj) {
   return nil;
 }
 
-jboolean ASExpressionMethodHandler_isVisibleWithId_(id obj) {
+bool ASExpressionMethodHandler_isVisibleWithId_(id obj) {
   ASExpressionMethodHandler_initialize();
   if ([JavaUtilList_class_() isInstance:obj]) {
     return [((id<JavaUtilList>) nil_chk(((id<JavaUtilList>) cast_check(obj, JavaUtilList_class_())))) size] > 0;
   }
   if ([obj isKindOfClass:[NSString class]]) {
-    return ![((NSString *) nil_chk(((NSString *) obj))) java_isEmpty];
+    return ![((NSString *) nil_chk(((NSString *) obj))) isEmpty];
   }
   if ([obj isKindOfClass:[JavaLangBoolean class]]) {
     return [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) obj)) booleanValue];
@@ -672,8 +683,8 @@ jboolean ASExpressionMethodHandler_isVisibleWithId_(id obj) {
 
 id ASExpressionMethodHandler_multiplyWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> w, id obj, id<JavaUtilMap> configMap) {
   ASExpressionMethodHandler_initialize();
-  jfloat val1 = 0;
-  jfloat val2 = 0;
+  float val1 = 0;
+  float val2 = 0;
   if ([((id<JavaUtilMap>) nil_chk(configMap)) containsKeyWithId:@"op1"]) {
     val1 = [((JavaLangFloat *) nil_chk(ASPluginInvoker_getFloatWithId_([((id<ASIWidget>) nil_chk(w)) getModelByPathWithNSString:(NSString *) cast_chk([configMap getWithId:@"op1"], [NSString class]) withId:obj]))) floatValue];
   }
@@ -692,3 +703,5 @@ id ASExpressionMethodHandler_getFileAssetWithId_withASIWidget_withJavaUtilMap_(i
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASExpressionMethodHandler)
+
+J2OBJC_NAME_MAPPING(ASExpressionMethodHandler, "com.ashera.model", "AS")

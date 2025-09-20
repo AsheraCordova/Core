@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\IBinder.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IBinder")
@@ -25,6 +26,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADIBinder)
 J2OBJC_TYPE_LITERAL_HEADER(ADIBinder)
 
 #define RAndroidOsIBinder ADIBinder
+
 
 #endif
 

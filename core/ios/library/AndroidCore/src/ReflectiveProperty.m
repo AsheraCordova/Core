@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\ReflectiveProperty.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
@@ -28,8 +33,12 @@
 #include "java/lang/reflect/InvocationTargetException.h"
 #include "java/lang/reflect/Method.h"
 
-@class JavaLangReflectField;
-@class JavaLangReflectMethod;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADReflectiveProperty () {
@@ -47,8 +56,8 @@
  Accept float as matching Float,
   etc.
  */
-- (jboolean)typesMatchWithIOSClass:(IOSClass *)valueType
-                      withIOSClass:(IOSClass *)getterType;
+- (bool)typesMatchWithIOSClass:(IOSClass *)valueType
+                  withIOSClass:(IOSClass *)getterType;
 
 @end
 
@@ -68,7 +77,7 @@ inline NSString *ADReflectiveProperty_get_PREFIX_SET(void);
 static NSString *ADReflectiveProperty_PREFIX_SET = @"set";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADReflectiveProperty, PREFIX_SET, NSString *)
 
-__attribute__((unused)) static jboolean ADReflectiveProperty_typesMatchWithIOSClass_withIOSClass_(ADReflectiveProperty *self, IOSClass *valueType, IOSClass *getterType);
+__attribute__((unused)) static bool ADReflectiveProperty_typesMatchWithIOSClass_withIOSClass_(ADReflectiveProperty *self, IOSClass *valueType, IOSClass *getterType);
 
 @implementation ADReflectiveProperty
 
@@ -79,8 +88,8 @@ __attribute__((unused)) static jboolean ADReflectiveProperty_typesMatchWithIOSCl
   return self;
 }
 
-- (jboolean)typesMatchWithIOSClass:(IOSClass *)valueType
-                      withIOSClass:(IOSClass *)getterType {
+- (bool)typesMatchWithIOSClass:(IOSClass *)valueType
+                  withIOSClass:(IOSClass *)getterType {
   return ADReflectiveProperty_typesMatchWithIOSClass_withIOSClass_(self, valueType, getterType);
 }
 
@@ -133,7 +142,7 @@ __attribute__((unused)) static jboolean ADReflectiveProperty_typesMatchWithIOSCl
   @throw create_JavaLangAssertionError_init();
 }
 
-- (jboolean)isReadOnly {
+- (bool)isReadOnly {
   return (mSetter_ == nil && mField_ == nil);
 }
 
@@ -178,7 +187,7 @@ __attribute__((unused)) static jboolean ADReflectiveProperty_typesMatchWithIOSCl
 
 void ADReflectiveProperty_initPackagePrivateWithIOSClass_withIOSClass_withNSString_(ADReflectiveProperty *self, IOSClass *propertyHolder, IOSClass *valueType, NSString *name) {
   ADProperty_initWithIOSClass_withNSString_(self, valueType, name);
-  jchar firstLetter = JavaLangCharacter_toUpperCaseWithChar_([((NSString *) nil_chk(name)) charAtWithInt:0]);
+  unichar firstLetter = JavaLangCharacter_toUpperCaseWithChar_([((NSString *) nil_chk(name)) charAtWithInt:0]);
   NSString *theRest = [name java_substring:1];
   NSString *capitalizedName = JreStrcat("C$", firstLetter, theRest);
   NSString *getterName = JreStrcat("$$", ADReflectiveProperty_PREFIX_GET, capitalizedName);
@@ -224,10 +233,10 @@ ADReflectiveProperty *create_ADReflectiveProperty_initPackagePrivateWithIOSClass
   J2OBJC_CREATE_IMPL(ADReflectiveProperty, initPackagePrivateWithIOSClass_withIOSClass_withNSString_, propertyHolder, valueType, name)
 }
 
-jboolean ADReflectiveProperty_typesMatchWithIOSClass_withIOSClass_(ADReflectiveProperty *self, IOSClass *valueType, IOSClass *getterType) {
-  if (getterType != valueType) {
+bool ADReflectiveProperty_typesMatchWithIOSClass_withIOSClass_(ADReflectiveProperty *self, IOSClass *valueType, IOSClass *getterType) {
+  if (!JreObjectEqualsEquals(getterType, valueType)) {
     if ([((IOSClass *) nil_chk(getterType)) isPrimitive]) {
-      return (getterType == [IOSClass floatClass] && valueType == JavaLangFloat_class_()) || (getterType == [IOSClass intClass] && valueType == JavaLangInteger_class_()) || (getterType == [IOSClass booleanClass] && valueType == JavaLangBoolean_class_()) || (getterType == [IOSClass longClass] && valueType == JavaLangLong_class_()) || (getterType == [IOSClass doubleClass] && valueType == JavaLangDouble_class_()) || (getterType == [IOSClass shortClass] && valueType == JavaLangShort_class_()) || (getterType == [IOSClass byteClass] && valueType == JavaLangByte_class_()) || (getterType == [IOSClass charClass] && valueType == JavaLangCharacter_class_());
+      return (JreObjectEqualsEquals(getterType, [IOSClass floatClass]) && JreObjectEqualsEquals(valueType, JavaLangFloat_class_())) || (JreObjectEqualsEquals(getterType, [IOSClass intClass]) && JreObjectEqualsEquals(valueType, JavaLangInteger_class_())) || (JreObjectEqualsEquals(getterType, [IOSClass booleanClass]) && JreObjectEqualsEquals(valueType, JavaLangBoolean_class_())) || (JreObjectEqualsEquals(getterType, [IOSClass longClass]) && JreObjectEqualsEquals(valueType, JavaLangLong_class_())) || (JreObjectEqualsEquals(getterType, [IOSClass doubleClass]) && JreObjectEqualsEquals(valueType, JavaLangDouble_class_())) || (JreObjectEqualsEquals(getterType, [IOSClass shortClass]) && JreObjectEqualsEquals(valueType, JavaLangShort_class_())) || (JreObjectEqualsEquals(getterType, [IOSClass byteClass]) && JreObjectEqualsEquals(valueType, JavaLangByte_class_())) || (JreObjectEqualsEquals(getterType, [IOSClass charClass]) && JreObjectEqualsEquals(valueType, JavaLangCharacter_class_()));
     }
     return false;
   }

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Looper.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Looper")
@@ -23,6 +24,7 @@
 #define ADLooper_
 
 @class ADMessageQueue;
+@class JavaLangBoolean;
 @class JavaLangThread;
 
 @interface ADLooper : NSObject {
@@ -48,7 +50,7 @@
 /*!
  @brief Returns true if the current thread is this looper's thread.
  */
-- (jboolean)isCurrentThread;
+- (bool)isCurrentThread;
 
 /*!
  @brief Run the message queue in this thread.Be sure to call 
@@ -125,6 +127,7 @@ FOUNDATION_EXPORT ADMessageQueue *ADLooper_myQueue(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADLooper)
 
 @compatibility_alias RAndroidOsLooper ADLooper;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ListPopupWindow.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ListPopupWindow")
@@ -22,11 +23,13 @@
 @class ADTextView;
 @class ADView;
 @class ADViewGroup;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADPopupWindow_OnDismissListener;
 
 @interface ADListPopupWindow : NSObject {
  @public
-  jint mListItemExpandMaximum_;
+  int32_t mListItemExpandMaximum_;
   ADPopupWindow *mPopup_;
 }
 
@@ -42,38 +45,38 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params;
 
 - (ADView *)getAnchorView;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
-- (jint)getHorizontalOffset;
+- (int32_t)getHorizontalOffset;
 
 - (ADViewGroup *)getListView;
 
-- (jint)getVerticalOffset;
+- (int32_t)getVerticalOffset;
 
-- (jint)getWidth;
+- (int32_t)getWidth;
 
-- (jboolean)isDropDownAlwaysVisible;
+- (bool)isDropDownAlwaysVisible;
 
-- (jboolean)isShowing;
+- (bool)isShowing;
 
 - (void)measureHintViewWithADView:(ADView *)view;
 
-- (jboolean)onKeyDownWithInt:(jint)keyCode
-              withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onKeyDownWithInt:(int32_t)keyCode
+          withADKeyEvent:(ADKeyEvent *)event;
 
 - (void)setAnchorViewWithADView:(ADView *)anchor;
 
-- (void)setHeightWithInt:(jint)height;
+- (void)setHeightWithInt:(int32_t)height;
 
-- (void)setHorizontalOffsetWithInt:(jint)offset;
+- (void)setHorizontalOffsetWithInt:(int32_t)offset;
 
 - (void)setOnDismissListenerWithADPopupWindow_OnDismissListener:(id<ADPopupWindow_OnDismissListener>)listener;
 
 - (void)setPromptViewWithADTextView:(ADTextView *)promptView;
 
-- (void)setVerticalOffsetWithInt:(jint)offset;
+- (void)setVerticalOffsetWithInt:(int32_t)offset;
 
-- (void)setWidthWithInt:(jint)width;
+- (void)setWidthWithInt:(int32_t)width;
 
 - (void)show;
 
@@ -87,33 +90,33 @@ J2OBJC_EMPTY_STATIC_INIT(ADListPopupWindow)
 
 J2OBJC_FIELD_SETTER(ADListPopupWindow, mPopup_, ADPopupWindow *)
 
-inline jint ADListPopupWindow_get_POSITION_PROMPT_ABOVE(void);
+inline int32_t ADListPopupWindow_get_POSITION_PROMPT_ABOVE(void);
 #define ADListPopupWindow_POSITION_PROMPT_ABOVE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, POSITION_PROMPT_ABOVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, POSITION_PROMPT_ABOVE, int32_t)
 
-inline jint ADListPopupWindow_get_POSITION_PROMPT_BELOW(void);
+inline int32_t ADListPopupWindow_get_POSITION_PROMPT_BELOW(void);
 #define ADListPopupWindow_POSITION_PROMPT_BELOW 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, POSITION_PROMPT_BELOW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, POSITION_PROMPT_BELOW, int32_t)
 
-inline jint ADListPopupWindow_get_MATCH_PARENT(void);
+inline int32_t ADListPopupWindow_get_MATCH_PARENT(void);
 #define ADListPopupWindow_MATCH_PARENT -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, MATCH_PARENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, MATCH_PARENT, int32_t)
 
-inline jint ADListPopupWindow_get_WRAP_CONTENT(void);
+inline int32_t ADListPopupWindow_get_WRAP_CONTENT(void);
 #define ADListPopupWindow_WRAP_CONTENT -2
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, WRAP_CONTENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, WRAP_CONTENT, int32_t)
 
-inline jint ADListPopupWindow_get_INPUT_METHOD_FROM_FOCUSABLE(void);
+inline int32_t ADListPopupWindow_get_INPUT_METHOD_FROM_FOCUSABLE(void);
 #define ADListPopupWindow_INPUT_METHOD_FROM_FOCUSABLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, INPUT_METHOD_FROM_FOCUSABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, INPUT_METHOD_FROM_FOCUSABLE, int32_t)
 
-inline jint ADListPopupWindow_get_INPUT_METHOD_NEEDED(void);
+inline int32_t ADListPopupWindow_get_INPUT_METHOD_NEEDED(void);
 #define ADListPopupWindow_INPUT_METHOD_NEEDED 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, INPUT_METHOD_NEEDED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, INPUT_METHOD_NEEDED, int32_t)
 
-inline jint ADListPopupWindow_get_INPUT_METHOD_NOT_NEEDED(void);
+inline int32_t ADListPopupWindow_get_INPUT_METHOD_NOT_NEEDED(void);
 #define ADListPopupWindow_INPUT_METHOD_NOT_NEEDED 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, INPUT_METHOD_NOT_NEEDED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, INPUT_METHOD_NOT_NEEDED, int32_t)
 
 FOUNDATION_EXPORT void ADListPopupWindow_initWithADView_withADView_withADRelativeLayout_LayoutParams_(ADListPopupWindow *self, ADView *decorView, ADView *contentView, ADRelativeLayout_LayoutParams *params);
 
@@ -124,6 +127,7 @@ FOUNDATION_EXPORT ADListPopupWindow *create_ADListPopupWindow_initWithADView_wit
 J2OBJC_TYPE_LITERAL_HEADER(ADListPopupWindow)
 
 @compatibility_alias RAndroidWidgetListPopupWindow ADListPopupWindow;
+
 
 #endif
 

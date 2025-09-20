@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\format\DateUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DateUtils")
@@ -16,7 +17,9 @@
 #if !defined (ADDateUtils_) && (INCLUDE_ALL_DateUtils || defined(INCLUDE_ADDateUtils))
 #define ADDateUtils_
 
+@class JavaLangLong;
 @class JavaLangStringBuilder;
+@class NSString;
 
 @interface ADDateUtils : NSObject
 
@@ -24,7 +27,7 @@
 
 - (instancetype)init;
 
-+ (NSString *)formatElapsedTimeWithLong:(jlong)elapsedSeconds;
++ (NSString *)formatElapsedTimeWithLong:(int64_t)elapsedSeconds;
 
 /*!
  @brief Formats an elapsed time in a format like "MM:SS" or "H:MM:SS" (using a form
@@ -34,15 +37,15 @@
  @param elapsedSeconds the elapsed time in seconds.
  */
 + (NSString *)formatElapsedTimeWithJavaLangStringBuilder:(JavaLangStringBuilder *)recycle
-                                                withLong:(jlong)elapsedSeconds;
+                                                withLong:(int64_t)elapsedSeconds;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADDateUtils)
 
-inline jlong ADDateUtils_get_SECOND_IN_MILLIS(void);
+inline int64_t ADDateUtils_get_SECOND_IN_MILLIS(void);
 #define ADDateUtils_SECOND_IN_MILLIS 1000LL
-J2OBJC_STATIC_FIELD_CONSTANT(ADDateUtils, SECOND_IN_MILLIS, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(ADDateUtils, SECOND_IN_MILLIS, int64_t)
 
 FOUNDATION_EXPORT void ADDateUtils_init(ADDateUtils *self);
 
@@ -50,13 +53,14 @@ FOUNDATION_EXPORT ADDateUtils *new_ADDateUtils_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADDateUtils *create_ADDateUtils_init(void);
 
-FOUNDATION_EXPORT NSString *ADDateUtils_formatElapsedTimeWithLong_(jlong elapsedSeconds);
+FOUNDATION_EXPORT NSString *ADDateUtils_formatElapsedTimeWithLong_(int64_t elapsedSeconds);
 
-FOUNDATION_EXPORT NSString *ADDateUtils_formatElapsedTimeWithJavaLangStringBuilder_withLong_(JavaLangStringBuilder *recycle, jlong elapsedSeconds);
+FOUNDATION_EXPORT NSString *ADDateUtils_formatElapsedTimeWithJavaLangStringBuilder_withLong_(JavaLangStringBuilder *recycle, int64_t elapsedSeconds);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDateUtils)
 
 @compatibility_alias RAndroidTextFormatDateUtils ADDateUtils;
+
 
 #endif
 

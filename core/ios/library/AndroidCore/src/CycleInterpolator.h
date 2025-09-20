@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\CycleInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CycleInterpolator")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADBaseInterpolator 1
 #include "BaseInterpolator.h"
 
+@class JavaLangFloat;
+@class JavaLangLong;
+
 /*!
  @brief Repeats the animation for a specified number of cycles.The
   rate of change follows a sinusoidal pattern.
@@ -28,15 +32,15 @@
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)cycles;
+- (instancetype)initWithFloat:(float)cycles;
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
 /*!
  */
-- (jfloat)getInterpolationWithFloat:(jfloat)input;
+- (float)getInterpolationWithFloat:(float)input;
 
 // Disallowed inherited constructors, do not use.
 
@@ -46,15 +50,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADCycleInterpolator)
 
-FOUNDATION_EXPORT void ADCycleInterpolator_initWithFloat_(ADCycleInterpolator *self, jfloat cycles);
+FOUNDATION_EXPORT void ADCycleInterpolator_initWithFloat_(ADCycleInterpolator *self, float cycles);
 
-FOUNDATION_EXPORT ADCycleInterpolator *new_ADCycleInterpolator_initWithFloat_(jfloat cycles) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADCycleInterpolator *new_ADCycleInterpolator_initWithFloat_(float cycles) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADCycleInterpolator *create_ADCycleInterpolator_initWithFloat_(jfloat cycles);
+FOUNDATION_EXPORT ADCycleInterpolator *create_ADCycleInterpolator_initWithFloat_(float cycles);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADCycleInterpolator)
 
 @compatibility_alias RAndroidViewAnimationCycleInterpolator ADCycleInterpolator;
+
 
 #endif
 

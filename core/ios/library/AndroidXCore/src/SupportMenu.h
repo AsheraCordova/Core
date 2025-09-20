@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\internal\view\SupportMenu.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SupportMenu")
@@ -20,35 +21,38 @@
 #define INCLUDE_ADMenu 1
 #include "Menu.h"
 
+@class JavaLangInteger;
+
 @protocol ADXSupportMenu < ADMenu, JavaObject >
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXSupportMenu)
 
-inline jint ADXSupportMenu_get_USER_MASK(void);
+inline int32_t ADXSupportMenu_get_USER_MASK(void);
 #define ADXSupportMenu_USER_MASK 65535
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, USER_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, USER_MASK, int32_t)
 
-inline jint ADXSupportMenu_get_USER_SHIFT(void);
+inline int32_t ADXSupportMenu_get_USER_SHIFT(void);
 #define ADXSupportMenu_USER_SHIFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, USER_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, USER_SHIFT, int32_t)
 
-inline jint ADXSupportMenu_get_CATEGORY_MASK(void);
+inline int32_t ADXSupportMenu_get_CATEGORY_MASK(void);
 #define ADXSupportMenu_CATEGORY_MASK -65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, CATEGORY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, CATEGORY_MASK, int32_t)
 
-inline jint ADXSupportMenu_get_CATEGORY_SHIFT(void);
+inline int32_t ADXSupportMenu_get_CATEGORY_SHIFT(void);
 #define ADXSupportMenu_CATEGORY_SHIFT 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, CATEGORY_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, CATEGORY_SHIFT, int32_t)
 
-inline jint ADXSupportMenu_get_FLAG_KEEP_OPEN_ON_SUBMENU_OPENED(void);
+inline int32_t ADXSupportMenu_get_FLAG_KEEP_OPEN_ON_SUBMENU_OPENED(void);
 #define ADXSupportMenu_FLAG_KEEP_OPEN_ON_SUBMENU_OPENED 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, FLAG_KEEP_OPEN_ON_SUBMENU_OPENED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSupportMenu, FLAG_KEEP_OPEN_ON_SUBMENU_OPENED, int32_t)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXSupportMenu)
 
 #define AndroidxCoreInternalViewSupportMenu ADXSupportMenu
+
 
 #endif
 

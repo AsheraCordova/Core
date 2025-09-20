@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\IModelGroup.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IModelGroup.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASIModelGroup : NSObject
@@ -48,3 +59,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASIModelGroup)
+
+J2OBJC_NAME_MAPPING(ASIModelGroup, "com.ashera.model", "AS")

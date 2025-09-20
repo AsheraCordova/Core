@@ -3,22 +3,35 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\SimpleWrapableView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HasWidgets.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "SimpleWrapableView.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASSimpleWrapableView () {
  @public
   id foreground_;
-  __unsafe_unretained id wrapperViewHolder_;
-  jboolean disableForeground_;
-  jint viewtype_;
+  WEAK_ id wrapperViewHolder_;
+  bool disableForeground_;
+  int32_t viewtype_;
 }
 
 @end
@@ -27,20 +40,20 @@ J2OBJC_FIELD_SETTER(ASSimpleWrapableView, foreground_, id)
 
 @implementation ASSimpleWrapableView
 
-- (jint)getViewtype {
+- (int32_t)getViewtype {
   return viewtype_;
 }
 
-- (jboolean)isDisableForeground {
+- (bool)isDisableForeground {
   return disableForeground_;
 }
 
-- (void)setDisableForegroundWithBoolean:(jboolean)disableForeground {
+- (void)setDisableForegroundWithBoolean:(bool)disableForeground {
   self->disableForeground_ = disableForeground;
 }
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget
-                          withInt:(jint)viewtype {
+                          withInt:(int32_t)viewtype {
   ASSimpleWrapableView_initWithASIWidget_withInt_(self, widget, viewtype);
   return self;
 }
@@ -74,7 +87,7 @@ J2OBJC_FIELD_SETTER(ASSimpleWrapableView, foreground_, id)
   return wrapperViewHolder_;
 }
 
-- (jboolean)isViewWrapped {
+- (bool)isViewWrapped {
   return viewtype_ != -1;
 }
 
@@ -142,7 +155,7 @@ J2OBJC_FIELD_SETTER(ASSimpleWrapableView, foreground_, id)
 
 @end
 
-void ASSimpleWrapableView_initWithASIWidget_withInt_(ASSimpleWrapableView *self, id<ASIWidget> widget, jint viewtype) {
+void ASSimpleWrapableView_initWithASIWidget_withInt_(ASSimpleWrapableView *self, id<ASIWidget> widget, int32_t viewtype) {
   NSObject_init(self);
   self->viewtype_ = viewtype;
   if (viewtype != -1) {
@@ -154,12 +167,14 @@ void ASSimpleWrapableView_initWithASIWidget_withInt_(ASSimpleWrapableView *self,
   self->wrappedView_ = [widget createWrapperViewWithId:self->wrapperViewHolder_ withInt:viewtype];
 }
 
-ASSimpleWrapableView *new_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, jint viewtype) {
+ASSimpleWrapableView *new_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, int32_t viewtype) {
   J2OBJC_NEW_IMPL(ASSimpleWrapableView, initWithASIWidget_withInt_, widget, viewtype)
 }
 
-ASSimpleWrapableView *create_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, jint viewtype) {
+ASSimpleWrapableView *create_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, int32_t viewtype) {
   J2OBJC_CREATE_IMPL(ASSimpleWrapableView, initWithASIWidget_withInt_, widget, viewtype)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSimpleWrapableView)
+
+J2OBJC_NAME_MAPPING(ASSimpleWrapableView, "com.ashera.widget", "AS")

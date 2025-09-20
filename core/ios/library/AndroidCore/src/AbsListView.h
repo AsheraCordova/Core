@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\AbsListView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AbsListView")
@@ -26,38 +27,41 @@
 @class ADSparseBooleanArray;
 @class ADView;
 @class IOSLongArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 @protocol ADListAdapter;
 
 @interface ADAbsListView : ADAdapterView {
  @public
-  jint mChoiceMode_;
+  int32_t mChoiceMode_;
   ADAbsListView_ActionMode *mChoiceActionMode_;
   ADAbsListView_MultiChoiceModeWrapper *mMultiChoiceModeCallback_;
-  jint mCheckedItemCount_;
+  int32_t mCheckedItemCount_;
   ADSparseBooleanArray *mCheckStates_;
   ADLongSparseArray *mCheckedIdStates_;
-  jint mLayoutMode_AbsListView_;
+  int32_t mLayoutMode_AbsListView_;
   id<ADListAdapter> mAdapter_;
-  jboolean mAdapterHasStableIds_;
-  jint mSelectorPosition_;
-  jint mSelectionLeftPadding_;
-  jint mSelectionTopPadding_;
-  jint mSelectionRightPadding_;
-  jint mSelectionBottomPadding_;
-  jint mWidthMeasureSpec_;
-  jint mMotionPosition_;
-  jint mMotionViewOriginalTop_;
-  jint mMotionViewNewTop_;
-  jint mMotionX_;
-  jint mMotionY_;
-  jint mTouchMode_;
-  jint mLastY_;
-  jint mMotionCorrection_;
-  jint mSelectedTop_;
-  jint mResurrectToPosition_;
-  jint mOverscrollMax_;
-  jint mOverscrollDistance_;
-  jint mOverflingDistance_;
+  bool mAdapterHasStableIds_;
+  int32_t mSelectorPosition_;
+  int32_t mSelectionLeftPadding_;
+  int32_t mSelectionTopPadding_;
+  int32_t mSelectionRightPadding_;
+  int32_t mSelectionBottomPadding_;
+  int32_t mWidthMeasureSpec_;
+  int32_t mMotionPosition_;
+  int32_t mMotionViewOriginalTop_;
+  int32_t mMotionViewNewTop_;
+  int32_t mMotionX_;
+  int32_t mMotionY_;
+  int32_t mTouchMode_;
+  int32_t mLastY_;
+  int32_t mMotionCorrection_;
+  int32_t mSelectedTop_;
+  int32_t mResurrectToPosition_;
+  int32_t mOverscrollMax_;
+  int32_t mOverscrollDistance_;
+  int32_t mOverflingDistance_;
 }
 
 #pragma mark Public
@@ -66,25 +70,25 @@
 
 - (void)clearChoices;
 
-- (jint)getCheckedItemCount;
+- (int32_t)getCheckedItemCount;
 
 - (IOSLongArray *)getCheckedItemIds;
 
-- (jint)getCheckedItemPosition;
+- (int32_t)getCheckedItemPosition;
 
 - (ADSparseBooleanArray *)getCheckedItemPositions;
 
-- (jint)getChoiceMode;
+- (int32_t)getChoiceMode;
 
-- (jboolean)isItemCheckedWithInt:(jint)position;
+- (bool)isItemCheckedWithInt:(int32_t)position;
 
-- (jboolean)performItemClickWithADView:(ADView *)view
-                               withInt:(jint)position
-                              withLong:(jlong)id_;
+- (bool)performItemClickWithADView:(ADView *)view
+                           withInt:(int32_t)position
+                          withLong:(int64_t)id_;
 
 - (void)setAdapterWithADListAdapter:(id<ADListAdapter>)adapter;
 
-- (void)setChoiceModeWithInt:(jint)choiceMode;
+- (void)setChoiceModeWithInt:(int32_t)choiceMode;
 
 @end
 
@@ -96,103 +100,104 @@ J2OBJC_FIELD_SETTER(ADAbsListView, mCheckStates_, ADSparseBooleanArray *)
 J2OBJC_FIELD_SETTER(ADAbsListView, mCheckedIdStates_, ADLongSparseArray *)
 J2OBJC_FIELD_SETTER(ADAbsListView, mAdapter_, id<ADListAdapter>)
 
-inline jint ADAbsListView_get_TRANSCRIPT_MODE_DISABLED(void);
+inline int32_t ADAbsListView_get_TRANSCRIPT_MODE_DISABLED(void);
 #define ADAbsListView_TRANSCRIPT_MODE_DISABLED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TRANSCRIPT_MODE_DISABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TRANSCRIPT_MODE_DISABLED, int32_t)
 
-inline jint ADAbsListView_get_TRANSCRIPT_MODE_NORMAL(void);
+inline int32_t ADAbsListView_get_TRANSCRIPT_MODE_NORMAL(void);
 #define ADAbsListView_TRANSCRIPT_MODE_NORMAL 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TRANSCRIPT_MODE_NORMAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TRANSCRIPT_MODE_NORMAL, int32_t)
 
-inline jint ADAbsListView_get_TRANSCRIPT_MODE_ALWAYS_SCROLL(void);
+inline int32_t ADAbsListView_get_TRANSCRIPT_MODE_ALWAYS_SCROLL(void);
 #define ADAbsListView_TRANSCRIPT_MODE_ALWAYS_SCROLL 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TRANSCRIPT_MODE_ALWAYS_SCROLL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TRANSCRIPT_MODE_ALWAYS_SCROLL, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_REST(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_REST(void);
 #define ADAbsListView_TOUCH_MODE_REST -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_REST, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_REST, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_DOWN(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_DOWN(void);
 #define ADAbsListView_TOUCH_MODE_DOWN 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_DOWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_DOWN, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_TAP(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_TAP(void);
 #define ADAbsListView_TOUCH_MODE_TAP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_TAP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_TAP, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_DONE_WAITING(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_DONE_WAITING(void);
 #define ADAbsListView_TOUCH_MODE_DONE_WAITING 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_DONE_WAITING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_DONE_WAITING, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_SCROLL(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_SCROLL(void);
 #define ADAbsListView_TOUCH_MODE_SCROLL 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_SCROLL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_SCROLL, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_FLING(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_FLING(void);
 #define ADAbsListView_TOUCH_MODE_FLING 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_FLING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_FLING, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_OVERSCROLL(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_OVERSCROLL(void);
 #define ADAbsListView_TOUCH_MODE_OVERSCROLL 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_OVERSCROLL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_OVERSCROLL, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_OVERFLING(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_OVERFLING(void);
 #define ADAbsListView_TOUCH_MODE_OVERFLING 6
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_OVERFLING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_OVERFLING, int32_t)
 
-inline jint ADAbsListView_get_LAYOUT_NORMAL(void);
+inline int32_t ADAbsListView_get_LAYOUT_NORMAL(void);
 #define ADAbsListView_LAYOUT_NORMAL 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_NORMAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_NORMAL, int32_t)
 
-inline jint ADAbsListView_get_LAYOUT_FORCE_TOP(void);
+inline int32_t ADAbsListView_get_LAYOUT_FORCE_TOP(void);
 #define ADAbsListView_LAYOUT_FORCE_TOP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_FORCE_TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_FORCE_TOP, int32_t)
 
-inline jint ADAbsListView_get_LAYOUT_SET_SELECTION(void);
+inline int32_t ADAbsListView_get_LAYOUT_SET_SELECTION(void);
 #define ADAbsListView_LAYOUT_SET_SELECTION 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_SET_SELECTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_SET_SELECTION, int32_t)
 
-inline jint ADAbsListView_get_LAYOUT_FORCE_BOTTOM(void);
+inline int32_t ADAbsListView_get_LAYOUT_FORCE_BOTTOM(void);
 #define ADAbsListView_LAYOUT_FORCE_BOTTOM 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_FORCE_BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_FORCE_BOTTOM, int32_t)
 
-inline jint ADAbsListView_get_LAYOUT_SPECIFIC(void);
+inline int32_t ADAbsListView_get_LAYOUT_SPECIFIC(void);
 #define ADAbsListView_LAYOUT_SPECIFIC 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_SPECIFIC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_SPECIFIC, int32_t)
 
-inline jint ADAbsListView_get_LAYOUT_SYNC(void);
+inline int32_t ADAbsListView_get_LAYOUT_SYNC(void);
 #define ADAbsListView_LAYOUT_SYNC 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_SYNC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_SYNC, int32_t)
 
-inline jint ADAbsListView_get_LAYOUT_MOVE_SELECTION(void);
+inline int32_t ADAbsListView_get_LAYOUT_MOVE_SELECTION(void);
 #define ADAbsListView_LAYOUT_MOVE_SELECTION 6
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_MOVE_SELECTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, LAYOUT_MOVE_SELECTION, int32_t)
 
-inline jint ADAbsListView_get_CHOICE_MODE_NONE(void);
+inline int32_t ADAbsListView_get_CHOICE_MODE_NONE(void);
 #define ADAbsListView_CHOICE_MODE_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_NONE, int32_t)
 
-inline jint ADAbsListView_get_CHOICE_MODE_SINGLE(void);
+inline int32_t ADAbsListView_get_CHOICE_MODE_SINGLE(void);
 #define ADAbsListView_CHOICE_MODE_SINGLE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_SINGLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_SINGLE, int32_t)
 
-inline jint ADAbsListView_get_CHOICE_MODE_MULTIPLE(void);
+inline int32_t ADAbsListView_get_CHOICE_MODE_MULTIPLE(void);
 #define ADAbsListView_CHOICE_MODE_MULTIPLE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_MULTIPLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_MULTIPLE, int32_t)
 
-inline jint ADAbsListView_get_CHOICE_MODE_MULTIPLE_MODAL(void);
+inline int32_t ADAbsListView_get_CHOICE_MODE_MULTIPLE_MODAL(void);
 #define ADAbsListView_CHOICE_MODE_MULTIPLE_MODAL 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_MULTIPLE_MODAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHOICE_MODE_MULTIPLE_MODAL, int32_t)
 
-inline jint ADAbsListView_get_OVERSCROLL_LIMIT_DIVISOR(void);
+inline int32_t ADAbsListView_get_OVERSCROLL_LIMIT_DIVISOR(void);
 #define ADAbsListView_OVERSCROLL_LIMIT_DIVISOR 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, OVERSCROLL_LIMIT_DIVISOR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, OVERSCROLL_LIMIT_DIVISOR, int32_t)
 
 FOUNDATION_EXPORT void ADAbsListView_init(ADAbsListView *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAbsListView)
 
 @compatibility_alias RAndroidWidgetAbsListView ADAbsListView;
+
 
 #endif
 
@@ -229,6 +234,7 @@ FOUNDATION_EXPORT ADAbsListView_ActionMode *create_ADAbsListView_ActionMode_init
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAbsListView_ActionMode)
 
+
 #endif
 
 #if !defined (ADAbsListView_MultiChoiceModeWrapper_) && (INCLUDE_ALL_AbsListView || defined(INCLUDE_ADAbsListView_MultiChoiceModeWrapper))
@@ -236,15 +242,18 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAbsListView_ActionMode)
 
 @class ADAbsListView;
 @class ADAbsListView_ActionMode;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 @interface ADAbsListView_MultiChoiceModeWrapper : NSObject
 
 #pragma mark Public
 
 - (void)onItemCheckedStateChangedWithADAbsListView_ActionMode:(ADAbsListView_ActionMode *)mode
-                                                      withInt:(jint)position
-                                                     withLong:(jlong)id_
-                                                  withBoolean:(jboolean)checked;
+                                                      withInt:(int32_t)position
+                                                     withLong:(int64_t)id_
+                                                  withBoolean:(bool)checked;
 
 #pragma mark Package-Private
 
@@ -266,25 +275,28 @@ FOUNDATION_EXPORT ADAbsListView_MultiChoiceModeWrapper *create_ADAbsListView_Mul
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAbsListView_MultiChoiceModeWrapper)
 
+
 #endif
 
 #if !defined (ADAbsListView_OnScrollListener_) && (INCLUDE_ALL_AbsListView || defined(INCLUDE_ADAbsListView_OnScrollListener))
 #define ADAbsListView_OnScrollListener_
 
 @class ADAbsListView;
+@class JavaLangInteger;
 
 @protocol ADAbsListView_OnScrollListener < JavaObject >
 
 - (void)onScrollWithADAbsListView:(ADAbsListView *)view
-                          withInt:(jint)firstVisibleItem
-                          withInt:(jint)visibleItemCount
-                          withInt:(jint)totalItemCount;
+                          withInt:(int32_t)firstVisibleItem
+                          withInt:(int32_t)visibleItemCount
+                          withInt:(int32_t)totalItemCount;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADAbsListView_OnScrollListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAbsListView_OnScrollListener)
+
 
 #endif
 

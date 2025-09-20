@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\com\ashera\parser\html\HtmlParser.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HTMLSchema.h"
 #include "HtmlParser.h"
 #include "J2ObjC_source.h"
@@ -15,6 +20,12 @@
 #include "org/xml/sax/SAXException.h"
 #include "org/xml/sax/SAXNotRecognizedException.h"
 #include "org/xml/sax/SAXNotSupportedException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline TSHTMLSchema *ASHtmlParser_get_schema(void);
@@ -102,3 +113,5 @@ void ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSString_(id<OrgXmlSaxCon
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHtmlParser)
+
+J2OBJC_NAME_MAPPING(ASHtmlParser, "com.ashera.parser.html", "AS")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\AttributedString.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AttributedString")
@@ -16,58 +17,62 @@
 #if !defined (ASAttributedString_) && (INCLUDE_ALL_AttributedString || defined(INCLUDE_ASAttributedString))
 #define ASAttributedString_
 
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
+
 @protocol ASAttributedString < JavaObject >
 
 - (id)get;
 
-- (void)init__WithInt:(jint)start
-              withInt:(jint)end OBJC_METHOD_FAMILY_NONE;
+- (void)init__WithInt:(int32_t)start
+              withInt:(int32_t)end OBJC_METHOD_FAMILY_NONE;
 
-- (void)applyUnderLineWithInt:(jint)start
-                      withInt:(jint)end;
+- (void)applyUnderLineWithInt:(int32_t)start
+                      withInt:(int32_t)end;
 
 - (void)applyColorWithId:(id)color
-                 withInt:(jint)start
-                 withInt:(jint)end;
+                 withInt:(int32_t)start
+                 withInt:(int32_t)end;
 
-- (void)applyStrikeThroughWithInt:(jint)start
-                          withInt:(jint)end;
+- (void)applyStrikeThroughWithInt:(int32_t)start
+                          withInt:(int32_t)end;
 
 - (void)applyFontWithId:(id)typeFace
-              withFloat:(jfloat)textSize
-                withInt:(jint)style
-                withInt:(jint)start
-                withInt:(jint)end;
+              withFloat:(float)textSize
+                withInt:(int32_t)style
+                withInt:(int32_t)start
+                withInt:(int32_t)end;
 
-- (void)applyLineHeightWithFloat:(jfloat)floatValue
-                         withInt:(jint)start
-                         withInt:(jint)end;
+- (void)applyLineHeightWithFloat:(float)floatValue
+                         withInt:(int32_t)start
+                         withInt:(int32_t)end;
 
 - (void)applyTextAlignWithNSString:(NSString *)value
-                           withInt:(jint)start
-                           withInt:(jint)end;
+                           withInt:(int32_t)start
+                           withInt:(int32_t)end;
 
 - (void)applyBackgroundColorWithId:(id)objcolor
-                           withInt:(jint)start
-                           withInt:(jint)end;
+                           withInt:(int32_t)start
+                           withInt:(int32_t)end;
 
 - (void)applyVerticalAlignWithNSString:(NSString *)verticalAlign
-                               withInt:(jint)start
-                               withInt:(jint)end;
+                               withInt:(int32_t)start
+                               withInt:(int32_t)end;
 
 - (void)applyUrlWithNSString:(NSString *)href
                       withId:(id)linkColor
-                     withInt:(jint)start
-                     withInt:(jint)end;
+                     withInt:(int32_t)start
+                     withInt:(int32_t)end;
 
 - (void)applyImgWithId:(id)image
-               withInt:(jint)start
-               withInt:(jint)end;
+               withInt:(int32_t)start
+               withInt:(int32_t)end;
 
-- (void)applyBulletWithInt:(jint)indent
-                   withInt:(jint)spacing
-                   withInt:(jint)start
-                   withInt:(jint)end;
+- (void)applyBulletWithInt:(int32_t)indent
+                   withInt:(int32_t)spacing
+                   withInt:(int32_t)start
+                   withInt:(int32_t)end;
 
 - (NSString *)getText;
 
@@ -78,6 +83,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASAttributedString)
 J2OBJC_TYPE_LITERAL_HEADER(ASAttributedString)
 
 #define ComAsheraAttributedtextAttributedString ASAttributedString
+
 
 #endif
 

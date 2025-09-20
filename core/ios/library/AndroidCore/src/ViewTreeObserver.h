@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\ViewTreeObserver.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewTreeObserver")
@@ -17,6 +18,7 @@
 #define ADViewTreeObserver_
 
 @class ADContext;
+@class JavaLangBoolean;
 @protocol ADViewTreeObserver_OnPreDrawListener;
 @protocol ADViewTreeObserver_OnScrollChangedListener;
 
@@ -32,7 +34,7 @@
 
 - (void)dispatchOnScrollChanged;
 
-- (jboolean)isAlive;
+- (bool)isAlive;
 
 - (void)removeOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:(id<ADViewTreeObserver_OnPreDrawListener>)victim;
 
@@ -60,20 +62,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver)
 
 @compatibility_alias RAndroidViewViewTreeObserver ADViewTreeObserver;
 
+
 #endif
 
 #if !defined (ADViewTreeObserver_OnPreDrawListener_) && (INCLUDE_ALL_ViewTreeObserver || defined(INCLUDE_ADViewTreeObserver_OnPreDrawListener))
 #define ADViewTreeObserver_OnPreDrawListener_
 
+@class JavaLangBoolean;
+
 @protocol ADViewTreeObserver_OnPreDrawListener < JavaObject >
 
-- (jboolean)onPreDraw;
+- (bool)onPreDraw;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADViewTreeObserver_OnPreDrawListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver_OnPreDrawListener)
+
 
 #endif
 
@@ -90,12 +96,14 @@ J2OBJC_EMPTY_STATIC_INIT(ADViewTreeObserver_OnScrollChangedListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver_OnScrollChangedListener)
 
+
 #endif
 
 #if !defined (ADViewTreeObserver_CopyOnWriteArray_) && (INCLUDE_ALL_ViewTreeObserver || defined(INCLUDE_ADViewTreeObserver_CopyOnWriteArray))
 #define ADViewTreeObserver_CopyOnWriteArray_
 
 @class ADViewTreeObserver_Access;
+@class JavaLangInteger;
 
 @interface ADViewTreeObserver_CopyOnWriteArray : NSObject
 
@@ -113,7 +121,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver_OnScrollChangedListener)
 
 - (void)removeWithId:(id)item;
 
-- (jint)size;
+- (int32_t)size;
 
 - (ADViewTreeObserver_Access *)start;
 
@@ -129,10 +137,13 @@ FOUNDATION_EXPORT ADViewTreeObserver_CopyOnWriteArray *create_ADViewTreeObserver
 
 J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver_CopyOnWriteArray)
 
+
 #endif
 
 #if !defined (ADViewTreeObserver_Access_) && (INCLUDE_ALL_ViewTreeObserver || defined(INCLUDE_ADViewTreeObserver_Access))
 #define ADViewTreeObserver_Access_
+
+@class JavaLangInteger;
 
 @interface ADViewTreeObserver_Access : NSObject
 
@@ -140,9 +151,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver_CopyOnWriteArray)
 
 - (instancetype)init;
 
-- (id)getWithInt:(jint)index;
+- (id)getWithInt:(int32_t)index;
 
-- (jint)size;
+- (int32_t)size;
 
 @end
 
@@ -155,6 +166,7 @@ FOUNDATION_EXPORT ADViewTreeObserver_Access *new_ADViewTreeObserver_Access_init(
 FOUNDATION_EXPORT ADViewTreeObserver_Access *create_ADViewTreeObserver_Access_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver_Access)
+
 
 #endif
 

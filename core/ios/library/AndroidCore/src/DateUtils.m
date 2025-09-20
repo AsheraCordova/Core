@@ -3,14 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\format\DateUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DateUtils.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Long.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Formatter.h"
 #include "java/util/Locale.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADDateUtils ()
@@ -40,12 +53,12 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (NSString *)formatElapsedTimeWithLong:(jlong)elapsedSeconds {
++ (NSString *)formatElapsedTimeWithLong:(int64_t)elapsedSeconds {
   return ADDateUtils_formatElapsedTimeWithLong_(elapsedSeconds);
 }
 
 + (NSString *)formatElapsedTimeWithJavaLangStringBuilder:(JavaLangStringBuilder *)recycle
-                                                withLong:(jlong)elapsedSeconds {
+                                                withLong:(int64_t)elapsedSeconds {
   return ADDateUtils_formatElapsedTimeWithJavaLangStringBuilder_withLong_(recycle, elapsedSeconds);
 }
 
@@ -92,16 +105,16 @@ ADDateUtils *create_ADDateUtils_init() {
   J2OBJC_CREATE_IMPL(ADDateUtils, init)
 }
 
-NSString *ADDateUtils_formatElapsedTimeWithLong_(jlong elapsedSeconds) {
+NSString *ADDateUtils_formatElapsedTimeWithLong_(int64_t elapsedSeconds) {
   ADDateUtils_initialize();
   return ADDateUtils_formatElapsedTimeWithJavaLangStringBuilder_withLong_(nil, elapsedSeconds);
 }
 
-NSString *ADDateUtils_formatElapsedTimeWithJavaLangStringBuilder_withLong_(JavaLangStringBuilder *recycle, jlong elapsedSeconds) {
+NSString *ADDateUtils_formatElapsedTimeWithJavaLangStringBuilder_withLong_(JavaLangStringBuilder *recycle, int64_t elapsedSeconds) {
   ADDateUtils_initialize();
-  jlong hours = 0;
-  jlong minutes = 0;
-  jlong seconds = 0;
+  int64_t hours = 0;
+  int64_t minutes = 0;
+  int64_t seconds = 0;
   if (elapsedSeconds >= 3600) {
     hours = JreLongDiv(elapsedSeconds, 3600);
     elapsedSeconds -= hours * 3600;
@@ -135,3 +148,5 @@ void ADDateUtils_initFormatStrings() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDateUtils)
+
+J2OBJC_NAME_MAPPING(ADDateUtils, "r.android.text.format", "AD")

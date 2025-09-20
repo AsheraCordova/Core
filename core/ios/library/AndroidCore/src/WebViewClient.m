@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebViewClient.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bitmap.h"
 #include "ClientCertRequest.h"
 #include "HttpAuthHandler.h"
@@ -12,6 +17,14 @@
 #include "WebResourceResponse.h"
 #include "WebView.h"
 #include "WebViewClient.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADWebViewClient
@@ -23,8 +36,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)shouldOverrideUrlLoadingWithADWebView:(ADWebView *)view
-                                     withNSString:(NSString *)url {
+- (bool)shouldOverrideUrlLoadingWithADWebView:(ADWebView *)view
+                                 withNSString:(NSString *)url {
   return false;
 }
 
@@ -48,7 +61,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onReceivedErrorWithADWebView:(ADWebView *)view
-                             withInt:(jint)errorCode
+                             withInt:(int32_t)errorCode
                         withNSString:(NSString *)description_
                         withNSString:(NSString *)failingUrl {
 }
@@ -112,3 +125,5 @@ ADWebViewClient *create_ADWebViewClient_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWebViewClient)
+
+J2OBJC_NAME_MAPPING(ADWebViewClient, "r.android.webkit", "AD")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\GravityCompat.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_GravityCompat")
@@ -17,6 +18,7 @@
 #define ADXGravityCompat_
 
 @class ADRect;
+@class JavaLangInteger;
 
 @interface ADXGravityCompat : NSObject
 
@@ -24,15 +26,15 @@
 
 - (instancetype)init;
 
-+ (void)applyWithInt:(jint)resolveGravity
-             withInt:(jint)measuredWidth
-             withInt:(jint)measuredHeight
++ (void)applyWithInt:(int32_t)resolveGravity
+             withInt:(int32_t)measuredWidth
+             withInt:(int32_t)measuredHeight
           withADRect:(ADRect *)parent
           withADRect:(ADRect *)outArg
-             withInt:(jint)layoutDirection;
+             withInt:(int32_t)layoutDirection;
 
-+ (jint)getAbsoluteGravityWithInt:(jint)gravity
-                          withInt:(jint)layoutDirection;
++ (int32_t)getAbsoluteGravityWithInt:(int32_t)gravity
+                             withInt:(int32_t)layoutDirection;
 
 @end
 
@@ -42,30 +44,30 @@ J2OBJC_EMPTY_STATIC_INIT(ADXGravityCompat)
  @brief Raw bit controlling whether the layout direction is relative or not (START/END instead of
   absolute LEFT/RIGHT).
  */
-inline jint ADXGravityCompat_get_RELATIVE_LAYOUT_DIRECTION(void);
+inline int32_t ADXGravityCompat_get_RELATIVE_LAYOUT_DIRECTION(void);
 #define ADXGravityCompat_RELATIVE_LAYOUT_DIRECTION 8388608
-J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, RELATIVE_LAYOUT_DIRECTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, RELATIVE_LAYOUT_DIRECTION, int32_t)
 
 /*!
  @brief Push object to x-axis position at the start of its container, not changing its size.
  */
-inline jint ADXGravityCompat_get_START(void);
+inline int32_t ADXGravityCompat_get_START(void);
 #define ADXGravityCompat_START 8388611
-J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, START, int32_t)
 
 /*!
  @brief Push object to x-axis position at the end of its container, not changing its size.
  */
-inline jint ADXGravityCompat_get_END(void);
+inline int32_t ADXGravityCompat_get_END(void);
 #define ADXGravityCompat_END 8388613
-J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, END, int32_t)
 
 /*!
  @brief Binary mask for the horizontal gravity and script specific direction bit.
  */
-inline jint ADXGravityCompat_get_RELATIVE_HORIZONTAL_GRAVITY_MASK(void);
+inline int32_t ADXGravityCompat_get_RELATIVE_HORIZONTAL_GRAVITY_MASK(void);
 #define ADXGravityCompat_RELATIVE_HORIZONTAL_GRAVITY_MASK 8388615
-J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, RELATIVE_HORIZONTAL_GRAVITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXGravityCompat, RELATIVE_HORIZONTAL_GRAVITY_MASK, int32_t)
 
 FOUNDATION_EXPORT void ADXGravityCompat_init(ADXGravityCompat *self);
 
@@ -73,13 +75,14 @@ FOUNDATION_EXPORT ADXGravityCompat *new_ADXGravityCompat_init(void) NS_RETURNS_R
 
 FOUNDATION_EXPORT ADXGravityCompat *create_ADXGravityCompat_init(void);
 
-FOUNDATION_EXPORT jint ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(jint gravity, jint layoutDirection);
+FOUNDATION_EXPORT int32_t ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(int32_t gravity, int32_t layoutDirection);
 
-FOUNDATION_EXPORT void ADXGravityCompat_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(jint resolveGravity, jint measuredWidth, jint measuredHeight, ADRect *parent, ADRect *outArg, jint layoutDirection);
+FOUNDATION_EXPORT void ADXGravityCompat_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(int32_t resolveGravity, int32_t measuredWidth, int32_t measuredHeight, ADRect *parent, ADRect *outArg, int32_t layoutDirection);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXGravityCompat)
 
 @compatibility_alias AndroidxCoreViewGravityCompat ADXGravityCompat;
+
 
 #endif
 

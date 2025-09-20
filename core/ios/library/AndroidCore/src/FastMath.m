@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\android\internal\util\FastMath.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FastMath.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADFastMath
@@ -17,7 +30,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)roundWithFloat:(jfloat)value {
++ (int32_t)roundWithFloat:(float)value {
   return ADFastMath_roundWithFloat_(value);
 }
 
@@ -51,9 +64,11 @@ ADFastMath *create_ADFastMath_init() {
   J2OBJC_CREATE_IMPL(ADFastMath, init)
 }
 
-jint ADFastMath_roundWithFloat_(jfloat value) {
+int32_t ADFastMath_roundWithFloat_(float value) {
   ADFastMath_initialize();
   return JavaLangMath_roundWithFloat_(value);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADFastMath)
+
+J2OBJC_NAME_MAPPING(ADFastMath, "r.com.android.internal.util", "AD")

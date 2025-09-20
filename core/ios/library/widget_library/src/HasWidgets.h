@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\HasWidgets.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HasWidgets")
@@ -25,25 +26,28 @@
 #include "IModelGroup.h"
 
 @class ASWidgetAttribute;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
 
 @protocol ASHasWidgets < ASIWidget, ASIModelGroup, JavaObject >
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index;
+                 withInt:(int32_t)index;
 
 - (void)clear;
 
-- (id<ASIWidget>)getWithInt:(jint)index;
+- (id<ASIWidget>)getWithInt:(int32_t)index;
 
 - (id<JavaUtilList>)getWidgets;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w;
+- (bool)removeWithASIWidget:(id<ASIWidget>)w;
 
-- (jboolean)removeWithInt:(jint)index;
+- (bool)removeWithInt:(int32_t)index;
 
 - (void)addTemplateWithId:(id)objValue;
 
@@ -57,7 +61,7 @@
 
 - (id<ASHasWidgets>)getCompositeLeafWithASIWidget:(id<ASIWidget>)w;
 
-- (jboolean)areWidgetItemsRecycled;
+- (bool)areWidgetItemsRecycled;
 
 @end
 
@@ -66,6 +70,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASHasWidgets)
 J2OBJC_TYPE_LITERAL_HEADER(ASHasWidgets)
 
 #define ComAsheraWidgetHasWidgets ASHasWidgets
+
 
 #endif
 

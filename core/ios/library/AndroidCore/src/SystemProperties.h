@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\SystemProperties.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SystemProperties")
@@ -16,14 +17,17 @@
 #if !defined (ADSystemProperties_) && (INCLUDE_ALL_SystemProperties || defined(INCLUDE_ADSystemProperties))
 #define ADSystemProperties_
 
+@class JavaLangBoolean;
+@class NSString;
+
 @interface ADSystemProperties : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (jboolean)getBooleanWithNSString:(NSString *)string
-                       withBoolean:(jboolean)b;
++ (bool)getBooleanWithNSString:(NSString *)string
+                   withBoolean:(bool)b;
 
 @end
 
@@ -35,11 +39,12 @@ FOUNDATION_EXPORT ADSystemProperties *new_ADSystemProperties_init(void) NS_RETUR
 
 FOUNDATION_EXPORT ADSystemProperties *create_ADSystemProperties_init(void);
 
-FOUNDATION_EXPORT jboolean ADSystemProperties_getBooleanWithNSString_withBoolean_(NSString *string, jboolean b);
+FOUNDATION_EXPORT bool ADSystemProperties_getBooleanWithNSString_withBoolean_(NSString *string, bool b);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADSystemProperties)
 
 @compatibility_alias RAndroidOsSystemProperties ADSystemProperties;
+
 
 #endif
 

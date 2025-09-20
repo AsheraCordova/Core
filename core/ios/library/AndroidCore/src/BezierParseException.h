@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierParseException.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BezierParseException")
@@ -20,8 +21,11 @@
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangBoolean;
 @class JavaLangException;
+@class JavaLangInteger;
 @class JavaLangThrowable;
+@class NSString;
 
 /*!
  @brief This class encapsulates a general parse error or warning.
@@ -39,10 +43,10 @@
   JavaLangException *exception_;
   /*!
    */
-  jint lineNumber_;
+  int32_t lineNumber_;
   /*!
    */
-  jint columnNumber_;
+  int32_t columnNumber_;
 }
 
 #pragma mark Public
@@ -73,13 +77,13 @@
  @param column The column of the last parsed character.
  */
 - (instancetype)initWithNSString:(NSString *)message
-                         withInt:(jint)line
-                         withInt:(jint)column;
+                         withInt:(int32_t)line
+                         withInt:(int32_t)column;
 
 /*!
  @brief Returns the column of the last parsed character.
  */
-- (jint)getColumnNumber;
+- (int32_t)getColumnNumber;
 
 /*!
  @brief Return the embedded exception, if any.
@@ -90,7 +94,7 @@
 /*!
  @brief Returns the line of the last parsed character.
  */
-- (jint)getLineNumber;
+- (int32_t)getLineNumber;
 
 /*!
  @brief Return a detail message for this exception.
@@ -114,8 +118,8 @@
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -123,11 +127,11 @@ J2OBJC_EMPTY_STATIC_INIT(ADBezierParseException)
 
 J2OBJC_FIELD_SETTER(ADBezierParseException, exception_, JavaLangException *)
 
-FOUNDATION_EXPORT void ADBezierParseException_initWithNSString_withInt_withInt_(ADBezierParseException *self, NSString *message, jint line, jint column);
+FOUNDATION_EXPORT void ADBezierParseException_initWithNSString_withInt_withInt_(ADBezierParseException *self, NSString *message, int32_t line, int32_t column);
 
-FOUNDATION_EXPORT ADBezierParseException *new_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, jint line, jint column) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADBezierParseException *new_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, int32_t line, int32_t column) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADBezierParseException *create_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, jint line, jint column);
+FOUNDATION_EXPORT ADBezierParseException *create_ADBezierParseException_initWithNSString_withInt_withInt_(NSString *message, int32_t line, int32_t column);
 
 FOUNDATION_EXPORT void ADBezierParseException_initWithJavaLangException_(ADBezierParseException *self, JavaLangException *e);
 
@@ -144,6 +148,7 @@ FOUNDATION_EXPORT ADBezierParseException *create_ADBezierParseException_initWith
 J2OBJC_TYPE_LITERAL_HEADER(ADBezierParseException)
 
 @compatibility_alias RAndroidGraphicsBezierParseException ADBezierParseException;
+
 
 #endif
 

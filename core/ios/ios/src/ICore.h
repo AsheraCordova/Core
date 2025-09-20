@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\ICore.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ICore")
@@ -19,6 +20,10 @@
 @class ASFontMetricsDescriptor;
 @class JavaIoFile;
 @class JavaIoInputStream;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
 @protocol ASAttributedString;
 @protocol ASIFragment;
 @protocol JavaLangRunnable;
@@ -32,13 +37,13 @@
 
 - (NSString *)getOrientation;
 
-- (jint)getScreenWidth;
+- (int32_t)getScreenWidth;
 
-- (jint)getScreenHeight;
+- (int32_t)getScreenHeight;
 
-- (jint)getScreenWidthDp;
+- (int32_t)getScreenWidthDp;
 
-- (jint)getScreenHeightDp;
+- (int32_t)getScreenHeightDp;
 
 - (NSString *)getOS;
 
@@ -47,10 +52,10 @@
 
 - (NSString *)getDensityName;
 
-- (jint)getDensity;
+- (int32_t)getDensity;
 
 - (id)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                              withInt:(jint)delay;
+                              withInt:(int32_t)delay;
 
 - (void)removeCallbacksWithId:(id)handler
          withJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
@@ -68,13 +73,13 @@
 - (id<ASAttributedString>)createAttributedStringWithASIFragment:(id<ASIFragment>)fragment
                                                    withNSString:(NSString *)text;
 
-- (jfloat)getDisplayMetricDensity;
+- (float)getDisplayMetricDensity;
 
 - (NSString *)getAttributedBulletHtml;
 
 - (JavaIoFile *)getExternalFilesDirWithId:(id)context;
 
-- (jint)getMaxMemoryWithId:(id)context;
+- (int32_t)getMaxMemoryWithId:(id)context;
 
 - (id)decodeBitmapStreamWithJavaIoInputStream:(JavaIoInputStream *)stream
                                        withId:(id)options;
@@ -82,7 +87,7 @@
 - (void)runOnMainThreadWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
 - (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                           withLong:(jlong)delay;
+                                           withLong:(int64_t)delay;
 
 - (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl
                                  withASIFragment:(id<ASIFragment>)fragment;
@@ -98,6 +103,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASICore)
 J2OBJC_TYPE_LITERAL_HEADER(ASICore)
 
 #define ComAsheraCoreICore ASICore
+
 
 #endif
 

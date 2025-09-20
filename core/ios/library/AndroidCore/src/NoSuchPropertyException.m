@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\NoSuchPropertyException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "NoSuchPropertyException.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADNoSuchPropertyException
@@ -44,3 +55,5 @@ ADNoSuchPropertyException *create_ADNoSuchPropertyException_initWithNSString_(NS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADNoSuchPropertyException)
+
+J2OBJC_NAME_MAPPING(ADNoSuchPropertyException, "r.android.util", "AD")

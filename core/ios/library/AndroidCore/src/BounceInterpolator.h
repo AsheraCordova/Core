@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\BounceInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BounceInterpolator")
@@ -22,6 +23,8 @@
 
 @class ADAttributeSet;
 @class ADContext;
+@class JavaLangFloat;
+@class JavaLangLong;
 
 /*!
  @brief An interpolator where the change bounces at the end.
@@ -37,9 +40,9 @@
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
-- (jfloat)getInterpolationWithFloat:(jfloat)t;
+- (float)getInterpolationWithFloat:(float)t;
 
 @end
 
@@ -60,6 +63,7 @@ FOUNDATION_EXPORT ADBounceInterpolator *create_ADBounceInterpolator_initWithADCo
 J2OBJC_TYPE_LITERAL_HEADER(ADBounceInterpolator)
 
 @compatibility_alias RAndroidViewAnimationBounceInterpolator ADBounceInterpolator;
+
 
 #endif
 

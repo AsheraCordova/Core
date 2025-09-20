@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\AttributeCommandChain.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AttributeCommandChain")
@@ -17,6 +18,7 @@
 #define ASAttributeCommandChain_
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -68,6 +70,7 @@ FOUNDATION_EXPORT ASAttributeCommandChain *create_ASAttributeCommandChain_init(v
 J2OBJC_TYPE_LITERAL_HEADER(ASAttributeCommandChain)
 
 @compatibility_alias ComAsheraWidgetAttributeCommandChain ASAttributeCommandChain;
+
 
 #endif
 

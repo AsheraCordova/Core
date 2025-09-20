@@ -3,13 +3,25 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ArrayConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ArrayConverter.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
+#include "java/lang/Boolean.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASArrayConverter
@@ -86,3 +98,5 @@ ASArrayConverter *create_ASArrayConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASArrayConverter)
+
+J2OBJC_NAME_MAPPING(ASArrayConverter, "com.ashera.converter", "AS")

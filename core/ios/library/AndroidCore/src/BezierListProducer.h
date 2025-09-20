@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierListProducer.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BezierListProducer")
@@ -22,6 +23,8 @@
 
 @class ADBezierHistory;
 @class IOSFloatArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
 @class JavaUtilArrayList;
 
 /*!
@@ -34,7 +37,7 @@
  @public
   JavaUtilArrayList *bezierSegs_;
   IOSFloatArray *coords_;
-  jfloat curveLength_;
+  float curveLength_;
   ADBezierHistory *hist_;
 }
 
@@ -42,85 +45,85 @@
 
 - (instancetype)init;
 
-- (void)arcAbsWithFloat:(jfloat)rx
-              withFloat:(jfloat)ry
-              withFloat:(jfloat)xAxisRotation
-            withBoolean:(jboolean)largeArcFlag
-            withBoolean:(jboolean)sweepFlag
-              withFloat:(jfloat)x
-              withFloat:(jfloat)y;
+- (void)arcAbsWithFloat:(float)rx
+              withFloat:(float)ry
+              withFloat:(float)xAxisRotation
+            withBoolean:(bool)largeArcFlag
+            withBoolean:(bool)sweepFlag
+              withFloat:(float)x
+              withFloat:(float)y;
 
-- (void)arcRelWithFloat:(jfloat)rx
-              withFloat:(jfloat)ry
-              withFloat:(jfloat)xAxisRotation
-            withBoolean:(jboolean)largeArcFlag
-            withBoolean:(jboolean)sweepFlag
-              withFloat:(jfloat)x
-              withFloat:(jfloat)y;
+- (void)arcRelWithFloat:(float)rx
+              withFloat:(float)ry
+              withFloat:(float)xAxisRotation
+            withBoolean:(bool)largeArcFlag
+            withBoolean:(bool)sweepFlag
+              withFloat:(float)x
+              withFloat:(float)y;
 
 - (void)closePath;
 
-- (void)curvetoCubicAbsWithFloat:(jfloat)x1
-                       withFloat:(jfloat)y1
-                       withFloat:(jfloat)x2
-                       withFloat:(jfloat)y2
-                       withFloat:(jfloat)x
-                       withFloat:(jfloat)y;
+- (void)curvetoCubicAbsWithFloat:(float)x1
+                       withFloat:(float)y1
+                       withFloat:(float)x2
+                       withFloat:(float)y2
+                       withFloat:(float)x
+                       withFloat:(float)y;
 
-- (void)curvetoCubicRelWithFloat:(jfloat)x1
-                       withFloat:(jfloat)y1
-                       withFloat:(jfloat)x2
-                       withFloat:(jfloat)y2
-                       withFloat:(jfloat)x
-                       withFloat:(jfloat)y;
+- (void)curvetoCubicRelWithFloat:(float)x1
+                       withFloat:(float)y1
+                       withFloat:(float)x2
+                       withFloat:(float)y2
+                       withFloat:(float)x
+                       withFloat:(float)y;
 
-- (void)curvetoCubicSmoothAbsWithFloat:(jfloat)x2
-                             withFloat:(jfloat)y2
-                             withFloat:(jfloat)x
-                             withFloat:(jfloat)y;
+- (void)curvetoCubicSmoothAbsWithFloat:(float)x2
+                             withFloat:(float)y2
+                             withFloat:(float)x
+                             withFloat:(float)y;
 
-- (void)curvetoCubicSmoothRelWithFloat:(jfloat)x2
-                             withFloat:(jfloat)y2
-                             withFloat:(jfloat)x
-                             withFloat:(jfloat)y;
+- (void)curvetoCubicSmoothRelWithFloat:(float)x2
+                             withFloat:(float)y2
+                             withFloat:(float)x
+                             withFloat:(float)y;
 
-- (void)curvetoQuadraticAbsWithFloat:(jfloat)x1
-                           withFloat:(jfloat)y1
-                           withFloat:(jfloat)x
-                           withFloat:(jfloat)y;
+- (void)curvetoQuadraticAbsWithFloat:(float)x1
+                           withFloat:(float)y1
+                           withFloat:(float)x
+                           withFloat:(float)y;
 
-- (void)curvetoQuadraticRelWithFloat:(jfloat)x1
-                           withFloat:(jfloat)y1
-                           withFloat:(jfloat)x
-                           withFloat:(jfloat)y;
+- (void)curvetoQuadraticRelWithFloat:(float)x1
+                           withFloat:(float)y1
+                           withFloat:(float)x
+                           withFloat:(float)y;
 
-- (void)curvetoQuadraticSmoothAbsWithFloat:(jfloat)x
-                                 withFloat:(jfloat)y;
+- (void)curvetoQuadraticSmoothAbsWithFloat:(float)x
+                                 withFloat:(float)y;
 
-- (void)curvetoQuadraticSmoothRelWithFloat:(jfloat)x
-                                 withFloat:(jfloat)y;
+- (void)curvetoQuadraticSmoothRelWithFloat:(float)x
+                                 withFloat:(float)y;
 
 - (void)endPath;
 
-- (void)linetoAbsWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)linetoAbsWithFloat:(float)x
+                 withFloat:(float)y;
 
-- (void)linetoHorizontalAbsWithFloat:(jfloat)x;
+- (void)linetoHorizontalAbsWithFloat:(float)x;
 
-- (void)linetoHorizontalRelWithFloat:(jfloat)x;
+- (void)linetoHorizontalRelWithFloat:(float)x;
 
-- (void)linetoRelWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)linetoRelWithFloat:(float)x
+                 withFloat:(float)y;
 
-- (void)linetoVerticalAbsWithFloat:(jfloat)y;
+- (void)linetoVerticalAbsWithFloat:(float)y;
 
-- (void)linetoVerticalRelWithFloat:(jfloat)y;
+- (void)linetoVerticalRelWithFloat:(float)y;
 
-- (void)movetoAbsWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)movetoAbsWithFloat:(float)x
+                 withFloat:(float)y;
 
-- (void)movetoRelWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)movetoRelWithFloat:(float)x
+                 withFloat:(float)y;
 
 - (void)startPath;
 
@@ -141,6 +144,7 @@ FOUNDATION_EXPORT ADBezierListProducer *create_ADBezierListProducer_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADBezierListProducer)
 
 @compatibility_alias RAndroidGraphicsBezierListProducer ADBezierListProducer;
+
 
 #endif
 

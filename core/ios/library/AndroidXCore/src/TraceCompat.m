@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\os\TraceCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "TraceCompat.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADXTraceCompat
@@ -65,3 +76,5 @@ void ADXTraceCompat_beginSectionWithNSString_(NSString *traceOnLayoutTag) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXTraceCompat)
+
+J2OBJC_NAME_MAPPING(ADXTraceCompat, "androidx.core.os", "ADX")

@@ -3,11 +3,17 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttributeMap.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "WidgetAttribute.h"
 #include "WidgetAttributeMap.h"
 #include "WidgetAttributeMapFilter.h"
 #include "WidgetAttributeValue.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Comparator.h"
@@ -19,12 +25,11 @@
 #include "java/util/function/ToIntFunction.h"
 #include "java/util/function/ToLongFunction.h"
 
-@class JavaUtilHashMap;
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -52,8 +57,8 @@ J2OBJC_FIELD_SETTER(ASWidgetAttributeMap, orderMap_, JavaUtilHashMap *)
 
 - (instancetype)initWithJavaUtilHashMap:(JavaUtilHashMap *)capture$0;
 
-- (jint)compareWithId:(id)o1
-               withId:(id)o2;
+- (int32_t)compareWithId:(id)o1
+                  withId:(id)o2;
 
 @end
 
@@ -64,6 +69,7 @@ __attribute__((unused)) static void ASWidgetAttributeMap_1_initWithJavaUtilHashM
 __attribute__((unused)) static ASWidgetAttributeMap_1 *new_ASWidgetAttributeMap_1_initWithJavaUtilHashMap_(JavaUtilHashMap *capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASWidgetAttributeMap_1 *create_ASWidgetAttributeMap_1_initWithJavaUtilHashMap_(JavaUtilHashMap *capture$0);
+
 
 @implementation ASWidgetAttributeMap
 
@@ -194,6 +200,8 @@ ASWidgetAttributeMap *create_ASWidgetAttributeMap_initWithJavaUtilHashMap_(JavaU
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetAttributeMap)
 
+J2OBJC_NAME_MAPPING(ASWidgetAttributeMap, "com.ashera.widget", "AS")
+
 @implementation ASWidgetAttributeMap_1
 
 - (instancetype)initWithJavaUtilHashMap:(JavaUtilHashMap *)capture$0 {
@@ -201,8 +209,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetAttributeMap)
   return self;
 }
 
-- (jint)compareWithId:(id)o1
-               withId:(id)o2 {
+- (int32_t)compareWithId:(id)o1
+                  withId:(id)o2 {
   if ([o1 isKindOfClass:[ASWidgetAttribute class]] && [o2 isKindOfClass:[ASWidgetAttribute class]]) {
     NSString *key1 = JreStrcat("I$", [((ASWidgetAttribute *) nil_chk(((ASWidgetAttribute *) cast_chk(o1, [ASWidgetAttribute class])))) getOrder], [((NSString *) nil_chk([((ASWidgetAttribute *) nil_chk(((ASWidgetAttribute *) cast_chk(o1, [ASWidgetAttribute class])))) getAttributeName])) lowercaseString]);
     NSString *key2 = JreStrcat("I$", [((ASWidgetAttribute *) nil_chk(((ASWidgetAttribute *) cast_chk(o2, [ASWidgetAttribute class])))) getOrder], [((NSString *) nil_chk([((ASWidgetAttribute *) nil_chk(((ASWidgetAttribute *) cast_chk(o2, [ASWidgetAttribute class])))) getAttributeName])) lowercaseString]);
@@ -270,7 +278,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetAttributeMap)
     { "val$orderMap_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x1012, -1, -1, 3, -1 },
   };
   static const void *ptrTable[] = { "LJavaUtilHashMap;", "compare", "LNSObject;LNSObject;", "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Integer;>;", "LASWidgetAttributeMap;", "initWithJavaUtilHashMap:", "Ljava/lang/Object;Ljava/util/Comparator<Ljava/lang/Object;>;" };
-  static const J2ObjcClassInfo _ASWidgetAttributeMap_1 = { "", "com.ashera.widget", ptrTable, methods, fields, 7, 0x8010, 2, 1, 4, -1, 5, 6, -1 };
+  static const J2ObjcClassInfo _ASWidgetAttributeMap_1 = { "", "com.ashera.widget", ptrTable, methods, fields, 7, 0x8000, 2, 1, 4, -1, 5, 6, -1 };
   return &_ASWidgetAttributeMap_1;
 }
 

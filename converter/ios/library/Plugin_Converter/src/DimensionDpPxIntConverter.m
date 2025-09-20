@@ -3,16 +3,30 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\DimensionDpPxIntConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DimensionDpPxIntConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "ResourceBundleUtils.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASDimensionDpPxIntConverter
@@ -27,7 +41,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (JavaLangInteger *)convertFromWithId:(NSString *)dimen
                        withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
                        withASIFragment:(id<ASIFragment>)fragment {
-  jint paramDimen = 0;
+  int32_t paramDimen = 0;
   if (dimen != nil) {
     dimen = [dimen java_trim];
     dimen = ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/dimens", @"dimen", dimen, fragment);
@@ -98,3 +112,5 @@ ASDimensionDpPxIntConverter *create_ASDimensionDpPxIntConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDimensionDpPxIntConverter)
+
+J2OBJC_NAME_MAPPING(ASDimensionDpPxIntConverter, "com.ashera.converter", "AS")

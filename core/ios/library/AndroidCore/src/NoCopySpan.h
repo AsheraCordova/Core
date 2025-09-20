@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\NoCopySpan.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NoCopySpan")
@@ -25,6 +26,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADNoCopySpan)
 J2OBJC_TYPE_LITERAL_HEADER(ADNoCopySpan)
 
 #define RAndroidTextNoCopySpan ADNoCopySpan
+
 
 #endif
 

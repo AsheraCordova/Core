@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ProgressBar.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ProgressBar")
@@ -22,6 +23,7 @@
 
 @class ADContext;
 @class ADLinearLayout_LayoutParams;
+@class JavaLangInteger;
 @protocol ASIWidget;
 
 @interface ADProgressBar : ASBaseMeasurableView
@@ -32,10 +34,10 @@
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (void)setLayoutParamsWithADLinearLayout_LayoutParams:(ADLinearLayout_LayoutParams *)barLayoutParams;
 
@@ -58,6 +60,7 @@ FOUNDATION_EXPORT ADProgressBar *create_ADProgressBar_initWithADContext_(ADConte
 J2OBJC_TYPE_LITERAL_HEADER(ADProgressBar)
 
 @compatibility_alias RAndroidWidgetProgressBar ADProgressBar;
+
 
 #endif
 

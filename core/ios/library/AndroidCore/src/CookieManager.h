@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\CookieManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CookieManager")
@@ -17,6 +18,8 @@
 #define ADCookieManager_
 
 @class ADWebView;
+@class JavaLangBoolean;
+@class NSString;
 
 @interface ADCookieManager : NSObject
 
@@ -34,12 +37,12 @@
 
 - (void)removeAllCookiesWithId:(id)object;
 
-- (void)setAcceptCookieWithBoolean:(jboolean)accept;
+- (void)setAcceptCookieWithBoolean:(bool)accept;
 
-- (void)setAcceptFileSchemeCookiesWithBoolean:(jboolean)b;
+- (void)setAcceptFileSchemeCookiesWithBoolean:(bool)b;
 
 - (void)setAcceptThirdPartyCookiesWithADWebView:(ADWebView *)webView
-                                    withBoolean:(jboolean)b;
+                                    withBoolean:(bool)b;
 
 - (void)setCookieWithNSString:(NSString *)url
                  withNSString:(NSString *)value;
@@ -59,6 +62,7 @@ FOUNDATION_EXPORT ADCookieManager *ADCookieManager_getInstance(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADCookieManager)
 
 @compatibility_alias RAndroidWebkitCookieManager ADCookieManager;
+
 
 #endif
 

@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttributeValue.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "WidgetAttributeValue.h"
 #include "WidgetAttributeValueFilter.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASWidgetAttributeValue () {
@@ -44,6 +56,7 @@ __attribute__((unused)) static void ASWidgetAttributeValue_1_init(ASWidgetAttrib
 __attribute__((unused)) static ASWidgetAttributeValue_1 *new_ASWidgetAttributeValue_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASWidgetAttributeValue_1 *create_ASWidgetAttributeValue_1_init(void);
+
 
 @implementation ASWidgetAttributeValue
 
@@ -227,6 +240,8 @@ ASWidgetAttributeValue *create_ASWidgetAttributeValue_initWithNSString_withNSStr
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetAttributeValue)
 
+J2OBJC_NAME_MAPPING(ASWidgetAttributeValue, "com.ashera.widget", "AS")
+
 @implementation ASWidgetAttributeValue_1
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -237,7 +252,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)filterWithNSString:(NSString *)value {
-  return value;
+  return JreRetainedLocalValue(value);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -252,7 +267,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(filterWithNSString:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "filter", "LNSString;", "LASWidgetAttributeValue;" };
-  static const J2ObjcClassInfo _ASWidgetAttributeValue_1 = { "", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASWidgetAttributeValue_1 = { "", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, -1, -1, -1 };
   return &_ASWidgetAttributeValue_1;
 }
 

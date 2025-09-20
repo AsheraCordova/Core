@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\DialogFragment.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DialogFragment")
@@ -20,7 +21,9 @@
 #define INCLUDE_ASGenericFragment 1
 #include "GenericFragment.h"
 
+@class JavaLangBoolean;
 @class JavaLangFloat;
+@class JavaLangInteger;
 @protocol JavaUtilMap;
 
 @interface ASDialogFragment : ASGenericFragment
@@ -28,21 +31,21 @@
 #pragma mark Public
 
 - (instancetype)initWithId:(id)dialog
-                   withInt:(jint)layoutWidth
-                   withInt:(jint)layoutHeight
+                   withInt:(int32_t)layoutWidth
+                   withInt:(int32_t)layoutHeight
          withJavaLangFloat:(JavaLangFloat *)marginPercent;
 
 - (id)getParentForRootWidget;
 
-- (jboolean)isFullScreen;
+- (bool)isFullScreen;
 
 - (id<JavaUtilMap>)onCloseDialogEventData;
 
 - (void)remeasure;
 
-- (void)setMaxHeightWithInt:(jint)maxHeight;
+- (void)setMaxHeightWithInt:(int32_t)maxHeight;
 
-- (void)setMaxWidthWithInt:(jint)maxWidth;
+- (void)setMaxWidthWithInt:(int32_t)maxWidth;
 
 // Disallowed inherited constructors, do not use.
 
@@ -52,15 +55,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASDialogFragment)
 
-FOUNDATION_EXPORT void ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(ASDialogFragment *self, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent);
+FOUNDATION_EXPORT void ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(ASDialogFragment *self, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent);
 
-FOUNDATION_EXPORT ASDialogFragment *new_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASDialogFragment *new_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASDialogFragment *create_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent);
+FOUNDATION_EXPORT ASDialogFragment *create_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASDialogFragment)
 
 @compatibility_alias ComAsheraCoreDialogFragment ASDialogFragment;
+
 
 #endif
 

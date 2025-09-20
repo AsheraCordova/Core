@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\database\DataSetObserver.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DataSetObserver.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADDataSetObserver
@@ -46,3 +57,5 @@ void ADDataSetObserver_init(ADDataSetObserver *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDataSetObserver)
+
+J2OBJC_NAME_MAPPING(ADDataSetObserver, "r.android.database", "AD")

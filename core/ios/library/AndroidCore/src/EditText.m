@@ -3,13 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\EditText.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Context.h"
 #include "EditText.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "KeyEvent.h"
 #include "TextView.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADEditText
@@ -31,8 +45,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)onKeyDownWithInt:(jint)keyCode
-              withADKeyEvent:(ADKeyEvent *)event {
+- (bool)onKeyDownWithInt:(int32_t)keyCode
+          withADKeyEvent:(ADKeyEvent *)event {
   return false;
 }
 
@@ -40,16 +54,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   @throw create_JavaLangRuntimeException_initWithNSString_(@"cannot be called by view.");
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   @throw create_JavaLangRuntimeException_initWithNSString_(@"cannot be called by view.");
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return 0;
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return 0;
 }
 
@@ -120,3 +134,5 @@ ADEditText *create_ADEditText_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADEditText)
+
+J2OBJC_NAME_MAPPING(ADEditText, "r.android.widget", "AD")

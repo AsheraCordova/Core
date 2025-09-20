@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\TypeConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TypeConverter.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADTypeConverter () {
@@ -80,3 +91,5 @@ void ADTypeConverter_initWithIOSClass_withIOSClass_(ADTypeConverter *self, IOSCl
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTypeConverter)
+
+J2OBJC_NAME_MAPPING(ADTypeConverter, "r.android.animation", "AD")

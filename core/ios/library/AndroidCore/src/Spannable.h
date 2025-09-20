@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\Spannable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Spannable")
@@ -25,6 +26,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADSpannable)
 J2OBJC_TYPE_LITERAL_HEADER(ADSpannable)
 
 #define RAndroidTextSpannable ADSpannable
+
 
 #endif
 

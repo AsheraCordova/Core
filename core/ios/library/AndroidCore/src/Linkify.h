@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\util\Linkify.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Linkify")
@@ -17,7 +18,10 @@
 #define ADLinkify_
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @class JavaUtilRegexPattern;
+@class NSString;
 @protocol ADLinkify_MatchFilter;
 @protocol ADLinkify_Spannable;
 @protocol ADLinkify_TransformFilter;
@@ -29,67 +33,67 @@
 
 - (instancetype)init;
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                                    withInt:(jint)mask;
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+                                withInt:(int32_t)mask;
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                                    withInt:(jint)mask
-               withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory;
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+                                withInt:(int32_t)mask
+           withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory;
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)scheme;
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)scheme;
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)scheme
-                  withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
-              withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter;
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)scheme
+              withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
+          withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter;
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)defaultScheme
-                          withNSStringArray:(IOSObjectArray *)schemes
-                  withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
-              withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter;
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)defaultScheme
+                      withNSStringArray:(IOSObjectArray *)schemes
+              withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
+          withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter;
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)defaultScheme
-                          withNSStringArray:(IOSObjectArray *)schemes
-                  withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
-              withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter
-               withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory;
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)defaultScheme
+                      withNSStringArray:(IOSObjectArray *)schemes
+              withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
+          withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter
+           withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory;
 
-+ (jboolean)containsUnsupportedCharactersWithNSString:(NSString *)text;
++ (bool)containsUnsupportedCharactersWithNSString:(NSString *)text;
 
 + (NSString *)linkifyWithNSString:(NSString *)url
-                          withInt:(jint)mask
-                      withBoolean:(jboolean)clickable;
+                          withInt:(int32_t)mask
+                      withBoolean:(bool)clickable;
 
 @end
 
 J2OBJC_STATIC_INIT(ADLinkify)
 
-inline jint ADLinkify_get_WEB_URLS(void);
+inline int32_t ADLinkify_get_WEB_URLS(void);
 #define ADLinkify_WEB_URLS 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, WEB_URLS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, WEB_URLS, int32_t)
 
-inline jint ADLinkify_get_EMAIL_ADDRESSES(void);
+inline int32_t ADLinkify_get_EMAIL_ADDRESSES(void);
 #define ADLinkify_EMAIL_ADDRESSES 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, EMAIL_ADDRESSES, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, EMAIL_ADDRESSES, int32_t)
 
-inline jint ADLinkify_get_PHONE_NUMBERS(void);
+inline int32_t ADLinkify_get_PHONE_NUMBERS(void);
 #define ADLinkify_PHONE_NUMBERS 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, PHONE_NUMBERS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, PHONE_NUMBERS, int32_t)
 
-inline jint ADLinkify_get_MAP_ADDRESSES(void);
+inline int32_t ADLinkify_get_MAP_ADDRESSES(void);
 #define ADLinkify_MAP_ADDRESSES 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, MAP_ADDRESSES, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, MAP_ADDRESSES, int32_t)
 
-inline jint ADLinkify_get_ALL(void);
+inline int32_t ADLinkify_get_ALL(void);
 #define ADLinkify_ALL 15
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, ALL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, ALL, int32_t)
 
 inline id<ADLinkify_MatchFilter> ADLinkify_get_sUrlMatchFilter(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -112,36 +116,40 @@ FOUNDATION_EXPORT ADLinkify *new_ADLinkify_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADLinkify *create_ADLinkify_init(void);
 
-FOUNDATION_EXPORT jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_(id<ADLinkify_Spannable> text, jint mask);
+FOUNDATION_EXPORT bool ADLinkify_addLinksWithADLinkify_Spannable_withInt_(id<ADLinkify_Spannable> text, int32_t mask);
 
-FOUNDATION_EXPORT jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, jint mask, id<JavaUtilFunctionFunction> urlSpanFactory);
+FOUNDATION_EXPORT bool ADLinkify_addLinksWithADLinkify_Spannable_withInt_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, int32_t mask, id<JavaUtilFunctionFunction> urlSpanFactory);
 
-FOUNDATION_EXPORT jboolean ADLinkify_containsUnsupportedCharactersWithNSString_(NSString *text);
+FOUNDATION_EXPORT bool ADLinkify_containsUnsupportedCharactersWithNSString_(NSString *text);
 
-FOUNDATION_EXPORT jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_(id<ADLinkify_Spannable> text, JavaUtilRegexPattern *pattern, NSString *scheme);
+FOUNDATION_EXPORT bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_(id<ADLinkify_Spannable> text, JavaUtilRegexPattern *pattern, NSString *scheme);
 
-FOUNDATION_EXPORT jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *scheme, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter);
+FOUNDATION_EXPORT bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *scheme, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter);
 
-FOUNDATION_EXPORT jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter);
+FOUNDATION_EXPORT bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter);
 
-FOUNDATION_EXPORT jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter, id<JavaUtilFunctionFunction> urlSpanFactory);
+FOUNDATION_EXPORT bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter, id<JavaUtilFunctionFunction> urlSpanFactory);
 
-FOUNDATION_EXPORT NSString *ADLinkify_linkifyWithNSString_withInt_withBoolean_(NSString *url, jint mask, jboolean clickable);
+FOUNDATION_EXPORT NSString *ADLinkify_linkifyWithNSString_withInt_withBoolean_(NSString *url, int32_t mask, bool clickable);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLinkify)
 
 @compatibility_alias RAndroidTextUtilLinkify ADLinkify;
+
 
 #endif
 
 #if !defined (ADLinkSpec_) && (INCLUDE_ALL_Linkify || defined(INCLUDE_ADLinkSpec))
 #define ADLinkSpec_
 
+@class JavaLangInteger;
+@class NSString;
+
 @interface ADLinkSpec : NSObject {
  @public
   NSString *url_;
-  jint start_;
-  jint end_;
+  int32_t start_;
+  int32_t end_;
 }
 
 #pragma mark Package-Private
@@ -168,18 +176,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLinkSpec)
 
 @compatibility_alias RAndroidTextUtilLinkSpec ADLinkSpec;
 
+
 #endif
 
 #if !defined (ADLinkify_MatchFilter_) && (INCLUDE_ALL_Linkify || defined(INCLUDE_ADLinkify_MatchFilter))
 #define ADLinkify_MatchFilter_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaLangCharSequence;
 
 @protocol ADLinkify_MatchFilter < JavaObject >
 
-- (jboolean)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                        withInt:(jint)start
-                                        withInt:(jint)end;
+- (bool)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)end;
 
 @end
 
@@ -187,12 +198,14 @@ J2OBJC_EMPTY_STATIC_INIT(ADLinkify_MatchFilter)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLinkify_MatchFilter)
 
+
 #endif
 
 #if !defined (ADLinkify_TransformFilter_) && (INCLUDE_ALL_Linkify || defined(INCLUDE_ADLinkify_TransformFilter))
 #define ADLinkify_TransformFilter_
 
 @class JavaUtilRegexMatcher;
+@class NSString;
 
 @protocol ADLinkify_TransformFilter < JavaObject >
 
@@ -204,6 +217,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLinkify_MatchFilter)
 J2OBJC_EMPTY_STATIC_INIT(ADLinkify_TransformFilter)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLinkify_TransformFilter)
+
 
 #endif
 
@@ -217,11 +231,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLinkify_TransformFilter)
 @class ADLinkify_URLSpan;
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangInteger;
 
 @protocol ADLinkify_Spannable < JavaLangCharSequence, JavaObject >
 
-- (IOSObjectArray *)getSpansWithInt:(jint)i
-                            withInt:(jint)length
+- (IOSObjectArray *)getSpansWithInt:(int32_t)i
+                            withInt:(int32_t)length
                        withIOSClass:(IOSClass *)class1;
 
 - (void)removeSpanWithADLinkify_URLSpan:(ADLinkify_URLSpan *)urlSpan;
@@ -232,16 +247,20 @@ J2OBJC_EMPTY_STATIC_INIT(ADLinkify_Spannable)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLinkify_Spannable)
 
+
 #endif
 
 #if !defined (ADLinkify_URLSpan_) && (INCLUDE_ALL_Linkify || defined(INCLUDE_ADLinkify_URLSpan))
 #define ADLinkify_URLSpan_
 
+@class JavaLangInteger;
+@class NSString;
+
 @interface ADLinkify_URLSpan : NSObject {
  @public
   NSString *url_;
-  jint start_;
-  jint end_;
+  int32_t start_;
+  int32_t end_;
 }
 
 #pragma mark Package-Private
@@ -261,6 +280,7 @@ FOUNDATION_EXPORT ADLinkify_URLSpan *new_ADLinkify_URLSpan_init(void) NS_RETURNS
 FOUNDATION_EXPORT ADLinkify_URLSpan *create_ADLinkify_URLSpan_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLinkify_URLSpan)
+
 
 #endif
 

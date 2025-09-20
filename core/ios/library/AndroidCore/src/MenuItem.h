@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\MenuItem.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MenuItem")
@@ -19,14 +20,16 @@
 @class ADColorStateList;
 @class ADDrawable;
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADSubMenu;
 @protocol JavaLangCharSequence;
 
 @protocol ADMenuItem < JavaObject >
 
-- (jint)getItemId;
+- (int32_t)getItemId;
 
-- (jint)getGroupId;
+- (int32_t)getGroupId;
 
 - (id<JavaLangCharSequence>)getTitle;
 
@@ -36,25 +39,25 @@
 
 - (id<ADMenuItem>)setIconTintListWithADColorStateList:(ADColorStateList *)tint;
 
-- (id<ADMenuItem>)setCheckableWithBoolean:(jboolean)checkable;
+- (id<ADMenuItem>)setCheckableWithBoolean:(bool)checkable;
 
-- (id<ADMenuItem>)setCheckedWithBoolean:(jboolean)checked;
+- (id<ADMenuItem>)setCheckedWithBoolean:(bool)checked;
 
-- (jboolean)isChecked;
+- (bool)isChecked;
 
-- (id<ADMenuItem>)setVisibleWithBoolean:(jboolean)visible;
+- (id<ADMenuItem>)setVisibleWithBoolean:(bool)visible;
 
-- (jboolean)isVisible;
+- (bool)isVisible;
 
-- (id<ADMenuItem>)setEnabledWithBoolean:(jboolean)enabled;
+- (id<ADMenuItem>)setEnabledWithBoolean:(bool)enabled;
 
-- (jboolean)isEnabled;
+- (bool)isEnabled;
 
-- (jboolean)hasSubMenu;
+- (bool)hasSubMenu;
 
 - (id<ADSubMenu>)getSubMenu;
 
-- (void)setShowAsActionWithInt:(jint)actionEnum;
+- (void)setShowAsActionWithInt:(int32_t)actionEnum;
 
 - (id<ADMenuItem>)setActionViewWithADView:(ADView *)view;
 
@@ -64,31 +67,32 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADMenuItem)
 
-inline jint ADMenuItem_get_SHOW_AS_ACTION_NEVER(void);
+inline int32_t ADMenuItem_get_SHOW_AS_ACTION_NEVER(void);
 #define ADMenuItem_SHOW_AS_ACTION_NEVER 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_NEVER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_NEVER, int32_t)
 
-inline jint ADMenuItem_get_SHOW_AS_ACTION_IF_ROOM(void);
+inline int32_t ADMenuItem_get_SHOW_AS_ACTION_IF_ROOM(void);
 #define ADMenuItem_SHOW_AS_ACTION_IF_ROOM 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_IF_ROOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_IF_ROOM, int32_t)
 
-inline jint ADMenuItem_get_SHOW_AS_ACTION_ALWAYS(void);
+inline int32_t ADMenuItem_get_SHOW_AS_ACTION_ALWAYS(void);
 #define ADMenuItem_SHOW_AS_ACTION_ALWAYS 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_ALWAYS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_ALWAYS, int32_t)
 
-inline jint ADMenuItem_get_SHOW_AS_ACTION_WITH_TEXT(void);
+inline int32_t ADMenuItem_get_SHOW_AS_ACTION_WITH_TEXT(void);
 #define ADMenuItem_SHOW_AS_ACTION_WITH_TEXT 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_WITH_TEXT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_WITH_TEXT, int32_t)
 
-inline jint ADMenuItem_get_SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW(void);
+inline int32_t ADMenuItem_get_SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW(void);
 #define ADMenuItem_SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMenuItem, SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW, int32_t)
 
 FOUNDATION_EXPORT id<ADMenuItem> ADMenuItem_setIconTintListWithADColorStateList_(id<ADMenuItem> self, ADColorStateList *tint);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMenuItem)
 
 #define RAndroidViewMenuItem ADMenuItem
+
 
 #endif
 

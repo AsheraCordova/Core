@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\RectEvaluator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Rect.h"
 #include "RectEvaluator.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADRectEvaluator () {
@@ -35,13 +48,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (ADRect *)evaluateWithFloat:(jfloat)fraction
+- (ADRect *)evaluateWithFloat:(float)fraction
                        withId:(ADRect *)startValue
                        withId:(ADRect *)endValue {
-  jint left = ((ADRect *) nil_chk(startValue))->left_ + JreFpToInt(((((ADRect *) nil_chk(endValue))->left_ - startValue->left_) * fraction));
-  jint top = startValue->top_ + JreFpToInt(((endValue->top_ - startValue->top_) * fraction));
-  jint right = startValue->right_ + JreFpToInt(((endValue->right_ - startValue->right_) * fraction));
-  jint bottom = startValue->bottom_ + JreFpToInt(((endValue->bottom_ - startValue->bottom_) * fraction));
+  int32_t left = ((ADRect *) nil_chk(startValue))->left_ + JreFpToInt(((((ADRect *) nil_chk(endValue))->left_ - startValue->left_) * fraction));
+  int32_t top = startValue->top_ + JreFpToInt(((endValue->top_ - startValue->top_) * fraction));
+  int32_t right = startValue->right_ + JreFpToInt(((endValue->right_ - startValue->right_) * fraction));
+  int32_t bottom = startValue->bottom_ + JreFpToInt(((endValue->bottom_ - startValue->bottom_) * fraction));
   if (mRect_ == nil) {
     return create_ADRect_initWithInt_withInt_withInt_withInt_(left, top, right, bottom);
   }
@@ -105,3 +118,5 @@ ADRectEvaluator *create_ADRectEvaluator_initWithADRect_(ADRect *reuseRect) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRectEvaluator)
+
+J2OBJC_NAME_MAPPING(ADRectEvaluator, "r.android.animation", "AD")

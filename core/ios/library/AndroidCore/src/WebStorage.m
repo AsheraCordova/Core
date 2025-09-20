@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebStorage.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "WebStorage.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADWebStorage
@@ -46,6 +58,8 @@ ADWebStorage *create_ADWebStorage_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWebStorage)
 
+J2OBJC_NAME_MAPPING(ADWebStorage, "r.android.webkit", "AD")
+
 @implementation ADWebStorage_QuotaUpdater
 
 - (instancetype)initWithADWebStorage:(ADWebStorage *)outer$ {
@@ -53,7 +67,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWebStorage)
   return self;
 }
 
-- (void)updateQuotaWithLong:(jlong)mAX_QUOTA {
+- (void)updateQuotaWithLong:(int64_t)mAX_QUOTA {
 }
 
 + (const J2ObjcClassInfo *)__metadata {

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\Schema.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Schema")
@@ -16,6 +17,8 @@
 #if !defined (TSSchema_) && (INCLUDE_ALL_Schema || defined(INCLUDE_TSSchema))
 #define TSSchema_
 
+@class JavaLangInteger;
+@class NSString;
 @class TSElementType;
 
 /*!
@@ -48,9 +51,9 @@
  @param flags Flags for the element
  */
 - (void)elementTypeWithNSString:(NSString *)name
-                        withInt:(jint)model
-                        withInt:(jint)memberOf
-                        withInt:(jint)flags;
+                        withInt:(int32_t)model
+                        withInt:(int32_t)memberOf
+                        withInt:(int32_t)flags;
 
 /*!
  @brief Add to or replace a character entity in this schema.
@@ -58,7 +61,7 @@
  @param value Value of the entity
  */
 - (void)entityWithNSString:(NSString *)name
-                   withInt:(jint)value;
+                   withInt:(int32_t)value;
 
 /*!
  @brief Get an ElementType by name.
@@ -72,7 +75,7 @@
  @param name Name of the entity
  @return The corresponding character, or 0 if none
  */
-- (jint)getEntityWithNSString:(NSString *)name;
+- (int32_t)getEntityWithNSString:(NSString *)name;
 
 /*!
  @brief Return the prefix of this schema.
@@ -111,39 +114,40 @@
 
 J2OBJC_EMPTY_STATIC_INIT(TSSchema)
 
-inline jint TSSchema_get_M_ANY(void);
+inline int32_t TSSchema_get_M_ANY(void);
 #define TSSchema_M_ANY -1
-J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_ANY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_ANY, int32_t)
 
-inline jint TSSchema_get_M_EMPTY(void);
+inline int32_t TSSchema_get_M_EMPTY(void);
 #define TSSchema_M_EMPTY 0
-J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_EMPTY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_EMPTY, int32_t)
 
-inline jint TSSchema_get_M_PCDATA(void);
+inline int32_t TSSchema_get_M_PCDATA(void);
 #define TSSchema_M_PCDATA 1073741824
-J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_PCDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_PCDATA, int32_t)
 
-inline jint TSSchema_get_M_ROOT(void);
-#define TSSchema_M_ROOT ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_ROOT, jint)
+inline int32_t TSSchema_get_M_ROOT(void);
+#define TSSchema_M_ROOT ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, M_ROOT, int32_t)
 
-inline jint TSSchema_get_F_RESTART(void);
+inline int32_t TSSchema_get_F_RESTART(void);
 #define TSSchema_F_RESTART 1
-J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, F_RESTART, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, F_RESTART, int32_t)
 
-inline jint TSSchema_get_F_CDATA(void);
+inline int32_t TSSchema_get_F_CDATA(void);
 #define TSSchema_F_CDATA 2
-J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, F_CDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, F_CDATA, int32_t)
 
-inline jint TSSchema_get_F_NOFORCE(void);
+inline int32_t TSSchema_get_F_NOFORCE(void);
 #define TSSchema_F_NOFORCE 4
-J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, F_NOFORCE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSSchema, F_NOFORCE, int32_t)
 
 FOUNDATION_EXPORT void TSSchema_init(TSSchema *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(TSSchema)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupSchema TSSchema;
+
 
 #endif
 

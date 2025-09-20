@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Trace.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Trace")
@@ -16,43 +17,48 @@
 #if !defined (ADTrace_) && (INCLUDE_ALL_Trace || defined(INCLUDE_ADTrace))
 #define ADTrace_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
+
 @interface ADTrace : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (void)asyncTraceBeginWithInt:(jint)traceTagView
++ (void)asyncTraceBeginWithInt:(int32_t)traceTagView
                   withNSString:(NSString *)nameForTrace
-                       withInt:(jint)identityHashCode;
+                       withInt:(int32_t)identityHashCode;
 
-+ (void)asyncTraceEndWithInt:(jint)traceTagView
++ (void)asyncTraceEndWithInt:(int32_t)traceTagView
                 withNSString:(NSString *)nameForTrace
-                     withInt:(jint)identityHashCode;
+                     withInt:(int32_t)identityHashCode;
 
-+ (jboolean)isTagEnabledWithLong:(jlong)traceTag;
++ (bool)isTagEnabledWithLong:(int64_t)traceTag;
 
-+ (void)traceBeginWithInt:(jint)traceTagView
++ (void)traceBeginWithInt:(int32_t)traceTagView
              withNSString:(NSString *)string;
 
-+ (void)traceBeginWithLong:(jlong)traceTag
++ (void)traceBeginWithLong:(int64_t)traceTag
               withNSString:(NSString *)traceName;
 
-+ (void)traceCounterWithInt:(jint)traceTagView
++ (void)traceCounterWithInt:(int32_t)traceTagView
                withNSString:(NSString *)string
-                    withInt:(jint)i;
+                    withInt:(int32_t)i;
 
-+ (void)traceEndWithInt:(jint)traceTagView;
++ (void)traceEndWithInt:(int32_t)traceTagView;
 
-+ (void)traceEndWithLong:(jlong)traceTag;
++ (void)traceEndWithLong:(int64_t)traceTag;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADTrace)
 
-inline jint ADTrace_get_TRACE_TAG_VIEW(void);
+inline int32_t ADTrace_get_TRACE_TAG_VIEW(void);
 #define ADTrace_TRACE_TAG_VIEW 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADTrace, TRACE_TAG_VIEW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTrace, TRACE_TAG_VIEW, int32_t)
 
 FOUNDATION_EXPORT void ADTrace_init(ADTrace *self);
 
@@ -60,25 +66,26 @@ FOUNDATION_EXPORT ADTrace *new_ADTrace_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADTrace *create_ADTrace_init(void);
 
-FOUNDATION_EXPORT void ADTrace_traceBeginWithInt_withNSString_(jint traceTagView, NSString *string);
+FOUNDATION_EXPORT void ADTrace_traceBeginWithInt_withNSString_(int32_t traceTagView, NSString *string);
 
-FOUNDATION_EXPORT void ADTrace_traceEndWithInt_(jint traceTagView);
+FOUNDATION_EXPORT void ADTrace_traceEndWithInt_(int32_t traceTagView);
 
-FOUNDATION_EXPORT jboolean ADTrace_isTagEnabledWithLong_(jlong traceTag);
+FOUNDATION_EXPORT bool ADTrace_isTagEnabledWithLong_(int64_t traceTag);
 
-FOUNDATION_EXPORT void ADTrace_traceBeginWithLong_withNSString_(jlong traceTag, NSString *traceName);
+FOUNDATION_EXPORT void ADTrace_traceBeginWithLong_withNSString_(int64_t traceTag, NSString *traceName);
 
-FOUNDATION_EXPORT void ADTrace_traceEndWithLong_(jlong traceTag);
+FOUNDATION_EXPORT void ADTrace_traceEndWithLong_(int64_t traceTag);
 
-FOUNDATION_EXPORT void ADTrace_asyncTraceEndWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode);
+FOUNDATION_EXPORT void ADTrace_asyncTraceEndWithInt_withNSString_withInt_(int32_t traceTagView, NSString *nameForTrace, int32_t identityHashCode);
 
-FOUNDATION_EXPORT void ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode);
+FOUNDATION_EXPORT void ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(int32_t traceTagView, NSString *nameForTrace, int32_t identityHashCode);
 
-FOUNDATION_EXPORT void ADTrace_traceCounterWithInt_withNSString_withInt_(jint traceTagView, NSString *string, jint i);
+FOUNDATION_EXPORT void ADTrace_traceCounterWithInt_withNSString_withInt_(int32_t traceTagView, NSString *string, int32_t i);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTrace)
 
 @compatibility_alias RAndroidOsTrace ADTrace;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\parser\css\FontFace.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FontFace")
@@ -41,6 +42,7 @@ FOUNDATION_EXPORT CSSFontFace *create_CSSFontFace_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(CSSFontFace)
 
 @compatibility_alias ComAsheraParserCssFontFace CSSFontFace;
+
 
 #endif
 

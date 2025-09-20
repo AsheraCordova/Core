@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\UINavigatorImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bundle.h"
 #include "CommonConverters.h"
 #include "ConverterFactory.h"
@@ -16,6 +21,7 @@
 #include "ResourceBundleUtils.h"
 #include "UINavigatorImpl.h"
 #include "java/io/PrintStream.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Exception.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
@@ -28,18 +34,22 @@
 #import "ASDialogFragmentController.h"
 #include "ASMainViewController.h"
 
-@class JavaLangFloat;
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASUINavigatorImpl () {
  @public
   id navController_;
   ASUINavigatorImpl_FragmentFactory *fragmentFactory_;
-  jboolean remeasure_;
+  bool remeasure_;
   NSString *namespace__;
   NSString *rootDirectory_;
-  jboolean childNavHost_;
+  bool childNavHost_;
 }
 
 - (ADBundle *)getInitialBundleWithJavaUtilList:(id<JavaUtilList>)scopedObjects
@@ -47,7 +57,7 @@
                                   withNSString:(NSString *)fileName;
 
 - (NSString *)getFileNameWithNSStringArray:(IOSObjectArray *)destinationProps
-                                   withInt:(jint)noofProps;
+                                   withInt:(int32_t)noofProps;
 
 - (void)updateViewFrameWithId:(id)controller
                        withId:(id)obj;
@@ -62,10 +72,10 @@
 - (id)getRootNavController;
 
 - (void)navigateToControllerWithId:(id)rootFragment
-                       withBoolean:(jboolean)finish
-                       withBoolean:(jboolean)clear
-                           withInt:(jint)popCount
-                       withBoolean:(jboolean)remeasure;
+                       withBoolean:(bool)finish
+                       withBoolean:(bool)clear
+                           withInt:(int32_t)popCount
+                       withBoolean:(bool)remeasure;
 
 - (id)getFragmentWithId:(id)presentedController;
 
@@ -84,7 +94,7 @@ J2OBJC_FIELD_SETTER(ASUINavigatorImpl, rootDirectory_, NSString *)
 
 __attribute__((unused)) static ADBundle *ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_(ASUINavigatorImpl *self, id<JavaUtilList> scopedObjects, NSString *resId, NSString *fileName);
 
-__attribute__((unused)) static NSString *ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(ASUINavigatorImpl *self, IOSObjectArray *destinationProps, jint noofProps);
+__attribute__((unused)) static NSString *ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(ASUINavigatorImpl *self, IOSObjectArray *destinationProps, int32_t noofProps);
 
 __attribute__((unused)) static void ASUINavigatorImpl_updateViewFrameWithId_withId_(ASUINavigatorImpl *self, id controller, id obj);
 
@@ -94,7 +104,7 @@ __attribute__((unused)) static id ASUINavigatorImpl_getNavController(ASUINavigat
 
 __attribute__((unused)) static id ASUINavigatorImpl_getRootNavController(ASUINavigatorImpl *self);
 
-__attribute__((unused)) static void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(ASUINavigatorImpl *self, id rootFragment, jboolean finish, jboolean clear, jint popCount, jboolean remeasure);
+__attribute__((unused)) static void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(ASUINavigatorImpl *self, id rootFragment, bool finish, bool clear, int32_t popCount, bool remeasure);
 
 __attribute__((unused)) static id ASUINavigatorImpl_getFragmentWithId_(ASUINavigatorImpl *self, id presentedController);
 
@@ -106,13 +116,13 @@ __attribute__((unused)) static void ASUINavigatorImpl_getGenericFragmentsWithJav
 
 @interface ASUINavigatorImpl_IosDialogFragment : ASDialogFragment {
  @public
-  __unsafe_unretained ASUINavigatorImpl *this$0_;
+  WEAK_ ASUINavigatorImpl *this$0_;
 }
 
 - (instancetype)initWithASUINavigatorImpl:(ASUINavigatorImpl *)outer$
                                    withId:(id)dialog
-                                  withInt:(jint)layoutWidth
-                                  withInt:(jint)layoutHeight
+                                  withInt:(int32_t)layoutWidth
+                                  withInt:(int32_t)layoutHeight
                         withJavaLangFloat:(JavaLangFloat *)marginPercent;
 
 - (void)remeasure;
@@ -121,13 +131,14 @@ __attribute__((unused)) static void ASUINavigatorImpl_getGenericFragmentsWithJav
 
 J2OBJC_EMPTY_STATIC_INIT(ASUINavigatorImpl_IosDialogFragment)
 
-__attribute__((unused)) static void ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl_IosDialogFragment *self, ASUINavigatorImpl *outer$, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent);
+__attribute__((unused)) static void ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl_IosDialogFragment *self, ASUINavigatorImpl *outer$, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent);
 
-__attribute__((unused)) static ASUINavigatorImpl_IosDialogFragment *new_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASUINavigatorImpl_IosDialogFragment *new_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASUINavigatorImpl_IosDialogFragment *create_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent);
+__attribute__((unused)) static ASUINavigatorImpl_IosDialogFragment *create_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_IosDialogFragment)
+
 
 @interface ASUINavigatorImpl_FragmentFactory_MyFragment : ASGenericFragment
 
@@ -147,6 +158,7 @@ __attribute__((unused)) static ASUINavigatorImpl_FragmentFactory_MyFragment *cre
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_FragmentFactory_MyFragment)
 
+
 @implementation ASUINavigatorImpl
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -158,19 +170,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithASUINavigatorImpl_FragmentFactory:(ASUINavigatorImpl_FragmentFactory *)fragmentFactory
                                                    withId:(id)navController
-                                              withBoolean:(jboolean)remeasure {
+                                              withBoolean:(bool)remeasure {
   ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(self, fragmentFactory, navController, remeasure);
   return self;
 }
 
 - (void)navigateWithNSString:(NSString *)actionId
                 withNSString:(NSString *)destinationId
-                 withBoolean:(jboolean)inclusive
-                 withBoolean:(jboolean)finish
+                 withBoolean:(bool)inclusive
+                 withBoolean:(bool)finish
             withJavaUtilList:(id<JavaUtilList>)scopedObjects
              withASIFragment:(id<ASIFragment>)fragment {
   @try {
-    jint popCount = 0;
+    int32_t popCount = 0;
     if (destinationId != nil) {
       popCount = [self getPopCountWithNSString:destinationId withBoolean:inclusive];
     }
@@ -201,11 +213,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)navigateWithPopBackStackToWithNSString:(NSString *)actionId
                                   withNSString:(NSString *)destinationId
-                                   withBoolean:(jboolean)inclusive
+                                   withBoolean:(bool)inclusive
                               withJavaUtilList:(id<JavaUtilList>)scopedObjects
                                withASIFragment:(id<ASIFragment>)fragment {
   @try {
-    jint popCount = [self getPopCountWithNSString:destinationId withBoolean:inclusive];
+    int32_t popCount = [self getPopCountWithNSString:destinationId withBoolean:inclusive];
     [self navigateWithNSString:actionId withJavaUtilList:scopedObjects withBoolean:false withInt:popCount withBoolean:false withASIFragment:fragment];
   }
   @catch (ASUINavigatorImpl_DestinatinNotFoundException *e) {
@@ -215,9 +227,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)navigateWithNSString:(NSString *)actionId
             withJavaUtilList:(id<JavaUtilList>)scopedObjects
-                 withBoolean:(jboolean)finish
-                     withInt:(jint)popCount
-                 withBoolean:(jboolean)clear
+                 withBoolean:(bool)finish
+                     withInt:(int32_t)popCount
+                 withBoolean:(bool)clear
              withASIFragment:(id<ASIFragment>)fragment {
   IOSObjectArray *destinationProps = [((NSString *) nil_chk(actionId)) java_split:@"#" limit:-1];
   NSString *type = IOSObjectArray_Get(nil_chk(destinationProps), 0);
@@ -226,8 +238,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     case 0:
     {
       NSString *fileName = ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, 3);
-      jint width = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 3) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
-      jint height = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 2) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
+      int32_t width = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 3) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
+      int32_t height = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 2) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
       NSString *style = IOSObjectArray_Get(destinationProps, destinationProps->size_ - 1);
       if (style != nil) {
         style = [style java_replace:@"@style/" withSequence:@""];
@@ -237,15 +249,15 @@ J2OBJC_IGNORE_DESIGNATED_END
       JavaLangFloat *marginPercent = nil;
       NSString *windowCloseOnTouchOutside = nil;
       NSString *backgroundDimEnabled = nil;
-      if (attrStr != nil && ![attrStr java_isEmpty]) {
+      if (attrStr != nil && ![attrStr isEmpty]) {
         IOSObjectArray *attrs = [attrStr java_split:@";"];
         {
           IOSObjectArray *a__ = attrs;
           NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
           NSString * const *e__ = b__ + a__->size_;
           while (b__ < e__) {
-            NSString *attr = *b__++;
-            IOSObjectArray *nameAndValue = [((NSString *) nil_chk(attr)) java_split:@"\\:"];
+            NSString *attr = RETAIN_AND_AUTORELEASE(*b__++);
+            IOSObjectArray *nameAndValue = [attr java_split:@"\\:"];
             NSString *key = IOSObjectArray_Get(nil_chk(nameAndValue), 0);
             NSString *value = nameAndValue->size_ <= 1 ? @"" : IOSObjectArray_Get(nameAndValue, 1);
             if ([((NSString *) nil_chk(key)) isEqual:@"marginPercent"]) {
@@ -289,7 +301,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)getFileNameWithNSStringArray:(IOSObjectArray *)destinationProps
-                                   withInt:(jint)noofProps {
+                                   withInt:(int32_t)noofProps {
   return ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, noofProps);
 }
 
@@ -314,10 +326,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)navigateToControllerWithId:(id)rootFragment
-                       withBoolean:(jboolean)finish
-                       withBoolean:(jboolean)clear
-                           withInt:(jint)popCount
-                       withBoolean:(jboolean)remeasure {
+                       withBoolean:(bool)finish
+                       withBoolean:(bool)clear
+                           withInt:(int32_t)popCount
+                       withBoolean:(bool)remeasure {
   ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, rootFragment, finish, clear, popCount, remeasure);
 }
 
@@ -352,9 +364,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)popBackStackWithASIFragment:(id<ASIFragment>)fragment
                        withNSString:(NSString *)destinationId
-                        withBoolean:(jboolean)inclusive {
+                        withBoolean:(bool)inclusive {
   @try {
-    jint popCount = [self getPopCountWithNSString:destinationId withBoolean:inclusive];
+    int32_t popCount = [self getPopCountWithNSString:destinationId withBoolean:inclusive];
     ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, nil, false, false, popCount, self->remeasure_);
   }
   @catch (ASUINavigatorImpl_DestinatinNotFoundException *e) {
@@ -362,13 +374,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getPopCountWithNSString:(NSString *)destinationId
-                    withBoolean:(jboolean)inclusive {
+- (int32_t)getPopCountWithNSString:(NSString *)destinationId
+                       withBoolean:(bool)inclusive {
   id<JavaUtilList> fragments = new_JavaUtilArrayList_init();
   ASUINavigatorImpl_getGenericFragmentsWithJavaUtilList_(self, fragments);
-  jboolean foundDestination = false;
-  jint popCount = 0;
-  for (jint i = [fragments size] - 1; i >= 0; i--) {
+  bool foundDestination = false;
+  int32_t popCount = 0;
+  for (int32_t i = [fragments size] - 1; i >= 0; i--) {
     ASGenericFragment *genericFragment = [fragments getWithInt:i];
     NSString *id_ = [((ADBundle *) nil_chk(((ADBundle *) cast_chk([((ASGenericFragment *) nil_chk(genericFragment)) getArgumentsBundle], [ADBundle class])))) getStringWithNSString:@"id"];
     if ([((NSString *) nil_chk(id_)) isEqual:destinationId]) {
@@ -490,7 +502,7 @@ ASUINavigatorImpl *create_ASUINavigatorImpl_init() {
   J2OBJC_CREATE_IMPL(ASUINavigatorImpl, init)
 }
 
-void ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl *self, ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) {
+void ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl *self, ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, bool remeasure) {
   NSObject_init(self);
   self->remeasure_ = true;
   self->navController_ = navController;
@@ -499,11 +511,11 @@ void ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBool
   self->childNavHost_ = true;
 }
 
-ASUINavigatorImpl *new_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) {
+ASUINavigatorImpl *new_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, bool remeasure) {
   J2OBJC_NEW_IMPL(ASUINavigatorImpl, initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_, fragmentFactory, navController, remeasure)
 }
 
-ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) {
+ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, bool remeasure) {
   J2OBJC_CREATE_IMPL(ASUINavigatorImpl, initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_, fragmentFactory, navController, remeasure)
 }
 
@@ -514,10 +526,10 @@ ADBundle *ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNS
   return bundle;
 }
 
-NSString *ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(ASUINavigatorImpl *self, IOSObjectArray *destinationProps, jint noofProps) {
+NSString *ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(ASUINavigatorImpl *self, IOSObjectArray *destinationProps, int32_t noofProps) {
   NSString *fileName = @"";
   NSString *separator = @"";
-  for (jint i = 2; i < ((IOSObjectArray *) nil_chk(destinationProps))->size_ - noofProps; i++) {
+  for (int32_t i = 2; i < ((IOSObjectArray *) nil_chk(destinationProps))->size_ - noofProps; i++) {
     NSString *destinationProp = IOSObjectArray_Get(destinationProps, i);
     (void) JreStrAppendStrong(&fileName, "$$", separator, destinationProp);
     separator = @"#";
@@ -559,7 +571,7 @@ id ASUINavigatorImpl_getRootNavController(ASUINavigatorImpl *self) {
   return navController;
 }
 
-void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(ASUINavigatorImpl *self, id rootFragment, jboolean finish, jboolean clear, jint popCount, jboolean remeasure) {
+void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(ASUINavigatorImpl *self, id rootFragment, bool finish, bool clear, int32_t popCount, bool remeasure) {
   ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
   UINavigationController* navController =  (UINavigationController*) [self getNavController];
   NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navController viewControllers]];
@@ -628,12 +640,14 @@ void ASUINavigatorImpl_getGenericFragmentsWithJavaUtilList_(ASUINavigatorImpl *s
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUINavigatorImpl)
 
+J2OBJC_NAME_MAPPING(ASUINavigatorImpl, "com.ashera.core", "AS")
+
 @implementation ASUINavigatorImpl_IosDialogFragment
 
 - (instancetype)initWithASUINavigatorImpl:(ASUINavigatorImpl *)outer$
                                    withId:(id)dialog
-                                  withInt:(jint)layoutWidth
-                                  withInt:(jint)layoutHeight
+                                  withInt:(int32_t)layoutWidth
+                                  withInt:(int32_t)layoutHeight
                         withJavaLangFloat:(JavaLangFloat *)marginPercent {
   ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(self, outer$, dialog, layoutWidth, layoutHeight, marginPercent);
   return self;
@@ -673,16 +687,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUINavigatorImpl)
 
 @end
 
-void ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl_IosDialogFragment *self, ASUINavigatorImpl *outer$, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) {
+void ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl_IosDialogFragment *self, ASUINavigatorImpl *outer$, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) {
   self->this$0_ = outer$;
   ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(self, dialog, layoutWidth, layoutHeight, marginPercent);
 }
 
-ASUINavigatorImpl_IosDialogFragment *new_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) {
+ASUINavigatorImpl_IosDialogFragment *new_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) {
   J2OBJC_NEW_IMPL(ASUINavigatorImpl_IosDialogFragment, initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_, outer$, dialog, layoutWidth, layoutHeight, marginPercent)
 }
 
-ASUINavigatorImpl_IosDialogFragment *create_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) {
+ASUINavigatorImpl_IosDialogFragment *create_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(ASUINavigatorImpl *outer$, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) {
   J2OBJC_CREATE_IMPL(ASUINavigatorImpl_IosDialogFragment, initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_, outer$, dialog, layoutWidth, layoutHeight, marginPercent)
 }
 

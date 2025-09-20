@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\badge\BadgeDrawable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BadgeDrawable.h"
 #include "BadgeState.h"
 #include "BadgeUtils.h"
@@ -23,6 +28,7 @@
 #include "ViewGroup.h"
 #include "ViewParent.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -31,7 +37,12 @@
 #include "java/text/NumberFormat.h"
 #include "java/util/Locale.h"
 
-@class JavaLangRefWeakReference;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXBadgeDrawable () {
@@ -41,12 +52,12 @@
   ADXBadgeDrawable_TextDrawableHelper *textDrawableHelper_;
   ADRect *badgeBounds_;
   ADXBadgeState *state_;
-  jfloat badgeCenterX_;
-  jfloat badgeCenterY_;
-  jint maxBadgeNumber_;
-  jfloat cornerRadius_;
-  jfloat halfBadgeWidth_;
-  jfloat halfBadgeHeight_;
+  float badgeCenterX_;
+  float badgeCenterY_;
+  int32_t maxBadgeNumber_;
+  float cornerRadius_;
+  float halfBadgeWidth_;
+  float halfBadgeHeight_;
   JavaLangRefWeakReference *anchorViewRef_;
   JavaLangRefWeakReference *customBadgeParentRef_;
   NSString *textAppearanceResource_;
@@ -72,9 +83,9 @@
 
 - (void)updateCenterAndBounds;
 
-- (jint)getTotalVerticalOffsetForState;
+- (int32_t)getTotalVerticalOffsetForState;
 
-- (jint)getTotalHorizontalOffsetForState;
+- (int32_t)getTotalHorizontalOffsetForState;
 
 - (void)calculateCenterAndBoundsWithADRect:(ADRect *)anchorRect
                                 withADView:(ADView *)anchorView;
@@ -84,17 +95,17 @@
 
 - (void)autoAdjustWithinGrandparentBoundsWithADView:(ADView *)anchorView;
 
-- (jfloat)getTopCutOffWithFloat:(jfloat)totalAnchorYOffset;
+- (float)getTopCutOffWithFloat:(float)totalAnchorYOffset;
 
-- (jfloat)getLeftCutOffWithFloat:(jfloat)totalAnchorXOffset;
+- (float)getLeftCutOffWithFloat:(float)totalAnchorXOffset;
 
-- (jfloat)getBottomCutOffWithFloat:(jfloat)ancestorHeight
-                         withFloat:(jfloat)totalAnchorYOffset;
+- (float)getBottomCutOffWithFloat:(float)ancestorHeight
+                        withFloat:(float)totalAnchorYOffset;
 
-- (jfloat)getRightCutoffWithFloat:(jfloat)ancestorWidth
-                        withFloat:(jfloat)totalAnchorXOffset;
+- (float)getRightCutoffWithFloat:(float)ancestorWidth
+                       withFloat:(float)totalAnchorXOffset;
 
-- (jboolean)hasBadgeContent;
+- (bool)hasBadgeContent;
 
 - (NSString *)getBadgeContent;
 
@@ -106,7 +117,7 @@
 
 - (void)updateMaxBadgeNumber;
 
-- (id)colorToNativeColorWithInt:(jint)color;
+- (id)colorToNativeColorWithInt:(int32_t)color;
 
 @end
 
@@ -143,9 +154,9 @@ __attribute__((unused)) static void ADXBadgeDrawable_onBadgeShapeAppearanceUpdat
 
 __attribute__((unused)) static void ADXBadgeDrawable_updateCenterAndBounds(ADXBadgeDrawable *self);
 
-__attribute__((unused)) static jint ADXBadgeDrawable_getTotalVerticalOffsetForState(ADXBadgeDrawable *self);
+__attribute__((unused)) static int32_t ADXBadgeDrawable_getTotalVerticalOffsetForState(ADXBadgeDrawable *self);
 
-__attribute__((unused)) static jint ADXBadgeDrawable_getTotalHorizontalOffsetForState(ADXBadgeDrawable *self);
+__attribute__((unused)) static int32_t ADXBadgeDrawable_getTotalHorizontalOffsetForState(ADXBadgeDrawable *self);
 
 __attribute__((unused)) static void ADXBadgeDrawable_calculateCenterAndBoundsWithADRect_withADView_(ADXBadgeDrawable *self, ADRect *anchorRect, ADView *anchorView);
 
@@ -153,15 +164,15 @@ __attribute__((unused)) static void ADXBadgeDrawable_autoAdjustWithinViewBoundsW
 
 __attribute__((unused)) static void ADXBadgeDrawable_autoAdjustWithinGrandparentBoundsWithADView_(ADXBadgeDrawable *self, ADView *anchorView);
 
-__attribute__((unused)) static jfloat ADXBadgeDrawable_getTopCutOffWithFloat_(ADXBadgeDrawable *self, jfloat totalAnchorYOffset);
+__attribute__((unused)) static float ADXBadgeDrawable_getTopCutOffWithFloat_(ADXBadgeDrawable *self, float totalAnchorYOffset);
 
-__attribute__((unused)) static jfloat ADXBadgeDrawable_getLeftCutOffWithFloat_(ADXBadgeDrawable *self, jfloat totalAnchorXOffset);
+__attribute__((unused)) static float ADXBadgeDrawable_getLeftCutOffWithFloat_(ADXBadgeDrawable *self, float totalAnchorXOffset);
 
-__attribute__((unused)) static jfloat ADXBadgeDrawable_getBottomCutOffWithFloat_withFloat_(ADXBadgeDrawable *self, jfloat ancestorHeight, jfloat totalAnchorYOffset);
+__attribute__((unused)) static float ADXBadgeDrawable_getBottomCutOffWithFloat_withFloat_(ADXBadgeDrawable *self, float ancestorHeight, float totalAnchorYOffset);
 
-__attribute__((unused)) static jfloat ADXBadgeDrawable_getRightCutoffWithFloat_withFloat_(ADXBadgeDrawable *self, jfloat ancestorWidth, jfloat totalAnchorXOffset);
+__attribute__((unused)) static float ADXBadgeDrawable_getRightCutoffWithFloat_withFloat_(ADXBadgeDrawable *self, float ancestorWidth, float totalAnchorXOffset);
 
-__attribute__((unused)) static jboolean ADXBadgeDrawable_hasBadgeContent(ADXBadgeDrawable *self);
+__attribute__((unused)) static bool ADXBadgeDrawable_hasBadgeContent(ADXBadgeDrawable *self);
 
 __attribute__((unused)) static NSString *ADXBadgeDrawable_getBadgeContent(ADXBadgeDrawable *self);
 
@@ -173,11 +184,11 @@ __attribute__((unused)) static void ADXBadgeDrawable_onBadgeContentUpdated(ADXBa
 
 __attribute__((unused)) static void ADXBadgeDrawable_updateMaxBadgeNumber(ADXBadgeDrawable *self);
 
-__attribute__((unused)) static id ADXBadgeDrawable_colorToNativeColorWithInt_(ADXBadgeDrawable *self, jint color);
+__attribute__((unused)) static id ADXBadgeDrawable_colorToNativeColorWithInt_(ADXBadgeDrawable *self, int32_t color);
 
 @interface ADXBadgeDrawable_MaterialShapeDrawable () {
  @public
-  jfloat cornerSize_;
+  float cornerSize_;
   ADColorStateList *backgroundColorStateList_;
 }
 
@@ -197,7 +208,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
 
 @implementation ADXBadgeDrawable
 
-- (void)setVisibleWithBoolean:(jboolean)visible {
+- (void)setVisibleWithBoolean:(bool)visible {
   [((ADXBadgeState *) nil_chk(state_)) setVisibleWithBoolean:visible];
   ADXBadgeDrawable_onVisibilityUpdated(self);
 }
@@ -235,7 +246,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_updateAnchorParentToNotClipWithADView_(anchorView);
 }
 
-- (void)setBackgroundColorWithInt:(jint)backgroundColor {
+- (void)setBackgroundColorWithInt:(int32_t)backgroundColor {
   [((ADXBadgeState *) nil_chk(state_)) setBackgroundColorWithInt:backgroundColor];
   ADXBadgeDrawable_onBackgroundColorUpdated(self);
 }
@@ -244,7 +255,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_onBackgroundColorUpdated(self);
 }
 
-- (void)setBadgeTextColorWithInt:(jint)badgeTextColor {
+- (void)setBadgeTextColorWithInt:(int32_t)badgeTextColor {
   if ([((ADXBadgeDrawable_TextPaint *) nil_chk([((ADXBadgeDrawable_TextDrawableHelper *) nil_chk(textDrawableHelper_)) getTextPaint])) getColor] != badgeTextColor) {
     [((ADXBadgeState *) nil_chk(state_)) setBadgeTextColorWithInt:badgeTextColor];
     ADXBadgeDrawable_onBadgeTextColorUpdated(self);
@@ -255,15 +266,15 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_onBadgeTextColorUpdated(self);
 }
 
-- (jboolean)hasNumber {
+- (bool)hasNumber {
   return ![((ADXBadgeState *) nil_chk(state_)) hasText] && [state_ hasNumber];
 }
 
-- (jint)getNumber {
+- (int32_t)getNumber {
   return [((ADXBadgeState *) nil_chk(state_)) hasNumber] ? [state_ getNumber] : 0;
 }
 
-- (void)setNumberWithInt:(jint)number {
+- (void)setNumberWithInt:(int32_t)number {
   number = JavaLangMath_maxWithInt_withInt_(0, number);
   if ([((ADXBadgeState *) nil_chk(self->state_)) getNumber] != number) {
     [state_ setNumberWithInt:number];
@@ -275,7 +286,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_onNumberUpdated(self);
 }
 
-- (jboolean)hasText {
+- (bool)hasText {
   return [((ADXBadgeState *) nil_chk(state_)) hasText];
 }
 
@@ -283,18 +294,18 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   return [((ADXBadgeState *) nil_chk(state_)) getText];
 }
 
-- (jint)getMaxCharacterCount {
+- (int32_t)getMaxCharacterCount {
   return [((ADXBadgeState *) nil_chk(state_)) getMaxCharacterCount];
 }
 
-- (void)setMaxCharacterCountWithInt:(jint)maxCharacterCount {
+- (void)setMaxCharacterCountWithInt:(int32_t)maxCharacterCount {
   if ([((ADXBadgeState *) nil_chk(self->state_)) getMaxCharacterCount] != maxCharacterCount) {
     [self->state_ setMaxCharacterCountWithInt:maxCharacterCount];
     ADXBadgeDrawable_onMaxBadgeLengthUpdated(self);
   }
 }
 
-- (jint)getMaxNumber {
+- (int32_t)getMaxNumber {
   return [((ADXBadgeState *) nil_chk(state_)) getMaxNumber];
 }
 
@@ -302,7 +313,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_onMaxBadgeLengthUpdated(self);
 }
 
-- (void)setBadgeGravityWithInt:(jint)gravity {
+- (void)setBadgeGravityWithInt:(int32_t)gravity {
   if (gravity == ADXBadgeDrawable_BOTTOM_START || gravity == ADXBadgeDrawable_BOTTOM_END) {
     ADLog_wWithNSString_withNSString_(ADXBadgeDrawable_TAG, @"Bottom badge gravities are deprecated; please use a top gravity instead.");
   }
@@ -316,11 +327,11 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_onBadgeGravityUpdated(self);
 }
 
-- (jint)getAlpha {
+- (int32_t)getAlpha {
   return [((ADXBadgeState *) nil_chk(state_)) getAlpha];
 }
 
-- (void)setAlphaWithInt:(jint)alpha {
+- (void)setAlphaWithInt:(int32_t)alpha {
   [((ADXBadgeState *) nil_chk(state_)) setAlphaWithInt:alpha];
   ADXBadgeDrawable_onAlphaUpdated(self);
 }
@@ -329,46 +340,46 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_onAlphaUpdated(self);
 }
 
-- (void)setHorizontalOffsetWithInt:(jint)px {
+- (void)setHorizontalOffsetWithInt:(int32_t)px {
   [self setHorizontalOffsetWithoutTextWithInt:px];
   [self setHorizontalOffsetWithTextWithInt:px];
 }
 
-- (jint)getHorizontalOffset {
+- (int32_t)getHorizontalOffset {
   return [((ADXBadgeState *) nil_chk(state_)) getHorizontalOffsetWithoutText];
 }
 
-- (void)setHorizontalOffsetWithoutTextWithInt:(jint)px {
+- (void)setHorizontalOffsetWithoutTextWithInt:(int32_t)px {
   [((ADXBadgeState *) nil_chk(state_)) setHorizontalOffsetWithoutTextWithInt:px];
   ADXBadgeDrawable_updateCenterAndBounds(self);
 }
 
-- (void)setHorizontalOffsetWithTextWithInt:(jint)px {
+- (void)setHorizontalOffsetWithTextWithInt:(int32_t)px {
   [((ADXBadgeState *) nil_chk(state_)) setHorizontalOffsetWithTextWithInt:px];
   ADXBadgeDrawable_updateCenterAndBounds(self);
 }
 
-- (void)setAdditionalHorizontalOffsetWithInt:(jint)px {
+- (void)setAdditionalHorizontalOffsetWithInt:(int32_t)px {
   [((ADXBadgeState *) nil_chk(state_)) setAdditionalHorizontalOffsetWithInt:px];
   ADXBadgeDrawable_updateCenterAndBounds(self);
 }
 
-- (void)setVerticalOffsetWithInt:(jint)px {
+- (void)setVerticalOffsetWithInt:(int32_t)px {
   [self setVerticalOffsetWithoutTextWithInt:px];
   [self setVerticalOffsetWithTextWithInt:px];
 }
 
-- (void)setVerticalOffsetWithoutTextWithInt:(jint)px {
+- (void)setVerticalOffsetWithoutTextWithInt:(int32_t)px {
   [((ADXBadgeState *) nil_chk(state_)) setVerticalOffsetWithoutTextWithInt:px];
   ADXBadgeDrawable_updateCenterAndBounds(self);
 }
 
-- (void)setVerticalOffsetWithTextWithInt:(jint)px {
+- (void)setVerticalOffsetWithTextWithInt:(int32_t)px {
   [((ADXBadgeState *) nil_chk(state_)) setVerticalOffsetWithTextWithInt:px];
   ADXBadgeDrawable_updateCenterAndBounds(self);
 }
 
-- (void)setAdditionalVerticalOffsetWithInt:(jint)px {
+- (void)setAdditionalVerticalOffsetWithInt:(int32_t)px {
   [((ADXBadgeState *) nil_chk(state_)) setAdditionalVerticalOffsetWithInt:px];
   ADXBadgeDrawable_updateCenterAndBounds(self);
 }
@@ -381,11 +392,11 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_updateCenterAndBounds(self);
 }
 
-- (jint)getTotalVerticalOffsetForState {
+- (int32_t)getTotalVerticalOffsetForState {
   return ADXBadgeDrawable_getTotalVerticalOffsetForState(self);
 }
 
-- (jint)getTotalHorizontalOffsetForState {
+- (int32_t)getTotalHorizontalOffsetForState {
   return ADXBadgeDrawable_getTotalHorizontalOffsetForState(self);
 }
 
@@ -403,25 +414,25 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   ADXBadgeDrawable_autoAdjustWithinGrandparentBoundsWithADView_(self, anchorView);
 }
 
-- (jfloat)getTopCutOffWithFloat:(jfloat)totalAnchorYOffset {
+- (float)getTopCutOffWithFloat:(float)totalAnchorYOffset {
   return ADXBadgeDrawable_getTopCutOffWithFloat_(self, totalAnchorYOffset);
 }
 
-- (jfloat)getLeftCutOffWithFloat:(jfloat)totalAnchorXOffset {
+- (float)getLeftCutOffWithFloat:(float)totalAnchorXOffset {
   return ADXBadgeDrawable_getLeftCutOffWithFloat_(self, totalAnchorXOffset);
 }
 
-- (jfloat)getBottomCutOffWithFloat:(jfloat)ancestorHeight
-                         withFloat:(jfloat)totalAnchorYOffset {
+- (float)getBottomCutOffWithFloat:(float)ancestorHeight
+                        withFloat:(float)totalAnchorYOffset {
   return ADXBadgeDrawable_getBottomCutOffWithFloat_withFloat_(self, ancestorHeight, totalAnchorYOffset);
 }
 
-- (jfloat)getRightCutoffWithFloat:(jfloat)ancestorWidth
-                        withFloat:(jfloat)totalAnchorXOffset {
+- (float)getRightCutoffWithFloat:(float)ancestorWidth
+                       withFloat:(float)totalAnchorXOffset {
   return ADXBadgeDrawable_getRightCutoffWithFloat_withFloat_(self, ancestorWidth, totalAnchorXOffset);
 }
 
-- (jboolean)hasBadgeContent {
+- (bool)hasBadgeContent {
   return ADXBadgeDrawable_hasBadgeContent(self);
 }
 
@@ -455,11 +466,11 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   return self;
 }
 
-- (jint)getMinimumHeight {
+- (int32_t)getMinimumHeight {
   return [((ADRect *) nil_chk(badgeBounds_)) height];
 }
 
-- (jint)getMinimumWidth {
+- (int32_t)getMinimumWidth {
   return [((ADRect *) nil_chk(badgeBounds_)) width];
 }
 
@@ -486,7 +497,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
       case 7:
       return @"sans";
       case 8:
-      return JavaLangFloat_valueOfWithFloat_((jfloat) [((ADXBadgeState *) nil_chk(state_)) getAlpha] / 255.0f);
+      return JavaLangFloat_valueOfWithFloat_((float) [((ADXBadgeState *) nil_chk(state_)) getAlpha] / 255.0f);
       case 9:
       return [((ADXBadgeState *) nil_chk(state_)) isVisible] ? @"visible" : @"gone";
       case 10:
@@ -500,7 +511,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
   return [super getAttributeWithNSString:key];
 }
 
-- (id)colorToNativeColorWithInt:(jint)color {
+- (id)colorToNativeColorWithInt:(int32_t)color {
   return ADXBadgeDrawable_colorToNativeColorWithInt_(self, color);
 }
 
@@ -713,7 +724,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
 @end
 
 void ADXBadgeDrawable_onVisibilityUpdated(ADXBadgeDrawable *self) {
-  jboolean visible = [((ADXBadgeState *) nil_chk(self->state_)) isVisible];
+  bool visible = [((ADXBadgeState *) nil_chk(self->state_)) isVisible];
   [self setVisibleWithBoolean:visible withBoolean:false];
 }
 
@@ -726,7 +737,7 @@ void ADXBadgeDrawable_updateAnchorParentToNotClipWithADView_(ADView *anchorView)
 
 void ADXBadgeDrawable_onBackgroundColorUpdated(ADXBadgeDrawable *self) {
   ADColorStateList *backgroundColorStateList = ADColorStateList_valueOfWithInt_([((ADXBadgeState *) nil_chk(self->state_)) getBackgroundColor]);
-  if ([((ADXBadgeDrawable_MaterialShapeDrawable *) nil_chk(self->shapeDrawable_)) getFillColor] != backgroundColorStateList) {
+  if (!JreObjectEqualsEquals([((ADXBadgeDrawable_MaterialShapeDrawable *) nil_chk(self->shapeDrawable_)) getFillColor], backgroundColorStateList)) {
     [self->shapeDrawable_ setFillColorWithADColorStateList:backgroundColorStateList];
     [self invalidateSelf];
   }
@@ -792,8 +803,8 @@ void ADXBadgeDrawable_updateCenterAndBounds(ADXBadgeDrawable *self) {
   }
 }
 
-jint ADXBadgeDrawable_getTotalVerticalOffsetForState(ADXBadgeDrawable *self) {
-  jint vOffset = [((ADXBadgeState *) nil_chk(self->state_)) getVerticalOffsetWithoutText];
+int32_t ADXBadgeDrawable_getTotalVerticalOffsetForState(ADXBadgeDrawable *self) {
+  int32_t vOffset = [((ADXBadgeState *) nil_chk(self->state_)) getVerticalOffsetWithoutText];
   if (ADXBadgeDrawable_hasBadgeContent(self)) {
     vOffset = [self->state_ getVerticalOffsetWithText];
     ADContext *context = JreRetainedLocalValue([((JavaLangRefWeakReference *) nil_chk(self->contextRef_)) get]);
@@ -806,8 +817,8 @@ jint ADXBadgeDrawable_getTotalVerticalOffsetForState(ADXBadgeDrawable *self) {
   return vOffset + [self->state_ getAdditionalVerticalOffset];
 }
 
-jint ADXBadgeDrawable_getTotalHorizontalOffsetForState(ADXBadgeDrawable *self) {
-  jint hOffset = ADXBadgeDrawable_hasBadgeContent(self) ? [((ADXBadgeState *) nil_chk(self->state_)) getHorizontalOffsetWithText] : [((ADXBadgeState *) nil_chk(self->state_)) getHorizontalOffsetWithoutText];
+int32_t ADXBadgeDrawable_getTotalHorizontalOffsetForState(ADXBadgeDrawable *self) {
+  int32_t hOffset = ADXBadgeDrawable_hasBadgeContent(self) ? [((ADXBadgeState *) nil_chk(self->state_)) getHorizontalOffsetWithText] : [((ADXBadgeState *) nil_chk(self->state_)) getHorizontalOffsetWithoutText];
   if (self->state_->offsetAlignmentMode_ == ADXBadgeDrawable_OFFSET_ALIGNMENT_MODE_LEGACY) {
     hOffset += ADXBadgeDrawable_hasBadgeContent(self) ? self->state_->horizontalInsetWithText_ : self->state_->horizontalInset_;
   }
@@ -830,7 +841,7 @@ void ADXBadgeDrawable_calculateCenterAndBoundsWithADRect_withADView_(ADXBadgeDra
     self->halfBadgeHeight_ = JavaLangMath_maxWithFloat_withFloat_(self->halfBadgeHeight_, [self->textDrawableHelper_ getTextHeightWithNSString:badgeContent] / 2.0f + [self->state_ getBadgeVerticalPadding]);
     self->halfBadgeWidth_ = JavaLangMath_maxWithFloat_withFloat_(self->halfBadgeWidth_, self->halfBadgeHeight_);
   }
-  jint totalVerticalOffset = ADXBadgeDrawable_getTotalVerticalOffsetForState(self);
+  int32_t totalVerticalOffset = ADXBadgeDrawable_getTotalVerticalOffsetForState(self);
   switch ([self->state_ getBadgeGravity]) {
     case ADXBadgeDrawable_BOTTOM_END:
     case ADXBadgeDrawable_BOTTOM_START:
@@ -842,7 +853,7 @@ void ADXBadgeDrawable_calculateCenterAndBoundsWithADRect_withADView_(ADXBadgeDra
     self->badgeCenterY_ = ((ADRect *) nil_chk(anchorRect))->top_ + totalVerticalOffset;
     break;
   }
-  jint totalHorizontalOffset = ADXBadgeDrawable_getTotalHorizontalOffsetForState(self);
+  int32_t totalHorizontalOffset = ADXBadgeDrawable_getTotalHorizontalOffsetForState(self);
   switch ([self->state_ getBadgeGravity]) {
     case ADXBadgeDrawable_BOTTOM_START:
     case ADXBadgeDrawable_TOP_START:
@@ -861,8 +872,8 @@ void ADXBadgeDrawable_calculateCenterAndBoundsWithADRect_withADView_(ADXBadgeDra
 }
 
 void ADXBadgeDrawable_autoAdjustWithinViewBoundsWithADView_withADView_(ADXBadgeDrawable *self, ADView *anchorView, ADView *ancestorView) {
-  jfloat totalAnchorYOffset;
-  jfloat totalAnchorXOffset;
+  float totalAnchorYOffset;
+  float totalAnchorXOffset;
   id<ADViewParent> anchorParent;
   id<ADViewParent> customAnchorParent = JreRetainedLocalValue([self getCustomBadgeParent]);
   if (customAnchorParent == nil) {
@@ -876,7 +887,7 @@ void ADXBadgeDrawable_autoAdjustWithinViewBoundsWithADView_withADView_(ADXBadgeD
     anchorParent = customAnchorParent;
   }
   id<ADViewParent> currentViewParent = JreRetainedLocalValue(anchorParent);
-  while ([currentViewParent isKindOfClass:[ADView class]] && currentViewParent != (id) ancestorView) {
+  while ([currentViewParent isKindOfClass:[ADView class]] && !JreObjectEqualsEquals(currentViewParent, ancestorView)) {
     id<ADViewParent> viewGrandparent = JreRetainedLocalValue([((id<ADViewParent>) nil_chk(currentViewParent)) getParent]);
     if (!([viewGrandparent isKindOfClass:[ADViewGroup class]])) {
       break;
@@ -889,10 +900,10 @@ void ADXBadgeDrawable_autoAdjustWithinViewBoundsWithADView_withADView_(ADXBadgeD
   if (!([currentViewParent isKindOfClass:[ADView class]])) {
     return;
   }
-  jfloat topCutOff = ADXBadgeDrawable_getTopCutOffWithFloat_(self, totalAnchorYOffset);
-  jfloat leftCutOff = ADXBadgeDrawable_getLeftCutOffWithFloat_(self, totalAnchorXOffset);
-  jfloat bottomCutOff = ADXBadgeDrawable_getBottomCutOffWithFloat_withFloat_(self, [((ADView *) nil_chk(((ADView *) cast_chk(currentViewParent, [ADView class])))) getHeight], totalAnchorYOffset);
-  jfloat rightCutOff = ADXBadgeDrawable_getRightCutoffWithFloat_withFloat_(self, [((ADView *) nil_chk(((ADView *) cast_chk(currentViewParent, [ADView class])))) getWidth], totalAnchorXOffset);
+  float topCutOff = ADXBadgeDrawable_getTopCutOffWithFloat_(self, totalAnchorYOffset);
+  float leftCutOff = ADXBadgeDrawable_getLeftCutOffWithFloat_(self, totalAnchorXOffset);
+  float bottomCutOff = ADXBadgeDrawable_getBottomCutOffWithFloat_withFloat_(self, [((ADView *) nil_chk(((ADView *) cast_chk(currentViewParent, [ADView class])))) getHeight], totalAnchorYOffset);
+  float rightCutOff = ADXBadgeDrawable_getRightCutoffWithFloat_withFloat_(self, [((ADView *) nil_chk(((ADView *) cast_chk(currentViewParent, [ADView class])))) getWidth], totalAnchorXOffset);
   if (topCutOff < 0) {
     JrePlusAssignFloatF(&self->badgeCenterY_, JavaLangMath_absWithFloat_(topCutOff));
   }
@@ -920,23 +931,23 @@ void ADXBadgeDrawable_autoAdjustWithinGrandparentBoundsWithADView_(ADXBadgeDrawa
   }
 }
 
-jfloat ADXBadgeDrawable_getTopCutOffWithFloat_(ADXBadgeDrawable *self, jfloat totalAnchorYOffset) {
+float ADXBadgeDrawable_getTopCutOffWithFloat_(ADXBadgeDrawable *self, float totalAnchorYOffset) {
   return self->badgeCenterY_ - self->halfBadgeHeight_ + totalAnchorYOffset;
 }
 
-jfloat ADXBadgeDrawable_getLeftCutOffWithFloat_(ADXBadgeDrawable *self, jfloat totalAnchorXOffset) {
+float ADXBadgeDrawable_getLeftCutOffWithFloat_(ADXBadgeDrawable *self, float totalAnchorXOffset) {
   return self->badgeCenterX_ - self->halfBadgeWidth_ + totalAnchorXOffset;
 }
 
-jfloat ADXBadgeDrawable_getBottomCutOffWithFloat_withFloat_(ADXBadgeDrawable *self, jfloat ancestorHeight, jfloat totalAnchorYOffset) {
+float ADXBadgeDrawable_getBottomCutOffWithFloat_withFloat_(ADXBadgeDrawable *self, float ancestorHeight, float totalAnchorYOffset) {
   return self->badgeCenterY_ + self->halfBadgeHeight_ - ancestorHeight + totalAnchorYOffset;
 }
 
-jfloat ADXBadgeDrawable_getRightCutoffWithFloat_withFloat_(ADXBadgeDrawable *self, jfloat ancestorWidth, jfloat totalAnchorXOffset) {
+float ADXBadgeDrawable_getRightCutoffWithFloat_withFloat_(ADXBadgeDrawable *self, float ancestorWidth, float totalAnchorXOffset) {
   return self->badgeCenterX_ + self->halfBadgeWidth_ - ancestorWidth + totalAnchorXOffset;
 }
 
-jboolean ADXBadgeDrawable_hasBadgeContent(ADXBadgeDrawable *self) {
+bool ADXBadgeDrawable_hasBadgeContent(ADXBadgeDrawable *self) {
   return [self hasText] || [self hasNumber];
 }
 
@@ -954,7 +965,7 @@ NSString *ADXBadgeDrawable_getBadgeContent(ADXBadgeDrawable *self) {
 
 NSString *ADXBadgeDrawable_getTextBadgeText(ADXBadgeDrawable *self) {
   NSString *text = JreRetainedLocalValue([self getText]);
-  jint maxCharacterCount = [self getMaxCharacterCount];
+  int32_t maxCharacterCount = [self getMaxCharacterCount];
   if (maxCharacterCount == ADXBadgeDrawable_BADGE_CONTENT_NOT_TRUNCATED) {
     return text;
   }
@@ -993,7 +1004,7 @@ void ADXBadgeDrawable_onBadgeContentUpdated(ADXBadgeDrawable *self) {
 
 void ADXBadgeDrawable_updateMaxBadgeNumber(ADXBadgeDrawable *self) {
   if ([self getMaxCharacterCount] != ADXBadgeDrawable_BADGE_CONTENT_NOT_TRUNCATED) {
-    self->maxBadgeNumber_ = JreFpToInt(JavaLangMath_powWithDouble_withDouble_(10.0, (jdouble) [self getMaxCharacterCount] - 1)) - 1;
+    self->maxBadgeNumber_ = JreFpToInt(JavaLangMath_powWithDouble_withDouble_(10.0, (double) [self getMaxCharacterCount] - 1)) - 1;
   }
   else {
     self->maxBadgeNumber_ = [self getMaxNumber];
@@ -1023,11 +1034,13 @@ ADXBadgeDrawable *create_ADXBadgeDrawable_initWithADContext_withADXBadgeState_St
   J2OBJC_CREATE_IMPL(ADXBadgeDrawable, initWithADContext_withADXBadgeState_State_, context, savedState)
 }
 
-id ADXBadgeDrawable_colorToNativeColorWithInt_(ADXBadgeDrawable *self, jint color) {
+id ADXBadgeDrawable_colorToNativeColorWithInt_(ADXBadgeDrawable *self, int32_t color) {
   return ASPluginInvoker_getColorWithNSString_(ADColor_formatColorWithInt_(color));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXBadgeDrawable)
+
+J2OBJC_NAME_MAPPING(ADXBadgeDrawable, "com.google.android.material.badge", "ADX")
 
 @implementation ADXBadgeDrawable_MaterialShapeDrawable
 
@@ -1036,11 +1049,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXBadgeDrawable)
   return self;
 }
 
-- (jfloat)getCornerSize {
+- (float)getCornerSize {
   return cornerSize_;
 }
 
-- (void)setCornerSizeWithFloat:(jfloat)cornerSize {
+- (void)setCornerSizeWithFloat:(float)cornerSize {
   self->cornerSize_ = cornerSize;
 }
 
@@ -1106,14 +1119,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXBadgeDrawable_MaterialShapeDrawable)
   return self;
 }
 
-- (jint)getColor {
+- (int32_t)getColor {
   return 0;
 }
 
-- (void)setAlphaWithInt:(jint)alpha {
+- (void)setAlphaWithInt:(int32_t)alpha {
 }
 
-- (void)setColorWithInt:(jint)badgeTextColor {
+- (void)setColorWithInt:(int32_t)badgeTextColor {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1163,21 +1176,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXBadgeDrawable_TextPaint)
   return create_ADXBadgeDrawable_TextPaint_initWithADXBadgeDrawable_(this$0_);
 }
 
-- (jfloat)getTextWidthWithNSString:(NSString *)badgeContent {
+- (float)getTextWidthWithNSString:(NSString *)badgeContent {
   if ([this$0_ getMeasureTextHelper] != nil) {
     return [((id<ADDrawable_MeasureTextHelper>) nil_chk([this$0_ getMeasureTextHelper])) getTextWidth];
   }
   return 0;
 }
 
-- (jfloat)getTextHeightWithNSString:(NSString *)badgeContent {
+- (float)getTextHeightWithNSString:(NSString *)badgeContent {
   if ([this$0_ getMeasureTextHelper] != nil) {
     return [((id<ADDrawable_MeasureTextHelper>) nil_chk([this$0_ getMeasureTextHelper])) getTextHeight];
   }
   return 0;
 }
 
-- (void)setTextSizeDirtyWithBoolean:(jboolean)b {
+- (void)setTextSizeDirtyWithBoolean:(bool)b {
 }
 
 - (void)dealloc {

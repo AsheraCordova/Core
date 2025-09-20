@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\drawable\ColorStateListFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ColorStateListFactory")
@@ -44,6 +45,7 @@ FOUNDATION_EXPORT ADColorStateList *ASColorStateListFactory_getColorWithJavaUtil
 J2OBJC_TYPE_LITERAL_HEADER(ASColorStateListFactory)
 
 @compatibility_alias ComAsheraDrawableColorStateListFactory ASColorStateListFactory;
+
 
 #endif
 

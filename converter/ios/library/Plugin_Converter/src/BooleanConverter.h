@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\BooleanConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BooleanConverter")
@@ -53,6 +54,7 @@ FOUNDATION_EXPORT ASBooleanConverter *create_ASBooleanConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASBooleanConverter)
 
 @compatibility_alias ComAsheraConverterBooleanConverter ASBooleanConverter;
+
 
 #endif
 

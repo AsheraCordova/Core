@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ToggleButton.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CompoundButton.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "ToggleButton.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADToggleButton
@@ -37,3 +48,5 @@ void ADToggleButton_initWithASIWidget_(ADToggleButton *self, id<ASIWidget> widge
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADToggleButton)
+
+J2OBJC_NAME_MAPPING(ADToggleButton, "r.android.widget", "AD")

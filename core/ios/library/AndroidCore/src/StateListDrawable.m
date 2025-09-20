@@ -3,22 +3,35 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\StateListDrawable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Drawable.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "StateListDrawable.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADStateListDrawable () {
  @public
   IOSObjectArray *mStateSets_;
   IOSObjectArray *mDrawables_;
-  jint mNumChildren_;
+  int32_t mNumChildren_;
 }
 
 @end
@@ -26,11 +39,11 @@
 J2OBJC_FIELD_SETTER(ADStateListDrawable, mStateSets_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(ADStateListDrawable, mDrawables_, IOSObjectArray *)
 
-__attribute__((unused)) static jint ADStateListDrawable_getCapacity(ADStateListDrawable *self);
+__attribute__((unused)) static int32_t ADStateListDrawable_getCapacity(ADStateListDrawable *self);
 
-__attribute__((unused)) static jint ADStateListDrawable_addChildWithADDrawable_(ADStateListDrawable *self, ADDrawable *dr);
+__attribute__((unused)) static int32_t ADStateListDrawable_addChildWithADDrawable_(ADStateListDrawable *self, ADDrawable *dr);
 
-__attribute__((unused)) static jint ADStateListDrawable_getChildCount(ADStateListDrawable *self);
+__attribute__((unused)) static int32_t ADStateListDrawable_getChildCount(ADStateListDrawable *self);
 
 @implementation ADStateListDrawable
 
@@ -39,7 +52,7 @@ __attribute__((unused)) static jint ADStateListDrawable_getChildCount(ADStateLis
     return nil;
   }
   id<JavaUtilList> objects = create_JavaUtilArrayList_init();
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(mDrawables_))->size_; i++) {
+  for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(mDrawables_))->size_; i++) {
     ADDrawable *drawable = IOSObjectArray_Get(mDrawables_, i);
     if (drawable != nil) {
       [objects addWithId:[drawable getDrawable]];
@@ -75,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [currentDrawable setDrawableWithId:drawable];
 }
 
-- (jint)getCapacity {
+- (int32_t)getCapacity {
   return ADStateListDrawable_getCapacity(self);
 }
 
@@ -88,31 +101,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (ADDrawable *)getCurrentDrawable {
-  jint idx = [self indexOfStateSetWithIntArray:[self getState]];
+  int32_t idx = [self indexOfStateSetWithIntArray:[self getState]];
   if (idx < 0) {
     idx = [self indexOfStateSetWithIntArray:JreLoadStatic(ADDrawable, WILD_CARD)];
   }
   return idx < 0 ? nil : IOSObjectArray_Get(nil_chk(mDrawables_), idx);
 }
 
-- (jboolean)isStateful {
+- (bool)isStateful {
   return true;
 }
 
-- (jint)addChildWithADDrawable:(ADDrawable *)dr {
+- (int32_t)addChildWithADDrawable:(ADDrawable *)dr {
   return ADStateListDrawable_addChildWithADDrawable_(self, dr);
 }
 
-- (void)growArrayWithInt:(jint)oldSize
-                 withInt:(jint)newSize {
+- (void)growArrayWithInt:(int32_t)oldSize
+                 withInt:(int32_t)newSize {
   IOSObjectArray *newDrawables = [IOSObjectArray arrayWithLength:newSize type:ADDrawable_class_()];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mDrawables_, 0, newDrawables, 0, oldSize);
   JreStrongAssign(&mDrawables_, newDrawables);
 }
 
-- (jint)addStateSetWithIntArray:(IOSIntArray *)stateSet
-                 withADDrawable:(ADDrawable *)drawable {
-  jint pos = ADStateListDrawable_addChildWithADDrawable_(self, drawable);
+- (int32_t)addStateSetWithIntArray:(IOSIntArray *)stateSet
+                    withADDrawable:(ADDrawable *)drawable {
+  int32_t pos = ADStateListDrawable_addChildWithADDrawable_(self, drawable);
   if (pos >= ((IOSObjectArray *) nil_chk(mStateSets_))->size_) {
     [self growArrayStateSetWithInt:pos withInt:pos + 10];
   }
@@ -120,29 +133,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   return pos;
 }
 
-- (void)growArrayStateSetWithInt:(jint)oldSize
-                         withInt:(jint)newSize {
+- (void)growArrayStateSetWithInt:(int32_t)oldSize
+                         withInt:(int32_t)newSize {
   IOSObjectArray *newStateSets = [IOSObjectArray arrayWithLength:newSize type:IOSClass_intArray(1)];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mStateSets_, 0, newStateSets, 0, oldSize);
   JreStrongAssign(&mStateSets_, newStateSets);
 }
 
-- (jboolean)onStateChangeWithIntArray:(IOSIntArray *)stateSet {
-  jint idx = [self indexOfStateSetWithIntArray:stateSet];
+- (bool)onStateChangeWithIntArray:(IOSIntArray *)stateSet {
+  int32_t idx = [self indexOfStateSetWithIntArray:stateSet];
   if (idx < 0) {
     idx = [self indexOfStateSetWithIntArray:JreLoadStatic(ADDrawable, WILD_CARD)];
   }
   return [self selectDrawableWithInt:idx];
 }
 
-- (jboolean)selectDrawableWithInt:(jint)index {
+- (bool)selectDrawableWithInt:(int32_t)index {
   return true;
 }
 
-- (jint)indexOfStateSetWithIntArray:(IOSIntArray *)stateSet {
+- (int32_t)indexOfStateSetWithIntArray:(IOSIntArray *)stateSet {
   IOSObjectArray *stateSets = mStateSets_;
-  jint N = ADStateListDrawable_getChildCount(self);
-  for (jint i = 0; i < N; i++) {
+  int32_t N = ADStateListDrawable_getChildCount(self);
+  for (int32_t i = 0; i < N; i++) {
     if (ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(IOSObjectArray_Get(nil_chk(stateSets), i), stateSet)) {
       return i;
     }
@@ -150,23 +163,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   return -1;
 }
 
-- (jint)getChildCount {
+- (int32_t)getChildCount {
   return ADStateListDrawable_getChildCount(self);
 }
 
-+ (jboolean)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec {
++ (bool)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec {
   return ADStateListDrawable_isWildCardWithIntArray_(stateSetOrSpec);
 }
 
-+ (jboolean)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
-                           withIntArray:(IOSIntArray *)stateSet {
++ (bool)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
+                       withIntArray:(IOSIntArray *)stateSet {
   return ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(stateSpec, stateSet);
 }
 
-- (void)setBoundsWithInt:(jint)left
-                 withInt:(jint)top
-                 withInt:(jint)right
-                 withInt:(jint)bottom {
+- (void)setBoundsWithInt:(int32_t)left
+                 withInt:(int32_t)top
+                 withInt:(int32_t)right
+                 withInt:(int32_t)bottom {
   [super setBoundsWithInt:left withInt:top withInt:right withInt:bottom];
   if (mDrawables_ != nil) {
     {
@@ -174,7 +187,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       ADDrawable * const *b__ = a__->buffer_;
       ADDrawable * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        ADDrawable *drawable = *b__++;
+        ADDrawable *drawable = RETAIN_AND_AUTORELEASE(*b__++);
         if (drawable != nil) {
           [drawable setBoundsWithInt:left withInt:top withInt:right withInt:bottom];
         }
@@ -261,12 +274,12 @@ ADStateListDrawable *create_ADStateListDrawable_init() {
   J2OBJC_CREATE_IMPL(ADStateListDrawable, init)
 }
 
-jint ADStateListDrawable_getCapacity(ADStateListDrawable *self) {
+int32_t ADStateListDrawable_getCapacity(ADStateListDrawable *self) {
   return ((IOSObjectArray *) nil_chk(self->mDrawables_))->size_;
 }
 
-jint ADStateListDrawable_addChildWithADDrawable_(ADStateListDrawable *self, ADDrawable *dr) {
-  jint pos = self->mNumChildren_;
+int32_t ADStateListDrawable_addChildWithADDrawable_(ADStateListDrawable *self, ADDrawable *dr) {
+  int32_t pos = self->mNumChildren_;
   if (pos >= ((IOSObjectArray *) nil_chk(self->mDrawables_))->size_) {
     [self growArrayWithInt:pos withInt:pos + 10];
   }
@@ -275,28 +288,28 @@ jint ADStateListDrawable_addChildWithADDrawable_(ADStateListDrawable *self, ADDr
   return pos;
 }
 
-jint ADStateListDrawable_getChildCount(ADStateListDrawable *self) {
+int32_t ADStateListDrawable_getChildCount(ADStateListDrawable *self) {
   return self->mNumChildren_;
 }
 
-jboolean ADStateListDrawable_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec) {
+bool ADStateListDrawable_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec) {
   ADStateListDrawable_initialize();
   return ((IOSIntArray *) nil_chk(stateSetOrSpec))->size_ == 0 || IOSIntArray_Get(stateSetOrSpec, 0) == 0;
 }
 
-jboolean ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet) {
+bool ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet) {
   ADStateListDrawable_initialize();
   if (stateSet == nil) {
     return (stateSpec == nil || ADStateListDrawable_isWildCardWithIntArray_(stateSpec));
   }
-  jint stateSpecSize = ((IOSIntArray *) nil_chk(stateSpec))->size_;
-  jint stateSetSize = stateSet->size_;
-  for (jint i = 0; i < stateSpecSize; i++) {
-    jint stateSpecState = IOSIntArray_Get(stateSpec, i);
+  int32_t stateSpecSize = ((IOSIntArray *) nil_chk(stateSpec))->size_;
+  int32_t stateSetSize = stateSet->size_;
+  for (int32_t i = 0; i < stateSpecSize; i++) {
+    int32_t stateSpecState = IOSIntArray_Get(stateSpec, i);
     if (stateSpecState == 0) {
       return true;
     }
-    jboolean mustMatch;
+    bool mustMatch;
     if (stateSpecState > 0) {
       mustMatch = true;
     }
@@ -304,9 +317,9 @@ jboolean ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(IOSIntArr
       mustMatch = false;
       stateSpecState = -stateSpecState;
     }
-    jboolean found = false;
-    for (jint j = 0; j < stateSetSize; j++) {
-      jint state = IOSIntArray_Get(stateSet, j);
+    bool found = false;
+    for (int32_t j = 0; j < stateSetSize; j++) {
+      int32_t state = IOSIntArray_Get(stateSet, j);
       if (state == 0) {
         if (mustMatch) {
           return false;
@@ -333,3 +346,5 @@ jboolean ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(IOSIntArr
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADStateListDrawable)
+
+J2OBJC_NAME_MAPPING(ADStateListDrawable, "r.android.graphics.drawable", "AD")

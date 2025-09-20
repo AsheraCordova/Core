@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\MaxValue.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSClass.h"
@@ -12,25 +17,32 @@
 #include "MaxValue.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/NumberFormatException.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASMaxValue () {
  @public
-  jint mMaxValue_;
+  int32_t mMaxValue_;
 }
 
-- (instancetype)initWithInt:(jint)maxValue;
+- (instancetype)initWithInt:(int32_t)maxValue;
 
 @end
 
-__attribute__((unused)) static void ASMaxValue_initWithInt_(ASMaxValue *self, jint maxValue);
+__attribute__((unused)) static void ASMaxValue_initWithInt_(ASMaxValue *self, int32_t maxValue);
 
-__attribute__((unused)) static ASMaxValue *new_ASMaxValue_initWithInt_(jint maxValue) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASMaxValue *new_ASMaxValue_initWithInt_(int32_t maxValue) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASMaxValue *create_ASMaxValue_initWithInt_(jint maxValue);
+__attribute__((unused)) static ASMaxValue *create_ASMaxValue_initWithInt_(int32_t maxValue);
 
 @implementation ASMaxValue
 
@@ -45,7 +57,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ASMaxValue_initWithInt_(JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(nil_chk(argument), 0)));
 }
 
-- (instancetype)initWithInt:(jint)maxValue {
+- (instancetype)initWithInt:(int32_t)maxValue {
   ASMaxValue_initWithInt_(self, maxValue);
   return self;
 }
@@ -55,9 +67,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return NSString_java_formatWithNSString_withNSObjectArray_(res, [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(mMaxValue_) } count:1 type:NSObject_class_()]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   @try {
@@ -108,17 +120,19 @@ ASMaxValue *create_ASMaxValue_init() {
   J2OBJC_CREATE_IMPL(ASMaxValue, init)
 }
 
-void ASMaxValue_initWithInt_(ASMaxValue *self, jint maxValue) {
+void ASMaxValue_initWithInt_(ASMaxValue *self, int32_t maxValue) {
   ASBaseValidator_init(self);
   self->mMaxValue_ = maxValue;
 }
 
-ASMaxValue *new_ASMaxValue_initWithInt_(jint maxValue) {
+ASMaxValue *new_ASMaxValue_initWithInt_(int32_t maxValue) {
   J2OBJC_NEW_IMPL(ASMaxValue, initWithInt_, maxValue)
 }
 
-ASMaxValue *create_ASMaxValue_initWithInt_(jint maxValue) {
+ASMaxValue *create_ASMaxValue_initWithInt_(int32_t maxValue) {
   J2OBJC_CREATE_IMPL(ASMaxValue, initWithInt_, maxValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMaxValue)
+
+J2OBJC_NAME_MAPPING(ASMaxValue, "com.ashera.validations", "AS")

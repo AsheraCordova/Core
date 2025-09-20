@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IsRadioButton.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IsRadioButton")
@@ -16,11 +17,14 @@
 #if !defined (ASIsRadioButton_) && (INCLUDE_ALL_IsRadioButton || defined(INCLUDE_ASIsRadioButton))
 #define ASIsRadioButton_
 
+@class JavaLangBoolean;
+@class NSString;
+
 @protocol ASIsRadioButton < JavaObject >
 
-- (void)setCheckedWithBoolean:(jboolean)checked;
+- (void)setCheckedWithBoolean:(bool)checked;
 
-- (jboolean)isChecked;
+- (bool)isChecked;
 
 - (void)addCheckedListenerWithId:(id)listener
                     withNSString:(NSString *)id_;
@@ -32,6 +36,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIsRadioButton)
 J2OBJC_TYPE_LITERAL_HEADER(ASIsRadioButton)
 
 #define ComAsheraWidgetIsRadioButton ASIsRadioButton
+
 
 #endif
 

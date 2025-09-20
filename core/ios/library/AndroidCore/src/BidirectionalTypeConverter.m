@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\BidirectionalTypeConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BidirectionalTypeConverter.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TypeConverter.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADBidirectionalTypeConverter () {
@@ -42,6 +53,7 @@ __attribute__((unused)) static ADBidirectionalTypeConverter_InvertedConverter *n
 __attribute__((unused)) static ADBidirectionalTypeConverter_InvertedConverter *create_ADBidirectionalTypeConverter_InvertedConverter_initWithADBidirectionalTypeConverter_(ADBidirectionalTypeConverter *converter);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADBidirectionalTypeConverter_InvertedConverter)
+
 
 @implementation ADBidirectionalTypeConverter
 
@@ -97,6 +109,8 @@ void ADBidirectionalTypeConverter_initWithIOSClass_withIOSClass_(ADBidirectional
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBidirectionalTypeConverter)
+
+J2OBJC_NAME_MAPPING(ADBidirectionalTypeConverter, "r.android.animation", "AD")
 
 @implementation ADBidirectionalTypeConverter_InvertedConverter
 

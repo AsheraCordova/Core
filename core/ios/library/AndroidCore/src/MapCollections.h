@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\MapCollections.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MapCollections")
@@ -20,6 +21,8 @@
 @class ADMapCollections_KeySet;
 @class ADMapCollections_ValuesCollection;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilCollection;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -37,11 +40,11 @@
 
 #pragma mark Public
 
-+ (jboolean)containsAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
-                      withJavaUtilCollection:(id<JavaUtilCollection>)collection;
++ (bool)containsAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
+                  withJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-+ (jboolean)equalsSetHelperWithJavaUtilSet:(id<JavaUtilSet>)set
-                                    withId:(id)object;
++ (bool)equalsSetHelperWithJavaUtilSet:(id<JavaUtilSet>)set
+                                withId:(id)object;
 
 - (id<JavaUtilSet>)getEntrySet;
 
@@ -49,38 +52,38 @@
 
 - (id<JavaUtilCollection>)getValues;
 
-+ (jboolean)removeAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
-                    withJavaUtilCollection:(id<JavaUtilCollection>)collection;
++ (bool)removeAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
+                withJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-+ (jboolean)retainAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
-                    withJavaUtilCollection:(id<JavaUtilCollection>)collection;
++ (bool)retainAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
+                withJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (IOSObjectArray *)toArrayHelperWithInt:(jint)offset;
+- (IOSObjectArray *)toArrayHelperWithInt:(int32_t)offset;
 
 - (IOSObjectArray *)toArrayHelperWithNSObjectArray:(IOSObjectArray *)array
-                                           withInt:(jint)offset;
+                                           withInt:(int32_t)offset;
 
 #pragma mark Protected
 
 - (void)colClear;
 
-- (id)colGetEntryWithInt:(jint)index
-                 withInt:(jint)offset;
+- (id)colGetEntryWithInt:(int32_t)index
+                 withInt:(int32_t)offset;
 
 - (id<JavaUtilMap>)colGetMap;
 
-- (jint)colGetSize;
+- (int32_t)colGetSize;
 
-- (jint)colIndexOfKeyWithId:(id)key;
+- (int32_t)colIndexOfKeyWithId:(id)key;
 
-- (jint)colIndexOfValueWithId:(id)key;
+- (int32_t)colIndexOfValueWithId:(id)key;
 
 - (void)colPutWithId:(id)key
               withId:(id)value;
 
-- (void)colRemoveAtWithInt:(jint)index;
+- (void)colRemoveAtWithInt:(int32_t)index;
 
-- (id)colSetValueWithInt:(jint)index
+- (id)colSetValueWithInt:(int32_t)index
                   withId:(id)value;
 
 #pragma mark Package-Private
@@ -101,17 +104,18 @@ J2OBJC_FIELD_SETTER(ADMapCollections, mValues_, ADMapCollections_ValuesCollectio
 
 FOUNDATION_EXPORT void ADMapCollections_initPackagePrivate(ADMapCollections *self);
 
-FOUNDATION_EXPORT jboolean ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
+FOUNDATION_EXPORT bool ADMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
 
-FOUNDATION_EXPORT jboolean ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
+FOUNDATION_EXPORT bool ADMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
 
-FOUNDATION_EXPORT jboolean ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
+FOUNDATION_EXPORT bool ADMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
 
-FOUNDATION_EXPORT jboolean ADMapCollections_equalsSetHelperWithJavaUtilSet_withId_(id<JavaUtilSet> set, id object);
+FOUNDATION_EXPORT bool ADMapCollections_equalsSetHelperWithJavaUtilSet_withId_(id<JavaUtilSet> set, id object);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections)
 
 @compatibility_alias RAndroidUtilMapCollections ADMapCollections;
+
 
 #endif
 
@@ -123,19 +127,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections)
 #include "java/util/Iterator.h"
 
 @class ADMapCollections;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilFunctionConsumer;
 
 @interface ADMapCollections_ArrayIterator : NSObject < JavaUtilIterator > {
  @public
-  jint mOffset_;
-  jint mSize_;
-  jint mIndex_;
-  jboolean mCanRemove_;
+  int32_t mOffset_;
+  int32_t mSize_;
+  int32_t mIndex_;
+  bool mCanRemove_;
 }
 
 #pragma mark Public
 
-- (jboolean)hasNext;
+- (bool)hasNext;
 
 - (id)next;
 
@@ -144,7 +150,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections)
 #pragma mark Package-Private
 
 - (instancetype)initWithADMapCollections:(ADMapCollections *)outer$
-                                 withInt:(jint)offset;
+                                 withInt:(int32_t)offset;
 
 // Disallowed inherited constructors, do not use.
 
@@ -154,13 +160,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections)
 
 J2OBJC_EMPTY_STATIC_INIT(ADMapCollections_ArrayIterator)
 
-FOUNDATION_EXPORT void ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections_ArrayIterator *self, ADMapCollections *outer$, jint offset);
+FOUNDATION_EXPORT void ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections_ArrayIterator *self, ADMapCollections *outer$, int32_t offset);
 
-FOUNDATION_EXPORT ADMapCollections_ArrayIterator *new_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, jint offset) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADMapCollections_ArrayIterator *new_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, int32_t offset) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADMapCollections_ArrayIterator *create_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, jint offset);
+FOUNDATION_EXPORT ADMapCollections_ArrayIterator *create_ADMapCollections_ArrayIterator_initWithADMapCollections_withInt_(ADMapCollections *outer$, int32_t offset);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_ArrayIterator)
+
 
 #endif
 
@@ -176,18 +183,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_ArrayIterator)
 #include "java/util/Map.h"
 
 @class ADMapCollections;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilFunctionConsumer;
 
 @interface ADMapCollections_MapIterator : NSObject < JavaUtilIterator, JavaUtilMap_Entry > {
  @public
-  jint mEnd_;
-  jint mIndex_;
-  jboolean mEntryValid_;
+  int32_t mEnd_;
+  int32_t mIndex_;
+  bool mEntryValid_;
 }
 
 #pragma mark Public
 
-- (jboolean)isEqual:(id)o;
+- (bool)isEqual:(id)o;
 
 - (id)getKey;
 
@@ -195,7 +205,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_ArrayIterator)
 
 - (NSUInteger)hash;
 
-- (jboolean)hasNext;
+- (bool)hasNext;
 
 - (id<JavaUtilMap_Entry>)next;
 
@@ -225,6 +235,7 @@ FOUNDATION_EXPORT ADMapCollections_MapIterator *create_ADMapCollections_MapItera
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_MapIterator)
 
+
 #endif
 
 #if !defined (ADMapCollections_EntrySet_) && (INCLUDE_ALL_MapCollections || defined(INCLUDE_ADMapCollections_EntrySet))
@@ -236,8 +247,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_MapIterator)
 
 @class ADMapCollections;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilCollection;
 @protocol JavaUtilFunctionConsumer;
+@protocol JavaUtilFunctionIntFunction;
 @protocol JavaUtilFunctionPredicate;
 @protocol JavaUtilIterator;
 @protocol JavaUtilMap_Entry;
@@ -248,31 +262,31 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_MapIterator)
 
 #pragma mark Public
 
-- (jboolean)addWithId:(id<JavaUtilMap_Entry>)object;
+- (bool)addWithId:(id<JavaUtilMap_Entry>)object;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
 - (void)clear;
 
-- (jboolean)containsWithId:(id)o;
+- (bool)containsWithId:(id)o;
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jboolean)isEqual:(id)object;
+- (bool)isEqual:(id)object;
 
 - (NSUInteger)hash;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (jboolean)removeWithId:(id)object;
+- (bool)removeWithId:(id)object;
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jint)size;
+- (int32_t)size;
 
 - (IOSObjectArray *)toArray;
 
@@ -298,6 +312,7 @@ FOUNDATION_EXPORT ADMapCollections_EntrySet *create_ADMapCollections_EntrySet_in
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_EntrySet)
 
+
 #endif
 
 #if !defined (ADMapCollections_KeySet_) && (INCLUDE_ALL_MapCollections || defined(INCLUDE_ADMapCollections_KeySet))
@@ -309,8 +324,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_EntrySet)
 
 @class ADMapCollections;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilCollection;
 @protocol JavaUtilFunctionConsumer;
+@protocol JavaUtilFunctionIntFunction;
 @protocol JavaUtilFunctionPredicate;
 @protocol JavaUtilIterator;
 @protocol JavaUtilSpliterator;
@@ -320,31 +338,31 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_EntrySet)
 
 #pragma mark Public
 
-- (jboolean)addWithId:(id)object;
+- (bool)addWithId:(id)object;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
 - (void)clear;
 
-- (jboolean)containsWithId:(id)object;
+- (bool)containsWithId:(id)object;
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jboolean)isEqual:(id)object;
+- (bool)isEqual:(id)object;
 
 - (NSUInteger)hash;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (jboolean)removeWithId:(id)object;
+- (bool)removeWithId:(id)object;
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jint)size;
+- (int32_t)size;
 
 - (IOSObjectArray *)toArray;
 
@@ -370,6 +388,7 @@ FOUNDATION_EXPORT ADMapCollections_KeySet *create_ADMapCollections_KeySet_initWi
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_KeySet)
 
+
 #endif
 
 #if !defined (ADMapCollections_ValuesCollection_) && (INCLUDE_ALL_MapCollections || defined(INCLUDE_ADMapCollections_ValuesCollection))
@@ -381,7 +400,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_KeySet)
 
 @class ADMapCollections;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilFunctionConsumer;
+@protocol JavaUtilFunctionIntFunction;
 @protocol JavaUtilFunctionPredicate;
 @protocol JavaUtilIterator;
 @protocol JavaUtilSpliterator;
@@ -391,27 +413,27 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_KeySet)
 
 #pragma mark Public
 
-- (jboolean)addWithId:(id)object;
+- (bool)addWithId:(id)object;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
 - (void)clear;
 
-- (jboolean)containsWithId:(id)object;
+- (bool)containsWithId:(id)object;
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (jboolean)removeWithId:(id)object;
+- (bool)removeWithId:(id)object;
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (jint)size;
+- (int32_t)size;
 
 - (IOSObjectArray *)toArray;
 
@@ -436,6 +458,7 @@ FOUNDATION_EXPORT ADMapCollections_ValuesCollection *new_ADMapCollections_Values
 FOUNDATION_EXPORT ADMapCollections_ValuesCollection *create_ADMapCollections_ValuesCollection_initWithADMapCollections_(ADMapCollections *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMapCollections_ValuesCollection)
+
 
 #endif
 

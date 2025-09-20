@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\IMessenger.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IMessenger")
@@ -35,6 +36,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADIMessenger)
 J2OBJC_TYPE_LITERAL_HEADER(ADIMessenger)
 
 #define RAndroidOsIMessenger ADIMessenger
+
 
 #endif
 
@@ -72,6 +74,7 @@ FOUNDATION_EXPORT ADIMessenger_Stub *create_ADIMessenger_Stub_init(void);
 FOUNDATION_EXPORT id<ADIMessenger> ADIMessenger_Stub_asInterfaceWithADIBinder_(id<ADIBinder> target);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIMessenger_Stub)
+
 
 #endif
 

@@ -3,11 +3,25 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\TokenMgrError.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "TokenMgrError.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Error.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/StringBuffer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 /*!
@@ -15,9 +29,9 @@
  Increment only if the <i>serialized</i> form of the
   class changes.
  */
-inline jlong CSSTokenMgrError_get_serialVersionUID(void);
+inline int64_t CSSTokenMgrError_get_serialVersionUID(void);
 #define CSSTokenMgrError_serialVersionUID 1LL
-J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, serialVersionUID, int64_t)
 
 @implementation CSSTokenMgrError
 
@@ -25,12 +39,12 @@ J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, serialVersionUID, jlong)
   return CSSTokenMgrError_addEscapesWithNSString_(str);
 }
 
-+ (NSString *)LexicalErrorWithBoolean:(jboolean)EOFSeen
-                              withInt:(jint)lexState
-                              withInt:(jint)errorLine
-                              withInt:(jint)errorColumn
++ (NSString *)LexicalErrorWithBoolean:(bool)EOFSeen
+                              withInt:(int32_t)lexState
+                              withInt:(int32_t)errorLine
+                              withInt:(int32_t)errorColumn
                          withNSString:(NSString *)errorAfter
-                             withChar:(jchar)curChar {
+                             withChar:(unichar)curChar {
   return CSSTokenMgrError_LexicalErrorWithBoolean_withInt_withInt_withInt_withNSString_withChar_(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar);
 }
 
@@ -44,18 +58,18 @@ J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, serialVersionUID, jlong)
 }
 
 - (instancetype)initPackagePrivateWithNSString:(NSString *)message
-                                       withInt:(jint)reason {
+                                       withInt:(int32_t)reason {
   CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(self, message, reason);
   return self;
 }
 
-- (instancetype)initPackagePrivateWithBoolean:(jboolean)EOFSeen
-                                      withInt:(jint)lexState
-                                      withInt:(jint)errorLine
-                                      withInt:(jint)errorColumn
+- (instancetype)initPackagePrivateWithBoolean:(bool)EOFSeen
+                                      withInt:(int32_t)lexState
+                                      withInt:(int32_t)errorLine
+                                      withInt:(int32_t)errorColumn
                                  withNSString:(NSString *)errorAfter
-                                     withChar:(jchar)curChar
-                                      withInt:(jint)reason {
+                                     withChar:(unichar)curChar
+                                      withInt:(int32_t)reason {
   CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(self, EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar, reason);
   return self;
 }
@@ -97,8 +111,8 @@ J2OBJC_STATIC_FIELD_CONSTANT(CSSTokenMgrError, serialVersionUID, jlong)
 NSString *CSSTokenMgrError_addEscapesWithNSString_(NSString *str) {
   CSSTokenMgrError_initialize();
   JavaLangStringBuffer *retval = create_JavaLangStringBuffer_init();
-  jchar ch;
-  for (jint i = 0; i < [((NSString *) nil_chk(str)) java_length]; i++) {
+  unichar ch;
+  for (int32_t i = 0; i < [((NSString *) nil_chk(str)) java_length]; i++) {
     switch ([str charAtWithInt:i]) {
       case 0:
       continue;
@@ -127,7 +141,7 @@ NSString *CSSTokenMgrError_addEscapesWithNSString_(NSString *str) {
       [retval appendWithNSString:@"\\\\"];
       continue;
       default:
-      if ((ch = [str charAtWithInt:i]) < (jint) 0x20 || ch > (jint) 0x7e) {
+      if ((ch = [str charAtWithInt:i]) < (int32_t) 0x20 || ch > (int32_t) 0x7e) {
         NSString *s = JreStrcat("$$", @"0000", JavaLangInteger_toStringWithInt_withInt_(ch, 16));
         [retval appendWithNSString:JreStrcat("$$", @"\\u", [s java_substring:[s java_length] - 4 endIndex:[s java_length]])];
       }
@@ -140,9 +154,9 @@ NSString *CSSTokenMgrError_addEscapesWithNSString_(NSString *str) {
   return [retval description];
 }
 
-NSString *CSSTokenMgrError_LexicalErrorWithBoolean_withInt_withInt_withInt_withNSString_withChar_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar) {
+NSString *CSSTokenMgrError_LexicalErrorWithBoolean_withInt_withInt_withInt_withNSString_withChar_(bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar) {
   CSSTokenMgrError_initialize();
-  return (JreStrcat("$I$I$$$$C", @"Lexical error at line ", errorLine, @", column ", errorColumn, @".  Encountered: ", (EOFSeen ? @"<EOF> " : JreStrcat("$$I$", (JreStrcat("C$C", '"', CSSTokenMgrError_addEscapesWithNSString_(NSString_java_valueOfChar_(curChar)), '"')), @" (", (jint) curChar, @"), ")), @"after : \"", CSSTokenMgrError_addEscapesWithNSString_(errorAfter), '"'));
+  return (JreStrcat("$I$I$$$$C", @"Lexical error at line ", errorLine, @", column ", errorColumn, @".  Encountered: ", (EOFSeen ? @"<EOF> " : JreStrcat("$$I$", (JreStrcat("C$C", '"', CSSTokenMgrError_addEscapesWithNSString_(NSString_java_valueOfChar_(curChar)), '"')), @" (", (int32_t) curChar, @"), ")), @"after : \"", CSSTokenMgrError_addEscapesWithNSString_(errorAfter), '"'));
 }
 
 void CSSTokenMgrError_initPackagePrivate(CSSTokenMgrError *self) {
@@ -157,28 +171,28 @@ CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivate() {
   J2OBJC_CREATE_IMPL(CSSTokenMgrError, initPackagePrivate)
 }
 
-void CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(CSSTokenMgrError *self, NSString *message, jint reason) {
+void CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(CSSTokenMgrError *self, NSString *message, int32_t reason) {
   JavaLangError_initWithNSString_(self, message);
   self->errorCode_ = reason;
 }
 
-CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, jint reason) {
+CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, int32_t reason) {
   J2OBJC_NEW_IMPL(CSSTokenMgrError, initPackagePrivateWithNSString_withInt_, message, reason)
 }
 
-CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, jint reason) {
+CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(NSString *message, int32_t reason) {
   J2OBJC_CREATE_IMPL(CSSTokenMgrError, initPackagePrivateWithNSString_withInt_, message, reason)
 }
 
-void CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(CSSTokenMgrError *self, jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) {
+void CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(CSSTokenMgrError *self, bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar, int32_t reason) {
   CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(self, CSSTokenMgrError_LexicalErrorWithBoolean_withInt_withInt_withInt_withNSString_withChar_(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
 }
 
-CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) {
+CSSTokenMgrError *new_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar, int32_t reason) {
   J2OBJC_NEW_IMPL(CSSTokenMgrError, initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_, EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar, reason)
 }
 
-CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) {
+CSSTokenMgrError *create_CSSTokenMgrError_initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(bool EOFSeen, int32_t lexState, int32_t errorLine, int32_t errorColumn, NSString *errorAfter, unichar curChar, int32_t reason) {
   J2OBJC_CREATE_IMPL(CSSTokenMgrError, initPackagePrivateWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_, EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar, reason)
 }
 

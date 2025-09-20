@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\annotation\VisibleForTesting.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "VisibleForTesting.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADXVisibleForTesting
@@ -18,7 +31,7 @@
   return @"@androidx.annotation.VisibleForTesting()";
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -39,3 +52,5 @@ id<ADXVisibleForTesting> create_ADXVisibleForTesting() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADXVisibleForTesting)
+
+J2OBJC_NAME_MAPPING(ADXVisibleForTesting, "androidx.annotation", "ADX")

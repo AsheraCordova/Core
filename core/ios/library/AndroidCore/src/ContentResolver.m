@@ -3,12 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\ContentResolver.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AssetFileDescriptor.h"
 #include "ContentResolver.h"
 #include "Cursor.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Uri.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 NSString *ADContentResolver_SCHEME_CONTENT = @"";
@@ -81,3 +92,5 @@ ADContentResolver *create_ADContentResolver_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADContentResolver)
+
+J2OBJC_NAME_MAPPING(ADContentResolver, "r.android.content", "AD")

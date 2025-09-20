@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\BaseAdapter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseAdapter")
@@ -34,6 +35,8 @@
 @class ADView;
 @class ADViewGroup;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief Common base class of common implementation for an <code>Adapter</code> that can be
@@ -47,23 +50,23 @@
 
 - (instancetype)init;
 
-- (jboolean)areAllItemsEnabled;
+- (bool)areAllItemsEnabled;
 
 - (IOSObjectArray *)getAutofillOptions;
 
-- (ADView *)getDropDownViewWithInt:(jint)position
+- (ADView *)getDropDownViewWithInt:(int32_t)position
                         withADView:(ADView *)convertView
                    withADViewGroup:(ADViewGroup *)parent;
 
-- (jint)getItemViewTypeWithInt:(jint)position;
+- (int32_t)getItemViewTypeWithInt:(int32_t)position;
 
-- (jint)getViewTypeCount;
+- (int32_t)getViewTypeCount;
 
-- (jboolean)hasStableIds;
+- (bool)hasStableIds;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
-- (jboolean)isEnabledWithInt:(jint)position;
+- (bool)isEnabledWithInt:(int32_t)position;
 
 /*!
  @brief Notifies the attached observers that the underlying data has been changed
@@ -96,6 +99,7 @@ FOUNDATION_EXPORT void ADBaseAdapter_init(ADBaseAdapter *self);
 J2OBJC_TYPE_LITERAL_HEADER(ADBaseAdapter)
 
 @compatibility_alias RAndroidWidgetBaseAdapter ADBaseAdapter;
+
 
 #endif
 

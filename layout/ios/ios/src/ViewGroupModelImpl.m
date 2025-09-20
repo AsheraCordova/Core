@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewGroupModelImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HasWidgets.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
@@ -15,8 +20,16 @@
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/Map.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASViewGroupModelImpl ()
@@ -213,7 +226,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASViewGroupModelImpl_getModelDescPathWithASIWidget_(w);
 }
 
-+ (jboolean)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key {
++ (bool)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key {
   return ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(key);
 }
 
@@ -410,7 +423,7 @@ void ASViewGroupModelImpl_removeModelAtIndexWithASIWidget_withId_(id<ASIWidget> 
 void ASViewGroupModelImpl_addModelByIndexWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewGroupModelImpl_initialize();
   id<JavaUtilMap> model = ASPluginInvoker_getMapWithId_(objValue);
-  jint index = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_([((id<JavaUtilMap>) nil_chk(model)) getWithId:@"index"]))) intValue];
+  int32_t index = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_([((id<JavaUtilMap>) nil_chk(model)) getWithId:@"index"]))) intValue];
   [((id<ASHasWidgets>) nil_chk(((id<ASHasWidgets>) cast_check(w, ASHasWidgets_class_())))) addModelWithId:[model getWithId:@"data"] withInt:index];
 }
 
@@ -454,7 +467,7 @@ id ASViewGroupModelImpl_getModelDescPathWithASIWidget_(id<ASIWidget> w) {
   return [((id<ASHasWidgets>) nil_chk(((id<ASHasWidgets>) cast_check(w, ASHasWidgets_class_())))) getModelDescPath];
 }
 
-jboolean ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key) {
+bool ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key) {
   ASViewGroupModelImpl_initialize();
   switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"addModel", @"addAllModel", @"addModelByIndex", @"removeModelAtIndex", @"removeModelById", @"modelFor", @"modelIdPath", @"modelDescPath" }, 8)) {
     case 0:
@@ -496,3 +509,5 @@ jboolean ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidge
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupModelImpl)
+
+J2OBJC_NAME_MAPPING(ASViewGroupModelImpl, "com.ashera.layout", "AS")

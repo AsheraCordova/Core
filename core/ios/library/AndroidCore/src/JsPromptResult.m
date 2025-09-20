@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\JsPromptResult.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "JsPromptResult.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADJsPromptResult
@@ -55,3 +66,5 @@ ADJsPromptResult *create_ADJsPromptResult_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADJsPromptResult)
+
+J2OBJC_NAME_MAPPING(ADJsPromptResult, "r.android.webkit", "AD")

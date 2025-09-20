@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\UpperCaseCommandConveter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_UpperCaseCommandConveter")
@@ -21,6 +22,7 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -53,6 +55,7 @@ FOUNDATION_EXPORT ASUpperCaseCommandConveter *create_ASUpperCaseCommandConveter_
 J2OBJC_TYPE_LITERAL_HEADER(ASUpperCaseCommandConveter)
 
 @compatibility_alias ComAsheraConverterUpperCaseCommandConveter ASUpperCaseCommandConveter;
+
 
 #endif
 

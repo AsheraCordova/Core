@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\FloatProperty.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FloatProperty")
@@ -22,6 +23,7 @@
 
 @class IOSClass;
 @class JavaLangFloat;
+@class NSString;
 
 /*!
  @brief An implementation of <code>r.android.util.Property</code> to be used specifically with fields of type 
@@ -36,7 +38,7 @@
 
 - (instancetype)initWithNSString:(NSString *)name;
 
-- (JavaLangFloat *)getWithId:(id)arg0;
+- (JavaLangFloat *)getWithId:(id)object;
 
 - (void)setWithId:(id)object
            withId:(JavaLangFloat *)value;
@@ -46,7 +48,7 @@
   with fields of type <code>float</code>.
  */
 - (void)setValueWithId:(id)object
-             withFloat:(jfloat)value;
+             withFloat:(float)value;
 
 // Disallowed inherited constructors, do not use.
 
@@ -62,6 +64,7 @@ FOUNDATION_EXPORT void ADFloatProperty_initWithNSString_(ADFloatProperty *self, 
 J2OBJC_TYPE_LITERAL_HEADER(ADFloatProperty)
 
 @compatibility_alias RAndroidUtilFloatProperty ADFloatProperty;
+
 
 #endif
 

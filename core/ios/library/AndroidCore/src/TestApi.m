@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\TestApi.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TestApi.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADTestApi
@@ -18,7 +31,7 @@
   return @"@r.android.annotation.TestApi()";
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -39,3 +52,5 @@ id<ADTestApi> create_ADTestApi() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADTestApi)
+
+J2OBJC_NAME_MAPPING(ADTestApi, "r.android.annotation", "AD")

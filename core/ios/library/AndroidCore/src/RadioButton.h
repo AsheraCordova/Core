@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\RadioButton.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RadioButton")
@@ -37,6 +38,7 @@ FOUNDATION_EXPORT void ADRadioButton_initWithASIWidget_(ADRadioButton *self, id<
 J2OBJC_TYPE_LITERAL_HEADER(ADRadioButton)
 
 @compatibility_alias RAndroidWidgetRadioButton ADRadioButton;
+
 
 #endif
 

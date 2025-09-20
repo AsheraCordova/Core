@@ -3,10 +3,17 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\EventExpressionParser.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "EventExpressionParser.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/PrintStream.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
@@ -16,9 +23,12 @@
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 
-@class JavaUtilRegexPattern;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASEventExpressionParser ()
@@ -152,7 +162,7 @@ id<JavaUtilMap> ASEventExpressionParser_parseEventExpressionWithNSString_withJav
 
 void ASEventExpressionParser_putValueToMapWithJavaUtilMap_withNSString_withNSString_withNSString_(id<JavaUtilMap> eventMap, NSString *key, NSString *value, NSString *defaultValue) {
   ASEventExpressionParser_initialize();
-  [((id<JavaUtilMap>) nil_chk(eventMap)) putWithId:key withId:value == nil || [value java_isEmpty] ? defaultValue : value];
+  [((id<JavaUtilMap>) nil_chk(eventMap)) putWithId:key withId:value == nil || [value isEmpty] ? defaultValue : value];
 }
 
 id<JavaUtilMap> ASEventExpressionParser_parseEventExpressionWithNSString_(NSString *expression) {
@@ -169,10 +179,10 @@ void ASEventExpressionParser_mainWithNSStringArray_(IOSObjectArray *args) {
 id<JavaUtilList> ASEventExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(NSString *expression, JavaUtilRegexPattern *regEx, NSString *message) {
   ASEventExpressionParser_initialize();
   JavaUtilRegexMatcher *m = JreRetainedLocalValue([((JavaUtilRegexPattern *) nil_chk(regEx)) matcherWithJavaLangCharSequence:expression]);
-  jboolean b = [((JavaUtilRegexMatcher *) nil_chk(m)) matches];
+  bool b = [((JavaUtilRegexMatcher *) nil_chk(m)) matches];
   id<JavaUtilList> groups = create_JavaUtilArrayList_init();
   if (b) {
-    for (jint i = 1; i <= [m groupCount]; i++) {
+    for (int32_t i = 1; i <= [m groupCount]; i++) {
       [groups addWithId:[m groupWithInt:i]];
     }
   }
@@ -183,3 +193,5 @@ id<JavaUtilList> ASEventExpressionParser_evelRegExWithNSString_withJavaUtilRegex
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEventExpressionParser)
+
+J2OBJC_NAME_MAPPING(ASEventExpressionParser, "com.ashera.widget", "AS")

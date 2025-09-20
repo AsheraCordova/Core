@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Message.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Build.h"
 #include "Bundle.h"
 #include "Handler.h"
@@ -11,9 +16,18 @@
 #include "Message.h"
 #include "Messenger.h"
 #include "SystemClock.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/StringBuilder.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline ADMessage *ADMessage_get_sPool(void);
@@ -21,21 +35,21 @@ inline ADMessage *ADMessage_set_sPool(ADMessage *value);
 static ADMessage *ADMessage_sPool;
 J2OBJC_STATIC_FIELD_OBJ(ADMessage, sPool, ADMessage *)
 
-inline jint ADMessage_get_sPoolSize(void);
-inline jint ADMessage_set_sPoolSize(jint value);
-inline jint *ADMessage_getRef_sPoolSize(void);
-static jint ADMessage_sPoolSize = 0;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADMessage, sPoolSize, jint)
+inline int32_t ADMessage_get_sPoolSize(void);
+inline int32_t ADMessage_set_sPoolSize(int32_t value);
+inline int32_t *ADMessage_getRef_sPoolSize(void);
+static int32_t ADMessage_sPoolSize = 0;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADMessage, sPoolSize, int32_t)
 
-inline jint ADMessage_get_MAX_POOL_SIZE(void);
+inline int32_t ADMessage_get_MAX_POOL_SIZE(void);
 #define ADMessage_MAX_POOL_SIZE 50
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, MAX_POOL_SIZE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, MAX_POOL_SIZE, int32_t)
 
-inline jboolean ADMessage_get_gCheckRecycle(void);
-inline jboolean ADMessage_set_gCheckRecycle(jboolean value);
-inline jboolean *ADMessage_getRef_gCheckRecycle(void);
-static jboolean ADMessage_gCheckRecycle = true;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADMessage, gCheckRecycle, jboolean)
+inline bool ADMessage_get_gCheckRecycle(void);
+inline bool ADMessage_set_gCheckRecycle(bool value);
+inline bool *ADMessage_getRef_gCheckRecycle(void);
+static bool ADMessage_gCheckRecycle = true;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADMessage, gCheckRecycle, bool)
 
 J2OBJC_INITIALIZED_DEFN(ADMessage)
 
@@ -61,32 +75,32 @@ id ADMessage_sPoolSync;
 }
 
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what {
+                           withInt:(int32_t)what {
   return ADMessage_obtainWithADHandler_withInt_(h, what);
 }
 
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what
+                           withInt:(int32_t)what
                             withId:(id)obj {
   return ADMessage_obtainWithADHandler_withInt_withId_(h, what, obj);
 }
 
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what
-                           withInt:(jint)arg1
-                           withInt:(jint)arg2 {
+                           withInt:(int32_t)what
+                           withInt:(int32_t)arg1
+                           withInt:(int32_t)arg2 {
   return ADMessage_obtainWithADHandler_withInt_withInt_withInt_(h, what, arg1, arg2);
 }
 
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what
-                           withInt:(jint)arg1
-                           withInt:(jint)arg2
+                           withInt:(int32_t)what
+                           withInt:(int32_t)arg1
+                           withInt:(int32_t)arg2
                             withId:(id)obj {
   return ADMessage_obtainWithADHandler_withInt_withInt_withInt_withId_(h, what, arg1, arg2, obj);
 }
 
-+ (void)updateCheckRecycleWithInt:(jint)targetSdkVersion {
++ (void)updateCheckRecycleWithInt:(int32_t)targetSdkVersion {
   ADMessage_updateCheckRecycleWithInt_(targetSdkVersion);
 }
 
@@ -139,7 +153,7 @@ id ADMessage_sPoolSync;
   }
 }
 
-- (jlong)getWhen {
+- (int64_t)getWhen {
   return when_;
 }
 
@@ -175,7 +189,7 @@ id ADMessage_sPoolSync;
   JreStrongAssign(&self->data_, data);
 }
 
-- (ADMessage *)setWhatWithInt:(jint)what {
+- (ADMessage *)setWhatWithInt:(int32_t)what {
   self->what_ = what;
   return self;
 }
@@ -184,11 +198,11 @@ id ADMessage_sPoolSync;
   [((ADHandler *) nil_chk(target_)) sendMessageWithADMessage:self];
 }
 
-- (jboolean)isAsynchronous {
+- (bool)isAsynchronous {
   return (flags_ & ADMessage_FLAG_ASYNCHRONOUS) != 0;
 }
 
-- (void)setAsynchronousWithBoolean:(jboolean)async {
+- (void)setAsynchronousWithBoolean:(bool)async {
   if (async) {
     flags_ |= ADMessage_FLAG_ASYNCHRONOUS;
   }
@@ -197,7 +211,7 @@ id ADMessage_sPoolSync;
   }
 }
 
-- (jboolean)isInUse {
+- (bool)isInUse {
   return (flags_ & ADMessage_FLAG_IN_USE) == ADMessage_FLAG_IN_USE;
 }
 
@@ -216,7 +230,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [self toStringWithLong:ADSystemClock_uptimeMillis()];
 }
 
-- (NSString *)toStringWithLong:(jlong)now {
+- (NSString *)toStringWithLong:(int64_t)now {
   JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [b appendWithNSString:@"{ when="];
   if (target_ != nil) {
@@ -412,7 +426,7 @@ ADMessage *ADMessage_obtainWithADHandler_withJavaLangRunnable_(ADHandler *h, id<
   return m;
 }
 
-ADMessage *ADMessage_obtainWithADHandler_withInt_(ADHandler *h, jint what) {
+ADMessage *ADMessage_obtainWithADHandler_withInt_(ADHandler *h, int32_t what) {
   ADMessage_initialize();
   ADMessage *m = ADMessage_obtain();
   JreStrongAssign(&((ADMessage *) nil_chk(m))->target_, h);
@@ -420,7 +434,7 @@ ADMessage *ADMessage_obtainWithADHandler_withInt_(ADHandler *h, jint what) {
   return m;
 }
 
-ADMessage *ADMessage_obtainWithADHandler_withInt_withId_(ADHandler *h, jint what, id obj) {
+ADMessage *ADMessage_obtainWithADHandler_withInt_withId_(ADHandler *h, int32_t what, id obj) {
   ADMessage_initialize();
   ADMessage *m = ADMessage_obtain();
   JreStrongAssign(&((ADMessage *) nil_chk(m))->target_, h);
@@ -429,7 +443,7 @@ ADMessage *ADMessage_obtainWithADHandler_withInt_withId_(ADHandler *h, jint what
   return m;
 }
 
-ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_(ADHandler *h, jint what, jint arg1, jint arg2) {
+ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_(ADHandler *h, int32_t what, int32_t arg1, int32_t arg2) {
   ADMessage_initialize();
   ADMessage *m = ADMessage_obtain();
   JreStrongAssign(&((ADMessage *) nil_chk(m))->target_, h);
@@ -439,7 +453,7 @@ ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_(ADHandler *h, 
   return m;
 }
 
-ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_withId_(ADHandler *h, jint what, jint arg1, jint arg2, id obj) {
+ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_withId_(ADHandler *h, int32_t what, int32_t arg1, int32_t arg2, id obj) {
   ADMessage_initialize();
   ADMessage *m = ADMessage_obtain();
   JreStrongAssign(&((ADMessage *) nil_chk(m))->target_, h);
@@ -450,7 +464,7 @@ ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_withId_(ADHandl
   return m;
 }
 
-void ADMessage_updateCheckRecycleWithInt_(jint targetSdkVersion) {
+void ADMessage_updateCheckRecycleWithInt_(int32_t targetSdkVersion) {
   ADMessage_initialize();
   if (targetSdkVersion < ADBuild_VERSION_CODES_LOLLIPOP) {
     ADMessage_gCheckRecycle = false;
@@ -472,3 +486,5 @@ ADMessage *create_ADMessage_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMessage)
+
+J2OBJC_NAME_MAPPING(ADMessage, "r.android.os", "AD")

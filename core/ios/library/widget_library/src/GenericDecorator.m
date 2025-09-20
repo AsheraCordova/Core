@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\GenericDecorator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "GenericDecorator.h"
 #include "ICompositeDecorator.h"
 #include "IDecorator.h"
@@ -10,10 +15,16 @@
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "WidgetAttribute.h"
+#include "java/lang/Boolean.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASGenericDecorator () {
@@ -61,10 +72,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)createWithJavaUtilMap:(id<JavaUtilMap>)metadata {
 }
 
-- (jboolean)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
-                                 withNSString:(NSString *)strValue
-                                       withId:(id)objValue
-                    withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)lifeCycleDecorator {
+- (bool)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
+                             withNSString:(NSString *)strValue
+                                   withId:(id)objValue
+                withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)lifeCycleDecorator {
   if ([((id<JavaUtilList>) nil_chk(supportedAttributes_)) containsWithId:[((ASWidgetAttribute *) nil_chk(key)) getAttributeName]]) {
     [((id<ASICompositeDecorator>) nil_chk(wrappingWidget_)) setAttributeWithASWidgetAttribute:key withNSString:strValue withId:objValue withASILifeCycleDecorator:lifeCycleDecorator withBoolean:true];
     return true;
@@ -141,3 +152,5 @@ ASGenericDecorator *create_ASGenericDecorator_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASGenericDecorator)
+
+J2OBJC_NAME_MAPPING(ASGenericDecorator, "com.ashera.widget", "AS")

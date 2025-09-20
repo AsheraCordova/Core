@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\AttributeSet.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AttributeSet")
@@ -35,6 +36,7 @@ FOUNDATION_EXPORT ADAttributeSet *create_ADAttributeSet_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADAttributeSet)
 
 @compatibility_alias RAndroidUtilAttributeSet ADAttributeSet;
+
 
 #endif
 

@@ -3,12 +3,21 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\parser\css\FontFace.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FontFace.h"
 #include "J2ObjC_source.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSFontFace () {
@@ -79,3 +88,5 @@ CSSFontFace *create_CSSFontFace_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(CSSFontFace)
+
+J2OBJC_NAME_MAPPING(CSSFontFace, "com.ashera.parser.css", "CSS")

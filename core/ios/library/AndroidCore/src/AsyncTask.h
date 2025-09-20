@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\AsyncTask.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AsyncTask")
@@ -17,6 +18,7 @@
 #define ADAsyncTask_
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
 
 @interface ADAsyncTask : NSObject
 
@@ -24,11 +26,11 @@
 
 - (instancetype)init;
 
-- (void)cancelWithBoolean:(jboolean)cancel;
+- (void)cancelWithBoolean:(bool)cancel;
 
 - (ADAsyncTask *)executeWithNSObjectArray:(IOSObjectArray *)params;
 
-- (jboolean)isCancelled;
+- (bool)isCancelled;
 
 #pragma mark Protected
 
@@ -45,6 +47,7 @@ FOUNDATION_EXPORT void ADAsyncTask_init(ADAsyncTask *self);
 J2OBJC_TYPE_LITERAL_HEADER(ADAsyncTask)
 
 @compatibility_alias RAndroidOsAsyncTask ADAsyncTask;
+
 
 #endif
 

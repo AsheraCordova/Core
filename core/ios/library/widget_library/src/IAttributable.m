@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IAttributable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IAttributable.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASIAttributable : NSObject
@@ -38,3 +49,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASIAttributable)
+
+J2OBJC_NAME_MAPPING(ASIAttributable, "com.ashera.widget", "AS")

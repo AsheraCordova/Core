@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\AccelerateInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AccelerateInterpolator")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADBaseInterpolator 1
 #include "BaseInterpolator.h"
 
+@class JavaLangFloat;
+@class JavaLangLong;
+
 /*!
  @brief An interpolator where the rate of change starts out slowly and
   and then accelerates.
@@ -36,15 +40,15 @@
           1.0f  exaggerates the ease-in effect (i.e., it starts even
           slower and ends evens faster)
  */
-- (instancetype)initWithFloat:(jfloat)factor;
+- (instancetype)initWithFloat:(float)factor;
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
 /*!
  */
-- (jfloat)getInterpolationWithFloat:(jfloat)input;
+- (float)getInterpolationWithFloat:(float)input;
 
 @end
 
@@ -56,15 +60,16 @@ FOUNDATION_EXPORT ADAccelerateInterpolator *new_ADAccelerateInterpolator_init(vo
 
 FOUNDATION_EXPORT ADAccelerateInterpolator *create_ADAccelerateInterpolator_init(void);
 
-FOUNDATION_EXPORT void ADAccelerateInterpolator_initWithFloat_(ADAccelerateInterpolator *self, jfloat factor);
+FOUNDATION_EXPORT void ADAccelerateInterpolator_initWithFloat_(ADAccelerateInterpolator *self, float factor);
 
-FOUNDATION_EXPORT ADAccelerateInterpolator *new_ADAccelerateInterpolator_initWithFloat_(jfloat factor) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADAccelerateInterpolator *new_ADAccelerateInterpolator_initWithFloat_(float factor) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADAccelerateInterpolator *create_ADAccelerateInterpolator_initWithFloat_(jfloat factor);
+FOUNDATION_EXPORT ADAccelerateInterpolator *create_ADAccelerateInterpolator_initWithFloat_(float factor);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAccelerateInterpolator)
 
 @compatibility_alias RAndroidViewAnimationAccelerateInterpolator ADAccelerateInterpolator;
+
 
 #endif
 

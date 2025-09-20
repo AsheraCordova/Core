@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\SystemClock.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SystemClock")
@@ -16,15 +17,17 @@
 #if !defined (ADSystemClock_) && (INCLUDE_ALL_SystemClock || defined(INCLUDE_ADSystemClock))
 #define ADSystemClock_
 
+@class JavaLangLong;
+
 @interface ADSystemClock : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (jlong)elapsedRealtime;
++ (int64_t)elapsedRealtime;
 
-+ (jlong)uptimeMillis;
++ (int64_t)uptimeMillis;
 
 @end
 
@@ -36,13 +39,14 @@ FOUNDATION_EXPORT ADSystemClock *new_ADSystemClock_init(void) NS_RETURNS_RETAINE
 
 FOUNDATION_EXPORT ADSystemClock *create_ADSystemClock_init(void);
 
-FOUNDATION_EXPORT jlong ADSystemClock_elapsedRealtime(void);
+FOUNDATION_EXPORT int64_t ADSystemClock_elapsedRealtime(void);
 
-FOUNDATION_EXPORT jlong ADSystemClock_uptimeMillis(void);
+FOUNDATION_EXPORT int64_t ADSystemClock_uptimeMillis(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADSystemClock)
 
 @compatibility_alias RAndroidOsSystemClock ADSystemClock;
+
 
 #endif
 

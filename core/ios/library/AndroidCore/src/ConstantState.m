@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\res\ConstantState.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ConstantState.h"
 #include "J2ObjC_source.h"
 #include "Resources.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADConstantState
@@ -17,7 +29,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getChangingConfigurations {
+- (int32_t)getChangingConfigurations {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -67,3 +79,5 @@ void ADConstantState_init(ADConstantState *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADConstantState)
+
+J2OBJC_NAME_MAPPING(ADConstantState, "r.android.content.res", "AD")

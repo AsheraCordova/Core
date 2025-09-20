@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\PlainMapException.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PlainMapException")
@@ -20,7 +21,9 @@
 #define INCLUDE_JavaLangException 1
 #include "java/lang/Exception.h"
 
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 
 /*!
  @brief Exception when working with <code>PlainMap</code>).
@@ -52,8 +55,8 @@
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -74,6 +77,7 @@ FOUNDATION_EXPORT ASPlainMapException *create_ASPlainMapException_initWithNSStri
 J2OBJC_TYPE_LITERAL_HEADER(ASPlainMapException)
 
 @compatibility_alias ComAsheraModelPlainMapException ASPlainMapException;
+
 
 #endif
 

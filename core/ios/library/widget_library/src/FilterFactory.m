@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\converter\FilterFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FilterFactory.h"
 #include "IFilter.h"
 #include "IOSClass.h"
@@ -11,7 +16,11 @@
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<JavaUtilMap> ASFilterFactory_get_registrationMap(void);
@@ -103,3 +112,5 @@ void ASFilterFactory_register__WithNSString_withASIFilter_(NSString *localname, 
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFilterFactory)
+
+J2OBJC_NAME_MAPPING(ASFilterFactory, "com.ashera.converter", "AS")

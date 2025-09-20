@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\app\Activity.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Activity")
@@ -28,6 +29,9 @@
 @class ADWindow;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADMenu;
 @protocol ADMenuItem;
 @protocol JavaLangRunnable;
@@ -38,7 +42,7 @@
 
 - (instancetype)init;
 
-- (jint)checkSelfPermissionWithNSString:(NSString *)permission;
+- (int32_t)checkSelfPermissionWithNSString:(NSString *)permission;
 
 - (void)finish;
 
@@ -52,42 +56,42 @@
 
 - (void)onCreateWithADBundle:(ADBundle *)savedInstanceState;
 
-- (jboolean)onCreateOptionsMenuWithADMenu:(id<ADMenu>)menu;
+- (bool)onCreateOptionsMenuWithADMenu:(id<ADMenu>)menu;
 
 - (void)onDestroy;
 
-- (jboolean)onOptionsItemSelectedWithADMenuItem:(id<ADMenuItem>)item;
+- (bool)onOptionsItemSelectedWithADMenuItem:(id<ADMenuItem>)item;
 
-- (jboolean)onPrepareOptionsMenuWithADMenu:(id<ADMenu>)menu;
+- (bool)onPrepareOptionsMenuWithADMenu:(id<ADMenu>)menu;
 
-- (void)onRequestPermissionsResultWithInt:(jint)requestCode
+- (void)onRequestPermissionsResultWithInt:(int32_t)requestCode
                         withNSStringArray:(IOSObjectArray *)permissions
                              withIntArray:(IOSIntArray *)grantResults;
 
-- (void)onWindowFocusChangedWithBoolean:(jboolean)hasFocus;
+- (void)onWindowFocusChangedWithBoolean:(bool)hasFocus;
 
 - (void)requestPermissionsWithNSStringArray:(IOSObjectArray *)permissions
-                                    withInt:(jint)mappedRequestCode;
+                                    withInt:(int32_t)mappedRequestCode;
 
 - (void)runOnUiThreadWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
 - (void)setContentViewWithADView:(ADView *)view;
 
-- (void)setVolumeControlStreamWithInt:(jint)streamMusic;
+- (void)setVolumeControlStreamWithInt:(int32_t)streamMusic;
 
 - (void)startActivityWithADIntent:(ADIntent *)intent2;
 
 - (void)startActivityForResultWithADIntent:(ADIntent *)intent2
-                                   withInt:(jint)requestCode;
+                                   withInt:(int32_t)requestCode;
 
 - (void)startActivityForResultWithADIntent:(ADIntent *)intent2
-                                   withInt:(jint)requestCode
+                                   withInt:(int32_t)requestCode
                               withADBundle:(ADBundle *)options;
 
 #pragma mark Protected
 
-- (void)onActivityResultWithInt:(jint)requestCode
-                        withInt:(jint)resultCode
+- (void)onActivityResultWithInt:(int32_t)requestCode
+                        withInt:(int32_t)resultCode
                    withADIntent:(ADIntent *)intent2;
 
 - (void)onNewIntentWithADIntent:(ADIntent *)intent2;
@@ -106,13 +110,13 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADActivity)
 
-inline jint ADActivity_get_RESULT_CANCELED(void);
+inline int32_t ADActivity_get_RESULT_CANCELED(void);
 #define ADActivity_RESULT_CANCELED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADActivity, RESULT_CANCELED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADActivity, RESULT_CANCELED, int32_t)
 
-inline jint ADActivity_get_RESULT_OK(void);
+inline int32_t ADActivity_get_RESULT_OK(void);
 #define ADActivity_RESULT_OK 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADActivity, RESULT_OK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADActivity, RESULT_OK, int32_t)
 
 FOUNDATION_EXPORT void ADActivity_init(ADActivity *self);
 
@@ -123,6 +127,7 @@ FOUNDATION_EXPORT ADActivity *create_ADActivity_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADActivity)
 
 @compatibility_alias RAndroidAppActivity ADActivity;
+
 
 #endif
 

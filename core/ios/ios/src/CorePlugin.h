@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\CorePlugin.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CorePlugin")
@@ -29,6 +30,11 @@
 @class IOSObjectArray;
 @class JavaIoFile;
 @class JavaIoInputStream;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
 @protocol ASAttributedString;
 @protocol ASIFragment;
 @protocol JavaLangRunnable;
@@ -51,7 +57,7 @@
                                        withId:(id)options;
 
 - (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                           withLong:(jlong)when;
+                                           withLong:(int64_t)when;
 
 + (NSString *)executeSimpleCommandWithId:(id)commands
                          withASIFragment:(id<ASIFragment>)fragment;
@@ -60,13 +66,13 @@
 
 - (NSString *)getAttributedBulletHtml;
 
-- (jint)getDensity;
+- (int32_t)getDensity;
 
 - (NSString *)getDensityName;
 
 - (NSString *)getDevServerIpWithASIFragment:(id<ASIFragment>)fragment;
 
-- (jfloat)getDisplayMetricDensity;
+- (float)getDisplayMetricDensity;
 
 - (JavaIoFile *)getExternalFilesDirWithId:(id)context;
 
@@ -79,7 +85,7 @@
 
 - (ASFontMetricsDescriptor *)getFontMetricsWithId:(id)font;
 
-- (jint)getMaxMemoryWithId:(id)context;
+- (int32_t)getMaxMemoryWithId:(id)context;
 
 - (NSString *)getName;
 
@@ -91,24 +97,24 @@
 
 + (id<JavaUtilList>)getScopedObjectArrayWithId:(id)scopedObjects;
 
-- (jint)getScreenHeight;
+- (int32_t)getScreenHeight;
 
-- (jint)getScreenHeightDp;
+- (int32_t)getScreenHeightDp;
 
-- (jint)getScreenWidth;
+- (int32_t)getScreenWidth;
 
-- (jint)getScreenWidthDp;
+- (int32_t)getScreenWidthDp;
 
 + (void)initPlugin OBJC_METHOD_FAMILY_NONE;
 
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args;
 
-- (jboolean)isLandScape;
+- (bool)isLandScape;
 
-- (jint)nativeGetScreenHeight;
+- (int32_t)nativeGetScreenHeight;
 
-- (jint)nativeGetScreenWidth;
+- (int32_t)nativeGetScreenWidth;
 
 + (void)navigateWithNSString:(NSString *)actionId
                       withId:(id)scopedObjects
@@ -124,7 +130,7 @@
 
 + (void)navigateWithPopBackStackToWithNSString:(NSString *)actionId
                                   withNSString:(NSString *)destinationId
-                                   withBoolean:(jboolean)inclusive
+                                   withBoolean:(bool)inclusive
                                         withId:(id)scopedObjects
                                withASIFragment:(id<ASIFragment>)fragment;
 
@@ -132,10 +138,10 @@
 
 + (void)popBackStackWithASIFragment:(id<ASIFragment>)fragment
                        withNSString:(NSString *)destinationId
-                        withBoolean:(jboolean)inclusive;
+                        withBoolean:(bool)inclusive;
 
 - (id)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                              withInt:(jint)delay;
+                              withInt:(int32_t)delay;
 
 - (void)putObjectToBundleWithId:(id)bundle
                    withNSString:(NSString *)key
@@ -180,7 +186,7 @@ FOUNDATION_EXPORT void ASCorePlugin_navigateWithNSString_withId_withASIFragment_
 
 FOUNDATION_EXPORT id<JavaUtilList> ASCorePlugin_getScopedObjectArrayWithId_(id scopedObjects);
 
-FOUNDATION_EXPORT void ASCorePlugin_navigateWithPopBackStackToWithNSString_withNSString_withBoolean_withId_withASIFragment_(NSString *actionId, NSString *destinationId, jboolean inclusive, id scopedObjects, id<ASIFragment> fragment);
+FOUNDATION_EXPORT void ASCorePlugin_navigateWithPopBackStackToWithNSString_withNSString_withBoolean_withId_withASIFragment_(NSString *actionId, NSString *destinationId, bool inclusive, id scopedObjects, id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT void ASCorePlugin_navigateWithPopBackStackWithNSString_withId_withASIFragment_(NSString *actionId, id scopedObjects, id<ASIFragment> fragment);
 
@@ -190,7 +196,7 @@ FOUNDATION_EXPORT void ASCorePlugin_closeDialog(void);
 
 FOUNDATION_EXPORT void ASCorePlugin_popBackStackWithASIFragment_(id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT void ASCorePlugin_popBackStackWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *destinationId, jboolean inclusive);
+FOUNDATION_EXPORT void ASCorePlugin_popBackStackWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *destinationId, bool inclusive);
 
 FOUNDATION_EXPORT NSString *ASCorePlugin_executeSimpleCommandWithId_withASIFragment_(id commands, id<ASIFragment> fragment);
 
@@ -201,6 +207,7 @@ FOUNDATION_EXPORT NSString *ASCorePlugin_getFileContentWithNSString_(NSString *p
 J2OBJC_TYPE_LITERAL_HEADER(ASCorePlugin)
 
 @compatibility_alias ComAsheraCoreCorePlugin ASCorePlugin;
+
 
 #endif
 

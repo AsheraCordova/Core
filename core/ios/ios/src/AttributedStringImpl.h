@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\AttributedStringImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AttributedStringImpl")
@@ -20,6 +21,10 @@
 #define INCLUDE_ASAttributedString 1
 #include "AttributedString.h"
 
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 
 @interface ASAttributedStringImpl : NSObject < ASAttributedString >
@@ -30,90 +35,90 @@
                        withNSString:(NSString *)text;
 
 - (void)applyBackgroundColorWithId:(id)color
-                           withInt:(jint)start
-                           withInt:(jint)end;
+                           withInt:(int32_t)start
+                           withInt:(int32_t)end;
 
-- (void)applyBulletWithInt:(jint)indent
-                   withInt:(jint)spacing
-                   withInt:(jint)start
-                   withInt:(jint)end;
+- (void)applyBulletWithInt:(int32_t)indent
+                   withInt:(int32_t)spacing
+                   withInt:(int32_t)start
+                   withInt:(int32_t)end;
 
 - (void)applyColorWithId:(id)color
-                 withInt:(jint)start
-                 withInt:(jint)end;
+                 withInt:(int32_t)start
+                 withInt:(int32_t)end;
 
 - (id)applyFontWithId:(id)font
-            withFloat:(jfloat)textSize
-          withBoolean:(jboolean)isBold
-          withBoolean:(jboolean)isItalics
-              withInt:(jint)start
-              withInt:(jint)end;
+            withFloat:(float)textSize
+          withBoolean:(bool)isBold
+          withBoolean:(bool)isItalics
+              withInt:(int32_t)start
+              withInt:(int32_t)end;
 
 - (void)applyFontWithId:(id)typeFace
-              withFloat:(jfloat)textSize
-                withInt:(jint)style
-                withInt:(jint)start
-                withInt:(jint)end;
+              withFloat:(float)textSize
+                withInt:(int32_t)style
+                withInt:(int32_t)start
+                withInt:(int32_t)end;
 
 - (void)applyImgWithId:(id)image
-               withInt:(jint)start
-               withInt:(jint)end;
+               withInt:(int32_t)start
+               withInt:(int32_t)end;
 
-- (void)applyLineHeightWithFloat:(jfloat)height
-                         withInt:(jint)start
-                         withInt:(jint)end;
+- (void)applyLineHeightWithFloat:(float)height
+                         withInt:(int32_t)start
+                         withInt:(int32_t)end;
 
-- (void)applyStrikeThroughWithInt:(jint)start
-                          withInt:(jint)end;
+- (void)applyStrikeThroughWithInt:(int32_t)start
+                          withInt:(int32_t)end;
 
-- (void)applySubscriptWithFloat:(jfloat)textSize
-                        withInt:(jint)start
-                        withInt:(jint)end;
+- (void)applySubscriptWithFloat:(float)textSize
+                        withInt:(int32_t)start
+                        withInt:(int32_t)end;
 
-- (void)applySuperscriptWithFloat:(jfloat)textSize
-                          withInt:(jint)start
-                          withInt:(jint)end;
+- (void)applySuperscriptWithFloat:(float)textSize
+                          withInt:(int32_t)start
+                          withInt:(int32_t)end;
 
 - (void)applyTextAlignWithNSString:(NSString *)value
-                           withInt:(jint)start
-                           withInt:(jint)end;
+                           withInt:(int32_t)start
+                           withInt:(int32_t)end;
 
-- (void)applyTextAlignCenterWithInt:(jint)start
-                            withInt:(jint)end;
+- (void)applyTextAlignCenterWithInt:(int32_t)start
+                            withInt:(int32_t)end;
 
-- (void)applyTextAlignLeftWithInt:(jint)start
-                          withInt:(jint)end;
+- (void)applyTextAlignLeftWithInt:(int32_t)start
+                          withInt:(int32_t)end;
 
-- (void)applyTextAlignRightWithInt:(jint)start
-                           withInt:(jint)end;
+- (void)applyTextAlignRightWithInt:(int32_t)start
+                           withInt:(int32_t)end;
 
-- (void)applyUnderLineWithInt:(jint)start
-                      withInt:(jint)end;
+- (void)applyUnderLineWithInt:(int32_t)start
+                      withInt:(int32_t)end;
 
 - (void)applyUrlWithNSString:(NSString *)href
                       withId:(id)color
-                     withInt:(jint)start
-                     withInt:(jint)end;
+                     withInt:(int32_t)start
+                     withInt:(int32_t)end;
 
 - (void)applyVerticalAlignWithNSString:(NSString *)verticalAlign
-                               withInt:(jint)start
-                               withInt:(jint)end;
+                               withInt:(int32_t)start
+                               withInt:(int32_t)end;
 
 - (id)get;
 
 - (id)getFontWithNSString:(NSString *)typeFace
-                withFloat:(jfloat)textSize;
+                withFloat:(float)textSize;
 
 - (NSString *)getText;
 
-- (void)init__WithInt:(jint)start
-              withInt:(jint)end OBJC_METHOD_FAMILY_NONE;
+- (void)init__WithInt:(int32_t)start
+              withInt:(int32_t)end OBJC_METHOD_FAMILY_NONE;
 
 - (void)init__WithNSString:(NSString *)text OBJC_METHOD_FAMILY_NONE;
 
 - (void)nativeApplyImgWithId:(id)image
-                     withInt:(jint)start
-                     withInt:(jint)end;
+                     withInt:(int32_t)start
+                     withInt:(int32_t)end;
 
 // Disallowed inherited constructors, do not use.
 
@@ -132,6 +137,7 @@ FOUNDATION_EXPORT ASAttributedStringImpl *create_ASAttributedStringImpl_initWith
 J2OBJC_TYPE_LITERAL_HEADER(ASAttributedStringImpl)
 
 @compatibility_alias ComAsheraCoreAttributedStringImpl ASAttributedStringImpl;
+
 
 #endif
 

@@ -3,20 +3,34 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\BounceInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeSet.h"
 #include "BaseInterpolator.h"
 #include "BounceInterpolator.h"
 #include "Context.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADBounceInterpolator ()
 
-+ (jfloat)bounceWithFloat:(jfloat)t;
++ (float)bounceWithFloat:(float)t;
 
 @end
 
-__attribute__((unused)) static jfloat ADBounceInterpolator_bounceWithFloat_(jfloat t);
+__attribute__((unused)) static float ADBounceInterpolator_bounceWithFloat_(float t);
 
 @implementation ADBounceInterpolator
 
@@ -33,11 +47,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-+ (jfloat)bounceWithFloat:(jfloat)t {
++ (float)bounceWithFloat:(float)t {
   return ADBounceInterpolator_bounceWithFloat_(t);
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)t {
+- (float)getInterpolationWithFloat:(float)t {
   JreTimesAssignFloatF(&t, 1.1226f);
   if (t < 0.3535f) return ADBounceInterpolator_bounceWithFloat_(t);
   else if (t < 0.7408f) return ADBounceInterpolator_bounceWithFloat_(t - 0.54719f) + 0.7f;
@@ -45,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   else return ADBounceInterpolator_bounceWithFloat_(t - 1.0435f) + 0.95f;
 }
 
-- (jlong)createNativeInterpolator {
+- (int64_t)createNativeInterpolator {
   return 0;
 }
 
@@ -97,9 +111,11 @@ ADBounceInterpolator *create_ADBounceInterpolator_initWithADContext_withADAttrib
   J2OBJC_CREATE_IMPL(ADBounceInterpolator, initWithADContext_withADAttributeSet_, context, attrs)
 }
 
-jfloat ADBounceInterpolator_bounceWithFloat_(jfloat t) {
+float ADBounceInterpolator_bounceWithFloat_(float t) {
   ADBounceInterpolator_initialize();
   return t * t * 8.0f;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBounceInterpolator)
+
+J2OBJC_NAME_MAPPING(ADBounceInterpolator, "r.android.view.animation", "AD")

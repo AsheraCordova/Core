@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\GravityConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_GravityConverter")
@@ -43,166 +44,166 @@ J2OBJC_STATIC_INIT(ASGravityConverter)
 /*!
  @brief Constant indicating that no gravity has been set
  */
-inline jint ASGravityConverter_get_NO_GRAVITY(void);
+inline int32_t ASGravityConverter_get_NO_GRAVITY(void);
 #define ASGravityConverter_NO_GRAVITY 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, NO_GRAVITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, NO_GRAVITY, int32_t)
 
 /*!
  @brief Raw bit indicating the gravity for an axis has been specified.
  */
-inline jint ASGravityConverter_get_AXIS_SPECIFIED(void);
+inline int32_t ASGravityConverter_get_AXIS_SPECIFIED(void);
 #define ASGravityConverter_AXIS_SPECIFIED 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_SPECIFIED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_SPECIFIED, int32_t)
 
 /*!
  @brief Raw bit controlling how the left/top edge is placed.
  */
-inline jint ASGravityConverter_get_AXIS_PULL_BEFORE(void);
+inline int32_t ASGravityConverter_get_AXIS_PULL_BEFORE(void);
 #define ASGravityConverter_AXIS_PULL_BEFORE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_PULL_BEFORE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_PULL_BEFORE, int32_t)
 
 /*!
  @brief Raw bit controlling how the right/bottom edge is placed.
  */
-inline jint ASGravityConverter_get_AXIS_PULL_AFTER(void);
+inline int32_t ASGravityConverter_get_AXIS_PULL_AFTER(void);
 #define ASGravityConverter_AXIS_PULL_AFTER 4
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_PULL_AFTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_PULL_AFTER, int32_t)
 
 /*!
  @brief Raw bit controlling whether the right/bottom edge is clipped to its
   container, based on the gravity direction being applied.
  */
-inline jint ASGravityConverter_get_AXIS_CLIP(void);
+inline int32_t ASGravityConverter_get_AXIS_CLIP(void);
 #define ASGravityConverter_AXIS_CLIP 8
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_CLIP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_CLIP, int32_t)
 
 /*!
  @brief Bits defining the horizontal axis.
  */
-inline jint ASGravityConverter_get_AXIS_X_SHIFT(void);
+inline int32_t ASGravityConverter_get_AXIS_X_SHIFT(void);
 #define ASGravityConverter_AXIS_X_SHIFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_X_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_X_SHIFT, int32_t)
 
 /*!
  @brief Bits defining the vertical axis.
  */
-inline jint ASGravityConverter_get_AXIS_Y_SHIFT(void);
+inline int32_t ASGravityConverter_get_AXIS_Y_SHIFT(void);
 #define ASGravityConverter_AXIS_Y_SHIFT 4
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_Y_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, AXIS_Y_SHIFT, int32_t)
 
 /*!
  @brief Push object to the top of its container, not changing its size.
  */
-inline jint ASGravityConverter_get_TOP(void);
+inline int32_t ASGravityConverter_get_TOP(void);
 #define ASGravityConverter_TOP 48
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, TOP, int32_t)
 
 /*!
  @brief Push object to the bottom of its container, not changing its size.
  */
-inline jint ASGravityConverter_get_BOTTOM(void);
+inline int32_t ASGravityConverter_get_BOTTOM(void);
 #define ASGravityConverter_BOTTOM 80
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, BOTTOM, int32_t)
 
 /*!
  @brief Push object to the left of its container, not changing its size.
  */
-inline jint ASGravityConverter_get_LEFT(void);
+inline int32_t ASGravityConverter_get_LEFT(void);
 #define ASGravityConverter_LEFT 3
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, LEFT, int32_t)
 
 /*!
  @brief Push object to the right of its container, not changing its size.
  */
-inline jint ASGravityConverter_get_RIGHT(void);
+inline int32_t ASGravityConverter_get_RIGHT(void);
 #define ASGravityConverter_RIGHT 5
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, RIGHT, int32_t)
 
 /*!
  @brief Place object in the vertical center of its container, not changing its
    size.
  */
-inline jint ASGravityConverter_get_CENTER_VERTICAL(void);
+inline int32_t ASGravityConverter_get_CENTER_VERTICAL(void);
 #define ASGravityConverter_CENTER_VERTICAL 16
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CENTER_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CENTER_VERTICAL, int32_t)
 
 /*!
  @brief Grow the vertical size of the object if needed so it completely fills
    its container.
  */
-inline jint ASGravityConverter_get_FILL_VERTICAL(void);
+inline int32_t ASGravityConverter_get_FILL_VERTICAL(void);
 #define ASGravityConverter_FILL_VERTICAL 112
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, FILL_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, FILL_VERTICAL, int32_t)
 
 /*!
  @brief Place object in the horizontal center of its container, not changing its
    size.
  */
-inline jint ASGravityConverter_get_CENTER_HORIZONTAL(void);
+inline int32_t ASGravityConverter_get_CENTER_HORIZONTAL(void);
 #define ASGravityConverter_CENTER_HORIZONTAL 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CENTER_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CENTER_HORIZONTAL, int32_t)
 
 /*!
  @brief Grow the horizontal size of the object if needed so it completely fills
    its container.
  */
-inline jint ASGravityConverter_get_FILL_HORIZONTAL(void);
+inline int32_t ASGravityConverter_get_FILL_HORIZONTAL(void);
 #define ASGravityConverter_FILL_HORIZONTAL 7
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, FILL_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, FILL_HORIZONTAL, int32_t)
 
 /*!
  @brief Place the object in the center of its container in both the vertical
    and horizontal axis, not changing its size.
  */
-inline jint ASGravityConverter_get_CENTER(void);
+inline int32_t ASGravityConverter_get_CENTER(void);
 #define ASGravityConverter_CENTER 17
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CENTER, int32_t)
 
 /*!
  @brief Grow the horizontal and vertical size of the object if needed so it
    completely fills its container.
  */
-inline jint ASGravityConverter_get_FILL(void);
+inline int32_t ASGravityConverter_get_FILL(void);
 #define ASGravityConverter_FILL 119
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, FILL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, FILL, int32_t)
 
 /*!
  @brief Flag to clip the edges of the object to its container along the
    vertical axis.
  */
-inline jint ASGravityConverter_get_CLIP_VERTICAL(void);
+inline int32_t ASGravityConverter_get_CLIP_VERTICAL(void);
 #define ASGravityConverter_CLIP_VERTICAL 128
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CLIP_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CLIP_VERTICAL, int32_t)
 
 /*!
  @brief Flag to clip the edges of the object to its container along the
    horizontal axis.
  */
-inline jint ASGravityConverter_get_CLIP_HORIZONTAL(void);
+inline int32_t ASGravityConverter_get_CLIP_HORIZONTAL(void);
 #define ASGravityConverter_CLIP_HORIZONTAL 8
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CLIP_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, CLIP_HORIZONTAL, int32_t)
 
 /*!
  @brief Raw bit controlling whether the layout direction is relative or not (START/END instead of
   absolute LEFT/RIGHT).
  */
-inline jint ASGravityConverter_get_RELATIVE_LAYOUT_DIRECTION(void);
+inline int32_t ASGravityConverter_get_RELATIVE_LAYOUT_DIRECTION(void);
 #define ASGravityConverter_RELATIVE_LAYOUT_DIRECTION 8388608
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, RELATIVE_LAYOUT_DIRECTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, RELATIVE_LAYOUT_DIRECTION, int32_t)
 
 /*!
  @brief Binary mask to get the absolute horizontal gravity of a gravity.
  */
-inline jint ASGravityConverter_get_HORIZONTAL_GRAVITY_MASK(void);
+inline int32_t ASGravityConverter_get_HORIZONTAL_GRAVITY_MASK(void);
 #define ASGravityConverter_HORIZONTAL_GRAVITY_MASK 7
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, HORIZONTAL_GRAVITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, HORIZONTAL_GRAVITY_MASK, int32_t)
 
 /*!
  @brief Binary mask to get the vertical gravity of a gravity.
  */
-inline jint ASGravityConverter_get_VERTICAL_GRAVITY_MASK(void);
+inline int32_t ASGravityConverter_get_VERTICAL_GRAVITY_MASK(void);
 #define ASGravityConverter_VERTICAL_GRAVITY_MASK 112
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, VERTICAL_GRAVITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, VERTICAL_GRAVITY_MASK, int32_t)
 
 /*!
  @brief Special constant to enable clipping to an overall display along the
@@ -210,9 +211,9 @@ J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, VERTICAL_GRAVITY_MASK, jint)
    <code>apply(int, int, int, Rect, int, int, Rect)</code>; you must do so
    yourself by calling <code>applyDisplay</code>.
  */
-inline jint ASGravityConverter_get_DISPLAY_CLIP_VERTICAL(void);
+inline int32_t ASGravityConverter_get_DISPLAY_CLIP_VERTICAL(void);
 #define ASGravityConverter_DISPLAY_CLIP_VERTICAL 268435456
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, DISPLAY_CLIP_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, DISPLAY_CLIP_VERTICAL, int32_t)
 
 /*!
  @brief Special constant to enable clipping to an overall display along the
@@ -220,30 +221,30 @@ J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, DISPLAY_CLIP_VERTICAL, jint)
    <code>apply(int, int, int, Rect, int, int, Rect)</code>; you must do so
    yourself by calling <code>applyDisplay</code>.
  */
-inline jint ASGravityConverter_get_DISPLAY_CLIP_HORIZONTAL(void);
+inline int32_t ASGravityConverter_get_DISPLAY_CLIP_HORIZONTAL(void);
 #define ASGravityConverter_DISPLAY_CLIP_HORIZONTAL 16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, DISPLAY_CLIP_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, DISPLAY_CLIP_HORIZONTAL, int32_t)
 
 /*!
  @brief Push object to x-axis position at the start of its container, not changing its size.
  */
-inline jint ASGravityConverter_get_START(void);
+inline int32_t ASGravityConverter_get_START(void);
 #define ASGravityConverter_START 8388611
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, START, int32_t)
 
 /*!
  @brief Push object to x-axis position at the end of its container, not changing its size.
  */
-inline jint ASGravityConverter_get_END(void);
+inline int32_t ASGravityConverter_get_END(void);
 #define ASGravityConverter_END 8388613
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, END, int32_t)
 
 /*!
  @brief Binary mask for the horizontal gravity and script specific direction bit.
  */
-inline jint ASGravityConverter_get_RELATIVE_HORIZONTAL_GRAVITY_MASK(void);
+inline int32_t ASGravityConverter_get_RELATIVE_HORIZONTAL_GRAVITY_MASK(void);
 #define ASGravityConverter_RELATIVE_HORIZONTAL_GRAVITY_MASK 8388615
-J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, RELATIVE_HORIZONTAL_GRAVITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASGravityConverter, RELATIVE_HORIZONTAL_GRAVITY_MASK, int32_t)
 
 FOUNDATION_EXPORT void ASGravityConverter_init(ASGravityConverter *self);
 
@@ -254,6 +255,7 @@ FOUNDATION_EXPORT ASGravityConverter *create_ASGravityConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASGravityConverter)
 
 @compatibility_alias ComAsheraConverterGravityConverter ASGravityConverter;
+
 
 #endif
 

@@ -3,13 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\GrowingArrayUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "GrowingArrayUtils.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/System.h"
 #include "java/lang/reflect/Array.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADGrowingArrayUtils ()
@@ -27,58 +41,58 @@ __attribute__((unused)) static ADGrowingArrayUtils *create_ADGrowingArrayUtils_i
 @implementation ADGrowingArrayUtils
 
 + (IOSBooleanArray *)appendWithBooleanArray:(IOSBooleanArray *)array
-                                    withInt:(jint)currentSize
-                                withBoolean:(jboolean)element {
+                                    withInt:(int32_t)currentSize
+                                withBoolean:(bool)element {
   return ADGrowingArrayUtils_appendWithBooleanArray_withInt_withBoolean_(array, currentSize, element);
 }
 
 + (IOSObjectArray *)appendWithNSObjectArray:(IOSObjectArray *)array
-                                    withInt:(jint)currentSize
+                                    withInt:(int32_t)currentSize
                                      withId:(id)element {
   return ADGrowingArrayUtils_appendWithNSObjectArray_withInt_withId_(array, currentSize, element);
 }
 
 + (IOSIntArray *)appendWithIntArray:(IOSIntArray *)array
-                            withInt:(jint)currentSize
-                            withInt:(jint)element {
+                            withInt:(int32_t)currentSize
+                            withInt:(int32_t)element {
   return ADGrowingArrayUtils_appendWithIntArray_withInt_withInt_(array, currentSize, element);
 }
 
 + (IOSIntArray *)insertWithIntArray:(IOSIntArray *)array
-                            withInt:(jint)currentSize
-                            withInt:(jint)index
-                            withInt:(jint)element {
+                            withInt:(int32_t)currentSize
+                            withInt:(int32_t)index
+                            withInt:(int32_t)element {
   return ADGrowingArrayUtils_insertWithIntArray_withInt_withInt_withInt_(array, currentSize, index, element);
 }
 
 + (IOSLongArray *)insertWithLongArray:(IOSLongArray *)array
-                              withInt:(jint)currentSize
-                              withInt:(jint)index
-                             withLong:(jlong)element {
+                              withInt:(int32_t)currentSize
+                              withInt:(int32_t)index
+                             withLong:(int64_t)element {
   return ADGrowingArrayUtils_insertWithLongArray_withInt_withInt_withLong_(array, currentSize, index, element);
 }
 
 + (IOSBooleanArray *)insertWithBooleanArray:(IOSBooleanArray *)array
-                                    withInt:(jint)currentSize
-                                    withInt:(jint)index
-                                withBoolean:(jboolean)element {
+                                    withInt:(int32_t)currentSize
+                                    withInt:(int32_t)index
+                                withBoolean:(bool)element {
   return ADGrowingArrayUtils_insertWithBooleanArray_withInt_withInt_withBoolean_(array, currentSize, index, element);
 }
 
-+ (jint)growSizeWithInt:(jint)currentSize {
++ (int32_t)growSizeWithInt:(int32_t)currentSize {
   return ADGrowingArrayUtils_growSizeWithInt_(currentSize);
 }
 
 + (IOSObjectArray *)insertWithNSObjectArray:(IOSObjectArray *)array
-                                    withInt:(jint)currentSize
-                                    withInt:(jint)index
+                                    withInt:(int32_t)currentSize
+                                    withInt:(int32_t)index
                                      withId:(id)element {
   return ADGrowingArrayUtils_insertWithNSObjectArray_withInt_withInt_withId_(array, currentSize, index, element);
 }
 
 + (IOSLongArray *)appendWithLongArray:(IOSLongArray *)array
-                              withInt:(jint)currentSize
-                             withLong:(jlong)element {
+                              withInt:(int32_t)currentSize
+                             withLong:(int64_t)element {
   return ADGrowingArrayUtils_appendWithLongArray_withInt_withLong_(array, currentSize, element);
 }
 
@@ -123,7 +137,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-IOSBooleanArray *ADGrowingArrayUtils_appendWithBooleanArray_withInt_withBoolean_(IOSBooleanArray *array, jint currentSize, jboolean element) {
+IOSBooleanArray *ADGrowingArrayUtils_appendWithBooleanArray_withInt_withBoolean_(IOSBooleanArray *array, int32_t currentSize, bool element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSBooleanArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:36 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 > array->size_) {
@@ -135,7 +149,7 @@ IOSBooleanArray *ADGrowingArrayUtils_appendWithBooleanArray_withInt_withBoolean_
   return array;
 }
 
-IOSObjectArray *ADGrowingArrayUtils_appendWithNSObjectArray_withInt_withId_(IOSObjectArray *array, jint currentSize, id element) {
+IOSObjectArray *ADGrowingArrayUtils_appendWithNSObjectArray_withInt_withId_(IOSObjectArray *array, int32_t currentSize, id element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSObjectArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:56 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 > array->size_) {
@@ -147,7 +161,7 @@ IOSObjectArray *ADGrowingArrayUtils_appendWithNSObjectArray_withInt_withId_(IOSO
   return array;
 }
 
-IOSIntArray *ADGrowingArrayUtils_appendWithIntArray_withInt_withInt_(IOSIntArray *array, jint currentSize, jint element) {
+IOSIntArray *ADGrowingArrayUtils_appendWithIntArray_withInt_withInt_(IOSIntArray *array, int32_t currentSize, int32_t element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSIntArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:74 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 > array->size_) {
@@ -159,7 +173,7 @@ IOSIntArray *ADGrowingArrayUtils_appendWithIntArray_withInt_withInt_(IOSIntArray
   return array;
 }
 
-IOSIntArray *ADGrowingArrayUtils_insertWithIntArray_withInt_withInt_withInt_(IOSIntArray *array, jint currentSize, jint index, jint element) {
+IOSIntArray *ADGrowingArrayUtils_insertWithIntArray_withInt_withInt_withInt_(IOSIntArray *array, int32_t currentSize, int32_t index, int32_t element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSIntArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:89 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 <= array->size_) {
@@ -174,7 +188,7 @@ IOSIntArray *ADGrowingArrayUtils_insertWithIntArray_withInt_withInt_withInt_(IOS
   return newArray;
 }
 
-IOSLongArray *ADGrowingArrayUtils_insertWithLongArray_withInt_withInt_withLong_(IOSLongArray *array, jint currentSize, jint index, jlong element) {
+IOSLongArray *ADGrowingArrayUtils_insertWithLongArray_withInt_withInt_withLong_(IOSLongArray *array, int32_t currentSize, int32_t index, int64_t element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSLongArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:108 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 <= array->size_) {
@@ -189,7 +203,7 @@ IOSLongArray *ADGrowingArrayUtils_insertWithLongArray_withInt_withInt_withLong_(
   return newArray;
 }
 
-IOSBooleanArray *ADGrowingArrayUtils_insertWithBooleanArray_withInt_withInt_withBoolean_(IOSBooleanArray *array, jint currentSize, jint index, jboolean element) {
+IOSBooleanArray *ADGrowingArrayUtils_insertWithBooleanArray_withInt_withInt_withBoolean_(IOSBooleanArray *array, int32_t currentSize, int32_t index, bool element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSBooleanArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:127 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 <= array->size_) {
@@ -204,12 +218,12 @@ IOSBooleanArray *ADGrowingArrayUtils_insertWithBooleanArray_withInt_withInt_with
   return newArray;
 }
 
-jint ADGrowingArrayUtils_growSizeWithInt_(jint currentSize) {
+int32_t ADGrowingArrayUtils_growSizeWithInt_(int32_t currentSize) {
   ADGrowingArrayUtils_initialize();
   return currentSize <= 4 ? 8 : currentSize * 2;
 }
 
-IOSObjectArray *ADGrowingArrayUtils_insertWithNSObjectArray_withInt_withInt_withId_(IOSObjectArray *array, jint currentSize, jint index, id element) {
+IOSObjectArray *ADGrowingArrayUtils_insertWithNSObjectArray_withInt_withInt_withId_(IOSObjectArray *array, int32_t currentSize, int32_t index, id element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSObjectArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:163 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 <= array->size_) {
@@ -224,7 +238,7 @@ IOSObjectArray *ADGrowingArrayUtils_insertWithNSObjectArray_withInt_withInt_with
   return newArray;
 }
 
-IOSLongArray *ADGrowingArrayUtils_appendWithLongArray_withInt_withLong_(IOSLongArray *array, jint currentSize, jlong element) {
+IOSLongArray *ADGrowingArrayUtils_appendWithLongArray_withInt_withLong_(IOSLongArray *array, int32_t currentSize, int64_t element) {
   ADGrowingArrayUtils_initialize();
   JreAssert(currentSize <= ((IOSLongArray *) nil_chk(array))->size_, @"r\\android\\util\\GrowingArrayUtils.java:184 condition failed: assert currentSize <= array.length;");
   if (currentSize + 1 > array->size_) {
@@ -249,3 +263,5 @@ ADGrowingArrayUtils *create_ADGrowingArrayUtils_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADGrowingArrayUtils)
+
+J2OBJC_NAME_MAPPING(ADGrowingArrayUtils, "r.android.util", "AD")

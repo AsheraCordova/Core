@@ -3,12 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelExpressionParser.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "ModelDataType.h"
 #include "ModelExpressionParser.h"
 #include "ModelScope.h"
 #include "java/io/PrintStream.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
@@ -18,8 +25,12 @@
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 
-@class JavaUtilRegexPattern;
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASModelExpressionParser ()
@@ -223,7 +234,7 @@ id<JavaUtilList> ASModelExpressionParser_parseEventExpressionWithNSString_(NSStr
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *varParam = *b__++;
+      NSString *varParam = RETAIN_AND_AUTORELEASE(*b__++);
       [result addWithId:create_ASModelExpressionParser_ModelEventHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(varParam, ASModelExpressionParser_EVENT_VAR_EXPRESSION, @"Invalid expression. e.g. y=z from z->view"))];
     }
   }
@@ -249,7 +260,7 @@ id<JavaUtilList> ASModelExpressionParser_parsePojoToUiExpressionWithNSString_(NS
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *varParam = *b__++;
+      NSString *varParam = RETAIN_AND_AUTORELEASE(*b__++);
       [result addWithId:create_ASModelExpressionParser_ModelPojoToUiHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(varParam, ASModelExpressionParser_UISET_FROMMODEL_REGEX, @"Invalid expression. e.g. text=abcd from x->view"))];
     }
   }
@@ -265,7 +276,7 @@ id<JavaUtilList> ASModelExpressionParser_parseUiToPojoExpressionWithNSString_(NS
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *varParam = *b__++;
+      NSString *varParam = RETAIN_AND_AUTORELEASE(*b__++);
       [result addWithId:create_ASModelExpressionParser_ModelUiToPojoHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(varParam, ASModelExpressionParser_MODELSET_FROMUI_REGEX, @"Invalid expression. e.g. abcd=text into x->view as boolean"))];
     }
   }
@@ -286,7 +297,7 @@ id<JavaUtilList> ASModelExpressionParser_parseModelVarExpressionWithNSString_(NS
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *varParam = *b__++;
+      NSString *varParam = RETAIN_AND_AUTORELEASE(*b__++);
       [result addWithId:create_ASModelExpressionParser_ModelVarHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(varParam, ASModelExpressionParser_VAR_REGEX, @"Invalid expression. e.g. let x = . from y->view into session as pathmap"))];
     }
   }
@@ -301,10 +312,10 @@ ASModelExpressionParser_ModelLoopHolder *ASModelExpressionParser_parseModelLoopE
 id<JavaUtilList> ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(NSString *expression, JavaUtilRegexPattern *regEx, NSString *message) {
   ASModelExpressionParser_initialize();
   JavaUtilRegexMatcher *m = JreRetainedLocalValue([((JavaUtilRegexPattern *) nil_chk(regEx)) matcherWithJavaLangCharSequence:expression]);
-  jboolean b = [((JavaUtilRegexMatcher *) nil_chk(m)) matches];
+  bool b = [((JavaUtilRegexMatcher *) nil_chk(m)) matches];
   id<JavaUtilList> groups = create_JavaUtilArrayList_init();
   if (b) {
-    for (jint i = 1; i <= [m groupCount]; i++) {
+    for (int32_t i = 1; i <= [m groupCount]; i++) {
       [groups addWithId:[m groupWithInt:i]];
     }
   }
@@ -327,15 +338,15 @@ id<JavaUtilMap> ASModelExpressionParser_parseSimpleCssExpressionWithNSString_(NS
 
 id<JavaUtilMap> ASModelExpressionParser_parseSimpleCssExpressionWithNSString_withJavaUtilMap_(NSString *cssStr, id<JavaUtilMap> params) {
   ASModelExpressionParser_initialize();
-  if (cssStr != nil && ![cssStr java_isEmpty]) {
+  if (cssStr != nil && ![cssStr isEmpty]) {
     IOSObjectArray *attrs = [cssStr java_split:@";"];
     {
       IOSObjectArray *a__ = attrs;
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *attr = *b__++;
-        attr = [((NSString *) nil_chk(attr)) java_trim];
+        NSString *attr = RETAIN_AND_AUTORELEASE(*b__++);
+        attr = [attr java_trim];
         IOSObjectArray *nameAndValue = [((NSString *) nil_chk(attr)) java_split:@"\\:"];
         NSString *key = IOSObjectArray_Get(nil_chk(nameAndValue), 0);
         NSString *value = nameAndValue->size_ <= 1 ? @"" : IOSObjectArray_Get(nameAndValue, 1);
@@ -354,6 +365,8 @@ void ASModelExpressionParser_mainWithNSStringArray_(IOSObjectArray *args) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelExpressionParser)
+
+J2OBJC_NAME_MAPPING(ASModelExpressionParser, "com.ashera.model", "AS")
 
 @implementation ASModelExpressionParser_ModelEventHolder
 

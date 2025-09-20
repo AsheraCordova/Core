@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\DisplayMetrics.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DisplayMetrics.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADDisplayMetrics
@@ -47,3 +59,5 @@ ADDisplayMetrics *create_ADDisplayMetrics_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDisplayMetrics)
+
+J2OBJC_NAME_MAPPING(ADDisplayMetrics, "r.android.util", "AD")

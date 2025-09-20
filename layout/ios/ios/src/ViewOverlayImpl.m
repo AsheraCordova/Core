@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewOverlayImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseWidget.h"
 #include "CommonConverters.h"
 #include "ConverterFactory.h"
@@ -23,6 +28,7 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
@@ -30,7 +36,12 @@
 #include <UIKit/UIKit.h>
 #include "ASUIView.h"
 
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASViewOverlayImpl () {
@@ -45,7 +56,7 @@
   NSString *boundsType_;
   NSString *boundsConverter_;
   ADDrawable *currentDrawable_;
-  jboolean useGC_;
+  bool useGC_;
 }
 
 - (void)setDrawableHeightWithNSString:(NSString *)drawableHeight;
@@ -66,22 +77,22 @@
 
 - (IOSIntArray *)getBoundsWithADView:(ADView *)view;
 
-- (jint)getDrawableDimenWithNSString:(NSString *)dimen
-                             withInt:(jint)intrinsicDimen
-                             withInt:(jint)width
-                             withInt:(jint)height;
+- (int32_t)getDrawableDimenWithNSString:(NSString *)dimen
+                                withInt:(int32_t)intrinsicDimen
+                                withInt:(int32_t)width
+                                withInt:(int32_t)height;
 
-- (jint)percentDimensionConvertWithNSString:(NSString *)dimen
-                                    withInt:(jint)width
-                                    withInt:(jint)height;
+- (int32_t)percentDimensionConvertWithNSString:(NSString *)dimen
+                                       withInt:(int32_t)width
+                                       withInt:(int32_t)height;
 
 - (void)setBoundsConverterWithNSString:(NSString *)boundsConverter;
 
 - (void)addOverlayInternalWithADView:(ADView *)view;
 
-- (jint)getTopWithADView:(ADView *)view;
+- (int32_t)getTopWithADView:(ADView *)view;
 
-- (jint)getLeftWithADView:(ADView *)view;
+- (int32_t)getLeftWithADView:(ADView *)view;
 
 - (void)setUseGCWithId:(id)useGC;
 
@@ -121,17 +132,17 @@ __attribute__((unused)) static void ASViewOverlayImpl_addOverlay(ASViewOverlayIm
 
 __attribute__((unused)) static IOSIntArray *ASViewOverlayImpl_getBoundsWithADView_(ASViewOverlayImpl *self, ADView *view);
 
-__attribute__((unused)) static jint ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, jint intrinsicDimen, jint width, jint height);
+__attribute__((unused)) static int32_t ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, int32_t intrinsicDimen, int32_t width, int32_t height);
 
-__attribute__((unused)) static jint ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, jint width, jint height);
+__attribute__((unused)) static int32_t ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, int32_t width, int32_t height);
 
 __attribute__((unused)) static void ASViewOverlayImpl_setBoundsConverterWithNSString_(ASViewOverlayImpl *self, NSString *boundsConverter);
 
 __attribute__((unused)) static void ASViewOverlayImpl_addOverlayInternalWithADView_(ASViewOverlayImpl *self, ADView *view);
 
-__attribute__((unused)) static jint ASViewOverlayImpl_getTopWithADView_(ASViewOverlayImpl *self, ADView *view);
+__attribute__((unused)) static int32_t ASViewOverlayImpl_getTopWithADView_(ASViewOverlayImpl *self, ADView *view);
 
-__attribute__((unused)) static jint ASViewOverlayImpl_getLeftWithADView_(ASViewOverlayImpl *self, ADView *view);
+__attribute__((unused)) static int32_t ASViewOverlayImpl_getLeftWithADView_(ASViewOverlayImpl *self, ADView *view);
 
 __attribute__((unused)) static void ASViewOverlayImpl_setUseGCWithId_(ASViewOverlayImpl *self, id useGC);
 
@@ -292,16 +303,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASViewOverlayImpl_getBoundsWithADView_(self, view);
 }
 
-- (jint)getDrawableDimenWithNSString:(NSString *)dimen
-                             withInt:(jint)intrinsicDimen
-                             withInt:(jint)width
-                             withInt:(jint)height {
+- (int32_t)getDrawableDimenWithNSString:(NSString *)dimen
+                                withInt:(int32_t)intrinsicDimen
+                                withInt:(int32_t)width
+                                withInt:(int32_t)height {
   return ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(self, dimen, intrinsicDimen, width, height);
 }
 
-- (jint)percentDimensionConvertWithNSString:(NSString *)dimen
-                                    withInt:(jint)width
-                                    withInt:(jint)height {
+- (int32_t)percentDimensionConvertWithNSString:(NSString *)dimen
+                                       withInt:(int32_t)width
+                                       withInt:(int32_t)height {
   return ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(self, dimen, width, height);
 }
 
@@ -329,11 +340,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [super invokeMethodWithNSString:methodName withNSObjectArray:args];
 }
 
-- (jint)getTopWithADView:(ADView *)view {
+- (int32_t)getTopWithADView:(ADView *)view {
   return ASViewOverlayImpl_getTopWithADView_(self, view);
 }
 
-- (jint)getLeftWithADView:(ADView *)view {
+- (int32_t)getLeftWithADView:(ADView *)view {
   return ASViewOverlayImpl_getLeftWithADView_(self, view);
 }
 
@@ -509,18 +520,18 @@ void ASViewOverlayImpl_addOverlay(ASViewOverlayImpl *self) {
 }
 
 IOSIntArray *ASViewOverlayImpl_getBoundsWithADView_(ASViewOverlayImpl *self, ADView *view) {
-  jint width = [((ADView *) nil_chk(view)) getWidth];
-  jint height = [view getHeight];
-  jint left = ASViewOverlayImpl_getLeftWithADView_(self, view);
+  int32_t width = [((ADView *) nil_chk(view)) getWidth];
+  int32_t height = [view getHeight];
+  int32_t left = ASViewOverlayImpl_getLeftWithADView_(self, view);
   
   ;
-  jint top = ASViewOverlayImpl_getTopWithADView_(self, view);
-  jint intrinsicWidth = [((ADDrawable *) nil_chk(self->drawable_)) getIntrinsicWidth];
-  jint mydrawableWidth = ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(self, self->drawableWidth_, intrinsicWidth, width, height);
-  jint intrinsicHeight = [((ADDrawable *) nil_chk(self->drawable_)) getIntrinsicHeight];
-  jint mydrawableHeight = ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(self, self->drawableHeight_, intrinsicHeight, width, height);
-  jint myoffsetHorizontal = ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(self, self->offsetHorizontal_, width, height);
-  jint myoffsetVertical = ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(self, self->offsetVertical_, width, height);
+  int32_t top = ASViewOverlayImpl_getTopWithADView_(self, view);
+  int32_t intrinsicWidth = [((ADDrawable *) nil_chk(self->drawable_)) getIntrinsicWidth];
+  int32_t mydrawableWidth = ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(self, self->drawableWidth_, intrinsicWidth, width, height);
+  int32_t intrinsicHeight = [((ADDrawable *) nil_chk(self->drawable_)) getIntrinsicHeight];
+  int32_t mydrawableHeight = ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(self, self->drawableHeight_, intrinsicHeight, width, height);
+  int32_t myoffsetHorizontal = ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(self, self->offsetHorizontal_, width, height);
+  int32_t myoffsetVertical = ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(self, self->offsetVertical_, width, height);
   if (self->offsetHorizontal_ == nil) {
     myoffsetHorizontal = 0;
   }
@@ -529,20 +540,20 @@ IOSIntArray *ASViewOverlayImpl_getBoundsWithADView_(ASViewOverlayImpl *self, ADV
   }
   IOSObjectArray *value = [IOSObjectArray newArrayWithObjects:(id[]){ self->boundsType_, JavaLangInteger_valueOfWithInt_(mydrawableWidth), JavaLangInteger_valueOfWithInt_(mydrawableHeight), JavaLangInteger_valueOfWithInt_(left), JavaLangInteger_valueOfWithInt_(top), JavaLangInteger_valueOfWithInt_(width), JavaLangInteger_valueOfWithInt_(height) } count:7 type:NSObject_class_()];
   IOSIntArray *bounds = (IOSIntArray *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(self->boundsConverter_))) convertFromWithId:value withJavaUtilMap:nil withASIFragment:[self getFragment]], [IOSIntArray class]);
-  IOSIntArray *finalBounds = [IOSIntArray newArrayWithInts:(jint[]){ IOSIntArray_Get(nil_chk(bounds), 0) + myoffsetHorizontal, IOSIntArray_Get(bounds, 1) + myoffsetVertical, IOSIntArray_Get(bounds, 2) + IOSIntArray_Get(bounds, 0) + myoffsetHorizontal, IOSIntArray_Get(bounds, 3) + IOSIntArray_Get(bounds, 1) + myoffsetVertical } count:4];
+  IOSIntArray *finalBounds = [IOSIntArray newArrayWithInts:(int32_t[]){ IOSIntArray_Get(nil_chk(bounds), 0) + myoffsetHorizontal, IOSIntArray_Get(bounds, 1) + myoffsetVertical, IOSIntArray_Get(bounds, 2) + IOSIntArray_Get(bounds, 0) + myoffsetHorizontal, IOSIntArray_Get(bounds, 3) + IOSIntArray_Get(bounds, 1) + myoffsetVertical } count:4];
   return finalBounds;
 }
 
-jint ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, jint intrinsicDimen, jint width, jint height) {
-  jint finalWidth = ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(self, dimen, width, height);
+int32_t ASViewOverlayImpl_getDrawableDimenWithNSString_withInt_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, int32_t intrinsicDimen, int32_t width, int32_t height) {
+  int32_t finalWidth = ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(self, dimen, width, height);
   if (finalWidth == -1) {
     finalWidth = intrinsicDimen;
   }
   return finalWidth;
 }
 
-jint ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, jint width, jint height) {
-  jint finalWidth = -1;
+int32_t ASViewOverlayImpl_percentDimensionConvertWithNSString_withInt_withInt_(ASViewOverlayImpl *self, NSString *dimen, int32_t width, int32_t height) {
+  int32_t finalWidth = -1;
   if (dimen != nil) {
     if ([dimen java_hasSuffix:@"%w"]) {
       finalWidth = JreFpToInt(((JavaLangInteger_parseIntWithNSString_([dimen java_replace:@"%w" withSequence:@""]) / 100.0f) * width));
@@ -573,14 +584,14 @@ void ASViewOverlayImpl_addOverlayInternalWithADView_(ASViewOverlayImpl *self, AD
   }
 }
 
-jint ASViewOverlayImpl_getTopWithADView_(ASViewOverlayImpl *self, ADView *view) {
+int32_t ASViewOverlayImpl_getTopWithADView_(ASViewOverlayImpl *self, ADView *view) {
   if (self->useGC_) {
     return 0;
   }
   return [((ADView *) nil_chk(view)) getTop];
 }
 
-jint ASViewOverlayImpl_getLeftWithADView_(ASViewOverlayImpl *self, ADView *view) {
+int32_t ASViewOverlayImpl_getLeftWithADView_(ASViewOverlayImpl *self, ADView *view) {
   if (self->useGC_) {
     return 0;
   }
@@ -604,6 +615,8 @@ void ASViewOverlayImpl_nativeCreateWithASIFragment_withJavaUtilMap_(ASViewOverla
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewOverlayImpl)
+
+J2OBJC_NAME_MAPPING(ASViewOverlayImpl, "com.ashera.layout", "AS")
 
 @implementation ASViewOverlayImpl_ViewExt
 

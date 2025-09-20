@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\MarginLayoutParamsCompat.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MarginLayoutParamsCompat")
@@ -17,6 +18,7 @@
 #define ADXMarginLayoutParamsCompat_
 
 @class ADViewGroup_MarginLayoutParams;
+@class JavaLangInteger;
 
 @interface ADXMarginLayoutParamsCompat : NSObject
 
@@ -24,15 +26,15 @@
 
 - (instancetype)init;
 
-+ (jint)getMarginEndWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params;
++ (int32_t)getMarginEndWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params;
 
-+ (jint)getMarginStartWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params;
++ (int32_t)getMarginStartWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params;
 
 + (void)setMarginEndWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params
-                                               withInt:(jint)end;
+                                               withInt:(int32_t)end;
 
 + (void)setMarginStartWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params
-                                                 withInt:(jint)start;
+                                                 withInt:(int32_t)start;
 
 @end
 
@@ -44,17 +46,18 @@ FOUNDATION_EXPORT ADXMarginLayoutParamsCompat *new_ADXMarginLayoutParamsCompat_i
 
 FOUNDATION_EXPORT ADXMarginLayoutParamsCompat *create_ADXMarginLayoutParamsCompat_init(void);
 
-FOUNDATION_EXPORT void ADXMarginLayoutParamsCompat_setMarginStartWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, jint start);
+FOUNDATION_EXPORT void ADXMarginLayoutParamsCompat_setMarginStartWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, int32_t start);
 
-FOUNDATION_EXPORT void ADXMarginLayoutParamsCompat_setMarginEndWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, jint end);
+FOUNDATION_EXPORT void ADXMarginLayoutParamsCompat_setMarginEndWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, int32_t end);
 
-FOUNDATION_EXPORT jint ADXMarginLayoutParamsCompat_getMarginStartWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params);
+FOUNDATION_EXPORT int32_t ADXMarginLayoutParamsCompat_getMarginStartWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params);
 
-FOUNDATION_EXPORT jint ADXMarginLayoutParamsCompat_getMarginEndWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params);
+FOUNDATION_EXPORT int32_t ADXMarginLayoutParamsCompat_getMarginEndWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMarginLayoutParamsCompat)
 
 @compatibility_alias AndroidxCoreViewMarginLayoutParamsCompat ADXMarginLayoutParamsCompat;
+
 
 #endif
 

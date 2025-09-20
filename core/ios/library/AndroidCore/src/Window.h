@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\Window.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Window")
@@ -17,6 +18,7 @@
 #define ADWindow_
 
 @class ADView;
+@class JavaLangInteger;
 
 @interface ADWindow : NSObject
 
@@ -26,18 +28,18 @@
 
 - (ADView *)getDecorView;
 
-- (void)requestFeatureWithInt:(jint)featureNoTitle;
+- (void)requestFeatureWithInt:(int32_t)featureNoTitle;
 
-- (void)setFlagsWithInt:(jint)flagFullscreen
-                withInt:(jint)flagFullscreen2;
+- (void)setFlagsWithInt:(int32_t)flagFullscreen
+                withInt:(int32_t)flagFullscreen2;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADWindow)
 
-inline jint ADWindow_get_FEATURE_NO_TITLE(void);
+inline int32_t ADWindow_get_FEATURE_NO_TITLE(void);
 #define ADWindow_FEATURE_NO_TITLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADWindow, FEATURE_NO_TITLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindow, FEATURE_NO_TITLE, int32_t)
 
 FOUNDATION_EXPORT void ADWindow_init(ADWindow *self);
 
@@ -48,6 +50,7 @@ FOUNDATION_EXPORT ADWindow *create_ADWindow_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADWindow)
 
 @compatibility_alias RAndroidViewWindow ADWindow;
+
 
 #endif
 

@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Environment.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Environment.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "java/io/File.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 NSString *ADEnvironment_MEDIA_MOUNTED = @"MEDIA_MOUNTED";
@@ -28,7 +40,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADEnvironment_getExternalStorageDirectory();
 }
 
-+ (jboolean)isExternalStorageEmulated {
++ (bool)isExternalStorageEmulated {
   return ADEnvironment_isExternalStorageEmulated();
 }
 
@@ -85,7 +97,7 @@ JavaIoFile *ADEnvironment_getExternalStorageDirectory() {
   return ASPluginInvoker_getExternalFilesDirWithId_(nil);
 }
 
-jboolean ADEnvironment_isExternalStorageEmulated() {
+bool ADEnvironment_isExternalStorageEmulated() {
   ADEnvironment_initialize();
   return false;
 }
@@ -96,3 +108,5 @@ id ADEnvironment_getLegacyExternalStorageDirectory() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADEnvironment)
+
+J2OBJC_NAME_MAPPING(ADEnvironment, "r.android.os", "AD")

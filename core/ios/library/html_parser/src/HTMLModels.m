@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\HTMLModels.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HTMLModels.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSHTMLModels : NSObject
@@ -45,3 +57,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(TSHTMLModels)
+
+J2OBJC_NAME_MAPPING(TSHTMLModels, "repackaged.org.ccil.cowan.tagsoup", "TS")

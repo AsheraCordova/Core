@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\AttributesImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AttributesImpl")
@@ -21,6 +22,8 @@
 #include "org/xml/sax/Attributes.h"
 
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief Default implementation of the Attributes interface.
@@ -55,7 +58,7 @@
  */
 @interface TSAttributesImpl : NSObject < OrgXmlSaxAttributes > {
  @public
-  jint length_;
+  int32_t length_;
   IOSObjectArray *data_;
 }
 
@@ -106,7 +109,7 @@
  @return The attribute's index, or -1 if none matches.
  - seealso: org.xml.sax.Attributes#getIndex(java.lang.String)
  */
-- (jint)getIndexWithNSString:(NSString *)qName;
+- (int32_t)getIndexWithNSString:(NSString *)qName;
 
 /*!
  @brief Look up an attribute's index by Namespace name.
@@ -118,15 +121,15 @@
  @return The attribute's index, or -1 if none matches.
  - seealso: org.xml.sax.Attributes#getIndex(java.lang.String,java.lang.String)
  */
-- (jint)getIndexWithNSString:(NSString *)uri
-                withNSString:(NSString *)localName;
+- (int32_t)getIndexWithNSString:(NSString *)uri
+                   withNSString:(NSString *)localName;
 
 /*!
  @brief Return the number of attributes in the list.
  @return The number of attributes in the list.
  - seealso: org.xml.sax.Attributes#getLength
  */
-- (jint)getLength;
+- (int32_t)getLength;
 
 /*!
  @brief Return an attribute's local name.
@@ -135,7 +138,7 @@
           none is available, or null if the index if out of range.
  - seealso: org.xml.sax.Attributes#getLocalName
  */
-- (NSString *)getLocalNameWithInt:(jint)index;
+- (NSString *)getLocalNameWithInt:(int32_t)index;
 
 /*!
  @brief Return an attribute's qualified (prefixed) name.
@@ -144,7 +147,7 @@
           none is available, or null if the index is out of bounds.
  - seealso: org.xml.sax.Attributes#getQName
  */
-- (NSString *)getQNameWithInt:(jint)index;
+- (NSString *)getQNameWithInt:(int32_t)index;
 
 /*!
  @brief Return an attribute's type by index.
@@ -153,7 +156,7 @@
           if the index is out of bounds.
  - seealso: org.xml.sax.Attributes#getType(int)
  */
-- (NSString *)getTypeWithInt:(jint)index;
+- (NSString *)getTypeWithInt:(int32_t)index;
 
 /*!
  @brief Look up an attribute's type by qualified (prefixed) name.
@@ -182,7 +185,7 @@
           available, or null if the index is out of range.
  - seealso: org.xml.sax.Attributes#getURI
  */
-- (NSString *)getURIWithInt:(jint)index;
+- (NSString *)getURIWithInt:(int32_t)index;
 
 /*!
  @brief Return an attribute's value by index.
@@ -190,7 +193,7 @@
  @return The attribute's value or null if the index is out of bounds.
  - seealso: org.xml.sax.Attributes#getValue(int)
  */
-- (NSString *)getValueWithInt:(jint)index;
+- (NSString *)getValueWithInt:(int32_t)index;
 
 /*!
  @brief Look up an attribute's value by qualified (prefixed) name.
@@ -219,7 +222,7 @@
              supplied index does not point to an attribute
              in the list.
  */
-- (void)removeAttributeWithInt:(jint)index;
+- (void)removeAttributeWithInt:(int32_t)index;
 
 /*!
  @brief Set an attribute in the list.
@@ -237,7 +240,7 @@
              supplied index does not point to an attribute
              in the list.
  */
-- (void)setAttributeWithInt:(jint)index
+- (void)setAttributeWithInt:(int32_t)index
                withNSString:(NSString *)uri
                withNSString:(NSString *)localName
                withNSString:(NSString *)qName
@@ -260,7 +263,7 @@
              supplied index does not point to an attribute
              in the list.
  */
-- (void)setLocalNameWithInt:(jint)index
+- (void)setLocalNameWithInt:(int32_t)index
                withNSString:(NSString *)localName;
 
 /*!
@@ -271,7 +274,7 @@
              supplied index does not point to an attribute
              in the list.
  */
-- (void)setQNameWithInt:(jint)index
+- (void)setQNameWithInt:(int32_t)index
            withNSString:(NSString *)qName;
 
 /*!
@@ -282,7 +285,7 @@
              supplied index does not point to an attribute
              in the list.
  */
-- (void)setTypeWithInt:(jint)index
+- (void)setTypeWithInt:(int32_t)index
           withNSString:(NSString *)type;
 
 /*!
@@ -293,7 +296,7 @@
              supplied index does not point to an attribute
              in the list.
  */
-- (void)setURIWithInt:(jint)index
+- (void)setURIWithInt:(int32_t)index
          withNSString:(NSString *)uri;
 
 /*!
@@ -304,7 +307,7 @@
              supplied index does not point to an attribute
              in the list.
  */
-- (void)setValueWithInt:(jint)index
+- (void)setValueWithInt:(int32_t)index
            withNSString:(NSString *)value;
 
 @end
@@ -328,6 +331,7 @@ FOUNDATION_EXPORT TSAttributesImpl *create_TSAttributesImpl_initWithOrgXmlSaxAtt
 J2OBJC_TYPE_LITERAL_HEADER(TSAttributesImpl)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupAttributesImpl TSAttributesImpl;
+
 
 #endif
 

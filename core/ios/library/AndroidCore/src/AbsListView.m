@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\AbsListView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbsListView.h"
 #include "AdapterView.h"
 #include "IOSPrimitiveArray.h"
@@ -11,49 +16,57 @@
 #include "LongSparseArray.h"
 #include "SparseBooleanArray.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADAbsListView () {
  @public
-  jint mLastTouchMode_;
-  jint mTranscriptMode_;
-  jint mCacheColorHint_;
-  jint mFastScrollStyle_;
-  jint mTouchSlop_AbsListView_;
-  jint mMinimumVelocity_;
-  jint mMaximumVelocity_;
-  jint mNestedYOffset_;
-  jint mActivePointerId_;
-  jint mFirstPositionDistanceGuess_;
-  jint mLastPositionDistanceGuess_;
-  jint mDirection_;
-  jint mLastHandledItemCount_;
+  int32_t mLastTouchMode_;
+  int32_t mTranscriptMode_;
+  int32_t mCacheColorHint_;
+  int32_t mFastScrollStyle_;
+  int32_t mTouchSlop_AbsListView_;
+  int32_t mMinimumVelocity_;
+  int32_t mMaximumVelocity_;
+  int32_t mNestedYOffset_;
+  int32_t mActivePointerId_;
+  int32_t mFirstPositionDistanceGuess_;
+  int32_t mLastPositionDistanceGuess_;
+  int32_t mDirection_;
+  int32_t mLastHandledItemCount_;
 }
 
 - (void)updateOnScreenCheckedViews;
 
 @end
 
-inline jint ADAbsListView_get_CHECK_POSITION_SEARCH_DISTANCE(void);
+inline int32_t ADAbsListView_get_CHECK_POSITION_SEARCH_DISTANCE(void);
 #define ADAbsListView_CHECK_POSITION_SEARCH_DISTANCE 20
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHECK_POSITION_SEARCH_DISTANCE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, CHECK_POSITION_SEARCH_DISTANCE, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_UNKNOWN(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_UNKNOWN(void);
 #define ADAbsListView_TOUCH_MODE_UNKNOWN -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_UNKNOWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_UNKNOWN, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_ON(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_ON(void);
 #define ADAbsListView_TOUCH_MODE_ON 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_ON, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_ON, int32_t)
 
-inline jint ADAbsListView_get_TOUCH_MODE_OFF(void);
+inline int32_t ADAbsListView_get_TOUCH_MODE_OFF(void);
 #define ADAbsListView_TOUCH_MODE_OFF 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_OFF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, TOUCH_MODE_OFF, int32_t)
 
-inline jint ADAbsListView_get_INVALID_POINTER(void);
+inline int32_t ADAbsListView_get_INVALID_POINTER(void);
 #define ADAbsListView_INVALID_POINTER -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, INVALID_POINTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAbsListView, INVALID_POINTER, int32_t)
 
 __attribute__((unused)) static void ADAbsListView_updateOnScreenCheckedViews(ADAbsListView *self);
 
@@ -80,18 +93,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self clearChoices];
 }
 
-- (jint)getCheckedItemCount {
+- (int32_t)getCheckedItemCount {
   return mCheckedItemCount_;
 }
 
-- (jboolean)isItemCheckedWithInt:(jint)position {
+- (bool)isItemCheckedWithInt:(int32_t)position {
   if (mChoiceMode_ != ADAbsListView_CHOICE_MODE_NONE && mCheckStates_ != nil) {
     return [mCheckStates_ getWithInt:position];
   }
   return false;
 }
 
-- (jint)getCheckedItemPosition {
+- (int32_t)getCheckedItemPosition {
   if (mChoiceMode_ == ADAbsListView_CHOICE_MODE_SINGLE && mCheckStates_ != nil && [mCheckStates_ size] == 1) {
     return [mCheckStates_ keyAtWithInt:0];
   }
@@ -110,9 +123,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     return [IOSLongArray arrayWithLength:0];
   }
   ADLongSparseArray *idStates = mCheckedIdStates_;
-  jint count = [idStates size];
+  int32_t count = [idStates size];
   IOSLongArray *ids = [IOSLongArray arrayWithLength:count];
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     *IOSLongArray_GetRef(ids, i) = [idStates keyAtWithInt:i];
   }
   return ids;
@@ -128,16 +141,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   mCheckedItemCount_ = 0;
 }
 
-- (jboolean)performItemClickWithADView:(ADView *)view
-                               withInt:(jint)position
-                              withLong:(jlong)id_ {
-  jboolean handled = false;
-  jboolean dispatchItemClick = true;
+- (bool)performItemClickWithADView:(ADView *)view
+                           withInt:(int32_t)position
+                          withLong:(int64_t)id_ {
+  bool handled = false;
+  bool dispatchItemClick = true;
   if (mChoiceMode_ != ADAbsListView_CHOICE_MODE_NONE) {
     handled = true;
-    jboolean checkedStateChanged = false;
+    bool checkedStateChanged = false;
     if (mChoiceMode_ == ADAbsListView_CHOICE_MODE_MULTIPLE || (mChoiceMode_ == ADAbsListView_CHOICE_MODE_MULTIPLE_MODAL && mChoiceActionMode_ != nil)) {
-      jboolean checked = ![((ADSparseBooleanArray *) nil_chk(mCheckStates_)) getWithInt:position withBoolean:false];
+      bool checked = ![((ADSparseBooleanArray *) nil_chk(mCheckStates_)) getWithInt:position withBoolean:false];
       [((ADSparseBooleanArray *) nil_chk(mCheckStates_)) putWithInt:position withBoolean:checked];
       if (mCheckedIdStates_ != nil && [((id<ADListAdapter>) nil_chk(mAdapter_)) hasStableIds]) {
         if (checked) {
@@ -160,7 +173,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       checkedStateChanged = true;
     }
     else if (mChoiceMode_ == ADAbsListView_CHOICE_MODE_SINGLE) {
-      jboolean checked = ![((ADSparseBooleanArray *) nil_chk(mCheckStates_)) getWithInt:position withBoolean:false];
+      bool checked = ![((ADSparseBooleanArray *) nil_chk(mCheckStates_)) getWithInt:position withBoolean:false];
       if (checked) {
         [((ADSparseBooleanArray *) nil_chk(mCheckStates_)) clear];
         [((ADSparseBooleanArray *) nil_chk(mCheckStates_)) putWithInt:position withBoolean:true];
@@ -185,11 +198,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return handled;
 }
 
-- (jint)getChoiceMode {
+- (int32_t)getChoiceMode {
   return mChoiceMode_;
 }
 
-- (void)setChoiceModeWithInt:(jint)choiceMode {
+- (void)setChoiceModeWithInt:(int32_t)choiceMode {
   mChoiceMode_ = choiceMode;
   if (mChoiceActionMode_ != nil) {
     [mChoiceActionMode_ finish];
@@ -355,6 +368,8 @@ void ADAbsListView_updateOnScreenCheckedViews(ADAbsListView *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAbsListView)
 
+J2OBJC_NAME_MAPPING(ADAbsListView, "r.android.widget", "AD")
+
 @implementation ADAbsListView_ActionMode
 
 - (instancetype)initWithADAbsListView:(ADAbsListView *)outer$ {
@@ -410,9 +425,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAbsListView_ActionMode)
 }
 
 - (void)onItemCheckedStateChangedWithADAbsListView_ActionMode:(ADAbsListView_ActionMode *)mode
-                                                      withInt:(jint)position
-                                                     withLong:(jlong)id_
-                                                  withBoolean:(jboolean)checked {
+                                                      withInt:(int32_t)position
+                                                     withLong:(int64_t)id_
+                                                  withBoolean:(bool)checked {
 }
 
 + (const J2ObjcClassInfo *)__metadata {

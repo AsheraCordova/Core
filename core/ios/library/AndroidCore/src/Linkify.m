@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\util\Linkify.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Context.h"
 #include "EmptyArray.h"
 #include "IOSClass.h"
@@ -12,8 +17,10 @@
 #include "Log.h"
 #include "Patterns.h"
 #include "SpannableImpl.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collections.h"
 #include "java/util/Comparator.h"
@@ -25,25 +32,22 @@
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 
-@class JavaUtilArrayList;
-@class JavaUtilRegexMatcher;
-@class JavaUtilRegexPattern;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ADLinkify ()
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                                    withInt:(jint)mask
-                              withADContext:(ADContext *)context
-               withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory;
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+                                withInt:(int32_t)mask
+                          withADContext:(ADContext *)context
+           withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory;
 
 + (NSString *)makeUrlWithNSString:(NSString *)url
                 withNSStringArray:(IOSObjectArray *)prefixes
@@ -67,8 +71,8 @@
                               withADContext:(ADContext *)context;
 
 + (void)applyLinkWithNSString:(NSString *)url
-                      withInt:(jint)start
-                      withInt:(jint)end
+                      withInt:(int32_t)start
+                      withInt:(int32_t)end
       withADLinkify_Spannable:(id<ADLinkify_Spannable>)text
  withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory;
 
@@ -78,11 +82,11 @@ inline NSString *ADLinkify_get_LOG_TAG(void);
 static NSString *ADLinkify_LOG_TAG = @"Linkify";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADLinkify, LOG_TAG, NSString *)
 
-inline jint ADLinkify_get_PHONE_NUMBER_MINIMUM_DIGITS(void);
+inline int32_t ADLinkify_get_PHONE_NUMBER_MINIMUM_DIGITS(void);
 #define ADLinkify_PHONE_NUMBER_MINIMUM_DIGITS 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, PHONE_NUMBER_MINIMUM_DIGITS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinkify, PHONE_NUMBER_MINIMUM_DIGITS, int32_t)
 
-__attribute__((unused)) static jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, jint mask, ADContext *context, id<JavaUtilFunctionFunction> urlSpanFactory);
+__attribute__((unused)) static bool ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, int32_t mask, ADContext *context, id<JavaUtilFunctionFunction> urlSpanFactory);
 
 __attribute__((unused)) static NSString *ADLinkify_makeUrlWithNSString_withNSStringArray_withJavaUtilRegexMatcher_withADLinkify_TransformFilter_(NSString *url, IOSObjectArray *prefixes, JavaUtilRegexMatcher *matcher, id<ADLinkify_TransformFilter> filter);
 
@@ -94,7 +98,7 @@ __attribute__((unused)) static void ADLinkify_gatherMapLinksWithJavaUtilArrayLis
 
 __attribute__((unused)) static void ADLinkify_gatherTelLinksWithJavaUtilArrayList_withADLinkify_Spannable_withADContext_(JavaUtilArrayList *links, id<ADLinkify_Spannable> text, ADContext *context);
 
-__attribute__((unused)) static void ADLinkify_applyLinkWithNSString_withInt_withInt_withADLinkify_Spannable_withJavaUtilFunctionFunction_(NSString *url, jint start, jint end, id<ADLinkify_Spannable> text, id<JavaUtilFunctionFunction> urlSpanFactory);
+__attribute__((unused)) static void ADLinkify_applyLinkWithNSString_withInt_withInt_withADLinkify_Spannable_withJavaUtilFunctionFunction_(NSString *url, int32_t start, int32_t end, id<ADLinkify_Spannable> text, id<JavaUtilFunctionFunction> urlSpanFactory);
 
 @interface ADLinkify_MatchFilter : NSObject
 
@@ -104,9 +108,9 @@ __attribute__((unused)) static void ADLinkify_applyLinkWithNSString_withInt_with
 
 - (instancetype)init;
 
-- (jboolean)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                        withInt:(jint)start
-                                        withInt:(jint)end;
+- (bool)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)end;
 
 @end
 
@@ -118,13 +122,14 @@ __attribute__((unused)) static ADLinkify_1 *new_ADLinkify_1_init(void) NS_RETURN
 
 __attribute__((unused)) static ADLinkify_1 *create_ADLinkify_1_init(void);
 
+
 @interface ADLinkify_2 : NSObject < ADLinkify_MatchFilter >
 
 - (instancetype)init;
 
-- (jboolean)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                        withInt:(jint)start
-                                        withInt:(jint)end;
+- (bool)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)end;
 
 @end
 
@@ -135,6 +140,7 @@ __attribute__((unused)) static void ADLinkify_2_init(ADLinkify_2 *self);
 __attribute__((unused)) static ADLinkify_2 *new_ADLinkify_2_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADLinkify_2 *create_ADLinkify_2_init(void);
+
 
 @interface ADLinkify_TransformFilter : NSObject
 
@@ -157,12 +163,13 @@ __attribute__((unused)) static ADLinkify_3 *new_ADLinkify_3_init(void) NS_RETURN
 
 __attribute__((unused)) static ADLinkify_3 *create_ADLinkify_3_init(void);
 
+
 @interface ADLinkify_4 : NSObject < JavaUtilComparator >
 
 - (instancetype)init;
 
-- (jint)compareWithId:(ADLinkSpec *)a
-               withId:(ADLinkSpec *)b;
+- (int32_t)compareWithId:(ADLinkSpec *)a
+                  withId:(ADLinkSpec *)b;
 
 @end
 
@@ -173,6 +180,7 @@ __attribute__((unused)) static void ADLinkify_4_init(ADLinkify_4 *self);
 __attribute__((unused)) static ADLinkify_4 *new_ADLinkify_4_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADLinkify_4 *create_ADLinkify_4_init(void);
+
 
 @interface ADLinkify_Spannable : NSObject
 
@@ -197,6 +205,7 @@ __attribute__((unused)) static ADLinkify_5 *new_ADLinkify_5_initWithJavaUtilArra
 
 __attribute__((unused)) static ADLinkify_5 *create_ADLinkify_5_initWithJavaUtilArrayList_(JavaUtilArrayList *capture$0);
 
+
 J2OBJC_INITIALIZED_DEFN(ADLinkify)
 
 id<ADLinkify_MatchFilter> ADLinkify_sUrlMatchFilter;
@@ -212,58 +221,58 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                                    withInt:(jint)mask {
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+                                withInt:(int32_t)mask {
   return ADLinkify_addLinksWithADLinkify_Spannable_withInt_(text, mask);
 }
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                                    withInt:(jint)mask
-               withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory {
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+                                withInt:(int32_t)mask
+           withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory {
   return ADLinkify_addLinksWithADLinkify_Spannable_withInt_withJavaUtilFunctionFunction_(text, mask, urlSpanFactory);
 }
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                                    withInt:(jint)mask
-                              withADContext:(ADContext *)context
-               withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory {
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+                                withInt:(int32_t)mask
+                          withADContext:(ADContext *)context
+           withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory {
   return ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJavaUtilFunctionFunction_(text, mask, context, urlSpanFactory);
 }
 
-+ (jboolean)containsUnsupportedCharactersWithNSString:(NSString *)text {
++ (bool)containsUnsupportedCharactersWithNSString:(NSString *)text {
   return ADLinkify_containsUnsupportedCharactersWithNSString_(text);
 }
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)scheme {
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)text
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)scheme {
   return ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_(text, pattern, scheme);
 }
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)scheme
-                  withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
-              withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter {
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)scheme
+              withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
+          withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter {
   return ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(spannable, pattern, scheme, matchFilter, transformFilter);
 }
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)defaultScheme
-                          withNSStringArray:(IOSObjectArray *)schemes
-                  withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
-              withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter {
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)defaultScheme
+                      withNSStringArray:(IOSObjectArray *)schemes
+              withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
+          withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter {
   return ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(spannable, pattern, defaultScheme, schemes, matchFilter, transformFilter);
 }
 
-+ (jboolean)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
-                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                               withNSString:(NSString *)defaultScheme
-                          withNSStringArray:(IOSObjectArray *)schemes
-                  withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
-              withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter
-               withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory {
++ (bool)addLinksWithADLinkify_Spannable:(id<ADLinkify_Spannable>)spannable
+               withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                           withNSString:(NSString *)defaultScheme
+                      withNSStringArray:(IOSObjectArray *)schemes
+              withADLinkify_MatchFilter:(id<ADLinkify_MatchFilter>)matchFilter
+          withADLinkify_TransformFilter:(id<ADLinkify_TransformFilter>)transformFilter
+           withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory {
   return ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_withJavaUtilFunctionFunction_(spannable, pattern, defaultScheme, schemes, matchFilter, transformFilter, urlSpanFactory);
 }
 
@@ -299,16 +308,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)applyLinkWithNSString:(NSString *)url
-                      withInt:(jint)start
-                      withInt:(jint)end
+                      withInt:(int32_t)start
+                      withInt:(int32_t)end
       withADLinkify_Spannable:(id<ADLinkify_Spannable>)text
  withJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)urlSpanFactory {
   ADLinkify_applyLinkWithNSString_withInt_withInt_withADLinkify_Spannable_withJavaUtilFunctionFunction_(url, start, end, text, urlSpanFactory);
 }
 
 + (NSString *)linkifyWithNSString:(NSString *)url
-                          withInt:(jint)mask
-                      withBoolean:(jboolean)clickable {
+                          withInt:(int32_t)mask
+                      withBoolean:(bool)clickable {
   return ADLinkify_linkifyWithNSString_withInt_withBoolean_(url, mask, clickable);
 }
 
@@ -391,17 +400,17 @@ ADLinkify *create_ADLinkify_init() {
   J2OBJC_CREATE_IMPL(ADLinkify, init)
 }
 
-jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_(id<ADLinkify_Spannable> text, jint mask) {
+bool ADLinkify_addLinksWithADLinkify_Spannable_withInt_(id<ADLinkify_Spannable> text, int32_t mask) {
   ADLinkify_initialize();
   return ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJavaUtilFunctionFunction_(text, mask, nil, nil);
 }
 
-jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, jint mask, id<JavaUtilFunctionFunction> urlSpanFactory) {
+bool ADLinkify_addLinksWithADLinkify_Spannable_withInt_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, int32_t mask, id<JavaUtilFunctionFunction> urlSpanFactory) {
   ADLinkify_initialize();
   return ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJavaUtilFunctionFunction_(text, mask, nil, urlSpanFactory);
 }
 
-jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, jint mask, ADContext *context, id<JavaUtilFunctionFunction> urlSpanFactory) {
+bool ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> text, int32_t mask, ADContext *context, id<JavaUtilFunctionFunction> urlSpanFactory) {
   ADLinkify_initialize();
   if (text != nil && ADLinkify_containsUnsupportedCharactersWithNSString_([text description])) {
     return false;
@@ -410,7 +419,7 @@ jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJav
     return false;
   }
   IOSObjectArray *old = [((id<ADLinkify_Spannable>) nil_chk(text)) getSpansWithInt:0 withInt:[text java_length] withIOSClass:ADLinkify_URLSpan_class_()];
-  for (jint i = ((IOSObjectArray *) nil_chk(old))->size_ - 1; i >= 0; i--) {
+  for (int32_t i = ((IOSObjectArray *) nil_chk(old))->size_ - 1; i >= 0; i--) {
     [text removeSpanWithADLinkify_URLSpan:IOSObjectArray_Get(old, i)];
   }
   JavaUtilArrayList *links = create_JavaUtilArrayList_init();
@@ -436,7 +445,7 @@ jboolean ADLinkify_addLinksWithADLinkify_Spannable_withInt_withADContext_withJav
   return true;
 }
 
-jboolean ADLinkify_containsUnsupportedCharactersWithNSString_(NSString *text) {
+bool ADLinkify_containsUnsupportedCharactersWithNSString_(NSString *text) {
   ADLinkify_initialize();
   if ([((NSString *) nil_chk(text)) java_contains:@"\u202c"]) {
     ADLog_eWithNSString_withNSString_(ADLinkify_LOG_TAG, @"Unsupported character for applying links: u202C");
@@ -453,22 +462,22 @@ jboolean ADLinkify_containsUnsupportedCharactersWithNSString_(NSString *text) {
   return false;
 }
 
-jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_(id<ADLinkify_Spannable> text, JavaUtilRegexPattern *pattern, NSString *scheme) {
+bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_(id<ADLinkify_Spannable> text, JavaUtilRegexPattern *pattern, NSString *scheme) {
   ADLinkify_initialize();
   return ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(text, pattern, scheme, nil, nil, nil);
 }
 
-jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *scheme, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter) {
+bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *scheme, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter) {
   ADLinkify_initialize();
   return ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(spannable, pattern, scheme, nil, matchFilter, transformFilter);
 }
 
-jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter) {
+bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter) {
   ADLinkify_initialize();
   return ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_withJavaUtilFunctionFunction_(spannable, pattern, defaultScheme, schemes, matchFilter, transformFilter, nil);
 }
 
-jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter, id<JavaUtilFunctionFunction> urlSpanFactory) {
+bool ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_withNSString_withNSStringArray_withADLinkify_MatchFilter_withADLinkify_TransformFilter_withJavaUtilFunctionFunction_(id<ADLinkify_Spannable> spannable, JavaUtilRegexPattern *pattern, NSString *defaultScheme, IOSObjectArray *schemes, id<ADLinkify_MatchFilter> matchFilter, id<ADLinkify_TransformFilter> transformFilter, id<JavaUtilFunctionFunction> urlSpanFactory) {
   ADLinkify_initialize();
   if (spannable != nil && ADLinkify_containsUnsupportedCharactersWithNSString_([spannable description])) {
     return false;
@@ -480,16 +489,16 @@ jboolean ADLinkify_addLinksWithADLinkify_Spannable_withJavaUtilRegexPattern_with
   }
   schemesCopy = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(schemes))->size_ + 1 type:NSString_class_()];
   IOSObjectArray_Set(schemesCopy, 0, [defaultScheme java_lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]);
-  for (jint index = 0; index < schemes->size_; index++) {
+  for (int32_t index = 0; index < schemes->size_; index++) {
     NSString *scheme = IOSObjectArray_Get(schemes, index);
     IOSObjectArray_Set(schemesCopy, index + 1, (scheme == nil) ? @"" : [((NSString *) nil_chk(scheme)) java_lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]);
   }
-  jboolean hasMatches = false;
+  bool hasMatches = false;
   JavaUtilRegexMatcher *m = JreRetainedLocalValue([((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:spannable]);
   while ([((JavaUtilRegexMatcher *) nil_chk(m)) find]) {
-    jint start = [m start];
-    jint end = [m end];
-    jboolean allowed = true;
+    int32_t start = [m start];
+    int32_t end = [m end];
+    bool allowed = true;
     if (matchFilter != nil) {
       allowed = [matchFilter acceptMatchWithJavaLangCharSequence:spannable withInt:start withInt:end];
     }
@@ -507,8 +516,8 @@ NSString *ADLinkify_makeUrlWithNSString_withNSStringArray_withJavaUtilRegexMatch
   if (filter != nil) {
     url = [filter transformUrlWithJavaUtilRegexMatcher:matcher withNSString:url];
   }
-  jboolean hasPrefix = false;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(prefixes))->size_; i++) {
+  bool hasPrefix = false;
+  for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(prefixes))->size_; i++) {
     if ([((NSString *) nil_chk(url)) java_regionMatches:true thisOffset:0 aString:IOSObjectArray_Get(prefixes, i) otherOffset:0 count:[((NSString *) nil_chk(IOSObjectArray_Get(prefixes, i))) java_length]]) {
       hasPrefix = true;
       if (![url java_regionMatches:false thisOffset:0 aString:IOSObjectArray_Get(prefixes, i) otherOffset:0 count:[((NSString *) nil_chk(IOSObjectArray_Get(prefixes, i))) java_length]]) {
@@ -527,8 +536,8 @@ void ADLinkify_gatherLinksWithJavaUtilArrayList_withADLinkify_Spannable_withJava
   ADLinkify_initialize();
   JavaUtilRegexMatcher *m = JreRetainedLocalValue([((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:s]);
   while ([((JavaUtilRegexMatcher *) nil_chk(m)) find]) {
-    jint start = [m start];
-    jint end = [m end];
+    int32_t start = [m start];
+    int32_t end = [m end];
     if (matchFilter == nil || [matchFilter acceptMatchWithJavaLangCharSequence:s withInt:start withInt:end]) {
       ADLinkSpec *spec = create_ADLinkSpec_initPackagePrivate();
       NSString *url = ADLinkify_makeUrlWithNSString_withNSStringArray_withJavaUtilRegexMatcher_withADLinkify_TransformFilter_([m groupWithInt:0], schemes, m, transformFilter);
@@ -544,12 +553,12 @@ void ADLinkify_pruneOverlapsWithJavaUtilArrayList_(JavaUtilArrayList *links) {
   ADLinkify_initialize();
   id<JavaUtilComparator> c = create_ADLinkify_4_init();
   JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(links, c);
-  jint len = [((JavaUtilArrayList *) nil_chk(links)) size];
-  jint i = 0;
+  int32_t len = [((JavaUtilArrayList *) nil_chk(links)) size];
+  int32_t i = 0;
   while (i < len - 1) {
     ADLinkSpec *a = JreRetainedLocalValue([links getWithInt:i]);
     ADLinkSpec *b = JreRetainedLocalValue([links getWithInt:i + 1]);
-    jint remove = -1;
+    int32_t remove = -1;
     if ((((ADLinkSpec *) nil_chk(a))->start_ <= ((ADLinkSpec *) nil_chk(b))->start_) && (a->end_ > b->start_)) {
       if (b->end_ <= a->end_) {
         remove = i + 1;
@@ -578,7 +587,7 @@ void ADLinkify_gatherTelLinksWithJavaUtilArrayList_withADLinkify_Spannable_withA
   ADLinkify_initialize();
 }
 
-void ADLinkify_applyLinkWithNSString_withInt_withInt_withADLinkify_Spannable_withJavaUtilFunctionFunction_(NSString *url, jint start, jint end, id<ADLinkify_Spannable> text, id<JavaUtilFunctionFunction> urlSpanFactory) {
+void ADLinkify_applyLinkWithNSString_withInt_withInt_withADLinkify_Spannable_withJavaUtilFunctionFunction_(NSString *url, int32_t start, int32_t end, id<ADLinkify_Spannable> text, id<JavaUtilFunctionFunction> urlSpanFactory) {
   ADLinkify_initialize();
   ADLinkify_URLSpan *urlSpan = JreRetainedLocalValue([((id<JavaUtilFunctionFunction>) nil_chk(urlSpanFactory)) applyWithId:url]);
   JreStrongAssign(&((ADLinkify_URLSpan *) nil_chk(urlSpan))->url_, url);
@@ -586,11 +595,11 @@ void ADLinkify_applyLinkWithNSString_withInt_withInt_withADLinkify_Spannable_wit
   urlSpan->end_ = end;
 }
 
-NSString *ADLinkify_linkifyWithNSString_withInt_withBoolean_(NSString *url, jint mask, jboolean clickable) {
+NSString *ADLinkify_linkifyWithNSString_withInt_withBoolean_(NSString *url, int32_t mask, bool clickable) {
   ADLinkify_initialize();
   JavaUtilArrayList *urlspans = create_JavaUtilArrayList_init();
   ADLinkify_addLinksWithADLinkify_Spannable_withInt_withJavaUtilFunctionFunction_(create_ADSpannableImpl_initWithNSString_(url), mask, create_ADLinkify_5_initWithJavaUtilArrayList_(urlspans));
-  for (jint i = [urlspans size] - 1; i >= 0; i--) {
+  for (int32_t i = [urlspans size] - 1; i >= 0; i--) {
     ADLinkify_URLSpan *urlSpan = JreRetainedLocalValue([urlspans getWithInt:i]);
     NSString *href = NSString_java_formatWithNSString_withNSObjectArray_(@"<a href='%s'>%s</a>", [IOSObjectArray arrayWithObjects:(id[]){ clickable ? @"#" : ((ADLinkify_URLSpan *) nil_chk(urlSpan))->url_, ((ADLinkify_URLSpan *) nil_chk(urlSpan))->url_ } count:2 type:NSObject_class_()]);
     url = JreStrcat("$$$", [((NSString *) nil_chk(url)) java_substring:0 endIndex:urlSpan->start_], href, [url java_substring:urlSpan->end_]);
@@ -599,6 +608,8 @@ NSString *ADLinkify_linkifyWithNSString_withInt_withBoolean_(NSString *url, jint
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLinkify)
+
+J2OBJC_NAME_MAPPING(ADLinkify, "r.android.text.util", "AD")
 
 @implementation ADLinkSpec
 
@@ -675,9 +686,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                        withInt:(jint)start
-                                        withInt:(jint)end {
+- (bool)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)end {
   if (start == 0) {
     return true;
   }
@@ -699,7 +710,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(acceptMatchWithJavaLangCharSequence:withInt:withInt:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "acceptMatch", "LJavaLangCharSequence;II", "LADLinkify;" };
-  static const J2ObjcClassInfo _ADLinkify_1 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADLinkify_1 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, -1, -1, -1 };
   return &_ADLinkify_1;
 }
 
@@ -726,11 +737,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                        withInt:(jint)start
-                                        withInt:(jint)end {
-  jint digitCount = 0;
-  for (jint i = start; i < end; i++) {
+- (bool)acceptMatchWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
+                                    withInt:(int32_t)start
+                                    withInt:(int32_t)end {
+  int32_t digitCount = 0;
+  for (int32_t i = start; i < end; i++) {
     if (JavaLangCharacter_isDigitWithChar_([((id<JavaLangCharSequence>) nil_chk(s)) charAtWithInt:i])) {
       digitCount++;
       if (digitCount >= ADLinkify_PHONE_NUMBER_MINIMUM_DIGITS) {
@@ -753,7 +764,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(acceptMatchWithJavaLangCharSequence:withInt:withInt:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "acceptMatch", "LJavaLangCharSequence;II", "LADLinkify;" };
-  static const J2ObjcClassInfo _ADLinkify_2 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADLinkify_2 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, -1, -1, -1 };
   return &_ADLinkify_2;
 }
 
@@ -817,7 +828,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(transformUrlWithJavaUtilRegexMatcher:withNSString:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "transformUrl", "LJavaUtilRegexMatcher;LNSString;", "LADLinkify;" };
-  static const J2ObjcClassInfo _ADLinkify_3 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADLinkify_3 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, -1, -1, -1 };
   return &_ADLinkify_3;
 }
 
@@ -844,8 +855,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)compareWithId:(ADLinkSpec *)a
-               withId:(ADLinkSpec *)b {
+- (int32_t)compareWithId:(ADLinkSpec *)a
+                  withId:(ADLinkSpec *)b {
   if (((ADLinkSpec *) nil_chk(a))->start_ < ((ADLinkSpec *) nil_chk(b))->start_) {
     return -1;
   }
@@ -902,7 +913,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(compareWithId:withId:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "compare", "LADLinkSpec;LADLinkSpec;", "LADLinkify;", "pruneOverlapsWithJavaUtilArrayList:", "Ljava/lang/Object;Ljava/util/Comparator<Lr/android/text/util/LinkSpec;>;" };
-  static const J2ObjcClassInfo _ADLinkify_4 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, 4, -1 };
+  static const J2ObjcClassInfo _ADLinkify_4 = { "", "r.android.text.util", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, 4, -1 };
   return &_ADLinkify_4;
 }
 
@@ -1001,7 +1012,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLinkify_URLSpan)
 - (ADLinkify_URLSpan *)applyWithId:(NSString *)t {
   ADLinkify_URLSpan *urlspan = create_ADLinkify_URLSpan_init();
   [((JavaUtilArrayList *) nil_chk(val$urlspans_)) addWithId:urlspan];
-  return urlspan;
+  return JreRetainedLocalValue(urlspan);
 }
 
 - (id<JavaUtilFunctionFunction>)composeWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
@@ -1032,7 +1043,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLinkify_URLSpan)
     { "val$urlspans_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x1012, -1, -1, 3, -1 },
   };
   static const void *ptrTable[] = { "LJavaUtilArrayList;", "apply", "LNSString;", "Ljava/util/ArrayList<Lr/android/text/util/Linkify$URLSpan;>;", "LADLinkify;", "linkifyWithNSString:withInt:withBoolean:", "Ljava/lang/Object;Ljava/util/function/Function<Ljava/lang/String;Lr/android/text/util/Linkify$URLSpan;>;" };
-  static const J2ObjcClassInfo _ADLinkify_5 = { "", "r.android.text.util", ptrTable, methods, fields, 7, 0x8018, 2, 1, 4, -1, 5, 6, -1 };
+  static const J2ObjcClassInfo _ADLinkify_5 = { "", "r.android.text.util", ptrTable, methods, fields, 7, 0x8000, 2, 1, 4, -1, 5, 6, -1 };
   return &_ADLinkify_5;
 }
 

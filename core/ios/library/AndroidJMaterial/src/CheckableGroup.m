@@ -3,11 +3,17 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\internal\CheckableGroup.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CheckableGroup.h"
 #include "J2ObjC_source.h"
 #include "MaterialCheckable.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -18,8 +24,11 @@
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXCheckableGroup () {
@@ -27,14 +36,14 @@
   id<JavaUtilMap> checkables_;
   id<JavaUtilSet> checkedIds_;
   id<ADXCheckableGroup_OnCheckedStateChangeListener> onCheckedStateChangeListener_;
-  jboolean singleSelection_;
-  jboolean selectionRequired_;
+  bool singleSelection_;
+  bool selectionRequired_;
 }
 
-- (jboolean)checkInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable;
+- (bool)checkInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable;
 
-- (jboolean)uncheckInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable
-                                        withBoolean:(jboolean)selectionRequired;
+- (bool)uncheckInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable
+                                    withBoolean:(bool)selectionRequired;
 
 - (void)onCheckedStateChanged;
 
@@ -44,9 +53,9 @@ J2OBJC_FIELD_SETTER(ADXCheckableGroup, checkables_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(ADXCheckableGroup, checkedIds_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(ADXCheckableGroup, onCheckedStateChangeListener_, id<ADXCheckableGroup_OnCheckedStateChangeListener>)
 
-__attribute__((unused)) static jboolean ADXCheckableGroup_checkInternalWithADXMaterialCheckable_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable);
+__attribute__((unused)) static bool ADXCheckableGroup_checkInternalWithADXMaterialCheckable_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable);
 
-__attribute__((unused)) static jboolean ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable, jboolean selectionRequired);
+__attribute__((unused)) static bool ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable, bool selectionRequired);
 
 __attribute__((unused)) static void ADXCheckableGroup_onCheckedStateChanged(ADXCheckableGroup *self);
 
@@ -58,7 +67,7 @@ __attribute__((unused)) static void ADXCheckableGroup_onCheckedStateChanged(ADXC
 - (instancetype)initWithADXCheckableGroup:(ADXCheckableGroup *)outer$;
 
 - (void)onCheckedChangedWithId:(id<ADXMaterialCheckable>)checkable
-                   withBoolean:(jboolean)isChecked;
+                   withBoolean:(bool)isChecked;
 
 @end
 
@@ -69,6 +78,7 @@ __attribute__((unused)) static void ADXCheckableGroup_1_initWithADXCheckableGrou
 __attribute__((unused)) static ADXCheckableGroup_1 *new_ADXCheckableGroup_1_initWithADXCheckableGroup_(ADXCheckableGroup *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADXCheckableGroup_1 *create_ADXCheckableGroup_1_initWithADXCheckableGroup_(ADXCheckableGroup *outer$);
+
 
 @interface ADXCheckableGroup_OnCheckedStateChangeListener : NSObject
 
@@ -83,22 +93,22 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setSingleSelectionWithBoolean:(jboolean)singleSelection {
+- (void)setSingleSelectionWithBoolean:(bool)singleSelection {
   if (self->singleSelection_ != singleSelection) {
     self->singleSelection_ = singleSelection;
     [self clearCheck];
   }
 }
 
-- (jboolean)isSingleSelection {
+- (bool)isSingleSelection {
   return singleSelection_;
 }
 
-- (void)setSelectionRequiredWithBoolean:(jboolean)selectionRequired {
+- (void)setSelectionRequiredWithBoolean:(bool)selectionRequired {
   self->selectionRequired_ = selectionRequired;
 }
 
-- (jboolean)isSelectionRequired {
+- (bool)isSelectionRequired {
   return selectionRequired_;
 }
 
@@ -120,7 +130,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<JavaUtilSet>) nil_chk(checkedIds_)) removeWithId:JavaLangInteger_valueOfWithInt_([checkable getId])];
 }
 
-- (void)checkWithInt:(jint)id_ {
+- (void)checkWithInt:(int32_t)id_ {
   id<ADXMaterialCheckable> checkable = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(checkables_)) getWithId:JavaLangInteger_valueOfWithInt_(id_)]);
   if (checkable == nil) {
     return;
@@ -130,7 +140,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)uncheckWithInt:(jint)id_ {
+- (void)uncheckWithInt:(int32_t)id_ {
   id<ADXMaterialCheckable> checkable = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(checkables_)) getWithId:JavaLangInteger_valueOfWithInt_(id_)]);
   if (checkable == nil) {
     return;
@@ -141,7 +151,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)clearCheck {
-  jboolean checkedStateChanged = ![((id<JavaUtilSet>) nil_chk(checkedIds_)) isEmpty];
+  bool checkedStateChanged = ![((id<JavaUtilSet>) nil_chk(checkedIds_)) isEmpty];
   for (id<ADXMaterialCheckable> __strong checkable in nil_chk([((id<JavaUtilMap>) nil_chk(checkables_)) values])) {
     ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(self, checkable, false);
   }
@@ -150,7 +160,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getSingleCheckedId {
+- (int32_t)getSingleCheckedId {
   return singleSelection_ && ![((id<JavaUtilSet>) nil_chk(checkedIds_)) isEmpty] ? [((JavaLangInteger *) nil_chk([((id<JavaUtilIterator>) nil_chk([((id<JavaUtilSet>) nil_chk(checkedIds_)) iterator])) next])) intValue] : ADView_NO_ID;
 }
 
@@ -161,7 +171,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<JavaUtilList>)getCheckedIdsSortedByChildOrderWithADViewGroup:(ADViewGroup *)parent {
   id<JavaUtilSet> checkedIds = JreRetainedLocalValue([self getCheckedIds]);
   id<JavaUtilList> sortedCheckedIds = create_JavaUtilArrayList_init();
-  for (jint i = 0; i < [((ADViewGroup *) nil_chk(parent)) getChildCount]; i++) {
+  for (int32_t i = 0; i < [((ADViewGroup *) nil_chk(parent)) getChildCount]; i++) {
     ADView *child = JreRetainedLocalValue([parent getChildAtWithInt:i]);
     if ([ADXMaterialCheckable_class_() isInstance:child] && [((id<JavaUtilSet>) nil_chk(checkedIds)) containsWithId:JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(child)) getId])]) {
       [sortedCheckedIds addWithId:JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(child)) getId])];
@@ -170,12 +180,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return sortedCheckedIds;
 }
 
-- (jboolean)checkInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable {
+- (bool)checkInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable {
   return ADXCheckableGroup_checkInternalWithADXMaterialCheckable_(self, checkable);
 }
 
-- (jboolean)uncheckInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable
-                                        withBoolean:(jboolean)selectionRequired {
+- (bool)uncheckInternalWithADXMaterialCheckable:(id<ADXMaterialCheckable>)checkable
+                                    withBoolean:(bool)selectionRequired {
   return ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(self, checkable, selectionRequired);
 }
 
@@ -259,8 +269,8 @@ ADXCheckableGroup *create_ADXCheckableGroup_init() {
   J2OBJC_CREATE_IMPL(ADXCheckableGroup, init)
 }
 
-jboolean ADXCheckableGroup_checkInternalWithADXMaterialCheckable_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable) {
-  jint id_ = [((id<ADXMaterialCheckable>) nil_chk(checkable)) getId];
+bool ADXCheckableGroup_checkInternalWithADXMaterialCheckable_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable) {
+  int32_t id_ = [((id<ADXMaterialCheckable>) nil_chk(checkable)) getId];
   if ([((id<JavaUtilSet>) nil_chk(self->checkedIds_)) containsWithId:JavaLangInteger_valueOfWithInt_(id_)]) {
     return false;
   }
@@ -268,15 +278,15 @@ jboolean ADXCheckableGroup_checkInternalWithADXMaterialCheckable_(ADXCheckableGr
   if (singleCheckedItem != nil) {
     ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(self, singleCheckedItem, false);
   }
-  jboolean checkedStateChanged = [self->checkedIds_ addWithId:JavaLangInteger_valueOfWithInt_(id_)];
+  bool checkedStateChanged = [self->checkedIds_ addWithId:JavaLangInteger_valueOfWithInt_(id_)];
   if (![checkable isChecked]) {
     [checkable setCheckedWithBoolean:true];
   }
   return checkedStateChanged;
 }
 
-jboolean ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable, jboolean selectionRequired) {
-  jint id_ = [((id<ADXMaterialCheckable>) nil_chk(checkable)) getId];
+bool ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(ADXCheckableGroup *self, id<ADXMaterialCheckable> checkable, bool selectionRequired) {
+  int32_t id_ = [((id<ADXMaterialCheckable>) nil_chk(checkable)) getId];
   if (![((id<JavaUtilSet>) nil_chk(self->checkedIds_)) containsWithId:JavaLangInteger_valueOfWithInt_(id_)]) {
     return false;
   }
@@ -284,7 +294,7 @@ jboolean ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(
     [checkable setCheckedWithBoolean:true];
     return false;
   }
-  jboolean checkedStateChanged = [self->checkedIds_ removeWithId:JavaLangInteger_valueOfWithInt_(id_)];
+  bool checkedStateChanged = [self->checkedIds_ removeWithId:JavaLangInteger_valueOfWithInt_(id_)];
   if ([checkable isChecked]) {
     [checkable setCheckedWithBoolean:false];
   }
@@ -299,6 +309,8 @@ void ADXCheckableGroup_onCheckedStateChanged(ADXCheckableGroup *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXCheckableGroup)
 
+J2OBJC_NAME_MAPPING(ADXCheckableGroup, "com.google.android.material.internal", "ADX")
+
 @implementation ADXCheckableGroup_1
 
 - (instancetype)initWithADXCheckableGroup:(ADXCheckableGroup *)outer$ {
@@ -307,7 +319,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXCheckableGroup)
 }
 
 - (void)onCheckedChangedWithId:(id<ADXMaterialCheckable>)checkable
-                   withBoolean:(jboolean)isChecked {
+                   withBoolean:(bool)isChecked {
   if (isChecked ? ADXCheckableGroup_checkInternalWithADXMaterialCheckable_(this$0_, checkable) : ADXCheckableGroup_uncheckInternalWithADXMaterialCheckable_withBoolean_(this$0_, checkable, this$0_->selectionRequired_)) {
     ADXCheckableGroup_onCheckedStateChanged(this$0_);
   }
@@ -333,7 +345,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXCheckableGroup)
     { "this$0_", "LADXCheckableGroup;", .constantValue.asLong = 0, 0x1012, -1, -1, 4, -1 },
   };
   static const void *ptrTable[] = { "LADXCheckableGroup;", "onCheckedChanged", "LADXMaterialCheckable;Z", "(TT;Z)V", "Lcom/google/android/material/internal/CheckableGroup<TT;>;", "addCheckableWithADXMaterialCheckable:", "Ljava/lang/Object;Lcom/google/android/material/internal/MaterialCheckable$OnCheckedChangeListener<TT;>;" };
-  static const J2ObjcClassInfo _ADXCheckableGroup_1 = { "", "com.google.android.material.internal", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 5, 6, -1 };
+  static const J2ObjcClassInfo _ADXCheckableGroup_1 = { "", "com.google.android.material.internal", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 5, 6, -1 };
   return &_ADXCheckableGroup_1;
 }
 

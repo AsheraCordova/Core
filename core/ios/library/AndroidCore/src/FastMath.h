@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\android\internal\util\FastMath.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FastMath")
@@ -16,13 +17,16 @@
 #if !defined (ADFastMath_) && (INCLUDE_ALL_FastMath || defined(INCLUDE_ADFastMath))
 #define ADFastMath_
 
+@class JavaLangFloat;
+@class JavaLangInteger;
+
 @interface ADFastMath : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (jint)roundWithFloat:(jfloat)value;
++ (int32_t)roundWithFloat:(float)value;
 
 @end
 
@@ -34,11 +38,12 @@ FOUNDATION_EXPORT ADFastMath *new_ADFastMath_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADFastMath *create_ADFastMath_init(void);
 
-FOUNDATION_EXPORT jint ADFastMath_roundWithFloat_(jfloat value);
+FOUNDATION_EXPORT int32_t ADFastMath_roundWithFloat_(float value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFastMath)
 
 @compatibility_alias RComAndroidInternalUtilFastMath ADFastMath;
+
 
 #endif
 

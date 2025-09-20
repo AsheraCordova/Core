@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\AugmentedIntervalTree.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AugmentedIntervalTree")
@@ -18,6 +19,7 @@
 
 @class ASInterval;
 @class ASWidgetAttributeMap;
+@class NSString;
 @protocol ASAttributedString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
@@ -71,6 +73,7 @@ FOUNDATION_EXPORT ASAugmentedIntervalTree *create_ASAugmentedIntervalTree_initWi
 J2OBJC_TYPE_LITERAL_HEADER(ASAugmentedIntervalTree)
 
 @compatibility_alias ComAsheraAttributedtextAugmentedIntervalTree ASAugmentedIntervalTree;
+
 
 #endif
 

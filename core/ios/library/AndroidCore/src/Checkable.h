@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\widget\Checkable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Checkable")
@@ -16,11 +17,13 @@
 #if !defined (ADCheckable_) && (INCLUDE_ALL_Checkable || defined(INCLUDE_ADCheckable))
 #define ADCheckable_
 
+@class JavaLangBoolean;
+
 @protocol ADCheckable < JavaObject >
 
-- (void)setCheckedWithBoolean:(jboolean)checked;
+- (void)setCheckedWithBoolean:(bool)checked;
 
-- (jboolean)isChecked;
+- (bool)isChecked;
 
 - (void)toggle;
 
@@ -31,6 +34,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADCheckable)
 J2OBJC_TYPE_LITERAL_HEADER(ADCheckable)
 
 #define RAndroidWidgetCheckable ADCheckable
+
 
 #endif
 

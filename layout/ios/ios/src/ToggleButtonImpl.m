@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ToggleButtonImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
@@ -50,6 +55,8 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -67,13 +74,14 @@
 
 #include "ASUIButton.h"
 
+
 @class ASToggleButtonImpl_DellocHandler;
 @class ASToggleButtonImpl_MarqueeTask;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@protocol JavaLangRunnable;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -84,26 +92,26 @@
   NSString *textOn_;
   id<ADCompoundButton_OnCheckedChangeListener> onCheckedChangeListener_;
   id<JavaUtilMap> fontDescriptors_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   ASToggleButtonImpl_MarqueeTask *marqueeTask_;
-  jint marqueeRepeatLimit_;
+  int32_t marqueeRepeatLimit_;
   ASMarqueeCommandConverter *marqueeCommandConverter_;
   ADColorStateList *drawableTint_;
   NSString *ellipsize_;
   id timer_;
-  jboolean isDisposed_;
+  bool isDisposed_;
   ASToggleButtonImpl_DellocHandler *dellocHandler_;
-  jboolean checked_;
+  bool checked_;
 }
 
 - (void)setWidgetOnNativeClass;
 
 - (void)createNativeWidgetWithJavaUtilMap:(id<JavaUtilMap>)params;
 
-- (jint)nativeMeasureHeightButtonWithId:(id)uiView
-                                withInt:(jint)width;
+- (int32_t)nativeMeasureHeightButtonWithId:(id)uiView
+                                   withInt:(int32_t)width;
 
 - (void)nativeSetTextWithId:(id)uiView
                withNSString:(NSString *)text;
@@ -130,7 +138,7 @@
 
 - (void)setVerticalAligmentTop;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (id)getPaddingEnd;
 
@@ -146,13 +154,13 @@
 
 - (void)setPaddingWithId:(id)objValue;
 
-- (void)nativeSetPaddingBottomWithInt:(jint)value;
+- (void)nativeSetPaddingBottomWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingLeftWithInt:(jint)value;
+- (void)nativeSetPaddingLeftWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingRightWithInt:(jint)value;
+- (void)nativeSetPaddingRightWithInt:(int32_t)value;
 
-- (void)nativeSetPaddingTopWithInt:(jint)value;
+- (void)nativeSetPaddingTopWithInt:(int32_t)value;
 
 - (void)postSetAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                                  withNSString:(NSString *)strValue
@@ -168,18 +176,18 @@
 
 - (void)syncPlaceholderLabel;
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor;
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor;
 
 - (void)setEnabledWithId:(id)objValue;
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)enabled;
+- (void)nativeSetEnabledWithBoolean:(bool)enabled;
 
-- (jint)nativeMeasureWidthButtonWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthButtonWithId:(id)uiView;
 
 - (void)setNumberOfLinesWithId:(id)uiView
-                       withInt:(jint)lines;
+                       withInt:(int32_t)lines;
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode;
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode;
 
 - (id)nativeGetLinBreakMode;
 
@@ -190,7 +198,7 @@
 - (void)setJustificationModeWithId:(id)objValue
                       withNSString:(NSString *)strValue;
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment;
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment;
 
 - (id)getJustificationMode;
 
@@ -267,7 +275,7 @@
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
 - (void)setTypeFaceWithId:(id)objValue
              withNSString:(NSString *)strValue;
@@ -283,7 +291,7 @@
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -293,7 +301,7 @@
 
 - (void)initHtmlWithJavaUtilMap:(id<JavaUtilMap>)params OBJC_METHOD_FAMILY_NONE;
 
-- (jint)calcNumberOfWhiteSpaces;
+- (int32_t)calcNumberOfWhiteSpaces;
 
 - (void)cancelTimer;
 
@@ -305,9 +313,9 @@
 
 - (void)startOrStopMarqueeWithId:(id)objValue;
 
-- (jint)getLabelWidth;
+- (int32_t)getLabelWidth;
 
-- (jboolean)isLabelMeasured;
+- (bool)isLabelMeasured;
 
 - (void)setTextFormatWithId:(id)objValue;
 
@@ -315,7 +323,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setTextColorWithId:(id)objValue;
 
@@ -339,9 +347,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -352,14 +360,14 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (void)setSingleLineWithId:(id)objValue;
 
@@ -368,15 +376,15 @@
 - (void)setEllipsizeWithId:(id)objValue
               withNSString:(NSString *)strValue;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jboolean)canMarquee;
+- (bool)canMarquee;
 
 - (void)cancelNativeTimer;
 
-- (jboolean)isDisposed;
+- (bool)isDisposed;
 
 - (void)addDeallocHandler;
 
@@ -390,7 +398,7 @@
 
 - (id)getChecked;
 
-- (jboolean)toggleChecked;
+- (bool)toggleChecked;
 
 @end
 
@@ -406,39 +414,39 @@ J2OBJC_FIELD_SETTER(ASToggleButtonImpl, ellipsize_, NSString *)
 J2OBJC_FIELD_SETTER(ASToggleButtonImpl, timer_, id)
 J2OBJC_FIELD_SETTER(ASToggleButtonImpl, dellocHandler_, ASToggleButtonImpl_DellocHandler *)
 
-inline jint ASToggleButtonImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASToggleButtonImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASToggleButtonImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASToggleButtonImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASToggleButtonImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASToggleButtonImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASToggleButtonImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASToggleButtonImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASToggleButtonImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, TEXT_ALIGN_RIGHT, int32_t)
 
-inline jint ASToggleButtonImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASToggleButtonImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASToggleButtonImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASToggleButtonImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASToggleButtonImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASToggleButtonImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASToggleButtonImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASToggleButtonImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASToggleButtonImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASToggleButtonImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASToggleButtonImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASToggleButtonImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASToggleButtonImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASToggleButtonImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASToggleButtonImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASToggleButtonImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASToggleButtonImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASToggleButtonImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASToggleButtonImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASToggleButtonImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASToggleButtonImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASToggleButtonImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASToggleButtonImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASToggleButtonImpl, NORMAL_FONT_TRAIT, int32_t)
 
 __attribute__((unused)) static void ASToggleButtonImpl_setWidgetOnNativeClass(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static void ASToggleButtonImpl_createNativeWidgetWithJavaUtilMap_(ASToggleButtonImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASToggleButtonImpl *self, id uiView, jint width);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASToggleButtonImpl *self, id uiView, int32_t width);
 
 __attribute__((unused)) static void ASToggleButtonImpl_nativeSetTextWithId_withNSString_(ASToggleButtonImpl *self, id uiView, NSString *text);
 
@@ -464,7 +472,7 @@ __attribute__((unused)) static void ASToggleButtonImpl_setVerticalAligmentBottom
 
 __attribute__((unused)) static void ASToggleButtonImpl_setVerticalAligmentTop(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_getTextAlignment(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_getTextAlignment(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static id ASToggleButtonImpl_getPaddingEnd(ASToggleButtonImpl *self);
 
@@ -480,13 +488,13 @@ __attribute__((unused)) static void ASToggleButtonImpl_setPaddingStartWithId_(AS
 
 __attribute__((unused)) static void ASToggleButtonImpl_setPaddingWithId_(ASToggleButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingBottomWithInt_(ASToggleButtonImpl *self, jint value);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingBottomWithInt_(ASToggleButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingLeftWithInt_(ASToggleButtonImpl *self, jint value);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingLeftWithInt_(ASToggleButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingRightWithInt_(ASToggleButtonImpl *self, jint value);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingRightWithInt_(ASToggleButtonImpl *self, int32_t value);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingTopWithInt_(ASToggleButtonImpl *self, jint value);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetPaddingTopWithInt_(ASToggleButtonImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASToggleButtonImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(ASToggleButtonImpl *self, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
@@ -498,17 +506,17 @@ __attribute__((unused)) static void ASToggleButtonImpl_setTextColorLinkWithADCol
 
 __attribute__((unused)) static void ASToggleButtonImpl_syncPlaceholderLabel(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static void ASToggleButtonImpl_setHintColorWithInt_(ASToggleButtonImpl *self, jint currentHintTextColor);
+__attribute__((unused)) static void ASToggleButtonImpl_setHintColorWithInt_(ASToggleButtonImpl *self, int32_t currentHintTextColor);
 
 __attribute__((unused)) static void ASToggleButtonImpl_setEnabledWithId_(ASToggleButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetEnabledWithBoolean_(ASToggleButtonImpl *self, jboolean enabled);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetEnabledWithBoolean_(ASToggleButtonImpl *self, bool enabled);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_nativeMeasureWidthButtonWithId_(ASToggleButtonImpl *self, id uiView);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_nativeMeasureWidthButtonWithId_(ASToggleButtonImpl *self, id uiView);
 
-__attribute__((unused)) static void ASToggleButtonImpl_setNumberOfLinesWithId_withInt_(ASToggleButtonImpl *self, id uiView, jint lines);
+__attribute__((unused)) static void ASToggleButtonImpl_setNumberOfLinesWithId_withInt_(ASToggleButtonImpl *self, id uiView, int32_t lines);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetLineBreakModeWithInt_(ASToggleButtonImpl *self, jint lineBreakMode);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetLineBreakModeWithInt_(ASToggleButtonImpl *self, int32_t lineBreakMode);
 
 __attribute__((unused)) static id ASToggleButtonImpl_nativeGetLinBreakMode(ASToggleButtonImpl *self);
 
@@ -518,7 +526,7 @@ __attribute__((unused)) static id ASToggleButtonImpl_getFont(ASToggleButtonImpl 
 
 __attribute__((unused)) static void ASToggleButtonImpl_setJustificationModeWithId_withNSString_(ASToggleButtonImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetTextAligmentWithInt_(ASToggleButtonImpl *self, jint textAlignment);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetTextAligmentWithInt_(ASToggleButtonImpl *self, int32_t textAlignment);
 
 __attribute__((unused)) static id ASToggleButtonImpl_getJustificationMode(ASToggleButtonImpl *self);
 
@@ -592,7 +600,7 @@ __attribute__((unused)) static void ASToggleButtonImpl_setMinWidthWithId_(ASTogg
 
 __attribute__((unused)) static id ASToggleButtonImpl_getWidth(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_getHeight(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_getHeight(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static void ASToggleButtonImpl_setTypeFaceWithId_withNSString_(ASToggleButtonImpl *self, id objValue, NSString *strValue);
 
@@ -606,7 +614,7 @@ __attribute__((unused)) static void ASToggleButtonImpl_setTextAllCapsWithId_(AST
 
 __attribute__((unused)) static void ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(ASToggleButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASToggleButtonImpl_getIncludeFontPadding(ASToggleButtonImpl *self);
+__attribute__((unused)) static bool ASToggleButtonImpl_getIncludeFontPadding(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static id ASToggleButtonImpl_getFirstBaselineToTopHeight(ASToggleButtonImpl *self);
 
@@ -616,7 +624,7 @@ __attribute__((unused)) static id ASToggleButtonImpl_getLastBaselineToBottomHeig
 
 __attribute__((unused)) static void ASToggleButtonImpl_initHtmlWithJavaUtilMap_(ASToggleButtonImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_calcNumberOfWhiteSpaces(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_calcNumberOfWhiteSpaces(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static void ASToggleButtonImpl_cancelTimer(ASToggleButtonImpl *self);
 
@@ -628,9 +636,9 @@ __attribute__((unused)) static void ASToggleButtonImpl_setMarqueeRepeatLimitWith
 
 __attribute__((unused)) static void ASToggleButtonImpl_startOrStopMarqueeWithId_(ASToggleButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_getLabelWidth(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_getLabelWidth(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASToggleButtonImpl_isLabelMeasured(ASToggleButtonImpl *self);
+__attribute__((unused)) static bool ASToggleButtonImpl_isLabelMeasured(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static void ASToggleButtonImpl_setTextFormatWithId_(ASToggleButtonImpl *self, id objValue);
 
@@ -638,7 +646,7 @@ __attribute__((unused)) static id ASToggleButtonImpl_getTextSize(ASToggleButtonI
 
 __attribute__((unused)) static void ASToggleButtonImpl_setMyTextSizeWithId_(ASToggleButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetTextSizeWithInt_(ASToggleButtonImpl *self, jint value);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetTextSizeWithInt_(ASToggleButtonImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASToggleButtonImpl_setTextColorWithId_(ASToggleButtonImpl *self, id objValue);
 
@@ -658,9 +666,9 @@ __attribute__((unused)) static void ASToggleButtonImpl_setDrawableLeftWithNSStri
 
 __attribute__((unused)) static void ASToggleButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASToggleButtonImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_getImageHeightWithId_(ASToggleButtonImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_getImageHeightWithId_(ASToggleButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_getImageWidthWithId_(ASToggleButtonImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_getImageWidthWithId_(ASToggleButtonImpl *self, id objValue);
 
 __attribute__((unused)) static id ASToggleButtonImpl_getDrawablePadding(ASToggleButtonImpl *self);
 
@@ -670,13 +678,13 @@ __attribute__((unused)) static void ASToggleButtonImpl_setDrawableTintWithId_(AS
 
 __attribute__((unused)) static void ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASToggleButtonImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_nativeGetFontSize(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_nativeGetFontSize(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_nativeGetFontStyle(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_nativeGetFontStyle(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASToggleButtonImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASToggleButtonImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASToggleButtonImpl_nativeSetFontStyleWithInt_(ASToggleButtonImpl *self, jint style);
+__attribute__((unused)) static void ASToggleButtonImpl_nativeSetFontStyleWithInt_(ASToggleButtonImpl *self, int32_t style);
 
 __attribute__((unused)) static void ASToggleButtonImpl_setSingleLineWithId_(ASToggleButtonImpl *self, id objValue);
 
@@ -684,15 +692,15 @@ __attribute__((unused)) static id ASToggleButtonImpl_getEllipsize(ASToggleButton
 
 __attribute__((unused)) static void ASToggleButtonImpl_setEllipsizeWithId_withNSString_(ASToggleButtonImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_getLineHeight(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_getLineHeight(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jint ASToggleButtonImpl_getBorderWidth(ASToggleButtonImpl *self);
+__attribute__((unused)) static int32_t ASToggleButtonImpl_getBorderWidth(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASToggleButtonImpl_canMarquee(ASToggleButtonImpl *self);
+__attribute__((unused)) static bool ASToggleButtonImpl_canMarquee(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static void ASToggleButtonImpl_cancelNativeTimer(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASToggleButtonImpl_isDisposed(ASToggleButtonImpl *self);
+__attribute__((unused)) static bool ASToggleButtonImpl_isDisposed(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static void ASToggleButtonImpl_addDeallocHandler(ASToggleButtonImpl *self);
 
@@ -706,7 +714,7 @@ __attribute__((unused)) static void ASToggleButtonImpl_setCheckedWithId_(ASToggl
 
 __attribute__((unused)) static id ASToggleButtonImpl_getChecked(ASToggleButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASToggleButtonImpl_toggleChecked(ASToggleButtonImpl *self);
+__attribute__((unused)) static bool ASToggleButtonImpl_toggleChecked(ASToggleButtonImpl *self);
 
 @interface ASToggleButtonImpl_DrawableTintMode () {
  @public
@@ -764,7 +772,7 @@ J2OBJC_FIELD_SETTER(ASToggleButtonImpl_JustificationMode, mapping_, id<JavaUtilM
 
 @interface ASToggleButtonImpl_ToggleButtonExt () {
  @public
-  __unsafe_unretained ASToggleButtonImpl *this$0_;
+  WEAK_ ASToggleButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -780,10 +788,10 @@ J2OBJC_FIELD_SETTER(ASToggleButtonImpl_ToggleButtonExt, templates_, id<JavaUtilM
 
 @interface ASToggleButtonImpl_MarqueeTask : NSObject < JavaLangRunnable > {
  @public
-  __unsafe_unretained ASToggleButtonImpl *this$0_;
-  jint slideLength_;
-  jint cycles_;
-  jboolean cancel_;
+  WEAK_ ASToggleButtonImpl *this$0_;
+  int32_t slideLength_;
+  int32_t cycles_;
+  bool cancel_;
   NSString *direction_;
 }
 
@@ -810,10 +818,11 @@ __attribute__((unused)) static ASToggleButtonImpl_MarqueeTask *create_ASToggleBu
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_MarqueeTask)
 
+
 @interface ASToggleButtonImpl_MarqueeTask_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   ASToggleButtonImpl_MarqueeTask *this$0_;
-  jint val$numberOfBlankSpaces_;
+  int32_t val$numberOfBlankSpaces_;
 }
 
 - (void)run;
@@ -822,15 +831,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_MarqueeTask)
 
 J2OBJC_EMPTY_STATIC_INIT(ASToggleButtonImpl_MarqueeTask_$Lambda$1)
 
-__attribute__((unused)) static void ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask_$Lambda$1 *self, ASToggleButtonImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static void ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask_$Lambda$1 *self, ASToggleButtonImpl_MarqueeTask *outer$, int32_t capture$0);
 
-__attribute__((unused)) static ASToggleButtonImpl_MarqueeTask_$Lambda$1 *new_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, jint capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASToggleButtonImpl_MarqueeTask_$Lambda$1 *new_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, int32_t capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASToggleButtonImpl_MarqueeTask_$Lambda$1 *create_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static ASToggleButtonImpl_MarqueeTask_$Lambda$1 *create_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, int32_t capture$0);
+
 
 @interface ASToggleButtonImpl_DellocHandler : ASEventBusHandler {
  @public
-  __unsafe_unretained ASToggleButtonImpl *this$0_;
+  WEAK_ ASToggleButtonImpl *this$0_;
 }
 
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$
@@ -850,6 +860,7 @@ __attribute__((unused)) static ASToggleButtonImpl_DellocHandler *create_ASToggle
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_DellocHandler)
 
+
 @interface ASToggleButtonImpl_OnCheckedChangeListener : NSObject < ADCompoundButton_OnCheckedChangeListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -868,10 +879,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_DellocHandler)
                      withNSString:(NSString *)action;
 
 - (void)onCheckedChangedWithADCompoundButton:(ADCompoundButton *)buttonView
-                                 withBoolean:(jboolean)isChecked;
+                                 withBoolean:(bool)isChecked;
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADCompoundButton:(ADCompoundButton *)buttonView
-                                                      withBoolean:(jboolean)isChecked;
+                                                      withBoolean:(bool)isChecked;
 
 @end
 
@@ -896,9 +907,10 @@ __attribute__((unused)) static ASToggleButtonImpl_OnCheckedChangeListener *creat
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_OnCheckedChangeListener)
 
+
 @interface ASToggleButtonImpl_StateToggler : NSObject < ADView_OnClickListener > {
  @public
-  __unsafe_unretained ASToggleButtonImpl *this$0_;
+  WEAK_ ASToggleButtonImpl *this$0_;
 }
 
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$;
@@ -916,6 +928,7 @@ __attribute__((unused)) static ASToggleButtonImpl_StateToggler *new_ASToggleButt
 __attribute__((unused)) static ASToggleButtonImpl_StateToggler *create_ASToggleButtonImpl_StateToggler_initWithASToggleButtonImpl_(ASToggleButtonImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_StateToggler)
+
 
 J2OBJC_INITIALIZED_DEFN(ASToggleButtonImpl)
 
@@ -1466,12 +1479,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_createNativeWidgetWithJavaUtilMap_(self, params);
 }
 
-- (jint)measureHeightWithInt:(jint)width {
+- (int32_t)measureHeightWithInt:(int32_t)width {
   return ASToggleButtonImpl_nativeMeasureHeightButtonWithId_withInt_(self, [self asNativeWidget], width);
 }
 
-- (jint)nativeMeasureHeightButtonWithId:(id)uiView
-                                withInt:(jint)width {
+- (int32_t)nativeMeasureHeightButtonWithId:(id)uiView
+                                   withInt:(int32_t)width {
   return ASToggleButtonImpl_nativeMeasureHeightButtonWithId_withInt_(self, uiView, width);
 }
 
@@ -1528,7 +1541,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setVerticalAligmentTop(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASToggleButtonImpl_getTextAlignment(self);
 }
 
@@ -1603,19 +1616,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self setPaddingBottomWithId:JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(measurableView_)) getPaddingBottom])];
 }
 
-- (void)nativeSetPaddingBottomWithInt:(jint)value {
+- (void)nativeSetPaddingBottomWithInt:(int32_t)value {
   ASToggleButtonImpl_nativeSetPaddingBottomWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingLeftWithInt:(jint)value {
+- (void)nativeSetPaddingLeftWithInt:(int32_t)value {
   ASToggleButtonImpl_nativeSetPaddingLeftWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingRightWithInt:(jint)value {
+- (void)nativeSetPaddingRightWithInt:(int32_t)value {
   ASToggleButtonImpl_nativeSetPaddingRightWithInt_(self, value);
 }
 
-- (void)nativeSetPaddingTopWithInt:(jint)value {
+- (void)nativeSetPaddingTopWithInt:(int32_t)value {
   ASToggleButtonImpl_nativeSetPaddingTopWithInt_(self, value);
 }
 
@@ -1643,7 +1656,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_syncPlaceholderLabel(self);
 }
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor {
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor {
   ASToggleButtonImpl_setHintColorWithInt_(self, currentHintTextColor);
 }
 
@@ -1651,24 +1664,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setEnabledWithId_(self, objValue);
 }
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)enabled {
+- (void)nativeSetEnabledWithBoolean:(bool)enabled {
   ASToggleButtonImpl_nativeSetEnabledWithBoolean_(self, enabled);
 }
 
-- (jint)measureWidth {
+- (int32_t)measureWidth {
   return ASToggleButtonImpl_nativeMeasureWidthButtonWithId_(self, [self asNativeWidget]);
 }
 
-- (jint)nativeMeasureWidthButtonWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthButtonWithId:(id)uiView {
   return ASToggleButtonImpl_nativeMeasureWidthButtonWithId_(self, uiView);
 }
 
 - (void)setNumberOfLinesWithId:(id)uiView
-                       withInt:(jint)lines {
+                       withInt:(int32_t)lines {
   ASToggleButtonImpl_setNumberOfLinesWithId_withInt_(self, uiView, lines);
 }
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode {
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode {
   ASToggleButtonImpl_nativeSetLineBreakModeWithInt_(self, lineBreakMode);
 }
 
@@ -1689,7 +1702,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment {
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment {
   ASToggleButtonImpl_nativeSetTextAligmentWithInt_(self, textAlignment);
 }
 
@@ -1776,7 +1789,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASToggleButtonImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADToggleButton *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADToggleButton *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASToggleButtonImpl_updateTextAlignment(self);
   }
@@ -1798,11 +1811,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADToggleButton *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADToggleButton *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -1810,11 +1823,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADToggleButton *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADToggleButton *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -1850,11 +1863,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADToggleButton *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADToggleButton *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -1870,7 +1883,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASToggleButtonImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASToggleButtonImpl_getHeight(self);
 }
 
@@ -1900,7 +1913,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASToggleButtonImpl_getIncludeFontPadding(self);
 }
 
@@ -1920,7 +1933,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_initHtmlWithJavaUtilMap_(self, params);
 }
 
-- (jint)calcNumberOfWhiteSpaces {
+- (int32_t)calcNumberOfWhiteSpaces {
   return ASToggleButtonImpl_calcNumberOfWhiteSpaces(self);
 }
 
@@ -1944,11 +1957,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_startOrStopMarqueeWithId_(self, objValue);
 }
 
-- (jint)getLabelWidth {
+- (int32_t)getLabelWidth {
   return ASToggleButtonImpl_getLabelWidth(self);
 }
 
-- (jboolean)isLabelMeasured {
+- (bool)isLabelMeasured {
   return ASToggleButtonImpl_isLabelMeasured(self);
 }
 
@@ -1964,7 +1977,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASToggleButtonImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -2008,11 +2021,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASToggleButtonImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASToggleButtonImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -2055,20 +2068,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASToggleButtonImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASToggleButtonImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASToggleButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASToggleButtonImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
@@ -2085,23 +2098,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_setEllipsizeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASToggleButtonImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASToggleButtonImpl_getBorderWidth(self);
 }
 
-- (jboolean)canMarquee {
+- (bool)canMarquee {
   return ASToggleButtonImpl_canMarquee(self);
 }
 
@@ -2109,7 +2122,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASToggleButtonImpl_cancelNativeTimer(self);
 }
 
-- (jboolean)isDisposed {
+- (bool)isDisposed {
   return ASToggleButtonImpl_isDisposed(self);
 }
 
@@ -2133,7 +2146,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -2144,7 +2157,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -2172,7 +2185,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASToggleButtonImpl_getChecked(self);
 }
 
-- (jboolean)toggleChecked {
+- (bool)toggleChecked {
   return ASToggleButtonImpl_toggleChecked(self);
 }
 
@@ -2629,7 +2642,7 @@ void ASToggleButtonImpl_createNativeWidgetWithJavaUtilMap_(ASToggleButtonImpl *s
   [((ASUIButton*)self.uiView) setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
-jint ASToggleButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASToggleButtonImpl *self, id uiView, jint width) {
+int32_t ASToggleButtonImpl_nativeMeasureHeightButtonWithId_withInt_(ASToggleButtonImpl *self, id uiView, int32_t width) {
   CGSize maximumLabelSize = CGSizeMake(width,CGFLOAT_MAX);
   CGSize requiredSize = [((ASUIButton*)uiView).titleLabel sizeThatFits:maximumLabelSize];
   return ceil(requiredSize.height);
@@ -2687,7 +2700,7 @@ void ASToggleButtonImpl_setVerticalAligmentTop(ASToggleButtonImpl *self) {
   ASToggleButtonImpl_nativeSetVerticalAligmentTop(self);
 }
 
-jint ASToggleButtonImpl_getTextAlignment(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_getTextAlignment(ASToggleButtonImpl *self) {
   int alignment = (int) ((ASUIButton*)self.uiView).contentHorizontalAlignment;
   
   if (alignment == UIControlContentHorizontalAlignmentCenter) {
@@ -2736,25 +2749,25 @@ void ASToggleButtonImpl_setPaddingWithId_(ASToggleButtonImpl *self, id objValue)
   ASToggleButtonImpl_setPaddingHorizontalWithId_(self, objValue);
 }
 
-void ASToggleButtonImpl_nativeSetPaddingBottomWithInt_(ASToggleButtonImpl *self, jint value) {
+void ASToggleButtonImpl_nativeSetPaddingBottomWithInt_(ASToggleButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, value, edgeInsets.right)];
 }
 
-void ASToggleButtonImpl_nativeSetPaddingLeftWithInt_(ASToggleButtonImpl *self, jint value) {
+void ASToggleButtonImpl_nativeSetPaddingLeftWithInt_(ASToggleButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, value, edgeInsets.bottom, edgeInsets.right)];
 }
 
-void ASToggleButtonImpl_nativeSetPaddingRightWithInt_(ASToggleButtonImpl *self, jint value) {
+void ASToggleButtonImpl_nativeSetPaddingRightWithInt_(ASToggleButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, value)];
 }
 
-void ASToggleButtonImpl_nativeSetPaddingTopWithInt_(ASToggleButtonImpl *self, jint value) {
+void ASToggleButtonImpl_nativeSetPaddingTopWithInt_(ASToggleButtonImpl *self, int32_t value) {
   ASUIButton* label = ((ASUIButton*) self.uiView);
   UIEdgeInsets edgeInsets = label.titleEdgeInsets;
   [label setTitleEdgeInsets:UIEdgeInsetsMake(value, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)];
@@ -2776,28 +2789,28 @@ void ASToggleButtonImpl_setTextColorLinkWithADColorStateList_(ASToggleButtonImpl
 void ASToggleButtonImpl_syncPlaceholderLabel(ASToggleButtonImpl *self) {
 }
 
-void ASToggleButtonImpl_setHintColorWithInt_(ASToggleButtonImpl *self, jint currentHintTextColor) {
+void ASToggleButtonImpl_setHintColorWithInt_(ASToggleButtonImpl *self, int32_t currentHintTextColor) {
 }
 
 void ASToggleButtonImpl_setEnabledWithId_(ASToggleButtonImpl *self, id objValue) {
   ASToggleButtonImpl_nativeSetEnabledWithBoolean_(self, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASToggleButtonImpl_nativeSetEnabledWithBoolean_(ASToggleButtonImpl *self, jboolean enabled) {
+void ASToggleButtonImpl_nativeSetEnabledWithBoolean_(ASToggleButtonImpl *self, bool enabled) {
   [((ASUIButton*)self.uiView) setEnabled:enabled];
 }
 
-jint ASToggleButtonImpl_nativeMeasureWidthButtonWithId_(ASToggleButtonImpl *self, id uiView) {
+int32_t ASToggleButtonImpl_nativeMeasureWidthButtonWithId_(ASToggleButtonImpl *self, id uiView) {
   CGSize maximumLabelSize = CGSizeMake(CGFLOAT_MAX,CGFLOAT_MAX);
   CGSize requiredSize = [((ASUIButton*)uiView).titleLabel sizeThatFits:maximumLabelSize];
   return ceil(requiredSize.width);
 }
 
-void ASToggleButtonImpl_setNumberOfLinesWithId_withInt_(ASToggleButtonImpl *self, id uiView, jint lines) {
+void ASToggleButtonImpl_setNumberOfLinesWithId_withInt_(ASToggleButtonImpl *self, id uiView, int32_t lines) {
   ((ASUIButton*)uiView).titleLabel.numberOfLines = lines;
 }
 
-void ASToggleButtonImpl_nativeSetLineBreakModeWithInt_(ASToggleButtonImpl *self, jint lineBreakMode) {
+void ASToggleButtonImpl_nativeSetLineBreakModeWithInt_(ASToggleButtonImpl *self, int32_t lineBreakMode) {
   ((ASUIButton*)self.uiView).titleLabel.lineBreakMode = lineBreakMode;
   ((ASUIButton*)self.uiView).titleLabel.adjustsFontSizeToFitWidth = false;
 }
@@ -2819,7 +2832,7 @@ void ASToggleButtonImpl_setJustificationModeWithId_withNSString_(ASToggleButtonI
   ASToggleButtonImpl_nativeSetTextAligmentWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASToggleButtonImpl_nativeSetTextAligmentWithInt_(ASToggleButtonImpl *self, jint textAlignment) {
+void ASToggleButtonImpl_nativeSetTextAligmentWithInt_(ASToggleButtonImpl *self, int32_t textAlignment) {
   [((ASUIButton*)self->uiView_).titleLabel setTextAlignment:textAlignment];
 }
 
@@ -2906,9 +2919,9 @@ void ASToggleButtonImpl_remeasure(ASToggleButtonImpl *self) {
 }
 
 void ASToggleButtonImpl_setGravityWithId_(ASToggleButtonImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADToggleButton *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASToggleButtonImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -2928,8 +2941,8 @@ void ASToggleButtonImpl_setGravityWithId_(ASToggleButtonImpl *self, id objValue)
 
 void ASToggleButtonImpl_updateTextAlignment(ASToggleButtonImpl *self) {
   ADLayout_Alignment *minor = [((ADToggleButton *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADToggleButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADToggleButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADToggleButton *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASToggleButtonImpl_getMyText(self), [NSString class]);
@@ -2982,7 +2995,7 @@ id ASToggleButtonImpl_getGravity(ASToggleButtonImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -2996,8 +3009,8 @@ id ASToggleButtonImpl_getGravity(ASToggleButtonImpl *self) {
     default:
     break;
   }
-  jint aligment = ASToggleButtonImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASToggleButtonImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASToggleButtonImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -3011,7 +3024,7 @@ id ASToggleButtonImpl_getGravity(ASToggleButtonImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -3094,7 +3107,7 @@ id ASToggleButtonImpl_getWidth(ASToggleButtonImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASToggleButtonImpl_getHeight(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_getHeight(ASToggleButtonImpl *self) {
   return [((ADToggleButton *) nil_chk(self->measurableView_)) getHeight];
 }
 
@@ -3107,8 +3120,8 @@ void ASToggleButtonImpl_setFontFamilyWithId_withNSString_(ASToggleButtonImpl *se
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASToggleButtonImpl_nativeGetFontStyle(self);
-  jint height = ASToggleButtonImpl_nativeGetFontSize(self);
+  int32_t style = ASToggleButtonImpl_nativeGetFontStyle(self);
+  int32_t height = ASToggleButtonImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASToggleButtonImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -3122,26 +3135,26 @@ void ASToggleButtonImpl_setFontFamilyWithId_withNSString_(ASToggleButtonImpl *se
 }
 
 void ASToggleButtonImpl_setTextStyleWithId_(ASToggleButtonImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASToggleButtonImpl_nativeGetFontSize(self);
+    int32_t height = ASToggleButtonImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASToggleButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASToggleButtonImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASToggleButtonImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASToggleButtonImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASToggleButtonImpl_ITALIC_FONT_TRAIT;
     }
     ASToggleButtonImpl_nativeSetFontStyleWithInt_(self, style);
@@ -3168,8 +3181,8 @@ void ASToggleButtonImpl_setTextAllCapsWithId_(ASToggleButtonImpl *self, id objVa
 
 void ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(ASToggleButtonImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASToggleButtonImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASToggleButtonImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -3177,12 +3190,12 @@ void ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(ASToggleButtonImpl *s
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADToggleButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingBottom], [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASToggleButtonImpl_getIncludeFontPadding(ASToggleButtonImpl *self) {
+bool ASToggleButtonImpl_getIncludeFontPadding(ASToggleButtonImpl *self) {
   return false;
 }
 
@@ -3193,8 +3206,8 @@ id ASToggleButtonImpl_getFirstBaselineToTopHeight(ASToggleButtonImpl *self) {
 
 void ASToggleButtonImpl_setLastBaselineToBottomHeightWithId_(ASToggleButtonImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASToggleButtonImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASToggleButtonImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -3202,7 +3215,7 @@ void ASToggleButtonImpl_setLastBaselineToBottomHeightWithId_(ASToggleButtonImpl 
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADToggleButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingTop], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -3226,13 +3239,13 @@ void ASToggleButtonImpl_initHtmlWithJavaUtilMap_(ASToggleButtonImpl *self, id<Ja
   }
 }
 
-jint ASToggleButtonImpl_calcNumberOfWhiteSpaces(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_calcNumberOfWhiteSpaces(ASToggleButtonImpl *self) {
   if (!ASToggleButtonImpl_isLabelMeasured(self)) {
     return 0;
   }
-  jfloat blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASToggleButtonImpl_getTextSize(self), [NSNumber class])))) floatValue];
-  jint width = JreIntDiv(ASToggleButtonImpl_getLabelWidth(self), 3);
-  jint numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
+  float blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASToggleButtonImpl_getTextSize(self), [NSNumber class])))) floatValue];
+  int32_t width = JreIntDiv(ASToggleButtonImpl_getLabelWidth(self), 3);
+  int32_t numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
   return numberOfBlankSpaces;
 }
 
@@ -3275,14 +3288,14 @@ void ASToggleButtonImpl_startOrStopMarqueeWithId_(ASToggleButtonImpl *self, id o
   }
 }
 
-jint ASToggleButtonImpl_getLabelWidth(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_getLabelWidth(ASToggleButtonImpl *self) {
   if ([((ADToggleButton *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
     return [((ADToggleButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADToggleButton *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADToggleButton *) nil_chk(self->measurableView_)) getPaddingRight];
   }
   return [((ADToggleButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADToggleButton *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADToggleButton *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
-jboolean ASToggleButtonImpl_isLabelMeasured(ASToggleButtonImpl *self) {
+bool ASToggleButtonImpl_isLabelMeasured(ASToggleButtonImpl *self) {
   return !ASToggleButtonImpl_isDisposed(self) && ASToggleButtonImpl_getLabelWidth(self) > 0;
 }
 
@@ -3295,11 +3308,11 @@ id ASToggleButtonImpl_getTextSize(ASToggleButtonImpl *self) {
 }
 
 void ASToggleButtonImpl_setMyTextSizeWithId_(ASToggleButtonImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASToggleButtonImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASToggleButtonImpl_nativeSetTextSizeWithInt_(ASToggleButtonImpl *self, jint value) {
+void ASToggleButtonImpl_nativeSetTextSizeWithInt_(ASToggleButtonImpl *self, int32_t value) {
   [((ASUIButton*)self.uiView) setFont: [((ASUIButton*)self.uiView).font fontWithSize: value]];
 }
 
@@ -3389,7 +3402,7 @@ void ASToggleButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASToggleButt
   }
 }
 
-jint ASToggleButtonImpl_getImageHeightWithId_(ASToggleButtonImpl *self, id objValue) {
+int32_t ASToggleButtonImpl_getImageHeightWithId_(ASToggleButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -3398,7 +3411,7 @@ jint ASToggleButtonImpl_getImageHeightWithId_(ASToggleButtonImpl *self, id objVa
   return 0;
 }
 
-jint ASToggleButtonImpl_getImageWidthWithId_(ASToggleButtonImpl *self, id objValue) {
+int32_t ASToggleButtonImpl_getImageWidthWithId_(ASToggleButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -3473,16 +3486,16 @@ void ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASToggle
   [self invalidate];
 }
 
-jint ASToggleButtonImpl_nativeGetFontSize(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_nativeGetFontSize(ASToggleButtonImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASToggleButtonImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASToggleButtonImpl_nativeGetFontStyle(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_nativeGetFontStyle(ASToggleButtonImpl *self) {
   ASUIButton* label = ((ASUIButton*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASToggleButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASToggleButtonImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASToggleButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASToggleButtonImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUIButton* label = ((ASUIButton*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -3496,7 +3509,7 @@ void ASToggleButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASToggl
   }
 }
 
-void ASToggleButtonImpl_nativeSetFontStyleWithInt_(ASToggleButtonImpl *self, jint style) {
+void ASToggleButtonImpl_nativeSetFontStyleWithInt_(ASToggleButtonImpl *self, int32_t style) {
   ASUIButton* label = ((ASUIButton*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUIButton*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -3520,7 +3533,7 @@ id ASToggleButtonImpl_getEllipsize(ASToggleButtonImpl *self) {
 
 void ASToggleButtonImpl_setEllipsizeWithId_withNSString_(ASToggleButtonImpl *self, id objValue, NSString *strValue) {
   self->ellipsize_ = strValue;
-  jint lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (lineBreakMode == JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee)) {
     lineBreakMode = JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping);
   }
@@ -3539,15 +3552,15 @@ void ASToggleButtonImpl_setEllipsizeWithId_withNSString_(ASToggleButtonImpl *sel
   }
 }
 
-jint ASToggleButtonImpl_getLineHeight(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_getLineHeight(ASToggleButtonImpl *self) {
   return ceil(((ASUIButton*)self.uiView).font.lineHeight);
 }
 
-jint ASToggleButtonImpl_getBorderWidth(ASToggleButtonImpl *self) {
+int32_t ASToggleButtonImpl_getBorderWidth(ASToggleButtonImpl *self) {
   return 0;
 }
 
-jboolean ASToggleButtonImpl_canMarquee(ASToggleButtonImpl *self) {
+bool ASToggleButtonImpl_canMarquee(ASToggleButtonImpl *self) {
   return [nil_chk(ASToggleButtonImpl_getSingleLine(self)) isEqual:JreLoadStatic(JavaLangBoolean, TRUE)];
 }
 
@@ -3558,7 +3571,7 @@ void ASToggleButtonImpl_cancelNativeTimer(ASToggleButtonImpl *self) {
   }
 }
 
-jboolean ASToggleButtonImpl_isDisposed(ASToggleButtonImpl *self) {
+bool ASToggleButtonImpl_isDisposed(ASToggleButtonImpl *self) {
   return self->isDisposed_;
 }
 
@@ -3603,11 +3616,13 @@ id ASToggleButtonImpl_getChecked(ASToggleButtonImpl *self) {
   return JavaLangBoolean_valueOfWithBoolean_(self->checked_);
 }
 
-jboolean ASToggleButtonImpl_toggleChecked(ASToggleButtonImpl *self) {
+bool ASToggleButtonImpl_toggleChecked(ASToggleButtonImpl *self) {
   return !self->checked_;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl)
+
+J2OBJC_NAME_MAPPING(ASToggleButtonImpl, "com.ashera.layout", "AS")
 
 @implementation ASToggleButtonImpl_DrawableTintMode
 
@@ -3689,7 +3704,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangInteger_valueOfWithInt_(0);
 }
 
-- (jboolean)supportsIntAlso {
+- (bool)supportsIntAlso {
   return true;
 }
 
@@ -3722,7 +3737,7 @@ void ASToggleButtonImpl_MarqueeRepeatLimit_init(ASToggleButtonImpl_MarqueeRepeat
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((jint) 0xffffffff)];
+    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0xffffffff)];
   }
 }
 
@@ -3780,10 +3795,10 @@ void ASToggleButtonImpl_Font_init(ASToggleButtonImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -3841,9 +3856,9 @@ void ASToggleButtonImpl_TextStyle_init(ASToggleButtonImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -3989,8 +4004,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -4000,11 +4015,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -4031,8 +4046,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -4100,12 +4115,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -4135,37 +4150,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASToggleButtonImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASToggleButtonImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -4365,7 +4380,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonExt)
 }
 
 - (void)run {
-  jint numberOfBlankSpaces = ASToggleButtonImpl_calcNumberOfWhiteSpaces(this$0_);
+  int32_t numberOfBlankSpaces = ASToggleButtonImpl_calcNumberOfWhiteSpaces(this$0_);
   if (this$0_->marqueeCommandConverter_ == nil) {
     this$0_->marqueeCommandConverter_ = (ASMarqueeCommandConverter *) cast_chk([this$0_ getAttributeCommandWithNSString:@"text" withNSString:ASCommonConverters_command_marquee withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(numberOfBlankSpaces), JavaLangInteger_valueOfWithInt_(0), direction_ } count:3 type:NSObject_class_()]], [ASMarqueeCommandConverter class]);
   }
@@ -4452,17 +4467,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_MarqueeTask)
 
 @end
 
-void ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask_$Lambda$1 *self, ASToggleButtonImpl_MarqueeTask *outer$, jint capture$0) {
+void ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask_$Lambda$1 *self, ASToggleButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   self->this$0_ = outer$;
   self->val$numberOfBlankSpaces_ = capture$0;
   NSObject_init(self);
 }
 
-ASToggleButtonImpl_MarqueeTask_$Lambda$1 *new_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, jint capture$0) {
+ASToggleButtonImpl_MarqueeTask_$Lambda$1 *new_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_NEW_IMPL(ASToggleButtonImpl_MarqueeTask_$Lambda$1, initWithASToggleButtonImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
-ASToggleButtonImpl_MarqueeTask_$Lambda$1 *create_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, jint capture$0) {
+ASToggleButtonImpl_MarqueeTask_$Lambda$1 *create_ASToggleButtonImpl_MarqueeTask_$Lambda$1_initWithASToggleButtonImpl_MarqueeTask_withInt_(ASToggleButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_CREATE_IMPL(ASToggleButtonImpl_MarqueeTask_$Lambda$1, initWithASToggleButtonImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
@@ -4540,7 +4555,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_DellocHandler)
 }
 
 - (void)onCheckedChangedWithADCompoundButton:(ADCompoundButton *)buttonView
-                                 withBoolean:(jboolean)isChecked {
+                                 withBoolean:(bool)isChecked {
   if (action_ == nil || [action_ isEqual:@"onCheckedChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onCheckedChange"];
     id<JavaUtilMap> obj = [self getOnCheckedChangeEventObjWithADCompoundButton:buttonView withBoolean:isChecked];
@@ -4562,7 +4577,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_DellocHandler)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -4573,7 +4588,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_DellocHandler)
 }
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADCompoundButton:(ADCompoundButton *)buttonView
-                                                      withBoolean:(jboolean)isChecked {
+                                                      withBoolean:(bool)isChecked {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"checkedchange"];

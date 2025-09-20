@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\android\internal\util\ArrayUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ArrayUtils.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/ArrayIndexOutOfBoundsException.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADArrayUtils
@@ -18,16 +30,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (void)checkBoundsWithInt:(jint)len
-                   withInt:(jint)index {
++ (void)checkBoundsWithInt:(int32_t)len
+                   withInt:(int32_t)index {
   ADArrayUtils_checkBoundsWithInt_withInt_(len, index);
 }
 
-+ (IOSIntArray *)newUnpaddedIntArrayWithInt:(jint)initialCapacity {
++ (IOSIntArray *)newUnpaddedIntArrayWithInt:(int32_t)initialCapacity {
   return ADArrayUtils_newUnpaddedIntArrayWithInt_(initialCapacity);
 }
 
-+ (IOSLongArray *)newUnpaddedLongArrayWithInt:(jint)initialCapacity {
++ (IOSLongArray *)newUnpaddedLongArrayWithInt:(int32_t)initialCapacity {
   return ADArrayUtils_newUnpaddedLongArrayWithInt_(initialCapacity);
 }
 
@@ -65,21 +77,23 @@ ADArrayUtils *create_ADArrayUtils_init() {
   J2OBJC_CREATE_IMPL(ADArrayUtils, init)
 }
 
-void ADArrayUtils_checkBoundsWithInt_withInt_(jint len, jint index) {
+void ADArrayUtils_checkBoundsWithInt_withInt_(int32_t len, int32_t index) {
   ADArrayUtils_initialize();
   if (index < 0 || len <= index) {
     @throw create_JavaLangArrayIndexOutOfBoundsException_initWithNSString_(JreStrcat("$I$I", @"length=", len, @"; index=", index));
   }
 }
 
-IOSIntArray *ADArrayUtils_newUnpaddedIntArrayWithInt_(jint initialCapacity) {
+IOSIntArray *ADArrayUtils_newUnpaddedIntArrayWithInt_(int32_t initialCapacity) {
   ADArrayUtils_initialize();
   return [IOSIntArray arrayWithLength:initialCapacity];
 }
 
-IOSLongArray *ADArrayUtils_newUnpaddedLongArrayWithInt_(jint initialCapacity) {
+IOSLongArray *ADArrayUtils_newUnpaddedLongArrayWithInt_(int32_t initialCapacity) {
   ADArrayUtils_initialize();
   return [IOSLongArray arrayWithLength:initialCapacity];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADArrayUtils)
+
+J2OBJC_NAME_MAPPING(ADArrayUtils, "r.com.android.internal.util", "AD")

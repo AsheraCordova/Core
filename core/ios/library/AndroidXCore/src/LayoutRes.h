@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\annotation\LayoutRes.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LayoutRes")
@@ -21,10 +22,13 @@
 #include "java/lang/annotation/Annotation.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADXLayoutRes < JavaLangAnnotationAnnotation >
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -41,6 +45,7 @@ FOUNDATION_EXPORT id<ADXLayoutRes> create_ADXLayoutRes(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADXLayoutRes)
 
 #define AndroidxAnnotationLayoutRes ADXLayoutRes
+
 
 #endif
 

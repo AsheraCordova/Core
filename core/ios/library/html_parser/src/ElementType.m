@@ -3,11 +3,26 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\ElementType.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributesImpl.h"
 #include "ElementType.h"
 #include "J2ObjC_source.h"
 #include "Schema.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/lang/StringBuffer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSElementType () {
@@ -15,12 +30,12 @@
   NSString *theName_;
   NSString *theNamespace_;
   NSString *theLocalName_;
-  jint theModel_;
-  jint theMemberOf_;
-  jint theFlags_;
+  int32_t theModel_;
+  int32_t theMemberOf_;
+  int32_t theFlags_;
   TSAttributesImpl *theAtts_;
   TSElementType *theParent_;
-  __unsafe_unretained TSSchema *theSchema_;
+  WEAK_ TSSchema *theSchema_;
 }
 
 @end
@@ -34,17 +49,17 @@ J2OBJC_FIELD_SETTER(TSElementType, theParent_, TSElementType *)
 @implementation TSElementType
 
 - (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)model
-                         withInt:(jint)memberOf
-                         withInt:(jint)flags
+                         withInt:(int32_t)model
+                         withInt:(int32_t)memberOf
+                         withInt:(int32_t)flags
                     withTSSchema:(TSSchema *)schema {
   TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(self, name, model, memberOf, flags, schema);
   return self;
 }
 
 - (NSString *)namespace__WithNSString:(NSString *)name
-                          withBoolean:(jboolean)attribute {
-  jint colon = [((NSString *) nil_chk(name)) java_indexOf:':'];
+                          withBoolean:(bool)attribute {
+  int32_t colon = [((NSString *) nil_chk(name)) java_indexOf:':'];
   if (colon == -1) {
     return attribute ? @"" : [((TSSchema *) nil_chk(theSchema_)) getURI];
   }
@@ -58,7 +73,7 @@ J2OBJC_FIELD_SETTER(TSElementType, theParent_, TSElementType *)
 }
 
 - (NSString *)localNameWithNSString:(NSString *)name {
-  jint colon = [((NSString *) nil_chk(name)) java_indexOf:':'];
+  int32_t colon = [((NSString *) nil_chk(name)) java_indexOf:':'];
   if (colon == -1) {
     return name;
   }
@@ -79,15 +94,15 @@ J2OBJC_FIELD_SETTER(TSElementType, theParent_, TSElementType *)
   return theLocalName_;
 }
 
-- (jint)model {
+- (int32_t)model {
   return theModel_;
 }
 
-- (jint)memberOf {
+- (int32_t)memberOf {
   return theMemberOf_;
 }
 
-- (jint)flags {
+- (int32_t)flags {
   return theFlags_;
 }
 
@@ -103,7 +118,7 @@ J2OBJC_FIELD_SETTER(TSElementType, theParent_, TSElementType *)
   return theSchema_;
 }
 
-- (jboolean)canContainWithTSElementType:(TSElementType *)other {
+- (bool)canContainWithTSElementType:(TSElementType *)other {
   return (theModel_ & ((TSElementType *) nil_chk(other))->theMemberOf_) != 0;
 }
 
@@ -118,7 +133,7 @@ J2OBJC_FIELD_SETTER(TSElementType, theParent_, TSElementType *)
   ;
   NSString *namespace_ = JreRetainedLocalValue([self namespace__WithNSString:name withBoolean:true]);
   NSString *localName = JreRetainedLocalValue([self localNameWithNSString:name]);
-  jint i = [((TSAttributesImpl *) nil_chk(atts)) getIndexWithNSString:name];
+  int32_t i = [((TSAttributesImpl *) nil_chk(atts)) getIndexWithNSString:name];
   if (i == -1) {
     name = [name java_intern];
     if (type == nil) type = @"CDATA";
@@ -142,15 +157,15 @@ J2OBJC_FIELD_SETTER(TSElementType, theParent_, TSElementType *)
   [self setAttributeWithTSAttributesImpl:theAtts_ withNSString:name withNSString:type withNSString:value];
 }
 
-- (void)setModelWithInt:(jint)model {
+- (void)setModelWithInt:(int32_t)model {
   theModel_ = model;
 }
 
-- (void)setMemberOfWithInt:(jint)memberOf {
+- (void)setMemberOfWithInt:(int32_t)memberOf {
   theMemberOf_ = memberOf;
 }
 
-- (void)setFlagsWithInt:(jint)flags {
+- (void)setFlagsWithInt:(int32_t)flags {
   theFlags_ = flags;
 }
 
@@ -237,7 +252,7 @@ J2OBJC_FIELD_SETTER(TSElementType, theParent_, TSElementType *)
 
 @end
 
-void TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(TSElementType *self, NSString *name, jint model, jint memberOf, jint flags, TSSchema *schema) {
+void TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(TSElementType *self, NSString *name, int32_t model, int32_t memberOf, int32_t flags, TSSchema *schema) {
   NSObject_init(self);
   JreStrongAssign(&self->theName_, name);
   self->theModel_ = model;
@@ -249,11 +264,11 @@ void TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(TSElem
   JreStrongAssign(&self->theLocalName_, [self localNameWithNSString:name]);
 }
 
-TSElementType *new_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, jint model, jint memberOf, jint flags, TSSchema *schema) {
+TSElementType *new_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, int32_t model, int32_t memberOf, int32_t flags, TSSchema *schema) {
   J2OBJC_NEW_IMPL(TSElementType, initWithNSString_withInt_withInt_withInt_withTSSchema_, name, model, memberOf, flags, schema)
 }
 
-TSElementType *create_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, jint model, jint memberOf, jint flags, TSSchema *schema) {
+TSElementType *create_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(NSString *name, int32_t model, int32_t memberOf, int32_t flags, TSSchema *schema) {
   J2OBJC_CREATE_IMPL(TSElementType, initWithNSString_withInt_withInt_withInt_withTSSchema_, name, model, memberOf, flags, schema)
 }
 
@@ -262,11 +277,11 @@ NSString *TSElementType_normalizeWithNSString_(NSString *value) {
   if (value == nil) return value;
   value = [value java_trim];
   if ([((NSString *) nil_chk(value)) java_indexOfString:@"  "] == -1) return value;
-  jboolean space = false;
-  jint len = [value java_length];
+  bool space = false;
+  int32_t len = [value java_length];
   JavaLangStringBuffer *b = create_JavaLangStringBuffer_initWithInt_(len);
-  for (jint i = 0; i < len; i++) {
-    jchar v = [value charAtWithInt:i];
+  for (int32_t i = 0; i < len; i++) {
+    unichar v = [value charAtWithInt:i];
     if (v == ' ') {
       if (!space) [b appendWithChar:v];
       space = true;
@@ -280,3 +295,5 @@ NSString *TSElementType_normalizeWithNSString_(NSString *value) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSElementType)
+
+J2OBJC_NAME_MAPPING(TSElementType, "repackaged.org.ccil.cowan.tagsoup", "TS")

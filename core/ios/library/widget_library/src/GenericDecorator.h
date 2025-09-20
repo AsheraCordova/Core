@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\GenericDecorator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_GenericDecorator")
@@ -21,6 +22,8 @@
 #include "IDecorator.h"
 
 @class ASWidgetAttribute;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASICompositeDecorator;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -46,10 +49,10 @@
 - (id<ASIDecorator>)newInstanceWithASICompositeDecorator:(id<ASICompositeDecorator>)wrappingWidget
                                            withASIWidget:(id<ASIWidget>)wrappedWidget OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
-                                 withNSString:(NSString *)strValue
-                                       withId:(id)objValue
-                    withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)lifeCycleDecorator;
+- (bool)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
+                             withNSString:(NSString *)strValue
+                                   withId:(id)objValue
+                withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)lifeCycleDecorator;
 
 - (void)setSupportedAttributesWithJavaUtilList:(id<JavaUtilList>)supportedAttributes;
 
@@ -66,6 +69,7 @@ FOUNDATION_EXPORT ASGenericDecorator *create_ASGenericDecorator_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASGenericDecorator)
 
 @compatibility_alias ComAsheraWidgetGenericDecorator ASGenericDecorator;
+
 
 #endif
 

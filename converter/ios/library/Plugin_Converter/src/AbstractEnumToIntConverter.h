@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractEnumToIntConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AbstractEnumToIntConverter")
@@ -20,7 +21,9 @@
 #define INCLUDE_ASIConverter 1
 #include "IConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -44,21 +47,22 @@
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASAbstractEnumToIntConverter)
 
-inline jint ASAbstractEnumToIntConverter_get_DEFAULT_UNKNOWN(void);
+inline int32_t ASAbstractEnumToIntConverter_get_DEFAULT_UNKNOWN(void);
 #define ASAbstractEnumToIntConverter_DEFAULT_UNKNOWN -99999
-J2OBJC_STATIC_FIELD_CONSTANT(ASAbstractEnumToIntConverter, DEFAULT_UNKNOWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASAbstractEnumToIntConverter, DEFAULT_UNKNOWN, int32_t)
 
 FOUNDATION_EXPORT void ASAbstractEnumToIntConverter_init(ASAbstractEnumToIntConverter *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAbstractEnumToIntConverter)
 
 @compatibility_alias ComAsheraConverterAbstractEnumToIntConverter ASAbstractEnumToIntConverter;
+
 
 #endif
 

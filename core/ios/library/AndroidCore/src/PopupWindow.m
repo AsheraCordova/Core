@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\PopupWindow.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ApplicationInfo.h"
 #include "Build.h"
 #include "Context.h"
@@ -18,11 +23,18 @@
 #include "ViewGroup.h"
 #include "ViewParent.h"
 #include "ViewTreeObserver.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/ref/WeakReference.h"
 
-@class JavaLangRefWeakReference;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -35,55 +47,55 @@
   ADRect *mTempRect_;
   ADContext *mContext_;
   JavaLangRefWeakReference *mParentRootView_;
-  jboolean mIsShowing_;
-  jboolean mIsTransitioningToDismiss_;
-  jboolean mIsDropdown_;
+  bool mIsShowing_;
+  bool mIsTransitioningToDismiss_;
+  bool mIsDropdown_;
   ADView *mDecorView_;
   ADView *mBackgroundView_;
   ADView *mContentView_;
-  jboolean mFocusable_;
-  jint mInputMethodMode_;
-  jboolean mTouchable_;
-  jboolean mOutsideTouchable_;
-  jboolean mClippingEnabled_;
-  jint mSplitTouchEnabled_;
-  jboolean mLayoutInScreen_;
-  jboolean mClipToScreen_;
-  jboolean mAllowScrollingAnchorParent_;
-  jboolean mLayoutInsetDecor_;
-  jboolean mNotTouchModal_;
-  jboolean mAttachedInDecor_;
-  jboolean mAttachedInDecorSet_;
-  jint mWidthMode_;
-  jint mWidth_;
-  jint mLastWidth_;
-  jint mHeightMode_;
-  jint mHeight_;
-  jint mLastHeight_;
-  jfloat mElevation_;
+  bool mFocusable_;
+  int32_t mInputMethodMode_;
+  bool mTouchable_;
+  bool mOutsideTouchable_;
+  bool mClippingEnabled_;
+  int32_t mSplitTouchEnabled_;
+  bool mLayoutInScreen_;
+  bool mClipToScreen_;
+  bool mAllowScrollingAnchorParent_;
+  bool mLayoutInsetDecor_;
+  bool mNotTouchModal_;
+  bool mAttachedInDecor_;
+  bool mAttachedInDecorSet_;
+  int32_t mWidthMode_;
+  int32_t mWidth_;
+  int32_t mLastWidth_;
+  int32_t mHeightMode_;
+  int32_t mHeight_;
+  int32_t mLastHeight_;
+  float mElevation_;
   ADDrawable *mBackground_;
   ADDrawable *mAboveAnchorBackgroundDrawable_;
   ADDrawable *mBelowAnchorBackgroundDrawable_;
   ADPopupWindow_Transition *mEnterTransition_;
-  jboolean mAboveAnchor_;
+  bool mAboveAnchor_;
   id<ADPopupWindow_OnDismissListener> mOnDismissListener_;
-  jboolean mIgnoreCheekPress_;
-  jint mAnimationStyle_;
-  jint mGravity_;
+  bool mIgnoreCheekPress_;
+  int32_t mAnimationStyle_;
+  int32_t mGravity_;
   id<ADView_OnAttachStateChangeListener> mOnAnchorDetachedListener_;
   id<ADView_OnAttachStateChangeListener> mOnAnchorRootDetachedListener_;
   JavaLangRefWeakReference *mAnchor_;
   JavaLangRefWeakReference *mAnchorRoot_;
-  jboolean mIsAnchorRootAttached_;
+  bool mIsAnchorRootAttached_;
   id<ADViewTreeObserver_OnScrollChangedListener> mOnScrollChangedListener_;
   id<ADView_OnLayoutChangeListener> mOnLayoutChangeListener_;
-  jint mAnchorXoff_;
-  jint mAnchorYoff_;
-  jint mAnchoredGravity_;
-  jboolean mOverlapAnchor_;
-  jboolean mPopupViewInitialLayoutDirectionInherited_;
+  int32_t mAnchorXoff_;
+  int32_t mAnchorYoff_;
+  int32_t mAnchoredGravity_;
+  bool mOverlapAnchor_;
+  bool mPopupViewInitialLayoutDirectionInherited_;
   ADRelativeLayout_LayoutParams *mOutParams_;
-  jboolean aligningAnchor_;
+  bool aligningAnchor_;
 }
 
 - (void)preparePopupWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p;
@@ -92,54 +104,54 @@
 
 - (void)setLayoutDirectionFromAnchor;
 
-- (jint)computeGravity;
+- (int32_t)computeGravity;
 
-- (jboolean)tryFitVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                    withInt:(jint)yOffset
-                                                    withInt:(jint)height
-                                                    withInt:(jint)anchorHeight
-                                                    withInt:(jint)drawingLocationY
-                                                    withInt:(jint)screenLocationY
-                                                    withInt:(jint)displayFrameTop
-                                                    withInt:(jint)displayFrameBottom
-                                                withBoolean:(jboolean)allowResize;
+- (bool)tryFitVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                withInt:(int32_t)yOffset
+                                                withInt:(int32_t)height
+                                                withInt:(int32_t)anchorHeight
+                                                withInt:(int32_t)drawingLocationY
+                                                withInt:(int32_t)screenLocationY
+                                                withInt:(int32_t)displayFrameTop
+                                                withInt:(int32_t)displayFrameBottom
+                                            withBoolean:(bool)allowResize;
 
-- (jboolean)positionInDisplayVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                               withInt:(jint)height
-                                                               withInt:(jint)drawingLocationY
-                                                               withInt:(jint)screenLocationY
-                                                               withInt:(jint)displayFrameTop
-                                                               withInt:(jint)displayFrameBottom
-                                                           withBoolean:(jboolean)canResize;
+- (bool)positionInDisplayVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                           withInt:(int32_t)height
+                                                           withInt:(int32_t)drawingLocationY
+                                                           withInt:(int32_t)screenLocationY
+                                                           withInt:(int32_t)displayFrameTop
+                                                           withInt:(int32_t)displayFrameBottom
+                                                       withBoolean:(bool)canResize;
 
-- (jboolean)tryFitHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                      withInt:(jint)xOffset
-                                                      withInt:(jint)width
-                                                      withInt:(jint)anchorWidth
-                                                      withInt:(jint)drawingLocationX
-                                                      withInt:(jint)screenLocationX
-                                                      withInt:(jint)displayFrameLeft
-                                                      withInt:(jint)displayFrameRight
-                                                  withBoolean:(jboolean)allowResize;
+- (bool)tryFitHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                  withInt:(int32_t)xOffset
+                                                  withInt:(int32_t)width
+                                                  withInt:(int32_t)anchorWidth
+                                                  withInt:(int32_t)drawingLocationX
+                                                  withInt:(int32_t)screenLocationX
+                                                  withInt:(int32_t)displayFrameLeft
+                                                  withInt:(int32_t)displayFrameRight
+                                              withBoolean:(bool)allowResize;
 
-- (jboolean)positionInDisplayHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                                 withInt:(jint)width
-                                                                 withInt:(jint)drawingLocationX
-                                                                 withInt:(jint)screenLocationX
-                                                                 withInt:(jint)displayFrameLeft
-                                                                 withInt:(jint)displayFrameRight
-                                                             withBoolean:(jboolean)canResize;
+- (bool)positionInDisplayHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                             withInt:(int32_t)width
+                                                             withInt:(int32_t)drawingLocationX
+                                                             withInt:(int32_t)screenLocationX
+                                                             withInt:(int32_t)displayFrameLeft
+                                                             withInt:(int32_t)displayFrameRight
+                                                         withBoolean:(bool)canResize;
 
 - (void)dismissImmediateWithADView:(ADView *)decorView
                    withADViewGroup:(ADViewGroup *)contentHolder
                         withADView:(ADView *)contentView;
 
 - (void)updateWithADView:(ADView *)anchor
-             withBoolean:(jboolean)updateLocation
-                 withInt:(jint)xoff
-                 withInt:(jint)yoff
-                 withInt:(jint)width
-                 withInt:(jint)height;
+             withBoolean:(bool)updateLocation
+                 withInt:(int32_t)xoff
+                 withInt:(int32_t)yoff
+                 withInt:(int32_t)width
+                 withInt:(int32_t)height;
 
 - (void)alignToAnchor;
 
@@ -147,13 +159,13 @@
 
 - (ADView *)createBackgroundViewWithADView:(ADView *)mContentView;
 
-- (jboolean)isTransitioningToDismiss;
+- (bool)isTransitioningToDismiss;
 
 - (void)safeAlignToAnchor;
 
 - (ADView *)getAppRootViewWithADView:(ADView *)anchor;
 
-- (jint)computeAnimationResource;
+- (int32_t)computeAnimationResource;
 
 @end
 
@@ -179,15 +191,15 @@ J2OBJC_FIELD_SETTER(ADPopupWindow, mOnScrollChangedListener_, id<ADViewTreeObser
 J2OBJC_FIELD_SETTER(ADPopupWindow, mOnLayoutChangeListener_, id<ADView_OnLayoutChangeListener>)
 J2OBJC_FIELD_SETTER(ADPopupWindow, mOutParams_, ADRelativeLayout_LayoutParams *)
 
-inline jint ADPopupWindow_get_DEFAULT_ANCHORED_GRAVITY(void);
+inline int32_t ADPopupWindow_get_DEFAULT_ANCHORED_GRAVITY(void);
 #define ADPopupWindow_DEFAULT_ANCHORED_GRAVITY 8388659
-J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, DEFAULT_ANCHORED_GRAVITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, DEFAULT_ANCHORED_GRAVITY, int32_t)
 
-inline jint ADPopupWindow_get_ANIMATION_STYLE_DEFAULT(void);
+inline int32_t ADPopupWindow_get_ANIMATION_STYLE_DEFAULT(void);
 #define ADPopupWindow_ANIMATION_STYLE_DEFAULT -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, ANIMATION_STYLE_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPopupWindow, ANIMATION_STYLE_DEFAULT, int32_t)
 
-__attribute__((unused)) static void ADPopupWindow_updateAboveAnchorWithBoolean_(ADPopupWindow *self, jboolean aboveAnchor);
+__attribute__((unused)) static void ADPopupWindow_updateAboveAnchorWithBoolean_(ADPopupWindow *self, bool aboveAnchor);
 
 __attribute__((unused)) static void ADPopupWindow_preparePopupWithADRelativeLayout_LayoutParams_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *p);
 
@@ -195,19 +207,19 @@ __attribute__((unused)) static void ADPopupWindow_invokePopupWithADRelativeLayou
 
 __attribute__((unused)) static void ADPopupWindow_setLayoutDirectionFromAnchor(ADPopupWindow *self);
 
-__attribute__((unused)) static jint ADPopupWindow_computeGravity(ADPopupWindow *self);
+__attribute__((unused)) static int32_t ADPopupWindow_computeGravity(ADPopupWindow *self);
 
-__attribute__((unused)) static jboolean ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint yOffset, jint height, jint anchorHeight, jint drawingLocationY, jint screenLocationY, jint displayFrameTop, jint displayFrameBottom, jboolean allowResize);
+__attribute__((unused)) static bool ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t yOffset, int32_t height, int32_t anchorHeight, int32_t drawingLocationY, int32_t screenLocationY, int32_t displayFrameTop, int32_t displayFrameBottom, bool allowResize);
 
-__attribute__((unused)) static jboolean ADPopupWindow_positionInDisplayVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint height, jint drawingLocationY, jint screenLocationY, jint displayFrameTop, jint displayFrameBottom, jboolean canResize);
+__attribute__((unused)) static bool ADPopupWindow_positionInDisplayVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t height, int32_t drawingLocationY, int32_t screenLocationY, int32_t displayFrameTop, int32_t displayFrameBottom, bool canResize);
 
-__attribute__((unused)) static jboolean ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint xOffset, jint width, jint anchorWidth, jint drawingLocationX, jint screenLocationX, jint displayFrameLeft, jint displayFrameRight, jboolean allowResize);
+__attribute__((unused)) static bool ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t xOffset, int32_t width, int32_t anchorWidth, int32_t drawingLocationX, int32_t screenLocationX, int32_t displayFrameLeft, int32_t displayFrameRight, bool allowResize);
 
-__attribute__((unused)) static jboolean ADPopupWindow_positionInDisplayHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint width, jint drawingLocationX, jint screenLocationX, jint displayFrameLeft, jint displayFrameRight, jboolean canResize);
+__attribute__((unused)) static bool ADPopupWindow_positionInDisplayHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t width, int32_t drawingLocationX, int32_t screenLocationX, int32_t displayFrameLeft, int32_t displayFrameRight, bool canResize);
 
 __attribute__((unused)) static void ADPopupWindow_dismissImmediateWithADView_withADViewGroup_withADView_(ADPopupWindow *self, ADView *decorView, ADViewGroup *contentHolder, ADView *contentView);
 
-__attribute__((unused)) static void ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_(ADPopupWindow *self, ADView *anchor, jboolean updateLocation, jint xoff, jint yoff, jint width, jint height);
+__attribute__((unused)) static void ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_(ADPopupWindow *self, ADView *anchor, bool updateLocation, int32_t xoff, int32_t yoff, int32_t width, int32_t height);
 
 __attribute__((unused)) static void ADPopupWindow_alignToAnchor(ADPopupWindow *self);
 
@@ -217,13 +229,13 @@ __attribute__((unused)) static ADView *ADPopupWindow_createDecorViewWithADView_(
 
 __attribute__((unused)) static ADView *ADPopupWindow_createBackgroundViewWithADView_(ADPopupWindow *self, ADView *mContentView);
 
-__attribute__((unused)) static jboolean ADPopupWindow_isTransitioningToDismiss(ADPopupWindow *self);
+__attribute__((unused)) static bool ADPopupWindow_isTransitioningToDismiss(ADPopupWindow *self);
 
 __attribute__((unused)) static void ADPopupWindow_safeAlignToAnchor(ADPopupWindow *self);
 
 __attribute__((unused)) static ADView *ADPopupWindow_getAppRootViewWithADView_(ADPopupWindow *self, ADView *anchor);
 
-__attribute__((unused)) static jint ADPopupWindow_computeAnimationResource(ADPopupWindow *self);
+__attribute__((unused)) static int32_t ADPopupWindow_computeAnimationResource(ADPopupWindow *self);
 
 @interface ADPopupWindow_1 : NSObject < ADView_OnAttachStateChangeListener > {
  @public
@@ -246,6 +258,7 @@ __attribute__((unused)) static ADPopupWindow_1 *new_ADPopupWindow_1_initWithADPo
 
 __attribute__((unused)) static ADPopupWindow_1 *create_ADPopupWindow_1_initWithADPopupWindow_(ADPopupWindow *outer$);
 
+
 @interface ADPopupWindow_2 : NSObject < ADView_OnAttachStateChangeListener > {
  @public
   ADPopupWindow *this$0_;
@@ -266,6 +279,7 @@ __attribute__((unused)) static void ADPopupWindow_2_initWithADPopupWindow_(ADPop
 __attribute__((unused)) static ADPopupWindow_2 *new_ADPopupWindow_2_initWithADPopupWindow_(ADPopupWindow *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADPopupWindow_2 *create_ADPopupWindow_2_initWithADPopupWindow_(ADPopupWindow *outer$);
+
 
 @interface ADPopupWindow_OnDismissListener : NSObject
 
@@ -288,20 +302,21 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$1 *new_ADPopupWindow_$Lambd
 
 __attribute__((unused)) static ADPopupWindow_$Lambda$1 *create_ADPopupWindow_$Lambda$1_initWithADPopupWindow_(ADPopupWindow *outer$);
 
+
 @interface ADPopupWindow_$Lambda$2 : NSObject < ADView_OnLayoutChangeListener > {
  @public
   ADPopupWindow *this$0_;
 }
 
 - (void)onLayoutChangeWithADView:(ADView *)v
-                         withInt:(jint)left
-                         withInt:(jint)top
-                         withInt:(jint)right
-                         withInt:(jint)bottom
-                         withInt:(jint)oldLeft
-                         withInt:(jint)oldTop
-                         withInt:(jint)oldRight
-                         withInt:(jint)oldBottom;
+                         withInt:(int32_t)left
+                         withInt:(int32_t)top
+                         withInt:(int32_t)right
+                         withInt:(int32_t)bottom
+                         withInt:(int32_t)oldLeft
+                         withInt:(int32_t)oldTop
+                         withInt:(int32_t)oldRight
+                         withInt:(int32_t)oldBottom;
 
 @end
 
@@ -312,6 +327,7 @@ __attribute__((unused)) static void ADPopupWindow_$Lambda$2_initWithADPopupWindo
 __attribute__((unused)) static ADPopupWindow_$Lambda$2 *new_ADPopupWindow_$Lambda$2_initWithADPopupWindow_(ADPopupWindow *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$Lambda$2_initWithADPopupWindow_(ADPopupWindow *outer$);
+
 
 @implementation ADPopupWindow
 
@@ -329,41 +345,41 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
   }
 }
 
-- (void)setAttachedInDecorWithBoolean:(jboolean)enabled {
+- (void)setAttachedInDecorWithBoolean:(bool)enabled {
   mAttachedInDecor_ = enabled;
   mAttachedInDecorSet_ = true;
 }
 
-- (void)setHeightWithInt:(jint)height {
+- (void)setHeightWithInt:(int32_t)height {
   mHeight_ = height;
   ((ADRelativeLayout_LayoutParams *) nil_chk(mOutParams_))->height_ = height;
 }
 
-- (void)setWidthWithInt:(jint)width {
+- (void)setWidthWithInt:(int32_t)width {
   mWidth_ = width;
   ((ADRelativeLayout_LayoutParams *) nil_chk(mOutParams_))->width_ = width;
 }
 
-- (void)setOverlapAnchorWithBoolean:(jboolean)overlapAnchor {
+- (void)setOverlapAnchorWithBoolean:(bool)overlapAnchor {
   mOverlapAnchor_ = overlapAnchor;
 }
 
-- (jboolean)isShowing {
+- (bool)isShowing {
   return mIsShowing_;
 }
 
 - (void)showAtLocationWithADView:(ADView *)parent
-                         withInt:(jint)gravity
-                         withInt:(jint)x
-                         withInt:(jint)y {
+                         withInt:(int32_t)gravity
+                         withInt:(int32_t)x
+                         withInt:(int32_t)y {
   JreStrongAssignAndConsume(&mParentRootView_, new_JavaLangRefWeakReference_initWithId_([((ADView *) nil_chk(parent)) getRootView]));
   [self showAtLocationWithADIBinder:[parent getWindowToken] withInt:gravity withInt:x withInt:y];
 }
 
 - (void)showAtLocationWithADIBinder:(id<ADIBinder>)token
-                            withInt:(jint)gravity
-                            withInt:(jint)x
-                            withInt:(jint)y {
+                            withInt:(int32_t)gravity
+                            withInt:(int32_t)x
+                            withInt:(int32_t)y {
   if ([self isShowing] || mContentView_ == nil) {
     return;
   }
@@ -384,15 +400,15 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
 }
 
 - (void)showAsDropDownWithADView:(ADView *)anchor
-                         withInt:(jint)xoff
-                         withInt:(jint)yoff {
+                         withInt:(int32_t)xoff
+                         withInt:(int32_t)yoff {
   [self showAsDropDownWithADView:anchor withInt:xoff withInt:yoff withInt:ADPopupWindow_DEFAULT_ANCHORED_GRAVITY];
 }
 
 - (void)showAsDropDownWithADView:(ADView *)anchor
-                         withInt:(jint)xoff
-                         withInt:(jint)yoff
-                         withInt:(jint)gravity {
+                         withInt:(int32_t)xoff
+                         withInt:(int32_t)yoff
+                         withInt:(int32_t)gravity {
   if ([self isShowing] || ![self hasContentView]) {
     return;
   }
@@ -402,16 +418,16 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
   mIsDropdown_ = true;
   ADRelativeLayout_LayoutParams *p = ADPopupWindow_createPopupLayoutParamsWithADIBinder_(self, [((ADView *) nil_chk(anchor)) getApplicationWindowToken]);
   ADPopupWindow_preparePopupWithADRelativeLayout_LayoutParams_(self, p);
-  jboolean aboveAnchor = [self findDropDownPositionWithADView:anchor withADRelativeLayout_LayoutParams:p withInt:xoff withInt:yoff withInt:((ADRelativeLayout_LayoutParams *) nil_chk(p))->width_ withInt:p->height_ withInt:gravity withBoolean:mAllowScrollingAnchorParent_];
+  bool aboveAnchor = [self findDropDownPositionWithADView:anchor withADRelativeLayout_LayoutParams:p withInt:xoff withInt:yoff withInt:((ADRelativeLayout_LayoutParams *) nil_chk(p))->width_ withInt:p->height_ withInt:gravity withBoolean:mAllowScrollingAnchorParent_];
   ADPopupWindow_updateAboveAnchorWithBoolean_(self, aboveAnchor);
   ADPopupWindow_invokePopupWithADRelativeLayout_LayoutParams_(self, p);
 }
 
-- (void)updateAboveAnchorWithBoolean:(jboolean)aboveAnchor {
+- (void)updateAboveAnchorWithBoolean:(bool)aboveAnchor {
   ADPopupWindow_updateAboveAnchorWithBoolean_(self, aboveAnchor);
 }
 
-- (jboolean)isAboveAnchor {
+- (bool)isAboveAnchor {
   return mAboveAnchor_;
 }
 
@@ -427,20 +443,20 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
   ADPopupWindow_setLayoutDirectionFromAnchor(self);
 }
 
-- (jint)computeGravity {
+- (int32_t)computeGravity {
   return ADPopupWindow_computeGravity(self);
 }
 
-- (jboolean)findDropDownPositionWithADView:(ADView *)anchor
-         withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                   withInt:(jint)xOffset
-                                   withInt:(jint)yOffset
-                                   withInt:(jint)width
-                                   withInt:(jint)height
-                                   withInt:(jint)gravity
-                               withBoolean:(jboolean)allowScroll {
-  jint anchorHeight = [((ADView *) nil_chk(anchor)) getHeight];
-  jint anchorWidth = [anchor getWidth];
+- (bool)findDropDownPositionWithADView:(ADView *)anchor
+     withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                               withInt:(int32_t)xOffset
+                               withInt:(int32_t)yOffset
+                               withInt:(int32_t)width
+                               withInt:(int32_t)height
+                               withInt:(int32_t)gravity
+                           withBoolean:(bool)allowScroll {
+  int32_t anchorHeight = [((ADView *) nil_chk(anchor)) getHeight];
+  int32_t anchorWidth = [anchor getWidth];
   if (mOverlapAnchor_) {
     yOffset -= anchorHeight;
   }
@@ -464,15 +480,15 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
   }
   outParams->width_ = width;
   outParams->height_ = height;
-  jint hgrav = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, [anchor getLayoutDirection]) & ADGravity_HORIZONTAL_GRAVITY_MASK;
+  int32_t hgrav = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, [anchor getLayoutDirection]) & ADGravity_HORIZONTAL_GRAVITY_MASK;
   if (hgrav == ADGravity_RIGHT) {
     [outParams addRuleWithInt:ADRelativeLayout_ALIGN_PARENT_RIGHT withInt:ADRelativeLayout_TRUE];
   }
-  jboolean fitsVertical = ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, yOffset, height, anchorHeight, IOSIntArray_Get(drawingLocation, 1), IOSIntArray_Get(screenLocation, 1), displayFrame->top_, displayFrame->bottom_, false);
-  jboolean fitsHorizontal = ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, xOffset, width, anchorWidth, IOSIntArray_Get(drawingLocation, 0), IOSIntArray_Get(screenLocation, 0), displayFrame->left_, displayFrame->right_, false);
+  bool fitsVertical = ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, yOffset, height, anchorHeight, IOSIntArray_Get(drawingLocation, 1), IOSIntArray_Get(screenLocation, 1), displayFrame->top_, displayFrame->bottom_, false);
+  bool fitsHorizontal = ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, xOffset, width, anchorWidth, IOSIntArray_Get(drawingLocation, 0), IOSIntArray_Get(screenLocation, 0), displayFrame->left_, displayFrame->right_, false);
   if (!fitsVertical || !fitsHorizontal) {
-    jint scrollX = [anchor getScrollX];
-    jint scrollY = [anchor getScrollY];
+    int32_t scrollX = [anchor getScrollX];
+    int32_t scrollY = [anchor getScrollY];
     ADRect *r = create_ADRect_initWithInt_withInt_withInt_withInt_(scrollX, scrollY, scrollX + width + xOffset, scrollY + height + anchorHeight + yOffset);
     if (allowScroll && [anchor requestRectangleOnScreenWithADRect:r withBoolean:true]) {
       [anchor getLocationOnScreenWithIntArray:screenLocation];
@@ -490,62 +506,62 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
   return outParams->topMargin_ < IOSIntArray_Get(drawingLocation, 1);
 }
 
-- (jboolean)tryFitVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                    withInt:(jint)yOffset
-                                                    withInt:(jint)height
-                                                    withInt:(jint)anchorHeight
-                                                    withInt:(jint)drawingLocationY
-                                                    withInt:(jint)screenLocationY
-                                                    withInt:(jint)displayFrameTop
-                                                    withInt:(jint)displayFrameBottom
-                                                withBoolean:(jboolean)allowResize {
+- (bool)tryFitVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                withInt:(int32_t)yOffset
+                                                withInt:(int32_t)height
+                                                withInt:(int32_t)anchorHeight
+                                                withInt:(int32_t)drawingLocationY
+                                                withInt:(int32_t)screenLocationY
+                                                withInt:(int32_t)displayFrameTop
+                                                withInt:(int32_t)displayFrameBottom
+                                            withBoolean:(bool)allowResize {
   return ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, yOffset, height, anchorHeight, drawingLocationY, screenLocationY, displayFrameTop, displayFrameBottom, allowResize);
 }
 
-- (jboolean)positionInDisplayVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                               withInt:(jint)height
-                                                               withInt:(jint)drawingLocationY
-                                                               withInt:(jint)screenLocationY
-                                                               withInt:(jint)displayFrameTop
-                                                               withInt:(jint)displayFrameBottom
-                                                           withBoolean:(jboolean)canResize {
+- (bool)positionInDisplayVerticalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                           withInt:(int32_t)height
+                                                           withInt:(int32_t)drawingLocationY
+                                                           withInt:(int32_t)screenLocationY
+                                                           withInt:(int32_t)displayFrameTop
+                                                           withInt:(int32_t)displayFrameBottom
+                                                       withBoolean:(bool)canResize {
   return ADPopupWindow_positionInDisplayVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, height, drawingLocationY, screenLocationY, displayFrameTop, displayFrameBottom, canResize);
 }
 
-- (jboolean)tryFitHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                      withInt:(jint)xOffset
-                                                      withInt:(jint)width
-                                                      withInt:(jint)anchorWidth
-                                                      withInt:(jint)drawingLocationX
-                                                      withInt:(jint)screenLocationX
-                                                      withInt:(jint)displayFrameLeft
-                                                      withInt:(jint)displayFrameRight
-                                                  withBoolean:(jboolean)allowResize {
+- (bool)tryFitHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                  withInt:(int32_t)xOffset
+                                                  withInt:(int32_t)width
+                                                  withInt:(int32_t)anchorWidth
+                                                  withInt:(int32_t)drawingLocationX
+                                                  withInt:(int32_t)screenLocationX
+                                                  withInt:(int32_t)displayFrameLeft
+                                                  withInt:(int32_t)displayFrameRight
+                                              withBoolean:(bool)allowResize {
   return ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, xOffset, width, anchorWidth, drawingLocationX, screenLocationX, displayFrameLeft, displayFrameRight, allowResize);
 }
 
-- (jboolean)positionInDisplayHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                                                                 withInt:(jint)width
-                                                                 withInt:(jint)drawingLocationX
-                                                                 withInt:(jint)screenLocationX
-                                                                 withInt:(jint)displayFrameLeft
-                                                                 withInt:(jint)displayFrameRight
-                                                             withBoolean:(jboolean)canResize {
+- (bool)positionInDisplayHorizontalWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
+                                                             withInt:(int32_t)width
+                                                             withInt:(int32_t)drawingLocationX
+                                                             withInt:(int32_t)screenLocationX
+                                                             withInt:(int32_t)displayFrameLeft
+                                                             withInt:(int32_t)displayFrameRight
+                                                         withBoolean:(bool)canResize {
   return ADPopupWindow_positionInDisplayHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(self, outParams, width, drawingLocationX, screenLocationX, displayFrameLeft, displayFrameRight, canResize);
 }
 
-- (jint)getMaxAvailableHeightWithADView:(ADView *)anchor {
+- (int32_t)getMaxAvailableHeightWithADView:(ADView *)anchor {
   return [self getMaxAvailableHeightWithADView:anchor withInt:0];
 }
 
-- (jint)getMaxAvailableHeightWithADView:(ADView *)anchor
-                                withInt:(jint)yOffset {
+- (int32_t)getMaxAvailableHeightWithADView:(ADView *)anchor
+                                   withInt:(int32_t)yOffset {
   return [self getMaxAvailableHeightWithADView:anchor withInt:yOffset withBoolean:false];
 }
 
-- (jint)getMaxAvailableHeightWithADView:(ADView *)anchor
-                                withInt:(jint)yOffset
-                            withBoolean:(jboolean)ignoreBottomDecorations {
+- (int32_t)getMaxAvailableHeightWithADView:(ADView *)anchor
+                                   withInt:(int32_t)yOffset
+                               withBoolean:(bool)ignoreBottomDecorations {
   ADRect *displayFrame = nil;
   ADRect *visibleDisplayFrame = create_ADRect_init();
   ADView *appView = ADPopupWindow_getAppRootViewWithADView_(self, anchor);
@@ -562,16 +578,16 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
   }
   IOSIntArray *anchorPos = mTmpDrawingLocation_;
   [((ADView *) nil_chk(anchor)) getLocationOnScreenWithIntArray:anchorPos];
-  jint bottomEdge = displayFrame->bottom_;
-  jint distanceToBottom;
+  int32_t bottomEdge = displayFrame->bottom_;
+  int32_t distanceToBottom;
   if (mOverlapAnchor_) {
     distanceToBottom = bottomEdge - IOSIntArray_Get(nil_chk(anchorPos), 1) - yOffset;
   }
   else {
     distanceToBottom = bottomEdge - (IOSIntArray_Get(nil_chk(anchorPos), 1) + [anchor getHeight]) - yOffset;
   }
-  jint distanceToTop = IOSIntArray_Get(anchorPos, 1) - displayFrame->top_ + yOffset;
-  jint returnedHeight = JavaLangMath_maxWithInt_withInt_(distanceToBottom, distanceToTop);
+  int32_t distanceToTop = IOSIntArray_Get(anchorPos, 1) - displayFrame->top_ + yOffset;
+  int32_t returnedHeight = JavaLangMath_maxWithInt_withInt_(distanceToBottom, distanceToTop);
   if (mBackground_ != nil) {
     [mBackground_ getPaddingWithADRect:mTempRect_];
     returnedHeight -= ((ADRect *) nil_chk(mTempRect_))->top_ + mTempRect_->bottom_;
@@ -626,9 +642,9 @@ __attribute__((unused)) static ADPopupWindow_$Lambda$2 *create_ADPopupWindow_$La
     return;
   }
   ADRelativeLayout_LayoutParams *p = [self getDecorViewLayoutParams];
-  jboolean update = false;
-  jint newAnim = ADPopupWindow_computeAnimationResource(self);
-  jint newGravity = ADPopupWindow_computeGravity(self);
+  bool update = false;
+  int32_t newAnim = ADPopupWindow_computeAnimationResource(self);
+  int32_t newGravity = ADPopupWindow_computeGravity(self);
   if (update) {
     [self updateWithADView:mAnchor_ != nil ? [mAnchor_ get] : nil withADRelativeLayout_LayoutParams:p];
   }
@@ -640,24 +656,24 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
   [self remeasure];
 }
 
-- (void)updateWithInt:(jint)width
-              withInt:(jint)height {
+- (void)updateWithInt:(int32_t)width
+              withInt:(int32_t)height {
   ADRelativeLayout_LayoutParams *p = [self getDecorViewLayoutParams];
   [self updateWithInt:((ADRelativeLayout_LayoutParams *) nil_chk(p))->leftMargin_ withInt:p->topMargin_ withInt:width withInt:height withBoolean:false];
 }
 
-- (void)updateWithInt:(jint)x
-              withInt:(jint)y
-              withInt:(jint)width
-              withInt:(jint)height {
+- (void)updateWithInt:(int32_t)x
+              withInt:(int32_t)y
+              withInt:(int32_t)width
+              withInt:(int32_t)height {
   [self updateWithInt:x withInt:y withInt:width withInt:height withBoolean:false];
 }
 
-- (void)updateWithInt:(jint)x
-              withInt:(jint)y
-              withInt:(jint)width
-              withInt:(jint)height
-          withBoolean:(jboolean)force {
+- (void)updateWithInt:(int32_t)x
+              withInt:(int32_t)y
+              withInt:(int32_t)width
+              withInt:(int32_t)height
+          withBoolean:(bool)force {
   if (width >= 0) {
     mLastWidth_ = width;
     [self setWidthWithInt:width];
@@ -670,13 +686,13 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
     return;
   }
   ADRelativeLayout_LayoutParams *p = [self getDecorViewLayoutParams];
-  jboolean update = force;
-  jint finalWidth = mWidthMode_ < 0 ? mWidthMode_ : mLastWidth_;
+  bool update = force;
+  int32_t finalWidth = mWidthMode_ < 0 ? mWidthMode_ : mLastWidth_;
   if (width != -1 && ((ADRelativeLayout_LayoutParams *) nil_chk(p))->width_ != finalWidth) {
     ((ADRelativeLayout_LayoutParams *) nil_chk(p))->width_ = mLastWidth_ = finalWidth;
     update = true;
   }
-  jint finalHeight = mHeightMode_ < 0 ? mHeightMode_ : mLastHeight_;
+  int32_t finalHeight = mHeightMode_ < 0 ? mHeightMode_ : mLastHeight_;
   if (height != -1 && ((ADRelativeLayout_LayoutParams *) nil_chk(p))->height_ != finalHeight) {
     ((ADRelativeLayout_LayoutParams *) nil_chk(p))->height_ = mLastHeight_ = finalHeight;
     update = true;
@@ -689,10 +705,10 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
     p->topMargin_ = y;
     update = true;
   }
-  jint newAnim = ADPopupWindow_computeAnimationResource(self);
-  jint newGravity = ADPopupWindow_computeGravity(self);
+  int32_t newAnim = ADPopupWindow_computeAnimationResource(self);
+  int32_t newGravity = ADPopupWindow_computeGravity(self);
   ADView *anchor = nil;
-  jint newAccessibilityIdOfAnchor = -1;
+  int32_t newAccessibilityIdOfAnchor = -1;
   if (mAnchor_ != nil && [mAnchor_ get] != nil) {
     anchor = [mAnchor_ get];
     newAccessibilityIdOfAnchor = [((ADView *) nil_chk(anchor)) getAccessibilityViewId];
@@ -702,11 +718,11 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
   }
 }
 
-- (jboolean)hasContentView {
+- (bool)hasContentView {
   return mContentView_ != nil;
 }
 
-- (jboolean)hasDecorView {
+- (bool)hasDecorView {
   return mDecorView_ != nil;
 }
 
@@ -715,25 +731,25 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
 }
 
 - (void)updateWithADView:(ADView *)anchor
-                 withInt:(jint)width
-                 withInt:(jint)height {
+                 withInt:(int32_t)width
+                 withInt:(int32_t)height {
   ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_(self, anchor, false, 0, 0, width, height);
 }
 
 - (void)updateWithADView:(ADView *)anchor
-                 withInt:(jint)xoff
-                 withInt:(jint)yoff
-                 withInt:(jint)width
-                 withInt:(jint)height {
+                 withInt:(int32_t)xoff
+                 withInt:(int32_t)yoff
+                 withInt:(int32_t)width
+                 withInt:(int32_t)height {
   ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_(self, anchor, true, xoff, yoff, width, height);
 }
 
 - (void)updateWithADView:(ADView *)anchor
-             withBoolean:(jboolean)updateLocation
-                 withInt:(jint)xoff
-                 withInt:(jint)yoff
-                 withInt:(jint)width
-                 withInt:(jint)height {
+             withBoolean:(bool)updateLocation
+                 withInt:(int32_t)xoff
+                 withInt:(int32_t)yoff
+                 withInt:(int32_t)width
+                 withInt:(int32_t)height {
   ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_(self, anchor, updateLocation, xoff, yoff, width, height);
 }
 
@@ -755,9 +771,9 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
 }
 
 - (void)attachToAnchorWithADView:(ADView *)anchor
-                         withInt:(jint)xoff
-                         withInt:(jint)yoff
-                         withInt:(jint)gravity {
+                         withInt:(int32_t)xoff
+                         withInt:(int32_t)yoff
+                         withInt:(int32_t)gravity {
   [self detachFromAnchor];
   ADViewTreeObserver *vto = [((ADView *) nil_chk(anchor)) getViewTreeObserver];
   if (vto != nil) {
@@ -805,9 +821,9 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
 - (void)showAsDropDownWithADView:(ADView *)decorView
                       withADView:(ADView *)anchor
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                         withInt:(jint)xOffset
-                         withInt:(jint)yOffset
-                         withInt:(jint)gravity {
+                         withInt:(int32_t)xOffset
+                         withInt:(int32_t)yOffset
+                         withInt:(int32_t)gravity {
   JreStrongAssign(&mDecorView_, decorView);
   JreStrongAssign(&mOutParams_, outParams);
   [self showAsDropDownWithADView:anchor withInt:xOffset withInt:yOffset withInt:gravity];
@@ -815,9 +831,9 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
 
 - (void)showAtLocationWithADView:(ADView *)decorView
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
-                         withInt:(jint)x
-                         withInt:(jint)y
-                         withInt:(jint)gravity {
+                         withInt:(int32_t)x
+                         withInt:(int32_t)y
+                         withInt:(int32_t)gravity {
   JreStrongAssign(&mDecorView_, decorView);
   JreStrongAssign(&mOutParams_, outParams);
   [self showAtLocationWithADView:decorView withInt:x withInt:y withInt:gravity];
@@ -835,7 +851,7 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)outParams
   return ADPopupWindow_createBackgroundViewWithADView_(self, mContentView);
 }
 
-- (jboolean)isTransitioningToDismiss {
+- (bool)isTransitioningToDismiss {
   return ADPopupWindow_isTransitioningToDismiss(self);
 }
 
@@ -854,11 +870,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADPopupWindow_getAppRootViewWithADView_(self, anchor);
 }
 
-- (jint)computeFlagsWithInt:(jint)curFlags {
+- (int32_t)computeFlagsWithInt:(int32_t)curFlags {
   return curFlags;
 }
 
-- (jint)computeAnimationResource {
+- (int32_t)computeAnimationResource {
   return ADPopupWindow_computeAnimationResource(self);
 }
 
@@ -1075,7 +1091,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADPopupWindow_updateAboveAnchorWithBoolean_(ADPopupWindow *self, jboolean aboveAnchor) {
+void ADPopupWindow_updateAboveAnchorWithBoolean_(ADPopupWindow *self, bool aboveAnchor) {
   if (aboveAnchor != self->mAboveAnchor_) {
     self->mAboveAnchor_ = aboveAnchor;
     if (self->mBackground_ != nil && self->mBackgroundView_ != nil) {
@@ -1130,25 +1146,25 @@ void ADPopupWindow_setLayoutDirectionFromAnchor(ADPopupWindow *self) {
   }
 }
 
-jint ADPopupWindow_computeGravity(ADPopupWindow *self) {
-  jint gravity = self->mGravity_ == ADGravity_NO_GRAVITY ? ADGravity_START | ADGravity_TOP : self->mGravity_;
+int32_t ADPopupWindow_computeGravity(ADPopupWindow *self) {
+  int32_t gravity = self->mGravity_ == ADGravity_NO_GRAVITY ? ADGravity_START | ADGravity_TOP : self->mGravity_;
   if (self->mIsDropdown_ && (self->mClipToScreen_ || self->mClippingEnabled_)) {
     gravity |= ADGravity_DISPLAY_CLIP_VERTICAL;
   }
   return gravity;
 }
 
-jboolean ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint yOffset, jint height, jint anchorHeight, jint drawingLocationY, jint screenLocationY, jint displayFrameTop, jint displayFrameBottom, jboolean allowResize) {
-  jint winOffsetY = screenLocationY - drawingLocationY;
-  jint anchorTopInScreen = ((ADRelativeLayout_LayoutParams *) nil_chk(outParams))->topMargin_ + winOffsetY;
-  jint spaceBelow = displayFrameBottom - anchorTopInScreen;
+bool ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t yOffset, int32_t height, int32_t anchorHeight, int32_t drawingLocationY, int32_t screenLocationY, int32_t displayFrameTop, int32_t displayFrameBottom, bool allowResize) {
+  int32_t winOffsetY = screenLocationY - drawingLocationY;
+  int32_t anchorTopInScreen = ((ADRelativeLayout_LayoutParams *) nil_chk(outParams))->topMargin_ + winOffsetY;
+  int32_t spaceBelow = displayFrameBottom - anchorTopInScreen;
   if (height < 0) {
     height = 0;
   }
   if (anchorTopInScreen >= displayFrameTop && height <= spaceBelow) {
     return true;
   }
-  jint spaceAbove = anchorTopInScreen - anchorHeight - displayFrameTop;
+  int32_t spaceAbove = anchorTopInScreen - anchorHeight - displayFrameTop;
   if (height <= spaceAbove) {
     if (self->mOverlapAnchor_) {
       yOffset += anchorHeight;
@@ -1162,18 +1178,18 @@ jboolean ADPopupWindow_tryFitVerticalWithADRelativeLayout_LayoutParams_withInt_w
   return false;
 }
 
-jboolean ADPopupWindow_positionInDisplayVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint height, jint drawingLocationY, jint screenLocationY, jint displayFrameTop, jint displayFrameBottom, jboolean canResize) {
-  jboolean fitsInDisplay = true;
-  jint winOffsetY = screenLocationY - drawingLocationY;
+bool ADPopupWindow_positionInDisplayVerticalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t height, int32_t drawingLocationY, int32_t screenLocationY, int32_t displayFrameTop, int32_t displayFrameBottom, bool canResize) {
+  bool fitsInDisplay = true;
+  int32_t winOffsetY = screenLocationY - drawingLocationY;
   ((ADRelativeLayout_LayoutParams *) nil_chk(outParams))->topMargin_ += winOffsetY;
   outParams->height_ = height;
-  jint bottom = outParams->topMargin_ + height;
+  int32_t bottom = outParams->topMargin_ + height;
   if (bottom > displayFrameBottom) {
     outParams->topMargin_ -= bottom - displayFrameBottom;
   }
   if (outParams->topMargin_ < displayFrameTop) {
     outParams->topMargin_ = displayFrameTop;
-    jint displayFrameHeight = displayFrameBottom - displayFrameTop;
+    int32_t displayFrameHeight = displayFrameBottom - displayFrameTop;
     if (canResize && height > displayFrameHeight) {
       outParams->height_ = displayFrameHeight;
     }
@@ -1185,10 +1201,10 @@ jboolean ADPopupWindow_positionInDisplayVerticalWithADRelativeLayout_LayoutParam
   return fitsInDisplay;
 }
 
-jboolean ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint xOffset, jint width, jint anchorWidth, jint drawingLocationX, jint screenLocationX, jint displayFrameLeft, jint displayFrameRight, jboolean allowResize) {
-  jint winOffsetX = screenLocationX - drawingLocationX;
-  jint anchorLeftInScreen = ((ADRelativeLayout_LayoutParams *) nil_chk(outParams))->leftMargin_ + winOffsetX;
-  jint spaceRight = displayFrameRight - anchorLeftInScreen;
+bool ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t xOffset, int32_t width, int32_t anchorWidth, int32_t drawingLocationX, int32_t screenLocationX, int32_t displayFrameLeft, int32_t displayFrameRight, bool allowResize) {
+  int32_t winOffsetX = screenLocationX - drawingLocationX;
+  int32_t anchorLeftInScreen = ((ADRelativeLayout_LayoutParams *) nil_chk(outParams))->leftMargin_ + winOffsetX;
+  int32_t spaceRight = displayFrameRight - anchorLeftInScreen;
   if (anchorLeftInScreen >= displayFrameLeft && width <= spaceRight) {
     return true;
   }
@@ -1198,17 +1214,17 @@ jboolean ADPopupWindow_tryFitHorizontalWithADRelativeLayout_LayoutParams_withInt
   return false;
 }
 
-jboolean ADPopupWindow_positionInDisplayHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, jint width, jint drawingLocationX, jint screenLocationX, jint displayFrameLeft, jint displayFrameRight, jboolean canResize) {
-  jboolean fitsInDisplay = true;
-  jint winOffsetX = screenLocationX - drawingLocationX;
+bool ADPopupWindow_positionInDisplayHorizontalWithADRelativeLayout_LayoutParams_withInt_withInt_withInt_withInt_withInt_withBoolean_(ADPopupWindow *self, ADRelativeLayout_LayoutParams *outParams, int32_t width, int32_t drawingLocationX, int32_t screenLocationX, int32_t displayFrameLeft, int32_t displayFrameRight, bool canResize) {
+  bool fitsInDisplay = true;
+  int32_t winOffsetX = screenLocationX - drawingLocationX;
   ((ADRelativeLayout_LayoutParams *) nil_chk(outParams))->leftMargin_ += winOffsetX;
-  jint right = outParams->leftMargin_ + width;
+  int32_t right = outParams->leftMargin_ + width;
   if (right > displayFrameRight) {
     outParams->leftMargin_ -= right - displayFrameRight;
   }
   if (outParams->leftMargin_ < displayFrameLeft) {
     outParams->leftMargin_ = displayFrameLeft;
-    jint displayFrameWidth = displayFrameRight - displayFrameLeft;
+    int32_t displayFrameWidth = displayFrameRight - displayFrameLeft;
     if (canResize && width > displayFrameWidth) {
       outParams->width_ = displayFrameWidth;
     }
@@ -1232,14 +1248,14 @@ void ADPopupWindow_dismissImmediateWithADView_withADViewGroup_withADView_(ADPopu
   self->mIsTransitioningToDismiss_ = false;
 }
 
-void ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_(ADPopupWindow *self, ADView *anchor, jboolean updateLocation, jint xoff, jint yoff, jint width, jint height) {
+void ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_(ADPopupWindow *self, ADView *anchor, bool updateLocation, int32_t xoff, int32_t yoff, int32_t width, int32_t height) {
   if (![self isShowing] || ![self hasContentView]) {
     return;
   }
   JavaLangRefWeakReference *oldAnchor = self->mAnchor_;
-  jint gravity = self->mAnchoredGravity_;
-  jboolean needsUpdate = updateLocation && (self->mAnchorXoff_ != xoff || self->mAnchorYoff_ != yoff);
-  if (oldAnchor == nil || [oldAnchor get] != anchor || (needsUpdate && !self->mIsDropdown_)) {
+  int32_t gravity = self->mAnchoredGravity_;
+  bool needsUpdate = updateLocation && (self->mAnchorXoff_ != xoff || self->mAnchorYoff_ != yoff);
+  if (oldAnchor == nil || !JreObjectEqualsEquals([oldAnchor get], anchor) || (needsUpdate && !self->mIsDropdown_)) {
     [self attachToAnchorWithADView:anchor withInt:xoff withInt:yoff withInt:gravity];
   }
   else if (needsUpdate) {
@@ -1247,21 +1263,21 @@ void ADPopupWindow_updateWithADView_withBoolean_withInt_withInt_withInt_withInt_
     self->mAnchorYoff_ = yoff;
   }
   ADRelativeLayout_LayoutParams *p = [self getDecorViewLayoutParams];
-  jint oldWidth = ((ADRelativeLayout_LayoutParams *) nil_chk(p))->width_;
-  jint oldHeight = p->height_;
-  jint oldX = p->leftMargin_;
-  jint oldY = p->topMargin_;
+  int32_t oldWidth = ((ADRelativeLayout_LayoutParams *) nil_chk(p))->width_;
+  int32_t oldHeight = p->height_;
+  int32_t oldX = p->leftMargin_;
+  int32_t oldY = p->topMargin_;
   if (width < 0) {
     width = self->mWidth_;
   }
   if (height < 0) {
     height = self->mHeight_;
   }
-  jboolean aboveAnchor = [self findDropDownPositionWithADView:anchor withADRelativeLayout_LayoutParams:p withInt:self->mAnchorXoff_ withInt:self->mAnchorYoff_ withInt:width withInt:height withInt:gravity withBoolean:self->mAllowScrollingAnchorParent_];
+  bool aboveAnchor = [self findDropDownPositionWithADView:anchor withADRelativeLayout_LayoutParams:p withInt:self->mAnchorXoff_ withInt:self->mAnchorYoff_ withInt:width withInt:height withInt:gravity withBoolean:self->mAllowScrollingAnchorParent_];
   ADPopupWindow_updateAboveAnchorWithBoolean_(self, aboveAnchor);
-  jboolean paramsChanged = true;
-  jint newWidth = width < 0 ? width : p->width_;
-  jint newHeight = height < 0 ? height : p->height_;
+  bool paramsChanged = true;
+  int32_t newWidth = width < 0 ? width : p->width_;
+  int32_t newHeight = height < 0 ? height : p->height_;
   [self updateWithInt:p->leftMargin_ withInt:p->topMargin_ withInt:newWidth withInt:newHeight withBoolean:paramsChanged];
 }
 
@@ -1286,7 +1302,7 @@ ADView *ADPopupWindow_createBackgroundViewWithADView_(ADPopupWindow *self, ADVie
   return self->mBackgroundView_;
 }
 
-jboolean ADPopupWindow_isTransitioningToDismiss(ADPopupWindow *self) {
+bool ADPopupWindow_isTransitioningToDismiss(ADPopupWindow *self) {
   return false;
 }
 
@@ -1336,11 +1352,13 @@ ADView *ADPopupWindow_getAppRootViewWithADView_(ADPopupWindow *self, ADView *anc
   return [((ADView *) nil_chk(anchor)) getRootView];
 }
 
-jint ADPopupWindow_computeAnimationResource(ADPopupWindow *self) {
+int32_t ADPopupWindow_computeAnimationResource(ADPopupWindow *self) {
   return 0;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPopupWindow)
+
+J2OBJC_NAME_MAPPING(ADPopupWindow, "r.android.widget", "AD")
 
 @implementation ADPopupWindow_1
 
@@ -1378,7 +1396,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPopupWindow)
     { "this$0_", "LADPopupWindow;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADPopupWindow;", "onViewAttachedToWindow", "LADView;", "onViewDetachedFromWindow" };
-  static const J2ObjcClassInfo _ADPopupWindow_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8010, 3, 1, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADPopupWindow_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8000, 3, 1, 0, -1, -1, -1, -1 };
   return &_ADPopupWindow_1;
 }
 
@@ -1433,7 +1451,7 @@ ADPopupWindow_1 *create_ADPopupWindow_1_initWithADPopupWindow_(ADPopupWindow *ou
     { "this$0_", "LADPopupWindow;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADPopupWindow;", "onViewAttachedToWindow", "LADView;", "onViewDetachedFromWindow" };
-  static const J2ObjcClassInfo _ADPopupWindow_2 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8010, 3, 1, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADPopupWindow_2 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8000, 3, 1, 0, -1, -1, -1, -1 };
   return &_ADPopupWindow_2;
 }
 
@@ -1587,14 +1605,14 @@ ADPopupWindow_$Lambda$1 *create_ADPopupWindow_$Lambda$1_initWithADPopupWindow_(A
 @implementation ADPopupWindow_$Lambda$2
 
 - (void)onLayoutChangeWithADView:(ADView *)v
-                         withInt:(jint)left
-                         withInt:(jint)top
-                         withInt:(jint)right
-                         withInt:(jint)bottom
-                         withInt:(jint)oldLeft
-                         withInt:(jint)oldTop
-                         withInt:(jint)oldRight
-                         withInt:(jint)oldBottom {
+                         withInt:(int32_t)left
+                         withInt:(int32_t)top
+                         withInt:(int32_t)right
+                         withInt:(int32_t)bottom
+                         withInt:(int32_t)oldLeft
+                         withInt:(int32_t)oldTop
+                         withInt:(int32_t)oldRight
+                         withInt:(int32_t)oldBottom {
   ADPopupWindow_safeAlignToAnchor(this$0_);
 }
 

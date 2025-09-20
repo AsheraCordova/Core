@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\CallSuper.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CallSuper.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADCallSuper
@@ -18,7 +31,7 @@
   return @"@r.android.annotation.CallSuper()";
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -39,3 +52,5 @@ id<ADCallSuper> create_ADCallSuper() {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADCallSuper)
+
+J2OBJC_NAME_MAPPING(ADCallSuper, "r.android.annotation", "AD")

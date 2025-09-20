@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Button.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Button.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "TextView.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADButton
@@ -37,3 +48,5 @@ void ADButton_initWithASIWidget_(ADButton *self, id<ASIWidget> widget) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADButton)
+
+J2OBJC_NAME_MAPPING(ADButton, "r.android.widget", "AD")

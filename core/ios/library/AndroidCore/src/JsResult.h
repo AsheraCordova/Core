@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\JsResult.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_JsResult")
@@ -39,6 +40,7 @@ FOUNDATION_EXPORT ADJsResult *create_ADJsResult_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADJsResult)
 
 @compatibility_alias RAndroidWebkitJsResult ADJsResult;
+
 
 #endif
 

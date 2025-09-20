@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\NoSuchPropertyException.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NoSuchPropertyException")
@@ -20,7 +21,9 @@
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 
 /*!
  @brief Thrown when code requests a <code>Property</code> on a class that does
@@ -44,8 +47,8 @@
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -60,6 +63,7 @@ FOUNDATION_EXPORT ADNoSuchPropertyException *create_ADNoSuchPropertyException_in
 J2OBJC_TYPE_LITERAL_HEADER(ADNoSuchPropertyException)
 
 @compatibility_alias RAndroidUtilNoSuchPropertyException ADNoSuchPropertyException;
+
 
 #endif
 

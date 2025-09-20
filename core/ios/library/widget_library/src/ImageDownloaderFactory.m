@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\image\ImageDownloaderFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IImageDownloader.h"
 #include "ImageDownloaderFactory.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<ASIImageDownloader> ASImageDownloaderFactory_get_imageDownloader(void);
@@ -76,3 +87,5 @@ void ASImageDownloaderFactory_register__WithASIImageDownloader_(id<ASIImageDownl
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageDownloaderFactory)
+
+J2OBJC_NAME_MAPPING(ASImageDownloaderFactory, "com.ashera.image", "AS")

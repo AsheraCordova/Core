@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\AssetFileDescriptor.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AssetFileDescriptor")
@@ -18,6 +19,7 @@
 
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
+@class JavaLangLong;
 
 @interface ADAssetFileDescriptor : NSObject
 
@@ -29,9 +31,9 @@
 
 - (JavaIoOutputStream *)createOutputStream;
 
-- (jlong)getLength;
+- (int64_t)getLength;
 
-- (jlong)getStartOffset;
+- (int64_t)getStartOffset;
 
 @end
 
@@ -46,6 +48,7 @@ FOUNDATION_EXPORT ADAssetFileDescriptor *create_ADAssetFileDescriptor_init(void)
 J2OBJC_TYPE_LITERAL_HEADER(ADAssetFileDescriptor)
 
 @compatibility_alias RAndroidContentResAssetFileDescriptor ADAssetFileDescriptor;
+
 
 #endif
 

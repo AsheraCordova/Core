@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\OvershootInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_OvershootInterpolator")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADBaseInterpolator 1
 #include "BaseInterpolator.h"
 
+@class JavaLangFloat;
+@class JavaLangLong;
+
 /*!
  @brief An interpolator where the change flings forward and overshoots the last value
   then comes back.
@@ -34,15 +38,15 @@
  @param tension Amount of overshoot. When tension equals 0.0f, there is                 no overshoot and the interpolator becomes a simple
                   deceleration interpolator.
  */
-- (instancetype)initWithFloat:(jfloat)tension;
+- (instancetype)initWithFloat:(float)tension;
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
 /*!
  */
-- (jfloat)getInterpolationWithFloat:(jfloat)t;
+- (float)getInterpolationWithFloat:(float)t;
 
 @end
 
@@ -54,15 +58,16 @@ FOUNDATION_EXPORT ADOvershootInterpolator *new_ADOvershootInterpolator_init(void
 
 FOUNDATION_EXPORT ADOvershootInterpolator *create_ADOvershootInterpolator_init(void);
 
-FOUNDATION_EXPORT void ADOvershootInterpolator_initWithFloat_(ADOvershootInterpolator *self, jfloat tension);
+FOUNDATION_EXPORT void ADOvershootInterpolator_initWithFloat_(ADOvershootInterpolator *self, float tension);
 
-FOUNDATION_EXPORT ADOvershootInterpolator *new_ADOvershootInterpolator_initWithFloat_(jfloat tension) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADOvershootInterpolator *new_ADOvershootInterpolator_initWithFloat_(float tension) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADOvershootInterpolator *create_ADOvershootInterpolator_initWithFloat_(jfloat tension);
+FOUNDATION_EXPORT ADOvershootInterpolator *create_ADOvershootInterpolator_initWithFloat_(float tension);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADOvershootInterpolator)
 
 @compatibility_alias RAndroidViewAnimationOvershootInterpolator ADOvershootInterpolator;
+
 
 #endif
 

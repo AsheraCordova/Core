@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\BidirectionalTypeConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BidirectionalTypeConverter")
@@ -64,6 +65,7 @@ FOUNDATION_EXPORT void ADBidirectionalTypeConverter_initWithIOSClass_withIOSClas
 J2OBJC_TYPE_LITERAL_HEADER(ADBidirectionalTypeConverter)
 
 @compatibility_alias RAndroidAnimationBidirectionalTypeConverter ADBidirectionalTypeConverter;
+
 
 #endif
 

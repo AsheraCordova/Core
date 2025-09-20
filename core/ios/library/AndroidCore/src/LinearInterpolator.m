@@ -3,11 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\LinearInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeSet.h"
 #include "BaseInterpolator.h"
 #include "Context.h"
 #include "J2ObjC_source.h"
 #include "LinearInterpolator.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADLinearInterpolator
@@ -25,11 +39,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)input {
+- (float)getInterpolationWithFloat:(float)input {
   return input;
 }
 
-- (jlong)createNativeInterpolator {
+- (int64_t)createNativeInterpolator {
   return 0;
 }
 
@@ -80,3 +94,5 @@ ADLinearInterpolator *create_ADLinearInterpolator_initWithADContext_withADAttrib
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLinearInterpolator)
+
+J2OBJC_NAME_MAPPING(ADLinearInterpolator, "r.android.view.animation", "AD")

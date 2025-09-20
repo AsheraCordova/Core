@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\FileUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FileUtils.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -17,8 +22,11 @@
 #include "java/io/InputStreamReader.h"
 #include "java/io/Reader.h"
 #include "java/io/StringReader.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/ClassLoader.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/Thread.h"
@@ -36,8 +44,12 @@
 #include "java/util/Properties.h"
 #include "java/util/Scanner.h"
 
-@class JavaIoInputStream;
-@class JavaIoReader;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASFileUtils ()
@@ -218,7 +230,7 @@ NSString *ASFileUtils_convertInputStreamToStringWithNSString_withJavaIoInputStre
     JavaLangThrowable *__primaryException1 = nil;
     @try {
       IOSByteArray *buffer = [IOSByteArray arrayWithLength:ASFileUtils_DEFAULT_BUFFER_SIZE];
-      jint length;
+      int32_t length;
       while ((length = [((JavaIoInputStream *) nil_chk(is)) readWithByteArray:buffer]) != -1) {
         [result writeWithByteArray:buffer withInt:0 withInt:length];
       }
@@ -266,7 +278,7 @@ NSString *ASFileUtils_readFileToStringWithJavaIoReader_(JavaIoReader *input) {
   JavaIoBufferedReader *reader = create_JavaIoBufferedReader_initWithJavaIoReader_(input);
   JavaLangStringBuilder *fileData = create_JavaLangStringBuilder_initWithInt_(1000);
   IOSCharArray *buf = [IOSCharArray arrayWithLength:10];
-  jint numRead = 0;
+  int32_t numRead = 0;
   while ((numRead = [reader readWithCharArray:buf]) != -1) {
     NSString *readData = NSString_java_valueOfChars_offset_count_(buf, 0, numRead);
     [fileData appendWithNSString:readData];
@@ -338,7 +350,7 @@ id<JavaUtilList> ASFileUtils_getFilenamesForDirnameFromCPWithNSString_(NSString 
     JavaNetURL *url = JreRetainedLocalValue([((JavaLangClassLoader *) nil_chk([((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getContextClassLoader])) getResourceWithNSString:directoryName]);
     if (url != nil) {
       if ([((NSString *) nil_chk([url getProtocol])) isEqual:@"file"]) {
-        JavaIoFile *file = JreRetainedLocalValue([((id<JavaNioFilePath>) nil_chk(JavaNioFilePaths_getWithJavaNetURI_([url toURI]))) toFile]);
+        JavaIoFile *file = [((id<JavaNioFilePath>) nil_chk(JavaNioFilePaths_getWithJavaNetURI_([url toURI]))) toFile];
         if (file != nil) {
           IOSObjectArray *files = [file listFiles];
           if (files != nil) {
@@ -347,7 +359,7 @@ id<JavaUtilList> ASFileUtils_getFilenamesForDirnameFromCPWithNSString_(NSString 
               JavaIoFile * const *b__ = a__->buffer_;
               JavaIoFile * const *e__ = b__ + a__->size_;
               while (b__ < e__) {
-                JavaIoFile *filename = *b__++;
+                JavaIoFile *filename = RETAIN_AND_AUTORELEASE(*b__++);
                 [filenames addWithId:filename];
               }
             }
@@ -364,9 +376,9 @@ id<JavaUtilList> ASFileUtils_getFilenamesForDirnameFromCPWithNSString_(NSString 
 
 IOSByteArray *ASFileUtils_readAllBytesWithJavaIoInputStream_(JavaIoInputStream *inputStream) {
   ASFileUtils_initialize();
-  jint bufLen = 4 * (jint) 0x400;
+  int32_t bufLen = 4 * (int32_t) 0x400;
   IOSByteArray *buf = [IOSByteArray arrayWithLength:bufLen];
-  jint readLen;
+  int32_t readLen;
   @try {
     JavaIoByteArrayOutputStream *outputStream = create_JavaIoByteArrayOutputStream_init();
     JavaLangThrowable *__primaryException1 = nil;
@@ -412,3 +424,5 @@ NSString *ASFileUtils_getSlashAppendedDirectoryNameWithNSString_(NSString *direc
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFileUtils)
+
+J2OBJC_NAME_MAPPING(ASFileUtils, "com.ashera.utils", "AS")

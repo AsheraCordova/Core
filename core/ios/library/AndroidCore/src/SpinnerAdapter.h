@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\widget\SpinnerAdapter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SpinnerAdapter")
@@ -25,6 +26,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADSpinnerAdapter)
 J2OBJC_TYPE_LITERAL_HEADER(ADSpinnerAdapter)
 
 #define RAndroidWidgetSpinnerAdapter ADSpinnerAdapter
+
 
 #endif
 

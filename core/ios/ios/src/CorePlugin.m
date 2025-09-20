@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\CorePlugin.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Activity.h"
 #include "Animator.h"
 #include "AttributedString.h"
@@ -27,6 +32,7 @@
 #include "UINavigatorImpl.h"
 #include "java/io/File.h"
 #include "java/io/InputStream.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
@@ -43,8 +49,12 @@
 
 #import <sys/utsname.h>
 
-@class JavaIoInputStream;
-@protocol JavaLangRunnable;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -52,19 +62,19 @@
 @interface ASCorePlugin ()
 
 - (id)scheduledTimerWithTimeIntervalWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                                               withFloat:(jfloat)delay;
+                                               withFloat:(float)delay;
 
 - (void)invalidateTimerWithId:(id)handler;
 
-- (jfloat)getMaxAscentWithId:(id)fontObj;
+- (float)getMaxAscentWithId:(id)fontObj;
 
-- (jfloat)getAscentWithId:(id)fontObj;
+- (float)getAscentWithId:(id)fontObj;
 
-- (jfloat)getDescentWithId:(id)fontObj;
+- (float)getDescentWithId:(id)fontObj;
 
-- (jfloat)getMaxDescentWithId:(id)fontObj;
+- (float)getMaxDescentWithId:(id)fontObj;
 
-- (jfloat)getLeadingWithId:(id)fontObj;
+- (float)getLeadingWithId:(id)fontObj;
 
 - (NSString *)getDeviceName;
 
@@ -74,7 +84,7 @@
 
 + (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl;
 
-+ (NSString *)navtiveGetDirectoryWithInt:(jint)type;
++ (NSString *)navtiveGetDirectoryWithInt:(int32_t)type;
 
 + (NSString *)readCdvDataAsStringWithNSString:(NSString *)cdvUrl;
 
@@ -84,30 +94,30 @@ inline NSString *ASCorePlugin_get_PLUGIN_NAME_CORE(void);
 static NSString *ASCorePlugin_PLUGIN_NAME_CORE = @"core";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASCorePlugin, PLUGIN_NAME_CORE, NSString *)
 
-inline jint ASCorePlugin_get_density(void);
-inline jint ASCorePlugin_set_density(jint value);
-inline jint *ASCorePlugin_getRef_density(void);
-static jint ASCorePlugin_density = 163;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASCorePlugin, density, jint)
+inline int32_t ASCorePlugin_get_density(void);
+inline int32_t ASCorePlugin_set_density(int32_t value);
+inline int32_t *ASCorePlugin_getRef_density(void);
+static int32_t ASCorePlugin_density = 163;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASCorePlugin, density, int32_t)
 
 inline ASUINavigatorImpl *ASCorePlugin_get_navigator(void);
 inline ASUINavigatorImpl *ASCorePlugin_set_navigator(ASUINavigatorImpl *value);
 static ASUINavigatorImpl *ASCorePlugin_navigator;
 J2OBJC_STATIC_FIELD_OBJ(ASCorePlugin, navigator, ASUINavigatorImpl *)
 
-__attribute__((unused)) static id ASCorePlugin_scheduledTimerWithTimeIntervalWithJavaLangRunnable_withFloat_(ASCorePlugin *self, id<JavaLangRunnable> mTickRunnable, jfloat delay);
+__attribute__((unused)) static id ASCorePlugin_scheduledTimerWithTimeIntervalWithJavaLangRunnable_withFloat_(ASCorePlugin *self, id<JavaLangRunnable> mTickRunnable, float delay);
 
 __attribute__((unused)) static void ASCorePlugin_invalidateTimerWithId_(ASCorePlugin *self, id handler);
 
-__attribute__((unused)) static jfloat ASCorePlugin_getMaxAscentWithId_(ASCorePlugin *self, id fontObj);
+__attribute__((unused)) static float ASCorePlugin_getMaxAscentWithId_(ASCorePlugin *self, id fontObj);
 
-__attribute__((unused)) static jfloat ASCorePlugin_getAscentWithId_(ASCorePlugin *self, id fontObj);
+__attribute__((unused)) static float ASCorePlugin_getAscentWithId_(ASCorePlugin *self, id fontObj);
 
-__attribute__((unused)) static jfloat ASCorePlugin_getDescentWithId_(ASCorePlugin *self, id fontObj);
+__attribute__((unused)) static float ASCorePlugin_getDescentWithId_(ASCorePlugin *self, id fontObj);
 
-__attribute__((unused)) static jfloat ASCorePlugin_getMaxDescentWithId_(ASCorePlugin *self, id fontObj);
+__attribute__((unused)) static float ASCorePlugin_getMaxDescentWithId_(ASCorePlugin *self, id fontObj);
 
-__attribute__((unused)) static jfloat ASCorePlugin_getLeadingWithId_(ASCorePlugin *self, id fontObj);
+__attribute__((unused)) static float ASCorePlugin_getLeadingWithId_(ASCorePlugin *self, id fontObj);
 
 __attribute__((unused)) static NSString *ASCorePlugin_getDeviceName(ASCorePlugin *self);
 
@@ -117,7 +127,7 @@ __attribute__((unused)) static void ASCorePlugin_nativeRunOnMainThreadWithJavaLa
 
 __attribute__((unused)) static NSString *ASCorePlugin_resolveCDVFileLocationWithNSString_(NSString *cdvUrl);
 
-__attribute__((unused)) static NSString *ASCorePlugin_navtiveGetDirectoryWithInt_(jint type);
+__attribute__((unused)) static NSString *ASCorePlugin_navtiveGetDirectoryWithInt_(int32_t type);
 
 __attribute__((unused)) static NSString *ASCorePlugin_readCdvDataAsStringWithNSString_(NSString *cdvUrl);
 
@@ -130,13 +140,13 @@ __attribute__((unused)) static NSString *ASCorePlugin_readCdvDataAsStringWithNSS
 
 - (id)nativeGetImageWithByteArray:(IOSByteArray *)bytes;
 
-- (jint)getRowBytes;
+- (int32_t)getRowBytes;
 
-+ (jint)getImageWidthWithId:(id)value;
++ (int32_t)getImageWidthWithId:(id)value;
 
-+ (jint)getImageHeightWithId:(id)value;
++ (int32_t)getImageHeightWithId:(id)value;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
 - (id)getImage;
 
@@ -154,11 +164,12 @@ __attribute__((unused)) static ASCorePlugin_MyBitmap *create_ASCorePlugin_MyBitm
 
 __attribute__((unused)) static id ASCorePlugin_MyBitmap_nativeGetImageWithByteArray_(ASCorePlugin_MyBitmap *self, IOSByteArray *bytes);
 
-__attribute__((unused)) static jint ASCorePlugin_MyBitmap_getImageWidthWithId_(id value);
+__attribute__((unused)) static int32_t ASCorePlugin_MyBitmap_getImageWidthWithId_(id value);
 
-__attribute__((unused)) static jint ASCorePlugin_MyBitmap_getImageHeightWithId_(id value);
+__attribute__((unused)) static int32_t ASCorePlugin_MyBitmap_getImageHeightWithId_(id value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCorePlugin_MyBitmap)
+
 
 @interface ASCorePlugin_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -177,6 +188,7 @@ __attribute__((unused)) static void ASCorePlugin_$Lambda$1_initWithASCorePlugin_
 __attribute__((unused)) static ASCorePlugin_$Lambda$1 *new_ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin *outer$, id<JavaLangRunnable> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASCorePlugin_$Lambda$1 *create_ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin *outer$, id<JavaLangRunnable> capture$0);
+
 
 J2OBJC_INITIALIZED_DEFN(ASCorePlugin)
 
@@ -279,16 +291,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [self isLandScape] ? @"landscape" : @"portrait";
 }
 
-- (jboolean)isLandScape {
+- (bool)isLandScape {
   UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
   return UIInterfaceOrientationIsLandscape(orientation);
 }
 
-- (jint)getScreenWidth {
+- (int32_t)getScreenWidth {
   return [self nativeGetScreenWidth];
 }
 
-- (jint)nativeGetScreenHeight {
+- (int32_t)nativeGetScreenHeight {
   UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
   CGFloat width   = [[UIScreen mainScreen] bounds].size.width;
   CGFloat height   = [[UIScreen mainScreen] bounds].size.height;
@@ -303,7 +315,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return bounds.size.height;
 }
 
-- (jint)nativeGetScreenWidth {
+- (int32_t)nativeGetScreenWidth {
   UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
   CGFloat width   = [[UIScreen mainScreen] bounds].size.width;
   CGFloat height   = [[UIScreen mainScreen] bounds].size.height;
@@ -316,7 +328,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return bounds.size.width;
 }
 
-- (jint)getScreenHeight {
+- (int32_t)getScreenHeight {
   return [self nativeGetScreenHeight];
 }
 
@@ -342,17 +354,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JreStrcat("I", [self getDensity]);
 }
 
-- (jint)getDensity {
+- (int32_t)getDensity {
   return ASCorePlugin_density;
 }
 
 - (id)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                              withInt:(jint)delay {
+                              withInt:(int32_t)delay {
   return ASCorePlugin_scheduledTimerWithTimeIntervalWithJavaLangRunnable_withFloat_(self, mTickRunnable, delay / 1000.0f);
 }
 
 - (id)scheduledTimerWithTimeIntervalWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                                               withFloat:(jfloat)delay {
+                                               withFloat:(float)delay {
   return ASCorePlugin_scheduledTimerWithTimeIntervalWithJavaLangRunnable_withFloat_(self, mTickRunnable, delay);
 }
 
@@ -395,23 +407,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   return metrics;
 }
 
-- (jfloat)getMaxAscentWithId:(id)fontObj {
+- (float)getMaxAscentWithId:(id)fontObj {
   return ASCorePlugin_getMaxAscentWithId_(self, fontObj);
 }
 
-- (jfloat)getAscentWithId:(id)fontObj {
+- (float)getAscentWithId:(id)fontObj {
   return ASCorePlugin_getAscentWithId_(self, fontObj);
 }
 
-- (jfloat)getDescentWithId:(id)fontObj {
+- (float)getDescentWithId:(id)fontObj {
   return ASCorePlugin_getDescentWithId_(self, fontObj);
 }
 
-- (jfloat)getMaxDescentWithId:(id)fontObj {
+- (float)getMaxDescentWithId:(id)fontObj {
   return ASCorePlugin_getMaxDescentWithId_(self, fontObj);
 }
 
-- (jfloat)getLeadingWithId:(id)fontObj {
+- (float)getLeadingWithId:(id)fontObj {
   return ASCorePlugin_getLeadingWithId_(self, fontObj);
 }
 
@@ -430,7 +442,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return new_ASAttributedStringImpl_initWithASIFragment_withNSString_(fragment, text);
 }
 
-- (jfloat)getDisplayMetricDensity {
+- (float)getDisplayMetricDensity {
   return [self getDensity] / 160.0f;
 }
 
@@ -460,7 +472,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)navigateWithPopBackStackToWithNSString:(NSString *)actionId
                                   withNSString:(NSString *)destinationId
-                                   withBoolean:(jboolean)inclusive
+                                   withBoolean:(bool)inclusive
                                         withId:(id)scopedObjects
                                withASIFragment:(id<ASIFragment>)fragment {
   ASCorePlugin_navigateWithPopBackStackToWithNSString_withNSString_withBoolean_withId_withASIFragment_(actionId, destinationId, inclusive, scopedObjects, fragment);
@@ -486,7 +498,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)popBackStackWithASIFragment:(id<ASIFragment>)fragment
                        withNSString:(NSString *)destinationId
-                        withBoolean:(jboolean)inclusive {
+                        withBoolean:(bool)inclusive {
   ASCorePlugin_popBackStackWithASIFragment_withNSString_withBoolean_(fragment, destinationId, inclusive);
 }
 
@@ -495,11 +507,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASCorePlugin_executeSimpleCommandWithId_withASIFragment_(commands, fragment);
 }
 
-- (jint)getScreenWidthDp {
+- (int32_t)getScreenWidthDp {
   return JreFpToInt(([self getScreenWidth] / [self getDisplayMetricDensity]));
 }
 
-- (jint)getScreenHeightDp {
+- (int32_t)getScreenHeightDp {
   return JreFpToInt(([self getScreenHeight] / [self getDisplayMetricDensity]));
 }
 
@@ -511,9 +523,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASCorePlugin_nativeGetExternalFilesDir(self);
 }
 
-- (jint)getMaxMemoryWithId:(id)context {
+- (int32_t)getMaxMemoryWithId:(id)context {
   JavaLangRuntime *rt = JavaLangRuntime_getRuntime();
-  jint maxMemory = JreFpToInt(([((JavaLangRuntime *) nil_chk(rt)) maxMemory] / (1024 * 1024 * 1.0f)));
+  int32_t maxMemory = JreFpToInt(([((JavaLangRuntime *) nil_chk(rt)) maxMemory] / (1024 * 1024 * 1.0f)));
   return maxMemory;
 }
 
@@ -534,8 +546,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                           withLong:(jlong)when {
-  jint delayInMills = (jint) (when - JavaLangSystem_currentTimeMillis());
+                                           withLong:(int64_t)when {
+  int32_t delayInMills = (int32_t) (when - JavaLangSystem_currentTimeMillis());
   if (delayInMills <= 0) {
     ASCorePlugin_nativeRunOnMainThreadWithJavaLangRunnable_(self, runnable);
   }
@@ -553,7 +565,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASCorePlugin_resolveCDVFileLocationWithNSString_(cdvUrl);
 }
 
-+ (NSString *)navtiveGetDirectoryWithInt:(jint)type {
++ (NSString *)navtiveGetDirectoryWithInt:(int32_t)type {
   return ASCorePlugin_navtiveGetDirectoryWithInt_(type);
 }
 
@@ -753,7 +765,7 @@ NSString *ASCorePlugin_getFileAssetWithNSString_(NSString *path) {
   return res;
 }
 
-id ASCorePlugin_scheduledTimerWithTimeIntervalWithJavaLangRunnable_withFloat_(ASCorePlugin *self, id<JavaLangRunnable> mTickRunnable, jfloat delay) {
+id ASCorePlugin_scheduledTimerWithTimeIntervalWithJavaLangRunnable_withFloat_(ASCorePlugin *self, id<JavaLangRunnable> mTickRunnable, float delay) {
   return 	[NSTimer scheduledTimerWithTimeInterval:delay
   target:self
   selector:@selector(onTick:)
@@ -765,27 +777,27 @@ void ASCorePlugin_invalidateTimerWithId_(ASCorePlugin *self, id handler) {
   [((NSTimer*) handler) invalidate];
 }
 
-jfloat ASCorePlugin_getMaxAscentWithId_(ASCorePlugin *self, id fontObj) {
+float ASCorePlugin_getMaxAscentWithId_(ASCorePlugin *self, id fontObj) {
   UIFont* font = ((UIFont*) fontObj);
   return font.ascender;
 }
 
-jfloat ASCorePlugin_getAscentWithId_(ASCorePlugin *self, id fontObj) {
+float ASCorePlugin_getAscentWithId_(ASCorePlugin *self, id fontObj) {
   UIFont* font = ((UIFont*) fontObj);
   return font.ascender;
 }
 
-jfloat ASCorePlugin_getDescentWithId_(ASCorePlugin *self, id fontObj) {
+float ASCorePlugin_getDescentWithId_(ASCorePlugin *self, id fontObj) {
   UIFont* font = ((UIFont*) fontObj);
   return font.descender;
 }
 
-jfloat ASCorePlugin_getMaxDescentWithId_(ASCorePlugin *self, id fontObj) {
+float ASCorePlugin_getMaxDescentWithId_(ASCorePlugin *self, id fontObj) {
   UIFont* font = ((UIFont*) fontObj);
   return font.descender;
 }
 
-jfloat ASCorePlugin_getLeadingWithId_(ASCorePlugin *self, id fontObj) {
+float ASCorePlugin_getLeadingWithId_(ASCorePlugin *self, id fontObj) {
   UIFont* font = ((UIFont*) fontObj);
   return font.lineHeight + font.descender - font.ascender;
 }
@@ -819,14 +831,14 @@ id<JavaUtilList> ASCorePlugin_getScopedObjectArrayWithId_(id scopedObjects) {
     id const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     id const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      id map = *b__++;
+      id map = RETAIN_AND_AUTORELEASE(*b__++);
       [result addWithId:ASPluginInvoker_getMapWithId_(map)];
     }
   }
   return result;
 }
 
-void ASCorePlugin_navigateWithPopBackStackToWithNSString_withNSString_withBoolean_withId_withASIFragment_(NSString *actionId, NSString *destinationId, jboolean inclusive, id scopedObjects, id<ASIFragment> fragment) {
+void ASCorePlugin_navigateWithPopBackStackToWithNSString_withNSString_withBoolean_withId_withASIFragment_(NSString *actionId, NSString *destinationId, bool inclusive, id scopedObjects, id<ASIFragment> fragment) {
   ASCorePlugin_initialize();
   id<JavaUtilList> result = ASCorePlugin_getScopedObjectArrayWithId_(scopedObjects);
   [((ASUINavigatorImpl *) nil_chk(ASCorePlugin_navigator)) navigateWithPopBackStackToWithNSString:actionId withNSString:destinationId withBoolean:inclusive withJavaUtilList:result withASIFragment:fragment];
@@ -853,7 +865,7 @@ void ASCorePlugin_popBackStackWithASIFragment_(id<ASIFragment> fragment) {
   [((ASUINavigatorImpl *) nil_chk(ASCorePlugin_navigator)) popBackStackWithASIFragment:fragment];
 }
 
-void ASCorePlugin_popBackStackWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *destinationId, jboolean inclusive) {
+void ASCorePlugin_popBackStackWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *destinationId, bool inclusive) {
   ASCorePlugin_initialize();
   [((ASUINavigatorImpl *) nil_chk(ASCorePlugin_navigator)) popBackStackWithASIFragment:fragment withNSString:destinationId withBoolean:inclusive];
 }
@@ -867,7 +879,7 @@ NSString *ASCorePlugin_executeSimpleCommandWithId_withASIFragment_(id commands, 
     id const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     id const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      id command = *b__++;
+      id command = RETAIN_AND_AUTORELEASE(*b__++);
       IOSObjectArray *commandArr = ASPluginInvoker_getArrayWithId_(command);
       NSString *commandName = ASPluginInvoker_getStringWithId_(IOSObjectArray_Get(nil_chk(commandArr), 0));
       {
@@ -889,7 +901,7 @@ NSString *ASCorePlugin_executeSimpleCommandWithId_withASIFragment_(id commands, 
           }
           if (keys != nil && keys->size_ > 0) {
             id<JavaUtilMap> localeMap = ASPluginInvoker_getJSONCompatMap();
-            for (jint j = 0; j < keys->size_; j++) {
+            for (int32_t j = 0; j < keys->size_; j++) {
               NSString *key = ASPluginInvoker_getStringWithId_(IOSObjectArray_Get(keys, j));
               if (rootDir == nil) {
                 NSString *value = ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", key, fragment);
@@ -928,7 +940,7 @@ NSString *ASCorePlugin_resolveCDVFileLocationWithNSString_(NSString *cdvUrl) {
   ASCorePlugin_initialize();
   JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"cordova\\.file\\.([a-zA-Z_\\-]+)\\/(.*)");
   JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:cdvUrl];
-  jboolean matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
+  bool matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
   if (matches) {
     NSString *fileName = [matcher groupWithInt:2];
     NSString *directoryName = [matcher groupWithInt:1];
@@ -968,7 +980,7 @@ NSString *ASCorePlugin_resolveCDVFileLocationWithNSString_(NSString *cdvUrl) {
   return nil;
 }
 
-NSString *ASCorePlugin_navtiveGetDirectoryWithInt_(jint type) {
+NSString *ASCorePlugin_navtiveGetDirectoryWithInt_(int32_t type) {
   ASCorePlugin_initialize();
   NSString* libPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
   NSString* libPathSync = [libPath stringByAppendingPathComponent:@"Cloud"];
@@ -1034,6 +1046,8 @@ NSString *ASCorePlugin_getFileContentWithNSString_(NSString *path) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCorePlugin)
 
+J2OBJC_NAME_MAPPING(ASCorePlugin, "com.ashera.core", "AS")
+
 @implementation ASCorePlugin_MyBitmap
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)stream {
@@ -1045,19 +1059,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCorePlugin)
   return ASCorePlugin_MyBitmap_nativeGetImageWithByteArray_(self, bytes);
 }
 
-- (jint)getRowBytes {
+- (int32_t)getRowBytes {
   return ASCorePlugin_MyBitmap_getImageWidthWithId_(image_) * 4;
 }
 
-+ (jint)getImageWidthWithId:(id)value {
++ (int32_t)getImageWidthWithId:(id)value {
   return ASCorePlugin_MyBitmap_getImageWidthWithId_(value);
 }
 
-+ (jint)getImageHeightWithId:(id)value {
++ (int32_t)getImageHeightWithId:(id)value {
   return ASCorePlugin_MyBitmap_getImageHeightWithId_(value);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASCorePlugin_MyBitmap_getImageHeightWithId_(image_);
 }
 
@@ -1116,13 +1130,13 @@ id ASCorePlugin_MyBitmap_nativeGetImageWithByteArray_(ASCorePlugin_MyBitmap *sel
   return image;
 }
 
-jint ASCorePlugin_MyBitmap_getImageWidthWithId_(id value) {
+int32_t ASCorePlugin_MyBitmap_getImageWidthWithId_(id value) {
   ASCorePlugin_MyBitmap_initialize();
   UIImage* image = ((UIImage*) value);
   return image.size.width;
 }
 
-jint ASCorePlugin_MyBitmap_getImageHeightWithId_(id value) {
+int32_t ASCorePlugin_MyBitmap_getImageHeightWithId_(id value) {
   ASCorePlugin_MyBitmap_initialize();
   UIImage* image = ((UIImage*) value);
   return image.size.height;

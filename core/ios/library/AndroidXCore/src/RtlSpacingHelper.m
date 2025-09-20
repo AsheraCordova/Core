@@ -3,20 +3,33 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\widget\RtlSpacingHelper.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "RtlSpacingHelper.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXRtlSpacingHelper () {
  @public
-  jint mLeft_;
-  jint mRight_;
-  jint mStart_;
-  jint mEnd_;
-  jint mExplicitLeft_;
-  jint mExplicitRight_;
-  jboolean mIsRtl_;
-  jboolean mIsRelative_;
+  int32_t mLeft_;
+  int32_t mRight_;
+  int32_t mStart_;
+  int32_t mEnd_;
+  int32_t mExplicitLeft_;
+  int32_t mExplicitRight_;
+  bool mIsRtl_;
+  bool mIsRelative_;
 }
 
 @end
@@ -28,24 +41,24 @@
   return self;
 }
 
-- (jint)getLeft {
+- (int32_t)getLeft {
   return mLeft_;
 }
 
-- (jint)getRight {
+- (int32_t)getRight {
   return mRight_;
 }
 
-- (jint)getStart {
+- (int32_t)getStart {
   return mIsRtl_ ? mRight_ : mLeft_;
 }
 
-- (jint)getEnd {
+- (int32_t)getEnd {
   return mIsRtl_ ? mLeft_ : mRight_;
 }
 
-- (void)setRelativeWithInt:(jint)start
-                   withInt:(jint)end {
+- (void)setRelativeWithInt:(int32_t)start
+                   withInt:(int32_t)end {
   mStart_ = start;
   mEnd_ = end;
   mIsRelative_ = true;
@@ -59,14 +72,14 @@
   }
 }
 
-- (void)setAbsoluteWithInt:(jint)left
-                   withInt:(jint)right {
+- (void)setAbsoluteWithInt:(int32_t)left
+                   withInt:(int32_t)right {
   mIsRelative_ = false;
   if (left != ADXRtlSpacingHelper_UNDEFINED) mLeft_ = mExplicitLeft_ = left;
   if (right != ADXRtlSpacingHelper_UNDEFINED) mRight_ = mExplicitRight_ = right;
 }
 
-- (void)setDirectionWithBoolean:(jboolean)isRtl {
+- (void)setDirectionWithBoolean:(bool)isRtl {
   if (isRtl == mIsRtl_) {
     return;
   }

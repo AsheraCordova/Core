@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\Window.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "View.h"
 #include "Window.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADWindow
@@ -17,11 +29,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)requestFeatureWithInt:(jint)featureNoTitle {
+- (void)requestFeatureWithInt:(int32_t)featureNoTitle {
 }
 
-- (void)setFlagsWithInt:(jint)flagFullscreen
-                withInt:(jint)flagFullscreen2 {
+- (void)setFlagsWithInt:(int32_t)flagFullscreen
+                withInt:(int32_t)flagFullscreen2 {
 }
 
 - (ADView *)getDecorView {
@@ -66,3 +78,5 @@ ADWindow *create_ADWindow_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWindow)
+
+J2OBJC_NAME_MAPPING(ADWindow, "r.android.view", "AD")

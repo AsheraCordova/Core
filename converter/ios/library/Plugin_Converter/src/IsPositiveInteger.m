@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\IsPositiveInteger.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,6 +16,13 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 NSString *ASIsPositiveInteger_POSITIVE_INT_PATTERN = @"\\d+";
@@ -33,9 +45,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return res;
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [text java_matches:ASIsPositiveInteger_POSITIVE_INT_PATTERN];
@@ -79,3 +91,5 @@ ASIsPositiveInteger *create_ASIsPositiveInteger_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASIsPositiveInteger)
+
+J2OBJC_NAME_MAPPING(ASIsPositiveInteger, "com.ashera.validations", "AS")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\internal\MaterialCheckable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MaterialCheckable")
@@ -26,6 +27,7 @@
 #define INCLUDE_ADCheckable 1
 #include "Checkable.h"
 
+@class JavaLangInteger;
 @protocol ADXMaterialCheckable_OnCheckedChangeListener;
 
 /*!
@@ -34,7 +36,7 @@
  */
 @protocol ADXMaterialCheckable < ADCheckable, JavaObject >
 
-- (jint)getId;
+- (int32_t)getId;
 
 - (void)setInternalOnCheckedChangeListenerWithADXMaterialCheckable_OnCheckedChangeListener:(id<ADXMaterialCheckable_OnCheckedChangeListener>)listener;
 
@@ -46,10 +48,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXMaterialCheckable)
 
 #define ComGoogleAndroidMaterialInternalMaterialCheckable ADXMaterialCheckable
 
+
 #endif
 
 #if !defined (ADXMaterialCheckable_OnCheckedChangeListener_) && (INCLUDE_ALL_MaterialCheckable || defined(INCLUDE_ADXMaterialCheckable_OnCheckedChangeListener))
 #define ADXMaterialCheckable_OnCheckedChangeListener_
+
+@class JavaLangBoolean;
 
 /*!
  @brief Interface definition for a callback to be invoked when a <code>MaterialCheckable</code> is checked
@@ -63,13 +68,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXMaterialCheckable)
  @param isChecked The new checked state of buttonView.
  */
 - (void)onCheckedChangedWithId:(id)checkable
-                   withBoolean:(jboolean)isChecked;
+                   withBoolean:(bool)isChecked;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXMaterialCheckable_OnCheckedChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMaterialCheckable_OnCheckedChangeListener)
+
 
 #endif
 

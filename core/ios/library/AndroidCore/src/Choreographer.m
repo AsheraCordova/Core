@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\Choreographer.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Choreographer.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "java/io/PrintStream.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/System.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -40,6 +53,7 @@ __attribute__((unused)) static ADChoreographer_$Lambda$1 *new_ADChoreographer_$L
 
 __attribute__((unused)) static ADChoreographer_$Lambda$1 *create_ADChoreographer_$Lambda$1_initWithADChoreographer_withADChoreographer_FrameCallback_(ADChoreographer *outer$, id<ADChoreographer_FrameCallback> capture$0);
 
+
 J2OBJC_INITIALIZED_DEFN(ADChoreographer)
 
 @implementation ADChoreographer
@@ -56,9 +70,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)postFrameCallbackDelayedWithADChoreographer_FrameCallback:(id<ADChoreographer_FrameCallback>)callback
-                                                         withLong:(jlong)backgroundPauseDelay {
+                                                         withLong:(int64_t)backgroundPauseDelay {
   if (callback != nil) {
-    ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(create_ADChoreographer_$Lambda$1_initWithADChoreographer_withADChoreographer_FrameCallback_(self, callback), (jint) backgroundPauseDelay);
+    ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(create_ADChoreographer_$Lambda$1_initWithADChoreographer_withADChoreographer_FrameCallback_(self, callback), (int32_t) backgroundPauseDelay);
   }
 }
 
@@ -70,21 +84,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self postFrameCallbackDelayedWithADChoreographer_FrameCallback:callback withLong:0];
 }
 
-- (void)postCallbackWithInt:(jint)callbackCommit
+- (void)postCallbackWithInt:(int32_t)callbackCommit
        withJavaLangRunnable:(id<JavaLangRunnable>)runnable
                      withId:(id)object {
   [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"postCallback"];
 }
 
-- (jlong)getFrameTime {
+- (int64_t)getFrameTime {
   return JreLongDiv(JavaLangSystem_nanoTime(), 1000000);
 }
 
-+ (jlong)getFrameDelay {
++ (int64_t)getFrameDelay {
   return ADChoreographer_getFrameDelay();
 }
 
-+ (void)setFrameDelayWithLong:(jlong)delay {
++ (void)setFrameDelayWithLong:(int64_t)delay {
   ADChoreographer_setFrameDelayWithLong_(delay);
 }
 
@@ -148,16 +162,18 @@ ADChoreographer *ADChoreographer_getInstance() {
   return ADChoreographer_choreographer;
 }
 
-jlong ADChoreographer_getFrameDelay() {
+int64_t ADChoreographer_getFrameDelay() {
   ADChoreographer_initialize();
   return 0;
 }
 
-void ADChoreographer_setFrameDelayWithLong_(jlong delay) {
+void ADChoreographer_setFrameDelayWithLong_(int64_t delay) {
   ADChoreographer_initialize();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADChoreographer)
+
+J2OBJC_NAME_MAPPING(ADChoreographer, "r.android.view", "AD")
 
 @implementation ADChoreographer_FrameCallback
 

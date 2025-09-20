@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ListPopupWindow.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ApplicationInfo.h"
 #include "Build.h"
 #include "Context.h"
@@ -23,34 +28,41 @@
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewParent.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
 
-@protocol JavaLangRunnable;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADListPopupWindow () {
  @public
   ADContext *mContext_;
   id<ADListAdapter> mAdapter_;
-  jint mDropDownHeight_;
-  jint mDropDownWidth_;
-  jint mDropDownHorizontalOffset_;
-  jint mDropDownVerticalOffset_;
-  jboolean mDropDownVerticalOffsetSet_;
-  jboolean mIsAnimatedFromAnchor_;
-  jboolean mOverlapAnchor_;
-  jboolean mOverlapAnchorSet_;
-  jint mDropDownGravity_;
-  jboolean mDropDownAlwaysVisible_;
-  jboolean mForceIgnoreOutsideTouch_;
+  int32_t mDropDownHeight_;
+  int32_t mDropDownWidth_;
+  int32_t mDropDownHorizontalOffset_;
+  int32_t mDropDownVerticalOffset_;
+  bool mDropDownVerticalOffsetSet_;
+  bool mIsAnimatedFromAnchor_;
+  bool mOverlapAnchor_;
+  bool mOverlapAnchorSet_;
+  int32_t mDropDownGravity_;
+  bool mDropDownAlwaysVisible_;
+  bool mForceIgnoreOutsideTouch_;
   ADView *mPromptView_;
-  jint mPromptPosition_;
+  int32_t mPromptPosition_;
   ADView *mDropDownAnchorView_;
   id<JavaLangRunnable> mShowDropDownRunnable_;
   ADRect *mTempRect_;
-  jboolean mModal_;
+  bool mModal_;
   ADViewGroup *mDropDownList_;
   ADView *decorView_;
   ADRelativeLayout_LayoutParams *params_;
@@ -58,12 +70,12 @@
 
 - (void)removePromptView;
 
-- (jint)buildDropDown;
+- (int32_t)buildDropDown;
 
-- (jboolean)isInputMethodNotNeeded;
+- (bool)isInputMethodNotNeeded;
 
 - (ADViewGroup *)createDropDownListViewWithADContext:(ADContext *)context
-                                         withBoolean:(jboolean)b;
+                                         withBoolean:(bool)b;
 
 @end
 
@@ -81,21 +93,21 @@ inline NSString *ADListPopupWindow_get_TAG(void);
 static NSString *ADListPopupWindow_TAG = @"ListPopupWindow";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADListPopupWindow, TAG, NSString *)
 
-inline jboolean ADListPopupWindow_get_DEBUG(void);
+inline bool ADListPopupWindow_get_DEBUG(void);
 #define ADListPopupWindow_DEBUG false
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, DEBUG, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, DEBUG, bool)
 
-inline jint ADListPopupWindow_get_EXPAND_LIST_TIMEOUT(void);
+inline int32_t ADListPopupWindow_get_EXPAND_LIST_TIMEOUT(void);
 #define ADListPopupWindow_EXPAND_LIST_TIMEOUT 250
-J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, EXPAND_LIST_TIMEOUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADListPopupWindow, EXPAND_LIST_TIMEOUT, int32_t)
 
 __attribute__((unused)) static void ADListPopupWindow_removePromptView(ADListPopupWindow *self);
 
-__attribute__((unused)) static jint ADListPopupWindow_buildDropDown(ADListPopupWindow *self);
+__attribute__((unused)) static int32_t ADListPopupWindow_buildDropDown(ADListPopupWindow *self);
 
-__attribute__((unused)) static jboolean ADListPopupWindow_isInputMethodNotNeeded(ADListPopupWindow *self);
+__attribute__((unused)) static bool ADListPopupWindow_isInputMethodNotNeeded(ADListPopupWindow *self);
 
-__attribute__((unused)) static ADViewGroup *ADListPopupWindow_createDropDownListViewWithADContext_withBoolean_(ADListPopupWindow *self, ADContext *context, jboolean b);
+__attribute__((unused)) static ADViewGroup *ADListPopupWindow_createDropDownListViewWithADContext_withBoolean_(ADListPopupWindow *self, ADContext *context, bool b);
 
 @interface ADListPopupWindow_1 : NSObject < JavaLangRunnable > {
  @public
@@ -116,9 +128,10 @@ __attribute__((unused)) static ADListPopupWindow_1 *new_ADListPopupWindow_1_init
 
 __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_initWithADListPopupWindow_(ADListPopupWindow *outer$);
 
+
 @implementation ADListPopupWindow
 
-- (jboolean)isDropDownAlwaysVisible {
+- (bool)isDropDownAlwaysVisible {
   return mDropDownAlwaysVisible_;
 }
 
@@ -130,39 +143,39 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
   JreStrongAssign(&mDropDownAnchorView_, anchor);
 }
 
-- (jint)getHorizontalOffset {
+- (int32_t)getHorizontalOffset {
   return mDropDownHorizontalOffset_;
 }
 
-- (void)setHorizontalOffsetWithInt:(jint)offset {
+- (void)setHorizontalOffsetWithInt:(int32_t)offset {
   mDropDownHorizontalOffset_ = offset;
 }
 
-- (jint)getVerticalOffset {
+- (int32_t)getVerticalOffset {
   if (!mDropDownVerticalOffsetSet_) {
     return 0;
   }
   return mDropDownVerticalOffset_;
 }
 
-- (void)setVerticalOffsetWithInt:(jint)offset {
+- (void)setVerticalOffsetWithInt:(int32_t)offset {
   mDropDownVerticalOffset_ = offset;
   mDropDownVerticalOffsetSet_ = true;
 }
 
-- (jint)getWidth {
+- (int32_t)getWidth {
   return mDropDownWidth_;
 }
 
-- (void)setWidthWithInt:(jint)width {
+- (void)setWidthWithInt:(int32_t)width {
   mDropDownWidth_ = width;
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return mDropDownHeight_;
 }
 
-- (void)setHeightWithInt:(jint)height {
+- (void)setHeightWithInt:(int32_t)height {
   if (height < 0 && ADViewGroup_LayoutParams_WRAP_CONTENT != height && ADViewGroup_LayoutParams_MATCH_PARENT != height) {
     if (((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk(mContext_)) getApplicationInfo]))->targetSdkVersion_ < ADBuild_VERSION_CODES_O) {
       ADLog_eWithNSString_withNSString_(ADListPopupWindow_TAG, JreStrcat("$I$", @"Negative value ", height, @" passed to ListPopupWindow#setHeight produces undefined results"));
@@ -175,13 +188,13 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
 }
 
 - (void)show {
-  jint height = ADListPopupWindow_buildDropDown(self);
-  jboolean noInputMethod = ADListPopupWindow_isInputMethodNotNeeded(self);
+  int32_t height = ADListPopupWindow_buildDropDown(self);
+  bool noInputMethod = ADListPopupWindow_isInputMethodNotNeeded(self);
   if ([((ADPopupWindow *) nil_chk(mPopup_)) isShowing]) {
     if (![((ADView *) nil_chk([self getAnchorView])) isAttachedToWindow]) {
       return;
     }
-    jint widthSpec;
+    int32_t widthSpec;
     if (mDropDownWidth_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
       widthSpec = -1;
     }
@@ -191,7 +204,7 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
     else {
       widthSpec = mDropDownWidth_;
     }
-    jint heightSpec;
+    int32_t heightSpec;
     if (mDropDownHeight_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
       heightSpec = noInputMethod ? height : ADViewGroup_LayoutParams_MATCH_PARENT;
       if (noInputMethod) {
@@ -212,7 +225,7 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
     [((ADPopupWindow *) nil_chk(mPopup_)) updateWithADView:[self getAnchorView] withInt:mDropDownHorizontalOffset_ withInt:mDropDownVerticalOffset_ withInt:(widthSpec < 0) ? -1 : widthSpec withInt:(heightSpec < 0) ? -1 : heightSpec];
   }
   else {
-    jint widthSpec;
+    int32_t widthSpec;
     if (mDropDownWidth_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
       widthSpec = ADViewGroup_LayoutParams_MATCH_PARENT;
     }
@@ -224,7 +237,7 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
         widthSpec = mDropDownWidth_;
       }
     }
-    jint heightSpec;
+    int32_t heightSpec;
     if (mDropDownHeight_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
       heightSpec = ADViewGroup_LayoutParams_MATCH_PARENT;
     }
@@ -272,7 +285,7 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
   }
 }
 
-- (jboolean)isShowing {
+- (bool)isShowing {
   return [((ADPopupWindow *) nil_chk(mPopup_)) isShowing];
 }
 
@@ -280,17 +293,17 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
   return mDropDownList_;
 }
 
-- (jboolean)onKeyDownWithInt:(jint)keyCode
-              withADKeyEvent:(ADKeyEvent *)event {
+- (bool)onKeyDownWithInt:(int32_t)keyCode
+          withADKeyEvent:(ADKeyEvent *)event {
   if ([self isShowing]) {
     if (keyCode != ADKeyEvent_KEYCODE_SPACE) {
-      jint curIndex = 0;
-      jboolean consumed;
-      jboolean below = ![((ADPopupWindow *) nil_chk(mPopup_)) isAboveAnchor];
+      int32_t curIndex = 0;
+      bool consumed;
+      bool below = ![((ADPopupWindow *) nil_chk(mPopup_)) isAboveAnchor];
       id<ADListAdapter> adapter = mAdapter_;
-      jboolean allEnabled;
-      jint firstItem = JavaLangInteger_MAX_VALUE;
-      jint lastItem = JavaLangInteger_MIN_VALUE;
+      bool allEnabled;
+      int32_t firstItem = JavaLangInteger_MAX_VALUE;
+      int32_t lastItem = JavaLangInteger_MIN_VALUE;
       if (adapter != nil) {
         allEnabled = [adapter areAllItemsEnabled];
         firstItem = allEnabled ? 0 : 0;
@@ -331,16 +344,16 @@ __attribute__((unused)) static ADListPopupWindow_1 *create_ADListPopupWindow_1_i
   return false;
 }
 
-- (jint)buildDropDown {
+- (int32_t)buildDropDown {
   return ADListPopupWindow_buildDropDown(self);
 }
 
-- (jboolean)isInputMethodNotNeeded {
+- (bool)isInputMethodNotNeeded {
   return ADListPopupWindow_isInputMethodNotNeeded(self);
 }
 
 - (ADViewGroup *)createDropDownListViewWithADContext:(ADContext *)context
-                                         withBoolean:(jboolean)b {
+                                         withBoolean:(bool)b {
   return ADListPopupWindow_createDropDownListViewWithADContext_withBoolean_(self, context, b);
 }
 
@@ -356,8 +369,8 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
 }
 
 - (void)measureHintViewWithADView:(ADView *)view {
-  jint widthSize;
-  jint widthMode;
+  int32_t widthSize;
+  int32_t widthMode;
   if (mDropDownWidth_ >= 0) {
     widthMode = ADView_MeasureSpec_AT_MOST;
     widthSize = mDropDownWidth_;
@@ -366,8 +379,8 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params {
     widthMode = ADView_MeasureSpec_UNSPECIFIED;
     widthSize = 0;
   }
-  jint widthSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(widthSize, widthMode);
-  jint heightSpec = ADView_MeasureSpec_UNSPECIFIED;
+  int32_t widthSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(widthSize, widthMode);
+  int32_t heightSpec = ADView_MeasureSpec_UNSPECIFIED;
   [((ADView *) nil_chk(view)) measureWithInt:widthSpec withInt:heightSpec];
 }
 
@@ -495,9 +508,9 @@ void ADListPopupWindow_removePromptView(ADListPopupWindow *self) {
   }
 }
 
-jint ADListPopupWindow_buildDropDown(ADListPopupWindow *self) {
+int32_t ADListPopupWindow_buildDropDown(ADListPopupWindow *self) {
   ADViewGroup *dropDownView;
-  jint otherHeights = 0;
+  int32_t otherHeights = 0;
   if (self->mDropDownList_ == nil) {
     ADContext *context = JreRetainedLocalValue(self->mContext_);
     JreStrongAssignAndConsume(&self->mShowDropDownRunnable_, new_ADListPopupWindow_1_initWithADListPopupWindow_(self));
@@ -522,8 +535,8 @@ jint ADListPopupWindow_buildDropDown(ADListPopupWindow *self) {
         ADLog_eWithNSString_withNSString_(ADListPopupWindow_TAG, JreStrcat("$I", @"Invalid hint position ", self->mPromptPosition_));
         break;
       }
-      jint widthSize;
-      jint widthMode;
+      int32_t widthSize;
+      int32_t widthMode;
       if (self->mDropDownWidth_ >= 0) {
         widthMode = ADView_MeasureSpec_AT_MOST;
         widthSize = self->mDropDownWidth_;
@@ -532,8 +545,8 @@ jint ADListPopupWindow_buildDropDown(ADListPopupWindow *self) {
         widthMode = ADView_MeasureSpec_UNSPECIFIED;
         widthSize = 0;
       }
-      jint widthSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(widthSize, widthMode);
-      jint heightSpec = ADView_MeasureSpec_UNSPECIFIED;
+      int32_t widthSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(widthSize, widthMode);
+      int32_t heightSpec = ADView_MeasureSpec_UNSPECIFIED;
       [hintView measureWithInt:widthSpec withInt:heightSpec];
       hintParams = (ADLinearLayout_LayoutParams *) cast_chk([hintView getLayoutParams], [ADLinearLayout_LayoutParams class]);
       otherHeights = [hintView getMeasuredHeight] + ((ADLinearLayout_LayoutParams *) nil_chk(hintParams))->topMargin_ + hintParams->bottomMargin_;
@@ -549,7 +562,7 @@ jint ADListPopupWindow_buildDropDown(ADListPopupWindow *self) {
       otherHeights = [view getMeasuredHeight] + ((ADLinearLayout_LayoutParams *) nil_chk(hintParams))->topMargin_ + hintParams->bottomMargin_;
     }
   }
-  jint padding;
+  int32_t padding;
   ADDrawable *background = nil;
   if (background != nil) {
     [background getPaddingWithADRect:self->mTempRect_];
@@ -562,12 +575,12 @@ jint ADListPopupWindow_buildDropDown(ADListPopupWindow *self) {
     [((ADRect *) nil_chk(self->mTempRect_)) setEmpty];
     padding = 0;
   }
-  jboolean ignoreBottomDecorations = false;
-  jint maxHeight = [((ADPopupWindow *) nil_chk(self->mPopup_)) getMaxAvailableHeightWithADView:[self getAnchorView] withInt:self->mDropDownVerticalOffset_ withBoolean:ignoreBottomDecorations];
+  bool ignoreBottomDecorations = false;
+  int32_t maxHeight = [((ADPopupWindow *) nil_chk(self->mPopup_)) getMaxAvailableHeightWithADView:[self getAnchorView] withInt:self->mDropDownVerticalOffset_ withBoolean:ignoreBottomDecorations];
   if (self->mDropDownAlwaysVisible_ || self->mDropDownHeight_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
     return maxHeight + padding;
   }
-  jint childWidthSpec;
+  int32_t childWidthSpec;
   switch (self->mDropDownWidth_) {
     case ADViewGroup_LayoutParams_WRAP_CONTENT:
     childWidthSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(ASPluginInvoker_getScreenWidth() - (self->mTempRect_->left_ + self->mTempRect_->right_), ADView_MeasureSpec_AT_MOST);
@@ -579,19 +592,19 @@ jint ADListPopupWindow_buildDropDown(ADListPopupWindow *self) {
     childWidthSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(self->mDropDownWidth_, ADView_MeasureSpec_EXACTLY);
     break;
   }
-  jint listContent = [((ADViewGroup *) nil_chk(self->mDropDownList_)) measureHeightOfChildrenWithInt:childWidthSpec withInt:0 withInt:-1 withInt:maxHeight - otherHeights withInt:-1];
+  int32_t listContent = [((ADViewGroup *) nil_chk(self->mDropDownList_)) measureHeightOfChildrenWithInt:childWidthSpec withInt:0 withInt:-1 withInt:maxHeight - otherHeights withInt:-1];
   if (listContent > 0) {
-    jint listPadding = [((ADViewGroup *) nil_chk(self->mDropDownList_)) getPaddingTop] + [((ADViewGroup *) nil_chk(self->mDropDownList_)) getPaddingBottom];
+    int32_t listPadding = [((ADViewGroup *) nil_chk(self->mDropDownList_)) getPaddingTop] + [((ADViewGroup *) nil_chk(self->mDropDownList_)) getPaddingBottom];
     otherHeights += padding + listPadding;
   }
   return listContent + otherHeights;
 }
 
-jboolean ADListPopupWindow_isInputMethodNotNeeded(ADListPopupWindow *self) {
+bool ADListPopupWindow_isInputMethodNotNeeded(ADListPopupWindow *self) {
   return false;
 }
 
-ADViewGroup *ADListPopupWindow_createDropDownListViewWithADContext_withBoolean_(ADListPopupWindow *self, ADContext *context, jboolean b) {
+ADViewGroup *ADListPopupWindow_createDropDownListViewWithADContext_withBoolean_(ADListPopupWindow *self, ADContext *context, bool b) {
   return [self getListView];
 }
 
@@ -622,6 +635,8 @@ ADListPopupWindow *create_ADListPopupWindow_initWithADView_withADView_withADRela
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADListPopupWindow)
+
+J2OBJC_NAME_MAPPING(ADListPopupWindow, "r.android.widget", "AD")
 
 @implementation ADListPopupWindow_1
 
@@ -657,7 +672,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADListPopupWindow)
     { "this$0_", "LADListPopupWindow;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADListPopupWindow;", "buildDropDown" };
-  static const J2ObjcClassInfo _ADListPopupWindow_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 1, -1, -1 };
+  static const J2ObjcClassInfo _ADListPopupWindow_1 = { "", "r.android.widget", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 1, -1, -1 };
   return &_ADListPopupWindow_1;
 }
 

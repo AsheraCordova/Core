@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\BaseWidget.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseWidget")
@@ -31,6 +32,9 @@
 @class ASWidgetAttributeMap;
 @class ASWidgetAttributeValue;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASHasWidgets;
 @protocol ASIConverter;
@@ -46,14 +50,14 @@
 
 @interface ASBaseWidget : NSObject < ASIWidget > {
  @public
-  __unsafe_unretained id<ASHasWidgets> parent_;
+  WEAK_ id<ASHasWidgets> parent_;
   ASWidgetAttributeMap *attributes_;
   id<JavaUtilMap> params_;
   id<JavaUtilMap> userData_;
   id<JavaUtilMap> tmpCache_;
   NSString *localName_;
   NSString *groupName_;
-  __unsafe_unretained id<ASIFragment> fragment_;
+  WEAK_ id<ASIFragment> fragment_;
   id<JavaUtilMap> methodListeners_;
 }
 
@@ -74,7 +78,7 @@
 - (void)applyAttributeCommandWithNSString:(NSString *)sourceName
                              withNSString:(NSString *)commandName
                         withNSStringArray:(IOSObjectArray *)attributes
-                              withBoolean:(jboolean)add
+                              withBoolean:(bool)add
                         withNSObjectArray:(IOSObjectArray *)args;
 
 - (void)applyModelToWidget;
@@ -94,20 +98,20 @@
               withJavaUtilMap:(id<JavaUtilMap>)params;
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype;
+                      withInt:(int32_t)viewtype;
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType;
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType;
 
 - (void)drawableStateChanged;
 
 - (void)executeCommandWithASIWidget:(id<ASIWidget>)w
                    withJavaUtilList:(id<JavaUtilList>)commandDataArr
       withASIWidget_CommandCallBack:(id<ASIWidget_CommandCallBack>)command
-                            withInt:(jint)methods;
+                            withInt:(int32_t)methods;
 
 - (void)executeCommandWithJavaUtilMap:(id<JavaUtilMap>)payLoad
         withASIWidget_CommandCallBack:(id<ASIWidget_CommandCallBack>)command
-                              withInt:(jint)methods;
+                              withInt:(int32_t)methods;
 
 - (void)executeMethodListenersWithNSString:(NSString *)methodName
                          withNSObjectArray:(IOSObjectArray *)args;
@@ -127,7 +131,7 @@
                                        withNSString:(NSString *)key;
 
 - (id)getAttributeWithNSString:(NSString *)attributeName
-                   withBoolean:(jboolean)skipConvert;
+                   withBoolean:(bool)skipConvert;
 
 - (id<ASAttributeCommand>)getAttributeCommandWithNSString:(NSString *)sourceName
                                              withNSString:(NSString *)commandName
@@ -149,7 +153,7 @@
 - (ASWidgetAttributeValue *)getAttributeValueWithASWidgetAttribute:(ASWidgetAttribute *)attr
                                           withASWidgetAttributeMap:(ASWidgetAttributeMap *)attributes;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
 - (NSString *)getBehaviorGroupId;
 
@@ -178,7 +182,7 @@
 
 - (NSString *)getId;
 
-- (jint)getIdAsInt;
+- (int32_t)getIdAsInt;
 
 - (id<ASIWidgetLifeCycleListener>)getListener;
 
@@ -222,16 +226,16 @@
 
 - (id)getUserDataWithNSString:(NSString *)key;
 
-- (jint)getValidationErrorDisplayType;
+- (int32_t)getValidationErrorDisplayType;
 
-- (jint)getZIndex;
+- (int32_t)getZIndex;
 
-- (jboolean)hasBufferedAttributes;
+- (bool)hasBufferedAttributes;
 
-- (jboolean)hasFeatureWithNSString:(NSString *)key
-                      withNSString:(NSString *)featureName;
+- (bool)hasFeatureWithNSString:(NSString *)key
+                  withNSString:(NSString *)featureName;
 
-- (jboolean)hasMethodListenerWithNSString:(NSString *)methodName;
+- (bool)hasMethodListenerWithNSString:(NSString *)methodName;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -249,18 +253,18 @@
                                   withNSString:(NSString *)methodName
                              withNSObjectArray:(IOSObjectArray *)params;
 
-- (jboolean)isAfterParentInitRequired;
+- (bool)isAfterParentInitRequired;
 
-- (jboolean)isInitialised;
+- (bool)isInitialised;
 
-- (jboolean)isInvalidateOnFrameChange;
+- (bool)isInvalidateOnFrameChange;
 
-- (jboolean)isWidgetDisposed;
+- (bool)isWidgetDisposed;
 
 - (id<ASIWidget>)loadLazyWidgetsWithASHasWidgets:(id<ASHasWidgets>)parent;
 
 - (id<ASIWidget>)loadLazyWidgetsWithASHasWidgets:(id<ASHasWidgets>)parent
-                                         withInt:(jint)index
+                                         withInt:(int32_t)index
                                     withNSString:(NSString *)idKey
                                  withASLoopParam:(ASLoopParam *)model;
 
@@ -301,7 +305,7 @@
 
 - (void)requestLayout;
 
-- (void)requestLayoutNInvalidateIfRequiredWithInt:(jint)updateUiFlag;
+- (void)requestLayoutNInvalidateIfRequiredWithInt:(int32_t)updateUiFlag;
 
 - (void)rerunCommandOnSourceWithNSString:(NSString *)sourceName
                             withNSString:(NSString *)phase;
@@ -317,7 +321,7 @@
 
 - (void)setAttributeWithNSString:(NSString *)key
                           withId:(id)objValue
-                     withBoolean:(jboolean)skipConvert;
+                     withBoolean:(bool)skipConvert;
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                              withNSString:(NSString *)strValue
@@ -332,22 +336,22 @@
 
 - (void)setCustomErrorMessageValuesWithJavaUtilList:(id<JavaUtilList>)customErrorMessageValues;
 
-- (void)setDrawableBoundsWithInt:(jint)l
-                         withInt:(jint)t
-                         withInt:(jint)r
-                         withInt:(jint)b;
+- (void)setDrawableBoundsWithInt:(int32_t)l
+                         withInt:(int32_t)t
+                         withInt:(int32_t)r
+                         withInt:(int32_t)b;
 
 - (void)setErrorStyleWithNSString:(NSString *)errorStyle;
 
 - (void)setEventBubblersWithJavaUtilCollection:(id<JavaUtilCollection>)flags;
 
-- (jboolean)setFieldUsingReflectionWithId:(id)targetObject
-                             withNSString:(NSString *)fieldName
-                                   withId:(id)fieldValue;
+- (bool)setFieldUsingReflectionWithId:(id)targetObject
+                         withNSString:(NSString *)fieldName
+                               withId:(id)fieldValue;
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)setInvalidateOnFrameChangeWithBoolean:(jboolean)invalidateOnFrameChange;
+- (void)setInvalidateOnFrameChangeWithBoolean:(bool)invalidateOnFrameChange;
 
 - (void)setListenerWithASIWidgetLifeCycleListener:(id<ASIWidgetLifeCycleListener>)listener;
 
@@ -369,17 +373,17 @@
 
 - (void)setNormalStyleWithNSString:(NSString *)normalStyle;
 
-- (void)setOnMethodCalledWithBoolean:(jboolean)onMethodCalled;
+- (void)setOnMethodCalledWithBoolean:(bool)onMethodCalled;
 
 - (void)setParamsWithJavaUtilMap:(id<JavaUtilMap>)params;
 
 - (void)setParentWithASHasWidgets:(id<ASHasWidgets>)parent;
 
-- (void)setValidationErrorDisplayTypeWithInt:(jint)validationErrorDisplayType;
+- (void)setValidationErrorDisplayTypeWithInt:(int32_t)validationErrorDisplayType;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
-- (void)setZIndexWithInt:(jint)zIndex;
+- (void)setZIndexWithInt:(int32_t)zIndex;
 
 - (void)storeInTempCacheWithNSString:(NSString *)key
                               withId:(id)object;
@@ -400,8 +404,8 @@
 
 - (id)unwrapWithId:(id)widget;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 - (void)updateModelByPathWithNSString:(NSString *)varPath
                                withId:(id)objValue
@@ -428,15 +432,15 @@
 
 #pragma mark Protected
 
-- (jboolean)applyModelAttributes;
+- (bool)applyModelAttributes;
 
 - (void)applyStyleToWidgets;
 
 - (void)attributeBuffered;
 
-- (jboolean)checkIfAttributeMatchesWithASWidgetAttributeValue:(ASWidgetAttributeValue *)attribute;
+- (bool)checkIfAttributeMatchesWithASWidgetAttributeValue:(ASWidgetAttributeValue *)attribute;
 
-- (jboolean)getBooleanWithId:(id)val;
+- (bool)getBooleanWithId:(id)val;
 
 - (id<JavaUtilMap>)getDependentAttributesMapWithASIConverter:(id<ASIConverter>)converter;
 
@@ -468,6 +472,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseWidget)
 
 @compatibility_alias ComAsheraWidgetBaseWidget ASBaseWidget;
 
+
 #endif
 
 #if !defined (ASBaseWidget_LazyBaseWidget_) && (INCLUDE_ALL_BaseWidget || defined(INCLUDE_ASBaseWidget_LazyBaseWidget))
@@ -476,6 +481,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseWidget)
 @class ASBaseWidget;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -531,6 +537,7 @@ FOUNDATION_EXPORT ASBaseWidget_LazyBaseWidget *create_ASBaseWidget_LazyBaseWidge
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseWidget_LazyBaseWidget)
 
+
 #endif
 
 #if !defined (ASBaseWidget_EventHolder_) && (INCLUDE_ALL_BaseWidget || defined(INCLUDE_ASBaseWidget_EventHolder))
@@ -573,6 +580,7 @@ FOUNDATION_EXPORT ASBaseWidget_EventHolder *new_ASBaseWidget_EventHolder_initWit
 FOUNDATION_EXPORT ASBaseWidget_EventHolder *create_ASBaseWidget_EventHolder_initWithASBaseWidget_withASWidgetAttribute_withASIWidget_withId_(ASBaseWidget *outer$, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseWidget_EventHolder)
+
 
 #endif
 

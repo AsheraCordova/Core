@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Chronometer.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Chronometer.h"
 #include "DateUtils.h"
 #include "IOSClass.h"
@@ -14,26 +19,31 @@
 #include "Resources.h"
 #include "SystemClock.h"
 #include "TextView.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Formatter.h"
 #include "java/util/IllegalFormatException.h"
 #include "java/util/Locale.h"
 
-@class JavaLangStringBuilder;
-@class JavaUtilFormatter;
-@class JavaUtilLocale;
-@protocol JavaLangRunnable;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADChronometer () {
  @public
-  jlong mBase_;
-  jlong mNow_;
-  jboolean mVisible_;
-  jboolean mStarted_;
-  jboolean mRunning_;
-  jboolean mLogged_;
+  int64_t mBase_;
+  int64_t mNow_;
+  bool mVisible_;
+  bool mStarted_;
+  bool mRunning_;
+  bool mLogged_;
   NSString *mFormat_;
   JavaUtilFormatter *mFormatter_;
   JavaUtilLocale *mFormatterLocale_;
@@ -41,13 +51,13 @@
   JavaLangStringBuilder *mFormatBuilder_;
   id<ADChronometer_OnChronometerTickListener> mOnChronometerTickListener_;
   JavaLangStringBuilder *mRecycle_;
-  jboolean mCountDown_;
+  bool mCountDown_;
   id<JavaLangRunnable> mTickRunnable_Chronometer_;
 }
 
 - (void)init__ OBJC_METHOD_FAMILY_NONE;
 
-- (void)updateTextWithLong:(jlong)now;
+- (void)updateTextWithLong:(int64_t)now;
 
 - (void)updateRunning;
 
@@ -66,17 +76,17 @@ inline NSString *ADChronometer_get_TAG(void);
 static NSString *ADChronometer_TAG = @"Chronometer";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADChronometer, TAG, NSString *)
 
-inline jint ADChronometer_get_MIN_IN_SEC(void);
+inline int32_t ADChronometer_get_MIN_IN_SEC(void);
 #define ADChronometer_MIN_IN_SEC 60
-J2OBJC_STATIC_FIELD_CONSTANT(ADChronometer, MIN_IN_SEC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADChronometer, MIN_IN_SEC, int32_t)
 
-inline jint ADChronometer_get_HOUR_IN_SEC(void);
+inline int32_t ADChronometer_get_HOUR_IN_SEC(void);
 #define ADChronometer_HOUR_IN_SEC 3600
-J2OBJC_STATIC_FIELD_CONSTANT(ADChronometer, HOUR_IN_SEC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADChronometer, HOUR_IN_SEC, int32_t)
 
 __attribute__((unused)) static void ADChronometer_init__(ADChronometer *self);
 
-__attribute__((unused)) static void ADChronometer_updateTextWithLong_(ADChronometer *self, jlong now);
+__attribute__((unused)) static void ADChronometer_updateTextWithLong_(ADChronometer *self, int64_t now);
 
 __attribute__((unused)) static void ADChronometer_updateRunning(ADChronometer *self);
 
@@ -86,7 +96,7 @@ __attribute__((unused)) static void ADChronometer_updateRunning(ADChronometer *s
 
 @interface ADChronometer_TickableRunnable : NSObject < JavaLangRunnable > {
  @public
-  __unsafe_unretained ADChronometer *this$0_;
+  WEAK_ ADChronometer *this$0_;
 }
 
 - (instancetype)initWithADChronometer:(ADChronometer *)outer$;
@@ -105,28 +115,29 @@ __attribute__((unused)) static ADChronometer_TickableRunnable *create_ADChronome
 
 J2OBJC_TYPE_LITERAL_HEADER(ADChronometer_TickableRunnable)
 
+
 @implementation ADChronometer
 
 - (void)init__ {
   ADChronometer_init__(self);
 }
 
-- (void)setCountDownWithBoolean:(jboolean)countDown {
+- (void)setCountDownWithBoolean:(bool)countDown {
   mCountDown_ = countDown;
   ADChronometer_updateTextWithLong_(self, ADSystemClock_elapsedRealtime());
 }
 
-- (jboolean)isCountDown {
+- (bool)isCountDown {
   return mCountDown_;
 }
 
-- (void)setBaseWithLong:(jlong)base {
+- (void)setBaseWithLong:(int64_t)base {
   mBase_ = base;
   [self dispatchChronometerTick];
   ADChronometer_updateTextWithLong_(self, ADSystemClock_elapsedRealtime());
 }
 
-- (jlong)getBase {
+- (int64_t)getBase {
   return mBase_;
 }
 
@@ -159,12 +170,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADChronometer_TickableRunnable)
   ADChronometer_updateRunning(self);
 }
 
-- (void)setStartedWithBoolean:(jboolean)started {
+- (void)setStartedWithBoolean:(bool)started {
   mStarted_ = started;
   ADChronometer_updateRunning(self);
 }
 
-- (void)updateTextWithLong:(jlong)now {
+- (void)updateTextWithLong:(int64_t)now {
   ADChronometer_updateTextWithLong_(self, now);
 }
 
@@ -273,12 +284,12 @@ void ADChronometer_init__(ADChronometer *self) {
   ADChronometer_updateTextWithLong_(self, self->mBase_);
 }
 
-void ADChronometer_updateTextWithLong_(ADChronometer *self, jlong now) {
+void ADChronometer_updateTextWithLong_(ADChronometer *self, int64_t now) {
   @synchronized(self) {
     self->mNow_ = now;
-    jlong seconds = self->mCountDown_ ? self->mBase_ - now : now - self->mBase_;
+    int64_t seconds = self->mCountDown_ ? self->mBase_ - now : now - self->mBase_;
     seconds /= 1000;
-    jboolean negative = false;
+    bool negative = false;
     if (seconds < 0) {
       seconds = -seconds;
       negative = true;
@@ -311,7 +322,7 @@ void ADChronometer_updateTextWithLong_(ADChronometer *self, jlong now) {
 }
 
 void ADChronometer_updateRunning(ADChronometer *self) {
-  jboolean running = self->mVisible_ && self->mStarted_ && [self isShown];
+  bool running = self->mVisible_ && self->mStarted_ && [self isShown];
   if (running != self->mRunning_) {
     if (running) {
       ADChronometer_updateTextWithLong_(self, ADSystemClock_elapsedRealtime());
@@ -333,6 +344,8 @@ void ADChronometer_initWithASIWidget_(ADChronometer *self, id<ASIWidget> widget)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADChronometer)
+
+J2OBJC_NAME_MAPPING(ADChronometer, "r.android.widget", "AD")
 
 @implementation ADChronometer_OnChronometerTickListener
 

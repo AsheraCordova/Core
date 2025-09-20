@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\HTMLModels.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HTMLModels")
@@ -16,103 +17,106 @@
 #if !defined (TSHTMLModels_) && (INCLUDE_ALL_HTMLModels || defined(INCLUDE_TSHTMLModels))
 #define TSHTMLModels_
 
+@class JavaLangInteger;
+
 @protocol TSHTMLModels < JavaObject >
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(TSHTMLModels)
 
-inline jint TSHTMLModels_get_M_AREA(void);
+inline int32_t TSHTMLModels_get_M_AREA(void);
 #define TSHTMLModels_M_AREA 2
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_AREA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_AREA, int32_t)
 
-inline jint TSHTMLModels_get_M_BLOCK(void);
+inline int32_t TSHTMLModels_get_M_BLOCK(void);
 #define TSHTMLModels_M_BLOCK 4
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_BLOCK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_BLOCK, int32_t)
 
-inline jint TSHTMLModels_get_M_BLOCKINLINE(void);
+inline int32_t TSHTMLModels_get_M_BLOCKINLINE(void);
 #define TSHTMLModels_M_BLOCKINLINE 8
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_BLOCKINLINE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_BLOCKINLINE, int32_t)
 
-inline jint TSHTMLModels_get_M_BODY(void);
+inline int32_t TSHTMLModels_get_M_BODY(void);
 #define TSHTMLModels_M_BODY 16
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_BODY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_BODY, int32_t)
 
-inline jint TSHTMLModels_get_M_CELL(void);
+inline int32_t TSHTMLModels_get_M_CELL(void);
 #define TSHTMLModels_M_CELL 32
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_CELL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_CELL, int32_t)
 
-inline jint TSHTMLModels_get_M_COL(void);
+inline int32_t TSHTMLModels_get_M_COL(void);
 #define TSHTMLModels_M_COL 64
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_COL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_COL, int32_t)
 
-inline jint TSHTMLModels_get_M_DEF(void);
+inline int32_t TSHTMLModels_get_M_DEF(void);
 #define TSHTMLModels_M_DEF 128
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_DEF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_DEF, int32_t)
 
-inline jint TSHTMLModels_get_M_FORM(void);
+inline int32_t TSHTMLModels_get_M_FORM(void);
 #define TSHTMLModels_M_FORM 256
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_FORM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_FORM, int32_t)
 
-inline jint TSHTMLModels_get_M_FRAME(void);
+inline int32_t TSHTMLModels_get_M_FRAME(void);
 #define TSHTMLModels_M_FRAME 512
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_FRAME, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_FRAME, int32_t)
 
-inline jint TSHTMLModels_get_M_HEAD(void);
+inline int32_t TSHTMLModels_get_M_HEAD(void);
 #define TSHTMLModels_M_HEAD 1024
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_HEAD, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_HEAD, int32_t)
 
-inline jint TSHTMLModels_get_M_HTML(void);
+inline int32_t TSHTMLModels_get_M_HTML(void);
 #define TSHTMLModels_M_HTML 2048
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_HTML, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_HTML, int32_t)
 
-inline jint TSHTMLModels_get_M_INLINE(void);
+inline int32_t TSHTMLModels_get_M_INLINE(void);
 #define TSHTMLModels_M_INLINE 4096
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_INLINE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_INLINE, int32_t)
 
-inline jint TSHTMLModels_get_M_LEGEND(void);
+inline int32_t TSHTMLModels_get_M_LEGEND(void);
 #define TSHTMLModels_M_LEGEND 8192
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_LEGEND, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_LEGEND, int32_t)
 
-inline jint TSHTMLModels_get_M_LI(void);
+inline int32_t TSHTMLModels_get_M_LI(void);
 #define TSHTMLModels_M_LI 16384
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_LI, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_LI, int32_t)
 
-inline jint TSHTMLModels_get_M_NOLINK(void);
+inline int32_t TSHTMLModels_get_M_NOLINK(void);
 #define TSHTMLModels_M_NOLINK 32768
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_NOLINK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_NOLINK, int32_t)
 
-inline jint TSHTMLModels_get_M_OPTION(void);
+inline int32_t TSHTMLModels_get_M_OPTION(void);
 #define TSHTMLModels_M_OPTION 65536
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_OPTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_OPTION, int32_t)
 
-inline jint TSHTMLModels_get_M_OPTIONS(void);
+inline int32_t TSHTMLModels_get_M_OPTIONS(void);
 #define TSHTMLModels_M_OPTIONS 131072
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_OPTIONS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_OPTIONS, int32_t)
 
-inline jint TSHTMLModels_get_M_P(void);
+inline int32_t TSHTMLModels_get_M_P(void);
 #define TSHTMLModels_M_P 262144
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_P, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_P, int32_t)
 
-inline jint TSHTMLModels_get_M_PARAM(void);
+inline int32_t TSHTMLModels_get_M_PARAM(void);
 #define TSHTMLModels_M_PARAM 524288
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_PARAM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_PARAM, int32_t)
 
-inline jint TSHTMLModels_get_M_TABLE(void);
+inline int32_t TSHTMLModels_get_M_TABLE(void);
 #define TSHTMLModels_M_TABLE 1048576
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_TABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_TABLE, int32_t)
 
-inline jint TSHTMLModels_get_M_TABULAR(void);
+inline int32_t TSHTMLModels_get_M_TABULAR(void);
 #define TSHTMLModels_M_TABULAR 2097152
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_TABULAR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_TABULAR, int32_t)
 
-inline jint TSHTMLModels_get_M_TR(void);
+inline int32_t TSHTMLModels_get_M_TR(void);
 #define TSHTMLModels_M_TR 4194304
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_TR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLModels, M_TR, int32_t)
 
 J2OBJC_TYPE_LITERAL_HEADER(TSHTMLModels)
 
 #define RepackagedOrgCcilCowanTagsoupHTMLModels TSHTMLModels
+
 
 #endif
 

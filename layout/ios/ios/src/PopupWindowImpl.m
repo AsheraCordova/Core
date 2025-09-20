@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\PopupWindowImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseWidget.h"
 #include "Event.h"
 #include "EventBus.h"
@@ -39,18 +44,23 @@
 #include <UIKit/UIKit.h>
 #include "ASUIView.h"
 
+
 @class ASPopupWindowImpl_OutsideEventListener;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASPopupWindowImpl () {
  @public
   ADView *viewStub_;
-  jint width_;
-  jint height_;
+  int32_t width_;
+  int32_t height_;
   id<ASIWidget> contentView_;
   ADPopupWindow *popupWindow_;
-  jboolean outsideTouchable_;
+  bool outsideTouchable_;
   ASPopupWindowImpl_OutsideEventListener *outsideEventListener_;
 }
 
@@ -162,6 +172,7 @@ __attribute__((unused)) static ASPopupWindowImpl_OnDismissListener *create_ASPop
 
 J2OBJC_TYPE_LITERAL_HEADER(ASPopupWindowImpl_OnDismissListener)
 
+
 @interface ASPopupWindowImpl_OutsideEventListener : ASEventBusHandler {
  @public
   ASPopupWindowImpl *window_;
@@ -185,6 +196,7 @@ __attribute__((unused)) static ASPopupWindowImpl_OutsideEventListener *new_ASPop
 __attribute__((unused)) static ASPopupWindowImpl_OutsideEventListener *create_ASPopupWindowImpl_OutsideEventListener_initWithASPopupWindowImpl_withNSString_(ASPopupWindowImpl *window, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASPopupWindowImpl_OutsideEventListener)
+
 
 NSString *ASPopupWindowImpl_LOCAL_NAME = @"com.ashera.layout.PopupWindow";
 NSString *ASPopupWindowImpl_GROUP_NAME = @"PopupWindow";
@@ -376,7 +388,7 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams 
   ASPopupWindowImpl_setOutsideTouchableWithId_(self, objValue);
 }
 
-- (void)addOutsideTouchListenerWithBoolean:(jboolean)add {
+- (void)addOutsideTouchListenerWithBoolean:(bool)add {
   ASEvent_StandardEvents *type = JreLoadEnum(ASEvent_StandardEvents, outsideClicked);
   if (outsideEventListener_ != nil) {
     [((ASEventBus *) nil_chk([((id<ASIFragment>) nil_chk(fragment_)) getEventBus])) offWithASEventBusHandlerArray:[IOSObjectArray newArrayWithObjects:(id[]){ outsideEventListener_ } count:1 type:ASEventBusHandler_class_()]];
@@ -501,7 +513,7 @@ void ASPopupWindowImpl_showAtLocationWithId_withId_withId_(ASPopupWindowImpl *se
 
 void ASPopupWindowImpl_applyGravityWithId_withADRelativeLayout_LayoutParams_(ASPopupWindowImpl *self, id gravity, ADRelativeLayout_LayoutParams *layoutParams) {
   if (gravity != nil) {
-    jint major = [((JavaLangInteger *) cast_chk(gravity, [JavaLangInteger class])) intValue] & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+    int32_t major = [((JavaLangInteger *) cast_chk(gravity, [JavaLangInteger class])) intValue] & ASGravityConverter_VERTICAL_GRAVITY_MASK;
     switch (major) {
       case ASGravityConverter_TOP:
       [((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) addRuleWithInt:ADRelativeLayout_ALIGN_TOP withInt:ADRelativeLayout_TRUE];
@@ -516,7 +528,7 @@ void ASPopupWindowImpl_applyGravityWithId_withADRelativeLayout_LayoutParams_(ASP
       [((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) addRuleWithInt:ADRelativeLayout_ALIGN_TOP withInt:ADRelativeLayout_TRUE];
       break;
     }
-    jint minor = [((JavaLangInteger *) cast_chk(gravity, [JavaLangInteger class])) intValue] & ASGravityConverter_HORIZONTAL_GRAVITY_MASK;
+    int32_t minor = [((JavaLangInteger *) cast_chk(gravity, [JavaLangInteger class])) intValue] & ASGravityConverter_HORIZONTAL_GRAVITY_MASK;
     switch (minor) {
       case ASGravityConverter_LEFT:
       [((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams)) addRuleWithInt:ADRelativeLayout_ALIGN_LEFT withInt:ADRelativeLayout_TRUE];
@@ -580,6 +592,8 @@ void ASPopupWindowImpl_moveTopTopWithASIWidget_(ASPopupWindowImpl *self, id<ASIW
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPopupWindowImpl)
+
+J2OBJC_NAME_MAPPING(ASPopupWindowImpl, "com.ashera.layout", "AS")
 
 @implementation ASPopupWindowImpl_ViewExt
 
@@ -687,7 +701,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPopupWindowImpl_ViewExt)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];

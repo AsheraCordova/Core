@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\CommandHelper.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CommandHelper.h"
 #include "IActivity.h"
 #include "IFragment.h"
@@ -10,7 +15,14 @@
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
+#include "java/lang/Integer.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASCommandHelper_SucessCallBack : NSObject
@@ -84,6 +96,8 @@ void ASCommandHelper_executeCommandWithASIActivity_withId_withNSString_withASCom
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCommandHelper)
+
+J2OBJC_NAME_MAPPING(ASCommandHelper, "com.ashera.utils", "AS")
 
 @implementation ASCommandHelper_SucessCallBack
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\MainThread.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MainThread")
@@ -21,10 +22,13 @@
 #include "java/lang/annotation/Annotation.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADMainThread < JavaLangAnnotationAnnotation >
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -41,6 +45,7 @@ FOUNDATION_EXPORT id<ADMainThread> create_ADMainThread(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADMainThread)
 
 #define RAndroidAnnotationMainThread ADMainThread
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\Evaluator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CssResult.h"
 #include "CssTree.h"
 #include "Evaluator.h"
@@ -20,26 +25,34 @@
 #include "java/io/Reader.h"
 #include "java/io/StringReader.h"
 #include "java/io/UnsupportedEncodingException.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSEvaluator () {
  @public
-  jint jj_gen_;
+  int32_t jj_gen_;
   IOSIntArray *jj_la1_;
   id<JavaUtilList> jj_expentries_;
   IOSIntArray *jj_expentry_;
-  jint jj_kind_;
+  int32_t jj_kind_;
 }
 
 + (void)jj_la1_init_0;
 
-- (CSSToken *)jj_consume_tokenWithInt:(jint)kind;
+- (CSSToken *)jj_consume_tokenWithInt:(int32_t)kind;
 
 @end
 
@@ -58,7 +71,7 @@ __attribute__((unused)) static void CSSEvaluator_connectionWithCSSCssTree_withNS
 
 __attribute__((unused)) static void CSSEvaluator_jj_la1_init_0(void);
 
-__attribute__((unused)) static CSSToken *CSSEvaluator_jj_consume_tokenWithInt_(CSSEvaluator *self, jint kind);
+__attribute__((unused)) static CSSToken *CSSEvaluator_jj_consume_tokenWithInt_(CSSEvaluator *self, int32_t kind);
 
 @interface CSSEvaluator_1 : NSObject < CSSCssResult >
 
@@ -76,6 +89,7 @@ __attribute__((unused)) static void CSSEvaluator_1_init(CSSEvaluator_1 *self);
 __attribute__((unused)) static CSSEvaluator_1 *new_CSSEvaluator_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static CSSEvaluator_1 *create_CSSEvaluator_1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(CSSEvaluator)
 
@@ -126,7 +140,7 @@ J2OBJC_INITIALIZED_DEFN(CSSEvaluator)
   JreStrongAssignAndConsume(&token_, new_CSSToken_initPackagePrivate());
   JreStrongAssign(&token_->next_, JreStrongAssign(&jj_nt_, [((CSSEvaluatorTokenManager *) nil_chk(token_source_)) getNextToken]));
   jj_gen_ = 0;
-  for (jint i = 0; i < 7; i++) *IOSIntArray_GetRef(nil_chk(jj_la1_), i) = -1;
+  for (int32_t i = 0; i < 7; i++) *IOSIntArray_GetRef(nil_chk(jj_la1_), i) = -1;
 }
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)stream {
@@ -140,7 +154,7 @@ J2OBJC_INITIALIZED_DEFN(CSSEvaluator)
   JreStrongAssignAndConsume(&token_, new_CSSToken_initPackagePrivate());
   JreStrongAssign(&token_->next_, JreStrongAssign(&jj_nt_, [((CSSEvaluatorTokenManager *) nil_chk(token_source_)) getNextToken]));
   jj_gen_ = 0;
-  for (jint i = 0; i < 7; i++) *IOSIntArray_GetRef(nil_chk(jj_la1_), i) = -1;
+  for (int32_t i = 0; i < 7; i++) *IOSIntArray_GetRef(nil_chk(jj_la1_), i) = -1;
 }
 
 - (instancetype)initWithCSSEvaluatorTokenManager:(CSSEvaluatorTokenManager *)tm {
@@ -153,10 +167,10 @@ J2OBJC_INITIALIZED_DEFN(CSSEvaluator)
   JreStrongAssignAndConsume(&token_, new_CSSToken_initPackagePrivate());
   JreStrongAssign(&token_->next_, JreStrongAssign(&jj_nt_, [((CSSEvaluatorTokenManager *) nil_chk(token_source_)) getNextToken]));
   jj_gen_ = 0;
-  for (jint i = 0; i < 7; i++) *IOSIntArray_GetRef(nil_chk(jj_la1_), i) = -1;
+  for (int32_t i = 0; i < 7; i++) *IOSIntArray_GetRef(nil_chk(jj_la1_), i) = -1;
 }
 
-- (CSSToken *)jj_consume_tokenWithInt:(jint)kind {
+- (CSSToken *)jj_consume_tokenWithInt:(int32_t)kind {
   return CSSEvaluator_jj_consume_tokenWithInt_(self, kind);
 }
 
@@ -167,9 +181,9 @@ J2OBJC_INITIALIZED_DEFN(CSSEvaluator)
   return token_;
 }
 
-- (CSSToken *)getTokenWithInt:(jint)index {
+- (CSSToken *)getTokenWithInt:(int32_t)index {
   CSSToken *t = JreRetainedLocalValue(token_);
-  for (jint i = 0; i < index; i++) {
+  for (int32_t i = 0; i < index; i++) {
     if (((CSSToken *) nil_chk(t))->next_ != nil) t = t->next_;
     else t = JreStrongAssign(&t->next_, [((CSSEvaluatorTokenManager *) nil_chk(token_source_)) getNextToken]);
   }
@@ -183,16 +197,16 @@ J2OBJC_INITIALIZED_DEFN(CSSEvaluator)
     *IOSBooleanArray_GetRef(la1tokens, jj_kind_) = true;
     jj_kind_ = -1;
   }
-  for (jint i = 0; i < 7; i++) {
+  for (int32_t i = 0; i < 7; i++) {
     if (IOSIntArray_Get(nil_chk(jj_la1_), i) == jj_gen_) {
-      for (jint j = 0; j < 32; j++) {
+      for (int32_t j = 0; j < 32; j++) {
         if ((IOSIntArray_Get(nil_chk(CSSEvaluator_jj_la1_0), i) & (JreLShift32(1, j))) != 0) {
           *IOSBooleanArray_GetRef(la1tokens, j) = true;
         }
       }
     }
   }
-  for (jint i = 0; i < 19; i++) {
+  for (int32_t i = 0; i < 19; i++) {
     if (IOSBooleanArray_Get(la1tokens, i)) {
       JreStrongAssignAndConsume(&jj_expentry_, [IOSIntArray newArrayWithLength:1]);
       *IOSIntArray_GetRef(jj_expentry_, 0) = i;
@@ -200,7 +214,7 @@ J2OBJC_INITIALIZED_DEFN(CSSEvaluator)
     }
   }
   IOSObjectArray *exptokseq = [IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(jj_expentries_)) size] type:IOSClass_intArray(1)];
-  for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(jj_expentries_)) size]; i++) {
+  for (int32_t i = 0; i < [((id<JavaUtilList>) nil_chk(jj_expentries_)) size]; i++) {
     IOSObjectArray_Set(exptokseq, i, [((id<JavaUtilList>) nil_chk(jj_expentries_)) getWithInt:i]);
   }
   return create_CSSParseException_initWithCSSToken_withIntArray2_withNSStringArray_(token_, exptokseq, JreLoadStatic(CSSEvaluatorConstants, tokenImage));
@@ -432,7 +446,7 @@ void CSSEvaluator_connectionWithCSSCssTree_withNSString_withNSString_(CSSEvaluat
 
 void CSSEvaluator_jj_la1_init_0() {
   CSSEvaluator_initialize();
-  JreStrongAssignAndConsume(&CSSEvaluator_jj_la1_0, [IOSIntArray newArrayWithInts:(jint[]){ (jint) 0x820, (jint) 0x20000, (jint) 0x40, (jint) 0x800, (jint) 0x820, (jint) 0x800, (jint) 0x10800 } count:7]);
+  JreStrongAssignAndConsume(&CSSEvaluator_jj_la1_0, [IOSIntArray newArrayWithInts:(int32_t[]){ (int32_t) 0x820, (int32_t) 0x20000, (int32_t) 0x40, (int32_t) 0x800, (int32_t) 0x820, (int32_t) 0x800, (int32_t) 0x10800 } count:7]);
 }
 
 void CSSEvaluator_initWithJavaIoInputStream_(CSSEvaluator *self, JavaIoInputStream *stream) {
@@ -462,7 +476,7 @@ void CSSEvaluator_initWithJavaIoInputStream_withNSString_(CSSEvaluator *self, Ja
   JreStrongAssignAndConsume(&self->token_, new_CSSToken_initPackagePrivate());
   JreStrongAssign(&self->token_->next_, JreStrongAssign(&self->jj_nt_, [((CSSEvaluatorTokenManager *) nil_chk(self->token_source_)) getNextToken]));
   self->jj_gen_ = 0;
-  for (jint i = 0; i < 7; i++) *IOSIntArray_GetRef(self->jj_la1_, i) = -1;
+  for (int32_t i = 0; i < 7; i++) *IOSIntArray_GetRef(self->jj_la1_, i) = -1;
 }
 
 CSSEvaluator *new_CSSEvaluator_initWithJavaIoInputStream_withNSString_(JavaIoInputStream *stream, NSString *encoding) {
@@ -483,7 +497,7 @@ void CSSEvaluator_initWithJavaIoReader_(CSSEvaluator *self, JavaIoReader *stream
   JreStrongAssignAndConsume(&self->token_, new_CSSToken_initPackagePrivate());
   JreStrongAssign(&self->token_->next_, JreStrongAssign(&self->jj_nt_, [((CSSEvaluatorTokenManager *) nil_chk(self->token_source_)) getNextToken]));
   self->jj_gen_ = 0;
-  for (jint i = 0; i < 7; i++) *IOSIntArray_GetRef(self->jj_la1_, i) = -1;
+  for (int32_t i = 0; i < 7; i++) *IOSIntArray_GetRef(self->jj_la1_, i) = -1;
 }
 
 CSSEvaluator *new_CSSEvaluator_initWithJavaIoReader_(JavaIoReader *stream) {
@@ -503,7 +517,7 @@ void CSSEvaluator_initWithCSSEvaluatorTokenManager_(CSSEvaluator *self, CSSEvalu
   JreStrongAssignAndConsume(&self->token_, new_CSSToken_initPackagePrivate());
   JreStrongAssign(&self->token_->next_, JreStrongAssign(&self->jj_nt_, [((CSSEvaluatorTokenManager *) nil_chk(self->token_source_)) getNextToken]));
   self->jj_gen_ = 0;
-  for (jint i = 0; i < 7; i++) *IOSIntArray_GetRef(self->jj_la1_, i) = -1;
+  for (int32_t i = 0; i < 7; i++) *IOSIntArray_GetRef(self->jj_la1_, i) = -1;
 }
 
 CSSEvaluator *new_CSSEvaluator_initWithCSSEvaluatorTokenManager_(CSSEvaluatorTokenManager *tm) {
@@ -514,7 +528,7 @@ CSSEvaluator *create_CSSEvaluator_initWithCSSEvaluatorTokenManager_(CSSEvaluator
   J2OBJC_CREATE_IMPL(CSSEvaluator, initWithCSSEvaluatorTokenManager_, tm)
 }
 
-CSSToken *CSSEvaluator_jj_consume_tokenWithInt_(CSSEvaluator *self, jint kind) {
+CSSToken *CSSEvaluator_jj_consume_tokenWithInt_(CSSEvaluator *self, int32_t kind) {
   CSSToken *oldToken = JreRetainedLocalValue(self->token_);
   if (((CSSToken *) (JreStrongAssign(&self->token_, self->jj_nt_)))->next_ != nil) JreStrongAssign(&self->jj_nt_, ((CSSToken *) nil_chk(self->jj_nt_))->next_);
   else JreStrongAssign(&self->jj_nt_, JreStrongAssign(&((CSSToken *) nil_chk(self->jj_nt_))->next_, [((CSSEvaluatorTokenManager *) nil_chk(self->token_source_)) getNextToken]));
@@ -529,6 +543,8 @@ CSSToken *CSSEvaluator_jj_consume_tokenWithInt_(CSSEvaluator *self, jint kind) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(CSSEvaluator)
+
+J2OBJC_NAME_MAPPING(CSSEvaluator, "com.ashera.css", "CSS")
 
 @implementation CSSEvaluator_1
 
@@ -556,7 +572,7 @@ withCSSCssTree_Attribute:(CSSCssTree_Attribute *)value {
   methods[1].selector = @selector(putWithNSString:withCSSCssTree_Attribute:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "put", "LNSString;LCSSCssTree_Attribute;", "LCSSEvaluator;", "mainWithNSStringArray:" };
-  static const J2ObjcClassInfo _CSSEvaluator_1 = { "", "com.ashera.css", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _CSSEvaluator_1 = { "", "com.ashera.css", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, -1, -1 };
   return &_CSSEvaluator_1;
 }
 

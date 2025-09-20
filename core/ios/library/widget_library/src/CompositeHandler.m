@@ -3,15 +3,26 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\CompositeHandler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CompositeHandler.h"
 #include "EventBusHandler.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASCompositeHandler () {
@@ -29,9 +40,9 @@ J2OBJC_FIELD_SETTER(ASCompositeHandler, _accumulator_, id<ASEventBusHandler_OnCo
 
 @interface ASCompositeHandler_AccumulatingListener : NSObject < ASEventBusHandler_OnCompletedListener > {
  @public
-  __unsafe_unretained ASCompositeHandler *this$0_;
-  jint _size_;
-  jint _accumulated_;
+  WEAK_ ASCompositeHandler *this$0_;
+  int32_t _size_;
+  int32_t _accumulated_;
 }
 
 - (instancetype)initWithASCompositeHandler:(ASCompositeHandler *)outer$;
@@ -49,6 +60,7 @@ __attribute__((unused)) static ASCompositeHandler_AccumulatingListener *new_ASCo
 __attribute__((unused)) static ASCompositeHandler_AccumulatingListener *create_ASCompositeHandler_AccumulatingListener_initWithASCompositeHandler_(ASCompositeHandler *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCompositeHandler_AccumulatingListener)
+
 
 @implementation ASCompositeHandler
 
@@ -141,6 +153,8 @@ ASCompositeHandler *create_ASCompositeHandler_initWithNSString_withASEventBusHan
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCompositeHandler)
+
+J2OBJC_NAME_MAPPING(ASCompositeHandler, "com.ashera.widget.bus", "AS")
 
 @implementation ASCompositeHandler_AccumulatingListener
 

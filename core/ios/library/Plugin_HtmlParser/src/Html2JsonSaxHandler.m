@@ -3,12 +3,18 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\Html2JsonSaxHandler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Html2JsonSaxHandler.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/ArrayDeque.h"
@@ -22,9 +28,12 @@
 #include "org/xml/sax/Attributes.h"
 #include "org/xml/sax/Locator.h"
 
-@class JavaLangStringBuilder;
-@protocol JavaUtilDeque;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASHtml2JsonSaxHandler () {
@@ -69,7 +78,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   [((JavaLangStringBuilder *) nil_chk(textBuffer_)) setLengthWithInt:0];
   id<JavaUtilMap> node = create_JavaUtilLinkedHashMap_init();
-  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(attributes)) getLength]; i++) {
+  for (int32_t i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(attributes)) getLength]; i++) {
     [node putWithId:JreStrcat("C$", '@', [attributes getQNameWithInt:i]) withId:[attributes getValueWithInt:i]];
   }
   if (![((id<JavaUtilDeque>) nil_chk(stack_)) isEmpty]) {
@@ -97,8 +106,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length {
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length {
   [((JavaLangStringBuilder *) nil_chk(textBuffer_)) appendWithCharArray:ch withInt:start withInt:length];
 }
 
@@ -109,7 +118,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return;
   }
   NSString *text = [((NSString *) nil_chk([((JavaLangStringBuilder *) nil_chk(textBuffer_)) description])) java_trim];
-  if (![((NSString *) nil_chk(text)) java_isEmpty]) {
+  if (![((NSString *) nil_chk(text)) isEmpty]) {
     id<JavaUtilMap> current = JreRetainedLocalValue([((id<JavaUtilDeque>) nil_chk(stack_)) peek]);
     id existing = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(current)) getWithId:@"#text"]);
     if (existing == nil) {
@@ -160,8 +169,8 @@ withJavaLangStringBuilder:(JavaLangStringBuilder *)sb {
 }
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length {
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length {
 }
 
 - (void)processingInstructionWithNSString:(NSString *)target
@@ -258,7 +267,7 @@ void ASHtml2JsonSaxHandler_writeJsonWithId_withJavaLangStringBuilder_(ASHtml2Jso
   }
   else if ([JavaUtilMap_class_() isInstance:v]) {
     [((JavaLangStringBuilder *) nil_chk(sb)) appendWithChar:'{'];
-    jboolean first = true;
+    bool first = true;
     for (id<JavaUtilMap_Entry> __strong e in nil_chk([((id<JavaUtilMap>) cast_check(v, JavaUtilMap_class_())) entrySet])) {
       if (!first) [sb appendWithChar:','];
       first = false;
@@ -269,7 +278,7 @@ void ASHtml2JsonSaxHandler_writeJsonWithId_withJavaLangStringBuilder_(ASHtml2Jso
   }
   else if ([JavaUtilList_class_() isInstance:v]) {
     [((JavaLangStringBuilder *) nil_chk(sb)) appendWithChar:'['];
-    jboolean first = true;
+    bool first = true;
     for (id __strong item in (id<JavaUtilList>) cast_check(v, JavaUtilList_class_())) {
       if (!first) [sb appendWithChar:','];
       first = false;
@@ -284,8 +293,8 @@ void ASHtml2JsonSaxHandler_writeJsonWithId_withJavaLangStringBuilder_(ASHtml2Jso
 
 NSString *ASHtml2JsonSaxHandler_escapeWithNSString_(ASHtml2JsonSaxHandler *self, NSString *s) {
   JavaLangStringBuilder *out = create_JavaLangStringBuilder_initWithInt_([((NSString *) nil_chk(s)) java_length] + 16);
-  for (jint i = 0; i < [s java_length]; i++) {
-    jchar c = [s charAtWithInt:i];
+  for (int32_t i = 0; i < [s java_length]; i++) {
+    unichar c = [s charAtWithInt:i];
     switch (c) {
       case '"':
       [out appendWithNSString:@"\\\""];
@@ -309,7 +318,7 @@ NSString *ASHtml2JsonSaxHandler_escapeWithNSString_(ASHtml2JsonSaxHandler *self,
       [out appendWithNSString:@"\\t"];
       break;
       default:
-      if (c < (jint) 0x20) [out appendWithNSString:NSString_java_formatWithNSString_withNSObjectArray_(@"\\u%04x", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_((jint) c) } count:1 type:NSObject_class_()])];
+      if (c < (int32_t) 0x20) [out appendWithNSString:NSString_java_formatWithNSString_withNSObjectArray_(@"\\u%04x", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_((int32_t) c) } count:1 type:NSObject_class_()])];
       else [out appendWithChar:c];
     }
   }
@@ -317,3 +326,5 @@ NSString *ASHtml2JsonSaxHandler_escapeWithNSString_(ASHtml2JsonSaxHandler *self,
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHtml2JsonSaxHandler)
+
+J2OBJC_NAME_MAPPING(ASHtml2JsonSaxHandler, "com.ashera.parser.html", "AS")

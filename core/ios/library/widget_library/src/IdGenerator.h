@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IdGenerator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IdGenerator")
@@ -16,6 +17,9 @@
 #if !defined (ASIdGenerator_) && (INCLUDE_ALL_IdGenerator || defined(INCLUDE_ASIdGenerator))
 #define ASIdGenerator_
 
+@class JavaLangInteger;
+@class NSString;
+
 @interface ASIdGenerator : NSObject
 
 #pragma mark Public
@@ -27,12 +31,12 @@
  This value will not collide with ID values generated at build time by aapt for R.id.
  @return a generated ID value
  */
-+ (jint)getIdWithNSString:(NSString *)id_;
++ (int32_t)getIdWithNSString:(NSString *)id_;
 
-+ (NSString *)getNameWithInt:(jint)id_;
++ (NSString *)getNameWithInt:(int32_t)id_;
 
 + (void)setIdWithNSString:(NSString *)name
-                  withInt:(jint)id_;
+                  withInt:(int32_t)id_;
 
 @end
 
@@ -44,15 +48,16 @@ FOUNDATION_EXPORT ASIdGenerator *new_ASIdGenerator_init(void) NS_RETURNS_RETAINE
 
 FOUNDATION_EXPORT ASIdGenerator *create_ASIdGenerator_init(void);
 
-FOUNDATION_EXPORT NSString *ASIdGenerator_getNameWithInt_(jint id_);
+FOUNDATION_EXPORT NSString *ASIdGenerator_getNameWithInt_(int32_t id_);
 
-FOUNDATION_EXPORT void ASIdGenerator_setIdWithNSString_withInt_(NSString *name, jint id_);
+FOUNDATION_EXPORT void ASIdGenerator_setIdWithNSString_withInt_(NSString *name, int32_t id_);
 
-FOUNDATION_EXPORT jint ASIdGenerator_getIdWithNSString_(NSString *id_);
+FOUNDATION_EXPORT int32_t ASIdGenerator_getIdWithNSString_(NSString *id_);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASIdGenerator)
 
 @compatibility_alias ComAsheraWidgetIdGenerator ASIdGenerator;
+
 
 #endif
 

@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierHistory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BezierHistory.h"
 #include "J2ObjC_source.h"
 #include "PointF.h"
+#include "java/lang/Float.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADBezierHistory
@@ -17,18 +29,18 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setStartPointWithFloat:(jfloat)x
-                     withFloat:(jfloat)y {
+- (void)setStartPointWithFloat:(float)x
+                     withFloat:(float)y {
   [((ADPointF *) nil_chk(startPoint_)) setWithFloat:x withFloat:y];
 }
 
-- (void)setLastPointWithFloat:(jfloat)x
-                    withFloat:(jfloat)y {
+- (void)setLastPointWithFloat:(float)x
+                    withFloat:(float)y {
   [((ADPointF *) nil_chk(lastPoint_)) setWithFloat:x withFloat:y];
 }
 
-- (void)setLastKnotWithFloat:(jfloat)x
-                   withFloat:(jfloat)y {
+- (void)setLastKnotWithFloat:(float)x
+                   withFloat:(float)y {
   [((ADPointF *) nil_chk(lastKnot_)) setWithFloat:x withFloat:y];
 }
 
@@ -82,3 +94,5 @@ ADBezierHistory *create_ADBezierHistory_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBezierHistory)
+
+J2OBJC_NAME_MAPPING(ADBezierHistory, "r.android.graphics", "AD")

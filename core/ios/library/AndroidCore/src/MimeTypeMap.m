@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\webkit\MimeTypeMap.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "MimeTypeMap.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/regex/Pattern.h"
 
-@class JavaUtilHashMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADMimeTypeMap () {
@@ -78,7 +91,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADMimeTypeMap_loadEntryWithNSString_withNSString_(self, mimeType, extension);
 }
 
-- (jboolean)hasMimeTypeWithNSString:(NSString *)mimeType {
+- (bool)hasMimeTypeWithNSString:(NSString *)mimeType {
   if (mimeType != nil && [mimeType java_length] > 0) {
     return [((JavaUtilHashMap *) nil_chk(mMimeTypeToExtensionMap_)) containsKeyWithId:mimeType];
   }
@@ -96,7 +109,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADMimeTypeMap_mimeTypeFromExtensionWithNSString_(extension);
 }
 
-- (jboolean)hasExtensionWithNSString:(NSString *)extension {
+- (bool)hasExtensionWithNSString:(NSString *)extension {
   if (extension != nil && [extension java_length] > 0) {
     return [((JavaUtilHashMap *) nil_chk(mExtensionToMimeTypeMap_)) containsKeyWithId:extension];
   }
@@ -174,14 +187,14 @@ ADMimeTypeMap *create_ADMimeTypeMap_init() {
 NSString *ADMimeTypeMap_getFileExtensionFromUrlWithNSString_(NSString *url) {
   ADMimeTypeMap_initialize();
   if (url != nil && [url java_length] > 0) {
-    jint query = [url java_lastIndexOf:'?'];
+    int32_t query = [url java_lastIndexOf:'?'];
     if (query > 0) {
       url = [url java_substring:0 endIndex:query];
     }
-    jint filenamePos = [((NSString *) nil_chk(url)) java_lastIndexOf:'/'];
+    int32_t filenamePos = [((NSString *) nil_chk(url)) java_lastIndexOf:'/'];
     NSString *filename = 0 <= filenamePos ? [url java_substring:filenamePos + 1] : url;
     if ([filename java_length] > 0 && JavaUtilRegexPattern_matchesWithNSString_withJavaLangCharSequence_(@"[a-zA-Z_0-9\\.\\-\\(\\)\\%]+", filename)) {
-      jint dotPos = [filename java_lastIndexOf:'.'];
+      int32_t dotPos = [filename java_lastIndexOf:'.'];
       if (0 <= dotPos) {
         return [filename java_substring:dotPos + 1];
       }
@@ -512,3 +525,5 @@ ADMimeTypeMap *ADMimeTypeMap_getSingleton() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMimeTypeMap)
+
+J2OBJC_NAME_MAPPING(ADMimeTypeMap, "r.android.webkit", "AD")

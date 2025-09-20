@@ -3,11 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\FloatProperty.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FloatProperty.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "Property.h"
 #include "java/lang/Float.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -20,7 +31,7 @@
 }
 
 - (void)setValueWithId:(id)object
-             withFloat:(jfloat)value {
+             withFloat:(float)value {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
 }
@@ -55,3 +66,5 @@ void ADFloatProperty_initWithNSString_(ADFloatProperty *self, NSString *name) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADFloatProperty)
+
+J2OBJC_NAME_MAPPING(ADFloatProperty, "r.android.util", "AD")

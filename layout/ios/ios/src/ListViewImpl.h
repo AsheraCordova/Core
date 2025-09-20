@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ListViewImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ListViewImpl")
@@ -30,6 +31,10 @@
 @class ASLoopParam;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangDouble;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -49,19 +54,19 @@
                     withNSString:(NSString *)localname;
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index;
+                 withInt:(int32_t)index;
 
 - (void)addAllModelWithId:(id)objValue;
 
-- (jboolean)areWidgetItemsRecycled;
+- (bool)areWidgetItemsRecycled;
 
 - (id)asNativeWidget;
 
 - (id)asWidget;
 
-- (jint)calculateHeightOfRowWithInt:(jint)index;
+- (int32_t)calculateHeightOfRowWithInt:(int32_t)index;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)clear;
 
@@ -152,21 +157,21 @@
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
 
-- (jdouble)nativeGetScrollXWithId:(id)view;
+- (double)nativeGetScrollXWithId:(id)view;
 
-- (jdouble)nativeGetScrollYWithId:(id)view;
+- (double)nativeGetScrollYWithId:(id)view;
 
 - (void)nativeSetScrollXWithId:(id)view
-                       withInt:(jint)value;
+                       withInt:(int32_t)value;
 
 - (void)nativeSetScrollYWithId:(id)view
-                       withInt:(jint)value;
+                       withInt:(int32_t)value;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
 - (void)notifyDataSetChanged;
 
-- (jboolean)removeWithInt:(jint)index;
+- (bool)removeWithInt:(int32_t)index;
 
 - (void)requestLayout;
 
@@ -262,7 +267,7 @@
 - (void)setSeparatorColorWithId:(id)nativeWidget
                          withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)updateModelToEventMapWithJavaUtilMap:(id<JavaUtilMap>)eventMap
                                 withNSString:(NSString *)eventType
@@ -272,7 +277,7 @@
 
 - (void)addObjectWithASLoopParam:(ASLoopParam *)childModel
                     withNSString:(NSString *)modelIdPath
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                     withNSString:(NSString *)currentLoopVar;
 
 - (void)clearModel;
@@ -320,6 +325,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl)
 
 @compatibility_alias ComAsheraLayoutListViewImpl ASListViewImpl;
 
+
 #endif
 
 #if !defined (ASListViewImpl_ChoiceMode_) && (INCLUDE_ALL_ListViewImpl || defined(INCLUDE_ASListViewImpl_ChoiceMode))
@@ -355,6 +361,7 @@ FOUNDATION_EXPORT ASListViewImpl_ChoiceMode *new_ASListViewImpl_ChoiceMode_init(
 FOUNDATION_EXPORT ASListViewImpl_ChoiceMode *create_ASListViewImpl_ChoiceMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ChoiceMode)
+
 
 #endif
 
@@ -392,6 +399,7 @@ FOUNDATION_EXPORT ASListViewImpl_IosSeparatorStyle *create_ASListViewImpl_IosSep
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosSeparatorStyle)
 
+
 #endif
 
 #if !defined (ASListViewImpl_IosCellSelectionStyle_) && (INCLUDE_ALL_ListViewImpl || defined(INCLUDE_ASListViewImpl_IosCellSelectionStyle))
@@ -428,6 +436,7 @@ FOUNDATION_EXPORT ASListViewImpl_IosCellSelectionStyle *create_ASListViewImpl_Io
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 
+
 #endif
 
 #if !defined (ASListViewImpl_ListViewExt_) && (INCLUDE_ALL_ListViewImpl || defined(INCLUDE_ASListViewImpl_ListViewExt))
@@ -451,6 +460,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -471,9 +483,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
@@ -485,20 +497,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)measureHeightOfChildrenWithInt:(jint)widthMeasureSpec
-                               withInt:(jint)startPosition
-                               withInt:(jint)endPosition
-                               withInt:(jint)maxHeight
-                               withInt:(jint)disallowPartialChildPosition;
+- (int32_t)measureHeightOfChildrenWithInt:(int32_t)widthMeasureSpec
+                                  withInt:(int32_t)startPosition
+                                  withInt:(int32_t)endPosition
+                                  withInt:(int32_t)maxHeight
+                                  withInt:(int32_t)disallowPartialChildPosition;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -508,9 +520,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setMaxHeightWithInt:(jint)height;
+- (void)setMaxHeightWithInt:(int32_t)height;
 
-- (void)setMaxWidthWithInt:(jint)width;
+- (void)setMaxWidthWithInt:(int32_t)width;
 
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
@@ -525,7 +537,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -541,16 +553,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -567,6 +579,7 @@ FOUNDATION_EXPORT ASListViewImpl_ListViewExt *new_ASListViewImpl_ListViewExt_ini
 FOUNDATION_EXPORT ASListViewImpl_ListViewExt *create_ASListViewImpl_ListViewExt_initWithASListViewImpl_(ASListViewImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListViewExt)
+
 
 #endif
 
@@ -585,6 +598,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListViewExt)
 @class ADView;
 @class ADViewGroup;
 @class ASListViewImpl;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
 
 @interface ASListViewImpl_ListAdapter : ADBaseAdapter < ADFilterable >
 
@@ -594,21 +611,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListViewExt)
 
 - (void)dofilterSyncWithNSString:(NSString *)text;
 
-- (jint)getCount;
+- (int32_t)getCount;
 
 - (ADFilter *)getFilter;
 
-- (id)getItemWithInt:(jint)position;
+- (id)getItemWithInt:(int32_t)position;
 
-- (jlong)getItemIdWithInt:(jint)position;
+- (int64_t)getItemIdWithInt:(int32_t)position;
 
-- (ADView *)getViewWithInt:(jint)position
+- (ADView *)getViewWithInt:(int32_t)position
                 withADView:(ADView *)convertView
            withADViewGroup:(ADViewGroup *)parent;
 
-- (jboolean)hasStableIds;
+- (bool)hasStableIds;
 
-- (jboolean)isEnabledWithInt:(jint)position;
+- (bool)isEnabledWithInt:(int32_t)position;
 
 // Disallowed inherited constructors, do not use.
 
@@ -626,6 +643,7 @@ FOUNDATION_EXPORT ASListViewImpl_ListAdapter *create_ASListViewImpl_ListAdapter_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
+
 #endif
 
 #if !defined (ASListViewImpl_PostMeasureEventHandler_) && (INCLUDE_ALL_ListViewImpl || defined(INCLUDE_ASListViewImpl_PostMeasureEventHandler))
@@ -636,6 +654,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 #include "EventBusHandler.h"
 
 @class ASListViewImpl;
+@class NSString;
 
 @interface ASListViewImpl_PostMeasureEventHandler : ASEventBusHandler
 
@@ -663,6 +682,7 @@ FOUNDATION_EXPORT ASListViewImpl_PostMeasureEventHandler *new_ASListViewImpl_Pos
 FOUNDATION_EXPORT ASListViewImpl_PostMeasureEventHandler *create_ASListViewImpl_PostMeasureEventHandler_initWithASListViewImpl_withNSString_(ASListViewImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_PostMeasureEventHandler)
+
 
 #endif
 

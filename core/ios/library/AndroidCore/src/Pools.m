@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Pools.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Pools.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPools ()
@@ -30,10 +43,10 @@ __attribute__((unused)) static ADPools *create_ADPools_init(void);
 @interface ADPools_SimplePool () {
  @public
   IOSObjectArray *mPool_;
-  jint mPoolSize_;
+  int32_t mPoolSize_;
 }
 
-- (jboolean)isInPoolWithId:(id)instance;
+- (bool)isInPoolWithId:(id)instance;
 
 @end
 
@@ -41,9 +54,9 @@ J2OBJC_FIELD_SETTER(ADPools_SimplePool, mPool_, IOSObjectArray *)
 
 __attribute__((unused)) static id ADPools_SimplePool_acquire(ADPools_SimplePool *self);
 
-__attribute__((unused)) static jboolean ADPools_SimplePool_release__WithId_(ADPools_SimplePool *self, id instance);
+__attribute__((unused)) static bool ADPools_SimplePool_release__WithId_(ADPools_SimplePool *self, id instance);
 
-__attribute__((unused)) static jboolean ADPools_SimplePool_isInPoolWithId_(ADPools_SimplePool *self, id instance);
+__attribute__((unused)) static bool ADPools_SimplePool_isInPoolWithId_(ADPools_SimplePool *self, id instance);
 
 @interface ADPools_SynchronizedPool () {
  @public
@@ -93,6 +106,8 @@ ADPools *create_ADPools_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPools)
 
+J2OBJC_NAME_MAPPING(ADPools, "r.android.util", "AD")
+
 @implementation ADPools_Pool
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -117,7 +132,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADPools_Pool)
 
 @implementation ADPools_SimplePool
 
-- (instancetype)initWithInt:(jint)maxPoolSize {
+- (instancetype)initWithInt:(int32_t)maxPoolSize {
   ADPools_SimplePool_initWithInt_(self, maxPoolSize);
   return self;
 }
@@ -126,11 +141,11 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADPools_Pool)
   return ADPools_SimplePool_acquire(self);
 }
 
-- (jboolean)release__WithId:(id)instance {
+- (bool)release__WithId:(id)instance {
   return ADPools_SimplePool_release__WithId_(self, instance);
 }
 
-- (jboolean)isInPoolWithId:(id)instance {
+- (bool)isInPoolWithId:(id)instance {
   return ADPools_SimplePool_isInPoolWithId_(self, instance);
 }
 
@@ -165,7 +180,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADPools_Pool)
 
 @end
 
-void ADPools_SimplePool_initWithInt_(ADPools_SimplePool *self, jint maxPoolSize) {
+void ADPools_SimplePool_initWithInt_(ADPools_SimplePool *self, int32_t maxPoolSize) {
   NSObject_init(self);
   if (maxPoolSize <= 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"The max pool size must be > 0");
@@ -173,17 +188,17 @@ void ADPools_SimplePool_initWithInt_(ADPools_SimplePool *self, jint maxPoolSize)
   JreStrongAssignAndConsume(&self->mPool_, [IOSObjectArray newArrayWithLength:maxPoolSize type:NSObject_class_()]);
 }
 
-ADPools_SimplePool *new_ADPools_SimplePool_initWithInt_(jint maxPoolSize) {
+ADPools_SimplePool *new_ADPools_SimplePool_initWithInt_(int32_t maxPoolSize) {
   J2OBJC_NEW_IMPL(ADPools_SimplePool, initWithInt_, maxPoolSize)
 }
 
-ADPools_SimplePool *create_ADPools_SimplePool_initWithInt_(jint maxPoolSize) {
+ADPools_SimplePool *create_ADPools_SimplePool_initWithInt_(int32_t maxPoolSize) {
   J2OBJC_CREATE_IMPL(ADPools_SimplePool, initWithInt_, maxPoolSize)
 }
 
 id ADPools_SimplePool_acquire(ADPools_SimplePool *self) {
   if (self->mPoolSize_ > 0) {
-    jint lastPooledIndex = self->mPoolSize_ - 1;
+    int32_t lastPooledIndex = self->mPoolSize_ - 1;
     id instance = IOSObjectArray_Get(nil_chk(self->mPool_), lastPooledIndex);
     IOSObjectArray_Set(self->mPool_, lastPooledIndex, nil);
     self->mPoolSize_--;
@@ -192,7 +207,7 @@ id ADPools_SimplePool_acquire(ADPools_SimplePool *self) {
   return nil;
 }
 
-jboolean ADPools_SimplePool_release__WithId_(ADPools_SimplePool *self, id instance) {
+bool ADPools_SimplePool_release__WithId_(ADPools_SimplePool *self, id instance) {
   if (ADPools_SimplePool_isInPoolWithId_(self, instance)) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"Already in the pool!");
   }
@@ -204,9 +219,9 @@ jboolean ADPools_SimplePool_release__WithId_(ADPools_SimplePool *self, id instan
   return false;
 }
 
-jboolean ADPools_SimplePool_isInPoolWithId_(ADPools_SimplePool *self, id instance) {
-  for (jint i = 0; i < self->mPoolSize_; i++) {
-    if (IOSObjectArray_Get(nil_chk(self->mPool_), i) == instance) {
+bool ADPools_SimplePool_isInPoolWithId_(ADPools_SimplePool *self, id instance) {
+  for (int32_t i = 0; i < self->mPoolSize_; i++) {
+    if (JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(self->mPool_), i), instance)) {
       return true;
     }
   }
@@ -217,18 +232,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPools_SimplePool)
 
 @implementation ADPools_SynchronizedPool
 
-- (instancetype)initWithInt:(jint)maxPoolSize {
+- (instancetype)initWithInt:(int32_t)maxPoolSize {
   ADPools_SynchronizedPool_initWithInt_(self, maxPoolSize);
   return self;
 }
 
 - (id)acquire {
   @synchronized(mLock_) {
-    return JreRetainedLocalValue(ADPools_SimplePool_acquire(self));
+    return ADPools_SimplePool_acquire(self);
   }
 }
 
-- (jboolean)release__WithId:(id)element {
+- (bool)release__WithId:(id)element {
   @synchronized(mLock_) {
     return ADPools_SimplePool_release__WithId_(self, element);
   }
@@ -262,16 +277,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPools_SimplePool)
 
 @end
 
-void ADPools_SynchronizedPool_initWithInt_(ADPools_SynchronizedPool *self, jint maxPoolSize) {
+void ADPools_SynchronizedPool_initWithInt_(ADPools_SynchronizedPool *self, int32_t maxPoolSize) {
   ADPools_SimplePool_initWithInt_(self, maxPoolSize);
   JreStrongAssignAndConsume(&self->mLock_, new_NSObject_init());
 }
 
-ADPools_SynchronizedPool *new_ADPools_SynchronizedPool_initWithInt_(jint maxPoolSize) {
+ADPools_SynchronizedPool *new_ADPools_SynchronizedPool_initWithInt_(int32_t maxPoolSize) {
   J2OBJC_NEW_IMPL(ADPools_SynchronizedPool, initWithInt_, maxPoolSize)
 }
 
-ADPools_SynchronizedPool *create_ADPools_SynchronizedPool_initWithInt_(jint maxPoolSize) {
+ADPools_SynchronizedPool *create_ADPools_SynchronizedPool_initWithInt_(int32_t maxPoolSize) {
   J2OBJC_CREATE_IMPL(ADPools_SynchronizedPool, initWithInt_, maxPoolSize)
 }
 

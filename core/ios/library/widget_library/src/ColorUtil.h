@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\ColorUtil.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ColorUtil")
@@ -17,6 +18,8 @@
 #define ASColorUtil_
 
 @class IOSIntArray;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ASColorUtil : NSObject
 
@@ -26,11 +29,11 @@
 
 + (NSString *)colorToHexWithNSString:(NSString *)color;
 
-+ (NSString *)getColorStringWithInt:(jint)intColor;
++ (NSString *)getColorStringWithInt:(int32_t)intColor;
 
-+ (NSString *)getColorStringWithInt:(jint)red
-                            withInt:(jint)blue
-                            withInt:(jint)green;
++ (NSString *)getColorStringWithInt:(int32_t)red
+                            withInt:(int32_t)blue
+                            withInt:(int32_t)green;
 
 /*!
  @param colorStr e.g. "#FFFFFF"
@@ -51,13 +54,14 @@ FOUNDATION_EXPORT NSString *ASColorUtil_colorToHexWithNSString_(NSString *color)
 
 FOUNDATION_EXPORT IOSIntArray *ASColorUtil_hexStr2IntWithNSString_(NSString *colorStr);
 
-FOUNDATION_EXPORT NSString *ASColorUtil_getColorStringWithInt_(jint intColor);
+FOUNDATION_EXPORT NSString *ASColorUtil_getColorStringWithInt_(int32_t intColor);
 
-FOUNDATION_EXPORT NSString *ASColorUtil_getColorStringWithInt_withInt_withInt_(jint red, jint blue, jint green);
+FOUNDATION_EXPORT NSString *ASColorUtil_getColorStringWithInt_withInt_withInt_(int32_t red, int32_t blue, int32_t green);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASColorUtil)
 
 @compatibility_alias ComAsheraUtilsColorUtil ASColorUtil;
+
 
 #endif
 

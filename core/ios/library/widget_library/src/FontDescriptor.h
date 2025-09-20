@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\FontDescriptor.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FontDescriptor")
@@ -16,20 +17,23 @@
 #if !defined (ASFontDescriptor_) && (INCLUDE_ALL_FontDescriptor || defined(INCLUDE_ASFontDescriptor))
 #define ASFontDescriptor_
 
+@class JavaLangInteger;
+@class NSString;
+
 @interface ASFontDescriptor : NSObject
 
 #pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)style;
+                         withInt:(int32_t)style;
 
 - (NSString *)getName;
 
-- (jint)getStyle;
+- (int32_t)getStyle;
 
 - (void)setNameWithNSString:(NSString *)name;
 
-- (void)setStyleWithInt:(jint)style;
+- (void)setStyleWithInt:(int32_t)style;
 
 // Disallowed inherited constructors, do not use.
 
@@ -39,15 +43,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASFontDescriptor)
 
-FOUNDATION_EXPORT void ASFontDescriptor_initWithNSString_withInt_(ASFontDescriptor *self, NSString *name, jint style);
+FOUNDATION_EXPORT void ASFontDescriptor_initWithNSString_withInt_(ASFontDescriptor *self, NSString *name, int32_t style);
 
-FOUNDATION_EXPORT ASFontDescriptor *new_ASFontDescriptor_initWithNSString_withInt_(NSString *name, jint style) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASFontDescriptor *new_ASFontDescriptor_initWithNSString_withInt_(NSString *name, int32_t style) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASFontDescriptor *create_ASFontDescriptor_initWithNSString_withInt_(NSString *name, jint style);
+FOUNDATION_EXPORT ASFontDescriptor *create_ASFontDescriptor_initWithNSString_withInt_(NSString *name, int32_t style);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASFontDescriptor)
 
 @compatibility_alias ComAsheraModelFontDescriptor ASFontDescriptor;
+
 
 #endif
 

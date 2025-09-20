@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebResourceResponse.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "WebResourceResponse.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADWebResourceResponse
@@ -45,3 +56,5 @@ ADWebResourceResponse *create_ADWebResourceResponse_initWithNSString_withNSStrin
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWebResourceResponse)
+
+J2OBJC_NAME_MAPPING(ADWebResourceResponse, "r.android.webkit", "AD")

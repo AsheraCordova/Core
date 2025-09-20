@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\image\ITarget.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ITarget")
@@ -31,6 +32,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASITarget)
 J2OBJC_TYPE_LITERAL_HEADER(ASITarget)
 
 #define ComAsheraImageITarget ASITarget
+
 
 #endif
 

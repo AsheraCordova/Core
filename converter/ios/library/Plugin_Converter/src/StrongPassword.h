@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\StrongPassword.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_StrongPassword")
@@ -21,6 +22,8 @@
 #include "BaseValidator.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIWidget;
 @protocol ASValidation;
 
@@ -32,8 +35,8 @@
 
 - (NSString *)getDefaultErrorMessageWithASIWidget:(id<ASIWidget>)widget;
 
-- (jboolean)isValidWithNSString:(NSString *)password
-                  withASIWidget:(id<ASIWidget>)widget;
+- (bool)isValidWithNSString:(NSString *)password
+              withASIWidget:(id<ASIWidget>)widget;
 
 - (id<ASValidation>)newInstanceWithNSStringArray:(IOSObjectArray *)argument OBJC_METHOD_FAMILY_NONE;
 
@@ -50,6 +53,7 @@ FOUNDATION_EXPORT ASStrongPassword *create_ASStrongPassword_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASStrongPassword)
 
 @compatibility_alias ComAsheraValidationsStrongPassword ASStrongPassword;
+
 
 #endif
 

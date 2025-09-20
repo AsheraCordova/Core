@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\ArgbEvaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ArgbEvaluator")
@@ -19,6 +20,8 @@
 #define RESTRICT_TypeEvaluator 1
 #define INCLUDE_ADTypeEvaluator 1
 #include "TypeEvaluator.h"
+
+@class JavaLangFloat;
 
 /*!
  @brief This evaluator can be used to perform type interpolation between integer
@@ -43,7 +46,7 @@
   color channels and interpolating each one separately, recombining the
   resulting values in the same way.
  */
-- (id)evaluateWithFloat:(jfloat)fraction
+- (id)evaluateWithFloat:(float)fraction
                  withId:(id)startValue
                  withId:(id)endValue;
 
@@ -70,6 +73,7 @@ FOUNDATION_EXPORT ADArgbEvaluator *ADArgbEvaluator_getInstance(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADArgbEvaluator)
 
 @compatibility_alias RAndroidAnimationArgbEvaluator ADArgbEvaluator;
+
 
 #endif
 

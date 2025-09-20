@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\com\ashera\parser\html\HtmlParser.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HtmlParser")
@@ -16,6 +17,7 @@
 #if !defined (ASHtmlParser_) && (INCLUDE_ALL_HtmlParser || defined(INCLUDE_ASHtmlParser))
 #define ASHtmlParser_
 
+@class NSString;
 @protocol OrgXmlSaxContentHandler;
 
 @interface ASHtmlParser : NSObject
@@ -42,6 +44,7 @@ FOUNDATION_EXPORT void ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSStrin
 J2OBJC_TYPE_LITERAL_HEADER(ASHtmlParser)
 
 @compatibility_alias ComAsheraParserHtmlHtmlParser ASHtmlParser;
+
 
 #endif
 

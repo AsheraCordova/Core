@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\RadioGroup.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RadioGroup")
@@ -49,23 +50,26 @@ J2OBJC_TYPE_LITERAL_HEADER(ADRadioGroup)
 
 @compatibility_alias RAndroidWidgetRadioGroup ADRadioGroup;
 
+
 #endif
 
 #if !defined (ADRadioGroup_OnCheckedChangeListener_) && (INCLUDE_ALL_RadioGroup || defined(INCLUDE_ADRadioGroup_OnCheckedChangeListener))
 #define ADRadioGroup_OnCheckedChangeListener_
 
 @class ADRadioGroup;
+@class JavaLangInteger;
 
 @protocol ADRadioGroup_OnCheckedChangeListener < JavaObject >
 
 - (void)onCheckedChangedWithADRadioGroup:(ADRadioGroup *)group
-                                 withInt:(jint)checkedId;
+                                 withInt:(int32_t)checkedId;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADRadioGroup_OnCheckedChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADRadioGroup_OnCheckedChangeListener)
+
 
 #endif
 

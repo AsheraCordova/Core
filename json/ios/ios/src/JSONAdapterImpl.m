@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSJSONAdapter\src\main\java\com\ashera\jsonadapter\JSONAdapterImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Error.h"
 #include "Errors.h"
 #include "IOSClass.h"
@@ -27,13 +32,20 @@
 #include "ASDictionaryMap.h"
 
 
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASJSONAdapterImpl ()
 
 - (id)getASDictionaryMapWithId:(id)payload;
 
 - (id)getNativeArrayWithId:(id)nsarray;
 
-- (jboolean)isClassNSMutableArrayWithId:(id)object;
+- (bool)isClassNSMutableArrayWithId:(id)object;
 
 - (id)tryNativeTypeWithId:(id)object;
 
@@ -43,13 +55,13 @@
 
 - (id)unmarshalWithNSString:(NSString *)jsonString;
 
-- (id)convertToNSIntegerWithInt:(jint)value;
+- (id)convertToNSIntegerWithInt:(int32_t)value;
 
-- (id)convertToNSDoubleWithDouble:(jdouble)value;
+- (id)convertToNSDoubleWithDouble:(double)value;
 
-- (id)convertToNSFloatWithFloat:(jfloat)value;
+- (id)convertToNSFloatWithFloat:(float)value;
 
-- (id)convertToNSLongWithLong:(jlong)value;
+- (id)convertToNSLongWithLong:(int64_t)value;
 
 - (id)getNSDictionaryWithId:(id)payload;
 
@@ -57,7 +69,7 @@
 
 - (id)tryNativeFloatTypeWithId:(id)object;
 
-- (jboolean)nativeIsNullWithId:(id)object;
+- (bool)nativeIsNullWithId:(id)object;
 
 @end
 
@@ -65,7 +77,7 @@ __attribute__((unused)) static id ASJSONAdapterImpl_getASDictionaryMapWithId_(AS
 
 __attribute__((unused)) static id ASJSONAdapterImpl_getNativeArrayWithId_(ASJSONAdapterImpl *self, id nsarray);
 
-__attribute__((unused)) static jboolean ASJSONAdapterImpl_isClassNSMutableArrayWithId_(ASJSONAdapterImpl *self, id object);
+__attribute__((unused)) static bool ASJSONAdapterImpl_isClassNSMutableArrayWithId_(ASJSONAdapterImpl *self, id object);
 
 __attribute__((unused)) static id ASJSONAdapterImpl_tryNativeTypeWithId_(ASJSONAdapterImpl *self, id object);
 
@@ -75,13 +87,13 @@ __attribute__((unused)) static NSString *ASJSONAdapterImpl_getJSONStringWithId_(
 
 __attribute__((unused)) static id ASJSONAdapterImpl_unmarshalWithNSString_(ASJSONAdapterImpl *self, NSString *jsonString);
 
-__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSIntegerWithInt_(ASJSONAdapterImpl *self, jint value);
+__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSIntegerWithInt_(ASJSONAdapterImpl *self, int32_t value);
 
-__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSDoubleWithDouble_(ASJSONAdapterImpl *self, jdouble value);
+__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSDoubleWithDouble_(ASJSONAdapterImpl *self, double value);
 
-__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSFloatWithFloat_(ASJSONAdapterImpl *self, jfloat value);
+__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSFloatWithFloat_(ASJSONAdapterImpl *self, float value);
 
-__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSLongWithLong_(ASJSONAdapterImpl *self, jlong value);
+__attribute__((unused)) static id ASJSONAdapterImpl_convertToNSLongWithLong_(ASJSONAdapterImpl *self, int64_t value);
 
 __attribute__((unused)) static id ASJSONAdapterImpl_getNSDictionaryWithId_(ASJSONAdapterImpl *self, id payload);
 
@@ -89,7 +101,7 @@ __attribute__((unused)) static id ASJSONAdapterImpl_tryNativeDoubleTypeWithId_(A
 
 __attribute__((unused)) static id ASJSONAdapterImpl_tryNativeFloatTypeWithId_(ASJSONAdapterImpl *self, id object);
 
-__attribute__((unused)) static jboolean ASJSONAdapterImpl_nativeIsNullWithId_(ASJSONAdapterImpl *self, id object);
+__attribute__((unused)) static bool ASJSONAdapterImpl_nativeIsNullWithId_(ASJSONAdapterImpl *self, id object);
 
 @implementation ASJSONAdapterImpl
 
@@ -190,7 +202,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASStringUtils_getBooleanWithId_(payLoad);
 }
 
-- (jboolean)isClassNSMutableArrayWithId:(id)object {
+- (bool)isClassNSMutableArrayWithId:(id)object {
   return ASJSONAdapterImpl_isClassNSMutableArrayWithId_(self, object);
 }
 
@@ -280,7 +292,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)unmarshalWithNSString:(NSString *)json
                withIOSClass:(IOSClass *)clazz {
-  if (clazz == JavaUtilList_class_()) {
+  if (JreObjectEqualsEquals(clazz, JavaUtilList_class_())) {
     id mutableArray = ASJSONAdapterImpl_unmarshalWithNSString_(self, json);
     return [self getListWithId:mutableArray];
   }
@@ -335,19 +347,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   return obj;
 }
 
-- (id)convertToNSIntegerWithInt:(jint)value {
+- (id)convertToNSIntegerWithInt:(int32_t)value {
   return ASJSONAdapterImpl_convertToNSIntegerWithInt_(self, value);
 }
 
-- (id)convertToNSDoubleWithDouble:(jdouble)value {
+- (id)convertToNSDoubleWithDouble:(double)value {
   return ASJSONAdapterImpl_convertToNSDoubleWithDouble_(self, value);
 }
 
-- (id)convertToNSFloatWithFloat:(jfloat)value {
+- (id)convertToNSFloatWithFloat:(float)value {
   return ASJSONAdapterImpl_convertToNSFloatWithFloat_(self, value);
 }
 
-- (id)convertToNSLongWithLong:(jlong)value {
+- (id)convertToNSLongWithLong:(int64_t)value {
   return ASJSONAdapterImpl_convertToNSLongWithLong_(self, value);
 }
 
@@ -359,8 +371,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return result;
 }
 
-- (id)addObjectWithId:(id)list
-               withId:(id)object {
+- (void)addObjectWithId:(id)list
+                 withId:(id)object {
   [list addObject:object];
 }
 
@@ -441,7 +453,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isBooleanWithId:(id)obj {
+- (bool)isBooleanWithId:(id)obj {
   if ([obj isKindOfClass:[JavaLangBoolean class]]) {
     return true;
   }
@@ -451,11 +463,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (jboolean)isNullWithId:(id)object {
+- (bool)isNullWithId:(id)object {
   return object == nil || ASJSONAdapterImpl_nativeIsNullWithId_(self, object);
 }
 
-- (jboolean)nativeIsNullWithId:(id)object {
+- (bool)nativeIsNullWithId:(id)object {
   return ASJSONAdapterImpl_nativeIsNullWithId_(self, object);
 }
 
@@ -487,7 +499,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x102, 29, 30, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, 31, 32, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, 33, 34, -1, 35, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 36, 37, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 36, 37, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, 38, 3, -1, -1, -1, -1 },
     { NULL, "V", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangDouble;", 0x1, 39, 3, -1, -1, -1, -1 },
@@ -572,7 +584,7 @@ id ASJSONAdapterImpl_getNativeArrayWithId_(ASJSONAdapterImpl *self, id nsarray) 
   return nil;
 }
 
-jboolean ASJSONAdapterImpl_isClassNSMutableArrayWithId_(ASJSONAdapterImpl *self, id object) {
+bool ASJSONAdapterImpl_isClassNSMutableArrayWithId_(ASJSONAdapterImpl *self, id object) {
   return [object isKindOfClass:[NSMutableArray class]];
 }
 
@@ -607,19 +619,19 @@ id ASJSONAdapterImpl_unmarshalWithNSString_(ASJSONAdapterImpl *self, NSString *j
   return jsonArray;
 }
 
-id ASJSONAdapterImpl_convertToNSIntegerWithInt_(ASJSONAdapterImpl *self, jint value) {
+id ASJSONAdapterImpl_convertToNSIntegerWithInt_(ASJSONAdapterImpl *self, int32_t value) {
   return [NSNumber numberWithInteger:value];
 }
 
-id ASJSONAdapterImpl_convertToNSDoubleWithDouble_(ASJSONAdapterImpl *self, jdouble value) {
+id ASJSONAdapterImpl_convertToNSDoubleWithDouble_(ASJSONAdapterImpl *self, double value) {
   return [NSNumber numberWithDouble:value];
 }
 
-id ASJSONAdapterImpl_convertToNSFloatWithFloat_(ASJSONAdapterImpl *self, jfloat value) {
+id ASJSONAdapterImpl_convertToNSFloatWithFloat_(ASJSONAdapterImpl *self, float value) {
   return [NSNumber numberWithFloat:value];
 }
 
-id ASJSONAdapterImpl_convertToNSLongWithLong_(ASJSONAdapterImpl *self, jlong value) {
+id ASJSONAdapterImpl_convertToNSLongWithLong_(ASJSONAdapterImpl *self, int64_t value) {
   return [NSNumber numberWithLong:value];
 }
 
@@ -646,8 +658,10 @@ id ASJSONAdapterImpl_tryNativeFloatTypeWithId_(ASJSONAdapterImpl *self, id objec
   return nil;
 }
 
-jboolean ASJSONAdapterImpl_nativeIsNullWithId_(ASJSONAdapterImpl *self, id object) {
+bool ASJSONAdapterImpl_nativeIsNullWithId_(ASJSONAdapterImpl *self, id object) {
   return object  == [NSNull null];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASJSONAdapterImpl)
+
+J2OBJC_NAME_MAPPING(ASJSONAdapterImpl, "com.ashera.jsonadapter", "AS")

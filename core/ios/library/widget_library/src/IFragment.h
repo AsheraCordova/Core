@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\core\IFragment.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IFragment")
@@ -19,6 +20,9 @@
 @class ASError;
 @class ASEventBus;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIActivity;
 @protocol ASIWidget;
 @protocol CSSStyleSheet;
@@ -45,7 +49,7 @@
 
 - (void)onCloseDialogWithJavaUtilMap:(id<JavaUtilMap>)eventData;
 
-- (id)onCreateViewWithBoolean:(jboolean)measure;
+- (id)onCreateViewWithBoolean:(bool)measure;
 
 - (id<ASIFragment>)getRootFragment;
 
@@ -53,7 +57,7 @@
 
 - (id<ASIWidget>)getRootWidget;
 
-- (jboolean)hasDevDataWithNSString:(NSString *)key;
+- (bool)hasDevDataWithNSString:(NSString *)key;
 
 - (id)getDevDataWithNSString:(NSString *)key;
 
@@ -79,12 +83,12 @@
 
 - (void)setStyleSheetWithCSSStyleSheet:(id<CSSStyleSheet>)styleSheet;
 
-- (jboolean)isViewLoaded;
+- (bool)isViewLoaded;
 
-- (void)setFrameWithInt:(jint)x
-                withInt:(jint)y
-                withInt:(jint)width
-                withInt:(jint)height;
+- (void)setFrameWithInt:(int32_t)x
+                withInt:(int32_t)y
+                withInt:(int32_t)width
+                withInt:(int32_t)height;
 
 - (void)remeasure;
 
@@ -109,16 +113,16 @@
 
 - (void)addErrorWithASError:(ASError *)error;
 
-- (jboolean)hasErrors;
+- (bool)hasErrors;
 
-- (void)resizeWindowWithInt:(jint)width
-                    withInt:(jint)height;
+- (void)resizeWindowWithInt:(int32_t)width
+                    withInt:(int32_t)height;
 
 - (NSString *)getInlineResourceWithNSString:(NSString *)key;
 
 - (void)setInlineResourceWithNSString:(NSString *)key
                          withNSString:(NSString *)value
-                          withBoolean:(jboolean)append;
+                          withBoolean:(bool)append;
 
 - (id<ASIFragment>)getParent;
 
@@ -135,6 +139,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIFragment)
 J2OBJC_TYPE_LITERAL_HEADER(ASIFragment)
 
 #define ComAsheraCoreIFragment ASIFragment
+
 
 #endif
 

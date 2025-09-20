@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\app\Application.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Application.h"
 #include "ApplicationInfo.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADApplication
@@ -51,3 +62,5 @@ ADApplication *create_ADApplication_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADApplication)
+
+J2OBJC_NAME_MAPPING(ADApplication, "r.android.app", "AD")

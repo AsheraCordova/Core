@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\HasLifeCycleDecorators.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HasLifeCycleDecorators")
@@ -17,6 +18,8 @@
 #define ASHasLifeCycleDecorators_
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASILifeCycleDecorator;
 @protocol JavaLangRunnable;
 
@@ -31,9 +34,9 @@
                       withJavaLangRunnable:(id<JavaLangRunnable>)callback
                          withNSObjectArray:(IOSObjectArray *)args;
 
-- (void)setOnMethodCalledWithBoolean:(jboolean)onMethodCalled;
+- (void)setOnMethodCalledWithBoolean:(bool)onMethodCalled;
 
-- (jboolean)hasMethodListenerWithNSString:(NSString *)methodName;
+- (bool)hasMethodListenerWithNSString:(NSString *)methodName;
 
 @end
 
@@ -42,6 +45,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASHasLifeCycleDecorators)
 J2OBJC_TYPE_LITERAL_HEADER(ASHasLifeCycleDecorators)
 
 #define ComAsheraWidgetHasLifeCycleDecorators ASHasLifeCycleDecorators
+
 
 #endif
 

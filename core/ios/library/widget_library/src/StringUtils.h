@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\StringUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_StringUtils")
@@ -18,6 +19,8 @@
 
 @class IOSObjectArray;
 @class JavaLangBoolean;
+@class JavaLangFloat;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASStringUtils : NSObject
@@ -26,7 +29,7 @@
 
 - (instancetype)init;
 
-+ (NSString *)floatToStringWithFloat:(jfloat)f;
++ (NSString *)floatToStringWithFloat:(float)f;
 
 + (JavaLangBoolean *)getBooleanWithId:(id)payLoad;
 
@@ -66,7 +69,7 @@ FOUNDATION_EXPORT NSString *ASStringUtils_unescapeJavaStringWithNSString_(NSStri
 
 FOUNDATION_EXPORT NSString *ASStringUtils_trimStringWithNSString_(NSString *myString);
 
-FOUNDATION_EXPORT NSString *ASStringUtils_floatToStringWithFloat_(jfloat f);
+FOUNDATION_EXPORT NSString *ASStringUtils_floatToStringWithFloat_(float f);
 
 FOUNDATION_EXPORT NSString *ASStringUtils_joinWithNSString_withJavaUtilList_(NSString *separator, id<JavaUtilList> input);
 
@@ -77,6 +80,7 @@ FOUNDATION_EXPORT IOSObjectArray *ASStringUtils_splitWithNSString_withNSString_(
 J2OBJC_TYPE_LITERAL_HEADER(ASStringUtils)
 
 @compatibility_alias ComAsheraUtilsStringUtils ASStringUtils;
+
 
 #endif
 

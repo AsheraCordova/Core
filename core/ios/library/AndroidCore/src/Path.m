@@ -3,10 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Path.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BezierPath.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "Path.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPath () {
@@ -25,11 +38,11 @@ J2OBJC_FIELD_SETTER(ADPath, path_, ADBezierPath *)
   return self;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return false;
 }
 
-- (IOSFloatArray *)approximateWithFloat:(jfloat)error {
+- (IOSFloatArray *)approximateWithFloat:(float)error {
   return [((ADBezierPath *) nil_chk(path_)) approximateWithFloat:error];
 }
 
@@ -88,6 +101,8 @@ ADPath *ADPath_createPathFromPathDataWithNSString_(NSString *pathData) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPath)
+
+J2OBJC_NAME_MAPPING(ADPath, "r.android.graphics", "AD")
 
 @implementation ADPath_PathParser
 

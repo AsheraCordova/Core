@@ -3,13 +3,26 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\AttributesImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributesImpl.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/ArrayIndexOutOfBoundsException.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "org/xml/sax/Attributes.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSAttributesImpl ()
@@ -18,20 +31,20 @@
  @brief Ensure the internal array's capacity.
  @param n The minimum number of attributes that the array must         be able to hold.
  */
-- (void)ensureCapacityWithInt:(jint)n;
+- (void)ensureCapacityWithInt:(int32_t)n;
 
 /*!
  @brief Report a bad array index in a manipulator.
  @param index The index to report.
  @throw java.lang.ArrayIndexOutOfBoundsExceptionAlways.
  */
-- (void)badIndexWithInt:(jint)index;
+- (void)badIndexWithInt:(int32_t)index;
 
 @end
 
-__attribute__((unused)) static void TSAttributesImpl_ensureCapacityWithInt_(TSAttributesImpl *self, jint n);
+__attribute__((unused)) static void TSAttributesImpl_ensureCapacityWithInt_(TSAttributesImpl *self, int32_t n);
 
-__attribute__((unused)) static void TSAttributesImpl_badIndexWithInt_(TSAttributesImpl *self, jint index);
+__attribute__((unused)) static void TSAttributesImpl_badIndexWithInt_(TSAttributesImpl *self, int32_t index);
 
 @implementation TSAttributesImpl
 
@@ -47,11 +60,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (jint)getLength {
+- (int32_t)getLength {
   return length_;
 }
 
-- (NSString *)getURIWithInt:(jint)index {
+- (NSString *)getURIWithInt:(int32_t)index {
   if (index >= 0 && index < length_) {
     return IOSObjectArray_Get(nil_chk(data_), index * 5);
   }
@@ -60,7 +73,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (NSString *)getLocalNameWithInt:(jint)index {
+- (NSString *)getLocalNameWithInt:(int32_t)index {
   if (index >= 0 && index < length_) {
     return IOSObjectArray_Get(nil_chk(data_), index * 5 + 1);
   }
@@ -69,7 +82,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (NSString *)getQNameWithInt:(jint)index {
+- (NSString *)getQNameWithInt:(int32_t)index {
   if (index >= 0 && index < length_) {
     return IOSObjectArray_Get(nil_chk(data_), index * 5 + 2);
   }
@@ -78,7 +91,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (NSString *)getTypeWithInt:(jint)index {
+- (NSString *)getTypeWithInt:(int32_t)index {
   if (index >= 0 && index < length_) {
     return IOSObjectArray_Get(nil_chk(data_), index * 5 + 3);
   }
@@ -87,7 +100,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (NSString *)getValueWithInt:(jint)index {
+- (NSString *)getValueWithInt:(int32_t)index {
   if (index >= 0 && index < length_) {
     return IOSObjectArray_Get(nil_chk(data_), index * 5 + 4);
   }
@@ -96,10 +109,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getIndexWithNSString:(NSString *)uri
-                withNSString:(NSString *)localName {
-  jint max = length_ * 5;
-  for (jint i = 0; i < max; i += 5) {
+- (int32_t)getIndexWithNSString:(NSString *)uri
+                   withNSString:(NSString *)localName {
+  int32_t max = length_ * 5;
+  for (int32_t i = 0; i < max; i += 5) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i))) isEqual:uri] && [((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i + 1))) isEqual:localName]) {
       return JreIntDiv(i, 5);
     }
@@ -107,9 +120,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return -1;
 }
 
-- (jint)getIndexWithNSString:(NSString *)qName {
-  jint max = length_ * 5;
-  for (jint i = 0; i < max; i += 5) {
+- (int32_t)getIndexWithNSString:(NSString *)qName {
+  int32_t max = length_ * 5;
+  for (int32_t i = 0; i < max; i += 5) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i + 2))) isEqual:qName]) {
       return JreIntDiv(i, 5);
     }
@@ -119,8 +132,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)getTypeWithNSString:(NSString *)uri
                      withNSString:(NSString *)localName {
-  jint max = length_ * 5;
-  for (jint i = 0; i < max; i += 5) {
+  int32_t max = length_ * 5;
+  for (int32_t i = 0; i < max; i += 5) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i))) isEqual:uri] && [((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i + 1))) isEqual:localName]) {
       return IOSObjectArray_Get(nil_chk(data_), i + 3);
     }
@@ -129,8 +142,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)getTypeWithNSString:(NSString *)qName {
-  jint max = length_ * 5;
-  for (jint i = 0; i < max; i += 5) {
+  int32_t max = length_ * 5;
+  for (int32_t i = 0; i < max; i += 5) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i + 2))) isEqual:qName]) {
       return IOSObjectArray_Get(nil_chk(data_), i + 3);
     }
@@ -140,8 +153,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)getValueWithNSString:(NSString *)uri
                       withNSString:(NSString *)localName {
-  jint max = length_ * 5;
-  for (jint i = 0; i < max; i += 5) {
+  int32_t max = length_ * 5;
+  for (int32_t i = 0; i < max; i += 5) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i))) isEqual:uri] && [((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(data_), i + 1))) isEqual:localName]) {
       return IOSObjectArray_Get(nil_chk(data_), i + 4);
     }
@@ -150,14 +163,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)getValueWithNSString:(NSString *)qName {
-  jint max = length_ * 5;
-  for (jint i = 0; i < max; i += 5) {
+  int32_t max = length_ * 5;
+  for (int32_t i = 0; i < max; i += 5) {
     NSString *myData = IOSObjectArray_Get(nil_chk(data_), i + 2);
-    jint indexmyData = [((NSString *) nil_chk(myData)) java_indexOfString:@":"];
+    int32_t indexmyData = [((NSString *) nil_chk(myData)) java_indexOfString:@":"];
     if (indexmyData != -1) {
       myData = [myData java_substring:indexmyData + 1];
     }
-    jint indexQname = [((NSString *) nil_chk(qName)) java_indexOfString:@":"];
+    int32_t indexQname = [((NSString *) nil_chk(qName)) java_indexOfString:@":"];
     if (indexQname != -1) {
       qName = [qName java_substring:indexQname + 1];
     }
@@ -170,7 +183,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)clear {
   if (data_ != nil) {
-    for (jint i = 0; i < (length_ * 5); i++) IOSObjectArray_Set(data_, i, nil);
+    for (int32_t i = 0; i < (length_ * 5); i++) IOSObjectArray_Set(data_, i, nil);
   }
   length_ = 0;
 }
@@ -180,7 +193,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   length_ = [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength];
   if (length_ > 0) {
     JreStrongAssignAndConsume(&data_, [IOSObjectArray newArrayWithLength:length_ * 5 type:NSString_class_()]);
-    for (jint i = 0; i < length_; i++) {
+    for (int32_t i = 0; i < length_; i++) {
       IOSObjectArray_Set(nil_chk(data_), i * 5, [atts getURIWithInt:i]);
       IOSObjectArray_Set(nil_chk(data_), i * 5 + 1, [atts getLocalNameWithInt:i]);
       IOSObjectArray_Set(nil_chk(data_), i * 5 + 2, [atts getQNameWithInt:i]);
@@ -204,7 +217,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   length_++;
 }
 
-- (void)setAttributeWithInt:(jint)index
+- (void)setAttributeWithInt:(int32_t)index
                withNSString:(NSString *)uri
                withNSString:(NSString *)localName
                withNSString:(NSString *)qName
@@ -222,7 +235,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)removeAttributeWithInt:(jint)index {
+- (void)removeAttributeWithInt:(int32_t)index {
   if (index >= 0 && index < length_) {
     if (index < length_ - 1) {
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(data_, (index + 1) * 5, data_, index * 5, (length_ - index - 1) * 5);
@@ -240,7 +253,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setURIWithInt:(jint)index
+- (void)setURIWithInt:(int32_t)index
          withNSString:(NSString *)uri {
   if (index >= 0 && index < length_) {
     IOSObjectArray_Set(nil_chk(data_), index * 5, uri);
@@ -250,7 +263,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setLocalNameWithInt:(jint)index
+- (void)setLocalNameWithInt:(int32_t)index
                withNSString:(NSString *)localName {
   if (index >= 0 && index < length_) {
     IOSObjectArray_Set(nil_chk(data_), index * 5 + 1, localName);
@@ -260,7 +273,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setQNameWithInt:(jint)index
+- (void)setQNameWithInt:(int32_t)index
            withNSString:(NSString *)qName {
   if (index >= 0 && index < length_) {
     IOSObjectArray_Set(nil_chk(data_), index * 5 + 2, qName);
@@ -270,7 +283,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setTypeWithInt:(jint)index
+- (void)setTypeWithInt:(int32_t)index
           withNSString:(NSString *)type {
   if (index >= 0 && index < length_) {
     IOSObjectArray_Set(nil_chk(data_), index * 5 + 3, type);
@@ -280,7 +293,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setValueWithInt:(jint)index
+- (void)setValueWithInt:(int32_t)index
            withNSString:(NSString *)value {
   if (index >= 0 && index < length_) {
     IOSObjectArray_Set(nil_chk(data_), index * 5 + 4, value);
@@ -290,11 +303,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)ensureCapacityWithInt:(jint)n {
+- (void)ensureCapacityWithInt:(int32_t)n {
   TSAttributesImpl_ensureCapacityWithInt_(self, n);
 }
 
-- (void)badIndexWithInt:(jint)index {
+- (void)badIndexWithInt:(int32_t)index {
   TSAttributesImpl_badIndexWithInt_(self, index);
 }
 
@@ -400,11 +413,11 @@ TSAttributesImpl *create_TSAttributesImpl_initWithOrgXmlSaxAttributes_(id<OrgXml
   J2OBJC_CREATE_IMPL(TSAttributesImpl, initWithOrgXmlSaxAttributes_, atts)
 }
 
-void TSAttributesImpl_ensureCapacityWithInt_(TSAttributesImpl *self, jint n) {
+void TSAttributesImpl_ensureCapacityWithInt_(TSAttributesImpl *self, int32_t n) {
   if (n <= 0) {
     return;
   }
-  jint max;
+  int32_t max;
   if (self->data_ == nil || self->data_->size_ == 0) {
     max = 25;
   }
@@ -424,9 +437,11 @@ void TSAttributesImpl_ensureCapacityWithInt_(TSAttributesImpl *self, jint n) {
   JreStrongAssign(&self->data_, newData);
 }
 
-void TSAttributesImpl_badIndexWithInt_(TSAttributesImpl *self, jint index) {
+void TSAttributesImpl_badIndexWithInt_(TSAttributesImpl *self, int32_t index) {
   NSString *msg = JreStrcat("$I", @"Attempt to modify attribute at illegal index: ", index);
   @throw create_JavaLangArrayIndexOutOfBoundsException_initWithNSString_(msg);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSAttributesImpl)
+
+J2OBJC_NAME_MAPPING(TSAttributesImpl, "repackaged.org.ccil.cowan.tagsoup", "TS")

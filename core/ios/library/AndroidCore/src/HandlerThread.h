@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\HandlerThread.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HandlerThread")
@@ -28,7 +29,12 @@
 
 @class ADHandler;
 @class ADLooper;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 @class JavaLangThreadGroup;
+@class JavaSecurityAccessControlContext;
+@class NSString;
 @protocol JavaLangRunnable;
 
 /*!
@@ -39,8 +45,8 @@
  */
 @interface ADHandlerThread : JavaLangThread {
  @public
-  jint mPriority_;
-  jint mTid_;
+  int32_t mPriority_;
+  int32_t mTid_;
   ADLooper *mLooper_;
 }
 
@@ -55,7 +61,7 @@
  <code>r.android.os.Process</code>  and not from java.lang.Thread.
  */
 - (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)priority;
+                         withInt:(int32_t)priority;
 
 /*!
  @brief This method returns the Looper associated with this thread.If this thread not been started
@@ -74,7 +80,7 @@
 /*!
  @brief Returns the identifier of this thread.See 100.
  */
-- (jint)getThreadId;
+- (int32_t)getThreadId;
 
 /*!
  @brief Quits the handler thread's looper.
@@ -93,7 +99,7 @@
   thread had not yet started running.
  - seealso: #quitSafely
  */
-- (jboolean)quit;
+- (bool)quit;
 
 /*!
  @brief Quits the handler thread's looper safely.
@@ -112,7 +118,7 @@
  @return True if the looper looper has been asked to quit or false if the
   thread had not yet started running.
  */
-- (jboolean)quitSafely;
+- (bool)quitSafely;
 
 - (void)run;
 
@@ -131,6 +137,9 @@
 - (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)arg0 NS_UNAVAILABLE;
 
 - (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)arg0
+    withJavaSecurityAccessControlContext:(JavaSecurityAccessControlContext *)arg1 NS_UNAVAILABLE;
+
+- (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)arg0
                             withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 - (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
@@ -143,7 +152,13 @@
 - (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
                        withJavaLangRunnable:(id<JavaLangRunnable>)arg1
                                withNSString:(NSString *)arg2
-                                   withLong:(jlong)arg3 NS_UNAVAILABLE;
+                                   withLong:(int64_t)arg3 NS_UNAVAILABLE;
+
+- (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
+                       withJavaLangRunnable:(id<JavaLangRunnable>)arg1
+                               withNSString:(NSString *)arg2
+                                   withLong:(int64_t)arg3
+                                withBoolean:(bool)arg4 NS_UNAVAILABLE;
 
 - (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)arg0
                                withNSString:(NSString *)arg1 NS_UNAVAILABLE;
@@ -160,15 +175,16 @@ FOUNDATION_EXPORT ADHandlerThread *new_ADHandlerThread_initWithNSString_(NSStrin
 
 FOUNDATION_EXPORT ADHandlerThread *create_ADHandlerThread_initWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT void ADHandlerThread_initWithNSString_withInt_(ADHandlerThread *self, NSString *name, jint priority);
+FOUNDATION_EXPORT void ADHandlerThread_initWithNSString_withInt_(ADHandlerThread *self, NSString *name, int32_t priority);
 
-FOUNDATION_EXPORT ADHandlerThread *new_ADHandlerThread_initWithNSString_withInt_(NSString *name, jint priority) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADHandlerThread *new_ADHandlerThread_initWithNSString_withInt_(NSString *name, int32_t priority) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADHandlerThread *create_ADHandlerThread_initWithNSString_withInt_(NSString *name, jint priority);
+FOUNDATION_EXPORT ADHandlerThread *create_ADHandlerThread_initWithNSString_withInt_(NSString *name, int32_t priority);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADHandlerThread)
 
 @compatibility_alias RAndroidOsHandlerThread ADHandlerThread;
+
 
 #endif
 

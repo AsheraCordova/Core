@@ -3,11 +3,23 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\com\ashera\parser\html\ContentHandlerAdapter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ContentHandlerAdapter.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
 #include "org/xml/sax/Attributes.h"
 #include "org/xml/sax/Locator.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASContentHandlerAdapter
@@ -47,13 +59,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length {
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length {
 }
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length {
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length {
 }
 
 - (void)processingInstructionWithNSString:(NSString *)target
@@ -114,3 +126,5 @@ ASContentHandlerAdapter *create_ASContentHandlerAdapter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASContentHandlerAdapter)
+
+J2OBJC_NAME_MAPPING(ASContentHandlerAdapter, "com.ashera.parser.html", "AS")

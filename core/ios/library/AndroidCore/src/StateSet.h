@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\util\StateSet.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_StateSet")
@@ -18,6 +19,8 @@
 
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADStateSet : NSObject
 
@@ -25,12 +28,12 @@
 
 - (instancetype)init;
 
-+ (jboolean)containsAttributeWithIntArray2:(IOSObjectArray *)stateSpecs
-                                   withInt:(jint)attr;
++ (bool)containsAttributeWithIntArray2:(IOSObjectArray *)stateSpecs
+                               withInt:(int32_t)attr;
 
-+ (IOSIntArray *)getWithInt:(jint)mask;
++ (IOSIntArray *)getWithInt:(int32_t)mask;
 
-+ (jboolean)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec;
++ (bool)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec;
 
 /*!
  @brief Return whether the state matches the desired stateSpec.
@@ -38,14 +41,14 @@
  <code>android.view.View</code>  states.
  @param state a <code>android.view.View</code>  state
  */
-+ (jboolean)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
-                                withInt:(jint)state;
++ (bool)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
+                            withInt:(int32_t)state;
 
-+ (jboolean)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
-                           withIntArray:(IOSIntArray *)stateSet;
++ (bool)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
+                       withIntArray:(IOSIntArray *)stateSet;
 
 + (IOSIntArray *)trimStateSetWithIntArray:(IOSIntArray *)states
-                                  withInt:(jint)newSize;
+                                  withInt:(int32_t)newSize;
 
 @end
 
@@ -53,63 +56,63 @@ J2OBJC_STATIC_INIT(ADStateSet)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_WINDOW_FOCUSED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_WINDOW_FOCUSED(void);
 #define ADStateSet_VIEW_STATE_WINDOW_FOCUSED 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_WINDOW_FOCUSED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_WINDOW_FOCUSED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_SELECTED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_SELECTED(void);
 #define ADStateSet_VIEW_STATE_SELECTED 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_SELECTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_SELECTED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_FOCUSED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_FOCUSED(void);
 #define ADStateSet_VIEW_STATE_FOCUSED 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_FOCUSED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_FOCUSED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_ENABLED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_ENABLED(void);
 #define ADStateSet_VIEW_STATE_ENABLED 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_ENABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_ENABLED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_PRESSED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_PRESSED(void);
 #define ADStateSet_VIEW_STATE_PRESSED 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_PRESSED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_PRESSED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_ACTIVATED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_ACTIVATED(void);
 #define ADStateSet_VIEW_STATE_ACTIVATED 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_ACTIVATED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_ACTIVATED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_ACCELERATED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_ACCELERATED(void);
 #define ADStateSet_VIEW_STATE_ACCELERATED 64
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_ACCELERATED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_ACCELERATED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_HOVERED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_HOVERED(void);
 #define ADStateSet_VIEW_STATE_HOVERED 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_HOVERED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_HOVERED, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_DRAG_CAN_ACCEPT(void);
+inline int32_t ADStateSet_get_VIEW_STATE_DRAG_CAN_ACCEPT(void);
 #define ADStateSet_VIEW_STATE_DRAG_CAN_ACCEPT 256
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_DRAG_CAN_ACCEPT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_DRAG_CAN_ACCEPT, int32_t)
 
 /*!
  */
-inline jint ADStateSet_get_VIEW_STATE_DRAG_HOVERED(void);
+inline int32_t ADStateSet_get_VIEW_STATE_DRAG_HOVERED(void);
 #define ADStateSet_VIEW_STATE_DRAG_HOVERED 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_DRAG_HOVERED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADStateSet, VIEW_STATE_DRAG_HOVERED, int32_t)
 
 inline IOSIntArray *ADStateSet_get_ViewDrawableStates(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -127,21 +130,22 @@ FOUNDATION_EXPORT ADStateSet *new_ADStateSet_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADStateSet *create_ADStateSet_init(void);
 
-FOUNDATION_EXPORT IOSIntArray *ADStateSet_getWithInt_(jint mask);
+FOUNDATION_EXPORT IOSIntArray *ADStateSet_getWithInt_(int32_t mask);
 
-FOUNDATION_EXPORT jboolean ADStateSet_containsAttributeWithIntArray2_withInt_(IOSObjectArray *stateSpecs, jint attr);
+FOUNDATION_EXPORT bool ADStateSet_containsAttributeWithIntArray2_withInt_(IOSObjectArray *stateSpecs, int32_t attr);
 
-FOUNDATION_EXPORT jboolean ADStateSet_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet);
+FOUNDATION_EXPORT bool ADStateSet_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet);
 
-FOUNDATION_EXPORT jboolean ADStateSet_stateSetMatchesWithIntArray_withInt_(IOSIntArray *stateSpec, jint state);
+FOUNDATION_EXPORT bool ADStateSet_stateSetMatchesWithIntArray_withInt_(IOSIntArray *stateSpec, int32_t state);
 
-FOUNDATION_EXPORT jboolean ADStateSet_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec);
+FOUNDATION_EXPORT bool ADStateSet_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec);
 
-FOUNDATION_EXPORT IOSIntArray *ADStateSet_trimStateSetWithIntArray_withInt_(IOSIntArray *states, jint newSize);
+FOUNDATION_EXPORT IOSIntArray *ADStateSet_trimStateSetWithIntArray_withInt_(IOSIntArray *states, int32_t newSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADStateSet)
 
 @compatibility_alias RAndroidUtilStateSet ADStateSet;
+
 
 #endif
 

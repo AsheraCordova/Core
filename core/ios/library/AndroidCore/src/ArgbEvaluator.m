@@ -3,10 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\ArgbEvaluator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ArgbEvaluator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline ADArgbEvaluator *ADArgbEvaluator_get_sInstance(void);
@@ -28,33 +41,33 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADArgbEvaluator_getInstance();
 }
 
-- (id)evaluateWithFloat:(jfloat)fraction
+- (id)evaluateWithFloat:(float)fraction
                  withId:(id)startValue
                  withId:(id)endValue {
-  jint startInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(startValue, [JavaLangInteger class]))) intValue];
-  jfloat startA = ((JreRShift32(startInt, 24)) & (jint) 0xff) / 255.0f;
-  jfloat startR = ((JreRShift32(startInt, 16)) & (jint) 0xff) / 255.0f;
-  jfloat startG = ((JreRShift32(startInt, 8)) & (jint) 0xff) / 255.0f;
-  jfloat startB = (startInt & (jint) 0xff) / 255.0f;
-  jint endInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(endValue, [JavaLangInteger class]))) intValue];
-  jfloat endA = ((JreRShift32(endInt, 24)) & (jint) 0xff) / 255.0f;
-  jfloat endR = ((JreRShift32(endInt, 16)) & (jint) 0xff) / 255.0f;
-  jfloat endG = ((JreRShift32(endInt, 8)) & (jint) 0xff) / 255.0f;
-  jfloat endB = (endInt & (jint) 0xff) / 255.0f;
-  startR = (jfloat) JavaLangMath_powWithDouble_withDouble_(startR, 2.2);
-  startG = (jfloat) JavaLangMath_powWithDouble_withDouble_(startG, 2.2);
-  startB = (jfloat) JavaLangMath_powWithDouble_withDouble_(startB, 2.2);
-  endR = (jfloat) JavaLangMath_powWithDouble_withDouble_(endR, 2.2);
-  endG = (jfloat) JavaLangMath_powWithDouble_withDouble_(endG, 2.2);
-  endB = (jfloat) JavaLangMath_powWithDouble_withDouble_(endB, 2.2);
-  jfloat a = startA + fraction * (endA - startA);
-  jfloat r = startR + fraction * (endR - startR);
-  jfloat g = startG + fraction * (endG - startG);
-  jfloat b = startB + fraction * (endB - startB);
+  int32_t startInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(startValue, [JavaLangInteger class]))) intValue];
+  float startA = ((JreRShift32(startInt, 24)) & (int32_t) 0xff) / 255.0f;
+  float startR = ((JreRShift32(startInt, 16)) & (int32_t) 0xff) / 255.0f;
+  float startG = ((JreRShift32(startInt, 8)) & (int32_t) 0xff) / 255.0f;
+  float startB = (startInt & (int32_t) 0xff) / 255.0f;
+  int32_t endInt = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(endValue, [JavaLangInteger class]))) intValue];
+  float endA = ((JreRShift32(endInt, 24)) & (int32_t) 0xff) / 255.0f;
+  float endR = ((JreRShift32(endInt, 16)) & (int32_t) 0xff) / 255.0f;
+  float endG = ((JreRShift32(endInt, 8)) & (int32_t) 0xff) / 255.0f;
+  float endB = (endInt & (int32_t) 0xff) / 255.0f;
+  startR = (float) JavaLangMath_powWithDouble_withDouble_(startR, 2.2);
+  startG = (float) JavaLangMath_powWithDouble_withDouble_(startG, 2.2);
+  startB = (float) JavaLangMath_powWithDouble_withDouble_(startB, 2.2);
+  endR = (float) JavaLangMath_powWithDouble_withDouble_(endR, 2.2);
+  endG = (float) JavaLangMath_powWithDouble_withDouble_(endG, 2.2);
+  endB = (float) JavaLangMath_powWithDouble_withDouble_(endB, 2.2);
+  float a = startA + fraction * (endA - startA);
+  float r = startR + fraction * (endR - startR);
+  float g = startG + fraction * (endG - startG);
+  float b = startB + fraction * (endB - startB);
   a = a * 255.0f;
-  r = (jfloat) JavaLangMath_powWithDouble_withDouble_(r, 1.0 / 2.2) * 255.0f;
-  g = (jfloat) JavaLangMath_powWithDouble_withDouble_(g, 1.0 / 2.2) * 255.0f;
-  b = (jfloat) JavaLangMath_powWithDouble_withDouble_(b, 1.0 / 2.2) * 255.0f;
+  r = (float) JavaLangMath_powWithDouble_withDouble_(r, 1.0 / 2.2) * 255.0f;
+  g = (float) JavaLangMath_powWithDouble_withDouble_(g, 1.0 / 2.2) * 255.0f;
+  b = (float) JavaLangMath_powWithDouble_withDouble_(b, 1.0 / 2.2) * 255.0f;
   return JavaLangInteger_valueOfWithInt_((JreLShift32(JavaLangMath_roundWithFloat_(a), 24)) | (JreLShift32(JavaLangMath_roundWithFloat_(r), 16)) | (JreLShift32(JavaLangMath_roundWithFloat_(g), 8)) | JavaLangMath_roundWithFloat_(b));
 }
 
@@ -106,3 +119,5 @@ ADArgbEvaluator *ADArgbEvaluator_getInstance() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADArgbEvaluator)
+
+J2OBJC_NAME_MAPPING(ADArgbEvaluator, "r.android.animation", "AD")

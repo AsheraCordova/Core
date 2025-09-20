@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\LongSparseArray.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ContainerHelpers.h"
 #include "GrowingArrayUtils.h"
 #include "IOSClass.h"
@@ -10,16 +15,26 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "LongSparseArray.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/CloneNotSupportedException.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/StringBuilder.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADLongSparseArray () {
  @public
-  jboolean mGarbage_;
+  bool mGarbage_;
   IOSLongArray *mKeys_;
   IOSObjectArray *mValues_;
-  jint mSize_;
+  int32_t mSize_;
 }
 
 - (void)gc;
@@ -46,7 +61,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)initialCapacity {
+- (instancetype)initWithInt:(int32_t)initialCapacity {
   ADLongSparseArray_initWithInt_(self, initialCapacity);
   return self;
 }
@@ -63,14 +78,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return clone;
 }
 
-- (id)getWithLong:(jlong)key {
+- (id)getWithLong:(int64_t)key {
   return [self getWithLong:key withId:nil];
 }
 
-- (id)getWithLong:(jlong)key
+- (id)getWithLong:(int64_t)key
            withId:(id)valueIfKeyNotFound {
-  jint i = ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(mKeys_, mSize_, key);
-  if (i < 0 || IOSObjectArray_Get(nil_chk(mValues_), i) == ADLongSparseArray_DELETED) {
+  int32_t i = ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(mKeys_, mSize_, key);
+  if (i < 0 || JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(mValues_), i), ADLongSparseArray_DELETED)) {
     return valueIfKeyNotFound;
   }
   else {
@@ -78,22 +93,22 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)delete__WithLong:(jlong)key {
-  jint i = ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(mKeys_, mSize_, key);
+- (void)delete__WithLong:(int64_t)key {
+  int32_t i = ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(mKeys_, mSize_, key);
   if (i >= 0) {
-    if (IOSObjectArray_Get(nil_chk(mValues_), i) != ADLongSparseArray_DELETED) {
+    if (!JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(mValues_), i), ADLongSparseArray_DELETED)) {
       IOSObjectArray_Set(mValues_, i, ADLongSparseArray_DELETED);
       mGarbage_ = true;
     }
   }
 }
 
-- (void)removeWithLong:(jlong)key {
+- (void)removeWithLong:(int64_t)key {
   [self delete__WithLong:key];
 }
 
-- (void)removeAtWithInt:(jint)index {
-  if (IOSObjectArray_Get(nil_chk(mValues_), index) != ADLongSparseArray_DELETED) {
+- (void)removeAtWithInt:(int32_t)index {
+  if (!JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(mValues_), index), ADLongSparseArray_DELETED)) {
     IOSObjectArray_Set(mValues_, index, ADLongSparseArray_DELETED);
     mGarbage_ = true;
   }
@@ -103,15 +118,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADLongSparseArray_gc(self);
 }
 
-- (void)putWithLong:(jlong)key
+- (void)putWithLong:(int64_t)key
              withId:(id)value {
-  jint i = ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(mKeys_, mSize_, key);
+  int32_t i = ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(mKeys_, mSize_, key);
   if (i >= 0) {
     IOSObjectArray_Set(nil_chk(mValues_), i, value);
   }
   else {
     i = ~i;
-    if (i < mSize_ && IOSObjectArray_Get(nil_chk(mValues_), i) == ADLongSparseArray_DELETED) {
+    if (i < mSize_ && JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(mValues_), i), ADLongSparseArray_DELETED)) {
       *IOSLongArray_GetRef(nil_chk(mKeys_), i) = key;
       IOSObjectArray_Set(nil_chk(mValues_), i, value);
       return;
@@ -126,28 +141,28 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)size {
+- (int32_t)size {
   if (mGarbage_) {
     ADLongSparseArray_gc(self);
   }
   return mSize_;
 }
 
-- (jlong)keyAtWithInt:(jint)index {
+- (int64_t)keyAtWithInt:(int32_t)index {
   if (mGarbage_) {
     ADLongSparseArray_gc(self);
   }
   return IOSLongArray_Get(nil_chk(mKeys_), index);
 }
 
-- (id)valueAtWithInt:(jint)index {
+- (id)valueAtWithInt:(int32_t)index {
   if (mGarbage_) {
     ADLongSparseArray_gc(self);
   }
   return IOSObjectArray_Get(nil_chk(mValues_), index);
 }
 
-- (void)setValueAtWithInt:(jint)index
+- (void)setValueAtWithInt:(int32_t)index
                    withId:(id)value {
   if (mGarbage_) {
     ADLongSparseArray_gc(self);
@@ -155,32 +170,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   IOSObjectArray_Set(nil_chk(mValues_), index, value);
 }
 
-- (jint)indexOfKeyWithLong:(jlong)key {
+- (int32_t)indexOfKeyWithLong:(int64_t)key {
   if (mGarbage_) {
     ADLongSparseArray_gc(self);
   }
   return ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(mKeys_, mSize_, key);
 }
 
-- (jint)indexOfValueWithId:(id)value {
+- (int32_t)indexOfValueWithId:(id)value {
   if (mGarbage_) {
     ADLongSparseArray_gc(self);
   }
-  for (jint i = 0; i < mSize_; i++) if (IOSObjectArray_Get(nil_chk(mValues_), i) == value) return i;
+  for (int32_t i = 0; i < mSize_; i++) if (JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(mValues_), i), value)) return i;
   return -1;
 }
 
 - (void)clear {
-  jint n = mSize_;
+  int32_t n = mSize_;
   IOSObjectArray *values = mValues_;
-  for (jint i = 0; i < n; i++) {
+  for (int32_t i = 0; i < n; i++) {
     IOSObjectArray_Set(nil_chk(values), i, nil);
   }
   mSize_ = 0;
   mGarbage_ = false;
 }
 
-- (void)appendWithLong:(jlong)key
+- (void)appendWithLong:(int64_t)key
                 withId:(id)value {
   if (mSize_ != 0 && key <= IOSLongArray_Get(nil_chk(mKeys_), mSize_ - 1)) {
     [self putWithLong:key withId:value];
@@ -200,15 +215,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_initWithInt_(mSize_ * 28);
   [buffer appendWithChar:'{'];
-  for (jint i = 0; i < mSize_; i++) {
+  for (int32_t i = 0; i < mSize_; i++) {
     if (i > 0) {
       [buffer appendWithNSString:@", "];
     }
-    jlong key = [self keyAtWithInt:i];
+    int64_t key = [self keyAtWithInt:i];
     [buffer appendWithLong:key];
     [buffer appendWithChar:'='];
     id value = JreRetainedLocalValue([self valueAtWithInt:i]);
-    if (value != self) {
+    if (!JreObjectEqualsEquals(value, self)) {
       [buffer appendWithId:value];
     }
     else {
@@ -307,7 +322,7 @@ ADLongSparseArray *create_ADLongSparseArray_init() {
   J2OBJC_CREATE_IMPL(ADLongSparseArray, init)
 }
 
-void ADLongSparseArray_initWithInt_(ADLongSparseArray *self, jint initialCapacity) {
+void ADLongSparseArray_initWithInt_(ADLongSparseArray *self, int32_t initialCapacity) {
   NSObject_init(self);
   self->mGarbage_ = false;
   if (initialCapacity == 0) {
@@ -321,22 +336,22 @@ void ADLongSparseArray_initWithInt_(ADLongSparseArray *self, jint initialCapacit
   self->mSize_ = 0;
 }
 
-ADLongSparseArray *new_ADLongSparseArray_initWithInt_(jint initialCapacity) {
+ADLongSparseArray *new_ADLongSparseArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_NEW_IMPL(ADLongSparseArray, initWithInt_, initialCapacity)
 }
 
-ADLongSparseArray *create_ADLongSparseArray_initWithInt_(jint initialCapacity) {
+ADLongSparseArray *create_ADLongSparseArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_CREATE_IMPL(ADLongSparseArray, initWithInt_, initialCapacity)
 }
 
 void ADLongSparseArray_gc(ADLongSparseArray *self) {
-  jint n = self->mSize_;
-  jint o = 0;
+  int32_t n = self->mSize_;
+  int32_t o = 0;
   IOSLongArray *keys = self->mKeys_;
   IOSObjectArray *values = self->mValues_;
-  for (jint i = 0; i < n; i++) {
+  for (int32_t i = 0; i < n; i++) {
     id val = IOSObjectArray_Get(nil_chk(values), i);
-    if (val != ADLongSparseArray_DELETED) {
+    if (!JreObjectEqualsEquals(val, ADLongSparseArray_DELETED)) {
       if (i != o) {
         *IOSLongArray_GetRef(nil_chk(keys), o) = IOSLongArray_Get(keys, i);
         IOSObjectArray_Set(values, o, val);
@@ -350,3 +365,5 @@ void ADLongSparseArray_gc(ADLongSparseArray *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLongSparseArray)
+
+J2OBJC_NAME_MAPPING(ADLongSparseArray, "r.android.util", "AD")

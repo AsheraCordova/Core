@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Objects.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Objects")
@@ -17,6 +18,9 @@
 #define ADObjects_
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilComparator;
 
 /*!
@@ -35,9 +39,9 @@
  @brief Returns 0 if <code>a == b</code>, or <code>c.compare(a, b)</code> otherwise.
  That is, this makes <code>c</code> null-safe.
  */
-+ (jint)compareWithId:(id)a
-               withId:(id)b
-withJavaUtilComparator:(id<JavaUtilComparator>)c;
++ (int32_t)compareWithId:(id)a
+                  withId:(id)b
+  withJavaUtilComparator:(id<JavaUtilComparator>)c;
 
 /*!
  @brief Returns true if both arguments are null,
@@ -45,32 +49,32 @@ withJavaUtilComparator:(id<JavaUtilComparator>)c;
   the result of <code>Arrays.deepEquals</code> if both arguments are arrays of reference types,
   and the result of <code>equals</code> otherwise.
  */
-+ (jboolean)deepEqualsWithId:(id)a
-                      withId:(id)b;
++ (bool)deepEqualsWithId:(id)a
+                  withId:(id)b;
 
 /*!
  @brief Returns true if two possibly-null objects are equal.
  */
-+ (jboolean)equalWithId:(id)a
-                 withId:(id)b;
++ (bool)equalWithId:(id)a
+             withId:(id)b;
 
 /*!
  @brief Null-safe equivalent of <code>a.equals(b)</code>.
  */
-+ (jboolean)equalsWithId:(id)a
-                  withId:(id)b;
++ (bool)equalsWithId:(id)a
+              withId:(id)b;
 
 /*!
  @brief Convenience wrapper for <code>Arrays.hashCode</code>, adding varargs.
  This can be used to compute a hash code for an object's fields as follows: 
  <code>Objects.hash(a, b, c)</code>.
  */
-+ (jint)hash__WithNSObjectArray:(IOSObjectArray *)values;
++ (int32_t)hash__WithNSObjectArray:(IOSObjectArray *)values;
 
 /*!
  @brief Returns 0 for null or <code>o.hashCode()</code>.
  */
-+ (jint)hashCodeWithId:(id)o;
++ (int32_t)hashCodeWithId:(id)o;
 
 /*!
  @brief Returns <code>o</code> if non-null, or throws <code>NullPointerException</code>.
@@ -99,15 +103,15 @@ withJavaUtilComparator:(id<JavaUtilComparator>)c;
 
 J2OBJC_EMPTY_STATIC_INIT(ADObjects)
 
-FOUNDATION_EXPORT jint ADObjects_compareWithId_withId_withJavaUtilComparator_(id a, id b, id<JavaUtilComparator> c);
+FOUNDATION_EXPORT int32_t ADObjects_compareWithId_withId_withJavaUtilComparator_(id a, id b, id<JavaUtilComparator> c);
 
-FOUNDATION_EXPORT jboolean ADObjects_deepEqualsWithId_withId_(id a, id b);
+FOUNDATION_EXPORT bool ADObjects_deepEqualsWithId_withId_(id a, id b);
 
-FOUNDATION_EXPORT jboolean ADObjects_equalsWithId_withId_(id a, id b);
+FOUNDATION_EXPORT bool ADObjects_equalsWithId_withId_(id a, id b);
 
-FOUNDATION_EXPORT jint ADObjects_hash__WithNSObjectArray_(IOSObjectArray *values);
+FOUNDATION_EXPORT int32_t ADObjects_hash__WithNSObjectArray_(IOSObjectArray *values);
 
-FOUNDATION_EXPORT jint ADObjects_hashCodeWithId_(id o);
+FOUNDATION_EXPORT int32_t ADObjects_hashCodeWithId_(id o);
 
 FOUNDATION_EXPORT id ADObjects_requireNonNullWithId_(id o);
 
@@ -117,11 +121,12 @@ FOUNDATION_EXPORT NSString *ADObjects_toStringWithId_(id o);
 
 FOUNDATION_EXPORT NSString *ADObjects_toStringWithId_withNSString_(id o, NSString *nullString);
 
-FOUNDATION_EXPORT jboolean ADObjects_equalWithId_withId_(id a, id b);
+FOUNDATION_EXPORT bool ADObjects_equalWithId_withId_(id a, id b);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADObjects)
 
 @compatibility_alias RAndroidUtilObjects ADObjects;
+
 
 #endif
 

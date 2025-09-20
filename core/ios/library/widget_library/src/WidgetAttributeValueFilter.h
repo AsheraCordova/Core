@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttributeValueFilter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetAttributeValueFilter")
@@ -16,6 +17,8 @@
 #if !defined (ASWidgetAttributeValueFilter_) && (INCLUDE_ALL_WidgetAttributeValueFilter || defined(INCLUDE_ASWidgetAttributeValueFilter))
 #define ASWidgetAttributeValueFilter_
 
+@class NSString;
+
 @protocol ASWidgetAttributeValueFilter < JavaObject >
 
 - (NSString *)filterWithNSString:(NSString *)value;
@@ -27,6 +30,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASWidgetAttributeValueFilter)
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttributeValueFilter)
 
 #define ComAsheraWidgetWidgetAttributeValueFilter ASWidgetAttributeValueFilter
+
 
 #endif
 

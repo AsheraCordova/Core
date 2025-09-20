@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\SslErrorHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SslErrorHandler")
@@ -37,6 +38,7 @@ FOUNDATION_EXPORT ADSslErrorHandler *create_ADSslErrorHandler_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADSslErrorHandler)
 
 @compatibility_alias RAndroidWebkitSslErrorHandler ADSslErrorHandler;
+
 
 #endif
 

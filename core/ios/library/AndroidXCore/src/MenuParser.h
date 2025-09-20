@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\MenuParser.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MenuParser")
@@ -16,6 +17,7 @@
 #if !defined (ADXMenuParser_) && (INCLUDE_ALL_MenuParser || defined(INCLUDE_ADXMenuParser))
 #define ADXMenuParser_
 
+@class NSString;
 @protocol ADMenu;
 @protocol ASHasWidgets;
 @protocol ASIFragment;
@@ -46,6 +48,7 @@ FOUNDATION_EXPORT void ADXMenuParser_parseMenuWithASHasWidgets_withADMenu_withNS
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuParser)
 
 @compatibility_alias AndroidxAppcompatViewMenuMenuParser ADXMenuParser;
+
 
 #endif
 

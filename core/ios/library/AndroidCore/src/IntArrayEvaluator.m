@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\IntArrayEvaluator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "IntArrayEvaluator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADIntArrayEvaluator () {
@@ -31,16 +44,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (IOSIntArray *)evaluateWithFloat:(jfloat)fraction
+- (IOSIntArray *)evaluateWithFloat:(float)fraction
                             withId:(IOSIntArray *)startValue
                             withId:(IOSIntArray *)endValue {
   IOSIntArray *array = mArray_;
   if (array == nil) {
     array = [IOSIntArray arrayWithLength:((IOSIntArray *) nil_chk(startValue))->size_];
   }
-  for (jint i = 0; i < array->size_; i++) {
-    jint start = IOSIntArray_Get(nil_chk(startValue), i);
-    jint end = IOSIntArray_Get(nil_chk(endValue), i);
+  for (int32_t i = 0; i < array->size_; i++) {
+    int32_t start = IOSIntArray_Get(nil_chk(startValue), i);
+    int32_t end = IOSIntArray_Get(nil_chk(endValue), i);
     *IOSIntArray_GetRef(array, i) = JreFpToInt((start + (fraction * (end - start))));
   }
   return array;
@@ -100,3 +113,5 @@ ADIntArrayEvaluator *create_ADIntArrayEvaluator_initWithIntArray_(IOSIntArray *r
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADIntArrayEvaluator)
+
+J2OBJC_NAME_MAPPING(ADIntArrayEvaluator, "r.android.animation", "AD")

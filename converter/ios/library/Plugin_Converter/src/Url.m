@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\Url.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,10 +16,17 @@
 #include "ResourceBundleUtils.h"
 #include "Url.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/net/MalformedURLException.h"
 #include "java/net/URI.h"
 #include "java/net/URISyntaxException.h"
 #include "java/net/URL.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASUrl
@@ -35,9 +47,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", @"@string/url_error_message", [((id<ASIWidget>) nil_chk(widget)) getFragment]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   @try {
@@ -88,3 +100,5 @@ ASUrl *create_ASUrl_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUrl)
+
+J2OBJC_NAME_MAPPING(ASUrl, "com.ashera.validations", "AS")

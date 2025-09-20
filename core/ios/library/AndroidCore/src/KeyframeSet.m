@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\KeyframeSet.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FloatKeyframeSet.h"
 #include "IKeyframes.h"
 #include "IOSClass.h"
@@ -17,10 +22,18 @@
 #include "PathKeyframes.h"
 #include "TimeInterpolator.h"
 #include "TypeEvaluator.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADKeyframeSet
@@ -55,7 +68,7 @@
 }
 
 + (ADPathKeyframes *)ofPathWithADPath:(ADPath *)path
-                            withFloat:(jfloat)error {
+                            withFloat:(float)error {
   return ADKeyframeSet_ofPathWithADPath_withFloat_(path, error);
 }
 
@@ -69,16 +82,16 @@
 
 - (ADKeyframeSet *)java_clone {
   id<JavaUtilList> keyframes = JreRetainedLocalValue(mKeyframes_);
-  jint numKeyframes = [((id<JavaUtilList>) nil_chk(mKeyframes_)) size];
+  int32_t numKeyframes = [((id<JavaUtilList>) nil_chk(mKeyframes_)) size];
   IOSObjectArray *newIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_class_()];
-  for (jint i = 0; i < numKeyframes; ++i) {
+  for (int32_t i = 0; i < numKeyframes; ++i) {
     IOSObjectArray_Set(newIKeyframes, i, [((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone]);
   }
   ADKeyframeSet *newSet = create_ADKeyframeSet_initWithADKeyframeArray_(newIKeyframes);
   return newSet;
 }
 
-- (id)getValueWithFloat:(jfloat)fraction {
+- (id)getValueWithFloat:(float)fraction {
   if (mNumKeyframes_ == 2) {
     if (mInterpolator_ != nil) {
       fraction = [mInterpolator_ getInterpolationWithFloat:fraction];
@@ -91,8 +104,8 @@
     if (interpolator != nil) {
       fraction = [interpolator getInterpolationWithFloat:fraction];
     }
-    jfloat prevFraction = [((ADKeyframe *) nil_chk(mFirstKeyframe_)) getFraction];
-    jfloat intervalFraction = (fraction - prevFraction) / ([nextKeyframe getFraction] - prevFraction);
+    float prevFraction = [((ADKeyframe *) nil_chk(mFirstKeyframe_)) getFraction];
+    float intervalFraction = (fraction - prevFraction) / ([nextKeyframe getFraction] - prevFraction);
     return [((id<ADTypeEvaluator>) nil_chk(mEvaluator_)) evaluateWithFloat:intervalFraction withId:[((ADKeyframe *) nil_chk(mFirstKeyframe_)) getValue] withId:[nextKeyframe getValue]];
   }
   else if (fraction >= 1.0f) {
@@ -101,17 +114,17 @@
     if (interpolator != nil) {
       fraction = [interpolator getInterpolationWithFloat:fraction];
     }
-    jfloat prevFraction = [((ADKeyframe *) nil_chk(prevKeyframe)) getFraction];
-    jfloat intervalFraction = (fraction - prevFraction) / ([((ADKeyframe *) nil_chk(mLastKeyframe_)) getFraction] - prevFraction);
+    float prevFraction = [((ADKeyframe *) nil_chk(prevKeyframe)) getFraction];
+    float intervalFraction = (fraction - prevFraction) / ([((ADKeyframe *) nil_chk(mLastKeyframe_)) getFraction] - prevFraction);
     return [((id<ADTypeEvaluator>) nil_chk(mEvaluator_)) evaluateWithFloat:intervalFraction withId:[prevKeyframe getValue] withId:[((ADKeyframe *) nil_chk(mLastKeyframe_)) getValue]];
   }
   ADKeyframe *prevKeyframe = JreRetainedLocalValue(mFirstKeyframe_);
-  for (jint i = 1; i < mNumKeyframes_; ++i) {
+  for (int32_t i = 1; i < mNumKeyframes_; ++i) {
     ADKeyframe *nextKeyframe = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:i]);
     if (fraction < [((ADKeyframe *) nil_chk(nextKeyframe)) getFraction]) {
       id<ADTimeInterpolator> interpolator = [nextKeyframe getInterpolator];
-      jfloat prevFraction = [((ADKeyframe *) nil_chk(prevKeyframe)) getFraction];
-      jfloat intervalFraction = (fraction - prevFraction) / ([nextKeyframe getFraction] - prevFraction);
+      float prevFraction = [((ADKeyframe *) nil_chk(prevKeyframe)) getFraction];
+      float intervalFraction = (fraction - prevFraction) / ([nextKeyframe getFraction] - prevFraction);
       if (interpolator != nil) {
         intervalFraction = [interpolator getInterpolationWithFloat:intervalFraction];
       }
@@ -124,7 +137,7 @@
 
 - (NSString *)description {
   NSString *returnVal = @" ";
-  for (jint i = 0; i < mNumKeyframes_; ++i) {
+  for (int32_t i = 0; i < mNumKeyframes_; ++i) {
     JreStrAppend(&returnVal, "@$", [((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:i])) getValue], @"  ");
   }
   return returnVal;
@@ -214,7 +227,7 @@ ADKeyframeSet *create_ADKeyframeSet_initWithADKeyframeArray_(IOSObjectArray *key
 
 ADKeyframeSet *ADKeyframeSet_ofIntWithIntArray_(IOSIntArray *values) {
   ADKeyframeSet_initialize();
-  jint numKeyframes = ((IOSIntArray *) nil_chk(values))->size_;
+  int32_t numKeyframes = ((IOSIntArray *) nil_chk(values))->size_;
   IOSObjectArray *keyframes = [IOSObjectArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(numKeyframes, 2) type:ADKeyframe_IntKeyframe_class_()];
   if (numKeyframes == 1) {
     IOSObjectArray_Set(keyframes, 0, (ADKeyframe_IntKeyframe *) cast_chk(ADKeyframe_ofIntWithFloat_(0.0f), [ADKeyframe_IntKeyframe class]));
@@ -222,8 +235,8 @@ ADKeyframeSet *ADKeyframeSet_ofIntWithIntArray_(IOSIntArray *values) {
   }
   else {
     IOSObjectArray_Set(keyframes, 0, (ADKeyframe_IntKeyframe *) cast_chk(ADKeyframe_ofIntWithFloat_withInt_(0.0f, IOSIntArray_Get(values, 0)), [ADKeyframe_IntKeyframe class]));
-    for (jint i = 1; i < numKeyframes; ++i) {
-      IOSObjectArray_Set(keyframes, i, (ADKeyframe_IntKeyframe *) cast_chk(ADKeyframe_ofIntWithFloat_withInt_((jfloat) i / (numKeyframes - 1), IOSIntArray_Get(values, i)), [ADKeyframe_IntKeyframe class]));
+    for (int32_t i = 1; i < numKeyframes; ++i) {
+      IOSObjectArray_Set(keyframes, i, (ADKeyframe_IntKeyframe *) cast_chk(ADKeyframe_ofIntWithFloat_withInt_((float) i / (numKeyframes - 1), IOSIntArray_Get(values, i)), [ADKeyframe_IntKeyframe class]));
     }
   }
   return create_ADIntKeyframeSet_initPackagePrivateWithADKeyframe_IntKeyframeArray_(keyframes);
@@ -231,8 +244,8 @@ ADKeyframeSet *ADKeyframeSet_ofIntWithIntArray_(IOSIntArray *values) {
 
 ADKeyframeSet *ADKeyframeSet_ofFloatWithFloatArray_(IOSFloatArray *values) {
   ADKeyframeSet_initialize();
-  jboolean badValue = false;
-  jint numKeyframes = ((IOSFloatArray *) nil_chk(values))->size_;
+  bool badValue = false;
+  int32_t numKeyframes = ((IOSFloatArray *) nil_chk(values))->size_;
   IOSObjectArray *keyframes = [IOSObjectArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(numKeyframes, 2) type:ADKeyframe_FloatKeyframe_class_()];
   if (numKeyframes == 1) {
     IOSObjectArray_Set(keyframes, 0, (ADKeyframe_FloatKeyframe *) cast_chk(ADKeyframe_ofFloatWithFloat_(0.0f), [ADKeyframe_FloatKeyframe class]));
@@ -243,8 +256,8 @@ ADKeyframeSet *ADKeyframeSet_ofFloatWithFloatArray_(IOSFloatArray *values) {
   }
   else {
     IOSObjectArray_Set(keyframes, 0, (ADKeyframe_FloatKeyframe *) cast_chk(ADKeyframe_ofFloatWithFloat_withFloat_(0.0f, IOSFloatArray_Get(values, 0)), [ADKeyframe_FloatKeyframe class]));
-    for (jint i = 1; i < numKeyframes; ++i) {
-      IOSObjectArray_Set(keyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk(ADKeyframe_ofFloatWithFloat_withFloat_((jfloat) i / (numKeyframes - 1), IOSFloatArray_Get(values, i)), [ADKeyframe_FloatKeyframe class]));
+    for (int32_t i = 1; i < numKeyframes; ++i) {
+      IOSObjectArray_Set(keyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk(ADKeyframe_ofFloatWithFloat_withFloat_((float) i / (numKeyframes - 1), IOSFloatArray_Get(values, i)), [ADKeyframe_FloatKeyframe class]));
       if (JavaLangFloat_isNaNWithFloat_(IOSFloatArray_Get(values, i))) {
         badValue = true;
       }
@@ -258,11 +271,11 @@ ADKeyframeSet *ADKeyframeSet_ofFloatWithFloatArray_(IOSFloatArray *values) {
 
 ADKeyframeSet *ADKeyframeSet_ofKeyframeWithADKeyframeArray_(IOSObjectArray *keyframes) {
   ADKeyframeSet_initialize();
-  jint numKeyframes = ((IOSObjectArray *) nil_chk(keyframes))->size_;
-  jboolean hasFloat = false;
-  jboolean hasInt = false;
-  jboolean hasOther = false;
-  for (jint i = 0; i < numKeyframes; ++i) {
+  int32_t numKeyframes = ((IOSObjectArray *) nil_chk(keyframes))->size_;
+  bool hasFloat = false;
+  bool hasInt = false;
+  bool hasOther = false;
+  for (int32_t i = 0; i < numKeyframes; ++i) {
     if ([IOSObjectArray_Get(keyframes, i) isKindOfClass:[ADKeyframe_FloatKeyframe class]]) {
       hasFloat = true;
     }
@@ -275,14 +288,14 @@ ADKeyframeSet *ADKeyframeSet_ofKeyframeWithADKeyframeArray_(IOSObjectArray *keyf
   }
   if (hasFloat && !hasInt && !hasOther) {
     IOSObjectArray *floatIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_FloatKeyframe_class_()];
-    for (jint i = 0; i < numKeyframes; ++i) {
+    for (int32_t i = 0; i < numKeyframes; ++i) {
       IOSObjectArray_Set(floatIKeyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk(IOSObjectArray_Get(keyframes, i), [ADKeyframe_FloatKeyframe class]));
     }
     return create_ADFloatKeyframeSet_initPackagePrivateWithADKeyframe_FloatKeyframeArray_(floatIKeyframes);
   }
   else if (hasInt && !hasFloat && !hasOther) {
     IOSObjectArray *intIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_IntKeyframe_class_()];
-    for (jint i = 0; i < numKeyframes; ++i) {
+    for (int32_t i = 0; i < numKeyframes; ++i) {
       IOSObjectArray_Set(intIKeyframes, i, (ADKeyframe_IntKeyframe *) cast_chk(IOSObjectArray_Get(keyframes, i), [ADKeyframe_IntKeyframe class]));
     }
     return create_ADIntKeyframeSet_initPackagePrivateWithADKeyframe_IntKeyframeArray_(intIKeyframes);
@@ -294,7 +307,7 @@ ADKeyframeSet *ADKeyframeSet_ofKeyframeWithADKeyframeArray_(IOSObjectArray *keyf
 
 ADKeyframeSet *ADKeyframeSet_ofObjectWithNSObjectArray_(IOSObjectArray *values) {
   ADKeyframeSet_initialize();
-  jint numKeyframes = ((IOSObjectArray *) nil_chk(values))->size_;
+  int32_t numKeyframes = ((IOSObjectArray *) nil_chk(values))->size_;
   IOSObjectArray *keyframes = [IOSObjectArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(numKeyframes, 2) type:ADKeyframe_ObjectKeyframe_class_()];
   if (numKeyframes == 1) {
     IOSObjectArray_Set(keyframes, 0, (ADKeyframe_ObjectKeyframe *) cast_chk(ADKeyframe_ofObjectWithFloat_(0.0f), [ADKeyframe_ObjectKeyframe class]));
@@ -302,8 +315,8 @@ ADKeyframeSet *ADKeyframeSet_ofObjectWithNSObjectArray_(IOSObjectArray *values) 
   }
   else {
     IOSObjectArray_Set(keyframes, 0, (ADKeyframe_ObjectKeyframe *) cast_chk(ADKeyframe_ofObjectWithFloat_withId_(0.0f, IOSObjectArray_Get(values, 0)), [ADKeyframe_ObjectKeyframe class]));
-    for (jint i = 1; i < numKeyframes; ++i) {
-      IOSObjectArray_Set(keyframes, i, (ADKeyframe_ObjectKeyframe *) cast_chk(ADKeyframe_ofObjectWithFloat_withId_((jfloat) i / (numKeyframes - 1), IOSObjectArray_Get(values, i)), [ADKeyframe_ObjectKeyframe class]));
+    for (int32_t i = 1; i < numKeyframes; ++i) {
+      IOSObjectArray_Set(keyframes, i, (ADKeyframe_ObjectKeyframe *) cast_chk(ADKeyframe_ofObjectWithFloat_withId_((float) i / (numKeyframes - 1), IOSObjectArray_Get(values, i)), [ADKeyframe_ObjectKeyframe class]));
     }
   }
   return create_ADKeyframeSet_initWithADKeyframeArray_(keyframes);
@@ -314,9 +327,11 @@ ADPathKeyframes *ADKeyframeSet_ofPathWithADPath_(ADPath *path) {
   return create_ADPathKeyframes_initWithADPath_(path);
 }
 
-ADPathKeyframes *ADKeyframeSet_ofPathWithADPath_withFloat_(ADPath *path, jfloat error) {
+ADPathKeyframes *ADKeyframeSet_ofPathWithADPath_withFloat_(ADPath *path, float error) {
   ADKeyframeSet_initialize();
   return create_ADPathKeyframes_initWithADPath_withFloat_(path, error);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframeSet)
+
+J2OBJC_NAME_MAPPING(ADKeyframeSet, "r.android.animation", "AD")

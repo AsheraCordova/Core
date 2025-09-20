@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\AnimationHandler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AnimationHandler.h"
 #include "Animator.h"
 #include "ArrayMap.h"
@@ -11,14 +16,20 @@
 #include "ObjectAnimator.h"
 #include "SystemClock.h"
 #include "SystemProperties.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/ThreadLocal.h"
 #include "java/lang/ref/WeakReference.h"
 #include "java/util/ArrayList.h"
 
-@class JavaUtilArrayList;
-@protocol JavaLangRunnable;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -53,7 +64,7 @@
    */
   JavaUtilArrayList *mAnimatorRequestors_;
   id<ADChoreographer_FrameCallback> mFrameCallback_;
-  jboolean mListDirty_;
+  bool mListDirty_;
   id<ADChoreographer_FrameCallback> mPauser_;
 }
 
@@ -62,31 +73,31 @@
   is moved to the background.
  @return the value of 'framework.pause_bg_animations.enabled' system property
  */
-+ (jboolean)isPauseBgAnimationsEnabledInSystemProperties;
++ (bool)isPauseBgAnimationsEnabledInSystemProperties;
 
-- (void)requestAnimatorsEnabledImplWithBoolean:(jboolean)enable
+- (void)requestAnimatorsEnabledImplWithBoolean:(bool)enable
                                         withId:(id)requestor;
 
 - (void)resumeAnimators;
 
 - (id<ADAnimationHandler_AnimationFrameCallbackProvider>)getProvider;
 
-- (void)doAnimationFrameWithLong:(jlong)frameTime;
+- (void)doAnimationFrameWithLong:(int64_t)frameTime;
 
 - (void)commitAnimationFrameWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
-                                                                 withLong:(jlong)frameTime;
+                                                                 withLong:(int64_t)frameTime;
 
 /*!
  @brief Remove the callbacks from mDelayedCallbackStartTime once they have passed the initial delay
   so that they can start getting frame callbacks.
  @return true if they have passed the initial delay or have no delay, false otherwise.
  */
-- (jboolean)isCallbackDueWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
-                                                              withLong:(jlong)currentTime;
+- (bool)isCallbackDueWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
+                                                          withLong:(int64_t)currentTime;
 
 - (void)cleanUpList;
 
-- (jint)getCallbackSize;
+- (int32_t)getCallbackSize;
 
 @end
 
@@ -103,44 +114,44 @@ inline NSString *ADAnimationHandler_get_TAG(void);
 static NSString *ADAnimationHandler_TAG = @"AnimationHandler";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADAnimationHandler, TAG, NSString *)
 
-inline jboolean ADAnimationHandler_get_LOCAL_LOGV(void);
+inline bool ADAnimationHandler_get_LOCAL_LOGV(void);
 #define ADAnimationHandler_LOCAL_LOGV false
-J2OBJC_STATIC_FIELD_CONSTANT(ADAnimationHandler, LOCAL_LOGV, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAnimationHandler, LOCAL_LOGV, bool)
 
-inline jboolean ADAnimationHandler_get_sAnimatorPausingEnabled(void);
-inline jboolean ADAnimationHandler_set_sAnimatorPausingEnabled(jboolean value);
-inline jboolean *ADAnimationHandler_getRef_sAnimatorPausingEnabled(void);
-static jboolean ADAnimationHandler_sAnimatorPausingEnabled;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADAnimationHandler, sAnimatorPausingEnabled, jboolean)
+inline bool ADAnimationHandler_get_sAnimatorPausingEnabled(void);
+inline bool ADAnimationHandler_set_sAnimatorPausingEnabled(bool value);
+inline bool *ADAnimationHandler_getRef_sAnimatorPausingEnabled(void);
+static bool ADAnimationHandler_sAnimatorPausingEnabled;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADAnimationHandler, sAnimatorPausingEnabled, bool)
 
-inline jboolean ADAnimationHandler_get_sOverrideAnimatorPausingSystemProperty(void);
-inline jboolean ADAnimationHandler_set_sOverrideAnimatorPausingSystemProperty(jboolean value);
-inline jboolean *ADAnimationHandler_getRef_sOverrideAnimatorPausingSystemProperty(void);
-static jboolean ADAnimationHandler_sOverrideAnimatorPausingSystemProperty = false;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADAnimationHandler, sOverrideAnimatorPausingSystemProperty, jboolean)
+inline bool ADAnimationHandler_get_sOverrideAnimatorPausingSystemProperty(void);
+inline bool ADAnimationHandler_set_sOverrideAnimatorPausingSystemProperty(bool value);
+inline bool *ADAnimationHandler_getRef_sOverrideAnimatorPausingSystemProperty(void);
+static bool ADAnimationHandler_sOverrideAnimatorPausingSystemProperty = false;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADAnimationHandler, sOverrideAnimatorPausingSystemProperty, bool)
 
 inline ADAnimationHandler *ADAnimationHandler_get_sTestHandler(void);
 inline ADAnimationHandler *ADAnimationHandler_set_sTestHandler(ADAnimationHandler *value);
 static ADAnimationHandler *ADAnimationHandler_sTestHandler;
 J2OBJC_STATIC_FIELD_OBJ(ADAnimationHandler, sTestHandler, ADAnimationHandler *)
 
-__attribute__((unused)) static jboolean ADAnimationHandler_isPauseBgAnimationsEnabledInSystemProperties(void);
+__attribute__((unused)) static bool ADAnimationHandler_isPauseBgAnimationsEnabledInSystemProperties(void);
 
-__attribute__((unused)) static void ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(ADAnimationHandler *self, jboolean enable, id requestor);
+__attribute__((unused)) static void ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(ADAnimationHandler *self, bool enable, id requestor);
 
 __attribute__((unused)) static void ADAnimationHandler_resumeAnimators(ADAnimationHandler *self);
 
 __attribute__((unused)) static id<ADAnimationHandler_AnimationFrameCallbackProvider> ADAnimationHandler_getProvider(ADAnimationHandler *self);
 
-__attribute__((unused)) static void ADAnimationHandler_doAnimationFrameWithLong_(ADAnimationHandler *self, jlong frameTime);
+__attribute__((unused)) static void ADAnimationHandler_doAnimationFrameWithLong_(ADAnimationHandler *self, int64_t frameTime);
 
-__attribute__((unused)) static void ADAnimationHandler_commitAnimationFrameWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, jlong frameTime);
+__attribute__((unused)) static void ADAnimationHandler_commitAnimationFrameWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, int64_t frameTime);
 
-__attribute__((unused)) static jboolean ADAnimationHandler_isCallbackDueWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, jlong currentTime);
+__attribute__((unused)) static bool ADAnimationHandler_isCallbackDueWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, int64_t currentTime);
 
 __attribute__((unused)) static void ADAnimationHandler_cleanUpList(ADAnimationHandler *self);
 
-__attribute__((unused)) static jint ADAnimationHandler_getCallbackSize(ADAnimationHandler *self);
+__attribute__((unused)) static int32_t ADAnimationHandler_getCallbackSize(ADAnimationHandler *self);
 
 @interface ADAnimationHandler_1 : NSObject < ADChoreographer_FrameCallback > {
  @public
@@ -149,7 +160,7 @@ __attribute__((unused)) static jint ADAnimationHandler_getCallbackSize(ADAnimati
 
 - (instancetype)initWithADAnimationHandler:(ADAnimationHandler *)outer$;
 
-- (void)doFrameWithLong:(jlong)frameTimeNanos;
+- (void)doFrameWithLong:(int64_t)frameTimeNanos;
 
 @end
 
@@ -160,6 +171,7 @@ __attribute__((unused)) static void ADAnimationHandler_1_initWithADAnimationHand
 __attribute__((unused)) static ADAnimationHandler_1 *new_ADAnimationHandler_1_initWithADAnimationHandler_(ADAnimationHandler *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADAnimationHandler_1 *create_ADAnimationHandler_1_initWithADAnimationHandler_(ADAnimationHandler *outer$);
+
 
 @interface ADAnimationHandler_2 : NSObject < JavaLangRunnable > {
  @public
@@ -182,6 +194,7 @@ __attribute__((unused)) static ADAnimationHandler_2 *new_ADAnimationHandler_2_in
 
 __attribute__((unused)) static ADAnimationHandler_2 *create_ADAnimationHandler_2_initWithADAnimationHandler_withADAnimationHandler_AnimationFrameCallback_(ADAnimationHandler *outer$, id<ADAnimationHandler_AnimationFrameCallback> capture$0);
 
+
 @interface ADAnimationHandler_AnimationFrameCallbackProvider : NSObject
 
 @end
@@ -200,11 +213,11 @@ __attribute__((unused)) static ADAnimationHandler_2 *create_ADAnimationHandler_2
 
 - (void)postCommitCallbackWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
-- (jlong)getFrameTime;
+- (int64_t)getFrameTime;
 
-- (jlong)getFrameDelay;
+- (int64_t)getFrameDelay;
 
-- (void)setFrameDelayWithLong:(jlong)delay;
+- (void)setFrameDelayWithLong:(int64_t)delay;
 
 @end
 
@@ -220,6 +233,7 @@ __attribute__((unused)) static ADAnimationHandler_MyFrameCallbackProvider *creat
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler_MyFrameCallbackProvider)
 
+
 @interface ADAnimationHandler_AnimationFrameCallback : NSObject
 
 @end
@@ -229,7 +243,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler_MyFrameCallbackProvider)
   ADAnimationHandler *this$0_;
 }
 
-- (void)doFrameWithLong:(jlong)frameTimeNanos;
+- (void)doFrameWithLong:(int64_t)frameTimeNanos;
 
 @end
 
@@ -240,6 +254,7 @@ __attribute__((unused)) static void ADAnimationHandler_$Lambda$1_initWithADAnima
 __attribute__((unused)) static ADAnimationHandler_$Lambda$1 *new_ADAnimationHandler_$Lambda$1_initWithADAnimationHandler_(ADAnimationHandler *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADAnimationHandler_$Lambda$1 *create_ADAnimationHandler_$Lambda$1_initWithADAnimationHandler_(ADAnimationHandler *outer$);
+
 
 J2OBJC_INITIALIZED_DEFN(ADAnimationHandler)
 
@@ -262,15 +277,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADAnimationHandler_setTestHandlerWithADAnimationHandler_(handler);
 }
 
-+ (jboolean)isPauseBgAnimationsEnabledInSystemProperties {
++ (bool)isPauseBgAnimationsEnabledInSystemProperties {
   return ADAnimationHandler_isPauseBgAnimationsEnabledInSystemProperties();
 }
 
-+ (void)setAnimatorPausingEnabledWithBoolean:(jboolean)enable {
++ (void)setAnimatorPausingEnabledWithBoolean:(bool)enable {
   ADAnimationHandler_setAnimatorPausingEnabledWithBoolean_(enable);
 }
 
-+ (void)setOverrideAnimatorPausingSystemPropertyWithBoolean:(jboolean)enable {
++ (void)setOverrideAnimatorPausingSystemPropertyWithBoolean:(bool)enable {
   ADAnimationHandler_setOverrideAnimatorPausingSystemPropertyWithBoolean_(enable);
 }
 
@@ -278,12 +293,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimationHandler_removeRequestorWithId_(requestor);
 }
 
-+ (void)requestAnimatorsEnabledWithBoolean:(jboolean)enable
++ (void)requestAnimatorsEnabledWithBoolean:(bool)enable
                                     withId:(id)requestor {
   ADAnimationHandler_requestAnimatorsEnabledWithBoolean_withId_(enable, requestor);
 }
 
-- (void)requestAnimatorsEnabledImplWithBoolean:(jboolean)enable
+- (void)requestAnimatorsEnabledImplWithBoolean:(bool)enable
                                         withId:(id)requestor {
   ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(self, enable, requestor);
 }
@@ -306,7 +321,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addAnimationFrameCallbackWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
-                                                                      withLong:(jlong)delay {
+                                                                      withLong:(int64_t)delay {
   if ([((JavaUtilArrayList *) nil_chk(mAnimationCallbacks_)) size] == 0) {
     [((id<ADAnimationHandler_AnimationFrameCallbackProvider>) nil_chk(ADAnimationHandler_getProvider(self))) postFrameCallbackWithADChoreographer_FrameCallback:mFrameCallback_];
   }
@@ -327,41 +342,41 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)removeCallbackWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback {
   [((JavaUtilArrayList *) nil_chk(mCommitCallbacks_)) removeWithId:callback];
   [((ADArrayMap *) nil_chk(mDelayedCallbackStartTime_)) removeWithId:callback];
-  jint id_ = [((JavaUtilArrayList *) nil_chk(mAnimationCallbacks_)) indexOfWithId:callback];
+  int32_t id_ = [((JavaUtilArrayList *) nil_chk(mAnimationCallbacks_)) indexOfWithId:callback];
   if (id_ >= 0) {
     [mAnimationCallbacks_ setWithInt:id_ withId:nil];
     mListDirty_ = true;
   }
 }
 
-- (void)doAnimationFrameWithLong:(jlong)frameTime {
+- (void)doAnimationFrameWithLong:(int64_t)frameTime {
   ADAnimationHandler_doAnimationFrameWithLong_(self, frameTime);
 }
 
 - (void)commitAnimationFrameWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
-                                                                 withLong:(jlong)frameTime {
+                                                                 withLong:(int64_t)frameTime {
   ADAnimationHandler_commitAnimationFrameWithADAnimationHandler_AnimationFrameCallback_withLong_(self, callback, frameTime);
 }
 
-- (jboolean)isCallbackDueWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
-                                                              withLong:(jlong)currentTime {
+- (bool)isCallbackDueWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)callback
+                                                          withLong:(int64_t)currentTime {
   return ADAnimationHandler_isCallbackDueWithADAnimationHandler_AnimationFrameCallback_withLong_(self, callback, currentTime);
 }
 
-+ (jint)getAnimationCount {
++ (int32_t)getAnimationCount {
   return ADAnimationHandler_getAnimationCount();
 }
 
-+ (void)setFrameDelayWithLong:(jlong)delay {
++ (void)setFrameDelayWithLong:(int64_t)delay {
   ADAnimationHandler_setFrameDelayWithLong_(delay);
 }
 
-+ (jlong)getFrameDelay {
++ (int64_t)getFrameDelay {
   return ADAnimationHandler_getFrameDelay();
 }
 
 - (void)autoCancelBasedOnWithADObjectAnimator:(ADObjectAnimator *)objectAnimator {
-  for (jint i = [((JavaUtilArrayList *) nil_chk(mAnimationCallbacks_)) size] - 1; i >= 0; i--) {
+  for (int32_t i = [((JavaUtilArrayList *) nil_chk(mAnimationCallbacks_)) size] - 1; i >= 0; i--) {
     id<ADAnimationHandler_AnimationFrameCallback> cb = JreRetainedLocalValue([mAnimationCallbacks_ getWithInt:i]);
     if (cb == nil) {
       continue;
@@ -376,7 +391,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimationHandler_cleanUpList(self);
 }
 
-- (jint)getCallbackSize {
+- (int32_t)getCallbackSize {
   return ADAnimationHandler_getCallbackSize(self);
 }
 
@@ -517,18 +532,18 @@ ADAnimationHandler *ADAnimationHandler_setTestHandlerWithADAnimationHandler_(ADA
   return oldHandler;
 }
 
-jboolean ADAnimationHandler_isPauseBgAnimationsEnabledInSystemProperties() {
+bool ADAnimationHandler_isPauseBgAnimationsEnabledInSystemProperties() {
   ADAnimationHandler_initialize();
   if (ADAnimationHandler_sOverrideAnimatorPausingSystemProperty) return ADAnimationHandler_sAnimatorPausingEnabled;
   return ADSystemProperties_getBooleanWithNSString_withBoolean_(@"framework.pause_bg_animations.enabled", true);
 }
 
-void ADAnimationHandler_setAnimatorPausingEnabledWithBoolean_(jboolean enable) {
+void ADAnimationHandler_setAnimatorPausingEnabledWithBoolean_(bool enable) {
   ADAnimationHandler_initialize();
   ADAnimationHandler_sAnimatorPausingEnabled = enable;
 }
 
-void ADAnimationHandler_setOverrideAnimatorPausingSystemPropertyWithBoolean_(jboolean enable) {
+void ADAnimationHandler_setOverrideAnimatorPausingSystemPropertyWithBoolean_(bool enable) {
   ADAnimationHandler_initialize();
   ADAnimationHandler_sOverrideAnimatorPausingSystemProperty = enable;
 }
@@ -538,21 +553,21 @@ void ADAnimationHandler_removeRequestorWithId_(id requestor) {
   ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(nil_chk(ADAnimationHandler_getInstance()), false, requestor);
 }
 
-void ADAnimationHandler_requestAnimatorsEnabledWithBoolean_withId_(jboolean enable, id requestor) {
+void ADAnimationHandler_requestAnimatorsEnabledWithBoolean_withId_(bool enable, id requestor) {
   ADAnimationHandler_initialize();
   ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(nil_chk(ADAnimationHandler_getInstance()), enable, requestor);
 }
 
-void ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(ADAnimationHandler *self, jboolean enable, id requestor) {
-  jboolean wasEmpty = [((JavaUtilArrayList *) nil_chk(self->mAnimatorRequestors_)) isEmpty];
+void ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(ADAnimationHandler *self, bool enable, id requestor) {
+  bool wasEmpty = [((JavaUtilArrayList *) nil_chk(self->mAnimatorRequestors_)) isEmpty];
   ADAnimationHandler_setAnimatorPausingEnabledWithBoolean_(ADAnimationHandler_isPauseBgAnimationsEnabledInSystemProperties());
   @synchronized(self->mAnimatorRequestors_) {
     if (enable) {
       JavaLangRefWeakReference *weakRef = nil;
-      for (jint i = [self->mAnimatorRequestors_ size] - 1; i >= 0; --i) {
+      for (int32_t i = [self->mAnimatorRequestors_ size] - 1; i >= 0; --i) {
         JavaLangRefWeakReference *ref = JreRetainedLocalValue([self->mAnimatorRequestors_ getWithInt:i]);
         id referent = JreRetainedLocalValue([((JavaLangRefWeakReference *) nil_chk(ref)) get]);
-        if (referent == requestor) {
+        if (JreObjectEqualsEquals(referent, requestor)) {
           weakRef = ref;
         }
         else if (referent == nil) {
@@ -565,10 +580,10 @@ void ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(ADAnimati
       }
     }
     else {
-      for (jint i = [self->mAnimatorRequestors_ size] - 1; i >= 0; --i) {
+      for (int32_t i = [self->mAnimatorRequestors_ size] - 1; i >= 0; --i) {
         JavaLangRefWeakReference *ref = JreRetainedLocalValue([self->mAnimatorRequestors_ getWithInt:i]);
         id referent = JreRetainedLocalValue([((JavaLangRefWeakReference *) nil_chk(ref)) get]);
-        if (referent == requestor || referent == nil) {
+        if (JreObjectEqualsEquals(referent, requestor) || referent == nil) {
           [self->mAnimatorRequestors_ removeWithInt:i];
         }
       }
@@ -578,7 +593,7 @@ void ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(ADAnimati
     ADAnimationHandler_resumeAnimators(self);
     return;
   }
-  jboolean isEmpty = [self->mAnimatorRequestors_ isEmpty];
+  bool isEmpty = [self->mAnimatorRequestors_ isEmpty];
   if (wasEmpty != isEmpty) {
     if (!isEmpty) {
       ADAnimationHandler_resumeAnimators(self);
@@ -591,7 +606,7 @@ void ADAnimationHandler_requestAnimatorsEnabledImplWithBoolean_withId_(ADAnimati
 
 void ADAnimationHandler_resumeAnimators(ADAnimationHandler *self) {
   [((ADChoreographer *) nil_chk(ADChoreographer_getInstance())) removeFrameCallbackWithADChoreographer_FrameCallback:self->mPauser_];
-  for (jint i = [((JavaUtilArrayList *) nil_chk(self->mPausedAnimators_)) size] - 1; i >= 0; --i) {
+  for (int32_t i = [((JavaUtilArrayList *) nil_chk(self->mPausedAnimators_)) size] - 1; i >= 0; --i) {
     [((ADAnimator *) nil_chk([self->mPausedAnimators_ getWithInt:i])) resume];
   }
   [self->mPausedAnimators_ clear];
@@ -604,10 +619,10 @@ id<ADAnimationHandler_AnimationFrameCallbackProvider> ADAnimationHandler_getProv
   return self->mProvider_;
 }
 
-void ADAnimationHandler_doAnimationFrameWithLong_(ADAnimationHandler *self, jlong frameTime) {
-  jlong currentTime = ADSystemClock_uptimeMillis();
-  jint size = [((JavaUtilArrayList *) nil_chk(self->mAnimationCallbacks_)) size];
-  for (jint i = 0; i < size; i++) {
+void ADAnimationHandler_doAnimationFrameWithLong_(ADAnimationHandler *self, int64_t frameTime) {
+  int64_t currentTime = ADSystemClock_uptimeMillis();
+  int32_t size = [((JavaUtilArrayList *) nil_chk(self->mAnimationCallbacks_)) size];
+  for (int32_t i = 0; i < size; i++) {
     id<ADAnimationHandler_AnimationFrameCallback> callback = [self->mAnimationCallbacks_ getWithInt:i];
     if (callback == nil) {
       continue;
@@ -622,14 +637,14 @@ void ADAnimationHandler_doAnimationFrameWithLong_(ADAnimationHandler *self, jlon
   ADAnimationHandler_cleanUpList(self);
 }
 
-void ADAnimationHandler_commitAnimationFrameWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, jlong frameTime) {
+void ADAnimationHandler_commitAnimationFrameWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, int64_t frameTime) {
   if (![((ADArrayMap *) nil_chk(self->mDelayedCallbackStartTime_)) containsKeyWithId:callback] && [((JavaUtilArrayList *) nil_chk(self->mCommitCallbacks_)) containsWithId:callback]) {
     [((id<ADAnimationHandler_AnimationFrameCallback>) nil_chk(callback)) commitAnimationFrameWithLong:frameTime];
     [((JavaUtilArrayList *) nil_chk(self->mCommitCallbacks_)) removeWithId:callback];
   }
 }
 
-jboolean ADAnimationHandler_isCallbackDueWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, jlong currentTime) {
+bool ADAnimationHandler_isCallbackDueWithADAnimationHandler_AnimationFrameCallback_withLong_(ADAnimationHandler *self, id<ADAnimationHandler_AnimationFrameCallback> callback, int64_t currentTime) {
   JavaLangLong *startTime = JreRetainedLocalValue([((ADArrayMap *) nil_chk(self->mDelayedCallbackStartTime_)) getWithId:callback]);
   if (startTime == nil) {
     return true;
@@ -641,7 +656,7 @@ jboolean ADAnimationHandler_isCallbackDueWithADAnimationHandler_AnimationFrameCa
   return false;
 }
 
-jint ADAnimationHandler_getAnimationCount() {
+int32_t ADAnimationHandler_getAnimationCount() {
   ADAnimationHandler_initialize();
   ADAnimationHandler *handler = JreRetainedLocalValue(ADAnimationHandler_sTestHandler);
   if (handler == nil) {
@@ -653,19 +668,19 @@ jint ADAnimationHandler_getAnimationCount() {
   return ADAnimationHandler_getCallbackSize(handler);
 }
 
-void ADAnimationHandler_setFrameDelayWithLong_(jlong delay) {
+void ADAnimationHandler_setFrameDelayWithLong_(int64_t delay) {
   ADAnimationHandler_initialize();
   [((id<ADAnimationHandler_AnimationFrameCallbackProvider>) nil_chk(ADAnimationHandler_getProvider(nil_chk(ADAnimationHandler_getInstance())))) setFrameDelayWithLong:delay];
 }
 
-jlong ADAnimationHandler_getFrameDelay() {
+int64_t ADAnimationHandler_getFrameDelay() {
   ADAnimationHandler_initialize();
   return [((id<ADAnimationHandler_AnimationFrameCallbackProvider>) nil_chk(ADAnimationHandler_getProvider(nil_chk(ADAnimationHandler_getInstance())))) getFrameDelay];
 }
 
 void ADAnimationHandler_cleanUpList(ADAnimationHandler *self) {
   if (self->mListDirty_) {
-    for (jint i = [((JavaUtilArrayList *) nil_chk(self->mAnimationCallbacks_)) size] - 1; i >= 0; i--) {
+    for (int32_t i = [((JavaUtilArrayList *) nil_chk(self->mAnimationCallbacks_)) size] - 1; i >= 0; i--) {
       if ([self->mAnimationCallbacks_ getWithInt:i] == nil) {
         [self->mAnimationCallbacks_ removeWithInt:i];
       }
@@ -674,10 +689,10 @@ void ADAnimationHandler_cleanUpList(ADAnimationHandler *self) {
   }
 }
 
-jint ADAnimationHandler_getCallbackSize(ADAnimationHandler *self) {
-  jint count = 0;
-  jint size = [((JavaUtilArrayList *) nil_chk(self->mAnimationCallbacks_)) size];
-  for (jint i = size - 1; i >= 0; i--) {
+int32_t ADAnimationHandler_getCallbackSize(ADAnimationHandler *self) {
+  int32_t count = 0;
+  int32_t size = [((JavaUtilArrayList *) nil_chk(self->mAnimationCallbacks_)) size];
+  for (int32_t i = size - 1; i >= 0; i--) {
     if ([self->mAnimationCallbacks_ getWithInt:i] != nil) {
       count++;
     }
@@ -687,6 +702,8 @@ jint ADAnimationHandler_getCallbackSize(ADAnimationHandler *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimationHandler)
 
+J2OBJC_NAME_MAPPING(ADAnimationHandler, "r.android.animation", "AD")
+
 @implementation ADAnimationHandler_1
 
 - (instancetype)initWithADAnimationHandler:(ADAnimationHandler *)outer$ {
@@ -694,7 +711,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimationHandler)
   return self;
 }
 
-- (void)doFrameWithLong:(jlong)frameTimeNanos {
+- (void)doFrameWithLong:(int64_t)frameTimeNanos {
   ADAnimationHandler_doAnimationFrameWithLong_(this$0_, [((id<ADAnimationHandler_AnimationFrameCallbackProvider>) nil_chk(ADAnimationHandler_getProvider(this$0_))) getFrameTime]);
   if ([((JavaUtilArrayList *) nil_chk(this$0_->mAnimationCallbacks_)) size] > 0) {
     [((id<ADAnimationHandler_AnimationFrameCallbackProvider>) nil_chk(ADAnimationHandler_getProvider(this$0_))) postFrameCallbackWithADChoreographer_FrameCallback:self];
@@ -721,7 +738,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimationHandler)
     { "this$0_", "LADAnimationHandler;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADAnimationHandler;", "doFrame", "J" };
-  static const J2ObjcClassInfo _ADAnimationHandler_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADAnimationHandler_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, -1, -1, -1 };
   return &_ADAnimationHandler_1;
 }
 
@@ -774,7 +791,7 @@ withADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFr
     { "val$callback_", "LADAnimationHandler_AnimationFrameCallback;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADAnimationHandler;LADAnimationHandler_AnimationFrameCallback;", "LADAnimationHandler;", "doAnimationFrameWithLong:" };
-  static const J2ObjcClassInfo _ADAnimationHandler_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 2, 1, -1, 2, -1, -1 };
+  static const J2ObjcClassInfo _ADAnimationHandler_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 2, 1, -1, 2, -1, -1 };
   return &_ADAnimationHandler_2;
 }
 
@@ -837,15 +854,15 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADAnimationHandler_AnimationFrameCallbackPr
   [((ADChoreographer *) nil_chk(mChoreographer_)) postCallbackWithInt:ADChoreographer_CALLBACK_COMMIT withJavaLangRunnable:runnable withId:nil];
 }
 
-- (jlong)getFrameTime {
+- (int64_t)getFrameTime {
   return [((ADChoreographer *) nil_chk(mChoreographer_)) getFrameTime];
 }
 
-- (jlong)getFrameDelay {
+- (int64_t)getFrameDelay {
   return ADChoreographer_getFrameDelay();
 }
 
-- (void)setFrameDelayWithLong:(jlong)delay {
+- (void)setFrameDelayWithLong:(int64_t)delay {
   ADChoreographer_setFrameDelayWithLong_(delay);
 }
 
@@ -922,11 +939,11 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADAnimationHandler_AnimationFrameCallback)
 
 @implementation ADAnimationHandler_$Lambda$1
 
-- (void)doFrameWithLong:(jlong)frameTimeNanos {
+- (void)doFrameWithLong:(int64_t)frameTimeNanos {
   if ([((JavaUtilArrayList *) nil_chk(this$0_->mAnimatorRequestors_)) size] > 0) {
     return;
   }
-  for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(this$0_->mAnimationCallbacks_)) size]; ++i) {
+  for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(this$0_->mAnimationCallbacks_)) size]; ++i) {
     id<ADAnimationHandler_AnimationFrameCallback> callback = JreRetainedLocalValue([this$0_->mAnimationCallbacks_ getWithInt:i]);
     if ([callback isKindOfClass:[ADAnimator class]]) {
       ADAnimator *animator = ((ADAnimator *) callback);

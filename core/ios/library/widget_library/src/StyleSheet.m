@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\css\StyleSheet.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "StyleSheet.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSStyleSheet : NSObject
@@ -21,3 +32,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(CSSStyleSheet)
+
+J2OBJC_NAME_MAPPING(CSSStyleSheet, "com.ashera.css", "CSS")

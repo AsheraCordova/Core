@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\GeolocationPermissions.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "GeolocationPermissions.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADGeolocationPermissions
@@ -46,6 +58,8 @@ ADGeolocationPermissions *create_ADGeolocationPermissions_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADGeolocationPermissions)
 
+J2OBJC_NAME_MAPPING(ADGeolocationPermissions, "r.android.webkit", "AD")
+
 @implementation ADGeolocationPermissions_Callback
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -56,8 +70,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)invokeWithNSString:(NSString *)origin
-               withBoolean:(jboolean)b
-               withBoolean:(jboolean)c {
+               withBoolean:(bool)b
+               withBoolean:(bool)c {
 }
 
 + (const J2ObjcClassInfo *)__metadata {

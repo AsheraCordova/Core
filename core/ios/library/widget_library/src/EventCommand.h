@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\EventCommand.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EventCommand")
@@ -33,6 +34,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASEventCommand)
 J2OBJC_TYPE_LITERAL_HEADER(ASEventCommand)
 
 #define ComAsheraWidgetEventCommand ASEventCommand
+
 
 #endif
 

@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\BaseAttributeCommand.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseAttributeCommand.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -17,15 +30,15 @@
   return self;
 }
 
-- (jint)getPriority {
+- (int32_t)getPriority {
   return priority_;
 }
 
-- (void)setPriorityWithInt:(jint)priority {
+- (void)setPriorityWithInt:(int32_t)priority {
   self->priority_ = priority;
 }
 
-- (jboolean)executeAfterPostMeasure {
+- (bool)executeAfterPostMeasure {
   return false;
 }
 
@@ -85,3 +98,5 @@ void ASBaseAttributeCommand_initWithNSString_(ASBaseAttributeCommand *self, NSSt
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseAttributeCommand)
+
+J2OBJC_NAME_MAPPING(ASBaseAttributeCommand, "com.ashera.widget", "AS")

@@ -3,16 +3,29 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\interpolator\view\animation\LookupTableInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "LookupTableInterpolator.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXLookupTableInterpolator () {
  @public
   IOSFloatArray *mValues_;
-  jfloat mStepSize_;
+  float mStepSize_;
 }
 
 @end
@@ -26,17 +39,17 @@ J2OBJC_FIELD_SETTER(ADXLookupTableInterpolator, mValues_, IOSFloatArray *)
   return self;
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)input {
+- (float)getInterpolationWithFloat:(float)input {
   if (input >= 1.0f) {
     return 1.0f;
   }
   if (input <= 0.0f) {
     return 0.0f;
   }
-  jint position = JavaLangMath_minWithInt_withInt_(JreFpToInt((input * (((IOSFloatArray *) nil_chk(mValues_))->size_ - 1))), mValues_->size_ - 2);
-  jfloat quantized = position * mStepSize_;
-  jfloat diff = input - quantized;
-  jfloat weight = diff / mStepSize_;
+  int32_t position = JavaLangMath_minWithInt_withInt_(JreFpToInt((input * (((IOSFloatArray *) nil_chk(mValues_))->size_ - 1))), mValues_->size_ - 2);
+  float quantized = position * mStepSize_;
+  float diff = input - quantized;
+  float weight = diff / mStepSize_;
   return IOSFloatArray_Get(mValues_, position) + weight * (IOSFloatArray_Get(mValues_, position + 1) - IOSFloatArray_Get(mValues_, position));
 }
 

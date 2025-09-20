@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\EventCommandFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EventCommandFactory")
@@ -16,6 +17,8 @@
 #if !defined (ASEventCommandFactory_) && (INCLUDE_ALL_EventCommandFactory || defined(INCLUDE_ASEventCommandFactory))
 #define ASEventCommandFactory_
 
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASEventCommand;
 
 @interface ASEventCommandFactory : NSObject
@@ -26,7 +29,7 @@
 
 + (id<ASEventCommand>)getCommandWithNSString:(NSString *)name;
 
-+ (jboolean)hasCommandWithNSString:(NSString *)name;
++ (bool)hasCommandWithNSString:(NSString *)name;
 
 + (void)registerCommandWithNSString:(NSString *)name
                  withASEventCommand:(id<ASEventCommand>)eventCommand;
@@ -45,11 +48,12 @@ FOUNDATION_EXPORT void ASEventCommandFactory_registerCommandWithNSString_withASE
 
 FOUNDATION_EXPORT id<ASEventCommand> ASEventCommandFactory_getCommandWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT jboolean ASEventCommandFactory_hasCommandWithNSString_(NSString *name);
+FOUNDATION_EXPORT bool ASEventCommandFactory_hasCommandWithNSString_(NSString *name);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEventCommandFactory)
 
 @compatibility_alias ComAsheraWidgetEventCommandFactory ASEventCommandFactory;
+
 
 #endif
 

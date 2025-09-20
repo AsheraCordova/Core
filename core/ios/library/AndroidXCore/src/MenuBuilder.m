@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\MenuBuilder.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Context.h"
 #include "Drawable.h"
 #include "IOSPrimitiveArray.h"
@@ -15,59 +20,63 @@
 #include "SubMenu.h"
 #include "SubMenuBuilder.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/ref/WeakReference.h"
 #include "java/util/ArrayList.h"
 #include "java/util/concurrent/CopyOnWriteArrayList.h"
 
-@class JavaUtilArrayList;
-@class JavaUtilConcurrentCopyOnWriteArrayList;
-@protocol JavaLangCharSequence;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXMenuBuilder () {
  @public
   ADContext *mContext_;
   ADResources *mResources_;
-  jboolean mQwertyMode_;
-  jboolean mShortcutsVisible_;
+  bool mQwertyMode_;
+  bool mShortcutsVisible_;
   id<ADXMenuBuilder_Callback> mCallback_;
   JavaUtilArrayList *mItems_;
   JavaUtilArrayList *mVisibleItems_;
-  jboolean mIsVisibleItemsStale_;
+  bool mIsVisibleItemsStale_;
   JavaUtilArrayList *mActionItems_;
   JavaUtilArrayList *mNonActionItems_;
-  jboolean mIsActionItemsStale_;
-  jint mDefaultShowAsAction_;
-  jboolean mPreventDispatchingItemsChanged_;
-  jboolean mItemsChangedWhileDispatchPrevented_;
-  jboolean mStructureChangedWhileDispatchPrevented_;
-  jboolean mOptionalIconsVisible_;
-  jboolean mIsClosing_;
+  bool mIsActionItemsStale_;
+  int32_t mDefaultShowAsAction_;
+  bool mPreventDispatchingItemsChanged_;
+  bool mItemsChangedWhileDispatchPrevented_;
+  bool mStructureChangedWhileDispatchPrevented_;
+  bool mOptionalIconsVisible_;
+  bool mIsClosing_;
   JavaUtilConcurrentCopyOnWriteArrayList *mPresenters_;
   ADXMenuItemImpl *mExpandedItem_;
-  jboolean mGroupDividerEnabled_;
-  jboolean mOverrideVisibleItems_;
+  bool mGroupDividerEnabled_;
+  bool mOverrideVisibleItems_;
 }
 
-- (void)dispatchPresenterUpdateWithBoolean:(jboolean)cleared;
+- (void)dispatchPresenterUpdateWithBoolean:(bool)cleared;
 
-- (ADXMenuItemImpl *)createNewMenuItemWithInt:(jint)group
-                                      withInt:(jint)id_
-                                      withInt:(jint)categoryOrder
-                                      withInt:(jint)ordering
+- (ADXMenuItemImpl *)createNewMenuItemWithInt:(int32_t)group
+                                      withInt:(int32_t)id_
+                                      withInt:(int32_t)categoryOrder
+                                      withInt:(int32_t)ordering
                      withJavaLangCharSequence:(id<JavaLangCharSequence>)title
-                                      withInt:(jint)defaultShowAsAction;
+                                      withInt:(int32_t)defaultShowAsAction;
 
-+ (jint)getOrderingWithInt:(jint)categoryOrder;
++ (int32_t)getOrderingWithInt:(int32_t)categoryOrder;
 
-+ (jint)findInsertIndexWithJavaUtilArrayList:(JavaUtilArrayList *)items
-                                     withInt:(jint)ordering;
++ (int32_t)findInsertIndexWithJavaUtilArrayList:(JavaUtilArrayList *)items
+                                        withInt:(int32_t)ordering;
 
-- (void)setHeaderInternalWithInt:(jint)titleRes
+- (void)setHeaderInternalWithInt:(int32_t)titleRes
         withJavaLangCharSequence:(id<JavaLangCharSequence>)title
-                         withInt:(jint)iconRes
+                         withInt:(int32_t)iconRes
                   withADDrawable:(ADDrawable *)icon
                       withADView:(ADView *)view;
 
@@ -89,15 +98,15 @@ inline IOSIntArray *ADXMenuBuilder_get_sCategoryToOrder(void);
 static IOSIntArray *ADXMenuBuilder_sCategoryToOrder;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADXMenuBuilder, sCategoryToOrder, IOSIntArray *)
 
-__attribute__((unused)) static void ADXMenuBuilder_dispatchPresenterUpdateWithBoolean_(ADXMenuBuilder *self, jboolean cleared);
+__attribute__((unused)) static void ADXMenuBuilder_dispatchPresenterUpdateWithBoolean_(ADXMenuBuilder *self, bool cleared);
 
-__attribute__((unused)) static ADXMenuItemImpl *ADXMenuBuilder_createNewMenuItemWithInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *self, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint defaultShowAsAction);
+__attribute__((unused)) static ADXMenuItemImpl *ADXMenuBuilder_createNewMenuItemWithInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *self, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t defaultShowAsAction);
 
-__attribute__((unused)) static jint ADXMenuBuilder_getOrderingWithInt_(jint categoryOrder);
+__attribute__((unused)) static int32_t ADXMenuBuilder_getOrderingWithInt_(int32_t categoryOrder);
 
-__attribute__((unused)) static jint ADXMenuBuilder_findInsertIndexWithJavaUtilArrayList_withInt_(JavaUtilArrayList *items, jint ordering);
+__attribute__((unused)) static int32_t ADXMenuBuilder_findInsertIndexWithJavaUtilArrayList_withInt_(JavaUtilArrayList *items, int32_t ordering);
 
-__attribute__((unused)) static void ADXMenuBuilder_setHeaderInternalWithInt_withJavaLangCharSequence_withInt_withADDrawable_withADView_(ADXMenuBuilder *self, jint titleRes, id<JavaLangCharSequence> title, jint iconRes, ADDrawable *icon, ADView *view);
+__attribute__((unused)) static void ADXMenuBuilder_setHeaderInternalWithInt_withJavaLangCharSequence_withInt_withADDrawable_withADView_(ADXMenuBuilder *self, int32_t titleRes, id<JavaLangCharSequence> title, int32_t iconRes, ADDrawable *icon, ADView *view);
 
 __attribute__((unused)) static void ADXMenuBuilder_collapseItemActionViewWithADMenuItem_(ADXMenuBuilder *self, id<ADMenuItem> mExpandedItem);
 
@@ -124,7 +133,7 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   mIsActionItemsStale_ = true;
 }
 
-- (void)dispatchPresenterUpdateWithBoolean:(jboolean)cleared {
+- (void)dispatchPresenterUpdateWithBoolean:(bool)cleared {
   ADXMenuBuilder_dispatchPresenterUpdateWithBoolean_(self, cleared);
 }
 
@@ -132,23 +141,23 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   JreStrongAssign(&mCallback_, cb);
 }
 
-- (id<ADMenuItem>)addInternalWithInt:(jint)group
-                             withInt:(jint)id_
-                             withInt:(jint)categoryOrder
+- (id<ADMenuItem>)addInternalWithInt:(int32_t)group
+                             withInt:(int32_t)id_
+                             withInt:(int32_t)categoryOrder
             withJavaLangCharSequence:(id<JavaLangCharSequence>)title {
-  jint ordering = ADXMenuBuilder_getOrderingWithInt_(categoryOrder);
+  int32_t ordering = ADXMenuBuilder_getOrderingWithInt_(categoryOrder);
   ADXMenuItemImpl *item = ADXMenuBuilder_createNewMenuItemWithInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(self, group, id_, categoryOrder, ordering, title, mDefaultShowAsAction_);
   [((JavaUtilArrayList *) nil_chk(mItems_)) addWithInt:ADXMenuBuilder_findInsertIndexWithJavaUtilArrayList_withInt_(mItems_, ordering) withId:item];
   [self onItemsChangedWithBoolean:true];
   return item;
 }
 
-- (ADXMenuItemImpl *)createNewMenuItemWithInt:(jint)group
-                                      withInt:(jint)id_
-                                      withInt:(jint)categoryOrder
-                                      withInt:(jint)ordering
+- (ADXMenuItemImpl *)createNewMenuItemWithInt:(int32_t)group
+                                      withInt:(int32_t)id_
+                                      withInt:(int32_t)categoryOrder
+                                      withInt:(int32_t)ordering
                      withJavaLangCharSequence:(id<JavaLangCharSequence>)title
-                                      withInt:(jint)defaultShowAsAction {
+                                      withInt:(int32_t)defaultShowAsAction {
   return ADXMenuBuilder_createNewMenuItemWithInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(self, group, id_, categoryOrder, ordering, title, defaultShowAsAction);
 }
 
@@ -156,21 +165,21 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   return [self addInternalWithInt:0 withInt:0 withInt:0 withJavaLangCharSequence:title];
 }
 
-- (id<ADMenuItem>)addWithInt:(jint)titleRes {
+- (id<ADMenuItem>)addWithInt:(int32_t)titleRes {
   return [self addInternalWithInt:0 withInt:0 withInt:0 withJavaLangCharSequence:[((ADResources *) nil_chk(mResources_)) getStringWithInt:titleRes]];
 }
 
-- (id<ADMenuItem>)addWithInt:(jint)group
-                     withInt:(jint)id_
-                     withInt:(jint)categoryOrder
+- (id<ADMenuItem>)addWithInt:(int32_t)group
+                     withInt:(int32_t)id_
+                     withInt:(int32_t)categoryOrder
     withJavaLangCharSequence:(id<JavaLangCharSequence>)title {
   return [self addInternalWithInt:group withInt:id_ withInt:categoryOrder withJavaLangCharSequence:title];
 }
 
-- (id<ADMenuItem>)addWithInt:(jint)group
-                     withInt:(jint)id_
-                     withInt:(jint)categoryOrder
-                     withInt:(jint)title {
+- (id<ADMenuItem>)addWithInt:(int32_t)group
+                     withInt:(int32_t)id_
+                     withInt:(int32_t)categoryOrder
+                     withInt:(int32_t)title {
   return [self addInternalWithInt:group withInt:id_ withInt:categoryOrder withJavaLangCharSequence:[((ADResources *) nil_chk(mResources_)) getStringWithInt:title]];
 }
 
@@ -178,13 +187,13 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   return [self addSubMenuWithInt:0 withInt:0 withInt:0 withJavaLangCharSequence:title];
 }
 
-- (id<ADSubMenu>)addSubMenuWithInt:(jint)titleRes {
+- (id<ADSubMenu>)addSubMenuWithInt:(int32_t)titleRes {
   return [self addSubMenuWithInt:0 withInt:0 withInt:0 withJavaLangCharSequence:[((ADResources *) nil_chk(mResources_)) getStringWithInt:titleRes]];
 }
 
-- (id<ADSubMenu>)addSubMenuWithInt:(jint)group
-                           withInt:(jint)id_
-                           withInt:(jint)categoryOrder
+- (id<ADSubMenu>)addSubMenuWithInt:(int32_t)group
+                           withInt:(int32_t)id_
+                           withInt:(int32_t)categoryOrder
           withJavaLangCharSequence:(id<JavaLangCharSequence>)title {
   ADXMenuItemImpl *item = (ADXMenuItemImpl *) cast_chk([self addInternalWithInt:group withInt:id_ withInt:categoryOrder withJavaLangCharSequence:title], [ADXMenuItemImpl class]);
   ADXSubMenuBuilder *subMenu = create_ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(mContext_, self, item);
@@ -192,10 +201,10 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   return subMenu;
 }
 
-- (id<ADSubMenu>)addSubMenuWithInt:(jint)group
-                           withInt:(jint)id_
-                           withInt:(jint)categoryOrder
-                           withInt:(jint)title {
+- (id<ADSubMenu>)addSubMenuWithInt:(int32_t)group
+                           withInt:(int32_t)id_
+                           withInt:(int32_t)categoryOrder
+                           withInt:(int32_t)title {
   return [self addSubMenuWithInt:group withInt:id_ withInt:categoryOrder withJavaLangCharSequence:[((ADResources *) nil_chk(mResources_)) getStringWithInt:title]];
 }
 
@@ -219,26 +228,26 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
 }
 
 - (void)setExclusiveItemCheckedWithADMenuItem:(id<ADMenuItem>)item {
-  jint group = [((id<ADMenuItem>) nil_chk(item)) getGroupId];
-  jint N = [((JavaUtilArrayList *) nil_chk(mItems_)) size];
+  int32_t group = [((id<ADMenuItem>) nil_chk(item)) getGroupId];
+  int32_t N = [((JavaUtilArrayList *) nil_chk(mItems_)) size];
   [self stopDispatchingItemsChanged];
-  for (jint i = 0; i < N; i++) {
+  for (int32_t i = 0; i < N; i++) {
     ADXMenuItemImpl *curItem = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mItems_)) getWithInt:i]);
     if ([((ADXMenuItemImpl *) nil_chk(curItem)) getGroupId] == group) {
       if (![curItem isExclusiveCheckable]) continue;
       if (![curItem isCheckable]) continue;
-      [curItem setCheckedIntWithBoolean:curItem == item];
+      [curItem setCheckedIntWithBoolean:JreObjectEqualsEquals(curItem, item)];
     }
   }
   [self startDispatchingItemsChanged];
 }
 
-- (jboolean)hasVisibleItems {
+- (bool)hasVisibleItems {
   if (mOverrideVisibleItems_) {
     return true;
   }
-  jint size = [self size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [self size];
+  for (int32_t i = 0; i < size; i++) {
     ADXMenuItemImpl *item = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mItems_)) getWithInt:i]);
     if ([((ADXMenuItemImpl *) nil_chk(item)) isVisible]) {
       return true;
@@ -247,9 +256,9 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   return false;
 }
 
-- (id<ADMenuItem>)findItemWithInt:(jint)id_ {
-  jint size = [self size];
-  for (jint i = 0; i < size; i++) {
+- (id<ADMenuItem>)findItemWithInt:(int32_t)id_ {
+  int32_t size = [self size];
+  for (int32_t i = 0; i < size; i++) {
     ADXMenuItemImpl *item = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mItems_)) getWithInt:i]);
     if ([((ADXMenuItemImpl *) nil_chk(item)) getItemId] == id_) {
       return item;
@@ -264,29 +273,29 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   return nil;
 }
 
-- (jint)size {
+- (int32_t)size {
   return [((JavaUtilArrayList *) nil_chk(mItems_)) size];
 }
 
-- (id<ADMenuItem>)getItemWithInt:(jint)index {
+- (id<ADMenuItem>)getItemWithInt:(int32_t)index {
   return [((JavaUtilArrayList *) nil_chk(mItems_)) getWithInt:index];
 }
 
-+ (jint)getOrderingWithInt:(jint)categoryOrder {
++ (int32_t)getOrderingWithInt:(int32_t)categoryOrder {
   return ADXMenuBuilder_getOrderingWithInt_(categoryOrder);
 }
 
-- (jboolean)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
-                                        withADMenuItem:(id<ADMenuItem>)item {
+- (bool)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
+                                    withADMenuItem:(id<ADMenuItem>)item {
   return mCallback_ != nil && [mCallback_ onMenuItemSelectedWithADXMenuBuilder:menu withADMenuItem:item];
 }
 
-+ (jint)findInsertIndexWithJavaUtilArrayList:(JavaUtilArrayList *)items
-                                     withInt:(jint)ordering {
++ (int32_t)findInsertIndexWithJavaUtilArrayList:(JavaUtilArrayList *)items
+                                        withInt:(int32_t)ordering {
   return ADXMenuBuilder_findInsertIndexWithJavaUtilArrayList_withInt_(items, ordering);
 }
 
-- (void)onItemsChangedWithBoolean:(jboolean)structureChanged {
+- (void)onItemsChangedWithBoolean:(bool)structureChanged {
   if (!mPreventDispatchingItemsChanged_) {
     if (structureChanged) {
       mIsVisibleItemsStale_ = true;
@@ -331,9 +340,9 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
 - (JavaUtilArrayList *)getVisibleItems {
   if (!mIsVisibleItemsStale_) return mVisibleItems_;
   [((JavaUtilArrayList *) nil_chk(mVisibleItems_)) clear];
-  jint itemsSize = [((JavaUtilArrayList *) nil_chk(mItems_)) size];
+  int32_t itemsSize = [((JavaUtilArrayList *) nil_chk(mItems_)) size];
   ADXMenuItemImpl *item;
-  for (jint i = 0; i < itemsSize; i++) {
+  for (int32_t i = 0; i < itemsSize; i++) {
     item = [((JavaUtilArrayList *) nil_chk(mItems_)) getWithInt:i];
     if ([((ADXMenuItemImpl *) nil_chk(item)) isVisible]) [((JavaUtilArrayList *) nil_chk(mVisibleItems_)) addWithId:item];
   }
@@ -347,7 +356,7 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   if (!mIsActionItemsStale_) {
     return;
   }
-  jboolean flagged = false;
+  bool flagged = false;
   for (JavaLangRefWeakReference * __strong ref in nil_chk(mPresenters_)) {
     id<ADXMenuPresenter> presenter = [((JavaLangRefWeakReference *) nil_chk(ref)) get];
     if (presenter == nil) {
@@ -360,8 +369,8 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   if (flagged) {
     [((JavaUtilArrayList *) nil_chk(mActionItems_)) clear];
     [((JavaUtilArrayList *) nil_chk(mNonActionItems_)) clear];
-    jint itemsSize = [((JavaUtilArrayList *) nil_chk(visibleItems)) size];
-    for (jint i = 0; i < itemsSize; i++) {
+    int32_t itemsSize = [((JavaUtilArrayList *) nil_chk(visibleItems)) size];
+    for (int32_t i = 0; i < itemsSize; i++) {
       ADXMenuItemImpl *item = JreRetainedLocalValue([visibleItems getWithInt:i]);
       if ([((ADXMenuItemImpl *) nil_chk(item)) isActionButton]) {
         [((JavaUtilArrayList *) nil_chk(mActionItems_)) addWithId:item];
@@ -396,9 +405,9 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   [self onItemsChangedWithBoolean:false];
 }
 
-- (void)setHeaderInternalWithInt:(jint)titleRes
+- (void)setHeaderInternalWithInt:(int32_t)titleRes
         withJavaLangCharSequence:(id<JavaLangCharSequence>)title
-                         withInt:(jint)iconRes
+                         withInt:(int32_t)iconRes
                   withADDrawable:(ADDrawable *)icon
                       withADView:(ADView *)view {
   ADXMenuBuilder_setHeaderInternalWithInt_withJavaLangCharSequence_withInt_withADDrawable_withADView_(self, titleRes, title, iconRes, icon, view);
@@ -409,7 +418,7 @@ J2OBJC_INITIALIZED_DEFN(ADXMenuBuilder)
   return self;
 }
 
-- (ADXMenuBuilder *)setHeaderTitleIntWithInt:(jint)titleRes {
+- (ADXMenuBuilder *)setHeaderTitleIntWithInt:(int32_t)titleRes {
   ADXMenuBuilder_setHeaderInternalWithInt_withJavaLangCharSequence_withInt_withADDrawable_withADView_(self, titleRes, nil, 0, nil, nil);
   return self;
 }
@@ -429,14 +438,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((JavaUtilConcurrentCopyOnWriteArrayList *) nil_chk(mPresenters_)) addWithId:create_JavaLangRefWeakReference_initWithId_(mPresenter)];
 }
 
-- (jboolean)performItemActionWithADMenuItem:(id<ADMenuItem>)item
-                       withADXMenuPresenter:(id<ADXMenuPresenter>)presenter
-                                    withInt:(jint)i {
+- (bool)performItemActionWithADMenuItem:(id<ADMenuItem>)item
+                   withADXMenuPresenter:(id<ADXMenuPresenter>)presenter
+                                withInt:(int32_t)i {
   ADXMenuItemImpl *itemImpl = (ADXMenuItemImpl *) cast_chk(item, [ADXMenuItemImpl class]);
   if (itemImpl == nil || ![itemImpl isEnabled]) {
     return false;
   }
-  jboolean invoked = [itemImpl invoke];
+  bool invoked = [itemImpl invoke];
   return invoked;
 }
 
@@ -585,14 +594,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [ADXMenuBuilder class]) {
-    JreStrongAssignAndConsume(&ADXMenuBuilder_sCategoryToOrder, [IOSIntArray newArrayWithInts:(jint[]){ 1, 4, 5, 3, 2, 0 } count:6]);
+    JreStrongAssignAndConsume(&ADXMenuBuilder_sCategoryToOrder, [IOSIntArray newArrayWithInts:(int32_t[]){ 1, 4, 5, 3, 2, 0 } count:6]);
     J2OBJC_SET_INITIALIZED(ADXMenuBuilder)
   }
 }
 
 @end
 
-void ADXMenuBuilder_dispatchPresenterUpdateWithBoolean_(ADXMenuBuilder *self, jboolean cleared) {
+void ADXMenuBuilder_dispatchPresenterUpdateWithBoolean_(ADXMenuBuilder *self, bool cleared) {
   if ([((JavaUtilConcurrentCopyOnWriteArrayList *) nil_chk(self->mPresenters_)) isEmpty]) return;
   [self stopDispatchingItemsChanged];
   for (JavaLangRefWeakReference * __strong ref in nil_chk(self->mPresenters_)) {
@@ -607,22 +616,22 @@ void ADXMenuBuilder_dispatchPresenterUpdateWithBoolean_(ADXMenuBuilder *self, jb
   [self startDispatchingItemsChanged];
 }
 
-ADXMenuItemImpl *ADXMenuBuilder_createNewMenuItemWithInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *self, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint defaultShowAsAction) {
+ADXMenuItemImpl *ADXMenuBuilder_createNewMenuItemWithInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *self, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t defaultShowAsAction) {
   return create_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(self, group, id_, categoryOrder, ordering, title, defaultShowAsAction);
 }
 
-jint ADXMenuBuilder_getOrderingWithInt_(jint categoryOrder) {
+int32_t ADXMenuBuilder_getOrderingWithInt_(int32_t categoryOrder) {
   ADXMenuBuilder_initialize();
-  jint index = JreRShift32((categoryOrder & ADXMenuBuilder_CATEGORY_MASK), ADXMenuBuilder_CATEGORY_SHIFT);
+  int32_t index = JreRShift32((categoryOrder & ADXMenuBuilder_CATEGORY_MASK), ADXMenuBuilder_CATEGORY_SHIFT);
   if (index < 0 || index >= ((IOSIntArray *) nil_chk(ADXMenuBuilder_sCategoryToOrder))->size_) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"order does not contain a valid category.");
   }
   return (JreLShift32(IOSIntArray_Get(nil_chk(ADXMenuBuilder_sCategoryToOrder), index), ADXMenuBuilder_CATEGORY_SHIFT)) | (categoryOrder & ADXMenuBuilder_USER_MASK);
 }
 
-jint ADXMenuBuilder_findInsertIndexWithJavaUtilArrayList_withInt_(JavaUtilArrayList *items, jint ordering) {
+int32_t ADXMenuBuilder_findInsertIndexWithJavaUtilArrayList_withInt_(JavaUtilArrayList *items, int32_t ordering) {
   ADXMenuBuilder_initialize();
-  for (jint i = [((JavaUtilArrayList *) nil_chk(items)) size] - 1; i >= 0; i--) {
+  for (int32_t i = [((JavaUtilArrayList *) nil_chk(items)) size] - 1; i >= 0; i--) {
     ADXMenuItemImpl *item = JreRetainedLocalValue([items getWithInt:i]);
     if ([((ADXMenuItemImpl *) nil_chk(item)) getOrdering] <= ordering) {
       return i + 1;
@@ -631,7 +640,7 @@ jint ADXMenuBuilder_findInsertIndexWithJavaUtilArrayList_withInt_(JavaUtilArrayL
   return 0;
 }
 
-void ADXMenuBuilder_setHeaderInternalWithInt_withJavaLangCharSequence_withInt_withADDrawable_withADView_(ADXMenuBuilder *self, jint titleRes, id<JavaLangCharSequence> title, jint iconRes, ADDrawable *icon, ADView *view) {
+void ADXMenuBuilder_setHeaderInternalWithInt_withJavaLangCharSequence_withInt_withADDrawable_withADView_(ADXMenuBuilder *self, int32_t titleRes, id<JavaLangCharSequence> title, int32_t iconRes, ADDrawable *icon, ADView *view) {
   if (view != nil) {
     JreStrongAssign(&self->mHeaderView_, view);
     JreStrongAssign(&self->mHeaderTitle_, nil);
@@ -684,6 +693,8 @@ void ADXMenuBuilder_collapseItemActionViewWithADMenuItem_(ADXMenuBuilder *self, 
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXMenuBuilder)
+
+J2OBJC_NAME_MAPPING(ADXMenuBuilder, "androidx.appcompat.view.menu", "ADX")
 
 @implementation ADXMenuBuilder_Callback
 

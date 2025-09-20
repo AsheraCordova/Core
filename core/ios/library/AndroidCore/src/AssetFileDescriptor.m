@@ -3,10 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\AssetFileDescriptor.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AssetFileDescriptor.h"
 #include "J2ObjC_source.h"
 #include "java/io/InputStream.h"
 #include "java/io/OutputStream.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAssetFileDescriptor
@@ -22,7 +35,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jlong)getLength {
+- (int64_t)getLength {
   return 0;
 }
 
@@ -30,7 +43,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jlong)getStartOffset {
+- (int64_t)getStartOffset {
   return 0;
 }
 
@@ -71,3 +84,5 @@ ADAssetFileDescriptor *create_ADAssetFileDescriptor_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAssetFileDescriptor)
+
+J2OBJC_NAME_MAPPING(ADAssetFileDescriptor, "r.android.content.res", "AD")

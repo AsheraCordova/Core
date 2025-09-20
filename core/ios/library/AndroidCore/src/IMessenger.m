@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\IMessenger.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IBinder.h"
 #include "IMessenger.h"
 #include "J2ObjC_source.h"
 #include "Message.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADIMessenger : NSObject
@@ -34,6 +45,8 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADIMessenger)
+
+J2OBJC_NAME_MAPPING(ADIMessenger, "r.android.os", "AD")
 
 @implementation ADIMessenger_Stub
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\TextFormatCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "IOSClass.h"
@@ -10,6 +15,14 @@
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "TextFormatCommandConverter.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASTextFormatCommandConverter () {
@@ -94,3 +107,5 @@ ASTextFormatCommandConverter *create_ASTextFormatCommandConverter_initWithNSStri
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextFormatCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASTextFormatCommandConverter, "com.ashera.converter", "AS")

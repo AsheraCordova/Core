@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Debug.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Debug")
@@ -16,13 +17,15 @@
 #if !defined (ADDebug_) && (INCLUDE_ALL_Debug || defined(INCLUDE_ADDebug))
 #define ADDebug_
 
+@class JavaLangBoolean;
+
 @interface ADDebug : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (jboolean)isDebuggerConnected;
++ (bool)isDebuggerConnected;
 
 @end
 
@@ -34,11 +37,12 @@ FOUNDATION_EXPORT ADDebug *new_ADDebug_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADDebug *create_ADDebug_init(void);
 
-FOUNDATION_EXPORT jboolean ADDebug_isDebuggerConnected(void);
+FOUNDATION_EXPORT bool ADDebug_isDebuggerConnected(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDebug)
 
 @compatibility_alias RAndroidOsDebug ADDebug;
+
 
 #endif
 

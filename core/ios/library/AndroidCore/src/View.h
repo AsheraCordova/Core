@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\View.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_View")
@@ -33,6 +34,10 @@
 @class ADView_ThreadLocal;
 @class ADView_ViewRootImpl;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADCanvas;
 @protocol ADIBinder;
 @protocol ADViewParent;
@@ -43,45 +48,45 @@
 
 @interface ADView : NSObject {
  @public
-  jint mMeasuredWidth_;
-  jint mMeasuredHeight_;
-  jboolean mRecreateDisplayList_;
-  jint mID_;
-  __unsafe_unretained id mTag_;
-  __unsafe_unretained id<ADViewParent> mParent_;
-  jint mPrivateFlags_;
-  jint mPrivateFlags2_;
-  jint mPrivateFlags3_;
-  jint mSystemUiVisibility_;
-  jint mTransientStateCount_;
-  jint mWindowAttachCount_;
+  int32_t mMeasuredWidth_;
+  int32_t mMeasuredHeight_;
+  bool mRecreateDisplayList_;
+  int32_t mID_;
+  WEAK_ id mTag_;
+  WEAK_ id<ADViewParent> mParent_;
+  int32_t mPrivateFlags_;
+  int32_t mPrivateFlags2_;
+  int32_t mPrivateFlags3_;
+  int32_t mSystemUiVisibility_;
+  int32_t mTransientStateCount_;
+  int32_t mWindowAttachCount_;
   ADViewGroup_LayoutParams *mLayoutParams_;
-  jint mViewFlags_;
-  jint mLeft_;
-  jint mRight_;
-  jint mTop_;
-  jint mBottom_;
-  jint mScrollX_;
-  jint mScrollY_;
-  jint mPaddingLeft_;
-  jint mPaddingRight_;
-  jint mPaddingTop_;
-  jint mPaddingBottom_;
-  jint mUserPaddingRight_;
-  jint mUserPaddingBottom_;
-  jint mUserPaddingLeft_;
-  jint mUserPaddingStart_;
-  jint mUserPaddingEnd_;
-  jint mUserPaddingLeftInitial_;
-  jint mUserPaddingRightInitial_;
-  jint mOldWidthMeasureSpec_;
-  jint mOldHeightMeasureSpec_;
+  int32_t mViewFlags_;
+  int32_t mLeft_;
+  int32_t mRight_;
+  int32_t mTop_;
+  int32_t mBottom_;
+  int32_t mScrollX_;
+  int32_t mScrollY_;
+  int32_t mPaddingLeft_;
+  int32_t mPaddingRight_;
+  int32_t mPaddingTop_;
+  int32_t mPaddingBottom_;
+  int32_t mUserPaddingRight_;
+  int32_t mUserPaddingBottom_;
+  int32_t mUserPaddingLeft_;
+  int32_t mUserPaddingStart_;
+  int32_t mUserPaddingEnd_;
+  int32_t mUserPaddingLeftInitial_;
+  int32_t mUserPaddingRightInitial_;
+  int32_t mOldWidthMeasureSpec_;
+  int32_t mOldHeightMeasureSpec_;
   ADContext *mContext_;
-  jint mNextFocusForwardId_;
-  jint mNextClusterForwardId_;
-  jboolean mDefaultFocusHighlightEnabled_;
-  jint mLayerType_;
-  jboolean mCachingFailed_;
+  int32_t mNextFocusForwardId_;
+  int32_t mNextClusterForwardId_;
+  bool mDefaultFocusHighlightEnabled_;
+  int32_t mLayerType_;
+  bool mCachingFailed_;
   ADViewOverlay *mOverlay_;
   ADRenderNode *mRenderNode_;
   ADView_AttachInfo *mAttachInfo_;
@@ -103,53 +108,53 @@
 
 - (void)cancelPendingInputEvents;
 
-- (jboolean)canResolveLayoutDirection;
+- (bool)canResolveLayoutDirection;
 
-- (jboolean)canResolveTextAlignment;
+- (bool)canResolveTextAlignment;
 
-- (jboolean)canResolveTextDirection;
+- (bool)canResolveTextDirection;
 
-- (jboolean)canScrollHorizontallyWithInt:(jint)direction;
+- (bool)canScrollHorizontallyWithInt:(int32_t)direction;
 
-- (jboolean)canScrollVerticallyWithInt:(jint)direction;
+- (bool)canScrollVerticallyWithInt:(int32_t)direction;
 
 - (void)clearAccessibilityFocus;
 
-- (jboolean)clearFocus;
+- (bool)clearFocus;
 
-+ (jint)combineMeasuredStatesWithInt:(jint)curState
-                             withInt:(jint)newState;
++ (int32_t)combineMeasuredStatesWithInt:(int32_t)curState
+                                withInt:(int32_t)newState;
 
 - (void)dispatchFinishTemporaryDetach;
 
-- (jboolean)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event;
+- (bool)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event;
 
-- (jboolean)dispatchNestedFlingWithFloat:(jfloat)velocityX
-                               withFloat:(jfloat)velocityY
-                             withBoolean:(jboolean)consumed;
+- (bool)dispatchNestedFlingWithFloat:(float)velocityX
+                           withFloat:(float)velocityY
+                         withBoolean:(bool)consumed;
 
-- (jboolean)dispatchNestedPreFlingWithFloat:(jfloat)velocityX
-                                  withFloat:(jfloat)velocityY;
+- (bool)dispatchNestedPreFlingWithFloat:(float)velocityX
+                              withFloat:(float)velocityY;
 
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow;
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow;
 
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow;
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow;
 
 - (void)dispatchStartTemporaryDetach;
 
-- (void)drawableHotspotChangedWithFloat:(jfloat)x
-                              withFloat:(jfloat)y;
+- (void)drawableHotspotChangedWithFloat:(float)x
+                              withFloat:(float)y;
 
 - (ADView *)findFocus;
 
-- (ADView *)findViewByIdWithInt:(jint)id_;
+- (ADView *)findViewByIdWithInt:(int32_t)id_;
 
 - (void)forceLayout;
 
@@ -157,9 +162,9 @@
 
 - (ADView_AccessibilityNodeProvider *)getAccessibilityNodeProvider;
 
-- (jint)getAccessibilityViewId;
+- (int32_t)getAccessibilityViewId;
 
-- (jfloat)getAlpha;
+- (float)getAlpha;
 
 - (id)getAnimation;
 
@@ -169,61 +174,61 @@
 
 - (ADColorStateList *)getBackgroundTintList;
 
-- (jint)getBaseline;
+- (int32_t)getBaseline;
 
-- (jint)getBottom;
+- (int32_t)getBottom;
 
 - (ADContext *)getContext;
 
-+ (jint)getDefaultSizeWithInt:(jint)size
-                      withInt:(jint)measureSpec;
++ (int32_t)getDefaultSizeWithInt:(int32_t)size
+                         withInt:(int32_t)measureSpec;
 
 - (IOSIntArray *)getDrawableState;
 
 - (void)getDrawingRectWithADRect:(ADRect *)anchorRect;
 
-- (jfloat)getElevation;
+- (float)getElevation;
 
 - (ADDrawable *)getForeground;
 
-- (ADRect *)getForegroundBoundsWithInt:(jint)imageWidth
-                               withInt:(jint)imageHeight;
+- (ADRect *)getForegroundBoundsWithInt:(int32_t)imageWidth
+                               withInt:(int32_t)imageHeight;
 
-- (jint)getForegroundGravity;
+- (int32_t)getForegroundGravity;
 
 - (ADColorStateList *)getForegroundTintList;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
 - (void)getHitRectWithADRect:(ADRect *)outRect;
 
-- (jint)getHorizontalScrollbarHeight;
+- (int32_t)getHorizontalScrollbarHeight;
 
-- (jint)getId;
+- (int32_t)getId;
 
-- (jint)getImportantForAccessibility;
+- (int32_t)getImportantForAccessibility;
 
-- (jint)getLayoutDirection;
+- (int32_t)getLayoutDirection;
 
 - (ADViewGroup_LayoutParams *)getLayoutParams;
 
-- (jint)getLeft;
+- (int32_t)getLeft;
 
 - (void)getLocationInWindowWithIntArray:(IOSIntArray *)appScreenLocation;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
-- (jint)getMeasuredHeight;
+- (int32_t)getMeasuredHeight;
 
-- (jint)getMeasuredState;
+- (int32_t)getMeasuredState;
 
-- (jint)getMeasuredWidth;
+- (int32_t)getMeasuredWidth;
 
-- (jint)getMeasuredWidthAndState;
+- (int32_t)getMeasuredWidthAndState;
 
-- (jint)getMinimumHeight;
+- (int32_t)getMinimumHeight;
 
-- (jint)getMinimumWidth;
+- (int32_t)getMinimumWidth;
 
 - (id<ADView_OnKeyListener>)getOnKeyListener;
 
@@ -231,101 +236,101 @@
 
 - (ADViewOverlay *)getOverlay;
 
-- (jint)getPaddingBottom;
+- (int32_t)getPaddingBottom;
 
-- (jint)getPaddingEnd;
+- (int32_t)getPaddingEnd;
 
-- (jint)getPaddingLeft;
+- (int32_t)getPaddingLeft;
 
-- (jint)getPaddingRight;
+- (int32_t)getPaddingRight;
 
-- (jint)getPaddingStart;
+- (int32_t)getPaddingStart;
 
-- (jint)getPaddingTop;
+- (int32_t)getPaddingTop;
 
 - (id<ADViewParent>)getParent;
 
-- (jfloat)getPivotX;
+- (float)getPivotX;
 
-- (jfloat)getPivotY;
+- (float)getPivotY;
 
-- (jint)getRawLayoutDirection;
+- (int32_t)getRawLayoutDirection;
 
-- (jint)getRawTextAlignment;
+- (int32_t)getRawTextAlignment;
 
-- (jint)getRawTextDirection;
+- (int32_t)getRawTextDirection;
 
 - (ADResources *)getResources;
 
-- (jint)getRight;
+- (int32_t)getRight;
 
 - (ADView *)getRootView;
 
-- (jfloat)getRotation;
+- (float)getRotation;
 
-- (jfloat)getRotationX;
+- (float)getRotationX;
 
-- (jfloat)getRotationY;
+- (float)getRotationY;
 
-- (jfloat)getScaleX;
+- (float)getScaleX;
 
-- (jfloat)getScaleY;
+- (float)getScaleY;
 
-- (jint)getScrollX;
+- (int32_t)getScrollX;
 
-- (jint)getScrollY;
+- (int32_t)getScrollY;
 
 - (id)getTag;
 
-- (id)getTagWithInt:(jint)key;
+- (id)getTagWithInt:(int32_t)key;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
-- (jint)getTextDirection;
+- (int32_t)getTextDirection;
 
-- (jint)getTop;
+- (int32_t)getTop;
 
-- (jfloat)getTranslationX;
+- (float)getTranslationX;
 
-- (jfloat)getTranslationY;
+- (float)getTranslationY;
 
-- (jfloat)getTranslationZ;
+- (float)getTranslationZ;
 
-- (jint)getVerticalScrollbarWidth;
+- (int32_t)getVerticalScrollbarWidth;
 
 - (ADView_ViewRootImpl *)getViewRootImpl;
 
 - (ADViewTreeObserver *)getViewTreeObserver;
 
-- (jint)getVisibility;
+- (int32_t)getVisibility;
 
-- (jint)getWidth;
+- (int32_t)getWidth;
 
 - (void)getWindowDisplayFrameWithADRect:(ADRect *)displayFrame;
 
 - (id<ADIBinder>)getWindowToken;
 
-- (jint)getWindowVisibility;
+- (int32_t)getWindowVisibility;
 
 - (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
 
-- (jint)getX;
+- (int32_t)getX;
 
-- (jint)getY;
+- (int32_t)getY;
 
-- (jint)getZ;
+- (int32_t)getZ;
 
-- (jboolean)hasDefaultFocus;
+- (bool)hasDefaultFocus;
 
-- (jboolean)hasFocus;
+- (bool)hasFocus;
 
-- (jboolean)hasOnKeyListener;
+- (bool)hasOnKeyListener;
 
-- (jboolean)hasTransientState;
+- (bool)hasTransientState;
 
-- (jboolean)hasUnhandledKeyListener;
+- (bool)hasUnhandledKeyListener;
 
-- (jboolean)hasWindowFocus;
+- (bool)hasWindowFocus;
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout;
 
@@ -333,114 +338,114 @@
 
 - (void)invalidate;
 
-- (void)invalidateWithBoolean:(jboolean)invalidateCache;
+- (void)invalidateWithBoolean:(bool)invalidateCache;
 
-- (void)invalidateWithInt:(jint)l
-                  withInt:(jint)t
-                  withInt:(jint)r
-                  withInt:(jint)b;
+- (void)invalidateWithInt:(int32_t)l
+                  withInt:(int32_t)t
+                  withInt:(int32_t)r
+                  withInt:(int32_t)b;
 
 - (void)invalidateWithADRect:(ADRect *)dirty;
 
 - (void)invalidateOutline;
 
-- (void)invokeKeyListenerDownWithInt:(jint)keyCode;
+- (void)invokeKeyListenerDownWithInt:(int32_t)keyCode;
 
-- (void)invokeKeyListenerUpWithInt:(jint)keyCode;
+- (void)invokeKeyListenerUpWithInt:(int32_t)keyCode;
 
-- (jboolean)isActivated;
+- (bool)isActivated;
 
-- (jboolean)isAttachedToWindow;
+- (bool)isAttachedToWindow;
 
-- (jboolean)isClickable;
+- (bool)isClickable;
 
-- (jboolean)isDrawingCacheEnabled;
+- (bool)isDrawingCacheEnabled;
 
-- (jboolean)isDuplicateParentStateEnabled;
+- (bool)isDuplicateParentStateEnabled;
 
-- (jboolean)isEnabled;
+- (bool)isEnabled;
 
-- (jboolean)isFocusable;
+- (bool)isFocusable;
 
-- (jboolean)isFocused;
+- (bool)isFocused;
 
-- (jboolean)isForegroundInsidePadding;
+- (bool)isForegroundInsidePadding;
 
-- (jboolean)isHardwareAccelerated;
+- (bool)isHardwareAccelerated;
 
-- (jboolean)isHovered;
+- (bool)isHovered;
 
-- (jboolean)isInEditMode;
+- (bool)isInEditMode;
 
-- (jboolean)isLaidOut;
+- (bool)isLaidOut;
 
-- (jboolean)isLayoutDirectionInherited;
+- (bool)isLayoutDirectionInherited;
 
-- (jboolean)isLayoutDirectionResolved;
+- (bool)isLayoutDirectionResolved;
 
-+ (jboolean)isLayoutModeOpticalWithId:(id)o;
++ (bool)isLayoutModeOpticalWithId:(id)o;
 
-- (jboolean)isLayoutRequested;
+- (bool)isLayoutRequested;
 
-- (jboolean)isLayoutRtl;
+- (bool)isLayoutRtl;
 
-- (jboolean)isLongClickable;
+- (bool)isLongClickable;
 
-- (jboolean)isNestedScrollingEnabled;
+- (bool)isNestedScrollingEnabled;
 
-- (jboolean)isOpaque;
+- (bool)isOpaque;
 
-- (jboolean)isOverlay;
+- (bool)isOverlay;
 
-- (jboolean)isPressed;
+- (bool)isPressed;
 
-- (jboolean)isSelected;
+- (bool)isSelected;
 
-- (jboolean)isShown;
+- (bool)isShown;
 
-- (jboolean)isTextAlignmentResolved;
+- (bool)isTextAlignmentResolved;
 
-- (jboolean)isTextDirectionResolved;
+- (bool)isTextDirectionResolved;
 
 - (void)jumpDrawablesToCurrentState;
 
-- (void)layoutWithInt:(jint)l
-              withInt:(jint)t
-              withInt:(jint)r
-              withInt:(jint)b;
+- (void)layoutWithInt:(int32_t)l
+              withInt:(int32_t)t
+              withInt:(int32_t)r
+              withInt:(int32_t)b;
 
-- (void)measureWithInt:(jint)widthMeasureSpec
-               withInt:(jint)heightMeasureSpec;
+- (void)measureWithInt:(int32_t)widthMeasureSpec
+               withInt:(int32_t)heightMeasureSpec;
 
-- (void)needGlobalAttributesUpdateWithBoolean:(jboolean)b;
+- (void)needGlobalAttributesUpdateWithBoolean:(bool)b;
 
 - (void)notifySubtreeAccessibilityStateChangedIfNeeded;
 
-- (void)notifyViewAccessibilityStateChangedIfNeededWithInt:(jint)changeType;
+- (void)notifyViewAccessibilityStateChangedIfNeededWithInt:(int32_t)changeType;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
 - (void)onAttachedToWindow;
 
-- (void)onDragCanAcceptWithBoolean:(jboolean)focus;
+- (void)onDragCanAcceptWithBoolean:(bool)focus;
 
-- (void)onDragHoveredWithBoolean:(jboolean)focus;
+- (void)onDragHoveredWithBoolean:(bool)focus;
 
 - (void)onFinishTemporaryDetach;
 
-- (void)onFocusChangedWithBoolean:(jboolean)focus;
+- (void)onFocusChangedWithBoolean:(bool)focus;
 
-- (void)onHoverChangedWithBoolean:(jboolean)hovered;
+- (void)onHoverChangedWithBoolean:(bool)hovered;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)onStartTemporaryDetach;
 
-- (void)onVisibilityAggregatedWithBoolean:(jboolean)isVisible;
+- (void)onVisibilityAggregatedWithBoolean:(bool)isVisible;
 
-- (jboolean)postWithJavaLangRunnable:(id<JavaLangRunnable>)action;
+- (bool)postWithJavaLangRunnable:(id<JavaLangRunnable>)action;
 
 - (void)refreshDrawableState;
 
@@ -450,7 +455,7 @@
 
 - (void)remeasure;
 
-- (jboolean)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)action;
+- (bool)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)action;
 
 - (void)removeFromParent;
 
@@ -460,14 +465,14 @@
 
 - (void)requestAccessibilityFocus;
 
-- (jboolean)requestFocus;
+- (bool)requestFocus;
 
 - (void)requestFocusFromTouch;
 
 - (void)requestLayout;
 
-- (jboolean)requestRectangleOnScreenWithADRect:(ADRect *)r
-                                   withBoolean:(jboolean)b;
+- (bool)requestRectangleOnScreenWithADRect:(ADRect *)r
+                               withBoolean:(bool)b;
 
 - (void)resetResolvedLayoutDirection;
 
@@ -479,154 +484,154 @@
 
 - (void)resetRtlProperties;
 
-- (jboolean)resolveLayoutDirection;
+- (bool)resolveLayoutDirection;
 
 - (void)resolveLayoutParams;
 
 - (void)resolvePadding;
 
-- (jboolean)resolveRtlPropertiesIfNeeded;
+- (bool)resolveRtlPropertiesIfNeeded;
 
-+ (jint)resolveSizeWithInt:(jint)size
-                   withInt:(jint)measureSpec;
++ (int32_t)resolveSizeWithInt:(int32_t)size
+                      withInt:(int32_t)measureSpec;
 
-+ (jint)resolveSizeAndStateWithInt:(jint)size
-                           withInt:(jint)measureSpec
-                           withInt:(jint)childMeasuredState;
++ (int32_t)resolveSizeAndStateWithInt:(int32_t)size
+                              withInt:(int32_t)measureSpec
+                              withInt:(int32_t)childMeasuredState;
 
-- (jboolean)resolveTextAlignment;
+- (bool)resolveTextAlignment;
 
-- (jboolean)resolveTextDirection;
+- (bool)resolveTextDirection;
 
-- (void)sendAccessibilityEventWithInt:(jint)eventType;
+- (void)sendAccessibilityEventWithInt:(int32_t)eventType;
 
 - (void)setAccessibilityDelegateWithId:(id)delegate;
 
-- (void)setActivatedWithBoolean:(jboolean)activated;
+- (void)setActivatedWithBoolean:(bool)activated;
 
-- (void)setAlphaWithFloat:(jfloat)alpha;
+- (void)setAlphaWithFloat:(float)alpha;
 
 - (void)setBackgroundWithADDrawable:(ADDrawable *)background;
 
-- (void)setBackgroundColorWithInt:(jint)backgroundColor;
+- (void)setBackgroundColorWithInt:(int32_t)backgroundColor;
 
 - (void)setBackgroundTintListWithADColorStateList:(ADColorStateList *)tint;
 
-- (void)setBottomWithInt:(jint)bottom;
+- (void)setBottomWithInt:(int32_t)bottom;
 
-- (void)setClickableWithBoolean:(jboolean)clickable;
+- (void)setClickableWithBoolean:(bool)clickable;
 
-- (void)setDragCanAcceptWithBoolean:(jboolean)hovered;
+- (void)setDragCanAcceptWithBoolean:(bool)hovered;
 
-- (void)setDragHoveredWithBoolean:(jboolean)hovered;
+- (void)setDragHoveredWithBoolean:(bool)hovered;
 
 - (void)setDrawingCacheBackgroundColorWithId:(id)color;
 
-- (void)setDrawingCacheEnabledWithBoolean:(jboolean)b;
+- (void)setDrawingCacheEnabledWithBoolean:(bool)b;
 
-- (void)setDuplicateParentStateEnabledWithBoolean:(jboolean)enabled;
+- (void)setDuplicateParentStateEnabledWithBoolean:(bool)enabled;
 
-- (void)setElevationWithFloat:(jfloat)elevation;
+- (void)setElevationWithFloat:(float)elevation;
 
-- (void)setEnabledWithBoolean:(jboolean)enabled;
+- (void)setEnabledWithBoolean:(bool)enabled;
 
-- (void)setFocusableWithBoolean:(jboolean)focusable;
+- (void)setFocusableWithBoolean:(bool)focusable;
 
-- (void)setFocusableWithInt:(jint)focusable;
+- (void)setFocusableWithInt:(int32_t)focusable;
 
-- (void)setFocusedWithBoolean:(jboolean)hovered;
+- (void)setFocusedWithBoolean:(bool)hovered;
 
 - (void)setForegroundWithADDrawable:(ADDrawable *)foreground;
 
-- (void)setForegroundGravityWithInt:(jint)gravity;
+- (void)setForegroundGravityWithInt:(int32_t)gravity;
 
 - (void)setForegroundTintListWithADColorStateList:(ADColorStateList *)tint;
 
-- (void)setHorizontalScrollbarHeightWithInt:(jint)horizontalScrollbarHeight;
+- (void)setHorizontalScrollbarHeightWithInt:(int32_t)horizontalScrollbarHeight;
 
-- (void)setHoveredWithBoolean:(jboolean)hovered;
+- (void)setHoveredWithBoolean:(bool)hovered;
 
-- (void)setIdWithInt:(jint)id_;
+- (void)setIdWithInt:(int32_t)id_;
 
-- (void)setImportantForAccessibilityWithInt:(jint)test;
+- (void)setImportantForAccessibilityWithInt:(int32_t)test;
 
-- (void)setLayoutDirectionWithInt:(jint)layoutDirection;
+- (void)setLayoutDirectionWithInt:(int32_t)layoutDirection;
 
 - (void)setLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
-- (void)setLeftWithInt:(jint)left;
+- (void)setLeftWithInt:(int32_t)left;
 
-- (void)setLongClickableWithBoolean:(jboolean)longClickable;
+- (void)setLongClickableWithBoolean:(bool)longClickable;
 
-- (void)setMinimumHeightWithInt:(jint)minHeight;
+- (void)setMinimumHeightWithInt:(int32_t)minHeight;
 
-- (void)setMinimumWidthWithInt:(jint)minWidth;
+- (void)setMinimumWidthWithInt:(int32_t)minWidth;
 
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
 - (void)setOnKeyListenerWithADView_OnKeyListener:(id<ADView_OnKeyListener>)l;
 
-- (void)setOverlayWithBoolean:(jboolean)isOverlay;
+- (void)setOverlayWithBoolean:(bool)isOverlay;
 
-- (void)setOverScrollModeWithInt:(jint)overScrollNever;
+- (void)setOverScrollModeWithInt:(int32_t)overScrollNever;
 
-- (void)setPaddingWithInt:(jint)left
-                  withInt:(jint)top
-                  withInt:(jint)right
-                  withInt:(jint)bottom;
+- (void)setPaddingWithInt:(int32_t)left
+                  withInt:(int32_t)top
+                  withInt:(int32_t)right
+                  withInt:(int32_t)bottom;
 
-- (void)setPaddingRelativeWithInt:(jint)start
-                          withInt:(jint)top
-                          withInt:(jint)end
-                          withInt:(jint)bottom;
+- (void)setPaddingRelativeWithInt:(int32_t)start
+                          withInt:(int32_t)top
+                          withInt:(int32_t)end
+                          withInt:(int32_t)bottom;
 
-- (void)setPivotXWithFloat:(jfloat)transformPivotX;
+- (void)setPivotXWithFloat:(float)transformPivotX;
 
-- (void)setPivotYWithFloat:(jfloat)transformPivotY;
+- (void)setPivotYWithFloat:(float)transformPivotY;
 
-- (void)setPressedWithBoolean:(jboolean)pressed;
+- (void)setPressedWithBoolean:(bool)pressed;
 
-- (void)setRightWithInt:(jint)right;
+- (void)setRightWithInt:(int32_t)right;
 
-- (void)setRotationWithFloat:(jfloat)rotation;
+- (void)setRotationWithFloat:(float)rotation;
 
-- (void)setRotationXWithFloat:(jfloat)rotationX;
+- (void)setRotationXWithFloat:(float)rotationX;
 
-- (void)setRotationYWithFloat:(jfloat)rotationY;
+- (void)setRotationYWithFloat:(float)rotationY;
 
-- (void)setScaleXWithFloat:(jfloat)scaleX;
+- (void)setScaleXWithFloat:(float)scaleX;
 
-- (void)setScaleYWithFloat:(jfloat)scaleY;
+- (void)setScaleYWithFloat:(float)scaleY;
 
-- (void)setSelectedWithBoolean:(jboolean)selected;
+- (void)setSelectedWithBoolean:(bool)selected;
 
-- (void)setSystemUiVisibilityWithInt:(jint)uiOptions;
+- (void)setSystemUiVisibilityWithInt:(int32_t)uiOptions;
 
-- (void)setTagWithInt:(jint)key
+- (void)setTagWithInt:(int32_t)key
                withId:(id)tag;
 
 - (void)setTagWithId:(id)tag;
 
-- (void)setTextAlignmentWithInt:(jint)textAlignment;
+- (void)setTextAlignmentWithInt:(int32_t)textAlignment;
 
-- (void)setTextDirectionWithInt:(jint)textDirection;
+- (void)setTextDirectionWithInt:(int32_t)textDirection;
 
-- (void)setTopWithInt:(jint)top;
+- (void)setTopWithInt:(int32_t)top;
 
-- (void)setTranslationXWithFloat:(jfloat)translationX;
+- (void)setTranslationXWithFloat:(float)translationX;
 
-- (void)setTranslationYWithFloat:(jfloat)translationY;
+- (void)setTranslationYWithFloat:(float)translationY;
 
-- (void)setTranslationZWithFloat:(jfloat)translationZ;
+- (void)setTranslationZWithFloat:(float)translationZ;
 
-- (void)setVerticalScrollbarWidthWithInt:(jint)verticalScrollbarWidth;
+- (void)setVerticalScrollbarWidthWithInt:(int32_t)verticalScrollbarWidth;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
-- (void)setWillNotDrawWithBoolean:(jboolean)willNotDraw;
+- (void)setWillNotDrawWithBoolean:(bool)willNotDraw;
 
-- (jboolean)shouldDrawRoundScrollbar;
+- (bool)shouldDrawRoundScrollbar;
 
 - (void)state0;
 
@@ -650,36 +655,36 @@
 
 #pragma mark Protected
 
-- (jint)computeHorizontalScrollExtent;
+- (int32_t)computeHorizontalScrollExtent;
 
-- (jint)computeHorizontalScrollOffset;
+- (int32_t)computeHorizontalScrollOffset;
 
-- (jint)computeHorizontalScrollRange;
+- (int32_t)computeHorizontalScrollRange;
 
-- (jint)computeVerticalScrollExtent;
+- (int32_t)computeVerticalScrollExtent;
 
-- (jint)computeVerticalScrollOffset;
+- (int32_t)computeVerticalScrollOffset;
 
-- (jint)computeVerticalScrollRange;
+- (int32_t)computeVerticalScrollRange;
 
-- (void)dispatchSetActivatedWithBoolean:(jboolean)activated;
+- (void)dispatchSetActivatedWithBoolean:(bool)activated;
 
-- (void)dispatchSetPressedWithBoolean:(jboolean)pressed;
+- (void)dispatchSetPressedWithBoolean:(bool)pressed;
 
-- (void)dispatchSetSelectedWithBoolean:(jboolean)selected;
+- (void)dispatchSetSelectedWithBoolean:(bool)selected;
 
 - (void)drawableStateChanged;
 
-- (ADView *)findViewTraversalWithInt:(jint)id_;
+- (ADView *)findViewTraversalWithInt:(int32_t)id_;
 
-- (jint)getSuggestedMinimumHeight;
+- (int32_t)getSuggestedMinimumHeight;
 
-- (jint)getSuggestedMinimumWidth;
+- (int32_t)getSuggestedMinimumWidth;
 
-- (void)internalSetPaddingWithInt:(jint)left
-                          withInt:(jint)top
-                          withInt:(jint)right
-                          withInt:(jint)bottom;
+- (void)internalSetPaddingWithInt:(int32_t)left
+                          withInt:(int32_t)top
+                          withInt:(int32_t)right
+                          withInt:(int32_t)bottom;
 
 - (void)invalidateParentCaches;
 
@@ -690,7 +695,7 @@
 + (IOSIntArray *)mergeDrawableStatesWithIntArray:(IOSIntArray *)baseState
                                     withIntArray:(IOSIntArray *)additionalState;
 
-- (IOSIntArray *)onCreateDrawableStateWithInt:(jint)extraSpace;
+- (IOSIntArray *)onCreateDrawableStateWithInt:(int32_t)extraSpace;
 
 - (void)onDetachedFromWindow;
 
@@ -698,53 +703,53 @@
 
 - (void)onDrawWithADCanvas:(id<ADCanvas>)canvas;
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
-- (void)onSizeChangedWithInt:(jint)w
-                     withInt:(jint)h
-                     withInt:(jint)oldw
-                     withInt:(jint)oldh;
+- (void)onSizeChangedWithInt:(int32_t)w
+                     withInt:(int32_t)h
+                     withInt:(int32_t)oldw
+                     withInt:(int32_t)oldh;
 
 - (void)onVisibilityChangedWithADView:(ADView *)changedView
-                              withInt:(jint)visibility;
+                              withInt:(int32_t)visibility;
 
-- (void)onWindowVisibilityChangedWithInt:(jint)visibility;
+- (void)onWindowVisibilityChangedWithInt:(int32_t)visibility;
 
 - (void)resetResolvedDrawables;
 
 - (void)resolveDrawables;
 
-- (jboolean)setFrameWithInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom;
+- (bool)setFrameWithInt:(int32_t)left
+                withInt:(int32_t)top
+                withInt:(int32_t)right
+                withInt:(int32_t)bottom;
 
-- (void)setMeasuredDimensionWithInt:(jint)measuredWidth
-                            withInt:(jint)measuredHeight;
+- (void)setMeasuredDimensionWithInt:(int32_t)measuredWidth
+                            withInt:(int32_t)measuredHeight;
 
-- (jboolean)verifyDrawableWithADDrawable:(ADDrawable *)who;
+- (bool)verifyDrawableWithADDrawable:(ADDrawable *)who;
 
 #pragma mark Package-Private
 
-- (jboolean)areDrawablesResolved;
+- (bool)areDrawablesResolved;
 
 - (void)assignParentWithADViewParent:(id<ADViewParent>)parent;
 
 - (void)clearFocusInternalWithADView:(ADView *)focused
-                         withBoolean:(jboolean)propagate
-                         withBoolean:(jboolean)refocus;
+                         withBoolean:(bool)propagate
+                         withBoolean:(bool)refocus;
 
 - (void)clearParentsWantFocus;
 
-- (jint)combineVisibilityWithInt:(jint)vis1
-                         withInt:(jint)vis2;
+- (int32_t)combineVisibilityWithInt:(int32_t)vis1
+                            withInt:(int32_t)vis2;
 
 - (ADInsets *)computeOpticalInsets;
 
@@ -753,38 +758,38 @@
 - (void)damageShadowReceiver;
 
 - (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)info
-                                              withInt:(jint)visibility;
+                                              withInt:(int32_t)visibility;
 
 - (void)dispatchDetachedFromWindow;
 
 - (ADView_ListenerInfo *)getListenerInfo;
 
-- (jboolean)hasIdentityMatrix;
+- (bool)hasIdentityMatrix;
 
-- (void)invalidateInheritedLayoutModeWithInt:(jint)layoutModeOfRoot;
+- (void)invalidateInheritedLayoutModeWithInt:(int32_t)layoutModeOfRoot;
 
-- (void)invalidateInternalWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b
-                      withBoolean:(jboolean)invalidateCache
-                      withBoolean:(jboolean)fullInvalidate;
+- (void)invalidateInternalWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b
+                      withBoolean:(bool)invalidateCache
+                      withBoolean:(bool)fullInvalidate;
 
-- (void)invalidateViewPropertyWithBoolean:(jboolean)invalidateParent
-                              withBoolean:(jboolean)forceRedraw;
+- (void)invalidateViewPropertyWithBoolean:(bool)invalidateParent
+                              withBoolean:(bool)forceRedraw;
 
-- (jboolean)isLayoutValid;
+- (bool)isLayoutValid;
 
-- (jboolean)isPaddingResolved;
+- (bool)isPaddingResolved;
 
-- (void)onResolveDrawablesWithInt:(jint)layoutDirection;
+- (void)onResolveDrawablesWithInt:(int32_t)layoutDirection;
 
 - (void)resetResolvedDrawablesInternal;
 
 - (void)resetResolvedPaddingInternal;
 
-- (void)setFlagsWithInt:(jint)flags
-                withInt:(jint)mask;
+- (void)setFlagsWithInt:(int32_t)flags
+                withInt:(int32_t)mask;
 
 @end
 
@@ -798,351 +803,351 @@ J2OBJC_FIELD_SETTER(ADView, mAttachInfo_, ADView_AttachInfo *)
 J2OBJC_FIELD_SETTER(ADView, sThreadLocal_, ADView_ThreadLocal *)
 J2OBJC_FIELD_SETTER(ADView, mListenerInfo_, ADView_ListenerInfo *)
 
-inline jboolean ADView_get_DEBUG_DRAW(void);
-inline jboolean ADView_set_DEBUG_DRAW(jboolean value);
-inline jboolean *ADView_getRef_DEBUG_DRAW(void);
+inline bool ADView_get_DEBUG_DRAW(void);
+inline bool ADView_set_DEBUG_DRAW(bool value);
+inline bool *ADView_getRef_DEBUG_DRAW(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jboolean ADView_DEBUG_DRAW;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, DEBUG_DRAW, jboolean)
+FOUNDATION_EXPORT bool ADView_DEBUG_DRAW;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, DEBUG_DRAW, bool)
 
 inline NSString *ADView_get_VIEW_LOG_TAG(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *ADView_VIEW_LOG_TAG;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADView, VIEW_LOG_TAG, NSString *)
 
-inline jboolean ADView_get_mDebugViewAttributes(void);
-inline jboolean ADView_set_mDebugViewAttributes(jboolean value);
-inline jboolean *ADView_getRef_mDebugViewAttributes(void);
+inline bool ADView_get_mDebugViewAttributes(void);
+inline bool ADView_set_mDebugViewAttributes(bool value);
+inline bool *ADView_getRef_mDebugViewAttributes(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jboolean ADView_mDebugViewAttributes;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, mDebugViewAttributes, jboolean)
+FOUNDATION_EXPORT bool ADView_mDebugViewAttributes;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, mDebugViewAttributes, bool)
 
-inline jint ADView_get_NO_ID(void);
+inline int32_t ADView_get_NO_ID(void);
 #define ADView_NO_ID -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, NO_ID, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, NO_ID, int32_t)
 
-inline jint ADView_get_LAST_APP_AUTOFILL_ID(void);
+inline int32_t ADView_get_LAST_APP_AUTOFILL_ID(void);
 #define ADView_LAST_APP_AUTOFILL_ID 1073741823
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAST_APP_AUTOFILL_ID, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAST_APP_AUTOFILL_ID, int32_t)
 
-inline jboolean ADView_get_sUseZeroUnspecifiedMeasureSpec(void);
-inline jboolean ADView_set_sUseZeroUnspecifiedMeasureSpec(jboolean value);
-inline jboolean *ADView_getRef_sUseZeroUnspecifiedMeasureSpec(void);
+inline bool ADView_get_sUseZeroUnspecifiedMeasureSpec(void);
+inline bool ADView_set_sUseZeroUnspecifiedMeasureSpec(bool value);
+inline bool *ADView_getRef_sUseZeroUnspecifiedMeasureSpec(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jboolean ADView_sUseZeroUnspecifiedMeasureSpec;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sUseZeroUnspecifiedMeasureSpec, jboolean)
+FOUNDATION_EXPORT bool ADView_sUseZeroUnspecifiedMeasureSpec;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sUseZeroUnspecifiedMeasureSpec, bool)
 
-inline jboolean ADView_get_sTextureViewIgnoresDrawableSetters(void);
-inline jboolean ADView_set_sTextureViewIgnoresDrawableSetters(jboolean value);
-inline jboolean *ADView_getRef_sTextureViewIgnoresDrawableSetters(void);
+inline bool ADView_get_sTextureViewIgnoresDrawableSetters(void);
+inline bool ADView_set_sTextureViewIgnoresDrawableSetters(bool value);
+inline bool *ADView_getRef_sTextureViewIgnoresDrawableSetters(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jboolean ADView_sTextureViewIgnoresDrawableSetters;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sTextureViewIgnoresDrawableSetters, jboolean)
+FOUNDATION_EXPORT bool ADView_sTextureViewIgnoresDrawableSetters;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sTextureViewIgnoresDrawableSetters, bool)
 
-inline jboolean ADView_get_sPreserveMarginParamsInLayoutParamConversion(void);
-inline jboolean ADView_set_sPreserveMarginParamsInLayoutParamConversion(jboolean value);
-inline jboolean *ADView_getRef_sPreserveMarginParamsInLayoutParamConversion(void);
+inline bool ADView_get_sPreserveMarginParamsInLayoutParamConversion(void);
+inline bool ADView_set_sPreserveMarginParamsInLayoutParamConversion(bool value);
+inline bool *ADView_getRef_sPreserveMarginParamsInLayoutParamConversion(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jboolean ADView_sPreserveMarginParamsInLayoutParamConversion;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sPreserveMarginParamsInLayoutParamConversion, jboolean)
+FOUNDATION_EXPORT bool ADView_sPreserveMarginParamsInLayoutParamConversion;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sPreserveMarginParamsInLayoutParamConversion, bool)
 
-inline jboolean ADView_get_sCascadedDragDrop(void);
-inline jboolean ADView_set_sCascadedDragDrop(jboolean value);
-inline jboolean *ADView_getRef_sCascadedDragDrop(void);
+inline bool ADView_get_sCascadedDragDrop(void);
+inline bool ADView_set_sCascadedDragDrop(bool value);
+inline bool *ADView_getRef_sCascadedDragDrop(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jboolean ADView_sCascadedDragDrop;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sCascadedDragDrop, jboolean)
+FOUNDATION_EXPORT bool ADView_sCascadedDragDrop;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sCascadedDragDrop, bool)
 
-inline jboolean ADView_get_sHasFocusableExcludeAutoFocusable(void);
-inline jboolean ADView_set_sHasFocusableExcludeAutoFocusable(jboolean value);
-inline jboolean *ADView_getRef_sHasFocusableExcludeAutoFocusable(void);
+inline bool ADView_get_sHasFocusableExcludeAutoFocusable(void);
+inline bool ADView_set_sHasFocusableExcludeAutoFocusable(bool value);
+inline bool *ADView_getRef_sHasFocusableExcludeAutoFocusable(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jboolean ADView_sHasFocusableExcludeAutoFocusable;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sHasFocusableExcludeAutoFocusable, jboolean)
+FOUNDATION_EXPORT bool ADView_sHasFocusableExcludeAutoFocusable;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADView, sHasFocusableExcludeAutoFocusable, bool)
 
-inline jint ADView_get_NOT_FOCUSABLE(void);
+inline int32_t ADView_get_NOT_FOCUSABLE(void);
 #define ADView_NOT_FOCUSABLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, NOT_FOCUSABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, NOT_FOCUSABLE, int32_t)
 
-inline jint ADView_get_FOCUSABLE(void);
+inline int32_t ADView_get_FOCUSABLE(void);
 #define ADView_FOCUSABLE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLE, int32_t)
 
-inline jint ADView_get_FOCUSABLE_AUTO(void);
+inline int32_t ADView_get_FOCUSABLE_AUTO(void);
 #define ADView_FOCUSABLE_AUTO 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLE_AUTO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLE_AUTO, int32_t)
 
-inline jint ADView_get_VISIBLE(void);
+inline int32_t ADView_get_VISIBLE(void);
 #define ADView_VISIBLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, VISIBLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, VISIBLE, int32_t)
 
-inline jint ADView_get_INVISIBLE(void);
+inline int32_t ADView_get_INVISIBLE(void);
 #define ADView_INVISIBLE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, INVISIBLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, INVISIBLE, int32_t)
 
-inline jint ADView_get_GONE(void);
+inline int32_t ADView_get_GONE(void);
 #define ADView_GONE 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, GONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, GONE, int32_t)
 
-inline jint ADView_get_VISIBILITY_MASK(void);
+inline int32_t ADView_get_VISIBILITY_MASK(void);
 #define ADView_VISIBILITY_MASK 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, VISIBILITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, VISIBILITY_MASK, int32_t)
 
-inline jint ADView_get_AUTOFILL_TYPE_NONE(void);
+inline int32_t ADView_get_AUTOFILL_TYPE_NONE(void);
 #define ADView_AUTOFILL_TYPE_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_NONE, int32_t)
 
-inline jint ADView_get_AUTOFILL_TYPE_TEXT(void);
+inline int32_t ADView_get_AUTOFILL_TYPE_TEXT(void);
 #define ADView_AUTOFILL_TYPE_TEXT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_TEXT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_TEXT, int32_t)
 
-inline jint ADView_get_AUTOFILL_TYPE_TOGGLE(void);
+inline int32_t ADView_get_AUTOFILL_TYPE_TOGGLE(void);
 #define ADView_AUTOFILL_TYPE_TOGGLE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_TOGGLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_TOGGLE, int32_t)
 
-inline jint ADView_get_AUTOFILL_TYPE_LIST(void);
+inline int32_t ADView_get_AUTOFILL_TYPE_LIST(void);
 #define ADView_AUTOFILL_TYPE_LIST 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_LIST, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_LIST, int32_t)
 
-inline jint ADView_get_AUTOFILL_TYPE_DATE(void);
+inline int32_t ADView_get_AUTOFILL_TYPE_DATE(void);
 #define ADView_AUTOFILL_TYPE_DATE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_DATE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_TYPE_DATE, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_AUTOFILL_AUTO(void);
+inline int32_t ADView_get_IMPORTANT_FOR_AUTOFILL_AUTO(void);
 #define ADView_IMPORTANT_FOR_AUTOFILL_AUTO 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_AUTO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_AUTO, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_AUTOFILL_YES(void);
+inline int32_t ADView_get_IMPORTANT_FOR_AUTOFILL_YES(void);
 #define ADView_IMPORTANT_FOR_AUTOFILL_YES 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_YES, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_YES, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_AUTOFILL_NO(void);
+inline int32_t ADView_get_IMPORTANT_FOR_AUTOFILL_NO(void);
 #define ADView_IMPORTANT_FOR_AUTOFILL_NO 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_NO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_NO, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS(void);
+inline int32_t ADView_get_IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS(void);
 #define ADView_IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_YES_EXCLUDE_DESCENDANTS, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS(void);
+inline int32_t ADView_get_IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS(void);
 #define ADView_IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS, int32_t)
 
-inline jint ADView_get_AUTOFILL_FLAG_INCLUDE_NOT_IMPORTANT_VIEWS(void);
+inline int32_t ADView_get_AUTOFILL_FLAG_INCLUDE_NOT_IMPORTANT_VIEWS(void);
 #define ADView_AUTOFILL_FLAG_INCLUDE_NOT_IMPORTANT_VIEWS 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_FLAG_INCLUDE_NOT_IMPORTANT_VIEWS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, AUTOFILL_FLAG_INCLUDE_NOT_IMPORTANT_VIEWS, int32_t)
 
-inline jint ADView_get_ENABLED(void);
+inline int32_t ADView_get_ENABLED(void);
 #define ADView_ENABLED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ENABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ENABLED, int32_t)
 
-inline jint ADView_get_DISABLED(void);
+inline int32_t ADView_get_DISABLED(void);
 #define ADView_DISABLED 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DISABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DISABLED, int32_t)
 
-inline jint ADView_get_ENABLED_MASK(void);
+inline int32_t ADView_get_ENABLED_MASK(void);
 #define ADView_ENABLED_MASK 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ENABLED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ENABLED_MASK, int32_t)
 
-inline jint ADView_get_WILL_NOT_DRAW(void);
+inline int32_t ADView_get_WILL_NOT_DRAW(void);
 #define ADView_WILL_NOT_DRAW 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, WILL_NOT_DRAW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, WILL_NOT_DRAW, int32_t)
 
-inline jint ADView_get_DRAW_MASK(void);
+inline int32_t ADView_get_DRAW_MASK(void);
 #define ADView_DRAW_MASK 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAW_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAW_MASK, int32_t)
 
-inline jint ADView_get_SCROLLBARS_NONE(void);
+inline int32_t ADView_get_SCROLLBARS_NONE(void);
 #define ADView_SCROLLBARS_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_NONE, int32_t)
 
-inline jint ADView_get_SCROLLBARS_HORIZONTAL(void);
+inline int32_t ADView_get_SCROLLBARS_HORIZONTAL(void);
 #define ADView_SCROLLBARS_HORIZONTAL 256
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_HORIZONTAL, int32_t)
 
-inline jint ADView_get_SCROLLBARS_VERTICAL(void);
+inline int32_t ADView_get_SCROLLBARS_VERTICAL(void);
 #define ADView_SCROLLBARS_VERTICAL 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_VERTICAL, int32_t)
 
-inline jint ADView_get_SCROLLBARS_MASK(void);
+inline int32_t ADView_get_SCROLLBARS_MASK(void);
 #define ADView_SCROLLBARS_MASK 768
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_MASK, int32_t)
 
-inline jint ADView_get_FILTER_TOUCHES_WHEN_OBSCURED(void);
+inline int32_t ADView_get_FILTER_TOUCHES_WHEN_OBSCURED(void);
 #define ADView_FILTER_TOUCHES_WHEN_OBSCURED 1024
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FILTER_TOUCHES_WHEN_OBSCURED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FILTER_TOUCHES_WHEN_OBSCURED, int32_t)
 
-inline jint ADView_get_OPTIONAL_FITS_SYSTEM_WINDOWS(void);
+inline int32_t ADView_get_OPTIONAL_FITS_SYSTEM_WINDOWS(void);
 #define ADView_OPTIONAL_FITS_SYSTEM_WINDOWS 2048
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, OPTIONAL_FITS_SYSTEM_WINDOWS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, OPTIONAL_FITS_SYSTEM_WINDOWS, int32_t)
 
-inline jint ADView_get_FADING_EDGE_NONE(void);
+inline int32_t ADView_get_FADING_EDGE_NONE(void);
 #define ADView_FADING_EDGE_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_NONE, int32_t)
 
-inline jint ADView_get_FADING_EDGE_HORIZONTAL(void);
+inline int32_t ADView_get_FADING_EDGE_HORIZONTAL(void);
 #define ADView_FADING_EDGE_HORIZONTAL 4096
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_HORIZONTAL, int32_t)
 
-inline jint ADView_get_FADING_EDGE_VERTICAL(void);
+inline int32_t ADView_get_FADING_EDGE_VERTICAL(void);
 #define ADView_FADING_EDGE_VERTICAL 8192
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_VERTICAL, int32_t)
 
-inline jint ADView_get_FADING_EDGE_MASK(void);
+inline int32_t ADView_get_FADING_EDGE_MASK(void);
 #define ADView_FADING_EDGE_MASK 12288
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FADING_EDGE_MASK, int32_t)
 
-inline jint ADView_get_CLICKABLE(void);
+inline int32_t ADView_get_CLICKABLE(void);
 #define ADView_CLICKABLE 16384
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, CLICKABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, CLICKABLE, int32_t)
 
-inline jint ADView_get_DRAWING_CACHE_ENABLED(void);
+inline int32_t ADView_get_DRAWING_CACHE_ENABLED(void);
 #define ADView_DRAWING_CACHE_ENABLED 32768
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_ENABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_ENABLED, int32_t)
 
-inline jint ADView_get_SAVE_DISABLED(void);
+inline int32_t ADView_get_SAVE_DISABLED(void);
 #define ADView_SAVE_DISABLED 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SAVE_DISABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SAVE_DISABLED, int32_t)
 
-inline jint ADView_get_SAVE_DISABLED_MASK(void);
+inline int32_t ADView_get_SAVE_DISABLED_MASK(void);
 #define ADView_SAVE_DISABLED_MASK 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SAVE_DISABLED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SAVE_DISABLED_MASK, int32_t)
 
-inline jint ADView_get_WILL_NOT_CACHE_DRAWING(void);
+inline int32_t ADView_get_WILL_NOT_CACHE_DRAWING(void);
 #define ADView_WILL_NOT_CACHE_DRAWING 131072
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, WILL_NOT_CACHE_DRAWING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, WILL_NOT_CACHE_DRAWING, int32_t)
 
-inline jint ADView_get_FOCUSABLE_IN_TOUCH_MODE(void);
+inline int32_t ADView_get_FOCUSABLE_IN_TOUCH_MODE(void);
 #define ADView_FOCUSABLE_IN_TOUCH_MODE 262144
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLE_IN_TOUCH_MODE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLE_IN_TOUCH_MODE, int32_t)
 
-inline jint ADView_get_DRAWING_CACHE_QUALITY_LOW(void);
+inline int32_t ADView_get_DRAWING_CACHE_QUALITY_LOW(void);
 #define ADView_DRAWING_CACHE_QUALITY_LOW 524288
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_LOW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_LOW, int32_t)
 
-inline jint ADView_get_DRAWING_CACHE_QUALITY_HIGH(void);
+inline int32_t ADView_get_DRAWING_CACHE_QUALITY_HIGH(void);
 #define ADView_DRAWING_CACHE_QUALITY_HIGH 1048576
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_HIGH, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_HIGH, int32_t)
 
-inline jint ADView_get_DRAWING_CACHE_QUALITY_AUTO(void);
+inline int32_t ADView_get_DRAWING_CACHE_QUALITY_AUTO(void);
 #define ADView_DRAWING_CACHE_QUALITY_AUTO 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_AUTO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_AUTO, int32_t)
 
-inline jint ADView_get_DRAWING_CACHE_QUALITY_MASK(void);
+inline int32_t ADView_get_DRAWING_CACHE_QUALITY_MASK(void);
 #define ADView_DRAWING_CACHE_QUALITY_MASK 1572864
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAWING_CACHE_QUALITY_MASK, int32_t)
 
-inline jint ADView_get_LONG_CLICKABLE(void);
+inline int32_t ADView_get_LONG_CLICKABLE(void);
 #define ADView_LONG_CLICKABLE 2097152
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LONG_CLICKABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LONG_CLICKABLE, int32_t)
 
-inline jint ADView_get_DUPLICATE_PARENT_STATE(void);
+inline int32_t ADView_get_DUPLICATE_PARENT_STATE(void);
 #define ADView_DUPLICATE_PARENT_STATE 4194304
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DUPLICATE_PARENT_STATE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DUPLICATE_PARENT_STATE, int32_t)
 
-inline jint ADView_get_CONTEXT_CLICKABLE(void);
+inline int32_t ADView_get_CONTEXT_CLICKABLE(void);
 #define ADView_CONTEXT_CLICKABLE 8388608
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, CONTEXT_CLICKABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, CONTEXT_CLICKABLE, int32_t)
 
-inline jint ADView_get_SCROLLBARS_INSIDE_OVERLAY(void);
+inline int32_t ADView_get_SCROLLBARS_INSIDE_OVERLAY(void);
 #define ADView_SCROLLBARS_INSIDE_OVERLAY 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_INSIDE_OVERLAY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_INSIDE_OVERLAY, int32_t)
 
-inline jint ADView_get_SCROLLBARS_INSIDE_INSET(void);
+inline int32_t ADView_get_SCROLLBARS_INSIDE_INSET(void);
 #define ADView_SCROLLBARS_INSIDE_INSET 16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_INSIDE_INSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_INSIDE_INSET, int32_t)
 
-inline jint ADView_get_SCROLLBARS_OUTSIDE_OVERLAY(void);
+inline int32_t ADView_get_SCROLLBARS_OUTSIDE_OVERLAY(void);
 #define ADView_SCROLLBARS_OUTSIDE_OVERLAY 33554432
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_OUTSIDE_OVERLAY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_OUTSIDE_OVERLAY, int32_t)
 
-inline jint ADView_get_SCROLLBARS_OUTSIDE_INSET(void);
+inline int32_t ADView_get_SCROLLBARS_OUTSIDE_INSET(void);
 #define ADView_SCROLLBARS_OUTSIDE_INSET 50331648
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_OUTSIDE_INSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_OUTSIDE_INSET, int32_t)
 
-inline jint ADView_get_SCROLLBARS_INSET_MASK(void);
+inline int32_t ADView_get_SCROLLBARS_INSET_MASK(void);
 #define ADView_SCROLLBARS_INSET_MASK 16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_INSET_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_INSET_MASK, int32_t)
 
-inline jint ADView_get_SCROLLBARS_OUTSIDE_MASK(void);
+inline int32_t ADView_get_SCROLLBARS_OUTSIDE_MASK(void);
 #define ADView_SCROLLBARS_OUTSIDE_MASK 33554432
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_OUTSIDE_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_OUTSIDE_MASK, int32_t)
 
-inline jint ADView_get_SCROLLBARS_STYLE_MASK(void);
+inline int32_t ADView_get_SCROLLBARS_STYLE_MASK(void);
 #define ADView_SCROLLBARS_STYLE_MASK 50331648
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_STYLE_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBARS_STYLE_MASK, int32_t)
 
-inline jint ADView_get_KEEP_SCREEN_ON(void);
+inline int32_t ADView_get_KEEP_SCREEN_ON(void);
 #define ADView_KEEP_SCREEN_ON 67108864
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, KEEP_SCREEN_ON, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, KEEP_SCREEN_ON, int32_t)
 
-inline jint ADView_get_SOUND_EFFECTS_ENABLED(void);
+inline int32_t ADView_get_SOUND_EFFECTS_ENABLED(void);
 #define ADView_SOUND_EFFECTS_ENABLED 134217728
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SOUND_EFFECTS_ENABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SOUND_EFFECTS_ENABLED, int32_t)
 
-inline jint ADView_get_HAPTIC_FEEDBACK_ENABLED(void);
+inline int32_t ADView_get_HAPTIC_FEEDBACK_ENABLED(void);
 #define ADView_HAPTIC_FEEDBACK_ENABLED 268435456
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, HAPTIC_FEEDBACK_ENABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, HAPTIC_FEEDBACK_ENABLED, int32_t)
 
-inline jint ADView_get_PARENT_SAVE_DISABLED(void);
+inline int32_t ADView_get_PARENT_SAVE_DISABLED(void);
 #define ADView_PARENT_SAVE_DISABLED 536870912
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PARENT_SAVE_DISABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PARENT_SAVE_DISABLED, int32_t)
 
-inline jint ADView_get_PARENT_SAVE_DISABLED_MASK(void);
+inline int32_t ADView_get_PARENT_SAVE_DISABLED_MASK(void);
 #define ADView_PARENT_SAVE_DISABLED_MASK 536870912
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PARENT_SAVE_DISABLED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PARENT_SAVE_DISABLED_MASK, int32_t)
 
-inline jint ADView_get_TOOLTIP(void);
+inline int32_t ADView_get_TOOLTIP(void);
 #define ADView_TOOLTIP 1073741824
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TOOLTIP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TOOLTIP, int32_t)
 
-inline jint ADView_get_FOCUSABLES_ALL(void);
+inline int32_t ADView_get_FOCUSABLES_ALL(void);
 #define ADView_FOCUSABLES_ALL 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLES_ALL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLES_ALL, int32_t)
 
-inline jint ADView_get_FOCUSABLES_TOUCH_MODE(void);
+inline int32_t ADView_get_FOCUSABLES_TOUCH_MODE(void);
 #define ADView_FOCUSABLES_TOUCH_MODE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLES_TOUCH_MODE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUSABLES_TOUCH_MODE, int32_t)
 
-inline jint ADView_get_FOCUS_BACKWARD(void);
+inline int32_t ADView_get_FOCUS_BACKWARD(void);
 #define ADView_FOCUS_BACKWARD 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_BACKWARD, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_BACKWARD, int32_t)
 
-inline jint ADView_get_FOCUS_FORWARD(void);
+inline int32_t ADView_get_FOCUS_FORWARD(void);
 #define ADView_FOCUS_FORWARD 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_FORWARD, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_FORWARD, int32_t)
 
-inline jint ADView_get_FOCUS_LEFT(void);
+inline int32_t ADView_get_FOCUS_LEFT(void);
 #define ADView_FOCUS_LEFT 17
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_LEFT, int32_t)
 
-inline jint ADView_get_FOCUS_UP(void);
+inline int32_t ADView_get_FOCUS_UP(void);
 #define ADView_FOCUS_UP 33
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_UP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_UP, int32_t)
 
-inline jint ADView_get_FOCUS_RIGHT(void);
+inline int32_t ADView_get_FOCUS_RIGHT(void);
 #define ADView_FOCUS_RIGHT 66
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_RIGHT, int32_t)
 
-inline jint ADView_get_FOCUS_DOWN(void);
+inline int32_t ADView_get_FOCUS_DOWN(void);
 #define ADView_FOCUS_DOWN 130
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_DOWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FOCUS_DOWN, int32_t)
 
-inline jint ADView_get_MEASURED_SIZE_MASK(void);
+inline int32_t ADView_get_MEASURED_SIZE_MASK(void);
 #define ADView_MEASURED_SIZE_MASK 16777215
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_SIZE_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_SIZE_MASK, int32_t)
 
-inline jint ADView_get_MEASURED_STATE_MASK(void);
+inline int32_t ADView_get_MEASURED_STATE_MASK(void);
 #define ADView_MEASURED_STATE_MASK -16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_STATE_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_STATE_MASK, int32_t)
 
-inline jint ADView_get_MEASURED_HEIGHT_STATE_SHIFT(void);
+inline int32_t ADView_get_MEASURED_HEIGHT_STATE_SHIFT(void);
 #define ADView_MEASURED_HEIGHT_STATE_SHIFT 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_HEIGHT_STATE_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_HEIGHT_STATE_SHIFT, int32_t)
 
-inline jint ADView_get_MEASURED_STATE_TOO_SMALL(void);
+inline int32_t ADView_get_MEASURED_STATE_TOO_SMALL(void);
 #define ADView_MEASURED_STATE_TOO_SMALL 16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_STATE_TOO_SMALL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, MEASURED_STATE_TOO_SMALL, int32_t)
 
 inline IOSIntArray *ADView_get_EMPTY_STATE_SET(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -1154,725 +1159,725 @@ inline IOSIntArray *ADView_get_SELECTED_STATE_SET(void);
 FOUNDATION_EXPORT IOSIntArray *ADView_SELECTED_STATE_SET;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADView, SELECTED_STATE_SET, IOSIntArray *)
 
-inline jint ADView_get_DEBUG_CORNERS_SIZE_DIP(void);
+inline int32_t ADView_get_DEBUG_CORNERS_SIZE_DIP(void);
 #define ADView_DEBUG_CORNERS_SIZE_DIP 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DEBUG_CORNERS_SIZE_DIP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DEBUG_CORNERS_SIZE_DIP, int32_t)
 
-inline jint ADView_get_PFLAG_WANTS_FOCUS(void);
+inline int32_t ADView_get_PFLAG_WANTS_FOCUS(void);
 #define ADView_PFLAG_WANTS_FOCUS 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_WANTS_FOCUS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_WANTS_FOCUS, int32_t)
 
-inline jint ADView_get_PFLAG_FOCUSED(void);
+inline int32_t ADView_get_PFLAG_FOCUSED(void);
 #define ADView_PFLAG_FOCUSED 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_FOCUSED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_FOCUSED, int32_t)
 
-inline jint ADView_get_PFLAG_SELECTED(void);
+inline int32_t ADView_get_PFLAG_SELECTED(void);
 #define ADView_PFLAG_SELECTED 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SELECTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SELECTED, int32_t)
 
-inline jint ADView_get_PFLAG_IS_ROOT_NAMESPACE(void);
+inline int32_t ADView_get_PFLAG_IS_ROOT_NAMESPACE(void);
 #define ADView_PFLAG_IS_ROOT_NAMESPACE 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_IS_ROOT_NAMESPACE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_IS_ROOT_NAMESPACE, int32_t)
 
-inline jint ADView_get_PFLAG_HAS_BOUNDS(void);
+inline int32_t ADView_get_PFLAG_HAS_BOUNDS(void);
 #define ADView_PFLAG_HAS_BOUNDS 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_HAS_BOUNDS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_HAS_BOUNDS, int32_t)
 
-inline jint ADView_get_PFLAG_DRAWN(void);
+inline int32_t ADView_get_PFLAG_DRAWN(void);
 #define ADView_PFLAG_DRAWN 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAWN, int32_t)
 
-inline jint ADView_get_PFLAG_DRAW_ANIMATION(void);
+inline int32_t ADView_get_PFLAG_DRAW_ANIMATION(void);
 #define ADView_PFLAG_DRAW_ANIMATION 64
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAW_ANIMATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAW_ANIMATION, int32_t)
 
-inline jint ADView_get_PFLAG_SKIP_DRAW(void);
+inline int32_t ADView_get_PFLAG_SKIP_DRAW(void);
 #define ADView_PFLAG_SKIP_DRAW 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SKIP_DRAW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SKIP_DRAW, int32_t)
 
-inline jint ADView_get_PFLAG_REQUEST_TRANSPARENT_REGIONS(void);
+inline int32_t ADView_get_PFLAG_REQUEST_TRANSPARENT_REGIONS(void);
 #define ADView_PFLAG_REQUEST_TRANSPARENT_REGIONS 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_REQUEST_TRANSPARENT_REGIONS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_REQUEST_TRANSPARENT_REGIONS, int32_t)
 
-inline jint ADView_get_PFLAG_DRAWABLE_STATE_DIRTY(void);
+inline int32_t ADView_get_PFLAG_DRAWABLE_STATE_DIRTY(void);
 #define ADView_PFLAG_DRAWABLE_STATE_DIRTY 1024
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAWABLE_STATE_DIRTY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAWABLE_STATE_DIRTY, int32_t)
 
-inline jint ADView_get_PFLAG_MEASURED_DIMENSION_SET(void);
+inline int32_t ADView_get_PFLAG_MEASURED_DIMENSION_SET(void);
 #define ADView_PFLAG_MEASURED_DIMENSION_SET 2048
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_MEASURED_DIMENSION_SET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_MEASURED_DIMENSION_SET, int32_t)
 
-inline jint ADView_get_PFLAG_FORCE_LAYOUT(void);
+inline int32_t ADView_get_PFLAG_FORCE_LAYOUT(void);
 #define ADView_PFLAG_FORCE_LAYOUT 4096
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_FORCE_LAYOUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_FORCE_LAYOUT, int32_t)
 
-inline jint ADView_get_PFLAG_LAYOUT_REQUIRED(void);
+inline int32_t ADView_get_PFLAG_LAYOUT_REQUIRED(void);
 #define ADView_PFLAG_LAYOUT_REQUIRED 8192
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_LAYOUT_REQUIRED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_LAYOUT_REQUIRED, int32_t)
 
-inline jint ADView_get_PFLAG_DRAWING_CACHE_VALID(void);
+inline int32_t ADView_get_PFLAG_DRAWING_CACHE_VALID(void);
 #define ADView_PFLAG_DRAWING_CACHE_VALID 32768
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAWING_CACHE_VALID, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DRAWING_CACHE_VALID, int32_t)
 
-inline jint ADView_get_PFLAG_ANIMATION_STARTED(void);
+inline int32_t ADView_get_PFLAG_ANIMATION_STARTED(void);
 #define ADView_PFLAG_ANIMATION_STARTED 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_ANIMATION_STARTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_ANIMATION_STARTED, int32_t)
 
-inline jint ADView_get_PFLAG_ALPHA_SET(void);
+inline int32_t ADView_get_PFLAG_ALPHA_SET(void);
 #define ADView_PFLAG_ALPHA_SET 262144
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_ALPHA_SET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_ALPHA_SET, int32_t)
 
-inline jint ADView_get_PFLAG_SCROLL_CONTAINER(void);
+inline int32_t ADView_get_PFLAG_SCROLL_CONTAINER(void);
 #define ADView_PFLAG_SCROLL_CONTAINER 524288
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SCROLL_CONTAINER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SCROLL_CONTAINER, int32_t)
 
-inline jint ADView_get_PFLAG_SCROLL_CONTAINER_ADDED(void);
+inline int32_t ADView_get_PFLAG_SCROLL_CONTAINER_ADDED(void);
 #define ADView_PFLAG_SCROLL_CONTAINER_ADDED 1048576
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SCROLL_CONTAINER_ADDED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_SCROLL_CONTAINER_ADDED, int32_t)
 
-inline jint ADView_get_PFLAG_DIRTY(void);
+inline int32_t ADView_get_PFLAG_DIRTY(void);
 #define ADView_PFLAG_DIRTY 2097152
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DIRTY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DIRTY, int32_t)
 
-inline jint ADView_get_PFLAG_DIRTY_OPAQUE(void);
+inline int32_t ADView_get_PFLAG_DIRTY_OPAQUE(void);
 #define ADView_PFLAG_DIRTY_OPAQUE 4194304
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DIRTY_OPAQUE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DIRTY_OPAQUE, int32_t)
 
-inline jint ADView_get_PFLAG_DIRTY_MASK(void);
+inline int32_t ADView_get_PFLAG_DIRTY_MASK(void);
 #define ADView_PFLAG_DIRTY_MASK 6291456
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DIRTY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_DIRTY_MASK, int32_t)
 
-inline jint ADView_get_PFLAG_OPAQUE_BACKGROUND(void);
+inline int32_t ADView_get_PFLAG_OPAQUE_BACKGROUND(void);
 #define ADView_PFLAG_OPAQUE_BACKGROUND 8388608
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_OPAQUE_BACKGROUND, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_OPAQUE_BACKGROUND, int32_t)
 
-inline jint ADView_get_PFLAG_OPAQUE_SCROLLBARS(void);
+inline int32_t ADView_get_PFLAG_OPAQUE_SCROLLBARS(void);
 #define ADView_PFLAG_OPAQUE_SCROLLBARS 16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_OPAQUE_SCROLLBARS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_OPAQUE_SCROLLBARS, int32_t)
 
-inline jint ADView_get_PFLAG_OPAQUE_MASK(void);
+inline int32_t ADView_get_PFLAG_OPAQUE_MASK(void);
 #define ADView_PFLAG_OPAQUE_MASK 25165824
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_OPAQUE_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_OPAQUE_MASK, int32_t)
 
-inline jint ADView_get_PFLAG_CANCEL_NEXT_UP_EVENT(void);
+inline int32_t ADView_get_PFLAG_CANCEL_NEXT_UP_EVENT(void);
 #define ADView_PFLAG_CANCEL_NEXT_UP_EVENT 67108864
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_CANCEL_NEXT_UP_EVENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_CANCEL_NEXT_UP_EVENT, int32_t)
 
-inline jint ADView_get_PFLAG_ACTIVATED(void);
+inline int32_t ADView_get_PFLAG_ACTIVATED(void);
 #define ADView_PFLAG_ACTIVATED 1073741824
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_ACTIVATED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_ACTIVATED, int32_t)
 
-inline jint ADView_get_PFLAG_INVALIDATED(void);
-#define ADView_PFLAG_INVALIDATED ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_INVALIDATED, jint)
+inline int32_t ADView_get_PFLAG_INVALIDATED(void);
+#define ADView_PFLAG_INVALIDATED ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG_INVALIDATED, int32_t)
 
-inline jint ADView_get_PFLAG2_DRAG_CAN_ACCEPT(void);
+inline int32_t ADView_get_PFLAG2_DRAG_CAN_ACCEPT(void);
 #define ADView_PFLAG2_DRAG_CAN_ACCEPT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_DRAG_CAN_ACCEPT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_DRAG_CAN_ACCEPT, int32_t)
 
-inline jint ADView_get_PFLAG2_DRAG_HOVERED(void);
+inline int32_t ADView_get_PFLAG2_DRAG_HOVERED(void);
 #define ADView_PFLAG2_DRAG_HOVERED 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_DRAG_HOVERED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_DRAG_HOVERED, int32_t)
 
-inline jint ADView_get_LAYOUT_DIRECTION_UNDEFINED(void);
+inline int32_t ADView_get_LAYOUT_DIRECTION_UNDEFINED(void);
 #define ADView_LAYOUT_DIRECTION_UNDEFINED -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_UNDEFINED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_UNDEFINED, int32_t)
 
-inline jint ADView_get_LAYOUT_DIRECTION_LTR(void);
+inline int32_t ADView_get_LAYOUT_DIRECTION_LTR(void);
 #define ADView_LAYOUT_DIRECTION_LTR 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_LTR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_LTR, int32_t)
 
-inline jint ADView_get_LAYOUT_DIRECTION_RTL(void);
+inline int32_t ADView_get_LAYOUT_DIRECTION_RTL(void);
 #define ADView_LAYOUT_DIRECTION_RTL 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_RTL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_RTL, int32_t)
 
-inline jint ADView_get_LAYOUT_DIRECTION_INHERIT(void);
+inline int32_t ADView_get_LAYOUT_DIRECTION_INHERIT(void);
 #define ADView_LAYOUT_DIRECTION_INHERIT 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_INHERIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_INHERIT, int32_t)
 
-inline jint ADView_get_LAYOUT_DIRECTION_LOCALE(void);
+inline int32_t ADView_get_LAYOUT_DIRECTION_LOCALE(void);
 #define ADView_LAYOUT_DIRECTION_LOCALE 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_LOCALE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_LOCALE, int32_t)
 
-inline jint ADView_get_PFLAG2_LAYOUT_DIRECTION_MASK_SHIFT(void);
+inline int32_t ADView_get_PFLAG2_LAYOUT_DIRECTION_MASK_SHIFT(void);
 #define ADView_PFLAG2_LAYOUT_DIRECTION_MASK_SHIFT 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_MASK_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_MASK_SHIFT, int32_t)
 
-inline jint ADView_get_PFLAG2_LAYOUT_DIRECTION_MASK(void);
+inline int32_t ADView_get_PFLAG2_LAYOUT_DIRECTION_MASK(void);
 #define ADView_PFLAG2_LAYOUT_DIRECTION_MASK 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_MASK, int32_t)
 
-inline jint ADView_get_PFLAG2_LAYOUT_DIRECTION_RESOLVED_RTL(void);
+inline int32_t ADView_get_PFLAG2_LAYOUT_DIRECTION_RESOLVED_RTL(void);
 #define ADView_PFLAG2_LAYOUT_DIRECTION_RESOLVED_RTL 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_RESOLVED_RTL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_RESOLVED_RTL, int32_t)
 
-inline jint ADView_get_PFLAG2_LAYOUT_DIRECTION_RESOLVED(void);
+inline int32_t ADView_get_PFLAG2_LAYOUT_DIRECTION_RESOLVED(void);
 #define ADView_PFLAG2_LAYOUT_DIRECTION_RESOLVED 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_RESOLVED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_RESOLVED, int32_t)
 
-inline jint ADView_get_PFLAG2_LAYOUT_DIRECTION_RESOLVED_MASK(void);
+inline int32_t ADView_get_PFLAG2_LAYOUT_DIRECTION_RESOLVED_MASK(void);
 #define ADView_PFLAG2_LAYOUT_DIRECTION_RESOLVED_MASK 48
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_RESOLVED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_LAYOUT_DIRECTION_RESOLVED_MASK, int32_t)
 
-inline jint ADView_get_LAYOUT_DIRECTION_RESOLVED_DEFAULT(void);
+inline int32_t ADView_get_LAYOUT_DIRECTION_RESOLVED_DEFAULT(void);
 #define ADView_LAYOUT_DIRECTION_RESOLVED_DEFAULT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_RESOLVED_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYOUT_DIRECTION_RESOLVED_DEFAULT, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_INHERIT(void);
+inline int32_t ADView_get_TEXT_DIRECTION_INHERIT(void);
 #define ADView_TEXT_DIRECTION_INHERIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_INHERIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_INHERIT, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_FIRST_STRONG(void);
+inline int32_t ADView_get_TEXT_DIRECTION_FIRST_STRONG(void);
 #define ADView_TEXT_DIRECTION_FIRST_STRONG 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_FIRST_STRONG, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_FIRST_STRONG, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_ANY_RTL(void);
+inline int32_t ADView_get_TEXT_DIRECTION_ANY_RTL(void);
 #define ADView_TEXT_DIRECTION_ANY_RTL 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_ANY_RTL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_ANY_RTL, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_LTR(void);
+inline int32_t ADView_get_TEXT_DIRECTION_LTR(void);
 #define ADView_TEXT_DIRECTION_LTR 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_LTR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_LTR, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_RTL(void);
+inline int32_t ADView_get_TEXT_DIRECTION_RTL(void);
 #define ADView_TEXT_DIRECTION_RTL 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_RTL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_RTL, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_LOCALE(void);
+inline int32_t ADView_get_TEXT_DIRECTION_LOCALE(void);
 #define ADView_TEXT_DIRECTION_LOCALE 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_LOCALE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_LOCALE, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_FIRST_STRONG_LTR(void);
+inline int32_t ADView_get_TEXT_DIRECTION_FIRST_STRONG_LTR(void);
 #define ADView_TEXT_DIRECTION_FIRST_STRONG_LTR 6
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_FIRST_STRONG_LTR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_FIRST_STRONG_LTR, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_FIRST_STRONG_RTL(void);
+inline int32_t ADView_get_TEXT_DIRECTION_FIRST_STRONG_RTL(void);
 #define ADView_TEXT_DIRECTION_FIRST_STRONG_RTL 7
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_FIRST_STRONG_RTL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_FIRST_STRONG_RTL, int32_t)
 
-inline jint ADView_get_TEXT_DIRECTION_RESOLVED_DEFAULT(void);
+inline int32_t ADView_get_TEXT_DIRECTION_RESOLVED_DEFAULT(void);
 #define ADView_TEXT_DIRECTION_RESOLVED_DEFAULT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_RESOLVED_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_DIRECTION_RESOLVED_DEFAULT, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_DIRECTION_MASK_SHIFT(void);
+inline int32_t ADView_get_PFLAG2_TEXT_DIRECTION_MASK_SHIFT(void);
 #define ADView_PFLAG2_TEXT_DIRECTION_MASK_SHIFT 6
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_MASK_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_MASK_SHIFT, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_DIRECTION_MASK(void);
+inline int32_t ADView_get_PFLAG2_TEXT_DIRECTION_MASK(void);
 #define ADView_PFLAG2_TEXT_DIRECTION_MASK 448
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_MASK, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED(void);
+inline int32_t ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED(void);
 #define ADView_PFLAG2_TEXT_DIRECTION_RESOLVED 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED_MASK_SHIFT(void);
+inline int32_t ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED_MASK_SHIFT(void);
 #define ADView_PFLAG2_TEXT_DIRECTION_RESOLVED_MASK_SHIFT 10
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED_MASK_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED_MASK_SHIFT, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED_MASK(void);
+inline int32_t ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED_MASK(void);
 #define ADView_PFLAG2_TEXT_DIRECTION_RESOLVED_MASK 7168
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED_MASK, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED_DEFAULT(void);
+inline int32_t ADView_get_PFLAG2_TEXT_DIRECTION_RESOLVED_DEFAULT(void);
 #define ADView_PFLAG2_TEXT_DIRECTION_RESOLVED_DEFAULT 1024
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_DIRECTION_RESOLVED_DEFAULT, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_INHERIT(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_INHERIT(void);
 #define ADView_TEXT_ALIGNMENT_INHERIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_INHERIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_INHERIT, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_GRAVITY(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_GRAVITY(void);
 #define ADView_TEXT_ALIGNMENT_GRAVITY 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_GRAVITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_GRAVITY, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_TEXT_START(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_TEXT_START(void);
 #define ADView_TEXT_ALIGNMENT_TEXT_START 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_TEXT_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_TEXT_START, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_TEXT_END(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_TEXT_END(void);
 #define ADView_TEXT_ALIGNMENT_TEXT_END 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_TEXT_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_TEXT_END, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_CENTER(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_CENTER(void);
 #define ADView_TEXT_ALIGNMENT_CENTER 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_CENTER, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_VIEW_START(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_VIEW_START(void);
 #define ADView_TEXT_ALIGNMENT_VIEW_START 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_VIEW_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_VIEW_START, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_VIEW_END(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_VIEW_END(void);
 #define ADView_TEXT_ALIGNMENT_VIEW_END 6
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_VIEW_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_VIEW_END, int32_t)
 
-inline jint ADView_get_TEXT_ALIGNMENT_RESOLVED_DEFAULT(void);
+inline int32_t ADView_get_TEXT_ALIGNMENT_RESOLVED_DEFAULT(void);
 #define ADView_TEXT_ALIGNMENT_RESOLVED_DEFAULT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_RESOLVED_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, TEXT_ALIGNMENT_RESOLVED_DEFAULT, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_ALIGNMENT_MASK_SHIFT(void);
+inline int32_t ADView_get_PFLAG2_TEXT_ALIGNMENT_MASK_SHIFT(void);
 #define ADView_PFLAG2_TEXT_ALIGNMENT_MASK_SHIFT 13
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_MASK_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_MASK_SHIFT, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_ALIGNMENT_MASK(void);
+inline int32_t ADView_get_PFLAG2_TEXT_ALIGNMENT_MASK(void);
 #define ADView_PFLAG2_TEXT_ALIGNMENT_MASK 57344
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_MASK, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_ALIGNMENT_RESOLVED(void);
+inline int32_t ADView_get_PFLAG2_TEXT_ALIGNMENT_RESOLVED(void);
 #define ADView_PFLAG2_TEXT_ALIGNMENT_RESOLVED 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_RESOLVED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_RESOLVED, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK_SHIFT(void);
+inline int32_t ADView_get_PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK_SHIFT(void);
 #define ADView_PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK_SHIFT 17
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK_SHIFT, int32_t)
 
-inline jint ADView_get_PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK(void);
+inline int32_t ADView_get_PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK(void);
 #define ADView_PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK 917504
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK, int32_t)
 
-inline jint ADView_get_PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_SHIFT(void);
+inline int32_t ADView_get_PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_SHIFT(void);
 #define ADView_PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_SHIFT 20
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_SHIFT, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_ACCESSIBILITY_AUTO(void);
+inline int32_t ADView_get_IMPORTANT_FOR_ACCESSIBILITY_AUTO(void);
 #define ADView_IMPORTANT_FOR_ACCESSIBILITY_AUTO 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_AUTO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_AUTO, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_ACCESSIBILITY_YES(void);
+inline int32_t ADView_get_IMPORTANT_FOR_ACCESSIBILITY_YES(void);
 #define ADView_IMPORTANT_FOR_ACCESSIBILITY_YES 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_YES, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_YES, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_ACCESSIBILITY_NO(void);
+inline int32_t ADView_get_IMPORTANT_FOR_ACCESSIBILITY_NO(void);
 #define ADView_IMPORTANT_FOR_ACCESSIBILITY_NO 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_NO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_NO, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS(void);
+inline int32_t ADView_get_IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS(void);
 #define ADView_IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, int32_t)
 
-inline jint ADView_get_IMPORTANT_FOR_ACCESSIBILITY_DEFAULT(void);
+inline int32_t ADView_get_IMPORTANT_FOR_ACCESSIBILITY_DEFAULT(void);
 #define ADView_IMPORTANT_FOR_ACCESSIBILITY_DEFAULT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, IMPORTANT_FOR_ACCESSIBILITY_DEFAULT, int32_t)
 
-inline jint ADView_get_PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_MASK(void);
+inline int32_t ADView_get_PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_MASK(void);
 #define ADView_PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_MASK 7340032
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_MASK, int32_t)
 
-inline jint ADView_get_PFLAG2_ACCESSIBILITY_LIVE_REGION_SHIFT(void);
+inline int32_t ADView_get_PFLAG2_ACCESSIBILITY_LIVE_REGION_SHIFT(void);
 #define ADView_PFLAG2_ACCESSIBILITY_LIVE_REGION_SHIFT 23
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_ACCESSIBILITY_LIVE_REGION_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_ACCESSIBILITY_LIVE_REGION_SHIFT, int32_t)
 
-inline jint ADView_get_ACCESSIBILITY_LIVE_REGION_NONE(void);
+inline int32_t ADView_get_ACCESSIBILITY_LIVE_REGION_NONE(void);
 #define ADView_ACCESSIBILITY_LIVE_REGION_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_NONE, int32_t)
 
-inline jint ADView_get_ACCESSIBILITY_LIVE_REGION_POLITE(void);
+inline int32_t ADView_get_ACCESSIBILITY_LIVE_REGION_POLITE(void);
 #define ADView_ACCESSIBILITY_LIVE_REGION_POLITE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_POLITE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_POLITE, int32_t)
 
-inline jint ADView_get_ACCESSIBILITY_LIVE_REGION_ASSERTIVE(void);
+inline int32_t ADView_get_ACCESSIBILITY_LIVE_REGION_ASSERTIVE(void);
 #define ADView_ACCESSIBILITY_LIVE_REGION_ASSERTIVE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_ASSERTIVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_ASSERTIVE, int32_t)
 
-inline jint ADView_get_ACCESSIBILITY_LIVE_REGION_DEFAULT(void);
+inline int32_t ADView_get_ACCESSIBILITY_LIVE_REGION_DEFAULT(void);
 #define ADView_ACCESSIBILITY_LIVE_REGION_DEFAULT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_LIVE_REGION_DEFAULT, int32_t)
 
-inline jint ADView_get_PFLAG2_ACCESSIBILITY_LIVE_REGION_MASK(void);
+inline int32_t ADView_get_PFLAG2_ACCESSIBILITY_LIVE_REGION_MASK(void);
 #define ADView_PFLAG2_ACCESSIBILITY_LIVE_REGION_MASK 25165824
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_ACCESSIBILITY_LIVE_REGION_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_ACCESSIBILITY_LIVE_REGION_MASK, int32_t)
 
-inline jint ADView_get_PFLAG2_ACCESSIBILITY_FOCUSED(void);
+inline int32_t ADView_get_PFLAG2_ACCESSIBILITY_FOCUSED(void);
 #define ADView_PFLAG2_ACCESSIBILITY_FOCUSED 67108864
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_ACCESSIBILITY_FOCUSED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_ACCESSIBILITY_FOCUSED, int32_t)
 
-inline jint ADView_get_PFLAG2_SUBTREE_ACCESSIBILITY_STATE_CHANGED(void);
+inline int32_t ADView_get_PFLAG2_SUBTREE_ACCESSIBILITY_STATE_CHANGED(void);
 #define ADView_PFLAG2_SUBTREE_ACCESSIBILITY_STATE_CHANGED 134217728
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_SUBTREE_ACCESSIBILITY_STATE_CHANGED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_SUBTREE_ACCESSIBILITY_STATE_CHANGED, int32_t)
 
-inline jint ADView_get_PFLAG2_VIEW_QUICK_REJECTED(void);
+inline int32_t ADView_get_PFLAG2_VIEW_QUICK_REJECTED(void);
 #define ADView_PFLAG2_VIEW_QUICK_REJECTED 268435456
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_VIEW_QUICK_REJECTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_VIEW_QUICK_REJECTED, int32_t)
 
-inline jint ADView_get_PFLAG2_PADDING_RESOLVED(void);
+inline int32_t ADView_get_PFLAG2_PADDING_RESOLVED(void);
 #define ADView_PFLAG2_PADDING_RESOLVED 536870912
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_PADDING_RESOLVED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_PADDING_RESOLVED, int32_t)
 
-inline jint ADView_get_PFLAG2_DRAWABLE_RESOLVED(void);
+inline int32_t ADView_get_PFLAG2_DRAWABLE_RESOLVED(void);
 #define ADView_PFLAG2_DRAWABLE_RESOLVED 1073741824
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_DRAWABLE_RESOLVED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_DRAWABLE_RESOLVED, int32_t)
 
-inline jint ADView_get_PFLAG2_HAS_TRANSIENT_STATE(void);
-#define ADView_PFLAG2_HAS_TRANSIENT_STATE ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_HAS_TRANSIENT_STATE, jint)
+inline int32_t ADView_get_PFLAG2_HAS_TRANSIENT_STATE(void);
+#define ADView_PFLAG2_HAS_TRANSIENT_STATE ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG2_HAS_TRANSIENT_STATE, int32_t)
 
-inline jint ADView_get_ALL_RTL_PROPERTIES_RESOLVED(void);
+inline int32_t ADView_get_ALL_RTL_PROPERTIES_RESOLVED(void);
 #define ADView_ALL_RTL_PROPERTIES_RESOLVED 1610678816
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ALL_RTL_PROPERTIES_RESOLVED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ALL_RTL_PROPERTIES_RESOLVED, int32_t)
 
-inline jint ADView_get_PFLAG3_VIEW_IS_ANIMATING_TRANSFORM(void);
+inline int32_t ADView_get_PFLAG3_VIEW_IS_ANIMATING_TRANSFORM(void);
 #define ADView_PFLAG3_VIEW_IS_ANIMATING_TRANSFORM 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_VIEW_IS_ANIMATING_TRANSFORM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_VIEW_IS_ANIMATING_TRANSFORM, int32_t)
 
-inline jint ADView_get_PFLAG3_VIEW_IS_ANIMATING_ALPHA(void);
+inline int32_t ADView_get_PFLAG3_VIEW_IS_ANIMATING_ALPHA(void);
 #define ADView_PFLAG3_VIEW_IS_ANIMATING_ALPHA 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_VIEW_IS_ANIMATING_ALPHA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_VIEW_IS_ANIMATING_ALPHA, int32_t)
 
-inline jint ADView_get_PFLAG3_IS_LAID_OUT(void);
+inline int32_t ADView_get_PFLAG3_IS_LAID_OUT(void);
 #define ADView_PFLAG3_IS_LAID_OUT 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_IS_LAID_OUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_IS_LAID_OUT, int32_t)
 
-inline jint ADView_get_PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT(void);
+inline int32_t ADView_get_PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT(void);
 #define ADView_PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT, int32_t)
 
-inline jint ADView_get_PFLAG3_CALLED_SUPER(void);
+inline int32_t ADView_get_PFLAG3_CALLED_SUPER(void);
 #define ADView_PFLAG3_CALLED_SUPER 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_CALLED_SUPER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_CALLED_SUPER, int32_t)
 
-inline jint ADView_get_PFLAG3_APPLYING_INSETS(void);
+inline int32_t ADView_get_PFLAG3_APPLYING_INSETS(void);
 #define ADView_PFLAG3_APPLYING_INSETS 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_APPLYING_INSETS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_APPLYING_INSETS, int32_t)
 
-inline jint ADView_get_PFLAG3_FITTING_SYSTEM_WINDOWS(void);
+inline int32_t ADView_get_PFLAG3_FITTING_SYSTEM_WINDOWS(void);
 #define ADView_PFLAG3_FITTING_SYSTEM_WINDOWS 64
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_FITTING_SYSTEM_WINDOWS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_FITTING_SYSTEM_WINDOWS, int32_t)
 
-inline jint ADView_get_PFLAG3_NESTED_SCROLLING_ENABLED(void);
+inline int32_t ADView_get_PFLAG3_NESTED_SCROLLING_ENABLED(void);
 #define ADView_PFLAG3_NESTED_SCROLLING_ENABLED 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_NESTED_SCROLLING_ENABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_NESTED_SCROLLING_ENABLED, int32_t)
 
-inline jint ADView_get_PFLAG3_SCROLL_INDICATOR_TOP(void);
+inline int32_t ADView_get_PFLAG3_SCROLL_INDICATOR_TOP(void);
 #define ADView_PFLAG3_SCROLL_INDICATOR_TOP 256
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_TOP, int32_t)
 
-inline jint ADView_get_PFLAG3_SCROLL_INDICATOR_BOTTOM(void);
+inline int32_t ADView_get_PFLAG3_SCROLL_INDICATOR_BOTTOM(void);
 #define ADView_PFLAG3_SCROLL_INDICATOR_BOTTOM 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_BOTTOM, int32_t)
 
-inline jint ADView_get_PFLAG3_SCROLL_INDICATOR_LEFT(void);
+inline int32_t ADView_get_PFLAG3_SCROLL_INDICATOR_LEFT(void);
 #define ADView_PFLAG3_SCROLL_INDICATOR_LEFT 1024
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_LEFT, int32_t)
 
-inline jint ADView_get_PFLAG3_SCROLL_INDICATOR_RIGHT(void);
+inline int32_t ADView_get_PFLAG3_SCROLL_INDICATOR_RIGHT(void);
 #define ADView_PFLAG3_SCROLL_INDICATOR_RIGHT 2048
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_RIGHT, int32_t)
 
-inline jint ADView_get_PFLAG3_SCROLL_INDICATOR_START(void);
+inline int32_t ADView_get_PFLAG3_SCROLL_INDICATOR_START(void);
 #define ADView_PFLAG3_SCROLL_INDICATOR_START 4096
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_START, int32_t)
 
-inline jint ADView_get_PFLAG3_SCROLL_INDICATOR_END(void);
+inline int32_t ADView_get_PFLAG3_SCROLL_INDICATOR_END(void);
 #define ADView_PFLAG3_SCROLL_INDICATOR_END 8192
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_SCROLL_INDICATOR_END, int32_t)
 
-inline jint ADView_get_DRAG_MASK(void);
+inline int32_t ADView_get_DRAG_MASK(void);
 #define ADView_DRAG_MASK 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_MASK, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATORS_NONE(void);
+inline int32_t ADView_get_SCROLL_INDICATORS_NONE(void);
 #define ADView_SCROLL_INDICATORS_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATORS_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATORS_NONE, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATORS_PFLAG3_MASK(void);
+inline int32_t ADView_get_SCROLL_INDICATORS_PFLAG3_MASK(void);
 #define ADView_SCROLL_INDICATORS_PFLAG3_MASK 16128
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATORS_PFLAG3_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATORS_PFLAG3_MASK, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATORS_TO_PFLAGS3_LSHIFT(void);
+inline int32_t ADView_get_SCROLL_INDICATORS_TO_PFLAGS3_LSHIFT(void);
 #define ADView_SCROLL_INDICATORS_TO_PFLAGS3_LSHIFT 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATORS_TO_PFLAGS3_LSHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATORS_TO_PFLAGS3_LSHIFT, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATOR_TOP(void);
+inline int32_t ADView_get_SCROLL_INDICATOR_TOP(void);
 #define ADView_SCROLL_INDICATOR_TOP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_TOP, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATOR_BOTTOM(void);
+inline int32_t ADView_get_SCROLL_INDICATOR_BOTTOM(void);
 #define ADView_SCROLL_INDICATOR_BOTTOM 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_BOTTOM, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATOR_LEFT(void);
+inline int32_t ADView_get_SCROLL_INDICATOR_LEFT(void);
 #define ADView_SCROLL_INDICATOR_LEFT 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_LEFT, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATOR_RIGHT(void);
+inline int32_t ADView_get_SCROLL_INDICATOR_RIGHT(void);
 #define ADView_SCROLL_INDICATOR_RIGHT 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_RIGHT, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATOR_START(void);
+inline int32_t ADView_get_SCROLL_INDICATOR_START(void);
 #define ADView_SCROLL_INDICATOR_START 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_START, int32_t)
 
-inline jint ADView_get_SCROLL_INDICATOR_END(void);
+inline int32_t ADView_get_SCROLL_INDICATOR_END(void);
 #define ADView_SCROLL_INDICATOR_END 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_INDICATOR_END, int32_t)
 
-inline jint ADView_get_PFLAG3_ASSIST_BLOCKED(void);
+inline int32_t ADView_get_PFLAG3_ASSIST_BLOCKED(void);
 #define ADView_PFLAG3_ASSIST_BLOCKED 16384
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_ASSIST_BLOCKED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_ASSIST_BLOCKED, int32_t)
 
-inline jint ADView_get_PFLAG3_IMPORTANT_FOR_AUTOFILL_SHIFT(void);
+inline int32_t ADView_get_PFLAG3_IMPORTANT_FOR_AUTOFILL_SHIFT(void);
 #define ADView_PFLAG3_IMPORTANT_FOR_AUTOFILL_SHIFT 19
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_IMPORTANT_FOR_AUTOFILL_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_IMPORTANT_FOR_AUTOFILL_SHIFT, int32_t)
 
-inline jint ADView_get_PFLAG3_IMPORTANT_FOR_AUTOFILL_MASK(void);
+inline int32_t ADView_get_PFLAG3_IMPORTANT_FOR_AUTOFILL_MASK(void);
 #define ADView_PFLAG3_IMPORTANT_FOR_AUTOFILL_MASK 7864320
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_IMPORTANT_FOR_AUTOFILL_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_IMPORTANT_FOR_AUTOFILL_MASK, int32_t)
 
-inline jint ADView_get_PFLAG3_TEMPORARY_DETACH(void);
+inline int32_t ADView_get_PFLAG3_TEMPORARY_DETACH(void);
 #define ADView_PFLAG3_TEMPORARY_DETACH 33554432
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_TEMPORARY_DETACH, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_TEMPORARY_DETACH, int32_t)
 
-inline jint ADView_get_PFLAG3_NOTIFY_AUTOFILL_ENTER_ON_LAYOUT(void);
+inline int32_t ADView_get_PFLAG3_NOTIFY_AUTOFILL_ENTER_ON_LAYOUT(void);
 #define ADView_PFLAG3_NOTIFY_AUTOFILL_ENTER_ON_LAYOUT 134217728
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_NOTIFY_AUTOFILL_ENTER_ON_LAYOUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PFLAG3_NOTIFY_AUTOFILL_ENTER_ON_LAYOUT, int32_t)
 
-inline jint ADView_get_OVER_SCROLL_ALWAYS(void);
+inline int32_t ADView_get_OVER_SCROLL_ALWAYS(void);
 #define ADView_OVER_SCROLL_ALWAYS 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, OVER_SCROLL_ALWAYS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, OVER_SCROLL_ALWAYS, int32_t)
 
-inline jint ADView_get_OVER_SCROLL_IF_CONTENT_SCROLLS(void);
+inline int32_t ADView_get_OVER_SCROLL_IF_CONTENT_SCROLLS(void);
 #define ADView_OVER_SCROLL_IF_CONTENT_SCROLLS 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, OVER_SCROLL_IF_CONTENT_SCROLLS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, OVER_SCROLL_IF_CONTENT_SCROLLS, int32_t)
 
-inline jint ADView_get_OVER_SCROLL_NEVER(void);
+inline int32_t ADView_get_OVER_SCROLL_NEVER(void);
 #define ADView_OVER_SCROLL_NEVER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, OVER_SCROLL_NEVER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, OVER_SCROLL_NEVER, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_VISIBLE(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_VISIBLE(void);
 #define ADView_SYSTEM_UI_FLAG_VISIBLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_VISIBLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_VISIBLE, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_LOW_PROFILE(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_LOW_PROFILE(void);
 #define ADView_SYSTEM_UI_FLAG_LOW_PROFILE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LOW_PROFILE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LOW_PROFILE, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_HIDE_NAVIGATION(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_HIDE_NAVIGATION(void);
 #define ADView_SYSTEM_UI_FLAG_HIDE_NAVIGATION 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_HIDE_NAVIGATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_HIDE_NAVIGATION, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_FULLSCREEN(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_FULLSCREEN(void);
 #define ADView_SYSTEM_UI_FLAG_FULLSCREEN 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_FULLSCREEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_FULLSCREEN, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_LAYOUT_STABLE(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_LAYOUT_STABLE(void);
 #define ADView_SYSTEM_UI_FLAG_LAYOUT_STABLE 256
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LAYOUT_STABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LAYOUT_STABLE, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION(void);
 #define ADView_SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN(void);
 #define ADView_SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN 1024
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_IMMERSIVE(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_IMMERSIVE(void);
 #define ADView_SYSTEM_UI_FLAG_IMMERSIVE 2048
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_IMMERSIVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_IMMERSIVE, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_IMMERSIVE_STICKY(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_IMMERSIVE_STICKY(void);
 #define ADView_SYSTEM_UI_FLAG_IMMERSIVE_STICKY 4096
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_IMMERSIVE_STICKY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_IMMERSIVE_STICKY, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_LIGHT_STATUS_BAR(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_LIGHT_STATUS_BAR(void);
 #define ADView_SYSTEM_UI_FLAG_LIGHT_STATUS_BAR 8192
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LIGHT_STATUS_BAR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LIGHT_STATUS_BAR, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR(void);
+inline int32_t ADView_get_SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR(void);
 #define ADView_SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR, int32_t)
 
-inline jint ADView_get_STATUS_BAR_HIDDEN(void);
+inline int32_t ADView_get_STATUS_BAR_HIDDEN(void);
 #define ADView_STATUS_BAR_HIDDEN 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_HIDDEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_HIDDEN, int32_t)
 
-inline jint ADView_get_STATUS_BAR_VISIBLE(void);
+inline int32_t ADView_get_STATUS_BAR_VISIBLE(void);
 #define ADView_STATUS_BAR_VISIBLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_VISIBLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_VISIBLE, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_EXPAND(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_EXPAND(void);
 #define ADView_STATUS_BAR_DISABLE_EXPAND 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_EXPAND, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_EXPAND, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_NOTIFICATION_ICONS(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_NOTIFICATION_ICONS(void);
 #define ADView_STATUS_BAR_DISABLE_NOTIFICATION_ICONS 131072
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_NOTIFICATION_ICONS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_NOTIFICATION_ICONS, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_NOTIFICATION_ALERTS(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_NOTIFICATION_ALERTS(void);
 #define ADView_STATUS_BAR_DISABLE_NOTIFICATION_ALERTS 262144
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_NOTIFICATION_ALERTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_NOTIFICATION_ALERTS, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_NOTIFICATION_TICKER(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_NOTIFICATION_TICKER(void);
 #define ADView_STATUS_BAR_DISABLE_NOTIFICATION_TICKER 524288
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_NOTIFICATION_TICKER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_NOTIFICATION_TICKER, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_SYSTEM_INFO(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_SYSTEM_INFO(void);
 #define ADView_STATUS_BAR_DISABLE_SYSTEM_INFO 1048576
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_SYSTEM_INFO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_SYSTEM_INFO, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_HOME(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_HOME(void);
 #define ADView_STATUS_BAR_DISABLE_HOME 2097152
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_HOME, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_HOME, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_BACK(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_BACK(void);
 #define ADView_STATUS_BAR_DISABLE_BACK 4194304
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_BACK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_BACK, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_CLOCK(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_CLOCK(void);
 #define ADView_STATUS_BAR_DISABLE_CLOCK 8388608
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_CLOCK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_CLOCK, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_RECENT(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_RECENT(void);
 #define ADView_STATUS_BAR_DISABLE_RECENT 16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_RECENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_RECENT, int32_t)
 
-inline jint ADView_get_STATUS_BAR_DISABLE_SEARCH(void);
+inline int32_t ADView_get_STATUS_BAR_DISABLE_SEARCH(void);
 #define ADView_STATUS_BAR_DISABLE_SEARCH 33554432
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_SEARCH, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_DISABLE_SEARCH, int32_t)
 
-inline jint ADView_get_STATUS_BAR_TRANSIENT(void);
+inline int32_t ADView_get_STATUS_BAR_TRANSIENT(void);
 #define ADView_STATUS_BAR_TRANSIENT 67108864
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_TRANSIENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_TRANSIENT, int32_t)
 
-inline jint ADView_get_NAVIGATION_BAR_TRANSIENT(void);
+inline int32_t ADView_get_NAVIGATION_BAR_TRANSIENT(void);
 #define ADView_NAVIGATION_BAR_TRANSIENT 134217728
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_TRANSIENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_TRANSIENT, int32_t)
 
-inline jint ADView_get_STATUS_BAR_UNHIDE(void);
+inline int32_t ADView_get_STATUS_BAR_UNHIDE(void);
 #define ADView_STATUS_BAR_UNHIDE 268435456
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_UNHIDE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_UNHIDE, int32_t)
 
-inline jint ADView_get_NAVIGATION_BAR_UNHIDE(void);
+inline int32_t ADView_get_NAVIGATION_BAR_UNHIDE(void);
 #define ADView_NAVIGATION_BAR_UNHIDE 536870912
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_UNHIDE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_UNHIDE, int32_t)
 
-inline jint ADView_get_STATUS_BAR_TRANSLUCENT(void);
+inline int32_t ADView_get_STATUS_BAR_TRANSLUCENT(void);
 #define ADView_STATUS_BAR_TRANSLUCENT 1073741824
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_TRANSLUCENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_TRANSLUCENT, int32_t)
 
-inline jint ADView_get_NAVIGATION_BAR_TRANSLUCENT(void);
-#define ADView_NAVIGATION_BAR_TRANSLUCENT ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_TRANSLUCENT, jint)
+inline int32_t ADView_get_NAVIGATION_BAR_TRANSLUCENT(void);
+#define ADView_NAVIGATION_BAR_TRANSLUCENT ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_TRANSLUCENT, int32_t)
 
-inline jint ADView_get_NAVIGATION_BAR_TRANSPARENT(void);
+inline int32_t ADView_get_NAVIGATION_BAR_TRANSPARENT(void);
 #define ADView_NAVIGATION_BAR_TRANSPARENT 32768
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_TRANSPARENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, NAVIGATION_BAR_TRANSPARENT, int32_t)
 
-inline jint ADView_get_STATUS_BAR_TRANSPARENT(void);
+inline int32_t ADView_get_STATUS_BAR_TRANSPARENT(void);
 #define ADView_STATUS_BAR_TRANSPARENT 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_TRANSPARENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, STATUS_BAR_TRANSPARENT, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_TRANSPARENT(void);
+inline int32_t ADView_get_SYSTEM_UI_TRANSPARENT(void);
 #define ADView_SYSTEM_UI_TRANSPARENT 32776
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_TRANSPARENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_TRANSPARENT, int32_t)
 
-inline jint ADView_get_PUBLIC_STATUS_BAR_VISIBILITY_MASK(void);
+inline int32_t ADView_get_PUBLIC_STATUS_BAR_VISIBILITY_MASK(void);
 #define ADView_PUBLIC_STATUS_BAR_VISIBILITY_MASK 16375
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, PUBLIC_STATUS_BAR_VISIBILITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, PUBLIC_STATUS_BAR_VISIBILITY_MASK, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_CLEARABLE_FLAGS(void);
+inline int32_t ADView_get_SYSTEM_UI_CLEARABLE_FLAGS(void);
 #define ADView_SYSTEM_UI_CLEARABLE_FLAGS 7
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_CLEARABLE_FLAGS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_CLEARABLE_FLAGS, int32_t)
 
-inline jint ADView_get_SYSTEM_UI_LAYOUT_FLAGS(void);
+inline int32_t ADView_get_SYSTEM_UI_LAYOUT_FLAGS(void);
 #define ADView_SYSTEM_UI_LAYOUT_FLAGS 1536
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_LAYOUT_FLAGS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SYSTEM_UI_LAYOUT_FLAGS, int32_t)
 
-inline jint ADView_get_FIND_VIEWS_WITH_TEXT(void);
+inline int32_t ADView_get_FIND_VIEWS_WITH_TEXT(void);
 #define ADView_FIND_VIEWS_WITH_TEXT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FIND_VIEWS_WITH_TEXT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FIND_VIEWS_WITH_TEXT, int32_t)
 
-inline jint ADView_get_FIND_VIEWS_WITH_CONTENT_DESCRIPTION(void);
+inline int32_t ADView_get_FIND_VIEWS_WITH_CONTENT_DESCRIPTION(void);
 #define ADView_FIND_VIEWS_WITH_CONTENT_DESCRIPTION 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FIND_VIEWS_WITH_CONTENT_DESCRIPTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FIND_VIEWS_WITH_CONTENT_DESCRIPTION, int32_t)
 
-inline jint ADView_get_FIND_VIEWS_WITH_ACCESSIBILITY_NODE_PROVIDERS(void);
+inline int32_t ADView_get_FIND_VIEWS_WITH_ACCESSIBILITY_NODE_PROVIDERS(void);
 #define ADView_FIND_VIEWS_WITH_ACCESSIBILITY_NODE_PROVIDERS 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, FIND_VIEWS_WITH_ACCESSIBILITY_NODE_PROVIDERS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, FIND_VIEWS_WITH_ACCESSIBILITY_NODE_PROVIDERS, int32_t)
 
-inline jint ADView_get_ACCESSIBILITY_CURSOR_POSITION_UNDEFINED(void);
+inline int32_t ADView_get_ACCESSIBILITY_CURSOR_POSITION_UNDEFINED(void);
 #define ADView_ACCESSIBILITY_CURSOR_POSITION_UNDEFINED -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_CURSOR_POSITION_UNDEFINED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, ACCESSIBILITY_CURSOR_POSITION_UNDEFINED, int32_t)
 
-inline jint ADView_get_SCREEN_STATE_OFF(void);
+inline int32_t ADView_get_SCREEN_STATE_OFF(void);
 #define ADView_SCREEN_STATE_OFF 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCREEN_STATE_OFF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCREEN_STATE_OFF, int32_t)
 
-inline jint ADView_get_SCREEN_STATE_ON(void);
+inline int32_t ADView_get_SCREEN_STATE_ON(void);
 #define ADView_SCREEN_STATE_ON 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCREEN_STATE_ON, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCREEN_STATE_ON, int32_t)
 
-inline jint ADView_get_SCROLL_AXIS_NONE(void);
+inline int32_t ADView_get_SCROLL_AXIS_NONE(void);
 #define ADView_SCROLL_AXIS_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_AXIS_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_AXIS_NONE, int32_t)
 
-inline jint ADView_get_SCROLL_AXIS_HORIZONTAL(void);
+inline int32_t ADView_get_SCROLL_AXIS_HORIZONTAL(void);
 #define ADView_SCROLL_AXIS_HORIZONTAL 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_AXIS_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_AXIS_HORIZONTAL, int32_t)
 
-inline jint ADView_get_SCROLL_AXIS_VERTICAL(void);
+inline int32_t ADView_get_SCROLL_AXIS_VERTICAL(void);
 #define ADView_SCROLL_AXIS_VERTICAL 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_AXIS_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLL_AXIS_VERTICAL, int32_t)
 
-inline jint ADView_get_DRAG_FLAG_GLOBAL(void);
+inline int32_t ADView_get_DRAG_FLAG_GLOBAL(void);
 #define ADView_DRAG_FLAG_GLOBAL 256
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL, int32_t)
 
-inline jint ADView_get_DRAG_FLAG_GLOBAL_URI_READ(void);
+inline int32_t ADView_get_DRAG_FLAG_GLOBAL_URI_READ(void);
 #define ADView_DRAG_FLAG_GLOBAL_URI_READ 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_URI_READ, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_URI_READ, int32_t)
 
-inline jint ADView_get_DRAG_FLAG_GLOBAL_URI_WRITE(void);
+inline int32_t ADView_get_DRAG_FLAG_GLOBAL_URI_WRITE(void);
 #define ADView_DRAG_FLAG_GLOBAL_URI_WRITE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_URI_WRITE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_URI_WRITE, int32_t)
 
-inline jint ADView_get_DRAG_FLAG_GLOBAL_PERSISTABLE_URI_PERMISSION(void);
+inline int32_t ADView_get_DRAG_FLAG_GLOBAL_PERSISTABLE_URI_PERMISSION(void);
 #define ADView_DRAG_FLAG_GLOBAL_PERSISTABLE_URI_PERMISSION 64
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_PERSISTABLE_URI_PERMISSION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_PERSISTABLE_URI_PERMISSION, int32_t)
 
-inline jint ADView_get_DRAG_FLAG_GLOBAL_PREFIX_URI_PERMISSION(void);
+inline int32_t ADView_get_DRAG_FLAG_GLOBAL_PREFIX_URI_PERMISSION(void);
 #define ADView_DRAG_FLAG_GLOBAL_PREFIX_URI_PERMISSION 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_PREFIX_URI_PERMISSION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_GLOBAL_PREFIX_URI_PERMISSION, int32_t)
 
-inline jint ADView_get_DRAG_FLAG_OPAQUE(void);
+inline int32_t ADView_get_DRAG_FLAG_OPAQUE(void);
 #define ADView_DRAG_FLAG_OPAQUE 512
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_OPAQUE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, DRAG_FLAG_OPAQUE, int32_t)
 
-inline jint ADView_get_SCROLLBAR_POSITION_DEFAULT(void);
+inline int32_t ADView_get_SCROLLBAR_POSITION_DEFAULT(void);
 #define ADView_SCROLLBAR_POSITION_DEFAULT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBAR_POSITION_DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBAR_POSITION_DEFAULT, int32_t)
 
-inline jint ADView_get_SCROLLBAR_POSITION_LEFT(void);
+inline int32_t ADView_get_SCROLLBAR_POSITION_LEFT(void);
 #define ADView_SCROLLBAR_POSITION_LEFT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBAR_POSITION_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBAR_POSITION_LEFT, int32_t)
 
-inline jint ADView_get_SCROLLBAR_POSITION_RIGHT(void);
+inline int32_t ADView_get_SCROLLBAR_POSITION_RIGHT(void);
 #define ADView_SCROLLBAR_POSITION_RIGHT 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBAR_POSITION_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, SCROLLBAR_POSITION_RIGHT, int32_t)
 
-inline jint ADView_get_LAYER_TYPE_NONE(void);
+inline int32_t ADView_get_LAYER_TYPE_NONE(void);
 #define ADView_LAYER_TYPE_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYER_TYPE_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYER_TYPE_NONE, int32_t)
 
-inline jint ADView_get_LAYER_TYPE_SOFTWARE(void);
+inline int32_t ADView_get_LAYER_TYPE_SOFTWARE(void);
 #define ADView_LAYER_TYPE_SOFTWARE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYER_TYPE_SOFTWARE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYER_TYPE_SOFTWARE, int32_t)
 
-inline jint ADView_get_LAYER_TYPE_HARDWARE(void);
+inline int32_t ADView_get_LAYER_TYPE_HARDWARE(void);
 #define ADView_LAYER_TYPE_HARDWARE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYER_TYPE_HARDWARE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView, LAYER_TYPE_HARDWARE, int32_t)
 
-FOUNDATION_EXPORT jboolean ADView_isLayoutModeOpticalWithId_(id o);
+FOUNDATION_EXPORT bool ADView_isLayoutModeOpticalWithId_(id o);
 
 FOUNDATION_EXPORT IOSIntArray *ADView_mergeDrawableStatesWithIntArray_withIntArray_(IOSIntArray *baseState, IOSIntArray *additionalState);
 
-FOUNDATION_EXPORT jint ADView_combineMeasuredStatesWithInt_withInt_(jint curState, jint newState);
+FOUNDATION_EXPORT int32_t ADView_combineMeasuredStatesWithInt_withInt_(int32_t curState, int32_t newState);
 
-FOUNDATION_EXPORT jint ADView_resolveSizeWithInt_withInt_(jint size, jint measureSpec);
+FOUNDATION_EXPORT int32_t ADView_resolveSizeWithInt_withInt_(int32_t size, int32_t measureSpec);
 
-FOUNDATION_EXPORT jint ADView_resolveSizeAndStateWithInt_withInt_withInt_(jint size, jint measureSpec, jint childMeasuredState);
+FOUNDATION_EXPORT int32_t ADView_resolveSizeAndStateWithInt_withInt_withInt_(int32_t size, int32_t measureSpec, int32_t childMeasuredState);
 
-FOUNDATION_EXPORT jint ADView_getDefaultSizeWithInt_withInt_(jint size, jint measureSpec);
+FOUNDATION_EXPORT int32_t ADView_getDefaultSizeWithInt_withInt_(int32_t size, int32_t measureSpec);
 
 FOUNDATION_EXPORT void ADView_init(ADView *self);
 
@@ -1884,20 +1889,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView)
 
 @compatibility_alias RAndroidViewView ADView;
 
+
 #endif
 
 #if !defined (ADView_OnScrollChangeListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnScrollChangeListener))
 #define ADView_OnScrollChangeListener_
 
 @class ADView;
+@class JavaLangInteger;
 
 @protocol ADView_OnScrollChangeListener < JavaObject >
 
 - (void)onScrollChangeWithADView:(ADView *)v
-                         withInt:(jint)scrollX
-                         withInt:(jint)scrollY
-                         withInt:(jint)oldScrollX
-                         withInt:(jint)oldScrollY;
+                         withInt:(int32_t)scrollX
+                         withInt:(int32_t)scrollY
+                         withInt:(int32_t)oldScrollX
+                         withInt:(int32_t)oldScrollY;
 
 @end
 
@@ -1905,24 +1912,26 @@ J2OBJC_EMPTY_STATIC_INIT(ADView_OnScrollChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnScrollChangeListener)
 
+
 #endif
 
 #if !defined (ADView_OnLayoutChangeListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnLayoutChangeListener))
 #define ADView_OnLayoutChangeListener_
 
 @class ADView;
+@class JavaLangInteger;
 
 @protocol ADView_OnLayoutChangeListener < JavaObject >
 
 - (void)onLayoutChangeWithADView:(ADView *)v
-                         withInt:(jint)left
-                         withInt:(jint)top
-                         withInt:(jint)right
-                         withInt:(jint)bottom
-                         withInt:(jint)oldLeft
-                         withInt:(jint)oldTop
-                         withInt:(jint)oldRight
-                         withInt:(jint)oldBottom;
+                         withInt:(int32_t)left
+                         withInt:(int32_t)top
+                         withInt:(int32_t)right
+                         withInt:(int32_t)bottom
+                         withInt:(int32_t)oldLeft
+                         withInt:(int32_t)oldTop
+                         withInt:(int32_t)oldRight
+                         withInt:(int32_t)oldBottom;
 
 @end
 
@@ -1930,10 +1939,14 @@ J2OBJC_EMPTY_STATIC_INIT(ADView_OnLayoutChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnLayoutChangeListener)
 
+
 #endif
 
 #if !defined (ADView_MeasureSpec_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_MeasureSpec))
 #define ADView_MeasureSpec_
+
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADView_MeasureSpec : NSObject
 
@@ -1941,38 +1954,38 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnLayoutChangeListener)
 
 - (instancetype)init;
 
-+ (jint)getModeWithInt:(jint)measureSpec;
++ (int32_t)getModeWithInt:(int32_t)measureSpec;
 
-+ (jint)getSizeWithInt:(jint)measureSpec;
++ (int32_t)getSizeWithInt:(int32_t)measureSpec;
 
-+ (jint)makeMeasureSpecWithInt:(jint)size
-                       withInt:(jint)mode;
++ (int32_t)makeMeasureSpecWithInt:(int32_t)size
+                          withInt:(int32_t)mode;
 
-+ (jint)makeSafeMeasureSpecWithInt:(jint)size
-                           withInt:(jint)mode;
++ (int32_t)makeSafeMeasureSpecWithInt:(int32_t)size
+                              withInt:(int32_t)mode;
 
-+ (NSString *)toStringWithInt:(jint)measureSpec;
++ (NSString *)toStringWithInt:(int32_t)measureSpec;
 
 #pragma mark Package-Private
 
-+ (jint)adjustWithInt:(jint)measureSpec
-              withInt:(jint)delta;
++ (int32_t)adjustWithInt:(int32_t)measureSpec
+                 withInt:(int32_t)delta;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_MeasureSpec)
 
-inline jint ADView_MeasureSpec_get_UNSPECIFIED(void);
+inline int32_t ADView_MeasureSpec_get_UNSPECIFIED(void);
 #define ADView_MeasureSpec_UNSPECIFIED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MeasureSpec, UNSPECIFIED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_MeasureSpec, UNSPECIFIED, int32_t)
 
-inline jint ADView_MeasureSpec_get_EXACTLY(void);
+inline int32_t ADView_MeasureSpec_get_EXACTLY(void);
 #define ADView_MeasureSpec_EXACTLY 1073741824
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MeasureSpec, EXACTLY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_MeasureSpec, EXACTLY, int32_t)
 
-inline jint ADView_MeasureSpec_get_AT_MOST(void);
-#define ADView_MeasureSpec_AT_MOST ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MeasureSpec, AT_MOST, jint)
+inline int32_t ADView_MeasureSpec_get_AT_MOST(void);
+#define ADView_MeasureSpec_AT_MOST ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_MeasureSpec, AT_MOST, int32_t)
 
 FOUNDATION_EXPORT void ADView_MeasureSpec_init(ADView_MeasureSpec *self);
 
@@ -1980,19 +1993,20 @@ FOUNDATION_EXPORT ADView_MeasureSpec *new_ADView_MeasureSpec_init(void) NS_RETUR
 
 FOUNDATION_EXPORT ADView_MeasureSpec *create_ADView_MeasureSpec_init(void);
 
-FOUNDATION_EXPORT jint ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(jint size, jint mode);
+FOUNDATION_EXPORT int32_t ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(int32_t size, int32_t mode);
 
-FOUNDATION_EXPORT jint ADView_MeasureSpec_makeSafeMeasureSpecWithInt_withInt_(jint size, jint mode);
+FOUNDATION_EXPORT int32_t ADView_MeasureSpec_makeSafeMeasureSpecWithInt_withInt_(int32_t size, int32_t mode);
 
-FOUNDATION_EXPORT jint ADView_MeasureSpec_getModeWithInt_(jint measureSpec);
+FOUNDATION_EXPORT int32_t ADView_MeasureSpec_getModeWithInt_(int32_t measureSpec);
 
-FOUNDATION_EXPORT jint ADView_MeasureSpec_getSizeWithInt_(jint measureSpec);
+FOUNDATION_EXPORT int32_t ADView_MeasureSpec_getSizeWithInt_(int32_t measureSpec);
 
-FOUNDATION_EXPORT jint ADView_MeasureSpec_adjustWithInt_withInt_(jint measureSpec, jint delta);
+FOUNDATION_EXPORT int32_t ADView_MeasureSpec_adjustWithInt_withInt_(int32_t measureSpec, int32_t delta);
 
-FOUNDATION_EXPORT NSString *ADView_MeasureSpec_toStringWithInt_(jint measureSpec);
+FOUNDATION_EXPORT NSString *ADView_MeasureSpec_toStringWithInt_(int32_t measureSpec);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_MeasureSpec)
+
 
 #endif
 
@@ -2001,18 +2015,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_MeasureSpec)
 
 @class ADKeyEvent;
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @protocol ADView_OnKeyListener < JavaObject >
 
-- (jboolean)onKeyWithADView:(ADView *)v
-                    withInt:(jint)keyCode
-             withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onKeyWithADView:(ADView *)v
+                withInt:(int32_t)keyCode
+         withADKeyEvent:(ADKeyEvent *)event;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_OnKeyListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnKeyListener)
+
 
 #endif
 
@@ -2021,17 +2038,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnKeyListener)
 
 @class ADMotionEvent;
 @class ADView;
+@class JavaLangBoolean;
 
 @protocol ADView_OnTouchListener < JavaObject >
 
-- (jboolean)onTouchWithADView:(ADView *)v
-            withADMotionEvent:(ADMotionEvent *)event;
+- (bool)onTouchWithADView:(ADView *)v
+        withADMotionEvent:(ADMotionEvent *)event;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_OnTouchListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnTouchListener)
+
 
 #endif
 
@@ -2040,11 +2059,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnTouchListener)
 
 @class ADMotionEvent;
 @class ADView;
+@class JavaLangBoolean;
 
 @protocol ADView_OnHoverListener < JavaObject >
 
-- (jboolean)onHoverWithADView:(ADView *)v
-            withADMotionEvent:(ADMotionEvent *)event;
+- (bool)onHoverWithADView:(ADView *)v
+        withADMotionEvent:(ADMotionEvent *)event;
 
 @end
 
@@ -2052,22 +2072,25 @@ J2OBJC_EMPTY_STATIC_INIT(ADView_OnHoverListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnHoverListener)
 
+
 #endif
 
 #if !defined (ADView_OnLongClickListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnLongClickListener))
 #define ADView_OnLongClickListener_
 
 @class ADView;
+@class JavaLangBoolean;
 
 @protocol ADView_OnLongClickListener < JavaObject >
 
-- (jboolean)onLongClickWithADView:(ADView *)v;
+- (bool)onLongClickWithADView:(ADView *)v;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_OnLongClickListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnLongClickListener)
+
 
 #endif
 
@@ -2076,11 +2099,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnLongClickListener)
 
 @class ADView;
 @class ADView_DragEvent;
+@class JavaLangBoolean;
 
 @protocol ADView_OnDragListener < JavaObject >
 
-- (jboolean)onDragWithADView:(ADView *)v
-        withADView_DragEvent:(ADView_DragEvent *)event;
+- (bool)onDragWithADView:(ADView *)v
+    withADView_DragEvent:(ADView_DragEvent *)event;
 
 @end
 
@@ -2088,23 +2112,26 @@ J2OBJC_EMPTY_STATIC_INIT(ADView_OnDragListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnDragListener)
 
+
 #endif
 
 #if !defined (ADView_OnFocusChangeListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnFocusChangeListener))
 #define ADView_OnFocusChangeListener_
 
 @class ADView;
+@class JavaLangBoolean;
 
 @protocol ADView_OnFocusChangeListener < JavaObject >
 
 - (void)onFocusChangeWithADView:(ADView *)v
-                    withBoolean:(jboolean)hasFocus;
+                    withBoolean:(bool)hasFocus;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_OnFocusChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnFocusChangeListener)
+
 
 #endif
 
@@ -2123,22 +2150,25 @@ J2OBJC_EMPTY_STATIC_INIT(ADView_OnClickListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnClickListener)
 
+
 #endif
 
 #if !defined (ADView_OnContextClickListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnContextClickListener))
 #define ADView_OnContextClickListener_
 
 @class ADView;
+@class JavaLangBoolean;
 
 @protocol ADView_OnContextClickListener < JavaObject >
 
-- (jboolean)onContextClickWithADView:(ADView *)v;
+- (bool)onContextClickWithADView:(ADView *)v;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_OnContextClickListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnContextClickListener)
+
 
 #endif
 
@@ -2159,16 +2189,19 @@ J2OBJC_EMPTY_STATIC_INIT(ADView_OnAttachStateChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_OnAttachStateChangeListener)
 
+
 #endif
 
 #if !defined (ADView_ThreadedRenderer_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_ThreadedRenderer))
 #define ADView_ThreadedRenderer_
 
+@class JavaLangBoolean;
+
 @interface ADView_ThreadedRenderer : NSObject
 
 #pragma mark Public
 
-+ (jboolean)isAvailable;
++ (bool)isAvailable;
 
 #pragma mark Package-Private
 
@@ -2184,9 +2217,10 @@ FOUNDATION_EXPORT ADView_ThreadedRenderer *new_ADView_ThreadedRenderer_init(void
 
 FOUNDATION_EXPORT ADView_ThreadedRenderer *create_ADView_ThreadedRenderer_init(void);
 
-FOUNDATION_EXPORT jboolean ADView_ThreadedRenderer_isAvailable(void);
+FOUNDATION_EXPORT bool ADView_ThreadedRenderer_isAvailable(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadedRenderer)
+
 
 #endif
 
@@ -2198,6 +2232,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadedRenderer)
 @class ADView;
 @class ADViewTreeObserver;
 @class ADView_ViewRootImpl;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilList;
 
 @interface ADView_AttachInfo : NSObject {
@@ -2206,12 +2242,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadedRenderer)
   id<JavaUtilList> mScrollContainers_;
   ADViewTreeObserver *mTreeObserver_;
   ADView *mRootView_;
-  jboolean mHardwareAccelerationRequested_;
+  bool mHardwareAccelerationRequested_;
   ADView_ViewRootImpl *mViewRootImpl_;
-  jint mWindowVisibility_;
+  int32_t mWindowVisibility_;
   ADRect *mTmpInvalRect_;
   id mViewRequestingLayout_;
-  jboolean mKeepScreenOn_;
+  bool mKeepScreenOn_;
 }
 
 #pragma mark Public
@@ -2237,6 +2273,7 @@ FOUNDATION_EXPORT ADView_AttachInfo *new_ADView_AttachInfo_init(void) NS_RETURNS
 FOUNDATION_EXPORT ADView_AttachInfo *create_ADView_AttachInfo_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_AttachInfo)
+
 
 #endif
 
@@ -2277,11 +2314,13 @@ FOUNDATION_EXPORT ADView_ThreadLocal *create_ADView_ThreadLocal_initWithADView_(
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadLocal)
 
+
 #endif
 
 #if !defined (ADView_TextUtils_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_TextUtils))
 #define ADView_TextUtils_
 
+@class JavaLangInteger;
 @class JavaUtilLocale;
 
 @interface ADView_TextUtils : NSObject
@@ -2290,7 +2329,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadLocal)
 
 - (instancetype)init;
 
-+ (jint)getLayoutDirectionFromLocaleWithJavaUtilLocale:(JavaUtilLocale *)l;
++ (int32_t)getLayoutDirectionFromLocaleWithJavaUtilLocale:(JavaUtilLocale *)l;
 
 @end
 
@@ -2302,9 +2341,10 @@ FOUNDATION_EXPORT ADView_TextUtils *new_ADView_TextUtils_init(void) NS_RETURNS_R
 
 FOUNDATION_EXPORT ADView_TextUtils *create_ADView_TextUtils_init(void);
 
-FOUNDATION_EXPORT jint ADView_TextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale *l);
+FOUNDATION_EXPORT int32_t ADView_TextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale *l);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_TextUtils)
+
 
 #endif
 
@@ -2313,6 +2353,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_TextUtils)
 
 @class ADLayoutTransition;
 @class ADView;
+@class JavaLangBoolean;
 
 @interface ADView_ViewRootImpl : NSObject
 
@@ -2324,9 +2365,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_TextUtils)
 
 - (instancetype)initWithADView:(ADView *)outer$;
 
-- (jboolean)isInLayout;
+- (bool)isInLayout;
 
-- (jboolean)requestLayoutDuringLayoutWithADView:(ADView *)view;
+- (bool)requestLayoutDuringLayoutWithADView:(ADView *)view;
 
 // Disallowed inherited constructors, do not use.
 
@@ -2343,6 +2384,7 @@ FOUNDATION_EXPORT ADView_ViewRootImpl *new_ADView_ViewRootImpl_initWithADView_(A
 FOUNDATION_EXPORT ADView_ViewRootImpl *create_ADView_ViewRootImpl_initWithADView_(ADView *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_ViewRootImpl)
+
 
 #endif
 
@@ -2389,10 +2431,13 @@ FOUNDATION_EXPORT ADView_ListenerInfo *create_ADView_ListenerInfo_initWithADView
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_ListenerInfo)
 
+
 #endif
 
 #if !defined (ADView_AccessibilityNodeInfo_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_AccessibilityNodeInfo))
 #define ADView_AccessibilityNodeInfo_
+
+@class JavaLangInteger;
 
 @interface ADView_AccessibilityNodeInfo : NSObject
 
@@ -2402,15 +2447,15 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ListenerInfo)
 
 - (id)getSourceNodeId;
 
-+ (jint)getVirtualDescendantIdWithId:(id)sourceNodeId;
++ (int32_t)getVirtualDescendantIdWithId:(id)sourceNodeId;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_AccessibilityNodeInfo)
 
-inline jint ADView_AccessibilityNodeInfo_get_ACTION_ACCESSIBILITY_FOCUS(void);
+inline int32_t ADView_AccessibilityNodeInfo_get_ACTION_ACCESSIBILITY_FOCUS(void);
 #define ADView_AccessibilityNodeInfo_ACTION_ACCESSIBILITY_FOCUS 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_AccessibilityNodeInfo, ACTION_ACCESSIBILITY_FOCUS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_AccessibilityNodeInfo, ACTION_ACCESSIBILITY_FOCUS, int32_t)
 
 FOUNDATION_EXPORT void ADView_AccessibilityNodeInfo_init(ADView_AccessibilityNodeInfo *self);
 
@@ -2418,9 +2463,10 @@ FOUNDATION_EXPORT ADView_AccessibilityNodeInfo *new_ADView_AccessibilityNodeInfo
 
 FOUNDATION_EXPORT ADView_AccessibilityNodeInfo *create_ADView_AccessibilityNodeInfo_init(void);
 
-FOUNDATION_EXPORT jint ADView_AccessibilityNodeInfo_getVirtualDescendantIdWithId_(id sourceNodeId);
+FOUNDATION_EXPORT int32_t ADView_AccessibilityNodeInfo_getVirtualDescendantIdWithId_(id sourceNodeId);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_AccessibilityNodeInfo)
+
 
 #endif
 
@@ -2428,6 +2474,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_AccessibilityNodeInfo)
 #define ADView_AccessibilityNodeProvider_
 
 @class ADView;
+@class JavaLangInteger;
 
 @interface ADView_AccessibilityNodeProvider : NSObject
 
@@ -2435,8 +2482,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_AccessibilityNodeInfo)
 
 - (instancetype)initWithADView:(ADView *)outer$;
 
-- (void)performActionWithInt:(jint)virtualViewId
-                     withInt:(jint)actionAccessibilityFocus
+- (void)performActionWithInt:(int32_t)virtualViewId
+                     withInt:(int32_t)actionAccessibilityFocus
                       withId:(id)object;
 
 // Disallowed inherited constructors, do not use.
@@ -2454,6 +2501,7 @@ FOUNDATION_EXPORT ADView_AccessibilityNodeProvider *new_ADView_AccessibilityNode
 FOUNDATION_EXPORT ADView_AccessibilityNodeProvider *create_ADView_AccessibilityNodeProvider_initWithADView_(ADView *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_AccessibilityNodeProvider)
+
 
 #endif
 
@@ -2485,10 +2533,14 @@ FOUNDATION_EXPORT ADView_RoundScrollbarRenderer *create_ADView_RoundScrollbarRen
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_RoundScrollbarRenderer)
 
+
 #endif
 
 #if !defined (ADView_DragEvent_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_DragEvent))
 #define ADView_DragEvent_
+
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADView_DragEvent : NSObject
 
@@ -2496,49 +2548,49 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_RoundScrollbarRenderer)
 
 - (instancetype)init;
 
-- (jint)getAction;
+- (int32_t)getAction;
 
 - (NSString *)getClipData;
 
-- (jint)getX;
+- (int32_t)getX;
 
-- (jint)getY;
+- (int32_t)getY;
 
-- (void)setActionWithInt:(jint)action;
+- (void)setActionWithInt:(int32_t)action;
 
 - (void)setClipDataWithNSString:(NSString *)clipData;
 
-- (void)setXWithInt:(jint)x;
+- (void)setXWithInt:(int32_t)x;
 
-- (void)setYWithInt:(jint)y;
+- (void)setYWithInt:(int32_t)y;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_DragEvent)
 
-inline jint ADView_DragEvent_get_ACTION_DRAG_STARTED(void);
+inline int32_t ADView_DragEvent_get_ACTION_DRAG_STARTED(void);
 #define ADView_DragEvent_ACTION_DRAG_STARTED 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_STARTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_STARTED, int32_t)
 
-inline jint ADView_DragEvent_get_ACTION_DRAG_LOCATION(void);
+inline int32_t ADView_DragEvent_get_ACTION_DRAG_LOCATION(void);
 #define ADView_DragEvent_ACTION_DRAG_LOCATION 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_LOCATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_LOCATION, int32_t)
 
-inline jint ADView_DragEvent_get_ACTION_DROP(void);
+inline int32_t ADView_DragEvent_get_ACTION_DROP(void);
 #define ADView_DragEvent_ACTION_DROP 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DROP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DROP, int32_t)
 
-inline jint ADView_DragEvent_get_ACTION_DRAG_ENDED(void);
+inline int32_t ADView_DragEvent_get_ACTION_DRAG_ENDED(void);
 #define ADView_DragEvent_ACTION_DRAG_ENDED 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_ENDED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_ENDED, int32_t)
 
-inline jint ADView_DragEvent_get_ACTION_DRAG_ENTERED(void);
+inline int32_t ADView_DragEvent_get_ACTION_DRAG_ENTERED(void);
 #define ADView_DragEvent_ACTION_DRAG_ENTERED 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_ENTERED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_ENTERED, int32_t)
 
-inline jint ADView_DragEvent_get_ACTION_DRAG_EXITED(void);
+inline int32_t ADView_DragEvent_get_ACTION_DRAG_EXITED(void);
 #define ADView_DragEvent_ACTION_DRAG_EXITED 6
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_EXITED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_DragEvent, ACTION_DRAG_EXITED, int32_t)
 
 FOUNDATION_EXPORT void ADView_DragEvent_init(ADView_DragEvent *self);
 
@@ -2548,6 +2600,7 @@ FOUNDATION_EXPORT ADView_DragEvent *create_ADView_DragEvent_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_DragEvent)
 
+
 #endif
 
 #if !defined (ADView_TintInfo_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_TintInfo))
@@ -2555,10 +2608,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_DragEvent)
 
 @class ADColorStateList;
 @class ADView;
+@class JavaLangBoolean;
 
 @interface ADView_TintInfo : NSObject {
  @public
-  jboolean mHasTintList_;
+  bool mHasTintList_;
   ADColorStateList *mTintList_;
 }
 
@@ -2583,6 +2637,7 @@ FOUNDATION_EXPORT ADView_TintInfo *new_ADView_TintInfo_initWithADView_(ADView *o
 FOUNDATION_EXPORT ADView_TintInfo *create_ADView_TintInfo_initWithADView_(ADView *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_TintInfo)
+
 
 #endif
 

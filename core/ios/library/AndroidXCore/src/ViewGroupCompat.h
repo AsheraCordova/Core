@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\ViewGroupCompat.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewGroupCompat")
@@ -17,6 +18,7 @@
 #define ADXViewGroupCompat_
 
 @class ADViewGroup;
+@class JavaLangInteger;
 
 @interface ADXViewGroupCompat : NSObject
 
@@ -24,7 +26,7 @@
 
 - (instancetype)init;
 
-+ (jint)getLayoutModeWithADViewGroup:(ADViewGroup *)view;
++ (int32_t)getLayoutModeWithADViewGroup:(ADViewGroup *)view;
 
 @end
 
@@ -36,11 +38,12 @@ FOUNDATION_EXPORT ADXViewGroupCompat *new_ADXViewGroupCompat_init(void) NS_RETUR
 
 FOUNDATION_EXPORT ADXViewGroupCompat *create_ADXViewGroupCompat_init(void);
 
-FOUNDATION_EXPORT jint ADXViewGroupCompat_getLayoutModeWithADViewGroup_(ADViewGroup *view);
+FOUNDATION_EXPORT int32_t ADXViewGroupCompat_getLayoutModeWithADViewGroup_(ADViewGroup *view);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXViewGroupCompat)
 
 @compatibility_alias AndroidxCoreViewViewGroupCompat ADXViewGroupCompat;
+
 
 #endif
 

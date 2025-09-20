@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\ViewGroupCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "ViewGroup.h"
 #include "ViewGroupCompat.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADXViewGroupCompat
@@ -17,7 +29,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)getLayoutModeWithADViewGroup:(ADViewGroup *)view {
++ (int32_t)getLayoutModeWithADViewGroup:(ADViewGroup *)view {
   return ADXViewGroupCompat_getLayoutModeWithADViewGroup_(view);
 }
 
@@ -51,9 +63,11 @@ ADXViewGroupCompat *create_ADXViewGroupCompat_init() {
   J2OBJC_CREATE_IMPL(ADXViewGroupCompat, init)
 }
 
-jint ADXViewGroupCompat_getLayoutModeWithADViewGroup_(ADViewGroup *view) {
+int32_t ADXViewGroupCompat_getLayoutModeWithADViewGroup_(ADViewGroup *view) {
   ADXViewGroupCompat_initialize();
   return [((ADViewGroup *) nil_chk(view)) getLayoutDirection];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXViewGroupCompat)
+
+J2OBJC_NAME_MAPPING(ADXViewGroupCompat, "androidx.core.view", "ADX")

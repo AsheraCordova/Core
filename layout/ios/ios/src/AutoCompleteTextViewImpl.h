@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\AutoCompleteTextViewImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AutoCompleteTextViewImpl")
@@ -38,6 +39,9 @@
 @class ASWidgetAttribute;
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -62,13 +66,13 @@
 
 - (void)addForegroundIfNeeded;
 
-- (void)addOutsideTouchListenerWithBoolean:(jboolean)add;
+- (void)addOutsideTouchListenerWithBoolean:(bool)add;
 
 - (id)asNativeWidget;
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -76,11 +80,11 @@
 - (ADTextView *)createHintViewWithASIWidget:(id<ASIWidget>)hintContainerWidget;
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype;
+                      withInt:(int32_t)viewtype;
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType;
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType;
 
-- (id)createWrapperViewHolderNativeWithInt:(jint)viewType;
+- (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType;
 
 - (void)drawableStateChanged;
 
@@ -95,7 +99,7 @@
 
 - (id)getBackground;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getChildAttributeWithASIWidget:(id<ASIWidget>)w
                withASWidgetAttribute:(ASWidgetAttribute *)key;
@@ -110,21 +114,21 @@
 
 - (id)getIsEditing;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
 - (id)getMinimumFontSize;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getPlaceholder;
 
@@ -144,28 +148,28 @@
 - (id)invokeMethodEditTextWithNSString:(NSString *)methodName
                      withNSObjectArray:(IOSObjectArray *)args;
 
-- (jboolean)isFocused;
+- (bool)isFocused;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 - (id)nativeAddForeGroundWithASIWidget:(id<ASIWidget>)w;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value;
+- (void)nativeSetEnabledWithBoolean:(bool)value;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -229,7 +233,7 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)showDropDownWithId:(id)objValue;
 
@@ -277,6 +281,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl)
 
 @compatibility_alias ComAsheraLayoutAutoCompleteTextViewImpl ASAutoCompleteTextViewImpl;
 
+
 #endif
 
 #if !defined (ASAutoCompleteTextViewImpl_DrawableTintMode_) && (INCLUDE_ALL_AutoCompleteTextViewImpl || defined(INCLUDE_ASAutoCompleteTextViewImpl_DrawableTintMode))
@@ -312,6 +317,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_DrawableTintMode *new_ASAutoComplet
 FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_DrawableTintMode *create_ASAutoCompleteTextViewImpl_DrawableTintMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_DrawableTintMode)
+
 
 #endif
 
@@ -349,6 +355,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_Font *create_ASAutoCompleteTextView
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_Font)
 
+
 #endif
 
 #if !defined (ASAutoCompleteTextViewImpl_TextStyle_) && (INCLUDE_ALL_AutoCompleteTextViewImpl || defined(INCLUDE_ASAutoCompleteTextViewImpl_TextStyle))
@@ -384,6 +391,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_TextStyle *new_ASAutoCompleteTextVi
 FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_TextStyle *create_ASAutoCompleteTextViewImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_TextStyle)
+
 
 #endif
 
@@ -421,6 +429,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_Capitalize *create_ASAutoCompleteTe
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_Capitalize)
 
+
 #endif
 
 #if !defined (ASAutoCompleteTextViewImpl_Numeric_) && (INCLUDE_ALL_AutoCompleteTextViewImpl || defined(INCLUDE_ASAutoCompleteTextViewImpl_Numeric))
@@ -456,6 +465,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_Numeric *new_ASAutoCompleteTextView
 FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_Numeric *create_ASAutoCompleteTextViewImpl_Numeric_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_Numeric)
+
 
 #endif
 
@@ -493,6 +503,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_InputType *create_ASAutoCompleteTex
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputType)
 
+
 #endif
 
 #if !defined (ASAutoCompleteTextViewImpl_ImeOptions_) && (INCLUDE_ALL_AutoCompleteTextViewImpl || defined(INCLUDE_ASAutoCompleteTextViewImpl_ImeOptions))
@@ -528,6 +539,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_ImeOptions *new_ASAutoCompleteTextV
 FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_ImeOptions *create_ASAutoCompleteTextViewImpl_ImeOptions_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_ImeOptions)
+
 
 #endif
 
@@ -565,6 +577,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_IosBorderStyle *create_ASAutoComple
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_IosBorderStyle)
 
+
 #endif
 
 #if !defined (ASAutoCompleteTextViewImpl_InputView_) && (INCLUDE_ALL_AutoCompleteTextViewImpl || defined(INCLUDE_ASAutoCompleteTextViewImpl_InputView))
@@ -601,6 +614,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_InputView *create_ASAutoCompleteTex
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 
+
 #endif
 
 #if !defined (ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_) && (INCLUDE_ALL_AutoCompleteTextViewImpl || defined(INCLUDE_ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt))
@@ -620,6 +634,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -629,7 +647,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 
 - (instancetype)initWithASAutoCompleteTextViewImpl:(ASAutoCompleteTextViewImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)dismissDropDown;
 
@@ -640,13 +658,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -662,19 +680,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -697,7 +715,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -713,16 +731,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -739,6 +757,7 @@ FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt *new_ASAuto
 FOUNDATION_EXPORT ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt *create_ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_initWithASAutoCompleteTextViewImpl_(ASAutoCompleteTextViewImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
+
 
 #endif
 

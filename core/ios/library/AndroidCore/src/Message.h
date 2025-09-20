@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Message.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Message")
@@ -19,6 +20,10 @@
 @class ADBundle;
 @class ADHandler;
 @class ADMessenger;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
 @protocol JavaLangRunnable;
 
 /*!
@@ -38,19 +43,19 @@
   for message codes, so you do not need to worry about yours conflicting
   with other handlers.
    */
-  jint what_;
+  int32_t what_;
   /*!
    @brief arg1 and arg2 are lower-cost alternatives to using 
  <code>setData()</code> if you only need to store a
   few integer values.
    */
-  jint arg1_;
+  int32_t arg1_;
   /*!
    @brief arg1 and arg2 are lower-cost alternatives to using 
  <code>setData()</code> if you only need to store a
   few integer values.
    */
-  jint arg2_;
+  int32_t arg2_;
   /*!
    @brief An arbitrary object to send to the recipient.When using 
  <code>Messenger</code> to send the message across processes this can only
@@ -74,17 +79,17 @@
   only valid for messages posted by a <code>Messenger</code>; otherwise,
   it will be -1.
    */
-  jint sendingUid_;
+  int32_t sendingUid_;
   /*!
    @brief Optional field indicating the uid that caused this message to be enqueued.
    */
-  jint workSourceUid_;
-  jint flags_;
+  int32_t workSourceUid_;
+  int32_t flags_;
   /*!
    @brief The targeted delivery time of this message.The time-base is 
  <code>SystemClock.uptimeMillis</code>.
    */
-  jlong when_;
+  int64_t when_;
   ADBundle *data_;
   ADHandler *target_;
   id<JavaLangRunnable> callback_;
@@ -143,7 +148,7 @@
 /*!
  @brief Return the targeted delivery time of this message, in milliseconds.
  */
-- (jlong)getWhen;
+- (int64_t)getWhen;
 
 /*!
  @brief Returns true if the message is asynchronous, meaning that it is not
@@ -151,7 +156,7 @@
  @return True if the message is asynchronous.
  - seealso: #setAsynchronous(boolean)
  */
-- (jboolean)isAsynchronous;
+- (bool)isAsynchronous;
 
 /*!
  @brief Return a new Message instance from the global pool.Allows us to
@@ -174,7 +179,7 @@
  @return A Message object from the global pool.
  */
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what;
+                           withInt:(int32_t)what;
 
 /*!
  @brief Same as <code>obtain()</code>, but sets the values of the <em>target</em>, <em>what</em>,
@@ -186,9 +191,9 @@
  @return A Message object from the global pool.
  */
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what
-                           withInt:(jint)arg1
-                           withInt:(jint)arg2;
+                           withInt:(int32_t)what
+                           withInt:(int32_t)arg1
+                           withInt:(int32_t)arg2;
 
 /*!
  @brief Same as <code>obtain()</code>, but sets the values of the <em>target</em>, <em>what</em>,
@@ -201,9 +206,9 @@
  @return A Message object from the global pool.
  */
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what
-                           withInt:(jint)arg1
-                           withInt:(jint)arg2
+                           withInt:(int32_t)what
+                           withInt:(int32_t)arg1
+                           withInt:(int32_t)arg2
                             withId:(id)obj;
 
 /*!
@@ -215,7 +220,7 @@
  @return A Message object from the global pool.
  */
 + (ADMessage *)obtainWithADHandler:(ADHandler *)h
-                           withInt:(jint)what
+                           withInt:(int32_t)what
                             withId:(id)obj;
 
 /*!
@@ -286,7 +291,7 @@
  @param async True if the message is asynchronous.
  - seealso: #isAsynchronous()
  */
-- (void)setAsynchronousWithBoolean:(jboolean)async;
+- (void)setAsynchronousWithBoolean:(bool)async;
 
 /*!
  */
@@ -305,17 +310,17 @@
 /*!
  @brief Chainable setter for <code>what</code>
  */
-- (ADMessage *)setWhatWithInt:(jint)what;
+- (ADMessage *)setWhatWithInt:(int32_t)what;
 
 - (NSString *)description;
 
 /*!
  */
-+ (void)updateCheckRecycleWithInt:(jint)targetSdkVersion;
++ (void)updateCheckRecycleWithInt:(int32_t)targetSdkVersion;
 
 #pragma mark Package-Private
 
-- (jboolean)isInUse;
+- (bool)isInUse;
 
 - (void)markInUse;
 
@@ -325,7 +330,7 @@
  */
 - (void)recycleUnchecked;
 
-- (NSString *)toStringWithLong:(jlong)now;
+- (NSString *)toStringWithLong:(int64_t)now;
 
 @end
 
@@ -341,9 +346,9 @@ J2OBJC_FIELD_SETTER(ADMessage, next_, ADMessage *)
 /*!
  @brief Indicates that the uid is not set;
  */
-inline jint ADMessage_get_UID_NONE(void);
+inline int32_t ADMessage_get_UID_NONE(void);
 #define ADMessage_UID_NONE -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, UID_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, UID_NONE, int32_t)
 
 /*!
  @brief If set message is in use.
@@ -353,23 +358,23 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, UID_NONE, jint)
   applications are allowed to modify the contents of the message.
   It is an error to attempt to enqueue or recycle a message that is already in use.
  */
-inline jint ADMessage_get_FLAG_IN_USE(void);
+inline int32_t ADMessage_get_FLAG_IN_USE(void);
 #define ADMessage_FLAG_IN_USE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, FLAG_IN_USE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, FLAG_IN_USE, int32_t)
 
 /*!
  @brief If set message is asynchronous
  */
-inline jint ADMessage_get_FLAG_ASYNCHRONOUS(void);
+inline int32_t ADMessage_get_FLAG_ASYNCHRONOUS(void);
 #define ADMessage_FLAG_ASYNCHRONOUS 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, FLAG_ASYNCHRONOUS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, FLAG_ASYNCHRONOUS, int32_t)
 
 /*!
  @brief Flags to clear in the copyFrom method
  */
-inline jint ADMessage_get_FLAGS_TO_CLEAR_ON_COPY_FROM(void);
+inline int32_t ADMessage_get_FLAGS_TO_CLEAR_ON_COPY_FROM(void);
 #define ADMessage_FLAGS_TO_CLEAR_ON_COPY_FROM 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, FLAGS_TO_CLEAR_ON_COPY_FROM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessage, FLAGS_TO_CLEAR_ON_COPY_FROM, int32_t)
 
 /*!
  */
@@ -386,15 +391,15 @@ FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_(ADHandler *h);
 
 FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withJavaLangRunnable_(ADHandler *h, id<JavaLangRunnable> callback);
 
-FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_(ADHandler *h, jint what);
+FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_(ADHandler *h, int32_t what);
 
-FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_withId_(ADHandler *h, jint what, id obj);
+FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_withId_(ADHandler *h, int32_t what, id obj);
 
-FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_(ADHandler *h, jint what, jint arg1, jint arg2);
+FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_(ADHandler *h, int32_t what, int32_t arg1, int32_t arg2);
 
-FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_withId_(ADHandler *h, jint what, jint arg1, jint arg2, id obj);
+FOUNDATION_EXPORT ADMessage *ADMessage_obtainWithADHandler_withInt_withInt_withInt_withId_(ADHandler *h, int32_t what, int32_t arg1, int32_t arg2, id obj);
 
-FOUNDATION_EXPORT void ADMessage_updateCheckRecycleWithInt_(jint targetSdkVersion);
+FOUNDATION_EXPORT void ADMessage_updateCheckRecycleWithInt_(int32_t targetSdkVersion);
 
 FOUNDATION_EXPORT void ADMessage_init(ADMessage *self);
 
@@ -405,6 +410,7 @@ FOUNDATION_EXPORT ADMessage *create_ADMessage_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADMessage)
 
 @compatibility_alias RAndroidOsMessage ADMessage;
+
 
 #endif
 

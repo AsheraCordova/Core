@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\SpinnerImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SpinnerImpl")
@@ -36,6 +37,9 @@
 @class ASLoopParam;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -61,7 +65,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -79,7 +83,7 @@
 
 - (id)getBackground;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getChildAttributeWithASIWidget:(id<ASIWidget>)w
                withASWidgetAttribute:(ASWidgetAttribute *)key;
@@ -92,7 +96,7 @@
 
 - (id)getIsEditing;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (id)getMinimumFontSize;
 
@@ -110,19 +114,19 @@
 
 - (void)invalidate;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value;
+- (void)nativeSetEnabledWithBoolean:(bool)value;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -182,13 +186,13 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)showErrorWithNSString:(NSString *)message;
 
 #pragma mark Protected
 
-- (void)addItemToParentWithInt:(jint)index
+- (void)addItemToParentWithInt:(int32_t)index
                   withNSString:(NSString *)id_
                withASLoopParam:(ASLoopParam *)loopParam;
 
@@ -233,6 +237,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl)
 
 @compatibility_alias ComAsheraLayoutSpinnerImpl ASSpinnerImpl;
 
+
 #endif
 
 #if !defined (ASSpinnerImpl_DrawableTintMode_) && (INCLUDE_ALL_SpinnerImpl || defined(INCLUDE_ASSpinnerImpl_DrawableTintMode))
@@ -268,6 +273,7 @@ FOUNDATION_EXPORT ASSpinnerImpl_DrawableTintMode *new_ASSpinnerImpl_DrawableTint
 FOUNDATION_EXPORT ASSpinnerImpl_DrawableTintMode *create_ASSpinnerImpl_DrawableTintMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_DrawableTintMode)
+
 
 #endif
 
@@ -305,6 +311,7 @@ FOUNDATION_EXPORT ASSpinnerImpl_Font *create_ASSpinnerImpl_Font_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_Font)
 
+
 #endif
 
 #if !defined (ASSpinnerImpl_TextStyle_) && (INCLUDE_ALL_SpinnerImpl || defined(INCLUDE_ASSpinnerImpl_TextStyle))
@@ -341,6 +348,7 @@ FOUNDATION_EXPORT ASSpinnerImpl_TextStyle *create_ASSpinnerImpl_TextStyle_init(v
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 
+
 #endif
 
 #if !defined (ASSpinnerImpl_SpinnerExt_) && (INCLUDE_ALL_SpinnerImpl || defined(INCLUDE_ASSpinnerImpl_SpinnerExt))
@@ -364,6 +372,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -382,9 +393,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
@@ -396,19 +407,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -418,9 +429,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setMaxHeightWithInt:(jint)height;
+- (void)setMaxHeightWithInt:(int32_t)height;
 
-- (void)setMaxWidthWithInt:(jint)width;
+- (void)setMaxWidthWithInt:(int32_t)width;
 
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
@@ -435,7 +446,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -451,16 +462,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -477,6 +488,7 @@ FOUNDATION_EXPORT ASSpinnerImpl_SpinnerExt *new_ASSpinnerImpl_SpinnerExt_initWit
 FOUNDATION_EXPORT ASSpinnerImpl_SpinnerExt *create_ASSpinnerImpl_SpinnerExt_initWithASSpinnerImpl_(ASSpinnerImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_SpinnerExt)
+
 
 #endif
 
@@ -501,6 +513,7 @@ FOUNDATION_EXPORT ASSpinnerImpl_AdapterView *create_ASSpinnerImpl_AdapterView_in
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView)
 
+
 #endif
 
 #if !defined (ASSpinnerImpl_AdapterView_OnItemSelectedListener_) && (INCLUDE_ALL_SpinnerImpl || defined(INCLUDE_ASSpinnerImpl_AdapterView_OnItemSelectedListener))
@@ -508,19 +521,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView)
 
 @class ADView;
 @class ASSpinnerImpl_AdapterView;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 @protocol ASSpinnerImpl_AdapterView_OnItemSelectedListener < JavaObject >
 
 - (void)onItemSelectedWithASSpinnerImpl_AdapterView:(ASSpinnerImpl_AdapterView *)parent
                                          withADView:(ADView *)view
-                                            withInt:(jint)position
-                                           withLong:(jlong)id_;
+                                            withInt:(int32_t)position
+                                           withLong:(int64_t)id_;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
+
 
 #endif
 
@@ -532,6 +548,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 #include "EventBusHandler.h"
 
 @class ASSpinnerImpl;
+@class NSString;
 
 @interface ASSpinnerImpl_PostMeasureHandler : ASEventBusHandler
 
@@ -559,6 +576,7 @@ FOUNDATION_EXPORT ASSpinnerImpl_PostMeasureHandler *new_ASSpinnerImpl_PostMeasur
 FOUNDATION_EXPORT ASSpinnerImpl_PostMeasureHandler *create_ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(ASSpinnerImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_PostMeasureHandler)
+
 
 #endif
 

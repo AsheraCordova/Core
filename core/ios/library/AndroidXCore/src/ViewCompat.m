@@ -3,10 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\ViewCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "View.h"
 #include "ViewCompat.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADXViewCompat
@@ -18,73 +32,73 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)getMeasuredWidthAndStateWithADView:(ADView *)view {
++ (int32_t)getMeasuredWidthAndStateWithADView:(ADView *)view {
   return ADXViewCompat_getMeasuredWidthAndStateWithADView_(view);
 }
 
-+ (jint)getMeasuredHeightAndStateWithADView:(ADView *)view {
++ (int32_t)getMeasuredHeightAndStateWithADView:(ADView *)view {
   return ADXViewCompat_getMeasuredHeightAndStateWithADView_(view);
 }
 
-+ (jint)getLayoutDirectionWithADView:(ADView *)view {
++ (int32_t)getLayoutDirectionWithADView:(ADView *)view {
   return ADXViewCompat_getLayoutDirectionWithADView_(view);
 }
 
-+ (jint)resolveSizeAndStateWithInt:(jint)size
-                           withInt:(jint)measureSpec
-                           withInt:(jint)childMeasuredState {
++ (int32_t)resolveSizeAndStateWithInt:(int32_t)size
+                              withInt:(int32_t)measureSpec
+                              withInt:(int32_t)childMeasuredState {
   return ADXViewCompat_resolveSizeAndStateWithInt_withInt_withInt_(size, measureSpec, childMeasuredState);
 }
 
-+ (jint)combineMeasuredStatesWithInt:(jint)curState
-                             withInt:(jint)newState {
++ (int32_t)combineMeasuredStatesWithInt:(int32_t)curState
+                                withInt:(int32_t)newState {
   return ADXViewCompat_combineMeasuredStatesWithInt_withInt_(curState, newState);
 }
 
-+ (jint)getMeasuredStateWithADView:(ADView *)child {
++ (int32_t)getMeasuredStateWithADView:(ADView *)child {
   return ADXViewCompat_getMeasuredStateWithADView_(child);
 }
 
-+ (jint)getPaddingStartWithADViewGroup:(ADViewGroup *)viewGroup {
++ (int32_t)getPaddingStartWithADViewGroup:(ADViewGroup *)viewGroup {
   return ADXViewCompat_getPaddingStartWithADViewGroup_(viewGroup);
 }
 
-+ (jint)getPaddingEndWithADViewGroup:(ADViewGroup *)viewGroup {
++ (int32_t)getPaddingEndWithADViewGroup:(ADViewGroup *)viewGroup {
   return ADXViewCompat_getPaddingEndWithADViewGroup_(viewGroup);
 }
 
 + (void)setLayoutDirectionWithADViewGroup:(ADViewGroup *)viewGroup
-                                  withInt:(jint)layoutDirection {
+                                  withInt:(int32_t)layoutDirection {
   ADXViewCompat_setLayoutDirectionWithADViewGroup_withInt_(viewGroup, layoutDirection);
 }
 
 + (void)setPaddingRelativeWithADView:(ADView *)view
-                             withInt:(jint)start
-                             withInt:(jint)top
-                             withInt:(jint)end
-                             withInt:(jint)bottom {
+                             withInt:(int32_t)start
+                             withInt:(int32_t)top
+                             withInt:(int32_t)end
+                             withInt:(int32_t)bottom {
   ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(view, start, top, end, bottom);
 }
 
-+ (jint)getPaddingStartWithADView:(ADView *)view {
++ (int32_t)getPaddingStartWithADView:(ADView *)view {
   return ADXViewCompat_getPaddingStartWithADView_(view);
 }
 
-+ (jint)getPaddingEndWithADView:(ADView *)view {
++ (int32_t)getPaddingEndWithADView:(ADView *)view {
   return ADXViewCompat_getPaddingEndWithADView_(view);
 }
 
 + (void)setXWithADView:(ADView *)child
-               withInt:(jint)x {
+               withInt:(int32_t)x {
   ADXViewCompat_setXWithADView_withInt_(child, x);
 }
 
 + (void)setYWithADView:(ADView *)child
-               withInt:(jint)y {
+               withInt:(int32_t)y {
   ADXViewCompat_setYWithADView_withInt_(child, y);
 }
 
-+ (jint)getMinimumHeightWithADView:(ADView *)view {
++ (int32_t)getMinimumHeightWithADView:(ADView *)view {
   return ADXViewCompat_getMinimumHeightWithADView_(view);
 }
 
@@ -92,16 +106,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADXViewCompat_jumpDrawablesToCurrentStateWithADView_(itemView);
 }
 
-+ (jboolean)getFitsSystemWindowsWithADView:(ADView *)view {
++ (bool)getFitsSystemWindowsWithADView:(ADView *)view {
   return ADXViewCompat_getFitsSystemWindowsWithADView_(view);
 }
 
 + (void)setElevationWithADView:(ADView *)child
-                     withFloat:(jfloat)mDrawerElevation {
+                     withFloat:(float)mDrawerElevation {
   ADXViewCompat_setElevationWithADView_withFloat_(child, mDrawerElevation);
 }
 
-+ (jfloat)getElevationWithADView:(ADView *)child {
++ (float)getElevationWithADView:(ADView *)child {
   return ADXViewCompat_getElevationWithADView_(child);
 }
 
@@ -114,16 +128,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADXViewCompat_getRootWindowInsetsWithId_(drawerLayout);
 }
 
-+ (jint)getMinimumWidthWithADView:(ADView *)view {
++ (int32_t)getMinimumWidthWithADView:(ADView *)view {
   return ADXViewCompat_getMinimumWidthWithADView_(view);
 }
 
-+ (jint)getImportantForAccessibilityWithADView:(ADView *)itemView {
++ (int32_t)getImportantForAccessibilityWithADView:(ADView *)itemView {
   return ADXViewCompat_getImportantForAccessibilityWithADView_(itemView);
 }
 
 + (void)setImportantForAccessibilityWithADView:(ADView *)itemView
-                                       withInt:(jint)importantForAccessibilityYes {
+                                       withInt:(int32_t)importantForAccessibilityYes {
   ADXViewCompat_setImportantForAccessibilityWithADView_withInt_(itemView, importantForAccessibilityYes);
 }
 
@@ -135,29 +149,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADXViewCompat_dispatchStartTemporaryDetachWithADView_(view);
 }
 
-+ (jboolean)hasTransientStateWithADView:(ADView *)view {
++ (bool)hasTransientStateWithADView:(ADView *)view {
   return ADXViewCompat_hasTransientStateWithADView_(view);
 }
 
-+ (jboolean)isLayoutDirectionResolvedWithADView:(ADView *)view {
++ (bool)isLayoutDirectionResolvedWithADView:(ADView *)view {
   return ADXViewCompat_isLayoutDirectionResolvedWithADView_(view);
 }
 
 + (void)offsetLeftAndRightWithADView:(ADView *)child
-                             withInt:(jint)dx {
+                             withInt:(int32_t)dx {
   ADXViewCompat_offsetLeftAndRightWithADView_withInt_(child, dx);
 }
 
 + (void)offsetTopAndBottomWithADView:(ADView *)child
-                             withInt:(jint)dy {
+                             withInt:(int32_t)dy {
   ADXViewCompat_offsetTopAndBottomWithADView_withInt_(child, dy);
 }
 
-+ (jboolean)isLaidOutWithADView:(ADView *)view {
++ (bool)isLaidOutWithADView:(ADView *)view {
   return ADXViewCompat_isLaidOutWithADView_(view);
 }
 
-+ (jboolean)isPaddingRelativeWithADView:(ADView *)view {
++ (bool)isPaddingRelativeWithADView:(ADView *)view {
   return ADXViewCompat_isPaddingRelativeWithADView_(view);
 }
 
@@ -275,77 +289,77 @@ ADXViewCompat *create_ADXViewCompat_init() {
   J2OBJC_CREATE_IMPL(ADXViewCompat, init)
 }
 
-jint ADXViewCompat_getMeasuredWidthAndStateWithADView_(ADView *view) {
+int32_t ADXViewCompat_getMeasuredWidthAndStateWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) getMeasuredWidth];
 }
 
-jint ADXViewCompat_getMeasuredHeightAndStateWithADView_(ADView *view) {
+int32_t ADXViewCompat_getMeasuredHeightAndStateWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) getMeasuredHeight];
 }
 
-jint ADXViewCompat_getLayoutDirectionWithADView_(ADView *view) {
+int32_t ADXViewCompat_getLayoutDirectionWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) getLayoutDirection];
 }
 
-jint ADXViewCompat_resolveSizeAndStateWithInt_withInt_withInt_(jint size, jint measureSpec, jint childMeasuredState) {
+int32_t ADXViewCompat_resolveSizeAndStateWithInt_withInt_withInt_(int32_t size, int32_t measureSpec, int32_t childMeasuredState) {
   ADXViewCompat_initialize();
   return ADView_resolveSizeAndStateWithInt_withInt_withInt_(size, measureSpec, childMeasuredState);
 }
 
-jint ADXViewCompat_combineMeasuredStatesWithInt_withInt_(jint curState, jint newState) {
+int32_t ADXViewCompat_combineMeasuredStatesWithInt_withInt_(int32_t curState, int32_t newState) {
   ADXViewCompat_initialize();
   return ADView_combineMeasuredStatesWithInt_withInt_(curState, newState);
 }
 
-jint ADXViewCompat_getMeasuredStateWithADView_(ADView *child) {
+int32_t ADXViewCompat_getMeasuredStateWithADView_(ADView *child) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(child)) getMeasuredState];
 }
 
-jint ADXViewCompat_getPaddingStartWithADViewGroup_(ADViewGroup *viewGroup) {
+int32_t ADXViewCompat_getPaddingStartWithADViewGroup_(ADViewGroup *viewGroup) {
   ADXViewCompat_initialize();
   return [((ADViewGroup *) nil_chk(viewGroup)) getPaddingStart];
 }
 
-jint ADXViewCompat_getPaddingEndWithADViewGroup_(ADViewGroup *viewGroup) {
+int32_t ADXViewCompat_getPaddingEndWithADViewGroup_(ADViewGroup *viewGroup) {
   ADXViewCompat_initialize();
   return [((ADViewGroup *) nil_chk(viewGroup)) getPaddingEnd];
 }
 
-void ADXViewCompat_setLayoutDirectionWithADViewGroup_withInt_(ADViewGroup *viewGroup, jint layoutDirection) {
+void ADXViewCompat_setLayoutDirectionWithADViewGroup_withInt_(ADViewGroup *viewGroup, int32_t layoutDirection) {
   ADXViewCompat_initialize();
   [((ADViewGroup *) nil_chk(viewGroup)) setLayoutDirectionWithInt:layoutDirection];
 }
 
-void ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(ADView *view, jint start, jint top, jint end, jint bottom) {
+void ADXViewCompat_setPaddingRelativeWithADView_withInt_withInt_withInt_withInt_(ADView *view, int32_t start, int32_t top, int32_t end, int32_t bottom) {
   ADXViewCompat_initialize();
   [((ADView *) nil_chk(view)) setPaddingRelativeWithInt:start withInt:top withInt:end withInt:bottom];
   
   ;
 }
 
-jint ADXViewCompat_getPaddingStartWithADView_(ADView *view) {
+int32_t ADXViewCompat_getPaddingStartWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) getPaddingStart];
 }
 
-jint ADXViewCompat_getPaddingEndWithADView_(ADView *view) {
+int32_t ADXViewCompat_getPaddingEndWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) getPaddingEnd];
 }
 
-void ADXViewCompat_setXWithADView_withInt_(ADView *child, jint x) {
+void ADXViewCompat_setXWithADView_withInt_(ADView *child, int32_t x) {
   ADXViewCompat_initialize();
 }
 
-void ADXViewCompat_setYWithADView_withInt_(ADView *child, jint y) {
+void ADXViewCompat_setYWithADView_withInt_(ADView *child, int32_t y) {
   ADXViewCompat_initialize();
 }
 
-jint ADXViewCompat_getMinimumHeightWithADView_(ADView *view) {
+int32_t ADXViewCompat_getMinimumHeightWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) getMinimumHeight];
 }
@@ -354,17 +368,17 @@ void ADXViewCompat_jumpDrawablesToCurrentStateWithADView_(ADView *itemView) {
   ADXViewCompat_initialize();
 }
 
-jboolean ADXViewCompat_getFitsSystemWindowsWithADView_(ADView *view) {
+bool ADXViewCompat_getFitsSystemWindowsWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return false;
 }
 
-void ADXViewCompat_setElevationWithADView_withFloat_(ADView *child, jfloat mDrawerElevation) {
+void ADXViewCompat_setElevationWithADView_withFloat_(ADView *child, float mDrawerElevation) {
   ADXViewCompat_initialize();
   [((ADView *) nil_chk(child)) setElevationWithFloat:mDrawerElevation];
 }
 
-jfloat ADXViewCompat_getElevationWithADView_(ADView *child) {
+float ADXViewCompat_getElevationWithADView_(ADView *child) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(child)) getElevation];
 }
@@ -378,17 +392,17 @@ id ADXViewCompat_getRootWindowInsetsWithId_(id drawerLayout) {
   return nil;
 }
 
-jint ADXViewCompat_getMinimumWidthWithADView_(ADView *view) {
+int32_t ADXViewCompat_getMinimumWidthWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) getMinimumWidth];
 }
 
-jint ADXViewCompat_getImportantForAccessibilityWithADView_(ADView *itemView) {
+int32_t ADXViewCompat_getImportantForAccessibilityWithADView_(ADView *itemView) {
   ADXViewCompat_initialize();
   return 0;
 }
 
-void ADXViewCompat_setImportantForAccessibilityWithADView_withInt_(ADView *itemView, jint importantForAccessibilityYes) {
+void ADXViewCompat_setImportantForAccessibilityWithADView_withInt_(ADView *itemView, int32_t importantForAccessibilityYes) {
   ADXViewCompat_initialize();
 }
 
@@ -400,32 +414,32 @@ void ADXViewCompat_dispatchStartTemporaryDetachWithADView_(ADView *view) {
   ADXViewCompat_initialize();
 }
 
-jboolean ADXViewCompat_hasTransientStateWithADView_(ADView *view) {
+bool ADXViewCompat_hasTransientStateWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) hasTransientState];
 }
 
-jboolean ADXViewCompat_isLayoutDirectionResolvedWithADView_(ADView *view) {
+bool ADXViewCompat_isLayoutDirectionResolvedWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) isLayoutDirectionResolved];
 }
 
-void ADXViewCompat_offsetLeftAndRightWithADView_withInt_(ADView *child, jint dx) {
+void ADXViewCompat_offsetLeftAndRightWithADView_withInt_(ADView *child, int32_t dx) {
   ADXViewCompat_initialize();
   [((ADView *) nil_chk(child)) offsetLeftAndRightWithInt:dx];
 }
 
-void ADXViewCompat_offsetTopAndBottomWithADView_withInt_(ADView *child, jint dy) {
+void ADXViewCompat_offsetTopAndBottomWithADView_withInt_(ADView *child, int32_t dy) {
   ADXViewCompat_initialize();
   [((ADView *) nil_chk(child)) offsetTopAndBottomWithInt:dy];
 }
 
-jboolean ADXViewCompat_isLaidOutWithADView_(ADView *view) {
+bool ADXViewCompat_isLaidOutWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) isLaidOut];
 }
 
-jboolean ADXViewCompat_isPaddingRelativeWithADView_(ADView *view) {
+bool ADXViewCompat_isPaddingRelativeWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   return false;
 }
@@ -436,3 +450,5 @@ void ADXViewCompat_stopNestedScrollWithADView_(ADView *view) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXViewCompat)
+
+J2OBJC_NAME_MAPPING(ADXViewCompat, "androidx.core.view", "ADX")

@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-ios-widgets\IOSJSONAdapter\src\main\java\com\ashera\jsonadapter\JSONAdapter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "JSONAdapter.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASJSONAdapter : NSObject
@@ -62,3 +73,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASJSONAdapter)
+
+J2OBJC_NAME_MAPPING(ASJSONAdapter, "com.ashera.jsonadapter", "AS")

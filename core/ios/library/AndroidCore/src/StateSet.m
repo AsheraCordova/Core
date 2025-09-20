@@ -3,15 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\util\StateSet.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "R.h"
 #include "StateSet.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/System.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline IOSObjectArray *ADStateSet_get_VIEW_STATE_SETS(void);
@@ -32,31 +44,31 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (IOSIntArray *)getWithInt:(jint)mask {
++ (IOSIntArray *)getWithInt:(int32_t)mask {
   return ADStateSet_getWithInt_(mask);
 }
 
-+ (jboolean)containsAttributeWithIntArray2:(IOSObjectArray *)stateSpecs
-                                   withInt:(jint)attr {
++ (bool)containsAttributeWithIntArray2:(IOSObjectArray *)stateSpecs
+                               withInt:(int32_t)attr {
   return ADStateSet_containsAttributeWithIntArray2_withInt_(stateSpecs, attr);
 }
 
-+ (jboolean)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
-                           withIntArray:(IOSIntArray *)stateSet {
++ (bool)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
+                       withIntArray:(IOSIntArray *)stateSet {
   return ADStateSet_stateSetMatchesWithIntArray_withIntArray_(stateSpec, stateSet);
 }
 
-+ (jboolean)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
-                                withInt:(jint)state {
++ (bool)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
+                            withInt:(int32_t)state {
   return ADStateSet_stateSetMatchesWithIntArray_withInt_(stateSpec, state);
 }
 
-+ (jboolean)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec {
++ (bool)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec {
   return ADStateSet_isWildCardWithIntArray_(stateSetOrSpec);
 }
 
 + (IOSIntArray *)trimStateSetWithIntArray:(IOSIntArray *)states
-                                  withInt:(jint)newSize {
+                                  withInt:(int32_t)newSize {
   return ADStateSet_trimStateSetWithIntArray_withInt_(states, newSize);
 }
 
@@ -103,26 +115,26 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [ADStateSet class]) {
-    JreStrongAssignAndConsume(&ADStateSet_ViewDrawableStates, [IOSIntArray newArrayWithInts:(jint[]){ ADR_attr_state_window_focused, ADR_attr_state_selected, ADR_attr_state_focused, ADR_attr_state_enabled, ADR_attr_state_pressed, ADR_attr_state_activated, ADR_attr_state_accelerated, ADR_attr_state_hovered, ADR_attr_state_drag_can_accept, ADR_attr_state_drag_hovered } count:10]);
-    JreStrongAssignAndConsume(&ADStateSet_VIEW_STATE_IDS, [IOSIntArray newArrayWithInts:(jint[]){ ADR_attr_state_window_focused, ADStateSet_VIEW_STATE_WINDOW_FOCUSED, ADR_attr_state_selected, ADStateSet_VIEW_STATE_SELECTED, ADR_attr_state_focused, ADStateSet_VIEW_STATE_FOCUSED, ADR_attr_state_enabled, ADStateSet_VIEW_STATE_ENABLED, ADR_attr_state_pressed, ADStateSet_VIEW_STATE_PRESSED, ADR_attr_state_activated, ADStateSet_VIEW_STATE_ACTIVATED, ADR_attr_state_accelerated, ADStateSet_VIEW_STATE_ACCELERATED, ADR_attr_state_hovered, ADStateSet_VIEW_STATE_HOVERED, ADR_attr_state_drag_can_accept, ADStateSet_VIEW_STATE_DRAG_CAN_ACCEPT, ADR_attr_state_drag_hovered, ADStateSet_VIEW_STATE_DRAG_HOVERED } count:20]);
+    JreStrongAssignAndConsume(&ADStateSet_ViewDrawableStates, [IOSIntArray newArrayWithInts:(int32_t[]){ ADR_attr_state_window_focused, ADR_attr_state_selected, ADR_attr_state_focused, ADR_attr_state_enabled, ADR_attr_state_pressed, ADR_attr_state_activated, ADR_attr_state_accelerated, ADR_attr_state_hovered, ADR_attr_state_drag_can_accept, ADR_attr_state_drag_hovered } count:10]);
+    JreStrongAssignAndConsume(&ADStateSet_VIEW_STATE_IDS, [IOSIntArray newArrayWithInts:(int32_t[]){ ADR_attr_state_window_focused, ADStateSet_VIEW_STATE_WINDOW_FOCUSED, ADR_attr_state_selected, ADStateSet_VIEW_STATE_SELECTED, ADR_attr_state_focused, ADStateSet_VIEW_STATE_FOCUSED, ADR_attr_state_enabled, ADStateSet_VIEW_STATE_ENABLED, ADR_attr_state_pressed, ADStateSet_VIEW_STATE_PRESSED, ADR_attr_state_activated, ADStateSet_VIEW_STATE_ACTIVATED, ADR_attr_state_accelerated, ADStateSet_VIEW_STATE_ACCELERATED, ADR_attr_state_hovered, ADStateSet_VIEW_STATE_HOVERED, ADR_attr_state_drag_can_accept, ADStateSet_VIEW_STATE_DRAG_CAN_ACCEPT, ADR_attr_state_drag_hovered, ADStateSet_VIEW_STATE_DRAG_HOVERED } count:20]);
     {
       IOSIntArray *orderedIds = [IOSIntArray arrayWithLength:ADStateSet_VIEW_STATE_IDS->size_];
-      for (jint i = 0; i < ADStateSet_ViewDrawableStates->size_; i++) {
-        jint viewState = IOSIntArray_Get(ADStateSet_ViewDrawableStates, i);
-        for (jint j = 0; j < ADStateSet_VIEW_STATE_IDS->size_; j += 2) {
+      for (int32_t i = 0; i < ADStateSet_ViewDrawableStates->size_; i++) {
+        int32_t viewState = IOSIntArray_Get(ADStateSet_ViewDrawableStates, i);
+        for (int32_t j = 0; j < ADStateSet_VIEW_STATE_IDS->size_; j += 2) {
           if (IOSIntArray_Get(ADStateSet_VIEW_STATE_IDS, j) == viewState) {
             *IOSIntArray_GetRef(orderedIds, i * 2) = viewState;
             *IOSIntArray_GetRef(orderedIds, i * 2 + 1) = IOSIntArray_Get(ADStateSet_VIEW_STATE_IDS, j + 1);
           }
         }
       }
-      jint NUM_BITS = JreIntDiv(ADStateSet_VIEW_STATE_IDS->size_, 2);
+      int32_t NUM_BITS = JreIntDiv(ADStateSet_VIEW_STATE_IDS->size_, 2);
       JreStrongAssignAndConsume(&ADStateSet_VIEW_STATE_SETS, [IOSObjectArray newArrayWithLength:JreLShift32(1, NUM_BITS) type:IOSClass_intArray(1)]);
-      for (jint i = 0; i < ADStateSet_VIEW_STATE_SETS->size_; i++) {
-        jint numBits = JavaLangInteger_bitCountWithInt_(i);
+      for (int32_t i = 0; i < ADStateSet_VIEW_STATE_SETS->size_; i++) {
+        int32_t numBits = JavaLangInteger_bitCountWithInt_(i);
         IOSIntArray *set = [IOSIntArray arrayWithLength:numBits];
-        jint pos = 0;
-        for (jint j = 0; j < orderedIds->size_; j += 2) {
+        int32_t pos = 0;
+        for (int32_t j = 0; j < orderedIds->size_; j += 2) {
           if ((i & IOSIntArray_Get(orderedIds, j + 1)) != 0) {
             *IOSIntArray_GetRef(set, pos++) = IOSIntArray_Get(orderedIds, j);
           }
@@ -148,7 +160,7 @@ ADStateSet *create_ADStateSet_init() {
   J2OBJC_CREATE_IMPL(ADStateSet, init)
 }
 
-IOSIntArray *ADStateSet_getWithInt_(jint mask) {
+IOSIntArray *ADStateSet_getWithInt_(int32_t mask) {
   ADStateSet_initialize();
   if (mask >= ((IOSObjectArray *) nil_chk(ADStateSet_VIEW_STATE_SETS))->size_) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Invalid state set mask");
@@ -156,7 +168,7 @@ IOSIntArray *ADStateSet_getWithInt_(jint mask) {
   return IOSObjectArray_Get(ADStateSet_VIEW_STATE_SETS, mask);
 }
 
-jboolean ADStateSet_containsAttributeWithIntArray2_withInt_(IOSObjectArray *stateSpecs, jint attr) {
+bool ADStateSet_containsAttributeWithIntArray2_withInt_(IOSObjectArray *stateSpecs, int32_t attr) {
   ADStateSet_initialize();
   if (stateSpecs != nil) {
     {
@@ -164,16 +176,16 @@ jboolean ADStateSet_containsAttributeWithIntArray2_withInt_(IOSObjectArray *stat
       IOSIntArray * const *b__ = a__->buffer_;
       IOSIntArray * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        IOSIntArray *spec = *b__++;
+        IOSIntArray *spec = RETAIN_AND_AUTORELEASE(*b__++);
         if (spec == nil) {
           break;
         }
         {
           IOSIntArray *a__ = spec;
-          jint const *b__ = a__->buffer_;
-          jint const *e__ = b__ + a__->size_;
+          int32_t const *b__ = a__->buffer_;
+          int32_t const *e__ = b__ + a__->size_;
           while (b__ < e__) {
-            jint specAttr = *b__++;
+            int32_t specAttr = *b__++;
             if (specAttr == attr || -specAttr == attr) {
               return true;
             }
@@ -185,19 +197,19 @@ jboolean ADStateSet_containsAttributeWithIntArray2_withInt_(IOSObjectArray *stat
   return false;
 }
 
-jboolean ADStateSet_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet) {
+bool ADStateSet_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet) {
   ADStateSet_initialize();
   if (stateSet == nil) {
     return (stateSpec == nil || ADStateSet_isWildCardWithIntArray_(stateSpec));
   }
-  jint stateSpecSize = ((IOSIntArray *) nil_chk(stateSpec))->size_;
-  jint stateSetSize = stateSet->size_;
-  for (jint i = 0; i < stateSpecSize; i++) {
-    jint stateSpecState = IOSIntArray_Get(stateSpec, i);
+  int32_t stateSpecSize = ((IOSIntArray *) nil_chk(stateSpec))->size_;
+  int32_t stateSetSize = stateSet->size_;
+  for (int32_t i = 0; i < stateSpecSize; i++) {
+    int32_t stateSpecState = IOSIntArray_Get(stateSpec, i);
     if (stateSpecState == 0) {
       return true;
     }
-    jboolean mustMatch;
+    bool mustMatch;
     if (stateSpecState > 0) {
       mustMatch = true;
     }
@@ -205,9 +217,9 @@ jboolean ADStateSet_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *state
       mustMatch = false;
       stateSpecState = -stateSpecState;
     }
-    jboolean found = false;
-    for (jint j = 0; j < stateSetSize; j++) {
-      jint state = IOSIntArray_Get(stateSet, j);
+    bool found = false;
+    for (int32_t j = 0; j < stateSetSize; j++) {
+      int32_t state = IOSIntArray_Get(stateSet, j);
       if (state == 0) {
         if (mustMatch) {
           return false;
@@ -233,11 +245,11 @@ jboolean ADStateSet_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *state
   return true;
 }
 
-jboolean ADStateSet_stateSetMatchesWithIntArray_withInt_(IOSIntArray *stateSpec, jint state) {
+bool ADStateSet_stateSetMatchesWithIntArray_withInt_(IOSIntArray *stateSpec, int32_t state) {
   ADStateSet_initialize();
-  jint stateSpecSize = ((IOSIntArray *) nil_chk(stateSpec))->size_;
-  for (jint i = 0; i < stateSpecSize; i++) {
-    jint stateSpecState = IOSIntArray_Get(stateSpec, i);
+  int32_t stateSpecSize = ((IOSIntArray *) nil_chk(stateSpec))->size_;
+  for (int32_t i = 0; i < stateSpecSize; i++) {
+    int32_t stateSpecState = IOSIntArray_Get(stateSpec, i);
     if (stateSpecState == 0) {
       return true;
     }
@@ -255,12 +267,12 @@ jboolean ADStateSet_stateSetMatchesWithIntArray_withInt_(IOSIntArray *stateSpec,
   return true;
 }
 
-jboolean ADStateSet_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec) {
+bool ADStateSet_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec) {
   ADStateSet_initialize();
   return ((IOSIntArray *) nil_chk(stateSetOrSpec))->size_ == 0 || IOSIntArray_Get(stateSetOrSpec, 0) == 0;
 }
 
-IOSIntArray *ADStateSet_trimStateSetWithIntArray_withInt_(IOSIntArray *states, jint newSize) {
+IOSIntArray *ADStateSet_trimStateSetWithIntArray_withInt_(IOSIntArray *states, int32_t newSize) {
   ADStateSet_initialize();
   if (((IOSIntArray *) nil_chk(states))->size_ == newSize) {
     return states;
@@ -271,3 +283,5 @@ IOSIntArray *ADStateSet_trimStateSetWithIntArray_withInt_(IOSIntArray *states, j
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADStateSet)
+
+J2OBJC_NAME_MAPPING(ADStateSet, "r.android.util", "AD")

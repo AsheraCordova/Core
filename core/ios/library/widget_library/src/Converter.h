@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\converter\Converter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Converter")
@@ -16,6 +17,9 @@
 #if !defined (ASConverter_) && (INCLUDE_ALL_Converter || defined(INCLUDE_ASConverter))
 #define ASConverter_
 
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class NSString;
 @protocol ASIConverter;
 @protocol ASIFragment;
 @protocol JavaUtilList;
@@ -38,15 +42,15 @@
 
 - (id)getColorWithNSString:(NSString *)color;
 
-- (jfloat)convertDpToPixelWithNSString:(NSString *)dimen;
+- (float)convertDpToPixelWithNSString:(NSString *)dimen;
 
-- (jfloat)convertSpToPixelWithNSString:(NSString *)dimen;
+- (float)convertSpToPixelWithNSString:(NSString *)dimen;
 
 - (NSString *)convertPixelToDpWithId:(id)dimen
-                         withBoolean:(jboolean)isInt;
+                         withBoolean:(bool)isInt;
 
 - (NSString *)convertPixelToSpWithId:(id)dimen
-                         withBoolean:(jboolean)isInt;
+                         withBoolean:(bool)isInt;
 
 @end
 
@@ -55,6 +59,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASConverter)
 J2OBJC_TYPE_LITERAL_HEADER(ASConverter)
 
 #define ComAsheraConverterConverter ASConverter
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\AnimatorSet.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AnimatorSet")
@@ -27,7 +28,11 @@
 @class ADAnimatorSet_Builder;
 @class ADLongArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 @class JavaUtilArrayList;
+@class NSString;
 @protocol ADTimeInterpolator;
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
@@ -63,7 +68,8 @@
 - (instancetype)init;
 
 /*!
- @brief <p>Note that canceling a <code>AnimatorSet</code> also cancels all of the animations that it
+ @brief  
+ <p>Note that canceling a <code>AnimatorSet</code> also cancels all of the animations that it
   is responsible for.
  </p>
  */
@@ -73,22 +79,23 @@
  @brief AnimatorSet is only reversible when the set contains no sequential animation, and no child
   animators have a start delay.
  */
-- (jboolean)canReverse;
+- (bool)canReverse;
 
 - (ADAnimatorSet *)java_clone;
 
 /*!
  */
-- (void)commitAnimationFrameWithLong:(jlong)frameTime;
+- (void)commitAnimationFrameWithLong:(int64_t)frameTime;
 
 /*!
  @param frameTime The frame start time, in the <code>SystemClock.uptimeMillis()</code>  time
                     base.
  */
-- (jboolean)doAnimationFrameWithLong:(jlong)frameTime;
+- (bool)doAnimationFrameWithLong:(int64_t)frameTime;
 
 /*!
- @brief <p>Note that ending a <code>AnimatorSet</code> also ends all of the animations that it is
+ @brief  
+ <p>Note that ending a <code>AnimatorSet</code> also ends all of the animations that it is
   responsible for.
  </p>
  */
@@ -96,7 +103,7 @@
 
 /*!
  */
-- (jint)getChangingConfigurations;
+- (int32_t)getChangingConfigurations;
 
 /*!
  @brief Returns the current list of child Animator objects controlled by this
@@ -115,7 +122,7 @@
   be returned; otherwise, this method will return 0.
  @return the current position in time of the animation in milliseconds
  */
-- (jlong)getCurrentPlayTime;
+- (int64_t)getCurrentPlayTime;
 
 /*!
  @brief Gets the length of each of the child animations of this AnimatorSet.This value may
@@ -124,7 +131,7 @@
  @return The length of the animation, in milliseconds, of each of the child
   animations of this AnimatorSet.
  */
-- (jlong)getDuration;
+- (int64_t)getDuration;
 
 - (id<ADTimeInterpolator>)getInterpolator;
 
@@ -133,9 +140,9 @@
  <code>start()</code> is called.
  @return the number of milliseconds to delay running the animation
  */
-- (jlong)getStartDelay;
+- (int64_t)getStartDelay;
 
-- (jlong)getTotalDuration;
+- (int64_t)getTotalDuration;
 
 /*!
  @brief Returns true if any of the child animations of this AnimatorSet have been started and have
@@ -144,9 +151,9 @@
  @return Whether this AnimatorSet has gone past the initial delay, and at least one child
           animation has been started and not yet ended.
  */
-- (jboolean)isRunning;
+- (bool)isRunning;
 
-- (jboolean)isStarted;
+- (bool)isStarted;
 
 - (void)pause;
 
@@ -242,7 +249,7 @@
  @param playTime The time, in milliseconds, to which the animation is advanced or rewound.                  Unless the animation is reversing, the playtime is considered the time since
                    the end of the start delay of the AnimatorSet in a forward playing direction.
  */
-- (void)setCurrentPlayTimeWithLong:(jlong)playTime;
+- (void)setCurrentPlayTimeWithLong:(int64_t)playTime;
 
 /*!
  @brief Sets the length of each of the current child animations of this AnimatorSet.By default,
@@ -251,7 +258,7 @@
   then each child animation inherits this duration.
  @param duration The length of the animation, in milliseconds, of each of the child  animations of this AnimatorSet.
  */
-- (ADAnimatorSet *)setDurationWithLong:(jlong)duration;
+- (ADAnimatorSet *)setDurationWithLong:(int64_t)duration;
 
 /*!
  @brief Sets the TimeInterpolator for all current <code>child animations</code>
@@ -271,7 +278,7 @@
   negative start delay will be clamped to 0 on N and above.
  @param startDelay The amount of the delay, in milliseconds
  */
-- (void)setStartDelayWithLong:(jlong)startDelay;
+- (void)setStartDelayWithLong:(int64_t)startDelay;
 
 /*!
  @brief Sets the target object for all current <code>child animations</code>
@@ -288,10 +295,11 @@
 /*!
  @return whether all the animators in the set are supposed to play together
  */
-- (jboolean)shouldPlayTogether;
+- (bool)shouldPlayTogether;
 
 /*!
- @brief <p>Starting this <code>AnimatorSet</code> will, in turn, start the animations for which
+ @brief  
+ <p>Starting this <code>AnimatorSet</code> will, in turn, start the animations for which
   it is responsible.
  The details of when exactly those animations are started depends on
   the dependency relationships that have been set up between the animations. 
@@ -305,22 +313,22 @@
 
 #pragma mark Package-Private
 
-- (void)animateSkipToEndsWithLong:(jlong)currentPlayTime
-                         withLong:(jlong)lastPlayTime;
+- (void)animateSkipToEndsWithLong:(int64_t)currentPlayTime
+                         withLong:(int64_t)lastPlayTime;
 
-- (void)animateValuesInRangeWithLong:(jlong)currentPlayTime
-                            withLong:(jlong)lastPlayTime;
+- (void)animateValuesInRangeWithLong:(int64_t)currentPlayTime
+                            withLong:(int64_t)lastPlayTime;
 
 - (void)getStartAndEndTimesWithADLongArray:(ADLongArray *)times
-                                  withLong:(jlong)offset;
+                                  withLong:(int64_t)offset;
 
-- (jboolean)isInitialized;
+- (bool)isInitialized;
 
-- (jboolean)pulseAnimationFrameWithLong:(jlong)frameTime;
+- (bool)pulseAnimationFrameWithLong:(int64_t)frameTime;
 
-- (void)skipToEndValueWithBoolean:(jboolean)inReverse;
+- (void)skipToEndValueWithBoolean:(bool)inReverse;
 
-- (void)startWithoutPulsingWithBoolean:(jboolean)inReverse;
+- (void)startWithoutPulsingWithBoolean:(bool)inReverse;
 
 @end
 
@@ -336,6 +344,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet)
 
 @compatibility_alias RAndroidAnimationAnimatorSet ADAnimatorSet;
 
+
 #endif
 
 #if !defined (ADAnimatorSet_Builder_) && (INCLUDE_ALL_AnimatorSet || defined(INCLUDE_ADAnimatorSet_Builder))
@@ -343,6 +352,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet)
 
 @class ADAnimator;
 @class ADAnimatorSet;
+@class JavaLangLong;
 
 /*!
  @brief The <code>Builder</code> object is a utility class to facilitate adding animations to a 
@@ -422,7 +432,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet)
   to play when the given amount of time elapses.
  @param delay The number of milliseconds that should elapse before the  animation starts.
  */
-- (ADAnimatorSet_Builder *)afterWithLong:(jlong)delay;
+- (ADAnimatorSet_Builder *)afterWithLong:(int64_t)delay;
 
 /*!
  @brief Sets up the given animation to play when the animation supplied in the 
@@ -466,6 +476,7 @@ FOUNDATION_EXPORT ADAnimatorSet_Builder *new_ADAnimatorSet_Builder_initWithADAni
 FOUNDATION_EXPORT ADAnimatorSet_Builder *create_ADAnimatorSet_Builder_initWithADAnimatorSet_withADAnimator_(ADAnimatorSet *outer$, ADAnimator *anim);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet_Builder)
+
 
 #endif
 

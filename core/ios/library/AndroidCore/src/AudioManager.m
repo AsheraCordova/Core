@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\media\AudioManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AudioManager.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAudioManager
@@ -47,3 +59,5 @@ ADAudioManager *create_ADAudioManager_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAudioManager)
+
+J2OBJC_NAME_MAPPING(ADAudioManager, "r.android.media", "AD")

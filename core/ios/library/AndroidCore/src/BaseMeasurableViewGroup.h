@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\view\BaseMeasurableViewGroup.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseMeasurableViewGroup")
@@ -30,103 +31,105 @@
 @class ASBaseMeasurableViewGroup_VerticalAligment;
 @class ASRectM;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ASHasWidgets;
 @protocol ASIWidget;
 
 @interface ASBaseMeasurableViewGroup : ADViewGroup {
  @public
   ASBaseMeasurableViewGroup_VerticalAligment *verticalAligment_;
-  jboolean mHorizontallyScrolling_;
+  bool mHorizontallyScrolling_;
 }
 
 #pragma mark Public
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (jint)getBaseline;
+- (int32_t)getBaseline;
 
 - (ADDrawable *)getBottomDrawable;
 
-- (ASRectM *)getBottomDrawableBoundsWithInt:(jint)x
-                                    withInt:(jint)y
-                                    withInt:(jint)width
-                                    withInt:(jint)height;
+- (ASRectM *)getBottomDrawableBoundsWithInt:(int32_t)x
+                                    withInt:(int32_t)y
+                                    withInt:(int32_t)width
+                                    withInt:(int32_t)height;
 
-- (jint)getCompoundPaddingBottom;
+- (int32_t)getCompoundPaddingBottom;
 
-- (jint)getCompoundPaddingLeft;
+- (int32_t)getCompoundPaddingLeft;
 
-- (jint)getCompoundPaddingLeftWithIgnoreCheck;
+- (int32_t)getCompoundPaddingLeftWithIgnoreCheck;
 
-- (jint)getCompoundPaddingRight;
+- (int32_t)getCompoundPaddingRight;
 
-- (jint)getCompoundPaddingRightWithIgnoreCheck;
+- (int32_t)getCompoundPaddingRightWithIgnoreCheck;
 
-- (jint)getCompoundPaddingTop;
+- (int32_t)getCompoundPaddingTop;
 
-- (jint)getDrawablePadding;
+- (int32_t)getDrawablePadding;
 
 - (ADDrawable *)getLeftDrawable;
 
-- (ASRectM *)getLeftDrawableBoundsWithInt:(jint)x
-                                  withInt:(jint)y
-                                  withInt:(jint)width
-                                  withInt:(jint)height;
+- (ASRectM *)getLeftDrawableBoundsWithInt:(int32_t)x
+                                  withInt:(int32_t)y
+                                  withInt:(int32_t)width
+                                  withInt:(int32_t)height;
 
 - (ADDrawable *)getRightDrawable;
 
-- (ASRectM *)getRightDrawableBoundsWithInt:(jint)x
-                                   withInt:(jint)y
-                                   withInt:(jint)width
-                                   withInt:(jint)height;
+- (ASRectM *)getRightDrawableBoundsWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)width
+                                   withInt:(int32_t)height;
 
 - (ADDrawable *)getTopDrawable;
 
-- (ASRectM *)getTopDrawableBoundsWithInt:(jint)x
-                                 withInt:(jint)y
-                                 withInt:(jint)width
-                                 withInt:(jint)height;
+- (ASRectM *)getTopDrawableBoundsWithInt:(int32_t)x
+                                 withInt:(int32_t)y
+                                 withInt:(int32_t)width
+                                 withInt:(int32_t)height;
 
 - (ASBaseMeasurableViewGroup_VerticalAligment *)getVerticalAligment;
 
 - (id<ASIWidget>)getWidget;
 
-- (ASRectM *)getWidgetBoundsWithInt:(jint)width
-                            withInt:(jint)height
+- (ASRectM *)getWidgetBoundsWithInt:(int32_t)width
+                            withInt:(int32_t)height
                   withNSObjectArray:(IOSObjectArray *)nativeWidgets;
 
-- (jboolean)hasDrawables;
+- (bool)hasDrawables;
 
-- (jboolean)isCompoundHorizontalPaddingConsumed;
+- (bool)isCompoundHorizontalPaddingConsumed;
 
-- (jboolean)isIgnoreDrawableHeight;
+- (bool)isIgnoreDrawableHeight;
 
-- (jboolean)isVerticalAlignBottom;
+- (bool)isVerticalAlignBottom;
 
-- (jboolean)isVerticalAlignMiddle;
+- (bool)isVerticalAlignMiddle;
 
-- (jboolean)isVerticalAlignTop;
+- (bool)isVerticalAlignTop;
 
 + (void)measureWidgetWithNoParentWithASHasWidgets:(id<ASHasWidgets>)parent
                                     withASIWidget:(id<ASIWidget>)widget
-                                          withInt:(jint)level
-                                          withInt:(jint)initialWidth
-                                          withInt:(jint)indent;
+                                          withInt:(int32_t)level
+                                          withInt:(int32_t)initialWidth
+                                          withInt:(int32_t)indent;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (void)setBottomDrawableWithADDrawable:(ADDrawable *)bottomDrawable;
 
-- (void)setCompoundHorizontalPaddingConsumedWithBoolean:(jboolean)isCompoundHorizontalPaddingConsumed;
+- (void)setCompoundHorizontalPaddingConsumedWithBoolean:(bool)isCompoundHorizontalPaddingConsumed;
 
-- (void)setDrawablePaddingWithInt:(jint)drawablePadding;
+- (void)setDrawablePaddingWithInt:(int32_t)drawablePadding;
 
-- (void)setHorizontallyScrollingWithBoolean:(jboolean)horizontallyScrolling;
+- (void)setHorizontallyScrollingWithBoolean:(bool)horizontallyScrolling;
 
-- (void)setIgnoreDrawableHeightWithBoolean:(jboolean)ignoreDrawableHeight;
+- (void)setIgnoreDrawableHeightWithBoolean:(bool)ignoreDrawableHeight;
 
 - (void)setLeftDrawableWithADDrawable:(ADDrawable *)leftDrawable;
 
@@ -138,8 +141,8 @@
 
 #pragma mark Protected
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 // Disallowed inherited constructors, do not use.
 
@@ -151,20 +154,21 @@ J2OBJC_EMPTY_STATIC_INIT(ASBaseMeasurableViewGroup)
 
 J2OBJC_FIELD_SETTER(ASBaseMeasurableViewGroup, verticalAligment_, ASBaseMeasurableViewGroup_VerticalAligment *)
 
-inline jint ASBaseMeasurableViewGroup_get_VERY_WIDE(void);
-inline jint ASBaseMeasurableViewGroup_set_VERY_WIDE(jint value);
-inline jint *ASBaseMeasurableViewGroup_getRef_VERY_WIDE(void);
+inline int32_t ASBaseMeasurableViewGroup_get_VERY_WIDE(void);
+inline int32_t ASBaseMeasurableViewGroup_set_VERY_WIDE(int32_t value);
+inline int32_t *ASBaseMeasurableViewGroup_getRef_VERY_WIDE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASBaseMeasurableViewGroup_VERY_WIDE;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASBaseMeasurableViewGroup, VERY_WIDE, jint)
+FOUNDATION_EXPORT int32_t ASBaseMeasurableViewGroup_VERY_WIDE;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASBaseMeasurableViewGroup, VERY_WIDE, int32_t)
 
 FOUNDATION_EXPORT void ASBaseMeasurableViewGroup_initWithASIWidget_(ASBaseMeasurableViewGroup *self, id<ASIWidget> widget);
 
-FOUNDATION_EXPORT void ASBaseMeasurableViewGroup_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, jint level, jint initialWidth, jint indent);
+FOUNDATION_EXPORT void ASBaseMeasurableViewGroup_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, int32_t level, int32_t initialWidth, int32_t indent);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableViewGroup)
 
 @compatibility_alias ComAsheraViewBaseMeasurableViewGroup ASBaseMeasurableViewGroup;
+
 
 #endif
 
@@ -176,12 +180,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableViewGroup)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ASBaseMeasurableViewGroup_VerticalAligment_Enum) {
-  ASBaseMeasurableViewGroup_VerticalAligment_Enum_middle = 0,
-  ASBaseMeasurableViewGroup_VerticalAligment_Enum_bottom = 1,
-  ASBaseMeasurableViewGroup_VerticalAligment_Enum_top = 2,
+typedef NS_ENUM(int32_t, ASBaseMeasurableViewGroup_VerticalAligment_Enum) {
+  ASBaseMeasurableViewGroup_VerticalAligment_Enum_middle NS_SWIFT_NAME(middle) = 0,
+  ASBaseMeasurableViewGroup_VerticalAligment_Enum_bottom NS_SWIFT_NAME(bottom) = 1,
+  ASBaseMeasurableViewGroup_VerticalAligment_Enum_top NS_SWIFT_NAME(top) = 2,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASBaseMeasurableViewGroup_VerticalAligment_ORDINAL int32_t
+#else
+#define ASBaseMeasurableViewGroup_VerticalAligment_ORDINAL ASBaseMeasurableViewGroup_VerticalAligment_Enum
+#endif
+
 
 @interface ASBaseMeasurableViewGroup_VerticalAligment : JavaLangEnum
 
@@ -194,6 +206,13 @@ typedef NS_ENUM(NSUInteger, ASBaseMeasurableViewGroup_VerticalAligment_Enum) {
 #pragma mark Package-Private
 
 - (ASBaseMeasurableViewGroup_VerticalAligment_Enum)toNSEnum;
+
+@property(readonly) ASBaseMeasurableViewGroup_VerticalAligment_Enum enumValue;
++ (ASBaseMeasurableViewGroup_VerticalAligment *)fromNSEnum:(ASBaseMeasurableViewGroup_VerticalAligment_Enum)value;
+
+- (ASBaseMeasurableViewGroup_VerticalAligment_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithVerticalAligment:(ASBaseMeasurableViewGroup_VerticalAligment_Enum)value;
 
 @end
 
@@ -215,9 +234,10 @@ FOUNDATION_EXPORT IOSObjectArray *ASBaseMeasurableViewGroup_VerticalAligment_val
 
 FOUNDATION_EXPORT ASBaseMeasurableViewGroup_VerticalAligment *ASBaseMeasurableViewGroup_VerticalAligment_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASBaseMeasurableViewGroup_VerticalAligment *ASBaseMeasurableViewGroup_VerticalAligment_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASBaseMeasurableViewGroup_VerticalAligment *ASBaseMeasurableViewGroup_VerticalAligment_fromOrdinal(ASBaseMeasurableViewGroup_VerticalAligment_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableViewGroup_VerticalAligment)
+
 
 #endif
 

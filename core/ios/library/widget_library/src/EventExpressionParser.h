@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\EventExpressionParser.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EventExpressionParser")
@@ -17,6 +18,7 @@
 #define ASEventExpressionParser_
 
 @class IOSObjectArray;
+@class NSString;
 @protocol JavaUtilMap;
 
 @interface ASEventExpressionParser : NSObject
@@ -76,6 +78,7 @@ FOUNDATION_EXPORT void ASEventExpressionParser_mainWithNSStringArray_(IOSObjectA
 J2OBJC_TYPE_LITERAL_HEADER(ASEventExpressionParser)
 
 @compatibility_alias ComAsheraWidgetEventExpressionParser ASEventExpressionParser;
+
 
 #endif
 

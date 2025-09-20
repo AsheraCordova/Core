@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\DialogFragment.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DialogFragment.h"
 #include "GenericFragment.h"
 #include "IMaxDimension.h"
@@ -13,20 +18,28 @@
 #include "PluginInvoker.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASDialogFragment () {
  @public
-  jint layoutWidth_;
-  jint layoutHeight_;
+  int32_t layoutWidth_;
+  int32_t layoutHeight_;
   id dialog_;
-  jint maxWidth_;
-  jint maxHeight_;
-  jboolean forceLayout_;
-  jfloat marginPercent_;
+  int32_t maxWidth_;
+  int32_t maxHeight_;
+  bool forceLayout_;
+  float marginPercent_;
 }
 
 @end
@@ -35,25 +48,25 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
 
 @implementation ASDialogFragment
 
-- (void)setMaxHeightWithInt:(jint)maxHeight {
+- (void)setMaxHeightWithInt:(int32_t)maxHeight {
   forceLayout_ = true;
   self->maxHeight_ = maxHeight;
 }
 
-- (void)setMaxWidthWithInt:(jint)maxWidth {
+- (void)setMaxWidthWithInt:(int32_t)maxWidth {
   forceLayout_ = true;
   self->maxWidth_ = maxWidth;
 }
 
 - (instancetype)initWithId:(id)dialog
-                   withInt:(jint)layoutWidth
-                   withInt:(jint)layoutHeight
+                   withInt:(int32_t)layoutWidth
+                   withInt:(int32_t)layoutHeight
          withJavaLangFloat:(JavaLangFloat *)marginPercent {
   ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(self, dialog, layoutWidth, layoutHeight, marginPercent);
   return self;
 }
 
-- (jboolean)isFullScreen {
+- (bool)isFullScreen {
   return marginPercent_ >= 1;
 }
 
@@ -75,14 +88,14 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
   if (maxHeight_ == -1) {
     maxHeight_ = JreFpToInt((marginPercent_ * ASPluginInvoker_getScreenHeight()));
   }
-  jint width = layoutWidth_;
+  int32_t width = layoutWidth_;
   if (layoutWidth_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
     width = maxWidth_;
   }
   else if (layoutWidth_ == ADViewGroup_LayoutParams_WRAP_CONTENT) {
     [((id<ASIMaxDimension>) nil_chk(((id<ASIMaxDimension>) cast_check([((id<ASIWidget>) cast_check(root, ASIWidget_class_())) asWidget], ASIMaxDimension_class_())))) setMaxWidthWithInt:maxWidth_];
   }
-  jint height = layoutHeight_;
+  int32_t height = layoutHeight_;
   if (layoutHeight_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
     height = maxHeight_;
   }
@@ -141,7 +154,7 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
 
 @end
 
-void ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(ASDialogFragment *self, id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) {
+void ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(ASDialogFragment *self, id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) {
   ASGenericFragment_init(self);
   self->maxWidth_ = -1;
   self->maxHeight_ = -1;
@@ -154,12 +167,14 @@ void ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(ASDialogFrag
   }
 }
 
-ASDialogFragment *new_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) {
+ASDialogFragment *new_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) {
   J2OBJC_NEW_IMPL(ASDialogFragment, initWithId_withInt_withInt_withJavaLangFloat_, dialog, layoutWidth, layoutHeight, marginPercent)
 }
 
-ASDialogFragment *create_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, jint layoutWidth, jint layoutHeight, JavaLangFloat *marginPercent) {
+ASDialogFragment *create_ASDialogFragment_initWithId_withInt_withInt_withJavaLangFloat_(id dialog, int32_t layoutWidth, int32_t layoutHeight, JavaLangFloat *marginPercent) {
   J2OBJC_CREATE_IMPL(ASDialogFragment, initWithId_withInt_withInt_withJavaLangFloat_, dialog, layoutWidth, layoutHeight, marginPercent)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDialogFragment)
+
+J2OBJC_NAME_MAPPING(ASDialogFragment, "com.ashera.core", "AS")

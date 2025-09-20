@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\LayoutTransition.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LayoutTransition")
@@ -19,6 +20,9 @@
 @class ADAnimator;
 @class ADView;
 @class ADViewGroup;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 @class JavaUtilLinkedHashMap;
 @protocol ADLayoutTransition_TransitionListener;
 @protocol ADTimeInterpolator;
@@ -139,7 +143,7 @@
   in the context of starting a new transition, so we want to move things from their mid-
   transition positions, but we want them to have their end-transition visibility.
  */
-- (void)cancelWithInt:(jint)transitionType;
+- (void)cancelWithInt:(int32_t)transitionType;
 
 /*!
  @brief Disables the specified transitionType for this LayoutTransition object.
@@ -147,7 +151,7 @@
  @param transitionType One of <code>CHANGE_APPEARING</code> , <code>CHANGE_DISAPPEARING</code> ,
    <code>CHANGING</code> , <code>APPEARING</code> , or <code>DISAPPEARING</code> .
  */
-- (void)disableTransitionTypeWithInt:(jint)transitionType;
+- (void)disableTransitionTypeWithInt:(int32_t)transitionType;
 
 /*!
  @brief Enables the specified transitionType for this LayoutTransition object.
@@ -159,7 +163,7 @@
  @param transitionType One of <code>CHANGE_APPEARING</code> , <code>CHANGE_DISAPPEARING</code> ,
    <code>CHANGING</code> , <code>APPEARING</code> , or <code>DISAPPEARING</code> .
  */
-- (void)enableTransitionTypeWithInt:(jint)transitionType;
+- (void)enableTransitionTypeWithInt:(int32_t)transitionType;
 
 /*!
  @brief Ends the animations that are set up for a CHANGING transition.This is a variant of
@@ -177,7 +181,7 @@
  @return Animator The animation being used for the given transition type.
  - seealso: #setAnimator(int, Animator)
  */
-- (ADAnimator *)getAnimatorWithInt:(jint)transitionType;
+- (ADAnimator *)getAnimatorWithInt:(int32_t)transitionType;
 
 /*!
  @brief Gets the duration on one of the animation objects used by this transition.The
@@ -188,7 +192,7 @@
  @return long The duration of the specified animation.
  - seealso: Animator#getDuration()
  */
-- (jlong)getDurationWithInt:(jint)transitionType;
+- (int64_t)getDurationWithInt:(int32_t)transitionType;
 
 /*!
  @brief Gets the interpolator on one of the animation objects used by this transition.The
@@ -199,7 +203,7 @@
  @return TimeInterpolator The interpolator that the specified animation uses.
  - seealso: Animator#setInterpolator(TimeInterpolator)
  */
-- (id<ADTimeInterpolator>)getInterpolatorWithInt:(jint)transitionType;
+- (id<ADTimeInterpolator>)getInterpolatorWithInt:(int32_t)transitionType;
 
 /*!
  @brief Gets the length of time to delay between starting each animation during one of the
@@ -209,7 +213,7 @@
  @return long The length of time, in milliseconds, to delay before launching the next
   animation in the sequence.
  */
-- (jlong)getStaggerWithInt:(jint)transitionType;
+- (int64_t)getStaggerWithInt:(int32_t)transitionType;
 
 /*!
  @brief Gets the start delay on one of the animation objects used by this transition.The
@@ -220,7 +224,7 @@
  @return long The start delay of the specified animation.
  - seealso: Animator#getStartDelay()
  */
-- (jlong)getStartDelayWithInt:(jint)transitionType;
+- (int64_t)getStartDelayWithInt:(int32_t)transitionType;
 
 /*!
  @brief Gets the current list of listeners for layout changes.
@@ -244,7 +248,7 @@
  */
 - (void)hideChildWithADViewGroup:(ADViewGroup *)parent
                       withADView:(ADView *)child
-                         withInt:(jint)newVisibility;
+                         withInt:(int32_t)newVisibility;
 
 /*!
  @brief Returns true if animations are running which animate layout-related properties.This
@@ -253,13 +257,13 @@
  @return true if CHANGE_APPEARING or CHANGE_DISAPPEARING animations are currently
   running.
  */
-- (jboolean)isChangingLayout;
+- (bool)isChangingLayout;
 
 /*!
  @brief Returns true if any of the animations in this transition are currently running.
  @return true if any animations in the transition are running.
  */
-- (jboolean)isRunning;
+- (bool)isRunning;
 
 /*!
  @brief Returns whether the specified transitionType is enabled for this LayoutTransition object.
@@ -268,7 +272,7 @@
    <code>CHANGING</code> , <code>APPEARING</code> , or <code>DISAPPEARING</code> .
  @return true if the specified transitionType is currently enabled, false otherwise.
  */
-- (jboolean)isTransitionTypeEnabledWithInt:(jint)transitionType;
+- (bool)isTransitionTypeEnabledWithInt:(int32_t)transitionType;
 
 /*!
  @brief This method is called by ViewGroup when there is a call to layout() on the container
@@ -313,7 +317,7 @@
   of resizing/rescrolling on any changing parents.
  @param animateParentHierarchy A boolean value indicating whether the parents of  transitioning views should also be animated during the transition. Default value is true.
  */
-- (void)setAnimateParentHierarchyWithBoolean:(jboolean)animateParentHierarchy;
+- (void)setAnimateParentHierarchyWithBoolean:(bool)animateParentHierarchy;
 
 /*!
  @brief Sets the animation used during one of the transition types that may run.Any
@@ -343,7 +347,7 @@
  @param animator The animation being assigned. A value of  <code> null </code>  means that no
    animation will be run for the specified transitionType.
  */
-- (void)setAnimatorWithInt:(jint)transitionType
+- (void)setAnimatorWithInt:(int32_t)transitionType
             withADAnimator:(ADAnimator *)animator;
 
 /*!
@@ -355,8 +359,8 @@
  @param duration The length of time, in milliseconds, that the specified animation should run.
  - seealso: Animator#setDuration(long)
  */
-- (void)setDurationWithInt:(jint)transitionType
-                  withLong:(jlong)duration;
+- (void)setDurationWithInt:(int32_t)transitionType
+                  withLong:(int64_t)duration;
 
 /*!
  @brief Sets the duration to be used by all animations of this transition object.If you want to
@@ -364,7 +368,7 @@
  <code>setDuration(int, long)</code> method.
  @param duration The length of time, in milliseconds, that the transition animations  should last.
  */
-- (void)setDurationWithLong:(jlong)duration;
+- (void)setDurationWithLong:(int64_t)duration;
 
 /*!
  @brief Sets the interpolator on one of the animation objects used by this transition.The
@@ -375,7 +379,7 @@
  @param interpolator The interpolator that the specified animation should use.
  - seealso: Animator#setInterpolator(TimeInterpolator)
  */
-- (void)setInterpolatorWithInt:(jint)transitionType
+- (void)setInterpolatorWithInt:(int32_t)transitionType
         withADTimeInterpolator:(id<ADTimeInterpolator>)interpolator;
 
 /*!
@@ -385,8 +389,8 @@
    <code>CHANGING</code> .
  @param duration The length of time, in milliseconds, to delay before launching the next  animation in the sequence.
  */
-- (void)setStaggerWithInt:(jint)transitionType
-                 withLong:(jlong)duration;
+- (void)setStaggerWithInt:(int32_t)transitionType
+                 withLong:(int64_t)duration;
 
 /*!
  @brief Sets the start delay on one of the animation objects used by this transition.The
@@ -397,8 +401,8 @@
  @param delay The length of time, in milliseconds, to delay before starting the animation.
  - seealso: Animator#setStartDelay(long)
  */
-- (void)setStartDelayWithInt:(jint)transitionType
-                    withLong:(jlong)delay;
+- (void)setStartDelayWithInt:(int32_t)transitionType
+                    withLong:(int64_t)delay;
 
 /*!
  */
@@ -417,7 +421,7 @@
  */
 - (void)showChildWithADViewGroup:(ADViewGroup *)parent
                       withADView:(ADView *)child
-                         withInt:(jint)oldVisibility;
+                         withInt:(int32_t)oldVisibility;
 
 /*!
  @brief Starts the animations set up for a CHANGING transition.We separate the setup of these
@@ -440,33 +444,33 @@ J2OBJC_FIELD_SETTER(ADLayoutTransition, currentChangingAnimations_, JavaUtilLink
  @brief A flag indicating the animation that runs on those items that are changing
   due to a new item appearing in the container.
  */
-inline jint ADLayoutTransition_get_CHANGE_APPEARING(void);
+inline int32_t ADLayoutTransition_get_CHANGE_APPEARING(void);
 #define ADLayoutTransition_CHANGE_APPEARING 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, CHANGE_APPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, CHANGE_APPEARING, int32_t)
 
 /*!
  @brief A flag indicating the animation that runs on those items that are changing
   due to an item disappearing from the container.
  */
-inline jint ADLayoutTransition_get_CHANGE_DISAPPEARING(void);
+inline int32_t ADLayoutTransition_get_CHANGE_DISAPPEARING(void);
 #define ADLayoutTransition_CHANGE_DISAPPEARING 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, CHANGE_DISAPPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, CHANGE_DISAPPEARING, int32_t)
 
 /*!
  @brief A flag indicating the animation that runs on those items that are appearing
   in the container.
  */
-inline jint ADLayoutTransition_get_APPEARING(void);
+inline int32_t ADLayoutTransition_get_APPEARING(void);
 #define ADLayoutTransition_APPEARING 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, APPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, APPEARING, int32_t)
 
 /*!
  @brief A flag indicating the animation that runs on those items that are disappearing
   from the container.
  */
-inline jint ADLayoutTransition_get_DISAPPEARING(void);
+inline int32_t ADLayoutTransition_get_DISAPPEARING(void);
 #define ADLayoutTransition_DISAPPEARING 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, DISAPPEARING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, DISAPPEARING, int32_t)
 
 /*!
  @brief A flag indicating the animation that runs on those items that are changing
@@ -474,9 +478,9 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, DISAPPEARING, jint)
   from the container.This transition type is not enabled by default; it can be
   enabled via <code>enableTransitionType(int)</code>.
  */
-inline jint ADLayoutTransition_get_CHANGING(void);
+inline int32_t ADLayoutTransition_get_CHANGING(void);
 #define ADLayoutTransition_CHANGING 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, CHANGING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLayoutTransition, CHANGING, int32_t)
 
 FOUNDATION_EXPORT void ADLayoutTransition_init(ADLayoutTransition *self);
 
@@ -488,6 +492,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLayoutTransition)
 
 @compatibility_alias RAndroidAnimationLayoutTransition ADLayoutTransition;
 
+
 #endif
 
 #if !defined (ADLayoutTransition_TransitionListener_) && (INCLUDE_ALL_LayoutTransition || defined(INCLUDE_ADLayoutTransition_TransitionListener))
@@ -496,6 +501,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLayoutTransition)
 @class ADLayoutTransition;
 @class ADView;
 @class ADViewGroup;
+@class JavaLangInteger;
 
 /*!
  @brief This interface is used for listening to starting and ending events for transitions.
@@ -516,7 +522,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLayoutTransition)
 - (void)startTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
                               withADViewGroup:(ADViewGroup *)container
                                    withADView:(ADView *)view
-                                      withInt:(jint)transitionType;
+                                      withInt:(int32_t)transitionType;
 
 /*!
  @brief This event is sent to listeners when any type of transition animation ends.
@@ -532,13 +538,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLayoutTransition)
 - (void)endTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
                             withADViewGroup:(ADViewGroup *)container
                                  withADView:(ADView *)view
-                                    withInt:(jint)transitionType;
+                                    withInt:(int32_t)transitionType;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADLayoutTransition_TransitionListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLayoutTransition_TransitionListener)
+
 
 #endif
 

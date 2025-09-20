@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\chip\ChipGroup.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ChipGroup")
@@ -23,6 +24,8 @@
 @class ADDrawable;
 @class ADView;
 @class ADViewGroup_LayoutParams;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADXChipGroup_OnCheckedChangeListener;
 @protocol ADXChipGroup_OnCheckedStateChangeListener;
 @protocol JavaUtilList;
@@ -33,53 +36,53 @@
 
 - (instancetype)init;
 
-- (void)checkWithInt:(jint)id_;
+- (void)checkWithInt:(int32_t)id_;
 
 - (void)clearCheck;
 
-- (jint)getCheckedChipId;
+- (int32_t)getCheckedChipId;
 
 - (id<JavaUtilList>)getCheckedChipIds;
 
-- (jint)getChipSpacingHorizontal;
+- (int32_t)getChipSpacingHorizontal;
 
-- (jint)getChipSpacingVertical;
+- (int32_t)getChipSpacingVertical;
 
-- (jboolean)isSelectionRequired;
+- (bool)isSelectionRequired;
 
-- (jboolean)isSingleLine;
+- (bool)isSingleLine;
 
-- (jboolean)isSingleSelection;
+- (bool)isSingleSelection;
 
-- (void)setChipSpacingWithInt:(jint)chipSpacing;
+- (void)setChipSpacingWithInt:(int32_t)chipSpacing;
 
-- (void)setChipSpacingHorizontalWithInt:(jint)chipSpacingHorizontal;
+- (void)setChipSpacingHorizontalWithInt:(int32_t)chipSpacingHorizontal;
 
-- (void)setChipSpacingVerticalWithInt:(jint)chipSpacingVertical;
+- (void)setChipSpacingVerticalWithInt:(int32_t)chipSpacingVertical;
 
 - (void)setDividerDrawableHorizontalWithADDrawable:(ADDrawable *)divider;
 
 - (void)setDividerDrawableVerticalWithADDrawable:(ADDrawable *)divider;
 
-- (void)setFlexWrapWithInt:(jint)flexWrap;
+- (void)setFlexWrapWithInt:(int32_t)flexWrap;
 
 - (void)setOnCheckedChangeListenerWithADXChipGroup_OnCheckedChangeListener:(id<ADXChipGroup_OnCheckedChangeListener>)listener;
 
 - (void)setOnCheckedStateChangeListenerWithADXChipGroup_OnCheckedStateChangeListener:(id<ADXChipGroup_OnCheckedStateChangeListener>)listener;
 
-- (void)setSelectionRequiredWithBoolean:(jboolean)selectionRequired;
+- (void)setSelectionRequiredWithBoolean:(bool)selectionRequired;
 
-- (void)setShowDividerHorizontalWithInt:(jint)dividerMode;
+- (void)setShowDividerHorizontalWithInt:(int32_t)dividerMode;
 
-- (void)setShowDividerVerticalWithInt:(jint)dividerMode;
+- (void)setShowDividerVerticalWithInt:(int32_t)dividerMode;
 
-- (void)setSingleLineWithBoolean:(jboolean)singleLine;
+- (void)setSingleLineWithBoolean:(bool)singleLine;
 
-- (void)setSingleSelectionWithBoolean:(jboolean)singleSelection;
+- (void)setSingleSelectionWithBoolean:(bool)singleSelection;
 
 #pragma mark Protected
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
 - (ADViewGroup_LayoutParams *)generateDefaultLayoutParams;
 
@@ -87,7 +90,7 @@
 
 #pragma mark Package-Private
 
-- (jint)getIndexOfChipWithADView:(ADView *)child;
+- (int32_t)getIndexOfChipWithADView:(ADView *)child;
 
 @end
 
@@ -103,23 +106,26 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXChipGroup)
 
 @compatibility_alias ComGoogleAndroidMaterialChipChipGroup ADXChipGroup;
 
+
 #endif
 
 #if !defined (ADXChipGroup_OnCheckedChangeListener_) && (INCLUDE_ALL_ChipGroup || defined(INCLUDE_ADXChipGroup_OnCheckedChangeListener))
 #define ADXChipGroup_OnCheckedChangeListener_
 
 @class ADXChipGroup;
+@class JavaLangInteger;
 
 @protocol ADXChipGroup_OnCheckedChangeListener < JavaObject >
 
 - (void)onCheckedChangedWithADXChipGroup:(ADXChipGroup *)group
-                                 withInt:(jint)checkedId;
+                                 withInt:(int32_t)checkedId;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXChipGroup_OnCheckedChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXChipGroup_OnCheckedChangeListener)
+
 
 #endif
 
@@ -140,6 +146,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXChipGroup_OnCheckedStateChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXChipGroup_OnCheckedStateChangeListener)
 
+
 #endif
 
 #if !defined (ADXChipGroup_LayoutParams_) && (INCLUDE_ALL_ChipGroup || defined(INCLUDE_ADXChipGroup_LayoutParams))
@@ -150,13 +157,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXChipGroup_OnCheckedStateChangeListener)
 #include "ViewGroup.h"
 
 @class ADViewGroup_LayoutParams;
+@class JavaLangInteger;
 
 @interface ADXChipGroup_LayoutParams : ADViewGroup_MarginLayoutParams
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height;
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height;
 
 - (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)source;
 
@@ -174,13 +182,14 @@ FOUNDATION_EXPORT ADXChipGroup_LayoutParams *new_ADXChipGroup_LayoutParams_initW
 
 FOUNDATION_EXPORT ADXChipGroup_LayoutParams *create_ADXChipGroup_LayoutParams_initWithADViewGroup_LayoutParams_(ADViewGroup_LayoutParams *source);
 
-FOUNDATION_EXPORT void ADXChipGroup_LayoutParams_initWithInt_withInt_(ADXChipGroup_LayoutParams *self, jint width, jint height);
+FOUNDATION_EXPORT void ADXChipGroup_LayoutParams_initWithInt_withInt_(ADXChipGroup_LayoutParams *self, int32_t width, int32_t height);
 
-FOUNDATION_EXPORT ADXChipGroup_LayoutParams *new_ADXChipGroup_LayoutParams_initWithInt_withInt_(jint width, jint height) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADXChipGroup_LayoutParams *new_ADXChipGroup_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADXChipGroup_LayoutParams *create_ADXChipGroup_LayoutParams_initWithInt_withInt_(jint width, jint height);
+FOUNDATION_EXPORT ADXChipGroup_LayoutParams *create_ADXChipGroup_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXChipGroup_LayoutParams)
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Messenger.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Messenger")
@@ -24,6 +25,8 @@
 
 @class ADHandler;
 @class ADMessage;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ADIBinder;
 
 /*!
@@ -58,13 +61,13 @@
  */
 - (instancetype)initWithADIBinder:(id<ADIBinder>)target;
 
-- (jint)describeContents;
+- (int32_t)describeContents;
 
 /*!
  @brief Comparison operator on two Messenger objects, such that true
   is returned then they both point to the same Handler.
  */
-- (jboolean)isEqual:(id)otherObj;
+- (bool)isEqual:(id)otherObj;
 
 /*!
  @brief Retrieve the IBinder that this Messenger is using to communicate with
@@ -107,6 +110,7 @@ FOUNDATION_EXPORT ADMessenger *create_ADMessenger_initWithADIBinder_(id<ADIBinde
 J2OBJC_TYPE_LITERAL_HEADER(ADMessenger)
 
 @compatibility_alias RAndroidOsMessenger ADMessenger;
+
 
 #endif
 

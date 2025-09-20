@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\widget\RtlSpacingHelper.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RtlSpacingHelper")
@@ -16,6 +17,9 @@
 #if !defined (ADXRtlSpacingHelper_) && (INCLUDE_ALL_RtlSpacingHelper || defined(INCLUDE_ADXRtlSpacingHelper))
 #define ADXRtlSpacingHelper_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+
 /*!
  @brief RtlSpacingHelper manages the relationship between left/right and start/end for views
   that need to maintain both absolute and relative settings for a form of spacing similar
@@ -25,21 +29,21 @@
 
 #pragma mark Public
 
-- (jint)getEnd;
+- (int32_t)getEnd;
 
-- (jint)getLeft;
+- (int32_t)getLeft;
 
-- (jint)getRight;
+- (int32_t)getRight;
 
-- (jint)getStart;
+- (int32_t)getStart;
 
-- (void)setAbsoluteWithInt:(jint)left
-                   withInt:(jint)right;
+- (void)setAbsoluteWithInt:(int32_t)left
+                   withInt:(int32_t)right;
 
-- (void)setDirectionWithBoolean:(jboolean)isRtl;
+- (void)setDirectionWithBoolean:(bool)isRtl;
 
-- (void)setRelativeWithInt:(jint)start
-                   withInt:(jint)end;
+- (void)setRelativeWithInt:(int32_t)start
+                   withInt:(int32_t)end;
 
 #pragma mark Package-Private
 
@@ -53,9 +57,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADXRtlSpacingHelper)
 
-inline jint ADXRtlSpacingHelper_get_UNDEFINED(void);
-#define ADXRtlSpacingHelper_UNDEFINED ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADXRtlSpacingHelper, UNDEFINED, jint)
+inline int32_t ADXRtlSpacingHelper_get_UNDEFINED(void);
+#define ADXRtlSpacingHelper_UNDEFINED ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXRtlSpacingHelper, UNDEFINED, int32_t)
 
 FOUNDATION_EXPORT void ADXRtlSpacingHelper_initPackagePrivate(ADXRtlSpacingHelper *self);
 
@@ -66,6 +70,7 @@ FOUNDATION_EXPORT ADXRtlSpacingHelper *create_ADXRtlSpacingHelper_initPackagePri
 J2OBJC_TYPE_LITERAL_HEADER(ADXRtlSpacingHelper)
 
 @compatibility_alias AndroidxAppcompatWidgetRtlSpacingHelper ADXRtlSpacingHelper;
+
 
 #endif
 

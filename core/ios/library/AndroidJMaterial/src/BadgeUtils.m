@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\badge\BadgeUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BadgeDrawable.h"
 #include "BadgeUtils.h"
 #include "FrameLayout.h"
@@ -10,6 +15,16 @@
 #include "Rect.h"
 #include "View.h"
 #include "ViewOverlay.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline NSString *ADXBadgeUtils_get_LOG_TAG(void);
@@ -26,10 +41,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)updateBadgeBoundsWithADRect:(ADRect *)rect
-                          withFloat:(jfloat)centerX
-                          withFloat:(jfloat)centerY
-                          withFloat:(jfloat)halfWidth
-                          withFloat:(jfloat)halfHeight {
+                          withFloat:(float)centerX
+                          withFloat:(float)centerY
+                          withFloat:(float)halfWidth
+                          withFloat:(float)halfHeight {
   ADXBadgeUtils_updateBadgeBoundsWithADRect_withFloat_withFloat_withFloat_withFloat_(rect, centerX, centerY, halfWidth, halfHeight);
 }
 
@@ -90,7 +105,7 @@ ADXBadgeUtils *create_ADXBadgeUtils_init() {
   J2OBJC_CREATE_IMPL(ADXBadgeUtils, init)
 }
 
-void ADXBadgeUtils_updateBadgeBoundsWithADRect_withFloat_withFloat_withFloat_withFloat_(ADRect *rect, jfloat centerX, jfloat centerY, jfloat halfWidth, jfloat halfHeight) {
+void ADXBadgeUtils_updateBadgeBoundsWithADRect_withFloat_withFloat_withFloat_withFloat_(ADRect *rect, float centerX, float centerY, float halfWidth, float halfHeight) {
   ADXBadgeUtils_initialize();
   [((ADRect *) nil_chk(rect)) setWithInt:JreFpToInt((centerX - halfWidth)) withInt:JreFpToInt((centerY - halfHeight)) withInt:JreFpToInt((centerX + halfWidth)) withInt:JreFpToInt((centerY + halfHeight))];
 }
@@ -128,3 +143,5 @@ void ADXBadgeUtils_setBadgeDrawableBoundsWithADXBadgeDrawable_withADView_withADF
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXBadgeUtils)
+
+J2OBJC_NAME_MAPPING(ADXBadgeUtils, "com.google.android.material.badge", "ADX")

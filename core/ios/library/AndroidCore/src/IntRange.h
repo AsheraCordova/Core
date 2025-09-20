@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\IntRange.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntRange")
@@ -21,12 +22,15 @@
 #include "java/lang/annotation/Annotation.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADIntRange < JavaLangAnnotationAnnotation >
 
-@property (readonly) jint from;
+@property (readonly) int32_t from;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -34,18 +38,19 @@
 
 @interface ADIntRange : NSObject < ADIntRange > {
  @public
-  jint from_;
+  int32_t from_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADIntRange)
 
-FOUNDATION_EXPORT id<ADIntRange> create_ADIntRange(jint from);
+FOUNDATION_EXPORT id<ADIntRange> create_ADIntRange(int32_t from);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIntRange)
 
 #define RAndroidAnnotationIntRange ADIntRange
+
 
 #endif
 

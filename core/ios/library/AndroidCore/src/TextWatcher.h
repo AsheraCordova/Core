@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\TextWatcher.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TextWatcher")
@@ -20,6 +21,7 @@
 #define INCLUDE_ADNoCopySpan 1
 #include "NoCopySpan.h"
 
+@class JavaLangInteger;
 @protocol ADEditable;
 @protocol JavaLangCharSequence;
 
@@ -37,9 +39,9 @@
   this callback.
  */
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after;
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after;
 
 /*!
  @brief This method is called to notify you that, within <code>s</code>,
@@ -49,9 +51,9 @@
   this callback.
  */
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count;
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count;
 
 /*!
  @brief This method is called to notify you that, somewhere within 
@@ -76,6 +78,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADTextWatcher)
 J2OBJC_TYPE_LITERAL_HEADER(ADTextWatcher)
 
 #define RAndroidTextTextWatcher ADTextWatcher
+
 
 #endif
 

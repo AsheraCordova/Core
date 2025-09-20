@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\ClientCertRequest.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ClientCertRequest.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
 #include "java/security/PrivateKey.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADClientCertRequest
@@ -29,7 +41,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jint)getPort {
+- (int32_t)getPort {
   return 0;
 }
 
@@ -87,3 +99,5 @@ ADClientCertRequest *create_ADClientCertRequest_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADClientCertRequest)
+
+J2OBJC_NAME_MAPPING(ADClientCertRequest, "r.android.webkit", "AD")

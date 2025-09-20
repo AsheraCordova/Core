@@ -3,15 +3,29 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\ParseException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "ParseException.h"
 #include "Token.h"
+#include "java/lang/Character.h"
 #include "java/lang/Exception.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/StringBuffer.h"
 #include "java/lang/System.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSParseException ()
@@ -34,9 +48,9 @@
  Increment only if the <i>serialized</i> form of the
   class changes.
  */
-inline jlong CSSParseException_get_serialVersionUID(void);
+inline int64_t CSSParseException_get_serialVersionUID(void);
 #define CSSParseException_serialVersionUID 1LL
-J2OBJC_STATIC_FIELD_CONSTANT(CSSParseException, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSParseException, serialVersionUID, int64_t)
 
 __attribute__((unused)) static NSString *CSSParseException_initialiseWithCSSToken_withIntArray2_withNSStringArray_(CSSToken *currentToken, IOSObjectArray *expectedTokenSequences, IOSObjectArray *tokenImage);
 
@@ -156,12 +170,12 @@ NSString *CSSParseException_initialiseWithCSSToken_withIntArray2_withNSStringArr
   CSSParseException_initialize();
   NSString *eol = JavaLangSystem_getPropertyWithNSString_withNSString_(@"line.separator", @"\n");
   JavaLangStringBuffer *expected = create_JavaLangStringBuffer_init();
-  jint maxSize = 0;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(expectedTokenSequences))->size_; i++) {
+  int32_t maxSize = 0;
+  for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(expectedTokenSequences))->size_; i++) {
     if (maxSize < ((IOSIntArray *) nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)))->size_) {
       maxSize = ((IOSIntArray *) nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)))->size_;
     }
-    for (jint j = 0; j < ((IOSIntArray *) nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)))->size_; j++) {
+    for (int32_t j = 0; j < ((IOSIntArray *) nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)))->size_; j++) {
       [((JavaLangStringBuffer *) nil_chk([expected appendWithNSString:IOSObjectArray_Get(nil_chk(tokenImage), IOSIntArray_Get(nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)), j))])) appendWithChar:' '];
     }
     if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)), ((IOSIntArray *) nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)))->size_ - 1) != 0) {
@@ -171,7 +185,7 @@ NSString *CSSParseException_initialiseWithCSSToken_withIntArray2_withNSStringArr
   }
   NSString *retval = @"Encountered \"";
   CSSToken *tok = JreRetainedLocalValue(((CSSToken *) nil_chk(currentToken))->next_);
-  for (jint i = 0; i < maxSize; i++) {
+  for (int32_t i = 0; i < maxSize; i++) {
     if (i != 0) JreStrAppend(&retval, "$", @" ");
     if (((CSSToken *) nil_chk(tok))->kind_ == 0) {
       JreStrAppend(&retval, "$", IOSObjectArray_Get(nil_chk(tokenImage), 0));
@@ -198,8 +212,8 @@ NSString *CSSParseException_initialiseWithCSSToken_withIntArray2_withNSStringArr
 NSString *CSSParseException_add_escapesWithNSString_(NSString *str) {
   CSSParseException_initialize();
   JavaLangStringBuffer *retval = create_JavaLangStringBuffer_init();
-  jchar ch;
-  for (jint i = 0; i < [((NSString *) nil_chk(str)) java_length]; i++) {
+  unichar ch;
+  for (int32_t i = 0; i < [((NSString *) nil_chk(str)) java_length]; i++) {
     switch ([str charAtWithInt:i]) {
       case 0:
       continue;
@@ -228,7 +242,7 @@ NSString *CSSParseException_add_escapesWithNSString_(NSString *str) {
       [retval appendWithNSString:@"\\\\"];
       continue;
       default:
-      if ((ch = [str charAtWithInt:i]) < (jint) 0x20 || ch > (jint) 0x7e) {
+      if ((ch = [str charAtWithInt:i]) < (int32_t) 0x20 || ch > (int32_t) 0x7e) {
         NSString *s = JreStrcat("$$", @"0000", JavaLangInteger_toStringWithInt_withInt_(ch, 16));
         [retval appendWithNSString:JreStrcat("$$", @"\\u", [s java_substring:[s java_length] - 4 endIndex:[s java_length]])];
       }
@@ -242,3 +256,5 @@ NSString *CSSParseException_add_escapesWithNSString_(NSString *str) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(CSSParseException)
+
+J2OBJC_NAME_MAPPING(CSSParseException, "com.ashera.css", "CSS")

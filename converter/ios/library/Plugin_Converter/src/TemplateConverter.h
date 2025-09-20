@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\TemplateConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TemplateConverter")
@@ -20,6 +21,7 @@
 #define INCLUDE_ASIConverter 1
 #include "IConverter.h"
 
+@class NSString;
 @protocol ASIFragment;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -53,6 +55,7 @@ FOUNDATION_EXPORT ASTemplateConverter *create_ASTemplateConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASTemplateConverter)
 
 @compatibility_alias ComAsheraConverterTemplateConverter ASTemplateConverter;
+
 
 #endif
 

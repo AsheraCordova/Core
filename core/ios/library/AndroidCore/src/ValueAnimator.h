@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\ValueAnimator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ValueAnimator")
@@ -34,8 +35,13 @@
 @class IOSFloatArray;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class JavaLangLong;
 @class JavaUtilArrayList;
 @class JavaUtilHashMap;
+@class NSString;
 @protocol ADTimeInterpolator;
 @protocol ADTypeEvaluator;
 @protocol ADValueAnimator_AnimatorUpdateListener;
@@ -82,7 +88,7 @@
   to animateFrame().
    Whenever mStartTime is set, you must also update mStartTimeCommitted.
    */
-  jlong mStartTime_;
+  int64_t mStartTime_;
   /*!
    @brief When true, the start time has been firmly committed as a chosen reference point in
   time by which the progress of the animation will be evaluated.When false, the
@@ -94,17 +100,17 @@
   resumes after having been paused.  This flag is set to true when the start time
   is firmly committed and should not be further compensated for jank.
    */
-  jboolean mStartTimeCommitted_;
+  bool mStartTimeCommitted_;
   /*!
    @brief Set when setCurrentPlayTime() is called.If negative, animation is not currently seeked
   to a value.
    */
-  jfloat mSeekFraction_;
+  float mSeekFraction_;
   /*!
    @brief Flag that denotes whether the animation is set up and ready to go.Used to
   set up animation that has not yet been started.
    */
-  jboolean mInitialized_;
+  bool mInitialized_;
   /*!
    @brief The set of listeners to be sent events through the life of an animation.
    */
@@ -149,13 +155,13 @@
  @return boolean Whether animators are currently enabled. The default value is 
  <code>true</code>.
  */
-+ (jboolean)areAnimatorsEnabled;
++ (bool)areAnimatorsEnabled;
 
 - (void)cancel;
 
 /*!
  */
-- (jboolean)canReverse;
+- (bool)canReverse;
 
 - (ADValueAnimator *)java_clone;
 
@@ -163,14 +169,14 @@
  @brief Applies an adjustment to the animation to compensate for jank between when
   the animation first ran and when the frame was drawn.
  */
-- (void)commitAnimationFrameWithLong:(jlong)frameTime;
+- (void)commitAnimationFrameWithLong:(int64_t)frameTime;
 
 /*!
  @brief Processes a frame of the animation, adjusting the start time if needed.
  @param frameTime The frame time.
  @return true if the animation has ended.
  */
-- (jboolean)doAnimationFrameWithLong:(jlong)frameTime;
+- (bool)doAnimationFrameWithLong:(int64_t)frameTime;
 
 - (void)end;
 
@@ -179,7 +185,7 @@
   the most recent frame update on the animation.
  @return Elapsed/interpolated fraction of the animation.
  */
-- (jfloat)getAnimatedFraction;
+- (float)getAnimatedFraction;
 
 /*!
  @brief The most recent value calculated by this <code>ValueAnimator</code> when there is just one
@@ -216,7 +222,7 @@
  Used by StrictMode internally to annotate violations.
   May be called on arbitrary threads!
  */
-+ (jint)getCurrentAnimationsCount;
++ (int32_t)getCurrentAnimationsCount;
 
 /*!
  @brief Gets the current position of the animation in time, which is equal to the current
@@ -226,13 +232,13 @@
   it will return the time that was set.
  @return The current position in time of the animation.
  */
-- (jlong)getCurrentPlayTime;
+- (int64_t)getCurrentPlayTime;
 
 /*!
  @brief Gets the length of the animation.The default duration is 300 milliseconds.
  @return The length of the animation, in milliseconds.
  */
-- (jlong)getDuration;
+- (int64_t)getDuration;
 
 /*!
  @brief Returns the system-wide scaling factor for Animator-based animations.
@@ -240,7 +246,7 @@
   cause animations to end immediately. The default value is 1.0f.
  @return the duration scale.
  */
-+ (jfloat)getDurationScale;
++ (float)getDurationScale;
 
 /*!
  @brief The amount of time, in milliseconds, between each frame of the animation.This is a
@@ -256,7 +262,7 @@
   thrown if the calling thread does not have a Looper.
  @return the requested time between frames, in milliseconds
  */
-+ (jlong)getFrameDelay;
++ (int64_t)getFrameDelay;
 
 /*!
  @brief Returns the timing interpolator that this ValueAnimator uses.
@@ -269,22 +275,22 @@
   is 0.
  @return the number of times the animation should repeat, or <code>INFINITE</code>
  */
-- (jint)getRepeatCount;
+- (int32_t)getRepeatCount;
 
 /*!
  @brief Defines what this animation should do when it reaches the end.
  @return either one of <code>REVERSE</code> or <code>RESTART</code>
  */
-- (jint)getRepeatMode;
+- (int32_t)getRepeatMode;
 
 /*!
  @brief The amount of time, in milliseconds, to delay starting the animation after 
  <code>start()</code> is called.
  @return the number of milliseconds to delay running the animation
  */
-- (jlong)getStartDelay;
+- (int64_t)getStartDelay;
 
-- (jlong)getTotalDuration;
+- (int64_t)getTotalDuration;
 
 /*!
  @brief Returns the values that this ValueAnimator animates between.These values are stored in
@@ -295,9 +301,9 @@
  */
 - (IOSObjectArray *)getValues;
 
-- (jboolean)isRunning;
+- (bool)isRunning;
 
-- (jboolean)isStarted;
+- (bool)isStarted;
 
 /*!
  @brief Constructs and returns a ValueAnimator that animates between color values.A single
@@ -374,7 +380,7 @@
  @param durationScale The duration scale to set; or <code>-1f</code>  to use the global duration
                         scale.
  */
-- (void)overrideDurationScaleWithFloat:(jfloat)durationScale;
+- (void)overrideDurationScaleWithFloat:(float)durationScale;
 
 - (void)pause;
 
@@ -385,7 +391,7 @@
  @param listener the listener to register.
  @return true if the listener was registered.
  */
-+ (jboolean)registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener;
++ (bool)registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener;
 
 /*!
  @brief Removes all listeners from the set listening to frame updates for this animation.
@@ -411,10 +417,10 @@
 
 /*!
  @brief <p>Whether or not the ValueAnimator is allowed to run asynchronously off of
-  the UI thread.
- This is a hint that informs the ValueAnimator that it is
+  the UI thread.This is a hint that informs the ValueAnimator that it is
   OK to run the animation off-thread, however ValueAnimator may decide
-  that it must run the animation on the UI thread anyway. For example if there
+  that it must run the animation on the UI thread anyway.
+ For example if there
   is an <code>AnimatorUpdateListener</code> the animation will run on the UI thread,
   regardless of the value of this hint.</p>
   
@@ -443,7 +449,7 @@
      for this reason.</li>
   </ol>
  */
-- (void)setAllowRunningAsynchronouslyWithBoolean:(jboolean)mayRunAsync;
+- (void)setAllowRunningAsynchronouslyWithBoolean:(bool)mayRunAsync;
 
 /*!
  @brief Sets the animation handler used to schedule updates for this animator or <code>null</code> to use
@@ -467,7 +473,7 @@
  @param fraction The fraction to which the animation is advanced or rewound. Values  outside the range of 0 to the maximum fraction for the animator will be clamped to
    the correct range.
  */
-- (void)setCurrentFractionWithFloat:(jfloat)fraction;
+- (void)setCurrentFractionWithFloat:(float)fraction;
 
 /*!
  @brief Sets the position of the animation to the specified point in time.This time should
@@ -479,7 +485,7 @@
   will set the current playing time to this value and continue playing from that point.
  @param playTime The time, in milliseconds, to which the animation is advanced or rewound.
  */
-- (void)setCurrentPlayTimeWithLong:(jlong)playTime;
+- (void)setCurrentPlayTimeWithLong:(int64_t)playTime;
 
 /*!
  @brief Sets the length of the animation.The default duration is 300 milliseconds.
@@ -488,11 +494,11 @@
   value makes it easier to compose statements together that construct and then set the
   duration, as in <code>ValueAnimator.ofInt(0, 10).setDuration(500).start()</code>.
  */
-- (ADValueAnimator *)setDurationWithLong:(jlong)duration;
+- (ADValueAnimator *)setDurationWithLong:(int64_t)duration;
 
 /*!
  */
-+ (void)setDurationScaleWithFloat:(jfloat)durationScale;
++ (void)setDurationScaleWithFloat:(float)durationScale;
 
 /*!
  @brief The type evaluator to be used when calculating the animated values of this animation.
@@ -539,7 +545,7 @@
   exception will be thrown if the calling thread does not have a Looper.
  @param frameDelay the requested time between frames, in milliseconds
  */
-+ (void)setFrameDelayWithLong:(jlong)frameDelay;
++ (void)setFrameDelayWithLong:(int64_t)frameDelay;
 
 /*!
  @brief The time interpolator used in calculating the elapsed fraction of this animation.The
@@ -598,7 +604,7 @@
   into account. The repeat count is 0 by default.
  @param value the number of times the animation should be repeated
  */
-- (void)setRepeatCountWithInt:(jint)value;
+- (void)setRepeatCountWithInt:(int32_t)value;
 
 /*!
  @brief Defines what this animation should do when it reaches the end.This
@@ -607,7 +613,7 @@
  Defaults to <code>RESTART</code>.
  @param value<code>RESTART</code>  or <code>REVERSE</code>
  */
-- (void)setRepeatModeWithInt:(jint)value;
+- (void)setRepeatModeWithInt:(int32_t)value;
 
 /*!
  @brief The amount of time, in milliseconds, to delay starting the animation after 
@@ -616,7 +622,7 @@
   negative start delay will be clamped to 0 on N and above.
  @param startDelay The amount of the delay, in milliseconds
  */
-- (void)setStartDelayWithLong:(jlong)startDelay;
+- (void)setStartDelayWithLong:(int64_t)startDelay;
 
 /*!
  @brief Sets the values, per property, being animated between.This function is called internally
@@ -638,7 +644,7 @@
  @param listener the listener to unregister.
  @return true if the listener was unregistered.
  */
-+ (jboolean)unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener;
++ (bool)unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener:(id<ADValueAnimator_DurationScaleChangeListener>)listener;
 
 #pragma mark Package-Private
 
@@ -654,10 +660,10 @@
  @return true if the animation's duration, including any repetitions due to 
  <code>repeatCount</code> has been exceeded and the animation should be ended.
  */
-- (jboolean)animateBasedOnTimeWithLong:(jlong)currentTime;
+- (bool)animateBasedOnTimeWithLong:(int64_t)currentTime;
 
-- (void)animateSkipToEndsWithLong:(jlong)currentPlayTime
-                         withLong:(jlong)lastPlayTime;
+- (void)animateSkipToEndsWithLong:(int64_t)currentPlayTime
+                         withLong:(int64_t)lastPlayTime;
 
 /*!
  @brief This method is called with the elapsed fraction of the animation during every
@@ -670,7 +676,7 @@
   of the animated value.</p>
  @param fraction The elapsed fraction of the animation.
  */
-- (void)animateValueWithFloat:(jfloat)fraction;
+- (void)animateValueWithFloat:(float)fraction;
 
 /*!
  @brief Internal use only.
@@ -680,8 +686,8 @@
  <code>r.android.view.animation.Animation.AnimationListener.onAnimationRepeat(Animation)</code>
   will be called.
  */
-- (void)animateValuesInRangeWithLong:(jlong)currentPlayTime
-                            withLong:(jlong)lastPlayTime;
+- (void)animateValuesInRangeWithLong:(int64_t)currentPlayTime
+                            withLong:(int64_t)lastPlayTime;
 
 /*!
  @brief Returns the name of this animator for debugging purposes.
@@ -700,9 +706,9 @@
  */
 - (void)initAnimation OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)isInitialized;
+- (bool)isInitialized;
 
-- (jboolean)pulseAnimationFrameWithLong:(jlong)frameTime;
+- (bool)pulseAnimationFrameWithLong:(int64_t)frameTime;
 
 /*!
  @brief Internal use only.
@@ -710,9 +716,9 @@
   or backward.
  @param inReverse whether the end value is based on a reverse direction. If yes, this is                   equivalent to skip to start value in a forward playing direction.
  */
-- (void)skipToEndValueWithBoolean:(jboolean)inReverse;
+- (void)skipToEndValueWithBoolean:(bool)inReverse;
 
-- (void)startWithoutPulsingWithBoolean:(jboolean)inReverse;
+- (void)startWithoutPulsingWithBoolean:(bool)inReverse;
 
 @end
 
@@ -726,35 +732,35 @@ J2OBJC_FIELD_SETTER(ADValueAnimator, mValuesMap_, JavaUtilHashMap *)
  @brief When the animation reaches the end and <code>repeatCount</code> is INFINITE
   or a positive value, the animation restarts from the beginning.
  */
-inline jint ADValueAnimator_get_RESTART(void);
+inline int32_t ADValueAnimator_get_RESTART(void);
 #define ADValueAnimator_RESTART 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, RESTART, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, RESTART, int32_t)
 
 /*!
  @brief When the animation reaches the end and <code>repeatCount</code> is INFINITE
   or a positive value, the animation reverses direction on every iteration.
  */
-inline jint ADValueAnimator_get_REVERSE(void);
+inline int32_t ADValueAnimator_get_REVERSE(void);
 #define ADValueAnimator_REVERSE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, REVERSE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, REVERSE, int32_t)
 
 /*!
  @brief This value used used with the <code>setRepeatCount(int)</code> property to repeat
   the animation indefinitely.
  */
-inline jint ADValueAnimator_get_INFINITE(void);
+inline int32_t ADValueAnimator_get_INFINITE(void);
 #define ADValueAnimator_INFINITE -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, INFINITE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADValueAnimator, INFINITE, int32_t)
 
-FOUNDATION_EXPORT void ADValueAnimator_setDurationScaleWithFloat_(jfloat durationScale);
+FOUNDATION_EXPORT void ADValueAnimator_setDurationScaleWithFloat_(float durationScale);
 
-FOUNDATION_EXPORT jfloat ADValueAnimator_getDurationScale(void);
+FOUNDATION_EXPORT float ADValueAnimator_getDurationScale(void);
 
-FOUNDATION_EXPORT jboolean ADValueAnimator_registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener);
+FOUNDATION_EXPORT bool ADValueAnimator_registerDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener);
 
-FOUNDATION_EXPORT jboolean ADValueAnimator_unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener);
+FOUNDATION_EXPORT bool ADValueAnimator_unregisterDurationScaleChangeListenerWithADValueAnimator_DurationScaleChangeListener_(id<ADValueAnimator_DurationScaleChangeListener> listener);
 
-FOUNDATION_EXPORT jboolean ADValueAnimator_areAnimatorsEnabled(void);
+FOUNDATION_EXPORT bool ADValueAnimator_areAnimatorsEnabled(void);
 
 FOUNDATION_EXPORT void ADValueAnimator_init(ADValueAnimator *self);
 
@@ -772,15 +778,16 @@ FOUNDATION_EXPORT ADValueAnimator *ADValueAnimator_ofPropertyValuesHolderWithADP
 
 FOUNDATION_EXPORT ADValueAnimator *ADValueAnimator_ofObjectWithADTypeEvaluator_withNSObjectArray_(id<ADTypeEvaluator> evaluator, IOSObjectArray *values);
 
-FOUNDATION_EXPORT jlong ADValueAnimator_getFrameDelay(void);
+FOUNDATION_EXPORT int64_t ADValueAnimator_getFrameDelay(void);
 
-FOUNDATION_EXPORT void ADValueAnimator_setFrameDelayWithLong_(jlong frameDelay);
+FOUNDATION_EXPORT void ADValueAnimator_setFrameDelayWithLong_(int64_t frameDelay);
 
-FOUNDATION_EXPORT jint ADValueAnimator_getCurrentAnimationsCount(void);
+FOUNDATION_EXPORT int32_t ADValueAnimator_getCurrentAnimationsCount(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADValueAnimator)
 
 @compatibility_alias RAndroidAnimationValueAnimator ADValueAnimator;
+
 
 #endif
 
@@ -800,6 +807,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADValueAnimator)
 J2OBJC_EMPTY_STATIC_INIT(ADValueAnimator_RepeatMode)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADValueAnimator_RepeatMode)
+
 
 #endif
 
@@ -829,10 +837,13 @@ J2OBJC_EMPTY_STATIC_INIT(ADValueAnimator_AnimatorUpdateListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADValueAnimator_AnimatorUpdateListener)
 
+
 #endif
 
 #if !defined (ADValueAnimator_DurationScaleChangeListener_) && (INCLUDE_ALL_ValueAnimator || defined(INCLUDE_ADValueAnimator_DurationScaleChangeListener))
 #define ADValueAnimator_DurationScaleChangeListener_
+
+@class JavaLangFloat;
 
 /*!
  @brief Listener interface for the system-wide scaling factor for Animator-based animations.
@@ -845,13 +856,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADValueAnimator_AnimatorUpdateListener)
  @brief Called when the duration scale changes.
  @param scale_ the duration scale
  */
-- (void)onChangedWithFloat:(jfloat)scale_;
+- (void)onChangedWithFloat:(float)scale_;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADValueAnimator_DurationScaleChangeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADValueAnimator_DurationScaleChangeListener)
+
 
 #endif
 

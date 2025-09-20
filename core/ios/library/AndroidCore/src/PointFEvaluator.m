@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\PointFEvaluator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "PointF.h"
 #include "PointFEvaluator.h"
+#include "java/lang/Float.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADPointFEvaluator () {
@@ -35,11 +47,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (ADPointF *)evaluateWithFloat:(jfloat)fraction
+- (ADPointF *)evaluateWithFloat:(float)fraction
                          withId:(ADPointF *)startValue
                          withId:(ADPointF *)endValue {
-  jfloat x = ((ADPointF *) nil_chk(startValue))->x_ + (fraction * (((ADPointF *) nil_chk(endValue))->x_ - startValue->x_));
-  jfloat y = startValue->y_ + (fraction * (endValue->y_ - startValue->y_));
+  float x = ((ADPointF *) nil_chk(startValue))->x_ + (fraction * (((ADPointF *) nil_chk(endValue))->x_ - startValue->x_));
+  float y = startValue->y_ + (fraction * (endValue->y_ - startValue->y_));
   if (mPoint_ != nil) {
     [mPoint_ setWithFloat:x withFloat:y];
     return mPoint_;
@@ -103,3 +115,5 @@ ADPointFEvaluator *create_ADPointFEvaluator_initWithADPointF_(ADPointF *reuse) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPointFEvaluator)
+
+J2OBJC_NAME_MAPPING(ADPointFEvaluator, "r.android.animation", "AD")

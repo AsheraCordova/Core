@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\DecelerateInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DecelerateInterpolator")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADBaseInterpolator 1
 #include "BaseInterpolator.h"
 
+@class JavaLangFloat;
+@class JavaLangLong;
+
 /*!
  @brief An interpolator where the rate of change starts out quickly and
   and then decelerates.
@@ -35,15 +39,15 @@
  @param factor Degree to which the animation should be eased. Setting factor to 1.0f produces         an upside-down y=x^2 parabola. Increasing factor above 1.0f exaggerates the
           ease-out effect (i.e., it starts even faster and ends evens slower).
  */
-- (instancetype)initWithFloat:(jfloat)factor;
+- (instancetype)initWithFloat:(float)factor;
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
 /*!
  */
-- (jfloat)getInterpolationWithFloat:(jfloat)input;
+- (float)getInterpolationWithFloat:(float)input;
 
 @end
 
@@ -55,15 +59,16 @@ FOUNDATION_EXPORT ADDecelerateInterpolator *new_ADDecelerateInterpolator_init(vo
 
 FOUNDATION_EXPORT ADDecelerateInterpolator *create_ADDecelerateInterpolator_init(void);
 
-FOUNDATION_EXPORT void ADDecelerateInterpolator_initWithFloat_(ADDecelerateInterpolator *self, jfloat factor);
+FOUNDATION_EXPORT void ADDecelerateInterpolator_initWithFloat_(ADDecelerateInterpolator *self, float factor);
 
-FOUNDATION_EXPORT ADDecelerateInterpolator *new_ADDecelerateInterpolator_initWithFloat_(jfloat factor) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADDecelerateInterpolator *new_ADDecelerateInterpolator_initWithFloat_(float factor) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADDecelerateInterpolator *create_ADDecelerateInterpolator_initWithFloat_(jfloat factor);
+FOUNDATION_EXPORT ADDecelerateInterpolator *create_ADDecelerateInterpolator_initWithFloat_(float factor);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDecelerateInterpolator)
 
 @compatibility_alias RAndroidViewAnimationDecelerateInterpolator ADDecelerateInterpolator;
+
 
 #endif
 

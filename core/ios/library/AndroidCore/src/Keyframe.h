@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\Keyframe.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Keyframe")
@@ -25,7 +26,11 @@
 #if !defined (ADKeyframe_) && (INCLUDE_ALL_Keyframe || defined(INCLUDE_ADKeyframe))
 #define ADKeyframe_
 
+
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 @protocol ADTimeInterpolator;
 
 /*!
@@ -52,16 +57,16 @@
   animation first starts, to populate placeholder keyframes with real values derived
   from the target object.
    */
-  jboolean mHasValue_;
+  bool mHasValue_;
   /*!
    @brief Flag to indicate whether the value in the keyframe was read from the target object or not.
    If so, its value will be recalculated if target changes.
    */
-  jboolean mValueWasSetOnStart_;
+  bool mValueWasSetOnStart_;
   /*!
    @brief The time at which mValue will hold true.
    */
-  jfloat mFraction_;
+  float mFraction_;
   /*!
    @brief The type of the value in this Keyframe.This type is determined at construction time,
   based on the type of the <code>value</code> object passed into the constructor.
@@ -80,7 +85,7 @@
  @return The time associated with this keyframe, as a fraction of the overall animation
   duration. This should be a value between 0 and 1.
  */
-- (jfloat)getFraction;
+- (float)getFraction;
 
 /*!
  @brief Gets the optional interpolator for this Keyframe.A value of <code>null</code> indicates
@@ -110,7 +115,7 @@
   that time by deriving the value for the property from the target object.
  @return boolean Whether this object has a value assigned.
  */
-- (jboolean)hasValue;
+- (bool)hasValue;
 
 /*!
  @brief Constructs a Keyframe object with the given time.The value at this time will be derived
@@ -122,7 +127,7 @@
   an interpolation between the values at those keyframes.
  @param fraction The time, expressed as a value between 0 and 1, representing the fraction  of time elapsed of the overall animation duration.
  */
-+ (ADKeyframe *)ofFloatWithFloat:(jfloat)fraction;
++ (ADKeyframe *)ofFloatWithFloat:(float)fraction;
 
 /*!
  @brief Constructs a Keyframe object with the given time and value.The time defines the
@@ -134,8 +139,8 @@
  @param value The value that the object will animate to as the animation time approaches  the time in this keyframe, and the value animated from as the time passes the time in
    this keyframe.
  */
-+ (ADKeyframe *)ofFloatWithFloat:(jfloat)fraction
-                       withFloat:(jfloat)value;
++ (ADKeyframe *)ofFloatWithFloat:(float)fraction
+                       withFloat:(float)value;
 
 /*!
  @brief Constructs a Keyframe object with the given time.The value at this time will be derived
@@ -147,7 +152,7 @@
   an interpolation between the values at those keyframes.
  @param fraction The time, expressed as a value between 0 and 1, representing the fraction  of time elapsed of the overall animation duration.
  */
-+ (ADKeyframe *)ofIntWithFloat:(jfloat)fraction;
++ (ADKeyframe *)ofIntWithFloat:(float)fraction;
 
 /*!
  @brief Constructs a Keyframe object with the given time and value.The time defines the
@@ -159,8 +164,8 @@
  @param value The value that the object will animate to as the animation time approaches  the time in this keyframe, and the value animated from as the time passes the time in
    this keyframe.
  */
-+ (ADKeyframe *)ofIntWithFloat:(jfloat)fraction
-                       withInt:(jint)value;
++ (ADKeyframe *)ofIntWithFloat:(float)fraction
+                       withInt:(int32_t)value;
 
 /*!
  @brief Constructs a Keyframe object with the given time.The value at this time will be derived
@@ -172,7 +177,7 @@
   an interpolation between the values at those keyframes.
  @param fraction The time, expressed as a value between 0 and 1, representing the fraction  of time elapsed of the overall animation duration.
  */
-+ (ADKeyframe *)ofObjectWithFloat:(jfloat)fraction;
++ (ADKeyframe *)ofObjectWithFloat:(float)fraction;
 
 /*!
  @brief Constructs a Keyframe object with the given time and value.The time defines the
@@ -184,14 +189,14 @@
  @param value The value that the object will animate to as the animation time approaches  the time in this keyframe, and the value animated from as the time passes the time in
    this keyframe.
  */
-+ (ADKeyframe *)ofObjectWithFloat:(jfloat)fraction
++ (ADKeyframe *)ofObjectWithFloat:(float)fraction
                            withId:(id)value;
 
 /*!
  @brief Sets the time for this keyframe, as a fraction of the overall animation duration.
  @param fraction time associated with this keyframe, as a fraction of the overall animation  duration. This should be a value between 0 and 1.
  */
-- (void)setFractionWithFloat:(jfloat)fraction;
+- (void)setFractionWithFloat:(float)fraction;
 
 /*!
  @brief Sets the optional interpolator for this Keyframe.A value of <code>null</code> indicates
@@ -208,14 +213,14 @@
 
 #pragma mark Package-Private
 
-- (void)setValueWasSetOnStartWithBoolean:(jboolean)valueWasSetOnStart;
+- (void)setValueWasSetOnStartWithBoolean:(bool)valueWasSetOnStart;
 
 /*!
  @brief If the Keyframe's value was acquired from the target object, this flag should be set so that,
   if target changes, value will be reset.
  @return boolean Whether this Keyframe's value was retieved from the target object or not.
  */
-- (jboolean)valueWasSetOnStart;
+- (bool)valueWasSetOnStart;
 
 @end
 
@@ -225,26 +230,29 @@ J2OBJC_FIELD_SETTER(ADKeyframe, mValueType_, IOSClass *)
 
 FOUNDATION_EXPORT void ADKeyframe_init(ADKeyframe *self);
 
-FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofIntWithFloat_withInt_(jfloat fraction, jint value);
+FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofIntWithFloat_withInt_(float fraction, int32_t value);
 
-FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofIntWithFloat_(jfloat fraction);
+FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofIntWithFloat_(float fraction);
 
-FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofFloatWithFloat_withFloat_(jfloat fraction, jfloat value);
+FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofFloatWithFloat_withFloat_(float fraction, float value);
 
-FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofFloatWithFloat_(jfloat fraction);
+FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofFloatWithFloat_(float fraction);
 
-FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofObjectWithFloat_withId_(jfloat fraction, id value);
+FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofObjectWithFloat_withId_(float fraction, id value);
 
-FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofObjectWithFloat_(jfloat fraction);
+FOUNDATION_EXPORT ADKeyframe *ADKeyframe_ofObjectWithFloat_(float fraction);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe)
 
 @compatibility_alias RAndroidAnimationKeyframe ADKeyframe;
 
+
 #endif
 
 #if !defined (ADKeyframe_ObjectKeyframe_) && (INCLUDE_ALL_Keyframe || defined(INCLUDE_ADKeyframe_ObjectKeyframe))
 #define ADKeyframe_ObjectKeyframe_
+
+@class JavaLangFloat;
 
 /*!
  @brief This internal subclass is used for all types which are not int or float.
@@ -267,7 +275,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithFloat:(jfloat)fraction
+- (instancetype)initWithFloat:(float)fraction
                        withId:(id)value;
 
 // Disallowed inherited constructors, do not use.
@@ -280,18 +288,22 @@ J2OBJC_EMPTY_STATIC_INIT(ADKeyframe_ObjectKeyframe)
 
 J2OBJC_FIELD_SETTER(ADKeyframe_ObjectKeyframe, mValue_, id)
 
-FOUNDATION_EXPORT void ADKeyframe_ObjectKeyframe_initWithFloat_withId_(ADKeyframe_ObjectKeyframe *self, jfloat fraction, id value);
+FOUNDATION_EXPORT void ADKeyframe_ObjectKeyframe_initWithFloat_withId_(ADKeyframe_ObjectKeyframe *self, float fraction, id value);
 
-FOUNDATION_EXPORT ADKeyframe_ObjectKeyframe *new_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(jfloat fraction, id value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADKeyframe_ObjectKeyframe *new_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(float fraction, id value) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADKeyframe_ObjectKeyframe *create_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(jfloat fraction, id value);
+FOUNDATION_EXPORT ADKeyframe_ObjectKeyframe *create_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(float fraction, id value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_ObjectKeyframe)
+
 
 #endif
 
 #if !defined (ADKeyframe_IntKeyframe_) && (INCLUDE_ALL_Keyframe || defined(INCLUDE_ADKeyframe_IntKeyframe))
 #define ADKeyframe_IntKeyframe_
+
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 /*!
  @brief Internal subclass used when the keyframe value is of type int.
@@ -301,14 +313,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_ObjectKeyframe)
   /*!
    @brief The value of the animation at the time mFraction.
    */
-  jint mValue_;
+  int32_t mValue_;
 }
 
 #pragma mark Public
 
 - (ADKeyframe_IntKeyframe *)java_clone;
 
-- (jint)getIntValue;
+- (int32_t)getIntValue;
 
 - (id)getValue;
 
@@ -316,10 +328,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_ObjectKeyframe)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithFloat:(jfloat)fraction;
+- (instancetype)initWithFloat:(float)fraction;
 
-- (instancetype)initWithFloat:(jfloat)fraction
-                      withInt:(jint)value;
+- (instancetype)initWithFloat:(float)fraction
+                      withInt:(int32_t)value;
 
 // Disallowed inherited constructors, do not use.
 
@@ -329,24 +341,27 @@ J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_ObjectKeyframe)
 
 J2OBJC_EMPTY_STATIC_INIT(ADKeyframe_IntKeyframe)
 
-FOUNDATION_EXPORT void ADKeyframe_IntKeyframe_initWithFloat_withInt_(ADKeyframe_IntKeyframe *self, jfloat fraction, jint value);
+FOUNDATION_EXPORT void ADKeyframe_IntKeyframe_initWithFloat_withInt_(ADKeyframe_IntKeyframe *self, float fraction, int32_t value);
 
-FOUNDATION_EXPORT ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_withInt_(jfloat fraction, jint value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_withInt_(float fraction, int32_t value) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_withInt_(jfloat fraction, jint value);
+FOUNDATION_EXPORT ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_withInt_(float fraction, int32_t value);
 
-FOUNDATION_EXPORT void ADKeyframe_IntKeyframe_initWithFloat_(ADKeyframe_IntKeyframe *self, jfloat fraction);
+FOUNDATION_EXPORT void ADKeyframe_IntKeyframe_initWithFloat_(ADKeyframe_IntKeyframe *self, float fraction);
 
-FOUNDATION_EXPORT ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_(jfloat fraction) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_(float fraction) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_(jfloat fraction);
+FOUNDATION_EXPORT ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_(float fraction);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_IntKeyframe)
+
 
 #endif
 
 #if !defined (ADKeyframe_FloatKeyframe_) && (INCLUDE_ALL_Keyframe || defined(INCLUDE_ADKeyframe_FloatKeyframe))
 #define ADKeyframe_FloatKeyframe_
+
+@class JavaLangFloat;
 
 /*!
  @brief Internal subclass used when the keyframe value is of type float.
@@ -356,14 +371,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_IntKeyframe)
   /*!
    @brief The value of the animation at the time mFraction.
    */
-  jfloat mValue_;
+  float mValue_;
 }
 
 #pragma mark Public
 
 - (ADKeyframe_FloatKeyframe *)java_clone;
 
-- (jfloat)getFloatValue;
+- (float)getFloatValue;
 
 - (id)getValue;
 
@@ -371,10 +386,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_IntKeyframe)
 
 #pragma mark Package-Private
 
-- (instancetype)initWithFloat:(jfloat)fraction;
+- (instancetype)initWithFloat:(float)fraction;
 
-- (instancetype)initWithFloat:(jfloat)fraction
-                    withFloat:(jfloat)value;
+- (instancetype)initWithFloat:(float)fraction
+                    withFloat:(float)value;
 
 // Disallowed inherited constructors, do not use.
 
@@ -384,19 +399,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_IntKeyframe)
 
 J2OBJC_EMPTY_STATIC_INIT(ADKeyframe_FloatKeyframe)
 
-FOUNDATION_EXPORT void ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(ADKeyframe_FloatKeyframe *self, jfloat fraction, jfloat value);
+FOUNDATION_EXPORT void ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(ADKeyframe_FloatKeyframe *self, float fraction, float value);
 
-FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(jfloat fraction, jfloat value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(float fraction, float value) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(jfloat fraction, jfloat value);
+FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(float fraction, float value);
 
-FOUNDATION_EXPORT void ADKeyframe_FloatKeyframe_initWithFloat_(ADKeyframe_FloatKeyframe *self, jfloat fraction);
+FOUNDATION_EXPORT void ADKeyframe_FloatKeyframe_initWithFloat_(ADKeyframe_FloatKeyframe *self, float fraction);
 
-FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_(jfloat fraction) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_(float fraction) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_(jfloat fraction);
+FOUNDATION_EXPORT ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_(float fraction);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADKeyframe_FloatKeyframe)
+
 
 #endif
 

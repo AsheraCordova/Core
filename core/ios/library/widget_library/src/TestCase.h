@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\TestCase.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TestCase")
@@ -41,6 +42,7 @@ FOUNDATION_EXPORT ASTestCase *create_ASTestCase_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASTestCase)
 
 @compatibility_alias ComAsheraModelTestCase ASTestCase;
+
 
 #endif
 

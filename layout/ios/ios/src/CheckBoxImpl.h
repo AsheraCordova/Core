@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\CheckBoxImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CheckBoxImpl")
@@ -31,6 +32,9 @@
 @class ADCheckBox;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -56,7 +60,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -72,9 +76,9 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getHighlightedTextColor;
 
@@ -84,21 +88,21 @@
 
 - (id)getIsUserInteractionEnabled;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
 - (id)getMinimumScaleFactor;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getNumberOfLines;
 
@@ -116,15 +120,15 @@
 
 - (void)invalidate;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -185,7 +189,7 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)showErrorWithNSString:(NSString *)message;
 
@@ -236,6 +240,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl)
 
 @compatibility_alias ComAsheraLayoutCheckBoxImpl ASCheckBoxImpl;
 
+
 #endif
 
 #if !defined (ASCheckBoxImpl_ButtonTinttMode_) && (INCLUDE_ALL_CheckBoxImpl || defined(INCLUDE_ASCheckBoxImpl_ButtonTinttMode))
@@ -271,6 +276,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_ButtonTinttMode *new_ASCheckBoxImpl_ButtonTintt
 FOUNDATION_EXPORT ASCheckBoxImpl_ButtonTinttMode *create_ASCheckBoxImpl_ButtonTinttMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_ButtonTinttMode)
+
 
 #endif
 
@@ -308,6 +314,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_Ellipsize *create_ASCheckBoxImpl_Ellipsize_init
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_Ellipsize)
 
+
 #endif
 
 #if !defined (ASCheckBoxImpl_MarqueeRepeatLimit_) && (INCLUDE_ALL_CheckBoxImpl || defined(INCLUDE_ASCheckBoxImpl_MarqueeRepeatLimit))
@@ -317,6 +324,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_Ellipsize)
 #define INCLUDE_ASAbstractEnumToIntConverter 1
 #include "AbstractEnumToIntConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
 @protocol JavaUtilMap;
 
@@ -328,7 +336,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_Ellipsize)
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 #pragma mark Package-Private
 
@@ -345,6 +353,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_MarqueeRepeatLimit *new_ASCheckBoxImpl_MarqueeR
 FOUNDATION_EXPORT ASCheckBoxImpl_MarqueeRepeatLimit *create_ASCheckBoxImpl_MarqueeRepeatLimit_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_MarqueeRepeatLimit)
+
 
 #endif
 
@@ -382,6 +391,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_JustificationMode *create_ASCheckBoxImpl_Justif
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_JustificationMode)
 
+
 #endif
 
 #if !defined (ASCheckBoxImpl_Font_) && (INCLUDE_ALL_CheckBoxImpl || defined(INCLUDE_ASCheckBoxImpl_Font))
@@ -417,6 +427,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_Font *new_ASCheckBoxImpl_Font_init(void) NS_RET
 FOUNDATION_EXPORT ASCheckBoxImpl_Font *create_ASCheckBoxImpl_Font_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_Font)
+
 
 #endif
 
@@ -454,6 +465,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_TextStyle *create_ASCheckBoxImpl_TextStyle_init
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_TextStyle)
 
+
 #endif
 
 #if !defined (ASCheckBoxImpl_DrawableTintMode_) && (INCLUDE_ALL_CheckBoxImpl || defined(INCLUDE_ASCheckBoxImpl_DrawableTintMode))
@@ -490,6 +502,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_DrawableTintMode *create_ASCheckBoxImpl_Drawabl
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASCheckBoxImpl_CheckBoxExt_) && (INCLUDE_ALL_CheckBoxImpl || defined(INCLUDE_ASCheckBoxImpl_CheckBoxExt))
@@ -509,6 +522,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -518,7 +535,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 
 - (instancetype)initWithASCheckBoxImpl:(ASCheckBoxImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -527,13 +544,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -549,19 +566,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -584,7 +601,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -600,16 +617,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -627,6 +644,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_CheckBoxExt *create_ASCheckBoxImpl_CheckBoxExt_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_CheckBoxExt)
 
+
 #endif
 
 #if !defined (ASCheckBoxImpl_PostMeasureHandler_) && (INCLUDE_ALL_CheckBoxImpl || defined(INCLUDE_ASCheckBoxImpl_PostMeasureHandler))
@@ -637,6 +655,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_CheckBoxExt)
 #include "EventBusHandler.h"
 
 @class ASCheckBoxImpl;
+@class NSString;
 
 @interface ASCheckBoxImpl_PostMeasureHandler : ASEventBusHandler
 
@@ -664,6 +683,7 @@ FOUNDATION_EXPORT ASCheckBoxImpl_PostMeasureHandler *new_ASCheckBoxImpl_PostMeas
 FOUNDATION_EXPORT ASCheckBoxImpl_PostMeasureHandler *create_ASCheckBoxImpl_PostMeasureHandler_initWithASCheckBoxImpl_withNSString_(ASCheckBoxImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
+
 
 #endif
 

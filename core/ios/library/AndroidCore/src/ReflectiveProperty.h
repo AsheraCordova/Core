@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\ReflectiveProperty.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ReflectiveProperty")
@@ -21,6 +22,8 @@
 #include "Property.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class NSString;
 
 /*!
  @brief Internal class to automatically generate a Property for a given class/name pair, given the
@@ -47,7 +50,7 @@
 /*!
  @brief Returns false if there is no setter or public field underlying this Property.
  */
-- (jboolean)isReadOnly;
+- (bool)isReadOnly;
 
 - (void)setWithId:(id)object
            withId:(id)value;
@@ -70,6 +73,7 @@ FOUNDATION_EXPORT ADReflectiveProperty *create_ADReflectiveProperty_initPackageP
 J2OBJC_TYPE_LITERAL_HEADER(ADReflectiveProperty)
 
 @compatibility_alias RAndroidUtilReflectiveProperty ADReflectiveProperty;
+
 
 #endif
 

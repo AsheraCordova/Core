@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebSettings.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WebSettings")
@@ -16,6 +17,10 @@
 #if !defined (ADWebSettings_) && (INCLUDE_ALL_WebSettings || defined(INCLUDE_ADWebSettings))
 #define ADWebSettings_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
+
 @interface ADWebSettings : NSObject
 
 #pragma mark Public
@@ -24,41 +29,41 @@
 
 - (NSString *)getUserAgentString;
 
-- (void)setAllowUniversalAccessFromFileURLsWithBoolean:(jboolean)b;
+- (void)setAllowUniversalAccessFromFileURLsWithBoolean:(bool)b;
 
-- (void)setAppCacheEnabledWithBoolean:(jboolean)b;
+- (void)setAppCacheEnabledWithBoolean:(bool)b;
 
-- (void)setAppCacheMaxSizeWithInt:(jint)i;
+- (void)setAppCacheMaxSizeWithInt:(int32_t)i;
 
 - (void)setAppCachePathWithNSString:(NSString *)databasePath;
 
-- (void)setDatabaseEnabledWithBoolean:(jboolean)b;
+- (void)setDatabaseEnabledWithBoolean:(bool)b;
 
 - (void)setDatabasePathWithNSString:(NSString *)databasePath;
 
-- (void)setDomStorageEnabledWithBoolean:(jboolean)b;
+- (void)setDomStorageEnabledWithBoolean:(bool)b;
 
 - (void)setGeolocationDatabasePathWithNSString:(NSString *)databasePath;
 
-- (void)setGeolocationEnabledWithBoolean:(jboolean)b;
+- (void)setGeolocationEnabledWithBoolean:(bool)b;
 
-- (void)setJavaScriptCanOpenWindowsAutomaticallyWithBoolean:(jboolean)b;
+- (void)setJavaScriptCanOpenWindowsAutomaticallyWithBoolean:(bool)b;
 
-- (void)setJavaScriptEnabledWithBoolean:(jboolean)b;
+- (void)setJavaScriptEnabledWithBoolean:(bool)b;
 
-- (void)setLayoutAlgorithmWithInt:(jint)normal;
+- (void)setLayoutAlgorithmWithInt:(int32_t)normal;
 
-- (void)setLoadWithOverviewModeWithBoolean:(jboolean)b;
+- (void)setLoadWithOverviewModeWithBoolean:(bool)b;
 
-- (void)setMediaPlaybackRequiresUserGestureWithBoolean:(jboolean)b;
+- (void)setMediaPlaybackRequiresUserGestureWithBoolean:(bool)b;
 
-- (void)setSaveFormDataWithBoolean:(jboolean)b;
+- (void)setSaveFormDataWithBoolean:(bool)b;
 
-- (void)setSavePasswordWithBoolean:(jboolean)b;
+- (void)setSavePasswordWithBoolean:(bool)b;
 
 - (void)setUserAgentStringWithNSString:(NSString *)overrideUserAgent;
 
-- (void)setUseWideViewPortWithBoolean:(jboolean)b;
+- (void)setUseWideViewPortWithBoolean:(bool)b;
 
 @end
 
@@ -74,10 +79,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWebSettings)
 
 @compatibility_alias RAndroidWebkitWebSettings ADWebSettings;
 
+
 #endif
 
 #if !defined (ADWebSettings_LayoutAlgorithm_) && (INCLUDE_ALL_WebSettings || defined(INCLUDE_ADWebSettings_LayoutAlgorithm))
 #define ADWebSettings_LayoutAlgorithm_
+
+@class JavaLangInteger;
 
 @interface ADWebSettings_LayoutAlgorithm : NSObject
 
@@ -89,9 +97,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWebSettings)
 
 J2OBJC_EMPTY_STATIC_INIT(ADWebSettings_LayoutAlgorithm)
 
-inline jint ADWebSettings_LayoutAlgorithm_get_NORMAL(void);
+inline int32_t ADWebSettings_LayoutAlgorithm_get_NORMAL(void);
 #define ADWebSettings_LayoutAlgorithm_NORMAL 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADWebSettings_LayoutAlgorithm, NORMAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWebSettings_LayoutAlgorithm, NORMAL, int32_t)
 
 FOUNDATION_EXPORT void ADWebSettings_LayoutAlgorithm_init(ADWebSettings_LayoutAlgorithm *self);
 
@@ -100,6 +108,7 @@ FOUNDATION_EXPORT ADWebSettings_LayoutAlgorithm *new_ADWebSettings_LayoutAlgorit
 FOUNDATION_EXPORT ADWebSettings_LayoutAlgorithm *create_ADWebSettings_LayoutAlgorithm_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADWebSettings_LayoutAlgorithm)
+
 
 #endif
 

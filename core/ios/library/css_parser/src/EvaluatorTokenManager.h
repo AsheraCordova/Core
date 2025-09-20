@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\EvaluatorTokenManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EvaluatorTokenManager")
@@ -26,6 +27,8 @@
 @class IOSLongArray;
 @class IOSObjectArray;
 @class JavaIoPrintStream;
+@class JavaLangCharacter;
+@class JavaLangInteger;
 
 /*!
  @brief Token Manager.
@@ -36,14 +39,14 @@
    @brief Debug output.
    */
   JavaIoPrintStream *debugStream_;
-  jint curLexState_;
-  jint defaultLexState_;
-  jint jjnewStateCnt_;
-  jint jjround_;
-  jint jjmatchedPos_;
-  jint jjmatchedKind_;
+  int32_t curLexState_;
+  int32_t defaultLexState_;
+  int32_t jjnewStateCnt_;
+  int32_t jjround_;
+  int32_t jjmatchedPos_;
+  int32_t jjmatchedKind_;
   CSSJavaCharStream *input_stream_;
-  jchar curChar_;
+  unichar curChar_;
 }
 
 #pragma mark Public
@@ -57,7 +60,7 @@
  @brief Constructor.
  */
 - (instancetype)initPackagePrivateWithCSSJavaCharStream:(CSSJavaCharStream *)stream
-                                                withInt:(jint)lexState;
+                                                withInt:(int32_t)lexState;
 
 /*!
  @brief Get the next Token.
@@ -73,7 +76,7 @@
  @brief Reinitialise parser.
  */
 - (void)ReInitWithCSSJavaCharStream:(CSSJavaCharStream *)stream
-                            withInt:(jint)lexState;
+                            withInt:(int32_t)lexState;
 
 /*!
  @brief Set debug output.
@@ -83,7 +86,7 @@
 /*!
  @brief Switch to specified lex state.
  */
-- (void)SwitchToWithInt:(jint)lexState;
+- (void)SwitchToWithInt:(int32_t)lexState;
 
 #pragma mark Protected
 
@@ -137,15 +140,16 @@ FOUNDATION_EXPORT CSSEvaluatorTokenManager *new_CSSEvaluatorTokenManager_initPac
 
 FOUNDATION_EXPORT CSSEvaluatorTokenManager *create_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_(CSSJavaCharStream *stream);
 
-FOUNDATION_EXPORT void CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSEvaluatorTokenManager *self, CSSJavaCharStream *stream, jint lexState);
+FOUNDATION_EXPORT void CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSEvaluatorTokenManager *self, CSSJavaCharStream *stream, int32_t lexState);
 
-FOUNDATION_EXPORT CSSEvaluatorTokenManager *new_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, jint lexState) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT CSSEvaluatorTokenManager *new_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, int32_t lexState) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT CSSEvaluatorTokenManager *create_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, jint lexState);
+FOUNDATION_EXPORT CSSEvaluatorTokenManager *create_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, int32_t lexState);
 
 J2OBJC_TYPE_LITERAL_HEADER(CSSEvaluatorTokenManager)
 
 @compatibility_alias ComAsheraCssEvaluatorTokenManager CSSEvaluatorTokenManager;
+
 
 #endif
 

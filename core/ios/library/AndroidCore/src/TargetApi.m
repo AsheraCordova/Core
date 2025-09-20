@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\TargetApi.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "TargetApi.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADTargetApi
@@ -20,7 +33,7 @@
   return [NSString stringWithFormat:@"@r.android.annotation.TargetApi(value=%d)", value_];
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -46,10 +59,12 @@
 
 @end
 
-id<ADTargetApi> create_ADTargetApi(jint value) {
+id<ADTargetApi> create_ADTargetApi(int32_t value) {
   ADTargetApi *self = AUTORELEASE([[ADTargetApi alloc] init]);
   self->value_ = value;
   return self;
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADTargetApi)
+
+J2OBJC_NAME_MAPPING(ADTargetApi, "r.android.annotation", "AD")

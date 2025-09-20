@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\jaxp\SAX1ParserAdapter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SAX1ParserAdapter")
@@ -21,6 +22,7 @@
 #include "org/xml/sax/Parser.h"
 
 @class JavaUtilLocale;
+@class NSString;
 @class OrgXmlSaxInputSource;
 @protocol OrgXmlSaxDTDHandler;
 @protocol OrgXmlSaxDocumentHandler;
@@ -78,6 +80,7 @@ J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupJaxpSAX1ParserAdapter TSSAX1ParserAdapter;
 
+
 #endif
 
 #if !defined (TSSAX1ParserAdapter_DocHandlerWrapper_) && (INCLUDE_ALL_SAX1ParserAdapter || defined(INCLUDE_TSSAX1ParserAdapter_DocHandlerWrapper))
@@ -88,6 +91,8 @@ J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter)
 #include "org/xml/sax/ContentHandler.h"
 
 @class IOSCharArray;
+@class JavaLangInteger;
+@class NSString;
 @class TSSAX1ParserAdapter_AttributesWrapper;
 @protocol OrgXmlSaxAttributes;
 @protocol OrgXmlSaxDocumentHandler;
@@ -106,8 +111,8 @@ J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter)
 #pragma mark Public
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length;
 
 - (void)endDocument;
 
@@ -118,8 +123,8 @@ J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter)
 - (void)endPrefixMappingWithNSString:(NSString *)prefix;
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length;
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length;
 
 - (void)processingInstructionWithNSString:(NSString *)target
                              withNSString:(NSString *)data;
@@ -163,6 +168,7 @@ FOUNDATION_EXPORT TSSAX1ParserAdapter_DocHandlerWrapper *create_TSSAX1ParserAdap
 
 J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter_DocHandlerWrapper)
 
+
 #endif
 
 #if !defined (TSSAX1ParserAdapter_AttributesWrapper_) && (INCLUDE_ALL_SAX1ParserAdapter || defined(INCLUDE_TSSAX1ParserAdapter_AttributesWrapper))
@@ -172,6 +178,8 @@ J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter_DocHandlerWrapper)
 #define INCLUDE_OrgXmlSaxAttributeList 1
 #include "org/xml/sax/AttributeList.h"
 
+@class JavaLangInteger;
+@class NSString;
 @protocol OrgXmlSaxAttributes;
 
 /*!
@@ -186,15 +194,15 @@ J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter_DocHandlerWrapper)
 
 - (instancetype)init;
 
-- (jint)getLength;
+- (int32_t)getLength;
 
-- (NSString *)getNameWithInt:(jint)i;
+- (NSString *)getNameWithInt:(int32_t)i;
 
-- (NSString *)getTypeWithInt:(jint)i;
+- (NSString *)getTypeWithInt:(int32_t)i;
 
 - (NSString *)getTypeWithNSString:(NSString *)name;
 
-- (NSString *)getValueWithInt:(jint)i;
+- (NSString *)getValueWithInt:(int32_t)i;
 
 - (NSString *)getValueWithNSString:(NSString *)name;
 
@@ -213,6 +221,7 @@ FOUNDATION_EXPORT TSSAX1ParserAdapter_AttributesWrapper *new_TSSAX1ParserAdapter
 FOUNDATION_EXPORT TSSAX1ParserAdapter_AttributesWrapper *create_TSSAX1ParserAdapter_AttributesWrapper_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(TSSAX1ParserAdapter_AttributesWrapper)
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\AnimatorListenerAdapter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AnimatorListenerAdapter")
@@ -25,6 +26,7 @@
 #include "Animator.h"
 
 @class ADAnimator;
+@class JavaLangBoolean;
 
 /*!
  @brief This adapter class provides empty implementations of the methods from <code>r.android.animation.Animator.AnimatorListener</code>.
@@ -70,6 +72,7 @@ FOUNDATION_EXPORT void ADAnimatorListenerAdapter_init(ADAnimatorListenerAdapter 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorListenerAdapter)
 
 @compatibility_alias RAndroidAnimationAnimatorListenerAdapter ADAnimatorListenerAdapter;
+
 
 #endif
 

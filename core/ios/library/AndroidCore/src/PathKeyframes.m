@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\PathKeyframes.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IKeyframes.h"
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
@@ -11,6 +16,7 @@
 #include "PathKeyframes.h"
 #include "PointF.h"
 #include "TypeEvaluator.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
@@ -18,7 +24,11 @@
 #include "java/lang/Math.h"
 #include "java/util/ArrayList.h"
 
-@class JavaUtilArrayList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -30,46 +40,46 @@
   IOSFloatArray *mKeyframeData_;
 }
 
-- (ADPointF *)interpolateInRangeWithFloat:(jfloat)fraction
-                                  withInt:(jint)startIndex
-                                  withInt:(jint)endIndex;
+- (ADPointF *)interpolateInRangeWithFloat:(float)fraction
+                                  withInt:(int32_t)startIndex
+                                  withInt:(int32_t)endIndex;
 
-- (ADPointF *)pointForIndexWithInt:(jint)index;
+- (ADPointF *)pointForIndexWithInt:(int32_t)index;
 
-+ (jfloat)interpolateWithFloat:(jfloat)fraction
-                     withFloat:(jfloat)startValue
-                     withFloat:(jfloat)endValue;
++ (float)interpolateWithFloat:(float)fraction
+                    withFloat:(float)startValue
+                    withFloat:(float)endValue;
 
 @end
 
 J2OBJC_FIELD_SETTER(ADPathKeyframes, mTempPointF_, ADPointF *)
 J2OBJC_FIELD_SETTER(ADPathKeyframes, mKeyframeData_, IOSFloatArray *)
 
-inline jint ADPathKeyframes_get_FRACTION_OFFSET(void);
+inline int32_t ADPathKeyframes_get_FRACTION_OFFSET(void);
 #define ADPathKeyframes_FRACTION_OFFSET 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, FRACTION_OFFSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, FRACTION_OFFSET, int32_t)
 
-inline jint ADPathKeyframes_get_X_OFFSET(void);
+inline int32_t ADPathKeyframes_get_X_OFFSET(void);
 #define ADPathKeyframes_X_OFFSET 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, X_OFFSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, X_OFFSET, int32_t)
 
-inline jint ADPathKeyframes_get_Y_OFFSET(void);
+inline int32_t ADPathKeyframes_get_Y_OFFSET(void);
 #define ADPathKeyframes_Y_OFFSET 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, Y_OFFSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, Y_OFFSET, int32_t)
 
-inline jint ADPathKeyframes_get_NUM_COMPONENTS(void);
+inline int32_t ADPathKeyframes_get_NUM_COMPONENTS(void);
 #define ADPathKeyframes_NUM_COMPONENTS 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, NUM_COMPONENTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPathKeyframes, NUM_COMPONENTS, int32_t)
 
 inline JavaUtilArrayList *ADPathKeyframes_get_EMPTY_KEYFRAMES(void);
 static JavaUtilArrayList *ADPathKeyframes_EMPTY_KEYFRAMES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADPathKeyframes, EMPTY_KEYFRAMES, JavaUtilArrayList *)
 
-__attribute__((unused)) static ADPointF *ADPathKeyframes_interpolateInRangeWithFloat_withInt_withInt_(ADPathKeyframes *self, jfloat fraction, jint startIndex, jint endIndex);
+__attribute__((unused)) static ADPointF *ADPathKeyframes_interpolateInRangeWithFloat_withInt_withInt_(ADPathKeyframes *self, float fraction, int32_t startIndex, int32_t endIndex);
 
-__attribute__((unused)) static ADPointF *ADPathKeyframes_pointForIndexWithInt_(ADPathKeyframes *self, jint index);
+__attribute__((unused)) static ADPointF *ADPathKeyframes_pointForIndexWithInt_(ADPathKeyframes *self, int32_t index);
 
-__attribute__((unused)) static jfloat ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(jfloat fraction, jfloat startValue, jfloat endValue);
+__attribute__((unused)) static float ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(float fraction, float startValue, float endValue);
 
 @interface ADPathKeyframes_SimpleIKeyframes ()
 
@@ -86,7 +96,7 @@ __attribute__((unused)) static void ADPathKeyframes_SimpleIKeyframes_init(ADPath
 
 - (instancetype)initWithADPathKeyframes:(ADPathKeyframes *)outer$;
 
-- (jfloat)getFloatValueWithFloat:(jfloat)fraction;
+- (float)getFloatValueWithFloat:(float)fraction;
 
 - (id<ADIKeyframes>)java_clone;
 
@@ -102,6 +112,7 @@ __attribute__((unused)) static ADPathKeyframes_1 *new_ADPathKeyframes_1_initWith
 
 __attribute__((unused)) static ADPathKeyframes_1 *create_ADPathKeyframes_1_initWithADPathKeyframes_(ADPathKeyframes *outer$);
 
+
 @interface ADPathKeyframes_2 : ADPathKeyframes_FloatIKeyframesBase {
  @public
   ADPathKeyframes *this$0_;
@@ -109,7 +120,7 @@ __attribute__((unused)) static ADPathKeyframes_1 *create_ADPathKeyframes_1_initW
 
 - (instancetype)initWithADPathKeyframes:(ADPathKeyframes *)outer$;
 
-- (jfloat)getFloatValueWithFloat:(jfloat)fraction;
+- (float)getFloatValueWithFloat:(float)fraction;
 
 - (id<ADIKeyframes>)java_clone;
 
@@ -125,6 +136,7 @@ __attribute__((unused)) static ADPathKeyframes_2 *new_ADPathKeyframes_2_initWith
 
 __attribute__((unused)) static ADPathKeyframes_2 *create_ADPathKeyframes_2_initWithADPathKeyframes_(ADPathKeyframes *outer$);
 
+
 @interface ADPathKeyframes_3 : ADPathKeyframes_IntIKeyframesBase {
  @public
   ADPathKeyframes *this$0_;
@@ -132,7 +144,7 @@ __attribute__((unused)) static ADPathKeyframes_2 *create_ADPathKeyframes_2_initW
 
 - (instancetype)initWithADPathKeyframes:(ADPathKeyframes *)outer$;
 
-- (jint)getIntValueWithFloat:(jfloat)fraction;
+- (int32_t)getIntValueWithFloat:(float)fraction;
 
 - (id<ADIKeyframes>)java_clone;
 
@@ -148,6 +160,7 @@ __attribute__((unused)) static ADPathKeyframes_3 *new_ADPathKeyframes_3_initWith
 
 __attribute__((unused)) static ADPathKeyframes_3 *create_ADPathKeyframes_3_initWithADPathKeyframes_(ADPathKeyframes *outer$);
 
+
 @interface ADPathKeyframes_4 : ADPathKeyframes_IntIKeyframesBase {
  @public
   ADPathKeyframes *this$0_;
@@ -155,7 +168,7 @@ __attribute__((unused)) static ADPathKeyframes_3 *create_ADPathKeyframes_3_initW
 
 - (instancetype)initWithADPathKeyframes:(ADPathKeyframes *)outer$;
 
-- (jint)getIntValueWithFloat:(jfloat)fraction;
+- (int32_t)getIntValueWithFloat:(float)fraction;
 
 - (id<ADIKeyframes>)java_clone;
 
@@ -171,6 +184,7 @@ __attribute__((unused)) static ADPathKeyframes_4 *new_ADPathKeyframes_4_initWith
 
 __attribute__((unused)) static ADPathKeyframes_4 *create_ADPathKeyframes_4_initWithADPathKeyframes_(ADPathKeyframes *outer$);
 
+
 J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
 
 @implementation ADPathKeyframes
@@ -181,7 +195,7 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
 }
 
 - (instancetype)initWithADPath:(ADPath *)path
-                     withFloat:(jfloat)error {
+                     withFloat:(float)error {
   ADPathKeyframes_initWithADPath_withFloat_(self, path, error);
   return self;
 }
@@ -190,8 +204,8 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
   return ADPathKeyframes_EMPTY_KEYFRAMES;
 }
 
-- (id)getValueWithFloat:(jfloat)fraction {
-  jint numPoints = JreIntDiv(((IOSFloatArray *) nil_chk(mKeyframeData_))->size_, 3);
+- (id)getValueWithFloat:(float)fraction {
+  int32_t numPoints = JreIntDiv(((IOSFloatArray *) nil_chk(mKeyframeData_))->size_, 3);
   if (fraction < 0) {
     return ADPathKeyframes_interpolateInRangeWithFloat_withInt_withInt_(self, fraction, 0, 1);
   }
@@ -205,11 +219,11 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
     return ADPathKeyframes_pointForIndexWithInt_(self, numPoints - 1);
   }
   else {
-    jint low = 0;
-    jint high = numPoints - 1;
+    int32_t low = 0;
+    int32_t high = numPoints - 1;
     while (low <= high) {
-      jint mid = JreIntDiv((low + high), 2);
-      jfloat midFraction = IOSFloatArray_Get(mKeyframeData_, (mid * ADPathKeyframes_NUM_COMPONENTS) + ADPathKeyframes_FRACTION_OFFSET);
+      int32_t mid = JreIntDiv((low + high), 2);
+      float midFraction = IOSFloatArray_Get(mKeyframeData_, (mid * ADPathKeyframes_NUM_COMPONENTS) + ADPathKeyframes_FRACTION_OFFSET);
       if (fraction < midFraction) {
         high = mid - 1;
       }
@@ -224,9 +238,9 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
   }
 }
 
-- (ADPointF *)interpolateInRangeWithFloat:(jfloat)fraction
-                                  withInt:(jint)startIndex
-                                  withInt:(jint)endIndex {
+- (ADPointF *)interpolateInRangeWithFloat:(float)fraction
+                                  withInt:(int32_t)startIndex
+                                  withInt:(int32_t)endIndex {
   return ADPathKeyframes_interpolateInRangeWithFloat_withInt_withInt_(self, fraction, startIndex, endIndex);
 }
 
@@ -247,13 +261,13 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
   return clone;
 }
 
-- (ADPointF *)pointForIndexWithInt:(jint)index {
+- (ADPointF *)pointForIndexWithInt:(int32_t)index {
   return ADPathKeyframes_pointForIndexWithInt_(self, index);
 }
 
-+ (jfloat)interpolateWithFloat:(jfloat)fraction
-                     withFloat:(jfloat)startValue
-                     withFloat:(jfloat)endValue {
++ (float)interpolateWithFloat:(float)fraction
+                    withFloat:(float)startValue
+                    withFloat:(float)endValue {
   return ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(fraction, startValue, endValue);
 }
 
@@ -357,7 +371,7 @@ ADPathKeyframes *create_ADPathKeyframes_initWithADPath_(ADPath *path) {
   J2OBJC_CREATE_IMPL(ADPathKeyframes, initWithADPath_, path)
 }
 
-void ADPathKeyframes_initWithADPath_withFloat_(ADPathKeyframes *self, ADPath *path, jfloat error) {
+void ADPathKeyframes_initWithADPath_withFloat_(ADPathKeyframes *self, ADPath *path, float error) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->mTempPointF_, new_ADPointF_init());
   if (path == nil || [path isEmpty]) {
@@ -366,45 +380,47 @@ void ADPathKeyframes_initWithADPath_withFloat_(ADPathKeyframes *self, ADPath *pa
   JreStrongAssign(&self->mKeyframeData_, [path approximateWithFloat:error]);
 }
 
-ADPathKeyframes *new_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, jfloat error) {
+ADPathKeyframes *new_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, float error) {
   J2OBJC_NEW_IMPL(ADPathKeyframes, initWithADPath_withFloat_, path, error)
 }
 
-ADPathKeyframes *create_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, jfloat error) {
+ADPathKeyframes *create_ADPathKeyframes_initWithADPath_withFloat_(ADPath *path, float error) {
   J2OBJC_CREATE_IMPL(ADPathKeyframes, initWithADPath_withFloat_, path, error)
 }
 
-ADPointF *ADPathKeyframes_interpolateInRangeWithFloat_withInt_withInt_(ADPathKeyframes *self, jfloat fraction, jint startIndex, jint endIndex) {
-  jint startBase = (startIndex * ADPathKeyframes_NUM_COMPONENTS);
-  jint endBase = (endIndex * ADPathKeyframes_NUM_COMPONENTS);
-  jfloat startFraction = IOSFloatArray_Get(nil_chk(self->mKeyframeData_), startBase + ADPathKeyframes_FRACTION_OFFSET);
-  jfloat endFraction = IOSFloatArray_Get(self->mKeyframeData_, endBase + ADPathKeyframes_FRACTION_OFFSET);
-  jfloat intervalFraction = (fraction - startFraction) / (endFraction - startFraction);
-  jfloat startX = IOSFloatArray_Get(self->mKeyframeData_, startBase + ADPathKeyframes_X_OFFSET);
-  jfloat endX = IOSFloatArray_Get(self->mKeyframeData_, endBase + ADPathKeyframes_X_OFFSET);
-  jfloat startY = IOSFloatArray_Get(self->mKeyframeData_, startBase + ADPathKeyframes_Y_OFFSET);
-  jfloat endY = IOSFloatArray_Get(self->mKeyframeData_, endBase + ADPathKeyframes_Y_OFFSET);
-  jfloat x = ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(intervalFraction, startX, endX);
-  jfloat y = ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(intervalFraction, startY, endY);
+ADPointF *ADPathKeyframes_interpolateInRangeWithFloat_withInt_withInt_(ADPathKeyframes *self, float fraction, int32_t startIndex, int32_t endIndex) {
+  int32_t startBase = (startIndex * ADPathKeyframes_NUM_COMPONENTS);
+  int32_t endBase = (endIndex * ADPathKeyframes_NUM_COMPONENTS);
+  float startFraction = IOSFloatArray_Get(nil_chk(self->mKeyframeData_), startBase + ADPathKeyframes_FRACTION_OFFSET);
+  float endFraction = IOSFloatArray_Get(self->mKeyframeData_, endBase + ADPathKeyframes_FRACTION_OFFSET);
+  float intervalFraction = (fraction - startFraction) / (endFraction - startFraction);
+  float startX = IOSFloatArray_Get(self->mKeyframeData_, startBase + ADPathKeyframes_X_OFFSET);
+  float endX = IOSFloatArray_Get(self->mKeyframeData_, endBase + ADPathKeyframes_X_OFFSET);
+  float startY = IOSFloatArray_Get(self->mKeyframeData_, startBase + ADPathKeyframes_Y_OFFSET);
+  float endY = IOSFloatArray_Get(self->mKeyframeData_, endBase + ADPathKeyframes_Y_OFFSET);
+  float x = ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(intervalFraction, startX, endX);
+  float y = ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(intervalFraction, startY, endY);
   [((ADPointF *) nil_chk(self->mTempPointF_)) setWithFloat:x withFloat:y];
   return self->mTempPointF_;
 }
 
-ADPointF *ADPathKeyframes_pointForIndexWithInt_(ADPathKeyframes *self, jint index) {
-  jint base = (index * ADPathKeyframes_NUM_COMPONENTS);
-  jint xOffset = base + ADPathKeyframes_X_OFFSET;
-  jint yOffset = base + ADPathKeyframes_Y_OFFSET;
+ADPointF *ADPathKeyframes_pointForIndexWithInt_(ADPathKeyframes *self, int32_t index) {
+  int32_t base = (index * ADPathKeyframes_NUM_COMPONENTS);
+  int32_t xOffset = base + ADPathKeyframes_X_OFFSET;
+  int32_t yOffset = base + ADPathKeyframes_Y_OFFSET;
   [((ADPointF *) nil_chk(self->mTempPointF_)) setWithFloat:IOSFloatArray_Get(nil_chk(self->mKeyframeData_), xOffset) withFloat:IOSFloatArray_Get(self->mKeyframeData_, yOffset)];
   return self->mTempPointF_;
 }
 
-jfloat ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(jfloat fraction, jfloat startValue, jfloat endValue) {
+float ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(float fraction, float startValue, float endValue) {
   ADPathKeyframes_initialize();
-  jfloat diff = endValue - startValue;
+  float diff = endValue - startValue;
   return startValue + (diff * fraction);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes)
+
+J2OBJC_NAME_MAPPING(ADPathKeyframes, "r.android.animation", "AD")
 
 @implementation ADPathKeyframes_SimpleIKeyframes
 
@@ -481,7 +497,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangFloat_class_();
 }
 
-- (id)getValueWithFloat:(jfloat)fraction {
+- (id)getValueWithFloat:(float)fraction {
   return JavaLangFloat_valueOfWithFloat_([self getFloatValueWithFloat:fraction]);
 }
 
@@ -518,7 +534,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_FloatIKeyframesBase)
   return self;
 }
 
-- (jfloat)getFloatValueWithFloat:(jfloat)fraction {
+- (float)getFloatValueWithFloat:(float)fraction {
   ADPointF *pointF = (ADPointF *) cast_chk([this$0_ getValueWithFloat:fraction], [ADPointF class]);
   return ((ADPointF *) nil_chk(pointF))->x_;
 }
@@ -543,7 +559,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_FloatIKeyframesBase)
     { "this$0_", "LADPathKeyframes;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADPathKeyframes;", "getFloatValue", "F", "createXFloatKeyframes" };
-  static const J2ObjcClassInfo _ADPathKeyframes_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ADPathKeyframes_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ADPathKeyframes_1;
 }
 
@@ -569,7 +585,7 @@ ADPathKeyframes_1 *create_ADPathKeyframes_1_initWithADPathKeyframes_(ADPathKeyfr
   return self;
 }
 
-- (jfloat)getFloatValueWithFloat:(jfloat)fraction {
+- (float)getFloatValueWithFloat:(float)fraction {
   ADPointF *pointF = (ADPointF *) cast_chk([this$0_ getValueWithFloat:fraction], [ADPointF class]);
   return ((ADPointF *) nil_chk(pointF))->y_;
 }
@@ -594,7 +610,7 @@ ADPathKeyframes_1 *create_ADPathKeyframes_1_initWithADPathKeyframes_(ADPathKeyfr
     { "this$0_", "LADPathKeyframes;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADPathKeyframes;", "getFloatValue", "F", "createYFloatKeyframes" };
-  static const J2ObjcClassInfo _ADPathKeyframes_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ADPathKeyframes_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ADPathKeyframes_2;
 }
 
@@ -626,7 +642,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangInteger_class_();
 }
 
-- (id)getValueWithFloat:(jfloat)fraction {
+- (id)getValueWithFloat:(float)fraction {
   return JavaLangInteger_valueOfWithInt_([self getIntValueWithFloat:fraction]);
 }
 
@@ -663,7 +679,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_IntIKeyframesBase)
   return self;
 }
 
-- (jint)getIntValueWithFloat:(jfloat)fraction {
+- (int32_t)getIntValueWithFloat:(float)fraction {
   ADPointF *pointF = (ADPointF *) cast_chk([this$0_ getValueWithFloat:fraction], [ADPointF class]);
   return JavaLangMath_roundWithFloat_(((ADPointF *) nil_chk(pointF))->x_);
 }
@@ -688,7 +704,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_IntIKeyframesBase)
     { "this$0_", "LADPathKeyframes;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADPathKeyframes;", "getIntValue", "F", "createXIntKeyframes" };
-  static const J2ObjcClassInfo _ADPathKeyframes_3 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ADPathKeyframes_3 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ADPathKeyframes_3;
 }
 
@@ -714,7 +730,7 @@ ADPathKeyframes_3 *create_ADPathKeyframes_3_initWithADPathKeyframes_(ADPathKeyfr
   return self;
 }
 
-- (jint)getIntValueWithFloat:(jfloat)fraction {
+- (int32_t)getIntValueWithFloat:(float)fraction {
   ADPointF *pointF = (ADPointF *) cast_chk([this$0_ getValueWithFloat:fraction], [ADPointF class]);
   return JavaLangMath_roundWithFloat_(((ADPointF *) nil_chk(pointF))->y_);
 }
@@ -739,7 +755,7 @@ ADPathKeyframes_3 *create_ADPathKeyframes_3_initWithADPathKeyframes_(ADPathKeyfr
     { "this$0_", "LADPathKeyframes;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADPathKeyframes;", "getIntValue", "F", "createYIntKeyframes" };
-  static const J2ObjcClassInfo _ADPathKeyframes_4 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ADPathKeyframes_4 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ADPathKeyframes_4;
 }
 

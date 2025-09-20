@@ -3,24 +3,36 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\Insets.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Insets.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADInsets ()
 
-- (instancetype)initWithInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom;
+- (instancetype)initWithInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom;
 
 @end
 
-__attribute__((unused)) static void ADInsets_initWithInt_withInt_withInt_withInt_(ADInsets *self, jint left, jint top, jint right, jint bottom);
+__attribute__((unused)) static void ADInsets_initWithInt_withInt_withInt_withInt_(ADInsets *self, int32_t left, int32_t top, int32_t right, int32_t bottom);
 
-__attribute__((unused)) static ADInsets *new_ADInsets_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADInsets *new_ADInsets_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADInsets *create_ADInsets_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom);
+__attribute__((unused)) static ADInsets *create_ADInsets_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom);
 
 J2OBJC_INITIALIZED_DEFN(ADInsets)
 
@@ -28,18 +40,18 @@ ADInsets *ADInsets_NONE;
 
 @implementation ADInsets
 
-- (instancetype)initWithInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom {
+- (instancetype)initWithInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom {
   ADInsets_initWithInt_withInt_withInt_withInt_(self, left, top, right, bottom);
   return self;
 }
 
-+ (ADInsets *)ofWithInt:(jint)left
-                withInt:(jint)top
-                withInt:(jint)right
-                withInt:(jint)bottom {
++ (ADInsets *)ofWithInt:(int32_t)left
+                withInt:(int32_t)top
+                withInt:(int32_t)right
+                withInt:(int32_t)bottom {
   return ADInsets_ofWithInt_withInt_withInt_withInt_(left, top, right, bottom);
 }
 
@@ -75,7 +87,7 @@ ADInsets *ADInsets_NONE;
 
 @end
 
-void ADInsets_initWithInt_withInt_withInt_withInt_(ADInsets *self, jint left, jint top, jint right, jint bottom) {
+void ADInsets_initWithInt_withInt_withInt_withInt_(ADInsets *self, int32_t left, int32_t top, int32_t right, int32_t bottom) {
   NSObject_init(self);
   self->left_ = left;
   self->top_ = top;
@@ -83,15 +95,15 @@ void ADInsets_initWithInt_withInt_withInt_withInt_(ADInsets *self, jint left, ji
   self->bottom_ = bottom;
 }
 
-ADInsets *new_ADInsets_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom) {
+ADInsets *new_ADInsets_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom) {
   J2OBJC_NEW_IMPL(ADInsets, initWithInt_withInt_withInt_withInt_, left, top, right, bottom)
 }
 
-ADInsets *create_ADInsets_initWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom) {
+ADInsets *create_ADInsets_initWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom) {
   J2OBJC_CREATE_IMPL(ADInsets, initWithInt_withInt_withInt_withInt_, left, top, right, bottom)
 }
 
-ADInsets *ADInsets_ofWithInt_withInt_withInt_withInt_(jint left, jint top, jint right, jint bottom) {
+ADInsets *ADInsets_ofWithInt_withInt_withInt_withInt_(int32_t left, int32_t top, int32_t right, int32_t bottom) {
   ADInsets_initialize();
   if (left == 0 && top == 0 && right == 0 && bottom == 0) {
     return ADInsets_NONE;
@@ -100,3 +112,5 @@ ADInsets *ADInsets_ofWithInt_withInt_withInt_withInt_(jint left, jint top, jint 
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADInsets)
+
+J2OBJC_NAME_MAPPING(ADInsets, "r.android.graphics", "AD")

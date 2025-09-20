@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\TextDirectionHeuristic.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TextDirectionHeuristic")
@@ -17,6 +18,8 @@
 #define ADTextDirectionHeuristic_
 
 @class IOSCharArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaLangCharSequence;
 
 /*!
@@ -33,9 +36,9 @@
  @return true if all chars in the range are to be considered in a RTL direction,
            false otherwise.
  */
-- (jboolean)isRtlWithCharArray:(IOSCharArray *)array
-                       withInt:(jint)start
-                       withInt:(jint)count;
+- (bool)isRtlWithCharArray:(IOSCharArray *)array
+                   withInt:(int32_t)start
+                   withInt:(int32_t)count;
 
 /*!
  @brief Guess if a <code>CharSequence</code> is in the RTL direction or not.
@@ -46,9 +49,9 @@
  @return true if all chars in the range are to be considered in a RTL direction,
            false otherwise.
  */
-- (jboolean)isRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                  withInt:(jint)start
-                                  withInt:(jint)count;
+- (bool)isRtlWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                              withInt:(int32_t)start
+                              withInt:(int32_t)count;
 
 @end
 
@@ -57,6 +60,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADTextDirectionHeuristic)
 J2OBJC_TYPE_LITERAL_HEADER(ADTextDirectionHeuristic)
 
 #define RAndroidTextTextDirectionHeuristic ADTextDirectionHeuristic
+
 
 #endif
 

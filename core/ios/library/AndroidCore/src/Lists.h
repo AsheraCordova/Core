@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\google\android\collect\Lists.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Lists")
@@ -70,6 +71,7 @@ FOUNDATION_EXPORT JavaUtilArrayList *ADLists_newArrayListWithNSObjectArray_(IOSO
 J2OBJC_TYPE_LITERAL_HEADER(ADLists)
 
 @compatibility_alias RComGoogleAndroidCollectLists ADLists;
+
 
 #endif
 

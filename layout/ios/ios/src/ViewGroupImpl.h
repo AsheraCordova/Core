@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewGroupImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewGroupImpl")
@@ -18,6 +19,8 @@
 
 @class ASSimpleWrapableView;
 @class ASWidgetAttribute;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
 
@@ -32,7 +35,7 @@
 + (id)getChildAttributeWithASIWidget:(id<ASIWidget>)w
                withASWidgetAttribute:(ASWidgetAttribute *)key;
 
-+ (jboolean)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key;
++ (bool)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key;
 
 + (void)nativeAddViewWithId:(id)uiView
                      withId:(id)w;
@@ -119,7 +122,7 @@ FOUNDATION_EXPORT void ASViewGroupImpl_setEndMarginWithId_withId_withASIWidget_(
 
 FOUNDATION_EXPORT void ASViewGroupImpl_setStartMarginWithId_withId_withASIWidget_(id objValue, id layoutParams, id<ASIWidget> w);
 
-FOUNDATION_EXPORT jboolean ASViewGroupImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key);
+FOUNDATION_EXPORT bool ASViewGroupImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key);
 
 FOUNDATION_EXPORT void ASViewGroupImpl_registerCommandConveterWithASIWidget_(id<ASIWidget> widget);
 
@@ -132,6 +135,7 @@ FOUNDATION_EXPORT void ASViewGroupImpl_nativeAddViewWithId_withId_(id uiView, id
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl)
 
 @compatibility_alias ComAsheraLayoutViewGroupImpl ASViewGroupImpl;
+
 
 #endif
 
@@ -169,6 +173,7 @@ FOUNDATION_EXPORT ASViewGroupImpl_LayoutTransition *create_ASViewGroupImpl_Layou
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_LayoutTransition)
 
+
 #endif
 
 #if !defined (ASViewGroupImpl_LayoutMode_) && (INCLUDE_ALL_ViewGroupImpl || defined(INCLUDE_ASViewGroupImpl_LayoutMode))
@@ -205,6 +210,7 @@ FOUNDATION_EXPORT ASViewGroupImpl_LayoutMode *create_ASViewGroupImpl_LayoutMode_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_LayoutMode)
 
+
 #endif
 
 #if !defined (ASViewGroupImpl_ClipPaddingMaskCommand_) && (INCLUDE_ALL_ViewGroupImpl || defined(INCLUDE_ASViewGroupImpl_ClipPaddingMaskCommand))
@@ -215,6 +221,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_LayoutMode)
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -224,7 +232,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_LayoutMode)
 
 - (instancetype)initWithNSString:(NSString *)id_;
 
-- (jboolean)executeAfterPostMeasure;
+- (bool)executeAfterPostMeasure;
 
 - (id)modifyValueWithASIWidget:(id<ASIWidget>)widget
                         withId:(id)nativeView
@@ -247,6 +255,7 @@ FOUNDATION_EXPORT ASViewGroupImpl_ClipPaddingMaskCommand *new_ASViewGroupImpl_Cl
 FOUNDATION_EXPORT ASViewGroupImpl_ClipPaddingMaskCommand *create_ASViewGroupImpl_ClipPaddingMaskCommand_initWithNSString_(NSString *id_);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ClipPaddingMaskCommand)
+
 
 #endif
 

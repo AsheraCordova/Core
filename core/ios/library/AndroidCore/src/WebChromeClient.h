@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebChromeClient.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WebChromeClient")
@@ -27,6 +28,10 @@
 @class ADWebChromeClient_FileChooserParams;
 @class ADWebStorage_QuotaUpdater;
 @class ADWebView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
 
 @interface ADWebChromeClient : NSObject
 
@@ -36,17 +41,17 @@
 
 - (ADView *)getVideoLoadingProgressView;
 
-- (jboolean)onConsoleMessageWithADConsoleMessage:(ADConsoleMessage *)consoleMessage;
+- (bool)onConsoleMessageWithADConsoleMessage:(ADConsoleMessage *)consoleMessage;
 
 - (void)onConsoleMessageWithNSString:(NSString *)message
-                             withInt:(jint)lineNumber
+                             withInt:(int32_t)lineNumber
                         withNSString:(NSString *)sourceID;
 
 - (void)onExceededDatabaseQuotaWithNSString:(NSString *)url
                                withNSString:(NSString *)databaseIdentifier
-                                   withLong:(jlong)currentQuota
-                                   withLong:(jlong)estimatedSize
-                                   withLong:(jlong)totalUsedQuota
+                                   withLong:(int64_t)currentQuota
+                                   withLong:(int64_t)estimatedSize
+                                   withLong:(int64_t)totalUsedQuota
               withADWebStorage_QuotaUpdater:(ADWebStorage_QuotaUpdater *)quotaUpdater;
 
 - (void)onGeolocationPermissionsShowPromptWithNSString:(NSString *)origin
@@ -54,30 +59,30 @@
 
 - (void)onHideCustomView;
 
-- (jboolean)onJsAlertWithADWebView:(ADWebView *)view
-                      withNSString:(NSString *)url
-                      withNSString:(NSString *)message
-                    withADJsResult:(ADJsResult *)result;
+- (bool)onJsAlertWithADWebView:(ADWebView *)view
+                  withNSString:(NSString *)url
+                  withNSString:(NSString *)message
+                withADJsResult:(ADJsResult *)result;
 
-- (jboolean)onJsConfirmWithADWebView:(ADWebView *)view
-                        withNSString:(NSString *)url
-                        withNSString:(NSString *)message
-                      withADJsResult:(ADJsResult *)result;
+- (bool)onJsConfirmWithADWebView:(ADWebView *)view
+                    withNSString:(NSString *)url
+                    withNSString:(NSString *)message
+                  withADJsResult:(ADJsResult *)result;
 
-- (jboolean)onJsPromptWithADWebView:(ADWebView *)view
-                       withNSString:(NSString *)origin
-                       withNSString:(NSString *)message
-                       withNSString:(NSString *)defaultValue
-               withADJsPromptResult:(ADJsPromptResult *)result;
+- (bool)onJsPromptWithADWebView:(ADWebView *)view
+                   withNSString:(NSString *)origin
+                   withNSString:(NSString *)message
+                   withNSString:(NSString *)defaultValue
+           withADJsPromptResult:(ADJsPromptResult *)result;
 
 - (void)onPermissionRequestWithADPermissionRequest:(ADPermissionRequest *)request;
 
 - (void)onShowCustomViewWithADView:(ADView *)view
 withADWebChromeClient_CustomViewCallback:(ADWebChromeClient_CustomViewCallback *)callback;
 
-- (jboolean)onShowFileChooserWithADWebView:(ADWebView *)webView
-                       withADValueCallback:(ADValueCallback *)filePathsCallback
-   withADWebChromeClient_FileChooserParams:(ADWebChromeClient_FileChooserParams *)fileChooserParams;
+- (bool)onShowFileChooserWithADWebView:(ADWebView *)webView
+                   withADValueCallback:(ADValueCallback *)filePathsCallback
+withADWebChromeClient_FileChooserParams:(ADWebChromeClient_FileChooserParams *)fileChooserParams;
 
 @end
 
@@ -93,6 +98,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWebChromeClient)
 
 @compatibility_alias RAndroidWebkitWebChromeClient ADWebChromeClient;
 
+
 #endif
 
 #if !defined (ADWebChromeClient_FileChooserParams_) && (INCLUDE_ALL_WebChromeClient || defined(INCLUDE_ADWebChromeClient_FileChooserParams))
@@ -100,6 +106,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWebChromeClient)
 
 @class ADIntent;
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADWebChromeClient_FileChooserParams : NSObject
 
@@ -113,7 +121,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWebChromeClient)
 
 - (NSString *)getMode;
 
-+ (IOSObjectArray *)parseResultWithInt:(jint)resultCode
++ (IOSObjectArray *)parseResultWithInt:(int32_t)resultCode
                           withADIntent:(ADIntent *)intent;
 
 @end
@@ -131,9 +139,10 @@ FOUNDATION_EXPORT ADWebChromeClient_FileChooserParams *new_ADWebChromeClient_Fil
 
 FOUNDATION_EXPORT ADWebChromeClient_FileChooserParams *create_ADWebChromeClient_FileChooserParams_init(void);
 
-FOUNDATION_EXPORT IOSObjectArray *ADWebChromeClient_FileChooserParams_parseResultWithInt_withADIntent_(jint resultCode, ADIntent *intent);
+FOUNDATION_EXPORT IOSObjectArray *ADWebChromeClient_FileChooserParams_parseResultWithInt_withADIntent_(int32_t resultCode, ADIntent *intent);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADWebChromeClient_FileChooserParams)
+
 
 #endif
 
@@ -159,6 +168,7 @@ FOUNDATION_EXPORT ADWebChromeClient_CustomViewCallback *new_ADWebChromeClient_Cu
 FOUNDATION_EXPORT ADWebChromeClient_CustomViewCallback *create_ADWebChromeClient_CustomViewCallback_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADWebChromeClient_CustomViewCallback)
+
 
 #endif
 

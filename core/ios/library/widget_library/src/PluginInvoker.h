@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\PluginInvoker.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PluginInvoker")
@@ -25,6 +26,8 @@
 @class JavaLangDouble;
 @class JavaLangFloat;
 @class JavaLangInteger;
+@class JavaLangLong;
+@class NSString;
 @protocol ASAttributedString;
 @protocol ASHasWidgets;
 @protocol ASIConverter;
@@ -43,7 +46,7 @@
 + (void)addToCurrentParentWithId:(id)handler
                    withASIWidget:(id<ASIWidget>)widget;
 
-+ (jfloat)convertDpToPixelWithNSString:(NSString *)dimen;
++ (float)convertDpToPixelWithNSString:(NSString *)dimen;
 
 + (id)convertFromWithASIConverter:(id<ASIConverter>)converter
                   withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
@@ -51,12 +54,12 @@
                   withASIFragment:(id<ASIFragment>)fragment;
 
 + (NSString *)convertPixelToDpWithId:(id)dimen
-                         withBoolean:(jboolean)isInt;
+                         withBoolean:(bool)isInt;
 
 + (NSString *)convertPixelToSpWithId:(id)dimen
-                         withBoolean:(jboolean)isInt;
+                         withBoolean:(bool)isInt;
 
-+ (jfloat)convertSpToPixelWithNSString:(NSString *)dimen;
++ (float)convertSpToPixelWithNSString:(NSString *)dimen;
 
 + (id)convertToWithASIConverter:(id<ASIConverter>)converter
                          withId:(id)objValue
@@ -71,7 +74,7 @@
                                        withId:(id)options;
 
 + (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                           withLong:(jlong)delay;
+                                           withLong:(int64_t)delay;
 
 + (IOSObjectArray *)getArrayWithId:(id)payLoad;
 
@@ -85,7 +88,7 @@
 
 + (id<ASIConverter>)getConverterWithNSString:(NSString *)name;
 
-+ (jint)getDensity;
++ (int32_t)getDensity;
 
 + (NSString *)getDensityName;
 
@@ -93,7 +96,7 @@
 
 + (NSString *)getDevServerIpWithASIFragment:(id<ASIFragment>)fragment;
 
-+ (jfloat)getDisplayMetricDensity;
++ (float)getDisplayMetricDensity;
 
 + (JavaLangDouble *)getDoubleWithId:(id)object;
 
@@ -107,7 +110,7 @@
 + (ASFontMetricsDescriptor *)getFontMetricsWithId:(id)font;
 
 + (id)getHandlerWithASHasWidgets:(id<ASHasWidgets>)parent
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                  withASIFragment:(id<ASIFragment>)fragment;
 
 + (JavaLangInteger *)getIntWithId:(id)object;
@@ -120,7 +123,7 @@
 
 + (id<JavaUtilMap>)getMapWithId:(id)payLoad;
 
-+ (jint)getMaxMemoryWithId:(id)context;
++ (int32_t)getMaxMemoryWithId:(id)context;
 
 + (id)getNativeMapWithJavaUtilMap:(id<JavaUtilMap>)payLoad;
 
@@ -128,13 +131,13 @@
 
 + (NSString *)getOS;
 
-+ (jint)getScreenHeight;
++ (int32_t)getScreenHeight;
 
-+ (jint)getScreenHeightDp;
++ (int32_t)getScreenHeightDp;
 
-+ (jint)getScreenWidth;
++ (int32_t)getScreenWidth;
 
-+ (jint)getScreenWidthDp;
++ (int32_t)getScreenWidthDp;
 
 + (NSString *)getStringWithId:(id)object;
 
@@ -143,11 +146,11 @@
 
 + (id<ASIWidget>)handlerStartWithId:(id)handler
                       withASIWidget:(id<ASIWidget>)widget
-                            withInt:(jint)index;
+                            withInt:(int32_t)index;
 
-+ (jboolean)isBooleanWithId:(id)obj;
++ (bool)isBooleanWithId:(id)obj;
 
-+ (jboolean)isNullWithId:(id)obj;
++ (bool)isNullWithId:(id)obj;
 
 + (NSString *)marshalWithId:(id)object;
 
@@ -157,30 +160,30 @@
              withASIFragment:(id<ASIFragment>)fragment;
 
 + (id<ASIWidget>)parseWithNSString:(NSString *)html
-                       withBoolean:(jboolean)template_
+                       withBoolean:(bool)template_
                    withASIFragment:(id<ASIFragment>)fragment;
 
 + (id<ASIWidget>)parseFileWithNSString:(NSString *)fileName
-                           withBoolean:(jboolean)template_
+                           withBoolean:(bool)template_
                        withASIFragment:(id<ASIFragment>)fragment;
 
 + (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileName
-                               withBoolean:(jboolean)template_
+                               withBoolean:(bool)template_
                            withASIFragment:(id<ASIFragment>)fragment;
 
 + (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
                         withNSString:(NSString *)componentId
-                         withBoolean:(jboolean)template_
+                         withBoolean:(bool)template_
                      withASIFragment:(id<ASIFragment>)fragment;
 
 + (id<ASIWidget>)parseWithParentWithNSString:(NSString *)html
-                                 withBoolean:(jboolean)template_
+                                 withBoolean:(bool)template_
                             withASHasWidgets:(id<ASHasWidgets>)parent
                              withASIFragment:(id<ASIFragment>)fragment;
 
 + (id)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                              withInt:(jint)delay;
+                              withInt:(int32_t)delay;
 
 + (void)putJSONSafeObjectIntoMapWithJavaUtilMap:(id<JavaUtilMap>)map
                                    withNSString:(NSString *)key
@@ -238,13 +241,13 @@ FOUNDATION_EXPORT id<JavaUtilList> ASPluginInvoker_getDependentAttributesWithASI
 
 FOUNDATION_EXPORT id ASPluginInvoker_getColorWithNSString_(NSString *color);
 
-FOUNDATION_EXPORT jfloat ASPluginInvoker_convertDpToPixelWithNSString_(NSString *dimen);
+FOUNDATION_EXPORT float ASPluginInvoker_convertDpToPixelWithNSString_(NSString *dimen);
 
-FOUNDATION_EXPORT jfloat ASPluginInvoker_convertSpToPixelWithNSString_(NSString *dimen);
+FOUNDATION_EXPORT float ASPluginInvoker_convertSpToPixelWithNSString_(NSString *dimen);
 
-FOUNDATION_EXPORT NSString *ASPluginInvoker_convertPixelToDpWithId_withBoolean_(id dimen, jboolean isInt);
+FOUNDATION_EXPORT NSString *ASPluginInvoker_convertPixelToDpWithId_withBoolean_(id dimen, bool isInt);
 
-FOUNDATION_EXPORT NSString *ASPluginInvoker_convertPixelToSpWithId_withBoolean_(id dimen, jboolean isInt);
+FOUNDATION_EXPORT NSString *ASPluginInvoker_convertPixelToSpWithId_withBoolean_(id dimen, bool isInt);
 
 FOUNDATION_EXPORT id<JavaUtilMap> ASPluginInvoker_getMapWithId_(id payLoad);
 
@@ -256,7 +259,7 @@ FOUNDATION_EXPORT IOSObjectArray *ASPluginInvoker_getArrayWithId_(id payLoad);
 
 FOUNDATION_EXPORT id<JavaUtilList> ASPluginInvoker_getListWithId_(id payLoad);
 
-FOUNDATION_EXPORT jboolean ASPluginInvoker_isBooleanWithId_(id obj);
+FOUNDATION_EXPORT bool ASPluginInvoker_isBooleanWithId_(id obj);
 
 FOUNDATION_EXPORT JavaLangBoolean *ASPluginInvoker_getBooleanWithId_(id payLoad);
 
@@ -278,23 +281,23 @@ FOUNDATION_EXPORT id<JavaUtilMap> ASPluginInvoker_getJSONCompatMap(void);
 
 FOUNDATION_EXPORT id ASPluginInvoker_getJSONSafeObjWithId_(id obj);
 
-FOUNDATION_EXPORT jboolean ASPluginInvoker_isNullWithId_(id obj);
+FOUNDATION_EXPORT bool ASPluginInvoker_isNullWithId_(id obj);
 
 FOUNDATION_EXPORT void ASPluginInvoker_navigateWithNSString_withNSString_withId_withASIFragment_(NSString *actionId, NSString *varExpression, id payload, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseWithNSString_withBoolean_withASIFragment_(NSString *html, jboolean template_, id<ASIFragment> fragment);
+FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseWithNSString_withBoolean_withASIFragment_(NSString *html, bool template_, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseWithParentWithNSString_withBoolean_withASHasWidgets_withASIFragment_(NSString *html, jboolean template_, id<ASHasWidgets> parent, id<ASIFragment> fragment);
+FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseWithParentWithNSString_withBoolean_withASHasWidgets_withASIFragment_(NSString *html, bool template_, id<ASHasWidgets> parent, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(NSString *fileName, jboolean template_, id<ASIFragment> fragment);
+FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(NSString *fileName, bool template_, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(NSString *fileName, jboolean template_, id<ASIFragment> fragment);
+FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(NSString *fileName, bool template_, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, NSString *componentId, jboolean template_, id<ASIFragment> fragment);
+FOUNDATION_EXPORT void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, NSString *componentId, bool template_, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT id ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(id<ASHasWidgets> parent, jint index, id<ASIFragment> fragment);
+FOUNDATION_EXPORT id ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(id<ASHasWidgets> parent, int32_t index, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_handlerStartWithId_withASIWidget_withInt_(id handler, id<ASIWidget> widget, jint index);
+FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_handlerStartWithId_withASIWidget_withInt_(id handler, id<ASIWidget> widget, int32_t index);
 
 FOUNDATION_EXPORT void ASPluginInvoker_handlerEndWithId_withASIWidget_(id handler, id<ASIWidget> widget);
 
@@ -308,13 +311,13 @@ FOUNDATION_EXPORT NSString *ASPluginInvoker_getDevServerIpWithASIFragment_(id<AS
 
 FOUNDATION_EXPORT NSString *ASPluginInvoker_getOrientation(void);
 
-FOUNDATION_EXPORT jint ASPluginInvoker_getScreenWidth(void);
+FOUNDATION_EXPORT int32_t ASPluginInvoker_getScreenWidth(void);
 
-FOUNDATION_EXPORT jint ASPluginInvoker_getScreenHeight(void);
+FOUNDATION_EXPORT int32_t ASPluginInvoker_getScreenHeight(void);
 
-FOUNDATION_EXPORT jint ASPluginInvoker_getScreenWidthDp(void);
+FOUNDATION_EXPORT int32_t ASPluginInvoker_getScreenWidthDp(void);
 
-FOUNDATION_EXPORT jint ASPluginInvoker_getScreenHeightDp(void);
+FOUNDATION_EXPORT int32_t ASPluginInvoker_getScreenHeightDp(void);
 
 FOUNDATION_EXPORT NSString *ASPluginInvoker_getOS(void);
 
@@ -322,9 +325,9 @@ FOUNDATION_EXPORT NSString *ASPluginInvoker_getFileAssetWithNSString_withASIFrag
 
 FOUNDATION_EXPORT NSString *ASPluginInvoker_getDensityName(void);
 
-FOUNDATION_EXPORT jint ASPluginInvoker_getDensity(void);
+FOUNDATION_EXPORT int32_t ASPluginInvoker_getDensity(void);
 
-FOUNDATION_EXPORT id ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(id<JavaLangRunnable> mTickRunnable, jint delay);
+FOUNDATION_EXPORT id ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(id<JavaLangRunnable> mTickRunnable, int32_t delay);
 
 FOUNDATION_EXPORT void ASPluginInvoker_removeCallbacksWithId_withJavaLangRunnable_(id handler, id<JavaLangRunnable> mTickRunnable);
 
@@ -338,19 +341,19 @@ FOUNDATION_EXPORT id ASPluginInvoker_createDrawableWithNSString_(NSString *type)
 
 FOUNDATION_EXPORT id<ASAttributedString> ASPluginInvoker_createAttributedStringWithASIFragment_withNSString_(id<ASIFragment> fragment, NSString *text);
 
-FOUNDATION_EXPORT jfloat ASPluginInvoker_getDisplayMetricDensity(void);
+FOUNDATION_EXPORT float ASPluginInvoker_getDisplayMetricDensity(void);
 
 FOUNDATION_EXPORT NSString *ASPluginInvoker_getAttributedBulletHtml(void);
 
 FOUNDATION_EXPORT JavaIoFile *ASPluginInvoker_getExternalFilesDirWithId_(id context);
 
-FOUNDATION_EXPORT jint ASPluginInvoker_getMaxMemoryWithId_(id context);
+FOUNDATION_EXPORT int32_t ASPluginInvoker_getMaxMemoryWithId_(id context);
 
 FOUNDATION_EXPORT id ASPluginInvoker_decodeBitmapStreamWithJavaIoInputStream_withId_(JavaIoInputStream *stream, id options);
 
 FOUNDATION_EXPORT void ASPluginInvoker_runOnMainThreadWithJavaLangRunnable_(id<JavaLangRunnable> runnable);
 
-FOUNDATION_EXPORT void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<JavaLangRunnable> runnable, jlong delay);
+FOUNDATION_EXPORT void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<JavaLangRunnable> runnable, int64_t delay);
 
 FOUNDATION_EXPORT NSString *ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(NSString *cdvUrl, id<ASIFragment> fragment);
 
@@ -361,6 +364,7 @@ FOUNDATION_EXPORT void ASPluginInvoker_registerFontWithNSString_withNSString_wit
 J2OBJC_TYPE_LITERAL_HEADER(ASPluginInvoker)
 
 @compatibility_alias ComAsheraWidgetPluginInvoker ASPluginInvoker;
+
 
 #endif
 

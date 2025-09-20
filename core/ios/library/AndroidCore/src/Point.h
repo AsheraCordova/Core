@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\Point.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Point")
@@ -27,6 +28,9 @@
 #include "Parcelable.h"
 
 @class ADParcelable_Creator;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADParcel;
 
 /*!
@@ -34,31 +38,31 @@
  */
 @interface ADPoint : NSObject < ADParcelable > {
  @public
-  jint x_;
-  jint y_;
+  int32_t x_;
+  int32_t y_;
 }
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)x
-                    withInt:(jint)y;
+- (instancetype)initWithInt:(int32_t)x
+                    withInt:(int32_t)y;
 
 - (instancetype)initWithADPoint:(ADPoint *)src;
 
 /*!
  @brief Parcelable interface methods
  */
-- (jint)describeContents;
+- (int32_t)describeContents;
 
 /*!
  @brief Returns true if the point's coordinates equal (x,y)
  */
-- (jboolean)equalsWithInt:(jint)x
-                  withInt:(jint)y;
+- (bool)equalsWithInt:(int32_t)x
+              withInt:(int32_t)y;
 
-- (jboolean)isEqual:(id)o;
+- (bool)isEqual:(id)o;
 
 /*!
  @return Returns a <code>String</code> that represents this point which can be parsed with 
@@ -76,8 +80,8 @@
 /*!
  @brief Offset the point's coordinates by dx, dy
  */
-- (void)offsetWithInt:(jint)dx
-              withInt:(jint)dy;
+- (void)offsetWithInt:(int32_t)dx
+              withInt:(int32_t)dy;
 
 /*!
  @brief Set the point's coordinates from the data stored in the specified
@@ -89,8 +93,8 @@
 /*!
  @brief Set the point's x and y coordinates
  */
-- (void)setWithInt:(jint)x
-           withInt:(jint)y;
+- (void)setWithInt:(int32_t)x
+           withInt:(int32_t)y;
 
 /*!
  @brief Sets the point's from <code>src</code>'s coordinates
@@ -110,7 +114,7 @@
  @param outArg The parcel to write the point's coordinates into
  */
 - (void)writeToParcelWithADParcel:(id<ADParcel>)outArg
-                          withInt:(jint)flags;
+                          withInt:(int32_t)flags;
 
 @end
 
@@ -127,11 +131,11 @@ FOUNDATION_EXPORT ADPoint *new_ADPoint_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADPoint *create_ADPoint_init(void);
 
-FOUNDATION_EXPORT void ADPoint_initWithInt_withInt_(ADPoint *self, jint x, jint y);
+FOUNDATION_EXPORT void ADPoint_initWithInt_withInt_(ADPoint *self, int32_t x, int32_t y);
 
-FOUNDATION_EXPORT ADPoint *new_ADPoint_initWithInt_withInt_(jint x, jint y) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPoint *new_ADPoint_initWithInt_withInt_(int32_t x, int32_t y) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPoint *create_ADPoint_initWithInt_withInt_(jint x, jint y);
+FOUNDATION_EXPORT ADPoint *create_ADPoint_initWithInt_withInt_(int32_t x, int32_t y);
 
 FOUNDATION_EXPORT void ADPoint_initWithADPoint_(ADPoint *self, ADPoint *src);
 
@@ -144,6 +148,7 @@ FOUNDATION_EXPORT ADPoint *ADPoint_unflattenFromStringWithNSString_(NSString *s)
 J2OBJC_TYPE_LITERAL_HEADER(ADPoint)
 
 @compatibility_alias RAndroidGraphicsPoint ADPoint;
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\OverlayBoundsConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
@@ -11,6 +16,12 @@
 #include "java/lang/Integer.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASOverlayBoundsConverter
@@ -31,12 +42,12 @@ J2OBJC_IGNORE_DESIGNATED_END
                    withASIFragment:(id<ASIFragment>)fragment {
   NSString *algorithm = (NSString *) cast_chk(IOSObjectArray_Get(nil_chk(value), 0), [NSString class]);
   IOSIntArray *bounds = [IOSIntArray arrayWithLength:4];
-  jint intrinsicWidth = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 1), [JavaLangInteger class]))) intValue];
-  jint intrinsicHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 2), [JavaLangInteger class]))) intValue];
-  jint left = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 3), [JavaLangInteger class]))) intValue];
-  jint top = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 4), [JavaLangInteger class]))) intValue];
-  jint viewWidth = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 5), [JavaLangInteger class]))) intValue];
-  jint viewHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 6), [JavaLangInteger class]))) intValue];
+  int32_t intrinsicWidth = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 1), [JavaLangInteger class]))) intValue];
+  int32_t intrinsicHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 2), [JavaLangInteger class]))) intValue];
+  int32_t left = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 3), [JavaLangInteger class]))) intValue];
+  int32_t top = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 4), [JavaLangInteger class]))) intValue];
+  int32_t viewWidth = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 5), [JavaLangInteger class]))) intValue];
+  int32_t viewHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(value, 6), [JavaLangInteger class]))) intValue];
   switch (JreIndexOfStr(algorithm, (id[]){ @"center", @"top_left", @"top_right", @"bottom_right", @"bottom_left" }, 5)) {
     case 0:
     *IOSIntArray_GetRef(bounds, 0) = left + JreIntDiv((viewWidth - intrinsicWidth), 2);
@@ -114,3 +125,5 @@ ASOverlayBoundsConverter *create_ASOverlayBoundsConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASOverlayBoundsConverter)
+
+J2OBJC_NAME_MAPPING(ASOverlayBoundsConverter, "com.ashera.converter", "AS")

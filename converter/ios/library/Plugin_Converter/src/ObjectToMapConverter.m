@@ -3,13 +3,25 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ObjectToMapConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "ObjectToMapConverter.h"
 #include "PluginInvoker.h"
+#include "java/lang/Boolean.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASObjectToMapConverter
@@ -93,3 +105,5 @@ ASObjectToMapConverter *create_ASObjectToMapConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASObjectToMapConverter)
+
+J2OBJC_NAME_MAPPING(ASObjectToMapConverter, "com.ashera.converter", "AS")

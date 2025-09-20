@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ListToIntArrayConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ListToIntArrayConverter")
@@ -55,6 +56,7 @@ FOUNDATION_EXPORT ASListToIntArrayConverter *create_ASListToIntArrayConverter_in
 J2OBJC_TYPE_LITERAL_HEADER(ASListToIntArrayConverter)
 
 @compatibility_alias ComAsheraConverterListToIntArrayConverter ASListToIntArrayConverter;
+
 
 #endif
 

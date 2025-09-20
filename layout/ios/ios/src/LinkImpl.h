@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\LinkImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LinkImpl")
@@ -23,6 +24,9 @@
 @class ADTextView;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -48,7 +52,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -62,9 +66,9 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getHighlightedTextColor;
 
@@ -74,21 +78,21 @@
 
 - (id)getIsUserInteractionEnabled;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
 - (id)getMinimumScaleFactor;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getNumberOfLines;
 
@@ -108,7 +112,7 @@
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -167,7 +171,7 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 + (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
@@ -216,6 +220,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl)
 
 @compatibility_alias ComAsheraLayoutLinkImpl ASLinkImpl;
 
+
 #endif
 
 #if !defined (ASLinkImpl_AutoSizeTextType_) && (INCLUDE_ALL_LinkImpl || defined(INCLUDE_ASLinkImpl_AutoSizeTextType))
@@ -251,6 +256,7 @@ FOUNDATION_EXPORT ASLinkImpl_AutoSizeTextType *new_ASLinkImpl_AutoSizeTextType_i
 FOUNDATION_EXPORT ASLinkImpl_AutoSizeTextType *create_ASLinkImpl_AutoSizeTextType_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_AutoSizeTextType)
+
 
 #endif
 
@@ -288,6 +294,7 @@ FOUNDATION_EXPORT ASLinkImpl_Ellipsize *create_ASLinkImpl_Ellipsize_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_Ellipsize)
 
+
 #endif
 
 #if !defined (ASLinkImpl_MarqueeRepeatLimit_) && (INCLUDE_ALL_LinkImpl || defined(INCLUDE_ASLinkImpl_MarqueeRepeatLimit))
@@ -297,6 +304,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_Ellipsize)
 #define INCLUDE_ASAbstractEnumToIntConverter 1
 #include "AbstractEnumToIntConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
 @protocol JavaUtilMap;
 
@@ -308,7 +316,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_Ellipsize)
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 #pragma mark Package-Private
 
@@ -325,6 +333,7 @@ FOUNDATION_EXPORT ASLinkImpl_MarqueeRepeatLimit *new_ASLinkImpl_MarqueeRepeatLim
 FOUNDATION_EXPORT ASLinkImpl_MarqueeRepeatLimit *create_ASLinkImpl_MarqueeRepeatLimit_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_MarqueeRepeatLimit)
+
 
 #endif
 
@@ -362,6 +371,7 @@ FOUNDATION_EXPORT ASLinkImpl_JustificationMode *create_ASLinkImpl_JustificationM
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_JustificationMode)
 
+
 #endif
 
 #if !defined (ASLinkImpl_Font_) && (INCLUDE_ALL_LinkImpl || defined(INCLUDE_ASLinkImpl_Font))
@@ -397,6 +407,7 @@ FOUNDATION_EXPORT ASLinkImpl_Font *new_ASLinkImpl_Font_init(void) NS_RETURNS_RET
 FOUNDATION_EXPORT ASLinkImpl_Font *create_ASLinkImpl_Font_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_Font)
+
 
 #endif
 
@@ -434,6 +445,7 @@ FOUNDATION_EXPORT ASLinkImpl_TextStyle *create_ASLinkImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_TextStyle)
 
+
 #endif
 
 #if !defined (ASLinkImpl_DrawableTintMode_) && (INCLUDE_ALL_LinkImpl || defined(INCLUDE_ASLinkImpl_DrawableTintMode))
@@ -470,6 +482,7 @@ FOUNDATION_EXPORT ASLinkImpl_DrawableTintMode *create_ASLinkImpl_DrawableTintMod
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASLinkImpl_LinkExt_) && (INCLUDE_ALL_LinkImpl || defined(INCLUDE_ASLinkImpl_LinkExt))
@@ -489,6 +502,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -498,7 +515,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 
 - (instancetype)initWithASLinkImpl:(ASLinkImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -507,13 +524,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -529,21 +546,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)remeasure;
 
@@ -566,7 +583,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -582,16 +599,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -609,6 +626,7 @@ FOUNDATION_EXPORT ASLinkImpl_LinkExt *create_ASLinkImpl_LinkExt_initWithASLinkIm
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_LinkExt)
 
+
 #endif
 
 #if !defined (ASLinkImpl_PostMeasureHandler_) && (INCLUDE_ALL_LinkImpl || defined(INCLUDE_ASLinkImpl_PostMeasureHandler))
@@ -619,6 +637,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_LinkExt)
 #include "EventBusHandler.h"
 
 @class ASLinkImpl;
+@class NSString;
 
 @interface ASLinkImpl_PostMeasureHandler : ASEventBusHandler
 
@@ -646,6 +665,7 @@ FOUNDATION_EXPORT ASLinkImpl_PostMeasureHandler *new_ASLinkImpl_PostMeasureHandl
 FOUNDATION_EXPORT ASLinkImpl_PostMeasureHandler *create_ASLinkImpl_PostMeasureHandler_initWithASLinkImpl_withNSString_(ASLinkImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
+
 
 #endif
 

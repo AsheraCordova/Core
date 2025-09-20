@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\RelativeLayout.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ApplicationInfo.h"
 #include "ArrayMap.h"
 #include "Build.h"
@@ -18,6 +23,7 @@
 #include "SparseArray.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -25,87 +31,90 @@
 #include "java/util/ArrayDeque.h"
 #include "java/util/ArrayList.h"
 
+
 @class ADRelativeLayout_DependencyGraph;
-@class JavaUtilArrayDeque;
-@class JavaUtilArrayList;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADRelativeLayout () {
  @public
   ADView *mBaselineView_;
-  jint mGravity_;
+  int32_t mGravity_;
   ADRect *mContentBounds_;
   ADRect *mSelfBounds_;
-  jint mIgnoreGravity_;
-  jboolean mDirtyHierarchy_;
+  int32_t mIgnoreGravity_;
+  bool mDirtyHierarchy_;
   IOSObjectArray *mSortedHorizontalChildren_;
   IOSObjectArray *mSortedVerticalChildren_;
   ADRelativeLayout_DependencyGraph *mGraph_;
-  jboolean mAllowBrokenMeasureSpecs_;
-  jboolean mMeasureVerticalWithPaddingMargin_;
+  bool mAllowBrokenMeasureSpecs_;
+  bool mMeasureVerticalWithPaddingMargin_;
 }
 
 - (void)sortChildren;
 
-- (jint)compareLayoutPositionWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p1
-                             withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p2;
+- (int32_t)compareLayoutPositionWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p1
+                                withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p2;
 
 - (void)measureChildWithADView:(ADView *)child
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                       withInt:(jint)myWidth
-                       withInt:(jint)myHeight;
+                       withInt:(int32_t)myWidth
+                       withInt:(int32_t)myHeight;
 
 - (void)measureChildHorizontalWithADView:(ADView *)child
        withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                                 withInt:(jint)myWidth
-                                 withInt:(jint)myHeight;
+                                 withInt:(int32_t)myWidth
+                                 withInt:(int32_t)myHeight;
 
-- (jint)getChildMeasureSpecWithInt:(jint)childStart
-                           withInt:(jint)childEnd
-                           withInt:(jint)childSize
-                           withInt:(jint)startMargin
-                           withInt:(jint)endMargin
-                           withInt:(jint)startPadding
-                           withInt:(jint)endPadding
-                           withInt:(jint)mySize;
+- (int32_t)getChildMeasureSpecWithInt:(int32_t)childStart
+                              withInt:(int32_t)childEnd
+                              withInt:(int32_t)childSize
+                              withInt:(int32_t)startMargin
+                              withInt:(int32_t)endMargin
+                              withInt:(int32_t)startPadding
+                              withInt:(int32_t)endPadding
+                              withInt:(int32_t)mySize;
 
-- (jboolean)positionChildHorizontalWithADView:(ADView *)child
-            withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                                      withInt:(jint)myWidth
-                                  withBoolean:(jboolean)wrapContent;
+- (bool)positionChildHorizontalWithADView:(ADView *)child
+        withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
+                                  withInt:(int32_t)myWidth
+                              withBoolean:(bool)wrapContent;
 
 - (void)positionAtEdgeWithADView:(ADView *)child
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                         withInt:(jint)myWidth;
+                         withInt:(int32_t)myWidth;
 
-- (jboolean)positionChildVerticalWithADView:(ADView *)child
-          withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                                    withInt:(jint)myHeight
-                                withBoolean:(jboolean)wrapContent;
+- (bool)positionChildVerticalWithADView:(ADView *)child
+      withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
+                                withInt:(int32_t)myHeight
+                            withBoolean:(bool)wrapContent;
 
 - (void)applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)childParams
-                                                          withInt:(jint)myWidth
+                                                          withInt:(int32_t)myWidth
                                                      withIntArray:(IOSIntArray *)rules;
 
 - (void)applyVerticalSizeRulesWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)childParams
-                                                        withInt:(jint)myHeight
-                                                        withInt:(jint)myBaseline;
+                                                        withInt:(int32_t)myHeight
+                                                        withInt:(int32_t)myBaseline;
 
 - (ADView *)getRelatedViewWithIntArray:(IOSIntArray *)rules
-                               withInt:(jint)relation;
+                               withInt:(int32_t)relation;
 
 - (ADRelativeLayout_LayoutParams *)getRelatedViewParamsWithIntArray:(IOSIntArray *)rules
-                                                            withInt:(jint)relation;
+                                                            withInt:(int32_t)relation;
 
-- (jint)getRelatedViewBaselineOffsetWithIntArray:(IOSIntArray *)rules;
+- (int32_t)getRelatedViewBaselineOffsetWithIntArray:(IOSIntArray *)rules;
 
 + (void)centerHorizontalWithADView:(ADView *)child
  withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                           withInt:(jint)myWidth;
+                           withInt:(int32_t)myWidth;
 
 + (void)centerVerticalWithADView:(ADView *)child
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                         withInt:(jint)myHeight;
+                         withInt:(int32_t)myHeight;
 
 @end
 
@@ -116,9 +125,9 @@ J2OBJC_FIELD_SETTER(ADRelativeLayout, mSortedHorizontalChildren_, IOSObjectArray
 J2OBJC_FIELD_SETTER(ADRelativeLayout, mSortedVerticalChildren_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(ADRelativeLayout, mGraph_, ADRelativeLayout_DependencyGraph *)
 
-inline jint ADRelativeLayout_get_VERB_COUNT(void);
+inline int32_t ADRelativeLayout_get_VERB_COUNT(void);
 #define ADRelativeLayout_VERB_COUNT 22
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, VERB_COUNT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, VERB_COUNT, int32_t)
 
 inline IOSIntArray *ADRelativeLayout_get_RULES_VERTICAL(void);
 static IOSIntArray *ADRelativeLayout_RULES_VERTICAL;
@@ -128,77 +137,77 @@ inline IOSIntArray *ADRelativeLayout_get_RULES_HORIZONTAL(void);
 static IOSIntArray *ADRelativeLayout_RULES_HORIZONTAL;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADRelativeLayout, RULES_HORIZONTAL, IOSIntArray *)
 
-inline jint ADRelativeLayout_get_VALUE_NOT_SET(void);
-#define ADRelativeLayout_VALUE_NOT_SET ((jint) 0x80000000)
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, VALUE_NOT_SET, jint)
+inline int32_t ADRelativeLayout_get_VALUE_NOT_SET(void);
+#define ADRelativeLayout_VALUE_NOT_SET ((int32_t) 0x80000000)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, VALUE_NOT_SET, int32_t)
 
-inline jint ADRelativeLayout_get_DEFAULT_WIDTH(void);
+inline int32_t ADRelativeLayout_get_DEFAULT_WIDTH(void);
 #define ADRelativeLayout_DEFAULT_WIDTH 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, DEFAULT_WIDTH, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, DEFAULT_WIDTH, int32_t)
 
 __attribute__((unused)) static void ADRelativeLayout_sortChildren(ADRelativeLayout *self);
 
-__attribute__((unused)) static jint ADRelativeLayout_compareLayoutPositionWithADRelativeLayout_LayoutParams_withADRelativeLayout_LayoutParams_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *p1, ADRelativeLayout_LayoutParams *p2);
+__attribute__((unused)) static int32_t ADRelativeLayout_compareLayoutPositionWithADRelativeLayout_LayoutParams_withADRelativeLayout_LayoutParams_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *p1, ADRelativeLayout_LayoutParams *p2);
 
-__attribute__((unused)) static void ADRelativeLayout_measureChildWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth, jint myHeight);
+__attribute__((unused)) static void ADRelativeLayout_measureChildWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth, int32_t myHeight);
 
-__attribute__((unused)) static void ADRelativeLayout_measureChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth, jint myHeight);
+__attribute__((unused)) static void ADRelativeLayout_measureChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth, int32_t myHeight);
 
-__attribute__((unused)) static jint ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(ADRelativeLayout *self, jint childStart, jint childEnd, jint childSize, jint startMargin, jint endMargin, jint startPadding, jint endPadding, jint mySize);
+__attribute__((unused)) static int32_t ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(ADRelativeLayout *self, int32_t childStart, int32_t childEnd, int32_t childSize, int32_t startMargin, int32_t endMargin, int32_t startPadding, int32_t endPadding, int32_t mySize);
 
-__attribute__((unused)) static jboolean ADRelativeLayout_positionChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth, jboolean wrapContent);
+__attribute__((unused)) static bool ADRelativeLayout_positionChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth, bool wrapContent);
 
-__attribute__((unused)) static void ADRelativeLayout_positionAtEdgeWithADView_withADRelativeLayout_LayoutParams_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth);
+__attribute__((unused)) static void ADRelativeLayout_positionAtEdgeWithADView_withADRelativeLayout_LayoutParams_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth);
 
-__attribute__((unused)) static jboolean ADRelativeLayout_positionChildVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myHeight, jboolean wrapContent);
+__attribute__((unused)) static bool ADRelativeLayout_positionChildVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myHeight, bool wrapContent);
 
-__attribute__((unused)) static void ADRelativeLayout_applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withIntArray_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, jint myWidth, IOSIntArray *rules);
+__attribute__((unused)) static void ADRelativeLayout_applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withIntArray_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, int32_t myWidth, IOSIntArray *rules);
 
-__attribute__((unused)) static void ADRelativeLayout_applyVerticalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, jint myHeight, jint myBaseline);
+__attribute__((unused)) static void ADRelativeLayout_applyVerticalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, int32_t myHeight, int32_t myBaseline);
 
-__attribute__((unused)) static ADView *ADRelativeLayout_getRelatedViewWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, jint relation);
+__attribute__((unused)) static ADView *ADRelativeLayout_getRelatedViewWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, int32_t relation);
 
-__attribute__((unused)) static ADRelativeLayout_LayoutParams *ADRelativeLayout_getRelatedViewParamsWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, jint relation);
+__attribute__((unused)) static ADRelativeLayout_LayoutParams *ADRelativeLayout_getRelatedViewParamsWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, int32_t relation);
 
-__attribute__((unused)) static jint ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(ADRelativeLayout *self, IOSIntArray *rules);
+__attribute__((unused)) static int32_t ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(ADRelativeLayout *self, IOSIntArray *rules);
 
-__attribute__((unused)) static void ADRelativeLayout_centerHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth);
+__attribute__((unused)) static void ADRelativeLayout_centerHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth);
 
-__attribute__((unused)) static void ADRelativeLayout_centerVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, jint myHeight);
+__attribute__((unused)) static void ADRelativeLayout_centerVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myHeight);
 
 @interface ADRelativeLayout_LayoutParams () {
  @public
   IOSIntArray *mRules_;
   IOSIntArray *mInitialRules_;
-  jint mLeft_;
-  jint mTop_;
-  jint mRight_;
-  jint mBottom_;
-  jboolean mNeedsLayoutResolution_;
-  jboolean mRulesChanged_;
-  jboolean mIsRtlCompatibilityMode_;
+  int32_t mLeft_;
+  int32_t mTop_;
+  int32_t mRight_;
+  int32_t mBottom_;
+  bool mNeedsLayoutResolution_;
+  bool mRulesChanged_;
+  bool mIsRtlCompatibilityMode_;
 }
 
-- (jboolean)hasRelativeRules;
+- (bool)hasRelativeRules;
 
-- (jboolean)isRelativeRuleWithInt:(jint)rule;
+- (bool)isRelativeRuleWithInt:(int32_t)rule;
 
-- (void)resolveRulesWithInt:(jint)layoutDirection;
+- (void)resolveRulesWithInt:(int32_t)layoutDirection;
 
-- (jboolean)shouldResolveLayoutDirectionWithInt:(jint)layoutDirection;
+- (bool)shouldResolveLayoutDirectionWithInt:(int32_t)layoutDirection;
 
 @end
 
 J2OBJC_FIELD_SETTER(ADRelativeLayout_LayoutParams, mRules_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(ADRelativeLayout_LayoutParams, mInitialRules_, IOSIntArray *)
 
-__attribute__((unused)) static jboolean ADRelativeLayout_LayoutParams_hasRelativeRules(ADRelativeLayout_LayoutParams *self);
+__attribute__((unused)) static bool ADRelativeLayout_LayoutParams_hasRelativeRules(ADRelativeLayout_LayoutParams *self);
 
-__attribute__((unused)) static jboolean ADRelativeLayout_LayoutParams_isRelativeRuleWithInt_(ADRelativeLayout_LayoutParams *self, jint rule);
+__attribute__((unused)) static bool ADRelativeLayout_LayoutParams_isRelativeRuleWithInt_(ADRelativeLayout_LayoutParams *self, int32_t rule);
 
-__attribute__((unused)) static void ADRelativeLayout_LayoutParams_resolveRulesWithInt_(ADRelativeLayout_LayoutParams *self, jint layoutDirection);
+__attribute__((unused)) static void ADRelativeLayout_LayoutParams_resolveRulesWithInt_(ADRelativeLayout_LayoutParams *self, int32_t layoutDirection);
 
-__attribute__((unused)) static jboolean ADRelativeLayout_LayoutParams_shouldResolveLayoutDirectionWithInt_(ADRelativeLayout_LayoutParams *self, jint layoutDirection);
+__attribute__((unused)) static bool ADRelativeLayout_LayoutParams_shouldResolveLayoutDirectionWithInt_(ADRelativeLayout_LayoutParams *self, int32_t layoutDirection);
 
 @interface ADRelativeLayout_DependencyGraph : NSObject {
  @public
@@ -236,9 +245,10 @@ __attribute__((unused)) static JavaUtilArrayDeque *ADRelativeLayout_DependencyGr
 
 J2OBJC_TYPE_LITERAL_HEADER(ADRelativeLayout_DependencyGraph)
 
+
 @interface ADRelativeLayout_DependencyGraph_Node : NSObject {
  @public
-  __unsafe_unretained ADView *view_;
+  WEAK_ ADView *view_;
   ADArrayMap *dependents_;
   ADSparseArray *dependencies_;
 }
@@ -256,9 +266,9 @@ J2OBJC_STATIC_INIT(ADRelativeLayout_DependencyGraph_Node)
 J2OBJC_FIELD_SETTER(ADRelativeLayout_DependencyGraph_Node, dependents_, ADArrayMap *)
 J2OBJC_FIELD_SETTER(ADRelativeLayout_DependencyGraph_Node, dependencies_, ADSparseArray *)
 
-inline jint ADRelativeLayout_DependencyGraph_Node_get_POOL_LIMIT(void);
+inline int32_t ADRelativeLayout_DependencyGraph_Node_get_POOL_LIMIT(void);
 #define ADRelativeLayout_DependencyGraph_Node_POOL_LIMIT 100
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout_DependencyGraph_Node, POOL_LIMIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout_DependencyGraph_Node, POOL_LIMIT, int32_t)
 
 inline ADPools_SynchronizedPool *ADRelativeLayout_DependencyGraph_Node_get_sPool(void);
 static ADPools_SynchronizedPool *ADRelativeLayout_DependencyGraph_Node_sPool;
@@ -274,19 +284,20 @@ __attribute__((unused)) static ADRelativeLayout_DependencyGraph_Node *ADRelative
 
 J2OBJC_TYPE_LITERAL_HEADER(ADRelativeLayout_DependencyGraph_Node)
 
+
 J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
 
 @implementation ADRelativeLayout
 
-- (void)setIgnoreGravityWithInt:(jint)viewId {
+- (void)setIgnoreGravityWithInt:(int32_t)viewId {
   mIgnoreGravity_ = viewId;
 }
 
-- (jint)getGravity {
+- (int32_t)getGravity {
   return mGravity_;
 }
 
-- (void)setGravityWithInt:(jint)gravity {
+- (void)setGravityWithInt:(int32_t)gravity {
   if (mGravity_ != gravity) {
     if ((gravity & ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK) == 0) {
       gravity |= ADGravity_START;
@@ -299,7 +310,7 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
   }
 }
 
-- (jint)getBaseline {
+- (int32_t)getBaseline {
   return mBaselineView_ != nil ? [mBaselineView_ getBaseline] : [super getBaseline];
 }
 
@@ -312,20 +323,20 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
   ADRelativeLayout_sortChildren(self);
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mDirtyHierarchy_) {
     mDirtyHierarchy_ = false;
     ADRelativeLayout_sortChildren(self);
   }
-  jint myWidth = -1;
-  jint myHeight = -1;
-  jint width = 0;
-  jint height = 0;
-  jint widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
-  jint heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
-  jint widthSize = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec);
-  jint heightSize = ADView_MeasureSpec_getSizeWithInt_(heightMeasureSpec);
+  int32_t myWidth = -1;
+  int32_t myHeight = -1;
+  int32_t width = 0;
+  int32_t height = 0;
+  int32_t widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
+  int32_t heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  int32_t widthSize = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec);
+  int32_t heightSize = ADView_MeasureSpec_getSizeWithInt_(heightMeasureSpec);
   if (widthMode != ADView_MeasureSpec_UNSPECIFIED) {
     myWidth = widthSize;
   }
@@ -339,28 +350,28 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
     height = myHeight;
   }
   ADView *ignore = nil;
-  jint gravity = mGravity_ & ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK;
-  jboolean horizontalGravity = gravity != ADGravity_START && gravity != 0;
+  int32_t gravity = mGravity_ & ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK;
+  bool horizontalGravity = gravity != ADGravity_START && gravity != 0;
   gravity = mGravity_ & ADGravity_VERTICAL_GRAVITY_MASK;
-  jboolean verticalGravity = gravity != ADGravity_TOP && gravity != 0;
-  jint left = JavaLangInteger_MAX_VALUE;
-  jint top = JavaLangInteger_MAX_VALUE;
-  jint right = JavaLangInteger_MIN_VALUE;
-  jint bottom = JavaLangInteger_MIN_VALUE;
-  jboolean offsetHorizontalAxis = false;
-  jboolean offsetVerticalAxis = false;
+  bool verticalGravity = gravity != ADGravity_TOP && gravity != 0;
+  int32_t left = JavaLangInteger_MAX_VALUE;
+  int32_t top = JavaLangInteger_MAX_VALUE;
+  int32_t right = JavaLangInteger_MIN_VALUE;
+  int32_t bottom = JavaLangInteger_MIN_VALUE;
+  bool offsetHorizontalAxis = false;
+  bool offsetVerticalAxis = false;
   if ((horizontalGravity || verticalGravity) && mIgnoreGravity_ != ADView_NO_ID) {
     ignore = [self findViewByIdWithInt:mIgnoreGravity_];
   }
-  jboolean isWrapContentWidth = widthMode != ADView_MeasureSpec_EXACTLY;
-  jboolean isWrapContentHeight = heightMode != ADView_MeasureSpec_EXACTLY;
-  jint layoutDirection = [self getLayoutDirection];
+  bool isWrapContentWidth = widthMode != ADView_MeasureSpec_EXACTLY;
+  bool isWrapContentHeight = heightMode != ADView_MeasureSpec_EXACTLY;
+  int32_t layoutDirection = [self getLayoutDirection];
   if ([self isLayoutRtl] && myWidth == -1) {
     myWidth = ADRelativeLayout_DEFAULT_WIDTH;
   }
   IOSObjectArray *views = mSortedHorizontalChildren_;
-  jint count = ((IOSObjectArray *) nil_chk(views))->size_;
-  for (jint i = 0; i < count; i++) {
+  int32_t count = ((IOSObjectArray *) nil_chk(views))->size_;
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = IOSObjectArray_Get(views, i);
     if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       ADRelativeLayout_LayoutParams *params = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
@@ -374,8 +385,8 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
   }
   views = mSortedVerticalChildren_;
   count = ((IOSObjectArray *) nil_chk(views))->size_;
-  jint targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
-  for (jint i = 0; i < count; i++) {
+  int32_t targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = IOSObjectArray_Get(views, i);
     if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       ADRelativeLayout_LayoutParams *params = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
@@ -410,11 +421,11 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
           height = JavaLangMath_maxWithInt_withInt_(height, ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mBottom_ + params->bottomMargin_);
         }
       }
-      if (child != ignore || verticalGravity) {
+      if (!JreObjectEqualsEquals(child, ignore) || verticalGravity) {
         left = JavaLangMath_minWithInt_withInt_(left, ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mLeft_ - params->leftMargin_);
         top = JavaLangMath_minWithInt_withInt_(top, params->mTop_ - params->topMargin_);
       }
-      if (child != ignore || horizontalGravity) {
+      if (!JreObjectEqualsEquals(child, ignore) || horizontalGravity) {
         right = JavaLangMath_maxWithInt_withInt_(right, ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mRight_ + params->rightMargin_);
         bottom = JavaLangMath_maxWithInt_withInt_(bottom, params->mBottom_ + params->bottomMargin_);
       }
@@ -422,7 +433,7 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
   }
   ADView *baselineView = nil;
   ADRelativeLayout_LayoutParams *baselineParams = nil;
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = IOSObjectArray_Get(views, i);
     if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       ADRelativeLayout_LayoutParams *childParams = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
@@ -441,7 +452,7 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
     width = JavaLangMath_maxWithInt_withInt_(width, [self getSuggestedMinimumWidth]);
     width = ADView_resolveSizeWithInt_withInt_(width, widthMeasureSpec);
     if (offsetHorizontalAxis) {
-      for (jint i = 0; i < count; i++) {
+      for (int32_t i = 0; i < count; i++) {
         ADView *child = IOSObjectArray_Get(views, i);
         if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
           ADRelativeLayout_LayoutParams *params = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
@@ -450,7 +461,7 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
             ADRelativeLayout_centerHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_(child, params, width);
           }
           else if (IOSIntArray_Get(rules, ADRelativeLayout_ALIGN_PARENT_RIGHT) != 0) {
-            jint childWidth = [child getMeasuredWidth];
+            int32_t childWidth = [child getMeasuredWidth];
             params->mLeft_ = width - mPaddingRight_ - childWidth;
             params->mRight_ = params->mLeft_ + childWidth;
           }
@@ -466,7 +477,7 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
     height = JavaLangMath_maxWithInt_withInt_(height, [self getSuggestedMinimumHeight]);
     height = ADView_resolveSizeWithInt_withInt_(height, heightMeasureSpec);
     if (offsetVerticalAxis) {
-      for (jint i = 0; i < count; i++) {
+      for (int32_t i = 0; i < count; i++) {
         ADView *child = IOSObjectArray_Get(views, i);
         if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
           ADRelativeLayout_LayoutParams *params = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
@@ -475,7 +486,7 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
             ADRelativeLayout_centerVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_(child, params, height);
           }
           else if (IOSIntArray_Get(rules, ADRelativeLayout_ALIGN_PARENT_BOTTOM) != 0) {
-            jint childHeight = [child getMeasuredHeight];
+            int32_t childHeight = [child getMeasuredHeight];
             params->mTop_ = height - mPaddingBottom_ - childHeight;
             params->mBottom_ = params->mTop_ + childHeight;
           }
@@ -488,12 +499,12 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
     [((ADRect *) nil_chk(selfBounds)) setWithInt:mPaddingLeft_ withInt:mPaddingTop_ withInt:width - mPaddingRight_ withInt:height - mPaddingBottom_];
     ADRect *contentBounds = mContentBounds_;
     ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(mGravity_, right - left, bottom - top, selfBounds, contentBounds, layoutDirection);
-    jint horizontalOffset = ((ADRect *) nil_chk(contentBounds))->left_ - left;
-    jint verticalOffset = contentBounds->top_ - top;
+    int32_t horizontalOffset = ((ADRect *) nil_chk(contentBounds))->left_ - left;
+    int32_t verticalOffset = contentBounds->top_ - top;
     if (horizontalOffset != 0 || verticalOffset != 0) {
-      for (jint i = 0; i < count; i++) {
+      for (int32_t i = 0; i < count; i++) {
         ADView *child = IOSObjectArray_Get(views, i);
-        if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE && child != ignore) {
+        if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE && !JreObjectEqualsEquals(child, ignore)) {
           ADRelativeLayout_LayoutParams *params = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
           if (horizontalGravity) {
             ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mLeft_ += horizontalOffset;
@@ -508,8 +519,8 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
     }
   }
   if ([self isLayoutRtl]) {
-    jint offsetWidth = myWidth - width;
-    for (jint i = 0; i < count; i++) {
+    int32_t offsetWidth = myWidth - width;
+    for (int32_t i = 0; i < count; i++) {
       ADView *child = IOSObjectArray_Get(views, i);
       if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
         ADRelativeLayout_LayoutParams *params = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
@@ -521,101 +532,101 @@ J2OBJC_INITIALIZED_DEFN(ADRelativeLayout)
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
-- (jint)compareLayoutPositionWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p1
-                             withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p2 {
+- (int32_t)compareLayoutPositionWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p1
+                                withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)p2 {
   return ADRelativeLayout_compareLayoutPositionWithADRelativeLayout_LayoutParams_withADRelativeLayout_LayoutParams_(self, p1, p2);
 }
 
 - (void)measureChildWithADView:(ADView *)child
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                       withInt:(jint)myWidth
-                       withInt:(jint)myHeight {
+                       withInt:(int32_t)myWidth
+                       withInt:(int32_t)myHeight {
   ADRelativeLayout_measureChildWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(self, child, params, myWidth, myHeight);
 }
 
 - (void)measureChildHorizontalWithADView:(ADView *)child
        withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                                 withInt:(jint)myWidth
-                                 withInt:(jint)myHeight {
+                                 withInt:(int32_t)myWidth
+                                 withInt:(int32_t)myHeight {
   ADRelativeLayout_measureChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(self, child, params, myWidth, myHeight);
 }
 
-- (jint)getChildMeasureSpecWithInt:(jint)childStart
-                           withInt:(jint)childEnd
-                           withInt:(jint)childSize
-                           withInt:(jint)startMargin
-                           withInt:(jint)endMargin
-                           withInt:(jint)startPadding
-                           withInt:(jint)endPadding
-                           withInt:(jint)mySize {
+- (int32_t)getChildMeasureSpecWithInt:(int32_t)childStart
+                              withInt:(int32_t)childEnd
+                              withInt:(int32_t)childSize
+                              withInt:(int32_t)startMargin
+                              withInt:(int32_t)endMargin
+                              withInt:(int32_t)startPadding
+                              withInt:(int32_t)endPadding
+                              withInt:(int32_t)mySize {
   return ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(self, childStart, childEnd, childSize, startMargin, endMargin, startPadding, endPadding, mySize);
 }
 
-- (jboolean)positionChildHorizontalWithADView:(ADView *)child
-            withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                                      withInt:(jint)myWidth
-                                  withBoolean:(jboolean)wrapContent {
+- (bool)positionChildHorizontalWithADView:(ADView *)child
+        withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
+                                  withInt:(int32_t)myWidth
+                              withBoolean:(bool)wrapContent {
   return ADRelativeLayout_positionChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(self, child, params, myWidth, wrapContent);
 }
 
 - (void)positionAtEdgeWithADView:(ADView *)child
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                         withInt:(jint)myWidth {
+                         withInt:(int32_t)myWidth {
   ADRelativeLayout_positionAtEdgeWithADView_withADRelativeLayout_LayoutParams_withInt_(self, child, params, myWidth);
 }
 
-- (jboolean)positionChildVerticalWithADView:(ADView *)child
-          withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                                    withInt:(jint)myHeight
-                                withBoolean:(jboolean)wrapContent {
+- (bool)positionChildVerticalWithADView:(ADView *)child
+      withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
+                                withInt:(int32_t)myHeight
+                            withBoolean:(bool)wrapContent {
   return ADRelativeLayout_positionChildVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(self, child, params, myHeight, wrapContent);
 }
 
 - (void)applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)childParams
-                                                          withInt:(jint)myWidth
+                                                          withInt:(int32_t)myWidth
                                                      withIntArray:(IOSIntArray *)rules {
   ADRelativeLayout_applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withIntArray_(self, childParams, myWidth, rules);
 }
 
 - (void)applyVerticalSizeRulesWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)childParams
-                                                        withInt:(jint)myHeight
-                                                        withInt:(jint)myBaseline {
+                                                        withInt:(int32_t)myHeight
+                                                        withInt:(int32_t)myBaseline {
   ADRelativeLayout_applyVerticalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withInt_(self, childParams, myHeight, myBaseline);
 }
 
 - (ADView *)getRelatedViewWithIntArray:(IOSIntArray *)rules
-                               withInt:(jint)relation {
+                               withInt:(int32_t)relation {
   return ADRelativeLayout_getRelatedViewWithIntArray_withInt_(self, rules, relation);
 }
 
 - (ADRelativeLayout_LayoutParams *)getRelatedViewParamsWithIntArray:(IOSIntArray *)rules
-                                                            withInt:(jint)relation {
+                                                            withInt:(int32_t)relation {
   return ADRelativeLayout_getRelatedViewParamsWithIntArray_withInt_(self, rules, relation);
 }
 
-- (jint)getRelatedViewBaselineOffsetWithIntArray:(IOSIntArray *)rules {
+- (int32_t)getRelatedViewBaselineOffsetWithIntArray:(IOSIntArray *)rules {
   return ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(self, rules);
 }
 
 + (void)centerHorizontalWithADView:(ADView *)child
  withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                           withInt:(jint)myWidth {
+                           withInt:(int32_t)myWidth {
   ADRelativeLayout_centerHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_(child, params, myWidth);
 }
 
 + (void)centerVerticalWithADView:(ADView *)child
 withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
-                         withInt:(jint)myHeight {
+                         withInt:(int32_t)myHeight {
   ADRelativeLayout_centerVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_(child, params, myHeight);
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
-  jint count = [self getChildCount];
-  for (jint i = 0; i < count; i++) {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
+  int32_t count = [self getChildCount];
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = JreRetainedLocalValue([self getChildAtWithInt:i]);
     if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       ADRelativeLayout_LayoutParams *st = (ADRelativeLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADRelativeLayout_LayoutParams class]);
@@ -628,7 +639,7 @@ withADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)params
   return create_ADRelativeLayout_LayoutParams_initWithInt_withInt_(ADViewGroup_LayoutParams_WRAP_CONTENT, ADViewGroup_LayoutParams_WRAP_CONTENT);
 }
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return [p isKindOfClass:[ADRelativeLayout_LayoutParams class]];
 }
 
@@ -774,8 +785,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [ADRelativeLayout class]) {
-    JreStrongAssignAndConsume(&ADRelativeLayout_RULES_VERTICAL, [IOSIntArray newArrayWithInts:(jint[]){ ADRelativeLayout_ABOVE, ADRelativeLayout_BELOW, ADRelativeLayout_ALIGN_BASELINE, ADRelativeLayout_ALIGN_TOP, ADRelativeLayout_ALIGN_BOTTOM } count:5]);
-    JreStrongAssignAndConsume(&ADRelativeLayout_RULES_HORIZONTAL, [IOSIntArray newArrayWithInts:(jint[]){ ADRelativeLayout_LEFT_OF, ADRelativeLayout_RIGHT_OF, ADRelativeLayout_ALIGN_LEFT, ADRelativeLayout_ALIGN_RIGHT, ADRelativeLayout_START_OF, ADRelativeLayout_END_OF, ADRelativeLayout_ALIGN_START, ADRelativeLayout_ALIGN_END } count:8]);
+    JreStrongAssignAndConsume(&ADRelativeLayout_RULES_VERTICAL, [IOSIntArray newArrayWithInts:(int32_t[]){ ADRelativeLayout_ABOVE, ADRelativeLayout_BELOW, ADRelativeLayout_ALIGN_BASELINE, ADRelativeLayout_ALIGN_TOP, ADRelativeLayout_ALIGN_BOTTOM } count:5]);
+    JreStrongAssignAndConsume(&ADRelativeLayout_RULES_HORIZONTAL, [IOSIntArray newArrayWithInts:(int32_t[]){ ADRelativeLayout_LEFT_OF, ADRelativeLayout_RIGHT_OF, ADRelativeLayout_ALIGN_LEFT, ADRelativeLayout_ALIGN_RIGHT, ADRelativeLayout_START_OF, ADRelativeLayout_END_OF, ADRelativeLayout_ALIGN_START, ADRelativeLayout_ALIGN_END } count:8]);
     J2OBJC_SET_INITIALIZED(ADRelativeLayout)
   }
 }
@@ -783,7 +794,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void ADRelativeLayout_sortChildren(ADRelativeLayout *self) {
-  jint count = [self getChildCount];
+  int32_t count = [self getChildCount];
   if (self->mSortedVerticalChildren_ == nil || self->mSortedVerticalChildren_->size_ != count) {
     JreStrongAssignAndConsume(&self->mSortedVerticalChildren_, [IOSObjectArray newArrayWithLength:count type:ADView_class_()]);
   }
@@ -792,30 +803,30 @@ void ADRelativeLayout_sortChildren(ADRelativeLayout *self) {
   }
   ADRelativeLayout_DependencyGraph *graph = self->mGraph_;
   [((ADRelativeLayout_DependencyGraph *) nil_chk(graph)) clear];
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     [graph addWithADView:[self getChildAtWithInt:i]];
   }
   [graph getSortedViewsWithADViewArray:self->mSortedVerticalChildren_ withIntArray:ADRelativeLayout_RULES_VERTICAL];
   [graph getSortedViewsWithADViewArray:self->mSortedHorizontalChildren_ withIntArray:ADRelativeLayout_RULES_HORIZONTAL];
 }
 
-jint ADRelativeLayout_compareLayoutPositionWithADRelativeLayout_LayoutParams_withADRelativeLayout_LayoutParams_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *p1, ADRelativeLayout_LayoutParams *p2) {
-  jint topDiff = ((ADRelativeLayout_LayoutParams *) nil_chk(p1))->mTop_ - ((ADRelativeLayout_LayoutParams *) nil_chk(p2))->mTop_;
+int32_t ADRelativeLayout_compareLayoutPositionWithADRelativeLayout_LayoutParams_withADRelativeLayout_LayoutParams_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *p1, ADRelativeLayout_LayoutParams *p2) {
+  int32_t topDiff = ((ADRelativeLayout_LayoutParams *) nil_chk(p1))->mTop_ - ((ADRelativeLayout_LayoutParams *) nil_chk(p2))->mTop_;
   if (topDiff != 0) {
     return topDiff;
   }
   return p1->mLeft_ - p2->mLeft_;
 }
 
-void ADRelativeLayout_measureChildWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth, jint myHeight) {
-  jint childWidthMeasureSpec = ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(self, ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mLeft_, params->mRight_, params->width_, params->leftMargin_, params->rightMargin_, self->mPaddingLeft_, self->mPaddingRight_, myWidth);
-  jint childHeightMeasureSpec = ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(self, params->mTop_, params->mBottom_, params->height_, params->topMargin_, params->bottomMargin_, self->mPaddingTop_, self->mPaddingBottom_, myHeight);
+void ADRelativeLayout_measureChildWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth, int32_t myHeight) {
+  int32_t childWidthMeasureSpec = ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(self, ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mLeft_, params->mRight_, params->width_, params->leftMargin_, params->rightMargin_, self->mPaddingLeft_, self->mPaddingRight_, myWidth);
+  int32_t childHeightMeasureSpec = ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(self, params->mTop_, params->mBottom_, params->height_, params->topMargin_, params->bottomMargin_, self->mPaddingTop_, self->mPaddingBottom_, myHeight);
   [((ADView *) nil_chk(child)) measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
-void ADRelativeLayout_measureChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth, jint myHeight) {
-  jint childWidthMeasureSpec = ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(self, ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mLeft_, params->mRight_, params->width_, params->leftMargin_, params->rightMargin_, self->mPaddingLeft_, self->mPaddingRight_, myWidth);
-  jint childHeightMeasureSpec;
+void ADRelativeLayout_measureChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth, int32_t myHeight) {
+  int32_t childWidthMeasureSpec = ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(self, ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mLeft_, params->mRight_, params->width_, params->leftMargin_, params->rightMargin_, self->mPaddingLeft_, self->mPaddingRight_, myWidth);
+  int32_t childHeightMeasureSpec;
   if (myHeight < 0 && !self->mAllowBrokenMeasureSpecs_) {
     if (params->height_ >= 0) {
       childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(params->height_, ADView_MeasureSpec_EXACTLY);
@@ -825,14 +836,14 @@ void ADRelativeLayout_measureChildHorizontalWithADView_withADRelativeLayout_Layo
     }
   }
   else {
-    jint maxHeight;
+    int32_t maxHeight;
     if (self->mMeasureVerticalWithPaddingMargin_) {
       maxHeight = JavaLangMath_maxWithInt_withInt_(0, myHeight - self->mPaddingTop_ - self->mPaddingBottom_ - params->topMargin_ - params->bottomMargin_);
     }
     else {
       maxHeight = JavaLangMath_maxWithInt_withInt_(0, myHeight);
     }
-    jint heightMode;
+    int32_t heightMode;
     if (params->height_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
       heightMode = ADView_MeasureSpec_EXACTLY;
     }
@@ -844,10 +855,10 @@ void ADRelativeLayout_measureChildHorizontalWithADView_withADRelativeLayout_Layo
   [((ADView *) nil_chk(child)) measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
-jint ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(ADRelativeLayout *self, jint childStart, jint childEnd, jint childSize, jint startMargin, jint endMargin, jint startPadding, jint endPadding, jint mySize) {
-  jint childSpecMode = 0;
-  jint childSpecSize = 0;
-  jboolean isUnspecified = mySize < 0;
+int32_t ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(ADRelativeLayout *self, int32_t childStart, int32_t childEnd, int32_t childSize, int32_t startMargin, int32_t endMargin, int32_t startPadding, int32_t endPadding, int32_t mySize) {
+  int32_t childSpecMode = 0;
+  int32_t childSpecSize = 0;
+  bool isUnspecified = mySize < 0;
   if (isUnspecified && !self->mAllowBrokenMeasureSpecs_) {
     if (childStart != ADRelativeLayout_VALUE_NOT_SET && childEnd != ADRelativeLayout_VALUE_NOT_SET) {
       childSpecSize = JavaLangMath_maxWithInt_withInt_(0, childEnd - childStart);
@@ -863,15 +874,15 @@ jint ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt
     }
     return ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(childSpecSize, childSpecMode);
   }
-  jint tempStart = childStart;
-  jint tempEnd = childEnd;
+  int32_t tempStart = childStart;
+  int32_t tempEnd = childEnd;
   if (tempStart == ADRelativeLayout_VALUE_NOT_SET) {
     tempStart = startPadding + startMargin;
   }
   if (tempEnd == ADRelativeLayout_VALUE_NOT_SET) {
     tempEnd = mySize - endPadding - endMargin;
   }
-  jint maxAvailable = tempEnd - tempStart;
+  int32_t maxAvailable = tempEnd - tempStart;
   if (childStart != ADRelativeLayout_VALUE_NOT_SET && childEnd != ADRelativeLayout_VALUE_NOT_SET) {
     childSpecMode = isUnspecified ? ADView_MeasureSpec_UNSPECIFIED : ADView_MeasureSpec_EXACTLY;
     childSpecSize = JavaLangMath_maxWithInt_withInt_(0, maxAvailable);
@@ -904,8 +915,8 @@ jint ADRelativeLayout_getChildMeasureSpecWithInt_withInt_withInt_withInt_withInt
   return ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(childSpecSize, childSpecMode);
 }
 
-jboolean ADRelativeLayout_positionChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth, jboolean wrapContent) {
-  jint layoutDirection = [self getLayoutDirection];
+bool ADRelativeLayout_positionChildHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth, bool wrapContent) {
+  int32_t layoutDirection = [self getLayoutDirection];
   IOSIntArray *rules = [((ADRelativeLayout_LayoutParams *) nil_chk(params)) getRulesWithInt:layoutDirection];
   if (params->mLeft_ == ADRelativeLayout_VALUE_NOT_SET && params->mRight_ != ADRelativeLayout_VALUE_NOT_SET) {
     params->mLeft_ = params->mRight_ - [((ADView *) nil_chk(child)) getMeasuredWidth];
@@ -930,7 +941,7 @@ jboolean ADRelativeLayout_positionChildHorizontalWithADView_withADRelativeLayout
   return IOSIntArray_Get(nil_chk(rules), ADRelativeLayout_ALIGN_PARENT_END) != 0;
 }
 
-void ADRelativeLayout_positionAtEdgeWithADView_withADRelativeLayout_LayoutParams_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth) {
+void ADRelativeLayout_positionAtEdgeWithADView_withADRelativeLayout_LayoutParams_withInt_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth) {
   if ([self isLayoutRtl]) {
     ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mRight_ = myWidth - self->mPaddingRight_ - params->rightMargin_;
     params->mLeft_ = params->mRight_ - [((ADView *) nil_chk(child)) getMeasuredWidth];
@@ -941,7 +952,7 @@ void ADRelativeLayout_positionAtEdgeWithADView_withADRelativeLayout_LayoutParams
   }
 }
 
-jboolean ADRelativeLayout_positionChildVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, jint myHeight, jboolean wrapContent) {
+bool ADRelativeLayout_positionChildVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_withBoolean_(ADRelativeLayout *self, ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myHeight, bool wrapContent) {
   IOSIntArray *rules = [((ADRelativeLayout_LayoutParams *) nil_chk(params)) getRules];
   if (params->mTop_ == ADRelativeLayout_VALUE_NOT_SET && params->mBottom_ != ADRelativeLayout_VALUE_NOT_SET) {
     params->mTop_ = params->mBottom_ - [((ADView *) nil_chk(child)) getMeasuredHeight];
@@ -968,7 +979,7 @@ jboolean ADRelativeLayout_positionChildVerticalWithADView_withADRelativeLayout_L
   return IOSIntArray_Get(nil_chk(rules), ADRelativeLayout_ALIGN_PARENT_BOTTOM) != 0;
 }
 
-void ADRelativeLayout_applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withIntArray_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, jint myWidth, IOSIntArray *rules) {
+void ADRelativeLayout_applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withIntArray_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, int32_t myWidth, IOSIntArray *rules) {
   ADRelativeLayout_LayoutParams *anchorParams;
   ((ADRelativeLayout_LayoutParams *) nil_chk(childParams))->mLeft_ = ADRelativeLayout_VALUE_NOT_SET;
   childParams->mRight_ = ADRelativeLayout_VALUE_NOT_SET;
@@ -1014,9 +1025,9 @@ void ADRelativeLayout_applyHorizontalSizeRulesWithADRelativeLayout_LayoutParams_
   }
 }
 
-void ADRelativeLayout_applyVerticalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, jint myHeight, jint myBaseline) {
+void ADRelativeLayout_applyVerticalSizeRulesWithADRelativeLayout_LayoutParams_withInt_withInt_(ADRelativeLayout *self, ADRelativeLayout_LayoutParams *childParams, int32_t myHeight, int32_t myBaseline) {
   IOSIntArray *rules = [((ADRelativeLayout_LayoutParams *) nil_chk(childParams)) getRules];
-  jint baselineOffset = ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(self, rules);
+  int32_t baselineOffset = ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(self, rules);
   if (baselineOffset != -1) {
     if (myBaseline != -1) {
       baselineOffset -= myBaseline;
@@ -1070,8 +1081,8 @@ void ADRelativeLayout_applyVerticalSizeRulesWithADRelativeLayout_LayoutParams_wi
   }
 }
 
-ADView *ADRelativeLayout_getRelatedViewWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, jint relation) {
-  jint id_ = IOSIntArray_Get(nil_chk(rules), relation);
+ADView *ADRelativeLayout_getRelatedViewWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, int32_t relation) {
+  int32_t id_ = IOSIntArray_Get(nil_chk(rules), relation);
   if (id_ != 0) {
     ADRelativeLayout_DependencyGraph_Node *node = JreRetainedLocalValue([((ADSparseArray *) nil_chk(((ADRelativeLayout_DependencyGraph *) nil_chk(self->mGraph_))->mKeyNodes_)) getWithInt:id_]);
     if (node == nil) return nil;
@@ -1079,7 +1090,7 @@ ADView *ADRelativeLayout_getRelatedViewWithIntArray_withInt_(ADRelativeLayout *s
     while ([((ADView *) nil_chk(v)) getVisibility] == ADView_GONE) {
       rules = [((ADRelativeLayout_LayoutParams *) nil_chk(((ADRelativeLayout_LayoutParams *) cast_chk([v getLayoutParams], [ADRelativeLayout_LayoutParams class])))) getRulesWithInt:[v getLayoutDirection]];
       node = [((ADSparseArray *) nil_chk(self->mGraph_->mKeyNodes_)) getWithInt:(IOSIntArray_Get(nil_chk(rules), relation))];
-      if (node == nil || v == node->view_) return nil;
+      if (node == nil || JreObjectEqualsEquals(v, node->view_)) return nil;
       v = node->view_;
     }
     return v;
@@ -1087,7 +1098,7 @@ ADView *ADRelativeLayout_getRelatedViewWithIntArray_withInt_(ADRelativeLayout *s
   return nil;
 }
 
-ADRelativeLayout_LayoutParams *ADRelativeLayout_getRelatedViewParamsWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, jint relation) {
+ADRelativeLayout_LayoutParams *ADRelativeLayout_getRelatedViewParamsWithIntArray_withInt_(ADRelativeLayout *self, IOSIntArray *rules, int32_t relation) {
   ADView *v = ADRelativeLayout_getRelatedViewWithIntArray_withInt_(self, rules, relation);
   if (v != nil) {
     ADViewGroup_LayoutParams *params = JreRetainedLocalValue([v getLayoutParams]);
@@ -1098,10 +1109,10 @@ ADRelativeLayout_LayoutParams *ADRelativeLayout_getRelatedViewParamsWithIntArray
   return nil;
 }
 
-jint ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(ADRelativeLayout *self, IOSIntArray *rules) {
+int32_t ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(ADRelativeLayout *self, IOSIntArray *rules) {
   ADView *v = ADRelativeLayout_getRelatedViewWithIntArray_withInt_(self, rules, ADRelativeLayout_ALIGN_BASELINE);
   if (v != nil) {
-    jint baseline = [v getBaseline];
+    int32_t baseline = [v getBaseline];
     if (baseline != -1) {
       ADViewGroup_LayoutParams *params = [v getLayoutParams];
       if ([params isKindOfClass:[ADRelativeLayout_LayoutParams class]]) {
@@ -1113,18 +1124,18 @@ jint ADRelativeLayout_getRelatedViewBaselineOffsetWithIntArray_(ADRelativeLayout
   return -1;
 }
 
-void ADRelativeLayout_centerHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, jint myWidth) {
+void ADRelativeLayout_centerHorizontalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myWidth) {
   ADRelativeLayout_initialize();
-  jint childWidth = [((ADView *) nil_chk(child)) getMeasuredWidth];
-  jint left = JreIntDiv((myWidth - childWidth), 2);
+  int32_t childWidth = [((ADView *) nil_chk(child)) getMeasuredWidth];
+  int32_t left = JreIntDiv((myWidth - childWidth), 2);
   ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mLeft_ = left;
   params->mRight_ = left + childWidth;
 }
 
-void ADRelativeLayout_centerVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, jint myHeight) {
+void ADRelativeLayout_centerVerticalWithADView_withADRelativeLayout_LayoutParams_withInt_(ADView *child, ADRelativeLayout_LayoutParams *params, int32_t myHeight) {
   ADRelativeLayout_initialize();
-  jint childHeight = [((ADView *) nil_chk(child)) getMeasuredHeight];
-  jint top = JreIntDiv((myHeight - childHeight), 2);
+  int32_t childHeight = [((ADView *) nil_chk(child)) getMeasuredHeight];
+  int32_t top = JreIntDiv((myHeight - childHeight), 2);
   ((ADRelativeLayout_LayoutParams *) nil_chk(params))->mTop_ = top;
   params->mBottom_ = top + childHeight;
 }
@@ -1151,10 +1162,12 @@ ADRelativeLayout *create_ADRelativeLayout_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRelativeLayout)
 
+J2OBJC_NAME_MAPPING(ADRelativeLayout, "r.android.widget", "AD")
+
 @implementation ADRelativeLayout_LayoutParams
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)h {
+- (instancetype)initWithInt:(int32_t)w
+                    withInt:(int32_t)h {
   ADRelativeLayout_LayoutParams_initWithInt_withInt_(self, w, h);
   return self;
 }
@@ -1169,12 +1182,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRelativeLayout)
   return self;
 }
 
-- (void)addRuleWithInt:(jint)verb {
+- (void)addRuleWithInt:(int32_t)verb {
   [self addRuleWithInt:verb withInt:ADRelativeLayout_TRUE];
 }
 
-- (void)addRuleWithInt:(jint)verb
-               withInt:(jint)subject {
+- (void)addRuleWithInt:(int32_t)verb
+               withInt:(int32_t)subject {
   if (!mNeedsLayoutResolution_ && ADRelativeLayout_LayoutParams_isRelativeRuleWithInt_(self, verb) && IOSIntArray_Get(nil_chk(mInitialRules_), verb) != 0 && subject == 0) {
     mNeedsLayoutResolution_ = true;
   }
@@ -1183,27 +1196,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRelativeLayout)
   mRulesChanged_ = true;
 }
 
-- (void)removeRuleWithInt:(jint)verb {
+- (void)removeRuleWithInt:(int32_t)verb {
   [self addRuleWithInt:verb withInt:0];
 }
 
-- (jint)getRuleWithInt:(jint)verb {
+- (int32_t)getRuleWithInt:(int32_t)verb {
   return IOSIntArray_Get(nil_chk(mRules_), verb);
 }
 
-- (jboolean)hasRelativeRules {
+- (bool)hasRelativeRules {
   return ADRelativeLayout_LayoutParams_hasRelativeRules(self);
 }
 
-- (jboolean)isRelativeRuleWithInt:(jint)rule {
+- (bool)isRelativeRuleWithInt:(int32_t)rule {
   return ADRelativeLayout_LayoutParams_isRelativeRuleWithInt_(self, rule);
 }
 
-- (void)resolveRulesWithInt:(jint)layoutDirection {
+- (void)resolveRulesWithInt:(int32_t)layoutDirection {
   ADRelativeLayout_LayoutParams_resolveRulesWithInt_(self, layoutDirection);
 }
 
-- (IOSIntArray *)getRulesWithInt:(jint)layoutDirection {
+- (IOSIntArray *)getRulesWithInt:(int32_t)layoutDirection {
   [self resolveLayoutDirectionWithInt:layoutDirection];
   return mRules_;
 }
@@ -1212,14 +1225,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRelativeLayout)
   return mRules_;
 }
 
-- (void)resolveLayoutDirectionWithInt:(jint)layoutDirection {
+- (void)resolveLayoutDirectionWithInt:(int32_t)layoutDirection {
   if (ADRelativeLayout_LayoutParams_shouldResolveLayoutDirectionWithInt_(self, layoutDirection)) {
     ADRelativeLayout_LayoutParams_resolveRulesWithInt_(self, layoutDirection);
   }
   [super resolveLayoutDirectionWithInt:layoutDirection];
 }
 
-- (jboolean)shouldResolveLayoutDirectionWithInt:(jint)layoutDirection {
+- (bool)shouldResolveLayoutDirectionWithInt:(int32_t)layoutDirection {
   return ADRelativeLayout_LayoutParams_shouldResolveLayoutDirectionWithInt_(self, layoutDirection);
 }
 
@@ -1283,7 +1296,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRelativeLayout)
 
 @end
 
-void ADRelativeLayout_LayoutParams_initWithInt_withInt_(ADRelativeLayout_LayoutParams *self, jint w, jint h) {
+void ADRelativeLayout_LayoutParams_initWithInt_withInt_(ADRelativeLayout_LayoutParams *self, int32_t w, int32_t h) {
   ADViewGroup_MarginLayoutParams_initWithInt_withInt_(self, w, h);
   JreStrongAssignAndConsume(&self->mRules_, [IOSIntArray newArrayWithLength:ADRelativeLayout_VERB_COUNT]);
   JreStrongAssignAndConsume(&self->mInitialRules_, [IOSIntArray newArrayWithLength:ADRelativeLayout_VERB_COUNT]);
@@ -1291,11 +1304,11 @@ void ADRelativeLayout_LayoutParams_initWithInt_withInt_(ADRelativeLayout_LayoutP
   self->mIsRtlCompatibilityMode_ = false;
 }
 
-ADRelativeLayout_LayoutParams *new_ADRelativeLayout_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADRelativeLayout_LayoutParams *new_ADRelativeLayout_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_NEW_IMPL(ADRelativeLayout_LayoutParams, initWithInt_withInt_, w, h)
 }
 
-ADRelativeLayout_LayoutParams *create_ADRelativeLayout_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+ADRelativeLayout_LayoutParams *create_ADRelativeLayout_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) {
   J2OBJC_CREATE_IMPL(ADRelativeLayout_LayoutParams, initWithInt_withInt_, w, h)
 }
 
@@ -1336,16 +1349,16 @@ ADRelativeLayout_LayoutParams *create_ADRelativeLayout_LayoutParams_initWithADRe
   J2OBJC_CREATE_IMPL(ADRelativeLayout_LayoutParams, initWithADRelativeLayout_LayoutParams_, source)
 }
 
-jboolean ADRelativeLayout_LayoutParams_hasRelativeRules(ADRelativeLayout_LayoutParams *self) {
+bool ADRelativeLayout_LayoutParams_hasRelativeRules(ADRelativeLayout_LayoutParams *self) {
   return (IOSIntArray_Get(nil_chk(self->mInitialRules_), ADRelativeLayout_START_OF) != 0 || IOSIntArray_Get(self->mInitialRules_, ADRelativeLayout_END_OF) != 0 || IOSIntArray_Get(self->mInitialRules_, ADRelativeLayout_ALIGN_START) != 0 || IOSIntArray_Get(self->mInitialRules_, ADRelativeLayout_ALIGN_END) != 0 || IOSIntArray_Get(self->mInitialRules_, ADRelativeLayout_ALIGN_PARENT_START) != 0 || IOSIntArray_Get(self->mInitialRules_, ADRelativeLayout_ALIGN_PARENT_END) != 0);
 }
 
-jboolean ADRelativeLayout_LayoutParams_isRelativeRuleWithInt_(ADRelativeLayout_LayoutParams *self, jint rule) {
+bool ADRelativeLayout_LayoutParams_isRelativeRuleWithInt_(ADRelativeLayout_LayoutParams *self, int32_t rule) {
   return rule == ADRelativeLayout_START_OF || rule == ADRelativeLayout_END_OF || rule == ADRelativeLayout_ALIGN_START || rule == ADRelativeLayout_ALIGN_END || rule == ADRelativeLayout_ALIGN_PARENT_START || rule == ADRelativeLayout_ALIGN_PARENT_END;
 }
 
-void ADRelativeLayout_LayoutParams_resolveRulesWithInt_(ADRelativeLayout_LayoutParams *self, jint layoutDirection) {
-  jboolean isLayoutRtl = layoutDirection == ADView_LAYOUT_DIRECTION_RTL;
+void ADRelativeLayout_LayoutParams_resolveRulesWithInt_(ADRelativeLayout_LayoutParams *self, int32_t layoutDirection) {
+  bool isLayoutRtl = layoutDirection == ADView_LAYOUT_DIRECTION_RTL;
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->mInitialRules_, ADRelativeLayout_LEFT_OF, self->mRules_, ADRelativeLayout_LEFT_OF, ADRelativeLayout_VERB_COUNT);
   if (self->mIsRtlCompatibilityMode_) {
     if (IOSIntArray_Get(nil_chk(self->mRules_), ADRelativeLayout_ALIGN_START) != 0) {
@@ -1427,7 +1440,7 @@ void ADRelativeLayout_LayoutParams_resolveRulesWithInt_(ADRelativeLayout_LayoutP
   self->mNeedsLayoutResolution_ = false;
 }
 
-jboolean ADRelativeLayout_LayoutParams_shouldResolveLayoutDirectionWithInt_(ADRelativeLayout_LayoutParams *self, jint layoutDirection) {
+bool ADRelativeLayout_LayoutParams_shouldResolveLayoutDirectionWithInt_(ADRelativeLayout_LayoutParams *self, int32_t layoutDirection) {
   return (self->mNeedsLayoutResolution_ || ADRelativeLayout_LayoutParams_hasRelativeRules(self)) && (self->mRulesChanged_ || layoutDirection != [self getLayoutDirection]);
 }
 
@@ -1444,8 +1457,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)clear {
   JavaUtilArrayList *nodes = mNodes_;
-  jint count = [((JavaUtilArrayList *) nil_chk(nodes)) size];
-  for (jint i = 0; i < count; i++) {
+  int32_t count = [((JavaUtilArrayList *) nil_chk(nodes)) size];
+  for (int32_t i = 0; i < count; i++) {
     [((ADRelativeLayout_DependencyGraph_Node *) nil_chk([nodes getWithInt:i])) release__];
   }
   [nodes clear];
@@ -1454,7 +1467,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithADView:(ADView *)view {
-  jint id_ = [((ADView *) nil_chk(view)) getId];
+  int32_t id_ = [((ADView *) nil_chk(view)) getId];
   ADRelativeLayout_DependencyGraph_Node *node = ADRelativeLayout_DependencyGraph_Node_acquireWithADView_(view);
   if (id_ != ADView_NO_ID) {
     [((ADSparseArray *) nil_chk(mKeyNodes_)) putWithInt:id_ withId:node];
@@ -1465,15 +1478,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)getSortedViewsWithADViewArray:(IOSObjectArray *)sorted
                          withIntArray:(IOSIntArray *)rules {
   JavaUtilArrayDeque *roots = ADRelativeLayout_DependencyGraph_findRootsWithIntArray_(self, rules);
-  jint index = 0;
+  int32_t index = 0;
   ADRelativeLayout_DependencyGraph_Node *node;
   while ((node = [((JavaUtilArrayDeque *) nil_chk(roots)) pollLast]) != nil) {
     ADView *view = ((ADRelativeLayout_DependencyGraph_Node *) nil_chk(node))->view_;
-    jint key = [((ADView *) nil_chk(view)) getId];
+    int32_t key = [((ADView *) nil_chk(view)) getId];
     IOSObjectArray_Set(nil_chk(sorted), index++, view);
     ADArrayMap *dependents = node->dependents_;
-    jint count = [((ADArrayMap *) nil_chk(dependents)) size];
-    for (jint i = 0; i < count; i++) {
+    int32_t count = [((ADArrayMap *) nil_chk(dependents)) size];
+    for (int32_t i = 0; i < count; i++) {
       ADRelativeLayout_DependencyGraph_Node *dependent = [dependents keyAtWithInt:i];
       ADSparseArray *dependencies = ((ADRelativeLayout_DependencyGraph_Node *) nil_chk(dependent))->dependencies_;
       [((ADSparseArray *) nil_chk(dependencies)) removeWithInt:key];
@@ -1545,22 +1558,22 @@ ADRelativeLayout_DependencyGraph *create_ADRelativeLayout_DependencyGraph_init()
 JavaUtilArrayDeque *ADRelativeLayout_DependencyGraph_findRootsWithIntArray_(ADRelativeLayout_DependencyGraph *self, IOSIntArray *rulesFilter) {
   ADSparseArray *keyNodes = self->mKeyNodes_;
   JavaUtilArrayList *nodes = self->mNodes_;
-  jint count = [((JavaUtilArrayList *) nil_chk(nodes)) size];
-  for (jint i = 0; i < count; i++) {
+  int32_t count = [((JavaUtilArrayList *) nil_chk(nodes)) size];
+  for (int32_t i = 0; i < count; i++) {
     ADRelativeLayout_DependencyGraph_Node *node = [nodes getWithInt:i];
     [((ADArrayMap *) nil_chk(((ADRelativeLayout_DependencyGraph_Node *) nil_chk(node))->dependents_)) clear];
     [((ADSparseArray *) nil_chk(node->dependencies_)) clear];
   }
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     ADRelativeLayout_DependencyGraph_Node *node = [nodes getWithInt:i];
     ADRelativeLayout_LayoutParams *layoutParams = (ADRelativeLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(((ADRelativeLayout_DependencyGraph_Node *) nil_chk(node))->view_)) getLayoutParams], [ADRelativeLayout_LayoutParams class]);
     IOSIntArray *rules = ((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams))->mRules_;
-    jint rulesCount = ((IOSIntArray *) nil_chk(rulesFilter))->size_;
-    for (jint j = 0; j < rulesCount; j++) {
-      jint rule = IOSIntArray_Get(nil_chk(rules), IOSIntArray_Get(rulesFilter, j));
+    int32_t rulesCount = ((IOSIntArray *) nil_chk(rulesFilter))->size_;
+    for (int32_t j = 0; j < rulesCount; j++) {
+      int32_t rule = IOSIntArray_Get(nil_chk(rules), IOSIntArray_Get(rulesFilter, j));
       if (rule > 0) {
         ADRelativeLayout_DependencyGraph_Node *dependency = [((ADSparseArray *) nil_chk(keyNodes)) getWithInt:rule];
-        if (dependency == nil || dependency == node) {
+        if (dependency == nil || JreObjectEqualsEquals(dependency, node)) {
           continue;
         }
         [((ADArrayMap *) nil_chk(dependency->dependents_)) putWithId:node withId:self];
@@ -1570,7 +1583,7 @@ JavaUtilArrayDeque *ADRelativeLayout_DependencyGraph_findRootsWithIntArray_(ADRe
   }
   JavaUtilArrayDeque *roots = self->mRoots_;
   [((JavaUtilArrayDeque *) nil_chk(roots)) clear];
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     ADRelativeLayout_DependencyGraph_Node *node = [nodes getWithInt:i];
     if ([((ADSparseArray *) nil_chk(((ADRelativeLayout_DependencyGraph_Node *) nil_chk(node))->dependencies_)) size] == 0) [roots addLastWithId:node];
   }

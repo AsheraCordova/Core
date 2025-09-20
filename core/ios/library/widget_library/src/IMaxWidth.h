@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IMaxWidth.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IMaxWidth")
@@ -16,9 +17,11 @@
 #if !defined (ASIMaxWidth_) && (INCLUDE_ALL_IMaxWidth || defined(INCLUDE_ASIMaxWidth))
 #define ASIMaxWidth_
 
+@class JavaLangInteger;
+
 @protocol ASIMaxWidth < JavaObject >
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
 @end
 
@@ -27,6 +30,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIMaxWidth)
 J2OBJC_TYPE_LITERAL_HEADER(ASIMaxWidth)
 
 #define ComAsheraWidgetIMaxWidth ASIMaxWidth
+
 
 #endif
 

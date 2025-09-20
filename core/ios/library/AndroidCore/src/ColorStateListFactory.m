@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\drawable\ColorStateListFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Color.h"
 #include "ColorStateList.h"
 #include "ColorStateListFactory.h"
@@ -28,13 +33,17 @@
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASColorStateListFactory ()
 
-+ (jint)modulateColorAlphaWithInt:(jint)baseColor
-                        withFloat:(jfloat)alphaMod;
++ (int32_t)modulateColorAlphaWithInt:(int32_t)baseColor
+                           withFloat:(float)alphaMod;
 
 @end
 
@@ -51,7 +60,7 @@ inline id<JavaUtilMap> ASColorStateListFactory_set_STATELIST_MAPPER(id<JavaUtilM
 static id<JavaUtilMap> ASColorStateListFactory_STATELIST_MAPPER;
 J2OBJC_STATIC_FIELD_OBJ(ASColorStateListFactory, STATELIST_MAPPER, id<JavaUtilMap>)
 
-__attribute__((unused)) static jint ASColorStateListFactory_modulateColorAlphaWithInt_withFloat_(jint baseColor, jfloat alphaMod);
+__attribute__((unused)) static int32_t ASColorStateListFactory_modulateColorAlphaWithInt_withFloat_(int32_t baseColor, float alphaMod);
 
 J2OBJC_INITIALIZED_DEFN(ASColorStateListFactory)
 
@@ -64,8 +73,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)modulateColorAlphaWithInt:(jint)baseColor
-                        withFloat:(jfloat)alphaMod {
++ (int32_t)modulateColorAlphaWithInt:(int32_t)baseColor
+                           withFloat:(float)alphaMod {
   return ASColorStateListFactory_modulateColorAlphaWithInt_withFloat_(baseColor, alphaMod);
 }
 
@@ -100,10 +109,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (void)initialize {
   if (self == [ASColorStateListFactory class]) {
     JreStrongAssignAndConsume(&ASColorStateListFactory_COLOR_STATE_LIST, [IOSObjectArray newArrayWithObjects:(id[]){ @"@android:state_window_focused", @"@android:state_selected", @"@android:state_focused", @"@android:state_pressed", @"@android:state_hovered", @"@android:state_activated", @"@android:state_accelerated", @"@android:state_enabled", @"@android:state_drag_can_accept", @"@android:state_drag_hovered" } count:10 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&ASColorStateListFactory_COLOR_STATE_LIST_ATTR, [IOSIntArray newArrayWithInts:(jint[]){ ADR_attr_state_window_focused, ADR_attr_state_selected, ADR_attr_state_focused, ADR_attr_state_pressed, ADR_attr_state_hovered, ADR_attr_state_activated, ADR_attr_state_accelerated, ADR_attr_state_enabled, ADR_attr_state_drag_can_accept, ADR_attr_state_drag_hovered } count:10]);
+    JreStrongAssignAndConsume(&ASColorStateListFactory_COLOR_STATE_LIST_ATTR, [IOSIntArray newArrayWithInts:(int32_t[]){ ADR_attr_state_window_focused, ADR_attr_state_selected, ADR_attr_state_focused, ADR_attr_state_pressed, ADR_attr_state_hovered, ADR_attr_state_activated, ADR_attr_state_accelerated, ADR_attr_state_enabled, ADR_attr_state_drag_can_accept, ADR_attr_state_drag_hovered } count:10]);
     JreStrongAssignAndConsume(&ASColorStateListFactory_STATELIST_MAPPER, new_JavaUtilHashMap_init());
     {
-      for (jint i = 0; i < ASColorStateListFactory_COLOR_STATE_LIST->size_; i++) {
+      for (int32_t i = 0; i < ASColorStateListFactory_COLOR_STATE_LIST->size_; i++) {
         [((id<JavaUtilMap>) nil_chk(ASColorStateListFactory_STATELIST_MAPPER)) putWithId:IOSObjectArray_Get(ASColorStateListFactory_COLOR_STATE_LIST, i) withId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(ASColorStateListFactory_COLOR_STATE_LIST_ATTR, i))];
       }
     }
@@ -125,23 +134,23 @@ ASColorStateListFactory *create_ASColorStateListFactory_init() {
   J2OBJC_CREATE_IMPL(ASColorStateListFactory, init)
 }
 
-jint ASColorStateListFactory_modulateColorAlphaWithInt_withFloat_(jint baseColor, jfloat alphaMod) {
+int32_t ASColorStateListFactory_modulateColorAlphaWithInt_withFloat_(int32_t baseColor, float alphaMod) {
   ASColorStateListFactory_initialize();
   if (alphaMod == 1.0f) {
     return baseColor;
   }
-  jint baseAlpha = ADColor_alphaWithInt_(baseColor);
-  jint alpha = ADMathUtils_constrainWithInt_withInt_withInt_(JreFpToInt((baseAlpha * alphaMod + 0.5f)), 0, 255);
-  return (baseColor & (jint) 0xFFFFFF) | (JreLShift32(alpha, 24));
+  int32_t baseAlpha = ADColor_alphaWithInt_(baseColor);
+  int32_t alpha = ADMathUtils_constrainWithInt_withInt_withInt_(JreFpToInt((baseAlpha * alphaMod + 0.5f)), 0, 255);
+  return (baseColor & (int32_t) 0xFFFFFF) | (JreLShift32(alpha, 24));
 }
 
 ADColorStateList *ASColorStateListFactory_getColorWithJavaUtilMap_withASIFragment_(id<JavaUtilMap> colorMap, id<ASIFragment> fragment) {
   ASColorStateListFactory_initialize();
   if ([((id<JavaUtilMap>) nil_chk(colorMap)) containsKeyWithId:@"selector"]) {
-    jint defaultColor = ADColor_RED;
-    IOSObjectArray *stateSpecList = [IOSIntArray arrayWithDimensions:2 lengths:(jint[]){ 20, 20 }];
+    int32_t defaultColor = ADColor_RED;
+    IOSObjectArray *stateSpecList = [IOSIntArray arrayWithDimensions:2 lengths:(int32_t[]){ 20, 20 }];
     IOSIntArray *colorList = [IOSIntArray arrayWithLength:stateSpecList->size_];
-    jint listSize = 0;
+    int32_t listSize = 0;
     id<JavaUtilMap> selector = ASPluginInvoker_getMapWithId_([colorMap getWithId:@"selector"]);
     id<JavaUtilList> items = ASPluginInvoker_getListWithId_([((id<JavaUtilMap>) nil_chk(selector)) getWithId:@"item"]);
     for (id __strong item in nil_chk(items)) {
@@ -150,23 +159,23 @@ ADColorStateList *ASColorStateListFactory_getColorWithJavaUtilMap_withASIFragmen
       if ([((NSString *) nil_chk(colorStr)) java_hasPrefix:@"@color/"]) {
         colorStr = ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"color/color", @"color", colorStr, fragment);
       }
-      jint baseColor = colorStr == nil ? ADColor_RED : ADColor_parseColorWithNSString_(ASColorUtil_colorToHexWithNSString_(colorStr));
+      int32_t baseColor = colorStr == nil ? ADColor_RED : ADColor_parseColorWithNSString_(ASColorUtil_colorToHexWithNSString_(colorStr));
       NSString *aplhaStr = (NSString *) cast_chk([itemMap getWithId:@"@android:alpha"], [NSString class]);
-      jfloat alphaMod = aplhaStr == nil ? 1.0f : [((JavaLangFloat *) nil_chk(ASPluginInvoker_getFloatWithId_(aplhaStr))) floatValue];
-      jint j = 0;
+      float alphaMod = aplhaStr == nil ? 1.0f : [((JavaLangFloat *) nil_chk(ASPluginInvoker_getFloatWithId_(aplhaStr))) floatValue];
+      int32_t j = 0;
       id<JavaUtilSet> itemMapKeySet = JreRetainedLocalValue([itemMap keySet]);
       id<JavaUtilIterator> itemMapIter = JreRetainedLocalValue([((id<JavaUtilSet>) nil_chk(itemMapKeySet)) iterator]);
-      jint numAttrs = [itemMapKeySet size];
+      int32_t numAttrs = [itemMapKeySet size];
       IOSIntArray *stateSpec = [IOSIntArray arrayWithLength:numAttrs];
       while ([((id<JavaUtilIterator>) nil_chk(itemMapIter)) hasNext]) {
         NSString *stateResStrId = [itemMapIter next];
         if (!([((NSString *) nil_chk(stateResStrId)) java_hasPrefix:@"@android:alpha"] || [stateResStrId java_hasPrefix:@"@android:color"])) {
-          jint stateResId = [((JavaLangInteger *) nil_chk([((id<JavaUtilMap>) nil_chk(ASColorStateListFactory_STATELIST_MAPPER)) getWithId:stateResStrId])) intValue];
+          int32_t stateResId = [((JavaLangInteger *) nil_chk([((id<JavaUtilMap>) nil_chk(ASColorStateListFactory_STATELIST_MAPPER)) getWithId:stateResStrId])) intValue];
           *IOSIntArray_GetRef(stateSpec, j++) = [((JavaLangBoolean *) nil_chk(ASPluginInvoker_getBooleanWithId_([itemMap getWithId:stateResStrId]))) booleanValue] ? stateResId : -stateResId;
         }
       }
       stateSpec = ADStateSet_trimStateSetWithIntArray_withInt_(stateSpec, j);
-      jint color = ASColorStateListFactory_modulateColorAlphaWithInt_withFloat_(baseColor, alphaMod);
+      int32_t color = ASColorStateListFactory_modulateColorAlphaWithInt_withFloat_(baseColor, alphaMod);
       if (listSize == 0 || ((IOSIntArray *) nil_chk(stateSpec))->size_ == 0) {
         defaultColor = color;
       }
@@ -183,3 +192,5 @@ ADColorStateList *ASColorStateListFactory_getColorWithJavaUtilMap_withASIFragmen
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASColorStateListFactory)
+
+J2OBJC_NAME_MAPPING(ASColorStateListFactory, "com.ashera.drawable", "AS")

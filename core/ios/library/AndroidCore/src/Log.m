@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Log.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Log.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Throwable.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADLog
@@ -17,8 +30,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jboolean)isLoggableWithNSString:(NSString *)tag
-                           withInt:(jint)debug2 {
++ (bool)isLoggableWithNSString:(NSString *)tag
+                       withInt:(int32_t)debug2 {
   return ADLog_isLoggableWithNSString_withInt_(tag, debug2);
 }
 
@@ -141,7 +154,7 @@ ADLog *create_ADLog_init() {
   J2OBJC_CREATE_IMPL(ADLog, init)
 }
 
-jboolean ADLog_isLoggableWithNSString_withInt_(NSString *tag, jint debug2) {
+bool ADLog_isLoggableWithNSString_withInt_(NSString *tag, int32_t debug2) {
   ADLog_initialize();
   return false;
 }
@@ -191,3 +204,5 @@ void ADLog_iWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSSt
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLog)
+
+J2OBJC_NAME_MAPPING(ADLog, "r.android.util", "AD")

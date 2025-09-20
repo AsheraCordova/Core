@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\Length.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSClass.h"
@@ -12,25 +17,32 @@
 #include "Length.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASLength () {
  @public
-  jint mMinLength_;
-  jint mMaxLength_;
+  int32_t mMinLength_;
+  int32_t mMaxLength_;
 }
 
-- (instancetype)initWithInt:(jint)minLength
-                    withInt:(jint)maxLength;
+- (instancetype)initWithInt:(int32_t)minLength
+                    withInt:(int32_t)maxLength;
 
 @end
 
-__attribute__((unused)) static void ASLength_initWithInt_withInt_(ASLength *self, jint minLength, jint maxLength);
+__attribute__((unused)) static void ASLength_initWithInt_withInt_(ASLength *self, int32_t minLength, int32_t maxLength);
 
-__attribute__((unused)) static ASLength *new_ASLength_initWithInt_withInt_(jint minLength, jint maxLength) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASLength *new_ASLength_initWithInt_withInt_(int32_t minLength, int32_t maxLength) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASLength *create_ASLength_initWithInt_withInt_(jint minLength, jint maxLength);
+__attribute__((unused)) static ASLength *create_ASLength_initWithInt_withInt_(int32_t minLength, int32_t maxLength);
 
 @implementation ASLength
 
@@ -51,8 +63,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ASLength_initWithInt_withInt_(0, 0);
 }
 
-- (instancetype)initWithInt:(jint)minLength
-                    withInt:(jint)maxLength {
+- (instancetype)initWithInt:(int32_t)minLength
+                    withInt:(int32_t)maxLength {
   ASLength_initWithInt_withInt_(self, minLength, maxLength);
   return self;
 }
@@ -70,8 +82,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return NSString_java_formatWithNSString_withNSObjectArray_(res, [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(mMinLength_) } count:1 type:NSObject_class_()]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
   if (text == nil) {
     return false;
   }
@@ -126,18 +138,20 @@ ASLength *create_ASLength_init() {
   J2OBJC_CREATE_IMPL(ASLength, init)
 }
 
-void ASLength_initWithInt_withInt_(ASLength *self, jint minLength, jint maxLength) {
+void ASLength_initWithInt_withInt_(ASLength *self, int32_t minLength, int32_t maxLength) {
   ASBaseValidator_init(self);
   self->mMinLength_ = minLength;
   self->mMaxLength_ = maxLength;
 }
 
-ASLength *new_ASLength_initWithInt_withInt_(jint minLength, jint maxLength) {
+ASLength *new_ASLength_initWithInt_withInt_(int32_t minLength, int32_t maxLength) {
   J2OBJC_NEW_IMPL(ASLength, initWithInt_withInt_, minLength, maxLength)
 }
 
-ASLength *create_ASLength_initWithInt_withInt_(jint minLength, jint maxLength) {
+ASLength *create_ASLength_initWithInt_withInt_(int32_t minLength, int32_t maxLength) {
   J2OBJC_CREATE_IMPL(ASLength, initWithInt_withInt_, minLength, maxLength)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLength)
+
+J2OBJC_NAME_MAPPING(ASLength, "com.ashera.validations", "AS")

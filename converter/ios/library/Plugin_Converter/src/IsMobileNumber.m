@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\IsMobileNumber.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSObjectArray.h"
@@ -11,8 +16,15 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASIsMobileNumber
@@ -33,9 +45,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return res;
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [((JavaUtilRegexMatcher *) nil_chk([((JavaUtilRegexPattern *) nil_chk(JavaUtilRegexPattern_compileWithNSString_(@"\\d{10}"))) matcherWithJavaLangCharSequence:text])) matches];
@@ -76,3 +88,5 @@ ASIsMobileNumber *create_ASIsMobileNumber_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASIsMobileNumber)
+
+J2OBJC_NAME_MAPPING(ASIsMobileNumber, "com.ashera.validations", "AS")

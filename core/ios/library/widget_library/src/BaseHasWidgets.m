@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\BaseHasWidgets.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseHasWidgets.h"
 #include "BaseWidget.h"
 #include "Error.h"
@@ -24,7 +29,9 @@
 #include "WidgetFactory.h"
 #include "WidgetViewHolder.h"
 #include "java/io/PrintStream.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
@@ -34,7 +41,12 @@
 #include "java/util/Set.h"
 #include "java/util/UUID.h"
 
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -49,7 +61,7 @@
 - (void)setChildAttributesWithASIWidget:(id<ASIWidget>)w;
 
 - (void)addModelByIndexWithId:(id)model
-                      withInt:(jint)index;
+                      withInt:(int32_t)index;
 
 - (id<JavaUtilList>)getListObjectInScopeWithASModelExpressionParser_ModelLoopHolder:(ASModelExpressionParser_ModelLoopHolder *)modelLoopHolder;
 
@@ -61,13 +73,13 @@ J2OBJC_FIELD_SETTER(ASBaseHasWidgets, modelFor_, NSString *)
 
 __attribute__((unused)) static void ASBaseHasWidgets_setChildAttributesWithASIWidget_(ASBaseHasWidgets *self, id<ASIWidget> w);
 
-__attribute__((unused)) static void ASBaseHasWidgets_addModelByIndexWithId_withInt_(ASBaseHasWidgets *self, id model, jint index);
+__attribute__((unused)) static void ASBaseHasWidgets_addModelByIndexWithId_withInt_(ASBaseHasWidgets *self, id model, int32_t index);
 
 __attribute__((unused)) static id<JavaUtilList> ASBaseHasWidgets_getListObjectInScopeWithASModelExpressionParser_ModelLoopHolder_(ASBaseHasWidgets *self, ASModelExpressionParser_ModelLoopHolder *modelLoopHolder);
 
 @interface ASBaseHasWidgets_LazyBaseWidget () {
  @public
-  __unsafe_unretained ASBaseHasWidgets *this$0_;
+  WEAK_ ASBaseHasWidgets *this$0_;
 }
 
 @end
@@ -95,6 +107,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *new_ASBaseHasWidgets_1_initWi
 
 __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_initWithASBaseHasWidgets_(ASBaseHasWidgets *outer$);
 
+
 @implementation ASBaseHasWidgets
 
 - (NSString *)getModelDescPath {
@@ -112,7 +125,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index < 0) {
     [((id<JavaUtilList>) nil_chk(widgets_)) addWithId:w];
   }
@@ -148,7 +161,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 - (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
                  withASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                 withId:(id)objValue
-                           withBoolean:(jboolean)skipConvert {
+                           withBoolean:(bool)skipConvert {
   if (objValue != nil) {
     NSString *strValue = nil;
     if (!skipConvert) {
@@ -172,9 +185,9 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 }
 
 - (void)clear {
-  jint startIndex = 0;
-  jint endIndex = [((id<JavaUtilList>) nil_chk([self getChildWidgets])) size];
-  for (jint i = endIndex - 1; i >= startIndex; i--) {
+  int32_t startIndex = 0;
+  int32_t endIndex = [((id<JavaUtilList>) nil_chk([self getChildWidgets])) size];
+  for (int32_t i = endIndex - 1; i >= startIndex; i--) {
     [self removeWithInt:i];
   }
 }
@@ -183,17 +196,17 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   return [((id<JavaUtilList>) nil_chk(widgets_)) iterator];
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
   return [((id<JavaUtilList>) nil_chk(widgets_)) removeWithId:w];
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   [self removeIdsAndDataWithInt:index];
   return [self removeWidgetWithInt:index];
 }
 
-- (jboolean)removeWidgetWithInt:(jint)index {
-  jboolean success = false;
+- (bool)removeWidgetWithInt:(int32_t)index {
+  bool success = false;
   if (index + 1 <= [((id<JavaUtilList>) nil_chk(widgets_)) size]) {
     id<ASIWidget> widget = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index]);
     [((id<ASIWidget>) nil_chk(widget)) setParentWithASHasWidgets:nil];
@@ -204,7 +217,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   return success;
 }
 
-- (void)removeIdsAndDataWithInt:(jint)index {
+- (void)removeIdsAndDataWithInt:(int32_t)index {
   if (index + 1 <= [((id<JavaUtilList>) nil_chk(ids_)) size]) {
     [((id<JavaUtilList>) nil_chk(ids_)) removeWithInt:index];
     [((id<JavaUtilList>) nil_chk(dataList_)) removeWithInt:index];
@@ -259,14 +272,14 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 }
 
 - (void)addModelWithASLoopParam:(ASLoopParam *)model
-                        withInt:(jint)index
+                        withInt:(int32_t)index
                    withNSString:(NSString *)currentLoopVar {
   [self addObjectWithASLoopParam:model withNSString:[self getModelIdPath] withInt:index withNSString:currentLoopVar];
 }
 
 - (void)addObjectWithASLoopParam:(ASLoopParam *)childModel
                     withNSString:(NSString *)modelIdPath
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                     withNSString:(NSString *)currentLoopVar {
   NSString *id_ = nil;
   if (modelIdPath != nil) {
@@ -287,7 +300,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
     [self addItemToParentWithInt:index withNSString:id_ withASLoopParam:childModel];
   }
   else {
-    jint idIndex = [((id<JavaUtilList>) nil_chk(ids_)) indexOfWithId:id_];
+    int32_t idIndex = [((id<JavaUtilList>) nil_chk(ids_)) indexOfWithId:id_];
     [((id<JavaUtilList>) nil_chk(dataList_)) setWithInt:idIndex withId:childModel];
     id<JavaUtilList> childWidgets = JreRetainedLocalValue([self getChildWidgets]);
     if ([((id<JavaUtilList>) nil_chk(childWidgets)) size] > idIndex) {
@@ -301,7 +314,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   return widgets_;
 }
 
-- (void)addItemToParentWithInt:(jint)index
+- (void)addItemToParentWithInt:(int32_t)index
                   withNSString:(NSString *)id_
                withASLoopParam:(ASLoopParam *)childModel {
   id<ASIWidget> widget = JreRetainedLocalValue([((id<ASIWidget>) nil_chk(listItem_)) loadLazyWidgetsWithASHasWidgets:self withInt:index withNSString:id_ withASLoopParam:childModel]);
@@ -332,7 +345,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 }
 
 - (void)removeModelByIdWithNSString:(NSString *)id_ {
-  jint index = [((id<JavaUtilList>) nil_chk(ids_)) indexOfWithId:id_];
+  int32_t index = [((id<JavaUtilList>) nil_chk(ids_)) indexOfWithId:id_];
   if (index != -1) {
     [self removeModelAtIndexWithInt:index];
   }
@@ -342,7 +355,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   return ids_;
 }
 
-- (id<ASIWidget>)getWithInt:(jint)index {
+- (id<ASIWidget>)getWithInt:(int32_t)index {
   return [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
 }
 
@@ -358,7 +371,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   return self;
 }
 
-- (jboolean)areWidgetItemsRecycled {
+- (bool)areWidgetItemsRecycled {
   return false;
 }
 
@@ -407,7 +420,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   }
 }
 
-- (jboolean)filterDataWithId:(id)model {
+- (bool)filterDataWithId:(id)model {
   return true;
 }
 
@@ -419,7 +432,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 }
 
 - (void)addModelWithId:(id)model
-               withInt:(jint)index {
+               withInt:(int32_t)index {
   ASBaseHasWidgets_addModelByIndexWithId_withInt_(self, model, index);
 }
 
@@ -427,7 +440,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   [self addModelWithId:model withInt:-1];
 }
 
-- (void)removeModelAtIndexWithInt:(jint)index {
+- (void)removeModelAtIndexWithInt:(int32_t)index {
   if (index != -1) {
     NSString *modelFor = JreRetainedLocalValue([self getModelFor]);
     if (modelFor != nil) {
@@ -440,7 +453,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 }
 
 - (void)addModelByIndexWithId:(id)model
-                      withInt:(jint)index {
+                      withInt:(int32_t)index {
   ASBaseHasWidgets_addModelByIndexWithId_withInt_(self, model, index);
 }
 
@@ -503,7 +516,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 }
 
 - (void)setAttributeOnViewHolderWithASWidgetViewHolder:(ASWidgetViewHolder *)widgetViewHolder
-                                               withInt:(jint)position {
+                                               withInt:(int32_t)position {
   if (widgetViewHolder != nil) {
     ASLoopParam *model = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(dataList_)) getWithInt:position]);
     [self setAttributeOnViewHolderWithASWidgetViewHolder:widgetViewHolder withASLoopParam:model withBoolean:false];
@@ -517,7 +530,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 
 - (void)setAttributeOnViewHolderWithASWidgetViewHolder:(ASWidgetViewHolder *)widgetViewHolder
                                        withASLoopParam:(ASLoopParam *)model
-                                           withBoolean:(jboolean)invalidateChild {
+                                           withBoolean:(bool)invalidateChild {
   if (widgetViewHolder != nil) {
     @try {
       [((id<ASIFragment>) nil_chk(fragment_)) disableRemeasure];
@@ -536,7 +549,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
             obj = ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(methodName, obj, childWidget);
           }
           [((ASBaseWidget *) cast_chk(childWidget, [ASBaseWidget class])) applyStyleToWidgetWithASWidgetAttribute:attrHolder->widgetAttribute_ withId:obj];
-          jint updateUiFlag = [((ASWidgetAttribute *) nil_chk(attrHolder->widgetAttribute_)) getUpdateUiFlag];
+          int32_t updateUiFlag = [((ASWidgetAttribute *) nil_chk(attrHolder->widgetAttribute_)) getUpdateUiFlag];
           if ((updateUiFlag & ASIWidget_UPDATE_UI_REQUEST_LAYOUT) != 0) {
             [childWidget requestLayout];
           }
@@ -741,7 +754,7 @@ void ASBaseHasWidgets_setChildAttributesWithASIWidget_(ASBaseHasWidgets *self, i
   }
 }
 
-void ASBaseHasWidgets_addModelByIndexWithId_withInt_(ASBaseHasWidgets *self, id model, jint index) {
+void ASBaseHasWidgets_addModelByIndexWithId_withInt_(ASBaseHasWidgets *self, id model, int32_t index) {
   NSString *modelFor = JreRetainedLocalValue([self getModelFor]);
   if (modelFor != nil) {
     ASModelExpressionParser_ModelLoopHolder *modelLoopHolder = ASModelExpressionParser_parseModelLoopExpressionWithNSString_(modelFor);
@@ -749,7 +762,7 @@ void ASBaseHasWidgets_addModelByIndexWithId_withInt_(ASBaseHasWidgets *self, id 
     ASModelScope *varScope = JreRetainedLocalValue(modelLoopHolder->varScope_);
     ASModelDataType *dataType = JreRetainedLocalValue(modelLoopHolder->dataType_);
     id<JavaUtilList> listObj = ASBaseHasWidgets_getListObjectInScopeWithASModelExpressionParser_ModelLoopHolder_(self, modelLoopHolder);
-    jint existingIndex = -1;
+    int32_t existingIndex = -1;
     if ([self getModelIdPath] != nil) {
       NSString *id_ = ASPluginInvoker_getStringWithId_([self getModelByPathWithNSString:[self getModelIdPath] withId:model]);
       existingIndex = [((id<JavaUtilList>) nil_chk(self->ids_)) indexOfWithId:id_];
@@ -784,6 +797,8 @@ id<JavaUtilList> ASBaseHasWidgets_getListObjectInScopeWithASModelExpressionParse
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseHasWidgets)
+
+J2OBJC_NAME_MAPPING(ASBaseHasWidgets, "com.ashera.widget", "AS")
 
 @implementation ASBaseHasWidgets_LazyBaseWidget
 
@@ -851,7 +866,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseHasWidgets)
 }
 
 - (void)addModelWithASLoopParam:(ASLoopParam *)model
-                        withInt:(jint)index
+                        withInt:(int32_t)index
                    withNSString:(NSString *)currentLoopParam {
 }
 
@@ -960,7 +975,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseHasWidgets_LazyBaseWidget)
   ASModelExpressionParser_ModelLoopHolder *modelLoopHolder = ASModelExpressionParser_parseModelLoopExpressionWithNSString_(this$0_->modelFor_);
   id obj = JreRetainedLocalValue([this$0_ getModelByPathWithNSString:((ASModelExpressionParser_ModelLoopHolder *) nil_chk(modelLoopHolder))->varName_ withId:self]);
   obj = [this$0_ getModelByPathWithNSString:this$0_->modelDescPath_ withId:obj];
-  return obj == nil ? @"" : [obj description];
+  return JreRetainedLocalValue(obj == nil ? @"" : [obj description]);
 }
 
 - (void)dealloc {
@@ -983,7 +998,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseHasWidgets_LazyBaseWidget)
     { "this$0_", "LASBaseHasWidgets;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASBaseHasWidgets;", "toString", "createLoopParam" };
-  static const J2ObjcClassInfo _ASBaseHasWidgets_1 = { "", "com.ashera.widget", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 2, -1, -1 };
+  static const J2ObjcClassInfo _ASBaseHasWidgets_1 = { "", "com.ashera.widget", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 2, -1, -1 };
   return &_ASBaseHasWidgets_1;
 }
 

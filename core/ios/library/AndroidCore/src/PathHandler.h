@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\PathHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PathHandler")
@@ -15,6 +16,9 @@
 
 #if !defined (ADPathHandler_) && (INCLUDE_ALL_PathHandler || defined(INCLUDE_ADPathHandler))
 #define ADPathHandler_
+
+@class JavaLangBoolean;
+@class JavaLangFloat;
 
 /*!
  @brief This interface must be implemented and then registred as the
@@ -44,8 +48,8 @@
  @param y the relative y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)movetoRelWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)movetoRelWithFloat:(float)x
+                 withFloat:(float)y;
 
 /*!
  @brief Invoked when an absolute moveto command has been parsed.
@@ -54,8 +58,8 @@
  @param y the absolute y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)movetoAbsWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)movetoAbsWithFloat:(float)x
+                 withFloat:(float)y;
 
 /*!
  @brief Invoked when a closepath has been parsed.
@@ -71,8 +75,8 @@
  @param y the relative y coordinates for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)linetoRelWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)linetoRelWithFloat:(float)x
+                 withFloat:(float)y;
 
 /*!
  @brief Invoked when an absolute line command has been parsed.
@@ -81,8 +85,8 @@
  @param y the absolute y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)linetoAbsWithFloat:(jfloat)x
-                 withFloat:(jfloat)y;
+- (void)linetoAbsWithFloat:(float)x
+                 withFloat:(float)y;
 
 /*!
  @brief Invoked when an horizontal relative line command has been parsed.
@@ -90,7 +94,7 @@
  @param x the relative X coordinate of the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)linetoHorizontalRelWithFloat:(jfloat)x;
+- (void)linetoHorizontalRelWithFloat:(float)x;
 
 /*!
  @brief Invoked when an horizontal absolute line command has been parsed.
@@ -98,7 +102,7 @@
  @param x the absolute X coordinate of the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)linetoHorizontalAbsWithFloat:(jfloat)x;
+- (void)linetoHorizontalAbsWithFloat:(float)x;
 
 /*!
  @brief Invoked when a vertical relative line command has been parsed.
@@ -106,7 +110,7 @@
  @param y the relative Y coordinate of the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)linetoVerticalRelWithFloat:(jfloat)y;
+- (void)linetoVerticalRelWithFloat:(float)y;
 
 /*!
  @brief Invoked when a vertical absolute line command has been parsed.
@@ -114,7 +118,7 @@
  @param y the absolute Y coordinate of the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)linetoVerticalAbsWithFloat:(jfloat)y;
+- (void)linetoVerticalAbsWithFloat:(float)y;
 
 /*!
  @brief Invoked when a relative cubic bezier curve command has been parsed.
@@ -127,12 +131,12 @@
  @param y the relative y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoCubicRelWithFloat:(jfloat)x1
-                       withFloat:(jfloat)y1
-                       withFloat:(jfloat)x2
-                       withFloat:(jfloat)y2
-                       withFloat:(jfloat)x
-                       withFloat:(jfloat)y;
+- (void)curvetoCubicRelWithFloat:(float)x1
+                       withFloat:(float)y1
+                       withFloat:(float)x2
+                       withFloat:(float)y2
+                       withFloat:(float)x
+                       withFloat:(float)y;
 
 /*!
  @brief Invoked when an absolute cubic bezier curve command has been parsed.
@@ -145,12 +149,12 @@
  @param y the absolute y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoCubicAbsWithFloat:(jfloat)x1
-                       withFloat:(jfloat)y1
-                       withFloat:(jfloat)x2
-                       withFloat:(jfloat)y2
-                       withFloat:(jfloat)x
-                       withFloat:(jfloat)y;
+- (void)curvetoCubicAbsWithFloat:(float)x1
+                       withFloat:(float)y1
+                       withFloat:(float)x2
+                       withFloat:(float)y2
+                       withFloat:(float)x
+                       withFloat:(float)y;
 
 /*!
  @brief Invoked when a relative smooth cubic bezier curve command has
@@ -164,10 +168,10 @@
  @param y the relative y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoCubicSmoothRelWithFloat:(jfloat)x2
-                             withFloat:(jfloat)y2
-                             withFloat:(jfloat)x
-                             withFloat:(jfloat)y;
+- (void)curvetoCubicSmoothRelWithFloat:(float)x2
+                             withFloat:(float)y2
+                             withFloat:(float)x
+                             withFloat:(float)y;
 
 /*!
  @brief Invoked when an absolute smooth cubic bezier curve command has
@@ -181,10 +185,10 @@
  @param y the absolute y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoCubicSmoothAbsWithFloat:(jfloat)x2
-                             withFloat:(jfloat)y2
-                             withFloat:(jfloat)x
-                             withFloat:(jfloat)y;
+- (void)curvetoCubicSmoothAbsWithFloat:(float)x2
+                             withFloat:(float)y2
+                             withFloat:(float)x
+                             withFloat:(float)y;
 
 /*!
  @brief Invoked when a relative quadratic bezier curve command has been parsed.
@@ -195,10 +199,10 @@
  @param y the relative x coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoQuadraticRelWithFloat:(jfloat)x1
-                           withFloat:(jfloat)y1
-                           withFloat:(jfloat)x
-                           withFloat:(jfloat)y;
+- (void)curvetoQuadraticRelWithFloat:(float)x1
+                           withFloat:(float)y1
+                           withFloat:(float)x
+                           withFloat:(float)y;
 
 /*!
  @brief Invoked when an absolute quadratic bezier curve command has been parsed.
@@ -209,10 +213,10 @@
  @param y the absolute x coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoQuadraticAbsWithFloat:(jfloat)x1
-                           withFloat:(jfloat)y1
-                           withFloat:(jfloat)x
-                           withFloat:(jfloat)y;
+- (void)curvetoQuadraticAbsWithFloat:(float)x1
+                           withFloat:(float)y1
+                           withFloat:(float)x
+                           withFloat:(float)y;
 
 /*!
  @brief Invoked when a relative smooth quadratic bezier curve command
@@ -224,8 +228,8 @@
  @param y the relative y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoQuadraticSmoothRelWithFloat:(jfloat)x
-                                 withFloat:(jfloat)y;
+- (void)curvetoQuadraticSmoothRelWithFloat:(float)x
+                                 withFloat:(float)y;
 
 /*!
  @brief Invoked when an absolute smooth quadratic bezier curve command
@@ -237,8 +241,8 @@
  @param y the absolute y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)curvetoQuadraticSmoothAbsWithFloat:(jfloat)x
-                                 withFloat:(jfloat)y;
+- (void)curvetoQuadraticSmoothAbsWithFloat:(float)x
+                                 withFloat:(float)y;
 
 /*!
  @brief Invoked when a relative elliptical arc command has been parsed.
@@ -252,13 +256,13 @@
  @param y the relative y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)arcRelWithFloat:(jfloat)rx
-              withFloat:(jfloat)ry
-              withFloat:(jfloat)xAxisRotation
-            withBoolean:(jboolean)largeArcFlag
-            withBoolean:(jboolean)sweepFlag
-              withFloat:(jfloat)x
-              withFloat:(jfloat)y;
+- (void)arcRelWithFloat:(float)rx
+              withFloat:(float)ry
+              withFloat:(float)xAxisRotation
+            withBoolean:(bool)largeArcFlag
+            withBoolean:(bool)sweepFlag
+              withFloat:(float)x
+              withFloat:(float)y;
 
 /*!
  @brief Invoked when an absolute elliptical arc command has been parsed.
@@ -272,13 +276,13 @@
  @param y the absolute y coordinate for the end point
  @throw BezierParseExceptionif an error occured while processing the path
  */
-- (void)arcAbsWithFloat:(jfloat)rx
-              withFloat:(jfloat)ry
-              withFloat:(jfloat)xAxisRotation
-            withBoolean:(jboolean)largeArcFlag
-            withBoolean:(jboolean)sweepFlag
-              withFloat:(jfloat)x
-              withFloat:(jfloat)y;
+- (void)arcAbsWithFloat:(float)rx
+              withFloat:(float)ry
+              withFloat:(float)xAxisRotation
+            withBoolean:(bool)largeArcFlag
+            withBoolean:(bool)sweepFlag
+              withFloat:(float)x
+              withFloat:(float)y;
 
 @end
 
@@ -287,6 +291,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADPathHandler)
 J2OBJC_TYPE_LITERAL_HEADER(ADPathHandler)
 
 #define RAndroidGraphicsPathHandler ADPathHandler
+
 
 #endif
 

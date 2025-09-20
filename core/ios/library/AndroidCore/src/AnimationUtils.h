@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\animation\AnimationUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AnimationUtils")
@@ -17,6 +18,8 @@
 #define ADAnimationUtils_
 
 @class ADContext;
+@class JavaLangInteger;
+@class JavaLangLong;
 @protocol ADInterpolator;
 
 @interface ADAnimationUtils : NSObject
@@ -25,10 +28,10 @@
 
 - (instancetype)init;
 
-+ (jlong)currentAnimationTimeMillis;
++ (int64_t)currentAnimationTimeMillis;
 
 + (id<ADInterpolator>)loadInterpolatorWithADContext:(ADContext *)context
-                                            withInt:(jint)mDefaultInterpolatorID;
+                                            withInt:(int32_t)mDefaultInterpolatorID;
 
 @end
 
@@ -40,13 +43,14 @@ FOUNDATION_EXPORT ADAnimationUtils *new_ADAnimationUtils_init(void) NS_RETURNS_R
 
 FOUNDATION_EXPORT ADAnimationUtils *create_ADAnimationUtils_init(void);
 
-FOUNDATION_EXPORT id<ADInterpolator> ADAnimationUtils_loadInterpolatorWithADContext_withInt_(ADContext *context, jint mDefaultInterpolatorID);
+FOUNDATION_EXPORT id<ADInterpolator> ADAnimationUtils_loadInterpolatorWithADContext_withInt_(ADContext *context, int32_t mDefaultInterpolatorID);
 
-FOUNDATION_EXPORT jlong ADAnimationUtils_currentAnimationTimeMillis(void);
+FOUNDATION_EXPORT int64_t ADAnimationUtils_currentAnimationTimeMillis(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimationUtils)
 
 @compatibility_alias RAndroidViewAnimationAnimationUtils ADAnimationUtils;
+
 
 #endif
 

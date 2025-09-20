@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Button.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Button")
@@ -37,6 +38,7 @@ FOUNDATION_EXPORT void ADButton_initWithASIWidget_(ADButton *self, id<ASIWidget>
 J2OBJC_TYPE_LITERAL_HEADER(ADButton)
 
 @compatibility_alias RAndroidWidgetButton ADButton;
+
 
 #endif
 

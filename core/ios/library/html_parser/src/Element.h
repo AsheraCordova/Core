@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\Element.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Element")
@@ -16,6 +17,9 @@
 #if !defined (TSElement_) && (INCLUDE_ALL_Element || defined(INCLUDE_TSElement))
 #define TSElement_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @class TSAttributesImpl;
 @class TSElementType;
 
@@ -36,7 +40,7 @@
  @param defaultAttributes True if default attributes are wanted
  */
 - (instancetype)initWithTSElementType:(TSElementType *)type
-                          withBoolean:(jboolean)defaultAttributes;
+                          withBoolean:(bool)defaultAttributes;
 
 /*!
  @brief Make this element anonymous.
@@ -59,7 +63,7 @@
  Convenience method.
  @param other The other element
  */
-- (jboolean)canContainWithTSElement:(TSElement *)other;
+- (bool)canContainWithTSElement:(TSElement *)other;
 
 /*!
  @brief Clean the attributes of this element.
@@ -74,12 +78,12 @@
  Convenience method.
  @return The flags vector
  */
-- (jint)flags;
+- (int32_t)flags;
 
 /*!
  @brief Return true if this element has been preclosed.
  */
-- (jboolean)isPreclosed;
+- (bool)isPreclosed;
 
 /*!
  @brief Return the local name of the element's type.
@@ -93,14 +97,14 @@
  Convenience method.
  @return The member-of vector
  */
-- (jint)memberOf;
+- (int32_t)memberOf;
 
 /*!
  @brief Return the content model vector of the element's type.
  Convenience method.
  @return The content model vector
  */
-- (jint)model;
+- (int32_t)model;
 
 /*!
  @brief Return the name of the element's type.
@@ -165,15 +169,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(TSElement)
 
-FOUNDATION_EXPORT void TSElement_initWithTSElementType_withBoolean_(TSElement *self, TSElementType *type, jboolean defaultAttributes);
+FOUNDATION_EXPORT void TSElement_initWithTSElementType_withBoolean_(TSElement *self, TSElementType *type, bool defaultAttributes);
 
-FOUNDATION_EXPORT TSElement *new_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, jboolean defaultAttributes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT TSElement *new_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, bool defaultAttributes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT TSElement *create_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, jboolean defaultAttributes);
+FOUNDATION_EXPORT TSElement *create_TSElement_initWithTSElementType_withBoolean_(TSElementType *type, bool defaultAttributes);
 
 J2OBJC_TYPE_LITERAL_HEADER(TSElement)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupElement TSElement;
+
 
 #endif
 

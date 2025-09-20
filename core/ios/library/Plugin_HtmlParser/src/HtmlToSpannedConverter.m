@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\HtmlToSpannedConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributedString.h"
 #include "AugmentedIntervalTree.h"
 #include "BulletInterval.h"
@@ -27,6 +32,7 @@
 #include "java/io/IOException.h"
 #include "java/io/StringReader.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
@@ -39,11 +45,12 @@
 #include "org/xml/sax/SAXException.h"
 #include "org/xml/sax/XMLReader.h"
 
-@class JavaLangStringBuilder;
-@class JavaUtilStack;
-@protocol JavaUtilMap;
-@protocol OrgXmlSaxAttributes;
-@protocol OrgXmlSaxXMLReader;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASHtmlToSpannedConverter () {
@@ -56,9 +63,9 @@
   ASAugmentedIntervalTree *intervalTree_;
   id<ASAttributedString> spannableString_;
   id<ASIFragment> fragment_;
-  jint bulletIndent_;
-  jint bulletIndentInc_;
-  jint bulletSpacing_;
+  int32_t bulletIndent_;
+  int32_t bulletIndentInc_;
+  int32_t bulletSpacing_;
   CSSCssDataHolder *pageData_;
   JavaUtilStack *widgetAttributeMaps_;
   id<JavaUtilMap> htmlConfig_;
@@ -67,8 +74,8 @@
 - (ASWidgetAttributeMap *)getAttributesWithNSString:(NSString *)localName
                             withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
 
-- (jboolean)checkIfNotSupportedWithNSString:(NSString *)localName
-                               withNSString:(NSString *)key;
+- (bool)checkIfNotSupportedWithNSString:(NSString *)localName
+                           withNSString:(NSString *)key;
 
 @end
 
@@ -86,7 +93,7 @@ J2OBJC_FIELD_SETTER(ASHtmlToSpannedConverter, htmlConfig_, id<JavaUtilMap>)
 
 __attribute__((unused)) static ASWidgetAttributeMap *ASHtmlToSpannedConverter_getAttributesWithNSString_withOrgXmlSaxAttributes_(ASHtmlToSpannedConverter *self, NSString *localName, id<OrgXmlSaxAttributes> atts);
 
-__attribute__((unused)) static jboolean ASHtmlToSpannedConverter_checkIfNotSupportedWithNSString_withNSString_(ASHtmlToSpannedConverter *self, NSString *localName, NSString *key);
+__attribute__((unused)) static bool ASHtmlToSpannedConverter_checkIfNotSupportedWithNSString_withNSString_(ASHtmlToSpannedConverter *self, NSString *localName, NSString *key);
 
 @interface ASHtmlToSpannedConverter_1 : NSObject < CSSCssResult > {
  @public
@@ -111,6 +118,7 @@ __attribute__((unused)) static void ASHtmlToSpannedConverter_1_initWithASHtmlToS
 __attribute__((unused)) static ASHtmlToSpannedConverter_1 *new_ASHtmlToSpannedConverter_1_initWithASHtmlToSpannedConverter_withNSString_withASWidgetAttributeMap_(ASHtmlToSpannedConverter *outer$, NSString *capture$0, ASWidgetAttributeMap *capture$1) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASHtmlToSpannedConverter_1 *create_ASHtmlToSpannedConverter_1_initWithASHtmlToSpannedConverter_withNSString_withASWidgetAttributeMap_(ASHtmlToSpannedConverter *outer$, NSString *capture$0, ASWidgetAttributeMap *capture$1);
+
 
 @implementation ASHtmlToSpannedConverter
 
@@ -201,7 +209,7 @@ __attribute__((unused)) static ASHtmlToSpannedConverter_1 *create_ASHtmlToSpanne
   if ([localName isEqual:@"div"] && ![((NSString *) nil_chk([((JavaLangStringBuilder *) nil_chk(text_)) description])) isEqual:@""] && ![((NSString *) nil_chk([((JavaLangStringBuilder *) nil_chk(text_)) description])) java_hasSuffix:@"\n"]) {
     [((JavaLangStringBuilder *) nil_chk(text_)) appendWithNSString:@"\n"];
   }
-  jint start = [((JavaLangInteger *) nil_chk([((JavaUtilStack *) nil_chk(lineStart_)) pop])) intValue];
+  int32_t start = [((JavaLangInteger *) nil_chk([((JavaUtilStack *) nil_chk(lineStart_)) pop])) intValue];
   ASWidgetAttributeMap *style = JreRetainedLocalValue([((JavaUtilStack *) nil_chk(widgetAttributeMaps_)) pop]);
   id<OrgXmlSaxAttributes> attributes = JreRetainedLocalValue([((JavaUtilStack *) nil_chk(attributesStack_)) pop]);
   if ([localName isEqual:@"br"]) {
@@ -227,8 +235,8 @@ __attribute__((unused)) static ASHtmlToSpannedConverter_1 *create_ASHtmlToSpanne
 }
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length {
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length {
   NSString *str = [NSString java_stringWithCharacters:ch offset:start length:length];
   id textAllCaps = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(htmlConfig_)) getWithId:@"textAllCaps"]);
   if (textAllCaps != nil && [(JavaLangBoolean *) cast_chk(textAllCaps, [JavaLangBoolean class]) booleanValue]) {
@@ -241,10 +249,10 @@ __attribute__((unused)) static ASHtmlToSpannedConverter_1 *create_ASHtmlToSpanne
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *splitStr = *b__++;
+      NSString *splitStr = RETAIN_AND_AUTORELEASE(*b__++);
       if (password != nil && [(JavaLangBoolean *) cast_chk(password, [JavaLangBoolean class]) booleanValue]) {
         NSString *result = @"";
-        for (jint i = 0; i < [((NSString *) nil_chk(splitStr)) java_length]; i++) {
+        for (int32_t i = 0; i < [splitStr java_length]; i++) {
           JreStrAppend(&result, "$", @"*");
         }
         splitStr = result;
@@ -255,8 +263,8 @@ __attribute__((unused)) static ASHtmlToSpannedConverter_1 *create_ASHtmlToSpanne
 }
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length {
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length {
 }
 
 - (void)processingInstructionWithNSString:(NSString *)target
@@ -271,8 +279,8 @@ __attribute__((unused)) static ASHtmlToSpannedConverter_1 *create_ASHtmlToSpanne
   return ASHtmlToSpannedConverter_getAttributesWithNSString_withOrgXmlSaxAttributes_(self, localName, atts);
 }
 
-- (jboolean)checkIfNotSupportedWithNSString:(NSString *)localName
-                               withNSString:(NSString *)key {
+- (bool)checkIfNotSupportedWithNSString:(NSString *)localName
+                           withNSString:(NSString *)key {
   return ASHtmlToSpannedConverter_checkIfNotSupportedWithNSString_withNSString_(self, localName, key);
 }
 
@@ -382,7 +390,7 @@ ASHtmlToSpannedConverter *create_ASHtmlToSpannedConverter_initWithNSString_withT
 ASWidgetAttributeMap *ASHtmlToSpannedConverter_getAttributesWithNSString_withOrgXmlSaxAttributes_(ASHtmlToSpannedConverter *self, NSString *localName, id<OrgXmlSaxAttributes> atts) {
   ASWidgetAttributeMap *styles = create_ASWidgetAttributeMap_init();
   [((CSSCssDataHolder *) nil_chk(self->pageData_)) getCssWithNSString:localName withNSString:[((id<OrgXmlSaxAttributes>) nil_chk(atts)) getValueWithNSString:@"class"] withNSString:[atts getValueWithNSString:@"id"] withCSSCssResult:create_ASHtmlToSpannedConverter_1_initWithASHtmlToSpannedConverter_withNSString_withASWidgetAttributeMap_(self, localName, styles)];
-  for (jint i = 0; i < [atts getLength]; i++) {
+  for (int32_t i = 0; i < [atts getLength]; i++) {
     NSString *key = JreRetainedLocalValue([atts getLocalNameWithInt:i]);
     ASWidgetAttribute *attribute = [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk(ASWidgetAttribute_builder())) withNameWithNSString:key])) withTypeWithNSString:@"string"])) build];
     if (ASHtmlToSpannedConverter_checkIfNotSupportedWithNSString_withNSString_(self, localName, key)) {
@@ -396,13 +404,15 @@ ASWidgetAttributeMap *ASHtmlToSpannedConverter_getAttributesWithNSString_withOrg
   return styles;
 }
 
-jboolean ASHtmlToSpannedConverter_checkIfNotSupportedWithNSString_withNSString_(ASHtmlToSpannedConverter *self, NSString *localName, NSString *key) {
-  jboolean textAlign = ([((NSString *) nil_chk(key)) isEqual:@"text-align"] || [key isEqual:@"textAlign"]) && ![((NSString *) nil_chk(localName)) isEqual:@"div"];
-  jboolean background = ([key isEqual:@"background-color"] || [key isEqual:@"background"]) && [((NSString *) nil_chk(localName)) isEqual:@"div"];
+bool ASHtmlToSpannedConverter_checkIfNotSupportedWithNSString_withNSString_(ASHtmlToSpannedConverter *self, NSString *localName, NSString *key) {
+  bool textAlign = ([((NSString *) nil_chk(key)) isEqual:@"text-align"] || [key isEqual:@"textAlign"]) && ![((NSString *) nil_chk(localName)) isEqual:@"div"];
+  bool background = ([key isEqual:@"background-color"] || [key isEqual:@"background"]) && [((NSString *) nil_chk(localName)) isEqual:@"div"];
   return textAlign || background;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHtmlToSpannedConverter)
+
+J2OBJC_NAME_MAPPING(ASHtmlToSpannedConverter, "com.ashera.parser.html", "AS")
 
 @implementation ASHtmlToSpannedConverter_1
 
@@ -449,7 +459,7 @@ withCSSCssTree_Attribute:(CSSCssTree_Attribute *)value {
     { "val$styles_", "LASWidgetAttributeMap;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASHtmlToSpannedConverter;LNSString;LASWidgetAttributeMap;", "put", "LNSString;LCSSCssTree_Attribute;", "LASHtmlToSpannedConverter;", "getAttributesWithNSString:withOrgXmlSaxAttributes:" };
-  static const J2ObjcClassInfo _ASHtmlToSpannedConverter_1 = { "", "com.ashera.parser.html", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
+  static const J2ObjcClassInfo _ASHtmlToSpannedConverter_1 = { "", "com.ashera.parser.html", ptrTable, methods, fields, 7, 0x8000, 2, 3, 3, -1, 4, -1, -1 };
   return &_ASHtmlToSpannedConverter_1;
 }
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\converter\FilterFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FilterFactory")
@@ -16,6 +17,7 @@
 #if !defined (ASFilterFactory_) && (INCLUDE_ALL_FilterFactory || defined(INCLUDE_ASFilterFactory))
 #define ASFilterFactory_
 
+@class NSString;
 @protocol ASIFilter;
 
 @interface ASFilterFactory : NSObject
@@ -51,6 +53,7 @@ FOUNDATION_EXPORT void ASFilterFactory_register__WithNSString_withASIFilter_(NSS
 J2OBJC_TYPE_LITERAL_HEADER(ASFilterFactory)
 
 @compatibility_alias ComAsheraConverterFilterFactory ASFilterFactory;
+
 
 #endif
 

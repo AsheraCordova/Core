@@ -3,12 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\net\UriCodec.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "UriCodec.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Byte.h"
+#include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
 #include "java/net/URISyntaxException.h"
-#include "java/nio/Buffer.h"
 #include "java/nio/ByteBuffer.h"
 #include "java/nio/CharBuffer.h"
 #include "java/nio/charset/CharacterCodingException.h"
@@ -16,11 +24,12 @@
 #include "java/nio/charset/CharsetDecoder.h"
 #include "java/nio/charset/CodingErrorAction.h"
 
-@class JavaLangStringBuilder;
-@class JavaNetURISyntaxException;
-@class JavaNioByteBuffer;
-@class JavaNioCharsetCharset;
-@class JavaNioCharsetCharsetDecoder;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADUriCodec ()
@@ -30,37 +39,37 @@
 /*!
  @brief Interprets a char as hex digits, returning a number from -1 (invalid char) to 15 ('f').
  */
-+ (jint)hexCharToValueWithChar:(jchar)c;
++ (int32_t)hexCharToValueWithChar:(unichar)c;
 
 + (JavaNetURISyntaxException *)unexpectedCharacterExceptionWithNSString:(NSString *)uri
                                                            withNSString:(NSString *)name
-                                                               withChar:(jchar)unexpected
-                                                                withInt:(jint)index;
+                                                               withChar:(unichar)unexpected
+                                                                withInt:(int32_t)index;
 
-+ (jchar)getNextCharacterWithNSString:(NSString *)uri
-                              withInt:(jint)index
-                              withInt:(jint)end
-                         withNSString:(NSString *)name;
++ (unichar)getNextCharacterWithNSString:(NSString *)uri
+                                withInt:(int32_t)index
+                                withInt:(int32_t)end
+                           withNSString:(NSString *)name;
 
 + (void)appendDecodedWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
                                   withNSString:(NSString *)s
-                                   withBoolean:(jboolean)convertPlus
+                                   withBoolean:(bool)convertPlus
                      withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
-                                   withBoolean:(jboolean)throwOnFailure;
+                                   withBoolean:(bool)throwOnFailure;
 
 + (void)flushDecodingByteAccumulatorWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
                              withJavaNioCharsetCharsetDecoder:(JavaNioCharsetCharsetDecoder *)decoder
                                         withJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer
-                                                  withBoolean:(jboolean)throwOnFailure;
+                                                  withBoolean:(bool)throwOnFailure;
 
 @end
 
 /*!
  @brief Character to be output when there's an error decoding an input.
  */
-inline jchar ADUriCodec_get_INVALID_INPUT_CHARACTER(void);
+inline unichar ADUriCodec_get_INVALID_INPUT_CHARACTER(void);
 #define ADUriCodec_INVALID_INPUT_CHARACTER 0xfffd
-J2OBJC_STATIC_FIELD_CONSTANT(ADUriCodec, INVALID_INPUT_CHARACTER, jchar)
+J2OBJC_STATIC_FIELD_CONSTANT(ADUriCodec, INVALID_INPUT_CHARACTER, unichar)
 
 __attribute__((unused)) static void ADUriCodec_init(ADUriCodec *self);
 
@@ -68,15 +77,15 @@ __attribute__((unused)) static ADUriCodec *new_ADUriCodec_init(void) NS_RETURNS_
 
 __attribute__((unused)) static ADUriCodec *create_ADUriCodec_init(void);
 
-__attribute__((unused)) static jint ADUriCodec_hexCharToValueWithChar_(jchar c);
+__attribute__((unused)) static int32_t ADUriCodec_hexCharToValueWithChar_(unichar c);
 
-__attribute__((unused)) static JavaNetURISyntaxException *ADUriCodec_unexpectedCharacterExceptionWithNSString_withNSString_withChar_withInt_(NSString *uri, NSString *name, jchar unexpected, jint index);
+__attribute__((unused)) static JavaNetURISyntaxException *ADUriCodec_unexpectedCharacterExceptionWithNSString_withNSString_withChar_withInt_(NSString *uri, NSString *name, unichar unexpected, int32_t index);
 
-__attribute__((unused)) static jchar ADUriCodec_getNextCharacterWithNSString_withInt_withInt_withNSString_(NSString *uri, jint index, jint end, NSString *name);
+__attribute__((unused)) static unichar ADUriCodec_getNextCharacterWithNSString_withInt_withInt_withNSString_(NSString *uri, int32_t index, int32_t end, NSString *name);
 
-__attribute__((unused)) static void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(JavaLangStringBuilder *builder, NSString *s, jboolean convertPlus, JavaNioCharsetCharset *charset, jboolean throwOnFailure);
+__attribute__((unused)) static void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(JavaLangStringBuilder *builder, NSString *s, bool convertPlus, JavaNioCharsetCharset *charset, bool throwOnFailure);
 
-__attribute__((unused)) static void ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNioCharsetCharsetDecoder_withJavaNioByteBuffer_withBoolean_(JavaLangStringBuilder *builder, JavaNioCharsetCharsetDecoder *decoder, JavaNioByteBuffer *byteBuffer, jboolean throwOnFailure);
+__attribute__((unused)) static void ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNioCharsetCharsetDecoder_withJavaNioByteBuffer_withBoolean_(JavaLangStringBuilder *builder, JavaNioCharsetCharsetDecoder *decoder, JavaNioByteBuffer *byteBuffer, bool throwOnFailure);
 
 @implementation ADUriCodec
 
@@ -87,43 +96,43 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)hexCharToValueWithChar:(jchar)c {
++ (int32_t)hexCharToValueWithChar:(unichar)c {
   return ADUriCodec_hexCharToValueWithChar_(c);
 }
 
 + (JavaNetURISyntaxException *)unexpectedCharacterExceptionWithNSString:(NSString *)uri
                                                            withNSString:(NSString *)name
-                                                               withChar:(jchar)unexpected
-                                                                withInt:(jint)index {
+                                                               withChar:(unichar)unexpected
+                                                                withInt:(int32_t)index {
   return ADUriCodec_unexpectedCharacterExceptionWithNSString_withNSString_withChar_withInt_(uri, name, unexpected, index);
 }
 
-+ (jchar)getNextCharacterWithNSString:(NSString *)uri
-                              withInt:(jint)index
-                              withInt:(jint)end
-                         withNSString:(NSString *)name {
++ (unichar)getNextCharacterWithNSString:(NSString *)uri
+                                withInt:(int32_t)index
+                                withInt:(int32_t)end
+                           withNSString:(NSString *)name {
   return ADUriCodec_getNextCharacterWithNSString_withInt_withInt_withNSString_(uri, index, end, name);
 }
 
 + (NSString *)decodeWithNSString:(NSString *)s
-                     withBoolean:(jboolean)convertPlus
+                     withBoolean:(bool)convertPlus
        withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
-                     withBoolean:(jboolean)throwOnFailure {
+                     withBoolean:(bool)throwOnFailure {
   return ADUriCodec_decodeWithNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(s, convertPlus, charset, throwOnFailure);
 }
 
 + (void)appendDecodedWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
                                   withNSString:(NSString *)s
-                                   withBoolean:(jboolean)convertPlus
+                                   withBoolean:(bool)convertPlus
                      withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
-                                   withBoolean:(jboolean)throwOnFailure {
+                                   withBoolean:(bool)throwOnFailure {
   ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(builder, s, convertPlus, charset, throwOnFailure);
 }
 
 + (void)flushDecodingByteAccumulatorWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
                              withJavaNioCharsetCharsetDecoder:(JavaNioCharsetCharsetDecoder *)decoder
                                         withJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer
-                                                  withBoolean:(jboolean)throwOnFailure {
+                                                  withBoolean:(bool)throwOnFailure {
   ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNioCharsetCharsetDecoder_withJavaNioByteBuffer_withBoolean_(builder, decoder, byteBuffer, throwOnFailure);
 }
 
@@ -170,7 +179,7 @@ ADUriCodec *create_ADUriCodec_init() {
   J2OBJC_CREATE_IMPL(ADUriCodec, init)
 }
 
-jint ADUriCodec_hexCharToValueWithChar_(jchar c) {
+int32_t ADUriCodec_hexCharToValueWithChar_(unichar c) {
   ADUriCodec_initialize();
   if ('0' <= c && c <= '9') {
     return c - '0';
@@ -184,13 +193,13 @@ jint ADUriCodec_hexCharToValueWithChar_(jchar c) {
   return -1;
 }
 
-JavaNetURISyntaxException *ADUriCodec_unexpectedCharacterExceptionWithNSString_withNSString_withChar_withInt_(NSString *uri, NSString *name, jchar unexpected, jint index) {
+JavaNetURISyntaxException *ADUriCodec_unexpectedCharacterExceptionWithNSString_withNSString_withChar_withInt_(NSString *uri, NSString *name, unichar unexpected, int32_t index) {
   ADUriCodec_initialize();
   NSString *nameString = (name == nil) ? @"" : JreStrcat("$$C", @" in [", name, ']');
   return create_JavaNetURISyntaxException_initWithNSString_withNSString_withInt_(uri, JreStrcat("$$$C", @"Unexpected character", nameString, @": ", unexpected), index);
 }
 
-jchar ADUriCodec_getNextCharacterWithNSString_withInt_withInt_withNSString_(NSString *uri, jint index, jint end, NSString *name) {
+unichar ADUriCodec_getNextCharacterWithNSString_withInt_withInt_withNSString_(NSString *uri, int32_t index, int32_t end, NSString *name) {
   ADUriCodec_initialize();
   if (index >= end) {
     NSString *nameString = (name == nil) ? @"" : JreStrcat("$$C", @" in [", name, ']');
@@ -199,23 +208,23 @@ jchar ADUriCodec_getNextCharacterWithNSString_withInt_withInt_withNSString_(NSSt
   return [((NSString *) nil_chk(uri)) charAtWithInt:index];
 }
 
-NSString *ADUriCodec_decodeWithNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(NSString *s, jboolean convertPlus, JavaNioCharsetCharset *charset, jboolean throwOnFailure) {
+NSString *ADUriCodec_decodeWithNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(NSString *s, bool convertPlus, JavaNioCharsetCharset *charset, bool throwOnFailure) {
   ADUriCodec_initialize();
   JavaLangStringBuilder *builder = create_JavaLangStringBuilder_initWithInt_([((NSString *) nil_chk(s)) java_length]);
   ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(builder, s, convertPlus, charset, throwOnFailure);
   return [builder description];
 }
 
-void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(JavaLangStringBuilder *builder, NSString *s, jboolean convertPlus, JavaNioCharsetCharset *charset, jboolean throwOnFailure) {
+void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(JavaLangStringBuilder *builder, NSString *s, bool convertPlus, JavaNioCharsetCharset *charset, bool throwOnFailure) {
   ADUriCodec_initialize();
   JavaNioCharsetCharsetDecoder *decoder = JreRetainedLocalValue([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(charset)) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPLACE)])) replaceWithWithNSString:@"\ufffd"])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)]);
   JavaNioByteBuffer *byteBuffer = JavaNioByteBuffer_allocateWithInt_([((NSString *) nil_chk(s)) java_length]);
-  jint i = 0;
+  int32_t i = 0;
   while (i < [s java_length]) {
-    jchar c = [s charAtWithInt:i];
+    unichar c = [s charAtWithInt:i];
     i++;
     {
-      jbyte hexValue;
+      int8_t hexValue;
       switch (c) {
         case '+':
         ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNioCharsetCharsetDecoder_withJavaNioByteBuffer_withBoolean_(builder, decoder, byteBuffer, throwOnFailure);
@@ -223,7 +232,7 @@ void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_
         break;
         case '%':
         hexValue = 0;
-        for (jint j = 0; j < 2; j++) {
+        for (int32_t j = 0; j < 2; j++) {
           @try {
             c = ADUriCodec_getNextCharacterWithNSString_withInt_withInt_withNSString_(s, i, [s java_length], nil);
           }
@@ -238,7 +247,7 @@ void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_
             }
           }
           i++;
-          jint newDigit = ADUriCodec_hexCharToValueWithChar_(c);
+          int32_t newDigit = ADUriCodec_hexCharToValueWithChar_(c);
           if (newDigit < 0) {
             if (throwOnFailure) {
               @throw create_JavaLangIllegalArgumentException_initWithJavaLangThrowable_(ADUriCodec_unexpectedCharacterExceptionWithNSString_withNSString_withChar_withInt_(s, nil, c, i - 1));
@@ -249,7 +258,7 @@ void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_
               break;
             }
           }
-          hexValue = (jbyte) (hexValue * (jint) 0x10 + newDigit);
+          hexValue = (int8_t) (hexValue * (int32_t) 0x10 + newDigit);
         }
         [((JavaNioByteBuffer *) nil_chk(byteBuffer)) putWithByte:hexValue];
         break;
@@ -262,7 +271,7 @@ void ADUriCodec_appendDecodedWithJavaLangStringBuilder_withNSString_withBoolean_
   ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNioCharsetCharsetDecoder_withJavaNioByteBuffer_withBoolean_(builder, decoder, byteBuffer, throwOnFailure);
 }
 
-void ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNioCharsetCharsetDecoder_withJavaNioByteBuffer_withBoolean_(JavaLangStringBuilder *builder, JavaNioCharsetCharsetDecoder *decoder, JavaNioByteBuffer *byteBuffer, jboolean throwOnFailure) {
+void ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNioCharsetCharsetDecoder_withJavaNioByteBuffer_withBoolean_(JavaLangStringBuilder *builder, JavaNioCharsetCharsetDecoder *decoder, JavaNioByteBuffer *byteBuffer, bool throwOnFailure) {
   ADUriCodec_initialize();
   if ([((JavaNioByteBuffer *) nil_chk(byteBuffer)) position] == 0) {
     return;
@@ -286,3 +295,5 @@ void ADUriCodec_flushDecodingByteAccumulatorWithJavaLangStringBuilder_withJavaNi
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUriCodec)
+
+J2OBJC_NAME_MAPPING(ADUriCodec, "r.android.net", "AD")

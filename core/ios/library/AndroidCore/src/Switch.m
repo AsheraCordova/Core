@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Switch.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ColorStateList.h"
 #include "CompoundButton.h"
 #include "Drawable.h"
@@ -14,46 +19,53 @@
 #include "RectM.h"
 #include "Switch.h"
 #include "TextUtils.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 
-@protocol JavaLangCharSequence;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADSwitch () {
  @public
   ADDrawable *mThumbDrawable_;
   ADColorStateList *mThumbTintList_;
-  jboolean mHasThumbTint_;
-  jboolean mHasThumbTintMode_;
+  bool mHasThumbTint_;
+  bool mHasThumbTintMode_;
   ADDrawable *mTrackDrawable_;
   ADColorStateList *mTrackTintList_;
-  jboolean mHasTrackTint_;
-  jboolean mHasTrackTintMode_;
-  jint mThumbTextPadding_;
-  jint mSwitchMinWidth_;
-  jint mSwitchPadding_;
-  jboolean mSplitTrack_;
+  bool mHasTrackTint_;
+  bool mHasTrackTintMode_;
+  int32_t mThumbTextPadding_;
+  int32_t mSwitchMinWidth_;
+  int32_t mSwitchPadding_;
+  bool mSplitTrack_;
   id<JavaLangCharSequence> mTextOn_;
   id<JavaLangCharSequence> mTextOff_;
-  jboolean mShowText_;
-  jboolean mUseFallbackLineSpacing_;
-  jint mTouchMode_;
-  jint mTouchSlop_Switch_;
-  jint mMinFlingVelocity_;
-  jint mSwitchWidth_;
-  jint mSwitchHeight_;
-  jint mThumbWidth_;
-  jint mSwitchLeft_;
-  jint mSwitchTop_;
-  jint mSwitchRight_;
-  jint mSwitchBottom_;
+  bool mShowText_;
+  bool mUseFallbackLineSpacing_;
+  int32_t mTouchMode_;
+  int32_t mTouchSlop_Switch_;
+  int32_t mMinFlingVelocity_;
+  int32_t mSwitchWidth_;
+  int32_t mSwitchHeight_;
+  int32_t mThumbWidth_;
+  int32_t mSwitchLeft_;
+  int32_t mSwitchTop_;
+  int32_t mSwitchRight_;
+  int32_t mSwitchBottom_;
   ADSwitch_Layout *mOnLayout_;
   ADSwitch_Layout *mOffLayout_;
   ADRect *mTempRect_;
   NSString *text_;
-  jint intrinsicWidth_;
-  jint intrinsicHeight_;
+  int32_t intrinsicWidth_;
+  int32_t intrinsicHeight_;
 }
 
 - (void)applyTrackTint;
@@ -73,33 +85,33 @@ J2OBJC_FIELD_SETTER(ADSwitch, mOffLayout_, ADSwitch_Layout *)
 J2OBJC_FIELD_SETTER(ADSwitch, mTempRect_, ADRect *)
 J2OBJC_FIELD_SETTER(ADSwitch, text_, NSString *)
 
-inline jint ADSwitch_get_THUMB_ANIMATION_DURATION(void);
+inline int32_t ADSwitch_get_THUMB_ANIMATION_DURATION(void);
 #define ADSwitch_THUMB_ANIMATION_DURATION 250
-J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, THUMB_ANIMATION_DURATION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, THUMB_ANIMATION_DURATION, int32_t)
 
-inline jint ADSwitch_get_TOUCH_MODE_IDLE(void);
+inline int32_t ADSwitch_get_TOUCH_MODE_IDLE(void);
 #define ADSwitch_TOUCH_MODE_IDLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, TOUCH_MODE_IDLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, TOUCH_MODE_IDLE, int32_t)
 
-inline jint ADSwitch_get_TOUCH_MODE_DOWN(void);
+inline int32_t ADSwitch_get_TOUCH_MODE_DOWN(void);
 #define ADSwitch_TOUCH_MODE_DOWN 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, TOUCH_MODE_DOWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, TOUCH_MODE_DOWN, int32_t)
 
-inline jint ADSwitch_get_TOUCH_MODE_DRAGGING(void);
+inline int32_t ADSwitch_get_TOUCH_MODE_DRAGGING(void);
 #define ADSwitch_TOUCH_MODE_DRAGGING 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, TOUCH_MODE_DRAGGING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, TOUCH_MODE_DRAGGING, int32_t)
 
-inline jint ADSwitch_get_SANS(void);
+inline int32_t ADSwitch_get_SANS(void);
 #define ADSwitch_SANS 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, SANS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, SANS, int32_t)
 
-inline jint ADSwitch_get_SERIF(void);
+inline int32_t ADSwitch_get_SERIF(void);
 #define ADSwitch_SERIF 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, SERIF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, SERIF, int32_t)
 
-inline jint ADSwitch_get_MONOSPACE(void);
+inline int32_t ADSwitch_get_MONOSPACE(void);
 #define ADSwitch_MONOSPACE 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, MONOSPACE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADSwitch, MONOSPACE, int32_t)
 
 __attribute__((unused)) static void ADSwitch_applyTrackTint(ADSwitch *self);
 
@@ -107,21 +119,21 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
 
 @implementation ADSwitch
 
-- (void)setSwitchPaddingWithInt:(jint)pixels {
+- (void)setSwitchPaddingWithInt:(int32_t)pixels {
   mSwitchPadding_ = pixels;
   [self requestLayout];
 }
 
-- (jint)getSwitchPadding {
+- (int32_t)getSwitchPadding {
   return mSwitchPadding_;
 }
 
-- (void)setSwitchMinWidthWithInt:(jint)pixels {
+- (void)setSwitchMinWidthWithInt:(int32_t)pixels {
   mSwitchMinWidth_ = pixels;
   [self requestLayout];
 }
 
-- (jint)getSwitchMinWidth {
+- (int32_t)getSwitchMinWidth {
   return mSwitchMinWidth_;
 }
 
@@ -145,8 +157,8 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
   return mThumbTintList_;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mShowText_) {
     if (mOnLayout_ == nil) {
       JreStrongAssign(&mOnLayout_, [self makeLayoutWithJavaLangCharSequence:mTextOn_]);
@@ -156,8 +168,8 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
     }
   }
   ADRect *padding = mTempRect_;
-  jint thumbWidth;
-  jint thumbHeight;
+  int32_t thumbWidth;
+  int32_t thumbHeight;
   if (mThumbDrawable_ != nil) {
     [mThumbDrawable_ getPaddingWithADRect:padding];
     thumbWidth = [((ADDrawable *) nil_chk(mThumbDrawable_)) getIntrinsicWidth] - ((ADRect *) nil_chk(padding))->left_ - padding->right_;
@@ -167,7 +179,7 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
     thumbWidth = 0;
     thumbHeight = 0;
   }
-  jint maxTextWidth;
+  int32_t maxTextWidth;
   if (mShowText_) {
     maxTextWidth = JavaLangMath_maxWithInt_withInt_([((ADSwitch_Layout *) nil_chk(mOnLayout_)) getWidth], [((ADSwitch_Layout *) nil_chk(mOffLayout_)) getWidth]) + mThumbTextPadding_ * 2;
   }
@@ -175,7 +187,7 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
     maxTextWidth = 0;
   }
   mThumbWidth_ = JavaLangMath_maxWithInt_withInt_(maxTextWidth, thumbWidth);
-  jint trackHeight;
+  int32_t trackHeight;
   if (mTrackDrawable_ != nil) {
     [mTrackDrawable_ getPaddingWithADRect:padding];
     trackHeight = [((ADDrawable *) nil_chk(mTrackDrawable_)) getIntrinsicHeight];
@@ -184,32 +196,32 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
     [((ADRect *) nil_chk(padding)) setEmpty];
     trackHeight = 0;
   }
-  jint paddingLeft = ((ADRect *) nil_chk(padding))->left_;
-  jint paddingRight = padding->right_;
+  int32_t paddingLeft = ((ADRect *) nil_chk(padding))->left_;
+  int32_t paddingRight = padding->right_;
   if (mThumbDrawable_ != nil) {
     ADInsets *inset = [mThumbDrawable_ getOpticalInsets];
     paddingLeft = JavaLangMath_maxWithInt_withInt_(paddingLeft, ((ADInsets *) nil_chk(inset))->left_);
     paddingRight = JavaLangMath_maxWithInt_withInt_(paddingRight, inset->right_);
   }
-  jint switchWidth = JavaLangMath_maxWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(mSwitchMinWidth_, 2 * mThumbWidth_ + paddingLeft + paddingRight), intrinsicWidth_);
-  jint switchHeight = JavaLangMath_maxWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(trackHeight, thumbHeight), intrinsicHeight_);
+  int32_t switchWidth = JavaLangMath_maxWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(mSwitchMinWidth_, 2 * mThumbWidth_ + paddingLeft + paddingRight), intrinsicWidth_);
+  int32_t switchHeight = JavaLangMath_maxWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(trackHeight, thumbHeight), intrinsicHeight_);
   mSwitchWidth_ = switchWidth;
   mSwitchHeight_ = switchHeight;
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
-  jint measuredHeight = [self getMeasuredHeight];
+  int32_t measuredHeight = [self getMeasuredHeight];
   if (measuredHeight < switchHeight) {
     [self setMeasuredDimensionWithInt:[self getMeasuredWidthAndState] withInt:switchHeight];
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom {
   [super onLayoutWithBoolean:changed withInt:left withInt:top withInt:right withInt:bottom];
-  jint opticalInsetLeft = 0;
-  jint opticalInsetRight = 0;
+  int32_t opticalInsetLeft = 0;
+  int32_t opticalInsetRight = 0;
   if (mThumbDrawable_ != nil) {
     ADRect *trackPadding = mTempRect_;
     if (mTrackDrawable_ != nil) {
@@ -222,8 +234,8 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
     opticalInsetLeft = JavaLangMath_maxWithInt_withInt_(0, ((ADInsets *) nil_chk(insets))->left_ - ((ADRect *) nil_chk(trackPadding))->left_);
     opticalInsetRight = JavaLangMath_maxWithInt_withInt_(0, insets->right_ - trackPadding->right_);
   }
-  jint switchRight;
-  jint switchLeft;
+  int32_t switchRight;
+  int32_t switchLeft;
   if ([self isLayoutRtl]) {
     switchLeft = [self getPaddingLeft] + opticalInsetLeft;
     switchRight = switchLeft + mSwitchWidth_ - opticalInsetLeft - opticalInsetRight;
@@ -232,8 +244,8 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
     switchRight = [self getWidth] - [self getPaddingRight] - opticalInsetRight;
     switchLeft = switchRight - mSwitchWidth_ + opticalInsetLeft + opticalInsetRight;
   }
-  jint switchTop;
-  jint switchBottom;
+  int32_t switchTop;
+  int32_t switchBottom;
   switch ([self getGravity] & ADGravity_VERTICAL_GRAVITY_MASK) {
     default:
     case ADGravity_TOP:
@@ -255,22 +267,22 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
   mSwitchRight_ = switchRight;
 }
 
-- (jint)getCompoundPaddingLeft {
+- (int32_t)getCompoundPaddingLeft {
   if (![self isLayoutRtl]) {
     return [super getCompoundPaddingLeft];
   }
-  jint padding = [super getCompoundPaddingLeft] + mSwitchWidth_;
+  int32_t padding = [super getCompoundPaddingLeft] + mSwitchWidth_;
   if (!ADTextUtils_isEmptyWithNSString_([self getText])) {
     padding += mSwitchPadding_;
   }
   return padding;
 }
 
-- (jint)getCompoundPaddingRight {
+- (int32_t)getCompoundPaddingRight {
   if ([self isLayoutRtl]) {
     return [super getCompoundPaddingRight];
   }
-  jint padding = [super getCompoundPaddingRight] + mSwitchWidth_;
+  int32_t padding = [super getCompoundPaddingRight] + mSwitchWidth_;
   if (!ADTextUtils_isEmptyWithNSString_([self getText])) {
     padding += mSwitchPadding_;
   }
@@ -285,7 +297,7 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
   JreStrongAssign(&self->text_, text);
 }
 
-- (void)setIntrinsicWidthWithInt:(jint)intrinsicWidth {
+- (void)setIntrinsicWidthWithInt:(int32_t)intrinsicWidth {
   self->intrinsicWidth_ = intrinsicWidth;
 }
 
@@ -294,7 +306,7 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
   return self;
 }
 
-- (void)setIntrinsicHeightWithInt:(jint)intrinsicHeight {
+- (void)setIntrinsicHeightWithInt:(int32_t)intrinsicHeight {
   self->intrinsicHeight_ = intrinsicHeight;
 }
 
@@ -306,27 +318,27 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
   return create_ADSwitch_Layout_initWithADSwitch_(self);
 }
 
-- (ASRectM *)getRightDrawableBoundsWithInt:(jint)x
-                                   withInt:(jint)y
-                                   withInt:(jint)width
-                                   withInt:(jint)height {
+- (ASRectM *)getRightDrawableBoundsWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)width
+                                   withInt:(int32_t)height {
   ASRectM *rightBounds = [super getRightDrawableBoundsWithInt:x withInt:y withInt:width withInt:height];
   ((ASRectM *) nil_chk(rightBounds))->x_ = rightBounds->x_ - intrinsicWidth_;
   return rightBounds;
 }
 
-- (ASRectM *)getBottomDrawableBoundsWithInt:(jint)x
-                                    withInt:(jint)y
-                                    withInt:(jint)width
-                                    withInt:(jint)height {
+- (ASRectM *)getBottomDrawableBoundsWithInt:(int32_t)x
+                                    withInt:(int32_t)y
+                                    withInt:(int32_t)width
+                                    withInt:(int32_t)height {
   ASRectM *bottomBounds = [super getBottomDrawableBoundsWithInt:x - intrinsicWidth_ withInt:y withInt:width - intrinsicWidth_ withInt:height];
   return bottomBounds;
 }
 
-- (ASRectM *)getTopDrawableBoundsWithInt:(jint)x
-                                 withInt:(jint)y
-                                 withInt:(jint)width
-                                 withInt:(jint)height {
+- (ASRectM *)getTopDrawableBoundsWithInt:(int32_t)x
+                                 withInt:(int32_t)y
+                                 withInt:(int32_t)width
+                                 withInt:(int32_t)height {
   ASRectM *topBounds = [super getTopDrawableBoundsWithInt:x - intrinsicWidth_ withInt:y withInt:width - intrinsicWidth_ withInt:height];
   return topBounds;
 }
@@ -475,6 +487,8 @@ void ADSwitch_applyThumbTint(ADSwitch *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSwitch)
 
+J2OBJC_NAME_MAPPING(ADSwitch, "r.android.widget", "AD")
+
 @implementation ADSwitch_Layout
 
 - (instancetype)initWithADSwitch:(ADSwitch *)outer$ {
@@ -482,7 +496,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSwitch)
   return self;
 }
 
-- (jint)getWidth {
+- (int32_t)getWidth {
   return 0;
 }
 

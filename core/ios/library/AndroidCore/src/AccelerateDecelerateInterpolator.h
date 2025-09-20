@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\AccelerateDecelerateInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AccelerateDecelerateInterpolator")
@@ -22,6 +23,8 @@
 
 @class ADAttributeSet;
 @class ADContext;
+@class JavaLangFloat;
+@class JavaLangLong;
 
 /*!
  @brief An interpolator where the rate of change starts and ends slowly but
@@ -38,9 +41,9 @@
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
-- (jfloat)getInterpolationWithFloat:(jfloat)input;
+- (float)getInterpolationWithFloat:(float)input;
 
 @end
 
@@ -61,6 +64,7 @@ FOUNDATION_EXPORT ADAccelerateDecelerateInterpolator *create_ADAccelerateDeceler
 J2OBJC_TYPE_LITERAL_HEADER(ADAccelerateDecelerateInterpolator)
 
 @compatibility_alias RAndroidViewAnimationAccelerateDecelerateInterpolator ADAccelerateDecelerateInterpolator;
+
 
 #endif
 

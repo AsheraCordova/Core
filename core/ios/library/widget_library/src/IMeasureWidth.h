@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IMeasureWidth.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IMeasureWidth")
@@ -16,11 +17,13 @@
 #if !defined (ASIMeasureWidth_) && (INCLUDE_ALL_IMeasureWidth || defined(INCLUDE_ASIMeasureWidth))
 #define ASIMeasureWidth_
 
+@class JavaLangInteger;
+
 @protocol ASIMeasureWidth < JavaObject >
 
-- (jint)measureWidthWithInt:(jint)widthMode
-                    withInt:(jint)widthSize
-                    withInt:(jint)width;
+- (int32_t)measureWidthWithInt:(int32_t)widthMode
+                       withInt:(int32_t)widthSize
+                       withInt:(int32_t)width;
 
 @end
 
@@ -29,6 +32,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIMeasureWidth)
 J2OBJC_TYPE_LITERAL_HEADER(ASIMeasureWidth)
 
 #define ComAsheraWidgetIMeasureWidth ASIMeasureWidth
+
 
 #endif
 

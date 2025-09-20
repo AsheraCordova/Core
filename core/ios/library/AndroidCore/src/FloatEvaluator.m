@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\FloatEvaluator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FloatEvaluator.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Float.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADFloatEvaluator
@@ -17,10 +28,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (JavaLangFloat *)evaluateWithFloat:(jfloat)fraction
+- (JavaLangFloat *)evaluateWithFloat:(float)fraction
                               withId:(NSNumber *)startValue
                               withId:(NSNumber *)endValue {
-  jfloat startFloat = [((NSNumber *) nil_chk(startValue)) floatValue];
+  float startFloat = [((NSNumber *) nil_chk(startValue)) floatValue];
   return JavaLangFloat_valueOfWithFloat_(startFloat + fraction * ([((NSNumber *) nil_chk(endValue)) floatValue] - startFloat));
 }
 
@@ -55,3 +66,5 @@ ADFloatEvaluator *create_ADFloatEvaluator_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADFloatEvaluator)
+
+J2OBJC_NAME_MAPPING(ADFloatEvaluator, "r.android.animation", "AD")

@@ -3,17 +3,29 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingParentHelper.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "NestedScrollingParentHelper.h"
 #include "View.h"
 #include "ViewCompat.h"
 #include "ViewGroup.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXNestedScrollingParentHelper () {
  @public
-  jint mNestedScrollAxesTouch_;
-  jint mNestedScrollAxesNonTouch_;
+  int32_t mNestedScrollAxesTouch_;
+  int32_t mNestedScrollAxesNonTouch_;
 }
 
 @end
@@ -27,14 +39,14 @@
 
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes {
+                                 withInt:(int32_t)axes {
   [self onNestedScrollAcceptedWithADView:child withADView:target withInt:axes withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes
-                                 withInt:(jint)type {
+                                 withInt:(int32_t)axes
+                                 withInt:(int32_t)type {
   if (type == ADXViewCompat_TYPE_NON_TOUCH) {
     mNestedScrollAxesNonTouch_ = axes;
   }
@@ -43,7 +55,7 @@
   }
 }
 
-- (jint)getNestedScrollAxes {
+- (int32_t)getNestedScrollAxes {
   return mNestedScrollAxesTouch_ | mNestedScrollAxesNonTouch_;
 }
 
@@ -52,7 +64,7 @@
 }
 
 - (void)onStopNestedScrollWithADView:(ADView *)target
-                             withInt:(jint)type {
+                             withInt:(int32_t)type {
   if (type == ADXViewCompat_TYPE_NON_TOUCH) {
     mNestedScrollAxesNonTouch_ = ADView_SCROLL_AXIS_NONE;
   }
@@ -104,3 +116,5 @@ ADXNestedScrollingParentHelper *create_ADXNestedScrollingParentHelper_initWithAD
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXNestedScrollingParentHelper)
+
+J2OBJC_NAME_MAPPING(ADXNestedScrollingParentHelper, "androidx.core.view", "ADX")

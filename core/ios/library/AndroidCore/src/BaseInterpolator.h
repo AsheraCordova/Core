@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\BaseInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseInterpolator")
@@ -20,6 +21,8 @@
 #define INCLUDE_ADInterpolator 1
 #include "Interpolator.h"
 
+@class JavaLangInteger;
+
 /*!
  @brief An abstract class which is extended by default interpolators.
  */
@@ -31,13 +34,13 @@
 
 /*!
  */
-- (jint)getChangingConfiguration;
+- (int32_t)getChangingConfiguration;
 
 #pragma mark Package-Private
 
 /*!
  */
-- (void)setChangingConfigurationWithInt:(jint)changingConfiguration;
+- (void)setChangingConfigurationWithInt:(int32_t)changingConfiguration;
 
 @end
 
@@ -48,6 +51,7 @@ FOUNDATION_EXPORT void ADBaseInterpolator_init(ADBaseInterpolator *self);
 J2OBJC_TYPE_LITERAL_HEADER(ADBaseInterpolator)
 
 @compatibility_alias RAndroidViewAnimationBaseInterpolator ADBaseInterpolator;
+
 
 #endif
 

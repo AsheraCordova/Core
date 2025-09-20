@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelScope.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ModelScope")
@@ -27,20 +28,28 @@
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ASModelScope_Enum) {
-  ASModelScope_Enum_viewmodel = 0,
-  ASModelScope_Enum_view = 1,
-  ASModelScope_Enum_parentview = 2,
-  ASModelScope_Enum_session = 3,
-  ASModelScope_Enum_local = 4,
-  ASModelScope_Enum_loopvar = 5,
-  ASModelScope_Enum_sharedpreference = 6,
-  ASModelScope_Enum_sqlllite = 7,
-  ASModelScope_Enum_strings = 8,
-  ASModelScope_Enum_component = 9,
-  ASModelScope_Enum_constants = 10,
+typedef NS_ENUM(int32_t, ASModelScope_Enum) {
+  ASModelScope_Enum_viewmodel NS_SWIFT_NAME(viewmodel) = 0,
+  ASModelScope_Enum_view NS_SWIFT_NAME(view) = 1,
+  ASModelScope_Enum_parentview NS_SWIFT_NAME(parentview) = 2,
+  ASModelScope_Enum_session NS_SWIFT_NAME(session) = 3,
+  ASModelScope_Enum_local NS_SWIFT_NAME(local) = 4,
+  ASModelScope_Enum_loopvar NS_SWIFT_NAME(loopvar) = 5,
+  ASModelScope_Enum_sharedpreference NS_SWIFT_NAME(sharedpreference) = 6,
+  ASModelScope_Enum_sqlllite NS_SWIFT_NAME(sqlllite) = 7,
+  ASModelScope_Enum_strings NS_SWIFT_NAME(strings) = 8,
+  ASModelScope_Enum_component NS_SWIFT_NAME(component) = 9,
+  ASModelScope_Enum_constants NS_SWIFT_NAME(constants) = 10,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASModelScope_ORDINAL int32_t
+#else
+#define ASModelScope_ORDINAL ASModelScope_Enum
+#endif
+
 
 @interface ASModelScope : JavaLangEnum
 
@@ -53,6 +62,13 @@ typedef NS_ENUM(NSUInteger, ASModelScope_Enum) {
 #pragma mark Package-Private
 
 - (ASModelScope_Enum)toNSEnum;
+
+@property(readonly) ASModelScope_Enum enumValue;
++ (ASModelScope *)fromNSEnum:(ASModelScope_Enum)value;
+
+- (ASModelScope_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithModelScope:(ASModelScope_Enum)value;
 
 @end
 
@@ -98,11 +114,12 @@ FOUNDATION_EXPORT IOSObjectArray *ASModelScope_values(void);
 
 FOUNDATION_EXPORT ASModelScope *ASModelScope_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASModelScope *ASModelScope_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASModelScope *ASModelScope_fromOrdinal(ASModelScope_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelScope)
 
 @compatibility_alias ComAsheraModelModelScope ASModelScope;
+
 
 #endif
 

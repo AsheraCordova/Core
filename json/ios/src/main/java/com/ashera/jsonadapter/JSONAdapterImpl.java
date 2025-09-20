@@ -321,7 +321,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 	  return result;
 	]-*/;
 	
-	public native Object addObject(Object list, Object object) /*-[
+	public native void addObject(Object list, Object object) /*-[
 		[list addObject:object];
 	]-*/;
 	

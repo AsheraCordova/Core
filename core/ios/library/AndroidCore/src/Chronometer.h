@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Chronometer.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Chronometer")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADTextView 1
 #include "TextView.h"
 
+@class JavaLangBoolean;
+@class JavaLangLong;
+@class NSString;
 @protocol ADChronometer_OnChronometerTickListener;
 @protocol ASIWidget;
 
@@ -29,25 +33,25 @@
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (jlong)getBase;
+- (int64_t)getBase;
 
 - (NSString *)getFormat;
 
 - (id<ADChronometer_OnChronometerTickListener>)getOnChronometerTickListener;
 
-- (jboolean)isCountDown;
+- (bool)isCountDown;
 
 - (void)postInit;
 
-- (void)setBaseWithLong:(jlong)base;
+- (void)setBaseWithLong:(int64_t)base;
 
-- (void)setCountDownWithBoolean:(jboolean)countDown;
+- (void)setCountDownWithBoolean:(bool)countDown;
 
 - (void)setFormatWithNSString:(NSString *)format;
 
 - (void)setOnChronometerTickListenerWithADChronometer_OnChronometerTickListener:(id<ADChronometer_OnChronometerTickListener>)listener;
 
-- (void)setStartedWithBoolean:(jboolean)started;
+- (void)setStartedWithBoolean:(bool)started;
 
 - (void)start;
 
@@ -67,6 +71,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADChronometer)
 
 @compatibility_alias RAndroidWidgetChronometer ADChronometer;
 
+
 #endif
 
 #if !defined (ADChronometer_OnChronometerTickListener_) && (INCLUDE_ALL_Chronometer || defined(INCLUDE_ADChronometer_OnChronometerTickListener))
@@ -83,6 +88,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADChronometer)
 J2OBJC_EMPTY_STATIC_INIT(ADChronometer_OnChronometerTickListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADChronometer_OnChronometerTickListener)
+
 
 #endif
 

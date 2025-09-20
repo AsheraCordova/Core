@@ -3,20 +3,32 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Space.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Space.h"
 #include "View.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADSpace ()
 
-+ (jint)getDefaultSize2WithInt:(jint)size
-                       withInt:(jint)measureSpec;
++ (int32_t)getDefaultSize2WithInt:(int32_t)size
+                          withInt:(int32_t)measureSpec;
 
 @end
 
-__attribute__((unused)) static jint ADSpace_getDefaultSize2WithInt_withInt_(jint size, jint measureSpec);
+__attribute__((unused)) static int32_t ADSpace_getDefaultSize2WithInt_withInt_(int32_t size, int32_t measureSpec);
 
 @implementation ADSpace
 
@@ -27,13 +39,13 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)getDefaultSize2WithInt:(jint)size
-                       withInt:(jint)measureSpec {
++ (int32_t)getDefaultSize2WithInt:(int32_t)size
+                          withInt:(int32_t)measureSpec {
   return ADSpace_getDefaultSize2WithInt_withInt_(size, measureSpec);
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [self setMeasuredDimensionWithInt:ADSpace_getDefaultSize2WithInt_withInt_([self getSuggestedMinimumWidth], widthMeasureSpec) withInt:ADSpace_getDefaultSize2WithInt_withInt_([self getSuggestedMinimumHeight], heightMeasureSpec)];
 }
 
@@ -69,11 +81,11 @@ ADSpace *create_ADSpace_init() {
   J2OBJC_CREATE_IMPL(ADSpace, init)
 }
 
-jint ADSpace_getDefaultSize2WithInt_withInt_(jint size, jint measureSpec) {
+int32_t ADSpace_getDefaultSize2WithInt_withInt_(int32_t size, int32_t measureSpec) {
   ADSpace_initialize();
-  jint result = size;
-  jint specMode = ADView_MeasureSpec_getModeWithInt_(measureSpec);
-  jint specSize = ADView_MeasureSpec_getSizeWithInt_(measureSpec);
+  int32_t result = size;
+  int32_t specMode = ADView_MeasureSpec_getModeWithInt_(measureSpec);
+  int32_t specSize = ADView_MeasureSpec_getSizeWithInt_(measureSpec);
   switch (specMode) {
     case ADView_MeasureSpec_UNSPECIFIED:
     result = size;
@@ -89,3 +101,5 @@ jint ADSpace_getDefaultSize2WithInt_withInt_(jint size, jint measureSpec) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSpace)
+
+J2OBJC_NAME_MAPPING(ADSpace, "r.android.widget", "AD")

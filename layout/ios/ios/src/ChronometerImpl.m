@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ChronometerImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
@@ -53,8 +58,11 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -71,13 +79,14 @@
 
 #include "ASUILabel.h"
 
+
 @class ASChronometerImpl_DellocHandler;
 @class ASChronometerImpl_MarqueeTask;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@protocol JavaLangRunnable;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -88,20 +97,20 @@
   NSString *stopWhenReached_;
   ASChronometerImpl_PostMeasureHandler *postMeasureHandler_;
   NSString *POST_MEASURE_EVENT_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   id<JavaUtilMap> fontDescriptors_;
   ASChronometerImpl_MarqueeTask *marqueeTask_;
-  jint marqueeRepeatLimit_;
+  int32_t marqueeRepeatLimit_;
   ASMarqueeCommandConverter *marqueeCommandConverter_;
-  jint autoSizeMin_;
-  jint autoSizeMax_;
-  jint autoSizeGranular_;
+  int32_t autoSizeMin_;
+  int32_t autoSizeMax_;
+  int32_t autoSizeGranular_;
   NSString *ellipsize_;
   ADColorStateList *drawableTint_;
   id timer_;
-  jboolean isDisposed_;
+  bool isDisposed_;
   ASChronometerImpl_DellocHandler *dellocHandler_;
 }
 
@@ -163,11 +172,11 @@
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType;
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType;
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue;
 
@@ -191,7 +200,7 @@
 
 - (void)setTextStyleWithId:(id)objValue;
 
-- (jint)calcNumberOfWhiteSpaces;
+- (int32_t)calcNumberOfWhiteSpaces;
 
 - (void)cancelTimer;
 
@@ -203,15 +212,15 @@
 
 - (void)startOrStopMarqueeWithId:(id)objValue;
 
-- (jint)getLabelWidth;
+- (int32_t)getLabelWidth;
 
-- (jboolean)isLabelMeasured;
+- (bool)isLabelMeasured;
 
 - (void)setPasswordWithId:(id)objValue;
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -269,7 +278,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -287,7 +296,7 @@
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)nativeSetVerticalAligmentBottom;
 
@@ -297,9 +306,9 @@
 
 - (void)addMinMaxListener;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (id)getEllipsize;
 
@@ -308,12 +317,12 @@
 
 - (JavaLangInteger *)nativeGetLinBreakMode;
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode;
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode;
 
 - (void)setJustificationModeWithId:(id)objValue
                       withNSString:(NSString *)strValue;
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment;
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment;
 
 - (id)getJustificationMode;
 
@@ -335,14 +344,14 @@
 
 - (void)setEnabledWithId:(id)objValue;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -362,9 +371,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -374,11 +383,11 @@
 
 - (void)setScrollHorizontallyWithId:(id)objValue;
 
-- (jboolean)canMarquee;
+- (bool)canMarquee;
 
 - (void)cancelNativeTimer;
 
-- (jboolean)isDisposed;
+- (bool)isDisposed;
 
 - (void)addDeallocHandler;
 
@@ -393,11 +402,11 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor;
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor;
 
 - (void)syncPlaceholderLabel;
 
-- (jint)nativeGetBaseLine;
+- (int32_t)nativeGetBaseLine;
 
 - (id)getFont;
 
@@ -428,33 +437,33 @@ J2OBJC_FIELD_SETTER(ASChronometerImpl, drawableTint_, ADColorStateList *)
 J2OBJC_FIELD_SETTER(ASChronometerImpl, timer_, id)
 J2OBJC_FIELD_SETTER(ASChronometerImpl, dellocHandler_, ASChronometerImpl_DellocHandler *)
 
-inline jint ASChronometerImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASChronometerImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASChronometerImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASChronometerImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASChronometerImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASChronometerImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASChronometerImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASChronometerImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASChronometerImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, TEXT_ALIGN_RIGHT, int32_t)
 
-inline jint ASChronometerImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASChronometerImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASChronometerImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASChronometerImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASChronometerImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASChronometerImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASChronometerImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASChronometerImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASChronometerImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASChronometerImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASChronometerImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASChronometerImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASChronometerImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASChronometerImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASChronometerImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASChronometerImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASChronometerImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASChronometerImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASChronometerImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASChronometerImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASChronometerImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASChronometerImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASChronometerImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASChronometerImpl, NORMAL_FONT_TRAIT, int32_t)
 
 __attribute__((unused)) static void ASChronometerImpl_addDellocHandler(ASChronometerImpl *self);
 
@@ -514,11 +523,11 @@ __attribute__((unused)) static void ASChronometerImpl_setMinWidthWithId_(ASChron
 
 __attribute__((unused)) static id ASChronometerImpl_getWidth(ASChronometerImpl *self);
 
-__attribute__((unused)) static jint ASChronometerImpl_getHeight(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_getHeight(ASChronometerImpl *self);
 
-__attribute__((unused)) static jint ASChronometerImpl_getAutoSizeTextTypeWithADTextView_(ASChronometerImpl *self, ADTextView *measurableView);
+__attribute__((unused)) static int32_t ASChronometerImpl_getAutoSizeTextTypeWithADTextView_(ASChronometerImpl *self, ADTextView *measurableView);
 
-__attribute__((unused)) static void ASChronometerImpl_setAutoSizeTextTypeInternalWithInt_(ASChronometerImpl *self, jint autoTextType);
+__attribute__((unused)) static void ASChronometerImpl_setAutoSizeTextTypeInternalWithInt_(ASChronometerImpl *self, int32_t autoTextType);
 
 __attribute__((unused)) static void ASChronometerImpl_setAutoSizePresetSizesWithId_(ASChronometerImpl *self, id objValue);
 
@@ -540,7 +549,7 @@ __attribute__((unused)) static void ASChronometerImpl_setFontFamilyWithId_withNS
 
 __attribute__((unused)) static void ASChronometerImpl_setTextStyleWithId_(ASChronometerImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASChronometerImpl_calcNumberOfWhiteSpaces(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_calcNumberOfWhiteSpaces(ASChronometerImpl *self);
 
 __attribute__((unused)) static void ASChronometerImpl_cancelTimer(ASChronometerImpl *self);
 
@@ -552,15 +561,15 @@ __attribute__((unused)) static void ASChronometerImpl_setMarqueeRepeatLimitWithI
 
 __attribute__((unused)) static void ASChronometerImpl_startOrStopMarqueeWithId_(ASChronometerImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASChronometerImpl_getLabelWidth(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_getLabelWidth(ASChronometerImpl *self);
 
-__attribute__((unused)) static jboolean ASChronometerImpl_isLabelMeasured(ASChronometerImpl *self);
+__attribute__((unused)) static bool ASChronometerImpl_isLabelMeasured(ASChronometerImpl *self);
 
 __attribute__((unused)) static void ASChronometerImpl_setPasswordWithId_(ASChronometerImpl *self, id objValue);
 
 __attribute__((unused)) static void ASChronometerImpl_setFirstBaselineToTopHeightWithId_(ASChronometerImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASChronometerImpl_getIncludeFontPadding(ASChronometerImpl *self);
+__attribute__((unused)) static bool ASChronometerImpl_getIncludeFontPadding(ASChronometerImpl *self);
 
 __attribute__((unused)) static id ASChronometerImpl_getFirstBaselineToTopHeight(ASChronometerImpl *self);
 
@@ -618,7 +627,7 @@ __attribute__((unused)) static id ASChronometerImpl_getTextSize(ASChronometerImp
 
 __attribute__((unused)) static void ASChronometerImpl_setMyTextSizeWithId_(ASChronometerImpl *self, id objValue);
 
-__attribute__((unused)) static void ASChronometerImpl_nativeSetTextSizeWithInt_(ASChronometerImpl *self, jint value);
+__attribute__((unused)) static void ASChronometerImpl_nativeSetTextSizeWithInt_(ASChronometerImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASChronometerImpl_setVerticalAligmentCenter(ASChronometerImpl *self);
 
@@ -636,7 +645,7 @@ __attribute__((unused)) static void ASChronometerImpl_setHorizontalAligmentLeft(
 
 __attribute__((unused)) static void ASChronometerImpl_setHorizontalAligmentLeftInternal(ASChronometerImpl *self);
 
-__attribute__((unused)) static jint ASChronometerImpl_getTextAlignment(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_getTextAlignment(ASChronometerImpl *self);
 
 __attribute__((unused)) static void ASChronometerImpl_nativeSetVerticalAligmentBottom(ASChronometerImpl *self);
 
@@ -646,9 +655,9 @@ __attribute__((unused)) static void ASChronometerImpl_nativeSetVerticalAligmentC
 
 __attribute__((unused)) static void ASChronometerImpl_addMinMaxListener(ASChronometerImpl *self);
 
-__attribute__((unused)) static jint ASChronometerImpl_getLineHeight(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_getLineHeight(ASChronometerImpl *self);
 
-__attribute__((unused)) static jint ASChronometerImpl_getBorderWidth(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_getBorderWidth(ASChronometerImpl *self);
 
 __attribute__((unused)) static id ASChronometerImpl_getEllipsize(ASChronometerImpl *self);
 
@@ -656,11 +665,11 @@ __attribute__((unused)) static void ASChronometerImpl_setEllipsizeWithId_withNSS
 
 __attribute__((unused)) static JavaLangInteger *ASChronometerImpl_nativeGetLinBreakMode(ASChronometerImpl *self);
 
-__attribute__((unused)) static void ASChronometerImpl_nativeSetLineBreakModeWithInt_(ASChronometerImpl *self, jint lineBreakMode);
+__attribute__((unused)) static void ASChronometerImpl_nativeSetLineBreakModeWithInt_(ASChronometerImpl *self, int32_t lineBreakMode);
 
 __attribute__((unused)) static void ASChronometerImpl_setJustificationModeWithId_withNSString_(ASChronometerImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASChronometerImpl_nativeSetTextAligmentWithInt_(ASChronometerImpl *self, jint textAlignment);
+__attribute__((unused)) static void ASChronometerImpl_nativeSetTextAligmentWithInt_(ASChronometerImpl *self, int32_t textAlignment);
 
 __attribute__((unused)) static id ASChronometerImpl_getJustificationMode(ASChronometerImpl *self);
 
@@ -680,13 +689,13 @@ __attribute__((unused)) static id ASChronometerImpl_getSingleLine(ASChronometerI
 
 __attribute__((unused)) static void ASChronometerImpl_setEnabledWithId_(ASChronometerImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASChronometerImpl_nativeGetFontSize(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_nativeGetFontSize(ASChronometerImpl *self);
 
-__attribute__((unused)) static jint ASChronometerImpl_nativeGetFontStyle(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_nativeGetFontStyle(ASChronometerImpl *self);
 
-__attribute__((unused)) static void ASChronometerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASChronometerImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASChronometerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASChronometerImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASChronometerImpl_nativeSetFontStyleWithInt_(ASChronometerImpl *self, jint style);
+__attribute__((unused)) static void ASChronometerImpl_nativeSetFontStyleWithInt_(ASChronometerImpl *self, int32_t style);
 
 __attribute__((unused)) static void ASChronometerImpl_setDrawablePaddingWithId_(ASChronometerImpl *self, id objValue);
 
@@ -702,9 +711,9 @@ __attribute__((unused)) static void ASChronometerImpl_setDrawableLeftWithNSStrin
 
 __attribute__((unused)) static void ASChronometerImpl_setDrawableLeftInternalWithNSString_withId_(ASChronometerImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASChronometerImpl_getImageHeightWithId_(ASChronometerImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASChronometerImpl_getImageHeightWithId_(ASChronometerImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASChronometerImpl_getImageWidthWithId_(ASChronometerImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASChronometerImpl_getImageWidthWithId_(ASChronometerImpl *self, id objValue);
 
 __attribute__((unused)) static id ASChronometerImpl_getDrawablePadding(ASChronometerImpl *self);
 
@@ -714,11 +723,11 @@ __attribute__((unused)) static void ASChronometerImpl_setDrawableTintWithId_(ASC
 
 __attribute__((unused)) static void ASChronometerImpl_setScrollHorizontallyWithId_(ASChronometerImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASChronometerImpl_canMarquee(ASChronometerImpl *self);
+__attribute__((unused)) static bool ASChronometerImpl_canMarquee(ASChronometerImpl *self);
 
 __attribute__((unused)) static void ASChronometerImpl_cancelNativeTimer(ASChronometerImpl *self);
 
-__attribute__((unused)) static jboolean ASChronometerImpl_isDisposed(ASChronometerImpl *self);
+__attribute__((unused)) static bool ASChronometerImpl_isDisposed(ASChronometerImpl *self);
 
 __attribute__((unused)) static void ASChronometerImpl_addDeallocHandler(ASChronometerImpl *self);
 
@@ -732,11 +741,11 @@ __attribute__((unused)) static id ASChronometerImpl_getTextColorState(ASChronome
 
 __attribute__((unused)) static void ASChronometerImpl_drawableStateChangeWithNSString_withADDrawable_(ASChronometerImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static void ASChronometerImpl_setHintColorWithInt_(ASChronometerImpl *self, jint currentHintTextColor);
+__attribute__((unused)) static void ASChronometerImpl_setHintColorWithInt_(ASChronometerImpl *self, int32_t currentHintTextColor);
 
 __attribute__((unused)) static void ASChronometerImpl_syncPlaceholderLabel(ASChronometerImpl *self);
 
-__attribute__((unused)) static jint ASChronometerImpl_nativeGetBaseLine(ASChronometerImpl *self);
+__attribute__((unused)) static int32_t ASChronometerImpl_nativeGetBaseLine(ASChronometerImpl *self);
 
 __attribute__((unused)) static id ASChronometerImpl_getFont(ASChronometerImpl *self);
 
@@ -752,7 +761,7 @@ __attribute__((unused)) static void ASChronometerImpl_releaseResource(ASChronome
 
 @interface ASChronometerImpl_DallocHandler () {
  @public
-  __unsafe_unretained ASChronometerImpl *this$0_;
+  WEAK_ ASChronometerImpl *this$0_;
 }
 
 @end
@@ -786,7 +795,7 @@ J2OBJC_FIELD_SETTER(ASChronometerImpl_DrawableTintMode, mapping_, id<JavaUtilMap
 
 @interface ASChronometerImpl_ChronometerExt () {
  @public
-  __unsafe_unretained ASChronometerImpl *this$0_;
+  WEAK_ ASChronometerImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -802,18 +811,18 @@ J2OBJC_FIELD_SETTER(ASChronometerImpl_ChronometerExt, templates_, id<JavaUtilMap
 
 @interface ASChronometerImpl_PostMeasureHandler () {
  @public
-  __unsafe_unretained ASChronometerImpl *this$0_;
-  jboolean onlyOnce_;
+  WEAK_ ASChronometerImpl *this$0_;
+  bool onlyOnce_;
 }
 
 @end
 
 @interface ASChronometerImpl_MarqueeTask : NSObject < JavaLangRunnable > {
  @public
-  __unsafe_unretained ASChronometerImpl *this$0_;
-  jint slideLength_;
-  jint cycles_;
-  jboolean cancel_;
+  WEAK_ ASChronometerImpl *this$0_;
+  int32_t slideLength_;
+  int32_t cycles_;
+  bool cancel_;
   NSString *direction_;
 }
 
@@ -840,10 +849,11 @@ __attribute__((unused)) static ASChronometerImpl_MarqueeTask *create_ASChronomet
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_MarqueeTask)
 
+
 @interface ASChronometerImpl_MarqueeTask_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   ASChronometerImpl_MarqueeTask *this$0_;
-  jint val$numberOfBlankSpaces_;
+  int32_t val$numberOfBlankSpaces_;
 }
 
 - (void)run;
@@ -852,15 +862,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_MarqueeTask)
 
 J2OBJC_EMPTY_STATIC_INIT(ASChronometerImpl_MarqueeTask_$Lambda$1)
 
-__attribute__((unused)) static void ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask_$Lambda$1 *self, ASChronometerImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static void ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask_$Lambda$1 *self, ASChronometerImpl_MarqueeTask *outer$, int32_t capture$0);
 
-__attribute__((unused)) static ASChronometerImpl_MarqueeTask_$Lambda$1 *new_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, jint capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASChronometerImpl_MarqueeTask_$Lambda$1 *new_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, int32_t capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASChronometerImpl_MarqueeTask_$Lambda$1 *create_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static ASChronometerImpl_MarqueeTask_$Lambda$1 *create_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, int32_t capture$0);
+
 
 @interface ASChronometerImpl_DellocHandler : ASEventBusHandler {
  @public
-  __unsafe_unretained ASChronometerImpl *this$0_;
+  WEAK_ ASChronometerImpl *this$0_;
 }
 
 - (instancetype)initWithASChronometerImpl:(ASChronometerImpl *)outer$
@@ -879,6 +890,7 @@ __attribute__((unused)) static ASChronometerImpl_DellocHandler *new_ASChronomete
 __attribute__((unused)) static ASChronometerImpl_DellocHandler *create_ASChronometerImpl_DellocHandler_initWithASChronometerImpl_withNSString_(ASChronometerImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DellocHandler)
+
 
 @interface ASChronometerImpl_OnChronometerTickListener : NSObject < ADChronometer_OnChronometerTickListener, ASIListener > {
  @public
@@ -923,6 +935,7 @@ __attribute__((unused)) static ASChronometerImpl_OnChronometerTickListener *new_
 __attribute__((unused)) static ASChronometerImpl_OnChronometerTickListener *create_ASChronometerImpl_OnChronometerTickListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_OnChronometerTickListener)
+
 
 J2OBJC_INITIALIZED_DEFN(ASChronometerImpl)
 
@@ -1586,7 +1599,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASChronometerImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADChronometer *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADChronometer *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASChronometerImpl_updateTextAlignment(self);
   }
@@ -1608,11 +1621,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADChronometer *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADChronometer *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -1620,11 +1633,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADChronometer *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADChronometer *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -1660,11 +1673,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADChronometer *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADChronometer *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -1680,15 +1693,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASChronometerImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASChronometerImpl_getHeight(self);
 }
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
   return ASChronometerImpl_getAutoSizeTextTypeWithADTextView_(self, measurableView);
 }
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType {
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType {
   ASChronometerImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -1734,7 +1747,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setTextStyleWithId_(self, objValue);
 }
 
-- (jint)calcNumberOfWhiteSpaces {
+- (int32_t)calcNumberOfWhiteSpaces {
   return ASChronometerImpl_calcNumberOfWhiteSpaces(self);
 }
 
@@ -1758,11 +1771,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_startOrStopMarqueeWithId_(self, objValue);
 }
 
-- (jint)getLabelWidth {
+- (int32_t)getLabelWidth {
   return ASChronometerImpl_getLabelWidth(self);
 }
 
-- (jboolean)isLabelMeasured {
+- (bool)isLabelMeasured {
   return ASChronometerImpl_isLabelMeasured(self);
 }
 
@@ -1774,7 +1787,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASChronometerImpl_getIncludeFontPadding(self);
 }
 
@@ -1843,31 +1856,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -1920,7 +1933,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASChronometerImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -1956,7 +1969,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASChronometerImpl_getTextAlignment(self);
 }
 
@@ -1976,19 +1989,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_addMinMaxListener(self);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASChronometerImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASChronometerImpl_getBorderWidth(self);
 }
 
@@ -2005,7 +2018,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASChronometerImpl_nativeGetLinBreakMode(self);
 }
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode {
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode {
   ASChronometerImpl_nativeSetLineBreakModeWithInt_(self, lineBreakMode);
 }
 
@@ -2014,7 +2027,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment {
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment {
   ASChronometerImpl_nativeSetTextAligmentWithInt_(self, textAlignment);
 }
 
@@ -2060,20 +2073,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASChronometerImpl_toUpperCaseWithNSString_(text);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASChronometerImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASChronometerImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASChronometerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASChronometerImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
@@ -2109,11 +2122,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASChronometerImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASChronometerImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -2136,7 +2149,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_setScrollHorizontallyWithId_(self, objValue);
 }
 
-- (jboolean)canMarquee {
+- (bool)canMarquee {
   return ASChronometerImpl_canMarquee(self);
 }
 
@@ -2144,7 +2157,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_cancelNativeTimer(self);
 }
 
-- (jboolean)isDisposed {
+- (bool)isDisposed {
   return ASChronometerImpl_isDisposed(self);
 }
 
@@ -2199,7 +2212,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor {
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor {
   ASChronometerImpl_setHintColorWithInt_(self, currentHintTextColor);
 }
 
@@ -2207,11 +2220,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASChronometerImpl_syncPlaceholderLabel(self);
 }
 
-- (jint)getBaseLine {
+- (int32_t)getBaseLine {
   return ASChronometerImpl_nativeGetBaseLine(self) + [((ADChronometer *) nil_chk(measurableView_)) getPaddingTop];
 }
 
-- (jint)nativeGetBaseLine {
+- (int32_t)nativeGetBaseLine {
   return ASChronometerImpl_nativeGetBaseLine(self);
 }
 
@@ -2335,7 +2348,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -2346,7 +2359,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -2953,9 +2966,9 @@ void ASChronometerImpl_setStopWhenReachedWithId_(ASChronometerImpl *self, id obj
 }
 
 void ASChronometerImpl_setGravityWithId_(ASChronometerImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADChronometer *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASChronometerImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -2975,8 +2988,8 @@ void ASChronometerImpl_setGravityWithId_(ASChronometerImpl *self, id objValue) {
 
 void ASChronometerImpl_updateTextAlignment(ASChronometerImpl *self) {
   ADLayout_Alignment *minor = [((ADChronometer *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADChronometer *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADChronometer *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADChronometer *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASChronometerImpl_getMyText(self), [NSString class]);
@@ -3029,7 +3042,7 @@ id ASChronometerImpl_getGravity(ASChronometerImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -3043,8 +3056,8 @@ id ASChronometerImpl_getGravity(ASChronometerImpl *self) {
     default:
     break;
   }
-  jint aligment = ASChronometerImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASChronometerImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASChronometerImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -3058,7 +3071,7 @@ id ASChronometerImpl_getGravity(ASChronometerImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -3141,15 +3154,15 @@ id ASChronometerImpl_getWidth(ASChronometerImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADChronometer *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASChronometerImpl_getHeight(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_getHeight(ASChronometerImpl *self) {
   return [((ADChronometer *) nil_chk(self->measurableView_)) getHeight];
 }
 
-jint ASChronometerImpl_getAutoSizeTextTypeWithADTextView_(ASChronometerImpl *self, ADTextView *measurableView) {
+int32_t ASChronometerImpl_getAutoSizeTextTypeWithADTextView_(ASChronometerImpl *self, ADTextView *measurableView) {
   return [((ADTextView *) nil_chk(measurableView)) getAutoSizeTextType];
 }
 
-void ASChronometerImpl_setAutoSizeTextTypeInternalWithInt_(ASChronometerImpl *self, jint autoTextType) {
+void ASChronometerImpl_setAutoSizeTextTypeInternalWithInt_(ASChronometerImpl *self, int32_t autoTextType) {
   ASChronometerImpl_removeResizeListener(self);
   if ([((ADChronometer *) nil_chk(self->measurableView_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
     [((ADChronometer *) nil_chk(self->measurableView_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
@@ -3232,8 +3245,8 @@ void ASChronometerImpl_setFontFamilyWithId_withNSString_(ASChronometerImpl *self
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASChronometerImpl_nativeGetFontStyle(self);
-  jint height = ASChronometerImpl_nativeGetFontSize(self);
+  int32_t style = ASChronometerImpl_nativeGetFontStyle(self);
+  int32_t height = ASChronometerImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASChronometerImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -3247,39 +3260,39 @@ void ASChronometerImpl_setFontFamilyWithId_withNSString_(ASChronometerImpl *self
 }
 
 void ASChronometerImpl_setTextStyleWithId_(ASChronometerImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASChronometerImpl_nativeGetFontSize(self);
+    int32_t height = ASChronometerImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASChronometerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASChronometerImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASChronometerImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASChronometerImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASChronometerImpl_ITALIC_FONT_TRAIT;
     }
     ASChronometerImpl_nativeSetFontStyleWithInt_(self, style);
   }
 }
 
-jint ASChronometerImpl_calcNumberOfWhiteSpaces(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_calcNumberOfWhiteSpaces(ASChronometerImpl *self) {
   if (!ASChronometerImpl_isLabelMeasured(self)) {
     return 0;
   }
-  jfloat blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASChronometerImpl_getTextSize(self), [NSNumber class])))) floatValue];
-  jint width = JreIntDiv(ASChronometerImpl_getLabelWidth(self), 3);
-  jint numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
+  float blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASChronometerImpl_getTextSize(self), [NSNumber class])))) floatValue];
+  int32_t width = JreIntDiv(ASChronometerImpl_getLabelWidth(self), 3);
+  int32_t numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
   return numberOfBlankSpaces;
 }
 
@@ -3322,14 +3335,14 @@ void ASChronometerImpl_startOrStopMarqueeWithId_(ASChronometerImpl *self, id obj
   }
 }
 
-jint ASChronometerImpl_getLabelWidth(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_getLabelWidth(ASChronometerImpl *self) {
   if ([((ADChronometer *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
     return [((ADChronometer *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADChronometer *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADChronometer *) nil_chk(self->measurableView_)) getPaddingRight];
   }
   return [((ADChronometer *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADChronometer *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADChronometer *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
-jboolean ASChronometerImpl_isLabelMeasured(ASChronometerImpl *self) {
+bool ASChronometerImpl_isLabelMeasured(ASChronometerImpl *self) {
   return !ASChronometerImpl_isDisposed(self) && ASChronometerImpl_getLabelWidth(self) > 0;
 }
 
@@ -3344,8 +3357,8 @@ void ASChronometerImpl_setPasswordWithId_(ASChronometerImpl *self, id objValue) 
 
 void ASChronometerImpl_setFirstBaselineToTopHeightWithId_(ASChronometerImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASChronometerImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASChronometerImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -3353,12 +3366,12 @@ void ASChronometerImpl_setFirstBaselineToTopHeightWithId_(ASChronometerImpl *sel
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADChronometer *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASChronometerImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASChronometerImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASChronometerImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASChronometerImpl_getIncludeFontPadding(ASChronometerImpl *self) {
+bool ASChronometerImpl_getIncludeFontPadding(ASChronometerImpl *self) {
   return false;
 }
 
@@ -3369,8 +3382,8 @@ id ASChronometerImpl_getFirstBaselineToTopHeight(ASChronometerImpl *self) {
 
 void ASChronometerImpl_setLastBaselineToBottomHeightWithId_(ASChronometerImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASChronometerImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASChronometerImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -3378,7 +3391,7 @@ void ASChronometerImpl_setLastBaselineToBottomHeightWithId_(ASChronometerImpl *s
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADChronometer *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASChronometerImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASChronometerImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASChronometerImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -3410,7 +3423,7 @@ void ASChronometerImpl_setAutoMaxTextSizeWithId_(ASChronometerImpl *self, id obj
 }
 
 void ASChronometerImpl_setAutoSizeTextTypeWithId_(ASChronometerImpl *self, id objValue) {
-  jint autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ASChronometerImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -3501,11 +3514,11 @@ id ASChronometerImpl_getTextSize(ASChronometerImpl *self) {
 }
 
 void ASChronometerImpl_setMyTextSizeWithId_(ASChronometerImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASChronometerImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASChronometerImpl_nativeSetTextSizeWithInt_(ASChronometerImpl *self, jint value) {
+void ASChronometerImpl_nativeSetTextSizeWithInt_(ASChronometerImpl *self, int32_t value) {
   [((ASUILabel*)self.uiView) setFont: [((ASUILabel*)self.uiView).font fontWithSize: value]];
 }
 
@@ -3544,7 +3557,7 @@ void ASChronometerImpl_setHorizontalAligmentLeftInternal(ASChronometerImpl *self
   ((ASUILabel*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASChronometerImpl_getTextAlignment(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_getTextAlignment(ASChronometerImpl *self) {
   int alignment = (int) ((ASUILabel*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -3574,11 +3587,11 @@ void ASChronometerImpl_nativeSetVerticalAligmentCenter(ASChronometerImpl *self) 
 void ASChronometerImpl_addMinMaxListener(ASChronometerImpl *self) {
 }
 
-jint ASChronometerImpl_getLineHeight(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_getLineHeight(ASChronometerImpl *self) {
   return ceil(((ASUILabel*)self.uiView).font.lineHeight);
 }
 
-jint ASChronometerImpl_getBorderWidth(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_getBorderWidth(ASChronometerImpl *self) {
   return 0;
 }
 
@@ -3591,7 +3604,7 @@ id ASChronometerImpl_getEllipsize(ASChronometerImpl *self) {
 
 void ASChronometerImpl_setEllipsizeWithId_withNSString_(ASChronometerImpl *self, id objValue, NSString *strValue) {
   self->ellipsize_ = strValue;
-  jint lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (lineBreakMode == JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee)) {
     lineBreakMode = JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping);
   }
@@ -3614,7 +3627,7 @@ JavaLangInteger *ASChronometerImpl_nativeGetLinBreakMode(ASChronometerImpl *self
   return [JavaLangInteger valueOfWithInt:(jint) ((ASUILabel*)self->uiView_).lineBreakMode];
 }
 
-void ASChronometerImpl_nativeSetLineBreakModeWithInt_(ASChronometerImpl *self, jint lineBreakMode) {
+void ASChronometerImpl_nativeSetLineBreakModeWithInt_(ASChronometerImpl *self, int32_t lineBreakMode) {
   [((ASUILabel*)self->uiView_) setLineBreakMode:lineBreakMode];
 }
 
@@ -3622,7 +3635,7 @@ void ASChronometerImpl_setJustificationModeWithId_withNSString_(ASChronometerImp
   ASChronometerImpl_nativeSetTextAligmentWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASChronometerImpl_nativeSetTextAligmentWithInt_(ASChronometerImpl *self, jint textAlignment) {
+void ASChronometerImpl_nativeSetTextAligmentWithInt_(ASChronometerImpl *self, int32_t textAlignment) {
   [((ASUILabel*)self->uiView_) setTextAlignment:textAlignment];
 }
 
@@ -3674,16 +3687,16 @@ NSString *ASChronometerImpl_toUpperCaseWithNSString_(NSString *text) {
   return [((NSString *) nil_chk(text)) java_uppercaseStringWithJRELocale:JavaUtilLocale_getDefault()];
 }
 
-jint ASChronometerImpl_nativeGetFontSize(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_nativeGetFontSize(ASChronometerImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASChronometerImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASChronometerImpl_nativeGetFontStyle(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_nativeGetFontStyle(ASChronometerImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASChronometerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASChronometerImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASChronometerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASChronometerImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -3697,7 +3710,7 @@ void ASChronometerImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASChrono
   }
 }
 
-void ASChronometerImpl_nativeSetFontStyleWithInt_(ASChronometerImpl *self, jint style) {
+void ASChronometerImpl_nativeSetFontStyleWithInt_(ASChronometerImpl *self, int32_t style) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUILabel*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -3776,7 +3789,7 @@ void ASChronometerImpl_setDrawableLeftInternalWithNSString_withId_(ASChronometer
   }
 }
 
-jint ASChronometerImpl_getImageHeightWithId_(ASChronometerImpl *self, id objValue) {
+int32_t ASChronometerImpl_getImageHeightWithId_(ASChronometerImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -3785,7 +3798,7 @@ jint ASChronometerImpl_getImageHeightWithId_(ASChronometerImpl *self, id objValu
   return 0;
 }
 
-jint ASChronometerImpl_getImageWidthWithId_(ASChronometerImpl *self, id objValue) {
+int32_t ASChronometerImpl_getImageWidthWithId_(ASChronometerImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -3841,7 +3854,7 @@ void ASChronometerImpl_setScrollHorizontallyWithId_(ASChronometerImpl *self, id 
   [((ADChronometer *) nil_chk(self->measurableView_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
 }
 
-jboolean ASChronometerImpl_canMarquee(ASChronometerImpl *self) {
+bool ASChronometerImpl_canMarquee(ASChronometerImpl *self) {
   return [nil_chk(ASChronometerImpl_getSingleLine(self)) isEqual:JreLoadStatic(JavaLangBoolean, TRUE)];
 }
 
@@ -3852,7 +3865,7 @@ void ASChronometerImpl_cancelNativeTimer(ASChronometerImpl *self) {
   }
 }
 
-jboolean ASChronometerImpl_isDisposed(ASChronometerImpl *self) {
+bool ASChronometerImpl_isDisposed(ASChronometerImpl *self) {
   return self->isDisposed_;
 }
 
@@ -3915,13 +3928,13 @@ void ASChronometerImpl_drawableStateChangeWithNSString_withADDrawable_(ASChronom
   [self invalidate];
 }
 
-void ASChronometerImpl_setHintColorWithInt_(ASChronometerImpl *self, jint currentHintTextColor) {
+void ASChronometerImpl_setHintColorWithInt_(ASChronometerImpl *self, int32_t currentHintTextColor) {
 }
 
 void ASChronometerImpl_syncPlaceholderLabel(ASChronometerImpl *self) {
 }
 
-jint ASChronometerImpl_nativeGetBaseLine(ASChronometerImpl *self) {
+int32_t ASChronometerImpl_nativeGetBaseLine(ASChronometerImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.ascender;
 }
@@ -3953,6 +3966,8 @@ void ASChronometerImpl_releaseResource(ASChronometerImpl *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl)
+
+J2OBJC_NAME_MAPPING(ASChronometerImpl, "com.ashera.layout", "AS")
 
 @implementation ASChronometerImpl_DallocHandler
 
@@ -4051,10 +4066,10 @@ void ASChronometerImpl_Font_init(ASChronometerImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -4112,9 +4127,9 @@ void ASChronometerImpl_TextStyle_init(ASChronometerImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -4202,8 +4217,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_DrawableTintMode)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -4213,11 +4228,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_DrawableTintMode)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -4244,8 +4259,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_DrawableTintMode)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -4313,12 +4328,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_DrawableTintMode)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -4348,41 +4363,41 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_DrawableTintMode)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASChronometerImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASChronometerImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   [this$0_ onRtlPropertiesChangedWithInt:layoutDirection];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -4641,7 +4656,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_PostMeasureHandler)
 }
 
 - (void)run {
-  jint numberOfBlankSpaces = ASChronometerImpl_calcNumberOfWhiteSpaces(this$0_);
+  int32_t numberOfBlankSpaces = ASChronometerImpl_calcNumberOfWhiteSpaces(this$0_);
   if (this$0_->marqueeCommandConverter_ == nil) {
     this$0_->marqueeCommandConverter_ = (ASMarqueeCommandConverter *) cast_chk([this$0_ getAttributeCommandWithNSString:@"text" withNSString:ASCommonConverters_command_marquee withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(numberOfBlankSpaces), JavaLangInteger_valueOfWithInt_(0), direction_ } count:3 type:NSObject_class_()]], [ASMarqueeCommandConverter class]);
   }
@@ -4728,17 +4743,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_MarqueeTask)
 
 @end
 
-void ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask_$Lambda$1 *self, ASChronometerImpl_MarqueeTask *outer$, jint capture$0) {
+void ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask_$Lambda$1 *self, ASChronometerImpl_MarqueeTask *outer$, int32_t capture$0) {
   self->this$0_ = outer$;
   self->val$numberOfBlankSpaces_ = capture$0;
   NSObject_init(self);
 }
 
-ASChronometerImpl_MarqueeTask_$Lambda$1 *new_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, jint capture$0) {
+ASChronometerImpl_MarqueeTask_$Lambda$1 *new_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_NEW_IMPL(ASChronometerImpl_MarqueeTask_$Lambda$1, initWithASChronometerImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
-ASChronometerImpl_MarqueeTask_$Lambda$1 *create_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, jint capture$0) {
+ASChronometerImpl_MarqueeTask_$Lambda$1 *create_ASChronometerImpl_MarqueeTask_$Lambda$1_initWithASChronometerImpl_MarqueeTask_withInt_(ASChronometerImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_CREATE_IMPL(ASChronometerImpl_MarqueeTask_$Lambda$1, initWithASChronometerImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
@@ -4838,7 +4853,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_DellocHandler)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];

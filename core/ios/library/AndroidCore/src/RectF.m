@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\RectF.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FastMath.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -12,9 +17,19 @@
 #include "Rect.h"
 #include "RectF.h"
 #include "java/io/PrintWriter.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADRectF_1 : ADParcelable_Creator
@@ -29,7 +44,7 @@
 /*!
  @brief Return an array of rectangles of the specified size.
  */
-- (IOSObjectArray *)newArrayWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -40,6 +55,7 @@ __attribute__((unused)) static void ADRectF_1_init(ADRectF_1 *self);
 __attribute__((unused)) static ADRectF_1 *new_ADRectF_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADRectF_1 *create_ADRectF_1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(ADRectF)
 
@@ -54,10 +70,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithFloat:(jfloat)left
-                    withFloat:(jfloat)top
-                    withFloat:(jfloat)right
-                    withFloat:(jfloat)bottom {
+- (instancetype)initWithFloat:(float)left
+                    withFloat:(float)top
+                    withFloat:(float)right
+                    withFloat:(float)bottom {
   ADRectF_initWithFloat_withFloat_withFloat_withFloat_(self, left, top, right, bottom);
   return self;
 }
@@ -72,15 +88,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (jboolean)isEqual:(id)o {
-  if (self == o) return true;
-  if (o == nil || [self java_getClass] != [o java_getClass]) return false;
+- (bool)isEqual:(id)o {
+  if (JreObjectEqualsEquals(self, o)) return true;
+  if (o == nil || !JreObjectEqualsEquals([self java_getClass], [o java_getClass])) return false;
   ADRectF *r = (ADRectF *) cast_chk(o, [ADRectF class]);
   return left_ == r->left_ && top_ == r->top_ && right_ == r->right_ && bottom_ == r->bottom_;
 }
 
 - (NSUInteger)hash {
-  jint result = (left_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(left_) : 0);
+  int32_t result = (left_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(left_) : 0);
   result = 31 * result + (top_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(top_) : 0);
   result = 31 * result + (right_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(right_) : 0);
   result = 31 * result + (bottom_ != +0.0f ? JavaLangFloat_floatToIntBitsWithFloat_(bottom_) : 0);
@@ -121,23 +137,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   [pw printWithChar:']'];
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return left_ >= right_ || top_ >= bottom_;
 }
 
-- (jfloat)width {
+- (float)width {
   return right_ - left_;
 }
 
-- (jfloat)height {
+- (float)height {
   return bottom_ - top_;
 }
 
-- (jfloat)centerX {
+- (float)centerX {
   return (left_ + right_) * 0.5f;
 }
 
-- (jfloat)centerY {
+- (float)centerY {
   return (top_ + bottom_) * 0.5f;
 }
 
@@ -145,10 +161,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   left_ = right_ = top_ = bottom_ = 0;
 }
 
-- (void)setWithFloat:(jfloat)left
-           withFloat:(jfloat)top
-           withFloat:(jfloat)right
-           withFloat:(jfloat)bottom {
+- (void)setWithFloat:(float)left
+           withFloat:(float)top
+           withFloat:(float)right
+           withFloat:(float)bottom {
   self->left_ = left;
   self->top_ = top;
   self->right_ = right;
@@ -169,50 +185,50 @@ J2OBJC_IGNORE_DESIGNATED_END
   self->bottom_ = src->bottom_;
 }
 
-- (void)offsetWithFloat:(jfloat)dx
-              withFloat:(jfloat)dy {
+- (void)offsetWithFloat:(float)dx
+              withFloat:(float)dy {
   JrePlusAssignFloatF(&left_, dx);
   JrePlusAssignFloatF(&top_, dy);
   JrePlusAssignFloatF(&right_, dx);
   JrePlusAssignFloatF(&bottom_, dy);
 }
 
-- (void)offsetToWithFloat:(jfloat)newLeft
-                withFloat:(jfloat)newTop {
+- (void)offsetToWithFloat:(float)newLeft
+                withFloat:(float)newTop {
   JrePlusAssignFloatF(&right_, newLeft - left_);
   JrePlusAssignFloatF(&bottom_, newTop - top_);
   left_ = newLeft;
   top_ = newTop;
 }
 
-- (void)insetWithFloat:(jfloat)dx
-             withFloat:(jfloat)dy {
+- (void)insetWithFloat:(float)dx
+             withFloat:(float)dy {
   JrePlusAssignFloatF(&left_, dx);
   JrePlusAssignFloatF(&top_, dy);
   JreMinusAssignFloatF(&right_, dx);
   JreMinusAssignFloatF(&bottom_, dy);
 }
 
-- (jboolean)containsWithFloat:(jfloat)x
-                    withFloat:(jfloat)y {
+- (bool)containsWithFloat:(float)x
+                withFloat:(float)y {
   return left_ < right_ && top_ < bottom_ && x >= left_ && x < right_ && y >= top_ && y < bottom_;
 }
 
-- (jboolean)containsWithFloat:(jfloat)left
-                    withFloat:(jfloat)top
-                    withFloat:(jfloat)right
-                    withFloat:(jfloat)bottom {
+- (bool)containsWithFloat:(float)left
+                withFloat:(float)top
+                withFloat:(float)right
+                withFloat:(float)bottom {
   return self->left_ < self->right_ && self->top_ < self->bottom_ && self->left_ <= left && self->top_ <= top && self->right_ >= right && self->bottom_ >= bottom;
 }
 
-- (jboolean)containsWithADRectF:(ADRectF *)r {
+- (bool)containsWithADRectF:(ADRectF *)r {
   return self->left_ < self->right_ && self->top_ < self->bottom_ && left_ <= ((ADRectF *) nil_chk(r))->left_ && top_ <= r->top_ && right_ >= r->right_ && bottom_ >= r->bottom_;
 }
 
-- (jboolean)intersectWithFloat:(jfloat)left
-                     withFloat:(jfloat)top
-                     withFloat:(jfloat)right
-                     withFloat:(jfloat)bottom {
+- (bool)intersectWithFloat:(float)left
+                 withFloat:(float)top
+                 withFloat:(float)right
+                 withFloat:(float)bottom {
   if (self->left_ < right && left < self->right_ && self->top_ < bottom && top < self->bottom_) {
     if (self->left_ < left) {
       self->left_ = left;
@@ -231,12 +247,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (jboolean)intersectWithADRectF:(ADRectF *)r {
+- (bool)intersectWithADRectF:(ADRectF *)r {
   return [self intersectWithFloat:((ADRectF *) nil_chk(r))->left_ withFloat:r->top_ withFloat:r->right_ withFloat:r->bottom_];
 }
 
-- (jboolean)setIntersectWithADRectF:(ADRectF *)a
-                        withADRectF:(ADRectF *)b {
+- (bool)setIntersectWithADRectF:(ADRectF *)a
+                    withADRectF:(ADRectF *)b {
   if (((ADRectF *) nil_chk(a))->left_ < ((ADRectF *) nil_chk(b))->right_ && b->left_ < a->right_ && a->top_ < b->bottom_ && b->top_ < a->bottom_) {
     left_ = JavaLangMath_maxWithFloat_withFloat_(a->left_, b->left_);
     top_ = JavaLangMath_maxWithFloat_withFloat_(a->top_, b->top_);
@@ -247,15 +263,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (jboolean)intersectsWithFloat:(jfloat)left
-                      withFloat:(jfloat)top
-                      withFloat:(jfloat)right
-                      withFloat:(jfloat)bottom {
+- (bool)intersectsWithFloat:(float)left
+                  withFloat:(float)top
+                  withFloat:(float)right
+                  withFloat:(float)bottom {
   return self->left_ < right && left < self->right_ && self->top_ < bottom && top < self->bottom_;
 }
 
-+ (jboolean)intersectsWithADRectF:(ADRectF *)a
-                      withADRectF:(ADRectF *)b {
++ (bool)intersectsWithADRectF:(ADRectF *)a
+                  withADRectF:(ADRectF *)b {
   return ADRectF_intersectsWithADRectF_withADRectF_(a, b);
 }
 
@@ -267,10 +283,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADRect *) nil_chk(dst)) setWithInt:JreFpToInt(JavaLangMath_floorWithDouble_(left_)) withInt:JreFpToInt(JavaLangMath_floorWithDouble_(top_)) withInt:JreFpToInt(JavaLangMath_ceilWithDouble_(right_)) withInt:JreFpToInt(JavaLangMath_ceilWithDouble_(bottom_))];
 }
 
-- (void)union__WithFloat:(jfloat)left
-               withFloat:(jfloat)top
-               withFloat:(jfloat)right
-               withFloat:(jfloat)bottom {
+- (void)union__WithFloat:(float)left
+               withFloat:(float)top
+               withFloat:(float)right
+               withFloat:(float)bottom {
   if ((left < right) && (top < bottom)) {
     if ((self->left_ < self->right_) && (self->top_ < self->bottom_)) {
       if (self->left_ > left) self->left_ = left;
@@ -291,8 +307,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self union__WithFloat:((ADRectF *) nil_chk(r))->left_ withFloat:r->top_ withFloat:r->right_ withFloat:r->bottom_];
 }
 
-- (void)union__WithFloat:(jfloat)x
-               withFloat:(jfloat)y {
+- (void)union__WithFloat:(float)x
+               withFloat:(float)y {
   if (x < left_) {
     left_ = x;
   }
@@ -309,23 +325,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)sort {
   if (left_ > right_) {
-    jfloat temp = left_;
+    float temp = left_;
     left_ = right_;
     right_ = temp;
   }
   if (top_ > bottom_) {
-    jfloat temp = top_;
+    float temp = top_;
     top_ = bottom_;
     bottom_ = temp;
   }
 }
 
-- (jint)describeContents {
+- (int32_t)describeContents {
   return 0;
 }
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)outArg
-                          withInt:(jint)flags {
+                          withInt:(int32_t)flags {
   [((id<ADParcel>) nil_chk(outArg)) writeFloatWithFloat:left_];
   [outArg writeFloatWithFloat:top_];
   [outArg writeFloatWithFloat:right_];
@@ -339,7 +355,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   bottom_ = [inArg readFloat];
 }
 
-- (void)scale__WithFloat:(jfloat)scale_ {
+- (void)scale__WithFloat:(float)scale_ {
   if (scale_ != 1.0f) {
     left_ = left_ * scale_;
     top_ = top_ * scale_;
@@ -468,7 +484,7 @@ ADRectF *create_ADRectF_init() {
   J2OBJC_CREATE_IMPL(ADRectF, init)
 }
 
-void ADRectF_initWithFloat_withFloat_withFloat_withFloat_(ADRectF *self, jfloat left, jfloat top, jfloat right, jfloat bottom) {
+void ADRectF_initWithFloat_withFloat_withFloat_withFloat_(ADRectF *self, float left, float top, float right, float bottom) {
   NSObject_init(self);
   self->left_ = left;
   self->top_ = top;
@@ -476,11 +492,11 @@ void ADRectF_initWithFloat_withFloat_withFloat_withFloat_(ADRectF *self, jfloat 
   self->bottom_ = bottom;
 }
 
-ADRectF *new_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(jfloat left, jfloat top, jfloat right, jfloat bottom) {
+ADRectF *new_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(float left, float top, float right, float bottom) {
   J2OBJC_NEW_IMPL(ADRectF, initWithFloat_withFloat_withFloat_withFloat_, left, top, right, bottom)
 }
 
-ADRectF *create_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(jfloat left, jfloat top, jfloat right, jfloat bottom) {
+ADRectF *create_ADRectF_initWithFloat_withFloat_withFloat_withFloat_(float left, float top, float right, float bottom) {
   J2OBJC_CREATE_IMPL(ADRectF, initWithFloat_withFloat_withFloat_withFloat_, left, top, right, bottom)
 }
 
@@ -526,12 +542,14 @@ ADRectF *create_ADRectF_initWithADRect_(ADRect *r) {
   J2OBJC_CREATE_IMPL(ADRectF, initWithADRect_, r)
 }
 
-jboolean ADRectF_intersectsWithADRectF_withADRectF_(ADRectF *a, ADRectF *b) {
+bool ADRectF_intersectsWithADRectF_withADRectF_(ADRectF *a, ADRectF *b) {
   ADRectF_initialize();
   return ((ADRectF *) nil_chk(a))->left_ < ((ADRectF *) nil_chk(b))->right_ && b->left_ < a->right_ && a->top_ < b->bottom_ && b->top_ < a->bottom_;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRectF)
+
+J2OBJC_NAME_MAPPING(ADRectF, "r.android.graphics", "AD")
 
 @implementation ADRectF_1
 
@@ -545,11 +563,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (ADRectF *)createFromParcelWithADParcel:(id<ADParcel>)inArg {
   ADRectF *r = create_ADRectF_init();
   [r readFromParcelWithADParcel:inArg];
-  return r;
+  return JreRetainedLocalValue(r);
 }
 
-- (IOSObjectArray *)newArrayWithInt:(jint)size {
-  return [IOSObjectArray arrayWithLength:size type:ADRectF_class_()];
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size {
+  return JreRetainedLocalValue([IOSObjectArray arrayWithLength:size type:ADRectF_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -566,7 +584,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(newArrayWithInt:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "createFromParcel", "LADParcel;", "newArray", "I", "LADRectF;", "Lr/android/os/Parcelable$Creator<Lr/android/graphics/RectF;>;" };
-  static const J2ObjcClassInfo _ADRectF_1 = { "", "r.android.graphics", ptrTable, methods, NULL, 7, 0x8018, 3, 0, 4, -1, -1, 5, -1 };
+  static const J2ObjcClassInfo _ADRectF_1 = { "", "r.android.graphics", ptrTable, methods, NULL, 7, 0x8000, 3, 0, 4, -1, -1, 5, -1 };
   return &_ADRectF_1;
 }
 

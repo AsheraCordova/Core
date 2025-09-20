@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingChild.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollingChild")
@@ -23,6 +24,9 @@
 #define ADXNestedScrollingChild_
 
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 /*!
  @brief This interface should be implemented by <code>View</code> subclasses that wish
@@ -49,7 +53,7 @@
  @param enabled true to enable nested scrolling, false to disable
  - seealso: #isNestedScrollingEnabled()
  */
-- (void)setNestedScrollingEnabledWithBoolean:(jboolean)enabled;
+- (void)setNestedScrollingEnabledWithBoolean:(bool)enabled;
 
 /*!
  @brief Returns true if nested scrolling is enabled for this view.
@@ -60,7 +64,7 @@
  @return true if nested scrolling is enabled
  - seealso: #setNestedScrollingEnabled(boolean)
  */
-- (jboolean)isNestedScrollingEnabled;
+- (bool)isNestedScrollingEnabled;
 
 /*!
  @brief Begin a nestable scroll operation along the given axes.
@@ -97,7 +101,7 @@
  - seealso: #dispatchNestedPreScroll(int, int, int[], int[])
  - seealso: #dispatchNestedScroll(int, int, int, int, int[])
  */
-- (jboolean)startNestedScrollWithInt:(jint)axes;
+- (bool)startNestedScrollWithInt:(int32_t)axes;
 
 /*!
  @brief Stop a nested scroll in progress.
@@ -112,7 +116,7 @@
   a nested scroll and it was accepted by an ancestor view further up the view hierarchy.</p>
  @return whether this view has a nested scrolling parent
  */
-- (jboolean)hasNestedScrollingParent;
+- (bool)hasNestedScrollingParent;
 
 /*!
  @brief Dispatch one step of a nested scroll in progress.
@@ -134,11 +138,11 @@
  @return true if the event was dispatched, false if it could not be dispatched.
  - seealso: #dispatchNestedPreScroll(int, int, int[], int[])
  */
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow;
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow;
 
 /*!
  @brief Dispatch one step of a nested scroll in progress before this view consumes any portion of it.
@@ -155,10 +159,10 @@
  @return true if the parent consumed some or all of the scroll delta
  - seealso: #dispatchNestedScroll(int, int, int, int, int[])
  */
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow;
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow;
 
 /*!
  @brief Dispatch a fling to a nested scrolling parent.
@@ -176,9 +180,9 @@
  @param consumed true if the child consumed the fling, false otherwise
  @return true if the nested scrolling parent consumed or otherwise reacted to the fling
  */
-- (jboolean)dispatchNestedFlingWithFloat:(jfloat)velocityX
-                               withFloat:(jfloat)velocityY
-                             withBoolean:(jboolean)consumed;
+- (bool)dispatchNestedFlingWithFloat:(float)velocityX
+                           withFloat:(float)velocityY
+                         withBoolean:(bool)consumed;
 
 /*!
  @brief Dispatch a fling to a nested scrolling parent before it is processed by this view.
@@ -208,8 +212,8 @@
  @param velocityY Vertical fling velocity in pixels per second
  @return true if a nested scrolling parent consumed the fling
  */
-- (jboolean)dispatchNestedPreFlingWithFloat:(jfloat)velocityX
-                                  withFloat:(jfloat)velocityY;
+- (bool)dispatchNestedPreFlingWithFloat:(float)velocityX
+                              withFloat:(float)velocityY;
 
 @end
 
@@ -218,6 +222,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXNestedScrollingChild)
 J2OBJC_TYPE_LITERAL_HEADER(ADXNestedScrollingChild)
 
 #define AndroidxCoreViewNestedScrollingChild ADXNestedScrollingChild
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\ShapeDrawable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ShapeDrawable")
@@ -20,49 +21,52 @@
 #define INCLUDE_ADDrawable 1
 #include "Drawable.h"
 
+@class JavaLangInteger;
+@class NSString;
+
 @interface ADShapeDrawable : ADDrawable
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
-- (jint)getMinimumHeight;
+- (int32_t)getMinimumHeight;
 
-- (jint)getMinimumWidth;
+- (int32_t)getMinimumWidth;
 
 - (id)getStrokeColor;
 
-- (jint)getStrokeDashGap;
+- (int32_t)getStrokeDashGap;
 
-- (jint)getStrokeDashWidth;
+- (int32_t)getStrokeDashWidth;
 
-- (jint)getStrokeHeight;
+- (int32_t)getStrokeHeight;
 
-- (jint)getStrokeWidth;
+- (int32_t)getStrokeWidth;
 
 - (NSString *)getType;
 
-- (jint)getWidth;
+- (int32_t)getWidth;
 
 - (void)invalidateSelf;
 
-- (void)setHeightWithInt:(jint)height;
+- (void)setHeightWithInt:(int32_t)height;
 
-- (void)setStrokDashGapWithInt:(jint)dashGap;
+- (void)setStrokDashGapWithInt:(int32_t)dashGap;
 
-- (void)setStrokDashWidthWithInt:(jint)dashWidth;
+- (void)setStrokDashWidthWithInt:(int32_t)dashWidth;
 
 - (void)setStrokeColorWithId:(id)color;
 
-- (void)setStrokeHeightWithInt:(jint)height;
+- (void)setStrokeHeightWithInt:(int32_t)height;
 
-- (void)setStrokeWidthWithInt:(jint)width;
+- (void)setStrokeWidthWithInt:(int32_t)width;
 
 - (void)setTypeWithNSString:(NSString *)type;
 
-- (void)setWidthWithInt:(jint)width;
+- (void)setWidthWithInt:(int32_t)width;
 
 @end
 
@@ -78,20 +82,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ADShapeDrawable)
 
 @compatibility_alias RAndroidGraphicsDrawableShapeDrawable ADShapeDrawable;
 
+
 #endif
 
 #if !defined (ADShapeDrawable_Stroke_) && (INCLUDE_ALL_ShapeDrawable || defined(INCLUDE_ADShapeDrawable_Stroke))
 #define ADShapeDrawable_Stroke_
 
 @class ADShapeDrawable;
+@class JavaLangInteger;
 
 @interface ADShapeDrawable_Stroke : NSObject {
  @public
-  jint width_;
-  jint height_;
+  int32_t width_;
+  int32_t height_;
   id color_;
-  jint dashWidth_;
-  jint dashGap_;
+  int32_t dashWidth_;
+  int32_t dashGap_;
 }
 
 #pragma mark Package-Private
@@ -116,17 +122,19 @@ FOUNDATION_EXPORT ADShapeDrawable_Stroke *create_ADShapeDrawable_Stroke_initWith
 
 J2OBJC_TYPE_LITERAL_HEADER(ADShapeDrawable_Stroke)
 
+
 #endif
 
 #if !defined (ADShapeDrawable_Size_) && (INCLUDE_ALL_ShapeDrawable || defined(INCLUDE_ADShapeDrawable_Size))
 #define ADShapeDrawable_Size_
 
 @class ADShapeDrawable;
+@class JavaLangInteger;
 
 @interface ADShapeDrawable_Size : NSObject {
  @public
-  jint height_;
-  jint width_;
+  int32_t height_;
+  int32_t width_;
 }
 
 #pragma mark Package-Private
@@ -148,6 +156,7 @@ FOUNDATION_EXPORT ADShapeDrawable_Size *new_ADShapeDrawable_Size_initWithADShape
 FOUNDATION_EXPORT ADShapeDrawable_Size *create_ADShapeDrawable_Size_initWithADShapeDrawable_(ADShapeDrawable *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADShapeDrawable_Size)
+
 
 #endif
 

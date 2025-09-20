@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\MinLength.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSClass.h"
@@ -12,23 +17,30 @@
 #include "MinLength.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASMinLength () {
  @public
-  jint mMinLength_;
+  int32_t mMinLength_;
 }
 
-- (instancetype)initWithInt:(jint)minLength;
+- (instancetype)initWithInt:(int32_t)minLength;
 
 @end
 
-__attribute__((unused)) static void ASMinLength_initWithInt_(ASMinLength *self, jint minLength);
+__attribute__((unused)) static void ASMinLength_initWithInt_(ASMinLength *self, int32_t minLength);
 
-__attribute__((unused)) static ASMinLength *new_ASMinLength_initWithInt_(jint minLength) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASMinLength *new_ASMinLength_initWithInt_(int32_t minLength) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASMinLength *create_ASMinLength_initWithInt_(jint minLength);
+__attribute__((unused)) static ASMinLength *create_ASMinLength_initWithInt_(int32_t minLength);
 
 @implementation ASMinLength
 
@@ -43,7 +55,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ASMinLength_initWithInt_(JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(nil_chk(argument), 0)));
 }
 
-- (instancetype)initWithInt:(jint)minLength {
+- (instancetype)initWithInt:(int32_t)minLength {
   ASMinLength_initWithInt_(self, minLength);
   return self;
 }
@@ -53,8 +65,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return NSString_java_formatWithNSString_withNSObjectArray_(res, [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(mMinLength_) } count:1 type:NSObject_class_()]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
   if (text == nil) {
     text = @"";
   }
@@ -101,17 +113,19 @@ ASMinLength *create_ASMinLength_init() {
   J2OBJC_CREATE_IMPL(ASMinLength, init)
 }
 
-void ASMinLength_initWithInt_(ASMinLength *self, jint minLength) {
+void ASMinLength_initWithInt_(ASMinLength *self, int32_t minLength) {
   ASBaseValidator_init(self);
   self->mMinLength_ = minLength;
 }
 
-ASMinLength *new_ASMinLength_initWithInt_(jint minLength) {
+ASMinLength *new_ASMinLength_initWithInt_(int32_t minLength) {
   J2OBJC_NEW_IMPL(ASMinLength, initWithInt_, minLength)
 }
 
-ASMinLength *create_ASMinLength_initWithInt_(jint minLength) {
+ASMinLength *create_ASMinLength_initWithInt_(int32_t minLength) {
   J2OBJC_CREATE_IMPL(ASMinLength, initWithInt_, minLength)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMinLength)
+
+J2OBJC_NAME_MAPPING(ASMinLength, "com.ashera.validations", "AS")

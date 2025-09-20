@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\HtmlToSpannedConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HtmlToSpannedConverter")
@@ -21,6 +22,8 @@
 #include "org/xml/sax/ContentHandler.h"
 
 @class IOSCharArray;
+@class JavaLangInteger;
+@class NSString;
 @class TSTagSoupParser;
 @protocol ASAttributedString;
 @protocol ASIFragment;
@@ -38,8 +41,8 @@
                  withASIFragment:(id<ASIFragment>)fragment;
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length;
 
 - (id<ASAttributedString>)convert;
 
@@ -52,8 +55,8 @@
 - (void)endPrefixMappingWithNSString:(NSString *)prefix;
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length;
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length;
 
 - (void)processingInstructionWithNSString:(NSString *)target
                              withNSString:(NSString *)data;
@@ -89,6 +92,7 @@ FOUNDATION_EXPORT ASHtmlToSpannedConverter *create_ASHtmlToSpannedConverter_init
 J2OBJC_TYPE_LITERAL_HEADER(ASHtmlToSpannedConverter)
 
 @compatibility_alias ComAsheraParserHtmlHtmlToSpannedConverter ASHtmlToSpannedConverter;
+
 
 #endif
 

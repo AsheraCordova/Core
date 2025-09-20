@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\ViewOverlay.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Canvas.h"
 #include "Context.h"
 #include "Drawable.h"
@@ -15,9 +20,17 @@
 #include "ViewGroup.h"
 #include "ViewOverlay.h"
 #include "ViewParent.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADViewOverlay
@@ -44,7 +57,7 @@
   [((ADViewOverlay_OverlayViewGroup *) nil_chk(mOverlayViewGroup_)) clear];
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return [((ADViewOverlay_OverlayViewGroup *) nil_chk(mOverlayViewGroup_)) isEmpty];
 }
 
@@ -103,6 +116,8 @@ ADViewOverlay *create_ADViewOverlay_initWithADContext_withADView_(ADContext *con
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewOverlay)
 
+J2OBJC_NAME_MAPPING(ADViewOverlay, "r.android.view", "AD")
+
 @implementation ADViewOverlay_OverlayViewGroup
 
 - (instancetype)initWithADContext:(ADContext *)context
@@ -136,7 +151,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewOverlay)
   }
 }
 
-- (jboolean)verifyDrawableWithADDrawable:(ADDrawable *)who {
+- (bool)verifyDrawableWithADDrawable:(ADDrawable *)who {
   return [super verifyDrawableWithADDrawable:who] || (mDrawables_ != nil && [mDrawables_ containsWithId:who]);
 }
 
@@ -146,7 +161,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewOverlay)
   }
   if ([[child getParent] isKindOfClass:[ADViewGroup class]]) {
     ADViewGroup *parent = (ADViewGroup *) cast_chk([child getParent], [ADViewGroup class]);
-    if (parent != mHostView_ && [((ADViewGroup *) nil_chk(parent)) getParent] != nil && parent->mAttachInfo_ != nil) {
+    if (!JreObjectEqualsEquals(parent, mHostView_) && [((ADViewGroup *) nil_chk(parent)) getParent] != nil && parent->mAttachInfo_ != nil) {
       IOSIntArray *parentLocation = [IOSIntArray arrayWithLength:2];
       IOSIntArray *hostViewLocation = [IOSIntArray arrayWithLength:2];
       [((ADViewGroup *) nil_chk(parent)) getLocationOnScreenWithIntArray:parentLocation];
@@ -182,7 +197,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewOverlay)
   }
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   if ([self getChildCount] == 0 && (mDrawables_ == nil || [mDrawables_ size] == 0)) {
     return true;
   }
@@ -194,17 +209,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewOverlay)
 }
 
 - (void)dispatchDrawWithADCanvas:(id<ADCanvas>)canvas {
-  jint numDrawables = (mDrawables_ == nil) ? 0 : [((JavaUtilArrayList *) nil_chk(mDrawables_)) size];
-  for (jint i = 0; i < numDrawables; ++i) {
+  int32_t numDrawables = (mDrawables_ == nil) ? 0 : [((JavaUtilArrayList *) nil_chk(mDrawables_)) size];
+  for (int32_t i = 0; i < numDrawables; ++i) {
     [((ADDrawable *) nil_chk([((JavaUtilArrayList *) nil_chk(mDrawables_)) getWithInt:i])) drawWithADCanvas:canvas];
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
 }
 
 - (void)invalidateWithADRect:(ADRect *)dirty {
@@ -214,10 +229,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewOverlay)
   }
 }
 
-- (void)invalidateWithInt:(jint)l
-                  withInt:(jint)t
-                  withInt:(jint)r
-                  withInt:(jint)b {
+- (void)invalidateWithInt:(int32_t)l
+                  withInt:(int32_t)t
+                  withInt:(int32_t)r
+                  withInt:(int32_t)b {
   [super invalidateWithInt:l withInt:t withInt:r withInt:b];
   if (mHostView_ != nil) {
     [mHostView_ invalidateWithInt:l withInt:t withInt:r withInt:b];
@@ -231,15 +246,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewOverlay)
   }
 }
 
-- (void)invalidateWithBoolean:(jboolean)invalidateCache {
+- (void)invalidateWithBoolean:(bool)invalidateCache {
   [super invalidateWithBoolean:invalidateCache];
   if (mHostView_ != nil) {
     [mHostView_ invalidateWithBoolean:invalidateCache];
   }
 }
 
-- (void)invalidateViewPropertyWithBoolean:(jboolean)invalidateParent
-                              withBoolean:(jboolean)forceRedraw {
+- (void)invalidateViewPropertyWithBoolean:(bool)invalidateParent
+                              withBoolean:(bool)forceRedraw {
   [super invalidateViewPropertyWithBoolean:invalidateParent withBoolean:forceRedraw];
   if (mHostView_ != nil) {
     [mHostView_ invalidateViewPropertyWithBoolean:invalidateParent withBoolean:forceRedraw];

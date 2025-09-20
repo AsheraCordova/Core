@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\R.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "R.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADR
@@ -46,9 +58,11 @@ ADR *create_ADR_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADR)
 
-jint ADR_id_view_transition = 1000;
-jint ADR_id_mtrl_view_tag_bottom_padding = 999;
-jint ADR_id_row_index_key = 1001;
+J2OBJC_NAME_MAPPING(ADR, "r.android", "AD")
+
+int32_t ADR_id_view_transition = 1000;
+int32_t ADR_id_mtrl_view_tag_bottom_padding = 999;
+int32_t ADR_id_row_index_key = 1001;
 
 @implementation ADR_id
 
@@ -147,8 +161,8 @@ ADR_attr *create_ADR_attr_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADR_attr)
 
-jint ADR_string_cancel = 1;
-jint ADR_string_negative_duration = 2;
+int32_t ADR_string_cancel = 1;
+int32_t ADR_string_negative_duration = 2;
 
 @implementation ADR_string
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\WebViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseWidget.h"
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
@@ -28,6 +33,7 @@
 #include "WebViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Exception.h"
 #include "java/lang/Integer.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -44,11 +50,15 @@
 #include "ASWKWebView.h"
 #include "signal_recovery.h"
 
+
 @class ASWebViewImpl_WebViewErrorListener;
 @class ASWebViewImpl_WebViewLoadedListener;
 @class ASWebViewImpl_WebViewLoadingListener;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASWebViewImpl () {
@@ -56,7 +66,7 @@
   id<ASWebViewImpl_Loader_WebViewLoadingListener> webviewLoadingListener_;
   id<ASWebViewImpl_Loader_WebViewLoadedListener> webviewLoadedListener_;
   id<ASWebViewImpl_Loader_WebViewErrorListener> webviewErrorListener_;
-  jboolean pageFinished_;
+  bool pageFinished_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -100,12 +110,12 @@ __attribute__((unused)) static void ASWebViewImpl_loadUrlWithId_(ASWebViewImpl *
 
 @interface ASWebViewImpl_WebViewExt () {
  @public
-  __unsafe_unretained ASWebViewImpl *this$0_;
+  WEAK_ ASWebViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -172,6 +182,7 @@ __attribute__((unused)) static ASWebViewImpl_WebViewLoadingListener *create_ASWe
 
 J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_WebViewLoadingListener)
 
+
 @interface ASWebViewImpl_WebViewLoadedListener : NSObject < ASWebViewImpl_Loader_WebViewLoadedListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -215,6 +226,7 @@ __attribute__((unused)) static ASWebViewImpl_WebViewLoadedListener *new_ASWebVie
 __attribute__((unused)) static ASWebViewImpl_WebViewLoadedListener *create_ASWebViewImpl_WebViewLoadedListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_WebViewLoadedListener)
+
 
 @interface ASWebViewImpl_WebViewErrorListener : NSObject < ASWebViewImpl_Loader_WebViewErrorListener, ASIListener > {
  @public
@@ -261,6 +273,7 @@ __attribute__((unused)) static ASWebViewImpl_WebViewErrorListener *new_ASWebView
 __attribute__((unused)) static ASWebViewImpl_WebViewErrorListener *create_ASWebViewImpl_WebViewErrorListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_WebViewErrorListener)
+
 
 NSString *ASWebViewImpl_LOCAL_NAME = @"WebView";
 NSString *ASWebViewImpl_GROUP_NAME = @"WebView";
@@ -393,7 +406,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -404,7 +417,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -609,25 +622,27 @@ void ASWebViewImpl_loadUrlWithId_(ASWebViewImpl *self, id objValue) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
 
+J2OBJC_NAME_MAPPING(ASWebViewImpl, "com.ashera.layout", "AS")
+
 @implementation ASWebViewImpl_WebViewExt
 
 - (id<ASIWidget>)getWidget {
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -636,8 +651,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -653,11 +668,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -684,8 +699,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -753,12 +768,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -788,7 +803,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
@@ -1102,7 +1117,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASWebViewImpl_Loader_WebViewErrorListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1230,7 +1245,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewLoadingListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1359,7 +1374,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewLoadedListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];

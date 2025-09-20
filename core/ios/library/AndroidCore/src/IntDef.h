@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\IntDef.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntDef")
@@ -22,13 +23,16 @@
 
 @class IOSClass;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADIntDef < JavaLangAnnotationAnnotation >
 
 @property (readonly) IOSIntArray *value;
-@property (readonly) jboolean flag;
+@property (readonly) bool flag;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -37,18 +41,19 @@
 @interface ADIntDef : NSObject < ADIntDef > {
  @public
   IOSIntArray *value_;
-  jboolean flag_;
+  bool flag_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADIntDef)
 
-FOUNDATION_EXPORT id<ADIntDef> create_ADIntDef(jboolean flag, IOSIntArray *value);
+FOUNDATION_EXPORT id<ADIntDef> create_ADIntDef(bool flag, IOSIntArray *value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIntDef)
 
 #define RAndroidAnnotationIntDef ADIntDef
+
 
 #endif
 

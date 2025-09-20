@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelExpressionParser.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ModelExpressionParser")
@@ -22,6 +23,7 @@
 @class ASModelExpressionParser_ModelUpdateToScopeHolder;
 @class ASModelExpressionParser_ModelVarScopeHolder;
 @class IOSObjectArray;
+@class NSString;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
@@ -94,12 +96,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser)
 
 @compatibility_alias ComAsheraModelModelExpressionParser ASModelExpressionParser;
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelEventHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelEventHolder))
 #define ASModelExpressionParser_ModelEventHolder_
 
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelEventHolder : NSObject {
@@ -137,12 +141,14 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelEventHolder *create_ASModelExpres
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelEventHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelFromScopeHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelFromScopeHolder))
 #define ASModelExpressionParser_ModelFromScopeHolder_
 
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelFromScopeHolder : NSObject {
@@ -176,12 +182,14 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelFromScopeHolder *create_ASModelEx
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelFromScopeHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelVarScopeHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelVarScopeHolder))
 #define ASModelExpressionParser_ModelVarScopeHolder_
 
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelVarScopeHolder : NSObject {
@@ -213,12 +221,14 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelVarScopeHolder *create_ASModelExp
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelVarScopeHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelPojoToUiHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelPojoToUiHolder))
 #define ASModelExpressionParser_ModelPojoToUiHolder_
 
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelPojoToUiHolder : NSObject {
@@ -256,6 +266,7 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelPojoToUiHolder *create_ASModelExp
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelPojoToUiHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelUiToPojoHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelUiToPojoHolder))
@@ -263,6 +274,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelPojoToUiHolder)
 
 @class ASModelDataType;
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelUiToPojoHolder : NSObject {
@@ -302,6 +314,7 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelUiToPojoHolder *create_ASModelExp
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelUiToPojoHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelStoreVarHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelStoreVarHolder))
@@ -309,6 +322,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelUiToPojoHolder)
 
 @class ASModelDataType;
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelStoreVarHolder : NSObject {
@@ -342,6 +356,7 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelStoreVarHolder *create_ASModelExp
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelStoreVarHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelVarHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelVarHolder))
@@ -349,6 +364,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelStoreVarHolder)
 
 @class ASModelDataType;
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelVarHolder : NSObject {
@@ -388,6 +404,7 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelVarHolder *create_ASModelExpressi
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelVarHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelLoopHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelLoopHolder))
@@ -395,6 +412,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelVarHolder)
 
 @class ASModelDataType;
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelLoopHolder : NSObject {
@@ -434,6 +452,7 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelLoopHolder *create_ASModelExpress
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelLoopHolder)
 
+
 #endif
 
 #if !defined (ASModelExpressionParser_ModelUpdateToScopeHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelUpdateToScopeHolder))
@@ -441,6 +460,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelLoopHolder)
 
 @class ASModelDataType;
 @class ASModelScope;
+@class NSString;
 @protocol JavaUtilList;
 
 @interface ASModelExpressionParser_ModelUpdateToScopeHolder : NSObject {
@@ -475,6 +495,7 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelUpdateToScopeHolder *new_ASModelE
 FOUNDATION_EXPORT ASModelExpressionParser_ModelUpdateToScopeHolder *create_ASModelExpressionParser_ModelUpdateToScopeHolder_initWithJavaUtilList_(id<JavaUtilList> data);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelUpdateToScopeHolder)
+
 
 #endif
 

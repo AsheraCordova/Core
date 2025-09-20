@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\ShapeDrawableImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Rect.h"
 #include "ShapeDrawable.h"
 #include "ShapeDrawableImpl.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASShapeDrawableImpl () {
@@ -17,14 +30,14 @@
 
 - (id)emptyImage;
 
-- (id)drawLineWithInt:(jint)x
-              withInt:(jint)y
-              withInt:(jint)width
-              withInt:(jint)height
+- (id)drawLineWithInt:(int32_t)x
+              withInt:(int32_t)y
+              withInt:(int32_t)width
+              withInt:(int32_t)height
                withId:(id)stokeColor
-              withInt:(jint)stokeWidth
-              withInt:(jint)strokeDashWidth
-              withInt:(jint)strokeDashGap;
+              withInt:(int32_t)stokeWidth
+              withInt:(int32_t)strokeDashWidth
+              withInt:(int32_t)strokeDashGap;
 
 @end
 
@@ -32,7 +45,7 @@ J2OBJC_FIELD_SETTER(ASShapeDrawableImpl, image_, id)
 
 __attribute__((unused)) static id ASShapeDrawableImpl_emptyImage(ASShapeDrawableImpl *self);
 
-__attribute__((unused)) static id ASShapeDrawableImpl_drawLineWithInt_withInt_withInt_withInt_withId_withInt_withInt_withInt_(ASShapeDrawableImpl *self, jint x, jint y, jint width, jint height, id stokeColor, jint stokeWidth, jint strokeDashWidth, jint strokeDashGap);
+__attribute__((unused)) static id ASShapeDrawableImpl_drawLineWithInt_withInt_withInt_withInt_withId_withInt_withInt_withInt_(ASShapeDrawableImpl *self, int32_t x, int32_t y, int32_t width, int32_t height, id stokeColor, int32_t stokeWidth, int32_t strokeDashWidth, int32_t strokeDashGap);
 
 @implementation ASShapeDrawableImpl
 
@@ -49,13 +62,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     return ASShapeDrawableImpl_emptyImage(self);
   }
   if (image_ == nil) {
-    jint width = [bounds width];
-    jint height = [bounds height];
+    int32_t width = [bounds width];
+    int32_t height = [bounds height];
     {
       id stokeColor;
-      jint stokeWidth;
-      jint strokeDashWidth;
-      jint strokeDashGap;
+      int32_t stokeWidth;
+      int32_t strokeDashWidth;
+      int32_t strokeDashGap;
       switch (JreIndexOfStr([self getType], (id[]){ @"line" }, 1)) {
         case 0:
         stokeColor = [self getStrokeColor];
@@ -79,14 +92,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASShapeDrawableImpl_emptyImage(self);
 }
 
-- (id)drawLineWithInt:(jint)x
-              withInt:(jint)y
-              withInt:(jint)width
-              withInt:(jint)height
+- (id)drawLineWithInt:(int32_t)x
+              withInt:(int32_t)y
+              withInt:(int32_t)width
+              withInt:(int32_t)height
                withId:(id)stokeColor
-              withInt:(jint)stokeWidth
-              withInt:(jint)strokeDashWidth
-              withInt:(jint)strokeDashGap {
+              withInt:(int32_t)stokeWidth
+              withInt:(int32_t)strokeDashWidth
+              withInt:(int32_t)strokeDashGap {
   return ASShapeDrawableImpl_drawLineWithInt_withInt_withInt_withInt_withId_withInt_withInt_withInt_(self, x, y, width, height, stokeColor, stokeWidth, strokeDashWidth, strokeDashGap);
 }
 
@@ -140,7 +153,7 @@ id ASShapeDrawableImpl_emptyImage(ASShapeDrawableImpl *self) {
   return [UIImage new];
 }
 
-id ASShapeDrawableImpl_drawLineWithInt_withInt_withInt_withInt_withId_withInt_withInt_withInt_(ASShapeDrawableImpl *self, jint x, jint y, jint width, jint height, id stokeColor, jint stokeWidth, jint strokeDashWidth, jint strokeDashGap) {
+id ASShapeDrawableImpl_drawLineWithInt_withInt_withInt_withInt_withId_withInt_withInt_withInt_(ASShapeDrawableImpl *self, int32_t x, int32_t y, int32_t width, int32_t height, id stokeColor, int32_t stokeWidth, int32_t strokeDashWidth, int32_t strokeDashGap) {
   UIGraphicsBeginImageContext(CGSizeMake(width, height));
   
   CGContextRef context = UIGraphicsGetCurrentContext();
@@ -162,3 +175,5 @@ id ASShapeDrawableImpl_drawLineWithInt_withInt_withInt_withInt_withId_withInt_wi
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASShapeDrawableImpl)
+
+J2OBJC_NAME_MAPPING(ASShapeDrawableImpl, "com.ashera.core", "AS")

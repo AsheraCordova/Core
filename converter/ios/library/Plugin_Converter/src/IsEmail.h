@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\IsEmail.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IsEmail")
@@ -21,7 +22,9 @@
 #include "BaseValidator.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
 @class JavaUtilRegexPattern;
+@class NSString;
 @protocol ASIWidget;
 @protocol ASValidation;
 
@@ -45,8 +48,8 @@
  @param text Text string
  @return isValid true or false
  */
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget;
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget;
 
 - (id<ASValidation>)newInstanceWithNSStringArray:(IOSObjectArray *)argument OBJC_METHOD_FAMILY_NONE;
 
@@ -68,6 +71,7 @@ FOUNDATION_EXPORT ASIsEmail *create_ASIsEmail_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASIsEmail)
 
 @compatibility_alias ComAsheraValidationsIsEmail ASIsEmail;
+
 
 #endif
 

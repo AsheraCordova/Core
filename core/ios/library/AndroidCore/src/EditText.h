@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\EditText.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EditText")
@@ -22,6 +23,10 @@
 
 @class ADContext;
 @class ADKeyEvent;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 
 @interface ADEditText : ADTextView
@@ -34,17 +39,17 @@
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (NSString *)getText;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
-- (jboolean)onKeyDownWithInt:(jint)keyCode
-              withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onKeyDownWithInt:(int32_t)keyCode
+          withADKeyEvent:(ADKeyEvent *)event;
 
 @end
 
@@ -71,6 +76,7 @@ FOUNDATION_EXPORT ADEditText *create_ADEditText_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADEditText)
 
 @compatibility_alias RAndroidWidgetEditText ADEditText;
+
 
 #endif
 

@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\HttpAuthHandler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HttpAuthHandler.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADHttpAuthHandler
@@ -56,3 +67,5 @@ ADHttpAuthHandler *create_ADHttpAuthHandler_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADHttpAuthHandler)
+
+J2OBJC_NAME_MAPPING(ADHttpAuthHandler, "r.android.webkit", "AD")

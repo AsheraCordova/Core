@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\ICompositeDecorator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ICompositeDecorator")
@@ -21,6 +22,8 @@
 #include "HasWidgets.h"
 
 @class ASWidgetAttribute;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIDecorator;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -38,12 +41,12 @@
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)lifeCycleDecorator
-                              withBoolean:(jboolean)parentView;
+                              withBoolean:(bool)parentView;
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-             withBoolean:(jboolean)parentView;
+             withBoolean:(bool)parentView;
 
-- (jboolean)supportsAttributeWithNSString:(NSString *)attributeName;
+- (bool)supportsAttributeWithNSString:(NSString *)attributeName;
 
 @end
 
@@ -52,6 +55,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASICompositeDecorator)
 J2OBJC_TYPE_LITERAL_HEADER(ASICompositeDecorator)
 
 #define ComAsheraWidgetICompositeDecorator ASICompositeDecorator
+
 
 #endif
 

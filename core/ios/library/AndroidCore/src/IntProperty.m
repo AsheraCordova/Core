@@ -3,11 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\IntProperty.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IntProperty.h"
 #include "J2ObjC_source.h"
 #include "Property.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -20,7 +31,7 @@
 }
 
 - (void)setValueWithId:(id)object
-               withInt:(jint)value {
+               withInt:(int32_t)value {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
 }
@@ -55,3 +66,5 @@ void ADIntProperty_initWithNSString_(ADIntProperty *self, NSString *name) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADIntProperty)
+
+J2OBJC_NAME_MAPPING(ADIntProperty, "r.android.util", "AD")

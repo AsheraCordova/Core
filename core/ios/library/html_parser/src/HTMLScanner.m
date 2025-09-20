@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\HTMLScanner.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HTMLScanner.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -12,26 +17,33 @@
 #include "java/io/BufferedReader.h"
 #include "java/io/PushbackReader.h"
 #include "java/io/Reader.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Character.h"
 #include "java/lang/Error.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Short.h"
 #include "java/lang/System.h"
 
-@class JavaIoPushbackReader;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSHTMLScanner () {
  @public
   NSString *thePublicid_;
   NSString *theSystemid_;
-  jint theLastLine_;
-  jint theLastColumn_;
-  jint theCurrentLine_;
-  jint theCurrentColumn_;
+  int32_t theLastLine_;
+  int32_t theLastColumn_;
+  int32_t theCurrentLine_;
+  int32_t theCurrentColumn_;
 }
 
 - (void)unreadWithJavaIoPushbackReader:(JavaIoPushbackReader *)r
-                               withInt:(jint)c;
+                               withInt:(int32_t)c;
 
 /*!
  @brief Mark the current scan position as a "point of interest" - start of a tag,
@@ -39,283 +51,283 @@
  */
 - (void)mark;
 
-- (void)saveWithInt:(jint)ch
+- (void)saveWithInt:(int32_t)ch
   withTSScanHandler:(id<TSScanHandler>)h;
 
-+ (NSString *)nicecharWithInt:(jint)inArg;
++ (NSString *)nicecharWithInt:(int32_t)inArg;
 
 @end
 
 J2OBJC_FIELD_SETTER(TSHTMLScanner, thePublicid_, NSString *)
 J2OBJC_FIELD_SETTER(TSHTMLScanner, theSystemid_, NSString *)
 
-inline jint TSHTMLScanner_get_S_ANAME(void);
+inline int32_t TSHTMLScanner_get_S_ANAME(void);
 #define TSHTMLScanner_S_ANAME 1
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_ANAME, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_ANAME, int32_t)
 
-inline jint TSHTMLScanner_get_S_APOS(void);
+inline int32_t TSHTMLScanner_get_S_APOS(void);
 #define TSHTMLScanner_S_APOS 2
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_APOS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_APOS, int32_t)
 
-inline jint TSHTMLScanner_get_S_AVAL(void);
+inline int32_t TSHTMLScanner_get_S_AVAL(void);
 #define TSHTMLScanner_S_AVAL 3
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_AVAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_AVAL, int32_t)
 
-inline jint TSHTMLScanner_get_S_BB(void);
+inline int32_t TSHTMLScanner_get_S_BB(void);
 #define TSHTMLScanner_S_BB 4
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BB, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BB, int32_t)
 
-inline jint TSHTMLScanner_get_S_BBC(void);
+inline int32_t TSHTMLScanner_get_S_BBC(void);
 #define TSHTMLScanner_S_BBC 5
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBC, int32_t)
 
-inline jint TSHTMLScanner_get_S_BBCD(void);
+inline int32_t TSHTMLScanner_get_S_BBCD(void);
 #define TSHTMLScanner_S_BBCD 6
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCD, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCD, int32_t)
 
-inline jint TSHTMLScanner_get_S_BBCDA(void);
+inline int32_t TSHTMLScanner_get_S_BBCDA(void);
 #define TSHTMLScanner_S_BBCDA 7
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCDA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCDA, int32_t)
 
-inline jint TSHTMLScanner_get_S_BBCDAT(void);
+inline int32_t TSHTMLScanner_get_S_BBCDAT(void);
 #define TSHTMLScanner_S_BBCDAT 8
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCDAT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCDAT, int32_t)
 
-inline jint TSHTMLScanner_get_S_BBCDATA(void);
+inline int32_t TSHTMLScanner_get_S_BBCDATA(void);
 #define TSHTMLScanner_S_BBCDATA 9
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_BBCDATA, int32_t)
 
-inline jint TSHTMLScanner_get_S_CDATA(void);
+inline int32_t TSHTMLScanner_get_S_CDATA(void);
 #define TSHTMLScanner_S_CDATA 10
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDATA, int32_t)
 
-inline jint TSHTMLScanner_get_S_CDATA2(void);
+inline int32_t TSHTMLScanner_get_S_CDATA2(void);
 #define TSHTMLScanner_S_CDATA2 11
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDATA2, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDATA2, int32_t)
 
-inline jint TSHTMLScanner_get_S_CDSECT(void);
+inline int32_t TSHTMLScanner_get_S_CDSECT(void);
 #define TSHTMLScanner_S_CDSECT 12
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDSECT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDSECT, int32_t)
 
-inline jint TSHTMLScanner_get_S_CDSECT1(void);
+inline int32_t TSHTMLScanner_get_S_CDSECT1(void);
 #define TSHTMLScanner_S_CDSECT1 13
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDSECT1, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDSECT1, int32_t)
 
-inline jint TSHTMLScanner_get_S_CDSECT2(void);
+inline int32_t TSHTMLScanner_get_S_CDSECT2(void);
 #define TSHTMLScanner_S_CDSECT2 14
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDSECT2, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_CDSECT2, int32_t)
 
-inline jint TSHTMLScanner_get_S_COM(void);
+inline int32_t TSHTMLScanner_get_S_COM(void);
 #define TSHTMLScanner_S_COM 15
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM, int32_t)
 
-inline jint TSHTMLScanner_get_S_COM2(void);
+inline int32_t TSHTMLScanner_get_S_COM2(void);
 #define TSHTMLScanner_S_COM2 16
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM2, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM2, int32_t)
 
-inline jint TSHTMLScanner_get_S_COM3(void);
+inline int32_t TSHTMLScanner_get_S_COM3(void);
 #define TSHTMLScanner_S_COM3 17
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM3, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM3, int32_t)
 
-inline jint TSHTMLScanner_get_S_COM4(void);
+inline int32_t TSHTMLScanner_get_S_COM4(void);
 #define TSHTMLScanner_S_COM4 18
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM4, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_COM4, int32_t)
 
-inline jint TSHTMLScanner_get_S_DECL(void);
+inline int32_t TSHTMLScanner_get_S_DECL(void);
 #define TSHTMLScanner_S_DECL 19
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_DECL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_DECL, int32_t)
 
-inline jint TSHTMLScanner_get_S_DECL2(void);
+inline int32_t TSHTMLScanner_get_S_DECL2(void);
 #define TSHTMLScanner_S_DECL2 20
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_DECL2, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_DECL2, int32_t)
 
-inline jint TSHTMLScanner_get_S_DONE(void);
+inline int32_t TSHTMLScanner_get_S_DONE(void);
 #define TSHTMLScanner_S_DONE 21
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_DONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_DONE, int32_t)
 
-inline jint TSHTMLScanner_get_S_EMPTYTAG(void);
+inline int32_t TSHTMLScanner_get_S_EMPTYTAG(void);
 #define TSHTMLScanner_S_EMPTYTAG 22
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_EMPTYTAG, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_EMPTYTAG, int32_t)
 
-inline jint TSHTMLScanner_get_S_ENT(void);
+inline int32_t TSHTMLScanner_get_S_ENT(void);
 #define TSHTMLScanner_S_ENT 23
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_ENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_ENT, int32_t)
 
-inline jint TSHTMLScanner_get_S_EQ(void);
+inline int32_t TSHTMLScanner_get_S_EQ(void);
 #define TSHTMLScanner_S_EQ 24
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_EQ, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_EQ, int32_t)
 
-inline jint TSHTMLScanner_get_S_ETAG(void);
+inline int32_t TSHTMLScanner_get_S_ETAG(void);
 #define TSHTMLScanner_S_ETAG 25
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_ETAG, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_ETAG, int32_t)
 
-inline jint TSHTMLScanner_get_S_GI(void);
+inline int32_t TSHTMLScanner_get_S_GI(void);
 #define TSHTMLScanner_S_GI 26
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_GI, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_GI, int32_t)
 
-inline jint TSHTMLScanner_get_S_NCR(void);
+inline int32_t TSHTMLScanner_get_S_NCR(void);
 #define TSHTMLScanner_S_NCR 27
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_NCR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_NCR, int32_t)
 
-inline jint TSHTMLScanner_get_S_PCDATA(void);
+inline int32_t TSHTMLScanner_get_S_PCDATA(void);
 #define TSHTMLScanner_S_PCDATA 28
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_PCDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_PCDATA, int32_t)
 
-inline jint TSHTMLScanner_get_S_PI(void);
+inline int32_t TSHTMLScanner_get_S_PI(void);
 #define TSHTMLScanner_S_PI 29
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_PI, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_PI, int32_t)
 
-inline jint TSHTMLScanner_get_S_PITARGET(void);
+inline int32_t TSHTMLScanner_get_S_PITARGET(void);
 #define TSHTMLScanner_S_PITARGET 30
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_PITARGET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_PITARGET, int32_t)
 
-inline jint TSHTMLScanner_get_S_QUOT(void);
+inline int32_t TSHTMLScanner_get_S_QUOT(void);
 #define TSHTMLScanner_S_QUOT 31
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_QUOT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_QUOT, int32_t)
 
-inline jint TSHTMLScanner_get_S_STAGC(void);
+inline int32_t TSHTMLScanner_get_S_STAGC(void);
 #define TSHTMLScanner_S_STAGC 32
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_STAGC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_STAGC, int32_t)
 
-inline jint TSHTMLScanner_get_S_TAG(void);
+inline int32_t TSHTMLScanner_get_S_TAG(void);
 #define TSHTMLScanner_S_TAG 33
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_TAG, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_TAG, int32_t)
 
-inline jint TSHTMLScanner_get_S_TAGWS(void);
+inline int32_t TSHTMLScanner_get_S_TAGWS(void);
 #define TSHTMLScanner_S_TAGWS 34
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_TAGWS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_TAGWS, int32_t)
 
-inline jint TSHTMLScanner_get_S_XNCR(void);
+inline int32_t TSHTMLScanner_get_S_XNCR(void);
 #define TSHTMLScanner_S_XNCR 35
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_XNCR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, S_XNCR, int32_t)
 
-inline jint TSHTMLScanner_get_A_ADUP(void);
+inline int32_t TSHTMLScanner_get_A_ADUP(void);
 #define TSHTMLScanner_A_ADUP 1
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ADUP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ADUP, int32_t)
 
-inline jint TSHTMLScanner_get_A_ADUP_SAVE(void);
+inline int32_t TSHTMLScanner_get_A_ADUP_SAVE(void);
 #define TSHTMLScanner_A_ADUP_SAVE 2
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ADUP_SAVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ADUP_SAVE, int32_t)
 
-inline jint TSHTMLScanner_get_A_ADUP_STAGC(void);
+inline int32_t TSHTMLScanner_get_A_ADUP_STAGC(void);
 #define TSHTMLScanner_A_ADUP_STAGC 3
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ADUP_STAGC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ADUP_STAGC, int32_t)
 
-inline jint TSHTMLScanner_get_A_ANAME(void);
+inline int32_t TSHTMLScanner_get_A_ANAME(void);
 #define TSHTMLScanner_A_ANAME 4
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ANAME, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ANAME, int32_t)
 
-inline jint TSHTMLScanner_get_A_ANAME_ADUP(void);
+inline int32_t TSHTMLScanner_get_A_ANAME_ADUP(void);
 #define TSHTMLScanner_A_ANAME_ADUP 5
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ANAME_ADUP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ANAME_ADUP, int32_t)
 
-inline jint TSHTMLScanner_get_A_ANAME_ADUP_STAGC(void);
+inline int32_t TSHTMLScanner_get_A_ANAME_ADUP_STAGC(void);
 #define TSHTMLScanner_A_ANAME_ADUP_STAGC 6
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ANAME_ADUP_STAGC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ANAME_ADUP_STAGC, int32_t)
 
-inline jint TSHTMLScanner_get_A_AVAL(void);
+inline int32_t TSHTMLScanner_get_A_AVAL(void);
 #define TSHTMLScanner_A_AVAL 7
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_AVAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_AVAL, int32_t)
 
-inline jint TSHTMLScanner_get_A_AVAL_STAGC(void);
+inline int32_t TSHTMLScanner_get_A_AVAL_STAGC(void);
 #define TSHTMLScanner_A_AVAL_STAGC 8
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_AVAL_STAGC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_AVAL_STAGC, int32_t)
 
-inline jint TSHTMLScanner_get_A_CDATA(void);
+inline int32_t TSHTMLScanner_get_A_CDATA(void);
 #define TSHTMLScanner_A_CDATA 9
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_CDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_CDATA, int32_t)
 
-inline jint TSHTMLScanner_get_A_CMNT(void);
+inline int32_t TSHTMLScanner_get_A_CMNT(void);
 #define TSHTMLScanner_A_CMNT 10
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_CMNT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_CMNT, int32_t)
 
-inline jint TSHTMLScanner_get_A_DECL(void);
+inline int32_t TSHTMLScanner_get_A_DECL(void);
 #define TSHTMLScanner_A_DECL 11
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_DECL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_DECL, int32_t)
 
-inline jint TSHTMLScanner_get_A_EMPTYTAG(void);
+inline int32_t TSHTMLScanner_get_A_EMPTYTAG(void);
 #define TSHTMLScanner_A_EMPTYTAG 12
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_EMPTYTAG, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_EMPTYTAG, int32_t)
 
-inline jint TSHTMLScanner_get_A_ENTITY(void);
+inline int32_t TSHTMLScanner_get_A_ENTITY(void);
 #define TSHTMLScanner_A_ENTITY 13
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ENTITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ENTITY, int32_t)
 
-inline jint TSHTMLScanner_get_A_ENTITY_START(void);
+inline int32_t TSHTMLScanner_get_A_ENTITY_START(void);
 #define TSHTMLScanner_A_ENTITY_START 14
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ENTITY_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ENTITY_START, int32_t)
 
-inline jint TSHTMLScanner_get_A_ETAG(void);
+inline int32_t TSHTMLScanner_get_A_ETAG(void);
 #define TSHTMLScanner_A_ETAG 15
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ETAG, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_ETAG, int32_t)
 
-inline jint TSHTMLScanner_get_A_GI(void);
+inline int32_t TSHTMLScanner_get_A_GI(void);
 #define TSHTMLScanner_A_GI 16
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_GI, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_GI, int32_t)
 
-inline jint TSHTMLScanner_get_A_GI_STAGC(void);
+inline int32_t TSHTMLScanner_get_A_GI_STAGC(void);
 #define TSHTMLScanner_A_GI_STAGC 17
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_GI_STAGC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_GI_STAGC, int32_t)
 
-inline jint TSHTMLScanner_get_A_LT(void);
+inline int32_t TSHTMLScanner_get_A_LT(void);
 #define TSHTMLScanner_A_LT 18
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_LT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_LT, int32_t)
 
-inline jint TSHTMLScanner_get_A_LT_PCDATA(void);
+inline int32_t TSHTMLScanner_get_A_LT_PCDATA(void);
 #define TSHTMLScanner_A_LT_PCDATA 19
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_LT_PCDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_LT_PCDATA, int32_t)
 
-inline jint TSHTMLScanner_get_A_MINUS(void);
+inline int32_t TSHTMLScanner_get_A_MINUS(void);
 #define TSHTMLScanner_A_MINUS 20
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_MINUS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_MINUS, int32_t)
 
-inline jint TSHTMLScanner_get_A_MINUS2(void);
+inline int32_t TSHTMLScanner_get_A_MINUS2(void);
 #define TSHTMLScanner_A_MINUS2 21
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_MINUS2, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_MINUS2, int32_t)
 
-inline jint TSHTMLScanner_get_A_MINUS3(void);
+inline int32_t TSHTMLScanner_get_A_MINUS3(void);
 #define TSHTMLScanner_A_MINUS3 22
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_MINUS3, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_MINUS3, int32_t)
 
-inline jint TSHTMLScanner_get_A_PCDATA(void);
+inline int32_t TSHTMLScanner_get_A_PCDATA(void);
 #define TSHTMLScanner_A_PCDATA 23
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PCDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PCDATA, int32_t)
 
-inline jint TSHTMLScanner_get_A_PI(void);
+inline int32_t TSHTMLScanner_get_A_PI(void);
 #define TSHTMLScanner_A_PI 24
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PI, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PI, int32_t)
 
-inline jint TSHTMLScanner_get_A_PITARGET(void);
+inline int32_t TSHTMLScanner_get_A_PITARGET(void);
 #define TSHTMLScanner_A_PITARGET 25
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PITARGET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PITARGET, int32_t)
 
-inline jint TSHTMLScanner_get_A_PITARGET_PI(void);
+inline int32_t TSHTMLScanner_get_A_PITARGET_PI(void);
 #define TSHTMLScanner_A_PITARGET_PI 26
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PITARGET_PI, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_PITARGET_PI, int32_t)
 
-inline jint TSHTMLScanner_get_A_SAVE(void);
+inline int32_t TSHTMLScanner_get_A_SAVE(void);
 #define TSHTMLScanner_A_SAVE 27
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_SAVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_SAVE, int32_t)
 
-inline jint TSHTMLScanner_get_A_SKIP(void);
+inline int32_t TSHTMLScanner_get_A_SKIP(void);
 #define TSHTMLScanner_A_SKIP 28
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_SKIP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_SKIP, int32_t)
 
-inline jint TSHTMLScanner_get_A_SP(void);
+inline int32_t TSHTMLScanner_get_A_SP(void);
 #define TSHTMLScanner_A_SP 29
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_SP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_SP, int32_t)
 
-inline jint TSHTMLScanner_get_A_STAGC(void);
+inline int32_t TSHTMLScanner_get_A_STAGC(void);
 #define TSHTMLScanner_A_STAGC 30
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_STAGC, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_STAGC, int32_t)
 
-inline jint TSHTMLScanner_get_A_UNGET(void);
+inline int32_t TSHTMLScanner_get_A_UNGET(void);
 #define TSHTMLScanner_A_UNGET 31
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_UNGET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_UNGET, int32_t)
 
-inline jint TSHTMLScanner_get_A_UNSAVE_PCDATA(void);
+inline int32_t TSHTMLScanner_get_A_UNSAVE_PCDATA(void);
 #define TSHTMLScanner_A_UNSAVE_PCDATA 32
-J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_UNSAVE_PCDATA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(TSHTMLScanner, A_UNSAVE_PCDATA, int32_t)
 
 inline IOSIntArray *TSHTMLScanner_get_statetable(void);
 inline IOSIntArray *TSHTMLScanner_set_statetable(IOSIntArray *value);
@@ -330,18 +342,18 @@ inline IOSObjectArray *TSHTMLScanner_get_debug_statenames(void);
 static IOSObjectArray *TSHTMLScanner_debug_statenames;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(TSHTMLScanner, debug_statenames, IOSObjectArray *)
 
-__attribute__((unused)) static void TSHTMLScanner_unreadWithJavaIoPushbackReader_withInt_(TSHTMLScanner *self, JavaIoPushbackReader *r, jint c);
+__attribute__((unused)) static void TSHTMLScanner_unreadWithJavaIoPushbackReader_withInt_(TSHTMLScanner *self, JavaIoPushbackReader *r, int32_t c);
 
 __attribute__((unused)) static void TSHTMLScanner_mark(TSHTMLScanner *self);
 
-__attribute__((unused)) static void TSHTMLScanner_saveWithInt_withTSScanHandler_(TSHTMLScanner *self, jint ch, id<TSScanHandler> h);
+__attribute__((unused)) static void TSHTMLScanner_saveWithInt_withTSScanHandler_(TSHTMLScanner *self, int32_t ch, id<TSScanHandler> h);
 
-__attribute__((unused)) static NSString *TSHTMLScanner_nicecharWithInt_(jint inArg);
+__attribute__((unused)) static NSString *TSHTMLScanner_nicecharWithInt_(int32_t inArg);
 
 J2OBJC_INITIALIZED_DEFN(TSHTMLScanner)
 
 IOSObjectArray *TSHTMLScanner_statetableIndex;
-jint TSHTMLScanner_statetableIndexMaxChar;
+int32_t TSHTMLScanner_statetableIndexMaxChar;
 
 @implementation TSHTMLScanner
 
@@ -353,15 +365,15 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)unreadWithJavaIoPushbackReader:(JavaIoPushbackReader *)r
-                               withInt:(jint)c {
+                               withInt:(int32_t)c {
   TSHTMLScanner_unreadWithJavaIoPushbackReader_withInt_(self, r, c);
 }
 
-- (jint)getLineNumber {
+- (int32_t)getLineNumber {
   return theLastLine_;
 }
 
-- (jint)getColumnNumber {
+- (int32_t)getColumnNumber {
   return theLastColumn_;
 }
 
@@ -390,11 +402,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   else {
     r = create_JavaIoPushbackReader_initWithJavaIoReader_withInt_(create_JavaIoBufferedReader_initWithJavaIoReader_(r0), 5);
   }
-  jint firstChar = [r read];
+  int32_t firstChar = [r read];
   if (firstChar != 0xfeff) TSHTMLScanner_unreadWithJavaIoPushbackReader_withInt_(self, r, firstChar);
   while (theState_ != TSHTMLScanner_S_DONE) {
-    jint ch = [r read];
-    if (ch >= (jint) 0x80 && ch <= (jint) 0x9F) ch = IOSIntArray_Get(nil_chk(theWinMap_), ch - (jint) 0x80);
+    int32_t ch = [r read];
+    if (ch >= (int32_t) 0x80 && ch <= (int32_t) 0x9F) ch = IOSIntArray_Get(nil_chk(theWinMap_), ch - (int32_t) 0x80);
     if (ch == 0x000d) {
       ch = [r read];
       if (ch != 0x000a) {
@@ -409,17 +421,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     else {
       theCurrentColumn_++;
     }
-    if (!(ch >= (jint) 0x20 || ch == 0x000a || ch == 0x0009 || ch == -1)) continue;
-    jint adjCh = (ch >= -1 && ch < TSHTMLScanner_statetableIndexMaxChar) ? ch : -2;
-    jint statetableRow = IOSShortArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(TSHTMLScanner_statetableIndex), theState_)), adjCh + 2);
-    jint action = 0;
+    if (!(ch >= (int32_t) 0x20 || ch == 0x000a || ch == 0x0009 || ch == -1)) continue;
+    int32_t adjCh = (ch >= -1 && ch < TSHTMLScanner_statetableIndexMaxChar) ? ch : -2;
+    int32_t statetableRow = IOSShortArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(TSHTMLScanner_statetableIndex), theState_)), adjCh + 2);
+    int32_t action = 0;
     if (statetableRow != -1) {
       action = IOSIntArray_Get(nil_chk(TSHTMLScanner_statetable), statetableRow + 2);
       theNextState_ = IOSIntArray_Get(TSHTMLScanner_statetable, statetableRow + 3);
     }
     {
-      jchar ch1;
-      jint ent;
+      unichar ch1;
+      int32_t ent;
       switch (action) {
         case 0:
         @throw create_JavaLangError_initWithNSString_(JreStrcat("$$$$", @"HTMLScanner can't cope with ", JavaLangInteger_toStringWithInt_(ch), @" in state ", JavaLangInteger_toStringWithInt_(theState_)));
@@ -474,7 +486,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         break;
         case TSHTMLScanner_A_ENTITY:
         TSHTMLScanner_mark(self);
-        ch1 = (jchar) ch;
+        ch1 = (unichar) ch;
         if (theState_ == TSHTMLScanner_S_ENT && ch1 == '#') {
           theNextState_ = TSHTMLScanner_S_NCR;
           TSHTMLScanner_saveWithInt_withTSScanHandler_(self, ch, h);
@@ -501,22 +513,22 @@ J2OBJC_IGNORE_DESIGNATED_END
         ent = [h getEntity];
         if (ent != 0) {
           theSize_ = 0;
-          if (ent >= (jint) 0x80 && ent <= (jint) 0x9F) {
-            ent = IOSIntArray_Get(nil_chk(theWinMap_), ent - (jint) 0x80);
+          if (ent >= (int32_t) 0x80 && ent <= (int32_t) 0x9F) {
+            ent = IOSIntArray_Get(nil_chk(theWinMap_), ent - (int32_t) 0x80);
           }
-          if (ent < (jint) 0x20) {
-            ent = (jint) 0x20;
+          if (ent < (int32_t) 0x20) {
+            ent = (int32_t) 0x20;
           }
-          else if (ent >= (jint) 0xD800 && ent <= (jint) 0xDFFF) {
+          else if (ent >= (int32_t) 0xD800 && ent <= (int32_t) 0xDFFF) {
             ent = 0;
           }
-          else if (ent <= (jint) 0xFFFF) {
+          else if (ent <= (int32_t) 0xFFFF) {
             TSHTMLScanner_saveWithInt_withTSScanHandler_(self, ent, h);
           }
           else {
-            ent -= (jint) 0x10000;
-            TSHTMLScanner_saveWithInt_withTSScanHandler_(self, (JreRShift32(ent, 10)) + (jint) 0xD800, h);
-            TSHTMLScanner_saveWithInt_withTSScanHandler_(self, (ent & (jint) 0x3FF) + (jint) 0xDC00, h);
+            ent -= (int32_t) 0x10000;
+            TSHTMLScanner_saveWithInt_withTSScanHandler_(self, (JreRShift32(ent, 10)) + (int32_t) 0xD800, h);
+            TSHTMLScanner_saveWithInt_withTSScanHandler_(self, (ent & (int32_t) 0x3FF) + (int32_t) 0xDC00, h);
           }
           if (ch != ';') {
             TSHTMLScanner_unreadWithJavaIoPushbackReader_withInt_(self, r, ch);
@@ -636,12 +648,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   theNextState_ = TSHTMLScanner_S_CDATA;
 }
 
-- (void)saveWithInt:(jint)ch
+- (void)saveWithInt:(int32_t)ch
   withTSScanHandler:(id<TSScanHandler>)h {
   TSHTMLScanner_saveWithInt_withTSScanHandler_(self, ch, h);
 }
 
-+ (NSString *)nicecharWithInt:(jint)inArg {
++ (NSString *)nicecharWithInt:(int32_t)inArg {
   return TSHTMLScanner_nicecharWithInt_(inArg);
 }
 
@@ -776,13 +788,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [TSHTMLScanner class]) {
-    JreStrongAssignAndConsume(&TSHTMLScanner_statetable, [IOSIntArray newArrayWithInts:(jint[]){ TSHTMLScanner_S_ANAME, '/', TSHTMLScanner_A_ANAME_ADUP, TSHTMLScanner_S_EMPTYTAG, TSHTMLScanner_S_ANAME, '=', TSHTMLScanner_A_ANAME, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_ANAME, '>', TSHTMLScanner_A_ANAME_ADUP_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_ANAME, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_ANAME, -1, TSHTMLScanner_A_ANAME_ADUP_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_ANAME, ' ', TSHTMLScanner_A_ANAME, TSHTMLScanner_S_EQ, TSHTMLScanner_S_ANAME, 0x000a, TSHTMLScanner_A_ANAME, TSHTMLScanner_S_EQ, TSHTMLScanner_S_ANAME, 0x0009, TSHTMLScanner_A_ANAME, TSHTMLScanner_S_EQ, TSHTMLScanner_S_APOS, '\'', TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_APOS, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_APOS, TSHTMLScanner_S_APOS, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_APOS, ' ', TSHTMLScanner_A_SP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_APOS, 0x000a, TSHTMLScanner_A_SP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_APOS, 0x0009, TSHTMLScanner_A_SP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_AVAL, '"', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_AVAL, '\'', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_AVAL, '>', TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_AVAL, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_STAGC, TSHTMLScanner_S_AVAL, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_AVAL, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_AVAL, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_AVAL, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_BB, 'C', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBC, TSHTMLScanner_S_BB, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BB, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBC, 'D', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCD, TSHTMLScanner_S_BBC, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBC, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCD, 'A', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCDA, TSHTMLScanner_S_BBCD, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCD, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCDA, 'T', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCDAT, TSHTMLScanner_S_BBCDA, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCDA, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCDAT, 'A', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCDATA, TSHTMLScanner_S_BBCDAT, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCDAT, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCDATA, '[', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_BBCDATA, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCDATA, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDATA, '<', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDATA2, TSHTMLScanner_S_CDATA, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDATA, TSHTMLScanner_S_CDATA, -1, TSHTMLScanner_A_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDATA2, '/', TSHTMLScanner_A_UNSAVE_PCDATA, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_CDATA2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDATA, TSHTMLScanner_S_CDATA2, -1, TSHTMLScanner_A_UNSAVE_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDSECT, ']', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT1, TSHTMLScanner_S_CDSECT, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_CDSECT, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDSECT1, ']', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT2, TSHTMLScanner_S_CDSECT1, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_CDSECT1, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDSECT2, '>', TSHTMLScanner_A_CDATA, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_CDSECT2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_CDSECT2, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM2, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM3, TSHTMLScanner_S_COM2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM2, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM3, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM4, TSHTMLScanner_S_COM3, 0, TSHTMLScanner_A_MINUS, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM3, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM4, '-', TSHTMLScanner_A_MINUS3, TSHTMLScanner_S_COM4, TSHTMLScanner_S_COM4, '>', TSHTMLScanner_A_CMNT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_COM4, 0, TSHTMLScanner_A_MINUS2, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM4, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_DECL, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM, TSHTMLScanner_S_DECL, '>', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_DECL, '[', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BB, TSHTMLScanner_S_DECL, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_DECL2, TSHTMLScanner_S_DECL, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_DECL2, '>', TSHTMLScanner_A_DECL, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_DECL2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_DECL2, TSHTMLScanner_S_DECL2, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_EMPTYTAG, '>', TSHTMLScanner_A_EMPTYTAG, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_EMPTYTAG, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_EMPTYTAG, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_EMPTYTAG, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_EMPTYTAG, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_ENT, 0, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_ENT, TSHTMLScanner_S_ENT, -1, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_DONE, TSHTMLScanner_S_EQ, '=', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_EQ, '>', TSHTMLScanner_A_ADUP_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_EQ, 0, TSHTMLScanner_A_ADUP_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_EQ, -1, TSHTMLScanner_A_ADUP_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_EQ, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EQ, TSHTMLScanner_S_EQ, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EQ, TSHTMLScanner_S_EQ, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EQ, TSHTMLScanner_S_ETAG, '>', TSHTMLScanner_A_ETAG, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_ETAG, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_ETAG, -1, TSHTMLScanner_A_ETAG, TSHTMLScanner_S_DONE, TSHTMLScanner_S_ETAG, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_ETAG, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_ETAG, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_GI, '/', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EMPTYTAG, TSHTMLScanner_S_GI, '>', TSHTMLScanner_A_GI_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_GI, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_GI, TSHTMLScanner_S_GI, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_GI, ' ', TSHTMLScanner_A_GI, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_GI, 0x000a, TSHTMLScanner_A_GI, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_GI, 0x0009, TSHTMLScanner_A_GI, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_NCR, 0, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_NCR, TSHTMLScanner_S_NCR, -1, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PCDATA, '&', TSHTMLScanner_A_ENTITY_START, TSHTMLScanner_S_ENT, TSHTMLScanner_S_PCDATA, '<', TSHTMLScanner_A_PCDATA, TSHTMLScanner_S_TAG, TSHTMLScanner_S_PCDATA, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_PCDATA, -1, TSHTMLScanner_A_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PI, '>', TSHTMLScanner_A_PI, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_PI, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_PI, TSHTMLScanner_S_PI, -1, TSHTMLScanner_A_PI, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PITARGET, '>', TSHTMLScanner_A_PITARGET_PI, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_PITARGET, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_PITARGET, TSHTMLScanner_S_PITARGET, -1, TSHTMLScanner_A_PITARGET_PI, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PITARGET, ' ', TSHTMLScanner_A_PITARGET, TSHTMLScanner_S_PI, TSHTMLScanner_S_PITARGET, 0x000a, TSHTMLScanner_A_PITARGET, TSHTMLScanner_S_PI, TSHTMLScanner_S_PITARGET, 0x0009, TSHTMLScanner_A_PITARGET, TSHTMLScanner_S_PI, TSHTMLScanner_S_QUOT, '"', TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_QUOT, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_QUOT, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_QUOT, ' ', TSHTMLScanner_A_SP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_QUOT, 0x000a, TSHTMLScanner_A_SP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_QUOT, 0x0009, TSHTMLScanner_A_SP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_STAGC, '>', TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_STAGC, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_STAGC, TSHTMLScanner_S_STAGC, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_STAGC, ' ', TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_STAGC, 0x000a, TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_STAGC, 0x0009, TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_TAG, '!', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_TAG, '/', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_TAG, '<', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_TAG, TSHTMLScanner_S_TAG, '?', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_PITARGET, TSHTMLScanner_S_TAG, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_GI, TSHTMLScanner_S_TAG, -1, TSHTMLScanner_A_LT_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_TAG, ' ', TSHTMLScanner_A_LT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAG, 0x000a, TSHTMLScanner_A_LT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAG, 0x0009, TSHTMLScanner_A_LT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAGWS, '/', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EMPTYTAG, TSHTMLScanner_S_TAGWS, '>', TSHTMLScanner_A_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAGWS, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_TAGWS, -1, TSHTMLScanner_A_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_TAGWS, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_TAGWS, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_TAGWS, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_XNCR, 0, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_XNCR, TSHTMLScanner_S_XNCR, -1, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_DONE } count:592]);
+    JreStrongAssignAndConsume(&TSHTMLScanner_statetable, [IOSIntArray newArrayWithInts:(int32_t[]){ TSHTMLScanner_S_ANAME, '/', TSHTMLScanner_A_ANAME_ADUP, TSHTMLScanner_S_EMPTYTAG, TSHTMLScanner_S_ANAME, '=', TSHTMLScanner_A_ANAME, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_ANAME, '>', TSHTMLScanner_A_ANAME_ADUP_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_ANAME, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_ANAME, -1, TSHTMLScanner_A_ANAME_ADUP_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_ANAME, ' ', TSHTMLScanner_A_ANAME, TSHTMLScanner_S_EQ, TSHTMLScanner_S_ANAME, 0x000a, TSHTMLScanner_A_ANAME, TSHTMLScanner_S_EQ, TSHTMLScanner_S_ANAME, 0x0009, TSHTMLScanner_A_ANAME, TSHTMLScanner_S_EQ, TSHTMLScanner_S_APOS, '\'', TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_APOS, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_APOS, TSHTMLScanner_S_APOS, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_APOS, ' ', TSHTMLScanner_A_SP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_APOS, 0x000a, TSHTMLScanner_A_SP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_APOS, 0x0009, TSHTMLScanner_A_SP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_AVAL, '"', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_AVAL, '\'', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_APOS, TSHTMLScanner_S_AVAL, '>', TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_AVAL, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_STAGC, TSHTMLScanner_S_AVAL, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_AVAL, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_AVAL, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_AVAL, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_BB, 'C', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBC, TSHTMLScanner_S_BB, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BB, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBC, 'D', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCD, TSHTMLScanner_S_BBC, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBC, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCD, 'A', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCDA, TSHTMLScanner_S_BBCD, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCD, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCDA, 'T', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCDAT, TSHTMLScanner_S_BBCDA, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCDA, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCDAT, 'A', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BBCDATA, TSHTMLScanner_S_BBCDAT, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCDAT, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_BBCDATA, '[', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_BBCDATA, 0, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_BBCDATA, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDATA, '<', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDATA2, TSHTMLScanner_S_CDATA, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDATA, TSHTMLScanner_S_CDATA, -1, TSHTMLScanner_A_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDATA2, '/', TSHTMLScanner_A_UNSAVE_PCDATA, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_CDATA2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDATA, TSHTMLScanner_S_CDATA2, -1, TSHTMLScanner_A_UNSAVE_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDSECT, ']', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT1, TSHTMLScanner_S_CDSECT, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_CDSECT, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDSECT1, ']', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT2, TSHTMLScanner_S_CDSECT1, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_CDSECT1, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_CDSECT2, '>', TSHTMLScanner_A_CDATA, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_CDSECT2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_CDSECT, TSHTMLScanner_S_CDSECT2, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM2, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM3, TSHTMLScanner_S_COM2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM2, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM3, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM4, TSHTMLScanner_S_COM3, 0, TSHTMLScanner_A_MINUS, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM3, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_COM4, '-', TSHTMLScanner_A_MINUS3, TSHTMLScanner_S_COM4, TSHTMLScanner_S_COM4, '>', TSHTMLScanner_A_CMNT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_COM4, 0, TSHTMLScanner_A_MINUS2, TSHTMLScanner_S_COM2, TSHTMLScanner_S_COM4, -1, TSHTMLScanner_A_CMNT, TSHTMLScanner_S_DONE, TSHTMLScanner_S_DECL, '-', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_COM, TSHTMLScanner_S_DECL, '>', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_DECL, '[', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_BB, TSHTMLScanner_S_DECL, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_DECL2, TSHTMLScanner_S_DECL, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_DECL2, '>', TSHTMLScanner_A_DECL, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_DECL2, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_DECL2, TSHTMLScanner_S_DECL2, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_EMPTYTAG, '>', TSHTMLScanner_A_EMPTYTAG, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_EMPTYTAG, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_EMPTYTAG, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_EMPTYTAG, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_EMPTYTAG, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_ENT, 0, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_ENT, TSHTMLScanner_S_ENT, -1, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_DONE, TSHTMLScanner_S_EQ, '=', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_AVAL, TSHTMLScanner_S_EQ, '>', TSHTMLScanner_A_ADUP_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_EQ, 0, TSHTMLScanner_A_ADUP_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_EQ, -1, TSHTMLScanner_A_ADUP_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_EQ, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EQ, TSHTMLScanner_S_EQ, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EQ, TSHTMLScanner_S_EQ, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EQ, TSHTMLScanner_S_ETAG, '>', TSHTMLScanner_A_ETAG, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_ETAG, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_ETAG, -1, TSHTMLScanner_A_ETAG, TSHTMLScanner_S_DONE, TSHTMLScanner_S_ETAG, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_ETAG, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_ETAG, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_GI, '/', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EMPTYTAG, TSHTMLScanner_S_GI, '>', TSHTMLScanner_A_GI_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_GI, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_GI, TSHTMLScanner_S_GI, -1, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DONE, TSHTMLScanner_S_GI, ' ', TSHTMLScanner_A_GI, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_GI, 0x000a, TSHTMLScanner_A_GI, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_GI, 0x0009, TSHTMLScanner_A_GI, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_NCR, 0, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_NCR, TSHTMLScanner_S_NCR, -1, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PCDATA, '&', TSHTMLScanner_A_ENTITY_START, TSHTMLScanner_S_ENT, TSHTMLScanner_S_PCDATA, '<', TSHTMLScanner_A_PCDATA, TSHTMLScanner_S_TAG, TSHTMLScanner_S_PCDATA, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_PCDATA, -1, TSHTMLScanner_A_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PI, '>', TSHTMLScanner_A_PI, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_PI, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_PI, TSHTMLScanner_S_PI, -1, TSHTMLScanner_A_PI, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PITARGET, '>', TSHTMLScanner_A_PITARGET_PI, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_PITARGET, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_PITARGET, TSHTMLScanner_S_PITARGET, -1, TSHTMLScanner_A_PITARGET_PI, TSHTMLScanner_S_DONE, TSHTMLScanner_S_PITARGET, ' ', TSHTMLScanner_A_PITARGET, TSHTMLScanner_S_PI, TSHTMLScanner_S_PITARGET, 0x000a, TSHTMLScanner_A_PITARGET, TSHTMLScanner_S_PI, TSHTMLScanner_S_PITARGET, 0x0009, TSHTMLScanner_A_PITARGET, TSHTMLScanner_S_PI, TSHTMLScanner_S_QUOT, '"', TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_QUOT, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_QUOT, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_QUOT, ' ', TSHTMLScanner_A_SP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_QUOT, 0x000a, TSHTMLScanner_A_SP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_QUOT, 0x0009, TSHTMLScanner_A_SP, TSHTMLScanner_S_QUOT, TSHTMLScanner_S_STAGC, '>', TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_STAGC, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_STAGC, TSHTMLScanner_S_STAGC, -1, TSHTMLScanner_A_AVAL_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_STAGC, ' ', TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_STAGC, 0x000a, TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_STAGC, 0x0009, TSHTMLScanner_A_AVAL, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_TAG, '!', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_DECL, TSHTMLScanner_S_TAG, '/', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_ETAG, TSHTMLScanner_S_TAG, '<', TSHTMLScanner_A_SAVE, TSHTMLScanner_S_TAG, TSHTMLScanner_S_TAG, '?', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_PITARGET, TSHTMLScanner_S_TAG, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_GI, TSHTMLScanner_S_TAG, -1, TSHTMLScanner_A_LT_PCDATA, TSHTMLScanner_S_DONE, TSHTMLScanner_S_TAG, ' ', TSHTMLScanner_A_LT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAG, 0x000a, TSHTMLScanner_A_LT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAG, 0x0009, TSHTMLScanner_A_LT, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAGWS, '/', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_EMPTYTAG, TSHTMLScanner_S_TAGWS, '>', TSHTMLScanner_A_STAGC, TSHTMLScanner_S_PCDATA, TSHTMLScanner_S_TAGWS, 0, TSHTMLScanner_A_SAVE, TSHTMLScanner_S_ANAME, TSHTMLScanner_S_TAGWS, -1, TSHTMLScanner_A_STAGC, TSHTMLScanner_S_DONE, TSHTMLScanner_S_TAGWS, ' ', TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_TAGWS, 0x000a, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_TAGWS, 0x0009, TSHTMLScanner_A_SKIP, TSHTMLScanner_S_TAGWS, TSHTMLScanner_S_XNCR, 0, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_XNCR, TSHTMLScanner_S_XNCR, -1, TSHTMLScanner_A_ENTITY, TSHTMLScanner_S_DONE } count:592]);
     JreStrongAssignAndConsume(&TSHTMLScanner_debug_actionnames, [IOSObjectArray newArrayWithObjects:(id[]){ @"", @"A_ADUP", @"A_ADUP_SAVE", @"A_ADUP_STAGC", @"A_ANAME", @"A_ANAME_ADUP", @"A_ANAME_ADUP_STAGC", @"A_AVAL", @"A_AVAL_STAGC", @"A_CDATA", @"A_CMNT", @"A_DECL", @"A_EMPTYTAG", @"A_ENTITY", @"A_ENTITY_START", @"A_ETAG", @"A_GI", @"A_GI_STAGC", @"A_LT", @"A_LT_PCDATA", @"A_MINUS", @"A_MINUS2", @"A_MINUS3", @"A_PCDATA", @"A_PI", @"A_PITARGET", @"A_PITARGET_PI", @"A_SAVE", @"A_SKIP", @"A_SP", @"A_STAGC", @"A_UNGET", @"A_UNSAVE_PCDATA" } count:33 type:NSString_class_()]);
     JreStrongAssignAndConsume(&TSHTMLScanner_debug_statenames, [IOSObjectArray newArrayWithObjects:(id[]){ @"", @"S_ANAME", @"S_APOS", @"S_AVAL", @"S_BB", @"S_BBC", @"S_BBCD", @"S_BBCDA", @"S_BBCDAT", @"S_BBCDATA", @"S_CDATA", @"S_CDATA2", @"S_CDSECT", @"S_CDSECT1", @"S_CDSECT2", @"S_COM", @"S_COM2", @"S_COM3", @"S_COM4", @"S_DECL", @"S_DECL2", @"S_DONE", @"S_EMPTYTAG", @"S_ENT", @"S_EQ", @"S_ETAG", @"S_GI", @"S_NCR", @"S_PCDATA", @"S_PI", @"S_PITARGET", @"S_QUOT", @"S_STAGC", @"S_TAG", @"S_TAGWS", @"S_XNCR" } count:36 type:NSString_class_()]);
     {
-      jint maxState = -1;
-      jint maxChar = -1;
-      for (jint i = 0; i < TSHTMLScanner_statetable->size_; i += 4) {
+      int32_t maxState = -1;
+      int32_t maxChar = -1;
+      for (int32_t i = 0; i < TSHTMLScanner_statetable->size_; i += 4) {
         if (IOSIntArray_Get(TSHTMLScanner_statetable, i) > maxState) {
           maxState = IOSIntArray_Get(TSHTMLScanner_statetable, i);
         }
@@ -791,12 +803,12 @@ J2OBJC_IGNORE_DESIGNATED_END
         }
       }
       TSHTMLScanner_statetableIndexMaxChar = maxChar + 1;
-      JreStrongAssignAndConsume(&TSHTMLScanner_statetableIndex, [IOSShortArray newArrayWithDimensions:2 lengths:(jint[]){ maxState + 1, maxChar + 3 }]);
-      for (jint theState = 0; theState <= maxState; ++theState) {
-        for (jint ch = -2; ch <= maxChar; ++ch) {
-          jint hit = -1;
-          jint action = 0;
-          for (jint i = 0; i < TSHTMLScanner_statetable->size_; i += 4) {
+      JreStrongAssignAndConsume(&TSHTMLScanner_statetableIndex, [IOSShortArray newArrayWithDimensions:2 lengths:(int32_t[]){ maxState + 1, maxChar + 3 }]);
+      for (int32_t theState = 0; theState <= maxState; ++theState) {
+        for (int32_t ch = -2; ch <= maxChar; ++ch) {
+          int32_t hit = -1;
+          int32_t action = 0;
+          for (int32_t i = 0; i < TSHTMLScanner_statetable->size_; i += 4) {
             if (theState != IOSIntArray_Get(TSHTMLScanner_statetable, i)) {
               if (action != 0) break;
               continue;
@@ -811,7 +823,7 @@ J2OBJC_IGNORE_DESIGNATED_END
               break;
             }
           }
-          *IOSShortArray_GetRef(nil_chk(IOSObjectArray_Get(TSHTMLScanner_statetableIndex, theState)), ch + 2) = (jshort) hit;
+          *IOSShortArray_GetRef(nil_chk(IOSObjectArray_Get(TSHTMLScanner_statetableIndex, theState)), ch + 2) = (int16_t) hit;
         }
       }
     }
@@ -824,7 +836,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 void TSHTMLScanner_init(TSHTMLScanner *self) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->theOutputBuffer_, [IOSCharArray newArrayWithLength:200]);
-  JreStrongAssignAndConsume(&self->theWinMap_, [IOSIntArray newArrayWithInts:(jint[]){ (jint) 0x20AC, (jint) 0xFFFD, (jint) 0x201A, (jint) 0x0192, (jint) 0x201E, (jint) 0x2026, (jint) 0x2020, (jint) 0x2021, (jint) 0x02C6, (jint) 0x2030, (jint) 0x0160, (jint) 0x2039, (jint) 0x0152, (jint) 0xFFFD, (jint) 0x017D, (jint) 0xFFFD, (jint) 0xFFFD, (jint) 0x2018, (jint) 0x2019, (jint) 0x201C, (jint) 0x201D, (jint) 0x2022, (jint) 0x2013, (jint) 0x2014, (jint) 0x02DC, (jint) 0x2122, (jint) 0x0161, (jint) 0x203A, (jint) 0x0153, (jint) 0xFFFD, (jint) 0x017E, (jint) 0x0178 } count:32]);
+  JreStrongAssignAndConsume(&self->theWinMap_, [IOSIntArray newArrayWithInts:(int32_t[]){ (int32_t) 0x20AC, (int32_t) 0xFFFD, (int32_t) 0x201A, (int32_t) 0x0192, (int32_t) 0x201E, (int32_t) 0x2026, (int32_t) 0x2020, (int32_t) 0x2021, (int32_t) 0x02C6, (int32_t) 0x2030, (int32_t) 0x0160, (int32_t) 0x2039, (int32_t) 0x0152, (int32_t) 0xFFFD, (int32_t) 0x017D, (int32_t) 0xFFFD, (int32_t) 0xFFFD, (int32_t) 0x2018, (int32_t) 0x2019, (int32_t) 0x201C, (int32_t) 0x201D, (int32_t) 0x2022, (int32_t) 0x2013, (int32_t) 0x2014, (int32_t) 0x02DC, (int32_t) 0x2122, (int32_t) 0x0161, (int32_t) 0x203A, (int32_t) 0x0153, (int32_t) 0xFFFD, (int32_t) 0x017E, (int32_t) 0x0178 } count:32]);
 }
 
 TSHTMLScanner *new_TSHTMLScanner_init() {
@@ -835,7 +847,7 @@ TSHTMLScanner *create_TSHTMLScanner_init() {
   J2OBJC_CREATE_IMPL(TSHTMLScanner, init)
 }
 
-void TSHTMLScanner_unreadWithJavaIoPushbackReader_withInt_(TSHTMLScanner *self, JavaIoPushbackReader *r, jint c) {
+void TSHTMLScanner_unreadWithJavaIoPushbackReader_withInt_(TSHTMLScanner *self, JavaIoPushbackReader *r, int32_t c) {
   if (c != -1) [((JavaIoPushbackReader *) nil_chk(r)) unreadWithInt:c];
 }
 
@@ -844,7 +856,7 @@ void TSHTMLScanner_mark(TSHTMLScanner *self) {
   self->theLastLine_ = self->theCurrentLine_;
 }
 
-void TSHTMLScanner_saveWithInt_withTSScanHandler_(TSHTMLScanner *self, jint ch, id<TSScanHandler> h) {
+void TSHTMLScanner_saveWithInt_withTSScanHandler_(TSHTMLScanner *self, int32_t ch, id<TSScanHandler> h) {
   if (self->theSize_ >= ((IOSCharArray *) nil_chk(self->theOutputBuffer_))->size_ - 20) {
     if (self->theState_ == TSHTMLScanner_S_PCDATA || self->theState_ == TSHTMLScanner_S_CDATA) {
       [((id<TSScanHandler>) nil_chk(h)) pcdataWithCharArray:self->theOutputBuffer_ withInt:0 withInt:self->theSize_];
@@ -856,14 +868,16 @@ void TSHTMLScanner_saveWithInt_withTSScanHandler_(TSHTMLScanner *self, jint ch, 
       JreStrongAssign(&self->theOutputBuffer_, newOutputBuffer);
     }
   }
-  *IOSCharArray_GetRef(nil_chk(self->theOutputBuffer_), self->theSize_++) = (jchar) ch;
+  *IOSCharArray_GetRef(nil_chk(self->theOutputBuffer_), self->theSize_++) = (unichar) ch;
 }
 
-NSString *TSHTMLScanner_nicecharWithInt_(jint inArg) {
+NSString *TSHTMLScanner_nicecharWithInt_(int32_t inArg) {
   TSHTMLScanner_initialize();
   if (inArg == 0x000a) return @"\\n";
   if (inArg < 32) return JreStrcat("$$", @"0x", JavaLangInteger_toHexStringWithInt_(inArg));
-  return JreStrcat("CCC", '\'', ((jchar) inArg), '\'');
+  return JreStrcat("CCC", '\'', ((unichar) inArg), '\'');
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSHTMLScanner)
+
+J2OBJC_NAME_MAPPING(TSHTMLScanner, "repackaged.org.ccil.cowan.tagsoup", "TS")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\view\BaseMeasurableView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseMeasurableView")
@@ -31,6 +32,8 @@
 @class ASBaseMeasurableView_VerticalAligment;
 @class ASRectM;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ASHasWidgets;
 @protocol ASIWidget;
 
@@ -38,101 +41,101 @@
  @public
   ASBaseMeasurableView_VerticalAligment *verticalAligment_;
   ASBaseMeasurableView_HorizonantalAligment *horizonantalAligment_;
-  jboolean mHorizontallyScrolling_;
+  bool mHorizontallyScrolling_;
 }
 
 #pragma mark Public
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (jint)getBaseline;
+- (int32_t)getBaseline;
 
 - (ADDrawable *)getBottomDrawable;
 
-- (ASRectM *)getBottomDrawableBoundsWithInt:(jint)x
-                                    withInt:(jint)y
-                                    withInt:(jint)width
-                                    withInt:(jint)height;
+- (ASRectM *)getBottomDrawableBoundsWithInt:(int32_t)x
+                                    withInt:(int32_t)y
+                                    withInt:(int32_t)width
+                                    withInt:(int32_t)height;
 
-- (jint)getCompoundPaddingBottom;
+- (int32_t)getCompoundPaddingBottom;
 
-- (jint)getCompoundPaddingLeft;
+- (int32_t)getCompoundPaddingLeft;
 
-- (jint)getCompoundPaddingLeftWithIgnoreCheck;
+- (int32_t)getCompoundPaddingLeftWithIgnoreCheck;
 
-- (jint)getCompoundPaddingRight;
+- (int32_t)getCompoundPaddingRight;
 
-- (jint)getCompoundPaddingRightWithIgnoreCheck;
+- (int32_t)getCompoundPaddingRightWithIgnoreCheck;
 
-- (jint)getCompoundPaddingTop;
+- (int32_t)getCompoundPaddingTop;
 
-- (jint)getDrawablePadding;
+- (int32_t)getDrawablePadding;
 
 - (ASBaseMeasurableView_HorizonantalAligment *)getHorizonantalAligment;
 
 - (ADDrawable *)getLeftDrawable;
 
-- (ASRectM *)getLeftDrawableBoundsWithInt:(jint)x
-                                  withInt:(jint)y
-                                  withInt:(jint)width
-                                  withInt:(jint)height;
+- (ASRectM *)getLeftDrawableBoundsWithInt:(int32_t)x
+                                  withInt:(int32_t)y
+                                  withInt:(int32_t)width
+                                  withInt:(int32_t)height;
 
 - (ADDrawable *)getRightDrawable;
 
-- (ASRectM *)getRightDrawableBoundsWithInt:(jint)x
-                                   withInt:(jint)y
-                                   withInt:(jint)width
-                                   withInt:(jint)height;
+- (ASRectM *)getRightDrawableBoundsWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)width
+                                   withInt:(int32_t)height;
 
 - (ADDrawable *)getTopDrawable;
 
-- (ASRectM *)getTopDrawableBoundsWithInt:(jint)x
-                                 withInt:(jint)y
-                                 withInt:(jint)width
-                                 withInt:(jint)height;
+- (ASRectM *)getTopDrawableBoundsWithInt:(int32_t)x
+                                 withInt:(int32_t)y
+                                 withInt:(int32_t)width
+                                 withInt:(int32_t)height;
 
 - (ASBaseMeasurableView_VerticalAligment *)getVerticalAligment;
 
 - (id<ASIWidget>)getWidget;
 
-- (ASRectM *)getWidgetBoundsWithInt:(jint)width
-                            withInt:(jint)height
+- (ASRectM *)getWidgetBoundsWithInt:(int32_t)width
+                            withInt:(int32_t)height
                   withNSObjectArray:(IOSObjectArray *)nativeWidgets;
 
-- (jboolean)hasDrawables;
+- (bool)hasDrawables;
 
-- (jboolean)isCompoundHorizontalPaddingConsumed;
+- (bool)isCompoundHorizontalPaddingConsumed;
 
-- (jboolean)isIgnoreDrawableHeight;
+- (bool)isIgnoreDrawableHeight;
 
-- (jboolean)isVerticalAlignBottom;
+- (bool)isVerticalAlignBottom;
 
-- (jboolean)isVerticalAlignMiddle;
+- (bool)isVerticalAlignMiddle;
 
-- (jboolean)isVerticalAlignTop;
+- (bool)isVerticalAlignTop;
 
 + (void)measureWidgetWithNoParentWithASHasWidgets:(id<ASHasWidgets>)parent
                                     withASIWidget:(id<ASIWidget>)widget
-                                          withInt:(jint)level
-                                          withInt:(jint)initialWidth
-                                          withInt:(jint)indent;
+                                          withInt:(int32_t)level
+                                          withInt:(int32_t)initialWidth
+                                          withInt:(int32_t)indent;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (void)setBottomDrawableWithADDrawable:(ADDrawable *)bottomDrawable;
 
-- (void)setCompoundHorizontalPaddingConsumedWithBoolean:(jboolean)isCompoundHorizontalPaddingConsumed;
+- (void)setCompoundHorizontalPaddingConsumedWithBoolean:(bool)isCompoundHorizontalPaddingConsumed;
 
-- (void)setDrawablePaddingWithInt:(jint)drawablePadding;
+- (void)setDrawablePaddingWithInt:(int32_t)drawablePadding;
 
 - (void)setHorizonantalAligmentWithASBaseMeasurableView_HorizonantalAligment:(ASBaseMeasurableView_HorizonantalAligment *)horizonantalAligment;
 
-- (void)setHorizontallyScrollingWithBoolean:(jboolean)horizontallyScrolling;
+- (void)setHorizontallyScrollingWithBoolean:(bool)horizontallyScrolling;
 
-- (void)setIgnoreDrawableHeightWithBoolean:(jboolean)ignoreDrawableHeight;
+- (void)setIgnoreDrawableHeightWithBoolean:(bool)ignoreDrawableHeight;
 
 - (void)setLeftDrawableWithADDrawable:(ADDrawable *)leftDrawable;
 
@@ -144,8 +147,8 @@
 
 #pragma mark Protected
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 // Disallowed inherited constructors, do not use.
 
@@ -158,20 +161,21 @@ J2OBJC_EMPTY_STATIC_INIT(ASBaseMeasurableView)
 J2OBJC_FIELD_SETTER(ASBaseMeasurableView, verticalAligment_, ASBaseMeasurableView_VerticalAligment *)
 J2OBJC_FIELD_SETTER(ASBaseMeasurableView, horizonantalAligment_, ASBaseMeasurableView_HorizonantalAligment *)
 
-inline jint ASBaseMeasurableView_get_VERY_WIDE(void);
-inline jint ASBaseMeasurableView_set_VERY_WIDE(jint value);
-inline jint *ASBaseMeasurableView_getRef_VERY_WIDE(void);
+inline int32_t ASBaseMeasurableView_get_VERY_WIDE(void);
+inline int32_t ASBaseMeasurableView_set_VERY_WIDE(int32_t value);
+inline int32_t *ASBaseMeasurableView_getRef_VERY_WIDE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ASBaseMeasurableView_VERY_WIDE;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASBaseMeasurableView, VERY_WIDE, jint)
+FOUNDATION_EXPORT int32_t ASBaseMeasurableView_VERY_WIDE;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASBaseMeasurableView, VERY_WIDE, int32_t)
 
 FOUNDATION_EXPORT void ASBaseMeasurableView_initWithASIWidget_(ASBaseMeasurableView *self, id<ASIWidget> widget);
 
-FOUNDATION_EXPORT void ASBaseMeasurableView_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, jint level, jint initialWidth, jint indent);
+FOUNDATION_EXPORT void ASBaseMeasurableView_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, int32_t level, int32_t initialWidth, int32_t indent);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableView)
 
 @compatibility_alias ComAsheraViewBaseMeasurableView ASBaseMeasurableView;
+
 
 #endif
 
@@ -183,12 +187,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableView)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ASBaseMeasurableView_VerticalAligment_Enum) {
-  ASBaseMeasurableView_VerticalAligment_Enum_middle = 0,
-  ASBaseMeasurableView_VerticalAligment_Enum_bottom = 1,
-  ASBaseMeasurableView_VerticalAligment_Enum_top = 2,
+typedef NS_ENUM(int32_t, ASBaseMeasurableView_VerticalAligment_Enum) {
+  ASBaseMeasurableView_VerticalAligment_Enum_middle NS_SWIFT_NAME(middle) = 0,
+  ASBaseMeasurableView_VerticalAligment_Enum_bottom NS_SWIFT_NAME(bottom) = 1,
+  ASBaseMeasurableView_VerticalAligment_Enum_top NS_SWIFT_NAME(top) = 2,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASBaseMeasurableView_VerticalAligment_ORDINAL int32_t
+#else
+#define ASBaseMeasurableView_VerticalAligment_ORDINAL ASBaseMeasurableView_VerticalAligment_Enum
+#endif
+
 
 @interface ASBaseMeasurableView_VerticalAligment : JavaLangEnum
 
@@ -201,6 +213,13 @@ typedef NS_ENUM(NSUInteger, ASBaseMeasurableView_VerticalAligment_Enum) {
 #pragma mark Package-Private
 
 - (ASBaseMeasurableView_VerticalAligment_Enum)toNSEnum;
+
+@property(readonly) ASBaseMeasurableView_VerticalAligment_Enum enumValue;
++ (ASBaseMeasurableView_VerticalAligment *)fromNSEnum:(ASBaseMeasurableView_VerticalAligment_Enum)value;
+
+- (ASBaseMeasurableView_VerticalAligment_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithVerticalAligment:(ASBaseMeasurableView_VerticalAligment_Enum)value;
 
 @end
 
@@ -222,9 +241,10 @@ FOUNDATION_EXPORT IOSObjectArray *ASBaseMeasurableView_VerticalAligment_values(v
 
 FOUNDATION_EXPORT ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_fromOrdinal(ASBaseMeasurableView_VerticalAligment_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableView_VerticalAligment)
+
 
 #endif
 
@@ -236,12 +256,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableView_VerticalAligment)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ASBaseMeasurableView_HorizonantalAligment_Enum) {
-  ASBaseMeasurableView_HorizonantalAligment_Enum_center = 0,
-  ASBaseMeasurableView_HorizonantalAligment_Enum_left = 1,
-  ASBaseMeasurableView_HorizonantalAligment_Enum_right = 2,
+typedef NS_ENUM(int32_t, ASBaseMeasurableView_HorizonantalAligment_Enum) {
+  ASBaseMeasurableView_HorizonantalAligment_Enum_center NS_SWIFT_NAME(center) = 0,
+  ASBaseMeasurableView_HorizonantalAligment_Enum_left NS_SWIFT_NAME(left) = 1,
+  ASBaseMeasurableView_HorizonantalAligment_Enum_right NS_SWIFT_NAME(right) = 2,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASBaseMeasurableView_HorizonantalAligment_ORDINAL int32_t
+#else
+#define ASBaseMeasurableView_HorizonantalAligment_ORDINAL ASBaseMeasurableView_HorizonantalAligment_Enum
+#endif
+
 
 @interface ASBaseMeasurableView_HorizonantalAligment : JavaLangEnum
 
@@ -254,6 +282,13 @@ typedef NS_ENUM(NSUInteger, ASBaseMeasurableView_HorizonantalAligment_Enum) {
 #pragma mark Package-Private
 
 - (ASBaseMeasurableView_HorizonantalAligment_Enum)toNSEnum;
+
+@property(readonly) ASBaseMeasurableView_HorizonantalAligment_Enum enumValue;
++ (ASBaseMeasurableView_HorizonantalAligment *)fromNSEnum:(ASBaseMeasurableView_HorizonantalAligment_Enum)value;
+
+- (ASBaseMeasurableView_HorizonantalAligment_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithHorizonantalAligment:(ASBaseMeasurableView_HorizonantalAligment_Enum)value;
 
 @end
 
@@ -275,9 +310,10 @@ FOUNDATION_EXPORT IOSObjectArray *ASBaseMeasurableView_HorizonantalAligment_valu
 
 FOUNDATION_EXPORT ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAligment_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAligment_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAligment_fromOrdinal(ASBaseMeasurableView_HorizonantalAligment_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableView_HorizonantalAligment)
+
 
 #endif
 

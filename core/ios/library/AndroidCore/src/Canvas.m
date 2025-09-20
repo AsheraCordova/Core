@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Canvas.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Canvas.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADCanvas : NSObject
@@ -33,8 +45,10 @@
 
 @end
 
-void ADCanvas_translateWithInt_withInt_(id<ADCanvas> self, jint scrollX, jint scrollY) {
+void ADCanvas_translateWithInt_withInt_(id<ADCanvas> self, int32_t scrollX, int32_t scrollY) {
   ADCanvas_initialize();
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADCanvas)
+
+J2OBJC_NAME_MAPPING(ADCanvas, "r.android.graphics", "AD")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttributeValue.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetAttributeValue")
@@ -16,6 +17,7 @@
 #if !defined (ASWidgetAttributeValue_) && (INCLUDE_ALL_WidgetAttributeValue || defined(INCLUDE_ASWidgetAttributeValue))
 #define ASWidgetAttributeValue_
 
+@class NSString;
 @protocol ASWidgetAttributeValueFilter;
 
 @interface ASWidgetAttributeValue : NSObject
@@ -84,6 +86,7 @@ FOUNDATION_EXPORT ASWidgetAttributeValue *create_ASWidgetAttributeValue_initWith
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttributeValue)
 
 @compatibility_alias ComAsheraWidgetWidgetAttributeValue ASWidgetAttributeValue;
+
 
 #endif
 

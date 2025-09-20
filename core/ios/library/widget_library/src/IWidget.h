@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IWidget.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IWidget")
@@ -35,6 +36,9 @@
 @class ASWidgetAttributeValue;
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASHasWidgets;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
@@ -84,7 +88,7 @@
 
 - (NSString *)getId;
 
-- (jint)getIdAsInt;
+- (int32_t)getIdAsInt;
 
 - (void)setIdWithNSString:(NSString *)id_;
 
@@ -104,10 +108,10 @@
 
 - (void)setAttributeWithNSString:(NSString *)key
                           withId:(id)objValue
-                     withBoolean:(jboolean)skipConvert;
+                     withBoolean:(bool)skipConvert;
 
 - (id)getAttributeWithNSString:(NSString *)key
-                   withBoolean:(jboolean)skipConvert;
+                   withBoolean:(bool)skipConvert;
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                              withNSString:(NSString *)strValue
@@ -138,18 +142,18 @@
 
 - (void)executeCommandWithJavaUtilMap:(id<JavaUtilMap>)payLoad
         withASIWidget_CommandCallBack:(id<ASIWidget_CommandCallBack>)command
-                              withInt:(jint)methods;
+                              withInt:(int32_t)methods;
 
 - (void)executeCommandWithASIWidget:(id<ASIWidget>)rootWidget
                    withJavaUtilList:(id<JavaUtilList>)payLoad
       withASIWidget_CommandCallBack:(id<ASIWidget_CommandCallBack>)command
-                            withInt:(jint)methods;
+                            withInt:(int32_t)methods;
 
-- (void)setVisibleWithBoolean:(jboolean)visible;
+- (void)setVisibleWithBoolean:(bool)visible;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
-- (jboolean)isInitialised;
+- (bool)isInitialised;
 
 - (id<ASIWidget>)findNearestViewWithNSString:(NSString *)id_;
 
@@ -159,20 +163,20 @@
 
 - (void)afterParentInit;
 
-- (jboolean)isAfterParentInitRequired;
+- (bool)isAfterParentInitRequired;
 
 - (void)requestLayout;
 
 - (void)invalidate;
 
-- (jboolean)isInvalidateOnFrameChange;
+- (bool)isInvalidateOnFrameChange;
 
-- (void)setInvalidateOnFrameChangeWithBoolean:(jboolean)invalidateOnFrameChange;
+- (void)setInvalidateOnFrameChangeWithBoolean:(bool)invalidateOnFrameChange;
 
 - (void)applyAttributeCommandWithNSString:(NSString *)sourceName
                              withNSString:(NSString *)commandName
                         withNSStringArray:(IOSObjectArray *)attributes
-                              withBoolean:(jboolean)add
+                              withBoolean:(bool)add
                         withNSObjectArray:(IOSObjectArray *)args;
 
 - (void)rerunCommandOnSourceWithNSString:(NSString *)sourceName
@@ -211,14 +215,14 @@
 
 - (void)drawableStateChanged;
 
-- (void)setDrawableBoundsWithInt:(jint)l
-                         withInt:(jint)t
-                         withInt:(jint)r
-                         withInt:(jint)b;
+- (void)setDrawableBoundsWithInt:(int32_t)l
+                         withInt:(int32_t)t
+                         withInt:(int32_t)r
+                         withInt:(int32_t)b;
 
-- (jint)getZIndex;
+- (int32_t)getZIndex;
 
-- (void)setZIndexWithInt:(jint)zIndex;
+- (void)setZIndexWithInt:(int32_t)zIndex;
 
 - (void)setEventBubblersWithJavaUtilCollection:(id<JavaUtilCollection>)flags;
 
@@ -230,7 +234,7 @@
 - (void)applyThemeStyleWithNSString:(NSString *)themeName;
 
 - (id<ASIWidget>)loadLazyWidgetsWithASHasWidgets:(id<ASHasWidgets>)parent
-                                         withInt:(jint)index
+                                         withInt:(int32_t)index
                                     withNSString:(NSString *)idKey
                                  withASLoopParam:(ASLoopParam *)model;
 
@@ -257,61 +261,62 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASIWidget)
 
-inline jint ASIWidget_get_COMMAND_EXEC_GETTER_METHOD(void);
+inline int32_t ASIWidget_get_COMMAND_EXEC_GETTER_METHOD(void);
 #define ASIWidget_COMMAND_EXEC_GETTER_METHOD 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, COMMAND_EXEC_GETTER_METHOD, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, COMMAND_EXEC_GETTER_METHOD, int32_t)
 
-inline jint ASIWidget_get_COMMAND_EXEC_SETTER_METHOD(void);
+inline int32_t ASIWidget_get_COMMAND_EXEC_SETTER_METHOD(void);
 #define ASIWidget_COMMAND_EXEC_SETTER_METHOD 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, COMMAND_EXEC_SETTER_METHOD, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, COMMAND_EXEC_SETTER_METHOD, int32_t)
 
-inline jint ASIWidget_get_BUFFER_STRATEGY_NONE(void);
+inline int32_t ASIWidget_get_BUFFER_STRATEGY_NONE(void);
 #define ASIWidget_BUFFER_STRATEGY_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, BUFFER_STRATEGY_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, BUFFER_STRATEGY_NONE, int32_t)
 
-inline jint ASIWidget_get_BUFFER_STRATEGY_DURING_INIT(void);
+inline int32_t ASIWidget_get_BUFFER_STRATEGY_DURING_INIT(void);
 #define ASIWidget_BUFFER_STRATEGY_DURING_INIT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, BUFFER_STRATEGY_DURING_INIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, BUFFER_STRATEGY_DURING_INIT, int32_t)
 
-inline jint ASIWidget_get_BUFFER_STRATEGY_ALWAYS(void);
+inline int32_t ASIWidget_get_BUFFER_STRATEGY_ALWAYS(void);
 #define ASIWidget_BUFFER_STRATEGY_ALWAYS 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, BUFFER_STRATEGY_ALWAYS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, BUFFER_STRATEGY_ALWAYS, int32_t)
 
-inline jint ASIWidget_get_UPDATE_UI_NONE(void);
+inline int32_t ASIWidget_get_UPDATE_UI_NONE(void);
 #define ASIWidget_UPDATE_UI_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_NONE, int32_t)
 
-inline jint ASIWidget_get_UPDATE_UI_REQUEST_LAYOUT(void);
+inline int32_t ASIWidget_get_UPDATE_UI_REQUEST_LAYOUT(void);
 #define ASIWidget_UPDATE_UI_REQUEST_LAYOUT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_REQUEST_LAYOUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_REQUEST_LAYOUT, int32_t)
 
-inline jint ASIWidget_get_UPDATE_UI_INVALIDATE(void);
+inline int32_t ASIWidget_get_UPDATE_UI_INVALIDATE(void);
 #define ASIWidget_UPDATE_UI_INVALIDATE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_INVALIDATE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_INVALIDATE, int32_t)
 
-inline jint ASIWidget_get_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE(void);
+inline int32_t ASIWidget_get_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE(void);
 #define ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE 3
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE, int32_t)
 
-inline jint ASIWidget_get_APPLY_TO_VIEW_WRAPPER(void);
+inline int32_t ASIWidget_get_APPLY_TO_VIEW_WRAPPER(void);
 #define ASIWidget_APPLY_TO_VIEW_WRAPPER 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_VIEW_WRAPPER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_VIEW_WRAPPER, int32_t)
 
-inline jint ASIWidget_get_APPLY_TO_VIEW_HOLDER(void);
+inline int32_t ASIWidget_get_APPLY_TO_VIEW_HOLDER(void);
 #define ASIWidget_APPLY_TO_VIEW_HOLDER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_VIEW_HOLDER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_VIEW_HOLDER, int32_t)
 
-inline jint ASIWidget_get_APPLY_TO_FOREGROUND(void);
+inline int32_t ASIWidget_get_APPLY_TO_FOREGROUND(void);
 #define ASIWidget_APPLY_TO_FOREGROUND 4
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_FOREGROUND, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_FOREGROUND, int32_t)
 
-inline jint ASIWidget_get_APPLY_TO_ALL(void);
+inline int32_t ASIWidget_get_APPLY_TO_ALL(void);
 #define ASIWidget_APPLY_TO_ALL 7
-J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_ALL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASIWidget, APPLY_TO_ALL, int32_t)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASIWidget)
 
 #define ComAsheraWidgetIWidget ASIWidget
+
 
 #endif
 
@@ -329,6 +334,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASIWidget)
 J2OBJC_EMPTY_STATIC_INIT(ASIWidget_CommandCallBack)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASIWidget_CommandCallBack)
+
 
 #endif
 

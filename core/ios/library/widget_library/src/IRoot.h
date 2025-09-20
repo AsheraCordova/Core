@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IRoot.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IRoot")
@@ -16,14 +17,16 @@
 #if !defined (ASIRoot_) && (INCLUDE_ALL_IRoot || defined(INCLUDE_ASIRoot))
 #define ASIRoot_
 
+@class JavaLangInteger;
+
 @protocol ASIRoot < JavaObject >
 
 - (void)measure;
 
-- (void)measureWithInt:(jint)x
-               withInt:(jint)y
-               withInt:(jint)width
-               withInt:(jint)height;
+- (void)measureWithInt:(int32_t)x
+               withInt:(int32_t)y
+               withInt:(int32_t)width
+               withInt:(int32_t)height;
 
 - (void)displayErrorIndicator;
 
@@ -34,6 +37,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIRoot)
 J2OBJC_TYPE_LITERAL_HEADER(ASIRoot)
 
 #define ComAsheraWidgetIRoot ASIRoot
+
 
 #endif
 

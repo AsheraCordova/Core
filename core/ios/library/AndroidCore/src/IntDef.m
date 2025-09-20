@@ -3,10 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\IntDef.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "IntDef.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADIntDef
@@ -18,7 +31,7 @@
   return [IOSIntArray arrayWithLength:0];
 }
 
-+ (jboolean)flagDefault {
++ (bool)flagDefault {
   return false;
 }
 
@@ -30,7 +43,7 @@
   return [NSString stringWithFormat:@"@r.android.annotation.IntDef(value=%@, flag=%d)", value_, flag_];
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -64,7 +77,7 @@
 
 @end
 
-id<ADIntDef> create_ADIntDef(jboolean flag, IOSIntArray *value) {
+id<ADIntDef> create_ADIntDef(bool flag, IOSIntArray *value) {
   ADIntDef *self = AUTORELEASE([[ADIntDef alloc] init]);
   self->flag_ = flag;
   self->value_ = RETAIN_(value);
@@ -72,3 +85,5 @@ id<ADIntDef> create_ADIntDef(jboolean flag, IOSIntArray *value) {
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADIntDef)
+
+J2OBJC_NAME_MAPPING(ADIntDef, "r.android.annotation", "AD")

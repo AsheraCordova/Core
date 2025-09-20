@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\Form.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Form")
@@ -18,6 +19,7 @@
 
 @class ASField;
 @class ASFieldValidationException;
+@class JavaLangBoolean;
 @protocol JavaUtilMap;
 
 /*!
@@ -37,7 +39,7 @@
  @brief check if all the fields in form is valid.
  @return true or false
  */
-- (jboolean)isValid;
+- (bool)isValid;
 
 /*!
  @brief method to reset all errors in form
@@ -64,6 +66,7 @@ FOUNDATION_EXPORT ASForm *create_ASForm_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASForm)
 
 @compatibility_alias ComAsheraValidationsForm ASForm;
+
 
 #endif
 

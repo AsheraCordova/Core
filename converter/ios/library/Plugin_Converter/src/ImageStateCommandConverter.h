@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ImageStateCommandConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ImageStateCommandConverter")
@@ -21,6 +22,8 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -30,7 +33,7 @@
 
 - (instancetype)initWithNSString:(NSString *)id_;
 
-- (jboolean)executeAfterPostMeasure;
+- (bool)executeAfterPostMeasure;
 
 - (id)modifyValueWithASIWidget:(id<ASIWidget>)widget
                         withId:(id)nativeView
@@ -55,6 +58,7 @@ FOUNDATION_EXPORT ASImageStateCommandConverter *create_ASImageStateCommandConver
 J2OBJC_TYPE_LITERAL_HEADER(ASImageStateCommandConverter)
 
 @compatibility_alias ComAsheraConverterImageStateCommandConverter ASImageStateCommandConverter;
+
 
 #endif
 

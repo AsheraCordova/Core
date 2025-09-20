@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\IntEvaluator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IntEvaluator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADIntEvaluator
@@ -17,10 +29,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (JavaLangInteger *)evaluateWithFloat:(jfloat)fraction
+- (JavaLangInteger *)evaluateWithFloat:(float)fraction
                                 withId:(JavaLangInteger *)startValue
                                 withId:(JavaLangInteger *)endValue {
-  jint startInt = [((JavaLangInteger *) nil_chk(startValue)) intValue];
+  int32_t startInt = [((JavaLangInteger *) nil_chk(startValue)) intValue];
   return JavaLangInteger_valueOfWithInt_(JreFpToInt((startInt + fraction * ([((JavaLangInteger *) nil_chk(endValue)) intValue] - startInt))));
 }
 
@@ -55,3 +67,5 @@ ADIntEvaluator *create_ADIntEvaluator_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADIntEvaluator)
+
+J2OBJC_NAME_MAPPING(ADIntEvaluator, "r.android.animation", "AD")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\TypeConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TypeConverter")
@@ -65,6 +66,7 @@ FOUNDATION_EXPORT void ADTypeConverter_initWithIOSClass_withIOSClass_(ADTypeConv
 J2OBJC_TYPE_LITERAL_HEADER(ADTypeConverter)
 
 @compatibility_alias RAndroidAnimationTypeConverter ADTypeConverter;
+
 
 #endif
 

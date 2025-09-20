@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\OnLayoutEvent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_OnLayoutEvent")
@@ -20,31 +21,34 @@
 #define INCLUDE_ASWidgetEvent 1
 #include "WidgetEvent.h"
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+
 @interface ASOnLayoutEvent : ASWidgetEvent
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)getB;
+- (int32_t)getB;
 
-- (jint)getL;
+- (int32_t)getL;
 
-- (jint)getR;
+- (int32_t)getR;
 
-- (jint)getT;
+- (int32_t)getT;
 
-- (jboolean)isChanged;
+- (bool)isChanged;
 
-- (void)setBWithInt:(jint)b;
+- (void)setBWithInt:(int32_t)b;
 
-- (void)setChangedWithBoolean:(jboolean)changed;
+- (void)setChangedWithBoolean:(bool)changed;
 
-- (void)setLWithInt:(jint)l;
+- (void)setLWithInt:(int32_t)l;
 
-- (void)setRWithInt:(jint)r;
+- (void)setRWithInt:(int32_t)r;
 
-- (void)setTWithInt:(jint)t;
+- (void)setTWithInt:(int32_t)t;
 
 @end
 
@@ -59,6 +63,7 @@ FOUNDATION_EXPORT ASOnLayoutEvent *create_ASOnLayoutEvent_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASOnLayoutEvent)
 
 @compatibility_alias ComAsheraWidgetOnLayoutEvent ASOnLayoutEvent;
+
 
 #endif
 

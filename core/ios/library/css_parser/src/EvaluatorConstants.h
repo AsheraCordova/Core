@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\EvaluatorConstants.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_EvaluatorConstants")
@@ -17,6 +18,7 @@
 #define CSSEvaluatorConstants_
 
 @class IOSObjectArray;
+@class JavaLangInteger;
 
 /*!
  @brief Token literal values and constants.
@@ -35,100 +37,100 @@ J2OBJC_STATIC_INIT(CSSEvaluatorConstants)
 /*!
  @brief End of File.
  */
-inline jint CSSEvaluatorConstants_get_EOF(void);
+inline int32_t CSSEvaluatorConstants_get_EOF(void);
 #define CSSEvaluatorConstants_EOF 0
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, EOF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, EOF, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_MEDIA(void);
+inline int32_t CSSEvaluatorConstants_get_MEDIA(void);
 #define CSSEvaluatorConstants_MEDIA 5
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, MEDIA, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, MEDIA, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_AND_TOKEN(void);
+inline int32_t CSSEvaluatorConstants_get_AND_TOKEN(void);
 #define CSSEvaluatorConstants_AND_TOKEN 6
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, AND_TOKEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, AND_TOKEN, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_ANY(void);
+inline int32_t CSSEvaluatorConstants_get_ANY(void);
 #define CSSEvaluatorConstants_ANY 7
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, ANY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, ANY, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_orientation(void);
+inline int32_t CSSEvaluatorConstants_get_orientation(void);
 #define CSSEvaluatorConstants_orientation 8
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, orientation, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, orientation, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_superview(void);
+inline int32_t CSSEvaluatorConstants_get_superview(void);
 #define CSSEvaluatorConstants_superview 9
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, superview, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, superview, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_relation(void);
+inline int32_t CSSEvaluatorConstants_get_relation(void);
 #define CSSEvaluatorConstants_relation 10
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, relation, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, relation, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_CSS_VAR(void);
+inline int32_t CSSEvaluatorConstants_get_CSS_VAR(void);
 #define CSSEvaluatorConstants_CSS_VAR 11
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, CSS_VAR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, CSS_VAR, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_OPEN_BRACKET(void);
+inline int32_t CSSEvaluatorConstants_get_OPEN_BRACKET(void);
 #define CSSEvaluatorConstants_OPEN_BRACKET 12
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, OPEN_BRACKET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, OPEN_BRACKET, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_CLOSE_BRACKET(void);
+inline int32_t CSSEvaluatorConstants_get_CLOSE_BRACKET(void);
 #define CSSEvaluatorConstants_CLOSE_BRACKET 13
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, CLOSE_BRACKET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, CLOSE_BRACKET, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_COLON(void);
+inline int32_t CSSEvaluatorConstants_get_COLON(void);
 #define CSSEvaluatorConstants_COLON 14
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, COLON, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, COLON, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_SEMI_COLON(void);
+inline int32_t CSSEvaluatorConstants_get_SEMI_COLON(void);
 #define CSSEvaluatorConstants_SEMI_COLON 15
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, SEMI_COLON, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, SEMI_COLON, int32_t)
 
 /*!
  @brief RegularExpression Id.
  */
-inline jint CSSEvaluatorConstants_get_CSS_VAR_WHITE_SPACE(void);
+inline int32_t CSSEvaluatorConstants_get_CSS_VAR_WHITE_SPACE(void);
 #define CSSEvaluatorConstants_CSS_VAR_WHITE_SPACE 16
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, CSS_VAR_WHITE_SPACE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, CSS_VAR_WHITE_SPACE, int32_t)
 
 /*!
  @brief Lexical state.
  */
-inline jint CSSEvaluatorConstants_get_DEFAULT(void);
+inline int32_t CSSEvaluatorConstants_get_DEFAULT(void);
 #define CSSEvaluatorConstants_DEFAULT 0
-J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, DEFAULT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSEvaluatorConstants, DEFAULT, int32_t)
 
 /*!
  @brief Literal token values.
@@ -141,6 +143,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(CSSEvaluatorConstants, tokenImage, IOSObjectArray 
 J2OBJC_TYPE_LITERAL_HEADER(CSSEvaluatorConstants)
 
 #define ComAsheraCssEvaluatorConstants CSSEvaluatorConstants
+
 
 #endif
 

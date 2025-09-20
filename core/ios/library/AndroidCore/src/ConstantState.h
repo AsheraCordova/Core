@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\res\ConstantState.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ConstantState")
@@ -18,6 +19,7 @@
 
 @class ADResources;
 @class ADResources_Theme;
+@class JavaLangInteger;
 
 /*!
  @brief A cache class that can provide new instances of a particular resource which may change
@@ -40,7 +42,7 @@
  @brief Return a bit mask of configuration changes that will impact
   this resource (and thus require completely reloading it).
  */
-- (jint)getChangingConfigurations;
+- (int32_t)getChangingConfigurations;
 
 /*!
  @brief Create a new instance without supplying resources the caller
@@ -72,6 +74,7 @@ FOUNDATION_EXPORT void ADConstantState_init(ADConstantState *self);
 J2OBJC_TYPE_LITERAL_HEADER(ADConstantState)
 
 @compatibility_alias RAndroidContentResConstantState ADConstantState;
+
 
 #endif
 

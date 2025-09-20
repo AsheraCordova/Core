@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\Field.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Field")
@@ -16,6 +17,8 @@
 #if !defined (ASField_) && (INCLUDE_ALL_Field || defined(INCLUDE_ASField))
 #define ASField_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ASFormElement;
 @protocol ASValidation;
 
@@ -28,16 +31,16 @@
 
 - (ASField *)addValidatorWithASValidation:(id<ASValidation>)what;
 
-- (jint)getOrder;
+- (int32_t)getOrder;
 
 - (id<ASFormElement>)getViewWrapper;
 
-- (jboolean)isValid;
+- (bool)isValid;
 
 - (void)setMetaDataWithId:(id)metaData;
 
 + (ASField *)using__WithASFormElement:(id<ASFormElement>)viewWrapper
-                              withInt:(jint)order;
+                              withInt:(int32_t)order;
 
 // Disallowed inherited constructors, do not use.
 
@@ -47,15 +50,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASField)
 
-inline jint ASField_get_DEFAULT_ORDER(void);
+inline int32_t ASField_get_DEFAULT_ORDER(void);
 #define ASField_DEFAULT_ORDER 10
-J2OBJC_STATIC_FIELD_CONSTANT(ASField, DEFAULT_ORDER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASField, DEFAULT_ORDER, int32_t)
 
-FOUNDATION_EXPORT ASField *ASField_using__WithASFormElement_withInt_(id<ASFormElement> viewWrapper, jint order);
+FOUNDATION_EXPORT ASField *ASField_using__WithASFormElement_withInt_(id<ASFormElement> viewWrapper, int32_t order);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASField)
 
 @compatibility_alias ComAsheraValidationsField ASField;
+
 
 #endif
 

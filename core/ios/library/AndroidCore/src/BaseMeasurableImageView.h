@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\view\BaseMeasurableImageView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseMeasurableImageView")
@@ -22,6 +23,9 @@
 
 @class ADDrawable;
 @class ASRectM;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 
 @interface ASBaseMeasurableImageView : ADView
@@ -30,76 +34,76 @@
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (jboolean)getAdjustViewBounds;
+- (bool)getAdjustViewBounds;
 
-- (jint)getBaseline;
+- (int32_t)getBaseline;
 
 /*!
  @brief Checks whether this view's baseline is considered the bottom of the view.
  @return True if the ImageView's baseline is considered the bottom of the view, false if otherwise.
  - seealso: #setBaselineAlignBottom(boolean)
  */
-- (jboolean)getBaselineAlignBottom;
+- (bool)getBaselineAlignBottom;
 
 - (ASRectM *)getCropPaddingClipBounds;
 
-- (jboolean)getCropToPadding;
+- (bool)getCropToPadding;
 
 - (ASRectM *)getImageBounds;
 
-- (ASRectM *)getImageBoundsWithInt:(jint)measuredWidth
-                           withInt:(jint)measuredHeight;
+- (ASRectM *)getImageBoundsWithInt:(int32_t)measuredWidth
+                           withInt:(int32_t)measuredHeight;
 
 - (ADDrawable *)getImageDrawable;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
 - (NSString *)getScaleType;
 
-- (jint)getScaleTypeInt;
+- (int32_t)getScaleTypeInt;
 
 - (id<ASIWidget>)getWidget;
 
-- (jboolean)hasDrawables;
+- (bool)hasDrawables;
 
-- (void)setAdjustViewBoundsWithBoolean:(jboolean)mAdjustViewBounds;
+- (void)setAdjustViewBoundsWithBoolean:(bool)mAdjustViewBounds;
 
 /*!
  @brief <p>Set the offset of the widget's text baseline from the widget's top
-  boundary.
- This value is overridden by the <code>setBaselineAlignBottom(boolean)</code>
-  property.</p>
+  boundary.This value is overridden by the <code>setBaselineAlignBottom(boolean)</code>
+  property.
+ </p>
  @param baseline The baseline to use, or -1 if none is to be provided.
  - seealso: #setBaseline(int)
  */
-- (void)setBaselineWithInt:(jint)baseline;
+- (void)setBaselineWithInt:(int32_t)baseline;
 
 /*!
  @brief Sets whether the baseline of this view to the bottom of the view.
  Setting this value overrides any calls to setBaseline.
  @param aligned If true, the image view will be baseline aligned by its bottom edge.
  */
-- (void)setBaselineAlignBottomWithBoolean:(jboolean)aligned;
+- (void)setBaselineAlignBottomWithBoolean:(bool)aligned;
 
-- (void)setCropToPaddingWithBoolean:(jboolean)objValue;
+- (void)setCropToPaddingWithBoolean:(bool)objValue;
 
 - (void)setImageDrawableWithADDrawable:(ADDrawable *)imageDrawable;
 
-- (void)setMaxHeightWithInt:(jint)mMaxHeight;
+- (void)setMaxHeightWithInt:(int32_t)mMaxHeight;
 
-- (void)setMaxWidthWithInt:(jint)mMaxWidth;
+- (void)setMaxWidthWithInt:(int32_t)mMaxWidth;
 
 - (void)setScaleTypeWithNSString:(NSString *)scaleType
-                         withInt:(jint)scaleTypeInt;
+                         withInt:(int32_t)scaleTypeInt;
 
-- (void)setUsePaddingForBoundsWithBoolean:(jboolean)usePaddingForBounds;
+- (void)setUsePaddingForBoundsWithBoolean:(bool)usePaddingForBounds;
 
 #pragma mark Protected
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 // Disallowed inherited constructors, do not use.
 
@@ -114,6 +118,7 @@ FOUNDATION_EXPORT void ASBaseMeasurableImageView_initWithASIWidget_(ASBaseMeasur
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseMeasurableImageView)
 
 @compatibility_alias ComAsheraViewBaseMeasurableImageView ASBaseMeasurableImageView;
+
 
 #endif
 

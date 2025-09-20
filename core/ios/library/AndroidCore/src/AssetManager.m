@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\AssetManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AssetFileDescriptor.h"
 #include "AssetManager.h"
 #include "J2ObjC_source.h"
 #include "java/io/InputStream.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAssetManager
@@ -59,3 +70,5 @@ ADAssetManager *create_ADAssetManager_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAssetManager)
+
+J2OBJC_NAME_MAPPING(ADAssetManager, "r.android.content.res", "AD")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\FloatKeyframeSet.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FloatKeyframeSet.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -12,7 +17,14 @@
 #include "TimeInterpolator.h"
 #include "TypeEvaluator.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADFloatKeyframeSet
@@ -22,58 +34,58 @@
   return self;
 }
 
-- (id)getValueWithFloat:(jfloat)fraction {
+- (id)getValueWithFloat:(float)fraction {
   return JavaLangFloat_valueOfWithFloat_([self getFloatValueWithFloat:fraction]);
 }
 
 - (ADFloatKeyframeSet *)java_clone {
   id<JavaUtilList> keyframes = mKeyframes_;
-  jint numKeyframes = [((id<JavaUtilList>) nil_chk(mKeyframes_)) size];
+  int32_t numKeyframes = [((id<JavaUtilList>) nil_chk(mKeyframes_)) size];
   IOSObjectArray *newIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_FloatKeyframe_class_()];
-  for (jint i = 0; i < numKeyframes; ++i) {
+  for (int32_t i = 0; i < numKeyframes; ++i) {
     IOSObjectArray_Set(newIKeyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk([((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone], [ADKeyframe_FloatKeyframe class]));
   }
   ADFloatKeyframeSet *newSet = create_ADFloatKeyframeSet_initPackagePrivateWithADKeyframe_FloatKeyframeArray_(newIKeyframes);
   return newSet;
 }
 
-- (jfloat)getFloatValueWithFloat:(jfloat)fraction {
+- (float)getFloatValueWithFloat:(float)fraction {
   if (fraction <= 0.0f) {
     ADKeyframe_FloatKeyframe *prevKeyframe = (ADKeyframe_FloatKeyframe *) cast_chk([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:0], [ADKeyframe_FloatKeyframe class]);
     ADKeyframe_FloatKeyframe *nextKeyframe = (ADKeyframe_FloatKeyframe *) cast_chk([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:1], [ADKeyframe_FloatKeyframe class]);
-    jfloat prevValue = [((ADKeyframe_FloatKeyframe *) nil_chk(prevKeyframe)) getFloatValue];
-    jfloat nextValue = [((ADKeyframe_FloatKeyframe *) nil_chk(nextKeyframe)) getFloatValue];
-    jfloat prevFraction = [prevKeyframe getFraction];
-    jfloat nextFraction = [nextKeyframe getFraction];
+    float prevValue = [((ADKeyframe_FloatKeyframe *) nil_chk(prevKeyframe)) getFloatValue];
+    float nextValue = [((ADKeyframe_FloatKeyframe *) nil_chk(nextKeyframe)) getFloatValue];
+    float prevFraction = [prevKeyframe getFraction];
+    float nextFraction = [nextKeyframe getFraction];
     id<ADTimeInterpolator> interpolator = [nextKeyframe getInterpolator];
     if (interpolator != nil) {
       fraction = [interpolator getInterpolationWithFloat:fraction];
     }
-    jfloat intervalFraction = (fraction - prevFraction) / (nextFraction - prevFraction);
+    float intervalFraction = (fraction - prevFraction) / (nextFraction - prevFraction);
     return mEvaluator_ == nil ? prevValue + intervalFraction * (nextValue - prevValue) : [((NSNumber *) nil_chk(((NSNumber *) cast_chk([mEvaluator_ evaluateWithFloat:intervalFraction withId:JavaLangFloat_valueOfWithFloat_(prevValue) withId:JavaLangFloat_valueOfWithFloat_(nextValue)], [NSNumber class])))) floatValue];
   }
   else if (fraction >= 1.0f) {
     ADKeyframe_FloatKeyframe *prevKeyframe = (ADKeyframe_FloatKeyframe *) cast_chk([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:mNumKeyframes_ - 2], [ADKeyframe_FloatKeyframe class]);
     ADKeyframe_FloatKeyframe *nextKeyframe = (ADKeyframe_FloatKeyframe *) cast_chk([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:mNumKeyframes_ - 1], [ADKeyframe_FloatKeyframe class]);
-    jfloat prevValue = [((ADKeyframe_FloatKeyframe *) nil_chk(prevKeyframe)) getFloatValue];
-    jfloat nextValue = [((ADKeyframe_FloatKeyframe *) nil_chk(nextKeyframe)) getFloatValue];
-    jfloat prevFraction = [prevKeyframe getFraction];
-    jfloat nextFraction = [nextKeyframe getFraction];
+    float prevValue = [((ADKeyframe_FloatKeyframe *) nil_chk(prevKeyframe)) getFloatValue];
+    float nextValue = [((ADKeyframe_FloatKeyframe *) nil_chk(nextKeyframe)) getFloatValue];
+    float prevFraction = [prevKeyframe getFraction];
+    float nextFraction = [nextKeyframe getFraction];
     id<ADTimeInterpolator> interpolator = [nextKeyframe getInterpolator];
     if (interpolator != nil) {
       fraction = [interpolator getInterpolationWithFloat:fraction];
     }
-    jfloat intervalFraction = (fraction - prevFraction) / (nextFraction - prevFraction);
+    float intervalFraction = (fraction - prevFraction) / (nextFraction - prevFraction);
     return mEvaluator_ == nil ? prevValue + intervalFraction * (nextValue - prevValue) : [((NSNumber *) nil_chk(((NSNumber *) cast_chk([mEvaluator_ evaluateWithFloat:intervalFraction withId:JavaLangFloat_valueOfWithFloat_(prevValue) withId:JavaLangFloat_valueOfWithFloat_(nextValue)], [NSNumber class])))) floatValue];
   }
   ADKeyframe_FloatKeyframe *prevKeyframe = (ADKeyframe_FloatKeyframe *) cast_chk([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:0], [ADKeyframe_FloatKeyframe class]);
-  for (jint i = 1; i < mNumKeyframes_; ++i) {
+  for (int32_t i = 1; i < mNumKeyframes_; ++i) {
     ADKeyframe_FloatKeyframe *nextKeyframe = (ADKeyframe_FloatKeyframe *) cast_chk([((id<JavaUtilList>) nil_chk(mKeyframes_)) getWithInt:i], [ADKeyframe_FloatKeyframe class]);
     if (fraction < [((ADKeyframe_FloatKeyframe *) nil_chk(nextKeyframe)) getFraction]) {
       id<ADTimeInterpolator> interpolator = [nextKeyframe getInterpolator];
-      jfloat intervalFraction = (fraction - [((ADKeyframe_FloatKeyframe *) nil_chk(prevKeyframe)) getFraction]) / ([nextKeyframe getFraction] - [prevKeyframe getFraction]);
-      jfloat prevValue = [prevKeyframe getFloatValue];
-      jfloat nextValue = [nextKeyframe getFloatValue];
+      float intervalFraction = (fraction - [((ADKeyframe_FloatKeyframe *) nil_chk(prevKeyframe)) getFraction]) / ([nextKeyframe getFraction] - [prevKeyframe getFraction]);
+      float prevValue = [prevKeyframe getFloatValue];
+      float nextValue = [nextKeyframe getFloatValue];
       if (interpolator != nil) {
         intervalFraction = [interpolator getInterpolationWithFloat:intervalFraction];
       }

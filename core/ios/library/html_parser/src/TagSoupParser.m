@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\TagSoupParser.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributesImpl.h"
 #include "AutoDetector.h"
 #include "Element.h"
@@ -44,41 +49,37 @@
 #include "org/xml/sax/ext/LexicalHandler.h"
 #include "org/xml/sax/helpers/DefaultHandler.h"
 
-@class JavaIoInputStream;
-@class JavaIoReader;
-@class JavaLangBoolean;
-@class JavaUtilHashMap;
-@class OrgXmlSaxInputSource;
-@protocol OrgXmlSaxContentHandler;
-@protocol OrgXmlSaxDTDHandler;
-@protocol OrgXmlSaxEntityResolver;
-@protocol OrgXmlSaxErrorHandler;
-@protocol OrgXmlSaxExtLexicalHandler;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSTagSoupParser () {
  @public
-  __unsafe_unretained id<OrgXmlSaxContentHandler> theContentHandler_;
-  __unsafe_unretained id<OrgXmlSaxExtLexicalHandler> theLexicalHandler_;
-  __unsafe_unretained id<OrgXmlSaxDTDHandler> theDTDHandler_;
-  __unsafe_unretained id<OrgXmlSaxErrorHandler> theErrorHandler_;
-  __unsafe_unretained id<OrgXmlSaxEntityResolver> theEntityResolver_;
+  WEAK_ id<OrgXmlSaxContentHandler> theContentHandler_;
+  WEAK_ id<OrgXmlSaxExtLexicalHandler> theLexicalHandler_;
+  WEAK_ id<OrgXmlSaxDTDHandler> theDTDHandler_;
+  WEAK_ id<OrgXmlSaxErrorHandler> theErrorHandler_;
+  WEAK_ id<OrgXmlSaxEntityResolver> theEntityResolver_;
   TSSchema *theSchema_;
   id<TSScanner> theScanner_;
   id<TSAutoDetector> theAutoDetector_;
-  jboolean namespaces_;
-  jboolean ignoreBogons_;
-  jboolean bogonsEmpty_;
-  jboolean rootBogons_;
-  jboolean defaultAttributes_;
-  jboolean translateColons_;
-  jboolean restartElements_;
-  jboolean ignorableWhitespace_;
-  jboolean CDATAElements_;
+  bool namespaces_;
+  bool ignoreBogons_;
+  bool bogonsEmpty_;
+  bool rootBogons_;
+  bool defaultAttributes_;
+  bool translateColons_;
+  bool restartElements_;
+  bool ignorableWhitespace_;
+  bool CDATAElements_;
   JavaUtilHashMap *theFeatures_;
   TSElement *theNewElement_;
   NSString *theAttributeName_;
-  jboolean theDoctypeIsPresent_;
+  bool theDoctypeIsPresent_;
   NSString *theDoctypePublicId_;
   NSString *theDoctypeSystemId_;
   NSString *theDoctypeName_;
@@ -86,12 +87,12 @@
   TSElement *theStack_;
   TSElement *theSaved_;
   TSElement *thePCDATA_;
-  jint theEntity_;
-  jboolean virginStack_;
+  int32_t theEntity_;
+  bool virginStack_;
   IOSCharArray *theCommentBuffer_;
 }
 
-+ (JavaLangBoolean *)truthValueWithBoolean:(jboolean)b;
++ (JavaLangBoolean *)truthValueWithBoolean:(bool)b;
 
 - (void)setup;
 
@@ -102,9 +103,9 @@
 
 - (NSString *)expandEntitiesWithNSString:(NSString *)src;
 
-- (jint)lookupEntityWithCharArray:(IOSCharArray *)buff
-                          withInt:(jint)offset
-                          withInt:(jint)length;
+- (int32_t)lookupEntityWithCharArray:(IOSCharArray *)buff
+                             withInt:(int32_t)offset
+                             withInt:(int32_t)length;
 
 - (void)restartWithTSElement:(TSElement *)e;
 
@@ -116,8 +117,8 @@
 
 - (NSString *)prefixOfWithNSString:(NSString *)name;
 
-- (jboolean)foreignWithNSString:(NSString *)prefix
-                   withNSString:(NSString *)namespace_;
+- (bool)foreignWithNSString:(NSString *)prefix
+               withNSString:(NSString *)namespace_;
 
 + (NSString *)trimquotesWithNSString:(NSString *)inArg;
 
@@ -128,8 +129,8 @@
 - (void)rectifyWithTSElement:(TSElement *)e;
 
 - (NSString *)makeNameWithCharArray:(IOSCharArray *)buff
-                            withInt:(jint)offset
-                            withInt:(jint)length;
+                            withInt:(int32_t)offset
+                            withInt:(int32_t)length;
 
 @end
 
@@ -148,59 +149,59 @@ J2OBJC_FIELD_SETTER(TSTagSoupParser, theSaved_, TSElement *)
 J2OBJC_FIELD_SETTER(TSTagSoupParser, thePCDATA_, TSElement *)
 J2OBJC_FIELD_SETTER(TSTagSoupParser, theCommentBuffer_, IOSCharArray *)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_NAMESPACES(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_NAMESPACES(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_NAMESPACES(void);
-static jboolean TSTagSoupParser_DEFAULT_NAMESPACES = true;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_NAMESPACES, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_NAMESPACES(void);
+inline bool TSTagSoupParser_set_DEFAULT_NAMESPACES(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_NAMESPACES(void);
+static bool TSTagSoupParser_DEFAULT_NAMESPACES = true;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_NAMESPACES, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_IGNORE_BOGONS(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_IGNORE_BOGONS(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_IGNORE_BOGONS(void);
-static jboolean TSTagSoupParser_DEFAULT_IGNORE_BOGONS = false;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_IGNORE_BOGONS, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_IGNORE_BOGONS(void);
+inline bool TSTagSoupParser_set_DEFAULT_IGNORE_BOGONS(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_IGNORE_BOGONS(void);
+static bool TSTagSoupParser_DEFAULT_IGNORE_BOGONS = false;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_IGNORE_BOGONS, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_BOGONS_EMPTY(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_BOGONS_EMPTY(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_BOGONS_EMPTY(void);
-static jboolean TSTagSoupParser_DEFAULT_BOGONS_EMPTY = false;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_BOGONS_EMPTY, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_BOGONS_EMPTY(void);
+inline bool TSTagSoupParser_set_DEFAULT_BOGONS_EMPTY(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_BOGONS_EMPTY(void);
+static bool TSTagSoupParser_DEFAULT_BOGONS_EMPTY = false;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_BOGONS_EMPTY, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_ROOT_BOGONS(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_ROOT_BOGONS(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_ROOT_BOGONS(void);
-static jboolean TSTagSoupParser_DEFAULT_ROOT_BOGONS = true;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_ROOT_BOGONS, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_ROOT_BOGONS(void);
+inline bool TSTagSoupParser_set_DEFAULT_ROOT_BOGONS(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_ROOT_BOGONS(void);
+static bool TSTagSoupParser_DEFAULT_ROOT_BOGONS = true;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_ROOT_BOGONS, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_DEFAULT_ATTRIBUTES(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_DEFAULT_ATTRIBUTES(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_DEFAULT_ATTRIBUTES(void);
-static jboolean TSTagSoupParser_DEFAULT_DEFAULT_ATTRIBUTES = true;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_DEFAULT_ATTRIBUTES, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_DEFAULT_ATTRIBUTES(void);
+inline bool TSTagSoupParser_set_DEFAULT_DEFAULT_ATTRIBUTES(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_DEFAULT_ATTRIBUTES(void);
+static bool TSTagSoupParser_DEFAULT_DEFAULT_ATTRIBUTES = true;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_DEFAULT_ATTRIBUTES, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_TRANSLATE_COLONS(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_TRANSLATE_COLONS(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_TRANSLATE_COLONS(void);
-static jboolean TSTagSoupParser_DEFAULT_TRANSLATE_COLONS = false;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_TRANSLATE_COLONS, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_TRANSLATE_COLONS(void);
+inline bool TSTagSoupParser_set_DEFAULT_TRANSLATE_COLONS(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_TRANSLATE_COLONS(void);
+static bool TSTagSoupParser_DEFAULT_TRANSLATE_COLONS = false;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_TRANSLATE_COLONS, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_RESTART_ELEMENTS(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_RESTART_ELEMENTS(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_RESTART_ELEMENTS(void);
-static jboolean TSTagSoupParser_DEFAULT_RESTART_ELEMENTS = true;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_RESTART_ELEMENTS, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_RESTART_ELEMENTS(void);
+inline bool TSTagSoupParser_set_DEFAULT_RESTART_ELEMENTS(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_RESTART_ELEMENTS(void);
+static bool TSTagSoupParser_DEFAULT_RESTART_ELEMENTS = true;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_RESTART_ELEMENTS, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_IGNORABLE_WHITESPACE(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_IGNORABLE_WHITESPACE(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_IGNORABLE_WHITESPACE(void);
-static jboolean TSTagSoupParser_DEFAULT_IGNORABLE_WHITESPACE = false;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_IGNORABLE_WHITESPACE, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_IGNORABLE_WHITESPACE(void);
+inline bool TSTagSoupParser_set_DEFAULT_IGNORABLE_WHITESPACE(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_IGNORABLE_WHITESPACE(void);
+static bool TSTagSoupParser_DEFAULT_IGNORABLE_WHITESPACE = false;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_IGNORABLE_WHITESPACE, bool)
 
-inline jboolean TSTagSoupParser_get_DEFAULT_CDATA_ELEMENTS(void);
-inline jboolean TSTagSoupParser_set_DEFAULT_CDATA_ELEMENTS(jboolean value);
-inline jboolean *TSTagSoupParser_getRef_DEFAULT_CDATA_ELEMENTS(void);
-static jboolean TSTagSoupParser_DEFAULT_CDATA_ELEMENTS = true;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_CDATA_ELEMENTS, jboolean)
+inline bool TSTagSoupParser_get_DEFAULT_CDATA_ELEMENTS(void);
+inline bool TSTagSoupParser_set_DEFAULT_CDATA_ELEMENTS(bool value);
+inline bool *TSTagSoupParser_getRef_DEFAULT_CDATA_ELEMENTS(void);
+static bool TSTagSoupParser_DEFAULT_CDATA_ELEMENTS = true;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSTagSoupParser, DEFAULT_CDATA_ELEMENTS, bool)
 
 inline IOSCharArray *TSTagSoupParser_get_etagchars(void);
 inline IOSCharArray *TSTagSoupParser_set_etagchars(IOSCharArray *value);
@@ -212,7 +213,7 @@ inline NSString *TSTagSoupParser_set_legal(NSString *value);
 static NSString *TSTagSoupParser_legal = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-'()+,./:=?;!*#@$_%";
 J2OBJC_STATIC_FIELD_OBJ(TSTagSoupParser, legal, NSString *)
 
-__attribute__((unused)) static JavaLangBoolean *TSTagSoupParser_truthValueWithBoolean_(jboolean b);
+__attribute__((unused)) static JavaLangBoolean *TSTagSoupParser_truthValueWithBoolean_(bool b);
 
 __attribute__((unused)) static void TSTagSoupParser_setup(TSTagSoupParser *self);
 
@@ -222,7 +223,7 @@ __attribute__((unused)) static JavaIoInputStream *TSTagSoupParser_getInputStream
 
 __attribute__((unused)) static NSString *TSTagSoupParser_expandEntitiesWithNSString_(TSTagSoupParser *self, NSString *src);
 
-__attribute__((unused)) static jint TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, jint offset, jint length);
+__attribute__((unused)) static int32_t TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, int32_t offset, int32_t length);
 
 __attribute__((unused)) static void TSTagSoupParser_restartWithTSElement_(TSTagSoupParser *self, TSElement *e);
 
@@ -234,7 +235,7 @@ __attribute__((unused)) static void TSTagSoupParser_pushWithTSElement_(TSTagSoup
 
 __attribute__((unused)) static NSString *TSTagSoupParser_prefixOfWithNSString_(TSTagSoupParser *self, NSString *name);
 
-__attribute__((unused)) static jboolean TSTagSoupParser_foreignWithNSString_withNSString_(TSTagSoupParser *self, NSString *prefix, NSString *namespace_);
+__attribute__((unused)) static bool TSTagSoupParser_foreignWithNSString_withNSString_(TSTagSoupParser *self, NSString *prefix, NSString *namespace_);
 
 __attribute__((unused)) static NSString *TSTagSoupParser_trimquotesWithNSString_(NSString *inArg);
 
@@ -244,7 +245,7 @@ __attribute__((unused)) static NSString *TSTagSoupParser_cleanPublicidWithNSStri
 
 __attribute__((unused)) static void TSTagSoupParser_rectifyWithTSElement_(TSTagSoupParser *self, TSElement *e);
 
-__attribute__((unused)) static NSString *TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, jint offset, jint length);
+__attribute__((unused)) static NSString *TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, int32_t offset, int32_t length);
 
 @interface TSTagSoupParser_1 : NSObject < TSAutoDetector >
 
@@ -261,6 +262,7 @@ __attribute__((unused)) static void TSTagSoupParser_1_init(TSTagSoupParser_1 *se
 __attribute__((unused)) static TSTagSoupParser_1 *new_TSTagSoupParser_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static TSTagSoupParser_1 *create_TSTagSoupParser_1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(TSTagSoupParser)
 
@@ -301,11 +303,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (JavaLangBoolean *)truthValueWithBoolean:(jboolean)b {
++ (JavaLangBoolean *)truthValueWithBoolean:(bool)b {
   return TSTagSoupParser_truthValueWithBoolean_(b);
 }
 
-- (jboolean)getFeatureWithNSString:(NSString *)name {
+- (bool)getFeatureWithNSString:(NSString *)name {
   JavaLangBoolean *b = (JavaLangBoolean *) cast_chk([((JavaUtilHashMap *) nil_chk(theFeatures_)) getWithId:name], [JavaLangBoolean class]);
   if (b == nil) {
     @throw create_OrgXmlSaxSAXNotRecognizedException_initWithNSString_(JreStrcat("$$", @"Unknown feature ", name));
@@ -314,7 +316,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)value {
+                   withBoolean:(bool)value {
   JavaLangBoolean *b = (JavaLangBoolean *) cast_chk([((JavaUtilHashMap *) nil_chk(theFeatures_)) getWithId:name], [JavaLangBoolean class]);
   if (b == nil) {
     @throw create_OrgXmlSaxSAXNotRecognizedException_initWithNSString_(JreStrcat("$$", @"Unknown feature ", name));
@@ -334,7 +336,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getPropertyWithNSString:(NSString *)name {
   if ([((NSString *) nil_chk(name)) isEqual:TSTagSoupParser_lexicalHandlerProperty]) {
-    return theLexicalHandler_ == self ? nil : theLexicalHandler_;
+    return JreObjectEqualsEquals(theLexicalHandler_, self) ? nil : theLexicalHandler_;
   }
   else if ([name isEqual:TSTagSoupParser_scannerProperty]) {
     return theScanner_;
@@ -397,7 +399,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgXmlSaxEntityResolver>)getEntityResolver {
-  return (theEntityResolver_ == self) ? nil : theEntityResolver_;
+  return (JreObjectEqualsEquals(theEntityResolver_, self)) ? nil : theEntityResolver_;
 }
 
 - (void)setDTDHandlerWithOrgXmlSaxDTDHandler:(id<OrgXmlSaxDTDHandler>)handler {
@@ -405,7 +407,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgXmlSaxDTDHandler>)getDTDHandler {
-  return (theDTDHandler_ == self) ? nil : theDTDHandler_;
+  return (JreObjectEqualsEquals(theDTDHandler_, self)) ? nil : theDTDHandler_;
 }
 
 - (void)setContentHandlerWithOrgXmlSaxContentHandler:(id<OrgXmlSaxContentHandler>)handler {
@@ -413,7 +415,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgXmlSaxContentHandler>)getContentHandler {
-  return (theContentHandler_ == self) ? nil : theContentHandler_;
+  return (JreObjectEqualsEquals(theContentHandler_, self)) ? nil : theContentHandler_;
 }
 
 - (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)handler {
@@ -421,7 +423,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgXmlSaxErrorHandler>)getErrorHandler {
-  return (theErrorHandler_ == self) ? nil : theErrorHandler_;
+  return (JreObjectEqualsEquals(theErrorHandler_, self)) ? nil : theErrorHandler_;
 }
 
 - (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)input {
@@ -454,23 +456,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)adupWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length {
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length {
   if (theNewElement_ == nil || theAttributeName_ == nil) return;
   [theNewElement_ setAttributeWithNSString:theAttributeName_ withNSString:nil withNSString:theAttributeName_];
   JreStrongAssign(&theAttributeName_, nil);
 }
 
 - (void)anameWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length {
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length {
   if (theNewElement_ == nil) return;
   JreStrongAssign(&theAttributeName_, TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(self, buff, offset, length));
 }
 
 - (void)avalWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length {
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length {
   if (theNewElement_ == nil || theAttributeName_ == nil) return;
   NSString *value = [NSString java_stringWithCharacters:buff offset:offset length:length];
   value = TSTagSoupParser_expandEntitiesWithNSString_(self, value);
@@ -483,20 +485,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)entityWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length {
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length {
   theEntity_ = TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(self, buff, offset, length);
 }
 
-- (jint)lookupEntityWithCharArray:(IOSCharArray *)buff
-                          withInt:(jint)offset
-                          withInt:(jint)length {
+- (int32_t)lookupEntityWithCharArray:(IOSCharArray *)buff
+                             withInt:(int32_t)offset
+                             withInt:(int32_t)length {
   return TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(self, buff, offset, length);
 }
 
 - (void)eofWithCharArray:(IOSCharArray *)buff
-                 withInt:(jint)offset
-                 withInt:(jint)length {
+                 withInt:(int32_t)offset
+                 withInt:(int32_t)length {
   if (virginStack_) TSTagSoupParser_rectifyWithTSElement_(self, thePCDATA_);
   while ([((TSElement *) nil_chk(theStack_)) next] != nil) {
     TSTagSoupParser_pop(self);
@@ -506,20 +508,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)etagWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length {
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length {
   if ([self etag_cdataWithCharArray:buff withInt:offset withInt:length]) return;
   [self etag_basicWithCharArray:buff withInt:offset withInt:length];
 }
 
-- (jboolean)etag_cdataWithCharArray:(IOSCharArray *)buff
-                            withInt:(jint)offset
-                            withInt:(jint)length {
+- (bool)etag_cdataWithCharArray:(IOSCharArray *)buff
+                        withInt:(int32_t)offset
+                        withInt:(int32_t)length {
   NSString *currentName = JreRetainedLocalValue([((TSElement *) nil_chk(theStack_)) name]);
   if (CDATAElements_ && ([((TSElement *) nil_chk(theStack_)) flags] & TSSchema_F_CDATA) != 0) {
-    jboolean realTag = length == [((NSString *) nil_chk(currentName)) java_length];
+    bool realTag = length == [((NSString *) nil_chk(currentName)) java_length];
     if (realTag) {
-      for (jint i = 0; i < length; i++) {
+      for (int32_t i = 0; i < length; i++) {
         if (JavaLangCharacter_toLowerCaseWithChar_(IOSCharArray_Get(nil_chk(buff), offset + i)) != JavaLangCharacter_toLowerCaseWithChar_([currentName charAtWithInt:i])) {
           realTag = false;
           break;
@@ -538,8 +540,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)etag_basicWithCharArray:(IOSCharArray *)buff
-                        withInt:(jint)offset
-                        withInt:(jint)length {
+                        withInt:(int32_t)offset
+                        withInt:(int32_t)length {
   JreStrongAssign(&theNewElement_, nil);
   NSString *name;
   if (length != 0) {
@@ -552,7 +554,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     name = [((TSElement *) nil_chk(theStack_)) name];
   }
   TSElement *sp;
-  jboolean inNoforce = false;
+  bool inNoforce = false;
   for (sp = theStack_; sp != nil; sp = [sp next]) {
     if ([((NSString *) nil_chk([sp name])) isEqual:name]) break;
     if (([sp flags] & TSSchema_F_NOFORCE) != 0) inNoforce = true;
@@ -563,7 +565,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [sp preclose];
   }
   else {
-    while (theStack_ != sp) {
+    while (!JreObjectEqualsEquals(theStack_, sp)) {
       TSTagSoupParser_restartablyPop(self);
     }
     TSTagSoupParser_pop(self);
@@ -594,14 +596,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return TSTagSoupParser_prefixOfWithNSString_(self, name);
 }
 
-- (jboolean)foreignWithNSString:(NSString *)prefix
-                   withNSString:(NSString *)namespace_ {
+- (bool)foreignWithNSString:(NSString *)prefix
+               withNSString:(NSString *)namespace_ {
   return TSTagSoupParser_foreignWithNSString_withNSString_(self, prefix, namespace_);
 }
 
 - (void)declWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length {
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length {
   NSString *s = [NSString java_stringWithCharacters:buff offset:offset length:length];
   NSString *name = nil;
   NSString *systemid = nil;
@@ -658,16 +660,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)giWithCharArray:(IOSCharArray *)buff
-                withInt:(jint)offset
-                withInt:(jint)length {
+                withInt:(int32_t)offset
+                withInt:(int32_t)length {
   if (theNewElement_ != nil) return;
   NSString *name = TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(self, buff, offset, length);
   if (name == nil) return;
   TSElementType *type = JreRetainedLocalValue([((TSSchema *) nil_chk(theSchema_)) getElementTypeWithNSString:name]);
   if (type == nil) {
     if (ignoreBogons_) return;
-    jint bogonModel = bogonsEmpty_ ? TSSchema_M_EMPTY : TSSchema_M_ANY;
-    jint bogonMemberOf = rootBogons_ ? TSSchema_M_ANY : (TSSchema_M_ANY & ~TSSchema_M_ROOT);
+    int32_t bogonModel = bogonsEmpty_ ? TSSchema_M_EMPTY : TSSchema_M_ANY;
+    int32_t bogonMemberOf = rootBogons_ ? TSSchema_M_ANY : (TSSchema_M_ANY & ~TSSchema_M_ROOT);
     [((TSSchema *) nil_chk(theSchema_)) elementTypeWithNSString:name withInt:bogonModel withInt:bogonMemberOf withInt:0];
     if (!rootBogons_) [((TSSchema *) nil_chk(theSchema_)) parentWithNSString:name withNSString:[((TSElementType *) nil_chk([theSchema_ rootElementType])) name]];
     type = [((TSSchema *) nil_chk(theSchema_)) getElementTypeWithNSString:name];
@@ -676,19 +678,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)cdsectWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length {
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length {
   [((id<OrgXmlSaxExtLexicalHandler>) nil_chk(theLexicalHandler_)) startCDATA];
   [self pcdataWithCharArray:buff withInt:offset withInt:length];
   [((id<OrgXmlSaxExtLexicalHandler>) nil_chk(theLexicalHandler_)) endCDATA];
 }
 
 - (void)pcdataWithCharArray:(IOSCharArray *)buff
-                    withInt:(jint)offset
-                    withInt:(jint)length {
+                    withInt:(int32_t)offset
+                    withInt:(int32_t)length {
   if (length == 0) return;
-  jboolean allWhite = true;
-  for (jint i = 0; i < length; i++) {
+  bool allWhite = true;
+  for (int32_t i = 0; i < length; i++) {
     if (!JavaLangCharacter_isWhitespaceWithChar_(IOSCharArray_Get(nil_chk(buff), offset + i))) {
       allWhite = false;
     }
@@ -705,15 +707,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)pitargetWithCharArray:(IOSCharArray *)buff
-                      withInt:(jint)offset
-                      withInt:(jint)length {
+                      withInt:(int32_t)offset
+                      withInt:(int32_t)length {
   if (theNewElement_ != nil) return;
   JreStrongAssign(&thePITarget_, [(TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(self, buff, offset, length)) java_replace:':' withChar:'_']);
 }
 
 - (void)piWithCharArray:(IOSCharArray *)buff
-                withInt:(jint)offset
-                withInt:(jint)length {
+                withInt:(int32_t)offset
+                withInt:(int32_t)length {
   if (theNewElement_ != nil || thePITarget_ == nil) return;
   if ([@"xml" java_equalsIgnoreCase:thePITarget_]) return;
   if (length > 0 && IOSCharArray_Get(nil_chk(buff), length - 1) == '?') length--;
@@ -722,8 +724,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)stagcWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length {
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length {
   if (theNewElement_ == nil) return;
   TSTagSoupParser_rectifyWithTSElement_(self, theNewElement_);
   if ([((TSElement *) nil_chk(theStack_)) model] == TSSchema_M_EMPTY) {
@@ -732,16 +734,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)stageWithCharArray:(IOSCharArray *)buff
-                   withInt:(jint)offset
-                   withInt:(jint)length {
+                   withInt:(int32_t)offset
+                   withInt:(int32_t)length {
   if (theNewElement_ == nil) return;
   TSTagSoupParser_rectifyWithTSElement_(self, theNewElement_);
   [self etag_basicWithCharArray:buff withInt:offset withInt:length];
 }
 
 - (void)cmntWithCharArray:(IOSCharArray *)buff
-                  withInt:(jint)offset
-                  withInt:(jint)length {
+                  withInt:(int32_t)offset
+                  withInt:(int32_t)length {
   [((id<OrgXmlSaxExtLexicalHandler>) nil_chk(theLexicalHandler_)) commentWithCharArray:buff withInt:offset withInt:length];
 }
 
@@ -749,19 +751,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   TSTagSoupParser_rectifyWithTSElement_(self, e);
 }
 
-- (jint)getEntity {
+- (int32_t)getEntity {
   return theEntity_;
 }
 
 - (NSString *)makeNameWithCharArray:(IOSCharArray *)buff
-                            withInt:(jint)offset
-                            withInt:(jint)length {
+                            withInt:(int32_t)offset
+                            withInt:(int32_t)length {
   return TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(self, buff, offset, length);
 }
 
 - (void)commentWithCharArray:(IOSCharArray *)ch
-                     withInt:(jint)start
-                     withInt:(jint)length {
+                     withInt:(int32_t)start
+                     withInt:(int32_t)length {
 }
 
 - (void)endCDATA {
@@ -1010,7 +1012,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [TSTagSoupParser class]) {
-    JreStrongAssignAndConsume(&TSTagSoupParser_etagchars, [IOSCharArray newArrayWithChars:(jchar[]){ '<', '/', '>' } count:3]);
+    JreStrongAssignAndConsume(&TSTagSoupParser_etagchars, [IOSCharArray newArrayWithChars:(unichar[]){ '<', '/', '>' } count:3]);
     J2OBJC_SET_INITIALIZED(TSTagSoupParser)
   }
 }
@@ -1082,7 +1084,7 @@ TSTagSoupParser *create_TSTagSoupParser_init() {
   J2OBJC_CREATE_IMPL(TSTagSoupParser, init)
 }
 
-JavaLangBoolean *TSTagSoupParser_truthValueWithBoolean_(jboolean b) {
+JavaLangBoolean *TSTagSoupParser_truthValueWithBoolean_(bool b) {
   TSTagSoupParser_initialize();
   return b ? JreLoadStatic(JavaLangBoolean, TRUE) : JreLoadStatic(JavaLangBoolean, FALSE);
 }
@@ -1135,12 +1137,12 @@ JavaIoInputStream *TSTagSoupParser_getInputStreamWithNSString_withNSString_(TSTa
 }
 
 NSString *TSTagSoupParser_expandEntitiesWithNSString_(TSTagSoupParser *self, NSString *src) {
-  jint refStart = -1;
-  jint len = [((NSString *) nil_chk(src)) java_length];
+  int32_t refStart = -1;
+  int32_t len = [((NSString *) nil_chk(src)) java_length];
   IOSCharArray *dst = [IOSCharArray arrayWithLength:len];
-  jint dstlen = 0;
-  for (jint i = 0; i < len; i++) {
-    jchar ch = [src charAtWithInt:i];
+  int32_t dstlen = 0;
+  for (int32_t i = 0; i < len; i++) {
+    unichar ch = [src charAtWithInt:i];
     *IOSCharArray_GetRef(dst, dstlen++) = ch;
     if (ch == '&' && refStart == -1) {
       refStart = dstlen;
@@ -1150,15 +1152,15 @@ NSString *TSTagSoupParser_expandEntitiesWithNSString_(TSTagSoupParser *self, NSS
     else if (JavaLangCharacter_isLetterWithChar_(ch) || JavaLangCharacter_isDigitWithChar_(ch) || ch == '#') {
     }
     else if (ch == ';') {
-      jint ent = TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(self, dst, refStart, dstlen - refStart - 1);
-      if (ent > (jint) 0xFFFF) {
-        ent -= (jint) 0x10000;
-        *IOSCharArray_GetRef(dst, refStart - 1) = (jchar) ((JreRShift32(ent, 10)) + (jint) 0xD800);
-        *IOSCharArray_GetRef(dst, refStart) = (jchar) ((ent & (jint) 0x3FF) + (jint) 0xDC00);
+      int32_t ent = TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(self, dst, refStart, dstlen - refStart - 1);
+      if (ent > (int32_t) 0xFFFF) {
+        ent -= (int32_t) 0x10000;
+        *IOSCharArray_GetRef(dst, refStart - 1) = (unichar) ((JreRShift32(ent, 10)) + (int32_t) 0xD800);
+        *IOSCharArray_GetRef(dst, refStart) = (unichar) ((ent & (int32_t) 0x3FF) + (int32_t) 0xDC00);
         dstlen = refStart + 1;
       }
       else if (ent != 0) {
-        *IOSCharArray_GetRef(dst, refStart - 1) = (jchar) ent;
+        *IOSCharArray_GetRef(dst, refStart - 1) = (unichar) ent;
         dstlen = refStart;
       }
       refStart = -1;
@@ -1170,8 +1172,8 @@ NSString *TSTagSoupParser_expandEntitiesWithNSString_(TSTagSoupParser *self, NSS
   return [NSString java_stringWithCharacters:dst offset:0 length:dstlen];
 }
 
-jint TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, jint offset, jint length) {
-  jint result = 0;
+int32_t TSTagSoupParser_lookupEntityWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, int32_t offset, int32_t length) {
+  int32_t result = 0;
   if (length < 1) return result;
   if (IOSCharArray_Get(nil_chk(buff), offset) == '#') {
     if (length > 1 && (IOSCharArray_Get(buff, offset + 1) == 'x' || IOSCharArray_Get(buff, offset + 1) == 'X')) {
@@ -1212,7 +1214,7 @@ void TSTagSoupParser_pop(TSTagSoupParser *self) {
     [((id<OrgXmlSaxContentHandler>) nil_chk(self->theContentHandler_)) endPrefixMappingWithNSString:prefix];
   }
   id<OrgXmlSaxAttributes> atts = JreRetainedLocalValue([((TSElement *) nil_chk(self->theStack_)) atts]);
-  for (jint i = [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength] - 1; i >= 0; i--) {
+  for (int32_t i = [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength] - 1; i >= 0; i--) {
     NSString *attNamespace = JreRetainedLocalValue([atts getURIWithInt:i]);
     NSString *attPrefix = TSTagSoupParser_prefixOfWithNSString_(self, [atts getQNameWithInt:i]);
     if (TSTagSoupParser_foreignWithNSString_withNSString_(self, attPrefix, attNamespace)) {
@@ -1250,8 +1252,8 @@ void TSTagSoupParser_pushWithTSElement_(TSTagSoupParser *self, TSElement *e) {
     [((id<OrgXmlSaxContentHandler>) nil_chk(self->theContentHandler_)) startPrefixMappingWithNSString:prefix withNSString:namespace_];
   }
   id<OrgXmlSaxAttributes> atts = JreRetainedLocalValue([e atts]);
-  jint len = [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength];
-  for (jint i = 0; i < len; i++) {
+  int32_t len = [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength];
+  for (int32_t i = 0; i < len; i++) {
     NSString *attNamespace = JreRetainedLocalValue([atts getURIWithInt:i]);
     NSString *attPrefix = TSTagSoupParser_prefixOfWithNSString_(self, [atts getQNameWithInt:i]);
     if (TSTagSoupParser_foreignWithNSString_withNSString_(self, attPrefix, attNamespace)) {
@@ -1268,24 +1270,24 @@ void TSTagSoupParser_pushWithTSElement_(TSTagSoupParser *self, TSElement *e) {
 }
 
 NSString *TSTagSoupParser_prefixOfWithNSString_(TSTagSoupParser *self, NSString *name) {
-  jint i = [((NSString *) nil_chk(name)) java_indexOf:':'];
+  int32_t i = [((NSString *) nil_chk(name)) java_indexOf:':'];
   NSString *prefix = @"";
   if (i != -1) prefix = [name java_substring:0 endIndex:i];
   return prefix;
 }
 
-jboolean TSTagSoupParser_foreignWithNSString_withNSString_(TSTagSoupParser *self, NSString *prefix, NSString *namespace_) {
-  jboolean foreign = !([((NSString *) nil_chk(prefix)) isEqual:@""] || [((NSString *) nil_chk(namespace_)) isEqual:@""] || [namespace_ isEqual:[((TSSchema *) nil_chk(self->theSchema_)) getURI]]);
+bool TSTagSoupParser_foreignWithNSString_withNSString_(TSTagSoupParser *self, NSString *prefix, NSString *namespace_) {
+  bool foreign = !([((NSString *) nil_chk(prefix)) isEqual:@""] || [((NSString *) nil_chk(namespace_)) isEqual:@""] || [namespace_ isEqual:[((TSSchema *) nil_chk(self->theSchema_)) getURI]]);
   return foreign;
 }
 
 NSString *TSTagSoupParser_trimquotesWithNSString_(NSString *inArg) {
   TSTagSoupParser_initialize();
   if (inArg == nil) return inArg;
-  jint length = [inArg java_length];
+  int32_t length = [inArg java_length];
   if (length == 0) return inArg;
-  jchar s = [inArg charAtWithInt:0];
-  jchar e = [inArg charAtWithInt:length - 1];
+  unichar s = [inArg charAtWithInt:0];
+  unichar e = [inArg charAtWithInt:length - 1];
   if (s == e && (s == '\'' || s == '"')) {
     inArg = [inArg java_substring:1 endIndex:[inArg java_length] - 1];
   }
@@ -1300,14 +1302,14 @@ IOSObjectArray *TSTagSoupParser_splitWithNSString_(NSString *val) {
   }
   else {
     JavaUtilArrayList *l = create_JavaUtilArrayList_init();
-    jint s = 0;
-    jint e = 0;
-    jboolean sq = false;
-    jboolean dq = false;
-    jchar lastc = 0;
-    jint len = [val java_length];
+    int32_t s = 0;
+    int32_t e = 0;
+    bool sq = false;
+    bool dq = false;
+    unichar lastc = 0;
+    int32_t len = [val java_length];
     for (e = 0; e < len; e++) {
-      jchar c = [val charAtWithInt:e];
+      unichar c = [val charAtWithInt:e];
       if (!dq && c == '\'' && lastc != '\\') {
         sq = !sq;
         if (s < 0) s = e;
@@ -1334,11 +1336,11 @@ IOSObjectArray *TSTagSoupParser_splitWithNSString_(NSString *val) {
 
 NSString *TSTagSoupParser_cleanPublicidWithNSString_(TSTagSoupParser *self, NSString *src) {
   if (src == nil) return nil;
-  jint len = [src java_length];
+  int32_t len = [src java_length];
   JavaLangStringBuffer *dst = create_JavaLangStringBuffer_initWithInt_(len);
-  jboolean suppressSpace = true;
-  for (jint i = 0; i < len; i++) {
-    jchar ch = [src charAtWithInt:i];
+  bool suppressSpace = true;
+  for (int32_t i = 0; i < len; i++) {
+    unichar ch = [src charAtWithInt:i];
     if ([((NSString *) nil_chk(TSTagSoupParser_legal)) java_indexOf:ch] != -1) {
       [dst appendWithChar:ch];
       suppressSpace = false;
@@ -1369,7 +1371,7 @@ void TSTagSoupParser_rectifyWithTSElement_(TSTagSoupParser *self, TSElement *e) 
     e = parent;
   }
   if (sp == nil) return;
-  while (self->theStack_ != sp) {
+  while (!JreObjectEqualsEquals(self->theStack_, sp)) {
     if (self->theStack_ == nil || [self->theStack_ next] == nil || [((TSElement *) nil_chk([((TSElement *) nil_chk(self->theStack_)) next])) next] == nil) break;
     TSTagSoupParser_restartablyPop(self);
   }
@@ -1382,12 +1384,12 @@ void TSTagSoupParser_rectifyWithTSElement_(TSTagSoupParser *self, TSElement *e) 
   JreStrongAssign(&self->theNewElement_, nil);
 }
 
-NSString *TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, jint offset, jint length) {
+NSString *TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(TSTagSoupParser *self, IOSCharArray *buff, int32_t offset, int32_t length) {
   JavaLangStringBuffer *dst = create_JavaLangStringBuffer_initWithInt_(length + 2);
-  jboolean seenColon = false;
-  jboolean start = true;
+  bool seenColon = false;
+  bool start = true;
   for (; length-- > 0; offset++) {
-    jchar ch = IOSCharArray_Get(nil_chk(buff), offset);
+    unichar ch = IOSCharArray_Get(nil_chk(buff), offset);
     if (JavaLangCharacter_isLetterWithChar_(ch) || ch == '_') {
       start = false;
       [dst appendWithChar:ch];
@@ -1404,12 +1406,14 @@ NSString *TSTagSoupParser_makeNameWithCharArray_withInt_withInt_(TSTagSoupParser
       [dst appendWithChar:self->translateColons_ ? '_' : ch];
     }
   }
-  jint dstLength = [dst java_length];
+  int32_t dstLength = [dst java_length];
   if (dstLength == 0 || [dst charAtWithInt:dstLength - 1] == ':') [dst appendWithChar:'_'];
   return [((NSString *) nil_chk([dst description])) java_intern];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSTagSoupParser)
+
+J2OBJC_NAME_MAPPING(TSTagSoupParser, "repackaged.org.ccil.cowan.tagsoup", "TS")
 
 @implementation TSTagSoupParser_1
 
@@ -1436,7 +1440,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(autoDetectingReaderWithJavaIoInputStream:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "autoDetectingReader", "LJavaIoInputStream;", "LTSTagSoupParser;", "setup" };
-  static const J2ObjcClassInfo _TSTagSoupParser_1 = { "", "repackaged.org.ccil.cowan.tagsoup", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _TSTagSoupParser_1 = { "", "repackaged.org.ccil.cowan.tagsoup", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, -1, -1 };
   return &_TSTagSoupParser_1;
 }
 

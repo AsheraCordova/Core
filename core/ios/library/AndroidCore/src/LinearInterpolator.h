@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\LinearInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LinearInterpolator")
@@ -22,6 +23,8 @@
 
 @class ADAttributeSet;
 @class ADContext;
+@class JavaLangFloat;
+@class JavaLangLong;
 
 /*!
  @brief An interpolator where the rate of change is constant
@@ -37,9 +40,9 @@
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
-- (jfloat)getInterpolationWithFloat:(jfloat)input;
+- (float)getInterpolationWithFloat:(float)input;
 
 @end
 
@@ -60,6 +63,7 @@ FOUNDATION_EXPORT ADLinearInterpolator *create_ADLinearInterpolator_initWithADCo
 J2OBJC_TYPE_LITERAL_HEADER(ADLinearInterpolator)
 
 @compatibility_alias RAndroidViewAnimationLinearInterpolator ADLinearInterpolator;
+
 
 #endif
 

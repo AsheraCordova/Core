@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\widget\ListView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ListView")
@@ -21,6 +22,7 @@
 #include "AbsListView.h"
 
 @class ADView;
+@class JavaLangInteger;
 @protocol ADListAdapter;
 
 @interface ADListView : ADAbsListView
@@ -35,8 +37,8 @@
 
 #pragma mark Protected
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 @end
 
@@ -51,6 +53,7 @@ FOUNDATION_EXPORT ADListView *create_ADListView_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADListView)
 
 @compatibility_alias RAndroidWidgetListView ADListView;
+
 
 #endif
 

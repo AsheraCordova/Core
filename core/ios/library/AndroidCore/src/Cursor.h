@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\database\Cursor.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Cursor")
@@ -16,6 +17,9 @@
 #if !defined (ADCursor_) && (INCLUDE_ALL_Cursor || defined(INCLUDE_ADCursor))
 #define ADCursor_
 
+@class JavaLangInteger;
+@class NSString;
+
 @interface ADCursor : NSObject
 
 #pragma mark Public
@@ -24,11 +28,11 @@
 
 - (void)close;
 
-- (jint)getColumnIndexWithNSString:(NSString *)string;
+- (int32_t)getColumnIndexWithNSString:(NSString *)string;
 
-- (jint)getCount;
+- (int32_t)getCount;
 
-- (NSString *)getStringWithInt:(jint)columnIndex;
+- (NSString *)getStringWithInt:(int32_t)columnIndex;
 
 - (void)moveToFirst;
 
@@ -45,6 +49,7 @@ FOUNDATION_EXPORT ADCursor *create_ADCursor_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADCursor)
 
 @compatibility_alias RAndroidDatabaseCursor ADCursor;
+
 
 #endif
 

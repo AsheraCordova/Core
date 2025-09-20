@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\SubMenuBuilder.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Context.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
@@ -11,7 +16,15 @@
 #include "MenuItemImpl.h"
 #include "SubMenu.h"
 #include "SubMenuBuilder.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXSubMenuBuilder () {
@@ -42,8 +55,8 @@ J2OBJC_FIELD_SETTER(ADXSubMenuBuilder, mItem_, ADXMenuItemImpl *)
   [((ADXMenuBuilder *) nil_chk(mParentMenu_)) setCallbackWithADXMenuBuilder_Callback:callback];
 }
 
-- (jboolean)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
-                                        withADMenuItem:(id<ADMenuItem>)item {
+- (bool)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
+                                    withADMenuItem:(id<ADMenuItem>)item {
   return [super dispatchMenuItemSelectedWithADXMenuBuilder:menu withADMenuItem:item] || [((ADXMenuBuilder *) nil_chk(mParentMenu_)) dispatchMenuItemSelectedWithADXMenuBuilder:menu withADMenuItem:item];
 }
 
@@ -51,7 +64,7 @@ J2OBJC_FIELD_SETTER(ADXSubMenuBuilder, mItem_, ADXMenuItemImpl *)
   return (id<ADSubMenu>) cast_check([super setHeaderTitleIntWithJavaLangCharSequence:title], ADSubMenu_class_());
 }
 
-- (id<ADSubMenu>)setHeaderTitleWithInt:(jint)titleRes {
+- (id<ADSubMenu>)setHeaderTitleWithInt:(int32_t)titleRes {
   return (id<ADSubMenu>) cast_check([super setHeaderTitleIntWithInt:titleRes], ADSubMenu_class_());
 }
 
@@ -106,3 +119,5 @@ ADXSubMenuBuilder *create_ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXSubMenuBuilder)
+
+J2OBJC_NAME_MAPPING(ADXSubMenuBuilder, "androidx.appcompat.view.menu", "ADX")

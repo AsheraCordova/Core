@@ -3,8 +3,21 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\Token.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Token.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 /*!
@@ -12,9 +25,9 @@
  Increment only if the <i>serialized</i> form of the
   class changes.
  */
-inline jlong CSSToken_get_serialVersionUID(void);
+inline int64_t CSSToken_get_serialVersionUID(void);
 #define CSSToken_serialVersionUID 1LL
-J2OBJC_STATIC_FIELD_CONSTANT(CSSToken, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(CSSToken, serialVersionUID, int64_t)
 
 @implementation CSSToken
 
@@ -27,12 +40,12 @@ J2OBJC_STATIC_FIELD_CONSTANT(CSSToken, serialVersionUID, jlong)
   return self;
 }
 
-- (instancetype)initPackagePrivateWithInt:(jint)kind {
+- (instancetype)initPackagePrivateWithInt:(int32_t)kind {
   CSSToken_initPackagePrivateWithInt_(self, kind);
   return self;
 }
 
-- (instancetype)initPackagePrivateWithInt:(jint)kind
+- (instancetype)initPackagePrivateWithInt:(int32_t)kind
                              withNSString:(NSString *)image {
   CSSToken_initPackagePrivateWithInt_withNSString_(self, kind, image);
   return self;
@@ -42,12 +55,12 @@ J2OBJC_STATIC_FIELD_CONSTANT(CSSToken, serialVersionUID, jlong)
   return image_;
 }
 
-+ (CSSToken *)newTokenWithInt:(jint)ofKind
++ (CSSToken *)newTokenWithInt:(int32_t)ofKind
                  withNSString:(NSString *)image {
   return CSSToken_newTokenWithInt_withNSString_(ofKind, image);
 }
 
-+ (CSSToken *)newTokenWithInt:(jint)ofKind {
++ (CSSToken *)newTokenWithInt:(int32_t)ofKind {
   return CSSToken_newTokenWithInt_(ofKind);
 }
 
@@ -109,33 +122,33 @@ CSSToken *create_CSSToken_initPackagePrivate() {
   J2OBJC_CREATE_IMPL(CSSToken, initPackagePrivate)
 }
 
-void CSSToken_initPackagePrivateWithInt_(CSSToken *self, jint kind) {
+void CSSToken_initPackagePrivateWithInt_(CSSToken *self, int32_t kind) {
   CSSToken_initPackagePrivateWithInt_withNSString_(self, kind, nil);
 }
 
-CSSToken *new_CSSToken_initPackagePrivateWithInt_(jint kind) {
+CSSToken *new_CSSToken_initPackagePrivateWithInt_(int32_t kind) {
   J2OBJC_NEW_IMPL(CSSToken, initPackagePrivateWithInt_, kind)
 }
 
-CSSToken *create_CSSToken_initPackagePrivateWithInt_(jint kind) {
+CSSToken *create_CSSToken_initPackagePrivateWithInt_(int32_t kind) {
   J2OBJC_CREATE_IMPL(CSSToken, initPackagePrivateWithInt_, kind)
 }
 
-void CSSToken_initPackagePrivateWithInt_withNSString_(CSSToken *self, jint kind, NSString *image) {
+void CSSToken_initPackagePrivateWithInt_withNSString_(CSSToken *self, int32_t kind, NSString *image) {
   NSObject_init(self);
   self->kind_ = kind;
   JreStrongAssign(&self->image_, image);
 }
 
-CSSToken *new_CSSToken_initPackagePrivateWithInt_withNSString_(jint kind, NSString *image) {
+CSSToken *new_CSSToken_initPackagePrivateWithInt_withNSString_(int32_t kind, NSString *image) {
   J2OBJC_NEW_IMPL(CSSToken, initPackagePrivateWithInt_withNSString_, kind, image)
 }
 
-CSSToken *create_CSSToken_initPackagePrivateWithInt_withNSString_(jint kind, NSString *image) {
+CSSToken *create_CSSToken_initPackagePrivateWithInt_withNSString_(int32_t kind, NSString *image) {
   J2OBJC_CREATE_IMPL(CSSToken, initPackagePrivateWithInt_withNSString_, kind, image)
 }
 
-CSSToken *CSSToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image) {
+CSSToken *CSSToken_newTokenWithInt_withNSString_(int32_t ofKind, NSString *image) {
   CSSToken_initialize();
   switch (ofKind) {
     default:
@@ -143,7 +156,7 @@ CSSToken *CSSToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image) {
   }
 }
 
-CSSToken *CSSToken_newTokenWithInt_(jint ofKind) {
+CSSToken *CSSToken_newTokenWithInt_(int32_t ofKind) {
   CSSToken_initialize();
   return CSSToken_newTokenWithInt_withNSString_(ofKind, nil);
 }

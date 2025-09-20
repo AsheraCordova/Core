@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\MessageQueue.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Handler.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -12,8 +17,11 @@
 #include "MessageQueue.h"
 #include "PluginInvoker.h"
 #include "SystemClock.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/annotation/Annotation.h"
@@ -21,23 +29,28 @@
 #include "java/lang/annotation/RetentionPolicy.h"
 #include "java/util/ArrayList.h"
 
-@class JavaUtilArrayList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ADMessageQueue () {
  @public
-  jboolean mQuitAllowed_;
-  jlong mPtr_;
+  bool mQuitAllowed_;
+  int64_t mPtr_;
   JavaUtilArrayList *mIdleHandlers_;
-  jboolean mQuitting_;
-  jboolean mBlocked_;
+  bool mQuitting_;
+  bool mBlocked_;
 }
 
 - (void)dispose;
 
-- (jboolean)isPollingLocked;
+- (bool)isPollingLocked;
 
 - (void)removeAllMessagesLocked;
 
@@ -53,7 +66,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADMessageQueue, TAG, NSString *)
 
 __attribute__((unused)) static void ADMessageQueue_dispose(ADMessageQueue *self);
 
-__attribute__((unused)) static jboolean ADMessageQueue_isPollingLocked(ADMessageQueue *self);
+__attribute__((unused)) static bool ADMessageQueue_isPollingLocked(ADMessageQueue *self);
 
 __attribute__((unused)) static void ADMessageQueue_removeAllMessagesLocked(ADMessageQueue *self);
 
@@ -75,7 +88,7 @@ __attribute__((unused)) static IOSObjectArray *ADMessageQueue_OnFileDescriptorEv
 
 @interface ADMessageQueue_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
-  jlong val$when_;
+  int64_t val$when_;
   ADMessage *val$msg_;
 }
 
@@ -85,15 +98,16 @@ __attribute__((unused)) static IOSObjectArray *ADMessageQueue_OnFileDescriptorEv
 
 J2OBJC_EMPTY_STATIC_INIT(ADMessageQueue_$Lambda$1)
 
-__attribute__((unused)) static void ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(ADMessageQueue_$Lambda$1 *self, jlong capture$0, ADMessage *capture$1);
+__attribute__((unused)) static void ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(ADMessageQueue_$Lambda$1 *self, int64_t capture$0, ADMessage *capture$1);
 
-__attribute__((unused)) static ADMessageQueue_$Lambda$1 *new_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(jlong capture$0, ADMessage *capture$1) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADMessageQueue_$Lambda$1 *new_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(int64_t capture$0, ADMessage *capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(jlong capture$0, ADMessage *capture$1);
+__attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(int64_t capture$0, ADMessage *capture$1);
+
 
 @implementation ADMessageQueue
 
-- (instancetype)initWithBoolean:(jboolean)quitAllowed {
+- (instancetype)initWithBoolean:(bool)quitAllowed {
   ADMessageQueue_initWithBoolean_(self, quitAllowed);
   return self;
 }
@@ -111,9 +125,9 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   ADMessageQueue_dispose(self);
 }
 
-- (jboolean)isIdle {
+- (bool)isIdle {
   @synchronized(self) {
-    jlong now = ADSystemClock_uptimeMillis();
+    int64_t now = ADSystemClock_uptimeMillis();
     return mMessages_ == nil || now < mMessages_->when_;
   }
 }
@@ -133,21 +147,21 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
 }
 
-- (jboolean)isPolling {
+- (bool)isPolling {
   @synchronized(self) {
     return ADMessageQueue_isPollingLocked(self);
   }
 }
 
-- (jboolean)isPollingLocked {
+- (bool)isPollingLocked {
   return ADMessageQueue_isPollingLocked(self);
 }
 
-- (void)quitWithBoolean:(jboolean)safe {
+- (void)quitWithBoolean:(bool)safe {
 }
 
-- (jboolean)enqueueMessageWithADMessage:(ADMessage *)msg
-                               withLong:(jlong)when {
+- (bool)enqueueMessageWithADMessage:(ADMessage *)msg
+                           withLong:(int64_t)when {
   if (((ADMessage *) nil_chk(msg))->target_ == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Message must have a target.");
   }
@@ -164,7 +178,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
     [msg markInUse];
     msg->when_ = when;
     ADMessage *p = JreRetainedLocalValue(mMessages_);
-    jboolean needWake;
+    bool needWake;
     if (p == nil || when == 0 || when < p->when_) {
       JreStrongAssign(&msg->next_, p);
       JreStrongAssign(&mMessages_, msg);
@@ -193,16 +207,16 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   return true;
 }
 
-- (jboolean)hasMessagesWithADHandler:(ADHandler *)h
-                             withInt:(jint)what
-                              withId:(id)object {
+- (bool)hasMessagesWithADHandler:(ADHandler *)h
+                         withInt:(int32_t)what
+                          withId:(id)object {
   if (h == nil) {
     return false;
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
     while (p != nil) {
-      if (p->target_ == h && p->what_ == what && (object == nil || p->obj_ == object)) {
+      if (JreObjectEqualsEquals(p->target_, h) && p->what_ == what && (object == nil || JreObjectEqualsEquals(p->obj_, object))) {
         return true;
       }
       p = p->next_;
@@ -211,16 +225,16 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
 }
 
-- (jboolean)hasEqualMessagesWithADHandler:(ADHandler *)h
-                                  withInt:(jint)what
-                                   withId:(id)object {
+- (bool)hasEqualMessagesWithADHandler:(ADHandler *)h
+                              withInt:(int32_t)what
+                               withId:(id)object {
   if (h == nil) {
     return false;
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
     while (p != nil) {
-      if (p->target_ == h && p->what_ == what && (object == nil || [object isEqual:p->obj_])) {
+      if (JreObjectEqualsEquals(p->target_, h) && p->what_ == what && (object == nil || [object isEqual:p->obj_])) {
         return true;
       }
       p = p->next_;
@@ -229,16 +243,16 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
 }
 
-- (jboolean)hasMessagesWithADHandler:(ADHandler *)h
-                withJavaLangRunnable:(id<JavaLangRunnable>)r
-                              withId:(id)object {
+- (bool)hasMessagesWithADHandler:(ADHandler *)h
+            withJavaLangRunnable:(id<JavaLangRunnable>)r
+                          withId:(id)object {
   if (h == nil) {
     return false;
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
     while (p != nil) {
-      if (p->target_ == h && p->callback_ == r && (object == nil || p->obj_ == object)) {
+      if (JreObjectEqualsEquals(p->target_, h) && JreObjectEqualsEquals(p->callback_, r) && (object == nil || JreObjectEqualsEquals(p->obj_, object))) {
         return true;
       }
       p = p->next_;
@@ -247,14 +261,14 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
 }
 
-- (jboolean)hasMessagesWithADHandler:(ADHandler *)h {
+- (bool)hasMessagesWithADHandler:(ADHandler *)h {
   if (h == nil) {
     return false;
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
     while (p != nil) {
-      if (p->target_ == h) {
+      if (JreObjectEqualsEquals(p->target_, h)) {
         return true;
       }
       p = p->next_;
@@ -264,14 +278,14 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
 }
 
 - (void)removeMessagesWithADHandler:(ADHandler *)h
-                            withInt:(jint)what
+                            withInt:(int32_t)what
                              withId:(id)object {
   if (h == nil) {
     return;
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
-    while (p != nil && p->target_ == h && p->what_ == what && (object == nil || p->obj_ == object)) {
+    while (p != nil && JreObjectEqualsEquals(p->target_, h) && p->what_ == what && (object == nil || JreObjectEqualsEquals(p->obj_, object))) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       JreStrongAssign(&mMessages_, n);
       [p recycleUnchecked];
@@ -280,7 +294,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
     while (p != nil) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       if (n != nil) {
-        if (n->target_ == h && n->what_ == what && (object == nil || n->obj_ == object)) {
+        if (JreObjectEqualsEquals(n->target_, h) && n->what_ == what && (object == nil || JreObjectEqualsEquals(n->obj_, object))) {
           ADMessage *nn = JreRetainedLocalValue(n->next_);
           [n recycleUnchecked];
           JreStrongAssign(&p->next_, nn);
@@ -293,14 +307,14 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
 }
 
 - (void)removeEqualMessagesWithADHandler:(ADHandler *)h
-                                 withInt:(jint)what
+                                 withInt:(int32_t)what
                                   withId:(id)object {
   if (h == nil) {
     return;
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
-    while (p != nil && p->target_ == h && p->what_ == what && (object == nil || [object isEqual:p->obj_])) {
+    while (p != nil && JreObjectEqualsEquals(p->target_, h) && p->what_ == what && (object == nil || [object isEqual:p->obj_])) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       JreStrongAssign(&mMessages_, n);
       [p recycleUnchecked];
@@ -309,7 +323,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
     while (p != nil) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       if (n != nil) {
-        if (n->target_ == h && n->what_ == what && (object == nil || [object isEqual:n->obj_])) {
+        if (JreObjectEqualsEquals(n->target_, h) && n->what_ == what && (object == nil || [object isEqual:n->obj_])) {
           ADMessage *nn = JreRetainedLocalValue(n->next_);
           [n recycleUnchecked];
           JreStrongAssign(&p->next_, nn);
@@ -329,7 +343,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
-    while (p != nil && p->target_ == h && p->callback_ == r && (object == nil || p->obj_ == object)) {
+    while (p != nil && JreObjectEqualsEquals(p->target_, h) && JreObjectEqualsEquals(p->callback_, r) && (object == nil || JreObjectEqualsEquals(p->obj_, object))) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       JreStrongAssign(&mMessages_, n);
       [p recycleUnchecked];
@@ -338,7 +352,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
     while (p != nil) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       if (n != nil) {
-        if (n->target_ == h && n->callback_ == r && (object == nil || n->obj_ == object)) {
+        if (JreObjectEqualsEquals(n->target_, h) && JreObjectEqualsEquals(n->callback_, r) && (object == nil || JreObjectEqualsEquals(n->obj_, object))) {
           ADMessage *nn = JreRetainedLocalValue(n->next_);
           [n recycleUnchecked];
           JreStrongAssign(&p->next_, nn);
@@ -358,7 +372,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
-    while (p != nil && p->target_ == h && p->callback_ == r && (object == nil || [object isEqual:p->obj_])) {
+    while (p != nil && JreObjectEqualsEquals(p->target_, h) && JreObjectEqualsEquals(p->callback_, r) && (object == nil || [object isEqual:p->obj_])) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       JreStrongAssign(&mMessages_, n);
       [p recycleUnchecked];
@@ -367,7 +381,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
     while (p != nil) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       if (n != nil) {
-        if (n->target_ == h && n->callback_ == r && (object == nil || [object isEqual:n->obj_])) {
+        if (JreObjectEqualsEquals(n->target_, h) && JreObjectEqualsEquals(n->callback_, r) && (object == nil || [object isEqual:n->obj_])) {
           ADMessage *nn = JreRetainedLocalValue(n->next_);
           [n recycleUnchecked];
           JreStrongAssign(&p->next_, nn);
@@ -386,7 +400,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
-    while (p != nil && p->target_ == h && (object == nil || p->obj_ == object)) {
+    while (p != nil && JreObjectEqualsEquals(p->target_, h) && (object == nil || JreObjectEqualsEquals(p->obj_, object))) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       JreStrongAssign(&mMessages_, n);
       [p recycleUnchecked];
@@ -395,7 +409,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
     while (p != nil) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       if (n != nil) {
-        if (n->target_ == h && (object == nil || n->obj_ == object)) {
+        if (JreObjectEqualsEquals(n->target_, h) && (object == nil || JreObjectEqualsEquals(n->obj_, object))) {
           ADMessage *nn = JreRetainedLocalValue(n->next_);
           [n recycleUnchecked];
           JreStrongAssign(&p->next_, nn);
@@ -414,7 +428,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
   }
   @synchronized(self) {
     ADMessage *p = JreRetainedLocalValue(mMessages_);
-    while (p != nil && p->target_ == h && (object == nil || [object isEqual:p->obj_])) {
+    while (p != nil && JreObjectEqualsEquals(p->target_, h) && (object == nil || [object isEqual:p->obj_])) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       JreStrongAssign(&mMessages_, n);
       [p recycleUnchecked];
@@ -423,7 +437,7 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
     while (p != nil) {
       ADMessage *n = JreRetainedLocalValue(p->next_);
       if (n != nil) {
-        if (n->target_ == h && (object == nil || [object isEqual:n->obj_])) {
+        if (JreObjectEqualsEquals(n->target_, h) && (object == nil || [object isEqual:n->obj_])) {
           ADMessage *nn = JreRetainedLocalValue(n->next_);
           [n recycleUnchecked];
           JreStrongAssign(&p->next_, nn);
@@ -517,18 +531,18 @@ __attribute__((unused)) static ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$
 
 @end
 
-void ADMessageQueue_initWithBoolean_(ADMessageQueue *self, jboolean quitAllowed) {
+void ADMessageQueue_initWithBoolean_(ADMessageQueue *self, bool quitAllowed) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->mIdleHandlers_, new_JavaUtilArrayList_init());
   self->mQuitAllowed_ = quitAllowed;
   self->mPtr_ = 100;
 }
 
-ADMessageQueue *new_ADMessageQueue_initWithBoolean_(jboolean quitAllowed) {
+ADMessageQueue *new_ADMessageQueue_initWithBoolean_(bool quitAllowed) {
   J2OBJC_NEW_IMPL(ADMessageQueue, initWithBoolean_, quitAllowed)
 }
 
-ADMessageQueue *create_ADMessageQueue_initWithBoolean_(jboolean quitAllowed) {
+ADMessageQueue *create_ADMessageQueue_initWithBoolean_(bool quitAllowed) {
   J2OBJC_CREATE_IMPL(ADMessageQueue, initWithBoolean_, quitAllowed)
 }
 
@@ -538,7 +552,7 @@ void ADMessageQueue_dispose(ADMessageQueue *self) {
   }
 }
 
-jboolean ADMessageQueue_isPollingLocked(ADMessageQueue *self) {
+bool ADMessageQueue_isPollingLocked(ADMessageQueue *self) {
   return !self->mQuitting_;
 }
 
@@ -553,7 +567,7 @@ void ADMessageQueue_removeAllMessagesLocked(ADMessageQueue *self) {
 }
 
 void ADMessageQueue_removeAllFutureMessagesLocked(ADMessageQueue *self) {
-  jlong now = ADSystemClock_uptimeMillis();
+  int64_t now = ADSystemClock_uptimeMillis();
   ADMessage *p = JreRetainedLocalValue(self->mMessages_);
   if (p != nil) {
     if (p->when_ > now) {
@@ -583,6 +597,8 @@ void ADMessageQueue_removeAllFutureMessagesLocked(ADMessageQueue *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMessageQueue)
+
+J2OBJC_NAME_MAPPING(ADMessageQueue, "r.android.os", "AD")
 
 @implementation ADMessageQueue_IdleHandler
 
@@ -665,16 +681,16 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADMessageQueue_OnFileDescriptorEventListene
 
 @end
 
-void ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(ADMessageQueue_$Lambda$1 *self, jlong capture$0, ADMessage *capture$1) {
+void ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(ADMessageQueue_$Lambda$1 *self, int64_t capture$0, ADMessage *capture$1) {
   self->val$when_ = capture$0;
   JreStrongAssign(&self->val$msg_, capture$1);
   NSObject_init(self);
 }
 
-ADMessageQueue_$Lambda$1 *new_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(jlong capture$0, ADMessage *capture$1) {
+ADMessageQueue_$Lambda$1 *new_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(int64_t capture$0, ADMessage *capture$1) {
   J2OBJC_NEW_IMPL(ADMessageQueue_$Lambda$1, initWithLong_withADMessage_, capture$0, capture$1)
 }
 
-ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(jlong capture$0, ADMessage *capture$1) {
+ADMessageQueue_$Lambda$1 *create_ADMessageQueue_$Lambda$1_initWithLong_withADMessage_(int64_t capture$0, ADMessage *capture$1) {
   J2OBJC_CREATE_IMPL(ADMessageQueue_$Lambda$1, initWithLong_withADMessage_, capture$0, capture$1)
 }

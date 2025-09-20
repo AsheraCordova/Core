@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\FormElement.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FormElement")
@@ -20,6 +21,9 @@
 #define INCLUDE_ASIWidget 1
 #include "IWidget.h"
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilList;
 
 /*!
@@ -31,7 +35,7 @@
 
 - (NSString *)getTextEntered;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)focus;
 
@@ -45,9 +49,9 @@
 
 - (NSString *)getCustomMessageWithNSString:(NSString *)key;
 
-- (jint)getValidationErrorDisplayType;
+- (int32_t)getValidationErrorDisplayType;
 
-- (void)setValidationErrorDisplayTypeWithInt:(jint)validationErrorDisplayType;
+- (void)setValidationErrorDisplayTypeWithInt:(int32_t)validationErrorDisplayType;
 
 - (void)setNormalStyleWithNSString:(NSString *)style;
 
@@ -57,21 +61,22 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASFormElement)
 
-inline jint ASFormElement_get_ERROR_DISPLAY_TYPE_POPUP(void);
+inline int32_t ASFormElement_get_ERROR_DISPLAY_TYPE_POPUP(void);
 #define ASFormElement_ERROR_DISPLAY_TYPE_POPUP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASFormElement, ERROR_DISPLAY_TYPE_POPUP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASFormElement, ERROR_DISPLAY_TYPE_POPUP, int32_t)
 
-inline jint ASFormElement_get_ERROR_DISPLAY_TYPE_LABEL(void);
+inline int32_t ASFormElement_get_ERROR_DISPLAY_TYPE_LABEL(void);
 #define ASFormElement_ERROR_DISPLAY_TYPE_LABEL 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASFormElement, ERROR_DISPLAY_TYPE_LABEL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASFormElement, ERROR_DISPLAY_TYPE_LABEL, int32_t)
 
-inline jint ASFormElement_get_ERROR_DISPLAY_TYPE_STYLE(void);
+inline int32_t ASFormElement_get_ERROR_DISPLAY_TYPE_STYLE(void);
 #define ASFormElement_ERROR_DISPLAY_TYPE_STYLE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ASFormElement, ERROR_DISPLAY_TYPE_STYLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASFormElement, ERROR_DISPLAY_TYPE_STYLE, int32_t)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASFormElement)
 
 #define ComAsheraValidationsFormElement ASFormElement
+
 
 #endif
 

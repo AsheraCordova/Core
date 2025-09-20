@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\IntRange.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IntRange.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADIntRange
@@ -20,7 +33,7 @@
   return [NSString stringWithFormat:@"@r.android.annotation.IntRange(from=%d)", from_];
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -46,10 +59,12 @@
 
 @end
 
-id<ADIntRange> create_ADIntRange(jint from) {
+id<ADIntRange> create_ADIntRange(int32_t from) {
   ADIntRange *self = AUTORELEASE([[ADIntRange alloc] init]);
   self->from_ = from;
   return self;
 }
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADIntRange)
+
+J2OBJC_NAME_MAPPING(ADIntRange, "r.android.annotation", "AD")

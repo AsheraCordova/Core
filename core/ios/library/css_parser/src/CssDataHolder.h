@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\parser\css\CssDataHolder.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CssDataHolder")
@@ -20,6 +21,7 @@
 #define INCLUDE_CSSStyleSheet 1
 #include "StyleSheet.h"
 
+@class NSString;
 @protocol CSSCssResult;
 @protocol JavaUtilList;
 
@@ -53,6 +55,7 @@ FOUNDATION_EXPORT CSSCssDataHolder *create_CSSCssDataHolder_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(CSSCssDataHolder)
 
 @compatibility_alias ComAsheraParserCssCssDataHolder CSSCssDataHolder;
+
 
 #endif
 

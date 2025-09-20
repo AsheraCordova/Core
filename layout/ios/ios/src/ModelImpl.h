@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ModelImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ModelImpl")
@@ -22,6 +23,8 @@
 
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -62,7 +65,7 @@
 
 #pragma mark Protected
 
-- (jboolean)applyModelAttributes;
+- (bool)applyModelAttributes;
 
 // Disallowed inherited constructors, do not use.
 
@@ -95,6 +98,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelImpl)
 
 @compatibility_alias ComAsheraLayoutModelImpl ASModelImpl;
 
+
 #endif
 
 #if !defined (ASModelImpl_ViewExt_) && (INCLUDE_ALL_ModelImpl || defined(INCLUDE_ASModelImpl_ViewExt))
@@ -109,6 +113,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelImpl)
 #include "IViewStub.h"
 
 @class ASModelImpl;
+@class NSString;
 
 @interface ASModelImpl_ViewExt : ADView < ASIViewStub >
 
@@ -135,6 +140,7 @@ FOUNDATION_EXPORT ASModelImpl_ViewExt *new_ASModelImpl_ViewExt_initWithASModelIm
 FOUNDATION_EXPORT ASModelImpl_ViewExt *create_ASModelImpl_ViewExt_initWithASModelImpl_(ASModelImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelImpl_ViewExt)
+
 
 #endif
 

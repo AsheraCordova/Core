@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\jaxp\SAXFactoryImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "SAXFactoryImpl.h"
 #include "SAXParserImpl.h"
@@ -14,7 +19,11 @@
 #include "javax/xml/parsers/SAXParserFactory.h"
 #include "org/xml/sax/SAXException.h"
 
-@class JavaUtilHashMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSSAXFactoryImpl () {
@@ -68,7 +77,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)value {
+                   withBoolean:(bool)value {
   [((TSSAXParserImpl *) nil_chk(TSSAXFactoryImpl_getPrototype(self))) setFeatureWithNSString:name withBoolean:value];
   if (features_ == nil) {
     JreStrongAssignAndConsume(&features_, new_JavaUtilLinkedHashMap_init());
@@ -76,7 +85,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [features_ putWithId:name withId:value ? JreLoadStatic(JavaLangBoolean, TRUE) : JreLoadStatic(JavaLangBoolean, FALSE)];
 }
 
-- (jboolean)getFeatureWithNSString:(NSString *)name {
+- (bool)getFeatureWithNSString:(NSString *)name {
   return [((TSSAXParserImpl *) nil_chk(TSSAXFactoryImpl_getPrototype(self))) getFeatureWithNSString:name];
 }
 
@@ -140,3 +149,5 @@ TSSAXParserImpl *TSSAXFactoryImpl_getPrototype(TSSAXFactoryImpl *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSSAXFactoryImpl)
+
+J2OBJC_NAME_MAPPING(TSSAXFactoryImpl, "repackaged.org.ccil.cowan.tagsoup.jaxp", "TS")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\LinearLayout.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LinearLayout")
@@ -25,6 +26,9 @@
 @class ADLinearLayout_LayoutParams;
 @class ADView;
 @class ADViewGroup_LayoutParams;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 @protocol ADCanvas;
 
 @interface ADLinearLayout : ADViewGroup
@@ -35,66 +39,66 @@
 
 - (instancetype)initWithADContext:(ADContext *)context;
 
-- (jint)getBaseline;
+- (int32_t)getBaseline;
 
-- (jint)getBaselineAlignedChildIndex;
+- (int32_t)getBaselineAlignedChildIndex;
 
 - (ADDrawable *)getDividerDrawable;
 
-- (jint)getDividerPadding;
+- (int32_t)getDividerPadding;
 
-- (jint)getGravity;
+- (int32_t)getGravity;
 
-- (jint)getOrientation;
+- (int32_t)getOrientation;
 
-- (jint)getShowDividers;
+- (int32_t)getShowDividers;
 
-- (jfloat)getWeightSum;
+- (float)getWeightSum;
 
-- (jboolean)isBaselineAligned;
+- (bool)isBaselineAligned;
 
-- (jboolean)isMeasureWithLargestChildEnabled;
+- (bool)isMeasureWithLargestChildEnabled;
 
-- (void)setBaselineAlignedWithBoolean:(jboolean)baselineAligned;
+- (void)setBaselineAlignedWithBoolean:(bool)baselineAligned;
 
-- (void)setBaselineAlignedChildIndexWithInt:(jint)i;
+- (void)setBaselineAlignedChildIndexWithInt:(int32_t)i;
 
 - (void)setDividerDrawableWithADDrawable:(ADDrawable *)divider;
 
-- (void)setDividerPaddingWithInt:(jint)padding;
+- (void)setDividerPaddingWithInt:(int32_t)padding;
 
-- (void)setGravityWithInt:(jint)gravity;
+- (void)setGravityWithInt:(int32_t)gravity;
 
-- (void)setMeasureWithLargestChildEnabledWithBoolean:(jboolean)enabled;
+- (void)setMeasureWithLargestChildEnabledWithBoolean:(bool)enabled;
 
-- (void)setOrientationWithInt:(jint)orientation;
+- (void)setOrientationWithInt:(int32_t)orientation;
 
-- (void)setShowDividersWithInt:(jint)showDividers;
+- (void)setShowDividersWithInt:(int32_t)showDividers;
 
-- (void)setWeightSumWithFloat:(jfloat)weightSum;
+- (void)setWeightSumWithFloat:(float)weightSum;
 
-- (void)updateDividerHeightWithInt:(jint)mDividerHeight;
+- (void)updateDividerHeightWithInt:(int32_t)mDividerHeight;
 
 #pragma mark Protected
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
 - (ADLinearLayout_LayoutParams *)generateDefaultLayoutParams;
 
 - (ADLinearLayout_LayoutParams *)generateLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)lp;
 
-- (jboolean)hasDividerBeforeChildAtWithInt:(jint)childIndex;
+- (bool)hasDividerBeforeChildAtWithInt:(int32_t)childIndex;
 
 - (void)onDrawWithADCanvas:(id<ADCanvas>)canvas;
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 #pragma mark Package-Private
 
@@ -103,74 +107,74 @@
 - (void)drawDividersVerticalWithADCanvas:(id<ADCanvas>)canvas;
 
 - (void)drawHorizontalDividerWithADCanvas:(id<ADCanvas>)canvas
-                                  withInt:(jint)top;
+                                  withInt:(int32_t)top;
 
 - (void)drawVerticalDividerWithADCanvas:(id<ADCanvas>)canvas
-                                withInt:(jint)left;
+                                withInt:(int32_t)left;
 
-- (jint)getChildrenSkipCountWithADView:(ADView *)child
-                               withInt:(jint)index;
+- (int32_t)getChildrenSkipCountWithADView:(ADView *)child
+                                  withInt:(int32_t)index;
 
-- (jint)getLocationOffsetWithADView:(ADView *)child;
+- (int32_t)getLocationOffsetWithADView:(ADView *)child;
 
-- (jint)getNextLocationOffsetWithADView:(ADView *)child;
+- (int32_t)getNextLocationOffsetWithADView:(ADView *)child;
 
-- (ADView *)getVirtualChildAtWithInt:(jint)index;
+- (ADView *)getVirtualChildAtWithInt:(int32_t)index;
 
-- (jint)getVirtualChildCount;
+- (int32_t)getVirtualChildCount;
 
-- (void)layoutHorizontalWithInt:(jint)left
-                        withInt:(jint)top
-                        withInt:(jint)right
-                        withInt:(jint)bottom;
+- (void)layoutHorizontalWithInt:(int32_t)left
+                        withInt:(int32_t)top
+                        withInt:(int32_t)right
+                        withInt:(int32_t)bottom;
 
-- (void)layoutVerticalWithInt:(jint)left
-                      withInt:(jint)top
-                      withInt:(jint)right
-                      withInt:(jint)bottom;
+- (void)layoutVerticalWithInt:(int32_t)left
+                      withInt:(int32_t)top
+                      withInt:(int32_t)right
+                      withInt:(int32_t)bottom;
 
 - (void)measureChildBeforeLayoutWithADView:(ADView *)child
-                                   withInt:(jint)childIndex
-                                   withInt:(jint)widthMeasureSpec
-                                   withInt:(jint)totalWidth
-                                   withInt:(jint)heightMeasureSpec
-                                   withInt:(jint)totalHeight;
+                                   withInt:(int32_t)childIndex
+                                   withInt:(int32_t)widthMeasureSpec
+                                   withInt:(int32_t)totalWidth
+                                   withInt:(int32_t)heightMeasureSpec
+                                   withInt:(int32_t)totalHeight;
 
-- (void)measureHorizontalWithInt:(jint)widthMeasureSpec
-                         withInt:(jint)heightMeasureSpec;
+- (void)measureHorizontalWithInt:(int32_t)widthMeasureSpec
+                         withInt:(int32_t)heightMeasureSpec;
 
-- (jint)measureNullChildWithInt:(jint)childIndex;
+- (int32_t)measureNullChildWithInt:(int32_t)childIndex;
 
-- (void)measureVerticalWithInt:(jint)widthMeasureSpec
-                       withInt:(jint)heightMeasureSpec;
+- (void)measureVerticalWithInt:(int32_t)widthMeasureSpec
+                       withInt:(int32_t)heightMeasureSpec;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADLinearLayout)
 
-inline jint ADLinearLayout_get_HORIZONTAL(void);
+inline int32_t ADLinearLayout_get_HORIZONTAL(void);
 #define ADLinearLayout_HORIZONTAL 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, HORIZONTAL, int32_t)
 
-inline jint ADLinearLayout_get_VERTICAL(void);
+inline int32_t ADLinearLayout_get_VERTICAL(void);
 #define ADLinearLayout_VERTICAL 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, VERTICAL, int32_t)
 
-inline jint ADLinearLayout_get_SHOW_DIVIDER_NONE(void);
+inline int32_t ADLinearLayout_get_SHOW_DIVIDER_NONE(void);
 #define ADLinearLayout_SHOW_DIVIDER_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_NONE, int32_t)
 
-inline jint ADLinearLayout_get_SHOW_DIVIDER_BEGINNING(void);
+inline int32_t ADLinearLayout_get_SHOW_DIVIDER_BEGINNING(void);
 #define ADLinearLayout_SHOW_DIVIDER_BEGINNING 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_BEGINNING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_BEGINNING, int32_t)
 
-inline jint ADLinearLayout_get_SHOW_DIVIDER_MIDDLE(void);
+inline int32_t ADLinearLayout_get_SHOW_DIVIDER_MIDDLE(void);
 #define ADLinearLayout_SHOW_DIVIDER_MIDDLE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_MIDDLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_MIDDLE, int32_t)
 
-inline jint ADLinearLayout_get_SHOW_DIVIDER_END(void);
+inline int32_t ADLinearLayout_get_SHOW_DIVIDER_END(void);
 #define ADLinearLayout_SHOW_DIVIDER_END 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLinearLayout, SHOW_DIVIDER_END, int32_t)
 
 FOUNDATION_EXPORT void ADLinearLayout_initWithADContext_(ADLinearLayout *self, ADContext *context);
 
@@ -188,6 +192,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLinearLayout)
 
 @compatibility_alias RAndroidWidgetLinearLayout ADLinearLayout;
 
+
 #endif
 
 #if !defined (ADLinearLayout_LayoutParams_) && (INCLUDE_ALL_LinearLayout || defined(INCLUDE_ADLinearLayout_LayoutParams))
@@ -198,21 +203,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLinearLayout)
 #include "ViewGroup.h"
 
 @class ADViewGroup_LayoutParams;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 @interface ADLinearLayout_LayoutParams : ADViewGroup_MarginLayoutParams {
  @public
-  jfloat weight_;
-  jint gravity_;
+  float weight_;
+  int32_t gravity_;
 }
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height;
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height;
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height
-                  withFloat:(jfloat)weight;
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height
+                  withFloat:(float)weight;
 
 - (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
@@ -226,17 +233,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLinearLayout)
 
 J2OBJC_EMPTY_STATIC_INIT(ADLinearLayout_LayoutParams)
 
-FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithInt_withInt_(ADLinearLayout_LayoutParams *self, jint width, jint height);
+FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithInt_withInt_(ADLinearLayout_LayoutParams *self, int32_t width, int32_t height);
 
-FOUNDATION_EXPORT ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt_(jint width, jint height) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_(jint width, jint height);
+FOUNDATION_EXPORT ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height);
 
-FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(ADLinearLayout_LayoutParams *self, jint width, jint height, jfloat weight);
+FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(ADLinearLayout_LayoutParams *self, int32_t width, int32_t height, float weight);
 
-FOUNDATION_EXPORT ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(jint width, jint height, jfloat weight) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(int32_t width, int32_t height, float weight) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(jint width, jint height, jfloat weight);
+FOUNDATION_EXPORT ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(int32_t width, int32_t height, float weight);
 
 FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithADViewGroup_LayoutParams_(ADLinearLayout_LayoutParams *self, ADViewGroup_LayoutParams *p);
 
@@ -251,6 +258,7 @@ FOUNDATION_EXPORT ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_i
 FOUNDATION_EXPORT ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithADLinearLayout_LayoutParams_(ADLinearLayout_LayoutParams *source);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLinearLayout_LayoutParams)
+
 
 #endif
 

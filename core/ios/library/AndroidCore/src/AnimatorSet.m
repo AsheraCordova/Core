@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\AnimatorSet.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ActivityThread.h"
 #include "AndroidRuntimeException.h"
 #include "AnimationHandler.h"
@@ -23,7 +28,10 @@
 #include "TimeInterpolator.h"
 #include "ValueAnimator.h"
 #include "java/lang/AssertionError.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/CloneNotSupportedException.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
@@ -42,16 +50,15 @@
 #include "java/util/function/ToIntFunction.h"
 #include "java/util/function/ToLongFunction.h"
 
+
 @class ADAnimatorSet_AnimationEvent;
 @class ADAnimatorSet_Node;
 @class ADAnimatorSet_SeekState;
-@class JavaUtilArrayList;
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionConsumer;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -84,34 +91,34 @@
    @brief Tracks whether any change has been made to the AnimatorSet, which is then used to
   determine whether the dependency graph should be re-constructed.
    */
-  jboolean mDependencyDirty_;
+  bool mDependencyDirty_;
   /*!
    @brief Indicates whether an AnimatorSet has been start()'d, whether or
   not there is a nonzero startDelay.
    */
-  jboolean mStarted_;
-  jlong mStartDelay_;
+  bool mStarted_;
+  int64_t mStartDelay_;
   ADValueAnimator *mDelayAnim_;
   ADAnimatorSet_Node *mRootNode_;
-  jlong mDuration_;
+  int64_t mDuration_;
   id<ADTimeInterpolator> mInterpolator_;
-  jlong mTotalDuration_;
-  jboolean mShouldIgnoreEndWithoutStart_;
-  jboolean mShouldResetValuesAtStart_;
-  jboolean mEndCanBeCalled_;
-  jlong mLastFrameTime_;
-  jlong mFirstFrame_;
-  jint mLastEventId_;
-  jboolean mReversing_;
-  jboolean mSelfPulse_;
+  int64_t mTotalDuration_;
+  bool mShouldIgnoreEndWithoutStart_;
+  bool mShouldResetValuesAtStart_;
+  bool mEndCanBeCalled_;
+  int64_t mLastFrameTime_;
+  int64_t mFirstFrame_;
+  int32_t mLastEventId_;
+  bool mReversing_;
+  bool mSelfPulse_;
   ADAnimatorSet_SeekState *mSeekState_;
-  jboolean mChildrenInitialized_;
+  bool mChildrenInitialized_;
   /*!
    @brief Set on the next frame after pause() is called, used to calculate a new startTime
   or delayStartTime which allows the animator set to continue from the point at which
   it was paused.If negative, has not yet been set.
    */
-  jlong mPauseTime_;
+  int64_t mPauseTime_;
   /*!
    @brief The start and stop times of all descendant animators.
    */
@@ -129,10 +136,10 @@
 
 - (void)initAnimation OBJC_METHOD_FAMILY_NONE;
 
-- (void)startWithBoolean:(jboolean)inReverse
-             withBoolean:(jboolean)selfPulse;
+- (void)startWithBoolean:(bool)inReverse
+             withBoolean:(bool)selfPulse;
 
-+ (jboolean)isEmptySetWithADAnimatorSet:(ADAnimatorSet *)set;
++ (bool)isEmptySetWithADAnimatorSet:(ADAnimatorSet *)set;
 
 - (void)updateAnimatorsDuration;
 
@@ -144,9 +151,9 @@
  <code>r.android.view.animation.Animation.AnimationListener.onAnimationRepeat(Animation)</code>,
   as needed, based on the last play time and current play time.
  */
-- (void)animateBasedOnPlayTimeWithLong:(jlong)currentPlayTime
-                              withLong:(jlong)lastPlayTime
-                           withBoolean:(jboolean)inReverse;
+- (void)animateBasedOnPlayTimeWithLong:(int64_t)currentPlayTime
+                              withLong:(int64_t)lastPlayTime
+                           withBoolean:(bool)inReverse;
 
 /*!
  @brief Looks through startEndTimes for playTime.If it is in startEndTimes, the index after
@@ -154,8 +161,8 @@
  Otherwise, it returns the index at which it would be placed if it were
   to be inserted.
  */
-- (jint)findNextIndexWithLong:(jlong)playTime
-                withLongArray:(IOSLongArray *)startEndTimes;
+- (int32_t)findNextIndexWithLong:(int64_t)playTime
+                   withLongArray:(IOSLongArray *)startEndTimes;
 
 - (IOSLongArray *)ensureChildStartAndEndTimes;
 
@@ -167,9 +174,9 @@
  When playing in reverse, we should reverse the animation when we hit animation's end event,
   and expect the animation to end at the its delay ended event, rather than start event.
  */
-- (void)handleAnimationEventsWithInt:(jint)startId
-                             withInt:(jint)latestId
-                            withLong:(jlong)playTime;
+- (void)handleAnimationEventsWithInt:(int32_t)startId
+                             withInt:(int32_t)latestId
+                            withLong:(int64_t)playTime;
 
 /*!
  @brief This method pulses frames into child animations.It scales the input animation play time
@@ -178,14 +185,14 @@
  @param animPlayTime unscaled play time (including start delay) for the child animator
  */
 - (void)pulseFrameWithADAnimatorSet_Node:(ADAnimatorSet_Node *)node
-                                withLong:(jlong)animPlayTime;
+                                withLong:(int64_t)animPlayTime;
 
-- (jlong)getPlayTimeForNodeIncludingDelayWithLong:(jlong)overallPlayTime
-                           withADAnimatorSet_Node:(ADAnimatorSet_Node *)node;
+- (int64_t)getPlayTimeForNodeIncludingDelayWithLong:(int64_t)overallPlayTime
+                             withADAnimatorSet_Node:(ADAnimatorSet_Node *)node;
 
-- (jlong)getPlayTimeForNodeIncludingDelayWithLong:(jlong)overallPlayTime
-                           withADAnimatorSet_Node:(ADAnimatorSet_Node *)node
-                                      withBoolean:(jboolean)inReverse;
+- (int64_t)getPlayTimeForNodeIncludingDelayWithLong:(int64_t)overallPlayTime
+                             withADAnimatorSet_Node:(ADAnimatorSet_Node *)node
+                                        withBoolean:(bool)inReverse;
 
 - (void)startAnimation;
 
@@ -193,13 +200,13 @@
 
 - (void)removeAnimationEndListener;
 
-- (jint)findLatestEventIdForTimeWithLong:(jlong)currentPlayTime;
+- (int32_t)findLatestEventIdForTimeWithLong:(int64_t)currentPlayTime;
 
 - (void)endAnimation;
 
 - (void)removeAnimationCallback;
 
-- (void)addAnimationCallbackWithLong:(jlong)delay;
+- (void)addAnimationCallbackWithLong:(int64_t)delay;
 
 - (void)printChildCount;
 
@@ -243,27 +250,27 @@ __attribute__((unused)) static void ADAnimatorSet_forceToEnd(ADAnimatorSet *self
 
 __attribute__((unused)) static void ADAnimatorSet_initAnimation(ADAnimatorSet *self);
 
-__attribute__((unused)) static void ADAnimatorSet_startWithBoolean_withBoolean_(ADAnimatorSet *self, jboolean inReverse, jboolean selfPulse);
+__attribute__((unused)) static void ADAnimatorSet_startWithBoolean_withBoolean_(ADAnimatorSet *self, bool inReverse, bool selfPulse);
 
-__attribute__((unused)) static jboolean ADAnimatorSet_isEmptySetWithADAnimatorSet_(ADAnimatorSet *set);
+__attribute__((unused)) static bool ADAnimatorSet_isEmptySetWithADAnimatorSet_(ADAnimatorSet *set);
 
 __attribute__((unused)) static void ADAnimatorSet_updateAnimatorsDuration(ADAnimatorSet *self);
 
-__attribute__((unused)) static void ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(ADAnimatorSet *self, jlong currentPlayTime, jlong lastPlayTime, jboolean inReverse);
+__attribute__((unused)) static void ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(ADAnimatorSet *self, int64_t currentPlayTime, int64_t lastPlayTime, bool inReverse);
 
-__attribute__((unused)) static jint ADAnimatorSet_findNextIndexWithLong_withLongArray_(ADAnimatorSet *self, jlong playTime, IOSLongArray *startEndTimes);
+__attribute__((unused)) static int32_t ADAnimatorSet_findNextIndexWithLong_withLongArray_(ADAnimatorSet *self, int64_t playTime, IOSLongArray *startEndTimes);
 
 __attribute__((unused)) static IOSLongArray *ADAnimatorSet_ensureChildStartAndEndTimes(ADAnimatorSet *self);
 
 __attribute__((unused)) static void ADAnimatorSet_initChildren(ADAnimatorSet *self);
 
-__attribute__((unused)) static void ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(ADAnimatorSet *self, jint startId, jint latestId, jlong playTime);
+__attribute__((unused)) static void ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(ADAnimatorSet *self, int32_t startId, int32_t latestId, int64_t playTime);
 
-__attribute__((unused)) static void ADAnimatorSet_pulseFrameWithADAnimatorSet_Node_withLong_(ADAnimatorSet *self, ADAnimatorSet_Node *node, jlong animPlayTime);
+__attribute__((unused)) static void ADAnimatorSet_pulseFrameWithADAnimatorSet_Node_withLong_(ADAnimatorSet *self, ADAnimatorSet_Node *node, int64_t animPlayTime);
 
-__attribute__((unused)) static jlong ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_(ADAnimatorSet *self, jlong overallPlayTime, ADAnimatorSet_Node *node);
+__attribute__((unused)) static int64_t ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_(ADAnimatorSet *self, int64_t overallPlayTime, ADAnimatorSet_Node *node);
 
-__attribute__((unused)) static jlong ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_withBoolean_(ADAnimatorSet *self, jlong overallPlayTime, ADAnimatorSet_Node *node, jboolean inReverse);
+__attribute__((unused)) static int64_t ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_withBoolean_(ADAnimatorSet *self, int64_t overallPlayTime, ADAnimatorSet_Node *node, bool inReverse);
 
 __attribute__((unused)) static void ADAnimatorSet_startAnimation(ADAnimatorSet *self);
 
@@ -271,13 +278,13 @@ __attribute__((unused)) static void ADAnimatorSet_addAnimationEndListener(ADAnim
 
 __attribute__((unused)) static void ADAnimatorSet_removeAnimationEndListener(ADAnimatorSet *self);
 
-__attribute__((unused)) static jint ADAnimatorSet_findLatestEventIdForTimeWithLong_(ADAnimatorSet *self, jlong currentPlayTime);
+__attribute__((unused)) static int32_t ADAnimatorSet_findLatestEventIdForTimeWithLong_(ADAnimatorSet *self, int64_t currentPlayTime);
 
 __attribute__((unused)) static void ADAnimatorSet_endAnimation(ADAnimatorSet *self);
 
 __attribute__((unused)) static void ADAnimatorSet_removeAnimationCallback(ADAnimatorSet *self);
 
-__attribute__((unused)) static void ADAnimatorSet_addAnimationCallbackWithLong_(ADAnimatorSet *self, jlong delay);
+__attribute__((unused)) static void ADAnimatorSet_addAnimationCallbackWithLong_(ADAnimatorSet *self, int64_t delay);
 
 __attribute__((unused)) static void ADAnimatorSet_printChildCount(ADAnimatorSet *self);
 
@@ -310,6 +317,7 @@ __attribute__((unused)) static ADAnimatorSet_1 *new_ADAnimatorSet_1_initWithADAn
 
 __attribute__((unused)) static ADAnimatorSet_1 *create_ADAnimatorSet_1_initWithADAnimatorSet_(ADAnimatorSet *outer$);
 
+
 @interface ADAnimatorSet_2 : ADAnimatorListenerAdapter {
  @public
   ADAnimatorSet *val$anim_;
@@ -329,12 +337,13 @@ __attribute__((unused)) static ADAnimatorSet_2 *new_ADAnimatorSet_2_initWithADAn
 
 __attribute__((unused)) static ADAnimatorSet_2 *create_ADAnimatorSet_2_initWithADAnimatorSet_(ADAnimatorSet *capture$0);
 
+
 @interface ADAnimatorSet_3 : NSObject < JavaUtilComparator >
 
 - (instancetype)init;
 
-- (jint)compareWithId:(ADAnimatorSet_AnimationEvent *)e1
-               withId:(ADAnimatorSet_AnimationEvent *)e2;
+- (int32_t)compareWithId:(ADAnimatorSet_AnimationEvent *)e1
+                  withId:(ADAnimatorSet_AnimationEvent *)e2;
 
 @end
 
@@ -345,6 +354,7 @@ __attribute__((unused)) static void ADAnimatorSet_3_init(ADAnimatorSet_3 *self);
 __attribute__((unused)) static ADAnimatorSet_3 *new_ADAnimatorSet_3_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADAnimatorSet_3 *create_ADAnimatorSet_3_init(void);
+
 
 /*!
  @brief A Node is an embodiment of both the Animator that it wraps as well as
@@ -365,7 +375,7 @@ __attribute__((unused)) static ADAnimatorSet_3 *create_ADAnimatorSet_3_init(void
   is used by AnimatorSet to check, as each animation ends, whether all child animations
   are mEnded and it's time to send out an end event for the entire AnimatorSet.
    */
-  jboolean mEnded_;
+  bool mEnded_;
   /*!
    @brief Nodes with animations that are defined to play simultaneously with the animation
   associated with this current node.
@@ -381,10 +391,10 @@ __attribute__((unused)) static ADAnimatorSet_3 *create_ADAnimatorSet_3_init(void
   the other parents' animations.
    */
   ADAnimatorSet_Node *mLatestParent_;
-  jboolean mParentsAdded_;
-  jlong mStartTime_;
-  jlong mEndTime_;
-  jlong mTotalDuration_;
+  bool mParentsAdded_;
+  int64_t mStartTime_;
+  int64_t mEndTime_;
+  int64_t mTotalDuration_;
 }
 
 /*!
@@ -423,6 +433,7 @@ __attribute__((unused)) static ADAnimatorSet_Node *create_ADAnimatorSet_Node_ini
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet_Node)
 
+
 /*!
  @brief This class is a wrapper around a node and an event for the animation corresponding to the
   node.The 3 types of events represent the start of an animation, the end of a start delay of
@@ -436,13 +447,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet_Node)
 @interface ADAnimatorSet_AnimationEvent : NSObject {
  @public
   ADAnimatorSet_Node *mNode_;
-  jint mEvent_;
+  int32_t mEvent_;
 }
 
 - (instancetype)initWithADAnimatorSet_Node:(ADAnimatorSet_Node *)node
-                                   withInt:(jint)event;
+                                   withInt:(int32_t)event;
 
-- (jlong)getTime;
+- (int64_t)getTime;
 
 - (NSString *)description;
 
@@ -452,50 +463,51 @@ J2OBJC_EMPTY_STATIC_INIT(ADAnimatorSet_AnimationEvent)
 
 J2OBJC_FIELD_SETTER(ADAnimatorSet_AnimationEvent, mNode_, ADAnimatorSet_Node *)
 
-inline jint ADAnimatorSet_AnimationEvent_get_ANIMATION_START(void);
+inline int32_t ADAnimatorSet_AnimationEvent_get_ANIMATION_START(void);
 #define ADAnimatorSet_AnimationEvent_ANIMATION_START 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAnimatorSet_AnimationEvent, ANIMATION_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAnimatorSet_AnimationEvent, ANIMATION_START, int32_t)
 
-inline jint ADAnimatorSet_AnimationEvent_get_ANIMATION_DELAY_ENDED(void);
+inline int32_t ADAnimatorSet_AnimationEvent_get_ANIMATION_DELAY_ENDED(void);
 #define ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAnimatorSet_AnimationEvent, ANIMATION_DELAY_ENDED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAnimatorSet_AnimationEvent, ANIMATION_DELAY_ENDED, int32_t)
 
-inline jint ADAnimatorSet_AnimationEvent_get_ANIMATION_END(void);
+inline int32_t ADAnimatorSet_AnimationEvent_get_ANIMATION_END(void);
 #define ADAnimatorSet_AnimationEvent_ANIMATION_END 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADAnimatorSet_AnimationEvent, ANIMATION_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAnimatorSet_AnimationEvent, ANIMATION_END, int32_t)
 
-__attribute__((unused)) static void ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_AnimationEvent *self, ADAnimatorSet_Node *node, jint event);
+__attribute__((unused)) static void ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_AnimationEvent *self, ADAnimatorSet_Node *node, int32_t event);
 
-__attribute__((unused)) static ADAnimatorSet_AnimationEvent *new_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, jint event) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ADAnimatorSet_AnimationEvent *new_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, int32_t event) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ADAnimatorSet_AnimationEvent *create_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, jint event);
+__attribute__((unused)) static ADAnimatorSet_AnimationEvent *create_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, int32_t event);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet_AnimationEvent)
+
 
 @interface ADAnimatorSet_SeekState : NSObject {
  @public
   ADAnimatorSet *this$0_;
-  jlong mPlayTime_;
-  jboolean mSeekingInReverse_;
+  int64_t mPlayTime_;
+  bool mSeekingInReverse_;
 }
 
 - (instancetype)initWithADAnimatorSet:(ADAnimatorSet *)outer$;
 
 - (void)reset;
 
-- (void)setPlayTimeWithLong:(jlong)playTime
-                withBoolean:(jboolean)inReverse;
+- (void)setPlayTimeWithLong:(int64_t)playTime
+                withBoolean:(bool)inReverse;
 
-- (void)updateSeekDirectionWithBoolean:(jboolean)inReverse;
+- (void)updateSeekDirectionWithBoolean:(bool)inReverse;
 
-- (jlong)getPlayTime;
+- (int64_t)getPlayTime;
 
 /*!
  @brief Returns the playtime assuming the animation is forward playing
  */
-- (jlong)getPlayTimeNormalized;
+- (int64_t)getPlayTimeNormalized;
 
-- (jboolean)isActive;
+- (bool)isActive;
 
 @end
 
@@ -508,6 +520,7 @@ __attribute__((unused)) static ADAnimatorSet_SeekState *new_ADAnimatorSet_SeekSt
 __attribute__((unused)) static ADAnimatorSet_SeekState *create_ADAnimatorSet_SeekState_initWithADAnimatorSet_(ADAnimatorSet *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimatorSet_SeekState)
+
 
 @interface ADAnimatorSet_Builder () {
  @public
@@ -541,6 +554,7 @@ __attribute__((unused)) static ADAnimatorSet_$Lambda$1 *new_ADAnimatorSet_$Lambd
 
 __attribute__((unused)) static ADAnimatorSet_$Lambda$1 *create_ADAnimatorSet_$Lambda$1_init(void);
 
+
 @interface ADAnimatorSet_$Lambda$2 : NSObject < JavaUtilFunctionConsumer >
 
 - (void)acceptWithId:(ADAnimator *)a;
@@ -558,6 +572,7 @@ __attribute__((unused)) static void ADAnimatorSet_$Lambda$2_init(ADAnimatorSet_$
 __attribute__((unused)) static ADAnimatorSet_$Lambda$2 *new_ADAnimatorSet_$Lambda$2_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADAnimatorSet_$Lambda$2 *create_ADAnimatorSet_$Lambda$2_init(void);
+
 
 @interface ADAnimatorSet_$Lambda$3 : NSObject < JavaUtilFunctionConsumer >
 
@@ -577,6 +592,7 @@ __attribute__((unused)) static ADAnimatorSet_$Lambda$3 *new_ADAnimatorSet_$Lambd
 
 __attribute__((unused)) static ADAnimatorSet_$Lambda$3 *create_ADAnimatorSet_$Lambda$3_init(void);
 
+
 @implementation ADAnimatorSet
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -589,7 +605,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)playTogetherWithADAnimatorArray:(IOSObjectArray *)items {
   if (items != nil) {
     ADAnimatorSet_Builder *builder = JreRetainedLocalValue([self playWithADAnimator:IOSObjectArray_Get(items, 0)]);
-    for (jint i = 1; i < items->size_; ++i) {
+    for (int32_t i = 1; i < items->size_; ++i) {
       [((ADAnimatorSet_Builder *) nil_chk(builder)) withWithADAnimator:IOSObjectArray_Get(items, i)];
     }
   }
@@ -615,7 +631,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [self playWithADAnimator:IOSObjectArray_Get(items, 0)];
     }
     else {
-      for (jint i = 0; i < items->size_ - 1; ++i) {
+      for (int32_t i = 0; i < items->size_ - 1; ++i) {
         [((ADAnimatorSet_Builder *) nil_chk([self playWithADAnimator:IOSObjectArray_Get(items, i)])) beforeWithADAnimator:IOSObjectArray_Get(items, i + 1)];
       }
     }
@@ -628,7 +644,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [self playWithADAnimator:[items getWithInt:0]];
     }
     else {
-      for (jint i = 0; i < [items size] - 1; ++i) {
+      for (int32_t i = 0; i < [items size] - 1; ++i) {
         [((ADAnimatorSet_Builder *) nil_chk([self playWithADAnimator:[items getWithInt:i]])) beforeWithADAnimator:[items getWithInt:i + 1]];
       }
     }
@@ -637,10 +653,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (JavaUtilArrayList *)getChildAnimations {
   JavaUtilArrayList *childList = create_JavaUtilArrayList_init();
-  jint size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]);
-    if (node != mRootNode_) {
+    if (!JreObjectEqualsEquals(node, mRootNode_)) {
       [childList addWithId:((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_];
     }
   }
@@ -648,8 +664,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setTargetWithId:(id)target {
-  jint size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]);
     ADAnimator *animation = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_);
     if ([animation isKindOfClass:[ADAnimatorSet class]]) {
@@ -661,10 +677,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getChangingConfigurations {
-  jint conf = [super getChangingConfigurations];
-  jint nodeCount = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
-  for (jint i = 0; i < nodeCount; i++) {
+- (int32_t)getChangingConfigurations {
+  int32_t conf = [super getChangingConfigurations];
+  int32_t nodeCount = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+  for (int32_t i = 0; i < nodeCount; i++) {
     conf |= [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]))->mAnimation_)) getChangingConfigurations];
   }
   return conf;
@@ -716,7 +732,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     mStarted_ = false;
     if (mReversing_) {
       mLastEventId_ = mLastEventId_ == -1 ? [((JavaUtilArrayList *) nil_chk(mEvents_)) size] : mLastEventId_;
-      for (jint eventId = mLastEventId_ - 1; eventId >= 0; eventId--) {
+      for (int32_t eventId = mLastEventId_ - 1; eventId >= 0; eventId--) {
         ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:eventId]);
         ADAnimator *anim = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk(((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mNode_))->mAnimation_);
         if (((ADAnimatorSet_Node *) nil_chk([((ADArrayMap *) nil_chk(mNodeMap_)) getWithId:anim]))->mEnded_) {
@@ -731,7 +747,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     else {
-      for (jint eventId = mLastEventId_ + 1; eventId < [((JavaUtilArrayList *) nil_chk(mEvents_)) size]; eventId++) {
+      for (int32_t eventId = mLastEventId_ + 1; eventId < [((JavaUtilArrayList *) nil_chk(mEvents_)) size]; eventId++) {
         ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:eventId]);
         ADAnimator *anim = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk(((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mNode_))->mAnimation_);
         if (((ADAnimatorSet_Node *) nil_chk([((ADArrayMap *) nil_chk(mNodeMap_)) getWithId:anim]))->mEnded_) {
@@ -749,36 +765,36 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_endAnimation(self);
 }
 
-- (jboolean)isRunning {
+- (bool)isRunning {
   if (mStartDelay_ == 0) {
     return mStarted_;
   }
   return mLastFrameTime_ > 0;
 }
 
-- (jboolean)isStarted {
+- (bool)isStarted {
   return mStarted_;
 }
 
-- (jlong)getStartDelay {
+- (int64_t)getStartDelay {
   return mStartDelay_;
 }
 
-- (void)setStartDelayWithLong:(jlong)startDelay {
+- (void)setStartDelayWithLong:(int64_t)startDelay {
   if (startDelay < 0) {
     ADLog_wWithNSString_withNSString_(ADAnimatorSet_TAG, @"Start delay should always be non-negative");
     startDelay = 0;
   }
-  jlong delta = startDelay - mStartDelay_;
+  int64_t delta = startDelay - mStartDelay_;
   if (delta == 0) {
     return;
   }
   mStartDelay_ = startDelay;
   if (!mDependencyDirty_) {
-    jint size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
-    for (jint i = 0; i < size; i++) {
+    int32_t size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+    for (int32_t i = 0; i < size; i++) {
       ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]);
-      if (node == mRootNode_) {
+      if (JreObjectEqualsEquals(node, mRootNode_)) {
         ((ADAnimatorSet_Node *) nil_chk(node))->mEndTime_ = mStartDelay_;
       }
       else {
@@ -792,11 +808,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jlong)getDuration {
+- (int64_t)getDuration {
   return mDuration_;
 }
 
-- (ADAnimatorSet *)setDurationWithLong:(jlong)duration {
+- (ADAnimatorSet *)setDurationWithLong:(int64_t)duration {
   if (duration < 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"duration must be a value of zero or greater");
   }
@@ -806,20 +822,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setupStartValues {
-  jint size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]);
-    if (node != mRootNode_) {
+    if (!JreObjectEqualsEquals(node, mRootNode_)) {
       [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_)) setupStartValues];
     }
   }
 }
 
 - (void)setupEndValues {
-  jint size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]);
-    if (node != mRootNode_) {
+    if (!JreObjectEqualsEquals(node, mRootNode_)) {
       [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_)) setupEndValues];
     }
   }
@@ -829,7 +845,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (ADLooper_myLooper() == nil) {
     @throw create_ADAndroidRuntimeException_initWithNSString_(@"Animators may only be run on Looper threads");
   }
-  jboolean previouslyPaused = mPaused_;
+  bool previouslyPaused = mPaused_;
   [super pause];
   if (!previouslyPaused && mPaused_) {
     mPauseTime_ = -1;
@@ -841,7 +857,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (ADLooper_myLooper() == nil) {
     @throw create_ADAndroidRuntimeException_initWithNSString_(@"Animators may only be run on Looper threads");
   }
-  jboolean previouslyPaused = mPaused_;
+  bool previouslyPaused = mPaused_;
   [super resume];
   if (previouslyPaused && !mPaused_) {
     if (mPauseTime_ >= 0) {
@@ -855,7 +871,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_startWithBoolean_withBoolean_(self, false, true);
 }
 
-- (void)startWithoutPulsingWithBoolean:(jboolean)inReverse {
+- (void)startWithoutPulsingWithBoolean:(bool)inReverse {
   ADAnimatorSet_startWithBoolean_withBoolean_(self, inReverse, false);
 }
 
@@ -863,12 +879,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_initAnimation(self);
 }
 
-- (void)startWithBoolean:(jboolean)inReverse
-             withBoolean:(jboolean)selfPulse {
+- (void)startWithBoolean:(bool)inReverse
+             withBoolean:(bool)selfPulse {
   ADAnimatorSet_startWithBoolean_withBoolean_(self, inReverse, selfPulse);
 }
 
-+ (jboolean)isEmptySetWithADAnimatorSet:(ADAnimatorSet *)set {
++ (bool)isEmptySetWithADAnimatorSet:(ADAnimatorSet *)set {
   return ADAnimatorSet_isEmptySetWithADAnimatorSet_(set);
 }
 
@@ -876,11 +892,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_updateAnimatorsDuration(self);
 }
 
-- (void)skipToEndValueWithBoolean:(jboolean)inReverse {
+- (void)skipToEndValueWithBoolean:(bool)inReverse {
   ADAnimatorSet_initAnimation(self);
   ADAnimatorSet_initChildren(self);
   if (inReverse) {
-    for (jint i = [((JavaUtilArrayList *) nil_chk(mEvents_)) size] - 1; i >= 0; i--) {
+    for (int32_t i = [((JavaUtilArrayList *) nil_chk(mEvents_)) size] - 1; i >= 0; i--) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:i]);
       if (((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED) {
         [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(event->mNode_))->mAnimation_)) skipToEndValueWithBoolean:true];
@@ -888,7 +904,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
   }
   else {
-    for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(mEvents_)) size]; i++) {
+    for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(mEvents_)) size]; i++) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:i]);
       if (((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_END) {
         [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(event->mNode_))->mAnimation_)) skipToEndValueWithBoolean:false];
@@ -897,29 +913,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)animateBasedOnPlayTimeWithLong:(jlong)currentPlayTime
-                              withLong:(jlong)lastPlayTime
-                           withBoolean:(jboolean)inReverse {
+- (void)animateBasedOnPlayTimeWithLong:(int64_t)currentPlayTime
+                              withLong:(int64_t)lastPlayTime
+                           withBoolean:(bool)inReverse {
   ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(self, currentPlayTime, lastPlayTime, inReverse);
 }
 
-- (jint)findNextIndexWithLong:(jlong)playTime
-                withLongArray:(IOSLongArray *)startEndTimes {
+- (int32_t)findNextIndexWithLong:(int64_t)playTime
+                   withLongArray:(IOSLongArray *)startEndTimes {
   return ADAnimatorSet_findNextIndexWithLong_withLongArray_(self, playTime, startEndTimes);
 }
 
-- (void)animateSkipToEndsWithLong:(jlong)currentPlayTime
-                         withLong:(jlong)lastPlayTime {
+- (void)animateSkipToEndsWithLong:(int64_t)currentPlayTime
+                         withLong:(int64_t)lastPlayTime {
   ADAnimatorSet_initAnimation(self);
   if (lastPlayTime > currentPlayTime) {
     [self notifyStartListenersWithBoolean:true];
-    for (jint i = [((JavaUtilArrayList *) nil_chk(mEvents_)) size] - 1; i >= 0; i--) {
+    for (int32_t i = [((JavaUtilArrayList *) nil_chk(mEvents_)) size] - 1; i >= 0; i--) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:i]);
       ADAnimatorSet_Node *node = JreRetainedLocalValue(((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mNode_);
       if (event->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_END && ((ADAnimatorSet_Node *) nil_chk(node))->mStartTime_ != ADAnimator_DURATION_INFINITE) {
         ADAnimator *animator = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_);
-        jlong start = node->mStartTime_;
-        jlong end = node->mTotalDuration_ == ADAnimator_DURATION_INFINITE ? JavaLangLong_MAX_VALUE : node->mEndTime_;
+        int64_t start = node->mStartTime_;
+        int64_t end = node->mTotalDuration_ == ADAnimator_DURATION_INFINITE ? JavaLangLong_MAX_VALUE : node->mEndTime_;
         if (currentPlayTime <= start && start < lastPlayTime) {
           [((ADAnimator *) nil_chk(animator)) animateSkipToEndsWithLong:0 withLong:lastPlayTime - node->mStartTime_];
           [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) removeWithId:node];
@@ -938,14 +954,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   else {
     [self notifyStartListenersWithBoolean:false];
-    jint eventsSize = [((JavaUtilArrayList *) nil_chk(mEvents_)) size];
-    for (jint i = 0; i < eventsSize; i++) {
+    int32_t eventsSize = [((JavaUtilArrayList *) nil_chk(mEvents_)) size];
+    for (int32_t i = 0; i < eventsSize; i++) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:i]);
       ADAnimatorSet_Node *node = JreRetainedLocalValue(((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mNode_);
       if (event->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED && ((ADAnimatorSet_Node *) nil_chk(node))->mStartTime_ != ADAnimator_DURATION_INFINITE) {
         ADAnimator *animator = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_);
-        jlong start = node->mStartTime_;
-        jlong end = node->mTotalDuration_ == ADAnimator_DURATION_INFINITE ? JavaLangLong_MAX_VALUE : node->mEndTime_;
+        int64_t start = node->mStartTime_;
+        int64_t end = node->mTotalDuration_ == ADAnimator_DURATION_INFINITE ? JavaLangLong_MAX_VALUE : node->mEndTime_;
         if (lastPlayTime < end && end <= currentPlayTime) {
           [((ADAnimator *) nil_chk(animator)) animateSkipToEndsWithLong:end - node->mStartTime_ withLong:lastPlayTime - node->mStartTime_];
           [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) removeWithId:node];
@@ -964,26 +980,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)animateValuesInRangeWithLong:(jlong)currentPlayTime
-                            withLong:(jlong)lastPlayTime {
+- (void)animateValuesInRangeWithLong:(int64_t)currentPlayTime
+                            withLong:(int64_t)lastPlayTime {
   ADAnimatorSet_initAnimation(self);
   if (lastPlayTime < 0 || (lastPlayTime == 0 && currentPlayTime > 0)) {
     [self notifyStartListenersWithBoolean:false];
   }
   else {
-    jlong duration = [self getTotalDuration];
+    int64_t duration = [self getTotalDuration];
     if (duration >= 0 && (lastPlayTime > duration || (lastPlayTime == duration && currentPlayTime < duration))) {
       [self notifyStartListenersWithBoolean:true];
     }
   }
-  jint eventsSize = [((JavaUtilArrayList *) nil_chk(mEvents_)) size];
-  for (jint i = 0; i < eventsSize; i++) {
+  int32_t eventsSize = [((JavaUtilArrayList *) nil_chk(mEvents_)) size];
+  for (int32_t i = 0; i < eventsSize; i++) {
     ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:i]);
     ADAnimatorSet_Node *node = JreRetainedLocalValue(((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mNode_);
     if (event->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED && ((ADAnimatorSet_Node *) nil_chk(node))->mStartTime_ != ADAnimator_DURATION_INFINITE) {
       ADAnimator *animator = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_);
-      jlong start = node->mStartTime_;
-      jlong end = node->mTotalDuration_ == ADAnimator_DURATION_INFINITE ? JavaLangLong_MAX_VALUE : node->mEndTime_;
+      int64_t start = node->mStartTime_;
+      int64_t end = node->mTotalDuration_ == ADAnimator_DURATION_INFINITE ? JavaLangLong_MAX_VALUE : node->mEndTime_;
       if ((start < currentPlayTime && currentPlayTime < end) || (start == currentPlayTime && lastPlayTime < start) || (end == currentPlayTime && lastPlayTime > end)) {
         [((ADAnimator *) nil_chk(animator)) animateValuesInRangeWithLong:currentPlayTime - node->mStartTime_ withLong:JavaLangMath_maxWithLong_withLong_(-1, lastPlayTime - node->mStartTime_)];
       }
@@ -996,9 +1012,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)getStartAndEndTimesWithADLongArray:(ADLongArray *)times
-                                  withLong:(jlong)offset {
-  jint eventsSize = [((JavaUtilArrayList *) nil_chk(mEvents_)) size];
-  for (jint i = 0; i < eventsSize; i++) {
+                                  withLong:(int64_t)offset {
+  int32_t eventsSize = [((JavaUtilArrayList *) nil_chk(mEvents_)) size];
+  for (int32_t i = 0; i < eventsSize; i++) {
     ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mEvents_)) getWithInt:i]);
     if (((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED && ((ADAnimatorSet_Node *) nil_chk(event->mNode_))->mStartTime_ != ADAnimator_DURATION_INFINITE) {
       [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(event->mNode_))->mAnimation_)) getStartAndEndTimesWithADLongArray:times withLong:offset + event->mNode_->mStartTime_];
@@ -1006,12 +1022,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isInitialized {
+- (bool)isInitialized {
   if (mChildrenInitialized_) {
     return true;
   }
-  jboolean allInitialized = true;
-  for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(mNodes_)) size]; i++) {
+  bool allInitialized = true;
+  for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(mNodes_)) size]; i++) {
     if (![((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]))->mAnimation_)) isInitialized]) {
       allInitialized = false;
       break;
@@ -1021,7 +1037,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return mChildrenInitialized_;
 }
 
-- (void)setCurrentPlayTimeWithLong:(jlong)playTime {
+- (void)setCurrentPlayTimeWithLong:(int64_t)playTime {
   if (mReversing_ && [self getTotalDuration] == ADAnimator_DURATION_INFINITE) {
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Error: Cannot seek in reverse in an infinite AnimatorSet");
   }
@@ -1029,7 +1045,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Error: Play time should always be in between 0 and duration.");
   }
   ADAnimatorSet_initAnimation(self);
-  jlong lastPlayTime = [((ADAnimatorSet_SeekState *) nil_chk(mSeekState_)) getPlayTime];
+  int64_t lastPlayTime = [((ADAnimatorSet_SeekState *) nil_chk(mSeekState_)) getPlayTime];
   if (![self isStarted] || [self isPaused]) {
     if (mReversing_ && ![self isStarted]) {
       @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Error: Something went wrong. mReversing should not be set when AnimatorSet is not started.");
@@ -1045,14 +1061,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(self, playTime, lastPlayTime, mReversing_);
 }
 
-- (jlong)getCurrentPlayTime {
+- (int64_t)getCurrentPlayTime {
   if ([((ADAnimatorSet_SeekState *) nil_chk(mSeekState_)) isActive]) {
     return [((ADAnimatorSet_SeekState *) nil_chk(mSeekState_)) getPlayTime];
   }
   if (mLastFrameTime_ == -1) {
     return 0;
   }
-  jfloat durationScale = ADValueAnimator_getDurationScale();
+  float durationScale = ADValueAnimator_getDurationScale();
   durationScale = durationScale == 0 ? 1 : durationScale;
   if (mReversing_) {
     return JreFpToLong(((mLastFrameTime_ - mFirstFrame_) / durationScale));
@@ -1066,8 +1082,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_initChildren(self);
 }
 
-- (jboolean)doAnimationFrameWithLong:(jlong)frameTime {
-  jfloat durationScale = ADValueAnimator_getDurationScale();
+- (bool)doAnimationFrameWithLong:(int64_t)frameTime {
+  float durationScale = ADValueAnimator_getDurationScale();
   if (durationScale == 0.0f) {
     ADAnimatorSet_forceToEnd(self);
     return true;
@@ -1097,26 +1113,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (!mReversing_ && frameTime < mFirstFrame_ + mStartDelay_ * durationScale) {
     return false;
   }
-  jlong unscaledPlayTime = JreFpToLong(((frameTime - mFirstFrame_) / durationScale));
+  int64_t unscaledPlayTime = JreFpToLong(((frameTime - mFirstFrame_) / durationScale));
   mLastFrameTime_ = frameTime;
-  jint latestId = ADAnimatorSet_findLatestEventIdForTimeWithLong_(self, unscaledPlayTime);
-  jint startId = mLastEventId_;
+  int32_t latestId = ADAnimatorSet_findLatestEventIdForTimeWithLong_(self, unscaledPlayTime);
+  int32_t startId = mLastEventId_;
   ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(self, startId, latestId, unscaledPlayTime);
   mLastEventId_ = latestId;
-  for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) size]; i++) {
+  for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) size]; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mPlayingSet_)) getWithInt:i]);
     if (!((ADAnimatorSet_Node *) nil_chk(node))->mEnded_) {
       ADAnimatorSet_pulseFrameWithADAnimatorSet_Node_withLong_(self, node, ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_(self, unscaledPlayTime, node));
     }
   }
-  for (jint i = [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) size] - 1; i >= 0; i--) {
+  for (int32_t i = [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) size] - 1; i >= 0; i--) {
     if (((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(mPlayingSet_)) getWithInt:i]))->mEnded_) {
       [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) removeWithInt:i];
     }
   }
-  jboolean finished = false;
+  bool finished = false;
   if (mReversing_) {
-    if ([((JavaUtilArrayList *) nil_chk(mPlayingSet_)) size] == 1 && [((JavaUtilArrayList *) nil_chk(mPlayingSet_)) getWithInt:0] == mRootNode_) {
+    if ([((JavaUtilArrayList *) nil_chk(mPlayingSet_)) size] == 1 && JreObjectEqualsEquals([((JavaUtilArrayList *) nil_chk(mPlayingSet_)) getWithInt:0], mRootNode_)) {
       finished = true;
     }
     else if ([((JavaUtilArrayList *) nil_chk(mPlayingSet_)) isEmpty] && mLastEventId_ < 3) {
@@ -1133,32 +1149,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (void)commitAnimationFrameWithLong:(jlong)frameTime {
+- (void)commitAnimationFrameWithLong:(int64_t)frameTime {
 }
 
-- (jboolean)pulseAnimationFrameWithLong:(jlong)frameTime {
+- (bool)pulseAnimationFrameWithLong:(int64_t)frameTime {
   return [self doAnimationFrameWithLong:frameTime];
 }
 
-- (void)handleAnimationEventsWithInt:(jint)startId
-                             withInt:(jint)latestId
-                            withLong:(jlong)playTime {
+- (void)handleAnimationEventsWithInt:(int32_t)startId
+                             withInt:(int32_t)latestId
+                            withLong:(int64_t)playTime {
   ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(self, startId, latestId, playTime);
 }
 
 - (void)pulseFrameWithADAnimatorSet_Node:(ADAnimatorSet_Node *)node
-                                withLong:(jlong)animPlayTime {
+                                withLong:(int64_t)animPlayTime {
   ADAnimatorSet_pulseFrameWithADAnimatorSet_Node_withLong_(self, node, animPlayTime);
 }
 
-- (jlong)getPlayTimeForNodeIncludingDelayWithLong:(jlong)overallPlayTime
-                           withADAnimatorSet_Node:(ADAnimatorSet_Node *)node {
+- (int64_t)getPlayTimeForNodeIncludingDelayWithLong:(int64_t)overallPlayTime
+                             withADAnimatorSet_Node:(ADAnimatorSet_Node *)node {
   return ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_(self, overallPlayTime, node);
 }
 
-- (jlong)getPlayTimeForNodeIncludingDelayWithLong:(jlong)overallPlayTime
-                           withADAnimatorSet_Node:(ADAnimatorSet_Node *)node
-                                      withBoolean:(jboolean)inReverse {
+- (int64_t)getPlayTimeForNodeIncludingDelayWithLong:(int64_t)overallPlayTime
+                             withADAnimatorSet_Node:(ADAnimatorSet_Node *)node
+                                        withBoolean:(bool)inReverse {
   return ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_withBoolean_(self, overallPlayTime, node, inReverse);
 }
 
@@ -1174,7 +1190,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_removeAnimationEndListener(self);
 }
 
-- (jint)findLatestEventIdForTimeWithLong:(jlong)currentPlayTime {
+- (int32_t)findLatestEventIdForTimeWithLong:(int64_t)currentPlayTime {
   return ADAnimatorSet_findLatestEventIdForTimeWithLong_(self, currentPlayTime);
 }
 
@@ -1186,13 +1202,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_removeAnimationCallback(self);
 }
 
-- (void)addAnimationCallbackWithLong:(jlong)delay {
+- (void)addAnimationCallbackWithLong:(int64_t)delay {
   ADAnimatorSet_addAnimationCallbackWithLong_(self, delay);
 }
 
 - (ADAnimatorSet *)java_clone {
   ADAnimatorSet *anim = (ADAnimatorSet *) cast_chk([super java_clone], [ADAnimatorSet class]);
-  jint nodeCount = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+  int32_t nodeCount = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
   ((ADAnimatorSet *) nil_chk(anim))->mStarted_ = false;
   anim->mLastFrameTime_ = -1;
   anim->mFirstFrame_ = -1;
@@ -1210,7 +1226,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   anim->mReversing_ = false;
   anim->mDependencyDirty_ = true;
   JavaUtilHashMap *clonesMap = create_JavaUtilHashMap_initWithInt_(nodeCount);
-  for (jint n = 0; n < nodeCount; n++) {
+  for (int32_t n = 0; n < nodeCount; n++) {
     ADAnimatorSet_Node *node = [((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:n];
     ADAnimatorSet_Node *nodeClone = JreRetainedLocalValue([((ADAnimatorSet_Node *) nil_chk(node)) java_clone]);
     [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(nodeClone))->mAnimation_)) removeListenerWithADAnimator_AnimatorListener:mAnimationEndListener_];
@@ -1220,27 +1236,27 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   JreStrongAssign(&anim->mRootNode_, [clonesMap getWithId:mRootNode_]);
   JreStrongAssign(&anim->mDelayAnim_, (ADValueAnimator *) cast_chk(((ADAnimatorSet_Node *) nil_chk(anim->mRootNode_))->mAnimation_, [ADValueAnimator class]));
-  for (jint i = 0; i < nodeCount; i++) {
+  for (int32_t i = 0; i < nodeCount; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]);
     ADAnimatorSet_Node *nodeClone = JreRetainedLocalValue([clonesMap getWithId:node]);
     JreStrongAssign(&((ADAnimatorSet_Node *) nil_chk(nodeClone))->mLatestParent_, ((ADAnimatorSet_Node *) nil_chk(node))->mLatestParent_ == nil ? nil : [clonesMap getWithId:node->mLatestParent_]);
-    jint size = node->mChildNodes_ == nil ? 0 : [node->mChildNodes_ size];
-    for (jint j = 0; j < size; j++) {
+    int32_t size = node->mChildNodes_ == nil ? 0 : [node->mChildNodes_ size];
+    for (int32_t j = 0; j < size; j++) {
       [((JavaUtilArrayList *) nil_chk(nodeClone->mChildNodes_)) setWithInt:j withId:[clonesMap getWithId:[node->mChildNodes_ getWithInt:j]]];
     }
     size = node->mSiblings_ == nil ? 0 : [node->mSiblings_ size];
-    for (jint j = 0; j < size; j++) {
+    for (int32_t j = 0; j < size; j++) {
       [((JavaUtilArrayList *) nil_chk(nodeClone->mSiblings_)) setWithInt:j withId:[clonesMap getWithId:[node->mSiblings_ getWithInt:j]]];
     }
     size = node->mParents_ == nil ? 0 : [node->mParents_ size];
-    for (jint j = 0; j < size; j++) {
+    for (int32_t j = 0; j < size; j++) {
       [((JavaUtilArrayList *) nil_chk(nodeClone->mParents_)) setWithInt:j withId:[clonesMap getWithId:[node->mParents_ getWithInt:j]]];
     }
   }
   return anim;
 }
 
-- (jboolean)canReverse {
+- (bool)canReverse {
   return [self getTotalDuration] != ADAnimator_DURATION_INFINITE;
 }
 
@@ -1249,9 +1265,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  NSString *returnVal = JreStrcat("$$C", @"AnimatorSet@", JavaLangInteger_toHexStringWithInt_(((jint) [self hash])), '{');
-  jint size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
-  for (jint i = 0; i < size; i++) {
+  NSString *returnVal = JreStrcat("$$C", @"AnimatorSet@", JavaLangInteger_toHexStringWithInt_(((int32_t) [self hash])), '{');
+  int32_t size = [((JavaUtilArrayList *) nil_chk(mNodes_)) size];
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(mNodes_)) getWithInt:i]);
     JreStrAppend(&returnVal, "$$", @"\n    ", [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_)) description]);
   }
@@ -1280,13 +1296,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADAnimatorSet_findSiblingsWithADAnimatorSet_Node_withJavaUtilArrayList_(self, node, siblings);
 }
 
-- (jboolean)shouldPlayTogether {
+- (bool)shouldPlayTogether {
   ADAnimatorSet_updateAnimatorsDuration(self);
   ADAnimatorSet_createDependencyGraph(self);
   return ((ADAnimatorSet_Node *) nil_chk(mRootNode_))->mChildNodes_ == nil || [mRootNode_->mChildNodes_ size] == [((JavaUtilArrayList *) nil_chk(mNodes_)) size] - 1;
 }
 
-- (jlong)getTotalDuration {
+- (int64_t)getTotalDuration {
   ADAnimatorSet_updateAnimatorsDuration(self);
   ADAnimatorSet_createDependencyGraph(self);
   return mTotalDuration_;
@@ -1497,7 +1513,7 @@ void ADAnimatorSet_init(ADAnimatorSet *self) {
   self->mDependencyDirty_ = false;
   self->mStarted_ = false;
   self->mStartDelay_ = 0;
-  JreStrongAssign(&self->mDelayAnim_, [((ADValueAnimator *) nil_chk(ADValueAnimator_ofFloatWithFloatArray_([IOSFloatArray arrayWithFloats:(jfloat[]){ 0.0f, 1.0f } count:2]))) setDurationWithLong:0]);
+  JreStrongAssign(&self->mDelayAnim_, [((ADValueAnimator *) nil_chk(ADValueAnimator_ofFloatWithFloatArray_([IOSFloatArray arrayWithFloats:(float[]){ 0.0f, 1.0f } count:2]))) setDurationWithLong:0]);
   JreStrongAssignAndConsume(&self->mRootNode_, new_ADAnimatorSet_Node_initWithADAnimator_(self->mDelayAnim_));
   self->mDuration_ = -1;
   JreStrongAssign(&self->mInterpolator_, nil);
@@ -1513,7 +1529,7 @@ void ADAnimatorSet_init(ADAnimatorSet *self) {
   JreStrongAssignAndConsume(&self->mAnimationEndListener_, new_ADAnimatorSet_1_initWithADAnimatorSet_(self));
   [((ADArrayMap *) nil_chk(self->mNodeMap_)) putWithId:self->mDelayAnim_ withId:self->mRootNode_];
   [((JavaUtilArrayList *) nil_chk(self->mNodes_)) addWithId:self->mRootNode_];
-  jboolean isPreO;
+  bool isPreO;
   ADApplication *app = ADActivityThread_currentApplication();
   if (app == nil || [app getApplicationInfo] == nil) {
     self->mShouldIgnoreEndWithoutStart_ = true;
@@ -1542,8 +1558,8 @@ ADAnimatorSet *create_ADAnimatorSet_init() {
 
 void ADAnimatorSet_callOnPlayingSetWithJavaUtilFunctionConsumer_(ADAnimatorSet *self, id<JavaUtilFunctionConsumer> consumer) {
   JavaUtilArrayList *list = self->mPlayingSet_;
-  jint size = [((JavaUtilArrayList *) nil_chk(list)) size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(list)) size];
+  for (int32_t i = 0; i < size; i++) {
     ADAnimator *animator = ((ADAnimatorSet_Node *) nil_chk([list getWithInt:i]))->mAnimation_;
     [((id<JavaUtilFunctionConsumer>) nil_chk(consumer)) acceptWithId:animator];
   }
@@ -1558,7 +1574,7 @@ void ADAnimatorSet_forceToEnd(ADAnimatorSet *self) {
     ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(self, self->mLastEventId_, 0, [self getTotalDuration]);
   }
   else {
-    jlong zeroScalePlayTime = [self getTotalDuration];
+    int64_t zeroScalePlayTime = [self getTotalDuration];
     if (zeroScalePlayTime == ADAnimator_DURATION_INFINITE) {
       zeroScalePlayTime = JavaLangInteger_MAX_VALUE;
     }
@@ -1570,7 +1586,7 @@ void ADAnimatorSet_forceToEnd(ADAnimatorSet *self) {
 
 void ADAnimatorSet_initAnimation(ADAnimatorSet *self) {
   if (self->mInterpolator_ != nil) {
-    for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
+    for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
       ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]);
       [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_)) setInterpolatorWithADTimeInterpolator:self->mInterpolator_];
     }
@@ -1579,7 +1595,7 @@ void ADAnimatorSet_initAnimation(ADAnimatorSet *self) {
   ADAnimatorSet_createDependencyGraph(self);
 }
 
-void ADAnimatorSet_startWithBoolean_withBoolean_(ADAnimatorSet *self, jboolean inReverse, jboolean selfPulse) {
+void ADAnimatorSet_startWithBoolean_withBoolean_(ADAnimatorSet *self, bool inReverse, bool selfPulse) {
   if (ADLooper_myLooper() == nil) {
     @throw create_ADAndroidRuntimeException_initWithNSString_(@"Animators may only be run on Looper threads");
   }
@@ -1590,8 +1606,8 @@ void ADAnimatorSet_startWithBoolean_withBoolean_(ADAnimatorSet *self, jboolean i
   self->mSelfPulse_ = selfPulse;
   self->mPaused_ = false;
   self->mPauseTime_ = -1;
-  jint size = [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size];
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]);
     ((ADAnimatorSet_Node *) nil_chk(node))->mEnded_ = false;
     [((ADAnimator *) nil_chk(node->mAnimation_)) setAllowRunningAsynchronouslyWithBoolean:false];
@@ -1601,7 +1617,7 @@ void ADAnimatorSet_startWithBoolean_withBoolean_(ADAnimatorSet *self, jboolean i
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Cannot reverse infinite AnimatorSet");
   }
   self->mReversing_ = inReverse;
-  jboolean isEmptySet = ADAnimatorSet_isEmptySetWithADAnimatorSet_(self);
+  bool isEmptySet = ADAnimatorSet_isEmptySetWithADAnimatorSet_(self);
   if (!isEmptySet) {
     ADAnimatorSet_startAnimation(self);
   }
@@ -1611,12 +1627,12 @@ void ADAnimatorSet_startWithBoolean_withBoolean_(ADAnimatorSet *self, jboolean i
   }
 }
 
-jboolean ADAnimatorSet_isEmptySetWithADAnimatorSet_(ADAnimatorSet *set) {
+bool ADAnimatorSet_isEmptySetWithADAnimatorSet_(ADAnimatorSet *set) {
   ADAnimatorSet_initialize();
   if ([((ADAnimatorSet *) nil_chk(set)) getStartDelay] > 0) {
     return false;
   }
-  for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk([set getChildAnimations])) size]; i++) {
+  for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk([set getChildAnimations])) size]; i++) {
     ADAnimator *anim = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk([set getChildAnimations])) getWithInt:i]);
     if (!([anim isKindOfClass:[ADAnimatorSet class]])) {
       return false;
@@ -1632,8 +1648,8 @@ jboolean ADAnimatorSet_isEmptySetWithADAnimatorSet_(ADAnimatorSet *set) {
 
 void ADAnimatorSet_updateAnimatorsDuration(ADAnimatorSet *self) {
   if (self->mDuration_ >= 0) {
-    jint size = [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size];
-    for (jint i = 0; i < size; i++) {
+    int32_t size = [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size];
+    for (int32_t i = 0; i < size; i++) {
       ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]);
       [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk(node))->mAnimation_)) setDurationWithLong:self->mDuration_];
     }
@@ -1641,12 +1657,12 @@ void ADAnimatorSet_updateAnimatorsDuration(ADAnimatorSet *self) {
   [((ADValueAnimator *) nil_chk(self->mDelayAnim_)) setDurationWithLong:self->mStartDelay_];
 }
 
-void ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(ADAnimatorSet *self, jlong currentPlayTime, jlong lastPlayTime, jboolean inReverse) {
+void ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(ADAnimatorSet *self, int64_t currentPlayTime, int64_t lastPlayTime, bool inReverse) {
   if (currentPlayTime < 0 || lastPlayTime < -1) {
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Error: Play time should never be negative.");
   }
   if (inReverse) {
-    jlong duration = [self getTotalDuration];
+    int64_t duration = [self getTotalDuration];
     if (duration == ADAnimator_DURATION_INFINITE) {
       @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Cannot reverse AnimatorSet with infinite duration");
     }
@@ -1655,11 +1671,11 @@ void ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(ADAnimat
     lastPlayTime = duration - lastPlayTime;
   }
   IOSLongArray *startEndTimes = ADAnimatorSet_ensureChildStartAndEndTimes(self);
-  jint index = ADAnimatorSet_findNextIndexWithLong_withLongArray_(self, lastPlayTime, startEndTimes);
-  jint endIndex = ADAnimatorSet_findNextIndexWithLong_withLongArray_(self, currentPlayTime, startEndTimes);
+  int32_t index = ADAnimatorSet_findNextIndexWithLong_withLongArray_(self, lastPlayTime, startEndTimes);
+  int32_t endIndex = ADAnimatorSet_findNextIndexWithLong_withLongArray_(self, currentPlayTime, startEndTimes);
   if (currentPlayTime >= lastPlayTime) {
     while (index < endIndex) {
-      jlong playTime = IOSLongArray_Get(nil_chk(startEndTimes), index);
+      int64_t playTime = IOSLongArray_Get(nil_chk(startEndTimes), index);
       if (lastPlayTime != playTime) {
         [self animateSkipToEndsWithLong:playTime withLong:lastPlayTime];
         [self animateValuesInRangeWithLong:playTime withLong:lastPlayTime];
@@ -1671,7 +1687,7 @@ void ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(ADAnimat
   else {
     while (index > endIndex) {
       index--;
-      jlong playTime = IOSLongArray_Get(nil_chk(startEndTimes), index);
+      int64_t playTime = IOSLongArray_Get(nil_chk(startEndTimes), index);
       if (lastPlayTime != playTime) {
         [self animateSkipToEndsWithLong:playTime withLong:lastPlayTime];
         [self animateValuesInRangeWithLong:playTime withLong:lastPlayTime];
@@ -1685,8 +1701,8 @@ void ADAnimatorSet_animateBasedOnPlayTimeWithLong_withLong_withBoolean_(ADAnimat
   }
 }
 
-jint ADAnimatorSet_findNextIndexWithLong_withLongArray_(ADAnimatorSet *self, jlong playTime, IOSLongArray *startEndTimes) {
-  jint index = JavaUtilArrays_binarySearchWithLongArray_withLong_(startEndTimes, playTime);
+int32_t ADAnimatorSet_findNextIndexWithLong_withLongArray_(ADAnimatorSet *self, int64_t playTime, IOSLongArray *startEndTimes) {
+  int32_t index = JavaUtilArrays_binarySearchWithLongArray_withLong_(startEndTimes, playTime);
   if (index < 0) {
     index = -index - 1;
   }
@@ -1714,10 +1730,10 @@ void ADAnimatorSet_initChildren(ADAnimatorSet *self) {
   }
 }
 
-void ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(ADAnimatorSet *self, jint startId, jint latestId, jlong playTime) {
+void ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(ADAnimatorSet *self, int32_t startId, int32_t latestId, int64_t playTime) {
   if (self->mReversing_) {
     startId = startId == -1 ? [((JavaUtilArrayList *) nil_chk(self->mEvents_)) size] : startId;
-    for (jint i = startId - 1; i >= latestId; i--) {
+    for (int32_t i = startId - 1; i >= latestId; i--) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:i]);
       ADAnimatorSet_Node *node = JreRetainedLocalValue(((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mNode_);
       if (event->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_END) {
@@ -1735,7 +1751,7 @@ void ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(ADAnimatorSet 
     }
   }
   else {
-    for (jint i = startId + 1; i <= latestId; i++) {
+    for (int32_t i = startId + 1; i <= latestId; i++) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:i]);
       ADAnimatorSet_Node *node = JreRetainedLocalValue(((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mNode_);
       if (event->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_START) {
@@ -1754,19 +1770,19 @@ void ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(ADAnimatorSet 
   }
 }
 
-void ADAnimatorSet_pulseFrameWithADAnimatorSet_Node_withLong_(ADAnimatorSet *self, ADAnimatorSet_Node *node, jlong animPlayTime) {
+void ADAnimatorSet_pulseFrameWithADAnimatorSet_Node_withLong_(ADAnimatorSet *self, ADAnimatorSet_Node *node, int64_t animPlayTime) {
   if (!((ADAnimatorSet_Node *) nil_chk(node))->mEnded_) {
-    jfloat durationScale = ADValueAnimator_getDurationScale();
+    float durationScale = ADValueAnimator_getDurationScale();
     durationScale = durationScale == 0 ? 1 : durationScale;
     node->mEnded_ = [((ADAnimator *) nil_chk(node->mAnimation_)) pulseAnimationFrameWithLong:JreFpToLong((animPlayTime * durationScale))];
   }
 }
 
-jlong ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_(ADAnimatorSet *self, jlong overallPlayTime, ADAnimatorSet_Node *node) {
+int64_t ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_(ADAnimatorSet *self, int64_t overallPlayTime, ADAnimatorSet_Node *node) {
   return ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_withBoolean_(self, overallPlayTime, node, self->mReversing_);
 }
 
-jlong ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_withBoolean_(ADAnimatorSet *self, jlong overallPlayTime, ADAnimatorSet_Node *node, jboolean inReverse) {
+int64_t ADAnimatorSet_getPlayTimeForNodeIncludingDelayWithLong_withADAnimatorSet_Node_withBoolean_(ADAnimatorSet *self, int64_t overallPlayTime, ADAnimatorSet_Node *node, bool inReverse) {
   if (inReverse) {
     overallPlayTime = [self getTotalDuration] - overallPlayTime;
     return ((ADAnimatorSet_Node *) nil_chk(node))->mEndTime_ - overallPlayTime;
@@ -1791,7 +1807,7 @@ void ADAnimatorSet_startAnimation(ADAnimatorSet *self) {
       [self skipToEndValueWithBoolean:!self->mReversing_];
     }
     else {
-      for (jint i = [((JavaUtilArrayList *) nil_chk(self->mEvents_)) size] - 1; i >= 0; i--) {
+      for (int32_t i = [((JavaUtilArrayList *) nil_chk(self->mEvents_)) size] - 1; i >= 0; i--) {
         if (((ADAnimatorSet_AnimationEvent *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:i]))->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED) {
           ADAnimator *anim = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk(((ADAnimatorSet_AnimationEvent *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:i]))->mNode_))->mAnimation_);
           if ([((ADAnimator *) nil_chk(anim)) isInitialized]) {
@@ -1802,7 +1818,7 @@ void ADAnimatorSet_startAnimation(ADAnimatorSet *self) {
     }
   }
   if (self->mReversing_ || self->mStartDelay_ == 0 || [((ADAnimatorSet_SeekState *) nil_chk(self->mSeekState_)) isActive]) {
-    jlong playTime;
+    int64_t playTime;
     if ([((ADAnimatorSet_SeekState *) nil_chk(self->mSeekState_)) isActive]) {
       [((ADAnimatorSet_SeekState *) nil_chk(self->mSeekState_)) updateSeekDirectionWithBoolean:self->mReversing_];
       playTime = [((ADAnimatorSet_SeekState *) nil_chk(self->mSeekState_)) getPlayTime];
@@ -1810,9 +1826,9 @@ void ADAnimatorSet_startAnimation(ADAnimatorSet *self) {
     else {
       playTime = 0;
     }
-    jint toId = ADAnimatorSet_findLatestEventIdForTimeWithLong_(self, playTime);
+    int32_t toId = ADAnimatorSet_findLatestEventIdForTimeWithLong_(self, playTime);
     ADAnimatorSet_handleAnimationEventsWithInt_withInt_withLong_(self, -1, toId, playTime);
-    for (jint i = [((JavaUtilArrayList *) nil_chk(self->mPlayingSet_)) size] - 1; i >= 0; i--) {
+    for (int32_t i = [((JavaUtilArrayList *) nil_chk(self->mPlayingSet_)) size] - 1; i >= 0; i--) {
       if (((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mPlayingSet_)) getWithInt:i]))->mEnded_) {
         [((JavaUtilArrayList *) nil_chk(self->mPlayingSet_)) removeWithInt:i];
       }
@@ -1822,24 +1838,24 @@ void ADAnimatorSet_startAnimation(ADAnimatorSet *self) {
 }
 
 void ADAnimatorSet_addAnimationEndListener(ADAnimatorSet *self) {
-  for (jint i = 1; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
+  for (int32_t i = 1; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
     [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]))->mAnimation_)) addListenerWithADAnimator_AnimatorListener:self->mAnimationEndListener_];
   }
 }
 
 void ADAnimatorSet_removeAnimationEndListener(ADAnimatorSet *self) {
-  for (jint i = 1; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
+  for (int32_t i = 1; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
     [((ADAnimator *) nil_chk(((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]))->mAnimation_)) removeListenerWithADAnimator_AnimatorListener:self->mAnimationEndListener_];
   }
 }
 
-jint ADAnimatorSet_findLatestEventIdForTimeWithLong_(ADAnimatorSet *self, jlong currentPlayTime) {
-  jint size = [((JavaUtilArrayList *) nil_chk(self->mEvents_)) size];
-  jint latestId = self->mLastEventId_;
+int32_t ADAnimatorSet_findLatestEventIdForTimeWithLong_(ADAnimatorSet *self, int64_t currentPlayTime) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(self->mEvents_)) size];
+  int32_t latestId = self->mLastEventId_;
   if (self->mReversing_) {
     currentPlayTime = [self getTotalDuration] - currentPlayTime;
     self->mLastEventId_ = self->mLastEventId_ == -1 ? size : self->mLastEventId_;
-    for (jint j = self->mLastEventId_ - 1; j >= 0; j--) {
+    for (int32_t j = self->mLastEventId_ - 1; j >= 0; j--) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:j]);
       if ([((ADAnimatorSet_AnimationEvent *) nil_chk(event)) getTime] >= currentPlayTime) {
         latestId = j;
@@ -1847,7 +1863,7 @@ jint ADAnimatorSet_findLatestEventIdForTimeWithLong_(ADAnimatorSet *self, jlong 
     }
   }
   else {
-    for (jint i = self->mLastEventId_ + 1; i < size; i++) {
+    for (int32_t i = self->mLastEventId_ + 1; i < size; i++) {
       ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:i]);
       if ([((ADAnimatorSet_AnimationEvent *) nil_chk(event)) getTime] != ADAnimator_DURATION_INFINITE && [event getTime] <= currentPlayTime) {
         latestId = i;
@@ -1881,7 +1897,7 @@ void ADAnimatorSet_removeAnimationCallback(ADAnimatorSet *self) {
   [((ADAnimationHandler *) nil_chk(handler)) removeCallbackWithADAnimationHandler_AnimationFrameCallback:self];
 }
 
-void ADAnimatorSet_addAnimationCallbackWithLong_(ADAnimatorSet *self, jlong delay) {
+void ADAnimatorSet_addAnimationCallbackWithLong_(ADAnimatorSet *self, int64_t delay) {
   if (!self->mSelfPulse_) {
     return;
   }
@@ -1893,17 +1909,17 @@ void ADAnimatorSet_printChildCount(ADAnimatorSet *self) {
   JavaUtilArrayList *list = create_JavaUtilArrayList_initWithInt_([((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]);
   [list addWithId:self->mRootNode_];
   ADLog_dWithNSString_withNSString_(ADAnimatorSet_TAG, @"Current tree: ");
-  jint index = 0;
+  int32_t index = 0;
   while (index < [list size]) {
-    jint listSize = [list size];
+    int32_t listSize = [list size];
     JavaLangStringBuilder *builder = create_JavaLangStringBuilder_init();
     for (; index < listSize; index++) {
       ADAnimatorSet_Node *node = JreRetainedLocalValue([list getWithInt:index]);
-      jint num = 0;
+      int32_t num = 0;
       if (((ADAnimatorSet_Node *) nil_chk(node))->mChildNodes_ != nil) {
-        for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(node->mChildNodes_)) size]; i++) {
+        for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(node->mChildNodes_)) size]; i++) {
           ADAnimatorSet_Node *child = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(node->mChildNodes_)) getWithInt:i]);
-          if (((ADAnimatorSet_Node *) nil_chk(child))->mLatestParent_ == node) {
+          if (JreObjectEqualsEquals(((ADAnimatorSet_Node *) nil_chk(child))->mLatestParent_, node)) {
             num++;
             [list addWithId:child];
           }
@@ -1918,8 +1934,8 @@ void ADAnimatorSet_printChildCount(ADAnimatorSet *self) {
 
 void ADAnimatorSet_createDependencyGraph(ADAnimatorSet *self) {
   if (!self->mDependencyDirty_) {
-    jboolean durationChanged = false;
-    for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
+    bool durationChanged = false;
+    for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
       ADAnimator *anim = JreRetainedLocalValue(((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]))->mAnimation_);
       if (((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]))->mTotalDuration_ != [((ADAnimator *) nil_chk(anim)) getTotalDuration]) {
         durationChanged = true;
@@ -1931,11 +1947,11 @@ void ADAnimatorSet_createDependencyGraph(ADAnimatorSet *self) {
     }
   }
   self->mDependencyDirty_ = false;
-  jint size = [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size];
+  for (int32_t i = 0; i < size; i++) {
     ((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]))->mParentsAdded_ = false;
   }
-  for (jint i = 0; i < size; i++) {
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]);
     if (((ADAnimatorSet_Node *) nil_chk(node))->mParentsAdded_) {
       continue;
@@ -1946,19 +1962,19 @@ void ADAnimatorSet_createDependencyGraph(ADAnimatorSet *self) {
     }
     ADAnimatorSet_findSiblingsWithADAnimatorSet_Node_withJavaUtilArrayList_(self, node, node->mSiblings_);
     [((JavaUtilArrayList *) nil_chk(node->mSiblings_)) removeWithId:node];
-    jint siblingSize = [((JavaUtilArrayList *) nil_chk(node->mSiblings_)) size];
-    for (jint j = 0; j < siblingSize; j++) {
+    int32_t siblingSize = [((JavaUtilArrayList *) nil_chk(node->mSiblings_)) size];
+    for (int32_t j = 0; j < siblingSize; j++) {
       [node addParentsWithJavaUtilArrayList:((ADAnimatorSet_Node *) nil_chk([((JavaUtilArrayList *) nil_chk(node->mSiblings_)) getWithInt:j]))->mParents_];
     }
-    for (jint j = 0; j < siblingSize; j++) {
+    for (int32_t j = 0; j < siblingSize; j++) {
       ADAnimatorSet_Node *sibling = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(node->mSiblings_)) getWithInt:j]);
       [((ADAnimatorSet_Node *) nil_chk(sibling)) addParentsWithJavaUtilArrayList:node->mParents_];
       sibling->mParentsAdded_ = true;
     }
   }
-  for (jint i = 0; i < size; i++) {
+  for (int32_t i = 0; i < size; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]);
-    if (node != self->mRootNode_ && ((ADAnimatorSet_Node *) nil_chk(node))->mParents_ == nil) {
+    if (!JreObjectEqualsEquals(node, self->mRootNode_) && ((ADAnimatorSet_Node *) nil_chk(node))->mParents_ == nil) {
       [((ADAnimatorSet_Node *) nil_chk(node)) addParentWithADAnimatorSet_Node:self->mRootNode_];
     }
   }
@@ -1972,18 +1988,18 @@ void ADAnimatorSet_createDependencyGraph(ADAnimatorSet *self) {
 
 void ADAnimatorSet_sortAnimationEvents(ADAnimatorSet *self) {
   [((JavaUtilArrayList *) nil_chk(self->mEvents_)) clear];
-  for (jint i = 1; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
+  for (int32_t i = 1; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
     ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]);
     [((JavaUtilArrayList *) nil_chk(self->mEvents_)) addWithId:create_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(node, ADAnimatorSet_AnimationEvent_ANIMATION_START)];
     [((JavaUtilArrayList *) nil_chk(self->mEvents_)) addWithId:create_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(node, ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED)];
     [((JavaUtilArrayList *) nil_chk(self->mEvents_)) addWithId:create_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(node, ADAnimatorSet_AnimationEvent_ANIMATION_END)];
   }
   [((JavaUtilArrayList *) nil_chk(self->mEvents_)) sortWithJavaUtilComparator:create_ADAnimatorSet_3_init()];
-  jint eventSize = [((JavaUtilArrayList *) nil_chk(self->mEvents_)) size];
-  for (jint i = 0; i < eventSize; ) {
+  int32_t eventSize = [((JavaUtilArrayList *) nil_chk(self->mEvents_)) size];
+  for (int32_t i = 0; i < eventSize; ) {
     ADAnimatorSet_AnimationEvent *event = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:i]);
     if (((ADAnimatorSet_AnimationEvent *) nil_chk(event))->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_END) {
-      jboolean needToSwapStart;
+      bool needToSwapStart;
       if (((ADAnimatorSet_Node *) nil_chk(event->mNode_))->mStartTime_ == event->mNode_->mEndTime_) {
         needToSwapStart = true;
       }
@@ -1994,13 +2010,13 @@ void ADAnimatorSet_sortAnimationEvents(ADAnimatorSet *self) {
         i++;
         continue;
       }
-      jint startEventId = eventSize;
-      jint startDelayEndId = eventSize;
-      for (jint j = i + 1; j < eventSize; j++) {
+      int32_t startEventId = eventSize;
+      int32_t startDelayEndId = eventSize;
+      for (int32_t j = i + 1; j < eventSize; j++) {
         if (startEventId < eventSize && startDelayEndId < eventSize) {
           break;
         }
-        if (((ADAnimatorSet_AnimationEvent *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:j]))->mNode_ == event->mNode_) {
+        if (JreObjectEqualsEquals(((ADAnimatorSet_AnimationEvent *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:j]))->mNode_, event->mNode_)) {
           if (((ADAnimatorSet_AnimationEvent *) nil_chk([((JavaUtilArrayList *) nil_chk(self->mEvents_)) getWithInt:j]))->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_START) {
             startEventId = j;
           }
@@ -2041,10 +2057,10 @@ void ADAnimatorSet_sortAnimationEvents(ADAnimatorSet *self) {
 
 void ADAnimatorSet_updatePlayTimeWithADAnimatorSet_Node_withJavaUtilArrayList_(ADAnimatorSet *self, ADAnimatorSet_Node *parent, JavaUtilArrayList *visited) {
   if (((ADAnimatorSet_Node *) nil_chk(parent))->mChildNodes_ == nil) {
-    if (parent == self->mRootNode_) {
-      for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
+    if (JreObjectEqualsEquals(parent, self->mRootNode_)) {
+      for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(self->mNodes_)) size]; i++) {
         ADAnimatorSet_Node *node = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(self->mNodes_)) getWithInt:i]);
-        if (node != self->mRootNode_) {
+        if (!JreObjectEqualsEquals(node, self->mRootNode_)) {
           ((ADAnimatorSet_Node *) nil_chk(node))->mStartTime_ = ADAnimator_DURATION_INFINITE;
           node->mEndTime_ = ADAnimator_DURATION_INFINITE;
         }
@@ -2053,13 +2069,13 @@ void ADAnimatorSet_updatePlayTimeWithADAnimatorSet_Node_withJavaUtilArrayList_(A
     return;
   }
   [((JavaUtilArrayList *) nil_chk(visited)) addWithId:parent];
-  jint childrenSize = [((JavaUtilArrayList *) nil_chk(parent->mChildNodes_)) size];
-  for (jint i = 0; i < childrenSize; i++) {
+  int32_t childrenSize = [((JavaUtilArrayList *) nil_chk(parent->mChildNodes_)) size];
+  for (int32_t i = 0; i < childrenSize; i++) {
     ADAnimatorSet_Node *child = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(parent->mChildNodes_)) getWithInt:i]);
     ((ADAnimatorSet_Node *) nil_chk(child))->mTotalDuration_ = [((ADAnimator *) nil_chk(child->mAnimation_)) getTotalDuration];
-    jint index = [visited indexOfWithId:child];
+    int32_t index = [visited indexOfWithId:child];
     if (index >= 0) {
-      for (jint j = index; j < [visited size]; j++) {
+      for (int32_t j = index; j < [visited size]; j++) {
         JreStrongAssign(&((ADAnimatorSet_Node *) nil_chk([visited getWithInt:j]))->mLatestParent_, nil);
         ((ADAnimatorSet_Node *) nil_chk([visited getWithInt:j]))->mStartTime_ = ADAnimator_DURATION_INFINITE;
         ((ADAnimatorSet_Node *) nil_chk([visited getWithInt:j]))->mEndTime_ = ADAnimator_DURATION_INFINITE;
@@ -2095,7 +2111,7 @@ void ADAnimatorSet_findSiblingsWithADAnimatorSet_Node_withJavaUtilArrayList_(ADA
     if (((ADAnimatorSet_Node *) nil_chk(node))->mSiblings_ == nil) {
       return;
     }
-    for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(node->mSiblings_)) size]; i++) {
+    for (int32_t i = 0; i < [((JavaUtilArrayList *) nil_chk(node->mSiblings_)) size]; i++) {
       ADAnimatorSet_findSiblingsWithADAnimatorSet_Node_withJavaUtilArrayList_(self, [((JavaUtilArrayList *) nil_chk(node->mSiblings_)) getWithInt:i], siblings);
     }
   }
@@ -2112,6 +2128,8 @@ ADAnimatorSet_Node *ADAnimatorSet_getNodeForAnimationWithADAnimator_(ADAnimatorS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet)
+
+J2OBJC_NAME_MAPPING(ADAnimatorSet, "r.android.animation", "AD")
 
 @implementation ADAnimatorSet_1
 
@@ -2147,7 +2165,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet)
     { "this$0_", "LADAnimatorSet;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADAnimatorSet;", "onAnimationEnd", "LADAnimator;" };
-  static const J2ObjcClassInfo _ADAnimatorSet_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADAnimatorSet_1 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, -1, -1, -1 };
   return &_ADAnimatorSet_1;
 }
 
@@ -2200,7 +2218,7 @@ ADAnimatorSet_1 *create_ADAnimatorSet_1_initWithADAnimatorSet_(ADAnimatorSet *ou
     { "val$anim_", "LADAnimatorSet;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADAnimatorSet;", "onAnimationEnd", "LADAnimator;", "java_clone" };
-  static const J2ObjcClassInfo _ADAnimatorSet_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ADAnimatorSet_2 = { "", "r.android.animation", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ADAnimatorSet_2;
 }
 
@@ -2228,10 +2246,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)compareWithId:(ADAnimatorSet_AnimationEvent *)e1
-               withId:(ADAnimatorSet_AnimationEvent *)e2 {
-  jlong t1 = [((ADAnimatorSet_AnimationEvent *) nil_chk(e1)) getTime];
-  jlong t2 = [((ADAnimatorSet_AnimationEvent *) nil_chk(e2)) getTime];
+- (int32_t)compareWithId:(ADAnimatorSet_AnimationEvent *)e1
+                  withId:(ADAnimatorSet_AnimationEvent *)e2 {
+  int64_t t1 = [((ADAnimatorSet_AnimationEvent *) nil_chk(e1)) getTime];
+  int64_t t2 = [((ADAnimatorSet_AnimationEvent *) nil_chk(e2)) getTime];
   if (t1 == t2) {
     if (e2->mEvent_ + e1->mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_START + ADAnimatorSet_AnimationEvent_ANIMATION_DELAY_ENDED) {
       return e1->mEvent_ - e2->mEvent_;
@@ -2246,7 +2264,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (t1 == ADAnimator_DURATION_INFINITE) {
     return 1;
   }
-  return (jint) (t1 - t2);
+  return (int32_t) (t1 - t2);
 }
 
 - (id<JavaUtilComparator>)reversed {
@@ -2290,7 +2308,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(compareWithId:withId:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "compare", "LADAnimatorSet_AnimationEvent;LADAnimatorSet_AnimationEvent;", "LADAnimatorSet;", "sortAnimationEvents", "Ljava/lang/Object;Ljava/util/Comparator<Lr/android/animation/AnimatorSet$AnimationEvent;>;" };
-  static const J2ObjcClassInfo _ADAnimatorSet_3 = { "", "r.android.animation", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, 3, 4, -1 };
+  static const J2ObjcClassInfo _ADAnimatorSet_3 = { "", "r.android.animation", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, 4, -1 };
   return &_ADAnimatorSet_3;
 }
 
@@ -2370,8 +2388,8 @@ ADAnimatorSet_3 *create_ADAnimatorSet_3_init() {
   if (parents == nil) {
     return;
   }
-  jint size = [parents size];
-  for (jint i = 0; i < size; i++) {
+  int32_t size = [parents size];
+  for (int32_t i = 0; i < size; i++) {
     [self addParentWithADAnimatorSet_Node:[parents getWithInt:i]];
   }
 }
@@ -2452,12 +2470,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet_Node)
 @implementation ADAnimatorSet_AnimationEvent
 
 - (instancetype)initWithADAnimatorSet_Node:(ADAnimatorSet_Node *)node
-                                   withInt:(jint)event {
+                                   withInt:(int32_t)event {
   ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(self, node, event);
   return self;
 }
 
-- (jlong)getTime {
+- (int64_t)getTime {
   if (mEvent_ == ADAnimatorSet_AnimationEvent_ANIMATION_START) {
     return ((ADAnimatorSet_Node *) nil_chk(mNode_))->mStartTime_;
   }
@@ -2506,17 +2524,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet_Node)
 
 @end
 
-void ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_AnimationEvent *self, ADAnimatorSet_Node *node, jint event) {
+void ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_AnimationEvent *self, ADAnimatorSet_Node *node, int32_t event) {
   NSObject_init(self);
   JreStrongAssign(&self->mNode_, node);
   self->mEvent_ = event;
 }
 
-ADAnimatorSet_AnimationEvent *new_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, jint event) {
+ADAnimatorSet_AnimationEvent *new_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, int32_t event) {
   J2OBJC_NEW_IMPL(ADAnimatorSet_AnimationEvent, initWithADAnimatorSet_Node_withInt_, node, event)
 }
 
-ADAnimatorSet_AnimationEvent *create_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, jint event) {
+ADAnimatorSet_AnimationEvent *create_ADAnimatorSet_AnimationEvent_initWithADAnimatorSet_Node_withInt_(ADAnimatorSet_Node *node, int32_t event) {
   J2OBJC_CREATE_IMPL(ADAnimatorSet_AnimationEvent, initWithADAnimatorSet_Node_withInt_, node, event)
 }
 
@@ -2534,8 +2552,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet_AnimationEvent)
   mSeekingInReverse_ = false;
 }
 
-- (void)setPlayTimeWithLong:(jlong)playTime
-                withBoolean:(jboolean)inReverse {
+- (void)setPlayTimeWithLong:(int64_t)playTime
+                withBoolean:(bool)inReverse {
   if ([this$0_ getTotalDuration] != ADAnimator_DURATION_INFINITE) {
     mPlayTime_ = JavaLangMath_minWithLong_withLong_(playTime, [this$0_ getTotalDuration] - this$0_->mStartDelay_);
   }
@@ -2546,7 +2564,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet_AnimationEvent)
   mSeekingInReverse_ = inReverse;
 }
 
-- (void)updateSeekDirectionWithBoolean:(jboolean)inReverse {
+- (void)updateSeekDirectionWithBoolean:(bool)inReverse {
   if (inReverse && [this$0_ getTotalDuration] == ADAnimator_DURATION_INFINITE) {
     @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Error: Cannot reverse infinite animator set");
   }
@@ -2558,18 +2576,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet_AnimationEvent)
   }
 }
 
-- (jlong)getPlayTime {
+- (int64_t)getPlayTime {
   return mPlayTime_;
 }
 
-- (jlong)getPlayTimeNormalized {
+- (int64_t)getPlayTimeNormalized {
   if (this$0_->mReversing_) {
     return [this$0_ getTotalDuration] - this$0_->mStartDelay_ - mPlayTime_;
   }
   return mPlayTime_;
 }
 
-- (jboolean)isActive {
+- (bool)isActive {
   return mPlayTime_ != -1;
 }
 
@@ -2654,8 +2672,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorSet_SeekState)
   return self;
 }
 
-- (ADAnimatorSet_Builder *)afterWithLong:(jlong)delay {
-  ADValueAnimator *anim = ADValueAnimator_ofFloatWithFloatArray_([IOSFloatArray arrayWithFloats:(jfloat[]){ 0.0f, 1.0f } count:2]);
+- (ADAnimatorSet_Builder *)afterWithLong:(int64_t)delay {
+  ADValueAnimator *anim = ADValueAnimator_ofFloatWithFloatArray_([IOSFloatArray arrayWithFloats:(float[]){ 0.0f, 1.0f } count:2]);
   [((ADValueAnimator *) nil_chk(anim)) setDurationWithLong:delay];
   [self afterWithADAnimator:anim];
   return self;

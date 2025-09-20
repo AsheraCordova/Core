@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\internal\FlowLayout.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FlowLayout.h"
 #include "J2ObjC_source.h"
 #include "MarginLayoutParamsCompat.h"
@@ -10,25 +15,32 @@
 #include "View.h"
 #include "ViewCompat.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ADXFlowLayout () {
  @public
-  jint lineSpacing_;
-  jint itemSpacing_;
-  jboolean singleLine_;
-  jint rowCount_;
+  int32_t lineSpacing_;
+  int32_t itemSpacing_;
+  bool singleLine_;
+  int32_t rowCount_;
 }
 
-+ (jint)getMeasuredDimensionWithInt:(jint)size
-                            withInt:(jint)mode
-                            withInt:(jint)childrenEdge;
++ (int32_t)getMeasuredDimensionWithInt:(int32_t)size
+                               withInt:(int32_t)mode
+                               withInt:(int32_t)childrenEdge;
 
 @end
 
-__attribute__((unused)) static jint ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(jint size, jint mode, jint childrenEdge);
+__attribute__((unused)) static int32_t ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(int32_t size, int32_t mode, int32_t childrenEdge);
 
 @implementation ADXFlowLayout
 
@@ -39,44 +51,44 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setLineSpacingWithInt:(jint)lineSpacing {
+- (void)setLineSpacingWithInt:(int32_t)lineSpacing {
   self->lineSpacing_ = lineSpacing;
 }
 
-- (void)setItemSpacingWithInt:(jint)itemSpacing {
+- (void)setItemSpacingWithInt:(int32_t)itemSpacing {
   self->itemSpacing_ = itemSpacing;
 }
 
-- (jboolean)isSingleLine {
+- (bool)isSingleLine {
   return singleLine_;
 }
 
-- (void)setSingleLineWithBoolean:(jboolean)singleLine {
+- (void)setSingleLineWithBoolean:(bool)singleLine {
   self->singleLine_ = singleLine;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
-  jint width = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec);
-  jint widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
-  jint height = ADView_MeasureSpec_getSizeWithInt_(heightMeasureSpec);
-  jint heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
-  jint maxWidth = widthMode == ADView_MeasureSpec_AT_MOST || widthMode == ADView_MeasureSpec_EXACTLY ? width : JavaLangInteger_MAX_VALUE;
-  jint childLeft = [self getPaddingLeft];
-  jint childTop = [self getPaddingTop];
-  jint childBottom = childTop;
-  jint childRight = childLeft;
-  jint maxChildRight = 0;
-  jint maxRight = maxWidth - [self getPaddingRight];
-  for (jint i = 0; i < [self getChildCount]; i++) {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
+  int32_t width = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec);
+  int32_t widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
+  int32_t height = ADView_MeasureSpec_getSizeWithInt_(heightMeasureSpec);
+  int32_t heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  int32_t maxWidth = widthMode == ADView_MeasureSpec_AT_MOST || widthMode == ADView_MeasureSpec_EXACTLY ? width : JavaLangInteger_MAX_VALUE;
+  int32_t childLeft = [self getPaddingLeft];
+  int32_t childTop = [self getPaddingTop];
+  int32_t childBottom = childTop;
+  int32_t childRight = childLeft;
+  int32_t maxChildRight = 0;
+  int32_t maxRight = maxWidth - [self getPaddingRight];
+  for (int32_t i = 0; i < [self getChildCount]; i++) {
     ADView *child = JreRetainedLocalValue([self getChildAtWithInt:i]);
     if ([((ADView *) nil_chk(child)) getVisibility] == ADView_GONE) {
       continue;
     }
     [self measureChildWithADView:child withInt:widthMeasureSpec withInt:heightMeasureSpec];
     ADViewGroup_LayoutParams *lp = JreRetainedLocalValue([child getLayoutParams]);
-    jint leftMargin = 0;
-    jint rightMargin = 0;
+    int32_t leftMargin = 0;
+    int32_t rightMargin = 0;
     if ([lp isKindOfClass:[ADViewGroup_MarginLayoutParams class]]) {
       ADViewGroup_MarginLayoutParams *marginLp = (ADViewGroup_MarginLayoutParams *) lp;
       leftMargin += ((ADViewGroup_MarginLayoutParams *) nil_chk(marginLp))->leftMargin_;
@@ -99,44 +111,44 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   maxChildRight += [self getPaddingRight];
   childBottom += [self getPaddingBottom];
-  jint finalWidth = ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(width, widthMode, maxChildRight);
-  jint finalHeight = ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(height, heightMode, childBottom);
+  int32_t finalWidth = ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(width, widthMode, maxChildRight);
+  int32_t finalHeight = ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(height, heightMode, childBottom);
   [self setMeasuredDimensionWithInt:finalWidth withInt:finalHeight];
 }
 
-+ (jint)getMeasuredDimensionWithInt:(jint)size
-                            withInt:(jint)mode
-                            withInt:(jint)childrenEdge {
++ (int32_t)getMeasuredDimensionWithInt:(int32_t)size
+                               withInt:(int32_t)mode
+                               withInt:(int32_t)childrenEdge {
   return ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(size, mode, childrenEdge);
 }
 
-- (void)onLayoutWithBoolean:(jboolean)sizeChanged
-                    withInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom {
+- (void)onLayoutWithBoolean:(bool)sizeChanged
+                    withInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom {
   if ([self getChildCount] == 0) {
     rowCount_ = 0;
     return;
   }
   rowCount_ = 1;
-  jboolean isRtl = ADXViewCompat_getLayoutDirectionWithADView_(self) == ADXViewCompat_LAYOUT_DIRECTION_RTL;
-  jint paddingStart = isRtl ? [self getPaddingRight] : [self getPaddingLeft];
-  jint paddingEnd = isRtl ? [self getPaddingLeft] : [self getPaddingRight];
-  jint childStart = paddingStart;
-  jint childTop = [self getPaddingTop];
-  jint childBottom = childTop;
-  jint childEnd;
-  jint maxChildEnd = right - left - paddingEnd;
-  for (jint i = 0; i < [self getChildCount]; i++) {
+  bool isRtl = ADXViewCompat_getLayoutDirectionWithADView_(self) == ADXViewCompat_LAYOUT_DIRECTION_RTL;
+  int32_t paddingStart = isRtl ? [self getPaddingRight] : [self getPaddingLeft];
+  int32_t paddingEnd = isRtl ? [self getPaddingLeft] : [self getPaddingRight];
+  int32_t childStart = paddingStart;
+  int32_t childTop = [self getPaddingTop];
+  int32_t childBottom = childTop;
+  int32_t childEnd;
+  int32_t maxChildEnd = right - left - paddingEnd;
+  for (int32_t i = 0; i < [self getChildCount]; i++) {
     ADView *child = JreRetainedLocalValue([self getChildAtWithInt:i]);
     if ([((ADView *) nil_chk(child)) getVisibility] == ADView_GONE) {
       [child setTagWithInt:JreLoadStatic(ADR_id, row_index_key) withId:JavaLangInteger_valueOfWithInt_(-1)];
       continue;
     }
     ADViewGroup_LayoutParams *lp = JreRetainedLocalValue([child getLayoutParams]);
-    jint startMargin = 0;
-    jint endMargin = 0;
+    int32_t startMargin = 0;
+    int32_t endMargin = 0;
     if ([lp isKindOfClass:[ADViewGroup_MarginLayoutParams class]]) {
       ADViewGroup_MarginLayoutParams *marginLp = (ADViewGroup_MarginLayoutParams *) lp;
       startMargin = ADXMarginLayoutParamsCompat_getMarginStartWithADViewGroup_MarginLayoutParams_(marginLp);
@@ -161,11 +173,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getRowCount {
+- (int32_t)getRowCount {
   return rowCount_;
 }
 
-- (jint)getRowIndexWithADView:(ADView *)child {
+- (int32_t)getRowIndexWithADView:(ADView *)child {
   id index = JreRetainedLocalValue([((ADView *) nil_chk(child)) getTagWithInt:JreLoadStatic(ADR_id, row_index_key)]);
   if (!([index isKindOfClass:[JavaLangInteger class]])) {
     return -1;
@@ -225,7 +237,7 @@ ADXFlowLayout *create_ADXFlowLayout_init() {
   J2OBJC_CREATE_IMPL(ADXFlowLayout, init)
 }
 
-jint ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(jint size, jint mode, jint childrenEdge) {
+int32_t ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(int32_t size, int32_t mode, int32_t childrenEdge) {
   ADXFlowLayout_initialize();
   switch (mode) {
     case ADView_MeasureSpec_EXACTLY:
@@ -238,3 +250,5 @@ jint ADXFlowLayout_getMeasuredDimensionWithInt_withInt_withInt_(jint size, jint 
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXFlowLayout)
+
+J2OBJC_NAME_MAPPING(ADXFlowLayout, "com.google.android.material.internal", "ADX")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\BaseAdapter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseAdapter.h"
 #include "DataSetObservable.h"
 #include "DataSetObserver.h"
@@ -10,6 +15,14 @@
 #include "J2ObjC_source.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -34,7 +47,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)hasStableIds {
+- (bool)hasStableIds {
   return false;
 }
 
@@ -54,29 +67,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADDataSetObservable *) nil_chk(mDataSetObservable_)) notifyInvalidated];
 }
 
-- (jboolean)areAllItemsEnabled {
+- (bool)areAllItemsEnabled {
   return true;
 }
 
-- (jboolean)isEnabledWithInt:(jint)position {
+- (bool)isEnabledWithInt:(int32_t)position {
   return true;
 }
 
-- (ADView *)getDropDownViewWithInt:(jint)position
+- (ADView *)getDropDownViewWithInt:(int32_t)position
                         withADView:(ADView *)convertView
                    withADViewGroup:(ADViewGroup *)parent {
   return [self getViewWithInt:position withADView:convertView withADViewGroup:parent];
 }
 
-- (jint)getItemViewTypeWithInt:(jint)position {
+- (int32_t)getItemViewTypeWithInt:(int32_t)position {
   return 0;
 }
 
-- (jint)getViewTypeCount {
+- (int32_t)getViewTypeCount {
   return 1;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return [self getCount] == 0;
 }
 
@@ -146,3 +159,5 @@ void ADBaseAdapter_init(ADBaseAdapter *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBaseAdapter)
+
+J2OBJC_NAME_MAPPING(ADBaseAdapter, "r.android.widget", "AD")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\UpperCaseCommandConveter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "IOSObjectArray.h"
@@ -10,6 +15,12 @@
 #include "J2ObjC_source.h"
 #include "UpperCaseCommandConveter.h"
 #include "java/util/Locale.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASUpperCaseCommandConveter
@@ -74,3 +85,5 @@ ASUpperCaseCommandConveter *create_ASUpperCaseCommandConveter_initWithNSString_(
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUpperCaseCommandConveter)
+
+J2OBJC_NAME_MAPPING(ASUpperCaseCommandConveter, "com.ashera.converter", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\MenuParser.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Drawable.h"
 #include "HasWidgets.h"
 #include "IConverter.h"
@@ -20,13 +25,19 @@
 #include "SubMenuBuilder.h"
 #include "View.h"
 #include "WidgetFactory.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXMenuParser ()
@@ -35,7 +46,7 @@
                                withADMenu:(id<ADMenu>)menu
                           withASIFragment:(id<ASIFragment>)fragment
                           withJavaUtilMap:(id<JavaUtilMap>)parentMap
-                                  withInt:(jint)groupId;
+                                  withInt:(int32_t)groupId;
 
 + (void)parseGroupWithASHasWidgets:(id<ASHasWidgets>)parent
                         withADMenu:(id<ADMenu>)menu
@@ -46,13 +57,13 @@
                                      withADMenu:(id<ADMenu>)menu
                                 withASIFragment:(id<ASIFragment>)fragment
                                          withId:(id)item
-                                        withInt:(jint)groupId;
+                                        withInt:(int32_t)groupId;
 
 + (void)createMenuItemWithASHasWidgets:(id<ASHasWidgets>)parent
                             withADMenu:(id<ADMenu>)menu
                        withASIFragment:(id<ASIFragment>)fragment
                                 withId:(id)payLoad
-                               withInt:(jint)groupId;
+                               withInt:(int32_t)groupId;
 
 + (void)createActionLayoutWithASHasWidgets:(id<ASHasWidgets>)parent
                             withADMenuItem:(id<ADMenuItem>)menuItem
@@ -66,13 +77,13 @@
 
 @end
 
-__attribute__((unused)) static void ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADMenu_withASIFragment_withJavaUtilMap_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id<JavaUtilMap> parentMap, jint groupId);
+__attribute__((unused)) static void ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADMenu_withASIFragment_withJavaUtilMap_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id<JavaUtilMap> parentMap, int32_t groupId);
 
 __attribute__((unused)) static void ADXMenuParser_parseGroupWithASHasWidgets_withADMenu_withASIFragment_withId_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id item);
 
-__attribute__((unused)) static void ADXMenuParser_createMenuItemMapOrListWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id item, jint groupId);
+__attribute__((unused)) static void ADXMenuParser_createMenuItemMapOrListWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id item, int32_t groupId);
 
-__attribute__((unused)) static void ADXMenuParser_createMenuItemWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id payLoad, jint groupId);
+__attribute__((unused)) static void ADXMenuParser_createMenuItemWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id payLoad, int32_t groupId);
 
 __attribute__((unused)) static void ADXMenuParser_createActionLayoutWithASHasWidgets_withADMenuItem_withNSString_(id<ASHasWidgets> parent, id<ADMenuItem> menuItem, NSString *actionLayout);
 
@@ -100,7 +111,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                withADMenu:(id<ADMenu>)menu
                           withASIFragment:(id<ASIFragment>)fragment
                           withJavaUtilMap:(id<JavaUtilMap>)parentMap
-                                  withInt:(jint)groupId {
+                                  withInt:(int32_t)groupId {
   ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADMenu_withASIFragment_withJavaUtilMap_withInt_(parent, menu, fragment, parentMap, groupId);
 }
 
@@ -115,7 +126,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                      withADMenu:(id<ADMenu>)menu
                                 withASIFragment:(id<ASIFragment>)fragment
                                          withId:(id)item
-                                        withInt:(jint)groupId {
+                                        withInt:(int32_t)groupId {
   ADXMenuParser_createMenuItemMapOrListWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(parent, menu, fragment, item, groupId);
 }
 
@@ -123,7 +134,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                             withADMenu:(id<ADMenu>)menu
                        withASIFragment:(id<ASIFragment>)fragment
                                 withId:(id)payLoad
-                               withInt:(jint)groupId {
+                               withInt:(int32_t)groupId {
   ADXMenuParser_createMenuItemWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(parent, menu, fragment, payLoad, groupId);
 }
 
@@ -196,7 +207,7 @@ void ADXMenuParser_parseMenuWithASHasWidgets_withADMenu_withNSString_withASIFrag
   }
 }
 
-void ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADMenu_withASIFragment_withJavaUtilMap_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id<JavaUtilMap> parentMap, jint groupId) {
+void ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADMenu_withASIFragment_withJavaUtilMap_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id<JavaUtilMap> parentMap, int32_t groupId) {
   ADXMenuParser_initialize();
   for (id<JavaUtilIterator> iterator = JreRetainedLocalValue([((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(parentMap)) entrySet])) iterator]); [((id<JavaUtilIterator>) nil_chk(iterator)) hasNext]; ) {
     id<JavaUtilMap_Entry> entry_ = JreRetainedLocalValue([iterator next]);
@@ -228,14 +239,14 @@ void ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADMenu_withASIFragment_
 void ADXMenuParser_parseGroupWithASHasWidgets_withADMenu_withASIFragment_withId_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id item) {
   ADXMenuParser_initialize();
   id<JavaUtilMap> itemMap = ASPluginInvoker_getMapWithId_(item);
-  jint menugroupId = 0;
+  int32_t menugroupId = 0;
   if ([((id<JavaUtilMap>) nil_chk(itemMap)) containsKeyWithId:@"@android:id"]) {
     menugroupId = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASPluginInvoker_getConverterWithNSString_(@"id"), nil, [itemMap getWithId:@"@android:id"], fragment), [JavaLangInteger class]))) intValue];
   }
   ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADMenu_withASIFragment_withJavaUtilMap_withInt_(parent, menu, fragment, itemMap, menugroupId);
 }
 
-void ADXMenuParser_createMenuItemMapOrListWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id item, jint groupId) {
+void ADXMenuParser_createMenuItemMapOrListWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id item, int32_t groupId) {
   ADXMenuParser_initialize();
   id<JavaUtilList> itemList = ASPluginInvoker_getListWithId_(item);
   if (itemList != nil) {
@@ -248,14 +259,14 @@ void ADXMenuParser_createMenuItemMapOrListWithASHasWidgets_withADMenu_withASIFra
   }
 }
 
-void ADXMenuParser_createMenuItemWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id payLoad, jint groupId) {
+void ADXMenuParser_createMenuItemWithASHasWidgets_withADMenu_withASIFragment_withId_withInt_(id<ASHasWidgets> parent, id<ADMenu> menu, id<ASIFragment> fragment, id payLoad, int32_t groupId) {
   ADXMenuParser_initialize();
   id<JavaUtilMap> itemMap = ASPluginInvoker_getMapWithId_(payLoad);
-  jint id_ = 0;
-  jint categoryOrder = 0;
+  int32_t id_ = 0;
+  int32_t categoryOrder = 0;
   NSString *title = @"";
   ADDrawable *icon = nil;
-  jint showAsAction = -1;
+  int32_t showAsAction = -1;
   if ([((id<JavaUtilMap>) nil_chk(itemMap)) containsKeyWithId:@"@android:id"]) {
     id_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASPluginInvoker_getConverterWithNSString_(@"id"), nil, [itemMap getWithId:@"@android:id"], fragment), [JavaLangInteger class]))) intValue];
   }
@@ -272,7 +283,7 @@ void ADXMenuParser_createMenuItemWithASHasWidgets_withADMenu_withASIFragment_wit
   id<ADMenuItem> menuItem = JreRetainedLocalValue([((id<ADMenu>) nil_chk(menu)) addWithInt:groupId withInt:id_ withInt:categoryOrder withJavaLangCharSequence:title]);
   [((id<ADMenuItem>) nil_chk(menuItem)) setEnabledWithBoolean:true];
   [menuItem setVisibleWithBoolean:true];
-  jboolean actionViewSpecified = false;
+  bool actionViewSpecified = false;
   if ([itemMap containsKeyWithId:@"@app:actionViewClass"]) {
     ADView *actionView = ADXMenuParser_getActionViewWithASHasWidgets_withNSString_(parent, (NSString *) cast_chk([itemMap getWithId:@"@app:actionViewClass"], [NSString class]));
     [menuItem setActionViewWithADView:actionView];
@@ -320,3 +331,5 @@ id<ADMenu> ADXMenuParser_getSubMenuWithADMenu_withADMenuItem_(id<ADMenu> menu, i
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXMenuParser)
+
+J2OBJC_NAME_MAPPING(ADXMenuParser, "androidx.appcompat.view.menu", "ADX")

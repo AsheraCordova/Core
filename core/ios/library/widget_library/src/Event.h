@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\Event.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Event")
@@ -65,6 +66,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEvent)
 
 @compatibility_alias ComAsheraWidgetBusEvent ASEvent;
 
+
 #endif
 
 #if !defined (ASEvent_StandardEvents_) && (INCLUDE_ALL_Event || defined(INCLUDE_ASEvent_StandardEvents))
@@ -75,17 +77,25 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEvent)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ASEvent_StandardEvents_Enum) {
-  ASEvent_StandardEvents_Enum_orientationChange = 0,
-  ASEvent_StandardEvents_Enum_customEvent = 1,
-  ASEvent_StandardEvents_Enum_initialise = 2,
-  ASEvent_StandardEvents_Enum_orientationChangePostParentMeasure = 3,
-  ASEvent_StandardEvents_Enum_postMeasure = 4,
-  ASEvent_StandardEvents_Enum_preMeasure = 5,
-  ASEvent_StandardEvents_Enum_dealloc = 6,
-  ASEvent_StandardEvents_Enum_outsideClicked = 7,
+typedef NS_ENUM(int32_t, ASEvent_StandardEvents_Enum) {
+  ASEvent_StandardEvents_Enum_orientationChange NS_SWIFT_NAME(orientationchange) = 0,
+  ASEvent_StandardEvents_Enum_customEvent NS_SWIFT_NAME(customevent) = 1,
+  ASEvent_StandardEvents_Enum_initialise NS_SWIFT_NAME(initialise) = 2,
+  ASEvent_StandardEvents_Enum_orientationChangePostParentMeasure NS_SWIFT_NAME(orientationchangepostparentmeasure) = 3,
+  ASEvent_StandardEvents_Enum_postMeasure NS_SWIFT_NAME(postmeasure) = 4,
+  ASEvent_StandardEvents_Enum_preMeasure NS_SWIFT_NAME(premeasure) = 5,
+  ASEvent_StandardEvents_Enum_dealloc NS_SWIFT_NAME(dealloc_) = 6,
+  ASEvent_StandardEvents_Enum_outsideClicked NS_SWIFT_NAME(outsideclicked) = 7,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASEvent_StandardEvents_ORDINAL int32_t
+#else
+#define ASEvent_StandardEvents_ORDINAL ASEvent_StandardEvents_Enum
+#endif
+
 
 @interface ASEvent_StandardEvents : JavaLangEnum
 
@@ -98,6 +108,13 @@ typedef NS_ENUM(NSUInteger, ASEvent_StandardEvents_Enum) {
 #pragma mark Package-Private
 
 - (ASEvent_StandardEvents_Enum)toNSEnum;
+
+@property(readonly) ASEvent_StandardEvents_Enum enumValue;
++ (ASEvent_StandardEvents *)fromNSEnum:(ASEvent_StandardEvents_Enum)value;
+
+- (ASEvent_StandardEvents_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithStandardEvents:(ASEvent_StandardEvents_Enum)value;
 
 @end
 
@@ -134,9 +151,10 @@ FOUNDATION_EXPORT IOSObjectArray *ASEvent_StandardEvents_values(void);
 
 FOUNDATION_EXPORT ASEvent_StandardEvents *ASEvent_StandardEvents_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASEvent_StandardEvents *ASEvent_StandardEvents_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASEvent_StandardEvents *ASEvent_StandardEvents_fromOrdinal(ASEvent_StandardEvents_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEvent_StandardEvents)
+
 
 #endif
 

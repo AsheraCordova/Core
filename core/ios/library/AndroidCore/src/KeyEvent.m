@@ -3,14 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\KeyEvent.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "KeyEvent.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADKeyEvent () {
  @public
-  jint action_;
-  jint keyCode_;
+  int32_t action_;
+  int32_t keyCode_;
 }
 
 @end
@@ -24,27 +37,27 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getAction {
+- (int32_t)getAction {
   return action_;
 }
 
-- (void)setActionWithInt:(jint)action {
+- (void)setActionWithInt:(int32_t)action {
   self->action_ = action;
 }
 
-- (jint)getKeyCode {
+- (int32_t)getKeyCode {
   return keyCode_;
 }
 
-- (void)setKeyCodeWithInt:(jint)keyCode {
+- (void)setKeyCodeWithInt:(int32_t)keyCode {
   self->keyCode_ = keyCode;
 }
 
-- (jboolean)hasNoModifiers {
+- (bool)hasNoModifiers {
   return false;
 }
 
-+ (jboolean)isConfirmKeyWithInt:(jint)keyCode2 {
++ (bool)isConfirmKeyWithInt:(int32_t)keyCode2 {
   return ADKeyEvent_isConfirmKeyWithInt_(keyCode2);
 }
 
@@ -383,9 +396,11 @@ ADKeyEvent *create_ADKeyEvent_init() {
   J2OBJC_CREATE_IMPL(ADKeyEvent, init)
 }
 
-jboolean ADKeyEvent_isConfirmKeyWithInt_(jint keyCode2) {
+bool ADKeyEvent_isConfirmKeyWithInt_(int32_t keyCode2) {
   ADKeyEvent_initialize();
   return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyEvent)
+
+J2OBJC_NAME_MAPPING(ADKeyEvent, "r.android.view", "AD")

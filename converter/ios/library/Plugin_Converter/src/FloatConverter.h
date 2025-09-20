@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\FloatConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FloatConverter")
@@ -53,6 +54,7 @@ FOUNDATION_EXPORT ASFloatConverter *create_ASFloatConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASFloatConverter)
 
 @compatibility_alias ComAsheraConverterFloatConverter ASFloatConverter;
+
 
 #endif
 

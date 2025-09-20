@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\CommonConverters.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AlphaNumeric.h"
 #include "Alphabet.h"
 #include "ArrayConverter.h"
@@ -57,6 +62,12 @@
 #include "UpperCaseCommandConveter.h"
 #include "Url.h"
 #include "ValidatorFactory.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(ASCommonConverters)
@@ -242,3 +253,5 @@ void ASCommonConverters_init__() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCommonConverters)
+
+J2OBJC_NAME_MAPPING(ASCommonConverters, "com.ashera.converter", "AS")

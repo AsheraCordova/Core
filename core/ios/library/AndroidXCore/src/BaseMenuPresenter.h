@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\BaseMenuPresenter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseMenuPresenter")
@@ -25,6 +26,8 @@
 @class ADViewGroup;
 @class ADXMenuBuilder;
 @class ADXMenuItemImpl;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADXBaseMenuPresenter : NSObject < ADXMenuPresenter > {
  @public
@@ -37,7 +40,7 @@
 
 - (instancetype)init;
 
-- (jboolean)flagActionItems;
+- (bool)flagActionItems;
 
 - (ADView *)getItemViewWithADXMenuItemImpl:(ADXMenuItemImpl *)item
                                 withADView:(ADView *)convertView
@@ -46,22 +49,22 @@
 - (ADView *)getItemViewWithADView:(ADView *)parent
               withADXMenuItemImpl:(ADXMenuItemImpl *)item;
 
-- (jboolean)isMenuItemViewWithADView:(ADView *)convertView;
+- (bool)isMenuItemViewWithADView:(ADView *)convertView;
 
 - (void)setMenuWithADXMenuBuilder:(ADXMenuBuilder *)mMenu;
 
-- (jboolean)shouldIncludeItemWithInt:(jint)childIndex
-                 withADXMenuItemImpl:(ADXMenuItemImpl *)item;
+- (bool)shouldIncludeItemWithInt:(int32_t)childIndex
+             withADXMenuItemImpl:(ADXMenuItemImpl *)item;
 
-- (void)updateMenuViewWithBoolean:(jboolean)cleared;
+- (void)updateMenuViewWithBoolean:(bool)cleared;
 
 #pragma mark Protected
 
 - (void)addItemViewWithADView:(ADView *)itemView
-                      withInt:(jint)childIndex;
+                      withInt:(int32_t)childIndex;
 
-- (jboolean)filterLeftoverViewWithADViewGroup:(ADViewGroup *)parent
-                                      withInt:(jint)childIndex;
+- (bool)filterLeftoverViewWithADViewGroup:(ADViewGroup *)parent
+                                  withInt:(int32_t)childIndex;
 
 @end
 
@@ -77,6 +80,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXBaseMenuPresenter)
 
 @compatibility_alias AndroidxAppcompatViewMenuBaseMenuPresenter ADXBaseMenuPresenter;
 
+
 #endif
 
 #if !defined (ADXBaseMenuPresenter_MenuView_) && (INCLUDE_ALL_BaseMenuPresenter || defined(INCLUDE_ADXBaseMenuPresenter_MenuView))
@@ -89,6 +93,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXBaseMenuPresenter)
 J2OBJC_EMPTY_STATIC_INIT(ADXBaseMenuPresenter_MenuView)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXBaseMenuPresenter_MenuView)
+
 
 #endif
 
@@ -106,6 +111,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXBaseMenuPresenter_MenuView)
 J2OBJC_EMPTY_STATIC_INIT(ADXBaseMenuPresenter_MenuView_ItemView)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXBaseMenuPresenter_MenuView_ItemView)
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\Error.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Error")
@@ -19,6 +20,7 @@
 @class ASBaseWidget;
 @class ASWidgetAttribute;
 @class JavaLangException;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilMap;
 
@@ -73,6 +75,7 @@ FOUNDATION_EXPORT ASError *create_ASError_initWithJavaUtilMap_withASBaseWidget_w
 J2OBJC_TYPE_LITERAL_HEADER(ASError)
 
 @compatibility_alias ComAsheraModelError ASError;
+
 
 #endif
 

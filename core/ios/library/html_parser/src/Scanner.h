@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\Scanner.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Scanner")
@@ -17,6 +18,7 @@
 #define TSScanner_
 
 @class JavaIoReader;
+@class NSString;
 @protocol TSScanHandler;
 
 /*!
@@ -52,6 +54,7 @@ J2OBJC_EMPTY_STATIC_INIT(TSScanner)
 J2OBJC_TYPE_LITERAL_HEADER(TSScanner)
 
 #define RepackagedOrgCcilCowanTagsoupScanner TSScanner
+
 
 #endif
 

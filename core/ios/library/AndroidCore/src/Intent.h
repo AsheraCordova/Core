@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\Intent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Intent")
@@ -19,6 +20,9 @@
 @class ADBundle;
 @class ADIntent_ClipData;
 @class ADUri;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaIoSerializable;
 
 @interface ADIntent : NSObject
@@ -27,9 +31,9 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)actionView;
+- (instancetype)initWithInt:(int32_t)actionView;
 
-- (void)addCategoryWithInt:(jint)categoryBrowsable;
+- (void)addCategoryWithInt:(int32_t)categoryBrowsable;
 
 - (id)getAction;
 
@@ -45,9 +49,9 @@
 
 - (NSString *)getStringExtraWithNSString:(NSString *)localDataKey;
 
-- (jboolean)hasExtraWithNSString:(NSString *)extraState;
+- (bool)hasExtraWithNSString:(NSString *)extraState;
 
-+ (jboolean)isAccessUriModeWithInt:(jint)flags;
++ (bool)isAccessUriModeWithInt:(int32_t)flags;
 
 - (ADIntent *)putExtraWithNSString:(NSString *)name
                             withId:(id)value;
@@ -63,21 +67,21 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADIntent)
 
-inline jint ADIntent_get_ACTION_VIEW(void);
+inline int32_t ADIntent_get_ACTION_VIEW(void);
 #define ADIntent_ACTION_VIEW 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, ACTION_VIEW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, ACTION_VIEW, int32_t)
 
-inline jint ADIntent_get_CATEGORY_BROWSABLE(void);
+inline int32_t ADIntent_get_CATEGORY_BROWSABLE(void);
 #define ADIntent_CATEGORY_BROWSABLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, CATEGORY_BROWSABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, CATEGORY_BROWSABLE, int32_t)
 
-inline jint ADIntent_get_ACTION_GET_CONTENT(void);
+inline int32_t ADIntent_get_ACTION_GET_CONTENT(void);
 #define ADIntent_ACTION_GET_CONTENT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, ACTION_GET_CONTENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, ACTION_GET_CONTENT, int32_t)
 
-inline jint ADIntent_get_CATEGORY_OPENABLE(void);
+inline int32_t ADIntent_get_CATEGORY_OPENABLE(void);
 #define ADIntent_CATEGORY_OPENABLE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, CATEGORY_OPENABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, CATEGORY_OPENABLE, int32_t)
 
 inline NSString *ADIntent_get_ACTION_CONFIGURATION_CHANGED(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -92,9 +96,9 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADIntent, ACTION_CONFIGURATION_CHANGED, NSString *
   in Intent items will be granted; only the grant flags of the top-level
   Intent are used.
  */
-inline jint ADIntent_get_FLAG_GRANT_READ_URI_PERMISSION(void);
+inline int32_t ADIntent_get_FLAG_GRANT_READ_URI_PERMISSION(void);
 #define ADIntent_FLAG_GRANT_READ_URI_PERMISSION 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_READ_URI_PERMISSION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_READ_URI_PERMISSION, int32_t)
 
 /*!
  @brief If set, the recipient of this Intent will be granted permission to
@@ -104,17 +108,17 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_READ_URI_PERMISSION, jint)
   in Intent items will be granted; only the grant flags of the top-level
   Intent are used.
  */
-inline jint ADIntent_get_FLAG_GRANT_WRITE_URI_PERMISSION(void);
+inline int32_t ADIntent_get_FLAG_GRANT_WRITE_URI_PERMISSION(void);
 #define ADIntent_FLAG_GRANT_WRITE_URI_PERMISSION 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_WRITE_URI_PERMISSION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_WRITE_URI_PERMISSION, int32_t)
 
 /*!
  @brief Can be set by the caller to indicate that this Intent is coming from
   a background operation, not from direct user interaction.
  */
-inline jint ADIntent_get_FLAG_FROM_BACKGROUND(void);
+inline int32_t ADIntent_get_FLAG_FROM_BACKGROUND(void);
 #define ADIntent_FLAG_FROM_BACKGROUND 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_FROM_BACKGROUND, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_FROM_BACKGROUND, int32_t)
 
 /*!
  @brief When combined with <code>FLAG_GRANT_READ_URI_PERMISSION</code> and/or 
@@ -129,9 +133,9 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_FROM_BACKGROUND, jint)
  - seealso: ContentResolver#getPersistedUriPermissions()
  - seealso: ContentResolver#getOutgoingPersistedUriPermissions()
  */
-inline jint ADIntent_get_FLAG_GRANT_PERSISTABLE_URI_PERMISSION(void);
+inline int32_t ADIntent_get_FLAG_GRANT_PERSISTABLE_URI_PERMISSION(void);
 #define ADIntent_FLAG_GRANT_PERSISTABLE_URI_PERMISSION 64
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_PERSISTABLE_URI_PERMISSION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_PERSISTABLE_URI_PERMISSION, int32_t)
 
 /*!
  @brief When combined with <code>FLAG_GRANT_READ_URI_PERMISSION</code> and/or 
@@ -143,9 +147,9 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_PERSISTABLE_URI_PERMISSION, ji
   authority, and all path segments defined by the prefix are an exact
   match.
  */
-inline jint ADIntent_get_FLAG_GRANT_PREFIX_URI_PERMISSION(void);
+inline int32_t ADIntent_get_FLAG_GRANT_PREFIX_URI_PERMISSION(void);
 #define ADIntent_FLAG_GRANT_PREFIX_URI_PERMISSION 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_PREFIX_URI_PERMISSION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADIntent, FLAG_GRANT_PREFIX_URI_PERMISSION, int32_t)
 
 inline NSString *ADIntent_get_EXTRA_ALLOW_MULTIPLE(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -157,11 +161,11 @@ inline NSString *ADIntent_get_EXTRA_MIME_TYPES(void);
 FOUNDATION_EXPORT NSString *ADIntent_EXTRA_MIME_TYPES;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADIntent, EXTRA_MIME_TYPES, NSString *)
 
-FOUNDATION_EXPORT void ADIntent_initWithInt_(ADIntent *self, jint actionView);
+FOUNDATION_EXPORT void ADIntent_initWithInt_(ADIntent *self, int32_t actionView);
 
-FOUNDATION_EXPORT ADIntent *new_ADIntent_initWithInt_(jint actionView) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADIntent *new_ADIntent_initWithInt_(int32_t actionView) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADIntent *create_ADIntent_initWithInt_(jint actionView);
+FOUNDATION_EXPORT ADIntent *create_ADIntent_initWithInt_(int32_t actionView);
 
 FOUNDATION_EXPORT void ADIntent_init(ADIntent *self);
 
@@ -169,11 +173,12 @@ FOUNDATION_EXPORT ADIntent *new_ADIntent_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADIntent *create_ADIntent_init(void);
 
-FOUNDATION_EXPORT jboolean ADIntent_isAccessUriModeWithInt_(jint flags);
+FOUNDATION_EXPORT bool ADIntent_isAccessUriModeWithInt_(int32_t flags);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIntent)
 
 @compatibility_alias RAndroidContentIntent ADIntent;
+
 
 #endif
 
@@ -182,6 +187,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADIntent)
 
 @class ADIntent;
 @class ADIntent_Item;
+@class JavaLangInteger;
 
 @interface ADIntent_ClipData : NSObject
 
@@ -189,9 +195,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADIntent)
 
 - (instancetype)initWithADIntent:(ADIntent *)outer$;
 
-- (ADIntent_Item *)getItemAtWithInt:(jint)i;
+- (ADIntent_Item *)getItemAtWithInt:(int32_t)i;
 
-- (jint)getItemCount;
+- (int32_t)getItemCount;
 
 // Disallowed inherited constructors, do not use.
 
@@ -208,6 +214,7 @@ FOUNDATION_EXPORT ADIntent_ClipData *new_ADIntent_ClipData_initWithADIntent_(ADI
 FOUNDATION_EXPORT ADIntent_ClipData *create_ADIntent_ClipData_initWithADIntent_(ADIntent *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIntent_ClipData)
+
 
 #endif
 
@@ -240,6 +247,7 @@ FOUNDATION_EXPORT ADIntent_Item *new_ADIntent_Item_initWithADIntent_(ADIntent *o
 FOUNDATION_EXPORT ADIntent_Item *create_ADIntent_Item_initWithADIntent_(ADIntent *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIntent_Item)
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Color.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Color")
@@ -17,6 +18,8 @@
 #define ADColor_
 
 @class IOSFloatArray;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADColor : NSObject
 
@@ -24,33 +27,33 @@
 
 - (instancetype)init;
 
-+ (jint)alphaWithInt:(jint)i;
++ (int32_t)alphaWithInt:(int32_t)i;
 
-+ (NSString *)formatColorWithInt:(jint)intColor;
++ (NSString *)formatColorWithInt:(int32_t)intColor;
 
-+ (jint)HSVToColorWithFloatArray:(IOSFloatArray *)value;
++ (int32_t)HSVToColorWithFloatArray:(IOSFloatArray *)value;
 
-+ (jint)parseColorWithNSString:(NSString *)colorString;
++ (int32_t)parseColorWithNSString:(NSString *)colorString;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADColor)
 
-inline jint ADColor_get_BLACK(void);
+inline int32_t ADColor_get_BLACK(void);
 #define ADColor_BLACK -16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADColor, BLACK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADColor, BLACK, int32_t)
 
-inline jint ADColor_get_RED(void);
+inline int32_t ADColor_get_RED(void);
 #define ADColor_RED -65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADColor, RED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADColor, RED, int32_t)
 
-inline jint ADColor_get_WHITE(void);
+inline int32_t ADColor_get_WHITE(void);
 #define ADColor_WHITE -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADColor, WHITE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADColor, WHITE, int32_t)
 
-inline jint ADColor_get_TRANSPARENT(void);
+inline int32_t ADColor_get_TRANSPARENT(void);
 #define ADColor_TRANSPARENT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADColor, TRANSPARENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADColor, TRANSPARENT, int32_t)
 
 FOUNDATION_EXPORT void ADColor_init(ADColor *self);
 
@@ -58,17 +61,18 @@ FOUNDATION_EXPORT ADColor *new_ADColor_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADColor *create_ADColor_init(void);
 
-FOUNDATION_EXPORT jint ADColor_HSVToColorWithFloatArray_(IOSFloatArray *value);
+FOUNDATION_EXPORT int32_t ADColor_HSVToColorWithFloatArray_(IOSFloatArray *value);
 
-FOUNDATION_EXPORT jint ADColor_alphaWithInt_(jint i);
+FOUNDATION_EXPORT int32_t ADColor_alphaWithInt_(int32_t i);
 
-FOUNDATION_EXPORT jint ADColor_parseColorWithNSString_(NSString *colorString);
+FOUNDATION_EXPORT int32_t ADColor_parseColorWithNSString_(NSString *colorString);
 
-FOUNDATION_EXPORT NSString *ADColor_formatColorWithInt_(jint intColor);
+FOUNDATION_EXPORT NSString *ADColor_formatColorWithInt_(int32_t intColor);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADColor)
 
 @compatibility_alias RAndroidGraphicsColor ADColor;
+
 
 #endif
 

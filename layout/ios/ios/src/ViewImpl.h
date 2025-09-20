@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewImpl")
@@ -26,6 +27,9 @@
 @class ASSimpleWrapableView;
 @class ASWidgetAttribute;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADInterpolator;
 @protocol ADMenuItem;
 @protocol ADView_OnClickListener;
@@ -76,7 +80,7 @@
                      withNSString:(NSString *)validationName
                 withNSStringArray:(IOSObjectArray *)params;
 
-+ (jboolean)checkIosVersionWithNSString:(NSString *)v;
++ (bool)checkIosVersionWithNSString:(NSString *)v;
 
 + (void)drawableStateChangedWithASIWidget:(id<ASIWidget>)w;
 
@@ -122,9 +126,9 @@
 
 + (id<JavaUtilList>)getFormsWithASIWidget:(id<ASIWidget>)w;
 
-+ (jint)getImageHeightWithId:(id)value;
++ (int32_t)getImageHeightWithId:(id)value;
 
-+ (jint)getImageWidthWithId:(id)value;
++ (int32_t)getImageWidthWithId:(id)value;
 
 + (id)getInsetsLayoutMarginsFromSafeAreaWithId:(id)uiView;
 
@@ -151,9 +155,9 @@
 
 + (id)getLargeContentTitleWithId:(id)uiView;
 
-+ (jint)getLocationXOnScreenWithId:(id)nativeWidget;
++ (int32_t)getLocationXOnScreenWithId:(id)nativeWidget;
 
-+ (jint)getLocationYOnScreenWithId:(id)nativeWidget;
++ (int32_t)getLocationYOnScreenWithId:(id)nativeWidget;
 
 + (id)getMaxHeightWithASIWidget:(id<ASIWidget>)w;
 
@@ -190,56 +194,56 @@
 + (NSString *)getValueWithNSString:(NSString *)key
            withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)attributes;
 
-+ (jint)getXWithId:(id)objview;
++ (int32_t)getXWithId:(id)objview;
 
-+ (jint)getYWithId:(id)objview;
++ (int32_t)getYWithId:(id)objview;
 
 + (void)invalidateWithASIWidget:(id<ASIWidget>)w
                          withId:(id)nativeView;
 
-+ (jboolean)isColorWithId:(id)value;
++ (bool)isColorWithId:(id)value;
 
-+ (jboolean)isImageWithId:(id)value;
++ (bool)isImageWithId:(id)value;
 
-+ (jboolean)isRTLLayout;
++ (bool)isRTLLayout;
 
-+ (jboolean)isRTLLayoutWithASIWidget:(id<ASIWidget>)widget;
++ (bool)isRTLLayoutWithASIWidget:(id<ASIWidget>)widget;
 
-+ (jboolean)isRTLLayoutDirectionWithASIWidget:(id<ASIWidget>)widget;
++ (bool)isRTLLayoutDirectionWithASIWidget:(id<ASIWidget>)widget;
 
 + (void)nativeBringToFrontWithId:(id)nativeWidget;
 
 + (void)nativeInvalidateWithId:(id)view;
 
 + (void)nativeMakeFrameWithId:(id)uiView
-                      withInt:(jint)l
-                      withInt:(jint)t
-                      withInt:(jint)r
-                      withInt:(jint)b;
+                      withInt:(int32_t)l
+                      withInt:(int32_t)t
+                      withInt:(int32_t)r
+                      withInt:(int32_t)b;
 
 + (void)nativeMakeFrameWithId:(id)uiView
-                      withInt:(jint)l
-                      withInt:(jint)t
-                      withInt:(jint)r
-                      withInt:(jint)b
-                      withInt:(jint)height;
+                      withInt:(int32_t)l
+                      withInt:(int32_t)t
+                      withInt:(int32_t)r
+                      withInt:(int32_t)b
+                      withInt:(int32_t)height;
 
 + (void)nativeMakeFrameForHorizontalScrollViewWithId:(id)uiView
-                                             withInt:(jint)l
-                                             withInt:(jint)t
-                                             withInt:(jint)r
-                                             withInt:(jint)b
-                                             withInt:(jint)width;
+                                             withInt:(int32_t)l
+                                             withInt:(int32_t)t
+                                             withInt:(int32_t)r
+                                             withInt:(int32_t)b
+                                             withInt:(int32_t)width;
 
-+ (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
++ (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-+ (jint)nativeMeasureWidthWithId:(id)uiView;
++ (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 + (void)nativeRequestLayoutWithId:(id)view;
 
 + (void)nativeSetVisibilityWithId:(id)view
-                      withBoolean:(jboolean)hidden;
+                      withBoolean:(bool)hidden;
 
 + (void)redrawDrawablesWithASIWidget:(id<ASIWidget>)w;
 
@@ -248,7 +252,7 @@
 
 + (void)refreshUiFromModelWithASIWidget:(id<ASIWidget>)w
                                  withId:(id)objValue
-                            withBoolean:(jboolean)remeasure;
+                            withBoolean:(bool)remeasure;
 
 + (void)register__WithNSString:(NSString *)localName;
 
@@ -296,8 +300,8 @@
 + (void)setBackgroundColorWithId:(id)nativeWidget
                           withId:(id)value;
 
-+ (void)setBgDrawabeOnViewWithInt:(jint)width
-                          withInt:(jint)height
++ (void)setBgDrawabeOnViewWithInt:(int32_t)width
+                          withInt:(int32_t)height
                        withADView:(ADView *)view;
 
 + (void)setClearsContextBeforeDrawingWithId:(id)nativeWidget
@@ -310,10 +314,10 @@
                              withId:(id)value;
 
 + (void)setDrawableBoundsWithASIWidget:(id<ASIWidget>)widget
-                               withInt:(jint)l
-                               withInt:(jint)t
-                               withInt:(jint)r
-                               withInt:(jint)b;
+                               withInt:(int32_t)l
+                               withInt:(int32_t)t
+                               withInt:(int32_t)r
+                               withInt:(int32_t)b;
 
 + (void)setIdWithASIWidget:(id<ASIWidget>)w
               withNSString:(NSString *)strValue
@@ -405,7 +409,7 @@
                                   withId:(id)value;
 
 + (void)setStateWithASIWidget:(id<ASIWidget>)w
-                      withInt:(jint)i
+                      withInt:(int32_t)i
                        withId:(id)value;
 
 + (void)setStyleWithASIWidget:(id<ASIWidget>)w
@@ -428,26 +432,26 @@
                   withNSString:(NSString *)eventData;
 
 + (void)stateWithASIWidget:(id<ASIWidget>)w
-                   withInt:(jint)i;
+                   withInt:(int32_t)i;
 
 + (void)stateNoWithASIWidget:(id<ASIWidget>)w;
 
 + (void)stateYesWithASIWidget:(id<ASIWidget>)w;
 
 + (void)translateWithAnimationWithId:(id)objview
-                             withInt:(jint)x
-                             withInt:(jint)y
-                             withInt:(jint)animationDurationInMs
+                             withInt:(int32_t)x
+                             withInt:(int32_t)y
+                             withInt:(int32_t)animationDurationInMs
     withASViewImpl_AnimationCallBack:(id<ASViewImpl_AnimationCallBack>)callBack;
 
 + (void)updateBoundsWithId:(id)objview
-                   withInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)width
-                   withInt:(jint)height;
+                   withInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)width
+                   withInt:(int32_t)height;
 
 + (void)updateBoundsXWithId:(id)objview
-                    withInt:(jint)x;
+                    withInt:(int32_t)x;
 
 @end
 
@@ -463,7 +467,7 @@ FOUNDATION_EXPORT id ASViewImpl_getAttributeWithASIWidget_withASWidgetAttribute_
 
 FOUNDATION_EXPORT id ASViewImpl_getAttributeWithASIWidget_withId_withASWidgetAttribute_withASILifeCycleDecorator_(id<ASIWidget> w, id nativeWidget, ASWidgetAttribute *key, id<ASILifeCycleDecorator> decorator);
 
-FOUNDATION_EXPORT jboolean ASViewImpl_checkIosVersionWithNSString_(NSString *v);
+FOUNDATION_EXPORT bool ASViewImpl_checkIosVersionWithNSString_(NSString *v);
 
 FOUNDATION_EXPORT void ASViewImpl_setPaddingWithId_withADView_(id objValue, ADView *view);
 
@@ -491,7 +495,7 @@ FOUNDATION_EXPORT void ASViewImpl_setIdWithASIWidget_withNSString_withId_withADV
 
 FOUNDATION_EXPORT void ASViewImpl_refreshUiFromModelWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
-FOUNDATION_EXPORT void ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(id<ASIWidget> w, id objValue, jboolean remeasure);
+FOUNDATION_EXPORT void ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(id<ASIWidget> w, id objValue, bool remeasure);
 
 FOUNDATION_EXPORT void ASViewImpl_setMaxHeightWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
@@ -519,9 +523,9 @@ FOUNDATION_EXPORT void ASViewImpl_setStyleWithASIWidget_withId_(id<ASIWidget> w,
 
 FOUNDATION_EXPORT void ASViewImpl_setMessageOnLabelWithASIWidget_withNSString_(id<ASIWidget> w, NSString *message);
 
-FOUNDATION_EXPORT void ASViewImpl_stateWithASIWidget_withInt_(id<ASIWidget> w, jint i);
+FOUNDATION_EXPORT void ASViewImpl_stateWithASIWidget_withInt_(id<ASIWidget> w, int32_t i);
 
-FOUNDATION_EXPORT void ASViewImpl_setStateWithASIWidget_withInt_withId_(id<ASIWidget> w, jint i, id value);
+FOUNDATION_EXPORT void ASViewImpl_setStateWithASIWidget_withInt_withId_(id<ASIWidget> w, int32_t i, id value);
 
 FOUNDATION_EXPORT void ASViewImpl_stateYesWithASIWidget_(id<ASIWidget> w);
 
@@ -529,13 +533,13 @@ FOUNDATION_EXPORT void ASViewImpl_stateNoWithASIWidget_(id<ASIWidget> w);
 
 FOUNDATION_EXPORT void ASViewImpl_setLayoutDirectionWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
-FOUNDATION_EXPORT jboolean ASViewImpl_isRTLLayoutDirectionWithASIWidget_(id<ASIWidget> widget);
+FOUNDATION_EXPORT bool ASViewImpl_isRTLLayoutDirectionWithASIWidget_(id<ASIWidget> widget);
 
 FOUNDATION_EXPORT void ASViewImpl_drawableStateChangedWithASIWidget_(id<ASIWidget> w);
 
 FOUNDATION_EXPORT id ASViewImpl_getColorWithId_(id objValue);
 
-FOUNDATION_EXPORT void ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(id<ASIWidget> widget, jint l, jint t, jint r, jint b);
+FOUNDATION_EXPORT void ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(id<ASIWidget> widget, int32_t l, int32_t t, int32_t r, int32_t b);
 
 FOUNDATION_EXPORT void ASViewImpl_redrawDrawablesWithASIWidget_(id<ASIWidget> w);
 
@@ -661,29 +665,29 @@ FOUNDATION_EXPORT void ASViewImpl_setAccessibilityTraitsWithId_withId_(id native
 
 FOUNDATION_EXPORT id ASViewImpl_getAccessibilityTraitsWithId_(id uiView);
 
-FOUNDATION_EXPORT void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, jint l, jint t, jint r, jint b, jint height);
+FOUNDATION_EXPORT void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, int32_t l, int32_t t, int32_t r, int32_t b, int32_t height);
 
-FOUNDATION_EXPORT void ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(id objview, jint x, jint y, jint width, jint height);
+FOUNDATION_EXPORT void ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(id objview, int32_t x, int32_t y, int32_t width, int32_t height);
 
 FOUNDATION_EXPORT id ASViewImpl_getFirstChildOrSelfWithId_(id objview);
 
-FOUNDATION_EXPORT void ASViewImpl_nativeMakeFrameForHorizontalScrollViewWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, jint l, jint t, jint r, jint b, jint width);
+FOUNDATION_EXPORT void ASViewImpl_nativeMakeFrameForHorizontalScrollViewWithId_withInt_withInt_withInt_withInt_withInt_(id uiView, int32_t l, int32_t t, int32_t r, int32_t b, int32_t width);
 
-FOUNDATION_EXPORT void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(id uiView, jint l, jint t, jint r, jint b);
+FOUNDATION_EXPORT void ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(id uiView, int32_t l, int32_t t, int32_t r, int32_t b);
 
-FOUNDATION_EXPORT jboolean ASViewImpl_isRTLLayoutWithASIWidget_(id<ASIWidget> widget);
+FOUNDATION_EXPORT bool ASViewImpl_isRTLLayoutWithASIWidget_(id<ASIWidget> widget);
 
-FOUNDATION_EXPORT jboolean ASViewImpl_isRTLLayout(void);
+FOUNDATION_EXPORT bool ASViewImpl_isRTLLayout(void);
 
-FOUNDATION_EXPORT void ASViewImpl_setBgDrawabeOnViewWithInt_withInt_withADView_(jint width, jint height, ADView *view);
+FOUNDATION_EXPORT void ASViewImpl_setBgDrawabeOnViewWithInt_withInt_withADView_(int32_t width, int32_t height, ADView *view);
 
-FOUNDATION_EXPORT jboolean ASViewImpl_isColorWithId_(id value);
+FOUNDATION_EXPORT bool ASViewImpl_isColorWithId_(id value);
 
-FOUNDATION_EXPORT jboolean ASViewImpl_isImageWithId_(id value);
+FOUNDATION_EXPORT bool ASViewImpl_isImageWithId_(id value);
 
-FOUNDATION_EXPORT jint ASViewImpl_getImageWidthWithId_(id value);
+FOUNDATION_EXPORT int32_t ASViewImpl_getImageWidthWithId_(id value);
 
-FOUNDATION_EXPORT jint ASViewImpl_getImageHeightWithId_(id value);
+FOUNDATION_EXPORT int32_t ASViewImpl_getImageHeightWithId_(id value);
 
 FOUNDATION_EXPORT void ASViewImpl_setOnClickWithASIWidget_withNSString_withId_withADView_OnClickListener_(id<ASIWidget> w, NSString *id_, id nativeView, id<ADView_OnClickListener> onClickListener);
 
@@ -693,7 +697,7 @@ FOUNDATION_EXPORT id ASViewImpl_getParentWithASIWidget_(id<ASIWidget> widget);
 
 FOUNDATION_EXPORT void ASViewImpl_setVisibilityWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-FOUNDATION_EXPORT void ASViewImpl_nativeSetVisibilityWithId_withBoolean_(id view, jboolean hidden);
+FOUNDATION_EXPORT void ASViewImpl_nativeSetVisibilityWithId_withBoolean_(id view, bool hidden);
 
 FOUNDATION_EXPORT void ASViewImpl_setOnLongClickWithASIWidget_withId_withADView_OnLongClickListener_(id<ASIWidget> w, id nativeView, id<ADView_OnLongClickListener> listener);
 
@@ -713,29 +717,30 @@ FOUNDATION_EXPORT void ASViewImpl_startDragWithASIWidget_withNSString_(id<ASIWid
 
 FOUNDATION_EXPORT void ASViewImpl_nativeBringToFrontWithId_(id nativeWidget);
 
-FOUNDATION_EXPORT jint ASViewImpl_getLocationXOnScreenWithId_(id nativeWidget);
+FOUNDATION_EXPORT int32_t ASViewImpl_getLocationXOnScreenWithId_(id nativeWidget);
 
-FOUNDATION_EXPORT jint ASViewImpl_getLocationYOnScreenWithId_(id nativeWidget);
+FOUNDATION_EXPORT int32_t ASViewImpl_getLocationYOnScreenWithId_(id nativeWidget);
 
-FOUNDATION_EXPORT jint ASViewImpl_nativeMeasureWidthWithId_(id uiView);
+FOUNDATION_EXPORT int32_t ASViewImpl_nativeMeasureWidthWithId_(id uiView);
 
-FOUNDATION_EXPORT jint ASViewImpl_nativeMeasureHeightWithId_withInt_(id uiView, jint width);
+FOUNDATION_EXPORT int32_t ASViewImpl_nativeMeasureHeightWithId_withInt_(id uiView, int32_t width);
 
 FOUNDATION_EXPORT void ASViewImpl_addPanListenerWithASIWidget_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback);
 
 FOUNDATION_EXPORT void ASViewImpl_addPanListenerWithASIWidget_withId_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, id<ASViewImpl_PanCallBack> callback);
 
-FOUNDATION_EXPORT jint ASViewImpl_getXWithId_(id objview);
+FOUNDATION_EXPORT int32_t ASViewImpl_getXWithId_(id objview);
 
-FOUNDATION_EXPORT jint ASViewImpl_getYWithId_(id objview);
+FOUNDATION_EXPORT int32_t ASViewImpl_getYWithId_(id objview);
 
-FOUNDATION_EXPORT void ASViewImpl_updateBoundsXWithId_withInt_(id objview, jint x);
+FOUNDATION_EXPORT void ASViewImpl_updateBoundsXWithId_withInt_(id objview, int32_t x);
 
-FOUNDATION_EXPORT void ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(id objview, jint x, jint y, jint animationDurationInMs, id<ASViewImpl_AnimationCallBack> callBack);
+FOUNDATION_EXPORT void ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(id objview, int32_t x, int32_t y, int32_t animationDurationInMs, id<ASViewImpl_AnimationCallBack> callBack);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl)
 
 @compatibility_alias ComAsheraLayoutViewImpl ASViewImpl;
+
 
 #endif
 
@@ -773,6 +778,7 @@ FOUNDATION_EXPORT ASViewImpl_IosAccessibilityTraits *create_ASViewImpl_IosAccess
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_IosAccessibilityTraits)
 
+
 #endif
 
 #if !defined (ASViewImpl_Vtype_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_Vtype))
@@ -808,6 +814,7 @@ FOUNDATION_EXPORT ASViewImpl_Vtype *new_ASViewImpl_Vtype_init(void) NS_RETURNS_R
 FOUNDATION_EXPORT ASViewImpl_Vtype *create_ASViewImpl_Vtype_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_Vtype)
+
 
 #endif
 
@@ -845,6 +852,7 @@ FOUNDATION_EXPORT ASViewImpl_ValidationErrorDisplay *create_ASViewImpl_Validatio
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ValidationErrorDisplay)
 
+
 #endif
 
 #if !defined (ASViewImpl_BackgroundRepeat_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_BackgroundRepeat))
@@ -880,6 +888,7 @@ FOUNDATION_EXPORT ASViewImpl_BackgroundRepeat *new_ASViewImpl_BackgroundRepeat_i
 FOUNDATION_EXPORT ASViewImpl_BackgroundRepeat *create_ASViewImpl_BackgroundRepeat_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_BackgroundRepeat)
+
 
 #endif
 
@@ -917,6 +926,7 @@ FOUNDATION_EXPORT ASViewImpl_BackgroundTintMode *create_ASViewImpl_BackgroundTin
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_BackgroundTintMode)
 
+
 #endif
 
 #if !defined (ASViewImpl_ForegroundRepeat_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_ForegroundRepeat))
@@ -952,6 +962,7 @@ FOUNDATION_EXPORT ASViewImpl_ForegroundRepeat *new_ASViewImpl_ForegroundRepeat_i
 FOUNDATION_EXPORT ASViewImpl_ForegroundRepeat *create_ASViewImpl_ForegroundRepeat_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ForegroundRepeat)
+
 
 #endif
 
@@ -989,6 +1000,7 @@ FOUNDATION_EXPORT ASViewImpl_ForegroundTintMode *create_ASViewImpl_ForegroundTin
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ForegroundTintMode)
 
+
 #endif
 
 #if !defined (ASViewImpl_Visibility_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_Visibility))
@@ -1024,6 +1036,7 @@ FOUNDATION_EXPORT ASViewImpl_Visibility *new_ASViewImpl_Visibility_init(void) NS
 FOUNDATION_EXPORT ASViewImpl_Visibility *create_ASViewImpl_Visibility_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_Visibility)
+
 
 #endif
 
@@ -1061,6 +1074,7 @@ FOUNDATION_EXPORT ASViewImpl_LayoutDirection *create_ASViewImpl_LayoutDirection_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_LayoutDirection)
 
+
 #endif
 
 #if !defined (ASViewImpl_TextDirection_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_TextDirection))
@@ -1096,6 +1110,7 @@ FOUNDATION_EXPORT ASViewImpl_TextDirection *new_ASViewImpl_TextDirection_init(vo
 FOUNDATION_EXPORT ASViewImpl_TextDirection *create_ASViewImpl_TextDirection_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_TextDirection)
+
 
 #endif
 
@@ -1133,6 +1148,7 @@ FOUNDATION_EXPORT ASViewImpl_TextAlignment *create_ASViewImpl_TextAlignment_init
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_TextAlignment)
 
+
 #endif
 
 #if !defined (ASViewImpl_AddRemoveCallBack_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_AddRemoveCallBack))
@@ -1150,29 +1166,31 @@ J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_AddRemoveCallBack)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AddRemoveCallBack)
 
+
 #endif
 
 #if !defined (ASViewImpl_PanCallBack_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_PanCallBack))
 #define ASViewImpl_PanCallBack_
 
+@class JavaLangInteger;
 @protocol ASIWidget;
 
 @protocol ASViewImpl_PanCallBack < JavaObject >
 
 - (void)handlePanStartWithASIWidget:(id<ASIWidget>)widget
                              withId:(id)eventWidget
-                            withInt:(jint)x
-                            withInt:(jint)y;
+                            withInt:(int32_t)x
+                            withInt:(int32_t)y;
 
 - (void)handlePanDragWithASIWidget:(id<ASIWidget>)widget
                             withId:(id)eventWidget
-                           withInt:(jint)x
-                           withInt:(jint)y;
+                           withInt:(int32_t)x
+                           withInt:(int32_t)y;
 
 - (void)handlePanEndWithASIWidget:(id<ASIWidget>)widget
                            withId:(id)eventWidget
-                          withInt:(jint)x
-                          withInt:(jint)y;
+                          withInt:(int32_t)x
+                          withInt:(int32_t)y;
 
 @end
 
@@ -1180,15 +1198,18 @@ J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_PanCallBack)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_PanCallBack)
 
+
 #endif
 
 #if !defined (ASViewImpl_AnimationCallBack_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_AnimationCallBack))
 #define ASViewImpl_AnimationCallBack_
 
+@class JavaLangInteger;
+
 @protocol ASViewImpl_AnimationCallBack < JavaObject >
 
-- (void)animatingWithInt:(jint)x
-                 withInt:(jint)y;
+- (void)animatingWithInt:(int32_t)x
+                 withInt:(int32_t)y;
 
 @end
 
@@ -1196,11 +1217,13 @@ J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_AnimationCallBack)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
+
 #endif
 
 #if !defined (ASViewImpl_UIControlEventTouchDelegate_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_UIControlEventTouchDelegate))
 #define ASViewImpl_UIControlEventTouchDelegate_
 
+@class JavaLangInteger;
 @protocol ADView_OnTouchListener;
 @protocol ASIWidget;
 
@@ -1213,36 +1236,36 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (void)nativeAddOnTouchListenerWithId:(id)nativeWidget;
 
-- (void)onTouchCancelWithInt:(jint)x
-                     withInt:(jint)y
-                     withInt:(jint)rawX
-                     withInt:(jint)rawY;
+- (void)onTouchCancelWithInt:(int32_t)x
+                     withInt:(int32_t)y
+                     withInt:(int32_t)rawX
+                     withInt:(int32_t)rawY;
 
-- (void)onTouchDownWithInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)rawX
-                   withInt:(jint)rawY;
+- (void)onTouchDownWithInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)rawX
+                   withInt:(int32_t)rawY;
 
-- (void)onTouchMoveWithInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)rawX
-                   withInt:(jint)rawY;
+- (void)onTouchMoveWithInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)rawX
+                   withInt:(int32_t)rawY;
 
-- (void)onTouchOutsideWithInt:(jint)x
-                      withInt:(jint)y
-                      withInt:(jint)rawX
-                      withInt:(jint)rawY;
+- (void)onTouchOutsideWithInt:(int32_t)x
+                      withInt:(int32_t)y
+                      withInt:(int32_t)rawX
+                      withInt:(int32_t)rawY;
 
-- (void)onTouchUpWithInt:(jint)x
-                 withInt:(jint)y
-                 withInt:(jint)rawX
-                 withInt:(jint)rawY;
+- (void)onTouchUpWithInt:(int32_t)x
+                 withInt:(int32_t)y
+                 withInt:(int32_t)rawX
+                 withInt:(int32_t)rawY;
 
-- (void)sendEventWithInt:(jint)x
-                 withInt:(jint)y
-                 withInt:(jint)rawX
-                 withInt:(jint)rawY
-                 withInt:(jint)action;
+- (void)sendEventWithInt:(int32_t)x
+                 withInt:(int32_t)y
+                 withInt:(int32_t)rawX
+                 withInt:(int32_t)rawY
+                 withInt:(int32_t)action;
 
 #pragma mark Package-Private
 
@@ -1261,6 +1284,7 @@ FOUNDATION_EXPORT ASViewImpl_UIControlEventTouchDelegate *new_ASViewImpl_UIContr
 FOUNDATION_EXPORT ASViewImpl_UIControlEventTouchDelegate *create_ASViewImpl_UIControlEventTouchDelegate_initWithASIWidget_withADView_OnTouchListener_(id<ASIWidget> widget, id<ADView_OnTouchListener> listener);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UIControlEventTouchDelegate)
+
 
 #endif
 
@@ -1299,11 +1323,13 @@ FOUNDATION_EXPORT ASViewImpl_UILongTapGestureRecognizerDelegate *create_ASViewIm
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UILongTapGestureRecognizerDelegate)
 
+
 #endif
 
 #if !defined (ASViewImpl_UITapGestureRecognizerDelegate_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_UITapGestureRecognizerDelegate))
 #define ASViewImpl_UITapGestureRecognizerDelegate_
 
+@class NSString;
 @protocol ADView_OnClickListener;
 @protocol ASIWidget;
 
@@ -1337,11 +1363,14 @@ FOUNDATION_EXPORT ASViewImpl_UITapGestureRecognizerDelegate *create_ASViewImpl_U
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UITapGestureRecognizerDelegate)
 
+
 #endif
 
 #if !defined (ASViewImpl_UIDragInteractionDelegate_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_UIDragInteractionDelegate))
 #define ASViewImpl_UIDragInteractionDelegate_
 
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 
 @interface ASViewImpl_UIDragInteractionDelegate : NSObject
@@ -1353,11 +1382,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UITapGestureRecognizerDelegate)
 
 - (void)nativeAddDragInteractionWithId:(id)nativeWidget;
 
-- (void)sendEndEventWithInt:(jint)x
-                    withInt:(jint)y;
+- (void)sendEndEventWithInt:(int32_t)x
+                    withInt:(int32_t)y;
 
-- (void)sendStartEventWithInt:(jint)x
-                      withInt:(jint)y;
+- (void)sendStartEventWithInt:(int32_t)x
+                      withInt:(int32_t)y;
 
 #pragma mark Package-Private
 
@@ -1377,11 +1406,14 @@ FOUNDATION_EXPORT ASViewImpl_UIDragInteractionDelegate *create_ASViewImpl_UIDrag
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UIDragInteractionDelegate)
 
+
 #endif
 
 #if !defined (ASViewImpl_UIDropInteractionDelegate_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_UIDropInteractionDelegate))
 #define ASViewImpl_UIDropInteractionDelegate_
 
+@class JavaLangInteger;
+@class NSString;
 @protocol ADView_OnDragListener;
 @protocol ASIWidget;
 
@@ -1392,25 +1424,25 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UIDragInteractionDelegate)
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget
         withADView_OnDragListener:(id<ADView_OnDragListener>)onDragListener;
 
-- (void)dragEnterWithInt:(jint)x
-                 withInt:(jint)y;
+- (void)dragEnterWithInt:(int32_t)x
+                 withInt:(int32_t)y;
 
-- (void)dragLeaveWithInt:(jint)x
-                 withInt:(jint)y;
+- (void)dragLeaveWithInt:(int32_t)x
+                 withInt:(int32_t)y;
 
-- (void)dragOverWithInt:(jint)x
-                withInt:(jint)y;
+- (void)dragOverWithInt:(int32_t)x
+                withInt:(int32_t)y;
 
-- (void)dropWithInt:(jint)x
-            withInt:(jint)y
+- (void)dropWithInt:(int32_t)x
+            withInt:(int32_t)y
        withNSString:(NSString *)data;
 
 - (void)nativeAddDropInteractionWithId:(id)nativeWidget;
 
-- (void)sendEventWithInt:(jint)x
-                 withInt:(jint)y
+- (void)sendEventWithInt:(int32_t)x
+                 withInt:(int32_t)y
             withNSString:(NSString *)data
-                 withInt:(jint)action;
+                 withInt:(int32_t)action;
 
 #pragma mark Package-Private
 
@@ -1430,11 +1462,13 @@ FOUNDATION_EXPORT ASViewImpl_UIDropInteractionDelegate *create_ASViewImpl_UIDrop
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UIDropInteractionDelegate)
 
+
 #endif
 
 #if !defined (ASViewImpl_UISwipeGestureRecognizerDelegate_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_UISwipeGestureRecognizerDelegate))
 #define ASViewImpl_UISwipeGestureRecognizerDelegate_
 
+@class NSString;
 @protocol ASIWidget;
 @protocol ASSwipeHelper_SwipeListener;
 
@@ -1467,6 +1501,7 @@ FOUNDATION_EXPORT ASViewImpl_UISwipeGestureRecognizerDelegate *new_ASViewImpl_UI
 FOUNDATION_EXPORT ASViewImpl_UISwipeGestureRecognizerDelegate *create_ASViewImpl_UISwipeGestureRecognizerDelegate_initWithASIWidget_withASSwipeHelper_SwipeListener_(id<ASIWidget> widget, id<ASSwipeHelper_SwipeListener> listener);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UISwipeGestureRecognizerDelegate)
+
 
 #endif
 
@@ -1503,6 +1538,7 @@ FOUNDATION_EXPORT ASViewImpl_PanGestureRecognizer *create_ASViewImpl_PanGestureR
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_PanGestureRecognizer)
 
+
 #endif
 
 #if !defined (ASViewImpl_AnimationUtils_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_AnimationUtils))
@@ -1534,6 +1570,7 @@ FOUNDATION_EXPORT ASViewImpl_AnimationUtils *new_ASViewImpl_AnimationUtils_initW
 FOUNDATION_EXPORT ASViewImpl_AnimationUtils *create_ASViewImpl_AnimationUtils_initWithId_withASViewImpl_AnimationCallBack_(id objview, id<ASViewImpl_AnimationCallBack> callBack);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationUtils)
+
 
 #endif
 

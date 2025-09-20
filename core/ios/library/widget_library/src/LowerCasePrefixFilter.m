@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\converter\LowerCasePrefixFilter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "LowerCasePrefixFilter.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASLowerCasePrefixFilter
@@ -17,9 +30,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)filterWithNSString:(NSString *)value
-                  withNSString:(NSString *)query {
-  jboolean matches = false;
+- (bool)filterWithNSString:(NSString *)value
+              withNSString:(NSString *)query {
+  bool matches = false;
   if (query == nil || [query java_length] == 0) {
     return true;
   }
@@ -37,8 +50,8 @@ J2OBJC_IGNORE_DESIGNATED_END
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *word = *b__++;
-        if ([((NSString *) nil_chk([((NSString *) nil_chk(word)) lowercaseString])) java_hasPrefix:query]) {
+        NSString *word = RETAIN_AND_AUTORELEASE(*b__++);
+        if ([((NSString *) nil_chk([word lowercaseString])) java_hasPrefix:query]) {
           matches = true;
           break;
         }
@@ -79,3 +92,5 @@ ASLowerCasePrefixFilter *create_ASLowerCasePrefixFilter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLowerCasePrefixFilter)
+
+J2OBJC_NAME_MAPPING(ASLowerCasePrefixFilter, "com.ashera.converter", "AS")

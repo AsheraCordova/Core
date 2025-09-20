@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\accessibility\AccessibilityEvent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AccessibilityEvent")
@@ -16,6 +17,8 @@
 #if !defined (ADAccessibilityEvent_) && (INCLUDE_ALL_AccessibilityEvent || defined(INCLUDE_ADAccessibilityEvent))
 #define ADAccessibilityEvent_
 
+@class JavaLangInteger;
+
 @interface ADAccessibilityEvent : NSObject
 
 #pragma mark Public
@@ -26,21 +29,21 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADAccessibilityEvent)
 
-inline jint ADAccessibilityEvent_get_CONTENT_CHANGE_TYPE_SUBTREE(void);
+inline int32_t ADAccessibilityEvent_get_CONTENT_CHANGE_TYPE_SUBTREE(void);
 #define ADAccessibilityEvent_CONTENT_CHANGE_TYPE_SUBTREE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, CONTENT_CHANGE_TYPE_SUBTREE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, CONTENT_CHANGE_TYPE_SUBTREE, int32_t)
 
-inline jint ADAccessibilityEvent_get_TYPE_VIEW_SELECTED(void);
+inline int32_t ADAccessibilityEvent_get_TYPE_VIEW_SELECTED(void);
 #define ADAccessibilityEvent_TYPE_VIEW_SELECTED 10
-J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, TYPE_VIEW_SELECTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, TYPE_VIEW_SELECTED, int32_t)
 
-inline jint ADAccessibilityEvent_get_CONTENT_CHANGE_TYPE_UNDEFINED(void);
+inline int32_t ADAccessibilityEvent_get_CONTENT_CHANGE_TYPE_UNDEFINED(void);
 #define ADAccessibilityEvent_CONTENT_CHANGE_TYPE_UNDEFINED 11
-J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, CONTENT_CHANGE_TYPE_UNDEFINED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, CONTENT_CHANGE_TYPE_UNDEFINED, int32_t)
 
-inline jint ADAccessibilityEvent_get_TYPE_WINDOW_STATE_CHANGED(void);
+inline int32_t ADAccessibilityEvent_get_TYPE_WINDOW_STATE_CHANGED(void);
 #define ADAccessibilityEvent_TYPE_WINDOW_STATE_CHANGED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, TYPE_WINDOW_STATE_CHANGED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAccessibilityEvent, TYPE_WINDOW_STATE_CHANGED, int32_t)
 
 FOUNDATION_EXPORT void ADAccessibilityEvent_init(ADAccessibilityEvent *self);
 
@@ -51,6 +54,7 @@ FOUNDATION_EXPORT ADAccessibilityEvent *create_ADAccessibilityEvent_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADAccessibilityEvent)
 
 @compatibility_alias RAndroidViewAccessibilityAccessibilityEvent ADAccessibilityEvent;
+
 
 #endif
 

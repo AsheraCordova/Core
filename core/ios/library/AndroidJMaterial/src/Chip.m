@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\chip\Chip.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Chip.h"
 #include "ColorStateList.h"
 #include "CompoundButton.h"
@@ -15,8 +20,15 @@
 #include "MaterialCheckable.h"
 #include "PluginInvoker.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXChip () {
@@ -24,8 +36,8 @@
   ADDrawable *chipIcon_;
   ADDrawable *checkedIcon_;
   ADColorStateList *chipIconTint_;
-  jfloat chipEndPadding_;
-  jfloat chipStartPadding_;
+  float chipEndPadding_;
+  float chipStartPadding_;
   id<ASIWidget> textWidget_;
   id<ASIWidget> checkboxWidget_;
   id<ASIWidget> closeIconWidget_;
@@ -33,25 +45,25 @@
   ADColorStateList *checkedIconTint_;
   ADDrawable *closeIcon_;
   ADColorStateList *closeIconTint_;
-  jfloat chipCornerRadius_;
-  jfloat closeIconEndPadding_;
-  jfloat closeIconStartPadding_;
-  jfloat closeIconSize_;
-  jfloat textEndPadding_;
-  jfloat textStartPadding_;
-  jfloat minHeight_;
+  float chipCornerRadius_;
+  float closeIconEndPadding_;
+  float closeIconStartPadding_;
+  float closeIconSize_;
+  float textEndPadding_;
+  float textStartPadding_;
+  float minHeight_;
   id<ASHasWidgets> parentLL_;
   id<ADCompoundButton_OnCheckedChangeListener> onCheckedChangeListener_;
-  jboolean checkedIconVisible_;
-  jboolean checkable_;
-  jboolean checked_;
-  jboolean shouldEnsureMinTouchTargetSize_;
+  bool checkedIconVisible_;
+  bool checkable_;
+  bool checked_;
+  bool shouldEnsureMinTouchTargetSize_;
   id<ADXMaterialCheckable_OnCheckedChangeListener> internalOnCheckedChangeListener_;
   ADColorStateList *chipBackgroundColor_;
   ADColorStateList *chipStrokeColor_;
-  jfloat chipStrokeWidth_;
-  jfloat iconEndPadding_;
-  jfloat iconStartPadding_;
+  float chipStrokeWidth_;
+  float iconEndPadding_;
+  float iconStartPadding_;
   id<ADView_OnClickListener> rippleInternalClickListener_;
   id<ADView_OnClickListener> chipClickListener_;
 }
@@ -78,7 +90,7 @@ J2OBJC_FIELD_SETTER(ADXChip, chipClickListener_, id<ADView_OnClickListener>)
 
 @interface ADXChip_ChipClickListener : NSObject < ADView_OnClickListener > {
  @public
-  __unsafe_unretained ADXChip *this$0_;
+  WEAK_ ADXChip *this$0_;
   id<ASIWidget> textWidget_;
 }
 
@@ -101,6 +113,7 @@ __attribute__((unused)) static ADXChip_ChipClickListener *create_ADXChip_ChipCli
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXChip_ChipClickListener)
 
+
 @implementation ADXChip
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -114,7 +127,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&self->internalOnCheckedChangeListener_, listener);
 }
 
-- (void)setCheckedWithBoolean:(jboolean)checked {
+- (void)setCheckedWithBoolean:(bool)checked {
   if (checkable_) {
     self->checked_ = checked;
     [((id<ASIWidget>) nil_chk(checkboxWidget_)) setVisibleWithBoolean:checked];
@@ -122,7 +135,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self requestLayout];
 }
 
-- (jboolean)isChecked {
+- (bool)isChecked {
   return checked_;
 }
 
@@ -155,17 +168,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ASIWidget>) nil_chk(textWidget_)) setAttributeWithNSString:@"text" withId:text withBoolean:true];
 }
 
-- (void)setCheckableWithBoolean:(jboolean)checkable {
+- (void)setCheckableWithBoolean:(bool)checkable {
   self->checkable_ = checkable;
   [((id<ASIWidget>) nil_chk(checkboxWidget_)) setVisibleWithBoolean:false];
 }
 
-- (void)setChipEndPaddingWithFloat:(jfloat)padding {
+- (void)setChipEndPaddingWithFloat:(float)padding {
   self->chipEndPadding_ = padding;
   [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"paddingEnd" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
 
-- (void)setChipIconSizeWithFloat:(jfloat)iconSize {
+- (void)setChipIconSizeWithFloat:(float)iconSize {
   [((id<ASIWidget>) nil_chk(iconWidget_)) setAttributeWithNSString:@"layout_width" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(iconSize)) withBoolean:true];
   [((id<ASIWidget>) nil_chk(iconWidget_)) setAttributeWithNSString:@"layout_height" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(iconSize)) withBoolean:true];
 }
@@ -181,16 +194,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ASIWidget>) nil_chk(iconWidget_)) setAttributeWithNSString:@"tint" withId:tint withBoolean:true];
 }
 
-- (void)setChipIconVisibleWithBoolean:(jboolean)visible {
+- (void)setChipIconVisibleWithBoolean:(bool)visible {
   [((id<ASIWidget>) nil_chk(iconWidget_)) setVisibleWithBoolean:visible];
 }
 
-- (void)setChipStartPaddingWithFloat:(jfloat)padding {
+- (void)setChipStartPaddingWithFloat:(float)padding {
   self->chipStartPadding_ = padding;
   [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"paddingStart" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
 
-- (jfloat)getChipEndPadding {
+- (float)getChipEndPadding {
   return chipEndPadding_;
 }
 
@@ -202,7 +215,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return chipIconTint_;
 }
 
-- (jfloat)getChipStartPadding {
+- (float)getChipStartPadding {
   return chipStartPadding_;
 }
 
@@ -217,7 +230,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ASIWidget>) nil_chk(checkboxWidget_)) setAttributeWithNSString:@"tint" withId:tint withBoolean:true];
 }
 
-- (void)setCheckedIconVisibleWithBoolean:(jboolean)isVisible {
+- (void)setCheckedIconVisibleWithBoolean:(bool)isVisible {
   self->checkedIconVisible_ = isVisible;
   if (!isVisible) {
     [((id<ASIWidget>) nil_chk(checkboxWidget_)) setVisibleWithBoolean:false];
@@ -227,12 +240,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setChipCornerRadiusWithFloat:(jfloat)radius {
+- (void)setChipCornerRadiusWithFloat:(float)radius {
   self->chipCornerRadius_ = radius;
   [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"cornerRadius" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(radius)) withBoolean:true];
 }
 
-- (void)setChipMinHeightWithFloat:(jfloat)minHeight {
+- (void)setChipMinHeightWithFloat:(float)minHeight {
   self->minHeight_ = minHeight;
   [self setMyAttributeWithNSString:@"minHeight" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(minHeight))];
 }
@@ -243,18 +256,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ASIWidget>) nil_chk(closeIconWidget_)) setVisibleWithBoolean:drawable != nil];
 }
 
-- (void)setCloseIconEndPaddingWithFloat:(jfloat)padding {
+- (void)setCloseIconEndPaddingWithFloat:(float)padding {
   self->closeIconEndPadding_ = padding;
   [((id<ASIWidget>) nil_chk(closeIconWidget_)) setAttributeWithNSString:@"layout_marginEnd" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
 
-- (void)setCloseIconSizeWithFloat:(jfloat)iconSize {
+- (void)setCloseIconSizeWithFloat:(float)iconSize {
   self->closeIconSize_ = iconSize;
   [((id<ASIWidget>) nil_chk(closeIconWidget_)) setAttributeWithNSString:@"layout_width" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(iconSize)) withBoolean:true];
   [((id<ASIWidget>) nil_chk(closeIconWidget_)) setAttributeWithNSString:@"layout_height" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(iconSize)) withBoolean:true];
 }
 
-- (void)setCloseIconStartPaddingWithFloat:(jfloat)padding {
+- (void)setCloseIconStartPaddingWithFloat:(float)padding {
   self->closeIconStartPadding_ = padding;
   [((id<ASIWidget>) nil_chk(closeIconWidget_)) setAttributeWithNSString:@"layout_marginStart" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
@@ -264,21 +277,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ASIWidget>) nil_chk(closeIconWidget_)) setAttributeWithNSString:@"tint" withId:tint withBoolean:true];
 }
 
-- (void)setCloseIconVisibleWithBoolean:(jboolean)isVisible {
+- (void)setCloseIconVisibleWithBoolean:(bool)isVisible {
   [((id<ASIWidget>) nil_chk(closeIconWidget_)) setVisibleWithBoolean:isVisible];
 }
 
-- (void)setTextEndPaddingWithFloat:(jfloat)padding {
+- (void)setTextEndPaddingWithFloat:(float)padding {
   self->textEndPadding_ = padding;
   [((id<ASIWidget>) nil_chk(textWidget_)) setAttributeWithNSString:@"paddingEnd" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
 
-- (void)setTextStartPaddingWithFloat:(jfloat)padding {
+- (void)setTextStartPaddingWithFloat:(float)padding {
   self->textStartPadding_ = padding;
   [((id<ASIWidget>) nil_chk(textWidget_)) setAttributeWithNSString:@"paddingStart" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   [self setMyAttributeWithNSString:@"maxWidth" withId:JavaLangInteger_valueOfWithInt_(width)];
 }
 
@@ -290,7 +303,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return checkedIconTint_;
 }
 
-- (jfloat)getChipCornerRadius {
+- (float)getChipCornerRadius {
   return chipCornerRadius_;
 }
 
@@ -298,15 +311,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return closeIcon_;
 }
 
-- (jfloat)getCloseIconEndPadding {
+- (float)getCloseIconEndPadding {
   return closeIconEndPadding_;
 }
 
-- (jfloat)getCloseIconSize {
+- (float)getCloseIconSize {
   return closeIconSize_;
 }
 
-- (jfloat)getCloseIconStartPadding {
+- (float)getCloseIconStartPadding {
   return closeIconStartPadding_;
 }
 
@@ -314,15 +327,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return closeIconTint_;
 }
 
-- (jfloat)getTextEndPadding {
+- (float)getTextEndPadding {
   return self->textEndPadding_;
 }
 
-- (jfloat)getTextStartPadding {
+- (float)getTextStartPadding {
   return self->textStartPadding_;
 }
 
-- (jfloat)getChipMinHeight {
+- (float)getChipMinHeight {
   return self->minHeight_;
 }
 
@@ -345,7 +358,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setEnsureMinTouchTargetSizeWithBoolean:(jboolean)shouldEnsureMinTouchTargetSize {
+- (void)setEnsureMinTouchTargetSizeWithBoolean:(bool)shouldEnsureMinTouchTargetSize {
   self->shouldEnsureMinTouchTargetSize_ = shouldEnsureMinTouchTargetSize;
   if (shouldEnsureMinTouchTargetSize) {
     [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"layout_marginVertical" withId:@"16dp" withBoolean:false];
@@ -355,7 +368,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)shouldEnsureMinTouchTargetSize {
+- (bool)shouldEnsureMinTouchTargetSize {
   return shouldEnsureMinTouchTargetSize_;
 }
 
@@ -376,19 +389,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"borderWidth" withId:@"1dp" withBoolean:false];
 }
 
-- (void)setChipStrokeWidthWithFloat:(jfloat)chipStrokeWidth {
+- (void)setChipStrokeWidthWithFloat:(float)chipStrokeWidth {
   self->chipStrokeWidth_ = chipStrokeWidth;
   [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"cornerRadius" withId:JavaLangInteger_valueOfWithInt_(0) withBoolean:true];
   [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"borderRadius" withId:JavaLangFloat_valueOfWithFloat_(chipCornerRadius_) withBoolean:true];
   [((id<ASHasWidgets>) nil_chk(parentLL_)) setAttributeWithNSString:@"borderWidth" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(chipStrokeWidth)) withBoolean:true];
 }
 
-- (void)setIconEndPaddingWithFloat:(jfloat)padding {
+- (void)setIconEndPaddingWithFloat:(float)padding {
   self->iconEndPadding_ = padding;
   [((id<ASIWidget>) nil_chk(iconWidget_)) setAttributeWithNSString:@"layout_marginEnd" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
 
-- (void)setIconStartPaddingWithFloat:(jfloat)padding {
+- (void)setIconStartPaddingWithFloat:(float)padding {
   self->iconStartPadding_ = padding;
   [((id<ASIWidget>) nil_chk(iconWidget_)) setAttributeWithNSString:@"layout_marginStart" withId:JavaLangInteger_valueOfWithInt_(JreFpToInt(padding)) withBoolean:true];
 }
@@ -401,15 +414,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return chipStrokeColor_;
 }
 
-- (jfloat)getChipStrokeWidth {
+- (float)getChipStrokeWidth {
   return chipStrokeWidth_;
 }
 
-- (jfloat)getIconEndPadding {
+- (float)getIconEndPadding {
   return iconEndPadding_;
 }
 
-- (jfloat)getIconStartPadding {
+- (float)getIconStartPadding {
   return iconStartPadding_;
 }
 
@@ -635,6 +648,8 @@ ADXChip *create_ADXChip_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXChip)
+
+J2OBJC_NAME_MAPPING(ADXChip, "com.google.android.material.chip", "ADX")
 
 @implementation ADXChip_ChipClickListener
 

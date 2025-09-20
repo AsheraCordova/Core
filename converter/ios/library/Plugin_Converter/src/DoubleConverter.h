@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\DoubleConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DoubleConverter")
@@ -53,6 +54,7 @@ FOUNDATION_EXPORT ASDoubleConverter *create_ASDoubleConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASDoubleConverter)
 
 @compatibility_alias ComAsheraConverterDoubleConverter ASDoubleConverter;
+
 
 #endif
 

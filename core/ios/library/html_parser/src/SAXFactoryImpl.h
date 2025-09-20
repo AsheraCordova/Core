@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\jaxp\SAXFactoryImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SAXFactoryImpl")
@@ -20,7 +21,9 @@
 #define INCLUDE_JavaxXmlParsersSAXParserFactory 1
 #include "javax/xml/parsers/SAXParserFactory.h"
 
+@class JavaLangBoolean;
 @class JavaxXmlParsersSAXParser;
+@class NSString;
 
 /*!
  @brief This is a simple implementation of JAXP <code>SAXParserFactory</code>,
@@ -38,7 +41,7 @@
  @brief Returns whether the specified property will be enabled or disabled
   on reader instances constructed by this factory.
  */
-- (jboolean)getFeatureWithNSString:(NSString *)name;
+- (bool)getFeatureWithNSString:(NSString *)name;
 
 /*!
  @brief Creates a new instance of <code>SAXParser</code> using the currently
@@ -52,7 +55,7 @@
   factory.
  */
 - (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)value;
+                   withBoolean:(bool)value;
 
 @end
 
@@ -67,6 +70,7 @@ FOUNDATION_EXPORT TSSAXFactoryImpl *create_TSSAXFactoryImpl_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(TSSAXFactoryImpl)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupJaxpSAXFactoryImpl TSSAXFactoryImpl;
+
 
 #endif
 

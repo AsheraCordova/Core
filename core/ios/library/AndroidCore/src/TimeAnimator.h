@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\TimeAnimator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TimeAnimator")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADValueAnimator 1
 #include "ValueAnimator.h"
 
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangLong;
 @protocol ADTimeAnimator_TimeListener;
 
 /*!
@@ -36,7 +40,7 @@
 
 - (instancetype)init;
 
-- (void)setCurrentPlayTimeWithLong:(jlong)playTime;
+- (void)setCurrentPlayTimeWithLong:(int64_t)playTime;
 
 /*!
  @brief Sets a listener that is sent update events throughout the life of
@@ -49,9 +53,9 @@
 
 #pragma mark Package-Private
 
-- (jboolean)animateBasedOnTimeWithLong:(jlong)currentTime;
+- (bool)animateBasedOnTimeWithLong:(int64_t)currentTime;
 
-- (void)animateValueWithFloat:(jfloat)fraction;
+- (void)animateValueWithFloat:(float)fraction;
 
 - (void)initAnimation OBJC_METHOD_FAMILY_NONE;
 
@@ -69,12 +73,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTimeAnimator)
 
 @compatibility_alias RAndroidAnimationTimeAnimator ADTimeAnimator;
 
+
 #endif
 
 #if !defined (ADTimeAnimator_TimeListener_) && (INCLUDE_ALL_TimeAnimator || defined(INCLUDE_ADTimeAnimator_TimeListener))
 #define ADTimeAnimator_TimeListener_
 
 @class ADTimeAnimator;
+@class JavaLangLong;
 
 /*!
  @brief Implementors of this interface can set themselves as update listeners
@@ -97,14 +103,15 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTimeAnimator)
  @param deltaTime The time elapsed since the previous frame, in milliseconds.
  */
 - (void)onTimeUpdateWithADTimeAnimator:(ADTimeAnimator *)animation
-                              withLong:(jlong)totalTime
-                              withLong:(jlong)deltaTime;
+                              withLong:(int64_t)totalTime
+                              withLong:(int64_t)deltaTime;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADTimeAnimator_TimeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTimeAnimator_TimeListener)
+
 
 #endif
 

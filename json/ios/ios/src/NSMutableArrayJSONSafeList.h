@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSJSONAdapter\src\main\java\com\ashera\jsonadapter\NSMutableArrayJSONSafeList.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NSMutableArrayJSONSafeList")
@@ -20,16 +21,18 @@
 #define INCLUDE_ASNSMutableArrayList 1
 #include "NSMutableArrayList.h"
 
+@class JavaLangInteger;
+
 @interface ASNSMutableArrayJSONSafeList : ASNSMutableArrayList
 
 #pragma mark Public
 
 - (instancetype)initWithId:(id)nsmutableArray;
 
-- (void)addWithInt:(jint)index
+- (void)addWithInt:(int32_t)index
             withId:(id)element;
 
-- (id)setWithInt:(jint)index
+- (id)setWithInt:(int32_t)index
           withId:(id)element;
 
 #pragma mark Package-Private
@@ -47,6 +50,7 @@ FOUNDATION_EXPORT ASNSMutableArrayJSONSafeList *create_ASNSMutableArrayJSONSafeL
 J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayJSONSafeList)
 
 @compatibility_alias ComAsheraJsonadapterNSMutableArrayJSONSafeList ASNSMutableArrayJSONSafeList;
+
 
 #endif
 

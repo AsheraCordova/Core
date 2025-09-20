@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelDataType.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ModelDataType")
@@ -27,16 +28,24 @@
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ASModelDataType_Enum) {
-  ASModelDataType_Enum_map = 0,
-  ASModelDataType_Enum_pathmap = 1,
-  ASModelDataType_Enum_string = 2,
-  ASModelDataType_Enum_list = 3,
-  ASModelDataType_Enum_integer = 4,
-  ASModelDataType_Enum_number = 5,
-  ASModelDataType_Enum_bool = 6,
+typedef NS_ENUM(int32_t, ASModelDataType_Enum) {
+  ASModelDataType_Enum_map NS_SWIFT_NAME(map) = 0,
+  ASModelDataType_Enum_pathmap NS_SWIFT_NAME(pathmap) = 1,
+  ASModelDataType_Enum_string NS_SWIFT_NAME(string) = 2,
+  ASModelDataType_Enum_list NS_SWIFT_NAME(list) = 3,
+  ASModelDataType_Enum_integer NS_SWIFT_NAME(integer) = 4,
+  ASModelDataType_Enum_number NS_SWIFT_NAME(number) = 5,
+  ASModelDataType_Enum_bool NS_SWIFT_NAME(bool_) = 6,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ASModelDataType_ORDINAL int32_t
+#else
+#define ASModelDataType_ORDINAL ASModelDataType_Enum
+#endif
+
 
 @interface ASModelDataType : JavaLangEnum
 
@@ -49,6 +58,13 @@ typedef NS_ENUM(NSUInteger, ASModelDataType_Enum) {
 #pragma mark Package-Private
 
 - (ASModelDataType_Enum)toNSEnum;
+
+@property(readonly) ASModelDataType_Enum enumValue;
++ (ASModelDataType *)fromNSEnum:(ASModelDataType_Enum)value;
+
+- (ASModelDataType_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithModelDataType:(ASModelDataType_Enum)value;
 
 @end
 
@@ -82,11 +98,12 @@ FOUNDATION_EXPORT IOSObjectArray *ASModelDataType_values(void);
 
 FOUNDATION_EXPORT ASModelDataType *ASModelDataType_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ASModelDataType *ASModelDataType_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ASModelDataType *ASModelDataType_fromOrdinal(ASModelDataType_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelDataType)
 
 @compatibility_alias ComAsheraModelModelDataType ASModelDataType;
+
 
 #endif
 

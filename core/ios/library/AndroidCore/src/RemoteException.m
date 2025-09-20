@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\RemoteException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "RemoteException.h"
 #include "java/lang/Exception.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADRemoteException
@@ -45,3 +56,5 @@ ADRemoteException *create_ADRemoteException_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRemoteException)
+
+J2OBJC_NAME_MAPPING(ADRemoteException, "r.android.os", "AD")

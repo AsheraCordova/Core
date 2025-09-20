@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\layout\SwipeHelper.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SwipeHelper")
@@ -16,21 +17,24 @@
 #if !defined (ASSwipeHelper_) && (INCLUDE_ALL_SwipeHelper || defined(INCLUDE_ASSwipeHelper))
 #define ASSwipeHelper_
 
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 @protocol ASSwipeHelper_SwipeListener;
 
 @interface ASSwipeHelper : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)swipedThreshold;
+- (instancetype)initWithInt:(int32_t)swipedThreshold;
 
-- (jint)getSwipedThreshold;
+- (int32_t)getSwipedThreshold;
 
-- (void)onActionDownWithFloat:(jfloat)x
-                    withFloat:(jfloat)y;
+- (void)onActionDownWithFloat:(float)x
+                    withFloat:(float)y;
 
-- (jboolean)onActionUpWithFloat:(jfloat)x
-                      withFloat:(jfloat)y;
+- (bool)onActionUpWithFloat:(float)x
+                  withFloat:(float)y;
 
 - (void)setListenerWithASSwipeHelper_SwipeListener:(id<ASSwipeHelper_SwipeListener>)swipeListener;
 
@@ -42,30 +46,35 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASSwipeHelper)
 
-FOUNDATION_EXPORT void ASSwipeHelper_initWithInt_(ASSwipeHelper *self, jint swipedThreshold);
+FOUNDATION_EXPORT void ASSwipeHelper_initWithInt_(ASSwipeHelper *self, int32_t swipedThreshold);
 
-FOUNDATION_EXPORT ASSwipeHelper *new_ASSwipeHelper_initWithInt_(jint swipedThreshold) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASSwipeHelper *new_ASSwipeHelper_initWithInt_(int32_t swipedThreshold) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASSwipeHelper *create_ASSwipeHelper_initWithInt_(jint swipedThreshold);
+FOUNDATION_EXPORT ASSwipeHelper *create_ASSwipeHelper_initWithInt_(int32_t swipedThreshold);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwipeHelper)
 
 @compatibility_alias ComAsheraLayoutSwipeHelper ASSwipeHelper;
+
 
 #endif
 
 #if !defined (ASSwipeHelper_SwipeListener_) && (INCLUDE_ALL_SwipeHelper || defined(INCLUDE_ASSwipeHelper_SwipeListener))
 #define ASSwipeHelper_SwipeListener_
 
+@class JavaLangBoolean;
+@class NSString;
+
 @protocol ASSwipeHelper_SwipeListener < JavaObject >
 
-- (jboolean)onSwipedWithNSString:(NSString *)direction;
+- (bool)onSwipedWithNSString:(NSString *)direction;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASSwipeHelper_SwipeListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwipeHelper_SwipeListener)
+
 
 #endif
 

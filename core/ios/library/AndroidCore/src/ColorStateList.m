@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\res\ColorStateList.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Color.h"
 #include "ColorStateList.h"
 #include "IOSClass.h"
@@ -12,17 +17,25 @@
 #include "R.h"
 #include "SparseArray.h"
 #include "StateSet.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/ref/WeakReference.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADColorStateList () {
  @public
   IOSObjectArray *mThemeAttrs_;
-  jint mChangingConfigurations_;
+  int32_t mChangingConfigurations_;
   IOSObjectArray *mStateSpecs_;
   IOSIntArray *mColors_;
-  jint mDefaultColor_;
-  jboolean mIsOpaque_;
+  int32_t mDefaultColor_;
+  bool mIsOpaque_;
 }
 
 - (instancetype)init;
@@ -33,9 +46,9 @@ J2OBJC_FIELD_SETTER(ADColorStateList, mThemeAttrs_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(ADColorStateList, mStateSpecs_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(ADColorStateList, mColors_, IOSIntArray *)
 
-inline jint ADColorStateList_get_DEFAULT_COLOR(void);
+inline int32_t ADColorStateList_get_DEFAULT_COLOR(void);
 #define ADColorStateList_DEFAULT_COLOR -65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADColorStateList, DEFAULT_COLOR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADColorStateList, DEFAULT_COLOR, int32_t)
 
 inline IOSObjectArray *ADColorStateList_get_EMPTY(void);
 static IOSObjectArray *ADColorStateList_EMPTY;
@@ -68,35 +81,35 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-+ (ADColorStateList *)valueOfWithInt:(jint)color {
++ (ADColorStateList *)valueOfWithInt:(int32_t)color {
   return ADColorStateList_valueOfWithInt_(color);
 }
 
-- (ADColorStateList *)withAlphaWithInt:(jint)alpha {
+- (ADColorStateList *)withAlphaWithInt:(int32_t)alpha {
   IOSIntArray *colors = [IOSIntArray arrayWithLength:((IOSIntArray *) nil_chk(mColors_))->size_];
-  jint len = colors->size_;
-  for (jint i = 0; i < len; i++) {
-    *IOSIntArray_GetRef(colors, i) = (IOSIntArray_Get(mColors_, i) & (jint) 0xFFFFFF) | (JreLShift32(alpha, 24));
+  int32_t len = colors->size_;
+  for (int32_t i = 0; i < len; i++) {
+    *IOSIntArray_GetRef(colors, i) = (IOSIntArray_Get(mColors_, i) & (int32_t) 0xFFFFFF) | (JreLShift32(alpha, 24));
   }
   return create_ADColorStateList_initWithIntArray2_withIntArray_(mStateSpecs_, colors);
 }
 
-- (jboolean)isStateful {
+- (bool)isStateful {
   return ((IOSObjectArray *) nil_chk(mStateSpecs_))->size_ >= 1 && ((IOSIntArray *) nil_chk(IOSObjectArray_Get(mStateSpecs_, 0)))->size_ > 0;
 }
 
-- (jboolean)hasFocusStateSpecified {
+- (bool)hasFocusStateSpecified {
   return ADStateSet_containsAttributeWithIntArray2_withInt_(mStateSpecs_, ADR_attr_state_focused);
 }
 
-- (jboolean)isOpaque {
+- (bool)isOpaque {
   return mIsOpaque_;
 }
 
-- (jint)getColorForStateWithIntArray:(IOSIntArray *)stateSet
-                             withInt:(jint)defaultColor {
-  jint setLength = ((IOSObjectArray *) nil_chk(mStateSpecs_))->size_;
-  for (jint i = 0; i < setLength; i++) {
+- (int32_t)getColorForStateWithIntArray:(IOSIntArray *)stateSet
+                                withInt:(int32_t)defaultColor {
+  int32_t setLength = ((IOSObjectArray *) nil_chk(mStateSpecs_))->size_;
+  for (int32_t i = 0; i < setLength; i++) {
     IOSIntArray *stateSpec = IOSObjectArray_Get(nil_chk(mStateSpecs_), i);
     if (ADStateSet_stateSetMatchesWithIntArray_withIntArray_(stateSpec, stateSet)) {
       return IOSIntArray_Get(nil_chk(mColors_), i);
@@ -105,7 +118,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return defaultColor;
 }
 
-- (jint)getDefaultColor {
+- (int32_t)getDefaultColor {
   return mDefaultColor_;
 }
 
@@ -117,13 +130,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return mColors_;
 }
 
-- (jboolean)hasStateWithInt:(jint)state {
+- (bool)hasStateWithInt:(int32_t)state {
   IOSObjectArray *stateSpecs = mStateSpecs_;
-  jint specCount = ((IOSObjectArray *) nil_chk(stateSpecs))->size_;
-  for (jint specIndex = 0; specIndex < specCount; specIndex++) {
+  int32_t specCount = ((IOSObjectArray *) nil_chk(stateSpecs))->size_;
+  for (int32_t specIndex = 0; specIndex < specCount; specIndex++) {
     IOSIntArray *states = IOSObjectArray_Get(stateSpecs, specIndex);
-    jint stateCount = ((IOSIntArray *) nil_chk(states))->size_;
-    for (jint stateIndex = 0; stateIndex < stateCount; stateIndex++) {
+    int32_t stateCount = ((IOSIntArray *) nil_chk(states))->size_;
+    for (int32_t stateIndex = 0; stateIndex < stateCount; stateIndex++) {
       if (IOSIntArray_Get(states, stateIndex) == state || IOSIntArray_Get(states, stateIndex) == ~state) {
         return true;
       }
@@ -133,21 +146,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onColorsChanged {
-  jint defaultColor = ADColorStateList_DEFAULT_COLOR;
-  jboolean isOpaque = true;
+  int32_t defaultColor = ADColorStateList_DEFAULT_COLOR;
+  bool isOpaque = true;
   IOSObjectArray *states = mStateSpecs_;
   IOSIntArray *colors = mColors_;
-  jint N = ((IOSObjectArray *) nil_chk(states))->size_;
+  int32_t N = ((IOSObjectArray *) nil_chk(states))->size_;
   if (N > 0) {
     defaultColor = IOSIntArray_Get(nil_chk(colors), 0);
-    for (jint i = N - 1; i > 0; i--) {
+    for (int32_t i = N - 1; i > 0; i--) {
       if (((IOSIntArray *) nil_chk(IOSObjectArray_Get(states, i)))->size_ == 0) {
         defaultColor = IOSIntArray_Get(colors, i);
         break;
       }
     }
-    for (jint i = 0; i < N; i++) {
-      if (ADColor_alphaWithInt_(IOSIntArray_Get(colors, i)) != (jint) 0xFF) {
+    for (int32_t i = 0; i < N; i++) {
+      if (ADColor_alphaWithInt_(IOSIntArray_Get(colors, i)) != (int32_t) 0xFF) {
         isOpaque = false;
         break;
       }
@@ -157,7 +170,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   mIsOpaque_ = isOpaque;
 }
 
-- (void)setDefaultColorWithInt:(jint)mDefaultColor {
+- (void)setDefaultColorWithInt:(int32_t)mDefaultColor {
   self->mDefaultColor_ = mDefaultColor;
 }
 
@@ -256,10 +269,10 @@ ADColorStateList *create_ADColorStateList_initWithIntArray2_withIntArray_(IOSObj
   J2OBJC_CREATE_IMPL(ADColorStateList, initWithIntArray2_withIntArray_, states, colors)
 }
 
-ADColorStateList *ADColorStateList_valueOfWithInt_(jint color) {
+ADColorStateList *ADColorStateList_valueOfWithInt_(int32_t color) {
   ADColorStateList_initialize();
   @synchronized(ADColorStateList_sCache) {
-    jint index = [((ADSparseArray *) nil_chk(ADColorStateList_sCache)) indexOfKeyWithInt:color];
+    int32_t index = [((ADSparseArray *) nil_chk(ADColorStateList_sCache)) indexOfKeyWithInt:color];
     if (index >= 0) {
       ADColorStateList *cached = [((JavaLangRefWeakReference *) nil_chk([ADColorStateList_sCache valueAtWithInt:index])) get];
       if (cached != nil) {
@@ -267,16 +280,18 @@ ADColorStateList *ADColorStateList_valueOfWithInt_(jint color) {
       }
       [ADColorStateList_sCache removeAtWithInt:index];
     }
-    jint N = [ADColorStateList_sCache size];
-    for (jint i = N - 1; i >= 0; i--) {
+    int32_t N = [ADColorStateList_sCache size];
+    for (int32_t i = N - 1; i >= 0; i--) {
       if ([((JavaLangRefWeakReference *) nil_chk([ADColorStateList_sCache valueAtWithInt:i])) get] == nil) {
         [ADColorStateList_sCache removeAtWithInt:i];
       }
     }
-    ADColorStateList *csl = create_ADColorStateList_initWithIntArray2_withIntArray_(ADColorStateList_EMPTY, [IOSIntArray arrayWithInts:(jint[]){ color } count:1]);
+    ADColorStateList *csl = create_ADColorStateList_initWithIntArray2_withIntArray_(ADColorStateList_EMPTY, [IOSIntArray arrayWithInts:(int32_t[]){ color } count:1]);
     [ADColorStateList_sCache putWithInt:color withId:create_JavaLangRefWeakReference_initWithId_(csl)];
     return JreRetainedLocalValue(csl);
   }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADColorStateList)
+
+J2OBJC_NAME_MAPPING(ADColorStateList, "r.android.content.res", "AD")

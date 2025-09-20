@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\MaxLengthCommandConveter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MaxLengthCommandConveter")
@@ -21,6 +22,8 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -31,7 +34,7 @@
 - (instancetype)initWithNSString:(NSString *)id_;
 
 - (instancetype)initWithNSString:(NSString *)id_
-                         withInt:(jint)maxLength;
+                         withInt:(int32_t)maxLength;
 
 - (id)modifyValueWithASIWidget:(id<ASIWidget>)widget
                         withId:(id)nativeView
@@ -53,15 +56,16 @@ FOUNDATION_EXPORT ASMaxLengthCommandConveter *new_ASMaxLengthCommandConveter_ini
 
 FOUNDATION_EXPORT ASMaxLengthCommandConveter *create_ASMaxLengthCommandConveter_initWithNSString_(NSString *id_);
 
-FOUNDATION_EXPORT void ASMaxLengthCommandConveter_initWithNSString_withInt_(ASMaxLengthCommandConveter *self, NSString *id_, jint maxLength);
+FOUNDATION_EXPORT void ASMaxLengthCommandConveter_initWithNSString_withInt_(ASMaxLengthCommandConveter *self, NSString *id_, int32_t maxLength);
 
-FOUNDATION_EXPORT ASMaxLengthCommandConveter *new_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, jint maxLength) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASMaxLengthCommandConveter *new_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, int32_t maxLength) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASMaxLengthCommandConveter *create_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, jint maxLength);
+FOUNDATION_EXPORT ASMaxLengthCommandConveter *create_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, int32_t maxLength);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASMaxLengthCommandConveter)
 
 @compatibility_alias ComAsheraConverterMaxLengthCommandConveter ASMaxLengthCommandConveter;
+
 
 #endif
 

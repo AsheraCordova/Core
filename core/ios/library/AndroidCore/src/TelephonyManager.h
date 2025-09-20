@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\telephony\TelephonyManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TelephonyManager")
@@ -15,6 +16,8 @@
 
 #if !defined (ADTelephonyManager_) && (INCLUDE_ALL_TelephonyManager || defined(INCLUDE_ADTelephonyManager))
 #define ADTelephonyManager_
+
+@class NSString;
 
 @interface ADTelephonyManager : NSObject
 
@@ -60,6 +63,7 @@ FOUNDATION_EXPORT ADTelephonyManager *create_ADTelephonyManager_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADTelephonyManager)
 
 @compatibility_alias RAndroidTelephonyTelephonyManager ADTelephonyManager;
+
 
 #endif
 

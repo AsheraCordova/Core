@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\interpolator\view\animation\LookupTableInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LookupTableInterpolator")
@@ -21,6 +22,7 @@
 #include "Interpolator.h"
 
 @class IOSFloatArray;
+@class JavaLangFloat;
 
 /*!
  @brief An <code>Interpolator</code> that uses a lookup table to compute an interpolation based on a
@@ -30,7 +32,7 @@
 
 #pragma mark Public
 
-- (jfloat)getInterpolationWithFloat:(jfloat)input;
+- (float)getInterpolationWithFloat:(float)input;
 
 #pragma mark Protected
 
@@ -49,6 +51,7 @@ FOUNDATION_EXPORT void ADXLookupTableInterpolator_initPackagePrivateWithFloatArr
 J2OBJC_TYPE_LITERAL_HEADER(ADXLookupTableInterpolator)
 
 @compatibility_alias AndroidxInterpolatorViewAnimationLookupTableInterpolator ADXLookupTableInterpolator;
+
 
 #endif
 

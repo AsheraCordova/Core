@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\plugin\PluginManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IPlugin.h"
 #include "J2ObjC_source.h"
 #include "PluginManager.h"
@@ -10,7 +15,11 @@
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<JavaUtilMap> ASPluginManager_get_registrationMap(void);
@@ -94,3 +103,5 @@ id<ASIPlugin> ASPluginManager_getWithNSString_(NSString *name) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPluginManager)
+
+J2OBJC_NAME_MAPPING(ASPluginManager, "com.ashera.plugin", "AS")

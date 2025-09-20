@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\DialogInterface.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DialogInterface")
@@ -38,6 +39,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADDialogInterface)
 
 @compatibility_alias RAndroidContentDialogInterface ADDialogInterface;
 
+
 #endif
 
 #if !defined (ADDialogInterface_OnClickListener_) && (INCLUDE_ALL_DialogInterface || defined(INCLUDE_ADDialogInterface_OnClickListener))
@@ -60,6 +62,7 @@ FOUNDATION_EXPORT ADDialogInterface_OnClickListener *new_ADDialogInterface_OnCli
 FOUNDATION_EXPORT ADDialogInterface_OnClickListener *create_ADDialogInterface_OnClickListener_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDialogInterface_OnClickListener)
+
 
 #endif
 
@@ -84,6 +87,7 @@ FOUNDATION_EXPORT ADDialogInterface_OnKeyListener *create_ADDialogInterface_OnKe
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDialogInterface_OnKeyListener)
 
+
 #endif
 
 #if !defined (ADDialogInterface_OnCancelListener_) && (INCLUDE_ALL_DialogInterface || defined(INCLUDE_ADDialogInterface_OnCancelListener))
@@ -106,6 +110,7 @@ FOUNDATION_EXPORT ADDialogInterface_OnCancelListener *new_ADDialogInterface_OnCa
 FOUNDATION_EXPORT ADDialogInterface_OnCancelListener *create_ADDialogInterface_OnCancelListener_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADDialogInterface_OnCancelListener)
+
 
 #endif
 

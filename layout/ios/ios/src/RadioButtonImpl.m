@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\RadioButtonImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
@@ -55,6 +60,8 @@
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -73,13 +80,14 @@
 
 #include "ASUILabel.h"
 
+
 @class ASRadioButtonImpl_DellocHandler;
 @class ASRadioButtonImpl_MarqueeTask;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@protocol JavaLangRunnable;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -90,20 +98,20 @@
   NSString *ellipsize_;
   ADColorStateList *drawableTint_;
   id timer_;
-  jboolean isDisposed_;
+  bool isDisposed_;
   ASRadioButtonImpl_DellocHandler *dellocHandler_;
   ASRadioButtonImpl_PostMeasureHandler *postMeasureHandler_;
   NSString *POST_MEASURE_EVENT_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   id<JavaUtilMap> fontDescriptors_;
   ASRadioButtonImpl_MarqueeTask *marqueeTask_;
-  jint marqueeRepeatLimit_;
+  int32_t marqueeRepeatLimit_;
   ASMarqueeCommandConverter *marqueeCommandConverter_;
-  jint autoSizeMin_;
-  jint autoSizeMax_;
-  jint autoSizeGranular_;
+  int32_t autoSizeMin_;
+  int32_t autoSizeMax_;
+  int32_t autoSizeGranular_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -142,7 +150,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -160,7 +168,7 @@
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)nativeSetVerticalAligmentBottom;
 
@@ -170,9 +178,9 @@
 
 - (void)addMinMaxListener;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (id)getEllipsize;
 
@@ -181,12 +189,12 @@
 
 - (JavaLangInteger *)nativeGetLinBreakMode;
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode;
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode;
 
 - (void)setJustificationModeWithId:(id)objValue
                       withNSString:(NSString *)strValue;
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment;
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment;
 
 - (id)getJustificationMode;
 
@@ -208,14 +216,14 @@
 
 - (void)setEnabledWithId:(id)objValue;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -235,9 +243,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -247,11 +255,11 @@
 
 - (void)setScrollHorizontallyWithId:(id)objValue;
 
-- (jboolean)canMarquee;
+- (bool)canMarquee;
 
 - (void)cancelNativeTimer;
 
-- (jboolean)isDisposed;
+- (bool)isDisposed;
 
 - (void)addDeallocHandler;
 
@@ -266,11 +274,11 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor;
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor;
 
 - (void)syncPlaceholderLabel;
 
-- (jint)nativeGetBaseLine;
+- (int32_t)nativeGetBaseLine;
 
 - (id)getFont;
 
@@ -340,11 +348,11 @@
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType;
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType;
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue;
 
@@ -368,7 +376,7 @@
 
 - (void)setTextStyleWithId:(id)objValue;
 
-- (jint)calcNumberOfWhiteSpaces;
+- (int32_t)calcNumberOfWhiteSpaces;
 
 - (void)cancelTimer;
 
@@ -380,15 +388,15 @@
 
 - (void)startOrStopMarqueeWithId:(id)objValue;
 
-- (jint)getLabelWidth;
+- (int32_t)getLabelWidth;
 
-- (jboolean)isLabelMeasured;
+- (bool)isLabelMeasured;
 
 - (void)setPasswordWithId:(id)objValue;
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -414,7 +422,7 @@
 
 - (void)setTextFormatWithId:(id)objValue;
 
-- (jboolean)allowUnCheck;
+- (bool)allowUnCheck;
 
 - (void)setErrorWithId:(id)object;
 
@@ -432,33 +440,33 @@ J2OBJC_FIELD_SETTER(ASRadioButtonImpl, fontDescriptors_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(ASRadioButtonImpl, marqueeTask_, ASRadioButtonImpl_MarqueeTask *)
 J2OBJC_FIELD_SETTER(ASRadioButtonImpl, marqueeCommandConverter_, ASMarqueeCommandConverter *)
 
-inline jint ASRadioButtonImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASRadioButtonImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASRadioButtonImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASRadioButtonImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASRadioButtonImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASRadioButtonImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASRadioButtonImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASRadioButtonImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASRadioButtonImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, TEXT_ALIGN_RIGHT, int32_t)
 
-inline jint ASRadioButtonImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASRadioButtonImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASRadioButtonImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASRadioButtonImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASRadioButtonImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASRadioButtonImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASRadioButtonImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASRadioButtonImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASRadioButtonImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASRadioButtonImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASRadioButtonImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASRadioButtonImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASRadioButtonImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASRadioButtonImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASRadioButtonImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASRadioButtonImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASRadioButtonImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASRadioButtonImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASRadioButtonImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASRadioButtonImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASRadioButtonImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASRadioButtonImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASRadioButtonImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASRadioButtonImpl, NORMAL_FONT_TRAIT, int32_t)
 
 __attribute__((unused)) static void ASRadioButtonImpl_setWidgetOnNativeClass(ASRadioButtonImpl *self);
 
@@ -496,7 +504,7 @@ __attribute__((unused)) static id ASRadioButtonImpl_getTextSize(ASRadioButtonImp
 
 __attribute__((unused)) static void ASRadioButtonImpl_setMyTextSizeWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASRadioButtonImpl_nativeSetTextSizeWithInt_(ASRadioButtonImpl *self, jint value);
+__attribute__((unused)) static void ASRadioButtonImpl_nativeSetTextSizeWithInt_(ASRadioButtonImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setVerticalAligmentCenter(ASRadioButtonImpl *self);
 
@@ -514,7 +522,7 @@ __attribute__((unused)) static void ASRadioButtonImpl_setHorizontalAligmentLeft(
 
 __attribute__((unused)) static void ASRadioButtonImpl_setHorizontalAligmentLeftInternal(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getTextAlignment(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getTextAlignment(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static void ASRadioButtonImpl_nativeSetVerticalAligmentBottom(ASRadioButtonImpl *self);
 
@@ -524,9 +532,9 @@ __attribute__((unused)) static void ASRadioButtonImpl_nativeSetVerticalAligmentC
 
 __attribute__((unused)) static void ASRadioButtonImpl_addMinMaxListener(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getLineHeight(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getLineHeight(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getBorderWidth(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getBorderWidth(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static id ASRadioButtonImpl_getEllipsize(ASRadioButtonImpl *self);
 
@@ -534,11 +542,11 @@ __attribute__((unused)) static void ASRadioButtonImpl_setEllipsizeWithId_withNSS
 
 __attribute__((unused)) static JavaLangInteger *ASRadioButtonImpl_nativeGetLinBreakMode(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static void ASRadioButtonImpl_nativeSetLineBreakModeWithInt_(ASRadioButtonImpl *self, jint lineBreakMode);
+__attribute__((unused)) static void ASRadioButtonImpl_nativeSetLineBreakModeWithInt_(ASRadioButtonImpl *self, int32_t lineBreakMode);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setJustificationModeWithId_withNSString_(ASRadioButtonImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASRadioButtonImpl_nativeSetTextAligmentWithInt_(ASRadioButtonImpl *self, jint textAlignment);
+__attribute__((unused)) static void ASRadioButtonImpl_nativeSetTextAligmentWithInt_(ASRadioButtonImpl *self, int32_t textAlignment);
 
 __attribute__((unused)) static id ASRadioButtonImpl_getJustificationMode(ASRadioButtonImpl *self);
 
@@ -558,13 +566,13 @@ __attribute__((unused)) static id ASRadioButtonImpl_getSingleLine(ASRadioButtonI
 
 __attribute__((unused)) static void ASRadioButtonImpl_setEnabledWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_nativeGetFontSize(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_nativeGetFontSize(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_nativeGetFontStyle(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_nativeGetFontStyle(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static void ASRadioButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASRadioButtonImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASRadioButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASRadioButtonImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASRadioButtonImpl_nativeSetFontStyleWithInt_(ASRadioButtonImpl *self, jint style);
+__attribute__((unused)) static void ASRadioButtonImpl_nativeSetFontStyleWithInt_(ASRadioButtonImpl *self, int32_t style);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setDrawablePaddingWithId_(ASRadioButtonImpl *self, id objValue);
 
@@ -580,9 +588,9 @@ __attribute__((unused)) static void ASRadioButtonImpl_setDrawableLeftWithNSStrin
 
 __attribute__((unused)) static void ASRadioButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASRadioButtonImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getImageHeightWithId_(ASRadioButtonImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getImageHeightWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getImageWidthWithId_(ASRadioButtonImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getImageWidthWithId_(ASRadioButtonImpl *self, id objValue);
 
 __attribute__((unused)) static id ASRadioButtonImpl_getDrawablePadding(ASRadioButtonImpl *self);
 
@@ -592,11 +600,11 @@ __attribute__((unused)) static void ASRadioButtonImpl_setDrawableTintWithId_(ASR
 
 __attribute__((unused)) static void ASRadioButtonImpl_setScrollHorizontallyWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASRadioButtonImpl_canMarquee(ASRadioButtonImpl *self);
+__attribute__((unused)) static bool ASRadioButtonImpl_canMarquee(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static void ASRadioButtonImpl_cancelNativeTimer(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASRadioButtonImpl_isDisposed(ASRadioButtonImpl *self);
+__attribute__((unused)) static bool ASRadioButtonImpl_isDisposed(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static void ASRadioButtonImpl_addDeallocHandler(ASRadioButtonImpl *self);
 
@@ -610,11 +618,11 @@ __attribute__((unused)) static id ASRadioButtonImpl_getTextColorState(ASRadioBut
 
 __attribute__((unused)) static void ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASRadioButtonImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static void ASRadioButtonImpl_setHintColorWithInt_(ASRadioButtonImpl *self, jint currentHintTextColor);
+__attribute__((unused)) static void ASRadioButtonImpl_setHintColorWithInt_(ASRadioButtonImpl *self, int32_t currentHintTextColor);
 
 __attribute__((unused)) static void ASRadioButtonImpl_syncPlaceholderLabel(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_nativeGetBaseLine(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_nativeGetBaseLine(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static id ASRadioButtonImpl_getFont(ASRadioButtonImpl *self);
 
@@ -680,11 +688,11 @@ __attribute__((unused)) static void ASRadioButtonImpl_setMinWidthWithId_(ASRadio
 
 __attribute__((unused)) static id ASRadioButtonImpl_getWidth(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getHeight(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getHeight(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(ASRadioButtonImpl *self, ADTextView *measurableView);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(ASRadioButtonImpl *self, ADTextView *measurableView);
 
-__attribute__((unused)) static void ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(ASRadioButtonImpl *self, jint autoTextType);
+__attribute__((unused)) static void ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(ASRadioButtonImpl *self, int32_t autoTextType);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setAutoSizePresetSizesWithId_(ASRadioButtonImpl *self, id objValue);
 
@@ -706,7 +714,7 @@ __attribute__((unused)) static void ASRadioButtonImpl_setFontFamilyWithId_withNS
 
 __attribute__((unused)) static void ASRadioButtonImpl_setTextStyleWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_calcNumberOfWhiteSpaces(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_calcNumberOfWhiteSpaces(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static void ASRadioButtonImpl_cancelTimer(ASRadioButtonImpl *self);
 
@@ -718,15 +726,15 @@ __attribute__((unused)) static void ASRadioButtonImpl_setMarqueeRepeatLimitWithI
 
 __attribute__((unused)) static void ASRadioButtonImpl_startOrStopMarqueeWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getLabelWidth(ASRadioButtonImpl *self);
+__attribute__((unused)) static int32_t ASRadioButtonImpl_getLabelWidth(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jboolean ASRadioButtonImpl_isLabelMeasured(ASRadioButtonImpl *self);
+__attribute__((unused)) static bool ASRadioButtonImpl_isLabelMeasured(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setPasswordWithId_(ASRadioButtonImpl *self, id objValue);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setFirstBaselineToTopHeightWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASRadioButtonImpl_getIncludeFontPadding(ASRadioButtonImpl *self);
+__attribute__((unused)) static bool ASRadioButtonImpl_getIncludeFontPadding(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static id ASRadioButtonImpl_getFirstBaselineToTopHeight(ASRadioButtonImpl *self);
 
@@ -752,7 +760,7 @@ __attribute__((unused)) static id ASRadioButtonImpl_getAutoSizeTextType(ASRadioB
 
 __attribute__((unused)) static void ASRadioButtonImpl_setTextFormatWithId_(ASRadioButtonImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASRadioButtonImpl_allowUnCheck(ASRadioButtonImpl *self);
+__attribute__((unused)) static bool ASRadioButtonImpl_allowUnCheck(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setErrorWithId_(ASRadioButtonImpl *self, id object);
 
@@ -821,7 +829,7 @@ J2OBJC_FIELD_SETTER(ASRadioButtonImpl_DrawableTintMode, mapping_, id<JavaUtilMap
 
 @interface ASRadioButtonImpl_RadioButtonExt () {
  @public
-  __unsafe_unretained ASRadioButtonImpl *this$0_;
+  WEAK_ ASRadioButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -837,7 +845,7 @@ J2OBJC_FIELD_SETTER(ASRadioButtonImpl_RadioButtonExt, templates_, id<JavaUtilMap
 
 @interface ASRadioButtonImpl_DellocHandler : ASEventBusHandler {
  @public
-  __unsafe_unretained ASRadioButtonImpl *this$0_;
+  WEAK_ ASRadioButtonImpl *this$0_;
 }
 
 - (instancetype)initWithASRadioButtonImpl:(ASRadioButtonImpl *)outer$
@@ -857,9 +865,10 @@ __attribute__((unused)) static ASRadioButtonImpl_DellocHandler *create_ASRadioBu
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DellocHandler)
 
+
 @interface ASRadioButtonImpl_StateToggler : NSObject < ADView_OnClickListener > {
  @public
-  __unsafe_unretained ASRadioButtonImpl *this$0_;
+  WEAK_ ASRadioButtonImpl *this$0_;
 }
 
 - (instancetype)initWithASRadioButtonImpl:(ASRadioButtonImpl *)outer$;
@@ -877,6 +886,7 @@ __attribute__((unused)) static ASRadioButtonImpl_StateToggler *new_ASRadioButton
 __attribute__((unused)) static ASRadioButtonImpl_StateToggler *create_ASRadioButtonImpl_StateToggler_initWithASRadioButtonImpl_(ASRadioButtonImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_StateToggler)
+
 
 @interface ASRadioButtonImpl_MyCanvas : NSObject < ADCanvas >
 
@@ -898,20 +908,21 @@ __attribute__((unused)) static ASRadioButtonImpl_MyCanvas *create_ASRadioButtonI
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_MyCanvas)
 
+
 @interface ASRadioButtonImpl_PostMeasureHandler () {
  @public
-  __unsafe_unretained ASRadioButtonImpl *this$0_;
-  jboolean onlyOnce_;
+  WEAK_ ASRadioButtonImpl *this$0_;
+  bool onlyOnce_;
 }
 
 @end
 
 @interface ASRadioButtonImpl_MarqueeTask : NSObject < JavaLangRunnable > {
  @public
-  __unsafe_unretained ASRadioButtonImpl *this$0_;
-  jint slideLength_;
-  jint cycles_;
-  jboolean cancel_;
+  WEAK_ ASRadioButtonImpl *this$0_;
+  int32_t slideLength_;
+  int32_t cycles_;
+  bool cancel_;
   NSString *direction_;
 }
 
@@ -938,10 +949,11 @@ __attribute__((unused)) static ASRadioButtonImpl_MarqueeTask *create_ASRadioButt
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_MarqueeTask)
 
+
 @interface ASRadioButtonImpl_MarqueeTask_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   ASRadioButtonImpl_MarqueeTask *this$0_;
-  jint val$numberOfBlankSpaces_;
+  int32_t val$numberOfBlankSpaces_;
 }
 
 - (void)run;
@@ -950,11 +962,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_MarqueeTask)
 
 J2OBJC_EMPTY_STATIC_INIT(ASRadioButtonImpl_MarqueeTask_$Lambda$1)
 
-__attribute__((unused)) static void ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask_$Lambda$1 *self, ASRadioButtonImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static void ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask_$Lambda$1 *self, ASRadioButtonImpl_MarqueeTask *outer$, int32_t capture$0);
 
-__attribute__((unused)) static ASRadioButtonImpl_MarqueeTask_$Lambda$1 *new_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, jint capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASRadioButtonImpl_MarqueeTask_$Lambda$1 *new_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, int32_t capture$0) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, jint capture$0);
+__attribute__((unused)) static ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, int32_t capture$0);
+
 
 @interface ASRadioButtonImpl_OnCheckedChangeListener : NSObject < ADCompoundButton_OnCheckedChangeListener, ASIListener > {
  @public
@@ -974,10 +987,10 @@ __attribute__((unused)) static ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_A
                      withNSString:(NSString *)action;
 
 - (void)onCheckedChangedWithADCompoundButton:(ADCompoundButton *)buttonView
-                                 withBoolean:(jboolean)isChecked;
+                                 withBoolean:(bool)isChecked;
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADCompoundButton:(ADCompoundButton *)buttonView
-                                                      withBoolean:(jboolean)isChecked;
+                                                      withBoolean:(bool)isChecked;
 
 @end
 
@@ -1001,6 +1014,7 @@ __attribute__((unused)) static ASRadioButtonImpl_OnCheckedChangeListener *new_AS
 __attribute__((unused)) static ASRadioButtonImpl_OnCheckedChangeListener *create_ASRadioButtonImpl_OnCheckedChangeListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_OnCheckedChangeListener)
+
 
 J2OBJC_INITIALIZED_DEFN(ASRadioButtonImpl)
 
@@ -1691,31 +1705,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -1768,7 +1782,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASRadioButtonImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -1804,7 +1818,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASRadioButtonImpl_getTextAlignment(self);
 }
 
@@ -1824,19 +1838,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASRadioButtonImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASRadioButtonImpl_getBorderWidth(self);
 }
 
@@ -1853,7 +1867,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASRadioButtonImpl_nativeGetLinBreakMode(self);
 }
 
-- (void)nativeSetLineBreakModeWithInt:(jint)lineBreakMode {
+- (void)nativeSetLineBreakModeWithInt:(int32_t)lineBreakMode {
   ASRadioButtonImpl_nativeSetLineBreakModeWithInt_(self, lineBreakMode);
 }
 
@@ -1862,7 +1876,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetTextAligmentWithInt:(jint)textAlignment {
+- (void)nativeSetTextAligmentWithInt:(int32_t)textAlignment {
   ASRadioButtonImpl_nativeSetTextAligmentWithInt_(self, textAlignment);
 }
 
@@ -1908,20 +1922,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASRadioButtonImpl_toUpperCaseWithNSString_(text);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASRadioButtonImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASRadioButtonImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASRadioButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASRadioButtonImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
@@ -1957,11 +1971,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASRadioButtonImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASRadioButtonImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -1984,7 +1998,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setScrollHorizontallyWithId_(self, objValue);
 }
 
-- (jboolean)canMarquee {
+- (bool)canMarquee {
   return ASRadioButtonImpl_canMarquee(self);
 }
 
@@ -1992,7 +2006,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_cancelNativeTimer(self);
 }
 
-- (jboolean)isDisposed {
+- (bool)isDisposed {
   return ASRadioButtonImpl_isDisposed(self);
 }
 
@@ -2048,7 +2062,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (void)setHintColorWithInt:(jint)currentHintTextColor {
+- (void)setHintColorWithInt:(int32_t)currentHintTextColor {
   ASRadioButtonImpl_setHintColorWithInt_(self, currentHintTextColor);
 }
 
@@ -2056,11 +2070,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_syncPlaceholderLabel(self);
 }
 
-- (jint)getBaseLine {
+- (int32_t)getBaseLine {
   return ASRadioButtonImpl_nativeGetBaseLine(self) + [((ADRadioButton *) nil_chk(measurableView_)) getPaddingTop];
 }
 
-- (jint)nativeGetBaseLine {
+- (int32_t)nativeGetBaseLine {
   return ASRadioButtonImpl_nativeGetBaseLine(self);
 }
 
@@ -2124,12 +2138,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setButtonTintModeWithId_(self, objValue);
 }
 
-- (jint)measureWidth {
+- (int32_t)measureWidth {
   return [((ADRadioButton *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_] + [((ADDrawable *) nil_chk([((ADRadioButton *) nil_chk(measurableView_)) getButtonDrawable])) getMinimumWidth];
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASRadioButtonImpl_setErrorWithId_(self, nil);
   }
@@ -2142,7 +2156,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASRadioButtonImpl_setErrorWithId_(self, message);
   }
@@ -2166,7 +2180,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASRadioButtonImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADRadioButton *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADRadioButton *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASRadioButtonImpl_updateTextAlignment(self);
   }
@@ -2188,11 +2202,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADRadioButton *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADRadioButton *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -2200,11 +2214,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADRadioButton *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADRadioButton *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -2240,11 +2254,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADRadioButton *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADRadioButton *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -2260,15 +2274,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASRadioButtonImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASRadioButtonImpl_getHeight(self);
 }
 
-- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
+- (int32_t)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
   return ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(self, measurableView);
 }
 
-- (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType {
+- (void)setAutoSizeTextTypeInternalWithInt:(int32_t)autoTextType {
   ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -2314,7 +2328,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setTextStyleWithId_(self, objValue);
 }
 
-- (jint)calcNumberOfWhiteSpaces {
+- (int32_t)calcNumberOfWhiteSpaces {
   return ASRadioButtonImpl_calcNumberOfWhiteSpaces(self);
 }
 
@@ -2338,11 +2352,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_startOrStopMarqueeWithId_(self, objValue);
 }
 
-- (jint)getLabelWidth {
+- (int32_t)getLabelWidth {
   return ASRadioButtonImpl_getLabelWidth(self);
 }
 
-- (jboolean)isLabelMeasured {
+- (bool)isLabelMeasured {
   return ASRadioButtonImpl_isLabelMeasured(self);
 }
 
@@ -2354,7 +2368,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRadioButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASRadioButtonImpl_getIncludeFontPadding(self);
 }
 
@@ -2404,7 +2418,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setErrorMessageWithNSString:(NSString *)message {
   [self setAttributeWithNSString:@"text" withId:message withBoolean:false];
-  [self setAttributeWithNSString:@"visibility" withId:message == nil || [message java_isEmpty] ? @"gone" : @"visible" withBoolean:false];
+  [self setAttributeWithNSString:@"visibility" withId:message == nil || [message isEmpty] ? @"gone" : @"visible" withBoolean:false];
 }
 
 - (void)setTextFormatWithId:(id)objValue {
@@ -2519,7 +2533,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).userInteractionEnabled];
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -2530,7 +2544,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -2546,15 +2560,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)allowUnCheck {
+- (bool)allowUnCheck {
   return ASRadioButtonImpl_allowUnCheck(self);
 }
 
-- (void)setCheckedWithBoolean:(jboolean)checked {
+- (void)setCheckedWithBoolean:(bool)checked {
   [((ADRadioButton *) nil_chk(measurableView_)) setCheckedWithBoolean:checked];
 }
 
-- (jboolean)isChecked {
+- (bool)isChecked {
   return [((ADRadioButton *) nil_chk(measurableView_)) isChecked];
 }
 
@@ -2571,7 +2585,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((ADRadioButton *) nil_chk(measurableView_)) isChecked] ? @"checked" : @"";
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ADRadioButton *) nil_chk(measurableView_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -3185,11 +3199,11 @@ id ASRadioButtonImpl_getTextSize(ASRadioButtonImpl *self) {
 }
 
 void ASRadioButtonImpl_setMyTextSizeWithId_(ASRadioButtonImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASRadioButtonImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASRadioButtonImpl_nativeSetTextSizeWithInt_(ASRadioButtonImpl *self, jint value) {
+void ASRadioButtonImpl_nativeSetTextSizeWithInt_(ASRadioButtonImpl *self, int32_t value) {
   [((ASUILabel*)self.uiView) setFont: [((ASUILabel*)self.uiView).font fontWithSize: value]];
 }
 
@@ -3228,7 +3242,7 @@ void ASRadioButtonImpl_setHorizontalAligmentLeftInternal(ASRadioButtonImpl *self
   ((ASUILabel*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASRadioButtonImpl_getTextAlignment(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_getTextAlignment(ASRadioButtonImpl *self) {
   int alignment = (int) ((ASUILabel*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -3258,11 +3272,11 @@ void ASRadioButtonImpl_nativeSetVerticalAligmentCenter(ASRadioButtonImpl *self) 
 void ASRadioButtonImpl_addMinMaxListener(ASRadioButtonImpl *self) {
 }
 
-jint ASRadioButtonImpl_getLineHeight(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_getLineHeight(ASRadioButtonImpl *self) {
   return ceil(((ASUILabel*)self.uiView).font.lineHeight);
 }
 
-jint ASRadioButtonImpl_getBorderWidth(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_getBorderWidth(ASRadioButtonImpl *self) {
   return 0;
 }
 
@@ -3275,7 +3289,7 @@ id ASRadioButtonImpl_getEllipsize(ASRadioButtonImpl *self) {
 
 void ASRadioButtonImpl_setEllipsizeWithId_withNSString_(ASRadioButtonImpl *self, id objValue, NSString *strValue) {
   self->ellipsize_ = strValue;
-  jint lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t lineBreakMode = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (lineBreakMode == JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee)) {
     lineBreakMode = JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping);
   }
@@ -3298,7 +3312,7 @@ JavaLangInteger *ASRadioButtonImpl_nativeGetLinBreakMode(ASRadioButtonImpl *self
   return [JavaLangInteger valueOfWithInt:(jint) ((ASUILabel*)self->uiView_).lineBreakMode];
 }
 
-void ASRadioButtonImpl_nativeSetLineBreakModeWithInt_(ASRadioButtonImpl *self, jint lineBreakMode) {
+void ASRadioButtonImpl_nativeSetLineBreakModeWithInt_(ASRadioButtonImpl *self, int32_t lineBreakMode) {
   [((ASUILabel*)self->uiView_) setLineBreakMode:lineBreakMode];
 }
 
@@ -3306,7 +3320,7 @@ void ASRadioButtonImpl_setJustificationModeWithId_withNSString_(ASRadioButtonImp
   ASRadioButtonImpl_nativeSetTextAligmentWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASRadioButtonImpl_nativeSetTextAligmentWithInt_(ASRadioButtonImpl *self, jint textAlignment) {
+void ASRadioButtonImpl_nativeSetTextAligmentWithInt_(ASRadioButtonImpl *self, int32_t textAlignment) {
   [((ASUILabel*)self->uiView_) setTextAlignment:textAlignment];
 }
 
@@ -3358,16 +3372,16 @@ NSString *ASRadioButtonImpl_toUpperCaseWithNSString_(NSString *text) {
   return [((NSString *) nil_chk(text)) java_uppercaseStringWithJRELocale:JavaUtilLocale_getDefault()];
 }
 
-jint ASRadioButtonImpl_nativeGetFontSize(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_nativeGetFontSize(ASRadioButtonImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASRadioButtonImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASRadioButtonImpl_nativeGetFontStyle(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_nativeGetFontStyle(ASRadioButtonImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASRadioButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASRadioButtonImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASRadioButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASRadioButtonImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -3381,7 +3395,7 @@ void ASRadioButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASRadioB
   }
 }
 
-void ASRadioButtonImpl_nativeSetFontStyleWithInt_(ASRadioButtonImpl *self, jint style) {
+void ASRadioButtonImpl_nativeSetFontStyleWithInt_(ASRadioButtonImpl *self, int32_t style) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUILabel*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -3460,7 +3474,7 @@ void ASRadioButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASRadioButton
   }
 }
 
-jint ASRadioButtonImpl_getImageHeightWithId_(ASRadioButtonImpl *self, id objValue) {
+int32_t ASRadioButtonImpl_getImageHeightWithId_(ASRadioButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -3469,7 +3483,7 @@ jint ASRadioButtonImpl_getImageHeightWithId_(ASRadioButtonImpl *self, id objValu
   return 0;
 }
 
-jint ASRadioButtonImpl_getImageWidthWithId_(ASRadioButtonImpl *self, id objValue) {
+int32_t ASRadioButtonImpl_getImageWidthWithId_(ASRadioButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -3525,7 +3539,7 @@ void ASRadioButtonImpl_setScrollHorizontallyWithId_(ASRadioButtonImpl *self, id 
   [((ADRadioButton *) nil_chk(self->measurableView_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
 }
 
-jboolean ASRadioButtonImpl_canMarquee(ASRadioButtonImpl *self) {
+bool ASRadioButtonImpl_canMarquee(ASRadioButtonImpl *self) {
   return [nil_chk(ASRadioButtonImpl_getSingleLine(self)) isEqual:JreLoadStatic(JavaLangBoolean, TRUE)];
 }
 
@@ -3536,7 +3550,7 @@ void ASRadioButtonImpl_cancelNativeTimer(ASRadioButtonImpl *self) {
   }
 }
 
-jboolean ASRadioButtonImpl_isDisposed(ASRadioButtonImpl *self) {
+bool ASRadioButtonImpl_isDisposed(ASRadioButtonImpl *self) {
   return self->isDisposed_;
 }
 
@@ -3599,13 +3613,13 @@ void ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASRadioBu
   [self invalidate];
 }
 
-void ASRadioButtonImpl_setHintColorWithInt_(ASRadioButtonImpl *self, jint currentHintTextColor) {
+void ASRadioButtonImpl_setHintColorWithInt_(ASRadioButtonImpl *self, int32_t currentHintTextColor) {
 }
 
 void ASRadioButtonImpl_syncPlaceholderLabel(ASRadioButtonImpl *self) {
 }
 
-jint ASRadioButtonImpl_nativeGetBaseLine(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_nativeGetBaseLine(ASRadioButtonImpl *self) {
   ASUILabel* label = ((ASUILabel*)self->uiView_);
   return label.font.ascender;
 }
@@ -3691,9 +3705,9 @@ void ASRadioButtonImpl_setButtonTintModeWithId_(ASRadioButtonImpl *self, id objV
 }
 
 void ASRadioButtonImpl_setGravityWithId_(ASRadioButtonImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADRadioButton *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASRadioButtonImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -3713,8 +3727,8 @@ void ASRadioButtonImpl_setGravityWithId_(ASRadioButtonImpl *self, id objValue) {
 
 void ASRadioButtonImpl_updateTextAlignment(ASRadioButtonImpl *self) {
   ADLayout_Alignment *minor = [((ADRadioButton *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADRadioButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADRadioButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADRadioButton *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASRadioButtonImpl_getMyText(self), [NSString class]);
@@ -3767,7 +3781,7 @@ id ASRadioButtonImpl_getGravity(ASRadioButtonImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -3781,8 +3795,8 @@ id ASRadioButtonImpl_getGravity(ASRadioButtonImpl *self) {
     default:
     break;
   }
-  jint aligment = ASRadioButtonImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASRadioButtonImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASRadioButtonImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -3796,7 +3810,7 @@ id ASRadioButtonImpl_getGravity(ASRadioButtonImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -3879,15 +3893,15 @@ id ASRadioButtonImpl_getWidth(ASRadioButtonImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADRadioButton *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASRadioButtonImpl_getHeight(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_getHeight(ASRadioButtonImpl *self) {
   return [((ADRadioButton *) nil_chk(self->measurableView_)) getHeight];
 }
 
-jint ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(ASRadioButtonImpl *self, ADTextView *measurableView) {
+int32_t ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(ASRadioButtonImpl *self, ADTextView *measurableView) {
   return [((ADTextView *) nil_chk(measurableView)) getAutoSizeTextType];
 }
 
-void ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(ASRadioButtonImpl *self, jint autoTextType) {
+void ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(ASRadioButtonImpl *self, int32_t autoTextType) {
   ASRadioButtonImpl_removeResizeListener(self);
   if ([((ADRadioButton *) nil_chk(self->measurableView_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
     [((ADRadioButton *) nil_chk(self->measurableView_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
@@ -3970,8 +3984,8 @@ void ASRadioButtonImpl_setFontFamilyWithId_withNSString_(ASRadioButtonImpl *self
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASRadioButtonImpl_nativeGetFontStyle(self);
-  jint height = ASRadioButtonImpl_nativeGetFontSize(self);
+  int32_t style = ASRadioButtonImpl_nativeGetFontStyle(self);
+  int32_t height = ASRadioButtonImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASRadioButtonImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -3985,39 +3999,39 @@ void ASRadioButtonImpl_setFontFamilyWithId_withNSString_(ASRadioButtonImpl *self
 }
 
 void ASRadioButtonImpl_setTextStyleWithId_(ASRadioButtonImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASRadioButtonImpl_nativeGetFontSize(self);
+    int32_t height = ASRadioButtonImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASRadioButtonImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASRadioButtonImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASRadioButtonImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASRadioButtonImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASRadioButtonImpl_ITALIC_FONT_TRAIT;
     }
     ASRadioButtonImpl_nativeSetFontStyleWithInt_(self, style);
   }
 }
 
-jint ASRadioButtonImpl_calcNumberOfWhiteSpaces(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_calcNumberOfWhiteSpaces(ASRadioButtonImpl *self) {
   if (!ASRadioButtonImpl_isLabelMeasured(self)) {
     return 0;
   }
-  jfloat blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASRadioButtonImpl_getTextSize(self), [NSNumber class])))) floatValue];
-  jint width = JreIntDiv(ASRadioButtonImpl_getLabelWidth(self), 3);
-  jint numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
+  float blankSpaceWidth = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(ASRadioButtonImpl_getTextSize(self), [NSNumber class])))) floatValue];
+  int32_t width = JreIntDiv(ASRadioButtonImpl_getLabelWidth(self), 3);
+  int32_t numberOfBlankSpaces = JreFpToInt(JavaLangMath_ceilWithDouble_(width / (blankSpaceWidth * 1.0f)));
   return numberOfBlankSpaces;
 }
 
@@ -4060,14 +4074,14 @@ void ASRadioButtonImpl_startOrStopMarqueeWithId_(ASRadioButtonImpl *self, id obj
   }
 }
 
-jint ASRadioButtonImpl_getLabelWidth(ASRadioButtonImpl *self) {
+int32_t ASRadioButtonImpl_getLabelWidth(ASRadioButtonImpl *self) {
   if ([((ADRadioButton *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
     return [((ADRadioButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADRadioButton *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADRadioButton *) nil_chk(self->measurableView_)) getPaddingRight];
   }
   return [((ADRadioButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADRadioButton *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADRadioButton *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
-jboolean ASRadioButtonImpl_isLabelMeasured(ASRadioButtonImpl *self) {
+bool ASRadioButtonImpl_isLabelMeasured(ASRadioButtonImpl *self) {
   return !ASRadioButtonImpl_isDisposed(self) && ASRadioButtonImpl_getLabelWidth(self) > 0;
 }
 
@@ -4082,8 +4096,8 @@ void ASRadioButtonImpl_setPasswordWithId_(ASRadioButtonImpl *self, id objValue) 
 
 void ASRadioButtonImpl_setFirstBaselineToTopHeightWithId_(ASRadioButtonImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASRadioButtonImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASRadioButtonImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -4091,12 +4105,12 @@ void ASRadioButtonImpl_setFirstBaselineToTopHeightWithId_(ASRadioButtonImpl *sel
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADRadioButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASRadioButtonImpl_getIncludeFontPadding(ASRadioButtonImpl *self) {
+bool ASRadioButtonImpl_getIncludeFontPadding(ASRadioButtonImpl *self) {
   return false;
 }
 
@@ -4107,8 +4121,8 @@ id ASRadioButtonImpl_getFirstBaselineToTopHeight(ASRadioButtonImpl *self) {
 
 void ASRadioButtonImpl_setLastBaselineToBottomHeightWithId_(ASRadioButtonImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASRadioButtonImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASRadioButtonImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -4116,7 +4130,7 @@ void ASRadioButtonImpl_setLastBaselineToBottomHeightWithId_(ASRadioButtonImpl *s
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADRadioButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -4148,7 +4162,7 @@ void ASRadioButtonImpl_setAutoMaxTextSizeWithId_(ASRadioButtonImpl *self, id obj
 }
 
 void ASRadioButtonImpl_setAutoSizeTextTypeWithId_(ASRadioButtonImpl *self, id objValue) {
-  jint autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t autoTextType = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
 }
 
@@ -4172,7 +4186,7 @@ void ASRadioButtonImpl_setTextFormatWithId_(ASRadioButtonImpl *self, id objValue
   [self applyAttributeCommandWithNSString:@"text" withNSString:ASCommonConverters_command_textformatter withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"textFormat" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ (NSString *) cast_chk(objValue, [NSString class]) } count:1 type:NSObject_class_()]];
 }
 
-jboolean ASRadioButtonImpl_allowUnCheck(ASRadioButtonImpl *self) {
+bool ASRadioButtonImpl_allowUnCheck(ASRadioButtonImpl *self) {
   return false;
 }
 
@@ -4180,6 +4194,8 @@ void ASRadioButtonImpl_setErrorWithId_(ASRadioButtonImpl *self, id object) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl)
+
+J2OBJC_NAME_MAPPING(ASRadioButtonImpl, "com.ashera.layout", "AS")
 
 @implementation ASRadioButtonImpl_ButtonTinttMode
 
@@ -4323,7 +4339,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JavaLangInteger_valueOfWithInt_(0);
 }
 
-- (jboolean)supportsIntAlso {
+- (bool)supportsIntAlso {
   return true;
 }
 
@@ -4356,7 +4372,7 @@ void ASRadioButtonImpl_MarqueeRepeatLimit_init(ASRadioButtonImpl_MarqueeRepeatLi
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((jint) 0xffffffff)];
+    (void) [self->mapping_ putWithId:@"marquee_forever" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0xffffffff)];
   }
 }
 
@@ -4473,10 +4489,10 @@ void ASRadioButtonImpl_Font_init(ASRadioButtonImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -4534,9 +4550,9 @@ void ASRadioButtonImpl_TextStyle_init(ASRadioButtonImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -4624,8 +4640,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -4635,11 +4651,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -4668,8 +4684,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -4737,12 +4753,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -4772,37 +4788,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASRadioButtonImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASRadioButtonImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -5046,7 +5062,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DellocHandler)
 
 - (void)onClickWithADView:(ADView *)v {
   if ([((ADRadioButton *) nil_chk(this$0_->measurableView_)) isEnabled]) {
-    jboolean isChecked = [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(ASRadioButtonImpl_getChecked(this$0_), [JavaLangBoolean class]))) booleanValue];
+    bool isChecked = [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(ASRadioButtonImpl_getChecked(this$0_), [JavaLangBoolean class]))) booleanValue];
     if (!isChecked || (isChecked && ASRadioButtonImpl_allowUnCheck(this$0_))) {
       [((ADRadioButton *) nil_chk(this$0_->measurableView_)) toggle];
     }
@@ -5107,8 +5123,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_StateToggler)
 - (void)reset {
 }
 
-- (void)translateWithInt:(jint)arg0
-                 withInt:(jint)arg1 {
+- (void)translateWithInt:(int32_t)arg0
+                 withInt:(int32_t)arg1 {
   ADCanvas_translateWithInt_withInt_(self, arg0, arg1);
 }
 
@@ -5222,7 +5238,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_PostMeasureHandler)
 }
 
 - (void)run {
-  jint numberOfBlankSpaces = ASRadioButtonImpl_calcNumberOfWhiteSpaces(this$0_);
+  int32_t numberOfBlankSpaces = ASRadioButtonImpl_calcNumberOfWhiteSpaces(this$0_);
   if (this$0_->marqueeCommandConverter_ == nil) {
     this$0_->marqueeCommandConverter_ = (ASMarqueeCommandConverter *) cast_chk([this$0_ getAttributeCommandWithNSString:@"text" withNSString:ASCommonConverters_command_marquee withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(numberOfBlankSpaces), JavaLangInteger_valueOfWithInt_(0), direction_ } count:3 type:NSObject_class_()]], [ASMarqueeCommandConverter class]);
   }
@@ -5309,17 +5325,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_MarqueeTask)
 
 @end
 
-void ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask_$Lambda$1 *self, ASRadioButtonImpl_MarqueeTask *outer$, jint capture$0) {
+void ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask_$Lambda$1 *self, ASRadioButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   self->this$0_ = outer$;
   self->val$numberOfBlankSpaces_ = capture$0;
   NSObject_init(self);
 }
 
-ASRadioButtonImpl_MarqueeTask_$Lambda$1 *new_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, jint capture$0) {
+ASRadioButtonImpl_MarqueeTask_$Lambda$1 *new_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_NEW_IMPL(ASRadioButtonImpl_MarqueeTask_$Lambda$1, initWithASRadioButtonImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
-ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, jint capture$0) {
+ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$Lambda$1_initWithASRadioButtonImpl_MarqueeTask_withInt_(ASRadioButtonImpl_MarqueeTask *outer$, int32_t capture$0) {
   J2OBJC_CREATE_IMPL(ASRadioButtonImpl_MarqueeTask_$Lambda$1, initWithASRadioButtonImpl_MarqueeTask_withInt_, outer$, capture$0)
 }
 
@@ -5343,7 +5359,7 @@ ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$L
 }
 
 - (void)onCheckedChangedWithADCompoundButton:(ADCompoundButton *)buttonView
-                                 withBoolean:(jboolean)isChecked {
+                                 withBoolean:(bool)isChecked {
   if (action_ == nil || [action_ isEqual:@"onCheckedChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onCheckedChange"];
     id<JavaUtilMap> obj = [self getOnCheckedChangeEventObjWithADCompoundButton:buttonView withBoolean:isChecked];
@@ -5365,7 +5381,7 @@ ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$L
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -5376,7 +5392,7 @@ ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$L
 }
 
 - (id<JavaUtilMap>)getOnCheckedChangeEventObjWithADCompoundButton:(ADCompoundButton *)buttonView
-                                                      withBoolean:(jboolean)isChecked {
+                                                      withBoolean:(bool)isChecked {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"checkedchange"];

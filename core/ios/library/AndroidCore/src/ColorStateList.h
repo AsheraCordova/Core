@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\content\res\ColorStateList.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ColorStateList")
@@ -18,6 +19,8 @@
 
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADColorStateList : NSObject
 
@@ -26,30 +29,30 @@
 - (instancetype)initWithIntArray2:(IOSObjectArray *)states
                      withIntArray:(IOSIntArray *)colors;
 
-- (jint)getColorForStateWithIntArray:(IOSIntArray *)stateSet
-                             withInt:(jint)defaultColor;
+- (int32_t)getColorForStateWithIntArray:(IOSIntArray *)stateSet
+                                withInt:(int32_t)defaultColor;
 
 - (IOSIntArray *)getColors;
 
-- (jint)getDefaultColor;
+- (int32_t)getDefaultColor;
 
 - (IOSObjectArray *)getStates;
 
-- (jboolean)hasFocusStateSpecified;
+- (bool)hasFocusStateSpecified;
 
-- (jboolean)hasStateWithInt:(jint)state;
+- (bool)hasStateWithInt:(int32_t)state;
 
-- (jboolean)isOpaque;
+- (bool)isOpaque;
 
-- (jboolean)isStateful;
+- (bool)isStateful;
 
 - (void)onColorsChanged;
 
-- (void)setDefaultColorWithInt:(jint)mDefaultColor;
+- (void)setDefaultColorWithInt:(int32_t)mDefaultColor;
 
-+ (ADColorStateList *)valueOfWithInt:(jint)color;
++ (ADColorStateList *)valueOfWithInt:(int32_t)color;
 
-- (ADColorStateList *)withAlphaWithInt:(jint)alpha;
+- (ADColorStateList *)withAlphaWithInt:(int32_t)alpha;
 
 @end
 
@@ -61,11 +64,12 @@ FOUNDATION_EXPORT ADColorStateList *new_ADColorStateList_initWithIntArray2_withI
 
 FOUNDATION_EXPORT ADColorStateList *create_ADColorStateList_initWithIntArray2_withIntArray_(IOSObjectArray *states, IOSIntArray *colors);
 
-FOUNDATION_EXPORT ADColorStateList *ADColorStateList_valueOfWithInt_(jint color);
+FOUNDATION_EXPORT ADColorStateList *ADColorStateList_valueOfWithInt_(int32_t color);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADColorStateList)
 
 @compatibility_alias RAndroidContentResColorStateList ADColorStateList;
+
 
 #endif
 

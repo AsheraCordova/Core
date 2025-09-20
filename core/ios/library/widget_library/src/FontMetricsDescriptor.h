@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\FontMetricsDescriptor.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FontMetricsDescriptor")
@@ -16,30 +17,32 @@
 #if !defined (ASFontMetricsDescriptor_) && (INCLUDE_ALL_FontMetricsDescriptor || defined(INCLUDE_ASFontMetricsDescriptor))
 #define ASFontMetricsDescriptor_
 
+@class JavaLangInteger;
+
 @interface ASFontMetricsDescriptor : NSObject {
  @public
   /*!
    @brief The maximum distance above the baseline for the tallest glyph in
   the font at a given text size.
    */
-  jint top_;
+  int32_t top_;
   /*!
    @brief The recommended distance above the baseline for singled spaced text.
    */
-  jint ascent_;
+  int32_t ascent_;
   /*!
    @brief The recommended distance below the baseline for singled spaced text.
    */
-  jint descent_;
+  int32_t descent_;
   /*!
    @brief The maximum distance below the baseline for the lowest glyph in
   the font at a given text size.
    */
-  jint bottom_;
+  int32_t bottom_;
   /*!
    @brief The recommended additional space to add between lines of text.
    */
-  jint leading_;
+  int32_t leading_;
 }
 
 #pragma mark Public
@@ -59,6 +62,7 @@ FOUNDATION_EXPORT ASFontMetricsDescriptor *create_ASFontMetricsDescriptor_init(v
 J2OBJC_TYPE_LITERAL_HEADER(ASFontMetricsDescriptor)
 
 @compatibility_alias ComAsheraModelFontMetricsDescriptor ASFontMetricsDescriptor;
+
 
 #endif
 

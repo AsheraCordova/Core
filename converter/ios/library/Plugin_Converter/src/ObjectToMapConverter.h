@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ObjectToMapConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ObjectToMapConverter")
@@ -52,6 +53,7 @@ FOUNDATION_EXPORT ASObjectToMapConverter *create_ASObjectToMapConverter_init(voi
 J2OBJC_TYPE_LITERAL_HEADER(ASObjectToMapConverter)
 
 @compatibility_alias ComAsheraConverterObjectToMapConverter ASObjectToMapConverter;
+
 
 #endif
 

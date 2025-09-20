@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\DisplayMetrics.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DisplayMetrics")
@@ -16,9 +17,11 @@
 #if !defined (ADDisplayMetrics_) && (INCLUDE_ALL_DisplayMetrics || defined(INCLUDE_ADDisplayMetrics))
 #define ADDisplayMetrics_
 
+@class JavaLangFloat;
+
 @interface ADDisplayMetrics : NSObject {
  @public
-  jfloat density_;
+  float density_;
 }
 
 #pragma mark Public
@@ -38,6 +41,7 @@ FOUNDATION_EXPORT ADDisplayMetrics *create_ADDisplayMetrics_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADDisplayMetrics)
 
 @compatibility_alias RAndroidUtilDisplayMetrics ADDisplayMetrics;
+
 
 #endif
 

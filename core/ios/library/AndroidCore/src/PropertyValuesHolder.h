@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\PropertyValuesHolder.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PropertyValuesHolder")
@@ -28,6 +29,7 @@
 #if !defined (ADPropertyValuesHolder_) && (INCLUDE_ALL_PropertyValuesHolder || defined(INCLUDE_ADPropertyValuesHolder))
 #define ADPropertyValuesHolder_
 
+
 @class ADPath;
 @class ADProperty;
 @class ADPropertyValuesHolder_PropertyValues;
@@ -36,7 +38,9 @@
 @class IOSFloatArray;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangFloat;
 @class JavaLangReflectMethod;
+@class NSString;
 @protocol ADIKeyframes;
 @protocol ADTypeEvaluator;
 
@@ -526,7 +530,7 @@
   this PropertyValuesHolder object.This function is called by ValueAnimator.animateValue().
  @param fraction The elapsed, interpolated fraction of the animation.
  */
-- (void)calculateValueWithFloat:(jfloat)fraction;
+- (void)calculateValueWithFloat:(float)fraction;
 
 /*!
  @brief Internal function, called by ValueAnimator and ObjectAnimator, to retrieve the value
@@ -662,20 +666,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder)
 
 @compatibility_alias RAndroidAnimationPropertyValuesHolder ADPropertyValuesHolder;
 
+
 #endif
 
 #if !defined (ADPropertyValuesHolder_PropertyValues_DataSource_) && (INCLUDE_ALL_PropertyValuesHolder || defined(INCLUDE_ADPropertyValuesHolder_PropertyValues_DataSource))
 #define ADPropertyValuesHolder_PropertyValues_DataSource_
 
+@class JavaLangFloat;
+
 @protocol ADPropertyValuesHolder_PropertyValues_DataSource < JavaObject >
 
-- (id)getValueAtFractionWithFloat:(jfloat)fraction;
+- (id)getValueAtFractionWithFloat:(float)fraction;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADPropertyValuesHolder_PropertyValues_DataSource)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PropertyValues_DataSource)
+
 
 #endif
 
@@ -685,13 +693,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PropertyValues_DataSource)
 @class ADProperty;
 @class IOSClass;
 @class IOSIntArray;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADIKeyframes_IntIKeyframes;
 
 @interface ADPropertyValuesHolder_IntPropertyValuesHolder : ADPropertyValuesHolder {
  @public
   NSString *mJniSetter_;
   id<ADIKeyframes_IntIKeyframes> mIntIKeyframes_;
-  jint mIntAnimatedValue_;
+  int32_t mIntAnimatedValue_;
 }
 
 #pragma mark Public
@@ -716,7 +727,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PropertyValues_DataSource)
 
 #pragma mark Package-Private
 
-- (void)calculateValueWithFloat:(jfloat)fraction;
+- (void)calculateValueWithFloat:(float)fraction;
 
 - (id)getAnimatedValue;
 
@@ -764,6 +775,7 @@ FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPrope
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_IntPropertyValuesHolder)
 
+
 #endif
 
 #if !defined (ADPropertyValuesHolder_FloatPropertyValuesHolder_) && (INCLUDE_ALL_PropertyValuesHolder || defined(INCLUDE_ADPropertyValuesHolder_FloatPropertyValuesHolder))
@@ -772,13 +784,15 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_IntPropertyValuesHolder)
 @class ADProperty;
 @class IOSClass;
 @class IOSFloatArray;
+@class JavaLangFloat;
+@class NSString;
 @protocol ADIKeyframes_FloatIKeyframes;
 
 @interface ADPropertyValuesHolder_FloatPropertyValuesHolder : ADPropertyValuesHolder {
  @public
   NSString *mJniSetter_;
   id<ADIKeyframes_FloatIKeyframes> mFloatIKeyframes_;
-  jfloat mFloatAnimatedValue_;
+  float mFloatAnimatedValue_;
 }
 
 #pragma mark Public
@@ -803,7 +817,7 @@ withADIKeyframes_FloatIKeyframes:(id<ADIKeyframes_FloatIKeyframes>)keyframes;
 
 #pragma mark Package-Private
 
-- (void)calculateValueWithFloat:(jfloat)fraction;
+- (void)calculateValueWithFloat:(float)fraction;
 
 - (id)getAnimatedValue;
 
@@ -851,6 +865,7 @@ FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPro
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 
+
 #endif
 
 #if !defined (ADPropertyValuesHolder_MultiFloatValuesHolder_) && (INCLUDE_ALL_PropertyValuesHolder || defined(INCLUDE_ADPropertyValuesHolder_MultiFloatValuesHolder))
@@ -859,6 +874,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 @class ADTypeConverter;
 @class IOSClass;
 @class IOSObjectArray;
+@class NSString;
 @protocol ADIKeyframes;
 @protocol ADTypeEvaluator;
 
@@ -914,6 +930,7 @@ FOUNDATION_EXPORT ADPropertyValuesHolder_MultiFloatValuesHolder *create_ADProper
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_MultiFloatValuesHolder)
 
+
 #endif
 
 #if !defined (ADPropertyValuesHolder_MultiIntValuesHolder_) && (INCLUDE_ALL_PropertyValuesHolder || defined(INCLUDE_ADPropertyValuesHolder_MultiIntValuesHolder))
@@ -922,6 +939,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_MultiFloatValuesHolder)
 @class ADTypeConverter;
 @class IOSClass;
 @class IOSObjectArray;
+@class NSString;
 @protocol ADIKeyframes;
 @protocol ADTypeEvaluator;
 
@@ -977,12 +995,14 @@ FOUNDATION_EXPORT ADPropertyValuesHolder_MultiIntValuesHolder *create_ADProperty
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_MultiIntValuesHolder)
 
+
 #endif
 
 #if !defined (ADPropertyValuesHolder_PropertyValues_) && (INCLUDE_ALL_PropertyValuesHolder || defined(INCLUDE_ADPropertyValuesHolder_PropertyValues))
 #define ADPropertyValuesHolder_PropertyValues_
 
 @class IOSClass;
+@class NSString;
 @protocol ADPropertyValuesHolder_PropertyValues_DataSource;
 
 /*!
@@ -1019,6 +1039,7 @@ FOUNDATION_EXPORT ADPropertyValuesHolder_PropertyValues *new_ADPropertyValuesHol
 FOUNDATION_EXPORT ADPropertyValuesHolder_PropertyValues *create_ADPropertyValuesHolder_PropertyValues_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PropertyValues)
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\BooleanConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BooleanConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
@@ -11,6 +16,12 @@
 #include "java/lang/Exception.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASBooleanConverter
@@ -77,3 +88,5 @@ ASBooleanConverter *create_ASBooleanConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBooleanConverter)
+
+J2OBJC_NAME_MAPPING(ASBooleanConverter, "com.ashera.converter", "AS")

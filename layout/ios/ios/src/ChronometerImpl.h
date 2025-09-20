@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ChronometerImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ChronometerImpl")
@@ -23,6 +24,9 @@
 @class ADChronometer;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -48,7 +52,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -62,9 +66,9 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getHighlightedTextColor;
 
@@ -74,21 +78,21 @@
 
 - (id)getIsUserInteractionEnabled;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
 - (id)getMinimumScaleFactor;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getNumberOfLines;
 
@@ -108,7 +112,7 @@
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -165,7 +169,7 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 + (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
@@ -214,6 +218,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl)
 
 @compatibility_alias ComAsheraLayoutChronometerImpl ASChronometerImpl;
 
+
 #endif
 
 #if !defined (ASChronometerImpl_DallocHandler_) && (INCLUDE_ALL_ChronometerImpl || defined(INCLUDE_ASChronometerImpl_DallocHandler))
@@ -224,6 +229,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl)
 #include "EventBusHandler.h"
 
 @class ASChronometerImpl;
+@class NSString;
 
 @interface ASChronometerImpl_DallocHandler : ASEventBusHandler
 
@@ -251,6 +257,7 @@ FOUNDATION_EXPORT ASChronometerImpl_DallocHandler *new_ASChronometerImpl_DallocH
 FOUNDATION_EXPORT ASChronometerImpl_DallocHandler *create_ASChronometerImpl_DallocHandler_initWithASChronometerImpl_withNSString_(ASChronometerImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DallocHandler)
+
 
 #endif
 
@@ -288,6 +295,7 @@ FOUNDATION_EXPORT ASChronometerImpl_Font *create_ASChronometerImpl_Font_init(voi
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_Font)
 
+
 #endif
 
 #if !defined (ASChronometerImpl_TextStyle_) && (INCLUDE_ALL_ChronometerImpl || defined(INCLUDE_ASChronometerImpl_TextStyle))
@@ -323,6 +331,7 @@ FOUNDATION_EXPORT ASChronometerImpl_TextStyle *new_ASChronometerImpl_TextStyle_i
 FOUNDATION_EXPORT ASChronometerImpl_TextStyle *create_ASChronometerImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_TextStyle)
+
 
 #endif
 
@@ -360,6 +369,7 @@ FOUNDATION_EXPORT ASChronometerImpl_DrawableTintMode *create_ASChronometerImpl_D
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASChronometerImpl_ChronometerExt_) && (INCLUDE_ALL_ChronometerImpl || defined(INCLUDE_ASChronometerImpl_ChronometerExt))
@@ -379,6 +389,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -388,7 +402,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
 - (instancetype)initWithASChronometerImpl:(ASChronometerImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -397,13 +411,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -419,21 +433,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)remeasure;
 
@@ -456,7 +470,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -472,16 +486,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -499,6 +513,7 @@ FOUNDATION_EXPORT ASChronometerImpl_ChronometerExt *create_ASChronometerImpl_Chr
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_ChronometerExt)
 
+
 #endif
 
 #if !defined (ASChronometerImpl_PostMeasureHandler_) && (INCLUDE_ALL_ChronometerImpl || defined(INCLUDE_ASChronometerImpl_PostMeasureHandler))
@@ -509,6 +524,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_ChronometerExt)
 #include "EventBusHandler.h"
 
 @class ASChronometerImpl;
+@class NSString;
 
 @interface ASChronometerImpl_PostMeasureHandler : ASEventBusHandler
 
@@ -536,6 +552,7 @@ FOUNDATION_EXPORT ASChronometerImpl_PostMeasureHandler *new_ASChronometerImpl_Po
 FOUNDATION_EXPORT ASChronometerImpl_PostMeasureHandler *create_ASChronometerImpl_PostMeasureHandler_initWithASChronometerImpl_withNSString_(ASChronometerImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\net\Uri.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Environment.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -18,6 +23,9 @@
 #include "java/io/IOException.h"
 #include "java/io/UnsupportedEncodingException.h"
 #include "java/lang/AssertionError.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Byte.h"
+#include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IndexOutOfBoundsException.h"
 #include "java/lang/Integer.h"
@@ -38,8 +46,12 @@
 #include "java/util/Objects.h"
 #include "java/util/Set.h"
 
-@class JavaLangStringBuilder;
-@protocol JavaUtilList;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -59,8 +71,8 @@
  @return true if the character is allowed or false if it should be
    encoded
  */
-+ (jboolean)isAllowedWithChar:(jchar)c
-                 withNSString:(NSString *)allow;
++ (bool)isAllowedWithChar:(unichar)c
+             withNSString:(NSString *)allow;
 
 /*!
  @brief Returns true if the given string is already encoded to safe characters.
@@ -68,8 +80,8 @@
  @param allow characters to allow
  @return true if the string is already encoded or false if it should be encoded
  */
-+ (jboolean)isEncodedWithNSString:(NSString *)value
-                     withNSString:(NSString *)allow;
++ (bool)isEncodedWithNSString:(NSString *)value
+                 withNSString:(NSString *)allow;
 
 @end
 
@@ -83,16 +95,16 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADUri, LOG, NSString *)
 /*!
  @brief Index of a component which was not found.
  */
-inline jint ADUri_get_NOT_FOUND(void);
+inline int32_t ADUri_get_NOT_FOUND(void);
 #define ADUri_NOT_FOUND -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADUri, NOT_FOUND, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADUri, NOT_FOUND, int32_t)
 
 /*!
  @brief Placeholder value for an index which hasn't been calculated yet.
  */
-inline jint ADUri_get_NOT_CALCULATED(void);
+inline int32_t ADUri_get_NOT_CALCULATED(void);
 #define ADUri_NOT_CALCULATED -2
-J2OBJC_STATIC_FIELD_CONSTANT(ADUri, NOT_CALCULATED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADUri, NOT_CALCULATED, int32_t)
 
 /*!
  @brief Error message presented when a user tries to treat an opaque URI as
@@ -112,9 +124,9 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADUri, DEFAULT_ENCODING, NSString *)
 /*!
  @brief Identifies a null parcelled Uri.
  */
-inline jint ADUri_get_NULL_TYPE_ID(void);
+inline int32_t ADUri_get_NULL_TYPE_ID(void);
 #define ADUri_NULL_TYPE_ID 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADUri, NULL_TYPE_ID, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADUri, NULL_TYPE_ID, int32_t)
 
 inline IOSCharArray *ADUri_get_HEX_DIGITS(void);
 static IOSCharArray *ADUri_HEX_DIGITS;
@@ -122,9 +134,9 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADUri, HEX_DIGITS, IOSCharArray *)
 
 __attribute__((unused)) static void ADUri_init(ADUri *self);
 
-__attribute__((unused)) static jboolean ADUri_isAllowedWithChar_withNSString_(jchar c, NSString *allow);
+__attribute__((unused)) static bool ADUri_isAllowedWithChar_withNSString_(unichar c, NSString *allow);
 
-__attribute__((unused)) static jboolean ADUri_isEncodedWithNSString_withNSString_(NSString *value, NSString *allow);
+__attribute__((unused)) static bool ADUri_isEncodedWithNSString_withNSString_(NSString *value, NSString *allow);
 
 @interface ADUri_NotCachedHolder ()
 
@@ -145,7 +157,7 @@ __attribute__((unused)) static ADUri_NotCachedHolder *create_ADUri_NotCachedHold
  @public
   ADUri_Part *userInfo_;
   volatile_id host_;
-  volatile_jint port_;
+  volatile_int32_t port_;
 }
 
 - (instancetype)init;
@@ -164,11 +176,11 @@ __attribute__((unused)) static ADUri_NotCachedHolder *create_ADUri_NotCachedHold
 
 - (NSString *)parseHost;
 
-- (jint)getPort;
+- (int32_t)getPort;
 
-- (jint)parsePort;
+- (int32_t)parsePort;
 
-- (jint)findPortSeparatorWithNSString:(NSString *)authority;
+- (int32_t)findPortSeparatorWithNSString:(NSString *)authority;
 
 @end
 
@@ -185,11 +197,12 @@ __attribute__((unused)) static NSString *ADUri_AbstractHierarchicalUri_parseUser
 
 __attribute__((unused)) static NSString *ADUri_AbstractHierarchicalUri_parseHost(ADUri_AbstractHierarchicalUri *self);
 
-__attribute__((unused)) static jint ADUri_AbstractHierarchicalUri_parsePort(ADUri_AbstractHierarchicalUri *self);
+__attribute__((unused)) static int32_t ADUri_AbstractHierarchicalUri_parsePort(ADUri_AbstractHierarchicalUri *self);
 
-__attribute__((unused)) static jint ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(ADUri_AbstractHierarchicalUri *self, NSString *authority);
+__attribute__((unused)) static int32_t ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(ADUri_AbstractHierarchicalUri *self, NSString *authority);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_AbstractHierarchicalUri)
+
 
 /*!
  @brief An implementation which wraps a String URI.This URI can be opaque or
@@ -205,11 +218,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_AbstractHierarchicalUri)
   /*!
    @brief Cached scheme separator index.
    */
-  volatile_jint cachedSsi_;
+  volatile_int32_t cachedSsi_;
   /*!
    @brief Cached fragment separator index.
    */
-  volatile_jint cachedFsi_;
+  volatile_int32_t cachedFsi_;
   volatile_id scheme_;
   ADUri_Part *ssp_;
   ADUri_Part *authority_;
@@ -222,24 +235,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_AbstractHierarchicalUri)
 
 + (ADUri *)readFromWithADParcel:(id<ADParcel>)parcel;
 
-- (jint)describeContents;
+- (int32_t)describeContents;
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)parcel
-                          withInt:(jint)flags;
+                          withInt:(int32_t)flags;
 
 /*!
  @brief Finds the first ':'.Returns -1 if none found.
  */
-- (jint)findSchemeSeparator;
+- (int32_t)findSchemeSeparator;
 
 /*!
  @brief Finds the first '#'.Returns -1 if none found.
  */
-- (jint)findFragmentSeparator;
+- (int32_t)findFragmentSeparator;
 
-- (jboolean)isHierarchical;
+- (bool)isHierarchical;
 
-- (jboolean)isRelative;
+- (bool)isRelative;
 
 - (NSString *)getScheme;
 
@@ -294,7 +307,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_AbstractHierarchicalUri)
  @return the authority or null if none is found
  */
 + (NSString *)parseAuthorityWithNSString:(NSString *)uriString
-                                 withInt:(jint)ssi;
+                                 withInt:(int32_t)ssi;
 
 /*!
  @brief Parses a path out of this given URI string.
@@ -303,7 +316,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_AbstractHierarchicalUri)
  @return the path
  */
 + (NSString *)parsePathWithNSString:(NSString *)uriString
-                            withInt:(jint)ssi;
+                            withInt:(int32_t)ssi;
 
 - (ADUri_Builder *)buildUpon;
 
@@ -322,9 +335,9 @@ J2OBJC_FIELD_SETTER(ADUri_StringUri, fragment_, ADUri_Part *)
 /*!
  @brief Used in parcelling.
  */
-inline jint ADUri_StringUri_get_TYPE_ID(void);
+inline int32_t ADUri_StringUri_get_TYPE_ID(void);
 #define ADUri_StringUri_TYPE_ID 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADUri_StringUri, TYPE_ID, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADUri_StringUri, TYPE_ID, int32_t)
 
 __attribute__((unused)) static void ADUri_StringUri_initWithNSString_(ADUri_StringUri *self, NSString *uriString);
 
@@ -334,9 +347,9 @@ __attribute__((unused)) static ADUri_StringUri *create_ADUri_StringUri_initWithN
 
 __attribute__((unused)) static ADUri *ADUri_StringUri_readFromWithADParcel_(id<ADParcel> parcel);
 
-__attribute__((unused)) static jint ADUri_StringUri_findSchemeSeparator(ADUri_StringUri *self);
+__attribute__((unused)) static int32_t ADUri_StringUri_findSchemeSeparator(ADUri_StringUri *self);
 
-__attribute__((unused)) static jint ADUri_StringUri_findFragmentSeparator(ADUri_StringUri *self);
+__attribute__((unused)) static int32_t ADUri_StringUri_findFragmentSeparator(ADUri_StringUri *self);
 
 __attribute__((unused)) static NSString *ADUri_StringUri_parseScheme(ADUri_StringUri *self);
 
@@ -358,11 +371,12 @@ __attribute__((unused)) static ADUri_Part *ADUri_StringUri_getFragmentPart(ADUri
 
 __attribute__((unused)) static NSString *ADUri_StringUri_parseFragment(ADUri_StringUri *self);
 
-__attribute__((unused)) static NSString *ADUri_StringUri_parseAuthorityWithNSString_withInt_(NSString *uriString, jint ssi);
+__attribute__((unused)) static NSString *ADUri_StringUri_parseAuthorityWithNSString_withInt_(NSString *uriString, int32_t ssi);
 
-__attribute__((unused)) static NSString *ADUri_StringUri_parsePathWithNSString_withInt_(NSString *uriString, jint ssi);
+__attribute__((unused)) static NSString *ADUri_StringUri_parsePathWithNSString_withInt_(NSString *uriString, int32_t ssi);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_StringUri)
+
 
 /*!
  @brief Opaque URI.
@@ -381,14 +395,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_StringUri)
 
 + (ADUri *)readFromWithADParcel:(id<ADParcel>)parcel;
 
-- (jint)describeContents;
+- (int32_t)describeContents;
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)parcel
-                          withInt:(jint)flags;
+                          withInt:(int32_t)flags;
 
-- (jboolean)isHierarchical;
+- (bool)isHierarchical;
 
-- (jboolean)isRelative;
+- (bool)isRelative;
 
 - (NSString *)getScheme;
 
@@ -422,7 +436,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_StringUri)
 
 - (NSString *)getHost;
 
-- (jint)getPort;
+- (int32_t)getPort;
 
 - (NSString *)description;
 
@@ -440,9 +454,9 @@ J2OBJC_VOLATILE_FIELD_SETTER(ADUri_OpaqueUri, cachedString_, NSString *)
 /*!
  @brief Used in parcelling.
  */
-inline jint ADUri_OpaqueUri_get_TYPE_ID(void);
+inline int32_t ADUri_OpaqueUri_get_TYPE_ID(void);
 #define ADUri_OpaqueUri_TYPE_ID 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADUri_OpaqueUri, TYPE_ID, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADUri_OpaqueUri, TYPE_ID, int32_t)
 
 __attribute__((unused)) static void ADUri_OpaqueUri_initWithNSString_withADUri_Part_withADUri_Part_(ADUri_OpaqueUri *self, NSString *scheme, ADUri_Part *ssp, ADUri_Part *fragment);
 
@@ -453,6 +467,7 @@ __attribute__((unused)) static ADUri_OpaqueUri *create_ADUri_OpaqueUri_initWithN
 __attribute__((unused)) static ADUri *ADUri_OpaqueUri_readFromWithADParcel_(id<ADParcel> parcel);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_OpaqueUri)
+
 
 /*!
  @brief Hierarchical Uri.
@@ -478,14 +493,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_OpaqueUri)
 
 + (ADUri *)readFromWithADParcel:(id<ADParcel>)parcel;
 
-- (jint)describeContents;
+- (int32_t)describeContents;
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)parcel
-                          withInt:(jint)flags;
+                          withInt:(int32_t)flags;
 
-- (jboolean)isHierarchical;
+- (bool)isHierarchical;
 
-- (jboolean)isRelative;
+- (bool)isRelative;
 
 - (NSString *)getScheme;
 
@@ -541,9 +556,9 @@ J2OBJC_VOLATILE_FIELD_SETTER(ADUri_HierarchicalUri, uriString_, NSString *)
 /*!
  @brief Used in parcelling.
  */
-inline jint ADUri_HierarchicalUri_get_TYPE_ID(void);
+inline int32_t ADUri_HierarchicalUri_get_TYPE_ID(void);
 #define ADUri_HierarchicalUri_TYPE_ID 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADUri_HierarchicalUri, TYPE_ID, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADUri_HierarchicalUri, TYPE_ID, int32_t)
 
 __attribute__((unused)) static void ADUri_HierarchicalUri_initWithNSString_withADUri_Part_withADUri_PathPart_withADUri_Part_withADUri_Part_(ADUri_HierarchicalUri *self, NSString *scheme, ADUri_Part *authority, ADUri_PathPart *path, ADUri_Part *query, ADUri_Part *fragment);
 
@@ -565,6 +580,7 @@ __attribute__((unused)) static NSString *ADUri_HierarchicalUri_makeUriString(ADU
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_HierarchicalUri)
 
+
 @interface ADUri_Builder () {
  @public
   NSString *scheme_;
@@ -575,7 +591,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADUri_HierarchicalUri)
   ADUri_Part *fragment_;
 }
 
-- (jboolean)hasSchemeOrAuthority;
+- (bool)hasSchemeOrAuthority;
 
 @end
 
@@ -586,7 +602,7 @@ J2OBJC_FIELD_SETTER(ADUri_Builder, path_, ADUri_PathPart *)
 J2OBJC_FIELD_SETTER(ADUri_Builder, query_, ADUri_Part *)
 J2OBJC_FIELD_SETTER(ADUri_Builder, fragment_, ADUri_Part *)
 
-__attribute__((unused)) static jboolean ADUri_Builder_hasSchemeOrAuthority(ADUri_Builder *self);
+__attribute__((unused)) static bool ADUri_Builder_hasSchemeOrAuthority(ADUri_Builder *self);
 
 @interface ADUri_1 : ADParcelable_Creator
 
@@ -594,7 +610,7 @@ __attribute__((unused)) static jboolean ADUri_Builder_hasSchemeOrAuthority(ADUri
 
 - (ADUri *)createFromParcelWithADParcel:(id<ADParcel>)inArg;
 
-- (IOSObjectArray *)newArrayWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -605,6 +621,7 @@ __attribute__((unused)) static void ADUri_1_init(ADUri_1 *self);
 __attribute__((unused)) static ADUri_1 *new_ADUri_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADUri_1 *create_ADUri_1_init(void);
+
 
 __attribute__((unused)) static NSString *ADUri_AbstractPart_getDecoded(ADUri_AbstractPart *self);
 
@@ -625,7 +642,7 @@ __attribute__((unused)) static ADUri_Part *create_ADUri_Part_initWithNSString_wi
 
 - (instancetype)initWithNSString:(NSString *)value;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 @end
 
@@ -638,6 +655,7 @@ __attribute__((unused)) static ADUri_Part_EmptyPart *new_ADUri_Part_EmptyPart_in
 __attribute__((unused)) static ADUri_Part_EmptyPart *create_ADUri_Part_EmptyPart_initWithNSString_(NSString *value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUri_Part_EmptyPart)
+
 
 @interface ADUri_PathPart () {
  @public
@@ -675,23 +693,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)isHierarchical {
+- (bool)isHierarchical {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jboolean)isOpaque {
+- (bool)isOpaque {
   return ![self isHierarchical];
 }
 
-- (jboolean)isRelative {
+- (bool)isRelative {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jboolean)isAbsolute {
+- (bool)isAbsolute {
   return ![self isRelative];
 }
 
@@ -743,7 +761,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
-- (jint)getPort {
+- (int32_t)getPort {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -797,7 +815,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
-- (jboolean)isEqual:(id)o {
+- (bool)isEqual:(id)o {
   if (!([o isKindOfClass:[ADUri class]])) {
     return false;
   }
@@ -806,10 +824,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSUInteger)hash {
-  return ((jint) [((NSString *) nil_chk([self description])) hash]);
+  return ((int32_t) [((NSString *) nil_chk([self description])) hash]);
 }
 
-- (jint)compareToWithId:(ADUri *)other {
+- (int32_t)compareToWithId:(ADUri *)other {
   cast_chk(other, [ADUri class]);
   return [((NSString *) nil_chk([self description])) compareToWithId:[((ADUri *) nil_chk(other)) description]];
 }
@@ -829,8 +847,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     [builder appendWithNSString:@":"];
     if ([scheme java_equalsIgnoreCase:@"tel"] || [scheme java_equalsIgnoreCase:@"sip"] || [scheme java_equalsIgnoreCase:@"sms"] || [scheme java_equalsIgnoreCase:@"smsto"] || [scheme java_equalsIgnoreCase:@"mailto"] || [scheme java_equalsIgnoreCase:@"nfc"]) {
       if (ssp != nil) {
-        for (jint i = 0; i < [ssp java_length]; i++) {
-          jchar c = [ssp charAtWithInt:i];
+        for (int32_t i = 0; i < [ssp java_length]; i++) {
+          unichar c = [ssp charAtWithInt:i];
           if (c == '-' || c == '@' || c == '.') {
             [builder appendWithChar:c];
           }
@@ -842,7 +860,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     else {
       NSString *host = [self getHost];
-      jint port = [self getPort];
+      int32_t port = [self getPort];
       NSString *path = [self getPath];
       NSString *authority = [self getAuthority];
       if (authority != nil) [builder appendWithNSString:@"//"];
@@ -883,11 +901,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     return JavaUtilCollections_emptySet();
   }
   id<JavaUtilSet> names = create_JavaUtilLinkedHashSet_init();
-  jint start = 0;
+  int32_t start = 0;
   do {
-    jint next = [query java_indexOf:'&' fromIndex:start];
-    jint end = (next == -1) ? [query java_length] : next;
-    jint separator = [query java_indexOf:'=' fromIndex:start];
+    int32_t next = [query java_indexOf:'&' fromIndex:start];
+    int32_t end = (next == -1) ? [query java_length] : next;
+    int32_t separator = [query java_indexOf:'=' fromIndex:start];
     if (separator > end || separator == -1) {
       separator = end;
     }
@@ -918,11 +936,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     @throw create_JavaLangAssertionError_initWithId_(e);
   }
   JavaUtilArrayList *values = create_JavaUtilArrayList_init();
-  jint start = 0;
+  int32_t start = 0;
   do {
-    jint nextAmpersand = [query java_indexOf:'&' fromIndex:start];
-    jint end = nextAmpersand != -1 ? nextAmpersand : [query java_length];
-    jint separator = [query java_indexOf:'=' fromIndex:start];
+    int32_t nextAmpersand = [query java_indexOf:'&' fromIndex:start];
+    int32_t end = nextAmpersand != -1 ? nextAmpersand : [query java_length];
+    int32_t separator = [query java_indexOf:'=' fromIndex:start];
     if (separator > end || separator == -1) {
       separator = end;
     }
@@ -957,12 +975,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     return nil;
   }
   NSString *encodedKey = ADUri_encodeWithNSString_withNSString_(key, nil);
-  jint length = [query java_length];
-  jint start = 0;
+  int32_t length = [query java_length];
+  int32_t start = 0;
   do {
-    jint nextAmpersand = [query java_indexOf:'&' fromIndex:start];
-    jint end = nextAmpersand != -1 ? nextAmpersand : length;
-    jint separator = [query java_indexOf:'=' fromIndex:start];
+    int32_t nextAmpersand = [query java_indexOf:'&' fromIndex:start];
+    int32_t end = nextAmpersand != -1 ? nextAmpersand : length;
+    int32_t separator = [query java_indexOf:'=' fromIndex:start];
     if (separator > end || separator == -1) {
       separator = end;
     }
@@ -986,8 +1004,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)getBooleanQueryParameterWithNSString:(NSString *)key
-                                     withBoolean:(jboolean)defaultValue {
+- (bool)getBooleanQueryParameterWithNSString:(NSString *)key
+                                 withBoolean:(bool)defaultValue {
   NSString *flag = JreRetainedLocalValue([self getQueryParameterWithNSString:key]);
   if (flag == nil) {
     return defaultValue;
@@ -1018,8 +1036,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADUri_encodeWithNSString_withNSString_(s, allow);
 }
 
-+ (jboolean)isAllowedWithChar:(jchar)c
-                 withNSString:(NSString *)allow {
++ (bool)isAllowedWithChar:(unichar)c
+             withNSString:(NSString *)allow {
   return ADUri_isAllowedWithChar_withNSString_(c, allow);
 }
 
@@ -1028,8 +1046,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADUri_encodeIfNotEncodedWithNSString_withNSString_(value, allow);
 }
 
-+ (jboolean)isEncodedWithNSString:(NSString *)value
-                     withNSString:(NSString *)allow {
++ (bool)isEncodedWithNSString:(NSString *)value
+                 withNSString:(NSString *)allow {
   return ADUri_isEncodedWithNSString_withNSString_(value, allow);
 }
 
@@ -1074,19 +1092,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)checkContentUriWithoutPermissionWithNSString:(NSString *)location
-                                             withInt:(jint)flags {
+                                             withInt:(int32_t)flags {
   if ([@"content" isEqual:[self getScheme]] && !ADIntent_isAccessUriModeWithInt_(flags)) {
   }
 }
 
-- (jboolean)isPathPrefixMatchWithADUri:(ADUri *)prefix {
+- (bool)isPathPrefixMatchWithADUri:(ADUri *)prefix {
   if (!JavaUtilObjects_equalsWithId_withId_([self getScheme], [((ADUri *) nil_chk(prefix)) getScheme])) return false;
   if (!JavaUtilObjects_equalsWithId_withId_([self getAuthority], [prefix getAuthority])) return false;
   id<JavaUtilList> seg = JreRetainedLocalValue([self getPathSegments]);
   id<JavaUtilList> prefixSeg = JreRetainedLocalValue([prefix getPathSegments]);
-  jint prefixSize = [((id<JavaUtilList>) nil_chk(prefixSeg)) size];
+  int32_t prefixSize = [((id<JavaUtilList>) nil_chk(prefixSeg)) size];
   if ([((id<JavaUtilList>) nil_chk(seg)) size] < prefixSize) return false;
-  for (jint i = 0; i < prefixSize; i++) {
+  for (int32_t i = 0; i < prefixSize; i++) {
     if (!JavaUtilObjects_equalsWithId_withId_([seg getWithInt:i], [prefixSeg getWithInt:i])) {
       return false;
     }
@@ -1277,10 +1295,10 @@ NSString *ADUri_encodeWithNSString_withNSString_(NSString *s, NSString *allow) {
     return nil;
   }
   JavaLangStringBuilder *encoded = nil;
-  jint oldLength = [s java_length];
-  jint current = 0;
+  int32_t oldLength = [s java_length];
+  int32_t current = 0;
   while (current < oldLength) {
-    jint nextToEncode = current;
+    int32_t nextToEncode = current;
     while (nextToEncode < oldLength && ADUri_isAllowedWithChar_withNSString_([s charAtWithInt:nextToEncode], allow)) {
       nextToEncode++;
     }
@@ -1302,18 +1320,18 @@ NSString *ADUri_encodeWithNSString_withNSString_(NSString *s, NSString *allow) {
     else {
     }
     current = nextToEncode;
-    jint nextAllowed = current + 1;
+    int32_t nextAllowed = current + 1;
     while (nextAllowed < oldLength && !ADUri_isAllowedWithChar_withNSString_([s charAtWithInt:nextAllowed], allow)) {
       nextAllowed++;
     }
     NSString *toEncode = [s java_substring:current endIndex:nextAllowed];
     @try {
       IOSByteArray *bytes = [((NSString *) nil_chk(toEncode)) java_getBytesWithCharsetName:ADUri_DEFAULT_ENCODING];
-      jint bytesLength = ((IOSByteArray *) nil_chk(bytes))->size_;
-      for (jint i = 0; i < bytesLength; i++) {
+      int32_t bytesLength = ((IOSByteArray *) nil_chk(bytes))->size_;
+      for (int32_t i = 0; i < bytesLength; i++) {
         [encoded appendWithChar:'%'];
-        [encoded appendWithChar:IOSCharArray_Get(nil_chk(ADUri_HEX_DIGITS), JreRShift32((IOSByteArray_Get(bytes, i) & (jint) 0xf0), 4))];
-        [encoded appendWithChar:IOSCharArray_Get(ADUri_HEX_DIGITS, IOSByteArray_Get(bytes, i) & (jint) 0xf)];
+        [encoded appendWithChar:IOSCharArray_Get(nil_chk(ADUri_HEX_DIGITS), JreRShift32((IOSByteArray_Get(bytes, i) & (int32_t) 0xf0), 4))];
+        [encoded appendWithChar:IOSCharArray_Get(ADUri_HEX_DIGITS, IOSByteArray_Get(bytes, i) & (int32_t) 0xf)];
       }
     }
     @catch (JavaIoUnsupportedEncodingException *e) {
@@ -1324,7 +1342,7 @@ NSString *ADUri_encodeWithNSString_withNSString_(NSString *s, NSString *allow) {
   return encoded == nil ? s : [encoded description];
 }
 
-jboolean ADUri_isAllowedWithChar_withNSString_(jchar c, NSString *allow) {
+bool ADUri_isAllowedWithChar_withNSString_(unichar c, NSString *allow) {
   ADUri_initialize();
   return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || [@"_-!.~'()*" java_indexOf:c] != ADUri_NOT_FOUND || (allow != nil && [allow java_indexOf:c] != ADUri_NOT_FOUND);
 }
@@ -1336,11 +1354,11 @@ NSString *ADUri_encodeIfNotEncodedWithNSString_withNSString_(NSString *value, NS
   return ADUri_encodeWithNSString_withNSString_(value, allow);
 }
 
-jboolean ADUri_isEncodedWithNSString_withNSString_(NSString *value, NSString *allow) {
+bool ADUri_isEncodedWithNSString_withNSString_(NSString *value, NSString *allow) {
   ADUri_initialize();
   if (value == nil) return true;
-  for (jint index = 0; index < [value java_length]; index++) {
-    jchar c = [value charAtWithInt:index];
+  for (int32_t index = 0; index < [value java_length]; index++) {
+    unichar c = [value charAtWithInt:index];
     if (!ADUri_isAllowedWithChar_withNSString_(c, allow) && c != '%') {
       return false;
     }
@@ -1371,6 +1389,8 @@ ADUri *ADUri_withAppendedPathWithADUri_withNSString_(ADUri *baseUri, NSString *p
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri)
+
+J2OBJC_NAME_MAPPING(ADUri, "r.android.net", "AD")
 
 J2OBJC_INITIALIZED_DEFN(ADUri_NotCachedHolder)
 
@@ -1436,7 +1456,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)getLastPathSegment {
   id<JavaUtilList> segments = JreRetainedLocalValue([self getPathSegments]);
-  jint size = [((id<JavaUtilList>) nil_chk(segments)) size];
+  int32_t size = [((id<JavaUtilList>) nil_chk(segments)) size];
   if (size == 0) {
     return nil;
   }
@@ -1460,7 +1480,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)getHost {
-  jboolean cached = (JreLoadVolatileId(&host_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
+  bool cached = (!JreStringEqualsEquals(JreLoadVolatileId(&host_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED)));
   return cached ? JreLoadVolatileId(&host_) : (JreVolatileStrongAssign(&host_, ADUri_AbstractHierarchicalUri_parseHost(self)));
 }
 
@@ -1468,15 +1488,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADUri_AbstractHierarchicalUri_parseHost(self);
 }
 
-- (jint)getPort {
+- (int32_t)getPort {
   return JreLoadVolatileInt(&port_) == ADUri_NOT_CALCULATED ? JreAssignVolatileInt(&port_, ADUri_AbstractHierarchicalUri_parsePort(self)) : JreLoadVolatileInt(&port_);
 }
 
-- (jint)parsePort {
+- (int32_t)parsePort {
   return ADUri_AbstractHierarchicalUri_parsePort(self);
 }
 
-- (jint)findPortSeparatorWithNSString:(NSString *)authority {
+- (int32_t)findPortSeparatorWithNSString:(NSString *)authority {
   return ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(self, authority);
 }
 
@@ -1547,7 +1567,7 @@ NSString *ADUri_AbstractHierarchicalUri_parseUserInfo(ADUri_AbstractHierarchical
   if (authority == nil) {
     return nil;
   }
-  jint end = [authority java_lastIndexOf:'@'];
+  int32_t end = [authority java_lastIndexOf:'@'];
   return end == ADUri_NOT_FOUND ? nil : [authority java_substring:0 endIndex:end];
 }
 
@@ -1556,15 +1576,15 @@ NSString *ADUri_AbstractHierarchicalUri_parseHost(ADUri_AbstractHierarchicalUri 
   if (authority == nil) {
     return nil;
   }
-  jint userInfoSeparator = [authority java_lastIndexOf:'@'];
-  jint portSeparator = ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(self, authority);
+  int32_t userInfoSeparator = [authority java_lastIndexOf:'@'];
+  int32_t portSeparator = ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(self, authority);
   NSString *encodedHost = portSeparator == ADUri_NOT_FOUND ? [authority java_substring:userInfoSeparator + 1] : [authority java_substring:userInfoSeparator + 1 endIndex:portSeparator];
   return ADUri_decodeWithNSString_(encodedHost);
 }
 
-jint ADUri_AbstractHierarchicalUri_parsePort(ADUri_AbstractHierarchicalUri *self) {
+int32_t ADUri_AbstractHierarchicalUri_parsePort(ADUri_AbstractHierarchicalUri *self) {
   NSString *authority = [self getEncodedAuthority];
-  jint portSeparator = ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(self, authority);
+  int32_t portSeparator = ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(self, authority);
   if (portSeparator == ADUri_NOT_FOUND) {
     return -1;
   }
@@ -1578,12 +1598,12 @@ jint ADUri_AbstractHierarchicalUri_parsePort(ADUri_AbstractHierarchicalUri *self
   }
 }
 
-jint ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(ADUri_AbstractHierarchicalUri *self, NSString *authority) {
+int32_t ADUri_AbstractHierarchicalUri_findPortSeparatorWithNSString_(ADUri_AbstractHierarchicalUri *self, NSString *authority) {
   if (authority == nil) {
     return ADUri_NOT_FOUND;
   }
-  for (jint i = [authority java_length] - 1; i >= 0; --i) {
-    jint character = [authority charAtWithInt:i];
+  for (int32_t i = [authority java_length] - 1; i >= 0; --i) {
+    int32_t character = [authority charAtWithInt:i];
     if (':' == character) return i;
     if (character < '0' || character > '9') return ADUri_NOT_FOUND;
   }
@@ -1603,26 +1623,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_AbstractHierarchicalUri)
   return ADUri_StringUri_readFromWithADParcel_(parcel);
 }
 
-- (jint)describeContents {
+- (int32_t)describeContents {
   return 0;
 }
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)parcel
-                          withInt:(jint)flags {
+                          withInt:(int32_t)flags {
   [((id<ADParcel>) nil_chk(parcel)) writeIntWithInt:ADUri_StringUri_TYPE_ID];
   [parcel writeString8WithNSString:uriString_];
 }
 
-- (jint)findSchemeSeparator {
+- (int32_t)findSchemeSeparator {
   return ADUri_StringUri_findSchemeSeparator(self);
 }
 
-- (jint)findFragmentSeparator {
+- (int32_t)findFragmentSeparator {
   return ADUri_StringUri_findFragmentSeparator(self);
 }
 
-- (jboolean)isHierarchical {
-  jint ssi = ADUri_StringUri_findSchemeSeparator(self);
+- (bool)isHierarchical {
+  int32_t ssi = ADUri_StringUri_findSchemeSeparator(self);
   if (ssi == ADUri_NOT_FOUND) {
     return true;
   }
@@ -1632,12 +1652,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_AbstractHierarchicalUri)
   return [uriString_ charAtWithInt:ssi + 1] == '/';
 }
 
-- (jboolean)isRelative {
+- (bool)isRelative {
   return ADUri_StringUri_findSchemeSeparator(self) == ADUri_NOT_FOUND;
 }
 
 - (NSString *)getScheme {
-  jboolean cached = (JreLoadVolatileId(&scheme_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
+  bool cached = (!JreStringEqualsEquals(JreLoadVolatileId(&scheme_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED)));
   return cached ? JreLoadVolatileId(&scheme_) : (JreVolatileStrongAssign(&scheme_, ADUri_StringUri_parseScheme(self)));
 }
 
@@ -1730,12 +1750,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_AbstractHierarchicalUri)
 }
 
 + (NSString *)parseAuthorityWithNSString:(NSString *)uriString
-                                 withInt:(jint)ssi {
+                                 withInt:(int32_t)ssi {
   return ADUri_StringUri_parseAuthorityWithNSString_withInt_(uriString, ssi);
 }
 
 + (NSString *)parsePathWithNSString:(NSString *)uriString
-                            withInt:(jint)ssi {
+                            withInt:(int32_t)ssi {
   return ADUri_StringUri_parsePathWithNSString_withInt_(uriString, ssi);
 }
 
@@ -1882,16 +1902,16 @@ ADUri *ADUri_StringUri_readFromWithADParcel_(id<ADParcel> parcel) {
   return create_ADUri_StringUri_initWithNSString_([((id<ADParcel>) nil_chk(parcel)) readString8]);
 }
 
-jint ADUri_StringUri_findSchemeSeparator(ADUri_StringUri *self) {
+int32_t ADUri_StringUri_findSchemeSeparator(ADUri_StringUri *self) {
   return JreLoadVolatileInt(&self->cachedSsi_) == ADUri_NOT_CALCULATED ? JreAssignVolatileInt(&self->cachedSsi_, [((NSString *) nil_chk(self->uriString_)) java_indexOf:':']) : JreLoadVolatileInt(&self->cachedSsi_);
 }
 
-jint ADUri_StringUri_findFragmentSeparator(ADUri_StringUri *self) {
+int32_t ADUri_StringUri_findFragmentSeparator(ADUri_StringUri *self) {
   return JreLoadVolatileInt(&self->cachedFsi_) == ADUri_NOT_CALCULATED ? JreAssignVolatileInt(&self->cachedFsi_, [((NSString *) nil_chk(self->uriString_)) java_indexOf:'#' fromIndex:ADUri_StringUri_findSchemeSeparator(self)]) : JreLoadVolatileInt(&self->cachedFsi_);
 }
 
 NSString *ADUri_StringUri_parseScheme(ADUri_StringUri *self) {
-  jint ssi = ADUri_StringUri_findSchemeSeparator(self);
+  int32_t ssi = ADUri_StringUri_findSchemeSeparator(self);
   return ssi == ADUri_NOT_FOUND ? nil : [((NSString *) nil_chk(self->uriString_)) java_substring:0 endIndex:ssi];
 }
 
@@ -1900,8 +1920,8 @@ ADUri_Part *ADUri_StringUri_getSsp(ADUri_StringUri *self) {
 }
 
 NSString *ADUri_StringUri_parseSsp(ADUri_StringUri *self) {
-  jint ssi = ADUri_StringUri_findSchemeSeparator(self);
-  jint fsi = ADUri_StringUri_findFragmentSeparator(self);
+  int32_t ssi = ADUri_StringUri_findSchemeSeparator(self);
+  int32_t fsi = ADUri_StringUri_findFragmentSeparator(self);
   return fsi == ADUri_NOT_FOUND ? [((NSString *) nil_chk(self->uriString_)) java_substring:ssi + 1] : [((NSString *) nil_chk(self->uriString_)) java_substring:ssi + 1 endIndex:fsi];
 }
 
@@ -1919,9 +1939,9 @@ ADUri_PathPart *ADUri_StringUri_getPathPart(ADUri_StringUri *self) {
 
 NSString *ADUri_StringUri_parsePath(ADUri_StringUri *self) {
   NSString *uriString = JreRetainedLocalValue(self->uriString_);
-  jint ssi = ADUri_StringUri_findSchemeSeparator(self);
+  int32_t ssi = ADUri_StringUri_findSchemeSeparator(self);
   if (ssi > -1) {
-    jboolean schemeOnly = ssi + 1 == [((NSString *) nil_chk(uriString)) java_length];
+    bool schemeOnly = ssi + 1 == [((NSString *) nil_chk(uriString)) java_length];
     if (schemeOnly) {
       return nil;
     }
@@ -1939,11 +1959,11 @@ ADUri_Part *ADUri_StringUri_getQueryPart(ADUri_StringUri *self) {
 }
 
 NSString *ADUri_StringUri_parseQuery(ADUri_StringUri *self) {
-  jint qsi = [((NSString *) nil_chk(self->uriString_)) java_indexOf:'?' fromIndex:ADUri_StringUri_findSchemeSeparator(self)];
+  int32_t qsi = [((NSString *) nil_chk(self->uriString_)) java_indexOf:'?' fromIndex:ADUri_StringUri_findSchemeSeparator(self)];
   if (qsi == ADUri_NOT_FOUND) {
     return nil;
   }
-  jint fsi = ADUri_StringUri_findFragmentSeparator(self);
+  int32_t fsi = ADUri_StringUri_findFragmentSeparator(self);
   if (fsi == ADUri_NOT_FOUND) {
     return [self->uriString_ java_substring:qsi + 1];
   }
@@ -1958,15 +1978,15 @@ ADUri_Part *ADUri_StringUri_getFragmentPart(ADUri_StringUri *self) {
 }
 
 NSString *ADUri_StringUri_parseFragment(ADUri_StringUri *self) {
-  jint fsi = ADUri_StringUri_findFragmentSeparator(self);
+  int32_t fsi = ADUri_StringUri_findFragmentSeparator(self);
   return fsi == ADUri_NOT_FOUND ? nil : [((NSString *) nil_chk(self->uriString_)) java_substring:fsi + 1];
 }
 
-NSString *ADUri_StringUri_parseAuthorityWithNSString_withInt_(NSString *uriString, jint ssi) {
+NSString *ADUri_StringUri_parseAuthorityWithNSString_withInt_(NSString *uriString, int32_t ssi) {
   ADUri_StringUri_initialize();
-  jint length = [((NSString *) nil_chk(uriString)) java_length];
+  int32_t length = [((NSString *) nil_chk(uriString)) java_length];
   if (length > ssi + 2 && [uriString charAtWithInt:ssi + 1] == '/' && [uriString charAtWithInt:ssi + 2] == '/') {
-    jint end = ssi + 3;
+    int32_t end = ssi + 3;
     while (end < length) {
       switch ([uriString charAtWithInt:end]) {
         case '/':
@@ -1985,10 +2005,10 @@ NSString *ADUri_StringUri_parseAuthorityWithNSString_withInt_(NSString *uriStrin
   }
 }
 
-NSString *ADUri_StringUri_parsePathWithNSString_withInt_(NSString *uriString, jint ssi) {
+NSString *ADUri_StringUri_parsePathWithNSString_withInt_(NSString *uriString, int32_t ssi) {
   ADUri_StringUri_initialize();
-  jint length = [((NSString *) nil_chk(uriString)) java_length];
-  jint pathStart;
+  int32_t length = [((NSString *) nil_chk(uriString)) java_length];
+  int32_t pathStart;
   if (length > ssi + 2 && [uriString charAtWithInt:ssi + 1] == '/' && [uriString charAtWithInt:ssi + 2] == '/') {
     pathStart = ssi + 3;
     while (pathStart < length) {
@@ -2007,7 +2027,7 @@ NSString *ADUri_StringUri_parsePathWithNSString_withInt_(NSString *uriString, ji
   else {
     pathStart = ssi + 1;
   }
-  jint pathEnd = pathStart;
+  int32_t pathEnd = pathStart;
   while (pathEnd < length) {
     switch ([uriString charAtWithInt:pathEnd]) {
       case '?':
@@ -2035,21 +2055,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_StringUri)
   return ADUri_OpaqueUri_readFromWithADParcel_(parcel);
 }
 
-- (jint)describeContents {
+- (int32_t)describeContents {
   return 0;
 }
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)parcel
-                          withInt:(jint)flags {
+                          withInt:(int32_t)flags {
   [((id<ADParcel>) nil_chk(parcel)) writeIntWithInt:ADUri_OpaqueUri_TYPE_ID];
   [parcel writeString8WithNSString:[self description]];
 }
 
-- (jboolean)isHierarchical {
+- (bool)isHierarchical {
   return false;
 }
 
-- (jboolean)isRelative {
+- (bool)isRelative {
   return scheme_ == nil;
 }
 
@@ -2117,12 +2137,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_StringUri)
   return nil;
 }
 
-- (jint)getPort {
+- (int32_t)getPort {
   return -1;
 }
 
 - (NSString *)description {
-  jboolean cached = JreLoadVolatileId(&cachedString_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
+  bool cached = !JreStringEqualsEquals(JreLoadVolatileId(&cachedString_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
   if (cached) {
     return JreLoadVolatileId(&cachedString_);
   }
@@ -2254,19 +2274,19 @@ ADUri_PathSegments *ADUri_PathSegments_EMPTY;
 @implementation ADUri_PathSegments
 
 - (instancetype)initWithNSStringArray:(IOSObjectArray *)segments
-                              withInt:(jint)size {
+                              withInt:(int32_t)size {
   ADUri_PathSegments_initWithNSStringArray_withInt_(self, segments, size);
   return self;
 }
 
-- (NSString *)getWithInt:(jint)index {
+- (NSString *)getWithInt:(int32_t)index {
   if (index >= size_) {
     @throw create_JavaLangIndexOutOfBoundsException_init();
   }
   return IOSObjectArray_Get(nil_chk(segments_), index);
 }
 
-- (jint)size {
+- (int32_t)size {
   return self->size_;
 }
 
@@ -2311,17 +2331,17 @@ ADUri_PathSegments *ADUri_PathSegments_EMPTY;
 
 @end
 
-void ADUri_PathSegments_initWithNSStringArray_withInt_(ADUri_PathSegments *self, IOSObjectArray *segments, jint size) {
+void ADUri_PathSegments_initWithNSStringArray_withInt_(ADUri_PathSegments *self, IOSObjectArray *segments, int32_t size) {
   JavaUtilAbstractList_init(self);
   JreStrongAssign(&self->segments_, segments);
   self->size_ = size;
 }
 
-ADUri_PathSegments *new_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, jint size) {
+ADUri_PathSegments *new_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, int32_t size) {
   J2OBJC_NEW_IMPL(ADUri_PathSegments, initWithNSStringArray_withInt_, segments, size)
 }
 
-ADUri_PathSegments *create_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, jint size) {
+ADUri_PathSegments *create_ADUri_PathSegments_initWithNSStringArray_withInt_(IOSObjectArray *segments, int32_t size) {
   J2OBJC_CREATE_IMPL(ADUri_PathSegments, initWithNSStringArray_withInt_, segments, size)
 }
 
@@ -2423,21 +2443,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_PathSegmentsBuilder)
   return ADUri_HierarchicalUri_readFromWithADParcel_(parcel);
 }
 
-- (jint)describeContents {
+- (int32_t)describeContents {
   return 0;
 }
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)parcel
-                          withInt:(jint)flags {
+                          withInt:(int32_t)flags {
   [((id<ADParcel>) nil_chk(parcel)) writeIntWithInt:ADUri_HierarchicalUri_TYPE_ID];
   [parcel writeString8WithNSString:[self description]];
 }
 
-- (jboolean)isHierarchical {
+- (bool)isHierarchical {
   return true;
 }
 
-- (jboolean)isRelative {
+- (bool)isRelative {
   return scheme_ == nil;
 }
 
@@ -2502,7 +2522,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_PathSegmentsBuilder)
 }
 
 - (NSString *)description {
-  jboolean cached = (JreLoadVolatileId(&uriString_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
+  bool cached = (!JreStringEqualsEquals(JreLoadVolatileId(&uriString_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED)));
   return cached ? JreLoadVolatileId(&uriString_) : (JreVolatileStrongAssign(&uriString_, ADUri_HierarchicalUri_makeUriString(self)));
 }
 
@@ -2623,7 +2643,7 @@ ADUri_HierarchicalUri *create_ADUri_HierarchicalUri_initWithNSString_withADUri_P
 }
 
 ADUri_PathPart *ADUri_HierarchicalUri_generatePathWithADUri_PathPart_(ADUri_HierarchicalUri *self, ADUri_PathPart *originalPath) {
-  jboolean hasSchemeOrAuthority = (self->scheme_ != nil && [self->scheme_ java_length] > 0) || ![((ADUri_Part *) nil_chk(self->authority_)) isEmpty];
+  bool hasSchemeOrAuthority = (self->scheme_ != nil && [self->scheme_ java_length] > 0) || ![((ADUri_Part *) nil_chk(self->authority_)) isEmpty];
   ADUri_PathPart *newPath = hasSchemeOrAuthority ? ADUri_PathPart_makeAbsoluteWithADUri_PathPart_(originalPath) : originalPath;
   return newPath == nil ? JreLoadStatic(ADUri_PathPart, NULL) : newPath;
 }
@@ -2798,7 +2818,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   else {
     ADUri_PathPart *path = JreRetainedLocalValue(self->path_);
-    if (path == nil || path == JreLoadStatic(ADUri_PathPart, NULL)) {
+    if (path == nil || JreObjectEqualsEquals(path, JreLoadStatic(ADUri_PathPart, NULL))) {
       path = JreLoadStatic(ADUri_PathPart, EMPTY);
     }
     else {
@@ -2810,7 +2830,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)hasSchemeOrAuthority {
+- (bool)hasSchemeOrAuthority {
   return ADUri_Builder_hasSchemeOrAuthority(self);
 }
 
@@ -2910,8 +2930,8 @@ ADUri_Builder *create_ADUri_Builder_init() {
   J2OBJC_CREATE_IMPL(ADUri_Builder, init)
 }
 
-jboolean ADUri_Builder_hasSchemeOrAuthority(ADUri_Builder *self) {
-  return self->scheme_ != nil || (self->authority_ != nil && self->authority_ != JreLoadStatic(ADUri_Part, NULL));
+bool ADUri_Builder_hasSchemeOrAuthority(ADUri_Builder *self) {
+  return self->scheme_ != nil || (self->authority_ != nil && !JreObjectEqualsEquals(self->authority_, JreLoadStatic(ADUri_Part, NULL)));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_Builder)
@@ -2926,10 +2946,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (ADUri *)createFromParcelWithADParcel:(id<ADParcel>)inArg {
-  jint type = [((id<ADParcel>) nil_chk(inArg)) readInt];
+  int32_t type = [((id<ADParcel>) nil_chk(inArg)) readInt];
   switch (type) {
     case ADUri_NULL_TYPE_ID:
-    return nil;
+    return JreRetainedLocalValue(nil);
     case ADUri_StringUri_TYPE_ID:
     return ADUri_StringUri_readFromWithADParcel_(inArg);
     case ADUri_OpaqueUri_TYPE_ID:
@@ -2940,8 +2960,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Unknown URI type: ", type));
 }
 
-- (IOSObjectArray *)newArrayWithInt:(jint)size {
-  return [IOSObjectArray arrayWithLength:size type:ADUri_class_()];
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size {
+  return JreRetainedLocalValue([IOSObjectArray arrayWithLength:size type:ADUri_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -2958,7 +2978,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(newArrayWithInt:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "createFromParcel", "LADParcel;", "newArray", "I", "LADUri;", "Lr/android/os/Parcelable$Creator<Lr/android/net/Uri;>;" };
-  static const J2ObjcClassInfo _ADUri_1 = { "", "r.android.net", ptrTable, methods, NULL, 7, 0x8018, 3, 0, 4, -1, -1, 5, -1 };
+  static const J2ObjcClassInfo _ADUri_1 = { "", "r.android.net", ptrTable, methods, NULL, 7, 0x8000, 3, 0, 4, -1, -1, 5, -1 };
   return &_ADUri_1;
 }
 
@@ -3032,11 +3052,11 @@ ADUri_1 *create_ADUri_1_init() {
 
 void ADUri_AbstractPart_initWithNSString_withNSString_(ADUri_AbstractPart *self, NSString *encoded, NSString *decoded) {
   NSObject_init(self);
-  if (encoded != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED)) {
+  if (!JreStringEqualsEquals(encoded, JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED))) {
     JreVolatileStrongAssign(&self->encoded_, encoded);
     JreVolatileStrongAssign(&self->decoded_, JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
   }
-  else if (decoded != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED)) {
+  else if (!JreStringEqualsEquals(decoded, JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED))) {
     JreVolatileStrongAssign(&self->encoded_, JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
     JreVolatileStrongAssign(&self->decoded_, decoded);
   }
@@ -3046,7 +3066,7 @@ void ADUri_AbstractPart_initWithNSString_withNSString_(ADUri_AbstractPart *self,
 }
 
 NSString *ADUri_AbstractPart_getDecoded(ADUri_AbstractPart *self) {
-  jboolean hasDecoded = JreLoadVolatileId(&self->decoded_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
+  bool hasDecoded = !JreStringEqualsEquals(JreLoadVolatileId(&self->decoded_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
   return hasDecoded ? JreLoadVolatileId(&self->decoded_) : (JreVolatileStrongAssign(&self->decoded_, ADUri_decodeWithNSString_(JreLoadVolatileId(&self->encoded_))));
 }
 
@@ -3065,12 +3085,12 @@ ADUri_Part *ADUri_Part_EMPTY;
   return self;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return false;
 }
 
 - (NSString *)getEncoded {
-  jboolean hasEncoded = JreLoadVolatileId(&encoded_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
+  bool hasEncoded = !JreStringEqualsEquals(JreLoadVolatileId(&encoded_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
   return hasEncoded ? JreLoadVolatileId(&encoded_) : (JreVolatileStrongAssign(&encoded_, ADUri_encodeWithNSString_(JreLoadVolatileId(&decoded_))));
 }
 
@@ -3184,7 +3204,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_Part)
   return self;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return true;
 }
 
@@ -3208,7 +3228,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADUri_Part)
 
 void ADUri_Part_EmptyPart_initWithNSString_(ADUri_Part_EmptyPart *self, NSString *value) {
   ADUri_Part_initWithNSString_withNSString_(self, value, value);
-  if (value != nil && ![value java_isEmpty]) {
+  if (value != nil && ![value isEmpty]) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Expected empty value, got: ", value));
   }
   JreVolatileStrongAssign(&self->encoded_, JreVolatileStrongAssign(&self->decoded_, value));
@@ -3238,7 +3258,7 @@ ADUri_PathPart *ADUri_PathPart_EMPTY;
 }
 
 - (NSString *)getEncoded {
-  jboolean hasEncoded = JreLoadVolatileId(&encoded_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
+  bool hasEncoded = !JreStringEqualsEquals(JreLoadVolatileId(&encoded_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
   return hasEncoded ? JreLoadVolatileId(&encoded_) : (JreVolatileStrongAssign(&encoded_, ADUri_encodeWithNSString_withNSString_(JreLoadVolatileId(&decoded_), JreLoadStatic(JavaIoFile, separator))));
 }
 
@@ -3251,8 +3271,8 @@ ADUri_PathPart *ADUri_PathPart_EMPTY;
     return JreStrongAssign(&pathSegments_, JreLoadStatic(ADUri_PathSegments, EMPTY));
   }
   ADUri_PathSegmentsBuilder *segmentBuilder = create_ADUri_PathSegmentsBuilder_init();
-  jint previous = 0;
-  jint current;
+  int32_t previous = 0;
+  int32_t current;
   while ((current = [path java_indexOf:'/' fromIndex:previous]) > -1) {
     if (previous < current) {
       NSString *decodedSegment = ADUri_decodeWithNSString_([path java_substring:previous endIndex:current]);
@@ -3364,7 +3384,7 @@ ADUri_PathPart *ADUri_PathPart_appendEncodedSegmentWithADUri_PathPart_withNSStri
   if (oldPath == nil) {
     oldPath = @"";
   }
-  jint oldPathLength = [oldPath java_length];
+  int32_t oldPathLength = [oldPath java_length];
   NSString *newPath;
   if (oldPathLength == 0) {
     newPath = JreStrcat("C$", '/', newSegment);
@@ -3407,13 +3427,13 @@ ADUri_PathPart *ADUri_PathPart_fromWithNSString_withNSString_(NSString *encoded,
 
 ADUri_PathPart *ADUri_PathPart_makeAbsoluteWithADUri_PathPart_(ADUri_PathPart *oldPart) {
   ADUri_PathPart_initialize();
-  jboolean encodedCached = JreLoadVolatileId(&((ADUri_PathPart *) nil_chk(oldPart))->encoded_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
+  bool encodedCached = !JreStringEqualsEquals(JreLoadVolatileId(&((ADUri_PathPart *) nil_chk(oldPart))->encoded_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
   NSString *oldPath = encodedCached ? JreLoadVolatileId(&oldPart->encoded_) : JreLoadVolatileId(&oldPart->decoded_);
   if (oldPath == nil || [oldPath java_length] == 0 || [oldPath java_hasPrefix:@"/"]) {
     return oldPart;
   }
   NSString *newEncoded = encodedCached ? JreStrcat("C$", '/', JreLoadVolatileId(&oldPart->encoded_)) : JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
-  jboolean decodedCached = JreLoadVolatileId(&oldPart->decoded_) != JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
+  bool decodedCached = !JreStringEqualsEquals(JreLoadVolatileId(&oldPart->decoded_), JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED));
   NSString *newDecoded = decodedCached ? JreStrcat("C$", '/', JreLoadVolatileId(&oldPart->decoded_)) : JreLoadStatic(ADUri_NotCachedHolder, NOT_CACHED);
   return create_ADUri_PathPart_initWithNSString_withNSString_(newEncoded, newDecoded);
 }

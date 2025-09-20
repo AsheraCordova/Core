@@ -3,11 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\libcore\util\EmptyArray.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "EmptyArray.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(ADEmptyArray)
@@ -68,3 +80,5 @@ ADEmptyArray *create_ADEmptyArray_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADEmptyArray)
+
+J2OBJC_NAME_MAPPING(ADEmptyArray, "r.libcore.util", "AD")

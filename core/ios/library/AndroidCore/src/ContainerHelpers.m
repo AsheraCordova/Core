@@ -3,11 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\ContainerHelpers.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ContainerHelpers.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(ADContainerHelpers)
@@ -25,32 +39,32 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)idealIntArraySizeWithInt:(jint)need {
++ (int32_t)idealIntArraySizeWithInt:(int32_t)need {
   return ADContainerHelpers_idealIntArraySizeWithInt_(need);
 }
 
-+ (jint)idealLongArraySizeWithInt:(jint)need {
++ (int32_t)idealLongArraySizeWithInt:(int32_t)need {
   return ADContainerHelpers_idealLongArraySizeWithInt_(need);
 }
 
-+ (jint)idealByteArraySizeWithInt:(jint)need {
++ (int32_t)idealByteArraySizeWithInt:(int32_t)need {
   return ADContainerHelpers_idealByteArraySizeWithInt_(need);
 }
 
-+ (jboolean)equalWithId:(id)a
-                 withId:(id)b {
++ (bool)equalWithId:(id)a
+             withId:(id)b {
   return ADContainerHelpers_equalWithId_withId_(a, b);
 }
 
-+ (jint)binarySearchWithIntArray:(IOSIntArray *)array
-                         withInt:(jint)size
-                         withInt:(jint)value {
++ (int32_t)binarySearchWithIntArray:(IOSIntArray *)array
+                            withInt:(int32_t)size
+                            withInt:(int32_t)value {
   return ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(array, size, value);
 }
 
-+ (jint)binarySearchWithLongArray:(IOSLongArray *)array
-                          withInt:(jint)size
-                         withLong:(jlong)value {
++ (int32_t)binarySearchWithLongArray:(IOSLongArray *)array
+                             withInt:(int32_t)size
+                            withLong:(int64_t)value {
   return ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(array, size, value);
 }
 
@@ -108,34 +122,34 @@ ADContainerHelpers *create_ADContainerHelpers_init() {
   J2OBJC_CREATE_IMPL(ADContainerHelpers, init)
 }
 
-jint ADContainerHelpers_idealIntArraySizeWithInt_(jint need) {
+int32_t ADContainerHelpers_idealIntArraySizeWithInt_(int32_t need) {
   ADContainerHelpers_initialize();
   return JreIntDiv(ADContainerHelpers_idealByteArraySizeWithInt_(need * 4), 4);
 }
 
-jint ADContainerHelpers_idealLongArraySizeWithInt_(jint need) {
+int32_t ADContainerHelpers_idealLongArraySizeWithInt_(int32_t need) {
   ADContainerHelpers_initialize();
   return JreIntDiv(ADContainerHelpers_idealByteArraySizeWithInt_(need * 8), 8);
 }
 
-jint ADContainerHelpers_idealByteArraySizeWithInt_(jint need) {
+int32_t ADContainerHelpers_idealByteArraySizeWithInt_(int32_t need) {
   ADContainerHelpers_initialize();
-  for (jint i = 4; i < 32; i++) if (need <= (JreLShift32(1, i)) - 12) return (JreLShift32(1, i)) - 12;
+  for (int32_t i = 4; i < 32; i++) if (need <= (JreLShift32(1, i)) - 12) return (JreLShift32(1, i)) - 12;
   return need;
 }
 
-jboolean ADContainerHelpers_equalWithId_withId_(id a, id b) {
+bool ADContainerHelpers_equalWithId_withId_(id a, id b) {
   ADContainerHelpers_initialize();
-  return a == b || (a != nil && [a isEqual:b]);
+  return JreObjectEqualsEquals(a, b) || (a != nil && [a isEqual:b]);
 }
 
-jint ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *array, jint size, jint value) {
+int32_t ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *array, int32_t size, int32_t value) {
   ADContainerHelpers_initialize();
-  jint lo = 0;
-  jint hi = size - 1;
+  int32_t lo = 0;
+  int32_t hi = size - 1;
   while (lo <= hi) {
-    jint mid = JreURShift32((lo + hi), 1);
-    jint midVal = IOSIntArray_Get(nil_chk(array), mid);
+    int32_t mid = JreURShift32((lo + hi), 1);
+    int32_t midVal = IOSIntArray_Get(nil_chk(array), mid);
     if (midVal < value) {
       lo = mid + 1;
     }
@@ -149,13 +163,13 @@ jint ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *a
   return ~lo;
 }
 
-jint ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray *array, jint size, jlong value) {
+int32_t ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray *array, int32_t size, int64_t value) {
   ADContainerHelpers_initialize();
-  jint lo = 0;
-  jint hi = size - 1;
+  int32_t lo = 0;
+  int32_t hi = size - 1;
   while (lo <= hi) {
-    jint mid = JreURShift32((lo + hi), 1);
-    jlong midVal = IOSLongArray_Get(nil_chk(array), mid);
+    int32_t mid = JreURShift32((lo + hi), 1);
+    int64_t midVal = IOSLongArray_Get(nil_chk(array), mid);
     if (midVal < value) {
       lo = mid + 1;
     }
@@ -170,3 +184,5 @@ jint ADContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADContainerHelpers)
+
+J2OBJC_NAME_MAPPING(ADContainerHelpers, "r.android.util", "AD")

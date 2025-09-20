@@ -3,14 +3,27 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelDataType.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "ModelDataType.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 
 
-__attribute__((unused)) static void ASModelDataType_initWithNSString_withInt_(ASModelDataType *self, NSString *__name, jint __ordinal);
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+__attribute__((unused)) static void ASModelDataType_initWithNSString_withInt_(ASModelDataType *self, NSString *__name, int32_t __ordinal);
 
 J2OBJC_INITIALIZED_DEFN(ASModelDataType)
 
@@ -28,6 +41,24 @@ ASModelDataType *ASModelDataType_values_[7];
 
 - (ASModelDataType_Enum)toNSEnum {
   return (ASModelDataType_Enum)[self ordinal];
+}
+
+- (ASModelDataType_Enum)enumValue {
+  return (ASModelDataType_Enum)[self ordinal];
+}
+
++ (ASModelDataType *)fromNSEnum:(ASModelDataType_Enum)nativeValue {
+  ASModelDataType *javaEnum = ASModelDataType_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ASModelDataType_Enum out of range.");
+  return javaEnum;
+}
+
+- (ASModelDataType_ORDINAL)ordinal {
+  return (ASModelDataType_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithModelDataType:(ASModelDataType_Enum)value {
+  return RETAIN_(ASModelDataType_fromOrdinal((ASModelDataType_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -61,7 +92,7 @@ ASModelDataType *ASModelDataType_values_[7];
     size_t allocSize = 7 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 7; i++) {
+    for (int32_t i = 0; i < 7; i++) {
       ((void)(ASModelDataType_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASModelDataType_initWithNSString_withInt_(e, JreEnumConstantName(ASModelDataType_class_(), i), i);
     }
@@ -71,7 +102,7 @@ ASModelDataType *ASModelDataType_values_[7];
 
 @end
 
-void ASModelDataType_initWithNSString_withInt_(ASModelDataType *self, NSString *__name, jint __ordinal) {
+void ASModelDataType_initWithNSString_withInt_(ASModelDataType *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -89,15 +120,16 @@ ASModelDataType *ASModelDataType_valueOfWithNSString_(NSString *name) {
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ASModelDataType *ASModelDataType_fromOrdinal(NSUInteger ordinal) {
+ASModelDataType *ASModelDataType_fromOrdinal(ASModelDataType_ORDINAL ordinal) {
   ASModelDataType_initialize();
-  if (ordinal >= 7) {
+  if (ordinal < 0 || ordinal >= 7) {
     return nil;
   }
   return ASModelDataType_values_[ordinal];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelDataType)
+
+J2OBJC_NAME_MAPPING(ASModelDataType, "com.ashera.model", "AS")

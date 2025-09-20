@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\ICustomMeasureWidth.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ICustomMeasureWidth")
@@ -16,9 +17,11 @@
 #if !defined (ASICustomMeasureWidth_) && (INCLUDE_ALL_ICustomMeasureWidth || defined(INCLUDE_ASICustomMeasureWidth))
 #define ASICustomMeasureWidth_
 
+@class JavaLangInteger;
+
 @protocol ASICustomMeasureWidth < JavaObject >
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 @end
 
@@ -27,6 +30,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASICustomMeasureWidth)
 J2OBJC_TYPE_LITERAL_HEADER(ASICustomMeasureWidth)
 
 #define ComAsheraWidgetICustomMeasureWidth ASICustomMeasureWidth
+
 
 #endif
 

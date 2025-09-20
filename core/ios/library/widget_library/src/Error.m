@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\Error.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseWidget.h"
 #include "Error.h"
 #include "IOSClass.h"
@@ -15,6 +20,13 @@
 #include "java/lang/Exception.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Map.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASError () {
@@ -198,3 +210,5 @@ ASError *create_ASError_initWithJavaUtilMap_withASBaseWidget_withJavaLangExcepti
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASError)
+
+J2OBJC_NAME_MAPPING(ASError, "com.ashera.model", "AS")

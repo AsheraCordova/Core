@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\RelativeLayout.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RelativeLayout")
@@ -21,6 +22,8 @@
 #include "ViewGroup.h"
 
 @class ADViewGroup_LayoutParams;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADRelativeLayout : ADViewGroup
 
@@ -28,130 +31,130 @@
 
 - (instancetype)init;
 
-- (jint)getBaseline;
+- (int32_t)getBaseline;
 
-- (jint)getGravity;
+- (int32_t)getGravity;
 
 - (void)release__;
 
 - (void)requestLayout;
 
-- (void)setGravityWithInt:(jint)gravity;
+- (void)setGravityWithInt:(int32_t)gravity;
 
-- (void)setIgnoreGravityWithInt:(jint)viewId;
+- (void)setIgnoreGravityWithInt:(int32_t)viewId;
 
 #pragma mark Protected
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
 - (ADViewGroup_LayoutParams *)generateDefaultLayoutParams;
 
 - (ADViewGroup_LayoutParams *)generateLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)lp;
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 @end
 
 J2OBJC_STATIC_INIT(ADRelativeLayout)
 
-inline jint ADRelativeLayout_get_TRUE(void);
+inline int32_t ADRelativeLayout_get_TRUE(void);
 #define ADRelativeLayout_TRUE -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, TRUE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, TRUE, int32_t)
 
-inline jint ADRelativeLayout_get_LEFT_OF(void);
+inline int32_t ADRelativeLayout_get_LEFT_OF(void);
 #define ADRelativeLayout_LEFT_OF 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, LEFT_OF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, LEFT_OF, int32_t)
 
-inline jint ADRelativeLayout_get_RIGHT_OF(void);
+inline int32_t ADRelativeLayout_get_RIGHT_OF(void);
 #define ADRelativeLayout_RIGHT_OF 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, RIGHT_OF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, RIGHT_OF, int32_t)
 
-inline jint ADRelativeLayout_get_ABOVE(void);
+inline int32_t ADRelativeLayout_get_ABOVE(void);
 #define ADRelativeLayout_ABOVE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ABOVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ABOVE, int32_t)
 
-inline jint ADRelativeLayout_get_BELOW(void);
+inline int32_t ADRelativeLayout_get_BELOW(void);
 #define ADRelativeLayout_BELOW 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, BELOW, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, BELOW, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_BASELINE(void);
+inline int32_t ADRelativeLayout_get_ALIGN_BASELINE(void);
 #define ADRelativeLayout_ALIGN_BASELINE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_BASELINE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_BASELINE, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_LEFT(void);
+inline int32_t ADRelativeLayout_get_ALIGN_LEFT(void);
 #define ADRelativeLayout_ALIGN_LEFT 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_LEFT, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_TOP(void);
+inline int32_t ADRelativeLayout_get_ALIGN_TOP(void);
 #define ADRelativeLayout_ALIGN_TOP 6
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_TOP, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_RIGHT(void);
+inline int32_t ADRelativeLayout_get_ALIGN_RIGHT(void);
 #define ADRelativeLayout_ALIGN_RIGHT 7
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_RIGHT, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_BOTTOM(void);
+inline int32_t ADRelativeLayout_get_ALIGN_BOTTOM(void);
 #define ADRelativeLayout_ALIGN_BOTTOM 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_BOTTOM, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_PARENT_LEFT(void);
+inline int32_t ADRelativeLayout_get_ALIGN_PARENT_LEFT(void);
 #define ADRelativeLayout_ALIGN_PARENT_LEFT 9
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_LEFT, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_PARENT_TOP(void);
+inline int32_t ADRelativeLayout_get_ALIGN_PARENT_TOP(void);
 #define ADRelativeLayout_ALIGN_PARENT_TOP 10
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_TOP, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_PARENT_RIGHT(void);
+inline int32_t ADRelativeLayout_get_ALIGN_PARENT_RIGHT(void);
 #define ADRelativeLayout_ALIGN_PARENT_RIGHT 11
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_RIGHT, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_PARENT_BOTTOM(void);
+inline int32_t ADRelativeLayout_get_ALIGN_PARENT_BOTTOM(void);
 #define ADRelativeLayout_ALIGN_PARENT_BOTTOM 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_BOTTOM, int32_t)
 
-inline jint ADRelativeLayout_get_CENTER_IN_PARENT(void);
+inline int32_t ADRelativeLayout_get_CENTER_IN_PARENT(void);
 #define ADRelativeLayout_CENTER_IN_PARENT 13
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, CENTER_IN_PARENT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, CENTER_IN_PARENT, int32_t)
 
-inline jint ADRelativeLayout_get_CENTER_HORIZONTAL(void);
+inline int32_t ADRelativeLayout_get_CENTER_HORIZONTAL(void);
 #define ADRelativeLayout_CENTER_HORIZONTAL 14
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, CENTER_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, CENTER_HORIZONTAL, int32_t)
 
-inline jint ADRelativeLayout_get_CENTER_VERTICAL(void);
+inline int32_t ADRelativeLayout_get_CENTER_VERTICAL(void);
 #define ADRelativeLayout_CENTER_VERTICAL 15
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, CENTER_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, CENTER_VERTICAL, int32_t)
 
-inline jint ADRelativeLayout_get_START_OF(void);
+inline int32_t ADRelativeLayout_get_START_OF(void);
 #define ADRelativeLayout_START_OF 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, START_OF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, START_OF, int32_t)
 
-inline jint ADRelativeLayout_get_END_OF(void);
+inline int32_t ADRelativeLayout_get_END_OF(void);
 #define ADRelativeLayout_END_OF 17
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, END_OF, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, END_OF, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_START(void);
+inline int32_t ADRelativeLayout_get_ALIGN_START(void);
 #define ADRelativeLayout_ALIGN_START 18
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_START, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_END(void);
+inline int32_t ADRelativeLayout_get_ALIGN_END(void);
 #define ADRelativeLayout_ALIGN_END 19
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_END, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_PARENT_START(void);
+inline int32_t ADRelativeLayout_get_ALIGN_PARENT_START(void);
 #define ADRelativeLayout_ALIGN_PARENT_START 20
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_START, int32_t)
 
-inline jint ADRelativeLayout_get_ALIGN_PARENT_END(void);
+inline int32_t ADRelativeLayout_get_ALIGN_PARENT_END(void);
 #define ADRelativeLayout_ALIGN_PARENT_END 21
-J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADRelativeLayout, ALIGN_PARENT_END, int32_t)
 
 FOUNDATION_EXPORT void ADRelativeLayout_init(ADRelativeLayout *self);
 
@@ -162,6 +165,7 @@ FOUNDATION_EXPORT ADRelativeLayout *create_ADRelativeLayout_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADRelativeLayout)
 
 @compatibility_alias RAndroidWidgetRelativeLayout ADRelativeLayout;
+
 
 #endif
 
@@ -174,35 +178,37 @@ J2OBJC_TYPE_LITERAL_HEADER(ADRelativeLayout)
 
 @class ADViewGroup_LayoutParams;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADRelativeLayout_LayoutParams : ADViewGroup_MarginLayoutParams {
  @public
-  jboolean alignWithParent_;
+  bool alignWithParent_;
 }
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)h;
+- (instancetype)initWithInt:(int32_t)w
+                    withInt:(int32_t)h;
 
 - (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)source;
 
 - (instancetype)initWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)source;
 
-- (void)addRuleWithInt:(jint)verb;
+- (void)addRuleWithInt:(int32_t)verb;
 
-- (void)addRuleWithInt:(jint)verb
-               withInt:(jint)subject;
+- (void)addRuleWithInt:(int32_t)verb
+               withInt:(int32_t)subject;
 
-- (jint)getRuleWithInt:(jint)verb;
+- (int32_t)getRuleWithInt:(int32_t)verb;
 
 - (IOSIntArray *)getRules;
 
-- (IOSIntArray *)getRulesWithInt:(jint)layoutDirection;
+- (IOSIntArray *)getRulesWithInt:(int32_t)layoutDirection;
 
-- (void)removeRuleWithInt:(jint)verb;
+- (void)removeRuleWithInt:(int32_t)verb;
 
-- (void)resolveLayoutDirectionWithInt:(jint)layoutDirection;
+- (void)resolveLayoutDirectionWithInt:(int32_t)layoutDirection;
 
 // Disallowed inherited constructors, do not use.
 
@@ -212,11 +218,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADRelativeLayout)
 
 J2OBJC_EMPTY_STATIC_INIT(ADRelativeLayout_LayoutParams)
 
-FOUNDATION_EXPORT void ADRelativeLayout_LayoutParams_initWithInt_withInt_(ADRelativeLayout_LayoutParams *self, jint w, jint h);
+FOUNDATION_EXPORT void ADRelativeLayout_LayoutParams_initWithInt_withInt_(ADRelativeLayout_LayoutParams *self, int32_t w, int32_t h);
 
-FOUNDATION_EXPORT ADRelativeLayout_LayoutParams *new_ADRelativeLayout_LayoutParams_initWithInt_withInt_(jint w, jint h) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADRelativeLayout_LayoutParams *new_ADRelativeLayout_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADRelativeLayout_LayoutParams *create_ADRelativeLayout_LayoutParams_initWithInt_withInt_(jint w, jint h);
+FOUNDATION_EXPORT ADRelativeLayout_LayoutParams *create_ADRelativeLayout_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h);
 
 FOUNDATION_EXPORT void ADRelativeLayout_LayoutParams_initWithADViewGroup_LayoutParams_(ADRelativeLayout_LayoutParams *self, ADViewGroup_LayoutParams *source);
 
@@ -231,6 +237,7 @@ FOUNDATION_EXPORT ADRelativeLayout_LayoutParams *new_ADRelativeLayout_LayoutPara
 FOUNDATION_EXPORT ADRelativeLayout_LayoutParams *create_ADRelativeLayout_LayoutParams_initWithADRelativeLayout_LayoutParams_(ADRelativeLayout_LayoutParams *source);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADRelativeLayout_LayoutParams)
+
 
 #endif
 

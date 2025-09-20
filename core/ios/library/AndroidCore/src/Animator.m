@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\Animator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AnimationHandler.h"
 #include "Animator.h"
 #include "ConstantState.h"
@@ -13,13 +18,21 @@
 #include "TimeInterpolator.h"
 #include "ValueAnimator.h"
 #include "java/lang/AssertionError.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CloneNotSupportedException.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/util/ArrayList.h"
+
 
 @class ADAnimator_AnimatorConstantState;
 @class ADResources;
 @class ADResources_Theme;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -50,11 +63,11 @@ J2OBJC_FIELD_SETTER(ADAnimator, mCachedList_, IOSObjectArray *)
  @brief backing field for backgroundPauseDelay property.This could be simply a hardcoded
   value in AnimationHandler, but it is useful to be able to change the value in tests.
  */
-inline jlong ADAnimator_get_sBackgroundPauseDelay(void);
-inline jlong ADAnimator_set_sBackgroundPauseDelay(jlong value);
-inline jlong *ADAnimator_getRef_sBackgroundPauseDelay(void);
-static jlong ADAnimator_sBackgroundPauseDelay = 1000;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADAnimator, sBackgroundPauseDelay, jlong)
+inline int64_t ADAnimator_get_sBackgroundPauseDelay(void);
+inline int64_t ADAnimator_set_sBackgroundPauseDelay(int64_t value);
+inline int64_t *ADAnimator_getRef_sBackgroundPauseDelay(void);
+static int64_t ADAnimator_sBackgroundPauseDelay = 1000;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADAnimator, sBackgroundPauseDelay, int64_t)
 
 @interface ADAnimator_AnimatorListener : NSObject
 
@@ -73,19 +86,19 @@ J2OBJC_STATIC_FIELD_PRIMITIVE(ADAnimator, sBackgroundPauseDelay, jlong)
 @interface ADAnimator_AnimatorConstantState : ADConstantState {
  @public
   ADAnimator *mAnimator_;
-  jint mChangingConf_;
+  int32_t mChangingConf_;
 }
 
 - (instancetype)initWithADAnimator:(ADAnimator *)animator;
 
-- (jint)getChangingConfigurations;
+- (int32_t)getChangingConfigurations;
 
 - (ADAnimator *)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (ADAnimator *)newInstanceWithADResources:(ADResources *)arg0
-                     withADResources_Theme:(ADResources_Theme *)arg1 OBJC_METHOD_FAMILY_NONE;
+- (ADAnimator *)newInstanceWithADResources:(ADResources *)res
+                     withADResources_Theme:(ADResources_Theme *)theme OBJC_METHOD_FAMILY_NONE;
 
-- (ADAnimator *)newInstanceWithADResources:(ADResources *)arg0 OBJC_METHOD_FAMILY_NONE;
+- (ADAnimator *)newInstanceWithADResources:(ADResources *)res OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -101,11 +114,12 @@ __attribute__((unused)) static ADAnimator_AnimatorConstantState *create_ADAnimat
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimator_AnimatorConstantState)
 
+
 @interface ADAnimator_AnimatorCaller_$Lambda$1 : NSObject < ADAnimator_AnimatorCaller >
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)a
             withId:(ADAnimator *)b
-       withBoolean:(jboolean)c;
+       withBoolean:(bool)c;
 
 @end
 
@@ -121,11 +135,12 @@ __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$1 *new_ADAnimat
 
 __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$1 *create_ADAnimator_AnimatorCaller_$Lambda$1_init(void);
 
+
 @interface ADAnimator_AnimatorCaller_$Lambda$2 : NSObject < ADAnimator_AnimatorCaller >
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)a
             withId:(ADAnimator *)b
-       withBoolean:(jboolean)c;
+       withBoolean:(bool)c;
 
 @end
 
@@ -141,11 +156,12 @@ __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$2 *new_ADAnimat
 
 __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$2 *create_ADAnimator_AnimatorCaller_$Lambda$2_init(void);
 
+
 @interface ADAnimator_AnimatorCaller_$Lambda$3 : NSObject < ADAnimator_AnimatorCaller >
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse;
+       withBoolean:(bool)isReverse;
 
 @end
 
@@ -161,11 +177,12 @@ __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$3 *new_ADAnimat
 
 __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$3 *create_ADAnimator_AnimatorCaller_$Lambda$3_init(void);
 
+
 @interface ADAnimator_AnimatorCaller_$Lambda$4 : NSObject < ADAnimator_AnimatorCaller >
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse;
+       withBoolean:(bool)isReverse;
 
 @end
 
@@ -181,11 +198,12 @@ __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$4 *new_ADAnimat
 
 __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$4 *create_ADAnimator_AnimatorCaller_$Lambda$4_init(void);
 
+
 @interface ADAnimator_AnimatorCaller_$Lambda$5 : NSObject < ADAnimator_AnimatorCaller >
 
 - (void)callWithId:(id<ADAnimator_AnimatorPauseListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse;
+       withBoolean:(bool)isReverse;
 
 @end
 
@@ -201,11 +219,12 @@ __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$5 *new_ADAnimat
 
 __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$5 *create_ADAnimator_AnimatorCaller_$Lambda$5_init(void);
 
+
 @interface ADAnimator_AnimatorCaller_$Lambda$6 : NSObject < ADAnimator_AnimatorCaller >
 
 - (void)callWithId:(id<ADAnimator_AnimatorPauseListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse;
+       withBoolean:(bool)isReverse;
 
 @end
 
@@ -221,11 +240,12 @@ __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$6 *new_ADAnimat
 
 __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$6 *create_ADAnimator_AnimatorCaller_$Lambda$6_init(void);
 
+
 @interface ADAnimator_AnimatorCaller_$Lambda$7 : NSObject < ADAnimator_AnimatorCaller >
 
 - (void)callWithId:(id<ADValueAnimator_AnimatorUpdateListener>)listener
             withId:(ADValueAnimator *)animator
-       withBoolean:(jboolean)isReverse;
+       withBoolean:(bool)isReverse;
 
 @end
 
@@ -241,6 +261,7 @@ __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$7 *new_ADAnimat
 
 __attribute__((unused)) static ADAnimator_AnimatorCaller_$Lambda$7 *create_ADAnimator_AnimatorCaller_$Lambda$7_init(void);
 
+
 @implementation ADAnimator
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -250,15 +271,15 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (void)setBackgroundPauseDelayWithLong:(jlong)value {
++ (void)setBackgroundPauseDelayWithLong:(int64_t)value {
   ADAnimator_setBackgroundPauseDelayWithLong_(value);
 }
 
-+ (jlong)getBackgroundPauseDelay {
++ (int64_t)getBackgroundPauseDelay {
   return ADAnimator_getBackgroundPauseDelay();
 }
 
-+ (void)setAnimatorPausingEnabledWithBoolean:(jboolean)enable {
++ (void)setAnimatorPausingEnabledWithBoolean:(bool)enable {
   ADAnimator_setAnimatorPausingEnabledWithBoolean_(enable);
 }
 
@@ -285,35 +306,35 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isPaused {
+- (bool)isPaused {
   return mPaused_;
 }
 
-- (jlong)getStartDelay {
+- (int64_t)getStartDelay {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (void)setStartDelayWithLong:(jlong)startDelay {
+- (void)setStartDelayWithLong:(int64_t)startDelay {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (ADAnimator *)setDurationWithLong:(jlong)duration {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jlong)getDuration {
+- (ADAnimator *)setDurationWithLong:(int64_t)duration {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jlong)getTotalDuration {
-  jlong duration = [self getDuration];
+- (int64_t)getDuration {
+  // can't call an abstract method
+  [self doesNotRecognizeSelector:_cmd];
+  return 0;
+}
+
+- (int64_t)getTotalDuration {
+  int64_t duration = [self getDuration];
   if (duration == ADAnimator_DURATION_INFINITE) {
     return ADAnimator_DURATION_INFINITE;
   }
@@ -331,13 +352,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)isRunning {
+- (bool)isRunning {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jboolean)isStarted {
+- (bool)isStarted {
   return [self isRunning];
 }
 
@@ -390,15 +411,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getChangingConfigurations {
+- (int32_t)getChangingConfigurations {
   return mChangingConfigurations_;
 }
 
-- (void)setChangingConfigurationsWithInt:(jint)configs {
+- (void)setChangingConfigurationsWithInt:(int32_t)configs {
   mChangingConfigurations_ = configs;
 }
 
-- (void)appendChangingConfigurationsWithInt:(jint)configs {
+- (void)appendChangingConfigurationsWithInt:(int32_t)configs {
   mChangingConfigurations_ |= configs;
 }
 
@@ -433,7 +454,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setTargetWithId:(id)target {
 }
 
-- (jboolean)canReverse {
+- (bool)canReverse {
   return false;
 }
 
@@ -441,11 +462,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   @throw create_JavaLangIllegalStateException_initWithNSString_(@"Reverse is not supported");
 }
 
-- (jboolean)pulseAnimationFrameWithLong:(jlong)frameTime {
+- (bool)pulseAnimationFrameWithLong:(int64_t)frameTime {
   return false;
 }
 
-- (void)startWithoutPulsingWithBoolean:(jboolean)inReverse {
+- (void)startWithoutPulsingWithBoolean:(bool)inReverse {
   if (inReverse) {
     [self reverse];
   }
@@ -454,30 +475,30 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)skipToEndValueWithBoolean:(jboolean)inReverse {
+- (void)skipToEndValueWithBoolean:(bool)inReverse {
 }
 
-- (jboolean)isInitialized {
+- (bool)isInitialized {
   return true;
 }
 
-- (void)animateValuesInRangeWithLong:(jlong)currentPlayTime
-                            withLong:(jlong)lastPlayTime {
+- (void)animateValuesInRangeWithLong:(int64_t)currentPlayTime
+                            withLong:(int64_t)lastPlayTime {
 }
 
-- (void)animateSkipToEndsWithLong:(jlong)currentPlayTime
-                         withLong:(jlong)lastPlayTime {
+- (void)animateSkipToEndsWithLong:(int64_t)currentPlayTime
+                         withLong:(int64_t)lastPlayTime {
 }
 
 - (void)getStartAndEndTimesWithADLongArray:(ADLongArray *)times
-                                  withLong:(jlong)offset {
-  jlong startTime = offset + [self getStartDelay];
+                                  withLong:(int64_t)offset {
+  int64_t startTime = offset + [self getStartDelay];
   if ([((ADLongArray *) nil_chk(times)) indexOfWithLong:startTime] < 0) {
     [times addWithLong:startTime];
   }
-  jlong duration = [self getTotalDuration];
+  int64_t duration = [self getTotalDuration];
   if (duration != ADAnimator_DURATION_INFINITE) {
-    jlong endTime = duration + offset;
+    int64_t endTime = duration + offset;
     if ([times indexOfWithLong:endTime] < 0) {
       [times addWithLong:endTime];
     }
@@ -485,7 +506,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)notifyListenersWithADAnimator_AnimatorCaller:(id<ADAnimator_AnimatorCaller>)notification
-                                         withBoolean:(jboolean)isReverse {
+                                         withBoolean:(bool)isReverse {
   [self callOnListWithJavaUtilArrayList:mListeners_ withADAnimator_AnimatorCaller:notification withId:self withBoolean:isReverse];
 }
 
@@ -493,16 +514,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self callOnListWithJavaUtilArrayList:mPauseListeners_ withADAnimator_AnimatorCaller:notification withId:self withBoolean:false];
 }
 
-- (void)notifyStartListenersWithBoolean:(jboolean)isReversing {
-  jboolean startListenersCalled = mStartListenersCalled_;
+- (void)notifyStartListenersWithBoolean:(bool)isReversing {
+  bool startListenersCalled = mStartListenersCalled_;
   mStartListenersCalled_ = true;
   if (mListeners_ != nil && !startListenersCalled) {
     [self notifyListenersWithADAnimator_AnimatorCaller:JreLoadStatic(ADAnimator_AnimatorCaller, ON_START) withBoolean:isReversing];
   }
 }
 
-- (void)notifyEndListenersWithBoolean:(jboolean)isReversing {
-  jboolean startListenersCalled = mStartListenersCalled_;
+- (void)notifyEndListenersWithBoolean:(bool)isReversing {
+  bool startListenersCalled = mStartListenersCalled_;
   mStartListenersCalled_ = false;
   if (mListeners_ != nil && startListenersCalled) {
     [self notifyListenersWithADAnimator_AnimatorCaller:JreLoadStatic(ADAnimator_AnimatorCaller, ON_END) withBoolean:isReversing];
@@ -512,8 +533,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)callOnListWithJavaUtilArrayList:(JavaUtilArrayList *)list
           withADAnimator_AnimatorCaller:(id<ADAnimator_AnimatorCaller>)call
                                  withId:(id)animator
-                            withBoolean:(jboolean)isReverse {
-  jint size = list == nil ? 0 : [list size];
+                            withBoolean:(bool)isReverse {
+  int32_t size = list == nil ? 0 : [list size];
   if (size > 0) {
     IOSObjectArray *array;
     if (mCachedList_ == nil || mCachedList_->size_ < size) {
@@ -524,7 +545,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       JreStrongAssign(&mCachedList_, nil);
     }
     [((JavaUtilArrayList *) nil_chk(list)) toArrayWithNSObjectArray:array];
-    for (jint i = 0; i < size; i++) {
+    for (int32_t i = 0; i < size; i++) {
       id item = IOSObjectArray_Get(array, i);
       [((id<ADAnimator_AnimatorCaller>) nil_chk(call)) callWithId:item withId:animator withBoolean:isReverse];
       IOSObjectArray_Set(array, i, nil);
@@ -533,7 +554,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setAllowRunningAsynchronouslyWithBoolean:(jboolean)mayRunAsync {
+- (void)setAllowRunningAsynchronouslyWithBoolean:(bool)mayRunAsync {
 }
 
 - (void)dealloc {
@@ -678,23 +699,25 @@ void ADAnimator_init(ADAnimator *self) {
   self->mStartListenersCalled_ = false;
 }
 
-void ADAnimator_setBackgroundPauseDelayWithLong_(jlong value) {
+void ADAnimator_setBackgroundPauseDelayWithLong_(int64_t value) {
   ADAnimator_initialize();
   ADAnimator_sBackgroundPauseDelay = value;
 }
 
-jlong ADAnimator_getBackgroundPauseDelay() {
+int64_t ADAnimator_getBackgroundPauseDelay() {
   ADAnimator_initialize();
   return ADAnimator_sBackgroundPauseDelay;
 }
 
-void ADAnimator_setAnimatorPausingEnabledWithBoolean_(jboolean enable) {
+void ADAnimator_setAnimatorPausingEnabledWithBoolean_(bool enable) {
   ADAnimator_initialize();
   ADAnimationHandler_setAnimatorPausingEnabledWithBoolean_(enable);
   ADAnimationHandler_setOverrideAnimatorPausingSystemPropertyWithBoolean_(!enable);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimator)
+
+J2OBJC_NAME_MAPPING(ADAnimator, "r.android.animation", "AD")
 
 @implementation ADAnimator_AnimatorListener
 
@@ -724,12 +747,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimator)
 
 @end
 
-void ADAnimator_AnimatorListener_onAnimationStartWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, jboolean isReverse) {
+void ADAnimator_AnimatorListener_onAnimationStartWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, bool isReverse) {
   ADAnimator_AnimatorListener_initialize();
   [self onAnimationStartWithADAnimator:animation];
 }
 
-void ADAnimator_AnimatorListener_onAnimationEndWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, jboolean isReverse) {
+void ADAnimator_AnimatorListener_onAnimationEndWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, bool isReverse) {
   ADAnimator_AnimatorListener_initialize();
   [self onAnimationEndWithADAnimator:animation];
 }
@@ -765,7 +788,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADAnimator_AnimatorPauseListener)
   return self;
 }
 
-- (jint)getChangingConfigurations {
+- (int32_t)getChangingConfigurations {
   return mChangingConf_;
 }
 
@@ -879,7 +902,7 @@ J2OBJC_INITIALIZED_DEFN(ADAnimator_AnimatorCaller_$Lambda$1)
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)a
             withId:(ADAnimator *)b
-       withBoolean:(jboolean)c {
+       withBoolean:(bool)c {
   [((id<ADAnimator_AnimatorListener>) nil_chk(a)) onAnimationStartWithADAnimator:b withBoolean:c];
 }
 
@@ -910,7 +933,7 @@ J2OBJC_INITIALIZED_DEFN(ADAnimator_AnimatorCaller_$Lambda$2)
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)a
             withId:(ADAnimator *)b
-       withBoolean:(jboolean)c {
+       withBoolean:(bool)c {
   [((id<ADAnimator_AnimatorListener>) nil_chk(a)) onAnimationEndWithADAnimator:b withBoolean:c];
 }
 
@@ -941,7 +964,7 @@ J2OBJC_INITIALIZED_DEFN(ADAnimator_AnimatorCaller_$Lambda$3)
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse {
+       withBoolean:(bool)isReverse {
   [((id<ADAnimator_AnimatorListener>) nil_chk(listener)) onAnimationCancelWithADAnimator:animator];
 }
 
@@ -972,7 +995,7 @@ J2OBJC_INITIALIZED_DEFN(ADAnimator_AnimatorCaller_$Lambda$4)
 
 - (void)callWithId:(id<ADAnimator_AnimatorListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse {
+       withBoolean:(bool)isReverse {
   [((id<ADAnimator_AnimatorListener>) nil_chk(listener)) onAnimationRepeatWithADAnimator:animator];
 }
 
@@ -1003,7 +1026,7 @@ J2OBJC_INITIALIZED_DEFN(ADAnimator_AnimatorCaller_$Lambda$5)
 
 - (void)callWithId:(id<ADAnimator_AnimatorPauseListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse {
+       withBoolean:(bool)isReverse {
   [((id<ADAnimator_AnimatorPauseListener>) nil_chk(listener)) onAnimationPauseWithADAnimator:animator];
 }
 
@@ -1034,7 +1057,7 @@ J2OBJC_INITIALIZED_DEFN(ADAnimator_AnimatorCaller_$Lambda$6)
 
 - (void)callWithId:(id<ADAnimator_AnimatorPauseListener>)listener
             withId:(ADAnimator *)animator
-       withBoolean:(jboolean)isReverse {
+       withBoolean:(bool)isReverse {
   [((id<ADAnimator_AnimatorPauseListener>) nil_chk(listener)) onAnimationResumeWithADAnimator:animator];
 }
 
@@ -1065,7 +1088,7 @@ J2OBJC_INITIALIZED_DEFN(ADAnimator_AnimatorCaller_$Lambda$7)
 
 - (void)callWithId:(id<ADValueAnimator_AnimatorUpdateListener>)listener
             withId:(ADValueAnimator *)animator
-       withBoolean:(jboolean)isReverse {
+       withBoolean:(bool)isReverse {
   [((id<ADValueAnimator_AnimatorUpdateListener>) nil_chk(listener)) onAnimationUpdateWithADValueAnimator:animator];
 }
 

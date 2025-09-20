@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\ICustomMeasureHeight.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ICustomMeasureHeight")
@@ -16,9 +17,11 @@
 #if !defined (ASICustomMeasureHeight_) && (INCLUDE_ALL_ICustomMeasureHeight || defined(INCLUDE_ASICustomMeasureHeight))
 #define ASICustomMeasureHeight_
 
+@class JavaLangInteger;
+
 @protocol ASICustomMeasureHeight < JavaObject >
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
 @end
 
@@ -27,6 +30,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASICustomMeasureHeight)
 J2OBJC_TYPE_LITERAL_HEADER(ASICustomMeasureHeight)
 
 #define ComAsheraWidgetICustomMeasureHeight ASICustomMeasureHeight
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\JsPromptResult.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_JsPromptResult")
@@ -15,6 +16,8 @@
 
 #if !defined (ADJsPromptResult_) && (INCLUDE_ALL_JsPromptResult || defined(INCLUDE_ADJsPromptResult))
 #define ADJsPromptResult_
+
+@class NSString;
 
 @interface ADJsPromptResult : NSObject
 
@@ -39,6 +42,7 @@ FOUNDATION_EXPORT ADJsPromptResult *create_ADJsPromptResult_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADJsPromptResult)
 
 @compatibility_alias RAndroidWebkitJsPromptResult ADJsPromptResult;
+
 
 #endif
 

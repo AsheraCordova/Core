@@ -3,10 +3,16 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\jaxp\SAX1ParserAdapter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "SAX1ParserAdapter.h"
 #include "java/io/IOException.h"
+#include "java/lang/Integer.h"
 #include "java/util/Locale.h"
 #include "org/xml/sax/Attributes.h"
 #include "org/xml/sax/DTDHandler.h"
@@ -18,6 +24,12 @@
 #include "org/xml/sax/SAXException.h"
 #include "org/xml/sax/SAXNotSupportedException.h"
 #include "org/xml/sax/XMLReader.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation TSSAX1ParserAdapter
@@ -118,6 +130,8 @@ TSSAX1ParserAdapter *create_TSSAX1ParserAdapter_initWithOrgXmlSaxXMLReader_(id<O
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSSAX1ParserAdapter)
 
+J2OBJC_NAME_MAPPING(TSSAX1ParserAdapter, "repackaged.org.ccil.cowan.tagsoup.jaxp", "TS")
+
 @implementation TSSAX1ParserAdapter_DocHandlerWrapper
 
 - (instancetype)initWithOrgXmlSaxDocumentHandler:(id<OrgXmlSaxDocumentHandler>)h {
@@ -126,8 +140,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSSAX1ParserAdapter)
 }
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length {
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length {
   [((id<OrgXmlSaxDocumentHandler>) nil_chk(docHandler_)) charactersWithCharArray:ch withInt:start withInt:length];
 }
 
@@ -148,8 +162,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSSAX1ParserAdapter)
 }
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length {
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length {
   [((id<OrgXmlSaxDocumentHandler>) nil_chk(docHandler_)) ignorableWhitespaceWithCharArray:ch withInt:start withInt:length];
 }
 
@@ -261,16 +275,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&attrs_, a);
 }
 
-- (jint)getLength {
+- (int32_t)getLength {
   return [((id<OrgXmlSaxAttributes>) nil_chk(attrs_)) getLength];
 }
 
-- (NSString *)getNameWithInt:(jint)i {
+- (NSString *)getNameWithInt:(int32_t)i {
   NSString *n = JreRetainedLocalValue([((id<OrgXmlSaxAttributes>) nil_chk(attrs_)) getQNameWithInt:i]);
   return (n == nil) ? [((id<OrgXmlSaxAttributes>) nil_chk(attrs_)) getLocalNameWithInt:i] : n;
 }
 
-- (NSString *)getTypeWithInt:(jint)i {
+- (NSString *)getTypeWithInt:(int32_t)i {
   return [((id<OrgXmlSaxAttributes>) nil_chk(attrs_)) getTypeWithInt:i];
 }
 
@@ -278,7 +292,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((id<OrgXmlSaxAttributes>) nil_chk(attrs_)) getTypeWithNSString:name];
 }
 
-- (NSString *)getValueWithInt:(jint)i {
+- (NSString *)getValueWithInt:(int32_t)i {
   return [((id<OrgXmlSaxAttributes>) nil_chk(attrs_)) getValueWithInt:i];
 }
 

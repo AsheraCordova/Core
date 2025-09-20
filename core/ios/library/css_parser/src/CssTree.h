@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\CssTree.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CssTree")
@@ -16,6 +17,7 @@
 #if !defined (CSSCssTree_) && (INCLUDE_ALL_CssTree || defined(INCLUDE_CSSCssTree))
 #define CSSCssTree_
 
+@class NSString;
 @protocol CSSCssResult;
 @protocol JavaUtilList;
 
@@ -56,12 +58,14 @@ J2OBJC_TYPE_LITERAL_HEADER(CSSCssTree)
 
 @compatibility_alias ComAsheraCssCssTree CSSCssTree;
 
+
 #endif
 
 #if !defined (CSSCssTree_Attribute_) && (INCLUDE_ALL_CssTree || defined(INCLUDE_CSSCssTree_Attribute))
 #define CSSCssTree_Attribute_
 
 @class CSSCssTree;
+@class NSString;
 
 @interface CSSCssTree_Attribute : NSObject {
  @public
@@ -103,6 +107,7 @@ FOUNDATION_EXPORT CSSCssTree_Attribute *new_CSSCssTree_Attribute_initWithCSSCssT
 FOUNDATION_EXPORT CSSCssTree_Attribute *create_CSSCssTree_Attribute_initWithCSSCssTree_withNSString_withNSString_(CSSCssTree *outer$, NSString *key, NSString *value);
 
 J2OBJC_TYPE_LITERAL_HEADER(CSSCssTree_Attribute)
+
 
 #endif
 

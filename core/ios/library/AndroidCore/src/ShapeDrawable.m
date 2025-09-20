@@ -3,10 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\ShapeDrawable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Drawable.h"
 #include "J2ObjC_source.h"
 #include "ShapeDrawable.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADShapeDrawable () {
@@ -39,19 +53,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&self->type_, type);
 }
 
-- (jint)getStrokeWidth {
+- (int32_t)getStrokeWidth {
   return ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->width_;
 }
 
-- (void)setStrokeWidthWithInt:(jint)width {
+- (void)setStrokeWidthWithInt:(int32_t)width {
   ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->width_ = width;
 }
 
-- (jint)getStrokeHeight {
+- (int32_t)getStrokeHeight {
   return ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->height_;
 }
 
-- (void)setStrokeHeightWithInt:(jint)height {
+- (void)setStrokeHeightWithInt:(int32_t)height {
   ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->height_ = height;
 }
 
@@ -63,43 +77,43 @@ J2OBJC_IGNORE_DESIGNATED_END
   JreStrongAssign(&((ADShapeDrawable_Stroke *) nil_chk(stroke_))->color_, color);
 }
 
-- (jint)getStrokeDashWidth {
+- (int32_t)getStrokeDashWidth {
   return ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->dashWidth_;
 }
 
-- (void)setStrokDashWidthWithInt:(jint)dashWidth {
+- (void)setStrokDashWidthWithInt:(int32_t)dashWidth {
   ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->dashWidth_ = dashWidth;
 }
 
-- (jint)getStrokeDashGap {
+- (int32_t)getStrokeDashGap {
   return ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->dashGap_;
 }
 
-- (void)setStrokDashGapWithInt:(jint)dashGap {
+- (void)setStrokDashGapWithInt:(int32_t)dashGap {
   ((ADShapeDrawable_Stroke *) nil_chk(stroke_))->dashGap_ = dashGap;
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ((ADShapeDrawable_Size *) nil_chk(size_))->height_;
 }
 
-- (void)setHeightWithInt:(jint)height {
+- (void)setHeightWithInt:(int32_t)height {
   ((ADShapeDrawable_Size *) nil_chk(size_))->height_ = height;
 }
 
-- (jint)getWidth {
+- (int32_t)getWidth {
   return ((ADShapeDrawable_Size *) nil_chk(size_))->width_;
 }
 
-- (void)setWidthWithInt:(jint)width {
+- (void)setWidthWithInt:(int32_t)width {
   ((ADShapeDrawable_Size *) nil_chk(size_))->width_ = width;
 }
 
-- (jint)getMinimumWidth {
+- (int32_t)getMinimumWidth {
   return JavaLangMath_maxWithInt_withInt_([super getMinimumWidth], ((ADShapeDrawable_Size *) nil_chk(size_))->width_);
 }
 
-- (jint)getMinimumHeight {
+- (int32_t)getMinimumHeight {
   return JavaLangMath_maxWithInt_withInt_([super getMinimumHeight], ((ADShapeDrawable_Size *) nil_chk(size_))->height_);
 }
 
@@ -189,6 +203,8 @@ ADShapeDrawable *create_ADShapeDrawable_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADShapeDrawable)
+
+J2OBJC_NAME_MAPPING(ADShapeDrawable, "r.android.graphics.drawable", "AD")
 
 @implementation ADShapeDrawable_Stroke
 

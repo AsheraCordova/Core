@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\Resources.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Resources")
@@ -18,6 +19,8 @@
 
 @class ADConfiguration;
 @class ADDisplayMetrics;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaLangCharSequence;
 
 @interface ADResources : NSObject
@@ -30,17 +33,17 @@
 
 - (ADDisplayMetrics *)getDisplayMetrics;
 
-- (jint)getIdentifierWithNSString:(NSString *)string
-                     withNSString:(NSString *)string2
-                     withNSString:(NSString *)name;
+- (int32_t)getIdentifierWithNSString:(NSString *)string
+                        withNSString:(NSString *)string2
+                        withNSString:(NSString *)name;
 
-- (NSString *)getResourceEntryNameWithInt:(jint)id_;
+- (NSString *)getResourceEntryNameWithInt:(int32_t)id_;
 
-- (NSString *)getResourceNameWithInt:(jint)id_;
+- (NSString *)getResourceNameWithInt:(int32_t)id_;
 
-- (id<JavaLangCharSequence>)getStringWithInt:(jint)titleRes;
+- (id<JavaLangCharSequence>)getStringWithInt:(int32_t)titleRes;
 
-- (NSString *)getStringWithInt:(jint)resource
+- (NSString *)getStringWithInt:(int32_t)resource
                   withNSString:(NSString *)text;
 
 @end
@@ -62,6 +65,7 @@ FOUNDATION_EXPORT ADResources *create_ADResources_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADResources)
 
 @compatibility_alias RAndroidContentResResources ADResources;
+
 
 #endif
 
@@ -86,6 +90,7 @@ FOUNDATION_EXPORT ADResources_Theme *create_ADResources_Theme_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADResources_Theme)
 
+
 #endif
 
 #if !defined (ADResources_NotFoundException_) && (INCLUDE_ALL_Resources || defined(INCLUDE_ADResources_NotFoundException))
@@ -96,7 +101,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADResources_Theme)
 #include "java/lang/RuntimeException.h"
 
 @class ADResources;
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 
 @interface ADResources_NotFoundException : JavaLangRuntimeException
 
@@ -117,8 +124,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADResources_Theme)
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -131,6 +138,7 @@ FOUNDATION_EXPORT ADResources_NotFoundException *new_ADResources_NotFoundExcepti
 FOUNDATION_EXPORT ADResources_NotFoundException *create_ADResources_NotFoundException_initWithADResources_(ADResources *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADResources_NotFoundException)
+
 
 #endif
 

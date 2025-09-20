@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\view\BaseMeasurableImageView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseMeasurableImageView.h"
 #include "Drawable.h"
 #include "IOSClass.h"
@@ -13,26 +18,35 @@
 #include "J2ObjC_source.h"
 #include "RectM.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 
 
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASBaseMeasurableImageView () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
-  jboolean mAdjustViewBoundsCompat_;
-  jboolean mAdjustViewBounds_;
+  WEAK_ id<ASIWidget> widget_;
+  bool mAdjustViewBoundsCompat_;
+  bool mAdjustViewBounds_;
   id mDrawable_;
-  jint mDrawableWidth_;
-  jint mDrawableHeight_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
-  jint mBaseline_;
-  jboolean mBaselineAlignBottom_;
-  jboolean cropToPadding_;
-  jboolean usePaddingForBounds_;
+  int32_t mDrawableWidth_;
+  int32_t mDrawableHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
+  int32_t mBaseline_;
+  bool mBaselineAlignBottom_;
+  bool cropToPadding_;
+  bool usePaddingForBounds_;
   NSString *scaleType_;
-  jint scaleTypeInt_;
+  int32_t scaleTypeInt_;
   ADDrawable *imageDrawable_;
 }
 
@@ -40,9 +54,9 @@
 
 - (void)updateDrawable;
 
-- (jint)resolveAdjustedSizeWithInt:(jint)desiredSize
-                           withInt:(jint)maxSize
-                           withInt:(jint)measureSpec;
+- (int32_t)resolveAdjustedSizeWithInt:(int32_t)desiredSize
+                              withInt:(int32_t)maxSize
+                              withInt:(int32_t)measureSpec;
 
 @end
 
@@ -82,11 +96,11 @@ __attribute__((unused)) static void ASBaseMeasurableImageView_resolveUri(ASBaseM
 
 __attribute__((unused)) static void ASBaseMeasurableImageView_updateDrawable(ASBaseMeasurableImageView *self);
 
-__attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(ASBaseMeasurableImageView *self, jint desiredSize, jint maxSize, jint measureSpec);
+__attribute__((unused)) static int32_t ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(ASBaseMeasurableImageView *self, int32_t desiredSize, int32_t maxSize, int32_t measureSpec);
 
 @implementation ASBaseMeasurableImageView
 
-- (jint)getScaleTypeInt {
+- (int32_t)getScaleTypeInt {
   return scaleTypeInt_;
 }
 
@@ -95,20 +109,20 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
 }
 
 - (void)setScaleTypeWithNSString:(NSString *)scaleType
-                         withInt:(jint)scaleTypeInt {
+                         withInt:(int32_t)scaleTypeInt {
   JreStrongAssign(&self->scaleType_, scaleType);
   self->scaleTypeInt_ = scaleTypeInt;
 }
 
-- (void)setUsePaddingForBoundsWithBoolean:(jboolean)usePaddingForBounds {
+- (void)setUsePaddingForBoundsWithBoolean:(bool)usePaddingForBounds {
   self->usePaddingForBounds_ = usePaddingForBounds;
 }
 
-- (void)setCropToPaddingWithBoolean:(jboolean)objValue {
+- (void)setCropToPaddingWithBoolean:(bool)objValue {
   self->cropToPadding_ = objValue;
 }
 
-- (jboolean)getCropToPadding {
+- (bool)getCropToPadding {
   return cropToPadding_;
 }
 
@@ -121,16 +135,16 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
   return widget_;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   ASBaseMeasurableImageView_resolveUri(self);
-  jint w;
-  jint h;
-  jfloat desiredAspect = 0.0f;
-  jboolean resizeWidth = false;
-  jboolean resizeHeight = false;
-  jint widthSpecMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
-  jint heightSpecMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  int32_t w;
+  int32_t h;
+  float desiredAspect = 0.0f;
+  bool resizeWidth = false;
+  bool resizeHeight = false;
+  int32_t widthSpecMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
+  int32_t heightSpecMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
   if (mDrawable_ == nil) {
     mDrawableWidth_ = -1;
     mDrawableHeight_ = -1;
@@ -144,24 +158,24 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
     if (mAdjustViewBounds_) {
       resizeWidth = (widthSpecMode != ADView_MeasureSpec_EXACTLY);
       resizeHeight = (heightSpecMode != ADView_MeasureSpec_EXACTLY);
-      desiredAspect = (jfloat) w / (jfloat) h;
+      desiredAspect = (float) w / (float) h;
     }
   }
-  jint pleft = mPaddingLeft_;
-  jint pright = mPaddingRight_;
-  jint ptop = mPaddingTop_;
-  jint pbottom = mPaddingBottom_;
-  jint widthSize;
-  jint heightSize;
+  int32_t pleft = mPaddingLeft_;
+  int32_t pright = mPaddingRight_;
+  int32_t ptop = mPaddingTop_;
+  int32_t pbottom = mPaddingBottom_;
+  int32_t widthSize;
+  int32_t heightSize;
   if (resizeWidth || resizeHeight) {
     widthSize = ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(self, w + pleft + pright, mMaxWidth_, widthMeasureSpec);
     heightSize = ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(self, h + ptop + pbottom, mMaxHeight_, heightMeasureSpec);
     if (desiredAspect != 0.0f) {
-      jfloat actualAspect = (jfloat) (widthSize - pleft - pright) / (heightSize - ptop - pbottom);
+      float actualAspect = (float) (widthSize - pleft - pright) / (heightSize - ptop - pbottom);
       if (JavaLangMath_absWithFloat_(actualAspect - desiredAspect) > 0.0000001) {
-        jboolean done = false;
+        bool done = false;
         if (resizeWidth) {
-          jint newWidth = JreFpToInt((desiredAspect * (heightSize - ptop - pbottom))) + pleft + pright;
+          int32_t newWidth = JreFpToInt((desiredAspect * (heightSize - ptop - pbottom))) + pleft + pright;
           if (!resizeHeight && !mAdjustViewBoundsCompat_) {
             widthSize = ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(self, newWidth, mMaxWidth_, widthMeasureSpec);
           }
@@ -171,7 +185,7 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
           }
         }
         if (!done && resizeHeight) {
-          jint newHeight = JreFpToInt(((widthSize - pleft - pright) / desiredAspect)) + ptop + pbottom;
+          int32_t newHeight = JreFpToInt(((widthSize - pleft - pright) / desiredAspect)) + ptop + pbottom;
           if (!resizeWidth && !mAdjustViewBoundsCompat_) {
             heightSize = ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(self, newHeight, mMaxHeight_, heightMeasureSpec);
           }
@@ -201,37 +215,37 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
   ASBaseMeasurableImageView_updateDrawable(self);
 }
 
-- (jint)resolveAdjustedSizeWithInt:(jint)desiredSize
-                           withInt:(jint)maxSize
-                           withInt:(jint)measureSpec {
+- (int32_t)resolveAdjustedSizeWithInt:(int32_t)desiredSize
+                              withInt:(int32_t)maxSize
+                              withInt:(int32_t)measureSpec {
   return ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(self, desiredSize, maxSize, measureSpec);
 }
 
-- (void)setAdjustViewBoundsWithBoolean:(jboolean)mAdjustViewBounds {
+- (void)setAdjustViewBoundsWithBoolean:(bool)mAdjustViewBounds {
   self->mAdjustViewBounds_ = mAdjustViewBounds;
 }
 
-- (jboolean)getAdjustViewBounds {
+- (bool)getAdjustViewBounds {
   return mAdjustViewBounds_;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
-- (void)setMaxWidthWithInt:(jint)mMaxWidth {
+- (void)setMaxWidthWithInt:(int32_t)mMaxWidth {
   self->mMaxWidth_ = mMaxWidth;
 }
 
-- (void)setMaxHeightWithInt:(jint)mMaxHeight {
+- (void)setMaxHeightWithInt:(int32_t)mMaxHeight {
   self->mMaxHeight_ = mMaxHeight;
 }
 
-- (jint)getBaseline {
+- (int32_t)getBaseline {
   if (mBaselineAlignBottom_) {
     return [self getMeasuredHeight];
   }
@@ -240,67 +254,67 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
   }
 }
 
-- (void)setBaselineWithInt:(jint)baseline {
+- (void)setBaselineWithInt:(int32_t)baseline {
   if (mBaseline_ != baseline) {
     mBaseline_ = baseline;
     [self requestLayout];
   }
 }
 
-- (void)setBaselineAlignBottomWithBoolean:(jboolean)aligned {
+- (void)setBaselineAlignBottomWithBoolean:(bool)aligned {
   if (mBaselineAlignBottom_ != aligned) {
     mBaselineAlignBottom_ = aligned;
     [self requestLayout];
   }
 }
 
-- (jboolean)getBaselineAlignBottom {
+- (bool)getBaselineAlignBottom {
   return mBaselineAlignBottom_;
 }
 
 - (ASRectM *)getCropPaddingClipBounds {
-  jint pLeft = 0;
-  jint pTop = 0;
-  jint pRight = 0;
-  jint pBottom = 0;
+  int32_t pLeft = 0;
+  int32_t pTop = 0;
+  int32_t pRight = 0;
+  int32_t pBottom = 0;
   if (usePaddingForBounds_) {
     pLeft = [self getPaddingStart];
     pRight = [self getPaddingEnd];
     pTop = [self getPaddingTop];
     pBottom = [self getPaddingBottom];
   }
-  jint vwidth = [self getMeasuredWidth] - pLeft - pRight;
-  jint vheight = [self getMeasuredHeight] - pTop - pBottom;
+  int32_t vwidth = [self getMeasuredWidth] - pLeft - pRight;
+  int32_t vheight = [self getMeasuredHeight] - pTop - pBottom;
   return create_ASRectM_initWithInt_withInt_withInt_withInt_(pLeft, pTop, vwidth, vheight);
 }
 
 - (ASRectM *)getImageBounds {
-  jint measuredWidth = [self getMeasuredWidth];
-  jint measuredHeight = [self getMeasuredHeight];
+  int32_t measuredWidth = [self getMeasuredWidth];
+  int32_t measuredHeight = [self getMeasuredHeight];
   return [self getImageBoundsWithInt:measuredWidth withInt:measuredHeight];
 }
 
-- (ASRectM *)getImageBoundsWithInt:(jint)measuredWidth
-                           withInt:(jint)measuredHeight {
+- (ASRectM *)getImageBoundsWithInt:(int32_t)measuredWidth
+                           withInt:(int32_t)measuredHeight {
   if (mDrawableWidth_ == 0 && mDrawableHeight_ == 0) return nil;
-  jint dwidth = mDrawableWidth_;
-  jint dheight = mDrawableHeight_;
-  jint pLeft = 0;
-  jint pTop = 0;
-  jint pRight = 0;
-  jint pBottom = 0;
+  int32_t dwidth = mDrawableWidth_;
+  int32_t dheight = mDrawableHeight_;
+  int32_t pLeft = 0;
+  int32_t pTop = 0;
+  int32_t pRight = 0;
+  int32_t pBottom = 0;
   if (usePaddingForBounds_) {
     pLeft = [self getPaddingStart];
     pRight = [self getPaddingEnd];
     pTop = [self getPaddingTop];
     pBottom = [self getPaddingBottom];
   }
-  jfloat dx = 0;
-  jfloat dy = 0;
-  jint vwidth = measuredWidth - pLeft - pRight;
-  jint vheight = measuredHeight - pTop - pBottom;
-  jint newHeight = vheight;
-  jint newWidth = vwidth;
+  float dx = 0;
+  float dy = 0;
+  int32_t vwidth = measuredWidth - pLeft - pRight;
+  int32_t vheight = measuredHeight - pTop - pBottom;
+  int32_t newHeight = vheight;
+  int32_t newWidth = vwidth;
   switch (JreIndexOfStr(scaleType_, (id[]){ ASBaseMeasurableImageView_SCALETYPE_FITXY, ASBaseMeasurableImageView_SCALETYPE_FITCENTER, ASBaseMeasurableImageView_SCALETYPE_FITSTART, ASBaseMeasurableImageView_SCALETYPE_FITEND, ASBaseMeasurableImageView_SCALETYPE_CENTERCROP, ASBaseMeasurableImageView_SCALETYPE_CENTER, ASBaseMeasurableImageView_SCALETYPE_CENTERINSIDE }, 7)) {
     case 0:
     {
@@ -344,13 +358,13 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
     break;
     case 4:
     {
-      jfloat scale_;
+      float scale_;
       if (dwidth * vheight > vwidth * dheight) {
-        scale_ = (jfloat) vheight / (jfloat) dheight;
+        scale_ = (float) vheight / (float) dheight;
         dx = (vwidth - dwidth * scale_) * 0.5f;
       }
       else {
-        scale_ = (jfloat) vwidth / (jfloat) dwidth;
+        scale_ = (float) vwidth / (float) dwidth;
         dy = (vheight - dheight * scale_) * 0.5f;
       }
       newWidth = JreFpToInt((dwidth * scale_));
@@ -367,12 +381,12 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
     }
     case 6:
     {
-      jfloat scale_;
+      float scale_;
       if (dwidth <= vwidth && dheight <= vheight) {
         scale_ = 1.0f;
       }
       else {
-        scale_ = JavaLangMath_minWithFloat_withFloat_((jfloat) vwidth / (jfloat) dwidth, (jfloat) vheight / (jfloat) dheight);
+        scale_ = JavaLangMath_minWithFloat_withFloat_((float) vwidth / (float) dwidth, (float) vheight / (float) dheight);
       }
       dx = JavaLangMath_roundWithFloat_((vwidth - dwidth * scale_) * 0.5f);
       dy = JavaLangMath_roundWithFloat_((vheight - dheight * scale_) * 0.5f);
@@ -388,7 +402,7 @@ __attribute__((unused)) static jint ASBaseMeasurableImageView_resolveAdjustedSiz
   return create_ASRectM_initWithInt_withInt_withInt_withInt_(JreFpToInt(dx), JreFpToInt(dy), newWidth, newHeight);
 }
 
-- (jboolean)hasDrawables {
+- (bool)hasDrawables {
   return false;
 }
 
@@ -525,15 +539,15 @@ void ASBaseMeasurableImageView_resolveUri(ASBaseMeasurableImageView *self) {
 void ASBaseMeasurableImageView_updateDrawable(ASBaseMeasurableImageView *self) {
   id<ASIsImage> image = (id<ASIsImage>) cast_check(self->widget_, ASIsImage_class_());
   IOSIntArray *dimension = [((id<ASIsImage>) nil_chk(image)) getImageDimension];
-  self->mDrawableWidth_ = (jint) IOSIntArray_Get(nil_chk(dimension), 0);
-  self->mDrawableHeight_ = (jint) IOSIntArray_Get(dimension, 1);
+  self->mDrawableWidth_ = (int32_t) IOSIntArray_Get(nil_chk(dimension), 0);
+  self->mDrawableHeight_ = (int32_t) IOSIntArray_Get(dimension, 1);
   JreStrongAssign(&self->mDrawable_, [image getImage]);
 }
 
-jint ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(ASBaseMeasurableImageView *self, jint desiredSize, jint maxSize, jint measureSpec) {
-  jint result = desiredSize;
-  jint specMode = ADView_MeasureSpec_getModeWithInt_(measureSpec);
-  jint specSize = ADView_MeasureSpec_getSizeWithInt_(measureSpec);
+int32_t ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(ASBaseMeasurableImageView *self, int32_t desiredSize, int32_t maxSize, int32_t measureSpec) {
+  int32_t result = desiredSize;
+  int32_t specMode = ADView_MeasureSpec_getModeWithInt_(measureSpec);
+  int32_t specSize = ADView_MeasureSpec_getSizeWithInt_(measureSpec);
   switch (specMode) {
     case ADView_MeasureSpec_UNSPECIFIED:
     result = JavaLangMath_minWithInt_withInt_(desiredSize, maxSize);
@@ -549,3 +563,5 @@ jint ASBaseMeasurableImageView_resolveAdjustedSizeWithInt_withInt_withInt_(ASBas
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseMeasurableImageView)
+
+J2OBJC_NAME_MAPPING(ASBaseMeasurableImageView, "com.ashera.view", "AS")

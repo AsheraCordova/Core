@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\Gravity.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Gravity")
@@ -17,6 +18,8 @@
 #define ADGravity_
 
 @class ADRect;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief Standard constants and tools for placing an object within a potentially
@@ -43,12 +46,12 @@
                ignored.
  @param outRect Receives the computed frame of the object in its                 container.
  */
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
-             withInt:(jint)xAdj
-             withInt:(jint)yAdj
+             withInt:(int32_t)xAdj
+             withInt:(int32_t)yAdj
           withADRect:(ADRect *)outRect;
 
 /*!
@@ -69,14 +72,14 @@
  - seealso: View#LAYOUT_DIRECTION_LTR
  - seealso: View#LAYOUT_DIRECTION_RTL
  */
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
-             withInt:(jint)xAdj
-             withInt:(jint)yAdj
+             withInt:(int32_t)xAdj
+             withInt:(int32_t)yAdj
           withADRect:(ADRect *)outRect
-             withInt:(jint)layoutDirection;
+             withInt:(int32_t)layoutDirection;
 
 /*!
  @brief Apply a gravity constant to an object.This supposes that the layout direction is LTR.
@@ -87,9 +90,9 @@
                     width and height of the object.
  @param outRect Receives the computed frame of the object in its                 container.
  */
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
           withADRect:(ADRect *)outRect;
 
@@ -105,12 +108,12 @@
  - seealso: View#LAYOUT_DIRECTION_LTR
  - seealso: View#LAYOUT_DIRECTION_RTL
  */
-+ (void)applyWithInt:(jint)gravity
-             withInt:(jint)w
-             withInt:(jint)h
++ (void)applyWithInt:(int32_t)gravity
+             withInt:(int32_t)w
+             withInt:(int32_t)h
           withADRect:(ADRect *)container
           withADRect:(ADRect *)outRect
-             withInt:(jint)layoutDirection;
+             withInt:(int32_t)layoutDirection;
 
 /*!
  @brief Apply additional gravity behavior based on the overall "display" that an
@@ -125,7 +128,7 @@
  @param display The rectangle of the display in which the object is  being placed.
  @param inoutObj Supplies the current object position; returns with it  modified if needed to fit in the display.
  */
-+ (void)applyDisplayWithInt:(jint)gravity
++ (void)applyDisplayWithInt:(int32_t)gravity
                  withADRect:(ADRect *)display
                  withADRect:(ADRect *)inoutObj;
 
@@ -145,10 +148,10 @@
  - seealso: View#LAYOUT_DIRECTION_LTR
  - seealso: View#LAYOUT_DIRECTION_RTL
  */
-+ (void)applyDisplayWithInt:(jint)gravity
++ (void)applyDisplayWithInt:(int32_t)gravity
                  withADRect:(ADRect *)display
                  withADRect:(ADRect *)inoutObj
-                    withInt:(jint)layoutDirection;
+                    withInt:(int32_t)layoutDirection;
 
 /*!
  @brief <p>Convert script specific gravity to absolute horizontal value.
@@ -159,8 +162,8 @@
  @param layoutDirection The layout direction.
  @return gravity converted to absolute (horizontal) values.
  */
-+ (jint)getAbsoluteGravityWithInt:(jint)gravity
-                          withInt:(jint)layoutDirection;
++ (int32_t)getAbsoluteGravityWithInt:(int32_t)gravity
+                             withInt:(int32_t)layoutDirection;
 
 /*!
  @brief <p>Indicate whether the supplied gravity has an horizontal pull.
@@ -168,7 +171,7 @@
  @param gravity the gravity to check for horizontal pull
  @return true if the supplied gravity has an horizontal pull
  */
-+ (jboolean)isHorizontalWithInt:(jint)gravity;
++ (bool)isHorizontalWithInt:(int32_t)gravity;
 
 /*!
  @brief <p>Indicate whether the supplied gravity has a vertical pull.
@@ -176,7 +179,7 @@
  @param gravity the gravity to check for vertical pull
  @return true if the supplied gravity has a vertical pull
  */
-+ (jboolean)isVerticalWithInt:(jint)gravity;
++ (bool)isVerticalWithInt:(int32_t)gravity;
 
 @end
 
@@ -185,166 +188,166 @@ J2OBJC_EMPTY_STATIC_INIT(ADGravity)
 /*!
  @brief Constant indicating that no gravity has been set
  */
-inline jint ADGravity_get_NO_GRAVITY(void);
+inline int32_t ADGravity_get_NO_GRAVITY(void);
 #define ADGravity_NO_GRAVITY 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, NO_GRAVITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, NO_GRAVITY, int32_t)
 
 /*!
  @brief Raw bit indicating the gravity for an axis has been specified.
  */
-inline jint ADGravity_get_AXIS_SPECIFIED(void);
+inline int32_t ADGravity_get_AXIS_SPECIFIED(void);
 #define ADGravity_AXIS_SPECIFIED 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_SPECIFIED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_SPECIFIED, int32_t)
 
 /*!
  @brief Raw bit controlling how the left/top edge is placed.
  */
-inline jint ADGravity_get_AXIS_PULL_BEFORE(void);
+inline int32_t ADGravity_get_AXIS_PULL_BEFORE(void);
 #define ADGravity_AXIS_PULL_BEFORE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_BEFORE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_BEFORE, int32_t)
 
 /*!
  @brief Raw bit controlling how the right/bottom edge is placed.
  */
-inline jint ADGravity_get_AXIS_PULL_AFTER(void);
+inline int32_t ADGravity_get_AXIS_PULL_AFTER(void);
 #define ADGravity_AXIS_PULL_AFTER 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_AFTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_PULL_AFTER, int32_t)
 
 /*!
  @brief Raw bit controlling whether the right/bottom edge is clipped to its
   container, based on the gravity direction being applied.
  */
-inline jint ADGravity_get_AXIS_CLIP(void);
+inline int32_t ADGravity_get_AXIS_CLIP(void);
 #define ADGravity_AXIS_CLIP 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_CLIP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_CLIP, int32_t)
 
 /*!
  @brief Bits defining the horizontal axis.
  */
-inline jint ADGravity_get_AXIS_X_SHIFT(void);
+inline int32_t ADGravity_get_AXIS_X_SHIFT(void);
 #define ADGravity_AXIS_X_SHIFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_X_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_X_SHIFT, int32_t)
 
 /*!
  @brief Bits defining the vertical axis.
  */
-inline jint ADGravity_get_AXIS_Y_SHIFT(void);
+inline int32_t ADGravity_get_AXIS_Y_SHIFT(void);
 #define ADGravity_AXIS_Y_SHIFT 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_Y_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, AXIS_Y_SHIFT, int32_t)
 
 /*!
  @brief Push object to the top of its container, not changing its size.
  */
-inline jint ADGravity_get_TOP(void);
+inline int32_t ADGravity_get_TOP(void);
 #define ADGravity_TOP 48
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, TOP, int32_t)
 
 /*!
  @brief Push object to the bottom of its container, not changing its size.
  */
-inline jint ADGravity_get_BOTTOM(void);
+inline int32_t ADGravity_get_BOTTOM(void);
 #define ADGravity_BOTTOM 80
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, BOTTOM, int32_t)
 
 /*!
  @brief Push object to the left of its container, not changing its size.
  */
-inline jint ADGravity_get_LEFT(void);
+inline int32_t ADGravity_get_LEFT(void);
 #define ADGravity_LEFT 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, LEFT, int32_t)
 
 /*!
  @brief Push object to the right of its container, not changing its size.
  */
-inline jint ADGravity_get_RIGHT(void);
+inline int32_t ADGravity_get_RIGHT(void);
 #define ADGravity_RIGHT 5
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, RIGHT, int32_t)
 
 /*!
  @brief Place object in the vertical center of its container, not changing its
    size.
  */
-inline jint ADGravity_get_CENTER_VERTICAL(void);
+inline int32_t ADGravity_get_CENTER_VERTICAL(void);
 #define ADGravity_CENTER_VERTICAL 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CENTER_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CENTER_VERTICAL, int32_t)
 
 /*!
  @brief Grow the vertical size of the object if needed so it completely fills
    its container.
  */
-inline jint ADGravity_get_FILL_VERTICAL(void);
+inline int32_t ADGravity_get_FILL_VERTICAL(void);
 #define ADGravity_FILL_VERTICAL 112
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, FILL_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, FILL_VERTICAL, int32_t)
 
 /*!
  @brief Place object in the horizontal center of its container, not changing its
    size.
  */
-inline jint ADGravity_get_CENTER_HORIZONTAL(void);
+inline int32_t ADGravity_get_CENTER_HORIZONTAL(void);
 #define ADGravity_CENTER_HORIZONTAL 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CENTER_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CENTER_HORIZONTAL, int32_t)
 
 /*!
  @brief Grow the horizontal size of the object if needed so it completely fills
    its container.
  */
-inline jint ADGravity_get_FILL_HORIZONTAL(void);
+inline int32_t ADGravity_get_FILL_HORIZONTAL(void);
 #define ADGravity_FILL_HORIZONTAL 7
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, FILL_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, FILL_HORIZONTAL, int32_t)
 
 /*!
  @brief Place the object in the center of its container in both the vertical
    and horizontal axis, not changing its size.
  */
-inline jint ADGravity_get_CENTER(void);
+inline int32_t ADGravity_get_CENTER(void);
 #define ADGravity_CENTER 17
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CENTER, int32_t)
 
 /*!
  @brief Grow the horizontal and vertical size of the object if needed so it
    completely fills its container.
  */
-inline jint ADGravity_get_FILL(void);
+inline int32_t ADGravity_get_FILL(void);
 #define ADGravity_FILL 119
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, FILL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, FILL, int32_t)
 
 /*!
  @brief Flag to clip the edges of the object to its container along the
    vertical axis.
  */
-inline jint ADGravity_get_CLIP_VERTICAL(void);
+inline int32_t ADGravity_get_CLIP_VERTICAL(void);
 #define ADGravity_CLIP_VERTICAL 128
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CLIP_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CLIP_VERTICAL, int32_t)
 
 /*!
  @brief Flag to clip the edges of the object to its container along the
    horizontal axis.
  */
-inline jint ADGravity_get_CLIP_HORIZONTAL(void);
+inline int32_t ADGravity_get_CLIP_HORIZONTAL(void);
 #define ADGravity_CLIP_HORIZONTAL 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CLIP_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, CLIP_HORIZONTAL, int32_t)
 
 /*!
  @brief Raw bit controlling whether the layout direction is relative or not (START/END instead of
   absolute LEFT/RIGHT).
  */
-inline jint ADGravity_get_RELATIVE_LAYOUT_DIRECTION(void);
+inline int32_t ADGravity_get_RELATIVE_LAYOUT_DIRECTION(void);
 #define ADGravity_RELATIVE_LAYOUT_DIRECTION 8388608
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, RELATIVE_LAYOUT_DIRECTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, RELATIVE_LAYOUT_DIRECTION, int32_t)
 
 /*!
  @brief Binary mask to get the absolute horizontal gravity of a gravity.
  */
-inline jint ADGravity_get_HORIZONTAL_GRAVITY_MASK(void);
+inline int32_t ADGravity_get_HORIZONTAL_GRAVITY_MASK(void);
 #define ADGravity_HORIZONTAL_GRAVITY_MASK 7
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, HORIZONTAL_GRAVITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, HORIZONTAL_GRAVITY_MASK, int32_t)
 
 /*!
  @brief Binary mask to get the vertical gravity of a gravity.
  */
-inline jint ADGravity_get_VERTICAL_GRAVITY_MASK(void);
+inline int32_t ADGravity_get_VERTICAL_GRAVITY_MASK(void);
 #define ADGravity_VERTICAL_GRAVITY_MASK 112
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, VERTICAL_GRAVITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, VERTICAL_GRAVITY_MASK, int32_t)
 
 /*!
  @brief Special constant to enable clipping to an overall display along the
@@ -352,9 +355,9 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, VERTICAL_GRAVITY_MASK, jint)
    <code>apply(int, int, int, Rect, int, int, Rect)</code>; you must do so
    yourself by calling <code>applyDisplay</code>.
  */
-inline jint ADGravity_get_DISPLAY_CLIP_VERTICAL(void);
+inline int32_t ADGravity_get_DISPLAY_CLIP_VERTICAL(void);
 #define ADGravity_DISPLAY_CLIP_VERTICAL 268435456
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, DISPLAY_CLIP_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, DISPLAY_CLIP_VERTICAL, int32_t)
 
 /*!
  @brief Special constant to enable clipping to an overall display along the
@@ -362,30 +365,30 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, DISPLAY_CLIP_VERTICAL, jint)
    <code>apply(int, int, int, Rect, int, int, Rect)</code>; you must do so
    yourself by calling <code>applyDisplay</code>.
  */
-inline jint ADGravity_get_DISPLAY_CLIP_HORIZONTAL(void);
+inline int32_t ADGravity_get_DISPLAY_CLIP_HORIZONTAL(void);
 #define ADGravity_DISPLAY_CLIP_HORIZONTAL 16777216
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, DISPLAY_CLIP_HORIZONTAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, DISPLAY_CLIP_HORIZONTAL, int32_t)
 
 /*!
  @brief Push object to x-axis position at the start of its container, not changing its size.
  */
-inline jint ADGravity_get_START(void);
+inline int32_t ADGravity_get_START(void);
 #define ADGravity_START 8388611
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, START, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, START, int32_t)
 
 /*!
  @brief Push object to x-axis position at the end of its container, not changing its size.
  */
-inline jint ADGravity_get_END(void);
+inline int32_t ADGravity_get_END(void);
 #define ADGravity_END 8388613
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, END, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, END, int32_t)
 
 /*!
  @brief Binary mask for the horizontal gravity and script specific direction bit.
  */
-inline jint ADGravity_get_RELATIVE_HORIZONTAL_GRAVITY_MASK(void);
+inline int32_t ADGravity_get_RELATIVE_HORIZONTAL_GRAVITY_MASK(void);
 #define ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK 8388615
-J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, RELATIVE_HORIZONTAL_GRAVITY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADGravity, RELATIVE_HORIZONTAL_GRAVITY_MASK, int32_t)
 
 FOUNDATION_EXPORT void ADGravity_init(ADGravity *self);
 
@@ -393,27 +396,28 @@ FOUNDATION_EXPORT ADGravity *new_ADGravity_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADGravity *create_ADGravity_init(void);
 
-FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_(jint gravity, jint w, jint h, ADRect *container, ADRect *outRect);
+FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_(int32_t gravity, int32_t w, int32_t h, ADRect *container, ADRect *outRect);
 
-FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(jint gravity, jint w, jint h, ADRect *container, ADRect *outRect, jint layoutDirection);
+FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(int32_t gravity, int32_t w, int32_t h, ADRect *container, ADRect *outRect, int32_t layoutDirection);
 
-FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(jint gravity, jint w, jint h, ADRect *container, jint xAdj, jint yAdj, ADRect *outRect);
+FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_(int32_t gravity, int32_t w, int32_t h, ADRect *container, int32_t xAdj, int32_t yAdj, ADRect *outRect);
 
-FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_withInt_(jint gravity, jint w, jint h, ADRect *container, jint xAdj, jint yAdj, ADRect *outRect, jint layoutDirection);
+FOUNDATION_EXPORT void ADGravity_applyWithInt_withInt_withInt_withADRect_withInt_withInt_withADRect_withInt_(int32_t gravity, int32_t w, int32_t h, ADRect *container, int32_t xAdj, int32_t yAdj, ADRect *outRect, int32_t layoutDirection);
 
-FOUNDATION_EXPORT void ADGravity_applyDisplayWithInt_withADRect_withADRect_(jint gravity, ADRect *display, ADRect *inoutObj);
+FOUNDATION_EXPORT void ADGravity_applyDisplayWithInt_withADRect_withADRect_(int32_t gravity, ADRect *display, ADRect *inoutObj);
 
-FOUNDATION_EXPORT void ADGravity_applyDisplayWithInt_withADRect_withADRect_withInt_(jint gravity, ADRect *display, ADRect *inoutObj, jint layoutDirection);
+FOUNDATION_EXPORT void ADGravity_applyDisplayWithInt_withADRect_withADRect_withInt_(int32_t gravity, ADRect *display, ADRect *inoutObj, int32_t layoutDirection);
 
-FOUNDATION_EXPORT jboolean ADGravity_isVerticalWithInt_(jint gravity);
+FOUNDATION_EXPORT bool ADGravity_isVerticalWithInt_(int32_t gravity);
 
-FOUNDATION_EXPORT jboolean ADGravity_isHorizontalWithInt_(jint gravity);
+FOUNDATION_EXPORT bool ADGravity_isHorizontalWithInt_(int32_t gravity);
 
-FOUNDATION_EXPORT jint ADGravity_getAbsoluteGravityWithInt_withInt_(jint gravity, jint layoutDirection);
+FOUNDATION_EXPORT int32_t ADGravity_getAbsoluteGravityWithInt_withInt_(int32_t gravity, int32_t layoutDirection);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADGravity)
 
 @compatibility_alias RAndroidViewGravity ADGravity;
+
 
 #endif
 

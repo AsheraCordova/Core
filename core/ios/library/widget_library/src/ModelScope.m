@@ -3,14 +3,27 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelScope.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "ModelScope.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 
 
-__attribute__((unused)) static void ASModelScope_initWithNSString_withInt_(ASModelScope *self, NSString *__name, jint __ordinal);
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+__attribute__((unused)) static void ASModelScope_initWithNSString_withInt_(ASModelScope *self, NSString *__name, int32_t __ordinal);
 
 J2OBJC_INITIALIZED_DEFN(ASModelScope)
 
@@ -28,6 +41,24 @@ ASModelScope *ASModelScope_values_[11];
 
 - (ASModelScope_Enum)toNSEnum {
   return (ASModelScope_Enum)[self ordinal];
+}
+
+- (ASModelScope_Enum)enumValue {
+  return (ASModelScope_Enum)[self ordinal];
+}
+
++ (ASModelScope *)fromNSEnum:(ASModelScope_Enum)nativeValue {
+  ASModelScope *javaEnum = ASModelScope_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ASModelScope_Enum out of range.");
+  return javaEnum;
+}
+
+- (ASModelScope_ORDINAL)ordinal {
+  return (ASModelScope_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithModelScope:(ASModelScope_Enum)value {
+  return RETAIN_(ASModelScope_fromOrdinal((ASModelScope_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -65,7 +96,7 @@ ASModelScope *ASModelScope_values_[11];
     size_t allocSize = 11 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 11; i++) {
+    for (int32_t i = 0; i < 11; i++) {
       ((void)(ASModelScope_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASModelScope_initWithNSString_withInt_(e, JreEnumConstantName(ASModelScope_class_(), i), i);
     }
@@ -75,7 +106,7 @@ ASModelScope *ASModelScope_values_[11];
 
 @end
 
-void ASModelScope_initWithNSString_withInt_(ASModelScope *self, NSString *__name, jint __ordinal) {
+void ASModelScope_initWithNSString_withInt_(ASModelScope *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -93,15 +124,16 @@ ASModelScope *ASModelScope_valueOfWithNSString_(NSString *name) {
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ASModelScope *ASModelScope_fromOrdinal(NSUInteger ordinal) {
+ASModelScope *ASModelScope_fromOrdinal(ASModelScope_ORDINAL ordinal) {
   ASModelScope_initialize();
-  if (ordinal >= 11) {
+  if (ordinal < 0 || ordinal >= 11) {
     return nil;
   }
   return ASModelScope_values_[ordinal];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelScope)
+
+J2OBJC_NAME_MAPPING(ASModelScope, "com.ashera.model", "AS")

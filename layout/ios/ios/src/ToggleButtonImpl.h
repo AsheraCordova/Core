@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ToggleButtonImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ToggleButtonImpl")
@@ -31,6 +32,9 @@
 @class ADToggleButton;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -56,7 +60,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -66,21 +70,21 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getPaddingBottom;
 
@@ -96,13 +100,13 @@
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureHeightWithInt:(jint)width;
+- (int32_t)measureHeightWithInt:(int32_t)width;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -123,7 +127,7 @@
 
 - (void)setPaddingTopWithId:(id)paddingTop;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)updatePadding;
 
@@ -168,6 +172,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl)
 
 @compatibility_alias ComAsheraLayoutToggleButtonImpl ASToggleButtonImpl;
 
+
 #endif
 
 #if !defined (ASToggleButtonImpl_DrawableTintMode_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_DrawableTintMode))
@@ -204,6 +209,7 @@ FOUNDATION_EXPORT ASToggleButtonImpl_DrawableTintMode *create_ASToggleButtonImpl
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASToggleButtonImpl_MarqueeRepeatLimit_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_MarqueeRepeatLimit))
@@ -213,6 +219,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_DrawableTintMode)
 #define INCLUDE_ASAbstractEnumToIntConverter 1
 #include "AbstractEnumToIntConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
 @protocol JavaUtilMap;
 
@@ -224,7 +231,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_DrawableTintMode)
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 #pragma mark Package-Private
 
@@ -241,6 +248,7 @@ FOUNDATION_EXPORT ASToggleButtonImpl_MarqueeRepeatLimit *new_ASToggleButtonImpl_
 FOUNDATION_EXPORT ASToggleButtonImpl_MarqueeRepeatLimit *create_ASToggleButtonImpl_MarqueeRepeatLimit_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_MarqueeRepeatLimit)
+
 
 #endif
 
@@ -278,6 +286,7 @@ FOUNDATION_EXPORT ASToggleButtonImpl_Font *create_ASToggleButtonImpl_Font_init(v
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_Font)
 
+
 #endif
 
 #if !defined (ASToggleButtonImpl_TextStyle_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_TextStyle))
@@ -313,6 +322,7 @@ FOUNDATION_EXPORT ASToggleButtonImpl_TextStyle *new_ASToggleButtonImpl_TextStyle
 FOUNDATION_EXPORT ASToggleButtonImpl_TextStyle *create_ASToggleButtonImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_TextStyle)
+
 
 #endif
 
@@ -350,6 +360,7 @@ FOUNDATION_EXPORT ASToggleButtonImpl_Ellipsize *create_ASToggleButtonImpl_Ellips
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_Ellipsize)
 
+
 #endif
 
 #if !defined (ASToggleButtonImpl_JustificationMode_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_JustificationMode))
@@ -386,6 +397,7 @@ FOUNDATION_EXPORT ASToggleButtonImpl_JustificationMode *create_ASToggleButtonImp
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 
+
 #endif
 
 #if !defined (ASToggleButtonImpl_ToggleButtonExt_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_ToggleButtonExt))
@@ -405,6 +417,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -414,7 +430,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -423,13 +439,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -445,19 +461,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -480,7 +496,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -496,16 +512,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -522,6 +538,7 @@ FOUNDATION_EXPORT ASToggleButtonImpl_ToggleButtonExt *new_ASToggleButtonImpl_Tog
 FOUNDATION_EXPORT ASToggleButtonImpl_ToggleButtonExt *create_ASToggleButtonImpl_ToggleButtonExt_initWithASToggleButtonImpl_(ASToggleButtonImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
+
 
 #endif
 

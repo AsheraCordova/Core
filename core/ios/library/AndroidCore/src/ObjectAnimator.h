@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\ObjectAnimator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ObjectAnimator")
@@ -32,6 +33,10 @@
 @class IOSFloatArray;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangLong;
+@class NSString;
 @protocol ADAnimationHandler_AnimationFrameCallback;
 @protocol ADTypeEvaluator;
 
@@ -567,7 +572,7 @@
   target properties, in the same order.
  @param cancel Whether future ObjectAnimators with the same target and properties  as this ObjectAnimator will cause this ObjectAnimator to be canceled.
  */
-- (void)setAutoCancelWithBoolean:(jboolean)cancel;
+- (void)setAutoCancelWithBoolean:(bool)cancel;
 
 /*!
  @brief Sets the length of the animation.The default duration is 300 milliseconds.
@@ -577,7 +582,7 @@
   duration, as in 
  <code>ObjectAnimator.ofInt(target, propertyName, 0, 10).setDuration(500).start()</code>.
  */
-- (ADObjectAnimator *)setDurationWithLong:(jlong)duration;
+- (ADObjectAnimator *)setDurationWithLong:(int64_t)duration;
 
 - (void)setFloatValuesWithFloatArray:(IOSFloatArray *)values;
 
@@ -643,7 +648,7 @@
   of the animated value.</p>
  @param fraction The elapsed fraction of the animation.
  */
-- (void)animateValueWithFloat:(jfloat)fraction;
+- (void)animateValueWithFloat:(float)fraction;
 
 - (NSString *)getNameForTrace;
 
@@ -661,9 +666,9 @@
  */
 - (void)initAnimation OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)isInitialized;
+- (bool)isInitialized;
 
-- (jboolean)shouldAutoCancelWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)anim;
+- (bool)shouldAutoCancelWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)anim;
 
 @end
 
@@ -722,6 +727,7 @@ FOUNDATION_EXPORT ADObjectAnimator *ADObjectAnimator_ofPropertyValuesHolderWithI
 J2OBJC_TYPE_LITERAL_HEADER(ADObjectAnimator)
 
 @compatibility_alias RAndroidAnimationObjectAnimator ADObjectAnimator;
+
 
 #endif
 

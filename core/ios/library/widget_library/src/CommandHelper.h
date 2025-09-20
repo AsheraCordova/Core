@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\CommandHelper.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CommandHelper")
@@ -16,6 +17,7 @@
 #if !defined (ASCommandHelper_) && (INCLUDE_ALL_CommandHelper || defined(INCLUDE_ASCommandHelper))
 #define ASCommandHelper_
 
+@class NSString;
 @protocol ASCommandHelper_SucessCallBack;
 @protocol ASIActivity;
 
@@ -46,10 +48,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCommandHelper)
 
 @compatibility_alias ComAsheraUtilsCommandHelper ASCommandHelper;
 
+
 #endif
 
 #if !defined (ASCommandHelper_SucessCallBack_) && (INCLUDE_ALL_CommandHelper || defined(INCLUDE_ASCommandHelper_SucessCallBack))
 #define ASCommandHelper_SucessCallBack_
+
+@class NSString;
 
 @protocol ASCommandHelper_SucessCallBack < JavaObject >
 
@@ -61,6 +66,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCommandHelper)
 J2OBJC_EMPTY_STATIC_INIT(ASCommandHelper_SucessCallBack)
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCommandHelper_SucessCallBack)
+
 
 #endif
 

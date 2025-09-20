@@ -3,12 +3,19 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\AttributeCommandChain.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "AttributeCommandChain.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/Comparator.h"
 #include "java/util/Set.h"
 #include "java/util/TreeSet.h"
@@ -17,12 +24,12 @@
 #include "java/util/function/ToIntFunction.h"
 #include "java/util/function/ToLongFunction.h"
 
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
-@protocol JavaUtilSet;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -46,8 +53,8 @@ J2OBJC_FIELD_SETTER(ASAttributeCommandChain, commands_, id<JavaUtilSet>)
 
 - (instancetype)init;
 
-- (jint)compareWithId:(id<ASAttributeCommand>)o1
-               withId:(id<ASAttributeCommand>)o2;
+- (int32_t)compareWithId:(id<ASAttributeCommand>)o1
+                  withId:(id<ASAttributeCommand>)o2;
 
 @end
 
@@ -58,6 +65,7 @@ __attribute__((unused)) static void ASAttributeCommandChain_1_init(ASAttributeCo
 __attribute__((unused)) static ASAttributeCommandChain_1 *new_ASAttributeCommandChain_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASAttributeCommandChain_1 *create_ASAttributeCommandChain_1_init(void);
+
 
 @implementation ASAttributeCommandChain
 
@@ -203,6 +211,8 @@ ASAttributeCommandChain *create_ASAttributeCommandChain_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAttributeCommandChain)
 
+J2OBJC_NAME_MAPPING(ASAttributeCommandChain, "com.ashera.widget", "AS")
+
 @implementation ASAttributeCommandChain_1
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -212,12 +222,12 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)compareWithId:(id<ASAttributeCommand>)o1
-               withId:(id<ASAttributeCommand>)o2 {
+- (int32_t)compareWithId:(id<ASAttributeCommand>)o1
+                  withId:(id<ASAttributeCommand>)o2 {
   if (o1 == nil || o1 == nil) {
     return 0;
   }
-  jint p = [o1 getPriority] - [((id<ASAttributeCommand>) nil_chk(o2)) getPriority];
+  int32_t p = [o1 getPriority] - [((id<ASAttributeCommand>) nil_chk(o2)) getPriority];
   if (p == 0) {
     return [((NSString *) nil_chk([[o1 java_getClass] getName])) compareToWithId:[[o2 java_getClass] getName]];
   }
@@ -265,7 +275,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(compareWithId:withId:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "compare", "LASAttributeCommand;LASAttributeCommand;", "LASAttributeCommandChain;", "addCommandWithASAttributeCommand:", "Ljava/lang/Object;Ljava/util/Comparator<Lcom/ashera/widget/AttributeCommand;>;" };
-  static const J2ObjcClassInfo _ASAttributeCommandChain_1 = { "", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, 3, 4, -1 };
+  static const J2ObjcClassInfo _ASAttributeCommandChain_1 = { "", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, 4, -1 };
   return &_ASAttributeCommandChain_1;
 }
 

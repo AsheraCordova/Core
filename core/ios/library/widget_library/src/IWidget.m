@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IWidget.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IWidget.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASIWidget : NSObject
@@ -207,6 +219,8 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASIWidget)
+
+J2OBJC_NAME_MAPPING(ASIWidget, "com.ashera.widget", "AS")
 
 @implementation ASIWidget_CommandCallBack
 

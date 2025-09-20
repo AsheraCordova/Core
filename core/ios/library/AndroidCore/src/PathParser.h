@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\util\PathParser.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PathParser")
@@ -36,6 +37,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathParser)
 
 @compatibility_alias RAndroidUtilPathParser ADPathParser;
 
+
 #endif
 
 #if !defined (ADPathParser_PathData_) && (INCLUDE_ALL_PathParser || defined(INCLUDE_ADPathParser_PathData))
@@ -62,6 +64,7 @@ FOUNDATION_EXPORT ADPathParser_PathData *new_ADPathParser_PathData_initWithADPat
 FOUNDATION_EXPORT ADPathParser_PathData *create_ADPathParser_PathData_initWithADPathParser_PathData_(ADPathParser_PathData *startValue);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPathParser_PathData)
+
 
 #endif
 

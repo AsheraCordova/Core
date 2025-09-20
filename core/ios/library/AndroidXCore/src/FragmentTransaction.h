@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\fragment\app\FragmentTransaction.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FragmentTransaction")
@@ -16,6 +17,7 @@
 #if !defined (ADXFragmentTransaction_) && (INCLUDE_ALL_FragmentTransaction || defined(INCLUDE_ADXFragmentTransaction))
 #define ADXFragmentTransaction_
 
+@class NSString;
 @protocol ASIFragmentContainer;
 @protocol JavaUtilList;
 
@@ -55,11 +57,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXFragmentTransaction)
 
 @compatibility_alias AndroidxFragmentAppFragmentTransaction ADXFragmentTransaction;
 
+
 #endif
 
 #if !defined (ADXFragmentTransaction_Ops_) && (INCLUDE_ALL_FragmentTransaction || defined(INCLUDE_ADXFragmentTransaction_Ops))
 #define ADXFragmentTransaction_Ops_
 
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragmentContainer;
 
 @interface ADXFragmentTransaction_Ops : NSObject {
@@ -69,12 +74,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXFragmentTransaction)
   NSString *navGraphId_;
   NSString *tag_;
   NSString *name_;
-  jint type_;
+  int32_t type_;
 }
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)type
+- (instancetype)initWithInt:(int32_t)type
    withASIFragmentContainer:(id<ASIFragmentContainer>)fragmentContainer
                withNSString:(NSString *)name
                withNSString:(NSString *)layout
@@ -95,13 +100,14 @@ J2OBJC_FIELD_SETTER(ADXFragmentTransaction_Ops, navGraphId_, NSString *)
 J2OBJC_FIELD_SETTER(ADXFragmentTransaction_Ops, tag_, NSString *)
 J2OBJC_FIELD_SETTER(ADXFragmentTransaction_Ops, name_, NSString *)
 
-FOUNDATION_EXPORT void ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(ADXFragmentTransaction_Ops *self, jint type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag);
+FOUNDATION_EXPORT void ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(ADXFragmentTransaction_Ops *self, int32_t type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag);
 
-FOUNDATION_EXPORT ADXFragmentTransaction_Ops *new_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(jint type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADXFragmentTransaction_Ops *new_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(int32_t type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADXFragmentTransaction_Ops *create_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(jint type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag);
+FOUNDATION_EXPORT ADXFragmentTransaction_Ops *create_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(int32_t type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXFragmentTransaction_Ops)
+
 
 #endif
 

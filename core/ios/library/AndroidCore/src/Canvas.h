@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Canvas.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Canvas")
@@ -17,6 +18,7 @@
 #define ADCanvas_
 
 @class ADDrawable;
+@class JavaLangInteger;
 
 @protocol ADCanvas < JavaObject >
 
@@ -24,18 +26,19 @@
 
 - (void)reset;
 
-- (void)translateWithInt:(jint)scrollX
-                 withInt:(jint)scrollY;
+- (void)translateWithInt:(int32_t)scrollX
+                 withInt:(int32_t)scrollY;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADCanvas)
 
-FOUNDATION_EXPORT void ADCanvas_translateWithInt_withInt_(id<ADCanvas> self, jint scrollX, jint scrollY);
+FOUNDATION_EXPORT void ADCanvas_translateWithInt_withInt_(id<ADCanvas> self, int32_t scrollX, int32_t scrollY);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADCanvas)
 
 #define RAndroidGraphicsCanvas ADCanvas
+
 
 #endif
 

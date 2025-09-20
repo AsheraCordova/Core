@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\WindowManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WindowManager")
@@ -32,6 +33,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWindowManager)
 
 #define RAndroidViewWindowManager ADWindowManager
 
+
 #endif
 
 #if !defined (ADWindowManager_LayoutParams_) && (INCLUDE_ALL_WindowManager || defined(INCLUDE_ADWindowManager_LayoutParams))
@@ -43,6 +45,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWindowManager)
 
 @class ADView;
 @class ADViewGroup_LayoutParams;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADIBinder;
 
 @interface ADWindowManager_LayoutParams : ADRelativeLayout_LayoutParams {
@@ -50,25 +55,25 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWindowManager)
   id accessibilityIdOfAnchor_;
   NSString *accessibilityTitle_;
   NSString *packageName_;
-  jint flags_;
-  jint type_;
+  int32_t flags_;
+  int32_t type_;
   id<ADIBinder> token_;
-  jint format_;
-  jint windowAnimations_;
-  jint softInputMode_;
-  jint privateFlags_;
+  int32_t format_;
+  int32_t windowAnimations_;
+  int32_t softInputMode_;
+  int32_t privateFlags_;
 }
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)h;
+- (instancetype)initWithInt:(int32_t)w
+                    withInt:(int32_t)h;
 
 - (void)setSurfaceInsetsWithADView:(ADView *)mBackgroundView
-                       withBoolean:(jboolean)b
-                       withBoolean:(jboolean)c;
+                       withBoolean:(bool)b
+                       withBoolean:(bool)c;
 
 - (void)setTitleWithNSString:(NSString *)string;
 
@@ -87,35 +92,35 @@ J2OBJC_FIELD_SETTER(ADWindowManager_LayoutParams, accessibilityTitle_, NSString 
 J2OBJC_FIELD_SETTER(ADWindowManager_LayoutParams, packageName_, NSString *)
 J2OBJC_FIELD_SETTER(ADWindowManager_LayoutParams, token_, id<ADIBinder>)
 
-inline jint ADWindowManager_LayoutParams_get_PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH(void);
+inline int32_t ADWindowManager_LayoutParams_get_PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH(void);
 #define ADWindowManager_LayoutParams_PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH 32768
-J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH, int32_t)
 
-inline jint ADWindowManager_LayoutParams_get_PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME(void);
+inline int32_t ADWindowManager_LayoutParams_get_PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME(void);
 #define ADWindowManager_LayoutParams_PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME 65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME, int32_t)
 
-inline jint ADWindowManager_LayoutParams_get_FLAG_FULLSCREEN(void);
+inline int32_t ADWindowManager_LayoutParams_get_FLAG_FULLSCREEN(void);
 #define ADWindowManager_LayoutParams_FLAG_FULLSCREEN 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, FLAG_FULLSCREEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, FLAG_FULLSCREEN, int32_t)
 
-inline jint ADWindowManager_LayoutParams_get_FLAG_FORCE_NOT_FULLSCREEN(void);
+inline int32_t ADWindowManager_LayoutParams_get_FLAG_FORCE_NOT_FULLSCREEN(void);
 #define ADWindowManager_LayoutParams_FLAG_FORCE_NOT_FULLSCREEN 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, FLAG_FORCE_NOT_FULLSCREEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, FLAG_FORCE_NOT_FULLSCREEN, int32_t)
 
-inline jint ADWindowManager_LayoutParams_get_SOFT_INPUT_STATE_UNCHANGED(void);
+inline int32_t ADWindowManager_LayoutParams_get_SOFT_INPUT_STATE_UNCHANGED(void);
 #define ADWindowManager_LayoutParams_SOFT_INPUT_STATE_UNCHANGED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, SOFT_INPUT_STATE_UNCHANGED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, SOFT_INPUT_STATE_UNCHANGED, int32_t)
 
-inline jint ADWindowManager_LayoutParams_get_TYPE_APPLICATION_PANEL(void);
+inline int32_t ADWindowManager_LayoutParams_get_TYPE_APPLICATION_PANEL(void);
 #define ADWindowManager_LayoutParams_TYPE_APPLICATION_PANEL 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, TYPE_APPLICATION_PANEL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, TYPE_APPLICATION_PANEL, int32_t)
 
-FOUNDATION_EXPORT void ADWindowManager_LayoutParams_initWithInt_withInt_(ADWindowManager_LayoutParams *self, jint w, jint h);
+FOUNDATION_EXPORT void ADWindowManager_LayoutParams_initWithInt_withInt_(ADWindowManager_LayoutParams *self, int32_t w, int32_t h);
 
-FOUNDATION_EXPORT ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADWindowManager_LayoutParams *create_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h);
+FOUNDATION_EXPORT ADWindowManager_LayoutParams *create_ADWindowManager_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h);
 
 FOUNDATION_EXPORT void ADWindowManager_LayoutParams_init(ADWindowManager_LayoutParams *self);
 
@@ -124,6 +129,7 @@ FOUNDATION_EXPORT ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams
 FOUNDATION_EXPORT ADWindowManager_LayoutParams *create_ADWindowManager_LayoutParams_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADWindowManager_LayoutParams)
+
 
 #endif
 

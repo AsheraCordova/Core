@@ -3,13 +3,26 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Messenger.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Handler.h"
 #include "IBinder.h"
 #include "IMessenger.h"
 #include "J2ObjC_source.h"
 #include "Message.h"
 #include "Messenger.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/ClassCastException.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADMessenger () {
@@ -36,7 +49,7 @@ J2OBJC_FIELD_SETTER(ADMessenger, mTarget_, id<ADIMessenger>)
   return [((id<ADIMessenger>) nil_chk(mTarget_)) asBinder];
 }
 
-- (jboolean)isEqual:(id)otherObj {
+- (bool)isEqual:(id)otherObj {
   if (otherObj == nil) {
     return false;
   }
@@ -49,10 +62,10 @@ J2OBJC_FIELD_SETTER(ADMessenger, mTarget_, id<ADIMessenger>)
 }
 
 - (NSUInteger)hash {
-  return ((jint) [((id<ADIBinder>) nil_chk([((id<ADIMessenger>) nil_chk(mTarget_)) asBinder])) hash]);
+  return ((int32_t) [((id<ADIBinder>) nil_chk([((id<ADIMessenger>) nil_chk(mTarget_)) asBinder])) hash]);
 }
 
-- (jint)describeContents {
+- (int32_t)describeContents {
   return 0;
 }
 
@@ -124,3 +137,5 @@ ADMessenger *create_ADMessenger_initWithADIBinder_(id<ADIBinder> target) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMessenger)
+
+J2OBJC_NAME_MAPPING(ADMessenger, "r.android.os", "AD")

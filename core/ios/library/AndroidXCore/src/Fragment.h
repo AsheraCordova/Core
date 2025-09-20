@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\fragment\app\Fragment.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Fragment")
@@ -22,6 +23,7 @@
 @class ADView;
 @class ADViewGroup;
 @class ADXFragmentManager;
+@class JavaLangBoolean;
 @protocol ASIFragment;
 
 @interface ADXFragment : NSObject
@@ -64,7 +66,7 @@
 - (void)setParentFragmentWithASIFragment:(id<ASIFragment>)parentFragment;
 
 - (void)setParentFragmentWithASIFragment:(id<ASIFragment>)parentFragment
-                             withBoolean:(jboolean)manageLifeCycle;
+                             withBoolean:(bool)manageLifeCycle;
 
 @end
 
@@ -79,6 +81,7 @@ FOUNDATION_EXPORT ADXFragment *create_ADXFragment_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADXFragment)
 
 @compatibility_alias AndroidxFragmentAppFragment ADXFragment;
+
 
 #endif
 

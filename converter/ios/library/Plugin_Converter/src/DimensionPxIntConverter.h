@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\DimensionPxIntConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DimensionPxIntConverter")
@@ -21,6 +22,7 @@
 #include "IConverter.h"
 
 @class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -53,6 +55,7 @@ FOUNDATION_EXPORT ASDimensionPxIntConverter *create_ASDimensionPxIntConverter_in
 J2OBJC_TYPE_LITERAL_HEADER(ASDimensionPxIntConverter)
 
 @compatibility_alias ComAsheraConverterDimensionPxIntConverter ASDimensionPxIntConverter;
+
 
 #endif
 

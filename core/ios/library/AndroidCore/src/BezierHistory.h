@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierHistory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BezierHistory")
@@ -17,6 +18,7 @@
 #define ADBezierHistory_
 
 @class ADPointF;
+@class JavaLangFloat;
 
 @interface ADBezierHistory : NSObject {
  @public
@@ -29,14 +31,14 @@
 
 - (instancetype)init;
 
-- (void)setLastKnotWithFloat:(jfloat)x
-                   withFloat:(jfloat)y;
+- (void)setLastKnotWithFloat:(float)x
+                   withFloat:(float)y;
 
-- (void)setLastPointWithFloat:(jfloat)x
-                    withFloat:(jfloat)y;
+- (void)setLastPointWithFloat:(float)x
+                    withFloat:(float)y;
 
-- (void)setStartPointWithFloat:(jfloat)x
-                     withFloat:(jfloat)y;
+- (void)setStartPointWithFloat:(float)x
+                     withFloat:(float)y;
 
 @end
 
@@ -55,6 +57,7 @@ FOUNDATION_EXPORT ADBezierHistory *create_ADBezierHistory_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADBezierHistory)
 
 @compatibility_alias RAndroidGraphicsBezierHistory ADBezierHistory;
+
 
 #endif
 

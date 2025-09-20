@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\app\AlertDialog.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AlertDialog")
@@ -38,6 +39,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAlertDialog)
 
 @compatibility_alias RAndroidAppAlertDialog ADAlertDialog;
 
+
 #endif
 
 #if !defined (ADAlertDialog_OnClickListener_) && (INCLUDE_ALL_AlertDialog || defined(INCLUDE_ADAlertDialog_OnClickListener))
@@ -61,6 +63,7 @@ FOUNDATION_EXPORT ADAlertDialog_OnClickListener *create_ADAlertDialog_OnClickLis
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAlertDialog_OnClickListener)
 
+
 #endif
 
 #if !defined (ADAlertDialog_Builder_) && (INCLUDE_ALL_AlertDialog || defined(INCLUDE_ADAlertDialog_Builder))
@@ -73,6 +76,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAlertDialog_OnClickListener)
 @class ADDialogInterface_OnClickListener;
 @class ADDialogInterface_OnKeyListener;
 @class ADEditText;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADAlertDialog_Builder : NSObject
 
@@ -82,21 +88,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAlertDialog_OnClickListener)
 
 - (void)create;
 
-- (void)setCancelableWithBoolean:(jboolean)b;
+- (void)setCancelableWithBoolean:(bool)b;
 
 - (void)setMessageWithNSString:(NSString *)message;
 
-- (void)setNegativeButtonWithInt:(jint)cancel
+- (void)setNegativeButtonWithInt:(int32_t)cancel
 withADDialogInterface_OnClickListener:(ADDialogInterface_OnClickListener *)onClickListener;
 
 - (void)setOnCancelListenerWithADDialogInterface_OnCancelListener:(ADDialogInterface_OnCancelListener *)onCancelListener;
 
 - (void)setOnKeyListenerWithADDialogInterface_OnKeyListener:(ADDialogInterface_OnKeyListener *)onKeyListener;
 
-- (void)setPositiveButtonWithInt:(jint)ok
+- (void)setPositiveButtonWithInt:(int32_t)ok
 withADAlertDialog_OnClickListener:(ADAlertDialog_OnClickListener *)onClickListener;
 
-- (void)setPositiveButtonWithInt:(jint)ok
+- (void)setPositiveButtonWithInt:(int32_t)ok
 withADDialogInterface_OnClickListener:(ADDialogInterface_OnClickListener *)onClickListener;
 
 - (void)setPositiveButtonWithNSString:(NSString *)button
@@ -123,6 +129,7 @@ FOUNDATION_EXPORT ADAlertDialog_Builder *new_ADAlertDialog_Builder_initWithADCon
 FOUNDATION_EXPORT ADAlertDialog_Builder *create_ADAlertDialog_Builder_initWithADContext_(ADContext *context);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAlertDialog_Builder)
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\FileUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FileUtils")
@@ -19,8 +20,10 @@
 @class IOSByteArray;
 @class JavaIoFile;
 @class JavaIoInputStream;
+@class JavaLangInteger;
 @class JavaNetURL;
 @class JavaUtilProperties;
+@class NSString;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
@@ -58,9 +61,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASFileUtils)
 
-inline jint ASFileUtils_get_DEFAULT_BUFFER_SIZE(void);
+inline int32_t ASFileUtils_get_DEFAULT_BUFFER_SIZE(void);
 #define ASFileUtils_DEFAULT_BUFFER_SIZE 8192
-J2OBJC_STATIC_FIELD_CONSTANT(ASFileUtils, DEFAULT_BUFFER_SIZE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASFileUtils, DEFAULT_BUFFER_SIZE, int32_t)
 
 FOUNDATION_EXPORT void ASFileUtils_init(ASFileUtils *self);
 
@@ -95,6 +98,7 @@ FOUNDATION_EXPORT NSString *ASFileUtils_getSlashAppendedDirectoryNameWithNSStrin
 J2OBJC_TYPE_LITERAL_HEADER(ASFileUtils)
 
 @compatibility_alias ComAsheraUtilsFileUtils ASFileUtils;
+
 
 #endif
 

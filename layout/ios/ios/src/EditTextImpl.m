@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\EditTextImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributedString.h"
@@ -56,6 +61,7 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
@@ -80,42 +86,43 @@
 
 #include "ASUITextField.h"
 
-@class JavaUtilLocale;
-@class JavaUtilRegexPattern;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASEditTextImpl () {
  @public
   id<JavaUtilMap> fontDescriptors_;
-  jboolean html_;
-  jboolean escapeHtml_;
+  bool html_;
+  bool escapeHtml_;
   id<JavaUtilMap> htmlConfig_;
   JavaUtilLocale *locale_;
   ADColorStateList *drawableTint_;
   ASSimpleWrapableView *simpleWrapableView_;
-  jboolean callMeasureOnChange_;
+  bool callMeasureOnChange_;
   id originalTintColor_;
-  jint maxLength_;
+  int32_t maxLength_;
   JavaUtilRegexPattern *numericPattern_;
   id editorAction_;
   id onFocusChange_;
-  jboolean selectAllOnFocus_;
-  jboolean selectOnceOnFocus_;
-  jboolean scrollHorizontally_;
+  bool selectAllOnFocus_;
+  bool selectOnceOnFocus_;
+  bool scrollHorizontally_;
   id onAfterTextChange_;
   id onBeforeTextChange_;
   id onTextChange_;
-  jint start_;
-  jint end_;
-  jint count_;
-  jint after_;
+  int32_t start_;
+  int32_t end_;
+  int32_t count_;
+  int32_t after_;
   NSString *str_;
   id<JavaUtilMap> textWatchers_;
   id<ADTextWatcher> textChangedListener_;
-  jboolean textAllCaps_;
+  bool textAllCaps_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -168,11 +175,11 @@
 
 - (id)getWidth;
 
-- (jint)getHeight;
+- (int32_t)getHeight;
 
 - (void)setFirstBaselineToTopHeightWithId:(id)objValue;
 
-- (jboolean)getIncludeFontPadding;
+- (bool)getIncludeFontPadding;
 
 - (id)getFirstBaselineToTopHeight;
 
@@ -192,14 +199,14 @@
 
 - (void)setDigitsWithId:(id)objValue;
 
-- (jint)nativeGetFontSize;
+- (int32_t)nativeGetFontSize;
 
-- (jint)nativeGetFontStyle;
+- (int32_t)nativeGetFontStyle;
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor;
 
-- (void)nativeSetFontStyleWithInt:(jint)style;
+- (void)nativeSetFontStyleWithInt:(int32_t)style;
 
 - (id)getPaddingTop;
 
@@ -233,7 +240,7 @@
 
 - (void)setMyTextSizeWithId:(id)objValue;
 
-- (void)nativeSetTextSizeWithInt:(jint)value;
+- (void)nativeSetTextSizeWithInt:(int32_t)value;
 
 - (void)setVerticalAligmentCenter;
 
@@ -251,7 +258,7 @@
 
 - (void)setHorizontalAligmentLeftInternal;
 
-- (jint)getTextAlignment;
+- (int32_t)getTextAlignment;
 
 - (void)setDrawablePaddingWithId:(id)objValue;
 
@@ -271,9 +278,9 @@
 - (void)setDrawableLeftInternalWithNSString:(NSString *)originalAttr
                                      withId:(id)objValue;
 
-- (jint)getImageHeightWithId:(id)objValue;
+- (int32_t)getImageHeightWithId:(id)objValue;
 
-- (jint)getImageWidthWithId:(id)objValue;
+- (int32_t)getImageWidthWithId:(id)objValue;
 
 - (id)getDrawablePadding;
 
@@ -288,9 +295,9 @@
 - (void)drawableStateChangeWithNSString:(NSString *)type
                          withADDrawable:(ADDrawable *)dr;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
 - (void)setTextColorHighlightWithId:(id)objValue;
 
@@ -298,14 +305,14 @@
 
 - (void)createSimpleWrapableView;
 
-- (jboolean)hasScrollView;
+- (bool)hasScrollView;
 
-- (jboolean)isViewWrapped;
+- (bool)isViewWrapped;
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b;
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b;
 
 - (void)invalidateWrapViewHolder;
 
@@ -313,7 +320,7 @@
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
-- (id)nativeCreateViewWithInt:(jint)viewType;
+- (id)nativeCreateViewWithInt:(int32_t)viewType;
 
 - (void)addMinMaxListener;
 
@@ -323,17 +330,17 @@
 
 - (void)setCursorVisibleWithId:(id)objValue;
 
-- (id)nativeGetTintColorWithBoolean:(jboolean)clearColor;
+- (id)nativeGetTintColorWithBoolean:(bool)clearColor;
 
 - (void)setCapitalizeWithId:(id)objValue;
 
-- (void)nativeSetCapitalizeWithInt:(jint)capitalizeType;
+- (void)nativeSetCapitalizeWithInt:(int32_t)capitalizeType;
 
 - (void)setAutoTextWithId:(id)objValue;
 
-- (void)nativeSetCorrectionTypeWithInt:(jint)capitalizeType;
+- (void)nativeSetCorrectionTypeWithInt:(int32_t)capitalizeType;
 
-- (jboolean)getCursorVisible;
+- (bool)getCursorVisible;
 
 - (void)setMaxLengthWithId:(id)objValue;
 
@@ -348,7 +355,7 @@
 
 - (NSString *)getDecimalCharacter;
 
-- (jboolean)numericPatternMatchesWithNSString:(NSString *)str;
+- (bool)numericPatternMatchesWithNSString:(NSString *)str;
 
 - (void)removeNumericListener;
 
@@ -356,24 +363,24 @@
 
 - (void)setPhoneNumberWithId:(id)objValue;
 
-- (void)nativeSetPhoneNumberWithBoolean:(jboolean)value;
+- (void)nativeSetPhoneNumberWithBoolean:(bool)value;
 
 - (id)getFont;
 
 - (void)setInputTypeWithId:(id)objValue;
 
-- (void)nativeSetKeyboardTypeWithInt:(jint)value;
+- (void)nativeSetKeyboardTypeWithInt:(int32_t)value;
 
 - (id)getInputType;
 
-- (jint)nativeGetKeyboardType;
+- (int32_t)nativeGetKeyboardType;
 
 - (void)setImeOptionsWithId:(id)objValue
                withNSString:(NSString *)strValue;
 
-- (void)nativeSetImeOptionsWithInt:(jint)imeOptions;
+- (void)nativeSetImeOptionsWithInt:(int32_t)imeOptions;
 
-- (jint)nativeGetImeOptions;
+- (int32_t)nativeGetImeOptions;
 
 - (id)getImeOptions;
 
@@ -395,11 +402,11 @@
 
 - (void)setSelectAllWithId:(id)objValue;
 
-- (jboolean)isFirstResponder;
+- (bool)isFirstResponder;
 
 - (void)becomeFirstResponder;
 
-- (void)nativeSetSelectAllWithFloat:(jfloat)delay;
+- (void)nativeSetSelectAllWithFloat:(float)delay;
 
 - (void)setSingleLineWithId:(id)objValue;
 
@@ -410,14 +417,14 @@
 - (void)nativeAddTapGesture;
 
 - (void)nativeSetScrollEnabledWithId:(id)scrollView
-                         withBoolean:(jboolean)scrollEnabled;
+                         withBoolean:(bool)scrollEnabled;
 
 - (void)setTextColorLinkWithADColorStateList:(ADColorStateList *)linkTextColors;
 
 - (void)handleOnBeforeTextChangeWithNSString:(NSString *)s
-                                     withInt:(jint)start
-                                     withInt:(jint)count
-                                     withInt:(jint)after;
+                                     withInt:(int32_t)start
+                                     withInt:(int32_t)count
+                                     withInt:(int32_t)after;
 
 - (id<ADTextWatcher>)getTextChangedListenerWithId:(id)objValue
                                      withNSString:(NSString *)name;
@@ -437,8 +444,8 @@
 - (void)forceRedraw;
 
 - (void)nativeSetContentSizeWithId:(id)uiView
-                           withInt:(jint)contentWidth
-                           withInt:(jint)height;
+                           withInt:(int32_t)contentWidth
+                           withInt:(int32_t)height;
 
 - (void)remeasure;
 
@@ -448,12 +455,12 @@
 
 - (void)setPasswordTypeWithId:(id)objValue;
 
-- (void)nativeSetSecureTextEntryWithBoolean:(jboolean)value;
+- (void)nativeSetSecureTextEntryWithBoolean:(bool)value;
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b;
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
 
 - (void)postSetAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                                  withNSString:(NSString *)strValue
@@ -462,7 +469,7 @@
 
 - (void)setBorderStyleWithId:(id)value;
 
-- (void)nativeSetBorderStyleWithInt:(jint)value;
+- (void)nativeSetBorderStyleWithInt:(int32_t)value;
 
 - (void)updatePadding;
 
@@ -525,33 +532,33 @@ inline id<JavaUtilList> ASEditTextImpl_set_regexSpecialCharacters(id<JavaUtilLis
 static id<JavaUtilList> ASEditTextImpl_regexSpecialCharacters;
 J2OBJC_STATIC_FIELD_OBJ(ASEditTextImpl, regexSpecialCharacters, id<JavaUtilList>)
 
-inline jint ASEditTextImpl_get_ITALIC_FONT_TRAIT(void);
-inline jint ASEditTextImpl_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASEditTextImpl_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASEditTextImpl_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASEditTextImpl, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASEditTextImpl_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASEditTextImpl_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASEditTextImpl_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASEditTextImpl_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASEditTextImpl, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASEditTextImpl_get_BOLD_FONT_TRAIT(void);
-inline jint ASEditTextImpl_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASEditTextImpl_getRef_BOLD_FONT_TRAIT(void);
-static jint ASEditTextImpl_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASEditTextImpl, BOLD_FONT_TRAIT, jint)
+inline int32_t ASEditTextImpl_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASEditTextImpl_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASEditTextImpl_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASEditTextImpl_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASEditTextImpl, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASEditTextImpl_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASEditTextImpl_get_NORMAL_FONT_TRAIT(void);
 #define ASEditTextImpl_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, NORMAL_FONT_TRAIT, int32_t)
 
-inline jint ASEditTextImpl_get_TEXT_ALIGN_CENTER(void);
+inline int32_t ASEditTextImpl_get_TEXT_ALIGN_CENTER(void);
 #define ASEditTextImpl_TEXT_ALIGN_CENTER 2
-J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, TEXT_ALIGN_CENTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, TEXT_ALIGN_CENTER, int32_t)
 
-inline jint ASEditTextImpl_get_TEXT_ALIGN_LEFT(void);
+inline int32_t ASEditTextImpl_get_TEXT_ALIGN_LEFT(void);
 #define ASEditTextImpl_TEXT_ALIGN_LEFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, TEXT_ALIGN_LEFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, TEXT_ALIGN_LEFT, int32_t)
 
-inline jint ASEditTextImpl_get_TEXT_ALIGN_RIGHT(void);
+inline int32_t ASEditTextImpl_get_TEXT_ALIGN_RIGHT(void);
 #define ASEditTextImpl_TEXT_ALIGN_RIGHT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, TEXT_ALIGN_RIGHT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASEditTextImpl, TEXT_ALIGN_RIGHT, int32_t)
 
 __attribute__((unused)) static void ASEditTextImpl_setWidgetOnNativeClass(ASEditTextImpl *self);
 
@@ -601,11 +608,11 @@ __attribute__((unused)) static void ASEditTextImpl_setMinWidthWithId_(ASEditText
 
 __attribute__((unused)) static id ASEditTextImpl_getWidth(ASEditTextImpl *self);
 
-__attribute__((unused)) static jint ASEditTextImpl_getHeight(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_getHeight(ASEditTextImpl *self);
 
 __attribute__((unused)) static void ASEditTextImpl_setFirstBaselineToTopHeightWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASEditTextImpl_getIncludeFontPadding(ASEditTextImpl *self);
+__attribute__((unused)) static bool ASEditTextImpl_getIncludeFontPadding(ASEditTextImpl *self);
 
 __attribute__((unused)) static id ASEditTextImpl_getFirstBaselineToTopHeight(ASEditTextImpl *self);
 
@@ -625,13 +632,13 @@ __attribute__((unused)) static void ASEditTextImpl_setNumericWithId_(ASEditTextI
 
 __attribute__((unused)) static void ASEditTextImpl_setDigitsWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASEditTextImpl_nativeGetFontSize(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_nativeGetFontSize(ASEditTextImpl *self);
 
-__attribute__((unused)) static jint ASEditTextImpl_nativeGetFontStyle(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_nativeGetFontStyle(ASEditTextImpl *self);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASEditTextImpl *self, jint height, ASFontDescriptor *fontDescriptor);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASEditTextImpl *self, int32_t height, ASFontDescriptor *fontDescriptor);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetFontStyleWithInt_(ASEditTextImpl *self, jint style);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetFontStyleWithInt_(ASEditTextImpl *self, int32_t style);
 
 __attribute__((unused)) static id ASEditTextImpl_getPaddingTop(ASEditTextImpl *self);
 
@@ -665,7 +672,7 @@ __attribute__((unused)) static id ASEditTextImpl_getTextSize(ASEditTextImpl *sel
 
 __attribute__((unused)) static void ASEditTextImpl_setMyTextSizeWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetTextSizeWithInt_(ASEditTextImpl *self, jint value);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetTextSizeWithInt_(ASEditTextImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASEditTextImpl_setVerticalAligmentCenter(ASEditTextImpl *self);
 
@@ -683,7 +690,7 @@ __attribute__((unused)) static void ASEditTextImpl_setHorizontalAligmentLeft(ASE
 
 __attribute__((unused)) static void ASEditTextImpl_setHorizontalAligmentLeftInternal(ASEditTextImpl *self);
 
-__attribute__((unused)) static jint ASEditTextImpl_getTextAlignment(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_getTextAlignment(ASEditTextImpl *self);
 
 __attribute__((unused)) static void ASEditTextImpl_setDrawablePaddingWithId_(ASEditTextImpl *self, id objValue);
 
@@ -699,9 +706,9 @@ __attribute__((unused)) static void ASEditTextImpl_setDrawableLeftWithNSString_w
 
 __attribute__((unused)) static void ASEditTextImpl_setDrawableLeftInternalWithNSString_withId_(ASEditTextImpl *self, NSString *originalAttr, id objValue);
 
-__attribute__((unused)) static jint ASEditTextImpl_getImageHeightWithId_(ASEditTextImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASEditTextImpl_getImageHeightWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static jint ASEditTextImpl_getImageWidthWithId_(ASEditTextImpl *self, id objValue);
+__attribute__((unused)) static int32_t ASEditTextImpl_getImageWidthWithId_(ASEditTextImpl *self, id objValue);
 
 __attribute__((unused)) static id ASEditTextImpl_getDrawablePadding(ASEditTextImpl *self);
 
@@ -715,9 +722,9 @@ __attribute__((unused)) static id ASEditTextImpl_getTextColorState(ASEditTextImp
 
 __attribute__((unused)) static void ASEditTextImpl_drawableStateChangeWithNSString_withADDrawable_(ASEditTextImpl *self, NSString *type, ADDrawable *dr);
 
-__attribute__((unused)) static jint ASEditTextImpl_getLineHeight(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_getLineHeight(ASEditTextImpl *self);
 
-__attribute__((unused)) static jint ASEditTextImpl_getBorderWidth(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_getBorderWidth(ASEditTextImpl *self);
 
 __attribute__((unused)) static void ASEditTextImpl_setTextColorHighlightWithId_(ASEditTextImpl *self, id objValue);
 
@@ -725,11 +732,11 @@ __attribute__((unused)) static id ASEditTextImpl_getTextColorHighlight(ASEditTex
 
 __attribute__((unused)) static void ASEditTextImpl_createSimpleWrapableView(ASEditTextImpl *self);
 
-__attribute__((unused)) static jboolean ASEditTextImpl_hasScrollView(ASEditTextImpl *self);
+__attribute__((unused)) static bool ASEditTextImpl_hasScrollView(ASEditTextImpl *self);
 
-__attribute__((unused)) static jboolean ASEditTextImpl_isViewWrapped(ASEditTextImpl *self);
+__attribute__((unused)) static bool ASEditTextImpl_isViewWrapped(ASEditTextImpl *self);
 
-__attribute__((unused)) static void ASEditTextImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASEditTextImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static void ASEditTextImpl_invalidateWrapViewHolder(ASEditTextImpl *self);
 
@@ -737,7 +744,7 @@ __attribute__((unused)) static id ASEditTextImpl_getScrollView(ASEditTextImpl *s
 
 __attribute__((unused)) static void ASEditTextImpl_nativeCreateWithJavaUtilMap_(ASEditTextImpl *self, id<JavaUtilMap> params);
 
-__attribute__((unused)) static id ASEditTextImpl_nativeCreateViewWithInt_(ASEditTextImpl *self, jint viewType);
+__attribute__((unused)) static id ASEditTextImpl_nativeCreateViewWithInt_(ASEditTextImpl *self, int32_t viewType);
 
 __attribute__((unused)) static void ASEditTextImpl_addMinMaxListener(ASEditTextImpl *self);
 
@@ -747,17 +754,17 @@ __attribute__((unused)) static void ASEditTextImpl_nativeTriggerBeforeChangeHand
 
 __attribute__((unused)) static void ASEditTextImpl_setCursorVisibleWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static id ASEditTextImpl_nativeGetTintColorWithBoolean_(ASEditTextImpl *self, jboolean clearColor);
+__attribute__((unused)) static id ASEditTextImpl_nativeGetTintColorWithBoolean_(ASEditTextImpl *self, bool clearColor);
 
 __attribute__((unused)) static void ASEditTextImpl_setCapitalizeWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetCapitalizeWithInt_(ASEditTextImpl *self, jint capitalizeType);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetCapitalizeWithInt_(ASEditTextImpl *self, int32_t capitalizeType);
 
 __attribute__((unused)) static void ASEditTextImpl_setAutoTextWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetCorrectionTypeWithInt_(ASEditTextImpl *self, jint capitalizeType);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetCorrectionTypeWithInt_(ASEditTextImpl *self, int32_t capitalizeType);
 
-__attribute__((unused)) static jboolean ASEditTextImpl_getCursorVisible(ASEditTextImpl *self);
+__attribute__((unused)) static bool ASEditTextImpl_getCursorVisible(ASEditTextImpl *self);
 
 __attribute__((unused)) static void ASEditTextImpl_setMaxLengthWithId_(ASEditTextImpl *self, id objValue);
 
@@ -771,7 +778,7 @@ __attribute__((unused)) static NSString *ASEditTextImpl_getMinusString(ASEditTex
 
 __attribute__((unused)) static NSString *ASEditTextImpl_getDecimalCharacter(ASEditTextImpl *self);
 
-__attribute__((unused)) static jboolean ASEditTextImpl_numericPatternMatchesWithNSString_(ASEditTextImpl *self, NSString *str);
+__attribute__((unused)) static bool ASEditTextImpl_numericPatternMatchesWithNSString_(ASEditTextImpl *self, NSString *str);
 
 __attribute__((unused)) static void ASEditTextImpl_removeNumericListener(ASEditTextImpl *self);
 
@@ -779,23 +786,23 @@ __attribute__((unused)) static void ASEditTextImpl_addNumericListenerWithJavaUti
 
 __attribute__((unused)) static void ASEditTextImpl_setPhoneNumberWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetPhoneNumberWithBoolean_(ASEditTextImpl *self, jboolean value);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetPhoneNumberWithBoolean_(ASEditTextImpl *self, bool value);
 
 __attribute__((unused)) static id ASEditTextImpl_getFont(ASEditTextImpl *self);
 
 __attribute__((unused)) static void ASEditTextImpl_setInputTypeWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetKeyboardTypeWithInt_(ASEditTextImpl *self, jint value);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetKeyboardTypeWithInt_(ASEditTextImpl *self, int32_t value);
 
 __attribute__((unused)) static id ASEditTextImpl_getInputType(ASEditTextImpl *self);
 
-__attribute__((unused)) static jint ASEditTextImpl_nativeGetKeyboardType(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_nativeGetKeyboardType(ASEditTextImpl *self);
 
 __attribute__((unused)) static void ASEditTextImpl_setImeOptionsWithId_withNSString_(ASEditTextImpl *self, id objValue, NSString *strValue);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetImeOptionsWithInt_(ASEditTextImpl *self, jint imeOptions);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetImeOptionsWithInt_(ASEditTextImpl *self, int32_t imeOptions);
 
-__attribute__((unused)) static jint ASEditTextImpl_nativeGetImeOptions(ASEditTextImpl *self);
+__attribute__((unused)) static int32_t ASEditTextImpl_nativeGetImeOptions(ASEditTextImpl *self);
 
 __attribute__((unused)) static id ASEditTextImpl_getImeOptions(ASEditTextImpl *self);
 
@@ -817,11 +824,11 @@ __attribute__((unused)) static void ASEditTextImpl_setSelectAllOnFocusWithId_(AS
 
 __attribute__((unused)) static void ASEditTextImpl_setSelectAllWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static jboolean ASEditTextImpl_isFirstResponder(ASEditTextImpl *self);
+__attribute__((unused)) static bool ASEditTextImpl_isFirstResponder(ASEditTextImpl *self);
 
 __attribute__((unused)) static void ASEditTextImpl_becomeFirstResponder(ASEditTextImpl *self);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetSelectAllWithFloat_(ASEditTextImpl *self, jfloat delay);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetSelectAllWithFloat_(ASEditTextImpl *self, float delay);
 
 __attribute__((unused)) static void ASEditTextImpl_setSingleLineWithId_(ASEditTextImpl *self, id objValue);
 
@@ -831,11 +838,11 @@ __attribute__((unused)) static void ASEditTextImpl_setScrollHorizontallyWithId_(
 
 __attribute__((unused)) static void ASEditTextImpl_nativeAddTapGesture(ASEditTextImpl *self);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetScrollEnabledWithId_withBoolean_(ASEditTextImpl *self, id scrollView, jboolean scrollEnabled);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetScrollEnabledWithId_withBoolean_(ASEditTextImpl *self, id scrollView, bool scrollEnabled);
 
 __attribute__((unused)) static void ASEditTextImpl_setTextColorLinkWithADColorStateList_(ASEditTextImpl *self, ADColorStateList *linkTextColors);
 
-__attribute__((unused)) static void ASEditTextImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASEditTextImpl *self, NSString *s, jint start, jint count, jint after);
+__attribute__((unused)) static void ASEditTextImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASEditTextImpl *self, NSString *s, int32_t start, int32_t count, int32_t after);
 
 __attribute__((unused)) static id<ADTextWatcher> ASEditTextImpl_getTextChangedListenerWithId_withNSString_(ASEditTextImpl *self, id objValue, NSString *name);
 
@@ -853,7 +860,7 @@ __attribute__((unused)) static void ASEditTextImpl_setTextAllCapsWithId_(ASEditT
 
 __attribute__((unused)) static void ASEditTextImpl_forceRedraw(ASEditTextImpl *self);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetContentSizeWithId_withInt_withInt_(ASEditTextImpl *self, id uiView, jint contentWidth, jint height);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetContentSizeWithId_withInt_withInt_(ASEditTextImpl *self, id uiView, int32_t contentWidth, int32_t height);
 
 __attribute__((unused)) static void ASEditTextImpl_remeasure(ASEditTextImpl *self);
 
@@ -863,15 +870,15 @@ __attribute__((unused)) static void ASEditTextImpl_nativeAddTextFieldDidChange(A
 
 __attribute__((unused)) static void ASEditTextImpl_setPasswordTypeWithId_(ASEditTextImpl *self, id objValue);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetSecureTextEntryWithBoolean_(ASEditTextImpl *self, jboolean value);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetSecureTextEntryWithBoolean_(ASEditTextImpl *self, bool value);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASEditTextImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static void ASEditTextImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(ASEditTextImpl *self, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
 __attribute__((unused)) static void ASEditTextImpl_setBorderStyleWithId_(ASEditTextImpl *self, id value);
 
-__attribute__((unused)) static void ASEditTextImpl_nativeSetBorderStyleWithInt_(ASEditTextImpl *self, jint value);
+__attribute__((unused)) static void ASEditTextImpl_nativeSetBorderStyleWithInt_(ASEditTextImpl *self, int32_t value);
 
 __attribute__((unused)) static void ASEditTextImpl_updatePadding(ASEditTextImpl *self);
 
@@ -982,7 +989,7 @@ J2OBJC_FIELD_SETTER(ASEditTextImpl_InputView, mapping_, id<JavaUtilMap>)
 
 @interface ASEditTextImpl_EditTextExt () {
  @public
-  __unsafe_unretained ASEditTextImpl *this$0_;
+  WEAK_ ASEditTextImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
@@ -1013,12 +1020,12 @@ J2OBJC_FIELD_SETTER(ASEditTextImpl_EditTextExt, templates_, id<JavaUtilMap>)
                      withNSString:(NSString *)strValue
                      withNSString:(NSString *)action;
 
-- (jboolean)onEditorActionWithADTextView:(ADTextView *)v
-                                 withInt:(jint)actionId
-                          withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onEditorActionWithADTextView:(ADTextView *)v
+                             withInt:(int32_t)actionId
+                      withADKeyEvent:(ADKeyEvent *)event;
 
 - (id<JavaUtilMap>)getOnEditorActionEventObjWithADTextView:(ADTextView *)v
-                                                   withInt:(jint)actionId
+                                                   withInt:(int32_t)actionId
                                             withADKeyEvent:(ADKeyEvent *)event;
 
 @end
@@ -1044,6 +1051,7 @@ __attribute__((unused)) static ASEditTextImpl_OnEditorActionListener *create_ASE
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_OnEditorActionListener)
 
+
 @interface ASEditTextImpl_OnFocusChangeListener : NSObject < ADView_OnFocusChangeListener, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1062,10 +1070,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_OnEditorActionListener)
                      withNSString:(NSString *)action;
 
 - (void)onFocusChangeWithADView:(ADView *)v
-                    withBoolean:(jboolean)hasFocus;
+                    withBoolean:(bool)hasFocus;
 
 - (id<JavaUtilMap>)getOnFocusChangeEventObjWithADView:(ADView *)v
-                                          withBoolean:(jboolean)hasFocus;
+                                          withBoolean:(bool)hasFocus;
 
 @end
 
@@ -1090,6 +1098,7 @@ __attribute__((unused)) static ASEditTextImpl_OnFocusChangeListener *create_ASEd
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_OnFocusChangeListener)
 
+
 @interface ASEditTextImpl_TextChangedListener : NSObject < ADTextWatcher, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -1110,24 +1119,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_OnFocusChangeListener)
 - (void)afterTextChangedWithADEditable:(id<ADEditable>)s;
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after;
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after;
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count;
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count;
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after;
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after;
 
 - (id<JavaUtilMap>)getOnafterTextChangeEventObjWithADEditable:(id<ADEditable>)s;
 
@@ -1153,6 +1162,7 @@ __attribute__((unused)) static ASEditTextImpl_TextChangedListener *new_ASEditTex
 __attribute__((unused)) static ASEditTextImpl_TextChangedListener *create_ASEditTextImpl_TextChangedListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_TextChangedListener)
+
 
 J2OBJC_INITIALIZED_DEFN(ASEditTextImpl)
 
@@ -1872,7 +1882,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASEditTextImpl_setErrorWithNSString_(self, nil);
   }
@@ -1885,7 +1895,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASEditTextImpl_setErrorWithNSString_(self, message);
   }
@@ -1913,7 +1923,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASEditTextImpl_getGravity(self);
 }
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection {
   if ([((ADEditText *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADEditText *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASEditTextImpl_updateTextAlignment(self);
   }
@@ -1949,11 +1959,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setEmsWithId_(self, objValue);
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return [((ADEditText *) nil_chk(measurableView_)) getMaxEms];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return [((ADEditText *) nil_chk(measurableView_)) getMinEms];
 }
 
@@ -1961,11 +1971,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setMinEmsWithId_(self, objValue);
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return [((ADEditText *) nil_chk(measurableView_)) getMinLines];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return [((ADEditText *) nil_chk(measurableView_)) getMaxLines];
 }
 
@@ -2001,11 +2011,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setMaxWidthWithId_(self, objValue);
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return [((ADEditText *) nil_chk(measurableView_)) getMaxWidth];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return [((ADEditText *) nil_chk(measurableView_)) getMaxHeight];
 }
 
@@ -2021,7 +2031,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASEditTextImpl_getWidth(self);
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return ASEditTextImpl_getHeight(self);
 }
 
@@ -2029,7 +2039,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
 }
 
-- (jboolean)getIncludeFontPadding {
+- (bool)getIncludeFontPadding {
   return ASEditTextImpl_getIncludeFontPadding(self);
 }
 
@@ -2069,49 +2079,49 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setDigitsWithId_(self, objValue);
 }
 
-- (jint)nativeGetFontSize {
+- (int32_t)nativeGetFontSize {
   return ASEditTextImpl_nativeGetFontSize(self);
 }
 
-- (jint)nativeGetFontStyle {
+- (int32_t)nativeGetFontStyle {
   return ASEditTextImpl_nativeGetFontStyle(self);
 }
 
-- (void)nativeSetCustomFontWithInt:(jint)height
+- (void)nativeSetCustomFontWithInt:(int32_t)height
               withASFontDescriptor:(ASFontDescriptor *)fontDescriptor {
   ASEditTextImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
 }
 
-- (void)nativeSetFontStyleWithInt:(jint)style {
+- (void)nativeSetFontStyleWithInt:(int32_t)style {
   ASEditTextImpl_nativeSetFontStyleWithInt_(self, style);
 }
 
 - (void)setPaddingWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingBottomWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingBottomWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingTopWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingTopWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingLeftWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingLeftWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
 
 - (void)setPaddingRightWithId:(id)objValue {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ADView *view = (ADView *) cast_chk([self asWidget], [ADView class]);
   ASViewImpl_setPaddingRightWithId_withADView_(JavaLangInteger_valueOfWithInt_(value), view);
 }
@@ -2180,7 +2190,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setMyTextSizeWithId_(self, objValue);
 }
 
-- (void)nativeSetTextSizeWithInt:(jint)value {
+- (void)nativeSetTextSizeWithInt:(int32_t)value {
   ASEditTextImpl_nativeSetTextSizeWithInt_(self, value);
 }
 
@@ -2216,7 +2226,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setHorizontalAligmentLeftInternal(self);
 }
 
-- (jint)getTextAlignment {
+- (int32_t)getTextAlignment {
   return ASEditTextImpl_getTextAlignment(self);
 }
 
@@ -2252,11 +2262,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setDrawableLeftInternalWithNSString_withId_(self, originalAttr, objValue);
 }
 
-- (jint)getImageHeightWithId:(id)objValue {
+- (int32_t)getImageHeightWithId:(id)objValue {
   return ASEditTextImpl_getImageHeightWithId_(self, objValue);
 }
 
-- (jint)getImageWidthWithId:(id)objValue {
+- (int32_t)getImageWidthWithId:(id)objValue {
   return ASEditTextImpl_getImageWidthWithId_(self, objValue);
 }
 
@@ -2307,19 +2317,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_drawableStateChangeWithNSString_withADDrawable_(self, type, dr);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASEditTextImpl_getLineHeight(self);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASEditTextImpl_getBorderWidth(self);
 }
 
@@ -2425,7 +2435,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ((ASUITextField*) uiView_).disabledBackground;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -2436,7 +2446,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -2462,11 +2472,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_createSimpleWrapableView(self);
 }
 
-- (jboolean)hasScrollView {
+- (bool)hasScrollView {
   return ASEditTextImpl_hasScrollView(self);
 }
 
-- (jboolean)isViewWrapped {
+- (bool)isViewWrapped {
   return ASEditTextImpl_isViewWrapped(self);
 }
 
@@ -2484,10 +2494,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((ASSimpleWrapableView *) nil_chk(simpleWrapableView_)) getForeground];
 }
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b {
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b {
   ASEditTextImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -2500,13 +2510,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype {
+                      withInt:(int32_t)viewtype {
   uiView_ = ASEditTextImpl_nativeCreateViewWithInt_(self, viewtype);
   ASViewGroupImpl_nativeAddViewWithId_withId_(ASViewImpl_getFirstChildOrSelfWithId_(wrapperParent), uiView_);
   return uiView_;
 }
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType {
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType {
   return [self createWrapperViewHolderNativeWithInt:viewType];
 }
 
@@ -2518,7 +2528,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView;
 }
 
-- (id)createWrapperViewHolderNativeWithInt:(jint)viewType {
+- (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType {
   if (viewType == 1) {
     ASUIView* uiView = [ASUIView new];
     uiView.widget = self;
@@ -2558,7 +2568,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
 
-- (id)nativeCreateViewWithInt:(jint)viewType {
+- (id)nativeCreateViewWithInt:(int32_t)viewType {
   return ASEditTextImpl_nativeCreateViewWithInt_(self, viewType);
 }
 
@@ -2591,7 +2601,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setCursorVisibleWithId_(self, objValue);
 }
 
-- (id)nativeGetTintColorWithBoolean:(jboolean)clearColor {
+- (id)nativeGetTintColorWithBoolean:(bool)clearColor {
   return ASEditTextImpl_nativeGetTintColorWithBoolean_(self, clearColor);
 }
 
@@ -2599,7 +2609,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setCapitalizeWithId_(self, objValue);
 }
 
-- (void)nativeSetCapitalizeWithInt:(jint)capitalizeType {
+- (void)nativeSetCapitalizeWithInt:(int32_t)capitalizeType {
   ASEditTextImpl_nativeSetCapitalizeWithInt_(self, capitalizeType);
 }
 
@@ -2607,11 +2617,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setAutoTextWithId_(self, objValue);
 }
 
-- (void)nativeSetCorrectionTypeWithInt:(jint)capitalizeType {
+- (void)nativeSetCorrectionTypeWithInt:(int32_t)capitalizeType {
   ASEditTextImpl_nativeSetCorrectionTypeWithInt_(self, capitalizeType);
 }
 
-- (jboolean)getCursorVisible {
+- (bool)getCursorVisible {
   return ASEditTextImpl_getCursorVisible(self);
 }
 
@@ -2620,7 +2630,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setEnabledWithId:(id)objValue {
-  jboolean isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
+  bool isEnabled = objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue];
   [self nativeSetEnabledWithBoolean:isEnabled];
 }
 
@@ -2645,7 +2655,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASEditTextImpl_getDecimalCharacter(self);
 }
 
-- (jboolean)numericPatternMatchesWithNSString:(NSString *)str {
+- (bool)numericPatternMatchesWithNSString:(NSString *)str {
   return ASEditTextImpl_numericPatternMatchesWithNSString_(self, str);
 }
 
@@ -2671,7 +2681,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setPhoneNumberWithId_(self, objValue);
 }
 
-- (void)nativeSetPhoneNumberWithBoolean:(jboolean)value {
+- (void)nativeSetPhoneNumberWithBoolean:(bool)value {
   ASEditTextImpl_nativeSetPhoneNumberWithBoolean_(self, value);
 }
 
@@ -2683,7 +2693,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setInputTypeWithId_(self, objValue);
 }
 
-- (void)nativeSetKeyboardTypeWithInt:(jint)value {
+- (void)nativeSetKeyboardTypeWithInt:(int32_t)value {
   ASEditTextImpl_nativeSetKeyboardTypeWithInt_(self, value);
 }
 
@@ -2691,7 +2701,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASEditTextImpl_getInputType(self);
 }
 
-- (jint)nativeGetKeyboardType {
+- (int32_t)nativeGetKeyboardType {
   return ASEditTextImpl_nativeGetKeyboardType(self);
 }
 
@@ -2700,11 +2710,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setImeOptionsWithId_withNSString_(self, objValue, strValue);
 }
 
-- (void)nativeSetImeOptionsWithInt:(jint)imeOptions {
+- (void)nativeSetImeOptionsWithInt:(int32_t)imeOptions {
   ASEditTextImpl_nativeSetImeOptionsWithInt_(self, imeOptions);
 }
 
-- (jint)nativeGetImeOptions {
+- (int32_t)nativeGetImeOptions {
   return ASEditTextImpl_nativeGetImeOptions(self);
 }
 
@@ -2801,7 +2811,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setSelectAllWithId_(self, objValue);
 }
 
-- (jboolean)isFirstResponder {
+- (bool)isFirstResponder {
   return ASEditTextImpl_isFirstResponder(self);
 }
 
@@ -2809,7 +2819,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_becomeFirstResponder(self);
 }
 
-- (void)nativeSetSelectAllWithFloat:(jfloat)delay {
+- (void)nativeSetSelectAllWithFloat:(float)delay {
   ASEditTextImpl_nativeSetSelectAllWithFloat_(self, delay);
 }
 
@@ -2843,7 +2853,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetScrollEnabledWithId:(id)scrollView
-                         withBoolean:(jboolean)scrollEnabled {
+                         withBoolean:(bool)scrollEnabled {
   ASEditTextImpl_nativeSetScrollEnabledWithId_withBoolean_(self, scrollView, scrollEnabled);
 }
 
@@ -2852,9 +2862,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)handleOnBeforeTextChangeWithNSString:(NSString *)s
-                                     withInt:(jint)start
-                                     withInt:(jint)count
-                                     withInt:(jint)after {
+                                     withInt:(int32_t)start
+                                     withInt:(int32_t)count
+                                     withInt:(int32_t)after {
   ASEditTextImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(self, s, start, count, after);
 }
 
@@ -2892,8 +2902,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)nativeSetContentSizeWithId:(id)uiView
-                           withInt:(jint)contentWidth
-                           withInt:(jint)height {
+                           withInt:(int32_t)contentWidth
+                           withInt:(int32_t)height {
   ASEditTextImpl_nativeSetContentSizeWithId_withInt_withInt_(self, uiView, contentWidth, height);
 }
 
@@ -2921,14 +2931,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setPasswordTypeWithId_(self, objValue);
 }
 
-- (void)nativeSetSecureTextEntryWithBoolean:(jboolean)value {
+- (void)nativeSetSecureTextEntryWithBoolean:(bool)value {
   ASEditTextImpl_nativeSetSecureTextEntryWithBoolean_(self, value);
 }
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b {
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b {
   ASEditTextImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -2943,17 +2953,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_setBorderStyleWithId_(self, value);
 }
 
-- (void)nativeSetBorderStyleWithInt:(jint)value {
+- (void)nativeSetBorderStyleWithInt:(int32_t)value {
   ASEditTextImpl_nativeSetBorderStyleWithInt_(self, value);
 }
 
-- (jint)measureWidth {
-  jint width = [((ADEditText *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
+- (int32_t)measureWidth {
+  int32_t width = [((ADEditText *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
   return width;
 }
 
-- (jint)measureHeightWithInt:(jint)width {
-  jint height = [((ADEditText *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
+- (int32_t)measureHeightWithInt:(int32_t)width {
+  int32_t height = [((ADEditText *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
   return height;
 }
 
@@ -2985,7 +2995,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASEditTextImpl_syncPlaceholderLabel(self);
 }
 
-- (void)nativeSetEnabledWithBoolean:(jboolean)value {
+- (void)nativeSetEnabledWithBoolean:(bool)value {
   ((ASUITextField*)self.uiView).enabled = value;
 }
 
@@ -2993,7 +3003,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return (NSString *) cast_chk(ASEditTextImpl_getMyText(self), [NSString class]);
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ADEditText *) nil_chk(measurableView_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -3637,9 +3647,9 @@ void ASEditTextImpl_setHintTextFormatWithId_(ASEditTextImpl *self, id objValue) 
 }
 
 void ASEditTextImpl_setGravityWithId_(ASEditTextImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADEditText *) nil_chk(self->measurableView_)) setGravityWithInt:value];
-  jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
+  int32_t major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASEditTextImpl_updateTextAlignment(self);
   switch (major) {
     case ASGravityConverter_TOP:
@@ -3659,8 +3669,8 @@ void ASEditTextImpl_setGravityWithId_(ASEditTextImpl *self, id objValue) {
 
 void ASEditTextImpl_updateTextAlignment(ASEditTextImpl *self) {
   ADLayout_Alignment *minor = [((ADEditText *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
-  jboolean isRtl = false;
-  jboolean hasTextDirection = [((ADEditText *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
+  bool isRtl = false;
+  bool hasTextDirection = [((ADEditText *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
     id<ADTextDirectionHeuristic> heuristic = [((ADEditText *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASEditTextImpl_getMyText(self), [NSString class]);
@@ -3713,7 +3723,7 @@ id ASEditTextImpl_getGravity(ASEditTextImpl *self) {
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
-  jint gravityVertical = 0;
+  int32_t gravityVertical = 0;
   switch ([verticalAligment ordinal]) {
     case ASBaseMeasurableView_VerticalAligment_Enum_top:
     gravityVertical = ASGravityConverter_TOP;
@@ -3727,8 +3737,8 @@ id ASEditTextImpl_getGravity(ASEditTextImpl *self) {
     default:
     break;
   }
-  jint aligment = ASEditTextImpl_getTextAlignment(self);
-  jint gravitHorizontal = 0;
+  int32_t aligment = ASEditTextImpl_getTextAlignment(self);
+  int32_t gravitHorizontal = 0;
   switch (aligment) {
     case ASEditTextImpl_TEXT_ALIGN_CENTER:
     gravitHorizontal = ASGravityConverter_CENTER_HORIZONTAL;
@@ -3742,7 +3752,7 @@ id ASEditTextImpl_getGravity(ASEditTextImpl *self) {
     default:
     break;
   }
-  jint gravity = gravitHorizontal | gravityVertical;
+  int32_t gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
 }
 
@@ -3762,8 +3772,8 @@ void ASEditTextImpl_setFontFamilyWithId_withNSString_(ASEditTextImpl *self, id o
     objValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASConverterFactory_getWithNSString_(ASCommonConverters_font), nil, strValue, self->fragment_);
   }
   self->fontDescriptors_ = (id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_());
-  jint style = ASEditTextImpl_nativeGetFontStyle(self);
-  jint height = ASEditTextImpl_nativeGetFontSize(self);
+  int32_t style = ASEditTextImpl_nativeGetFontStyle(self);
+  int32_t height = ASEditTextImpl_nativeGetFontSize(self);
   NSString *weight = @"400";
   if ((style & ASEditTextImpl_BOLD_FONT_TRAIT) != 0) {
     weight = @"700";
@@ -3777,26 +3787,26 @@ void ASEditTextImpl_setFontFamilyWithId_withNSString_(ASEditTextImpl *self, id o
 }
 
 void ASEditTextImpl_setTextStyleWithId_(ASEditTextImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if (self->fontDescriptors_ != nil) {
-    jint height = ASEditTextImpl_nativeGetFontSize(self);
+    int32_t height = ASEditTextImpl_nativeGetFontSize(self);
     NSString *weight = @"400";
-    if ((value & (jint) 0x1) != 0) {
+    if ((value & (int32_t) 0x1) != 0) {
       weight = @"700";
     }
     NSString *fontStyle = @"normal";
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       fontStyle = @"italic";
     }
     ASFontDescriptor *fontDescriptor = [((id<JavaUtilMap>) nil_chk(self->fontDescriptors_)) getWithId:JreStrcat("$C$", fontStyle, '_', weight)];
     ASEditTextImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(self, height, fontDescriptor);
   }
   else {
-    jint style = ASEditTextImpl_NORMAL_FONT_TRAIT;
-    if ((value & (jint) 0x1) != 0) {
+    int32_t style = ASEditTextImpl_NORMAL_FONT_TRAIT;
+    if ((value & (int32_t) 0x1) != 0) {
       style = style | ASEditTextImpl_BOLD_FONT_TRAIT;
     }
-    if ((value & (jint) 0x2) != 0) {
+    if ((value & (int32_t) 0x2) != 0) {
       style = style | ASEditTextImpl_ITALIC_FONT_TRAIT;
     }
     ASEditTextImpl_nativeSetFontStyleWithInt_(self, style);
@@ -3875,14 +3885,14 @@ id ASEditTextImpl_getWidth(ASEditTextImpl *self) {
   return JavaLangInteger_valueOfWithInt_([((ADEditText *) nil_chk(self->measurableView_)) getWidth]);
 }
 
-jint ASEditTextImpl_getHeight(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_getHeight(ASEditTextImpl *self) {
   return [((ADEditText *) nil_chk(self->measurableView_)) getHeight];
 }
 
 void ASEditTextImpl_setFirstBaselineToTopHeightWithId_(ASEditTextImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASEditTextImpl_getFont(self));
-  jint firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsTop;
+  int32_t firstBaselineToTopHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsTop;
   if (ASEditTextImpl_getIncludeFontPadding(self)) {
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->top_;
   }
@@ -3890,12 +3900,12 @@ void ASEditTextImpl_setFirstBaselineToTopHeightWithId_(ASEditTextImpl *self, id 
     fontMetricsTop = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->ascent_;
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
-    jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
+    int32_t paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
     [((ADEditText *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASEditTextImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASEditTextImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASEditTextImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
   }
 }
 
-jboolean ASEditTextImpl_getIncludeFontPadding(ASEditTextImpl *self) {
+bool ASEditTextImpl_getIncludeFontPadding(ASEditTextImpl *self) {
   return false;
 }
 
@@ -3906,8 +3916,8 @@ id ASEditTextImpl_getFirstBaselineToTopHeight(ASEditTextImpl *self) {
 
 void ASEditTextImpl_setLastBaselineToBottomHeightWithId_(ASEditTextImpl *self, id objValue) {
   ASFontMetricsDescriptor *fontMetrics = ASPluginInvoker_getFontMetricsWithId_(ASEditTextImpl_getFont(self));
-  jint lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  jint fontMetricsBottom;
+  int32_t lastBaselineToBottomHeight = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t fontMetricsBottom;
   if (ASEditTextImpl_getIncludeFontPadding(self)) {
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->bottom_;
   }
@@ -3915,7 +3925,7 @@ void ASEditTextImpl_setLastBaselineToBottomHeightWithId_(ASEditTextImpl *self, i
     fontMetricsBottom = ((ASFontMetricsDescriptor *) nil_chk(fontMetrics))->descent_;
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
-    jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
+    int32_t paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
     [((ADEditText *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASEditTextImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASEditTextImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASEditTextImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
@@ -3943,7 +3953,7 @@ NSString *ASEditTextImpl_getDigitString(ASEditTextImpl *self) {
   NSString *defaultDigits = @"0123456789";
   IOSObjectArray *digits = ASEditTextImpl_getDigitStrings(self);
   JavaLangStringBuilder *stringBuilder = new_JavaLangStringBuilder_init();
-  for (jint i = 0; i < 10; i++) {
+  for (int32_t i = 0; i < 10; i++) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(digits), i))) java_length] > 1) {
       return defaultDigits;
     }
@@ -3984,15 +3994,15 @@ NSString *ASEditTextImpl_getDecimalChars(ASEditTextImpl *self) {
 }
 
 void ASEditTextImpl_setNumericWithId_(ASEditTextImpl *self, id objValue) {
-  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   ASEditTextImpl_removeNumericListener(self);
   JavaLangStringBuilder *regex = new_JavaLangStringBuilder_init();
   NSString *digits = ASEditTextImpl_getDigitString(self);
-  if ((value & (jint) 0x3) != 1) {
+  if ((value & (int32_t) 0x3) != 1) {
     NSString *signedChars = ASEditTextImpl_getSignedChars(self);
     (void) [regex appendWithNSString:NSString_java_formatWithNSString_withNSObjectArray_(@"[%s]?", [IOSObjectArray newArrayWithObjects:(id[]){ signedChars } count:1 type:NSObject_class_()])];
   }
-  if ((value & (jint) 0x5) != 1) {
+  if ((value & (int32_t) 0x5) != 1) {
     NSString *decimalChars = ASEditTextImpl_getDecimalChars(self);
     (void) [regex appendWithNSString:NSString_java_formatWithNSString_withNSObjectArray_(@"[%s]*[%s]?[%s]*", [IOSObjectArray newArrayWithObjects:(id[]){ digits, decimalChars, digits } count:3 type:NSObject_class_()])];
   }
@@ -4016,16 +4026,16 @@ void ASEditTextImpl_setDigitsWithId_(ASEditTextImpl *self, id objValue) {
   }
 }
 
-jint ASEditTextImpl_nativeGetFontSize(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_nativeGetFontSize(ASEditTextImpl *self) {
   return JreFpToInt(JavaLangMath_ceilWithDouble_([((JavaLangFloat *) nil_chk((JavaLangFloat *) cast_chk(ASEditTextImpl_getTextSize(self), [JavaLangFloat class]))) floatValue]));
 }
 
-jint ASEditTextImpl_nativeGetFontStyle(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_nativeGetFontStyle(ASEditTextImpl *self) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   return label.font.fontDescriptor.symbolicTraits;
 }
 
-void ASEditTextImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASEditTextImpl *self, jint height, ASFontDescriptor *fontDescriptor) {
+void ASEditTextImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASEditTextImpl *self, int32_t height, ASFontDescriptor *fontDescriptor) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
   if (font == nil) {
@@ -4039,7 +4049,7 @@ void ASEditTextImpl_nativeSetCustomFontWithInt_withASFontDescriptor_(ASEditTextI
   }
 }
 
-void ASEditTextImpl_nativeSetFontStyleWithInt_(ASEditTextImpl *self, jint style) {
+void ASEditTextImpl_nativeSetFontStyleWithInt_(ASEditTextImpl *self, int32_t style) {
   ASUITextField* label = ((ASUITextField*)self->uiView_);
   UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   ((ASUITextField*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -4108,11 +4118,11 @@ id ASEditTextImpl_getTextSize(ASEditTextImpl *self) {
 }
 
 void ASEditTextImpl_setMyTextSizeWithId_(ASEditTextImpl *self, id objValue) {
-  jfloat fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
+  float fontSize = [((JavaLangFloat *) nil_chk(((JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class])))) floatValue] * [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootActivity])) getScaleFactor];
   ASEditTextImpl_nativeSetTextSizeWithInt_(self, JreFpToInt(fontSize));
 }
 
-void ASEditTextImpl_nativeSetTextSizeWithInt_(ASEditTextImpl *self, jint value) {
+void ASEditTextImpl_nativeSetTextSizeWithInt_(ASEditTextImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setFont: [((ASUITextField*)self.uiView).font fontWithSize: value]];
 }
 
@@ -4151,7 +4161,7 @@ void ASEditTextImpl_setHorizontalAligmentLeftInternal(ASEditTextImpl *self) {
   ((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentLeft;
 }
 
-jint ASEditTextImpl_getTextAlignment(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_getTextAlignment(ASEditTextImpl *self) {
   int alignment = (int) ((ASUITextField*)self.uiView).textAlignment;
   
   if (alignment == NSTextAlignmentCenter) {
@@ -4242,7 +4252,7 @@ void ASEditTextImpl_setDrawableLeftInternalWithNSString_withId_(ASEditTextImpl *
   }
 }
 
-jint ASEditTextImpl_getImageHeightWithId_(ASEditTextImpl *self, id objValue) {
+int32_t ASEditTextImpl_getImageHeightWithId_(ASEditTextImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.height;
@@ -4251,7 +4261,7 @@ jint ASEditTextImpl_getImageHeightWithId_(ASEditTextImpl *self, id objValue) {
   return 0;
 }
 
-jint ASEditTextImpl_getImageWidthWithId_(ASEditTextImpl *self, id objValue) {
+int32_t ASEditTextImpl_getImageWidthWithId_(ASEditTextImpl *self, id objValue) {
   if ([objValue isKindOfClass:[UIImage class]]) {
     UIImage* image = ((UIImage*) objValue);
     return image.size.width;
@@ -4339,11 +4349,11 @@ void ASEditTextImpl_drawableStateChangeWithNSString_withADDrawable_(ASEditTextIm
   [self invalidate];
 }
 
-jint ASEditTextImpl_getLineHeight(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_getLineHeight(ASEditTextImpl *self) {
   return ceil(((ASUITextField*)self.uiView).font.lineHeight);
 }
 
-jint ASEditTextImpl_getBorderWidth(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_getBorderWidth(ASEditTextImpl *self) {
   return 0;
 }
 
@@ -4356,11 +4366,11 @@ id ASEditTextImpl_getTextColorHighlight(ASEditTextImpl *self) {
 }
 
 void ASEditTextImpl_createSimpleWrapableView(ASEditTextImpl *self) {
-  jboolean wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
-  jint viewType = -1;
+  bool wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
+  int32_t viewType = -1;
   if (wrapViewFeature) {
-    jboolean hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
-    jboolean vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
+    bool hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
+    bool vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
     viewType = 1;
     if (hscroll) viewType = 2;
     if (vscroll) viewType = 3;
@@ -4368,15 +4378,15 @@ void ASEditTextImpl_createSimpleWrapableView(ASEditTextImpl *self) {
   self->simpleWrapableView_ = new_ASSimpleWrapableView_initWithASIWidget_withInt_(self, viewType);
 }
 
-jboolean ASEditTextImpl_hasScrollView(ASEditTextImpl *self) {
+bool ASEditTextImpl_hasScrollView(ASEditTextImpl *self) {
   return ASEditTextImpl_isViewWrapped(self) && ([((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 2 || [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 3);
 }
 
-jboolean ASEditTextImpl_isViewWrapped(ASEditTextImpl *self) {
+bool ASEditTextImpl_isViewWrapped(ASEditTextImpl *self) {
   return [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) isViewWrapped];
 }
 
-void ASEditTextImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, jint l, jint t, jint r, jint b) {
+void ASEditTextImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   id foreground = [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getForeground];
   if (foreground != nil) {
     ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(foreground, 0, 0, r - l, b - t);
@@ -4400,7 +4410,7 @@ void ASEditTextImpl_nativeCreateWithJavaUtilMap_(ASEditTextImpl *self, id<JavaUt
   [self registerForAttributeCommandChainWithPhaseWithNSString:@"predraw" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableStart", @"drawableEnd", @"drawableLeft", @"drawableTop", @"drawableRight", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode" } count:9 type:NSString_class_()]];
 }
 
-id ASEditTextImpl_nativeCreateViewWithInt_(ASEditTextImpl *self, jint viewType) {
+id ASEditTextImpl_nativeCreateViewWithInt_(ASEditTextImpl *self, int32_t viewType) {
   ASUITextField* uiView = [ASUITextField new];
   uiView.delegate = self;
   if (viewType != -1) {
@@ -4430,7 +4440,7 @@ void ASEditTextImpl_setCursorVisibleWithId_(ASEditTextImpl *self, id objValue) {
   ASViewImpl_setTintColorWithId_withId_(self->uiView_, ASEditTextImpl_nativeGetTintColorWithBoolean_(self, ![((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]));
 }
 
-id ASEditTextImpl_nativeGetTintColorWithBoolean_(ASEditTextImpl *self, jboolean clearColor) {
+id ASEditTextImpl_nativeGetTintColorWithBoolean_(ASEditTextImpl *self, bool clearColor) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   
   if (self->originalTintColor_ == nil) {
@@ -4451,7 +4461,7 @@ void ASEditTextImpl_setCapitalizeWithId_(ASEditTextImpl *self, id objValue) {
   ASEditTextImpl_nativeSetCapitalizeWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASEditTextImpl_nativeSetCapitalizeWithInt_(ASEditTextImpl *self, jint capitalizeType) {
+void ASEditTextImpl_nativeSetCapitalizeWithInt_(ASEditTextImpl *self, int32_t capitalizeType) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   tv.autocapitalizationType = capitalizeType;
 }
@@ -4465,12 +4475,12 @@ void ASEditTextImpl_setAutoTextWithId_(ASEditTextImpl *self, id objValue) {
   }
 }
 
-void ASEditTextImpl_nativeSetCorrectionTypeWithInt_(ASEditTextImpl *self, jint capitalizeType) {
+void ASEditTextImpl_nativeSetCorrectionTypeWithInt_(ASEditTextImpl *self, int32_t capitalizeType) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   tv.autocorrectionType = capitalizeType;
 }
 
-jboolean ASEditTextImpl_getCursorVisible(ASEditTextImpl *self) {
+bool ASEditTextImpl_getCursorVisible(ASEditTextImpl *self) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   return CGColorEqualToColor(tv.tintColor.CGColor, [UIColor clearColor].CGColor);
 }
@@ -4507,7 +4517,7 @@ NSString *ASEditTextImpl_getDecimalCharacter(ASEditTextImpl *self) {
   return JreStrcat("C", [symbols getDecimalSeparator]);
 }
 
-jboolean ASEditTextImpl_numericPatternMatchesWithNSString_(ASEditTextImpl *self, NSString *str) {
+bool ASEditTextImpl_numericPatternMatchesWithNSString_(ASEditTextImpl *self, NSString *str) {
   return [((JavaUtilRegexMatcher *) nil_chk([((JavaUtilRegexPattern *) nil_chk(self->numericPattern_)) matcherWithJavaLangCharSequence:str])) matches];
 }
 
@@ -4523,7 +4533,7 @@ void ASEditTextImpl_setPhoneNumberWithId_(ASEditTextImpl *self, id objValue) {
   ASEditTextImpl_nativeSetPhoneNumberWithBoolean_(self, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASEditTextImpl_nativeSetPhoneNumberWithBoolean_(ASEditTextImpl *self, jboolean value) {
+void ASEditTextImpl_nativeSetPhoneNumberWithBoolean_(ASEditTextImpl *self, bool value) {
   if (value) {
     [((ASUITextField*)self.uiView) setKeyboardType: UIKeyboardTypePhonePad];
   } else {
@@ -4539,7 +4549,7 @@ void ASEditTextImpl_setInputTypeWithId_(ASEditTextImpl *self, id objValue) {
   ASEditTextImpl_nativeSetKeyboardTypeWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASEditTextImpl_nativeSetKeyboardTypeWithInt_(ASEditTextImpl *self, jint value) {
+void ASEditTextImpl_nativeSetKeyboardTypeWithInt_(ASEditTextImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setKeyboardType: value];
 }
 
@@ -4547,7 +4557,7 @@ id ASEditTextImpl_getInputType(ASEditTextImpl *self) {
   return JavaLangInteger_valueOfWithInt_(ASEditTextImpl_nativeGetKeyboardType(self));
 }
 
-jint ASEditTextImpl_nativeGetKeyboardType(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_nativeGetKeyboardType(ASEditTextImpl *self) {
   return ((ASUITextField*)self.uiView).keyboardType;
 }
 
@@ -4555,11 +4565,11 @@ void ASEditTextImpl_setImeOptionsWithId_withNSString_(ASEditTextImpl *self, id o
   ASEditTextImpl_nativeSetImeOptionsWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]);
 }
 
-void ASEditTextImpl_nativeSetImeOptionsWithInt_(ASEditTextImpl *self, jint imeOptions) {
+void ASEditTextImpl_nativeSetImeOptionsWithInt_(ASEditTextImpl *self, int32_t imeOptions) {
   [((ASUITextField*)self->uiView_) setReturnKeyType:imeOptions];
 }
 
-jint ASEditTextImpl_nativeGetImeOptions(ASEditTextImpl *self) {
+int32_t ASEditTextImpl_nativeGetImeOptions(ASEditTextImpl *self) {
   return ((ASUITextField*)self->uiView_).returnKeyType;
 }
 
@@ -4648,7 +4658,7 @@ void ASEditTextImpl_setSelectAllWithId_(ASEditTextImpl *self, id objValue) {
   }
 }
 
-jboolean ASEditTextImpl_isFirstResponder(ASEditTextImpl *self) {
+bool ASEditTextImpl_isFirstResponder(ASEditTextImpl *self) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   return [tv isFirstResponder];
 }
@@ -4658,7 +4668,7 @@ void ASEditTextImpl_becomeFirstResponder(ASEditTextImpl *self) {
   [tv becomeFirstResponder];
 }
 
-void ASEditTextImpl_nativeSetSelectAllWithFloat_(ASEditTextImpl *self, jfloat delay) {
+void ASEditTextImpl_nativeSetSelectAllWithFloat_(ASEditTextImpl *self, float delay) {
   ASUITextField* tv = ((ASUITextField*)self.uiView);
   [self performSelector:@selector(nativeSetSelectAllActual:) withObject:tv afterDelay:delay];
 }
@@ -4696,14 +4706,14 @@ void ASEditTextImpl_nativeAddTapGesture(ASEditTextImpl *self) {
   [((ASUITextField*)self.uiView) addGestureRecognizer:tapGesture];
 }
 
-void ASEditTextImpl_nativeSetScrollEnabledWithId_withBoolean_(ASEditTextImpl *self, id scrollView, jboolean scrollEnabled) {
+void ASEditTextImpl_nativeSetScrollEnabledWithId_withBoolean_(ASEditTextImpl *self, id scrollView, bool scrollEnabled) {
   ((ASUIScrollView*)scrollView).scrollEnabled = scrollEnabled;
 }
 
 void ASEditTextImpl_setTextColorLinkWithADColorStateList_(ASEditTextImpl *self, ADColorStateList *linkTextColors) {
 }
 
-void ASEditTextImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASEditTextImpl *self, NSString *s, jint start, jint count, jint after) {
+void ASEditTextImpl_handleOnBeforeTextChangeWithNSString_withInt_withInt_withInt_(ASEditTextImpl *self, NSString *s, int32_t start, int32_t count, int32_t after) {
   self->start_ = start;
   self->count_ = count;
   self->after_ = after;
@@ -4771,7 +4781,7 @@ void ASEditTextImpl_forceRedraw(ASEditTextImpl *self) {
   [((ASUITextField*) self->uiView_) setText:text];
 }
 
-void ASEditTextImpl_nativeSetContentSizeWithId_withInt_withInt_(ASEditTextImpl *self, id uiView, jint contentWidth, jint height) {
+void ASEditTextImpl_nativeSetContentSizeWithId_withInt_withInt_(ASEditTextImpl *self, id uiView, int32_t contentWidth, int32_t height) {
   ((UIScrollView*) uiView).contentSize = CGSizeMake(contentWidth, height);
 }
 
@@ -4803,15 +4813,15 @@ void ASEditTextImpl_setPasswordTypeWithId_(ASEditTextImpl *self, id objValue) {
   ASEditTextImpl_nativeSetSecureTextEntryWithBoolean_(self, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
 }
 
-void ASEditTextImpl_nativeSetSecureTextEntryWithBoolean_(ASEditTextImpl *self, jboolean value) {
+void ASEditTextImpl_nativeSetSecureTextEntryWithBoolean_(ASEditTextImpl *self, bool value) {
   ((ASUITextField*)self.uiView).secureTextEntry = value;
 }
 
-void ASEditTextImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, jint l, jint t, jint r, jint b) {
+void ASEditTextImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASEditTextImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   if (ASEditTextImpl_isViewWrapped(self)) {
     if (ASEditTextImpl_hasScrollView(self)) {
-      jint textWidth = [((ADEditText *) nil_chk(self->measurableView_)) nativeMeasureWidthWithId:self->uiView_];
-      jint horizontalPadding = [((ADEditText *) nil_chk(self->measurableView_)) getCompoundPaddingLeft] + [((ADEditText *) nil_chk(self->measurableView_)) getCompoundPaddingRight];
+      int32_t textWidth = [((ADEditText *) nil_chk(self->measurableView_)) nativeMeasureWidthWithId:self->uiView_];
+      int32_t horizontalPadding = [((ADEditText *) nil_chk(self->measurableView_)) getCompoundPaddingLeft] + [((ADEditText *) nil_chk(self->measurableView_)) getCompoundPaddingRight];
       if (textWidth < (r - l - horizontalPadding)) {
         textWidth = r - l - horizontalPadding;
       }
@@ -4839,7 +4849,7 @@ void ASEditTextImpl_setBorderStyleWithId_(ASEditTextImpl *self, id value) {
   ASEditTextImpl_nativeSetBorderStyleWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(value, [JavaLangInteger class]))) intValue]);
 }
 
-void ASEditTextImpl_nativeSetBorderStyleWithInt_(ASEditTextImpl *self, jint value) {
+void ASEditTextImpl_nativeSetBorderStyleWithInt_(ASEditTextImpl *self, int32_t value) {
   [((ASUITextField*)self.uiView) setBorderStyle:value];
 }
 
@@ -4880,7 +4890,7 @@ void ASEditTextImpl_setErrorWithNSString_(ASEditTextImpl *self, NSString *messag
 
 void ASEditTextImpl_setInputViewWithId_(ASEditTextImpl *self, id objValue) {
   if ([objValue isKindOfClass:[JavaLangInteger class]]) {
-    jint inputView = [((JavaLangInteger *) nil_chk((JavaLangInteger *) objValue)) intValue];
+    int32_t inputView = [((JavaLangInteger *) nil_chk((JavaLangInteger *) objValue)) intValue];
     switch (inputView) {
       case 1:
       ASEditTextImpl_setPickerView(self);
@@ -4923,6 +4933,8 @@ void ASEditTextImpl_setFocusWithId_(ASEditTextImpl *self, id objValue) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl)
+
+J2OBJC_NAME_MAPPING(ASEditTextImpl, "com.ashera.layout", "AS")
 
 @implementation ASEditTextImpl_DrawableTintMode
 
@@ -5031,10 +5043,10 @@ void ASEditTextImpl_Font_init(ASEditTextImpl_Font *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"monospace" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"sans" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"serif" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -5092,9 +5104,9 @@ void ASEditTextImpl_TextStyle_init(ASEditTextImpl_TextStyle *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x0)];
+    (void) [self->mapping_ putWithId:@"bold" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"italic" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"normal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
   }
 }
 
@@ -5213,9 +5225,9 @@ void ASEditTextImpl_Numeric_init(ASEditTextImpl_Numeric *self) {
   ASAbstractBitFlagConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"decimal" withId:JavaLangInteger_valueOfWithInt_((jint) 0x5)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"integer" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"signed" withId:JavaLangInteger_valueOfWithInt_((jint) 0x3)];
+    (void) [self->mapping_ putWithId:@"decimal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x5)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"integer" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"signed" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
   }
 }
 
@@ -5497,8 +5509,8 @@ void ASEditTextImpl_InputView_init(ASEditTextImpl_InputView *self) {
   ASAbstractEnumToIntConverter_init(self);
   self->mapping_ = new_JavaUtilHashMap_init();
   {
-    (void) [self->mapping_ putWithId:@"picker" withId:JavaLangInteger_valueOfWithInt_((jint) 0x1)];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"datepicker" withId:JavaLangInteger_valueOfWithInt_((jint) 0x2)];
+    (void) [self->mapping_ putWithId:@"picker" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"datepicker" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
   }
 }
 
@@ -5523,8 +5535,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_InputView)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
@@ -5534,11 +5546,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_InputView)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -5566,8 +5578,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_InputView)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -5635,12 +5647,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_InputView)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -5670,37 +5682,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_InputView)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return [this$0_ getBorderPadding];
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return ASEditTextImpl_getLineHeight(this$0_);
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return ASEditTextImpl_getBorderWidth(this$0_);
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return [this$0_ getLineHeightPadding];
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
 }
 
@@ -5900,10 +5912,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_EditTextExt)
   return self;
 }
 
-- (jboolean)onEditorActionWithADTextView:(ADTextView *)v
-                                 withInt:(jint)actionId
-                          withADKeyEvent:(ADKeyEvent *)event {
-  jboolean result = true;
+- (bool)onEditorActionWithADTextView:(ADTextView *)v
+                             withInt:(int32_t)actionId
+                      withADKeyEvent:(ADKeyEvent *)event {
+  bool result = true;
   if (action_ == nil || [action_ isEqual:@"onEditorAction"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onEditorAction"];
     id<JavaUtilMap> obj = [self getOnEditorActionEventObjWithADTextView:v withInt:actionId withADKeyEvent:event];
@@ -5928,7 +5940,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_EditTextExt)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -5939,7 +5951,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_EditTextExt)
 }
 
 - (id<JavaUtilMap>)getOnEditorActionEventObjWithADTextView:(ADTextView *)v
-                                                   withInt:(jint)actionId
+                                                   withInt:(int32_t)actionId
                                             withADKeyEvent:(ADKeyEvent *)event {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
@@ -6039,7 +6051,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnEditorActionListener)
 }
 
 - (void)onFocusChangeWithADView:(ADView *)v
-                    withBoolean:(jboolean)hasFocus {
+                    withBoolean:(bool)hasFocus {
   if (action_ == nil || [action_ isEqual:@"onFocusChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onFocusChange"];
     id<JavaUtilMap> obj = [self getOnFocusChangeEventObjWithADView:v withBoolean:hasFocus];
@@ -6061,7 +6073,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnEditorActionListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -6072,7 +6084,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnEditorActionListener)
 }
 
 - (id<JavaUtilMap>)getOnFocusChangeEventObjWithADView:(ADView *)v
-                                          withBoolean:(jboolean)hasFocus {
+                                          withBoolean:(bool)hasFocus {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"focuschange"];
@@ -6191,7 +6203,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnFocusChangeListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -6202,9 +6214,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnFocusChangeListener)
 }
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after {
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after {
   if (action_ == nil || [action_ isEqual:@"onbeforeTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onbeforeTextChange"];
     id<JavaUtilMap> obj = [self getOnbeforeTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:count withInt:after];
@@ -6226,7 +6238,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnFocusChangeListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -6237,9 +6249,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnFocusChangeListener)
 }
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count {
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count {
   if (action_ == nil || [action_ isEqual:@"onTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onTextChange"];
     id<JavaUtilMap> obj = [self getOnTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:before withInt:count];
@@ -6261,7 +6273,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnFocusChangeListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -6272,9 +6284,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnFocusChangeListener)
 }
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count {
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"textchange"];
@@ -6295,9 +6307,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEditTextImpl_OnFocusChangeListener)
 }
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after {
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"beforetextchange"];

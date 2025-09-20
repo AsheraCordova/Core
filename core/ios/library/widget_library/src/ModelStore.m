@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\ModelStore.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IActivity.h"
 #include "IFlatMap.h"
 #include "IFragment.h"
@@ -17,11 +22,18 @@
 #include "PluginInvoker.h"
 #include "ResourceBundleUtils.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Double.h"
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASModelStore
@@ -136,7 +148,7 @@ void ASModelStore_storeModelToScopeWithNSString_withASModelScope_withId_withASIF
       }
       break;
       case ASModelScope_Enum_loopvar:
-      if (objValue == loopVarParams) {
+      if (JreObjectEqualsEquals(objValue, loopVarParams)) {
       }
       else if (loopVarParams != nil) {
         [loopVarParams putWithId:varName withId:objValue];
@@ -256,3 +268,5 @@ id ASModelStore_changeModelDataTypeWithASModelDataType_withId_(ASModelDataType *
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelStore)
+
+J2OBJC_NAME_MAPPING(ASModelStore, "com.ashera.model", "AS")

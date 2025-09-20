@@ -3,15 +3,24 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IdGenerator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IdGenerator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 #include "java/util/concurrent/atomic/AtomicInteger.h"
 
-@class JavaUtilConcurrentAtomicAtomicInteger;
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline JavaUtilConcurrentAtomicAtomicInteger *ASIdGenerator_get_sNextGeneratedId(void);
@@ -39,16 +48,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (NSString *)getNameWithInt:(jint)id_ {
++ (NSString *)getNameWithInt:(int32_t)id_ {
   return ASIdGenerator_getNameWithInt_(id_);
 }
 
 + (void)setIdWithNSString:(NSString *)name
-                  withInt:(jint)id_ {
+                  withInt:(int32_t)id_ {
   ASIdGenerator_setIdWithNSString_withInt_(name, id_);
 }
 
-+ (jint)getIdWithNSString:(NSString *)id_ {
++ (int32_t)getIdWithNSString:(NSString *)id_ {
   return ASIdGenerator_getIdWithNSString_(id_);
 }
 
@@ -100,18 +109,18 @@ ASIdGenerator *create_ASIdGenerator_init() {
   J2OBJC_CREATE_IMPL(ASIdGenerator, init)
 }
 
-NSString *ASIdGenerator_getNameWithInt_(jint id_) {
+NSString *ASIdGenerator_getNameWithInt_(int32_t id_) {
   ASIdGenerator_initialize();
   return [((id<JavaUtilMap>) nil_chk(ASIdGenerator_reverseMap)) getWithId:JavaLangInteger_valueOfWithInt_(id_)];
 }
 
-void ASIdGenerator_setIdWithNSString_withInt_(NSString *name, jint id_) {
+void ASIdGenerator_setIdWithNSString_withInt_(NSString *name, int32_t id_) {
   ASIdGenerator_initialize();
   [((id<JavaUtilMap>) nil_chk(ASIdGenerator_idMap)) putWithId:name withId:JavaLangInteger_valueOfWithInt_(id_)];
   [((id<JavaUtilMap>) nil_chk(ASIdGenerator_reverseMap)) putWithId:JavaLangInteger_valueOfWithInt_(id_) withId:name];
 }
 
-jint ASIdGenerator_getIdWithNSString_(NSString *id_) {
+int32_t ASIdGenerator_getIdWithNSString_(NSString *id_) {
   ASIdGenerator_initialize();
   if (id_ != nil && [id_ java_hasPrefix:@"@id/"]) {
     id_ = JreStrcat("$$", @"@+id/", [id_ java_substring:4]);
@@ -120,9 +129,9 @@ jint ASIdGenerator_getIdWithNSString_(NSString *id_) {
     return [((JavaLangInteger *) nil_chk([((id<JavaUtilMap>) nil_chk(ASIdGenerator_idMap)) getWithId:id_])) intValue];
   }
   for (; ; ) {
-    jint result = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ASIdGenerator_sNextGeneratedId)) get];
-    jint newValue = result + 1;
-    if (newValue > (jint) 0x00FFFFFF) newValue = 1;
+    int32_t result = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ASIdGenerator_sNextGeneratedId)) get];
+    int32_t newValue = result + 1;
+    if (newValue > (int32_t) 0x00FFFFFF) newValue = 1;
     if ([ASIdGenerator_sNextGeneratedId compareAndSetWithInt:result withInt:newValue]) {
       [((id<JavaUtilMap>) nil_chk(ASIdGenerator_idMap)) putWithId:id_ withId:JavaLangInteger_valueOfWithInt_(result)];
       [((id<JavaUtilMap>) nil_chk(ASIdGenerator_reverseMap)) putWithId:JavaLangInteger_valueOfWithInt_(result) withId:id_];
@@ -132,3 +141,5 @@ jint ASIdGenerator_getIdWithNSString_(NSString *id_) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASIdGenerator)
+
+J2OBJC_NAME_MAPPING(ASIdGenerator, "com.ashera.widget", "AS")

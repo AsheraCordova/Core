@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\Configuration.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Configuration")
@@ -16,13 +17,15 @@
 #if !defined (ADConfiguration_) && (INCLUDE_ALL_Configuration || defined(INCLUDE_ADConfiguration))
 #define ADConfiguration_
 
+@class JavaLangInteger;
+
 @interface ADConfiguration : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)getLayoutDirection;
+- (int32_t)getLayoutDirection;
 
 @end
 
@@ -37,6 +40,7 @@ FOUNDATION_EXPORT ADConfiguration *create_ADConfiguration_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADConfiguration)
 
 @compatibility_alias RAndroidContentResConfiguration ADConfiguration;
+
 
 #endif
 

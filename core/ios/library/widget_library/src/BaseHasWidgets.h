@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\BaseHasWidgets.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseHasWidgets")
@@ -30,6 +31,9 @@
 @class ASLoopParam;
 @class ASWidgetAttribute;
 @class ASWidgetViewHolder;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol ASIWidget_CommandCallBack;
 @protocol JavaLangRunnable;
@@ -51,12 +55,12 @@
                     withNSString:(NSString *)localName;
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index;
+                 withInt:(int32_t)index;
 
 - (void)addAllModelWithId:(id)objValue;
 
 - (void)addModelWithASLoopParam:(ASLoopParam *)model
-                        withInt:(jint)index
+                        withInt:(int32_t)index
                    withNSString:(NSString *)currentLoopVar;
 
 - (void)addModelWithASLoopParam:(ASLoopParam *)model
@@ -65,13 +69,13 @@
 - (void)addModelWithId:(id)model;
 
 - (void)addModelWithId:(id)model
-               withInt:(jint)index;
+               withInt:(int32_t)index;
 
 - (void)addTemplateWithId:(id)objValue;
 
 - (void)applyModelToWidget;
 
-- (jboolean)areWidgetItemsRecycled;
+- (bool)areWidgetItemsRecycled;
 
 - (void)clear;
 
@@ -82,7 +86,7 @@
 
 - (id<ASIWidget>)findWidgetByIdWithNSString:(NSString *)id_;
 
-- (id<ASIWidget>)getWithInt:(jint)index;
+- (id<ASIWidget>)getWithInt:(int32_t)index;
 
 - (id<ASHasWidgets>)getCompositeLeafWithASIWidget:(id<ASIWidget>)w;
 
@@ -104,27 +108,27 @@
 
 - (void)notifyDataSetChanged;
 
-- (jboolean)removeWithInt:(jint)index;
+- (bool)removeWithInt:(int32_t)index;
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w;
+- (bool)removeWithASIWidget:(id<ASIWidget>)w;
 
-- (void)removeIdsAndDataWithInt:(jint)index;
+- (void)removeIdsAndDataWithInt:(int32_t)index;
 
-- (void)removeModelAtIndexWithInt:(jint)index;
+- (void)removeModelAtIndexWithInt:(int32_t)index;
 
 - (void)removeModelByIdWithNSString:(NSString *)id_;
 
-- (jboolean)removeWidgetWithInt:(jint)index;
+- (bool)removeWidgetWithInt:(int32_t)index;
 
 - (void)setAttributeOnViewHolderWithASWidgetViewHolder:(ASWidgetViewHolder *)widgetViewHolder
-                                               withInt:(jint)position;
+                                               withInt:(int32_t)position;
 
 - (void)setAttributeOnViewHolderWithASWidgetViewHolder:(ASWidgetViewHolder *)widgetViewHolder
                                        withASLoopParam:(ASLoopParam *)model;
 
 - (void)setAttributeOnViewHolderWithASWidgetViewHolder:(ASWidgetViewHolder *)widgetViewHolder
                                        withASLoopParam:(ASLoopParam *)model
-                                           withBoolean:(jboolean)invalidateChild;
+                                           withBoolean:(bool)invalidateChild;
 
 - (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
                  withASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
@@ -132,7 +136,7 @@
 - (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
                  withASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                 withId:(id)objValue
-                           withBoolean:(jboolean)skipConvert;
+                           withBoolean:(bool)skipConvert;
 
 - (void)setChildAttributeWithASIWidget:(id<ASIWidget>)widget
                  withASWidgetAttribute:(ASWidgetAttribute *)key
@@ -145,13 +149,13 @@
 
 #pragma mark Protected
 
-- (void)addItemToParentWithInt:(jint)index
+- (void)addItemToParentWithInt:(int32_t)index
                   withNSString:(NSString *)id_
                withASLoopParam:(ASLoopParam *)childModel;
 
 - (void)addObjectWithASLoopParam:(ASLoopParam *)childModel
                     withNSString:(NSString *)modelIdPath
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                     withNSString:(NSString *)currentLoopVar;
 
 - (void)addToBufferedRunnablesWithJavaLangRunnable:(id<JavaLangRunnable>)run;
@@ -162,7 +166,7 @@
 
 - (void)clearModel;
 
-- (jboolean)filterDataWithId:(id)model;
+- (bool)filterDataWithId:(id)model;
 
 /*!
  @brief Override this if the list contains a subview.
@@ -198,6 +202,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseHasWidgets)
 
 @compatibility_alias ComAsheraWidgetBaseHasWidgets ASBaseHasWidgets;
 
+
 #endif
 
 #if !defined (ASBaseHasWidgets_LazyBaseWidget_) && (INCLUDE_ALL_BaseHasWidgets || defined(INCLUDE_ASBaseHasWidgets_LazyBaseWidget))
@@ -207,6 +212,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseHasWidgets)
 @class ASLoopParam;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -220,7 +227,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseHasWidgets)
 - (instancetype)initWithASBaseHasWidgets:(ASBaseHasWidgets *)outer$;
 
 - (void)addModelWithASLoopParam:(ASLoopParam *)model
-                        withInt:(jint)index
+                        withInt:(int32_t)index
                    withNSString:(NSString *)currentLoopParam;
 
 - (void)addModelWithASLoopParam:(ASLoopParam *)model
@@ -285,6 +292,7 @@ FOUNDATION_EXPORT ASBaseHasWidgets_LazyBaseWidget *new_ASBaseHasWidgets_LazyBase
 FOUNDATION_EXPORT ASBaseHasWidgets_LazyBaseWidget *create_ASBaseHasWidgets_LazyBaseWidget_initWithASBaseHasWidgets_(ASBaseHasWidgets *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseHasWidgets_LazyBaseWidget)
+
 
 #endif
 

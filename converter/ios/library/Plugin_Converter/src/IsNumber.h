@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\IsNumber.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IsNumber")
@@ -21,6 +22,8 @@
 #include "BaseValidator.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIWidget;
 @protocol ASValidation;
 
@@ -44,8 +47,8 @@
  @param value Text String
  @return isValid true or false
  */
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget;
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget;
 
 - (id<ASValidation>)newInstanceWithNSStringArray:(IOSObjectArray *)argument OBJC_METHOD_FAMILY_NONE;
 
@@ -62,6 +65,7 @@ FOUNDATION_EXPORT ASIsNumber *create_ASIsNumber_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASIsNumber)
 
 @compatibility_alias ComAsheraValidationsIsNumber ASIsNumber;
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\Alphabet.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Alphabet.h"
 #include "BaseValidator.h"
 #include "IFragment.h"
@@ -11,6 +16,13 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASAlphabet
@@ -30,9 +42,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", @"@string/alphabets_error_message", [((id<ASIWidget>) nil_chk(widget)) getFragment]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [text java_matches:@"[a-zA-Z]*"];
@@ -73,3 +85,5 @@ ASAlphabet *create_ASAlphabet_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAlphabet)
+
+J2OBJC_NAME_MAPPING(ASAlphabet, "com.ashera.validations", "AS")

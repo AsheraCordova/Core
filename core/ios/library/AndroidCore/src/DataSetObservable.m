@@ -3,11 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\database\DataSetObservable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DataSetObservable.h"
 #include "DataSetObserver.h"
 #include "J2ObjC_source.h"
 #include "Observable.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADDataSetObservable
@@ -21,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)notifyChanged {
   @synchronized(mObservers_) {
-    for (jint i = [((JavaUtilArrayList *) nil_chk(mObservers_)) size] - 1; i >= 0; i--) {
+    for (int32_t i = [((JavaUtilArrayList *) nil_chk(mObservers_)) size] - 1; i >= 0; i--) {
       [((ADDataSetObserver *) nil_chk([mObservers_ getWithInt:i])) onChanged];
     }
   }
@@ -29,7 +41,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)notifyInvalidated {
   @synchronized(mObservers_) {
-    for (jint i = [((JavaUtilArrayList *) nil_chk(mObservers_)) size] - 1; i >= 0; i--) {
+    for (int32_t i = [((JavaUtilArrayList *) nil_chk(mObservers_)) size] - 1; i >= 0; i--) {
       [((ADDataSetObserver *) nil_chk([mObservers_ getWithInt:i])) onInvalidated];
     }
   }
@@ -68,3 +80,5 @@ ADDataSetObservable *create_ADDataSetObservable_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDataSetObservable)
+
+J2OBJC_NAME_MAPPING(ADDataSetObservable, "r.android.database", "AD")

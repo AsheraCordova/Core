@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-ios-widgets\IOSJSONAdapter\src\main\java\com\ashera\jsonadapter\NSMutableArrayJSONSafeList.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "NSMutableArrayJSONSafeList.h"
 #include "NSMutableArrayList.h"
 #include "PluginInvoker.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASNSMutableArrayJSONSafeList
@@ -16,13 +28,13 @@
   return self;
 }
 
-- (void)addWithInt:(jint)index
+- (void)addWithInt:(int32_t)index
             withId:(id)element {
   element = ASPluginInvoker_getJSONSafeObjWithId_(element);
   [super addWithInt:index withId:element];
 }
 
-- (id)setWithInt:(jint)index
+- (id)setWithInt:(int32_t)index
           withId:(id)element {
   element = ASPluginInvoker_getJSONSafeObjWithId_(element);
   return [super setWithInt:index withId:element];
@@ -65,3 +77,5 @@ ASNSMutableArrayJSONSafeList *create_ASNSMutableArrayJSONSafeList_initWithId_(id
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASNSMutableArrayJSONSafeList)
+
+J2OBJC_NAME_MAPPING(ASNSMutableArrayJSONSafeList, "com.ashera.jsonadapter", "AS")

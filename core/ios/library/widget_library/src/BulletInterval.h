@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\BulletInterval.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BulletInterval")
@@ -23,52 +24,55 @@
 @class ASInterval;
 @class ASWidgetAttributeMap;
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ASBulletInterval : ASStyleInterval
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)style
-                    withInt:(jint)indent
-                    withInt:(jint)bulletSpacing;
+                    withInt:(int32_t)indent
+                    withInt:(int32_t)bulletSpacing;
 
 - (IOSObjectArray *)getArgs;
 
-- (jint)getBulletSpacing;
+- (int32_t)getBulletSpacing;
 
-- (jint)getIndent;
+- (int32_t)getIndent;
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments;
 
-- (void)setBulletSpacingWithInt:(jint)bulletSpacing;
+- (void)setBulletSpacingWithInt:(int32_t)bulletSpacing;
 
-- (void)setIndentWithInt:(jint)indent;
+- (void)setIndentWithInt:(int32_t)indent;
 
 - (NSString *)description;
 
 // Disallowed inherited constructors, do not use.
 
-- (instancetype)initWithInt:(jint)arg0
-                    withInt:(jint)arg1
+- (instancetype)initWithInt:(int32_t)arg0
+                    withInt:(int32_t)arg1
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)arg2 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASBulletInterval)
 
-FOUNDATION_EXPORT void ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(ASBulletInterval *self, jint start, jint end, ASWidgetAttributeMap *style, jint indent, jint bulletSpacing);
+FOUNDATION_EXPORT void ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(ASBulletInterval *self, int32_t start, int32_t end, ASWidgetAttributeMap *style, int32_t indent, int32_t bulletSpacing);
 
-FOUNDATION_EXPORT ASBulletInterval *new_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(jint start, jint end, ASWidgetAttributeMap *style, jint indent, jint bulletSpacing) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASBulletInterval *new_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(int32_t start, int32_t end, ASWidgetAttributeMap *style, int32_t indent, int32_t bulletSpacing) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASBulletInterval *create_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(jint start, jint end, ASWidgetAttributeMap *style, jint indent, jint bulletSpacing);
+FOUNDATION_EXPORT ASBulletInterval *create_ASBulletInterval_initWithInt_withInt_withASWidgetAttributeMap_withInt_withInt_(int32_t start, int32_t end, ASWidgetAttributeMap *style, int32_t indent, int32_t bulletSpacing);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBulletInterval)
 
 @compatibility_alias ComAsheraAttributedtextBulletInterval ASBulletInterval;
+
 
 #endif
 

@@ -3,17 +3,28 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\ColorUtil.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ColorUtil.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<JavaUtilMap> ASColorUtil_get_colorToHexMap(void);
@@ -40,13 +51,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASColorUtil_hexStr2IntWithNSString_(colorStr);
 }
 
-+ (NSString *)getColorStringWithInt:(jint)intColor {
++ (NSString *)getColorStringWithInt:(int32_t)intColor {
   return ASColorUtil_getColorStringWithInt_(intColor);
 }
 
-+ (NSString *)getColorStringWithInt:(jint)red
-                            withInt:(jint)blue
-                            withInt:(jint)green {
++ (NSString *)getColorStringWithInt:(int32_t)red
+                            withInt:(int32_t)blue
+                            withInt:(int32_t)green {
   return ASColorUtil_getColorStringWithInt_withInt_withInt_(red, blue, green);
 }
 
@@ -255,25 +266,27 @@ IOSIntArray *ASColorUtil_hexStr2IntWithNSString_(NSString *colorStr) {
   ASColorUtil_initialize();
   colorStr = ASColorUtil_colorToHexWithNSString_(colorStr);
   if ([((NSString *) nil_chk(colorStr)) java_length] == 7) {
-    return [IOSIntArray arrayWithInts:(jint[]){ [((JavaLangInteger *) nil_chk(JavaLangInteger_valueOfWithNSString_withInt_([colorStr java_substring:1 endIndex:7], 16))) intValue], 255 } count:2];
+    return [IOSIntArray arrayWithInts:(int32_t[]){ [((JavaLangInteger *) nil_chk(JavaLangInteger_valueOfWithNSString_withInt_([colorStr java_substring:1 endIndex:7], 16))) intValue], 255 } count:2];
   }
   else if ([colorStr java_length] == 9) {
-    return [IOSIntArray arrayWithInts:(jint[]){ [((JavaLangInteger *) nil_chk(JavaLangInteger_valueOfWithNSString_withInt_([colorStr java_substring:3], 16))) intValue], [((JavaLangInteger *) nil_chk(JavaLangInteger_valueOfWithNSString_withInt_([colorStr java_substring:1 endIndex:3], 16))) intValue] } count:2];
+    return [IOSIntArray arrayWithInts:(int32_t[]){ [((JavaLangInteger *) nil_chk(JavaLangInteger_valueOfWithNSString_withInt_([colorStr java_substring:3], 16))) intValue], [((JavaLangInteger *) nil_chk(JavaLangInteger_valueOfWithNSString_withInt_([colorStr java_substring:1 endIndex:3], 16))) intValue] } count:2];
   }
   else {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Unknown color");
   }
 }
 
-NSString *ASColorUtil_getColorStringWithInt_(jint intColor) {
+NSString *ASColorUtil_getColorStringWithInt_(int32_t intColor) {
   ASColorUtil_initialize();
-  return NSString_java_formatWithNSString_withNSObjectArray_(@"#%06X", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_((jint) 0xFFFFFF & intColor) } count:1 type:NSObject_class_()]);
+  return NSString_java_formatWithNSString_withNSObjectArray_(@"#%06X", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_((int32_t) 0xFFFFFF & intColor) } count:1 type:NSObject_class_()]);
 }
 
-NSString *ASColorUtil_getColorStringWithInt_withInt_withInt_(jint red, jint blue, jint green) {
+NSString *ASColorUtil_getColorStringWithInt_withInt_withInt_(int32_t red, int32_t blue, int32_t green) {
   ASColorUtil_initialize();
-  jint rgb = (JreLShift32((red & (jint) 0x0ff), 16)) | (JreLShift32((green & (jint) 0x0ff), 8)) | (blue & (jint) 0x0ff);
+  int32_t rgb = (JreLShift32((red & (int32_t) 0x0ff), 16)) | (JreLShift32((green & (int32_t) 0x0ff), 8)) | (blue & (int32_t) 0x0ff);
   return ASColorUtil_getColorStringWithInt_(rgb);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASColorUtil)
+
+J2OBJC_NAME_MAPPING(ASColorUtil, "com.ashera.utils", "AS")

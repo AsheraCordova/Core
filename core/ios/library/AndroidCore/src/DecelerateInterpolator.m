@@ -3,15 +3,30 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\DecelerateInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseInterpolator.h"
 #include "DecelerateInterpolator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADDecelerateInterpolator () {
  @public
-  jfloat mFactor_;
+  float mFactor_;
 }
 
 @end
@@ -25,23 +40,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithFloat:(jfloat)factor {
+- (instancetype)initWithFloat:(float)factor {
   ADDecelerateInterpolator_initWithFloat_(self, factor);
   return self;
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)input {
-  jfloat result;
+- (float)getInterpolationWithFloat:(float)input {
+  float result;
   if (mFactor_ == 1.0f) {
-    result = (jfloat) (1.0f - (1.0f - input) * (1.0f - input));
+    result = (float) (1.0f - (1.0f - input) * (1.0f - input));
   }
   else {
-    result = (jfloat) (1.0f - JavaLangMath_powWithDouble_withDouble_((1.0f - input), 2 * mFactor_));
+    result = (float) (1.0f - JavaLangMath_powWithDouble_withDouble_((1.0f - input), 2 * mFactor_));
   }
   return result;
 }
 
-- (jlong)createNativeInterpolator {
+- (int64_t)createNativeInterpolator {
   return 0;
 }
 
@@ -83,18 +98,20 @@ ADDecelerateInterpolator *create_ADDecelerateInterpolator_init() {
   J2OBJC_CREATE_IMPL(ADDecelerateInterpolator, init)
 }
 
-void ADDecelerateInterpolator_initWithFloat_(ADDecelerateInterpolator *self, jfloat factor) {
+void ADDecelerateInterpolator_initWithFloat_(ADDecelerateInterpolator *self, float factor) {
   ADBaseInterpolator_init(self);
   self->mFactor_ = 1.0f;
   self->mFactor_ = factor;
 }
 
-ADDecelerateInterpolator *new_ADDecelerateInterpolator_initWithFloat_(jfloat factor) {
+ADDecelerateInterpolator *new_ADDecelerateInterpolator_initWithFloat_(float factor) {
   J2OBJC_NEW_IMPL(ADDecelerateInterpolator, initWithFloat_, factor)
 }
 
-ADDecelerateInterpolator *create_ADDecelerateInterpolator_initWithFloat_(jfloat factor) {
+ADDecelerateInterpolator *create_ADDecelerateInterpolator_initWithFloat_(float factor) {
   J2OBJC_CREATE_IMPL(ADDecelerateInterpolator, initWithFloat_, factor)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDecelerateInterpolator)
+
+J2OBJC_NAME_MAPPING(ADDecelerateInterpolator, "r.android.view.animation", "AD")

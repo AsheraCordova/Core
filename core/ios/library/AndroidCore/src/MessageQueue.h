@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\MessageQueue.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MessageQueue")
@@ -24,6 +25,9 @@
 
 @class ADHandler;
 @class ADMessage;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 @protocol ADMessageQueue_IdleHandler;
 @protocol JavaLangRunnable;
 
@@ -56,7 +60,7 @@
  <p>This method is safe to call from any thread.
  @return True if the looper is idle.
  */
-- (jboolean)isIdle;
+- (bool)isIdle;
 
 /*!
  @brief Returns whether this looper's thread is currently polling for more work to do.
@@ -66,7 +70,7 @@
  <p>This method is safe to call from any thread.
  @return True if the looper is currently polling for events.
  */
-- (jboolean)isPolling;
+- (bool)isPolling;
 
 /*!
  @brief Remove an <code>IdleHandler</code> from the queue that was previously added
@@ -83,7 +87,7 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithBoolean:(jboolean)quitAllowed;
+- (instancetype)initWithBoolean:(bool)quitAllowed;
 
 /*!
  @brief Posts a synchronization barrier to the Looper's message queue.
@@ -102,24 +106,24 @@
  @return A token that uniquely identifies the barrier.  This token must be
   passed to <code>removeSyncBarrier</code> to release the barrier.
  */
-- (jboolean)enqueueMessageWithADMessage:(ADMessage *)msg
-                               withLong:(jlong)when;
+- (bool)enqueueMessageWithADMessage:(ADMessage *)msg
+                           withLong:(int64_t)when;
 
-- (jboolean)hasEqualMessagesWithADHandler:(ADHandler *)h
-                                  withInt:(jint)what
-                                   withId:(id)object;
+- (bool)hasEqualMessagesWithADHandler:(ADHandler *)h
+                              withInt:(int32_t)what
+                               withId:(id)object;
 
-- (jboolean)hasMessagesWithADHandler:(ADHandler *)h;
+- (bool)hasMessagesWithADHandler:(ADHandler *)h;
 
-- (jboolean)hasMessagesWithADHandler:(ADHandler *)h
-                             withInt:(jint)what
-                              withId:(id)object;
+- (bool)hasMessagesWithADHandler:(ADHandler *)h
+                         withInt:(int32_t)what
+                          withId:(id)object;
 
-- (jboolean)hasMessagesWithADHandler:(ADHandler *)h
-                withJavaLangRunnable:(id<JavaLangRunnable>)r
-                              withId:(id)object;
+- (bool)hasMessagesWithADHandler:(ADHandler *)h
+            withJavaLangRunnable:(id<JavaLangRunnable>)r
+                          withId:(id)object;
 
-- (void)quitWithBoolean:(jboolean)safe;
+- (void)quitWithBoolean:(bool)safe;
 
 - (void)removeCallbacksAndEqualMessagesWithADHandler:(ADHandler *)h
                                               withId:(id)object;
@@ -128,7 +132,7 @@
                                          withId:(id)object;
 
 - (void)removeEqualMessagesWithADHandler:(ADHandler *)h
-                                 withInt:(jint)what
+                                 withInt:(int32_t)what
                                   withId:(id)object;
 
 - (void)removeEqualMessagesWithADHandler:(ADHandler *)h
@@ -136,7 +140,7 @@
                                   withId:(id)object;
 
 - (void)removeMessagesWithADHandler:(ADHandler *)h
-                            withInt:(jint)what
+                            withInt:(int32_t)what
                              withId:(id)object;
 
 - (void)removeMessagesWithADHandler:(ADHandler *)h
@@ -153,20 +157,23 @@ J2OBJC_EMPTY_STATIC_INIT(ADMessageQueue)
 
 J2OBJC_FIELD_SETTER(ADMessageQueue, mMessages_, ADMessage *)
 
-FOUNDATION_EXPORT void ADMessageQueue_initWithBoolean_(ADMessageQueue *self, jboolean quitAllowed);
+FOUNDATION_EXPORT void ADMessageQueue_initWithBoolean_(ADMessageQueue *self, bool quitAllowed);
 
-FOUNDATION_EXPORT ADMessageQueue *new_ADMessageQueue_initWithBoolean_(jboolean quitAllowed) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADMessageQueue *new_ADMessageQueue_initWithBoolean_(bool quitAllowed) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADMessageQueue *create_ADMessageQueue_initWithBoolean_(jboolean quitAllowed);
+FOUNDATION_EXPORT ADMessageQueue *create_ADMessageQueue_initWithBoolean_(bool quitAllowed);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMessageQueue)
 
 @compatibility_alias RAndroidOsMessageQueue ADMessageQueue;
 
+
 #endif
 
 #if !defined (ADMessageQueue_IdleHandler_) && (INCLUDE_ALL_MessageQueue || defined(INCLUDE_ADMessageQueue_IdleHandler))
 #define ADMessageQueue_IdleHandler_
+
+@class JavaLangBoolean;
 
 /*!
  @brief Callback interface for discovering when a thread is going to block
@@ -182,7 +189,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMessageQueue)
   pending in the queue, but they are all scheduled to be dispatched
   after the current time.
  */
-- (jboolean)queueIdle;
+- (bool)queueIdle;
 
 @end
 
@@ -190,12 +197,14 @@ J2OBJC_EMPTY_STATIC_INIT(ADMessageQueue_IdleHandler)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMessageQueue_IdleHandler)
 
+
 #endif
 
 #if !defined (ADMessageQueue_OnFileDescriptorEventListener_) && (INCLUDE_ALL_MessageQueue || defined(INCLUDE_ADMessageQueue_OnFileDescriptorEventListener))
 #define ADMessageQueue_OnFileDescriptorEventListener_
 
 @class JavaIoFileDescriptor;
+@class JavaLangInteger;
 
 /*!
  @brief A listener which is invoked when file descriptor related events occur.
@@ -212,8 +221,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMessageQueue_IdleHandler)
  - seealso: #EVENT_OUTPUT
  - seealso: #EVENT_ERROR
  */
-- (jint)onFileDescriptorEventsWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                               withInt:(jint)events;
+- (int32_t)onFileDescriptorEventsWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
+                                                  withInt:(int32_t)events;
 
 @end
 
@@ -235,9 +244,9 @@ J2OBJC_EMPTY_STATIC_INIT(ADMessageQueue_OnFileDescriptorEventListener)
   specified when the listener was added. 
  </p>
  */
-inline jint ADMessageQueue_OnFileDescriptorEventListener_get_EVENT_INPUT(void);
+inline int32_t ADMessageQueue_OnFileDescriptorEventListener_get_EVENT_INPUT(void);
 #define ADMessageQueue_OnFileDescriptorEventListener_EVENT_INPUT 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT_INPUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT_INPUT, int32_t)
 
 /*!
  @brief File descriptor event: Indicates that the file descriptor is ready for output
@@ -253,9 +262,9 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT
   specified when the listener was added. 
  </p>
  */
-inline jint ADMessageQueue_OnFileDescriptorEventListener_get_EVENT_OUTPUT(void);
+inline int32_t ADMessageQueue_OnFileDescriptorEventListener_get_EVENT_OUTPUT(void);
 #define ADMessageQueue_OnFileDescriptorEventListener_EVENT_OUTPUT 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT_OUTPUT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT_OUTPUT, int32_t)
 
 /*!
  @brief File descriptor event: Indicates that the file descriptor encountered a
@@ -268,11 +277,12 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT
  <code>EVENT_ERROR</code> event mask was specified when the listener was added. 
  </p>
  */
-inline jint ADMessageQueue_OnFileDescriptorEventListener_get_EVENT_ERROR(void);
+inline int32_t ADMessageQueue_OnFileDescriptorEventListener_get_EVENT_ERROR(void);
 #define ADMessageQueue_OnFileDescriptorEventListener_EVENT_ERROR 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT_ERROR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMessageQueue_OnFileDescriptorEventListener, EVENT_ERROR, int32_t)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMessageQueue_OnFileDescriptorEventListener)
+
 
 #endif
 
@@ -292,6 +302,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADMessageQueue_OnFileDescriptorEventListener)
 J2OBJC_EMPTY_STATIC_INIT(ADMessageQueue_OnFileDescriptorEventListener_Events)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMessageQueue_OnFileDescriptorEventListener_Events)
+
 
 #endif
 

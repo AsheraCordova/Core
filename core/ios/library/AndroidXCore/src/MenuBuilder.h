@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\MenuBuilder.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MenuBuilder")
@@ -24,6 +25,8 @@
 @class ADDrawable;
 @class ADView;
 @class ADXMenuItemImpl;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @class JavaUtilArrayList;
 @protocol ADMenuItem;
 @protocol ADSubMenu;
@@ -44,17 +47,17 @@
 
 - (id<ADMenuItem>)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (id<ADMenuItem>)addWithInt:(jint)titleRes;
+- (id<ADMenuItem>)addWithInt:(int32_t)titleRes;
 
-- (id<ADMenuItem>)addWithInt:(jint)group
-                     withInt:(jint)id_
-                     withInt:(jint)categoryOrder
+- (id<ADMenuItem>)addWithInt:(int32_t)group
+                     withInt:(int32_t)id_
+                     withInt:(int32_t)categoryOrder
     withJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (id<ADMenuItem>)addWithInt:(jint)group
-                     withInt:(jint)id_
-                     withInt:(jint)categoryOrder
-                     withInt:(jint)title;
+- (id<ADMenuItem>)addWithInt:(int32_t)group
+                     withInt:(int32_t)id_
+                     withInt:(int32_t)categoryOrder
+                     withInt:(int32_t)title;
 
 - (void)addMenuPresenterWithADXMenuPresenter:(id<ADXMenuPresenter>)presenter;
 
@@ -63,17 +66,17 @@
 
 - (id<ADSubMenu>)addSubMenuWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (id<ADSubMenu>)addSubMenuWithInt:(jint)titleRes;
+- (id<ADSubMenu>)addSubMenuWithInt:(int32_t)titleRes;
 
-- (id<ADSubMenu>)addSubMenuWithInt:(jint)group
-                           withInt:(jint)id_
-                           withInt:(jint)categoryOrder
+- (id<ADSubMenu>)addSubMenuWithInt:(int32_t)group
+                           withInt:(int32_t)id_
+                           withInt:(int32_t)categoryOrder
           withJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (id<ADSubMenu>)addSubMenuWithInt:(jint)group
-                           withInt:(jint)id_
-                           withInt:(jint)categoryOrder
-                           withInt:(jint)title;
+- (id<ADSubMenu>)addSubMenuWithInt:(int32_t)group
+                           withInt:(int32_t)id_
+                           withInt:(int32_t)categoryOrder
+                           withInt:(int32_t)title;
 
 - (void)clear;
 
@@ -81,31 +84,31 @@
 
 - (void)clearHeader;
 
-- (id<ADMenuItem>)findItemWithInt:(jint)id_;
+- (id<ADMenuItem>)findItemWithInt:(int32_t)id_;
 
 - (void)flagActionItems;
 
 - (JavaUtilArrayList *)getActionItems;
 
-- (id<ADMenuItem>)getItemWithInt:(jint)index;
+- (id<ADMenuItem>)getItemWithInt:(int32_t)index;
 
 - (JavaUtilArrayList *)getNonActionItems;
 
 - (JavaUtilArrayList *)getVisibleItems;
 
-- (jboolean)hasVisibleItems;
+- (bool)hasVisibleItems;
 
-- (void)onItemsChangedWithBoolean:(jboolean)structureChanged;
+- (void)onItemsChangedWithBoolean:(bool)structureChanged;
 
-- (jboolean)performItemActionWithADMenuItem:(id<ADMenuItem>)item
-                       withADXMenuPresenter:(id<ADXMenuPresenter>)presenter
-                                    withInt:(jint)i;
+- (bool)performItemActionWithADMenuItem:(id<ADMenuItem>)item
+                   withADXMenuPresenter:(id<ADXMenuPresenter>)presenter
+                                withInt:(int32_t)i;
 
 - (void)setActionMenuPresenterWithADXMenuPresenter:(id<ADXMenuPresenter>)mPresenter;
 
 - (void)setCallbackWithADXMenuBuilder_Callback:(id<ADXMenuBuilder_Callback>)cb;
 
-- (jint)size;
+- (int32_t)size;
 
 - (void)startDispatchingItemsChanged;
 
@@ -113,19 +116,19 @@
 
 #pragma mark Protected
 
-- (id<ADMenuItem>)addInternalWithInt:(jint)group
-                             withInt:(jint)id_
-                             withInt:(jint)categoryOrder
+- (id<ADMenuItem>)addInternalWithInt:(int32_t)group
+                             withInt:(int32_t)id_
+                             withInt:(int32_t)categoryOrder
             withJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
 - (ADXMenuBuilder *)setHeaderTitleIntWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
-- (ADXMenuBuilder *)setHeaderTitleIntWithInt:(jint)titleRes;
+- (ADXMenuBuilder *)setHeaderTitleIntWithInt:(int32_t)titleRes;
 
 #pragma mark Package-Private
 
-- (jboolean)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
-                                        withADMenuItem:(id<ADMenuItem>)item;
+- (bool)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
+                                    withADMenuItem:(id<ADMenuItem>)item;
 
 - (void)onItemActionRequestChangedWithADXMenuItemImpl:(ADXMenuItemImpl *)item;
 
@@ -141,29 +144,29 @@ J2OBJC_FIELD_SETTER(ADXMenuBuilder, mHeaderTitle_, id<JavaLangCharSequence>)
 J2OBJC_FIELD_SETTER(ADXMenuBuilder, mHeaderIcon_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ADXMenuBuilder, mHeaderView_, ADView *)
 
-inline jint ADXMenuBuilder_get_USER_MASK(void);
+inline int32_t ADXMenuBuilder_get_USER_MASK(void);
 #define ADXMenuBuilder_USER_MASK 65535
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, USER_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, USER_MASK, int32_t)
 
-inline jint ADXMenuBuilder_get_USER_SHIFT(void);
+inline int32_t ADXMenuBuilder_get_USER_SHIFT(void);
 #define ADXMenuBuilder_USER_SHIFT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, USER_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, USER_SHIFT, int32_t)
 
-inline jint ADXMenuBuilder_get_CATEGORY_MASK(void);
+inline int32_t ADXMenuBuilder_get_CATEGORY_MASK(void);
 #define ADXMenuBuilder_CATEGORY_MASK -65536
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, CATEGORY_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, CATEGORY_MASK, int32_t)
 
-inline jint ADXMenuBuilder_get_CATEGORY_SHIFT(void);
+inline int32_t ADXMenuBuilder_get_CATEGORY_SHIFT(void);
 #define ADXMenuBuilder_CATEGORY_SHIFT 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, CATEGORY_SHIFT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, CATEGORY_SHIFT, int32_t)
 
-inline jint ADXMenuBuilder_get_SUPPORTED_MODIFIERS_MASK(void);
+inline int32_t ADXMenuBuilder_get_SUPPORTED_MODIFIERS_MASK(void);
 #define ADXMenuBuilder_SUPPORTED_MODIFIERS_MASK 69647
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, SUPPORTED_MODIFIERS_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, SUPPORTED_MODIFIERS_MASK, int32_t)
 
-inline jint ADXMenuBuilder_get_FLAG_KEEP_OPEN_ON_SUBMENU_OPENED(void);
+inline int32_t ADXMenuBuilder_get_FLAG_KEEP_OPEN_ON_SUBMENU_OPENED(void);
 #define ADXMenuBuilder_FLAG_KEEP_OPEN_ON_SUBMENU_OPENED 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, FLAG_KEEP_OPEN_ON_SUBMENU_OPENED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuBuilder, FLAG_KEEP_OPEN_ON_SUBMENU_OPENED, int32_t)
 
 FOUNDATION_EXPORT void ADXMenuBuilder_init(ADXMenuBuilder *self);
 
@@ -175,18 +178,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXMenuBuilder)
 
 @compatibility_alias AndroidxAppcompatViewMenuMenuBuilder ADXMenuBuilder;
 
+
 #endif
 
 #if !defined (ADXMenuBuilder_Callback_) && (INCLUDE_ALL_MenuBuilder || defined(INCLUDE_ADXMenuBuilder_Callback))
 #define ADXMenuBuilder_Callback_
 
 @class ADXMenuBuilder;
+@class JavaLangBoolean;
 @protocol ADMenuItem;
 
 @protocol ADXMenuBuilder_Callback < JavaObject >
 
-- (jboolean)onMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
-                                  withADMenuItem:(id<ADMenuItem>)item;
+- (bool)onMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
+                              withADMenuItem:(id<ADMenuItem>)item;
 
 - (void)onMenuModeChangeWithADXMenuBuilder:(ADXMenuBuilder *)menu;
 
@@ -195,6 +200,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXMenuBuilder)
 J2OBJC_EMPTY_STATIC_INIT(ADXMenuBuilder_Callback)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuBuilder_Callback)
+
 
 #endif
 
@@ -212,6 +218,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXMenuBuilder_Callback)
 J2OBJC_EMPTY_STATIC_INIT(ADXMenuBuilder_SupportMenuItem)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuBuilder_SupportMenuItem)
+
 
 #endif
 
@@ -241,6 +248,7 @@ FOUNDATION_EXPORT ADXMenuBuilder_ContextMenu *new_ADXMenuBuilder_ContextMenu_ini
 FOUNDATION_EXPORT ADXMenuBuilder_ContextMenu *create_ADXMenuBuilder_ContextMenu_initWithADXMenuBuilder_(ADXMenuBuilder *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuBuilder_ContextMenu)
+
 
 #endif
 

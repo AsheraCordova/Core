@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\widget\ViewUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewUtils")
@@ -17,22 +18,24 @@
 #define ADXViewUtils_
 
 @class ADView;
+@class JavaLangBoolean;
 
 @interface ADXViewUtils : NSObject
 
 #pragma mark Public
 
-+ (jboolean)isLayoutRtlWithADView:(ADView *)view;
++ (bool)isLayoutRtlWithADView:(ADView *)view;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXViewUtils)
 
-FOUNDATION_EXPORT jboolean ADXViewUtils_isLayoutRtlWithADView_(ADView *view);
+FOUNDATION_EXPORT bool ADXViewUtils_isLayoutRtlWithADView_(ADView *view);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXViewUtils)
 
 @compatibility_alias AndroidxAppcompatWidgetViewUtils ADXViewUtils;
+
 
 #endif
 

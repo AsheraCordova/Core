@@ -3,11 +3,18 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\PlainMap.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "PlainMap.h"
 #include "PlainMapException.h"
 #include "PluginInvoker.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Exception.h"
 #include "java/lang/Integer.h"
 #include "java/lang/NumberFormatException.h"
@@ -18,8 +25,12 @@
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASPlainMap () {
@@ -101,29 +112,29 @@
 
 J2OBJC_FIELD_SETTER(ASPlainMap, documentMap_, id<JavaUtilMap>)
 
-inline jchar ASPlainMap_get_SEPARATOR_DOT(void);
+inline unichar ASPlainMap_get_SEPARATOR_DOT(void);
 #define ASPlainMap_SEPARATOR_DOT '.'
-J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_DOT, jchar)
+J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_DOT, unichar)
 
-inline jchar ASPlainMap_get_SEPARATOR_ARRAY_START(void);
+inline unichar ASPlainMap_get_SEPARATOR_ARRAY_START(void);
 #define ASPlainMap_SEPARATOR_ARRAY_START '['
-J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ARRAY_START, jchar)
+J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ARRAY_START, unichar)
 
-inline jchar ASPlainMap_get_SEPARATOR_ARRAY_END(void);
+inline unichar ASPlainMap_get_SEPARATOR_ARRAY_END(void);
 #define ASPlainMap_SEPARATOR_ARRAY_END ']'
-J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ARRAY_END, jchar)
+J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ARRAY_END, unichar)
 
-inline jchar ASPlainMap_get_SEPARATOR_ASSOCIATIVE_ARRAY_START(void);
+inline unichar ASPlainMap_get_SEPARATOR_ASSOCIATIVE_ARRAY_START(void);
 #define ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_START '{'
-J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ASSOCIATIVE_ARRAY_START, jchar)
+J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ASSOCIATIVE_ARRAY_START, unichar)
 
-inline jchar ASPlainMap_get_SEPARATOR_ASSOCIATIVE_ARRAY_END(void);
+inline unichar ASPlainMap_get_SEPARATOR_ASSOCIATIVE_ARRAY_END(void);
 #define ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_END '}'
-J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ASSOCIATIVE_ARRAY_END, jchar)
+J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ASSOCIATIVE_ARRAY_END, unichar)
 
-inline jchar ASPlainMap_get_SEPARATOR_ASSOCIATIVE_ARRAY_EQUALS(void);
+inline unichar ASPlainMap_get_SEPARATOR_ASSOCIATIVE_ARRAY_EQUALS(void);
 #define ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_EQUALS '='
-J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ASSOCIATIVE_ARRAY_EQUALS, jchar)
+J2OBJC_STATIC_FIELD_CONSTANT(ASPlainMap, SEPARATOR_ASSOCIATIVE_ARRAY_EQUALS, unichar)
 
 inline NSString *ASPlainMap_get_ARRAY_LENGTH(void);
 static NSString *ASPlainMap_ARRAY_LENGTH = @"length";
@@ -189,6 +200,7 @@ __attribute__((unused)) static void ASPlainMap_InternalPlainMap_fillPlainMapForV
 
 J2OBJC_TYPE_LITERAL_HEADER(ASPlainMap_InternalPlainMap)
 
+
 @implementation ASPlainMap
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -217,10 +229,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [create_ASPlainMap_InternalPlainMap_initWithASPlainMap_(self) getPlainMapWithJavaUtilMap:self->documentMap_];
 }
 
-- (jboolean)existsWithNSString:(NSString *)path {
+- (bool)existsWithNSString:(NSString *)path {
   @try {
-    for (jint i = [((NSString *) nil_chk(path)) java_length] - 1; i >= 0; i--) {
-      jchar pathChar = [path charAtWithInt:i];
+    for (int32_t i = [((NSString *) nil_chk(path)) java_length] - 1; i >= 0; i--) {
+      unichar pathChar = [path charAtWithInt:i];
       if (pathChar == ASPlainMap_SEPARATOR_DOT) {
         NSString *parentPath = [path java_substring:0 endIndex:i];
         NSString *elementName = [path java_substring:i + 1];
@@ -229,9 +241,9 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
       else if (pathChar == ASPlainMap_SEPARATOR_ARRAY_START) {
         NSString *parentPath = [path java_substring:0 endIndex:i];
-        jint index = JavaLangInteger_parseIntWithNSString_([path java_substring:i + 1 endIndex:[path java_length] - 1]);
+        int32_t index = JavaLangInteger_parseIntWithNSString_([path java_substring:i + 1 endIndex:[path java_length] - 1]);
         id<JavaUtilList> parentList;
-        if ([((NSString *) nil_chk(parentPath)) java_isEmpty]) {
+        if ([((NSString *) nil_chk(parentPath)) isEmpty]) {
           parentList = (id<JavaUtilList>) cast_check([((id<JavaUtilMap>) nil_chk(self->documentMap_)) getWithId:ASPlainMap_EMPTY_STRING], JavaUtilList_class_());
         }
         else {
@@ -252,7 +264,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getWithNSString:(NSString *)path {
   @try {
-    if (path == nil || [path java_isEmpty] || [path charAtWithInt:0] == ASPlainMap_SEPARATOR_ARRAY_START || [((NSString *) nil_chk(ASPlainMap_DOT_ARRAY_LENGTH)) isEqual:path]) {
+    if (path == nil || [path isEmpty] || [path charAtWithInt:0] == ASPlainMap_SEPARATOR_ARRAY_START || [((NSString *) nil_chk(ASPlainMap_DOT_ARRAY_LENGTH)) isEqual:path]) {
       return ASPlainMap_getElementWithId_withNSString_(self, [((id<JavaUtilMap>) nil_chk(self->documentMap_)) getWithId:ASPlainMap_EMPTY_STRING], path);
     }
     else {
@@ -279,12 +291,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)removeWithNSString:(NSString *)path {
-  if (path == nil || [path java_isEmpty]) {
+  if (path == nil || [path isEmpty]) {
     [((id<JavaUtilMap>) nil_chk(self->documentMap_)) removeWithId:ASPlainMap_EMPTY_STRING];
     return;
   }
   if ([path charAtWithInt:[path java_length] - 1] == ASPlainMap_SEPARATOR_ARRAY_END) {
-    jint startListIndex = [path java_lastIndexOf:ASPlainMap_SEPARATOR_ARRAY_START];
+    int32_t startListIndex = [path java_lastIndexOf:ASPlainMap_SEPARATOR_ARRAY_START];
     if (startListIndex < 0) {
       @throw create_ASPlainMapException_initWithNSString_(JreStrcat("$$", @"Error removing an element with a wrong path: ", path));
     }
@@ -297,7 +309,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       if (!([JavaUtilList_class_() isInstance:listObject])) {
         @throw create_ASPlainMapException_initWithNSString_(JreStrcat("$$$", @"The path: ", path, @" targets a list but it is not a list"));
       }
-      jint listIndex;
+      int32_t listIndex;
       @try {
         listIndex = JavaLangInteger_parseIntWithNSString_([path java_substring:startListIndex + 1 endIndex:[path java_length] - 1]);
       }
@@ -312,9 +324,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
   }
   else {
-    jint endParentPathIndex = [path java_lastIndexOf:ASPlainMap_SEPARATOR_DOT];
+    int32_t endParentPathIndex = [path java_lastIndexOf:ASPlainMap_SEPARATOR_DOT];
     NSString *mapPath = endParentPathIndex < 0 ? ASPlainMap_EMPTY_STRING : [path java_substring:0 endIndex:endParentPathIndex];
-    id mapObject = [mapPath java_isEmpty] ? [self getHierarchicalMap] : [self getWithNSString:mapPath];
+    id mapObject = [mapPath isEmpty] ? [self getHierarchicalMap] : [self getWithNSString:mapPath];
     if (mapObject == nil) {
       return;
     }
@@ -504,7 +516,7 @@ ASPlainMap *create_ASPlainMap_initWithJavaUtilMap_withNSString_(id<JavaUtilMap> 
 }
 
 void ASPlainMap_addRootPathWithNSString_(ASPlainMap *self, NSString *rootPath) {
-  if (rootPath == nil || [rootPath java_isEmpty]) {
+  if (rootPath == nil || [rootPath isEmpty]) {
     return;
   }
   id<JavaUtilMap> newDocumentMap = create_JavaUtilHashMap_init();
@@ -514,14 +526,14 @@ void ASPlainMap_addRootPathWithNSString_(ASPlainMap *self, NSString *rootPath) {
 }
 
 id ASPlainMap_getElementWithId_withNSString_(ASPlainMap *self, id elementObject, NSString *elementPath) {
-  if (elementPath == nil || [elementPath java_isEmpty]) {
+  if (elementPath == nil || [elementPath isEmpty]) {
     return elementObject;
   }
   if ([elementPath charAtWithInt:0] == ASPlainMap_SEPARATOR_DOT) {
     return ASPlainMap_getElementWithId_withNSString_(self, elementObject, [elementPath java_substring:1]);
   }
-  jint bracketIndex = [elementPath java_indexOf:ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_START];
-  jint sqBracketIndex = [elementPath java_indexOf:ASPlainMap_SEPARATOR_ARRAY_START];
+  int32_t bracketIndex = [elementPath java_indexOf:ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_START];
+  int32_t sqBracketIndex = [elementPath java_indexOf:ASPlainMap_SEPARATOR_ARRAY_START];
   if (bracketIndex == -1 && sqBracketIndex == -1) {
     return ASPlainMap_getElementFromMapPathWithId_withNSString_(self, elementObject, elementPath);
   }
@@ -540,10 +552,10 @@ id ASPlainMap_getElementWithId_withNSString_(ASPlainMap *self, id elementObject,
 }
 
 id ASPlainMap_getElementFromMapPathWithId_withNSString_(ASPlainMap *self, id elementObject, NSString *elementMapPath) {
-  jint index = 0;
+  int32_t index = 0;
   id currentElementObject = JreRetainedLocalValue(elementObject);
   while (true) {
-    jint newIndex = [((NSString *) nil_chk(elementMapPath)) java_indexOf:ASPlainMap_SEPARATOR_DOT fromIndex:index];
+    int32_t newIndex = [((NSString *) nil_chk(elementMapPath)) java_indexOf:ASPlainMap_SEPARATOR_DOT fromIndex:index];
     if (newIndex >= 0) {
       NSString *pathElement = [elementMapPath java_substring:index endIndex:newIndex];
       currentElementObject = [((id<JavaUtilMap>) nil_chk((ASPluginInvoker_getMapWithId_(currentElementObject)))) getWithId:pathElement];
@@ -565,11 +577,11 @@ id ASPlainMap_getElementFromMapPathWithId_withNSString_(ASPlainMap *self, id ele
 }
 
 id ASPlainMap_getElementFromAssociativeArrayPathWithJavaUtilList_withNSString_(ASPlainMap *self, id<JavaUtilList> associativeList, NSString *associativeArrayPath) {
-  jint endAssociativeArrayIndex = [((NSString *) nil_chk(associativeArrayPath)) java_indexOf:ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_END];
+  int32_t endAssociativeArrayIndex = [((NSString *) nil_chk(associativeArrayPath)) java_indexOf:ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_END];
   if (endAssociativeArrayIndex < 0) {
     @throw create_ASPlainMapException_initWithNSString_(JreStrcat("$$", @"The associative array query must be surrounded by brackets: ", associativeArrayPath));
   }
-  jint equalsIndex = [associativeArrayPath java_indexOf:ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_EQUALS];
+  int32_t equalsIndex = [associativeArrayPath java_indexOf:ASPlainMap_SEPARATOR_ASSOCIATIVE_ARRAY_EQUALS];
   if (equalsIndex < 0) {
     @throw create_ASPlainMapException_initWithNSString_(JreStrcat("$$", @"Invalid associative array query: ", associativeArrayPath));
   }
@@ -584,12 +596,12 @@ id ASPlainMap_getElementFromAssociativeArrayPathWithJavaUtilList_withNSString_(A
 }
 
 id ASPlainMap_getElementFromArrayPathWithId_withNSString_(ASPlainMap *self, id arrayObject, NSString *arrayPath) {
-  jint endArrayIndex = [((NSString *) nil_chk(arrayPath)) java_indexOf:ASPlainMap_SEPARATOR_ARRAY_END];
+  int32_t endArrayIndex = [((NSString *) nil_chk(arrayPath)) java_indexOf:ASPlainMap_SEPARATOR_ARRAY_END];
   if (endArrayIndex < 0) {
     @throw create_ASPlainMapException_initWithNSString_(JreStrcat("$$", @"The array query must be surrounded by square brackets: ", arrayPath));
   }
   @try {
-    jint arrayIndex = JavaLangInteger_parseIntWithNSString_([arrayPath java_substring:1 endIndex:endArrayIndex]);
+    int32_t arrayIndex = JavaLangInteger_parseIntWithNSString_([arrayPath java_substring:1 endIndex:endArrayIndex]);
     NSString *subarrayPath = [arrayPath java_substring:endArrayIndex + 1];
     if ([JavaUtilList_class_() isInstance:arrayObject]) {
       id subarrayObject = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(((id<JavaUtilList>) cast_check(arrayObject, JavaUtilList_class_())))) getWithInt:arrayIndex]);
@@ -610,7 +622,7 @@ id ASPlainMap_getElementFromArrayPathWithId_withNSString_(ASPlainMap *self, id a
 }
 
 void ASPlainMap_putMapElementWithJavaUtilMap_withNSString_withId_(ASPlainMap *self, id<JavaUtilMap> map, NSString *path, id value) {
-  if (path == nil || [path java_isEmpty]) {
+  if (path == nil || [path isEmpty]) {
     if ([JavaUtilMap_class_() isInstance:value]) {
       [((id<JavaUtilMap>) nil_chk(map)) putAllWithJavaUtilMap:(id<JavaUtilMap>) cast_check(value, JavaUtilMap_class_())];
     }
@@ -619,15 +631,15 @@ void ASPlainMap_putMapElementWithJavaUtilMap_withNSString_withId_(ASPlainMap *se
     }
   }
   else {
-    jint index = [path java_indexOf:ASPlainMap_SEPARATOR_DOT];
+    int32_t index = [path java_indexOf:ASPlainMap_SEPARATOR_DOT];
     NSString *firstPathElement = (index >= 0) ? [path java_substring:0 endIndex:index] : path;
     NSString *childPath = (index >= 0) ? [path java_substring:index + 1] : ASPlainMap_EMPTY_STRING;
-    jint startArrayIndex = [firstPathElement java_indexOf:ASPlainMap_SEPARATOR_ARRAY_START];
+    int32_t startArrayIndex = [firstPathElement java_indexOf:ASPlainMap_SEPARATOR_ARRAY_START];
     NSString *subElementName = (startArrayIndex >= 0) ? [firstPathElement java_substring:0 endIndex:startArrayIndex] : firstPathElement;
     id subElementObject = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(map)) getWithId:subElementName]);
     id<JavaUtilMap> subElementMap = nil;
     if (startArrayIndex < 0) {
-      if ([childPath java_isEmpty]) {
+      if ([childPath isEmpty]) {
         [map putWithId:subElementName withId:value];
       }
       else {
@@ -645,24 +657,24 @@ void ASPlainMap_putMapElementWithJavaUtilMap_withNSString_withId_(ASPlainMap *se
         subElementObject = create_JavaUtilArrayList_init();
         [map putWithId:subElementName withId:subElementObject];
       }
-      id arrayValue = [childPath java_isEmpty] ? value : nil;
+      id arrayValue = [childPath isEmpty] ? value : nil;
       subElementMap = ASPlainMap_prepareArrayElementWithJavaUtilList_withNSString_withId_(self, (id<JavaUtilList>) cast_check(subElementObject, JavaUtilList_class_()), [firstPathElement java_substring:startArrayIndex], arrayValue);
     }
-    if (![childPath java_isEmpty]) {
+    if (![childPath isEmpty]) {
       ASPlainMap_putMapElementWithJavaUtilMap_withNSString_withId_(self, subElementMap, childPath, value);
     }
   }
 }
 
 id<JavaUtilMap> ASPlainMap_prepareArrayElementWithJavaUtilList_withNSString_withId_(ASPlainMap *self, id<JavaUtilList> arrayElementObject, NSString *arrayPath, id value) {
-  jint endArrayIndex = [((NSString *) nil_chk(arrayPath)) java_indexOf:ASPlainMap_SEPARATOR_ARRAY_END];
-  jint arrayIndex = JavaLangInteger_parseIntWithNSString_([arrayPath java_substring:1 endIndex:endArrayIndex]);
+  int32_t endArrayIndex = [((NSString *) nil_chk(arrayPath)) java_indexOf:ASPlainMap_SEPARATOR_ARRAY_END];
+  int32_t arrayIndex = JavaLangInteger_parseIntWithNSString_([arrayPath java_substring:1 endIndex:endArrayIndex]);
   NSString *subarrayPath = [arrayPath java_substring:endArrayIndex + 1];
   if (arrayIndex >= [((id<JavaUtilList>) nil_chk(arrayElementObject)) size]) {
-    for (jint j = [arrayElementObject size]; j < arrayIndex; j++) {
+    for (int32_t j = [arrayElementObject size]; j < arrayIndex; j++) {
       [arrayElementObject addWithId:nil];
     }
-    if ([((NSString *) nil_chk(subarrayPath)) java_isEmpty]) {
+    if ([((NSString *) nil_chk(subarrayPath)) isEmpty]) {
       if (value == nil) {
         id<JavaUtilMap> subarrayMap = create_JavaUtilHashMap_init();
         [arrayElementObject addWithId:subarrayMap];
@@ -680,7 +692,7 @@ id<JavaUtilMap> ASPlainMap_prepareArrayElementWithJavaUtilList_withNSString_with
     }
   }
   else {
-    if ([((NSString *) nil_chk(subarrayPath)) java_isEmpty]) {
+    if ([((NSString *) nil_chk(subarrayPath)) isEmpty]) {
       if (value == nil) {
         id subarrayObject = JreRetainedLocalValue([arrayElementObject getWithInt:arrayIndex]);
         if (!([JavaUtilMap_class_() isInstance:subarrayObject])) {
@@ -701,6 +713,8 @@ id<JavaUtilMap> ASPlainMap_prepareArrayElementWithJavaUtilList_withNSString_with
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASPlainMap)
+
+J2OBJC_NAME_MAPPING(ASPlainMap, "com.ashera.model", "AS")
 
 @implementation ASPlainMap_InternalPlainMap
 
@@ -769,7 +783,7 @@ ASPlainMap_InternalPlainMap *create_ASPlainMap_InternalPlainMap_initWithASPlainM
 
 void ASPlainMap_InternalPlainMap_fillPlainMapForObjectWithNSString_withJavaUtilMap_(ASPlainMap_InternalPlainMap *self, NSString *parentElementName, id<JavaUtilMap> documentMap) {
   for (id<JavaUtilMap_Entry> __strong elementEntry in nil_chk([((id<JavaUtilMap>) nil_chk(documentMap)) entrySet])) {
-    NSString *rootElementName = ([((NSString *) nil_chk(parentElementName)) java_isEmpty]) ? [((id<JavaUtilMap_Entry>) nil_chk(elementEntry)) getKey] : JreStrcat("$C$", parentElementName, ASPlainMap_SEPARATOR_DOT, [((id<JavaUtilMap_Entry>) nil_chk(elementEntry)) getKey]);
+    NSString *rootElementName = ([((NSString *) nil_chk(parentElementName)) isEmpty]) ? [((id<JavaUtilMap_Entry>) nil_chk(elementEntry)) getKey] : JreStrcat("$C$", parentElementName, ASPlainMap_SEPARATOR_DOT, [((id<JavaUtilMap_Entry>) nil_chk(elementEntry)) getKey]);
     ASPlainMap_InternalPlainMap_fillPlainMapForValueWithNSString_withId_(self, rootElementName, [elementEntry getValue]);
   }
 }
@@ -777,7 +791,7 @@ void ASPlainMap_InternalPlainMap_fillPlainMapForObjectWithNSString_withJavaUtilM
 void ASPlainMap_InternalPlainMap_fillPlainMapForValueWithNSString_withId_(ASPlainMap_InternalPlainMap *self, NSString *elementName, id elementValue) {
   if ([JavaUtilList_class_() isInstance:elementValue]) {
     id<JavaUtilList> elementList = (id<JavaUtilList>) cast_check(elementValue, JavaUtilList_class_());
-    for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(elementList)) size]; i++) {
+    for (int32_t i = 0; i < [((id<JavaUtilList>) nil_chk(elementList)) size]; i++) {
       NSString *arrayElementName = JreStrcat("$CIC", elementName, ASPlainMap_SEPARATOR_ARRAY_START, i, ASPlainMap_SEPARATOR_ARRAY_END);
       ASPlainMap_InternalPlainMap_fillPlainMapForValueWithNSString_withId_(self, arrayElementName, [elementList getWithInt:i]);
     }

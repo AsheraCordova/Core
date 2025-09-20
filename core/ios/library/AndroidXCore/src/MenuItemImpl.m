@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\MenuItemImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ColorStateList.h"
 #include "Drawable.h"
 #include "J2ObjC_source.h"
@@ -13,30 +18,36 @@
 #include "SubMenuBuilder.h"
 #include "SupportMenuItem.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 
-@protocol JavaLangCharSequence;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXMenuItemImpl () {
  @public
-  jint mId_;
-  jint mGroup_;
-  jint mCategoryOrder_;
-  jint mOrdering_;
+  int32_t mId_;
+  int32_t mGroup_;
+  int32_t mCategoryOrder_;
+  int32_t mOrdering_;
   id<JavaLangCharSequence> mTitle_;
   ADDrawable *mIconDrawable_;
-  jint mIconResId_;
+  int32_t mIconResId_;
   ADXSubMenuBuilder *mSubMenu_;
   id<JavaLangCharSequence> mTooltipText_;
   ADColorStateList *mIconTintList_;
-  jboolean mHasIconTint_;
-  jboolean mHasIconTintMode_;
-  jboolean mNeedToApplyIconTint_;
-  jint mFlags_;
-  jint mShowAsAction_;
-  jboolean mIsActionViewExpanded_;
+  bool mHasIconTint_;
+  bool mHasIconTintMode_;
+  bool mNeedToApplyIconTint_;
+  int32_t mFlags_;
+  int32_t mShowAsAction_;
+  bool mIsActionViewExpanded_;
   ADView *mActionView_;
   id<ADXMenuItemImpl_ActionProvider> mActionProvider_;
 }
@@ -51,33 +62,33 @@ J2OBJC_FIELD_SETTER(ADXMenuItemImpl, mIconTintList_, ADColorStateList *)
 J2OBJC_FIELD_SETTER(ADXMenuItemImpl, mActionView_, ADView *)
 J2OBJC_FIELD_SETTER(ADXMenuItemImpl, mActionProvider_, id<ADXMenuItemImpl_ActionProvider>)
 
-inline jint ADXMenuItemImpl_get_SHOW_AS_ACTION_MASK(void);
+inline int32_t ADXMenuItemImpl_get_SHOW_AS_ACTION_MASK(void);
 #define ADXMenuItemImpl_SHOW_AS_ACTION_MASK 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, SHOW_AS_ACTION_MASK, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, SHOW_AS_ACTION_MASK, int32_t)
 
-inline jint ADXMenuItemImpl_get_CHECKABLE(void);
+inline int32_t ADXMenuItemImpl_get_CHECKABLE(void);
 #define ADXMenuItemImpl_CHECKABLE 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, CHECKABLE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, CHECKABLE, int32_t)
 
-inline jint ADXMenuItemImpl_get_CHECKED(void);
+inline int32_t ADXMenuItemImpl_get_CHECKED(void);
 #define ADXMenuItemImpl_CHECKED 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, CHECKED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, CHECKED, int32_t)
 
-inline jint ADXMenuItemImpl_get_EXCLUSIVE(void);
+inline int32_t ADXMenuItemImpl_get_EXCLUSIVE(void);
 #define ADXMenuItemImpl_EXCLUSIVE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, EXCLUSIVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, EXCLUSIVE, int32_t)
 
-inline jint ADXMenuItemImpl_get_HIDDEN(void);
+inline int32_t ADXMenuItemImpl_get_HIDDEN(void);
 #define ADXMenuItemImpl_HIDDEN 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, HIDDEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, HIDDEN, int32_t)
 
-inline jint ADXMenuItemImpl_get_ENABLED(void);
+inline int32_t ADXMenuItemImpl_get_ENABLED(void);
 #define ADXMenuItemImpl_ENABLED 16
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, ENABLED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, ENABLED, int32_t)
 
-inline jint ADXMenuItemImpl_get_IS_ACTION(void);
+inline int32_t ADXMenuItemImpl_get_IS_ACTION(void);
 #define ADXMenuItemImpl_IS_ACTION 32
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, int32_t)
 
 @interface ADXMenuItemImpl_ActionProvider : NSObject
 
@@ -86,21 +97,21 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
 @implementation ADXMenuItemImpl
 
 - (instancetype)initWithADXMenuBuilder:(ADXMenuBuilder *)menu
-                               withInt:(jint)group
-                               withInt:(jint)id_
-                               withInt:(jint)categoryOrder
-                               withInt:(jint)ordering
+                               withInt:(int32_t)group
+                               withInt:(int32_t)id_
+                               withInt:(int32_t)categoryOrder
+                               withInt:(int32_t)ordering
               withJavaLangCharSequence:(id<JavaLangCharSequence>)title
-                               withInt:(jint)showAsAction {
+                               withInt:(int32_t)showAsAction {
   ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(self, menu, group, id_, categoryOrder, ordering, title, showAsAction);
   return self;
 }
 
-- (jboolean)isEnabled {
+- (bool)isEnabled {
   return (mFlags_ & ADXMenuItemImpl_ENABLED) != 0;
 }
 
-- (id<ADMenuItem>)setEnabledWithBoolean:(jboolean)enabled {
+- (id<ADMenuItem>)setEnabledWithBoolean:(bool)enabled {
   if (enabled) {
     mFlags_ |= ADXMenuItemImpl_ENABLED;
   }
@@ -111,15 +122,15 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return self;
 }
 
-- (jint)getGroupId {
+- (int32_t)getGroupId {
   return mGroup_;
 }
 
-- (jint)getItemId {
+- (int32_t)getItemId {
   return mId_;
 }
 
-- (jint)getOrdering {
+- (int32_t)getOrdering {
   return mOrdering_;
 }
 
@@ -127,7 +138,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return mSubMenu_;
 }
 
-- (jboolean)hasSubMenu {
+- (bool)hasSubMenu {
   return mSubMenu_ != nil;
 }
 
@@ -144,7 +155,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return self;
 }
 
-- (id<ADMenuItem>)setIconWithInt:(jint)iconResId {
+- (id<ADMenuItem>)setIconWithInt:(int32_t)iconResId {
   JreStrongAssign(&mIconDrawable_, nil);
   mIconResId_ = iconResId;
   mNeedToApplyIconTint_ = true;
@@ -160,12 +171,12 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return self;
 }
 
-- (jboolean)isCheckable {
+- (bool)isCheckable {
   return (mFlags_ & ADXMenuItemImpl_CHECKABLE) == ADXMenuItemImpl_CHECKABLE;
 }
 
-- (id<ADMenuItem>)setCheckableWithBoolean:(jboolean)checkable {
-  jint oldFlags = mFlags_;
+- (id<ADMenuItem>)setCheckableWithBoolean:(bool)checkable {
+  int32_t oldFlags = mFlags_;
   mFlags_ = (mFlags_ & ~ADXMenuItemImpl_CHECKABLE) | (checkable ? ADXMenuItemImpl_CHECKABLE : 0);
   if (oldFlags != mFlags_) {
     [((ADXMenuBuilder *) nil_chk(mMenu_)) onItemsChangedWithBoolean:false];
@@ -173,19 +184,19 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return self;
 }
 
-- (void)setExclusiveCheckableWithBoolean:(jboolean)exclusive {
+- (void)setExclusiveCheckableWithBoolean:(bool)exclusive {
   mFlags_ = (mFlags_ & ~ADXMenuItemImpl_EXCLUSIVE) | (exclusive ? ADXMenuItemImpl_EXCLUSIVE : 0);
 }
 
-- (jboolean)isExclusiveCheckable {
+- (bool)isExclusiveCheckable {
   return (mFlags_ & ADXMenuItemImpl_EXCLUSIVE) != 0;
 }
 
-- (jboolean)isChecked {
+- (bool)isChecked {
   return (mFlags_ & ADXMenuItemImpl_CHECKED) == ADXMenuItemImpl_CHECKED;
 }
 
-- (id<ADMenuItem>)setCheckedWithBoolean:(jboolean)checked {
+- (id<ADMenuItem>)setCheckedWithBoolean:(bool)checked {
   if ((mFlags_ & ADXMenuItemImpl_EXCLUSIVE) != 0) {
     [((ADXMenuBuilder *) nil_chk(mMenu_)) setExclusiveItemCheckedWithADMenuItem:self];
   }
@@ -195,45 +206,45 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return self;
 }
 
-- (void)setCheckedIntWithBoolean:(jboolean)checked {
-  jint oldFlags = mFlags_;
+- (void)setCheckedIntWithBoolean:(bool)checked {
+  int32_t oldFlags = mFlags_;
   mFlags_ = (mFlags_ & ~ADXMenuItemImpl_CHECKED) | (checked ? ADXMenuItemImpl_CHECKED : 0);
   if (oldFlags != mFlags_) {
     [((ADXMenuBuilder *) nil_chk(mMenu_)) onItemsChangedWithBoolean:false];
   }
 }
 
-- (jboolean)isVisible {
+- (bool)isVisible {
   if (mActionProvider_ != nil && [mActionProvider_ overridesItemVisibility]) {
     return (mFlags_ & ADXMenuItemImpl_HIDDEN) == 0 && [mActionProvider_ isVisible];
   }
   return (mFlags_ & ADXMenuItemImpl_HIDDEN) == 0;
 }
 
-- (jboolean)setVisibleIntWithBoolean:(jboolean)shown {
-  jint oldFlags = mFlags_;
+- (bool)setVisibleIntWithBoolean:(bool)shown {
+  int32_t oldFlags = mFlags_;
   mFlags_ = (mFlags_ & ~ADXMenuItemImpl_HIDDEN) | (shown ? 0 : ADXMenuItemImpl_HIDDEN);
   return oldFlags != mFlags_;
 }
 
-- (id<ADMenuItem>)setVisibleWithBoolean:(jboolean)shown {
+- (id<ADMenuItem>)setVisibleWithBoolean:(bool)shown {
   if ([self setVisibleIntWithBoolean:shown]) [((ADXMenuBuilder *) nil_chk(mMenu_)) onItemVisibleChangedWithADXMenuItemImpl:self];
   return self;
 }
 
-- (jboolean)isActionButton {
+- (bool)isActionButton {
   return (mFlags_ & ADXMenuItemImpl_IS_ACTION) == ADXMenuItemImpl_IS_ACTION;
 }
 
-- (jboolean)requestsActionButton {
+- (bool)requestsActionButton {
   return (mShowAsAction_ & ADMenuItem_SHOW_AS_ACTION_IF_ROOM) == ADMenuItem_SHOW_AS_ACTION_IF_ROOM;
 }
 
-- (jboolean)requiresActionButton {
+- (bool)requiresActionButton {
   return (mShowAsAction_ & ADMenuItem_SHOW_AS_ACTION_ALWAYS) == ADMenuItem_SHOW_AS_ACTION_ALWAYS;
 }
 
-- (void)setIsActionButtonWithBoolean:(jboolean)isActionButton {
+- (void)setIsActionButtonWithBoolean:(bool)isActionButton {
   if (isActionButton) {
     mFlags_ |= ADXMenuItemImpl_IS_ACTION;
   }
@@ -242,7 +253,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   }
 }
 
-- (void)setShowAsActionWithInt:(jint)actionEnum {
+- (void)setShowAsActionWithInt:(int32_t)actionEnum {
   switch (actionEnum & ADXMenuItemImpl_SHOW_AS_ACTION_MASK) {
     case ADMenuItem_SHOW_AS_ACTION_ALWAYS:
     case ADMenuItem_SHOW_AS_ACTION_IF_ROOM:
@@ -278,7 +289,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   }
 }
 
-- (jboolean)hasCollapsibleActionView {
+- (bool)hasCollapsibleActionView {
   if ((mShowAsAction_ & ADMenuItem_SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW) != 0) {
     if (mActionView_ == nil && mActionProvider_ != nil) {
       JreStrongAssign(&mActionView_, [mActionProvider_ onCreateActionViewWithADXMenuItemImpl:self]);
@@ -288,7 +299,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return false;
 }
 
-- (jboolean)isActionViewExpanded {
+- (bool)isActionViewExpanded {
   return mIsActionViewExpanded_;
 }
 
@@ -304,7 +315,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   return mIconDrawable_;
 }
 
-- (jboolean)invoke {
+- (bool)invoke {
   if ([((ADXMenuBuilder *) nil_chk(mMenu_)) dispatchMenuItemSelectedWithADXMenuBuilder:mMenu_ withADMenuItem:self]) {
     return true;
   }
@@ -436,7 +447,7 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
 
 @end
 
-void ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuItemImpl *self, ADXMenuBuilder *menu, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint showAsAction) {
+void ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuItemImpl *self, ADXMenuBuilder *menu, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t showAsAction) {
   NSObject_init(self);
   self->mIconResId_ = ADXMenuItemImpl_NO_ICON;
   JreStrongAssign(&self->mIconTintList_, nil);
@@ -455,15 +466,17 @@ void ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_with
   self->mShowAsAction_ = showAsAction;
 }
 
-ADXMenuItemImpl *new_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint showAsAction) {
+ADXMenuItemImpl *new_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t showAsAction) {
   J2OBJC_NEW_IMPL(ADXMenuItemImpl, initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_, menu, group, id_, categoryOrder, ordering, title, showAsAction)
 }
 
-ADXMenuItemImpl *create_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint showAsAction) {
+ADXMenuItemImpl *create_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t showAsAction) {
   J2OBJC_CREATE_IMPL(ADXMenuItemImpl, initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_, menu, group, id_, categoryOrder, ordering, title, showAsAction)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXMenuItemImpl)
+
+J2OBJC_NAME_MAPPING(ADXMenuItemImpl, "androidx.appcompat.view.menu", "ADX")
 
 @implementation ADXMenuItemImpl_ActionProvider
 

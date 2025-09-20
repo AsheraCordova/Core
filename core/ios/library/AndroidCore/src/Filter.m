@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Filter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Filter.h"
 #include "Handler.h"
 #include "HandlerThread.h"
@@ -10,10 +15,18 @@
 #include "Log.h"
 #include "Looper.h"
 #include "Message.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 
-@protocol JavaLangCharSequence;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADFilter () {
@@ -39,13 +52,13 @@ inline NSString *ADFilter_get_THREAD_NAME(void);
 static NSString *ADFilter_THREAD_NAME = @"Filter";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADFilter, THREAD_NAME, NSString *)
 
-inline jint ADFilter_get_FILTER_TOKEN(void);
+inline int32_t ADFilter_get_FILTER_TOKEN(void);
 #define ADFilter_FILTER_TOKEN -791613427
-J2OBJC_STATIC_FIELD_CONSTANT(ADFilter, FILTER_TOKEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADFilter, FILTER_TOKEN, int32_t)
 
-inline jint ADFilter_get_FINISH_TOKEN(void);
+inline int32_t ADFilter_get_FINISH_TOKEN(void);
 #define ADFilter_FINISH_TOKEN -559038737
-J2OBJC_STATIC_FIELD_CONSTANT(ADFilter, FINISH_TOKEN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADFilter, FINISH_TOKEN, int32_t)
 
 __attribute__((unused)) static void ADFilter_filterWithJavaLangCharSequence_withADFilter_FilterListener_(ADFilter *self, id<JavaLangCharSequence> constraint, id<ADFilter_FilterListener> listener);
 
@@ -54,10 +67,10 @@ __attribute__((unused)) static void ADFilter_filterWithJavaLangCharSequence_with
 @end
 
 /*!
- @brief <p>Worker thread handler.
- When a new filtering request is posted from 
+ @brief <p>Worker thread handler.When a new filtering request is posted from 
  <code>r.android.widget.Filter.filter(CharSequence, r.android.widget.Filter.FilterListener)</code>,
-  it is sent to this handler.</p>
+  it is sent to this handler.
+ </p>
  */
 @interface ADFilter_RequestHandler : ADHandler {
  @public
@@ -88,10 +101,11 @@ __attribute__((unused)) static ADFilter_RequestHandler *create_ADFilter_RequestH
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFilter_RequestHandler)
 
+
 /*!
- @brief <p>Handles the results of a filtering operation.
- The results are
-  handled in the UI thread.</p>
+ @brief <p>Handles the results of a filtering operation.The results are
+  handled in the UI thread.
+ </p>
  */
 @interface ADFilter_ResultsHandler : ADHandler {
  @public
@@ -102,12 +116,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFilter_RequestHandler)
 
 /*!
  @brief <p>Messages received from the request handler are processed in the
-  UI thread.
- The processing involves calling 
+  UI thread.The processing involves calling 
  <code>Filter.publishResults(CharSequence,
  r.android.widget.Filter.FilterResults)</code>
   to post the results back in the UI and then notifying the listener,
-  if any.</p>
+  if any.
+ </p>
  @param msg the filtering results
  */
 - (void)handleMessageWithADMessage:(ADMessage *)msg;
@@ -124,6 +138,7 @@ __attribute__((unused)) static ADFilter_ResultsHandler *create_ADFilter_ResultsH
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFilter_ResultsHandler)
 
+
 /*!
  @brief <p>Holds the arguments of a filtering request as well as the results
   of the request.
@@ -137,8 +152,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADFilter_ResultsHandler)
    */
   id<JavaLangCharSequence> constraint_;
   /*!
-   @brief <p>The listener to notify upon completion.
-   Can be null.</p>
+   @brief <p>The listener to notify upon completion.Can be null.
+   </p>
    */
   id<ADFilter_FilterListener> listener_;
   /*!
@@ -165,6 +180,7 @@ __attribute__((unused)) static ADFilter_RequestArguments *new_ADFilter_RequestAr
 __attribute__((unused)) static ADFilter_RequestArguments *create_ADFilter_RequestArguments_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFilter_RequestArguments)
+
 
 @interface ADFilter_Delayer : NSObject
 
@@ -270,7 +286,7 @@ void ADFilter_filterWithJavaLangCharSequence_withADFilter_FilterListener_(ADFilt
       [thread start];
       JreStrongAssignAndConsume(&self->mThreadHandler_, new_ADFilter_RequestHandler_initWithADFilter_withADLooper_(self, [thread getLooper]));
     }
-    jlong delay = (self->mDelayer_ == nil) ? 0 : [((id<ADFilter_Delayer>) nil_chk(self->mDelayer_)) getPostingDelayWithJavaLangCharSequence:constraint];
+    int64_t delay = (self->mDelayer_ == nil) ? 0 : [((id<ADFilter_Delayer>) nil_chk(self->mDelayer_)) getPostingDelayWithJavaLangCharSequence:constraint];
     ADMessage *message = JreRetainedLocalValue([((ADHandler *) nil_chk(self->mThreadHandler_)) obtainMessageWithInt:ADFilter_FILTER_TOKEN]);
     ADFilter_RequestArguments *args = create_ADFilter_RequestArguments_init();
     JreStrongAssign(&args->constraint_, constraint != nil ? [constraint description] : nil);
@@ -283,6 +299,8 @@ void ADFilter_filterWithJavaLangCharSequence_withADFilter_FilterListener_(ADFilt
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADFilter)
+
+J2OBJC_NAME_MAPPING(ADFilter, "r.android.widget", "AD")
 
 @implementation ADFilter_FilterResults
 
@@ -361,7 +379,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADFilter_FilterListener)
 }
 
 - (void)handleMessageWithADMessage:(ADMessage *)msg {
-  jint what = ((ADMessage *) nil_chk(msg))->what_;
+  int32_t what = ((ADMessage *) nil_chk(msg))->what_;
   ADMessage *message;
   {
     ADFilter_RequestArguments *args;
@@ -451,7 +469,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADFilter_RequestHandler)
   ADFilter_RequestArguments *args = (ADFilter_RequestArguments *) cast_chk(((ADMessage *) nil_chk(msg))->obj_, [ADFilter_RequestArguments class]);
   [this$0_ publishResultsWithJavaLangCharSequence:((ADFilter_RequestArguments *) nil_chk(args))->constraint_ withADFilter_FilterResults:args->results_];
   if (args->listener_ != nil) {
-    jint count = args->results_ != nil ? args->results_->count_ : -1;
+    int32_t count = args->results_ != nil ? args->results_->count_ : -1;
     [args->listener_ onFilterCompleteWithInt:count];
   }
 }

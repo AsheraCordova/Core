@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\WindowInsetsCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "WindowInsetsCompat.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADXWindowInsetsCompat
@@ -16,19 +28,19 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getSystemWindowInsetTop {
+- (int32_t)getSystemWindowInsetTop {
   return 0;
 }
 
-- (jint)getSystemWindowInsetBottom {
+- (int32_t)getSystemWindowInsetBottom {
   return 0;
 }
 
-- (jint)getSystemWindowInsetLeft {
+- (int32_t)getSystemWindowInsetLeft {
   return 0;
 }
 
-- (jint)getSystemWindowInsetRight {
+- (int32_t)getSystemWindowInsetRight {
   return 0;
 }
 
@@ -68,3 +80,5 @@ ADXWindowInsetsCompat *create_ADXWindowInsetsCompat_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXWindowInsetsCompat)
+
+J2OBJC_NAME_MAPPING(ADXWindowInsetsCompat, "androidx.core.view", "ADX")

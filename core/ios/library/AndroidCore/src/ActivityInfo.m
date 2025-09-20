@@ -3,9 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\pm\ActivityInfo.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ActivityInfo.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADActivityInfo
@@ -47,6 +60,8 @@ ADActivityInfo *create_ADActivityInfo_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADActivityInfo)
 
+J2OBJC_NAME_MAPPING(ADActivityInfo, "r.android.content.pm", "AD")
+
 @implementation ADActivityInfo_Config
 
 - (IOSClass *)annotationType {
@@ -57,7 +72,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADActivityInfo)
   return @"@r.android.content.pm.ActivityInfo$Config()";
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 

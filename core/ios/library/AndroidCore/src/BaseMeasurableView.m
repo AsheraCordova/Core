@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\view\BaseMeasurableView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseMeasurableView.h"
 #include "Drawable.h"
 #include "FrameLayout.h"
@@ -22,43 +27,53 @@
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewParent.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Double.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASBaseMeasurableView () {
  @public
-  __unsafe_unretained id<ASIWidget> widget_;
+  WEAK_ id<ASIWidget> widget_;
   ADDrawable *leftDrawable_;
   ADDrawable *rightDrawable_;
   ADDrawable *topDrawable_;
   ADDrawable *bottomDrawable_;
-  jboolean isCompoundHorizontalPaddingConsumed_;
-  jint drawablePadding_;
-  jboolean ignoreDrawableHeight_;
+  bool isCompoundHorizontalPaddingConsumed_;
+  int32_t drawablePadding_;
+  bool ignoreDrawableHeight_;
 }
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
-- (jint)measureWidgetHeightWithInt:(jint)width
-                 withNSObjectArray:(IOSObjectArray *)nativeWidgets;
+- (int32_t)measureWidgetHeightWithInt:(int32_t)width
+                    withNSObjectArray:(IOSObjectArray *)nativeWidgets;
 
-- (jint)getDrawableWidthWithADDrawable:(ADDrawable *)drawable;
+- (int32_t)getDrawableWidthWithADDrawable:(ADDrawable *)drawable;
 
-- (jint)getDrawableHeightWithADDrawable:(ADDrawable *)drawable
-                            withBoolean:(jboolean)considerPadding;
+- (int32_t)getDrawableHeightWithADDrawable:(ADDrawable *)drawable
+                               withBoolean:(bool)considerPadding;
 
 + (void)measureWithASHasWidgets:(id<ASHasWidgets>)parent
                   withASIWidget:(id<ASIWidget>)widget
-                        withInt:(jint)level
-                        withInt:(jint)indent
-                        withInt:(jint)initialWidth;
+                        withInt:(int32_t)level
+                        withInt:(int32_t)indent
+                        withInt:(int32_t)initialWidth;
 
-+ (jint)nativeGetWidthWithASHasWidgets:(id<ASHasWidgets>)parent
-                               withInt:(jint)level
-                               withInt:(jint)indent
-                               withInt:(jint)initialWidth;
++ (int32_t)nativeGetWidthWithASHasWidgets:(id<ASHasWidgets>)parent
+                                  withInt:(int32_t)level
+                                  withInt:(int32_t)indent
+                                  withInt:(int32_t)initialWidth;
 
 @end
 
@@ -67,43 +82,43 @@ J2OBJC_FIELD_SETTER(ASBaseMeasurableView, rightDrawable_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ASBaseMeasurableView, topDrawable_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ASBaseMeasurableView, bottomDrawable_, ADDrawable *)
 
-__attribute__((unused)) static jint ASBaseMeasurableView_measureWidth(ASBaseMeasurableView *self);
+__attribute__((unused)) static int32_t ASBaseMeasurableView_measureWidth(ASBaseMeasurableView *self);
 
-__attribute__((unused)) static jint ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(ASBaseMeasurableView *self, jint width, IOSObjectArray *nativeWidgets);
+__attribute__((unused)) static int32_t ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(ASBaseMeasurableView *self, int32_t width, IOSObjectArray *nativeWidgets);
 
-__attribute__((unused)) static jint ASBaseMeasurableView_getDrawableWidthWithADDrawable_(ASBaseMeasurableView *self, ADDrawable *drawable);
+__attribute__((unused)) static int32_t ASBaseMeasurableView_getDrawableWidthWithADDrawable_(ASBaseMeasurableView *self, ADDrawable *drawable);
 
-__attribute__((unused)) static jint ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(ASBaseMeasurableView *self, ADDrawable *drawable, jboolean considerPadding);
+__attribute__((unused)) static int32_t ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(ASBaseMeasurableView *self, ADDrawable *drawable, bool considerPadding);
 
-__attribute__((unused)) static void ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, jint level, jint indent, jint initialWidth);
+__attribute__((unused)) static void ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, int32_t level, int32_t indent, int32_t initialWidth);
 
-__attribute__((unused)) static jint ASBaseMeasurableView_nativeGetWidthWithASHasWidgets_withInt_withInt_withInt_(id<ASHasWidgets> parent, jint level, jint indent, jint initialWidth);
+__attribute__((unused)) static int32_t ASBaseMeasurableView_nativeGetWidthWithASHasWidgets_withInt_withInt_withInt_(id<ASHasWidgets> parent, int32_t level, int32_t indent, int32_t initialWidth);
 
-__attribute__((unused)) static void ASBaseMeasurableView_VerticalAligment_initWithNSString_withInt_(ASBaseMeasurableView_VerticalAligment *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void ASBaseMeasurableView_VerticalAligment_initWithNSString_withInt_(ASBaseMeasurableView_VerticalAligment *self, NSString *__name, int32_t __ordinal);
 
-__attribute__((unused)) static void ASBaseMeasurableView_HorizonantalAligment_initWithNSString_withInt_(ASBaseMeasurableView_HorizonantalAligment *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void ASBaseMeasurableView_HorizonantalAligment_initWithNSString_withInt_(ASBaseMeasurableView_HorizonantalAligment *self, NSString *__name, int32_t __ordinal);
 
-jint ASBaseMeasurableView_VERY_WIDE;
+int32_t ASBaseMeasurableView_VERY_WIDE;
 
 @implementation ASBaseMeasurableView
 
-- (jboolean)isIgnoreDrawableHeight {
+- (bool)isIgnoreDrawableHeight {
   return ignoreDrawableHeight_;
 }
 
-- (jboolean)isCompoundHorizontalPaddingConsumed {
+- (bool)isCompoundHorizontalPaddingConsumed {
   return isCompoundHorizontalPaddingConsumed_;
 }
 
-- (void)setCompoundHorizontalPaddingConsumedWithBoolean:(jboolean)isCompoundHorizontalPaddingConsumed {
+- (void)setCompoundHorizontalPaddingConsumedWithBoolean:(bool)isCompoundHorizontalPaddingConsumed {
   self->isCompoundHorizontalPaddingConsumed_ = isCompoundHorizontalPaddingConsumed;
 }
 
-- (void)setHorizontallyScrollingWithBoolean:(jboolean)horizontallyScrolling {
+- (void)setHorizontallyScrollingWithBoolean:(bool)horizontallyScrolling {
   self->mHorizontallyScrolling_ = horizontallyScrolling;
 }
 
-- (void)setIgnoreDrawableHeightWithBoolean:(jboolean)ignoreDrawableHeight {
+- (void)setIgnoreDrawableHeightWithBoolean:(bool)ignoreDrawableHeight {
   self->ignoreDrawableHeight_ = ignoreDrawableHeight;
 }
 
@@ -123,11 +138,11 @@ jint ASBaseMeasurableView_VERY_WIDE;
   JreStrongAssign(&self->horizonantalAligment_, horizonantalAligment);
 }
 
-- (jint)getDrawablePadding {
+- (int32_t)getDrawablePadding {
   return drawablePadding_;
 }
 
-- (void)setDrawablePaddingWithInt:(jint)drawablePadding {
+- (void)setDrawablePaddingWithInt:(int32_t)drawablePadding {
   self->drawablePadding_ = drawablePadding;
 }
 
@@ -172,15 +187,15 @@ jint ASBaseMeasurableView_VERY_WIDE;
   return widget_;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
-  jint widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
-  jint heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
-  jint widthSize = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec);
-  jint heightSize = ADView_MeasureSpec_getSizeWithInt_(heightMeasureSpec);
-  jint width;
-  jint height;
+  int32_t widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
+  int32_t heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  int32_t widthSize = ADView_MeasureSpec_getSizeWithInt_(widthMeasureSpec);
+  int32_t heightSize = ADView_MeasureSpec_getSizeWithInt_(heightMeasureSpec);
+  int32_t width;
+  int32_t height;
   if (widthMode == ADView_MeasureSpec_EXACTLY) {
     width = widthSize;
   }
@@ -197,7 +212,7 @@ jint ASBaseMeasurableView_VERY_WIDE;
       width = [((id<ASIMeasureWidth>) cast_check(self, ASIMeasureWidth_class_())) measureWidthWithInt:widthMode withInt:widthSize withInt:width];
     }
     if ([ASIMaxWidth_class_() isInstance:widget_]) {
-      jint maxWidth = [((id<ASIMaxWidth>) nil_chk(((id<ASIMaxWidth>) cast_check(widget_, ASIMaxWidth_class_())))) getMaxWidth];
+      int32_t maxWidth = [((id<ASIMaxWidth>) nil_chk(((id<ASIMaxWidth>) cast_check(widget_, ASIMaxWidth_class_())))) getMaxWidth];
       if (maxWidth != -1) {
         width = JavaLangMath_minWithInt_withInt_(width, maxWidth);
       }
@@ -223,7 +238,7 @@ jint ASBaseMeasurableView_VERY_WIDE;
     }
     height += mPaddingTop_ + mPaddingBottom_ + (ignoreDrawableHeight_ ? 0 : ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, topDrawable_, true) + ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, bottomDrawable_, true));
     if ([ASIMaxHeight_class_() isInstance:widget_]) {
-      jint maxHeight = [((id<ASIMaxHeight>) nil_chk(((id<ASIMaxHeight>) cast_check(widget_, ASIMaxHeight_class_())))) getMaxHeight];
+      int32_t maxHeight = [((id<ASIMaxHeight>) nil_chk(((id<ASIMaxHeight>) cast_check(widget_, ASIMaxHeight_class_())))) getMaxHeight];
       if (maxHeight != -1) {
         height = JavaLangMath_minWithInt_withInt_(height, maxHeight);
       }
@@ -238,32 +253,32 @@ jint ASBaseMeasurableView_VERY_WIDE;
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
-- (jint)measureWidth {
+- (int32_t)measureWidth {
   return ASBaseMeasurableView_measureWidth(self);
 }
 
-- (jint)measureWidgetHeightWithInt:(jint)width
-                 withNSObjectArray:(IOSObjectArray *)nativeWidgets {
+- (int32_t)measureWidgetHeightWithInt:(int32_t)width
+                    withNSObjectArray:(IOSObjectArray *)nativeWidgets {
   return ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(self, width, nativeWidgets);
 }
 
-- (jint)getDrawableWidthWithADDrawable:(ADDrawable *)drawable {
+- (int32_t)getDrawableWidthWithADDrawable:(ADDrawable *)drawable {
   return ASBaseMeasurableView_getDrawableWidthWithADDrawable_(self, drawable);
 }
 
-- (jint)getDrawableHeightWithADDrawable:(ADDrawable *)drawable
-                            withBoolean:(jboolean)considerPadding {
+- (int32_t)getDrawableHeightWithADDrawable:(ADDrawable *)drawable
+                               withBoolean:(bool)considerPadding {
   return ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, drawable, considerPadding);
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -271,38 +286,38 @@ jint ASBaseMeasurableView_VERY_WIDE;
 
 + (void)measureWidgetWithNoParentWithASHasWidgets:(id<ASHasWidgets>)parent
                                     withASIWidget:(id<ASIWidget>)widget
-                                          withInt:(jint)level
-                                          withInt:(jint)initialWidth
-                                          withInt:(jint)indent {
+                                          withInt:(int32_t)level
+                                          withInt:(int32_t)initialWidth
+                                          withInt:(int32_t)indent {
   ASBaseMeasurableView_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(parent, widget, level, initialWidth, indent);
 }
 
 + (void)measureWithASHasWidgets:(id<ASHasWidgets>)parent
                   withASIWidget:(id<ASIWidget>)widget
-                        withInt:(jint)level
-                        withInt:(jint)indent
-                        withInt:(jint)initialWidth {
+                        withInt:(int32_t)level
+                        withInt:(int32_t)indent
+                        withInt:(int32_t)initialWidth {
   ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(parent, widget, level, indent, initialWidth);
 }
 
-+ (jint)nativeGetWidthWithASHasWidgets:(id<ASHasWidgets>)parent
-                               withInt:(jint)level
-                               withInt:(jint)indent
-                               withInt:(jint)initialWidth {
++ (int32_t)nativeGetWidthWithASHasWidgets:(id<ASHasWidgets>)parent
+                                  withInt:(int32_t)level
+                                  withInt:(int32_t)indent
+                                  withInt:(int32_t)initialWidth {
   return ASBaseMeasurableView_nativeGetWidthWithASHasWidgets_withInt_withInt_withInt_(parent, level, indent, initialWidth);
 }
 
-- (jint)getBaseline {
+- (int32_t)getBaseline {
   return [((id<ASIWidget>) nil_chk(widget_)) getBaseLine];
 }
 
-- (ASRectM *)getWidgetBoundsWithInt:(jint)width
-                            withInt:(jint)height
+- (ASRectM *)getWidgetBoundsWithInt:(int32_t)width
+                            withInt:(int32_t)height
                   withNSObjectArray:(IOSObjectArray *)nativeWidgets {
-  jint compoundPaddingLeft = 0;
-  jint compoundPaddingRight = 0;
-  jint compoundPaddingTop = 0;
-  jint compoundPaddingBottom = 0;
+  int32_t compoundPaddingLeft = 0;
+  int32_t compoundPaddingRight = 0;
+  int32_t compoundPaddingTop = 0;
+  int32_t compoundPaddingBottom = 0;
   if (!ignoreDrawableHeight_) {
     if (!isCompoundHorizontalPaddingConsumed_) {
       if ([self isLayoutRtl]) {
@@ -317,10 +332,10 @@ jint ASBaseMeasurableView_VERY_WIDE;
     compoundPaddingTop = [self getCompoundPaddingTop];
     compoundPaddingBottom = [self getCompoundPaddingBottom];
   }
-  jint boundHeight = height - compoundPaddingTop - compoundPaddingBottom;
-  jint alignY = 0;
+  int32_t boundHeight = height - compoundPaddingTop - compoundPaddingBottom;
+  int32_t alignY = 0;
   if (verticalAligment_ != nil) {
-    jint sizeToFitHeight = ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(self, width, nativeWidgets);
+    int32_t sizeToFitHeight = ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(self, width, nativeWidgets);
     switch ([verticalAligment_ ordinal]) {
       case ASBaseMeasurableView_VerticalAligment_Enum_top:
       break;
@@ -335,10 +350,10 @@ jint ASBaseMeasurableView_VERY_WIDE;
     }
     boundHeight = sizeToFitHeight;
   }
-  jint boundWidth = width - compoundPaddingLeft - compoundPaddingRight;
-  jint alignX = 0;
+  int32_t boundWidth = width - compoundPaddingLeft - compoundPaddingRight;
+  int32_t alignX = 0;
   if (horizonantalAligment_ != nil) {
-    jint sizeToFitWidth = ASBaseMeasurableView_measureWidth(self);
+    int32_t sizeToFitWidth = ASBaseMeasurableView_measureWidth(self);
     if (sizeToFitWidth < boundWidth) {
       switch ([horizonantalAligment_ ordinal]) {
         case ASBaseMeasurableView_HorizonantalAligment_Enum_left:
@@ -358,61 +373,61 @@ jint ASBaseMeasurableView_VERY_WIDE;
   return create_ASRectM_initWithInt_withInt_withInt_withInt_(compoundPaddingLeft + alignX, compoundPaddingTop + alignY, boundWidth, boundHeight);
 }
 
-- (jint)getCompoundPaddingBottom {
-  jint compoundPaddingBottom = [self getPaddingBottom];
+- (int32_t)getCompoundPaddingBottom {
+  int32_t compoundPaddingBottom = [self getPaddingBottom];
   if ([self getBottomDrawable] != nil) {
     compoundPaddingBottom += [((ADDrawable *) nil_chk([self getBottomDrawable])) getMinimumHeight] + drawablePadding_;
   }
   return compoundPaddingBottom;
 }
 
-- (jint)getCompoundPaddingTop {
-  jint compoundPaddingTop = [self getPaddingTop];
+- (int32_t)getCompoundPaddingTop {
+  int32_t compoundPaddingTop = [self getPaddingTop];
   if ([self getTopDrawable] != nil) {
     compoundPaddingTop += [((ADDrawable *) nil_chk([self getTopDrawable])) getMinimumHeight] + drawablePadding_;
   }
   return compoundPaddingTop;
 }
 
-- (jint)getCompoundPaddingRight {
-  jint compoundPaddingRight = [self getPaddingRight];
+- (int32_t)getCompoundPaddingRight {
+  int32_t compoundPaddingRight = [self getPaddingRight];
   if (rightDrawable_ != nil) {
     compoundPaddingRight += [((ADDrawable *) nil_chk([self getRightDrawable])) getMinimumWidth] + drawablePadding_;
   }
   return compoundPaddingRight;
 }
 
-- (jint)getCompoundPaddingLeft {
-  jint compoundPaddingLeft = [self getPaddingLeft];
+- (int32_t)getCompoundPaddingLeft {
+  int32_t compoundPaddingLeft = [self getPaddingLeft];
   if (leftDrawable_ != nil) {
     compoundPaddingLeft += [leftDrawable_ getMinimumWidth] + drawablePadding_;
   }
   return compoundPaddingLeft;
 }
 
-- (jint)getCompoundPaddingLeftWithIgnoreCheck {
+- (int32_t)getCompoundPaddingLeftWithIgnoreCheck {
   if (isCompoundHorizontalPaddingConsumed_) {
     return 0;
   }
   return [self getCompoundPaddingLeft];
 }
 
-- (jint)getCompoundPaddingRightWithIgnoreCheck {
+- (int32_t)getCompoundPaddingRightWithIgnoreCheck {
   if (isCompoundHorizontalPaddingConsumed_) {
     return 0;
   }
   return [self getCompoundPaddingRight];
 }
 
-- (ASRectM *)getLeftDrawableBoundsWithInt:(jint)x
-                                  withInt:(jint)y
-                                  withInt:(jint)width
-                                  withInt:(jint)height {
+- (ASRectM *)getLeftDrawableBoundsWithInt:(int32_t)x
+                                  withInt:(int32_t)y
+                                  withInt:(int32_t)width
+                                  withInt:(int32_t)height {
   if (leftDrawable_ != nil) {
-    jint dWidth = [leftDrawable_ getMinimumWidth];
-    jint dHeight = [((ADDrawable *) nil_chk(leftDrawable_)) getMinimumHeight];
-    jint dy = [self getPaddingTop];
-    jint dx = 0;
+    int32_t dWidth = [leftDrawable_ getMinimumWidth];
+    int32_t dHeight = [((ADDrawable *) nil_chk(leftDrawable_)) getMinimumHeight];
+    int32_t dy = [self getPaddingTop];
+    int32_t dx = 0;
     if ([self isLayoutRtl]) {
       dx = width - dWidth - [self getPaddingLeft];
     }
@@ -427,15 +442,15 @@ jint ASBaseMeasurableView_VERY_WIDE;
   return create_ASRectM_initWithInt_withInt_withInt_withInt_(0, 0, 0, 0);
 }
 
-- (ASRectM *)getRightDrawableBoundsWithInt:(jint)x
-                                   withInt:(jint)y
-                                   withInt:(jint)width
-                                   withInt:(jint)height {
+- (ASRectM *)getRightDrawableBoundsWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)width
+                                   withInt:(int32_t)height {
   if (rightDrawable_ != nil) {
-    jint dWidth = [rightDrawable_ getMinimumWidth];
-    jint dHeight = [((ADDrawable *) nil_chk(rightDrawable_)) getMinimumHeight];
-    jint dy = [self getPaddingTop];
-    jint dx = 0;
+    int32_t dWidth = [rightDrawable_ getMinimumWidth];
+    int32_t dHeight = [((ADDrawable *) nil_chk(rightDrawable_)) getMinimumHeight];
+    int32_t dy = [self getPaddingTop];
+    int32_t dx = 0;
     if ([self isLayoutRtl]) {
       dx = [self getPaddingRight];
     }
@@ -450,15 +465,15 @@ jint ASBaseMeasurableView_VERY_WIDE;
   return create_ASRectM_initWithInt_withInt_withInt_withInt_(0, 0, 0, 0);
 }
 
-- (ASRectM *)getTopDrawableBoundsWithInt:(jint)x
-                                 withInt:(jint)y
-                                 withInt:(jint)width
-                                 withInt:(jint)height {
+- (ASRectM *)getTopDrawableBoundsWithInt:(int32_t)x
+                                 withInt:(int32_t)y
+                                 withInt:(int32_t)width
+                                 withInt:(int32_t)height {
   if (topDrawable_ != nil) {
-    jint dWidth = [topDrawable_ getMinimumWidth];
-    jint dHeight = [((ADDrawable *) nil_chk(topDrawable_)) getMinimumHeight];
-    jint dy = [self getPaddingTop];
-    jint dx = [self getPaddingLeft];
+    int32_t dWidth = [topDrawable_ getMinimumWidth];
+    int32_t dHeight = [((ADDrawable *) nil_chk(topDrawable_)) getMinimumHeight];
+    int32_t dy = [self getPaddingTop];
+    int32_t dx = [self getPaddingLeft];
     if (width > dWidth) {
       JrePlusAssignIntD(&dx, ((width - [self getPaddingLeft] - [self getPaddingRight] - dWidth) / 2.0));
     }
@@ -467,15 +482,15 @@ jint ASBaseMeasurableView_VERY_WIDE;
   return create_ASRectM_initWithInt_withInt_withInt_withInt_(0, 0, 0, 0);
 }
 
-- (ASRectM *)getBottomDrawableBoundsWithInt:(jint)x
-                                    withInt:(jint)y
-                                    withInt:(jint)width
-                                    withInt:(jint)height {
+- (ASRectM *)getBottomDrawableBoundsWithInt:(int32_t)x
+                                    withInt:(int32_t)y
+                                    withInt:(int32_t)width
+                                    withInt:(int32_t)height {
   if (bottomDrawable_ != nil) {
-    jint dWidth = [bottomDrawable_ getMinimumWidth];
-    jint dHeight = [((ADDrawable *) nil_chk(bottomDrawable_)) getMinimumHeight];
-    jint dy = height - dHeight - [self getPaddingBottom];
-    jint dx = [self getPaddingLeft];
+    int32_t dWidth = [bottomDrawable_ getMinimumWidth];
+    int32_t dHeight = [((ADDrawable *) nil_chk(bottomDrawable_)) getMinimumHeight];
+    int32_t dy = height - dHeight - [self getPaddingBottom];
+    int32_t dx = [self getPaddingLeft];
     if (width > dWidth) {
       JrePlusAssignIntD(&dx, ((width - [self getPaddingLeft] - [self getPaddingRight] - dWidth) / 2.0));
     }
@@ -484,19 +499,19 @@ jint ASBaseMeasurableView_VERY_WIDE;
   return create_ASRectM_initWithInt_withInt_withInt_withInt_(0, 0, 0, 0);
 }
 
-- (jboolean)isVerticalAlignTop {
+- (bool)isVerticalAlignTop {
   return verticalAligment_ == JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
 }
 
-- (jboolean)isVerticalAlignBottom {
+- (bool)isVerticalAlignBottom {
   return verticalAligment_ == JreLoadEnum(ASBaseMeasurableView_VerticalAligment, bottom);
 }
 
-- (jboolean)isVerticalAlignMiddle {
+- (bool)isVerticalAlignMiddle {
   return verticalAligment_ == JreLoadEnum(ASBaseMeasurableView_VerticalAligment, middle);
 }
 
-- (jboolean)hasDrawables {
+- (bool)hasDrawables {
   return leftDrawable_ != nil || rightDrawable_ != nil || topDrawable_ != nil || bottomDrawable_ != nil;
 }
 
@@ -640,13 +655,13 @@ jint ASBaseMeasurableView_VERY_WIDE;
 void ASBaseMeasurableView_initWithASIWidget_(ASBaseMeasurableView *self, id<ASIWidget> widget) {
   ADView_init(self);
   self->widget_ = widget;
-  jint width = ASPluginInvoker_getScreenWidth();
-  jint height = ASPluginInvoker_getScreenHeight();
+  int32_t width = ASPluginInvoker_getScreenWidth();
+  int32_t height = ASPluginInvoker_getScreenHeight();
   ASBaseMeasurableView_VERY_WIDE = height > width ? height * 2 : width * 2;
 }
 
-jint ASBaseMeasurableView_measureWidth(ASBaseMeasurableView *self) {
-  jint width;
+int32_t ASBaseMeasurableView_measureWidth(ASBaseMeasurableView *self) {
+  int32_t width;
   if ([ASICustomMeasureWidth_class_() isInstance:self->widget_]) {
     width = [((id<ASICustomMeasureWidth>) nil_chk(((id<ASICustomMeasureWidth>) cast_check(self->widget_, ASICustomMeasureWidth_class_())))) measureWidth];
   }
@@ -656,9 +671,9 @@ jint ASBaseMeasurableView_measureWidth(ASBaseMeasurableView *self) {
   return width;
 }
 
-jint ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(ASBaseMeasurableView *self, jint width, IOSObjectArray *nativeWidgets) {
-  jint height;
-  jint textViewWidth = width - (self->ignoreDrawableHeight_ ? 0 : ([self getCompoundPaddingLeft] + [self getCompoundPaddingRight]));
+int32_t ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(ASBaseMeasurableView *self, int32_t width, IOSObjectArray *nativeWidgets) {
+  int32_t height;
+  int32_t textViewWidth = width - (self->ignoreDrawableHeight_ ? 0 : ([self getCompoundPaddingLeft] + [self getCompoundPaddingRight]));
   if (textViewWidth == 0) {
     textViewWidth = 1;
   }
@@ -669,7 +684,7 @@ jint ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(ASBaseMe
       id const *b__ = a__->buffer_;
       id const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        id object = *b__++;
+        id object = RETAIN_AND_AUTORELEASE(*b__++);
         height += [self nativeMeasureHeightWithId:object withInt:textViewWidth];
       }
     }
@@ -683,26 +698,26 @@ jint ASBaseMeasurableView_measureWidgetHeightWithInt_withNSObjectArray_(ASBaseMe
   return height;
 }
 
-jint ASBaseMeasurableView_getDrawableWidthWithADDrawable_(ASBaseMeasurableView *self, ADDrawable *drawable) {
+int32_t ASBaseMeasurableView_getDrawableWidthWithADDrawable_(ASBaseMeasurableView *self, ADDrawable *drawable) {
   if (drawable == nil) {
     return 0;
   }
   return [drawable getMinimumWidth] + self->drawablePadding_;
 }
 
-jint ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(ASBaseMeasurableView *self, ADDrawable *drawable, jboolean considerPadding) {
+int32_t ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(ASBaseMeasurableView *self, ADDrawable *drawable, bool considerPadding) {
   if (drawable == nil || ![drawable hasDrawable]) {
     return 0;
   }
   return [drawable getMinimumHeight] + (considerPadding ? self->drawablePadding_ : 0);
 }
 
-void ASBaseMeasurableView_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, jint level, jint initialWidth, jint indent) {
+void ASBaseMeasurableView_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, int32_t level, int32_t initialWidth, int32_t indent) {
   ASBaseMeasurableView_initialize();
   ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(parent, widget, level, indent, initialWidth);
 }
 
-void ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, jint level, jint indent, jint initialWidth) {
+void ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, int32_t level, int32_t indent, int32_t initialWidth) {
   ASBaseMeasurableView_initialize();
   ADViewGroup *frameLayout = create_ADFrameLayout_init();
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk((widget))) asWidget], [ADView class]);
@@ -714,10 +729,10 @@ void ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_
     [frameLayout addViewWithADView:view];
   }
   [((ADViewGroup *) nil_chk(frameLayout)) setLayoutParamsWithADViewGroup_LayoutParams:create_ADViewGroup_LayoutParams_initWithInt_withInt_(ASBaseMeasurableView_nativeGetWidthWithASHasWidgets_withInt_withInt_withInt_(parent, level, indent, initialWidth), ADViewGroup_LayoutParams_WRAP_CONTENT)];
-  jint w = ((ADViewGroup_LayoutParams *) nil_chk([frameLayout getLayoutParams]))->width_;
-  jint h = ((ADViewGroup_LayoutParams *) nil_chk([frameLayout getLayoutParams]))->height_;
-  jint wmeasureSpec = ADView_MeasureSpec_UNSPECIFIED;
-  jint hmeasureSpec = ADView_MeasureSpec_UNSPECIFIED;
+  int32_t w = ((ADViewGroup_LayoutParams *) nil_chk([frameLayout getLayoutParams]))->width_;
+  int32_t h = ((ADViewGroup_LayoutParams *) nil_chk([frameLayout getLayoutParams]))->height_;
+  int32_t wmeasureSpec = ADView_MeasureSpec_UNSPECIFIED;
+  int32_t hmeasureSpec = ADView_MeasureSpec_UNSPECIFIED;
   if (h >= 0) {
     hmeasureSpec = ADView_MeasureSpec_EXACTLY;
   }
@@ -728,12 +743,14 @@ void ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_
   [frameLayout layoutWithInt:0 withInt:0 withInt:w withInt:[((ADView *) nil_chk(view)) getMeasuredHeight]];
 }
 
-jint ASBaseMeasurableView_nativeGetWidthWithASHasWidgets_withInt_withInt_withInt_(id<ASHasWidgets> parent, jint level, jint indent, jint initialWidth) {
+int32_t ASBaseMeasurableView_nativeGetWidthWithASHasWidgets_withInt_withInt_withInt_(id<ASHasWidgets> parent, int32_t level, int32_t indent, int32_t initialWidth) {
   ASBaseMeasurableView_initialize();
   return [((ADView *) nil_chk(((ADView *) cast_chk([((id<ASHasWidgets>) nil_chk(parent)) asWidget], [ADView class])))) getMeasuredWidth] - initialWidth - (level * indent);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseMeasurableView)
+
+J2OBJC_NAME_MAPPING(ASBaseMeasurableView, "com.ashera.view", "AS")
 
 J2OBJC_INITIALIZED_DEFN(ASBaseMeasurableView_VerticalAligment)
 
@@ -751,6 +768,24 @@ ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_val
 
 - (ASBaseMeasurableView_VerticalAligment_Enum)toNSEnum {
   return (ASBaseMeasurableView_VerticalAligment_Enum)[self ordinal];
+}
+
+- (ASBaseMeasurableView_VerticalAligment_Enum)enumValue {
+  return (ASBaseMeasurableView_VerticalAligment_Enum)[self ordinal];
+}
+
++ (ASBaseMeasurableView_VerticalAligment *)fromNSEnum:(ASBaseMeasurableView_VerticalAligment_Enum)nativeValue {
+  ASBaseMeasurableView_VerticalAligment *javaEnum = ASBaseMeasurableView_VerticalAligment_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ASBaseMeasurableView_VerticalAligment_Enum out of range.");
+  return javaEnum;
+}
+
+- (ASBaseMeasurableView_VerticalAligment_ORDINAL)ordinal {
+  return (ASBaseMeasurableView_VerticalAligment_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithVerticalAligment:(ASBaseMeasurableView_VerticalAligment_Enum)value {
+  return RETAIN_(ASBaseMeasurableView_VerticalAligment_fromOrdinal((ASBaseMeasurableView_VerticalAligment_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -780,7 +815,7 @@ ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_val
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 3; i++) {
+    for (int32_t i = 0; i < 3; i++) {
       ((void)(ASBaseMeasurableView_VerticalAligment_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASBaseMeasurableView_VerticalAligment_initWithNSString_withInt_(e, JreEnumConstantName(ASBaseMeasurableView_VerticalAligment_class_(), i), i);
     }
@@ -790,7 +825,7 @@ ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_val
 
 @end
 
-void ASBaseMeasurableView_VerticalAligment_initWithNSString_withInt_(ASBaseMeasurableView_VerticalAligment *self, NSString *__name, jint __ordinal) {
+void ASBaseMeasurableView_VerticalAligment_initWithNSString_withInt_(ASBaseMeasurableView_VerticalAligment *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -808,12 +843,11 @@ ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_val
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_fromOrdinal(NSUInteger ordinal) {
+ASBaseMeasurableView_VerticalAligment *ASBaseMeasurableView_VerticalAligment_fromOrdinal(ASBaseMeasurableView_VerticalAligment_ORDINAL ordinal) {
   ASBaseMeasurableView_VerticalAligment_initialize();
-  if (ordinal >= 3) {
+  if (ordinal < 0 || ordinal >= 3) {
     return nil;
   }
   return ASBaseMeasurableView_VerticalAligment_values_[ordinal];
@@ -837,6 +871,24 @@ ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAlig
 
 - (ASBaseMeasurableView_HorizonantalAligment_Enum)toNSEnum {
   return (ASBaseMeasurableView_HorizonantalAligment_Enum)[self ordinal];
+}
+
+- (ASBaseMeasurableView_HorizonantalAligment_Enum)enumValue {
+  return (ASBaseMeasurableView_HorizonantalAligment_Enum)[self ordinal];
+}
+
++ (ASBaseMeasurableView_HorizonantalAligment *)fromNSEnum:(ASBaseMeasurableView_HorizonantalAligment_Enum)nativeValue {
+  ASBaseMeasurableView_HorizonantalAligment *javaEnum = ASBaseMeasurableView_HorizonantalAligment_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ASBaseMeasurableView_HorizonantalAligment_Enum out of range.");
+  return javaEnum;
+}
+
+- (ASBaseMeasurableView_HorizonantalAligment_ORDINAL)ordinal {
+  return (ASBaseMeasurableView_HorizonantalAligment_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithHorizonantalAligment:(ASBaseMeasurableView_HorizonantalAligment_Enum)value {
+  return RETAIN_(ASBaseMeasurableView_HorizonantalAligment_fromOrdinal((ASBaseMeasurableView_HorizonantalAligment_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -866,7 +918,7 @@ ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAlig
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 3; i++) {
+    for (int32_t i = 0; i < 3; i++) {
       ((void)(ASBaseMeasurableView_HorizonantalAligment_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASBaseMeasurableView_HorizonantalAligment_initWithNSString_withInt_(e, JreEnumConstantName(ASBaseMeasurableView_HorizonantalAligment_class_(), i), i);
     }
@@ -876,7 +928,7 @@ ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAlig
 
 @end
 
-void ASBaseMeasurableView_HorizonantalAligment_initWithNSString_withInt_(ASBaseMeasurableView_HorizonantalAligment *self, NSString *__name, jint __ordinal) {
+void ASBaseMeasurableView_HorizonantalAligment_initWithNSString_withInt_(ASBaseMeasurableView_HorizonantalAligment *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -894,12 +946,11 @@ ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAlig
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAligment_fromOrdinal(NSUInteger ordinal) {
+ASBaseMeasurableView_HorizonantalAligment *ASBaseMeasurableView_HorizonantalAligment_fromOrdinal(ASBaseMeasurableView_HorizonantalAligment_ORDINAL ordinal) {
   ASBaseMeasurableView_HorizonantalAligment_initialize();
-  if (ordinal >= 3) {
+  if (ordinal < 0 || ordinal >= 3) {
     return nil;
   }
   return ASBaseMeasurableView_HorizonantalAligment_values_[ordinal];

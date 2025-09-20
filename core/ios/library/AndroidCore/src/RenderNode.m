@@ -3,8 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\RenderNode.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "RenderNode.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADRenderNode
@@ -16,32 +29,32 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setLeftTopRightBottomWithInt:(jint)mLeft
-                             withInt:(jint)mTop
-                             withInt:(jint)mRight
-                             withInt:(jint)mBottom {
+- (void)setLeftTopRightBottomWithInt:(int32_t)mLeft
+                             withInt:(int32_t)mTop
+                             withInt:(int32_t)mRight
+                             withInt:(int32_t)mBottom {
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
 }
 
-- (jboolean)isValid {
+- (bool)isValid {
   return false;
 }
 
-- (void)setTopWithInt:(jint)mTop {
+- (void)setTopWithInt:(int32_t)mTop {
 }
 
-- (void)setBottomWithInt:(jint)mBottom {
+- (void)setBottomWithInt:(int32_t)mBottom {
 }
 
-- (void)setLeftWithInt:(jint)left {
+- (void)setLeftWithInt:(int32_t)left {
 }
 
-- (void)setRightWithInt:(jint)mRight {
+- (void)setRightWithInt:(int32_t)mRight {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -89,3 +102,5 @@ ADRenderNode *create_ADRenderNode_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADRenderNode)
+
+J2OBJC_NAME_MAPPING(ADRenderNode, "r.android.view", "AD")

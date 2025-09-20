@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Parcelable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Parcelable")
@@ -16,14 +17,15 @@
 #if !defined (ADParcelable_) && (INCLUDE_ALL_Parcelable || defined(INCLUDE_ADParcelable))
 #define ADParcelable_
 
+@class JavaLangInteger;
 @protocol ADParcel;
 
 @protocol ADParcelable < JavaObject >
 
-- (jint)describeContents;
+- (int32_t)describeContents;
 
 - (void)writeToParcelWithADParcel:(id<ADParcel>)outArg
-                          withInt:(jint)flags;
+                          withInt:(int32_t)flags;
 
 @end
 
@@ -33,12 +35,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADParcelable)
 
 #define RAndroidOsParcelable ADParcelable
 
+
 #endif
 
 #if !defined (ADParcelable_Creator_) && (INCLUDE_ALL_Parcelable || defined(INCLUDE_ADParcelable_Creator))
 #define ADParcelable_Creator_
 
 @class IOSObjectArray;
+@class JavaLangInteger;
 @protocol ADParcel;
 
 @interface ADParcelable_Creator : NSObject
@@ -49,7 +53,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADParcelable)
 
 - (id)createFromParcelWithADParcel:(id<ADParcel>)inArg;
 
-- (IOSObjectArray *)newArrayWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -62,6 +66,7 @@ FOUNDATION_EXPORT ADParcelable_Creator *new_ADParcelable_Creator_init(void) NS_R
 FOUNDATION_EXPORT ADParcelable_Creator *create_ADParcelable_Creator_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADParcelable_Creator)
+
 
 #endif
 

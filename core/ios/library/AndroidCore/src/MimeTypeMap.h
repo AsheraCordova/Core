@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\webkit\MimeTypeMap.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MimeTypeMap")
@@ -15,6 +16,9 @@
 
 #if !defined (ADMimeTypeMap_) && (INCLUDE_ALL_MimeTypeMap || defined(INCLUDE_ADMimeTypeMap))
 #define ADMimeTypeMap_
+
+@class JavaLangBoolean;
+@class NSString;
 
 /*!
  @brief Two-way map that maps MIME-types to file extensions and vice versa.
@@ -60,14 +64,14 @@
  @param extension A file extension without the leading '.'
  @return True iff there is an extension entry in the map.
  */
-- (jboolean)hasExtensionWithNSString:(NSString *)extension;
+- (bool)hasExtensionWithNSString:(NSString *)extension;
 
 /*!
  @brief Return true if the given MIME type has an entry in the map.
  @param mimeType A MIME type (i.e. text/plain)
  @return True iff there is a mimeType entry in the map.
  */
-- (jboolean)hasMimeTypeWithNSString:(NSString *)mimeType;
+- (bool)hasMimeTypeWithNSString:(NSString *)mimeType;
 
 @end
 
@@ -80,6 +84,7 @@ FOUNDATION_EXPORT ADMimeTypeMap *ADMimeTypeMap_getSingleton(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADMimeTypeMap)
 
 @compatibility_alias RAndroidWebkitMimeTypeMap ADMimeTypeMap;
+
 
 #endif
 

@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\Parcelable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Parcel.h"
 #include "Parcelable.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADParcelable : NSObject
@@ -35,6 +47,8 @@
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADParcelable)
 
+J2OBJC_NAME_MAPPING(ADParcelable, "r.android.os", "AD")
+
 @implementation ADParcelable_Creator
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -48,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (IOSObjectArray *)newArrayWithInt:(jint)size {
+- (IOSObjectArray *)newArrayWithInt:(int32_t)size {
   return nil;
 }
 

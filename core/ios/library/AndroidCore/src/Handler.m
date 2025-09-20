@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Handler.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Handler.h"
 #include "IMessenger.h"
 #include "IOSClass.h"
@@ -12,9 +17,12 @@
 #include "Message.h"
 #include "MessageQueue.h"
 #include "SystemClock.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/InterruptedException.h"
+#include "java/lang/Long.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/RuntimeException.h"
@@ -22,14 +30,19 @@
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
 
-@protocol JavaLangRunnable;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADHandler ()
 
-- (jboolean)enqueueMessageWithADMessageQueue:(ADMessageQueue *)queue
-                               withADMessage:(ADMessage *)msg
-                                    withLong:(jlong)uptimeMillis;
+- (bool)enqueueMessageWithADMessageQueue:(ADMessageQueue *)queue
+                           withADMessage:(ADMessage *)msg
+                                withLong:(int64_t)uptimeMillis;
 
 + (ADMessage *)getPostMessageWithJavaLangRunnable:(id<JavaLangRunnable>)r;
 
@@ -40,9 +53,9 @@
 
 @end
 
-inline jboolean ADHandler_get_FIND_POTENTIAL_LEAKS(void);
+inline bool ADHandler_get_FIND_POTENTIAL_LEAKS(void);
 #define ADHandler_FIND_POTENTIAL_LEAKS false
-J2OBJC_STATIC_FIELD_CONSTANT(ADHandler, FIND_POTENTIAL_LEAKS, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADHandler, FIND_POTENTIAL_LEAKS, bool)
 
 inline NSString *ADHandler_get_TAG(void);
 static NSString *ADHandler_TAG = @"Handler";
@@ -53,17 +66,17 @@ inline ADHandler *ADHandler_set_MAIN_THREAD_HANDLER(ADHandler *value);
 static ADHandler *ADHandler_MAIN_THREAD_HANDLER;
 J2OBJC_STATIC_FIELD_OBJ(ADHandler, MAIN_THREAD_HANDLER, ADHandler *)
 
-__attribute__((unused)) static jboolean ADHandler_postWithJavaLangRunnable_(ADHandler *self, id<JavaLangRunnable> r);
+__attribute__((unused)) static bool ADHandler_postWithJavaLangRunnable_(ADHandler *self, id<JavaLangRunnable> r);
 
-__attribute__((unused)) static jboolean ADHandler_sendMessageWithADMessage_(ADHandler *self, ADMessage *msg);
+__attribute__((unused)) static bool ADHandler_sendMessageWithADMessage_(ADHandler *self, ADMessage *msg);
 
-__attribute__((unused)) static jboolean ADHandler_sendEmptyMessageDelayedWithInt_withLong_(ADHandler *self, jint what, jlong delayMillis);
+__attribute__((unused)) static bool ADHandler_sendEmptyMessageDelayedWithInt_withLong_(ADHandler *self, int32_t what, int64_t delayMillis);
 
-__attribute__((unused)) static jboolean ADHandler_sendMessageDelayedWithADMessage_withLong_(ADHandler *self, ADMessage *msg, jlong delayMillis);
+__attribute__((unused)) static bool ADHandler_sendMessageDelayedWithADMessage_withLong_(ADHandler *self, ADMessage *msg, int64_t delayMillis);
 
-__attribute__((unused)) static jboolean ADHandler_sendMessageAtFrontOfQueueWithADMessage_(ADHandler *self, ADMessage *msg);
+__attribute__((unused)) static bool ADHandler_sendMessageAtFrontOfQueueWithADMessage_(ADHandler *self, ADMessage *msg);
 
-__attribute__((unused)) static jboolean ADHandler_enqueueMessageWithADMessageQueue_withADMessage_withLong_(ADHandler *self, ADMessageQueue *queue, ADMessage *msg, jlong uptimeMillis);
+__attribute__((unused)) static bool ADHandler_enqueueMessageWithADMessageQueue_withADMessage_withLong_(ADHandler *self, ADMessageQueue *queue, ADMessage *msg, int64_t uptimeMillis);
 
 __attribute__((unused)) static ADMessage *ADHandler_getPostMessageWithJavaLangRunnable_(id<JavaLangRunnable> r);
 
@@ -96,18 +109,19 @@ __attribute__((unused)) static ADHandler_MessengerImpl *create_ADHandler_Messeng
 
 J2OBJC_TYPE_LITERAL_HEADER(ADHandler_MessengerImpl)
 
+
 @interface ADHandler_BlockingRunnable : NSObject < JavaLangRunnable > {
  @public
   id<JavaLangRunnable> mTask_;
-  jboolean mDone_;
+  bool mDone_;
 }
 
 - (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)task;
 
 - (void)run;
 
-- (jboolean)postAndWaitWithADHandler:(ADHandler *)handler
-                            withLong:(jlong)timeout;
+- (bool)postAndWaitWithADHandler:(ADHandler *)handler
+                        withLong:(int64_t)timeout;
 
 @end
 
@@ -122,6 +136,7 @@ __attribute__((unused)) static ADHandler_BlockingRunnable *new_ADHandler_Blockin
 __attribute__((unused)) static ADHandler_BlockingRunnable *create_ADHandler_BlockingRunnable_initWithJavaLangRunnable_(id<JavaLangRunnable> task);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADHandler_BlockingRunnable)
+
 
 @implementation ADHandler
 
@@ -165,20 +180,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (instancetype)initWithBoolean:(jboolean)async {
+- (instancetype)initWithBoolean:(bool)async {
   ADHandler_initWithBoolean_(self, async);
   return self;
 }
 
 - (instancetype)initWithADHandler_Callback:(id<ADHandler_Callback>)callback
-                               withBoolean:(jboolean)async {
+                               withBoolean:(bool)async {
   ADHandler_initWithADHandler_Callback_withBoolean_(self, callback, async);
   return self;
 }
 
 - (instancetype)initWithADLooper:(ADLooper *)looper
           withADHandler_Callback:(id<ADHandler_Callback>)callback
-                     withBoolean:(jboolean)async {
+                     withBoolean:(bool)async {
   ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(self, looper, callback, async);
   return self;
 }
@@ -223,73 +238,73 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADMessage_obtainWithADHandler_(self);
 }
 
-- (ADMessage *)obtainMessageWithInt:(jint)what {
+- (ADMessage *)obtainMessageWithInt:(int32_t)what {
   return ADMessage_obtainWithADHandler_withInt_(self, what);
 }
 
-- (ADMessage *)obtainMessageWithInt:(jint)what
+- (ADMessage *)obtainMessageWithInt:(int32_t)what
                              withId:(id)obj {
   return ADMessage_obtainWithADHandler_withInt_withId_(self, what, obj);
 }
 
-- (ADMessage *)obtainMessageWithInt:(jint)what
-                            withInt:(jint)arg1
-                            withInt:(jint)arg2 {
+- (ADMessage *)obtainMessageWithInt:(int32_t)what
+                            withInt:(int32_t)arg1
+                            withInt:(int32_t)arg2 {
   return ADMessage_obtainWithADHandler_withInt_withInt_withInt_(self, what, arg1, arg2);
 }
 
-- (ADMessage *)obtainMessageWithInt:(jint)what
-                            withInt:(jint)arg1
-                            withInt:(jint)arg2
+- (ADMessage *)obtainMessageWithInt:(int32_t)what
+                            withInt:(int32_t)arg1
+                            withInt:(int32_t)arg2
                              withId:(id)obj {
   return ADMessage_obtainWithADHandler_withInt_withInt_withInt_withId_(self, what, arg1, arg2, obj);
 }
 
-- (jboolean)postWithJavaLangRunnable:(id<JavaLangRunnable>)r {
+- (bool)postWithJavaLangRunnable:(id<JavaLangRunnable>)r {
   return ADHandler_postWithJavaLangRunnable_(self, r);
 }
 
-- (jboolean)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                  withLong:(jlong)uptimeMillis {
+- (bool)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                              withLong:(int64_t)uptimeMillis {
   return [self sendMessageAtTimeWithADMessage:ADHandler_getPostMessageWithJavaLangRunnable_(r) withLong:uptimeMillis];
 }
 
-- (jboolean)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                    withId:(id)token
-                                  withLong:(jlong)uptimeMillis {
+- (bool)postAtTimeWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                withId:(id)token
+                              withLong:(int64_t)uptimeMillis {
   return [self sendMessageAtTimeWithADMessage:ADHandler_getPostMessageWithJavaLangRunnable_withId_(r, token) withLong:uptimeMillis];
 }
 
-- (jboolean)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                   withLong:(jlong)delayMillis {
+- (bool)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                               withLong:(int64_t)delayMillis {
   return ADHandler_sendMessageDelayedWithADMessage_withLong_(self, ADHandler_getPostMessageWithJavaLangRunnable_(r), delayMillis);
 }
 
-- (jboolean)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                    withInt:(jint)what
-                                   withLong:(jlong)delayMillis {
+- (bool)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                withInt:(int32_t)what
+                               withLong:(int64_t)delayMillis {
   return ADHandler_sendMessageDelayedWithADMessage_withLong_(self, [((ADMessage *) nil_chk(ADHandler_getPostMessageWithJavaLangRunnable_(r))) setWhatWithInt:what], delayMillis);
 }
 
-- (jboolean)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                     withId:(id)token
-                                   withLong:(jlong)delayMillis {
+- (bool)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                 withId:(id)token
+                               withLong:(int64_t)delayMillis {
   return ADHandler_sendMessageDelayedWithADMessage_withLong_(self, ADHandler_getPostMessageWithJavaLangRunnable_withId_(r, token), delayMillis);
 }
 
-- (jboolean)postAtFrontOfQueueWithJavaLangRunnable:(id<JavaLangRunnable>)r {
+- (bool)postAtFrontOfQueueWithJavaLangRunnable:(id<JavaLangRunnable>)r {
   return ADHandler_sendMessageAtFrontOfQueueWithADMessage_(self, ADHandler_getPostMessageWithJavaLangRunnable_(r));
 }
 
-- (jboolean)runWithScissorsWithJavaLangRunnable:(id<JavaLangRunnable>)r
-                                       withLong:(jlong)timeout {
+- (bool)runWithScissorsWithJavaLangRunnable:(id<JavaLangRunnable>)r
+                                   withLong:(int64_t)timeout {
   if (r == nil) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"runnable must not be null");
   }
   if (timeout < 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"timeout must be non-negative");
   }
-  if (ADLooper_myLooper() == mLooper_) {
+  if (JreObjectEqualsEquals(ADLooper_myLooper(), mLooper_)) {
     [r run];
     return true;
   }
@@ -306,33 +321,33 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADMessageQueue *) nil_chk(mQueue_)) removeMessagesWithADHandler:self withJavaLangRunnable:r withId:token];
 }
 
-- (jboolean)sendMessageWithADMessage:(ADMessage *)msg {
+- (bool)sendMessageWithADMessage:(ADMessage *)msg {
   return ADHandler_sendMessageWithADMessage_(self, msg);
 }
 
-- (jboolean)sendEmptyMessageWithInt:(jint)what {
+- (bool)sendEmptyMessageWithInt:(int32_t)what {
   return ADHandler_sendEmptyMessageDelayedWithInt_withLong_(self, what, 0);
 }
 
-- (jboolean)sendEmptyMessageDelayedWithInt:(jint)what
-                                  withLong:(jlong)delayMillis {
+- (bool)sendEmptyMessageDelayedWithInt:(int32_t)what
+                              withLong:(int64_t)delayMillis {
   return ADHandler_sendEmptyMessageDelayedWithInt_withLong_(self, what, delayMillis);
 }
 
-- (jboolean)sendEmptyMessageAtTimeWithInt:(jint)what
-                                 withLong:(jlong)uptimeMillis {
+- (bool)sendEmptyMessageAtTimeWithInt:(int32_t)what
+                             withLong:(int64_t)uptimeMillis {
   ADMessage *msg = ADMessage_obtain();
   ((ADMessage *) nil_chk(msg))->what_ = what;
   return [self sendMessageAtTimeWithADMessage:msg withLong:uptimeMillis];
 }
 
-- (jboolean)sendMessageDelayedWithADMessage:(ADMessage *)msg
-                                   withLong:(jlong)delayMillis {
+- (bool)sendMessageDelayedWithADMessage:(ADMessage *)msg
+                               withLong:(int64_t)delayMillis {
   return ADHandler_sendMessageDelayedWithADMessage_withLong_(self, msg, delayMillis);
 }
 
-- (jboolean)sendMessageAtTimeWithADMessage:(ADMessage *)msg
-                                  withLong:(jlong)uptimeMillis {
+- (bool)sendMessageAtTimeWithADMessage:(ADMessage *)msg
+                              withLong:(int64_t)uptimeMillis {
   ADMessageQueue *queue = JreRetainedLocalValue(mQueue_);
   if (queue == nil) {
     JavaLangRuntimeException *e = create_JavaLangRuntimeException_initWithNSString_(JreStrcat("@$", self, @" sendMessageAtTime() called with no mQueue"));
@@ -342,34 +357,34 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADHandler_enqueueMessageWithADMessageQueue_withADMessage_withLong_(self, queue, msg, uptimeMillis);
 }
 
-- (jboolean)sendMessageAtFrontOfQueueWithADMessage:(ADMessage *)msg {
+- (bool)sendMessageAtFrontOfQueueWithADMessage:(ADMessage *)msg {
   return ADHandler_sendMessageAtFrontOfQueueWithADMessage_(self, msg);
 }
 
-- (jboolean)executeOrSendMessageWithADMessage:(ADMessage *)msg {
-  if (mLooper_ == ADLooper_myLooper()) {
+- (bool)executeOrSendMessageWithADMessage:(ADMessage *)msg {
+  if (JreObjectEqualsEquals(mLooper_, ADLooper_myLooper())) {
     [self dispatchMessageWithADMessage:msg];
     return true;
   }
   return ADHandler_sendMessageWithADMessage_(self, msg);
 }
 
-- (jboolean)enqueueMessageWithADMessageQueue:(ADMessageQueue *)queue
-                               withADMessage:(ADMessage *)msg
-                                    withLong:(jlong)uptimeMillis {
+- (bool)enqueueMessageWithADMessageQueue:(ADMessageQueue *)queue
+                           withADMessage:(ADMessage *)msg
+                                withLong:(int64_t)uptimeMillis {
   return ADHandler_enqueueMessageWithADMessageQueue_withADMessage_withLong_(self, queue, msg, uptimeMillis);
 }
 
-- (void)removeMessagesWithInt:(jint)what {
+- (void)removeMessagesWithInt:(int32_t)what {
   [((ADMessageQueue *) nil_chk(mQueue_)) removeMessagesWithADHandler:self withInt:what withId:nil];
 }
 
-- (void)removeMessagesWithInt:(jint)what
+- (void)removeMessagesWithInt:(int32_t)what
                        withId:(id)object {
   [((ADMessageQueue *) nil_chk(mQueue_)) removeMessagesWithADHandler:self withInt:what withId:object];
 }
 
-- (void)removeEqualMessagesWithInt:(jint)what
+- (void)removeEqualMessagesWithInt:(int32_t)what
                             withId:(id)object {
   [((ADMessageQueue *) nil_chk(mQueue_)) removeEqualMessagesWithADHandler:self withInt:what withId:object];
 }
@@ -382,25 +397,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADMessageQueue *) nil_chk(mQueue_)) removeCallbacksAndEqualMessagesWithADHandler:self withId:token];
 }
 
-- (jboolean)hasMessagesWithInt:(jint)what {
+- (bool)hasMessagesWithInt:(int32_t)what {
   return [((ADMessageQueue *) nil_chk(mQueue_)) hasMessagesWithADHandler:self withInt:what withId:nil];
 }
 
-- (jboolean)hasMessagesOrCallbacks {
+- (bool)hasMessagesOrCallbacks {
   return [((ADMessageQueue *) nil_chk(mQueue_)) hasMessagesWithADHandler:self];
 }
 
-- (jboolean)hasMessagesWithInt:(jint)what
-                        withId:(id)object {
+- (bool)hasMessagesWithInt:(int32_t)what
+                    withId:(id)object {
   return [((ADMessageQueue *) nil_chk(mQueue_)) hasMessagesWithADHandler:self withInt:what withId:object];
 }
 
-- (jboolean)hasEqualMessagesWithInt:(jint)what
-                             withId:(id)object {
+- (bool)hasEqualMessagesWithInt:(int32_t)what
+                         withId:(id)object {
   return [((ADMessageQueue *) nil_chk(mQueue_)) hasEqualMessagesWithADHandler:self withInt:what withId:object];
 }
 
-- (jboolean)hasCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)r {
+- (bool)hasCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)r {
   return [((ADMessageQueue *) nil_chk(mQueue_)) hasMessagesWithADHandler:self withJavaLangRunnable:r withId:nil];
 }
 
@@ -625,19 +640,19 @@ ADHandler *create_ADHandler_initWithADLooper_withADHandler_Callback_(ADLooper *l
   J2OBJC_CREATE_IMPL(ADHandler, initWithADLooper_withADHandler_Callback_, looper, callback)
 }
 
-void ADHandler_initWithBoolean_(ADHandler *self, jboolean async) {
+void ADHandler_initWithBoolean_(ADHandler *self, bool async) {
   ADHandler_initWithADHandler_Callback_withBoolean_(self, nil, async);
 }
 
-ADHandler *new_ADHandler_initWithBoolean_(jboolean async) {
+ADHandler *new_ADHandler_initWithBoolean_(bool async) {
   J2OBJC_NEW_IMPL(ADHandler, initWithBoolean_, async)
 }
 
-ADHandler *create_ADHandler_initWithBoolean_(jboolean async) {
+ADHandler *create_ADHandler_initWithBoolean_(bool async) {
   J2OBJC_CREATE_IMPL(ADHandler, initWithBoolean_, async)
 }
 
-void ADHandler_initWithADHandler_Callback_withBoolean_(ADHandler *self, id<ADHandler_Callback> callback, jboolean async) {
+void ADHandler_initWithADHandler_Callback_withBoolean_(ADHandler *self, id<ADHandler_Callback> callback, bool async) {
   NSObject_init(self);
   JreStrongAssign(&self->mLooper_, ADLooper_myLooper());
   if (self->mLooper_ == nil) {
@@ -648,15 +663,15 @@ void ADHandler_initWithADHandler_Callback_withBoolean_(ADHandler *self, id<ADHan
   self->mAsynchronous_ = async;
 }
 
-ADHandler *new_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, jboolean async) {
+ADHandler *new_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, bool async) {
   J2OBJC_NEW_IMPL(ADHandler, initWithADHandler_Callback_withBoolean_, callback, async)
 }
 
-ADHandler *create_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, jboolean async) {
+ADHandler *create_ADHandler_initWithADHandler_Callback_withBoolean_(id<ADHandler_Callback> callback, bool async) {
   J2OBJC_CREATE_IMPL(ADHandler, initWithADHandler_Callback_withBoolean_, callback, async)
 }
 
-void ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADHandler *self, ADLooper *looper, id<ADHandler_Callback> callback, jboolean async) {
+void ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADHandler *self, ADLooper *looper, id<ADHandler_Callback> callback, bool async) {
   NSObject_init(self);
   JreStrongAssign(&self->mLooper_, looper);
   JreStrongAssign(&self->mQueue_, ((ADLooper *) nil_chk(looper))->mQueue_);
@@ -664,11 +679,11 @@ void ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADHandler *s
   self->mAsynchronous_ = async;
 }
 
-ADHandler *new_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, jboolean async) {
+ADHandler *new_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, bool async) {
   J2OBJC_NEW_IMPL(ADHandler, initWithADLooper_withADHandler_Callback_withBoolean_, looper, callback, async)
 }
 
-ADHandler *create_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, jboolean async) {
+ADHandler *create_ADHandler_initWithADLooper_withADHandler_Callback_withBoolean_(ADLooper *looper, id<ADHandler_Callback> callback, bool async) {
   J2OBJC_CREATE_IMPL(ADHandler, initWithADLooper_withADHandler_Callback_withBoolean_, looper, callback, async)
 }
 
@@ -698,28 +713,28 @@ ADHandler *ADHandler_mainIfNullWithADHandler_(ADHandler *handler) {
   return handler == nil ? ADHandler_getMain() : handler;
 }
 
-jboolean ADHandler_postWithJavaLangRunnable_(ADHandler *self, id<JavaLangRunnable> r) {
+bool ADHandler_postWithJavaLangRunnable_(ADHandler *self, id<JavaLangRunnable> r) {
   return ADHandler_sendMessageDelayedWithADMessage_withLong_(self, ADHandler_getPostMessageWithJavaLangRunnable_(r), 0);
 }
 
-jboolean ADHandler_sendMessageWithADMessage_(ADHandler *self, ADMessage *msg) {
+bool ADHandler_sendMessageWithADMessage_(ADHandler *self, ADMessage *msg) {
   return ADHandler_sendMessageDelayedWithADMessage_withLong_(self, msg, 0);
 }
 
-jboolean ADHandler_sendEmptyMessageDelayedWithInt_withLong_(ADHandler *self, jint what, jlong delayMillis) {
+bool ADHandler_sendEmptyMessageDelayedWithInt_withLong_(ADHandler *self, int32_t what, int64_t delayMillis) {
   ADMessage *msg = ADMessage_obtain();
   ((ADMessage *) nil_chk(msg))->what_ = what;
   return ADHandler_sendMessageDelayedWithADMessage_withLong_(self, msg, delayMillis);
 }
 
-jboolean ADHandler_sendMessageDelayedWithADMessage_withLong_(ADHandler *self, ADMessage *msg, jlong delayMillis) {
+bool ADHandler_sendMessageDelayedWithADMessage_withLong_(ADHandler *self, ADMessage *msg, int64_t delayMillis) {
   if (delayMillis < 0) {
     delayMillis = 0;
   }
   return [self sendMessageAtTimeWithADMessage:msg withLong:ADSystemClock_uptimeMillis() + delayMillis];
 }
 
-jboolean ADHandler_sendMessageAtFrontOfQueueWithADMessage_(ADHandler *self, ADMessage *msg) {
+bool ADHandler_sendMessageAtFrontOfQueueWithADMessage_(ADHandler *self, ADMessage *msg) {
   ADMessageQueue *queue = JreRetainedLocalValue(self->mQueue_);
   if (queue == nil) {
     JavaLangRuntimeException *e = create_JavaLangRuntimeException_initWithNSString_(JreStrcat("@$", self, @" sendMessageAtTime() called with no mQueue"));
@@ -729,7 +744,7 @@ jboolean ADHandler_sendMessageAtFrontOfQueueWithADMessage_(ADHandler *self, ADMe
   return ADHandler_enqueueMessageWithADMessageQueue_withADMessage_withLong_(self, queue, msg, 0);
 }
 
-jboolean ADHandler_enqueueMessageWithADMessageQueue_withADMessage_withLong_(ADHandler *self, ADMessageQueue *queue, ADMessage *msg, jlong uptimeMillis) {
+bool ADHandler_enqueueMessageWithADMessageQueue_withADMessage_withLong_(ADHandler *self, ADMessageQueue *queue, ADMessage *msg, int64_t uptimeMillis) {
   JreStrongAssign(&((ADMessage *) nil_chk(msg))->target_, self);
   if (self->mAsynchronous_) {
     [msg setAsynchronousWithBoolean:true];
@@ -758,6 +773,8 @@ void ADHandler_handleCallbackWithADMessage_(ADMessage *message) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADHandler)
+
+J2OBJC_NAME_MAPPING(ADHandler, "r.android.os", "AD")
 
 @implementation ADHandler_Callback
 
@@ -850,16 +867,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADHandler_MessengerImpl)
   }
 }
 
-- (jboolean)postAndWaitWithADHandler:(ADHandler *)handler
-                            withLong:(jlong)timeout {
+- (bool)postAndWaitWithADHandler:(ADHandler *)handler
+                        withLong:(int64_t)timeout {
   if (!ADHandler_postWithJavaLangRunnable_(nil_chk(handler), self)) {
     return false;
   }
   @synchronized(self) {
     if (timeout > 0) {
-      jlong expirationTime = ADSystemClock_uptimeMillis() + timeout;
+      int64_t expirationTime = ADSystemClock_uptimeMillis() + timeout;
       while (!mDone_) {
-        jlong delay = expirationTime - ADSystemClock_uptimeMillis();
+        int64_t delay = expirationTime - ADSystemClock_uptimeMillis();
         if (delay <= 0) {
           return false;
         }

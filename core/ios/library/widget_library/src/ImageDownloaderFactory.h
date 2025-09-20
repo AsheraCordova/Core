@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\image\ImageDownloaderFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ImageDownloaderFactory")
@@ -45,6 +46,7 @@ FOUNDATION_EXPORT void ASImageDownloaderFactory_register__WithASIImageDownloader
 J2OBJC_TYPE_LITERAL_HEADER(ASImageDownloaderFactory)
 
 @compatibility_alias ComAsheraImageImageDownloaderFactory ASImageDownloaderFactory;
+
 
 #endif
 

@@ -3,10 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\GravityCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Gravity.h"
 #include "GravityCompat.h"
 #include "J2ObjC_source.h"
 #include "Rect.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADXGravityCompat
@@ -18,17 +30,17 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)getAbsoluteGravityWithInt:(jint)gravity
-                          withInt:(jint)layoutDirection {
++ (int32_t)getAbsoluteGravityWithInt:(int32_t)gravity
+                             withInt:(int32_t)layoutDirection {
   return ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
 }
 
-+ (void)applyWithInt:(jint)resolveGravity
-             withInt:(jint)measuredWidth
-             withInt:(jint)measuredHeight
++ (void)applyWithInt:(int32_t)resolveGravity
+             withInt:(int32_t)measuredWidth
+             withInt:(int32_t)measuredHeight
           withADRect:(ADRect *)parent
           withADRect:(ADRect *)outArg
-             withInt:(jint)layoutDirection {
+             withInt:(int32_t)layoutDirection {
   ADXGravityCompat_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(resolveGravity, measuredWidth, measuredHeight, parent, outArg, layoutDirection);
 }
 
@@ -70,14 +82,16 @@ ADXGravityCompat *create_ADXGravityCompat_init() {
   J2OBJC_CREATE_IMPL(ADXGravityCompat, init)
 }
 
-jint ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(jint gravity, jint layoutDirection) {
+int32_t ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(int32_t gravity, int32_t layoutDirection) {
   ADXGravityCompat_initialize();
   return ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
 }
 
-void ADXGravityCompat_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(jint resolveGravity, jint measuredWidth, jint measuredHeight, ADRect *parent, ADRect *outArg, jint layoutDirection) {
+void ADXGravityCompat_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(int32_t resolveGravity, int32_t measuredWidth, int32_t measuredHeight, ADRect *parent, ADRect *outArg, int32_t layoutDirection) {
   ADXGravityCompat_initialize();
   ADGravity_applyWithInt_withInt_withInt_withADRect_withADRect_withInt_(resolveGravity, measuredWidth, measuredHeight, parent, outArg, layoutDirection);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXGravityCompat)
+
+J2OBJC_NAME_MAPPING(ADXGravityCompat, "androidx.core.view", "ADX")

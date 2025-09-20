@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\IFlatMap.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IFlatMap")
@@ -16,6 +17,8 @@
 #if !defined (ASIFlatMap_) && (INCLUDE_ALL_IFlatMap || defined(INCLUDE_ASIFlatMap))
 #define ASIFlatMap_
 
+@class JavaLangBoolean;
+@class NSString;
 @protocol JavaUtilMap;
 
 @protocol ASIFlatMap < JavaObject >
@@ -35,7 +38,7 @@
  @brief Check if the path specified actually exists in the plain map.
  @param path
  */
-- (jboolean)existsWithNSString:(NSString *)path;
+- (bool)existsWithNSString:(NSString *)path;
 
 /*!
  @brief Get an element of the hierarchical map by a plain map path.This method simplifies the access to the information
@@ -106,6 +109,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIFlatMap)
 J2OBJC_TYPE_LITERAL_HEADER(ASIFlatMap)
 
 #define ComAsheraModelIFlatMap ASIFlatMap
+
 
 #endif
 

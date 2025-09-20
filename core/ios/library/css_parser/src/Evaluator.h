@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\Evaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Evaluator")
@@ -28,6 +29,8 @@
 @class IOSObjectArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
+@class JavaLangInteger;
+@class NSString;
 
 @interface CSSEvaluator : NSObject < CSSEvaluatorConstants > {
  @public
@@ -96,7 +99,7 @@
 /*!
  @brief Get the specific Token.
  */
-- (CSSToken *)getTokenWithInt:(jint)index;
+- (CSSToken *)getTokenWithInt:(int32_t)index;
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
@@ -165,6 +168,7 @@ FOUNDATION_EXPORT CSSEvaluator *create_CSSEvaluator_initWithCSSEvaluatorTokenMan
 J2OBJC_TYPE_LITERAL_HEADER(CSSEvaluator)
 
 @compatibility_alias ComAsheraCssEvaluator CSSEvaluator;
+
 
 #endif
 

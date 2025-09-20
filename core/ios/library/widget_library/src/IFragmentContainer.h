@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\core\IFragmentContainer.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IFragmentContainer")
@@ -16,12 +17,14 @@
 #if !defined (ASIFragmentContainer_) && (INCLUDE_ALL_IFragmentContainer || defined(INCLUDE_ASIFragmentContainer))
 #define ASIFragmentContainer_
 
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIWidget;
 
 @protocol ASIFragmentContainer < JavaObject >
 
 - (void)addOrReplaceFragmentWithNSString:(NSString *)name
-                             withBoolean:(jboolean)add
+                             withBoolean:(bool)add
                             withNSString:(NSString *)layout
                             withNSString:(NSString *)navGraphId
                             withNSString:(NSString *)tag;
@@ -35,6 +38,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIFragmentContainer)
 J2OBJC_TYPE_LITERAL_HEADER(ASIFragmentContainer)
 
 #define ComAsheraCoreIFragmentContainer ASIFragmentContainer
+
 
 #endif
 

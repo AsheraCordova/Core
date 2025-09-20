@@ -3,13 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\android\internal\util\Preconditions.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Preconditions.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADPreconditions
@@ -21,26 +33,26 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jfloat)checkArgumentInRangeWithFloat:(jfloat)value
-                              withFloat:(jfloat)lower
-                              withFloat:(jfloat)upper
-                           withNSString:(NSString *)valueName {
++ (float)checkArgumentInRangeWithFloat:(float)value
+                             withFloat:(float)lower
+                             withFloat:(float)upper
+                          withNSString:(NSString *)valueName {
   return ADPreconditions_checkArgumentInRangeWithFloat_withFloat_withFloat_withNSString_(value, lower, upper, valueName);
 }
 
-+ (jint)checkArgumentInRangeWithInt:(jint)value
-                            withInt:(jint)lower
-                            withInt:(jint)upper
-                       withNSString:(NSString *)valueName {
++ (int32_t)checkArgumentInRangeWithInt:(int32_t)value
+                               withInt:(int32_t)lower
+                               withInt:(int32_t)upper
+                          withNSString:(NSString *)valueName {
   return ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(value, lower, upper, valueName);
 }
 
-+ (jint)checkArgumentNonnegativeWithInt:(jint)value
-                           withNSString:(NSString *)errorMessage {
++ (int32_t)checkArgumentNonnegativeWithInt:(int32_t)value
+                              withNSString:(NSString *)errorMessage {
   return ADPreconditions_checkArgumentNonnegativeWithInt_withNSString_(value, errorMessage);
 }
 
-+ (jint)checkArgumentNonnegativeWithInt:(jint)value {
++ (int32_t)checkArgumentNonnegativeWithInt:(int32_t)value {
   return ADPreconditions_checkArgumentNonnegativeWithInt_(value);
 }
 
@@ -80,7 +92,7 @@ ADPreconditions *create_ADPreconditions_init() {
   J2OBJC_CREATE_IMPL(ADPreconditions, init)
 }
 
-jfloat ADPreconditions_checkArgumentInRangeWithFloat_withFloat_withFloat_withNSString_(jfloat value, jfloat lower, jfloat upper, NSString *valueName) {
+float ADPreconditions_checkArgumentInRangeWithFloat_withFloat_withFloat_withNSString_(float value, float lower, float upper, NSString *valueName) {
   ADPreconditions_initialize();
   if (JavaLangFloat_isNaNWithFloat_(value)) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", valueName, @" must not be NaN"));
@@ -94,7 +106,7 @@ jfloat ADPreconditions_checkArgumentInRangeWithFloat_withFloat_withFloat_withNSS
   return value;
 }
 
-jint ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(jint value, jint lower, jint upper, NSString *valueName) {
+int32_t ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(int32_t value, int32_t lower, int32_t upper, NSString *valueName) {
   ADPreconditions_initialize();
   if (value < lower) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(NSString_java_formatWithNSString_withNSObjectArray_(@"%s is out of range of [%d, %d] (too low)", [IOSObjectArray arrayWithObjects:(id[]){ valueName, JavaLangInteger_valueOfWithInt_(lower), JavaLangInteger_valueOfWithInt_(upper) } count:3 type:NSObject_class_()]));
@@ -105,7 +117,7 @@ jint ADPreconditions_checkArgumentInRangeWithInt_withInt_withInt_withNSString_(j
   return value;
 }
 
-jint ADPreconditions_checkArgumentNonnegativeWithInt_withNSString_(jint value, NSString *errorMessage) {
+int32_t ADPreconditions_checkArgumentNonnegativeWithInt_withNSString_(int32_t value, NSString *errorMessage) {
   ADPreconditions_initialize();
   if (value < 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(errorMessage);
@@ -113,7 +125,7 @@ jint ADPreconditions_checkArgumentNonnegativeWithInt_withNSString_(jint value, N
   return value;
 }
 
-jint ADPreconditions_checkArgumentNonnegativeWithInt_(jint value) {
+int32_t ADPreconditions_checkArgumentNonnegativeWithInt_(int32_t value) {
   ADPreconditions_initialize();
   if (value < 0) {
     @throw create_JavaLangIllegalArgumentException_init();
@@ -122,3 +134,5 @@ jint ADPreconditions_checkArgumentNonnegativeWithInt_(jint value) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPreconditions)
+
+J2OBJC_NAME_MAPPING(ADPreconditions, "r.com.android.internal.util", "AD")

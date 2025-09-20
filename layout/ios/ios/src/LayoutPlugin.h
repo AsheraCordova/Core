@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\LayoutPlugin.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LayoutPlugin")
@@ -39,6 +40,7 @@ FOUNDATION_EXPORT void ASLayoutPlugin_initPlugin(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASLayoutPlugin)
 
 @compatibility_alias ComAsheraLayoutLayoutPlugin ASLayoutPlugin;
+
 
 #endif
 

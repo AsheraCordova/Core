@@ -3,13 +3,23 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\MethodHandlerFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "MethodHandler.h"
 #include "MethodHandlerFactory.h"
+#include "java/lang/Boolean.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<JavaUtilList> ASMethodHandlerFactory_get_registrations(void);
@@ -99,3 +109,5 @@ void ASMethodHandlerFactory_register__WithASMethodHandler_(id<ASMethodHandler> m
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMethodHandlerFactory)
+
+J2OBJC_NAME_MAPPING(ASMethodHandlerFactory, "com.ashera.model", "AS")

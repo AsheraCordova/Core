@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\PopupWindowImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PopupWindowImpl")
@@ -22,6 +23,8 @@
 
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -37,7 +40,7 @@
 
 - (instancetype)init;
 
-- (void)addOutsideTouchListenerWithBoolean:(jboolean)add;
+- (void)addOutsideTouchListenerWithBoolean:(bool)add;
 
 - (id)asNativeWidget;
 
@@ -93,6 +96,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASPopupWindowImpl)
 
 @compatibility_alias ComAsheraLayoutPopupWindowImpl ASPopupWindowImpl;
 
+
 #endif
 
 #if !defined (ASPopupWindowImpl_ViewExt_) && (INCLUDE_ALL_PopupWindowImpl || defined(INCLUDE_ASPopupWindowImpl_ViewExt))
@@ -107,6 +111,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASPopupWindowImpl)
 #include "IViewStub.h"
 
 @class ASPopupWindowImpl;
+@class NSString;
 
 @interface ASPopupWindowImpl_ViewExt : ADView < ASIViewStub >
 
@@ -133,6 +138,7 @@ FOUNDATION_EXPORT ASPopupWindowImpl_ViewExt *new_ASPopupWindowImpl_ViewExt_initW
 FOUNDATION_EXPORT ASPopupWindowImpl_ViewExt *create_ASPopupWindowImpl_ViewExt_initWithASPopupWindowImpl_(ASPopupWindowImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASPopupWindowImpl_ViewExt)
+
 
 #endif
 

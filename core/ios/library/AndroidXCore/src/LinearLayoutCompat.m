@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\widget\LinearLayoutCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Canvas.h"
 #include "Drawable.h"
 #include "Gravity.h"
@@ -15,42 +20,51 @@
 #include "ViewCompat.h"
 #include "ViewGroup.h"
 #include "ViewUtils.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ADXLinearLayoutCompat () {
  @public
-  jboolean mBaselineAligned_;
-  jint mBaselineAlignedChildIndex_;
-  jint mBaselineChildTop_;
-  jint mOrientation_;
-  jint mGravity_;
-  jint mTotalLength_;
-  jfloat mWeightSum_;
-  jboolean mUseLargestChild_;
+  bool mBaselineAligned_;
+  int32_t mBaselineAlignedChildIndex_;
+  int32_t mBaselineChildTop_;
+  int32_t mOrientation_;
+  int32_t mGravity_;
+  int32_t mTotalLength_;
+  float mWeightSum_;
+  bool mUseLargestChild_;
   IOSIntArray *mMaxAscent_;
   IOSIntArray *mMaxDescent_;
   ADDrawable *mDivider_;
-  jint mDividerWidth_;
-  jint mDividerHeight_;
-  jint mShowDividers_;
-  jint mDividerPadding_;
+  int32_t mDividerWidth_;
+  int32_t mDividerHeight_;
+  int32_t mShowDividers_;
+  int32_t mDividerPadding_;
 }
 
-- (void)forceUniformWidthWithInt:(jint)count
-                         withInt:(jint)heightMeasureSpec;
+- (void)forceUniformWidthWithInt:(int32_t)count
+                         withInt:(int32_t)heightMeasureSpec;
 
-- (void)forceUniformHeightWithInt:(jint)count
-                          withInt:(jint)widthMeasureSpec;
+- (void)forceUniformHeightWithInt:(int32_t)count
+                          withInt:(int32_t)widthMeasureSpec;
 
 - (void)setChildFrameWithADView:(ADView *)child
-                        withInt:(jint)left
-                        withInt:(jint)top
-                        withInt:(jint)width
-                        withInt:(jint)height;
+                        withInt:(int32_t)left
+                        withInt:(int32_t)top
+                        withInt:(int32_t)width
+                        withInt:(int32_t)height;
 
 @end
 
@@ -58,31 +72,31 @@ J2OBJC_FIELD_SETTER(ADXLinearLayoutCompat, mMaxAscent_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(ADXLinearLayoutCompat, mMaxDescent_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(ADXLinearLayoutCompat, mDivider_, ADDrawable *)
 
-inline jint ADXLinearLayoutCompat_get_VERTICAL_GRAVITY_COUNT(void);
+inline int32_t ADXLinearLayoutCompat_get_VERTICAL_GRAVITY_COUNT(void);
 #define ADXLinearLayoutCompat_VERTICAL_GRAVITY_COUNT 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, VERTICAL_GRAVITY_COUNT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, VERTICAL_GRAVITY_COUNT, int32_t)
 
-inline jint ADXLinearLayoutCompat_get_INDEX_CENTER_VERTICAL(void);
+inline int32_t ADXLinearLayoutCompat_get_INDEX_CENTER_VERTICAL(void);
 #define ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_CENTER_VERTICAL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_CENTER_VERTICAL, int32_t)
 
-inline jint ADXLinearLayoutCompat_get_INDEX_TOP(void);
+inline int32_t ADXLinearLayoutCompat_get_INDEX_TOP(void);
 #define ADXLinearLayoutCompat_INDEX_TOP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_TOP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_TOP, int32_t)
 
-inline jint ADXLinearLayoutCompat_get_INDEX_BOTTOM(void);
+inline int32_t ADXLinearLayoutCompat_get_INDEX_BOTTOM(void);
 #define ADXLinearLayoutCompat_INDEX_BOTTOM 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_BOTTOM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_BOTTOM, int32_t)
 
-inline jint ADXLinearLayoutCompat_get_INDEX_FILL(void);
+inline int32_t ADXLinearLayoutCompat_get_INDEX_FILL(void);
 #define ADXLinearLayoutCompat_INDEX_FILL 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_FILL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXLinearLayoutCompat, INDEX_FILL, int32_t)
 
-__attribute__((unused)) static void ADXLinearLayoutCompat_forceUniformWidthWithInt_withInt_(ADXLinearLayoutCompat *self, jint count, jint heightMeasureSpec);
+__attribute__((unused)) static void ADXLinearLayoutCompat_forceUniformWidthWithInt_withInt_(ADXLinearLayoutCompat *self, int32_t count, int32_t heightMeasureSpec);
 
-__attribute__((unused)) static void ADXLinearLayoutCompat_forceUniformHeightWithInt_withInt_(ADXLinearLayoutCompat *self, jint count, jint widthMeasureSpec);
+__attribute__((unused)) static void ADXLinearLayoutCompat_forceUniformHeightWithInt_withInt_(ADXLinearLayoutCompat *self, int32_t count, int32_t widthMeasureSpec);
 
-__attribute__((unused)) static void ADXLinearLayoutCompat_setChildFrameWithADView_withInt_withInt_withInt_withInt_(ADXLinearLayoutCompat *self, ADView *child, jint left, jint top, jint width, jint height);
+__attribute__((unused)) static void ADXLinearLayoutCompat_setChildFrameWithADView_withInt_withInt_withInt_withInt_(ADXLinearLayoutCompat *self, ADView *child, int32_t left, int32_t top, int32_t width, int32_t height);
 
 @implementation ADXLinearLayoutCompat
 
@@ -93,14 +107,14 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setShowDividersWithInt:(jint)showDividers {
+- (void)setShowDividersWithInt:(int32_t)showDividers {
   if (showDividers != mShowDividers_) {
     [self requestLayout];
   }
   mShowDividers_ = showDividers;
 }
 
-- (jint)getShowDividers {
+- (int32_t)getShowDividers {
   return mShowDividers_;
 }
 
@@ -109,7 +123,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setDividerDrawableWithADDrawable:(ADDrawable *)divider {
-  if (divider == mDivider_) {
+  if (JreObjectEqualsEquals(divider, mDivider_)) {
     return;
   }
   JreStrongAssign(&mDivider_, divider);
@@ -125,11 +139,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self requestLayout];
 }
 
-- (void)setDividerPaddingWithInt:(jint)padding {
+- (void)setDividerPaddingWithInt:(int32_t)padding {
   mDividerPadding_ = padding;
 }
 
-- (jint)getDividerPadding {
+- (int32_t)getDividerPadding {
   return mDividerPadding_;
 }
 
@@ -146,20 +160,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)drawDividersVerticalWithADCanvas:(id<ADCanvas>)canvas {
-  jint count = [self getVirtualChildCount];
-  for (jint i = 0; i < count; i++) {
+  int32_t count = [self getVirtualChildCount];
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if (child != nil && [child getVisibility] != ADView_GONE) {
       if ([self hasDividerBeforeChildAtWithInt:i]) {
         ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-        jint top = [child getTop] - ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->topMargin_ - mDividerHeight_;
+        int32_t top = [child getTop] - ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->topMargin_ - mDividerHeight_;
         [self drawHorizontalDividerWithADCanvas:canvas withInt:top];
       }
     }
   }
   if ([self hasDividerBeforeChildAtWithInt:count]) {
     ADView *child = [self getVirtualChildAtWithInt:count - 1];
-    jint bottom = 0;
+    int32_t bottom = 0;
     if (child == nil) {
       bottom = [self getHeight] - [self getPaddingBottom] - mDividerHeight_;
     }
@@ -172,14 +186,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)drawDividersHorizontalWithADCanvas:(id<ADCanvas>)canvas {
-  jint count = [self getVirtualChildCount];
-  jboolean isLayoutRtl = ADXViewUtils_isLayoutRtlWithADView_(self);
-  for (jint i = 0; i < count; i++) {
+  int32_t count = [self getVirtualChildCount];
+  bool isLayoutRtl = ADXViewUtils_isLayoutRtlWithADView_(self);
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if (child != nil && [child getVisibility] != ADView_GONE) {
       if ([self hasDividerBeforeChildAtWithInt:i]) {
         ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-        jint position;
+        int32_t position;
         if (isLayoutRtl) {
           position = [child getRight] + ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->rightMargin_;
         }
@@ -192,7 +206,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   if ([self hasDividerBeforeChildAtWithInt:count]) {
     ADView *child = [self getVirtualChildAtWithInt:count - 1];
-    jint position;
+    int32_t position;
     if (child == nil) {
       if (isLayoutRtl) {
         position = [self getPaddingLeft];
@@ -215,34 +229,34 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)drawHorizontalDividerWithADCanvas:(id<ADCanvas>)canvas
-                                  withInt:(jint)top {
+                                  withInt:(int32_t)top {
   [((ADDrawable *) nil_chk(mDivider_)) setBoundsWithInt:[self getPaddingLeft] + mDividerPadding_ withInt:top withInt:[self getWidth] - [self getPaddingRight] - mDividerPadding_ withInt:top + mDividerHeight_];
   [((ADDrawable *) nil_chk(mDivider_)) drawWithADCanvas:canvas];
 }
 
 - (void)drawVerticalDividerWithADCanvas:(id<ADCanvas>)canvas
-                                withInt:(jint)left {
+                                withInt:(int32_t)left {
   [((ADDrawable *) nil_chk(mDivider_)) setBoundsWithInt:left withInt:[self getPaddingTop] + mDividerPadding_ withInt:left + mDividerWidth_ withInt:[self getHeight] - [self getPaddingBottom] - mDividerPadding_];
   [((ADDrawable *) nil_chk(mDivider_)) drawWithADCanvas:canvas];
 }
 
-- (jboolean)isBaselineAligned {
+- (bool)isBaselineAligned {
   return mBaselineAligned_;
 }
 
-- (void)setBaselineAlignedWithBoolean:(jboolean)baselineAligned {
+- (void)setBaselineAlignedWithBoolean:(bool)baselineAligned {
   mBaselineAligned_ = baselineAligned;
 }
 
-- (jboolean)isMeasureWithLargestChildEnabled {
+- (bool)isMeasureWithLargestChildEnabled {
   return mUseLargestChild_;
 }
 
-- (void)setMeasureWithLargestChildEnabledWithBoolean:(jboolean)enabled {
+- (void)setMeasureWithLargestChildEnabledWithBoolean:(bool)enabled {
   mUseLargestChild_ = enabled;
 }
 
-- (jint)getBaseline {
+- (int32_t)getBaseline {
   if (mBaselineAlignedChildIndex_ < 0) {
     return [super getBaseline];
   }
@@ -250,16 +264,16 @@ J2OBJC_IGNORE_DESIGNATED_END
     @throw create_JavaLangRuntimeException_initWithNSString_(@"mBaselineAlignedChildIndex of LinearLayout set to an index that is out of bounds.");
   }
   ADView *child = [self getChildAtWithInt:mBaselineAlignedChildIndex_];
-  jint childBaseline = [((ADView *) nil_chk(child)) getBaseline];
+  int32_t childBaseline = [((ADView *) nil_chk(child)) getBaseline];
   if (childBaseline == -1) {
     if (mBaselineAlignedChildIndex_ == 0) {
       return -1;
     }
     @throw create_JavaLangRuntimeException_initWithNSString_(@"mBaselineAlignedChildIndex of LinearLayout points to a View that doesn't know how to get its baseline.");
   }
-  jint childTop = mBaselineChildTop_;
+  int32_t childTop = mBaselineChildTop_;
   if (mOrientation_ == ADXLinearLayoutCompat_VERTICAL) {
-    jint majorGravity = mGravity_ & ADGravity_VERTICAL_GRAVITY_MASK;
+    int32_t majorGravity = mGravity_ & ADGravity_VERTICAL_GRAVITY_MASK;
     if (majorGravity != ADGravity_TOP) {
       switch (majorGravity) {
         case ADGravity_BOTTOM:
@@ -275,35 +289,35 @@ J2OBJC_IGNORE_DESIGNATED_END
   return childTop + ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->topMargin_ + childBaseline;
 }
 
-- (jint)getBaselineAlignedChildIndex {
+- (int32_t)getBaselineAlignedChildIndex {
   return mBaselineAlignedChildIndex_;
 }
 
-- (void)setBaselineAlignedChildIndexWithInt:(jint)i {
+- (void)setBaselineAlignedChildIndexWithInt:(int32_t)i {
   if ((i < 0) || (i >= [self getChildCount])) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"base aligned child index out of range (0, ", [self getChildCount], ')'));
   }
   mBaselineAlignedChildIndex_ = i;
 }
 
-- (ADView *)getVirtualChildAtWithInt:(jint)index {
+- (ADView *)getVirtualChildAtWithInt:(int32_t)index {
   return [self getChildAtWithInt:index];
 }
 
-- (jint)getVirtualChildCount {
+- (int32_t)getVirtualChildCount {
   return [self getChildCount];
 }
 
-- (jfloat)getWeightSum {
+- (float)getWeightSum {
   return mWeightSum_;
 }
 
-- (void)setWeightSumWithFloat:(jfloat)weightSum {
+- (void)setWeightSumWithFloat:(float)weightSum {
   mWeightSum_ = JavaLangMath_maxWithFloat_withFloat_(0.0f, weightSum);
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mOrientation_ == ADXLinearLayoutCompat_VERTICAL) {
     [self measureVerticalWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   }
@@ -312,7 +326,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)hasDividerBeforeChildAtWithInt:(jint)childIndex {
+- (bool)hasDividerBeforeChildAtWithInt:(int32_t)childIndex {
   if (childIndex == 0) {
     return (mShowDividers_ & ADXLinearLayoutCompat_SHOW_DIVIDER_BEGINNING) != 0;
   }
@@ -320,8 +334,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     return (mShowDividers_ & ADXLinearLayoutCompat_SHOW_DIVIDER_END) != 0;
   }
   else if ((mShowDividers_ & ADXLinearLayoutCompat_SHOW_DIVIDER_MIDDLE) != 0) {
-    jboolean hasVisibleViewBefore = false;
-    for (jint i = childIndex - 1; i >= 0; i--) {
+    bool hasVisibleViewBefore = false;
+    for (int32_t i = childIndex - 1; i >= 0; i--) {
       if ([((ADView *) nil_chk([self getChildAtWithInt:i])) getVisibility] != ADView_GONE) {
         hasVisibleViewBefore = true;
         break;
@@ -332,24 +346,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (void)measureVerticalWithInt:(jint)widthMeasureSpec
-                       withInt:(jint)heightMeasureSpec {
+- (void)measureVerticalWithInt:(int32_t)widthMeasureSpec
+                       withInt:(int32_t)heightMeasureSpec {
   mTotalLength_ = 0;
-  jint maxWidth = 0;
-  jint childState = 0;
-  jint alternativeMaxWidth = 0;
-  jint weightedMaxWidth = 0;
-  jboolean allFillParent = true;
-  jfloat totalWeight = 0;
-  jint count = [self getVirtualChildCount];
-  jint widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
-  jint heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
-  jboolean matchWidth = false;
-  jboolean skippedMeasure = false;
-  jint baselineChildIndex = mBaselineAlignedChildIndex_;
-  jboolean useLargestChild = mUseLargestChild_;
-  jint largestChildHeight = 0;
-  for (jint i = 0; i < count; ++i) {
+  int32_t maxWidth = 0;
+  int32_t childState = 0;
+  int32_t alternativeMaxWidth = 0;
+  int32_t weightedMaxWidth = 0;
+  bool allFillParent = true;
+  float totalWeight = 0;
+  int32_t count = [self getVirtualChildCount];
+  int32_t widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
+  int32_t heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  bool matchWidth = false;
+  bool skippedMeasure = false;
+  int32_t baselineChildIndex = mBaselineAlignedChildIndex_;
+  bool useLargestChild = mUseLargestChild_;
+  int32_t largestChildHeight = 0;
+  for (int32_t i = 0; i < count; ++i) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if (child == nil) {
       mTotalLength_ += [self measureNullChildWithInt:i];
@@ -365,12 +379,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
     JrePlusAssignFloatF(&totalWeight, ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_);
     if (heightMode == ADView_MeasureSpec_EXACTLY && lp->height_ == 0 && lp->weight_ > 0) {
-      jint totalLength = mTotalLength_;
+      int32_t totalLength = mTotalLength_;
       mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + lp->topMargin_ + lp->bottomMargin_);
       skippedMeasure = true;
     }
     else {
-      jint oldHeight = JavaLangInteger_MIN_VALUE;
+      int32_t oldHeight = JavaLangInteger_MIN_VALUE;
       if (lp->height_ == 0 && lp->weight_ > 0) {
         oldHeight = 0;
         lp->height_ = ADViewGroup_LayoutParams_WRAP_CONTENT;
@@ -379,8 +393,8 @@ J2OBJC_IGNORE_DESIGNATED_END
       if (oldHeight != JavaLangInteger_MIN_VALUE) {
         lp->height_ = oldHeight;
       }
-      jint childHeight = [child getMeasuredHeight];
-      jint totalLength = mTotalLength_;
+      int32_t childHeight = [child getMeasuredHeight];
+      int32_t totalLength = mTotalLength_;
       mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + childHeight + lp->topMargin_ + lp->bottomMargin_ + [self getNextLocationOffsetWithADView:child]);
       if (useLargestChild) {
         largestChildHeight = JavaLangMath_maxWithInt_withInt_(childHeight, largestChildHeight);
@@ -392,13 +406,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     if (i < baselineChildIndex && lp->weight_ > 0) {
       @throw create_JavaLangRuntimeException_initWithNSString_(@"A child of LinearLayout with index less than mBaselineAlignedChildIndex has weight > 0, which won't work.  Either remove the weight, or don't set mBaselineAlignedChildIndex.");
     }
-    jboolean matchWidthLocally = false;
+    bool matchWidthLocally = false;
     if (widthMode != ADView_MeasureSpec_EXACTLY && lp->width_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
       matchWidth = true;
       matchWidthLocally = true;
     }
-    jint margin = lp->leftMargin_ + lp->rightMargin_;
-    jint measuredWidth = [child getMeasuredWidth] + margin;
+    int32_t margin = lp->leftMargin_ + lp->rightMargin_;
+    int32_t measuredWidth = [child getMeasuredWidth] + margin;
     maxWidth = JavaLangMath_maxWithInt_withInt_(maxWidth, measuredWidth);
     childState = ADView_combineMeasuredStatesWithInt_withInt_(childState, [child getMeasuredState]);
     allFillParent = (allFillParent && lp->width_ == ADViewGroup_LayoutParams_MATCH_PARENT);
@@ -415,7 +429,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   if (useLargestChild && (heightMode == ADView_MeasureSpec_AT_MOST || heightMode == ADView_MeasureSpec_UNSPECIFIED)) {
     mTotalLength_ = 0;
-    for (jint i = 0; i < count; ++i) {
+    for (int32_t i = 0; i < count; ++i) {
       ADView *child = [self getVirtualChildAtWithInt:i];
       if (child == nil) {
         mTotalLength_ += [self measureNullChildWithInt:i];
@@ -426,33 +440,33 @@ J2OBJC_IGNORE_DESIGNATED_END
         continue;
       }
       ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-      jint totalLength = mTotalLength_;
+      int32_t totalLength = mTotalLength_;
       mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + largestChildHeight + ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->topMargin_ + lp->bottomMargin_ + [self getNextLocationOffsetWithADView:child]);
     }
   }
   mTotalLength_ += [self getPaddingTop] + [self getPaddingBottom];
-  jint heightSize = mTotalLength_;
+  int32_t heightSize = mTotalLength_;
   heightSize = JavaLangMath_maxWithInt_withInt_(heightSize, [self getSuggestedMinimumHeight]);
-  jint heightSizeAndState = ADView_resolveSizeAndStateWithInt_withInt_withInt_(heightSize, heightMeasureSpec, 0);
+  int32_t heightSizeAndState = ADView_resolveSizeAndStateWithInt_withInt_withInt_(heightSize, heightMeasureSpec, 0);
   heightSize = heightSizeAndState & ADView_MEASURED_SIZE_MASK;
-  jint delta = heightSize - mTotalLength_;
+  int32_t delta = heightSize - mTotalLength_;
   if (skippedMeasure || (delta != 0 && totalWeight > 0.0f)) {
-    jfloat weightSum = mWeightSum_ > 0.0f ? mWeightSum_ : totalWeight;
+    float weightSum = mWeightSum_ > 0.0f ? mWeightSum_ : totalWeight;
     mTotalLength_ = 0;
-    for (jint i = 0; i < count; ++i) {
+    for (int32_t i = 0; i < count; ++i) {
       ADView *child = [self getVirtualChildAtWithInt:i];
       if ([((ADView *) nil_chk(child)) getVisibility] == ADView_GONE) {
         continue;
       }
       ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-      jfloat childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
+      float childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
       if (childExtra > 0) {
-        jint share = JreFpToInt((childExtra * delta / weightSum));
+        int32_t share = JreFpToInt((childExtra * delta / weightSum));
         JreMinusAssignFloatF(&weightSum, childExtra);
         delta -= share;
-        jint childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, [self getPaddingLeft] + [self getPaddingRight] + lp->leftMargin_ + lp->rightMargin_, lp->width_);
+        int32_t childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, [self getPaddingLeft] + [self getPaddingRight] + lp->leftMargin_ + lp->rightMargin_, lp->width_);
         if ((lp->height_ != 0) || (heightMode != ADView_MeasureSpec_EXACTLY)) {
-          jint childHeight = [child getMeasuredHeight] + share;
+          int32_t childHeight = [child getMeasuredHeight] + share;
           if (childHeight < 0) {
             childHeight = 0;
           }
@@ -463,13 +477,13 @@ J2OBJC_IGNORE_DESIGNATED_END
         }
         childState = ADView_combineMeasuredStatesWithInt_withInt_(childState, [child getMeasuredState] & (JreRShift32(ADView_MEASURED_STATE_MASK, ADView_MEASURED_HEIGHT_STATE_SHIFT)));
       }
-      jint margin = lp->leftMargin_ + lp->rightMargin_;
-      jint measuredWidth = [child getMeasuredWidth] + margin;
+      int32_t margin = lp->leftMargin_ + lp->rightMargin_;
+      int32_t measuredWidth = [child getMeasuredWidth] + margin;
       maxWidth = JavaLangMath_maxWithInt_withInt_(maxWidth, measuredWidth);
-      jboolean matchWidthLocally = widthMode != ADView_MeasureSpec_EXACTLY && lp->width_ == ADViewGroup_LayoutParams_MATCH_PARENT;
+      bool matchWidthLocally = widthMode != ADView_MeasureSpec_EXACTLY && lp->width_ == ADViewGroup_LayoutParams_MATCH_PARENT;
       alternativeMaxWidth = JavaLangMath_maxWithInt_withInt_(alternativeMaxWidth, matchWidthLocally ? margin : measuredWidth);
       allFillParent = (allFillParent && lp->width_ == ADViewGroup_LayoutParams_MATCH_PARENT);
-      jint totalLength = mTotalLength_;
+      int32_t totalLength = mTotalLength_;
       mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + [child getMeasuredHeight] + lp->topMargin_ + lp->bottomMargin_ + [self getNextLocationOffsetWithADView:child]);
     }
     mTotalLength_ += [self getPaddingTop] + [self getPaddingBottom];
@@ -477,13 +491,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   else {
     alternativeMaxWidth = JavaLangMath_maxWithInt_withInt_(alternativeMaxWidth, weightedMaxWidth);
     if (useLargestChild && heightMode != ADView_MeasureSpec_EXACTLY) {
-      for (jint i = 0; i < count; i++) {
+      for (int32_t i = 0; i < count; i++) {
         ADView *child = [self getVirtualChildAtWithInt:i];
         if (child == nil || [child getVisibility] == ADView_GONE) {
           continue;
         }
         ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-        jfloat childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
+        float childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
         if (childExtra > 0) {
           [child measureWithInt:ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_([child getMeasuredWidth], ADView_MeasureSpec_EXACTLY) withInt:ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(largestChildHeight, ADView_MeasureSpec_EXACTLY)];
         }
@@ -501,25 +515,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)forceUniformWidthWithInt:(jint)count
-                         withInt:(jint)heightMeasureSpec {
+- (void)forceUniformWidthWithInt:(int32_t)count
+                         withInt:(int32_t)heightMeasureSpec {
   ADXLinearLayoutCompat_forceUniformWidthWithInt_withInt_(self, count, heightMeasureSpec);
 }
 
-- (void)measureHorizontalWithInt:(jint)widthMeasureSpec
-                         withInt:(jint)heightMeasureSpec {
+- (void)measureHorizontalWithInt:(int32_t)widthMeasureSpec
+                         withInt:(int32_t)heightMeasureSpec {
   mTotalLength_ = 0;
-  jint maxHeight = 0;
-  jint childState = 0;
-  jint alternativeMaxHeight = 0;
-  jint weightedMaxHeight = 0;
-  jboolean allFillParent = true;
-  jfloat totalWeight = 0;
-  jint count = [self getVirtualChildCount];
-  jint widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
-  jint heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
-  jboolean matchHeight = false;
-  jboolean skippedMeasure = false;
+  int32_t maxHeight = 0;
+  int32_t childState = 0;
+  int32_t alternativeMaxHeight = 0;
+  int32_t weightedMaxHeight = 0;
+  bool allFillParent = true;
+  float totalWeight = 0;
+  int32_t count = [self getVirtualChildCount];
+  int32_t widthMode = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec);
+  int32_t heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  bool matchHeight = false;
+  bool skippedMeasure = false;
   if (mMaxAscent_ == nil || mMaxDescent_ == nil) {
     JreStrongAssignAndConsume(&mMaxAscent_, [IOSIntArray newArrayWithLength:ADXLinearLayoutCompat_VERTICAL_GRAVITY_COUNT]);
     JreStrongAssignAndConsume(&mMaxDescent_, [IOSIntArray newArrayWithLength:ADXLinearLayoutCompat_VERTICAL_GRAVITY_COUNT]);
@@ -528,11 +542,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   IOSIntArray *maxDescent = mMaxDescent_;
   *IOSIntArray_GetRef(maxAscent, 0) = *IOSIntArray_GetRef(maxAscent, 1) = *IOSIntArray_GetRef(maxAscent, 2) = *IOSIntArray_GetRef(maxAscent, 3) = -1;
   *IOSIntArray_GetRef(maxDescent, 0) = *IOSIntArray_GetRef(maxDescent, 1) = *IOSIntArray_GetRef(maxDescent, 2) = *IOSIntArray_GetRef(maxDescent, 3) = -1;
-  jboolean baselineAligned = mBaselineAligned_;
-  jboolean useLargestChild = mUseLargestChild_;
-  jboolean isExactly = widthMode == ADView_MeasureSpec_EXACTLY;
-  jint largestChildWidth = 0;
-  for (jint i = 0; i < count; ++i) {
+  bool baselineAligned = mBaselineAligned_;
+  bool useLargestChild = mUseLargestChild_;
+  bool isExactly = widthMode == ADView_MeasureSpec_EXACTLY;
+  int32_t largestChildWidth = 0;
+  for (int32_t i = 0; i < count; ++i) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if (child == nil) {
       mTotalLength_ += [self measureNullChildWithInt:i];
@@ -552,11 +566,11 @@ J2OBJC_IGNORE_DESIGNATED_END
         mTotalLength_ += lp->leftMargin_ + lp->rightMargin_;
       }
       else {
-        jint totalLength = mTotalLength_;
+        int32_t totalLength = mTotalLength_;
         mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + lp->leftMargin_ + lp->rightMargin_);
       }
       if (baselineAligned) {
-        jint freeSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(0, ADView_MeasureSpec_UNSPECIFIED);
+        int32_t freeSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(0, ADView_MeasureSpec_UNSPECIFIED);
         [child measureWithInt:freeSpec withInt:freeSpec];
       }
       else {
@@ -564,7 +578,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     else {
-      jint oldWidth = JavaLangInteger_MIN_VALUE;
+      int32_t oldWidth = JavaLangInteger_MIN_VALUE;
       if (lp->width_ == 0 && lp->weight_ > 0) {
         oldWidth = 0;
         lp->width_ = ADViewGroup_LayoutParams_WRAP_CONTENT;
@@ -573,31 +587,31 @@ J2OBJC_IGNORE_DESIGNATED_END
       if (oldWidth != JavaLangInteger_MIN_VALUE) {
         lp->width_ = oldWidth;
       }
-      jint childWidth = [child getMeasuredWidth];
+      int32_t childWidth = [child getMeasuredWidth];
       if (isExactly) {
         mTotalLength_ += childWidth + lp->leftMargin_ + lp->rightMargin_ + [self getNextLocationOffsetWithADView:child];
       }
       else {
-        jint totalLength = mTotalLength_;
+        int32_t totalLength = mTotalLength_;
         mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + childWidth + lp->leftMargin_ + lp->rightMargin_ + [self getNextLocationOffsetWithADView:child]);
       }
       if (useLargestChild) {
         largestChildWidth = JavaLangMath_maxWithInt_withInt_(childWidth, largestChildWidth);
       }
     }
-    jboolean matchHeightLocally = false;
+    bool matchHeightLocally = false;
     if (heightMode != ADView_MeasureSpec_EXACTLY && lp->height_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
       matchHeight = true;
       matchHeightLocally = true;
     }
-    jint margin = lp->topMargin_ + lp->bottomMargin_;
-    jint childHeight = [child getMeasuredHeight] + margin;
+    int32_t margin = lp->topMargin_ + lp->bottomMargin_;
+    int32_t childHeight = [child getMeasuredHeight] + margin;
     childState = ADView_combineMeasuredStatesWithInt_withInt_(childState, [child getMeasuredState]);
     if (baselineAligned) {
-      jint childBaseline = [child getBaseline];
+      int32_t childBaseline = [child getBaseline];
       if (childBaseline != -1) {
-        jint gravity = (lp->gravity_ < 0 ? mGravity_ : lp->gravity_) & ADGravity_VERTICAL_GRAVITY_MASK;
-        jint index = JreRShift32(((JreRShift32(gravity, ADGravity_AXIS_Y_SHIFT)) & ~ADGravity_AXIS_SPECIFIED), 1);
+        int32_t gravity = (lp->gravity_ < 0 ? mGravity_ : lp->gravity_) & ADGravity_VERTICAL_GRAVITY_MASK;
+        int32_t index = JreRShift32(((JreRShift32(gravity, ADGravity_AXIS_Y_SHIFT)) & ~ADGravity_AXIS_SPECIFIED), 1);
         *IOSIntArray_GetRef(maxAscent, index) = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, index), childBaseline);
         *IOSIntArray_GetRef(maxDescent, index) = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, index), childHeight - childBaseline);
       }
@@ -616,13 +630,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     mTotalLength_ += mDividerWidth_;
   }
   if (IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_TOP) != -1 || IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL) != -1 || IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_BOTTOM) != -1 || IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_FILL) != -1) {
-    jint ascent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
-    jint descent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
+    int32_t ascent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
+    int32_t descent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
     maxHeight = JavaLangMath_maxWithInt_withInt_(maxHeight, ascent + descent);
   }
   if (useLargestChild && (widthMode == ADView_MeasureSpec_AT_MOST || widthMode == ADView_MeasureSpec_UNSPECIFIED)) {
     mTotalLength_ = 0;
-    for (jint i = 0; i < count; ++i) {
+    for (int32_t i = 0; i < count; ++i) {
       ADView *child = [self getVirtualChildAtWithInt:i];
       if (child == nil) {
         mTotalLength_ += [self measureNullChildWithInt:i];
@@ -637,37 +651,37 @@ J2OBJC_IGNORE_DESIGNATED_END
         mTotalLength_ += largestChildWidth + ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + [self getNextLocationOffsetWithADView:child];
       }
       else {
-        jint totalLength = mTotalLength_;
+        int32_t totalLength = mTotalLength_;
         mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + largestChildWidth + ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + [self getNextLocationOffsetWithADView:child]);
       }
     }
   }
   mTotalLength_ += [self getPaddingLeft] + [self getPaddingRight];
-  jint widthSize = mTotalLength_;
+  int32_t widthSize = mTotalLength_;
   widthSize = JavaLangMath_maxWithInt_withInt_(widthSize, [self getSuggestedMinimumWidth]);
-  jint widthSizeAndState = ADView_resolveSizeAndStateWithInt_withInt_withInt_(widthSize, widthMeasureSpec, 0);
+  int32_t widthSizeAndState = ADView_resolveSizeAndStateWithInt_withInt_withInt_(widthSize, widthMeasureSpec, 0);
   widthSize = widthSizeAndState & ADView_MEASURED_SIZE_MASK;
-  jint delta = widthSize - mTotalLength_;
+  int32_t delta = widthSize - mTotalLength_;
   if (skippedMeasure || (delta != 0 && totalWeight > 0.0f)) {
-    jfloat weightSum = mWeightSum_ > 0.0f ? mWeightSum_ : totalWeight;
+    float weightSum = mWeightSum_ > 0.0f ? mWeightSum_ : totalWeight;
     *IOSIntArray_GetRef(maxAscent, 0) = *IOSIntArray_GetRef(maxAscent, 1) = *IOSIntArray_GetRef(maxAscent, 2) = *IOSIntArray_GetRef(maxAscent, 3) = -1;
     *IOSIntArray_GetRef(maxDescent, 0) = *IOSIntArray_GetRef(maxDescent, 1) = *IOSIntArray_GetRef(maxDescent, 2) = *IOSIntArray_GetRef(maxDescent, 3) = -1;
     maxHeight = -1;
     mTotalLength_ = 0;
-    for (jint i = 0; i < count; ++i) {
+    for (int32_t i = 0; i < count; ++i) {
       ADView *child = [self getVirtualChildAtWithInt:i];
       if (child == nil || [child getVisibility] == ADView_GONE) {
         continue;
       }
       ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-      jfloat childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
+      float childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
       if (childExtra > 0) {
-        jint share = JreFpToInt((childExtra * delta / weightSum));
+        int32_t share = JreFpToInt((childExtra * delta / weightSum));
         JreMinusAssignFloatF(&weightSum, childExtra);
         delta -= share;
-        jint childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(heightMeasureSpec, [self getPaddingTop] + [self getPaddingBottom] + lp->topMargin_ + lp->bottomMargin_, lp->height_);
+        int32_t childHeightMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(heightMeasureSpec, [self getPaddingTop] + [self getPaddingBottom] + lp->topMargin_ + lp->bottomMargin_, lp->height_);
         if ((lp->width_ != 0) || (widthMode != ADView_MeasureSpec_EXACTLY)) {
-          jint childWidth = [child getMeasuredWidth] + share;
+          int32_t childWidth = [child getMeasuredWidth] + share;
           if (childWidth < 0) {
             childWidth = 0;
           }
@@ -682,20 +696,20 @@ J2OBJC_IGNORE_DESIGNATED_END
         mTotalLength_ += [child getMeasuredWidth] + lp->leftMargin_ + lp->rightMargin_ + [self getNextLocationOffsetWithADView:child];
       }
       else {
-        jint totalLength = mTotalLength_;
+        int32_t totalLength = mTotalLength_;
         mTotalLength_ = JavaLangMath_maxWithInt_withInt_(totalLength, totalLength + [child getMeasuredWidth] + lp->leftMargin_ + lp->rightMargin_ + [self getNextLocationOffsetWithADView:child]);
       }
-      jboolean matchHeightLocally = heightMode != ADView_MeasureSpec_EXACTLY && lp->height_ == ADViewGroup_LayoutParams_MATCH_PARENT;
-      jint margin = lp->topMargin_ + lp->bottomMargin_;
-      jint childHeight = [child getMeasuredHeight] + margin;
+      bool matchHeightLocally = heightMode != ADView_MeasureSpec_EXACTLY && lp->height_ == ADViewGroup_LayoutParams_MATCH_PARENT;
+      int32_t margin = lp->topMargin_ + lp->bottomMargin_;
+      int32_t childHeight = [child getMeasuredHeight] + margin;
       maxHeight = JavaLangMath_maxWithInt_withInt_(maxHeight, childHeight);
       alternativeMaxHeight = JavaLangMath_maxWithInt_withInt_(alternativeMaxHeight, matchHeightLocally ? margin : childHeight);
       allFillParent = (allFillParent && lp->height_ == ADViewGroup_LayoutParams_MATCH_PARENT);
       if (baselineAligned) {
-        jint childBaseline = [child getBaseline];
+        int32_t childBaseline = [child getBaseline];
         if (childBaseline != -1) {
-          jint gravity = (lp->gravity_ < 0 ? mGravity_ : lp->gravity_) & ADGravity_VERTICAL_GRAVITY_MASK;
-          jint index = JreRShift32(((JreRShift32(gravity, ADGravity_AXIS_Y_SHIFT)) & ~ADGravity_AXIS_SPECIFIED), 1);
+          int32_t gravity = (lp->gravity_ < 0 ? mGravity_ : lp->gravity_) & ADGravity_VERTICAL_GRAVITY_MASK;
+          int32_t index = JreRShift32(((JreRShift32(gravity, ADGravity_AXIS_Y_SHIFT)) & ~ADGravity_AXIS_SPECIFIED), 1);
           *IOSIntArray_GetRef(maxAscent, index) = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, index), childBaseline);
           *IOSIntArray_GetRef(maxDescent, index) = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, index), childHeight - childBaseline);
         }
@@ -703,21 +717,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     mTotalLength_ += [self getPaddingLeft] + [self getPaddingRight];
     if (IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_TOP) != -1 || IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL) != -1 || IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_BOTTOM) != -1 || IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_FILL) != -1) {
-      jint ascent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
-      jint descent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
+      int32_t ascent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxAscent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
+      int32_t descent = JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_FILL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_CENTER_VERTICAL), JavaLangMath_maxWithInt_withInt_(IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_TOP), IOSIntArray_Get(maxDescent, ADXLinearLayoutCompat_INDEX_BOTTOM))));
       maxHeight = JavaLangMath_maxWithInt_withInt_(maxHeight, ascent + descent);
     }
   }
   else {
     alternativeMaxHeight = JavaLangMath_maxWithInt_withInt_(alternativeMaxHeight, weightedMaxHeight);
     if (useLargestChild && widthMode != ADView_MeasureSpec_EXACTLY) {
-      for (jint i = 0; i < count; i++) {
+      for (int32_t i = 0; i < count; i++) {
         ADView *child = [self getVirtualChildAtWithInt:i];
         if (child == nil || [child getVisibility] == ADView_GONE) {
           continue;
         }
         ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-        jfloat childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
+        float childExtra = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->weight_;
         if (childExtra > 0) {
           [child measureWithInt:ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(largestChildWidth, ADView_MeasureSpec_EXACTLY) withInt:ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_([child getMeasuredHeight], ADView_MeasureSpec_EXACTLY)];
         }
@@ -735,42 +749,42 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)forceUniformHeightWithInt:(jint)count
-                          withInt:(jint)widthMeasureSpec {
+- (void)forceUniformHeightWithInt:(int32_t)count
+                          withInt:(int32_t)widthMeasureSpec {
   ADXLinearLayoutCompat_forceUniformHeightWithInt_withInt_(self, count, widthMeasureSpec);
 }
 
-- (jint)getChildrenSkipCountWithADView:(ADView *)child
-                               withInt:(jint)index {
+- (int32_t)getChildrenSkipCountWithADView:(ADView *)child
+                                  withInt:(int32_t)index {
   return 0;
 }
 
-- (jint)measureNullChildWithInt:(jint)childIndex {
+- (int32_t)measureNullChildWithInt:(int32_t)childIndex {
   return 0;
 }
 
 - (void)measureChildBeforeLayoutWithADView:(ADView *)child
-                                   withInt:(jint)childIndex
-                                   withInt:(jint)widthMeasureSpec
-                                   withInt:(jint)totalWidth
-                                   withInt:(jint)heightMeasureSpec
-                                   withInt:(jint)totalHeight {
+                                   withInt:(int32_t)childIndex
+                                   withInt:(int32_t)widthMeasureSpec
+                                   withInt:(int32_t)totalWidth
+                                   withInt:(int32_t)heightMeasureSpec
+                                   withInt:(int32_t)totalHeight {
   [self measureChildWithMarginsWithADView:child withInt:widthMeasureSpec withInt:totalWidth withInt:heightMeasureSpec withInt:totalHeight];
 }
 
-- (jint)getLocationOffsetWithADView:(ADView *)child {
+- (int32_t)getLocationOffsetWithADView:(ADView *)child {
   return 0;
 }
 
-- (jint)getNextLocationOffsetWithADView:(ADView *)child {
+- (int32_t)getNextLocationOffsetWithADView:(ADView *)child {
   return 0;
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   if (mOrientation_ == ADXLinearLayoutCompat_VERTICAL) {
     [self layoutVerticalWithInt:l withInt:t withInt:r withInt:b];
   }
@@ -779,19 +793,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)layoutVerticalWithInt:(jint)left
-                      withInt:(jint)top
-                      withInt:(jint)right
-                      withInt:(jint)bottom {
-  jint paddingLeft = [self getPaddingLeft];
-  jint childTop;
-  jint childLeft;
-  jint width = right - left;
-  jint childRight = width - [self getPaddingRight];
-  jint childSpace = width - paddingLeft - [self getPaddingRight];
-  jint count = [self getVirtualChildCount];
-  jint majorGravity = mGravity_ & ADGravity_VERTICAL_GRAVITY_MASK;
-  jint minorGravity = mGravity_ & ADXGravityCompat_RELATIVE_HORIZONTAL_GRAVITY_MASK;
+- (void)layoutVerticalWithInt:(int32_t)left
+                      withInt:(int32_t)top
+                      withInt:(int32_t)right
+                      withInt:(int32_t)bottom {
+  int32_t paddingLeft = [self getPaddingLeft];
+  int32_t childTop;
+  int32_t childLeft;
+  int32_t width = right - left;
+  int32_t childRight = width - [self getPaddingRight];
+  int32_t childSpace = width - paddingLeft - [self getPaddingRight];
+  int32_t count = [self getVirtualChildCount];
+  int32_t majorGravity = mGravity_ & ADGravity_VERTICAL_GRAVITY_MASK;
+  int32_t minorGravity = mGravity_ & ADXGravityCompat_RELATIVE_HORIZONTAL_GRAVITY_MASK;
   switch (majorGravity) {
     case ADGravity_BOTTOM:
     childTop = [self getPaddingTop] + bottom - top - mTotalLength_;
@@ -804,21 +818,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     childTop = [self getPaddingTop];
     break;
   }
-  for (jint i = 0; i < count; i++) {
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if (child == nil) {
       childTop += [self measureNullChildWithInt:i];
     }
     else if ([child getVisibility] != ADView_GONE) {
-      jint childWidth = [child getMeasuredWidth];
-      jint childHeight = [child getMeasuredHeight];
+      int32_t childWidth = [child getMeasuredWidth];
+      int32_t childHeight = [child getMeasuredHeight];
       ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
-      jint gravity = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->gravity_;
+      int32_t gravity = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->gravity_;
       if (gravity < 0) {
         gravity = minorGravity;
       }
-      jint layoutDirection = ADXViewCompat_getLayoutDirectionWithADView_(self);
-      jint absoluteGravity = ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
+      int32_t layoutDirection = ADXViewCompat_getLayoutDirectionWithADView_(self);
+      int32_t absoluteGravity = ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
       switch (absoluteGravity & ADGravity_HORIZONTAL_GRAVITY_MASK) {
         case ADGravity_CENTER_HORIZONTAL:
         childLeft = paddingLeft + (JreIntDiv((childSpace - childWidth), 2)) + lp->leftMargin_ - lp->rightMargin_;
@@ -842,24 +856,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)layoutHorizontalWithInt:(jint)left
-                        withInt:(jint)top
-                        withInt:(jint)right
-                        withInt:(jint)bottom {
-  jboolean isLayoutRtl = ADXViewUtils_isLayoutRtlWithADView_(self);
-  jint paddingTop = [self getPaddingTop];
-  jint childTop;
-  jint childLeft;
-  jint height = bottom - top;
-  jint childBottom = height - [self getPaddingBottom];
-  jint childSpace = height - paddingTop - [self getPaddingBottom];
-  jint count = [self getVirtualChildCount];
-  jint majorGravity = mGravity_ & ADXGravityCompat_RELATIVE_HORIZONTAL_GRAVITY_MASK;
-  jint minorGravity = mGravity_ & ADGravity_VERTICAL_GRAVITY_MASK;
-  jboolean baselineAligned = mBaselineAligned_;
+- (void)layoutHorizontalWithInt:(int32_t)left
+                        withInt:(int32_t)top
+                        withInt:(int32_t)right
+                        withInt:(int32_t)bottom {
+  bool isLayoutRtl = ADXViewUtils_isLayoutRtlWithADView_(self);
+  int32_t paddingTop = [self getPaddingTop];
+  int32_t childTop;
+  int32_t childLeft;
+  int32_t height = bottom - top;
+  int32_t childBottom = height - [self getPaddingBottom];
+  int32_t childSpace = height - paddingTop - [self getPaddingBottom];
+  int32_t count = [self getVirtualChildCount];
+  int32_t majorGravity = mGravity_ & ADXGravityCompat_RELATIVE_HORIZONTAL_GRAVITY_MASK;
+  int32_t minorGravity = mGravity_ & ADGravity_VERTICAL_GRAVITY_MASK;
+  bool baselineAligned = mBaselineAligned_;
   IOSIntArray *maxAscent = mMaxAscent_;
   IOSIntArray *maxDescent = mMaxDescent_;
-  jint layoutDirection = ADXViewCompat_getLayoutDirectionWithADView_(self);
+  int32_t layoutDirection = ADXViewCompat_getLayoutDirectionWithADView_(self);
   switch (ADXGravityCompat_getAbsoluteGravityWithInt_withInt_(majorGravity, layoutDirection)) {
     case ADGravity_RIGHT:
     childLeft = [self getPaddingLeft] + right - left - mTotalLength_;
@@ -872,27 +886,27 @@ J2OBJC_IGNORE_DESIGNATED_END
     childLeft = [self getPaddingLeft];
     break;
   }
-  jint start = 0;
-  jint dir = 1;
+  int32_t start = 0;
+  int32_t dir = 1;
   if (isLayoutRtl) {
     start = count - 1;
     dir = -1;
   }
-  for (jint i = 0; i < count; i++) {
-    jint childIndex = start + dir * i;
+  for (int32_t i = 0; i < count; i++) {
+    int32_t childIndex = start + dir * i;
     ADView *child = [self getVirtualChildAtWithInt:childIndex];
     if (child == nil) {
       childLeft += [self measureNullChildWithInt:childIndex];
     }
     else if ([child getVisibility] != ADView_GONE) {
-      jint childWidth = [child getMeasuredWidth];
-      jint childHeight = [child getMeasuredHeight];
-      jint childBaseline = -1;
+      int32_t childWidth = [child getMeasuredWidth];
+      int32_t childHeight = [child getMeasuredHeight];
+      int32_t childBaseline = -1;
       ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
       if (baselineAligned && ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->height_ != ADViewGroup_LayoutParams_MATCH_PARENT) {
         childBaseline = [child getBaseline];
       }
-      jint gravity = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->gravity_;
+      int32_t gravity = ((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->gravity_;
       if (gravity < 0) {
         gravity = minorGravity;
       }
@@ -909,7 +923,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         case ADGravity_BOTTOM:
         childTop = childBottom - childHeight - lp->bottomMargin_;
         if (childBaseline != -1) {
-          jint descent = [child getMeasuredHeight] - childBaseline;
+          int32_t descent = [child getMeasuredHeight] - childBaseline;
           childTop -= (IOSIntArray_Get(nil_chk(maxDescent), ADXLinearLayoutCompat_INDEX_BOTTOM) - descent);
         }
         break;
@@ -929,25 +943,25 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setChildFrameWithADView:(ADView *)child
-                        withInt:(jint)left
-                        withInt:(jint)top
-                        withInt:(jint)width
-                        withInt:(jint)height {
+                        withInt:(int32_t)left
+                        withInt:(int32_t)top
+                        withInt:(int32_t)width
+                        withInt:(int32_t)height {
   ADXLinearLayoutCompat_setChildFrameWithADView_withInt_withInt_withInt_withInt_(self, child, left, top, width, height);
 }
 
-- (void)setOrientationWithInt:(jint)orientation {
+- (void)setOrientationWithInt:(int32_t)orientation {
   if (mOrientation_ != orientation) {
     mOrientation_ = orientation;
     [self requestLayout];
   }
 }
 
-- (jint)getOrientation {
+- (int32_t)getOrientation {
   return mOrientation_;
 }
 
-- (void)setGravityWithInt:(jint)gravity {
+- (void)setGravityWithInt:(int32_t)gravity {
   if (mGravity_ != gravity) {
     if ((gravity & ADXGravityCompat_RELATIVE_HORIZONTAL_GRAVITY_MASK) == 0) {
       gravity |= ADXGravityCompat_START;
@@ -960,7 +974,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)getGravity {
+- (int32_t)getGravity {
   return mGravity_;
 }
 
@@ -978,7 +992,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ADXLinearLayoutCompat_LayoutParams_initWithADViewGroup_LayoutParams_(p);
 }
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return [p isKindOfClass:[ADXLinearLayoutCompat_LayoutParams class]];
 }
 
@@ -1137,14 +1151,14 @@ ADXLinearLayoutCompat *create_ADXLinearLayoutCompat_init() {
   J2OBJC_CREATE_IMPL(ADXLinearLayoutCompat, init)
 }
 
-void ADXLinearLayoutCompat_forceUniformWidthWithInt_withInt_(ADXLinearLayoutCompat *self, jint count, jint heightMeasureSpec) {
-  jint uniformMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_([self getMeasuredWidth], ADView_MeasureSpec_EXACTLY);
-  for (jint i = 0; i < count; ++i) {
+void ADXLinearLayoutCompat_forceUniformWidthWithInt_withInt_(ADXLinearLayoutCompat *self, int32_t count, int32_t heightMeasureSpec) {
+  int32_t uniformMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_([self getMeasuredWidth], ADView_MeasureSpec_EXACTLY);
+  for (int32_t i = 0; i < count; ++i) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       ADXLinearLayoutCompat_LayoutParams *lp = ((ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]));
       if (((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->width_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
-        jint oldHeight = lp->height_;
+        int32_t oldHeight = lp->height_;
         lp->height_ = [child getMeasuredHeight];
         [self measureChildWithMarginsWithADView:child withInt:uniformMeasureSpec withInt:0 withInt:heightMeasureSpec withInt:0];
         lp->height_ = oldHeight;
@@ -1153,14 +1167,14 @@ void ADXLinearLayoutCompat_forceUniformWidthWithInt_withInt_(ADXLinearLayoutComp
   }
 }
 
-void ADXLinearLayoutCompat_forceUniformHeightWithInt_withInt_(ADXLinearLayoutCompat *self, jint count, jint widthMeasureSpec) {
-  jint uniformMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_([self getMeasuredHeight], ADView_MeasureSpec_EXACTLY);
-  for (jint i = 0; i < count; ++i) {
+void ADXLinearLayoutCompat_forceUniformHeightWithInt_withInt_(ADXLinearLayoutCompat *self, int32_t count, int32_t widthMeasureSpec) {
+  int32_t uniformMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_([self getMeasuredHeight], ADView_MeasureSpec_EXACTLY);
+  for (int32_t i = 0; i < count; ++i) {
     ADView *child = [self getVirtualChildAtWithInt:i];
     if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       ADXLinearLayoutCompat_LayoutParams *lp = (ADXLinearLayoutCompat_LayoutParams *) cast_chk([child getLayoutParams], [ADXLinearLayoutCompat_LayoutParams class]);
       if (((ADXLinearLayoutCompat_LayoutParams *) nil_chk(lp))->height_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
-        jint oldWidth = lp->width_;
+        int32_t oldWidth = lp->width_;
         lp->width_ = [child getMeasuredWidth];
         [self measureChildWithMarginsWithADView:child withInt:widthMeasureSpec withInt:0 withInt:uniformMeasureSpec withInt:0];
         lp->width_ = oldWidth;
@@ -1169,16 +1183,18 @@ void ADXLinearLayoutCompat_forceUniformHeightWithInt_withInt_(ADXLinearLayoutCom
   }
 }
 
-void ADXLinearLayoutCompat_setChildFrameWithADView_withInt_withInt_withInt_withInt_(ADXLinearLayoutCompat *self, ADView *child, jint left, jint top, jint width, jint height) {
+void ADXLinearLayoutCompat_setChildFrameWithADView_withInt_withInt_withInt_withInt_(ADXLinearLayoutCompat *self, ADView *child, int32_t left, int32_t top, int32_t width, int32_t height) {
   [((ADView *) nil_chk(child)) layoutWithInt:left withInt:top withInt:left + width withInt:top + height];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXLinearLayoutCompat)
 
+J2OBJC_NAME_MAPPING(ADXLinearLayoutCompat, "androidx.appcompat.widget", "ADX")
+
 @implementation ADXLinearLayoutCompat_LayoutParams
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height {
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height {
   ADXLinearLayoutCompat_LayoutParams_initWithInt_withInt_(self, width, height);
   return self;
 }
@@ -1206,15 +1222,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXLinearLayoutCompat)
 
 @end
 
-void ADXLinearLayoutCompat_LayoutParams_initWithInt_withInt_(ADXLinearLayoutCompat_LayoutParams *self, jint width, jint height) {
+void ADXLinearLayoutCompat_LayoutParams_initWithInt_withInt_(ADXLinearLayoutCompat_LayoutParams *self, int32_t width, int32_t height) {
   ADLinearLayout_LayoutParams_initWithInt_withInt_(self, width, height);
 }
 
-ADXLinearLayoutCompat_LayoutParams *new_ADXLinearLayoutCompat_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADXLinearLayoutCompat_LayoutParams *new_ADXLinearLayoutCompat_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_NEW_IMPL(ADXLinearLayoutCompat_LayoutParams, initWithInt_withInt_, width, height)
 }
 
-ADXLinearLayoutCompat_LayoutParams *create_ADXLinearLayoutCompat_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADXLinearLayoutCompat_LayoutParams *create_ADXLinearLayoutCompat_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_CREATE_IMPL(ADXLinearLayoutCompat_LayoutParams, initWithInt_withInt_, width, height)
 }
 

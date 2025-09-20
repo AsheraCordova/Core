@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\com\android\internal\util\ArrayUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ArrayUtils")
@@ -18,6 +19,7 @@
 
 @class IOSIntArray;
 @class IOSLongArray;
+@class JavaLangInteger;
 
 @interface ADArrayUtils : NSObject
 
@@ -31,12 +33,12 @@
  @param index the index to check
  @throw ArrayIndexOutOfBoundsExceptionif the <code>index</code> is out of bounds of the array
  */
-+ (void)checkBoundsWithInt:(jint)len
-                   withInt:(jint)index;
++ (void)checkBoundsWithInt:(int32_t)len
+                   withInt:(int32_t)index;
 
-+ (IOSIntArray *)newUnpaddedIntArrayWithInt:(jint)initialCapacity OBJC_METHOD_FAMILY_NONE;
++ (IOSIntArray *)newUnpaddedIntArrayWithInt:(int32_t)initialCapacity OBJC_METHOD_FAMILY_NONE;
 
-+ (IOSLongArray *)newUnpaddedLongArrayWithInt:(jint)initialCapacity OBJC_METHOD_FAMILY_NONE;
++ (IOSLongArray *)newUnpaddedLongArrayWithInt:(int32_t)initialCapacity OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -48,15 +50,16 @@ FOUNDATION_EXPORT ADArrayUtils *new_ADArrayUtils_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADArrayUtils *create_ADArrayUtils_init(void);
 
-FOUNDATION_EXPORT void ADArrayUtils_checkBoundsWithInt_withInt_(jint len, jint index);
+FOUNDATION_EXPORT void ADArrayUtils_checkBoundsWithInt_withInt_(int32_t len, int32_t index);
 
-FOUNDATION_EXPORT IOSIntArray *ADArrayUtils_newUnpaddedIntArrayWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT IOSIntArray *ADArrayUtils_newUnpaddedIntArrayWithInt_(int32_t initialCapacity);
 
-FOUNDATION_EXPORT IOSLongArray *ADArrayUtils_newUnpaddedLongArrayWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT IOSLongArray *ADArrayUtils_newUnpaddedLongArrayWithInt_(int32_t initialCapacity);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADArrayUtils)
 
 @compatibility_alias RComAndroidInternalUtilArrayUtils ADArrayUtils;
+
 
 #endif
 

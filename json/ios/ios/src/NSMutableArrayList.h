@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSJSONAdapter\src\main\java\com\ashera\jsonadapter\NSMutableArrayList.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NSMutableArrayList")
@@ -21,6 +22,8 @@
 #include "java/util/AbstractList.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
@@ -36,58 +39,58 @@
 
 - (instancetype)initWithId:(id)nsmutableArray;
 
-- (jboolean)addWithId:(id)e;
+- (bool)addWithId:(id)e;
 
-- (void)addWithInt:(jint)index
+- (void)addWithInt:(int32_t)index
             withId:(id)element;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (bool)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (jboolean)addAllWithInt:(jint)index
-   withJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (bool)addAllWithInt:(int32_t)index
+withJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (void)clear;
 
-- (jboolean)containsWithId:(id)o;
+- (bool)containsWithId:(id)o;
 
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (id)getWithInt:(jint)index;
+- (id)getWithInt:(int32_t)index;
 
 - (id)getNsmutableArray;
 
-- (jint)indexOfWithId:(id)o;
+- (int32_t)indexOfWithId:(id)o;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (jint)lastIndexOfWithId:(id)o;
+- (int32_t)lastIndexOfWithId:(id)o;
 
 - (id<JavaUtilListIterator>)listIterator;
 
-- (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index;
+- (id<JavaUtilListIterator>)listIteratorWithInt:(int32_t)index;
 
-- (void)nativeSetWithInt:(jint)index
+- (void)nativeSetWithInt:(int32_t)index
                   withId:(id)element;
 
-- (id)removeWithInt:(jint)index;
+- (id)removeWithInt:(int32_t)index;
 
-- (jboolean)removeWithId:(id)o;
+- (bool)removeWithId:(id)o;
 
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (void)removeObjectWithId:(id)e;
 
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (id)setWithInt:(jint)index
+- (id)setWithInt:(int32_t)index
           withId:(id)element;
 
-- (jint)size;
+- (int32_t)size;
 
-- (id<JavaUtilList>)subListWithInt:(jint)fromIndex
-                           withInt:(jint)toIndex;
+- (id<JavaUtilList>)subListWithInt:(int32_t)fromIndex
+                           withInt:(int32_t)toIndex;
 
 - (IOSObjectArray *)toArray;
 
@@ -114,6 +117,7 @@ FOUNDATION_EXPORT ASNSMutableArrayList *create_ASNSMutableArrayList_initWithId_(
 J2OBJC_TYPE_LITERAL_HEADER(ASNSMutableArrayList)
 
 @compatibility_alias ComAsheraJsonadapterNSMutableArrayList ASNSMutableArrayList;
+
 
 #endif
 

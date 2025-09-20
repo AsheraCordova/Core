@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\pm\ActivityInfo.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ActivityInfo")
@@ -36,6 +37,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADActivityInfo)
 
 @compatibility_alias RAndroidContentPmActivityInfo ADActivityInfo;
 
+
 #endif
 
 #if !defined (ADActivityInfo_Config_) && (INCLUDE_ALL_ActivityInfo || defined(INCLUDE_ADActivityInfo_Config))
@@ -46,10 +48,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADActivityInfo)
 #include "java/lang/annotation/Annotation.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADActivityInfo_Config < JavaLangAnnotationAnnotation >
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -64,6 +69,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADActivityInfo_Config)
 FOUNDATION_EXPORT id<ADActivityInfo_Config> create_ADActivityInfo_Config(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADActivityInfo_Config)
+
 
 #endif
 

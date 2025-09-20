@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\MenuPresenter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MenuPresenter")
@@ -18,15 +19,16 @@
 
 @class ADContext;
 @class ADXMenuBuilder;
+@class JavaLangBoolean;
 
 @protocol ADXMenuPresenter < JavaObject >
 
-- (jboolean)flagActionItems;
+- (bool)flagActionItems;
 
 - (void)initForMenuWithADContext:(ADContext *)menuContext
               withADXMenuBuilder:(ADXMenuBuilder *)menuBuilder OBJC_METHOD_FAMILY_NONE;
 
-- (void)updateMenuViewWithBoolean:(jboolean)cleared;
+- (void)updateMenuViewWithBoolean:(bool)cleared;
 
 @end
 
@@ -35,6 +37,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXMenuPresenter)
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuPresenter)
 
 #define AndroidxAppcompatViewMenuMenuPresenter ADXMenuPresenter
+
 
 #endif
 

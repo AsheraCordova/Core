@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\IntConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntConverter")
@@ -53,6 +54,7 @@ FOUNDATION_EXPORT ASIntConverter *create_ASIntConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASIntConverter)
 
 @compatibility_alias ComAsheraConverterIntConverter ASIntConverter;
+
 
 #endif
 

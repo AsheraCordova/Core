@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\IntKeyframeSet.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntKeyframeSet")
@@ -26,6 +27,8 @@
 
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 /*!
  @brief This class holds a collection of IntKeyframe objects and is called by ValueAnimator to calculate
@@ -44,11 +47,11 @@
 
 - (ADIntKeyframeSet *)java_clone;
 
-- (jint)getIntValueWithFloat:(jfloat)fraction;
+- (int32_t)getIntValueWithFloat:(float)fraction;
 
 - (IOSClass *)getType;
 
-- (id)getValueWithFloat:(jfloat)fraction;
+- (id)getValueWithFloat:(float)fraction;
 
 // Disallowed inherited constructors, do not use.
 
@@ -67,6 +70,7 @@ FOUNDATION_EXPORT ADIntKeyframeSet *create_ADIntKeyframeSet_initPackagePrivateWi
 J2OBJC_TYPE_LITERAL_HEADER(ADIntKeyframeSet)
 
 @compatibility_alias RAndroidAnimationIntKeyframeSet ADIntKeyframeSet;
+
 
 #endif
 

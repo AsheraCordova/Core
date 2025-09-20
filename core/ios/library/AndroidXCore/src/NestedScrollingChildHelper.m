@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingChildHelper.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "NestedScrollingChildHelper.h"
@@ -10,6 +15,15 @@
 #include "ViewCompat.h"
 #include "ViewParent.h"
 #include "ViewParentCompat.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXNestedScrollingChildHelper () {
@@ -17,21 +31,21 @@
   id<ADViewParent> mNestedScrollingParentTouch_;
   id<ADViewParent> mNestedScrollingParentNonTouch_;
   ADView *mView_;
-  jboolean mIsNestedScrollingEnabled_;
+  bool mIsNestedScrollingEnabled_;
   IOSIntArray *mTempNestedScrollConsumed_;
 }
 
-- (jboolean)dispatchNestedScrollInternalWithInt:(jint)dxConsumed
-                                        withInt:(jint)dyConsumed
-                                        withInt:(jint)dxUnconsumed
-                                        withInt:(jint)dyUnconsumed
-                                   withIntArray:(IOSIntArray *)offsetInWindow
-                                        withInt:(jint)type
-                                   withIntArray:(IOSIntArray *)consumed;
+- (bool)dispatchNestedScrollInternalWithInt:(int32_t)dxConsumed
+                                    withInt:(int32_t)dyConsumed
+                                    withInt:(int32_t)dxUnconsumed
+                                    withInt:(int32_t)dyUnconsumed
+                               withIntArray:(IOSIntArray *)offsetInWindow
+                                    withInt:(int32_t)type
+                               withIntArray:(IOSIntArray *)consumed;
 
-- (id<ADViewParent>)getNestedScrollingParentForTypeWithInt:(jint)type;
+- (id<ADViewParent>)getNestedScrollingParentForTypeWithInt:(int32_t)type;
 
-- (void)setNestedScrollingParentForTypeWithInt:(jint)type
+- (void)setNestedScrollingParentForTypeWithInt:(int32_t)type
                               withADViewParent:(id<ADViewParent>)p;
 
 - (IOSIntArray *)getTempNestedScrollConsumed;
@@ -43,11 +57,11 @@ J2OBJC_FIELD_SETTER(ADXNestedScrollingChildHelper, mNestedScrollingParentNonTouc
 J2OBJC_FIELD_SETTER(ADXNestedScrollingChildHelper, mView_, ADView *)
 J2OBJC_FIELD_SETTER(ADXNestedScrollingChildHelper, mTempNestedScrollConsumed_, IOSIntArray *)
 
-__attribute__((unused)) static jboolean ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(ADXNestedScrollingChildHelper *self, jint dxConsumed, jint dyConsumed, jint dxUnconsumed, jint dyUnconsumed, IOSIntArray *offsetInWindow, jint type, IOSIntArray *consumed);
+__attribute__((unused)) static bool ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(ADXNestedScrollingChildHelper *self, int32_t dxConsumed, int32_t dyConsumed, int32_t dxUnconsumed, int32_t dyUnconsumed, IOSIntArray *offsetInWindow, int32_t type, IOSIntArray *consumed);
 
-__attribute__((unused)) static id<ADViewParent> ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(ADXNestedScrollingChildHelper *self, jint type);
+__attribute__((unused)) static id<ADViewParent> ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(ADXNestedScrollingChildHelper *self, int32_t type);
 
-__attribute__((unused)) static void ADXNestedScrollingChildHelper_setNestedScrollingParentForTypeWithInt_withADViewParent_(ADXNestedScrollingChildHelper *self, jint type, id<ADViewParent> p);
+__attribute__((unused)) static void ADXNestedScrollingChildHelper_setNestedScrollingParentForTypeWithInt_withADViewParent_(ADXNestedScrollingChildHelper *self, int32_t type, id<ADViewParent> p);
 
 __attribute__((unused)) static IOSIntArray *ADXNestedScrollingChildHelper_getTempNestedScrollConsumed(ADXNestedScrollingChildHelper *self);
 
@@ -58,31 +72,31 @@ __attribute__((unused)) static IOSIntArray *ADXNestedScrollingChildHelper_getTem
   return self;
 }
 
-- (void)setNestedScrollingEnabledWithBoolean:(jboolean)enabled {
+- (void)setNestedScrollingEnabledWithBoolean:(bool)enabled {
   if (mIsNestedScrollingEnabled_) {
     ADXViewCompat_stopNestedScrollWithADView_(mView_);
   }
   mIsNestedScrollingEnabled_ = enabled;
 }
 
-- (jboolean)isNestedScrollingEnabled {
+- (bool)isNestedScrollingEnabled {
   return mIsNestedScrollingEnabled_;
 }
 
-- (jboolean)hasNestedScrollingParent {
+- (bool)hasNestedScrollingParent {
   return [self hasNestedScrollingParentWithInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (jboolean)hasNestedScrollingParentWithInt:(jint)type {
+- (bool)hasNestedScrollingParentWithInt:(int32_t)type {
   return ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(self, type) != nil;
 }
 
-- (jboolean)startNestedScrollWithInt:(jint)axes {
+- (bool)startNestedScrollWithInt:(int32_t)axes {
   return [self startNestedScrollWithInt:axes withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (jboolean)startNestedScrollWithInt:(jint)axes
-                             withInt:(jint)type {
+- (bool)startNestedScrollWithInt:(int32_t)axes
+                         withInt:(int32_t)type {
   if ([self hasNestedScrollingParentWithInt:type]) {
     return true;
   }
@@ -108,7 +122,7 @@ __attribute__((unused)) static IOSIntArray *ADXNestedScrollingChildHelper_getTem
   [self stopNestedScrollWithInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (void)stopNestedScrollWithInt:(jint)type {
+- (void)stopNestedScrollWithInt:(int32_t)type {
   id<ADViewParent> parent = ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(self, type);
   if (parent != nil) {
     ADXViewParentCompat_onStopNestedScrollWithADViewParent_withADView_withInt_(parent, mView_, type);
@@ -116,63 +130,63 @@ __attribute__((unused)) static IOSIntArray *ADXNestedScrollingChildHelper_getTem
   }
 }
 
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow {
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow {
   return ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(self, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow, ADXViewCompat_TYPE_TOUCH, nil);
 }
 
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow
-                                withInt:(jint)type {
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow
+                            withInt:(int32_t)type {
   return ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(self, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow, type, nil);
 }
 
-- (void)dispatchNestedScrollWithInt:(jint)dxConsumed
-                            withInt:(jint)dyConsumed
-                            withInt:(jint)dxUnconsumed
-                            withInt:(jint)dyUnconsumed
+- (void)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
                        withIntArray:(IOSIntArray *)offsetInWindow
-                            withInt:(jint)type
+                            withInt:(int32_t)type
                        withIntArray:(IOSIntArray *)consumed {
   ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(self, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow, type, consumed);
 }
 
-- (jboolean)dispatchNestedScrollInternalWithInt:(jint)dxConsumed
-                                        withInt:(jint)dyConsumed
-                                        withInt:(jint)dxUnconsumed
-                                        withInt:(jint)dyUnconsumed
-                                   withIntArray:(IOSIntArray *)offsetInWindow
-                                        withInt:(jint)type
-                                   withIntArray:(IOSIntArray *)consumed {
+- (bool)dispatchNestedScrollInternalWithInt:(int32_t)dxConsumed
+                                    withInt:(int32_t)dyConsumed
+                                    withInt:(int32_t)dxUnconsumed
+                                    withInt:(int32_t)dyUnconsumed
+                               withIntArray:(IOSIntArray *)offsetInWindow
+                                    withInt:(int32_t)type
+                               withIntArray:(IOSIntArray *)consumed {
   return ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(self, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow, type, consumed);
 }
 
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow {
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow {
   return [self dispatchNestedPreScrollWithInt:dx withInt:dy withIntArray:consumed withIntArray:offsetInWindow withInt:ADXViewCompat_TYPE_TOUCH];
 }
 
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow
-                                   withInt:(jint)type {
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow
+                               withInt:(int32_t)type {
   if ([self isNestedScrollingEnabled]) {
     id<ADViewParent> parent = ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(self, type);
     if (parent == nil) {
       return false;
     }
     if (dx != 0 || dy != 0) {
-      jint startX = 0;
-      jint startY = 0;
+      int32_t startX = 0;
+      int32_t startY = 0;
       if (offsetInWindow != nil) {
         [((ADView *) nil_chk(mView_)) getLocationInWindowWithIntArray:offsetInWindow];
         startX = IOSIntArray_Get(offsetInWindow, 0);
@@ -199,9 +213,9 @@ __attribute__((unused)) static IOSIntArray *ADXNestedScrollingChildHelper_getTem
   return false;
 }
 
-- (jboolean)dispatchNestedFlingWithFloat:(jfloat)velocityX
-                               withFloat:(jfloat)velocityY
-                             withBoolean:(jboolean)consumed {
+- (bool)dispatchNestedFlingWithFloat:(float)velocityX
+                           withFloat:(float)velocityY
+                         withBoolean:(bool)consumed {
   if ([self isNestedScrollingEnabled]) {
     id<ADViewParent> parent = ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(self, ADXViewCompat_TYPE_TOUCH);
     if (parent != nil) {
@@ -211,8 +225,8 @@ __attribute__((unused)) static IOSIntArray *ADXNestedScrollingChildHelper_getTem
   return false;
 }
 
-- (jboolean)dispatchNestedPreFlingWithFloat:(jfloat)velocityX
-                                  withFloat:(jfloat)velocityY {
+- (bool)dispatchNestedPreFlingWithFloat:(float)velocityX
+                              withFloat:(float)velocityY {
   if ([self isNestedScrollingEnabled]) {
     id<ADViewParent> parent = ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(self, ADXViewCompat_TYPE_TOUCH);
     if (parent != nil) {
@@ -230,11 +244,11 @@ __attribute__((unused)) static IOSIntArray *ADXNestedScrollingChildHelper_getTem
   ADXViewCompat_stopNestedScrollWithADView_(mView_);
 }
 
-- (id<ADViewParent>)getNestedScrollingParentForTypeWithInt:(jint)type {
+- (id<ADViewParent>)getNestedScrollingParentForTypeWithInt:(int32_t)type {
   return ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(self, type);
 }
 
-- (void)setNestedScrollingParentForTypeWithInt:(jint)type
+- (void)setNestedScrollingParentForTypeWithInt:(int32_t)type
                               withADViewParent:(id<ADViewParent>)p {
   ADXNestedScrollingChildHelper_setNestedScrollingParentForTypeWithInt_withADViewParent_(self, type, p);
 }
@@ -329,15 +343,15 @@ ADXNestedScrollingChildHelper *create_ADXNestedScrollingChildHelper_initWithADVi
   J2OBJC_CREATE_IMPL(ADXNestedScrollingChildHelper, initWithADView_, view)
 }
 
-jboolean ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(ADXNestedScrollingChildHelper *self, jint dxConsumed, jint dyConsumed, jint dxUnconsumed, jint dyUnconsumed, IOSIntArray *offsetInWindow, jint type, IOSIntArray *consumed) {
+bool ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withInt_withInt_withInt_withIntArray_withInt_withIntArray_(ADXNestedScrollingChildHelper *self, int32_t dxConsumed, int32_t dyConsumed, int32_t dxUnconsumed, int32_t dyUnconsumed, IOSIntArray *offsetInWindow, int32_t type, IOSIntArray *consumed) {
   if ([self isNestedScrollingEnabled]) {
     id<ADViewParent> parent = ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(self, type);
     if (parent == nil) {
       return false;
     }
     if (dxConsumed != 0 || dyConsumed != 0 || dxUnconsumed != 0 || dyUnconsumed != 0) {
-      jint startX = 0;
-      jint startY = 0;
+      int32_t startX = 0;
+      int32_t startY = 0;
       if (offsetInWindow != nil) {
         [((ADView *) nil_chk(self->mView_)) getLocationInWindowWithIntArray:offsetInWindow];
         startX = IOSIntArray_Get(offsetInWindow, 0);
@@ -364,7 +378,7 @@ jboolean ADXNestedScrollingChildHelper_dispatchNestedScrollInternalWithInt_withI
   return false;
 }
 
-id<ADViewParent> ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(ADXNestedScrollingChildHelper *self, jint type) {
+id<ADViewParent> ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWithInt_(ADXNestedScrollingChildHelper *self, int32_t type) {
   switch (type) {
     case ADXViewCompat_TYPE_TOUCH:
     return self->mNestedScrollingParentTouch_;
@@ -374,7 +388,7 @@ id<ADViewParent> ADXNestedScrollingChildHelper_getNestedScrollingParentForTypeWi
   return nil;
 }
 
-void ADXNestedScrollingChildHelper_setNestedScrollingParentForTypeWithInt_withADViewParent_(ADXNestedScrollingChildHelper *self, jint type, id<ADViewParent> p) {
+void ADXNestedScrollingChildHelper_setNestedScrollingParentForTypeWithInt_withADViewParent_(ADXNestedScrollingChildHelper *self, int32_t type, id<ADViewParent> p) {
   switch (type) {
     case ADXViewCompat_TYPE_TOUCH:
     JreStrongAssign(&self->mNestedScrollingParentTouch_, p);
@@ -393,3 +407,5 @@ IOSIntArray *ADXNestedScrollingChildHelper_getTempNestedScrollConsumed(ADXNested
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXNestedScrollingChildHelper)
+
+J2OBJC_NAME_MAPPING(ADXNestedScrollingChildHelper, "androidx.core.view", "ADX")

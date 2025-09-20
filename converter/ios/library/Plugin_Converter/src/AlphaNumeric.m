@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\AlphaNumeric.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AlphaNumeric.h"
 #include "BaseValidator.h"
 #include "IFragment.h"
@@ -11,6 +16,13 @@
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASAlphaNumeric
@@ -30,9 +42,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", @"@string/alphanumeric_error_message", [((id<ASIWidget>) nil_chk(widget)) getFragment]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   return [text java_matches:@"[0-9a-zA-Z]*"];
@@ -73,3 +85,5 @@ ASAlphaNumeric *create_ASAlphaNumeric_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAlphaNumeric)
+
+J2OBJC_NAME_MAPPING(ASAlphaNumeric, "com.ashera.validations", "AS")

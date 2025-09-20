@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\animation\AnimationUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AnimationUtils.h"
 #include "Context.h"
 #include "Interpolator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/System.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAnimationUtils
@@ -20,11 +33,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (id<ADInterpolator>)loadInterpolatorWithADContext:(ADContext *)context
-                                            withInt:(jint)mDefaultInterpolatorID {
+                                            withInt:(int32_t)mDefaultInterpolatorID {
   return ADAnimationUtils_loadInterpolatorWithADContext_withInt_(context, mDefaultInterpolatorID);
 }
 
-+ (jlong)currentAnimationTimeMillis {
++ (int64_t)currentAnimationTimeMillis {
   return ADAnimationUtils_currentAnimationTimeMillis();
 }
 
@@ -60,14 +73,16 @@ ADAnimationUtils *create_ADAnimationUtils_init() {
   J2OBJC_CREATE_IMPL(ADAnimationUtils, init)
 }
 
-id<ADInterpolator> ADAnimationUtils_loadInterpolatorWithADContext_withInt_(ADContext *context, jint mDefaultInterpolatorID) {
+id<ADInterpolator> ADAnimationUtils_loadInterpolatorWithADContext_withInt_(ADContext *context, int32_t mDefaultInterpolatorID) {
   ADAnimationUtils_initialize();
   return nil;
 }
 
-jlong ADAnimationUtils_currentAnimationTimeMillis() {
+int64_t ADAnimationUtils_currentAnimationTimeMillis() {
   ADAnimationUtils_initialize();
   return JavaLangSystem_currentTimeMillis();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimationUtils)
+
+J2OBJC_NAME_MAPPING(ADAnimationUtils, "r.android.view.animation", "AD")

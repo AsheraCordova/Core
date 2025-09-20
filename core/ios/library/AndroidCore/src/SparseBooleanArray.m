@@ -3,21 +3,35 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\SparseBooleanArray.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ContainerHelpers.h"
 #include "GrowingArrayUtils.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "SparseBooleanArray.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/CloneNotSupportedException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADSparseBooleanArray () {
  @public
   IOSIntArray *mKeys_;
   IOSBooleanArray *mValues_;
-  jint mSize_;
+  int32_t mSize_;
 }
 
 @end
@@ -34,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)initialCapacity {
+- (instancetype)initWithInt:(int32_t)initialCapacity {
   ADSparseBooleanArray_initWithInt_(self, initialCapacity);
   return self;
 }
@@ -51,13 +65,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return clone;
 }
 
-- (jboolean)getWithInt:(jint)key {
+- (bool)getWithInt:(int32_t)key {
   return [self getWithInt:key withBoolean:false];
 }
 
-- (jboolean)getWithInt:(jint)key
-           withBoolean:(jboolean)valueIfKeyNotFound {
-  jint i = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mKeys_, mSize_, key);
+- (bool)getWithInt:(int32_t)key
+       withBoolean:(bool)valueIfKeyNotFound {
+  int32_t i = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mKeys_, mSize_, key);
   if (i < 0) {
     return valueIfKeyNotFound;
   }
@@ -66,8 +80,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)delete__WithInt:(jint)key {
-  jint i = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mKeys_, mSize_, key);
+- (void)delete__WithInt:(int32_t)key {
+  int32_t i = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mKeys_, mSize_, key);
   if (i >= 0) {
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mKeys_, i + 1, mKeys_, i, mSize_ - (i + 1));
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mValues_, i + 1, mValues_, i, mSize_ - (i + 1));
@@ -75,15 +89,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)removeAtWithInt:(jint)index {
+- (void)removeAtWithInt:(int32_t)index {
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mKeys_, index + 1, mKeys_, index, mSize_ - (index + 1));
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(mValues_, index + 1, mValues_, index, mSize_ - (index + 1));
   mSize_--;
 }
 
-- (void)putWithInt:(jint)key
-       withBoolean:(jboolean)value {
-  jint i = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mKeys_, mSize_, key);
+- (void)putWithInt:(int32_t)key
+       withBoolean:(bool)value {
+  int32_t i = ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mKeys_, mSize_, key);
   if (i >= 0) {
     *IOSBooleanArray_GetRef(nil_chk(mValues_), i) = value;
   }
@@ -95,29 +109,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jint)size {
+- (int32_t)size {
   return mSize_;
 }
 
-- (jint)keyAtWithInt:(jint)index {
+- (int32_t)keyAtWithInt:(int32_t)index {
   return IOSIntArray_Get(nil_chk(mKeys_), index);
 }
 
-- (jboolean)valueAtWithInt:(jint)index {
+- (bool)valueAtWithInt:(int32_t)index {
   return IOSBooleanArray_Get(nil_chk(mValues_), index);
 }
 
-- (void)setValueAtWithInt:(jint)index
-              withBoolean:(jboolean)value {
+- (void)setValueAtWithInt:(int32_t)index
+              withBoolean:(bool)value {
   *IOSBooleanArray_GetRef(nil_chk(mValues_), index) = value;
 }
 
-- (jint)indexOfKeyWithInt:(jint)key {
+- (int32_t)indexOfKeyWithInt:(int32_t)key {
   return ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(mKeys_, mSize_, key);
 }
 
-- (jint)indexOfValueWithBoolean:(jboolean)value {
-  for (jint i = 0; i < mSize_; i++) if (IOSBooleanArray_Get(nil_chk(mValues_), i) == value) return i;
+- (int32_t)indexOfValueWithBoolean:(bool)value {
+  for (int32_t i = 0; i < mSize_; i++) if (IOSBooleanArray_Get(nil_chk(mValues_), i) == value) return i;
   return -1;
 }
 
@@ -125,8 +139,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   mSize_ = 0;
 }
 
-- (void)appendWithInt:(jint)key
-          withBoolean:(jboolean)value {
+- (void)appendWithInt:(int32_t)key
+          withBoolean:(bool)value {
   if (mSize_ != 0 && key <= IOSIntArray_Get(nil_chk(mKeys_), mSize_ - 1)) {
     [self putWithInt:key withBoolean:value];
     return;
@@ -142,14 +156,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_initWithInt_(mSize_ * 28);
   [buffer appendWithChar:'{'];
-  for (jint i = 0; i < mSize_; i++) {
+  for (int32_t i = 0; i < mSize_; i++) {
     if (i > 0) {
       [buffer appendWithNSString:@", "];
     }
-    jint key = [self keyAtWithInt:i];
+    int32_t key = [self keyAtWithInt:i];
     [buffer appendWithInt:key];
     [buffer appendWithChar:'='];
-    jboolean value = [self valueAtWithInt:i];
+    bool value = [self valueAtWithInt:i];
     [buffer appendWithBoolean:value];
   }
   [buffer appendWithChar:'}'];
@@ -227,7 +241,7 @@ ADSparseBooleanArray *create_ADSparseBooleanArray_init() {
   J2OBJC_CREATE_IMPL(ADSparseBooleanArray, init)
 }
 
-void ADSparseBooleanArray_initWithInt_(ADSparseBooleanArray *self, jint initialCapacity) {
+void ADSparseBooleanArray_initWithInt_(ADSparseBooleanArray *self, int32_t initialCapacity) {
   NSObject_init(self);
   if (initialCapacity == 0) {
     JreStrongAssignAndConsume(&self->mKeys_, [IOSIntArray newArrayWithLength:0]);
@@ -240,12 +254,14 @@ void ADSparseBooleanArray_initWithInt_(ADSparseBooleanArray *self, jint initialC
   self->mSize_ = 0;
 }
 
-ADSparseBooleanArray *new_ADSparseBooleanArray_initWithInt_(jint initialCapacity) {
+ADSparseBooleanArray *new_ADSparseBooleanArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_NEW_IMPL(ADSparseBooleanArray, initWithInt_, initialCapacity)
 }
 
-ADSparseBooleanArray *create_ADSparseBooleanArray_initWithInt_(jint initialCapacity) {
+ADSparseBooleanArray *create_ADSparseBooleanArray_initWithInt_(int32_t initialCapacity) {
   J2OBJC_CREATE_IMPL(ADSparseBooleanArray, initWithInt_, initialCapacity)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSparseBooleanArray)
+
+J2OBJC_NAME_MAPPING(ADSparseBooleanArray, "r.android.util", "AD")

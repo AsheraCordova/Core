@@ -3,13 +3,23 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\EventCommandFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 inline id<JavaUtilMap> ASEventCommandFactory_get_commandMap(void);
@@ -37,7 +47,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASEventCommandFactory_getCommandWithNSString_(name);
 }
 
-+ (jboolean)hasCommandWithNSString:(NSString *)name {
++ (bool)hasCommandWithNSString:(NSString *)name {
   return ASEventCommandFactory_hasCommandWithNSString_(name);
 }
 
@@ -96,9 +106,11 @@ id<ASEventCommand> ASEventCommandFactory_getCommandWithNSString_(NSString *name)
   return eventCommand;
 }
 
-jboolean ASEventCommandFactory_hasCommandWithNSString_(NSString *name) {
+bool ASEventCommandFactory_hasCommandWithNSString_(NSString *name) {
   ASEventCommandFactory_initialize();
   return [((id<JavaUtilMap>) nil_chk(ASEventCommandFactory_commandMap)) containsKeyWithId:name];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEventCommandFactory)
+
+J2OBJC_NAME_MAPPING(ASEventCommandFactory, "com.ashera.widget", "AS")

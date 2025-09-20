@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\FieldValidationException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FieldValidationException.h"
 #include "FormElement.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Exception.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASFieldValidationException () {
@@ -70,3 +81,5 @@ ASFieldValidationException *create_ASFieldValidationException_initWithNSString_w
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFieldValidationException)
+
+J2OBJC_NAME_MAPPING(ASFieldValidationException, "com.ashera.validations", "AS")

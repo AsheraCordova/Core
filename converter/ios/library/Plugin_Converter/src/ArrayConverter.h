@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ArrayConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ArrayConverter")
@@ -21,6 +22,7 @@
 #include "IConverter.h"
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -53,6 +55,7 @@ FOUNDATION_EXPORT ASArrayConverter *create_ASArrayConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASArrayConverter)
 
 @compatibility_alias ComAsheraConverterArrayConverter ASArrayConverter;
+
 
 #endif
 

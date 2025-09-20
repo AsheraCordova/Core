@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\animation\MaterialAnimationUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DecelerateInterpolator.h"
 #include "FastOutLinearInInterpolator.h"
 #include "FastOutSlowInInterpolator.h"
@@ -11,7 +16,15 @@
 #include "LinearOutSlowInInterpolator.h"
 #include "MaterialAnimationUtils.h"
 #include "TimeInterpolator.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 J2OBJC_INITIALIZED_DEFN(ADXMaterialAnimationUtils)
@@ -31,23 +44,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jfloat)lerpWithFloat:(jfloat)startValue
-              withFloat:(jfloat)endValue
-              withFloat:(jfloat)fraction {
++ (float)lerpWithFloat:(float)startValue
+             withFloat:(float)endValue
+             withFloat:(float)fraction {
   return ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_(startValue, endValue, fraction);
 }
 
-+ (jint)lerpWithInt:(jint)startValue
-            withInt:(jint)endValue
-          withFloat:(jfloat)fraction {
++ (int32_t)lerpWithInt:(int32_t)startValue
+               withInt:(int32_t)endValue
+             withFloat:(float)fraction {
   return ADXMaterialAnimationUtils_lerpWithInt_withInt_withFloat_(startValue, endValue, fraction);
 }
 
-+ (jfloat)lerpWithFloat:(jfloat)outputMin
-              withFloat:(jfloat)outputMax
-              withFloat:(jfloat)inputMin
-              withFloat:(jfloat)inputMax
-              withFloat:(jfloat)value {
++ (float)lerpWithFloat:(float)outputMin
+             withFloat:(float)outputMax
+             withFloat:(float)inputMin
+             withFloat:(float)inputMax
+             withFloat:(float)value {
   return ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_withFloat_withFloat_(outputMin, outputMax, inputMin, inputMax, value);
 }
 
@@ -103,17 +116,17 @@ ADXMaterialAnimationUtils *create_ADXMaterialAnimationUtils_init() {
   J2OBJC_CREATE_IMPL(ADXMaterialAnimationUtils, init)
 }
 
-jfloat ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_(jfloat startValue, jfloat endValue, jfloat fraction) {
+float ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_(float startValue, float endValue, float fraction) {
   ADXMaterialAnimationUtils_initialize();
   return startValue + (fraction * (endValue - startValue));
 }
 
-jint ADXMaterialAnimationUtils_lerpWithInt_withInt_withFloat_(jint startValue, jint endValue, jfloat fraction) {
+int32_t ADXMaterialAnimationUtils_lerpWithInt_withInt_withFloat_(int32_t startValue, int32_t endValue, float fraction) {
   ADXMaterialAnimationUtils_initialize();
   return startValue + JavaLangMath_roundWithFloat_(fraction * (endValue - startValue));
 }
 
-jfloat ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_withFloat_withFloat_(jfloat outputMin, jfloat outputMax, jfloat inputMin, jfloat inputMax, jfloat value) {
+float ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_withFloat_withFloat_(float outputMin, float outputMax, float inputMin, float inputMax, float value) {
   ADXMaterialAnimationUtils_initialize();
   if (value <= inputMin) {
     return outputMin;
@@ -125,3 +138,5 @@ jfloat ADXMaterialAnimationUtils_lerpWithFloat_withFloat_withFloat_withFloat_wit
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXMaterialAnimationUtils)
+
+J2OBJC_NAME_MAPPING(ADXMaterialAnimationUtils, "com.google.android.material.animation", "ADX")

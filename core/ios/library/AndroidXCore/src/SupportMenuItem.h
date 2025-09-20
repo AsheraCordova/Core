@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\SupportMenuItem.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SupportMenuItem")
@@ -33,6 +34,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXSupportMenuItem)
 J2OBJC_TYPE_LITERAL_HEADER(ADXSupportMenuItem)
 
 #define AndroidxAppcompatViewMenuSupportMenuItem ADXSupportMenuItem
+
 
 #endif
 

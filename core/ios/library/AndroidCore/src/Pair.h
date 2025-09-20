@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Pair.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Pair")
@@ -15,6 +16,9 @@
 
 #if !defined (ADPair_) && (INCLUDE_ALL_Pair || defined(INCLUDE_ADPair))
 #define ADPair_
+
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief Container to ease passing around a tuple of two objects.This object provides a sensible
@@ -53,7 +57,7 @@
  @return true if the underlying objects of the Pair are both considered
           equal
  */
-- (jboolean)isEqual:(id)o;
+- (bool)isEqual:(id)o;
 
 /*!
  @brief Compute a hash code using the hash codes of the underlying objects
@@ -83,6 +87,7 @@ FOUNDATION_EXPORT ADPair *ADPair_createWithId_withId_(id a, id b);
 J2OBJC_TYPE_LITERAL_HEADER(ADPair)
 
 @compatibility_alias RAndroidUtilPair ADPair;
+
 
 #endif
 

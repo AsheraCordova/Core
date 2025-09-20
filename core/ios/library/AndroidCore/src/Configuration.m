@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\res\Configuration.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Configuration.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADConfiguration
@@ -16,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getLayoutDirection {
+- (int32_t)getLayoutDirection {
   return 0;
 }
 
@@ -50,3 +62,5 @@ ADConfiguration *create_ADConfiguration_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADConfiguration)
+
+J2OBJC_NAME_MAPPING(ADConfiguration, "r.android.content.res", "AD")

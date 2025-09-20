@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\MotionEvent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MotionEvent")
@@ -16,69 +17,71 @@
 #if !defined (ADMotionEvent_) && (INCLUDE_ALL_MotionEvent || defined(INCLUDE_ADMotionEvent))
 #define ADMotionEvent_
 
+@class JavaLangInteger;
+
 @interface ADMotionEvent : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)getAction;
+- (int32_t)getAction;
 
-- (jint)getEventTime;
+- (int32_t)getEventTime;
 
-- (jint)getRawX;
+- (int32_t)getRawX;
 
-- (jint)getRawY;
+- (int32_t)getRawY;
 
-- (jint)getX;
+- (int32_t)getX;
 
-- (jint)getY;
+- (int32_t)getY;
 
-- (void)setActionWithInt:(jint)action;
+- (void)setActionWithInt:(int32_t)action;
 
-- (void)setRawXWithInt:(jint)rawX;
+- (void)setRawXWithInt:(int32_t)rawX;
 
-- (void)setRawYWithInt:(jint)rawY;
+- (void)setRawYWithInt:(int32_t)rawY;
 
-- (void)setXWithInt:(jint)x;
+- (void)setXWithInt:(int32_t)x;
 
-- (void)setYWithInt:(jint)y;
+- (void)setYWithInt:(int32_t)y;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADMotionEvent)
 
-inline jint ADMotionEvent_get_ACTION_DOWN(void);
+inline int32_t ADMotionEvent_get_ACTION_DOWN(void);
 #define ADMotionEvent_ACTION_DOWN 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_DOWN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_DOWN, int32_t)
 
-inline jint ADMotionEvent_get_ACTION_UP(void);
+inline int32_t ADMotionEvent_get_ACTION_UP(void);
 #define ADMotionEvent_ACTION_UP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_UP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_UP, int32_t)
 
-inline jint ADMotionEvent_get_ACTION_MOVE(void);
+inline int32_t ADMotionEvent_get_ACTION_MOVE(void);
 #define ADMotionEvent_ACTION_MOVE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_MOVE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_MOVE, int32_t)
 
-inline jint ADMotionEvent_get_ACTION_CANCEL(void);
+inline int32_t ADMotionEvent_get_ACTION_CANCEL(void);
 #define ADMotionEvent_ACTION_CANCEL 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_CANCEL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_CANCEL, int32_t)
 
-inline jint ADMotionEvent_get_ACTION_OUTSIDE(void);
+inline int32_t ADMotionEvent_get_ACTION_OUTSIDE(void);
 #define ADMotionEvent_ACTION_OUTSIDE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_OUTSIDE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_OUTSIDE, int32_t)
 
-inline jint ADMotionEvent_get_ACTION_SCROLL(void);
+inline int32_t ADMotionEvent_get_ACTION_SCROLL(void);
 #define ADMotionEvent_ACTION_SCROLL 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_SCROLL, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_SCROLL, int32_t)
 
-inline jint ADMotionEvent_get_ACTION_BUTTON_PRESS(void);
+inline int32_t ADMotionEvent_get_ACTION_BUTTON_PRESS(void);
 #define ADMotionEvent_ACTION_BUTTON_PRESS 11
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_BUTTON_PRESS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_BUTTON_PRESS, int32_t)
 
-inline jint ADMotionEvent_get_ACTION_BUTTON_RELEASE(void);
+inline int32_t ADMotionEvent_get_ACTION_BUTTON_RELEASE(void);
 #define ADMotionEvent_ACTION_BUTTON_RELEASE 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_BUTTON_RELEASE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_BUTTON_RELEASE, int32_t)
 
 FOUNDATION_EXPORT void ADMotionEvent_init(ADMotionEvent *self);
 
@@ -89,6 +92,7 @@ FOUNDATION_EXPORT ADMotionEvent *create_ADMotionEvent_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADMotionEvent)
 
 @compatibility_alias RAndroidViewMotionEvent ADMotionEvent;
+
 
 #endif
 

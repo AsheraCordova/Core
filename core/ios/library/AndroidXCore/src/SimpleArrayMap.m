@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\collection\SimpleArrayMap.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ContainerHelpers.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -10,7 +15,10 @@
 #include "J2ObjC_source.h"
 #include "SimpleArrayMap.h"
 #include "java/lang/ArrayIndexOutOfBoundsException.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/ClassCastException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
@@ -18,23 +26,30 @@
 #include "java/util/Map.h"
 
 
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ADXSimpleArrayMap ()
 
-+ (jint)binarySearchHashesWithIntArray:(IOSIntArray *)hashes
-                               withInt:(jint)N
-                               withInt:(jint)hash_;
++ (int32_t)binarySearchHashesWithIntArray:(IOSIntArray *)hashes
+                                  withInt:(int32_t)N
+                                  withInt:(int32_t)hash_;
 
-- (void)allocArraysWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
+- (void)allocArraysWithInt:(int32_t)size OBJC_METHOD_FAMILY_NONE;
 
 + (void)freeArraysWithIntArray:(IOSIntArray *)hashes
              withNSObjectArray:(IOSObjectArray *)array
-                       withInt:(jint)size;
+                       withInt:(int32_t)size;
 
 @end
 
-inline jboolean ADXSimpleArrayMap_get_DEBUG(void);
+inline bool ADXSimpleArrayMap_get_DEBUG(void);
 #define ADXSimpleArrayMap_DEBUG false
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, DEBUG, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, DEBUG, bool)
 
 inline NSString *ADXSimpleArrayMap_get_TAG(void);
 static NSString *ADXSimpleArrayMap_TAG = @"ArrayMap";
@@ -48,96 +63,96 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADXSimpleArrayMap, TAG, NSString *)
   Good times to look for CME include after any allocArrays() call and at the end of
   functions that change mSize (put/remove/clear).
  */
-inline jboolean ADXSimpleArrayMap_get_CONCURRENT_MODIFICATION_EXCEPTIONS(void);
+inline bool ADXSimpleArrayMap_get_CONCURRENT_MODIFICATION_EXCEPTIONS(void);
 #define ADXSimpleArrayMap_CONCURRENT_MODIFICATION_EXCEPTIONS true
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, CONCURRENT_MODIFICATION_EXCEPTIONS, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, CONCURRENT_MODIFICATION_EXCEPTIONS, bool)
 
 /*!
  @brief The minimum amount by which the capacity of a ArrayMap will increase.
  This is tuned to be relatively space-efficient.
  */
-inline jint ADXSimpleArrayMap_get_BASE_SIZE(void);
+inline int32_t ADXSimpleArrayMap_get_BASE_SIZE(void);
 #define ADXSimpleArrayMap_BASE_SIZE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, BASE_SIZE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, BASE_SIZE, int32_t)
 
 /*!
  @brief Maximum number of entries to have in array caches.
  */
-inline jint ADXSimpleArrayMap_get_CACHE_SIZE(void);
+inline int32_t ADXSimpleArrayMap_get_CACHE_SIZE(void);
 #define ADXSimpleArrayMap_CACHE_SIZE 10
-J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, CACHE_SIZE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXSimpleArrayMap, CACHE_SIZE, int32_t)
 
-__attribute__((unused)) static jint ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(IOSIntArray *hashes, jint N, jint hash_);
+__attribute__((unused)) static int32_t ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(IOSIntArray *hashes, int32_t N, int32_t hash_);
 
-__attribute__((unused)) static void ADXSimpleArrayMap_allocArraysWithInt_(ADXSimpleArrayMap *self, jint size);
+__attribute__((unused)) static void ADXSimpleArrayMap_allocArraysWithInt_(ADXSimpleArrayMap *self, int32_t size);
 
-__attribute__((unused)) static void ADXSimpleArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, jint size);
+__attribute__((unused)) static void ADXSimpleArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, int32_t size);
 
 IOSObjectArray *ADXSimpleArrayMap_mBaseCache;
-jint ADXSimpleArrayMap_mBaseCacheSize;
+int32_t ADXSimpleArrayMap_mBaseCacheSize;
 IOSObjectArray *ADXSimpleArrayMap_mTwiceBaseCache;
-jint ADXSimpleArrayMap_mTwiceBaseCacheSize;
+int32_t ADXSimpleArrayMap_mTwiceBaseCacheSize;
 
 @implementation ADXSimpleArrayMap
 
-+ (jint)binarySearchHashesWithIntArray:(IOSIntArray *)hashes
-                               withInt:(jint)N
-                               withInt:(jint)hash_ {
++ (int32_t)binarySearchHashesWithIntArray:(IOSIntArray *)hashes
+                                  withInt:(int32_t)N
+                                  withInt:(int32_t)hash_ {
   return ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(hashes, N, hash_);
 }
 
-- (jint)indexOfWithId:(id)key
-              withInt:(jint)hash_ {
-  jint N = mSize_;
+- (int32_t)indexOfWithId:(id)key
+                 withInt:(int32_t)hash_ {
+  int32_t N = mSize_;
   if (N == 0) {
     return ~0;
   }
-  jint index = ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(mHashes_, N, hash_);
+  int32_t index = ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(mHashes_, N, hash_);
   if (index < 0) {
     return index;
   }
   if ([nil_chk(key) isEqual:IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(index, 1))]) {
     return index;
   }
-  jint end;
+  int32_t end;
   for (end = index + 1; end < N && IOSIntArray_Get(nil_chk(mHashes_), end) == hash_; end++) {
     if ([key isEqual:IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(end, 1))]) return end;
   }
-  for (jint i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == hash_; i--) {
+  for (int32_t i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == hash_; i--) {
     if ([key isEqual:IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(i, 1))]) return i;
   }
   return ~end;
 }
 
-- (jint)indexOfNull {
-  jint N = mSize_;
+- (int32_t)indexOfNull {
+  int32_t N = mSize_;
   if (N == 0) {
     return ~0;
   }
-  jint index = ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(mHashes_, N, 0);
+  int32_t index = ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(mHashes_, N, 0);
   if (index < 0) {
     return index;
   }
   if (nil == IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(index, 1))) {
     return index;
   }
-  jint end;
+  int32_t end;
   for (end = index + 1; end < N && IOSIntArray_Get(nil_chk(mHashes_), end) == 0; end++) {
     if (nil == IOSObjectArray_Get(mArray_, JreLShift32(end, 1))) return end;
   }
-  for (jint i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == 0; i--) {
+  for (int32_t i = index - 1; i >= 0 && IOSIntArray_Get(nil_chk(mHashes_), i) == 0; i--) {
     if (nil == IOSObjectArray_Get(mArray_, JreLShift32(i, 1))) return i;
   }
   return ~end;
 }
 
-- (void)allocArraysWithInt:(jint)size {
+- (void)allocArraysWithInt:(int32_t)size {
   ADXSimpleArrayMap_allocArraysWithInt_(self, size);
 }
 
 + (void)freeArraysWithIntArray:(IOSIntArray *)hashes
              withNSObjectArray:(IOSObjectArray *)array
-                       withInt:(jint)size {
+                       withInt:(int32_t)size {
   ADXSimpleArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(hashes, array, size);
 }
 
@@ -148,7 +163,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithInt:(jint)capacity {
+- (instancetype)initWithInt:(int32_t)capacity {
   ADXSimpleArrayMap_initWithInt_(self, capacity);
   return self;
 }
@@ -162,7 +177,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (mSize_ > 0) {
     IOSIntArray *ohashes = mHashes_;
     IOSObjectArray *oarray = mArray_;
-    jint osize = mSize_;
+    int32_t osize = mSize_;
     JreStrongAssign(&mHashes_, JreLoadStatic(ADContainerHelpers, EMPTY_INTS));
     JreStrongAssign(&mArray_, JreLoadStatic(ADContainerHelpers, EMPTY_OBJECTS));
     mSize_ = 0;
@@ -173,8 +188,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)ensureCapacityWithInt:(jint)minimumCapacity {
-  jint osize = mSize_;
+- (void)ensureCapacityWithInt:(int32_t)minimumCapacity {
+  int32_t osize = mSize_;
   if (((IOSIntArray *) nil_chk(mHashes_))->size_ < minimumCapacity) {
     IOSIntArray *ohashes = mHashes_;
     IOSObjectArray *oarray = mArray_;
@@ -190,26 +205,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)containsKeyWithId:(id)key {
+- (bool)containsKeyWithId:(id)key {
   return [self indexOfKeyWithId:key] >= 0;
 }
 
-- (jint)indexOfKeyWithId:(id)key {
-  return key == nil ? [self indexOfNull] : [self indexOfWithId:key withInt:((jint) [key hash])];
+- (int32_t)indexOfKeyWithId:(id)key {
+  return key == nil ? [self indexOfNull] : [self indexOfWithId:key withInt:((int32_t) [key hash])];
 }
 
-- (jint)indexOfValueWithId:(id)value {
-  jint N = mSize_ * 2;
+- (int32_t)indexOfValueWithId:(id)value {
+  int32_t N = mSize_ * 2;
   IOSObjectArray *array = mArray_;
   if (value == nil) {
-    for (jint i = 1; i < N; i += 2) {
+    for (int32_t i = 1; i < N; i += 2) {
       if (IOSObjectArray_Get(nil_chk(array), i) == nil) {
         return JreRShift32(i, 1);
       }
     }
   }
   else {
-    for (jint i = 1; i < N; i += 2) {
+    for (int32_t i = 1; i < N; i += 2) {
       if ([value isEqual:IOSObjectArray_Get(nil_chk(array), i)]) {
         return JreRShift32(i, 1);
       }
@@ -218,7 +233,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return -1;
 }
 
-- (jboolean)containsValueWithId:(id)value {
+- (bool)containsValueWithId:(id)value {
   return [self indexOfValueWithId:value] >= 0;
 }
 
@@ -228,19 +243,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getOrDefaultWithId:(id)key
                   withId:(id)defaultValue {
-  jint index = [self indexOfKeyWithId:key];
+  int32_t index = [self indexOfKeyWithId:key];
   return index >= 0 ? IOSObjectArray_Get(nil_chk(mArray_), (JreLShift32(index, 1)) + 1) : defaultValue;
 }
 
-- (id)keyAtWithInt:(jint)index {
+- (id)keyAtWithInt:(int32_t)index {
   return IOSObjectArray_Get(nil_chk(mArray_), JreLShift32(index, 1));
 }
 
-- (id)valueAtWithInt:(jint)index {
+- (id)valueAtWithInt:(int32_t)index {
   return IOSObjectArray_Get(nil_chk(mArray_), (JreLShift32(index, 1)) + 1);
 }
 
-- (id)setValueAtWithInt:(jint)index
+- (id)setValueAtWithInt:(int32_t)index
                  withId:(id)value {
   index = (JreLShift32(index, 1)) + 1;
   id old = IOSObjectArray_Get(nil_chk(mArray_), index);
@@ -248,21 +263,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   return old;
 }
 
-- (jboolean)isEmpty {
+- (bool)isEmpty {
   return mSize_ <= 0;
 }
 
 - (id)putWithId:(id)key
          withId:(id)value {
-  jint osize = mSize_;
-  jint hash_;
-  jint index;
+  int32_t osize = mSize_;
+  int32_t hash_;
+  int32_t index;
   if (key == nil) {
     hash_ = 0;
     index = [self indexOfNull];
   }
   else {
-    hash_ = ((jint) [key hash]);
+    hash_ = ((int32_t) [key hash]);
     index = [self indexOfWithId:key withInt:hash_];
   }
   if (index >= 0) {
@@ -273,7 +288,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   index = ~index;
   if (osize >= ((IOSIntArray *) nil_chk(mHashes_))->size_) {
-    jint n = osize >= (ADXSimpleArrayMap_BASE_SIZE * 2) ? (osize + (JreRShift32(osize, 1))) : (osize >= ADXSimpleArrayMap_BASE_SIZE ? (ADXSimpleArrayMap_BASE_SIZE * 2) : ADXSimpleArrayMap_BASE_SIZE);
+    int32_t n = osize >= (ADXSimpleArrayMap_BASE_SIZE * 2) ? (osize + (JreRShift32(osize, 1))) : (osize >= ADXSimpleArrayMap_BASE_SIZE ? (ADXSimpleArrayMap_BASE_SIZE * 2) : ADXSimpleArrayMap_BASE_SIZE);
     IOSIntArray *ohashes = mHashes_;
     IOSObjectArray *oarray = mArray_;
     ADXSimpleArrayMap_allocArraysWithInt_(self, n);
@@ -303,7 +318,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)putAllWithADXSimpleArrayMap:(ADXSimpleArrayMap *)array {
-  jint N = ((ADXSimpleArrayMap *) nil_chk(array))->mSize_;
+  int32_t N = ((ADXSimpleArrayMap *) nil_chk(array))->mSize_;
   [self ensureCapacityWithInt:mSize_ + N];
   if (mSize_ == 0) {
     if (N > 0) {
@@ -313,7 +328,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
   }
   else {
-    for (jint i = 0; i < N; i++) {
+    for (int32_t i = 0; i < N; i++) {
       [self putWithId:[array keyAtWithInt:i] withId:[array valueAtWithInt:i]];
     }
   }
@@ -329,19 +344,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)removeWithId:(id)key {
-  jint index = [self indexOfKeyWithId:key];
+  int32_t index = [self indexOfKeyWithId:key];
   if (index >= 0) {
     return [self removeAtWithInt:index];
   }
   return nil;
 }
 
-- (jboolean)removeWithId:(id)key
-                  withId:(id)value {
-  jint index = [self indexOfKeyWithId:key];
+- (bool)removeWithId:(id)key
+              withId:(id)value {
+  int32_t index = [self indexOfKeyWithId:key];
   if (index >= 0) {
     id mapValue = JreRetainedLocalValue([self valueAtWithInt:index]);
-    if (value == mapValue || (value != nil && [value isEqual:mapValue])) {
+    if (JreObjectEqualsEquals(value, mapValue) || (value != nil && [value isEqual:mapValue])) {
       [self removeAtWithInt:index];
       return true;
     }
@@ -349,16 +364,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (id)removeAtWithInt:(jint)index {
+- (id)removeAtWithInt:(int32_t)index {
   id old = IOSObjectArray_Get(nil_chk(mArray_), (JreLShift32(index, 1)) + 1);
-  jint osize = mSize_;
+  int32_t osize = mSize_;
   if (osize <= 1) {
     [self clear];
   }
   else {
-    jint nsize = osize - 1;
+    int32_t nsize = osize - 1;
     if (((IOSIntArray *) nil_chk(mHashes_))->size_ > (ADXSimpleArrayMap_BASE_SIZE * 2) && osize < JreIntDiv(mHashes_->size_, 3)) {
-      jint n = osize > (ADXSimpleArrayMap_BASE_SIZE * 2) ? (osize + (JreRShift32(osize, 1))) : (ADXSimpleArrayMap_BASE_SIZE * 2);
+      int32_t n = osize > (ADXSimpleArrayMap_BASE_SIZE * 2) ? (osize + (JreRShift32(osize, 1))) : (ADXSimpleArrayMap_BASE_SIZE * 2);
       IOSIntArray *ohashes = mHashes_;
       IOSObjectArray *oarray = mArray_;
       ADXSimpleArrayMap_allocArraysWithInt_(self, n);
@@ -392,20 +407,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)replaceWithId:(id)key
              withId:(id)value {
-  jint index = [self indexOfKeyWithId:key];
+  int32_t index = [self indexOfKeyWithId:key];
   if (index >= 0) {
     return [self setValueAtWithInt:index withId:value];
   }
   return nil;
 }
 
-- (jboolean)replaceWithId:(id)key
-                   withId:(id)oldValue
-                   withId:(id)newValue {
-  jint index = [self indexOfKeyWithId:key];
+- (bool)replaceWithId:(id)key
+               withId:(id)oldValue
+               withId:(id)newValue {
+  int32_t index = [self indexOfKeyWithId:key];
   if (index >= 0) {
     id mapValue = JreRetainedLocalValue([self valueAtWithInt:index]);
-    if (mapValue == oldValue || (oldValue != nil && [oldValue isEqual:mapValue])) {
+    if (JreObjectEqualsEquals(mapValue, oldValue) || (oldValue != nil && [oldValue isEqual:mapValue])) {
       [self setValueAtWithInt:index withId:newValue];
       return true;
     }
@@ -413,12 +428,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
-- (jint)size {
+- (int32_t)size {
   return mSize_;
 }
 
-- (jboolean)isEqual:(id)object {
-  if (self == object) {
+- (bool)isEqual:(id)object {
+  if (JreObjectEqualsEquals(self, object)) {
     return true;
   }
   @try {
@@ -427,7 +442,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       if ([self size] != [((ADXSimpleArrayMap *) nil_chk(map)) size]) {
         return false;
       }
-      for (jint i = 0; i < mSize_; i++) {
+      for (int32_t i = 0; i < mSize_; i++) {
         id key = JreRetainedLocalValue([self keyAtWithInt:i]);
         id mine = JreRetainedLocalValue([self valueAtWithInt:i]);
         id theirs = JreRetainedLocalValue([map getWithId:key]);
@@ -447,7 +462,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       if ([self size] != [((id<JavaUtilMap>) nil_chk(map)) size]) {
         return false;
       }
-      for (jint i = 0; i < mSize_; i++) {
+      for (int32_t i = 0; i < mSize_; i++) {
         id key = JreRetainedLocalValue([self keyAtWithInt:i]);
         id mine = JreRetainedLocalValue([self valueAtWithInt:i]);
         id theirs = JreRetainedLocalValue([map getWithId:key]);
@@ -473,10 +488,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (NSUInteger)hash {
   IOSIntArray *hashes = mHashes_;
   IOSObjectArray *array = mArray_;
-  jint result = 0;
-  for (jint i = 0, v = 1, s = mSize_; i < s; i++, v += 2) {
+  int32_t result = 0;
+  for (int32_t i = 0, v = 1, s = mSize_; i < s; i++, v += 2) {
     id value = IOSObjectArray_Get(nil_chk(array), v);
-    result += IOSIntArray_Get(nil_chk(hashes), i) ^ (value == nil ? 0 : ((jint) [value hash]));
+    result += IOSIntArray_Get(nil_chk(hashes), i) ^ (value == nil ? 0 : ((int32_t) [value hash]));
   }
   return result;
 }
@@ -487,12 +502,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_initWithInt_(mSize_ * 28);
   [buffer appendWithChar:'{'];
-  for (jint i = 0; i < mSize_; i++) {
+  for (int32_t i = 0; i < mSize_; i++) {
     if (i > 0) {
       [buffer appendWithNSString:@", "];
     }
     id key = JreRetainedLocalValue([self keyAtWithInt:i]);
-    if (key != self) {
+    if (!JreObjectEqualsEquals(key, self)) {
       [buffer appendWithId:key];
     }
     else {
@@ -500,7 +515,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     [buffer appendWithChar:'='];
     id value = JreRetainedLocalValue([self valueAtWithInt:i]);
-    if (value != self) {
+    if (!JreObjectEqualsEquals(value, self)) {
       [buffer appendWithId:value];
     }
     else {
@@ -609,7 +624,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-jint ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(IOSIntArray *hashes, jint N, jint hash_) {
+int32_t ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(IOSIntArray *hashes, int32_t N, int32_t hash_) {
   ADXSimpleArrayMap_initialize();
   @try {
     return ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(hashes, N, hash_);
@@ -621,7 +636,7 @@ jint ADXSimpleArrayMap_binarySearchHashesWithIntArray_withInt_withInt_(IOSIntArr
   }
 }
 
-void ADXSimpleArrayMap_allocArraysWithInt_(ADXSimpleArrayMap *self, jint size) {
+void ADXSimpleArrayMap_allocArraysWithInt_(ADXSimpleArrayMap *self, int32_t size) {
   if (size == (ADXSimpleArrayMap_BASE_SIZE * 2)) {
     @synchronized(ADXSimpleArrayMap_class_()) {
       if (ADXSimpleArrayMap_mTwiceBaseCache != nil) {
@@ -652,14 +667,14 @@ void ADXSimpleArrayMap_allocArraysWithInt_(ADXSimpleArrayMap *self, jint size) {
   JreStrongAssignAndConsume(&self->mArray_, [IOSObjectArray newArrayWithLength:JreLShift32(size, 1) type:NSObject_class_()]);
 }
 
-void ADXSimpleArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, jint size) {
+void ADXSimpleArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntArray *hashes, IOSObjectArray *array, int32_t size) {
   ADXSimpleArrayMap_initialize();
   if (((IOSIntArray *) nil_chk(hashes))->size_ == (ADXSimpleArrayMap_BASE_SIZE * 2)) {
     @synchronized(ADXSimpleArrayMap_class_()) {
       if (ADXSimpleArrayMap_mTwiceBaseCacheSize < ADXSimpleArrayMap_CACHE_SIZE) {
         IOSObjectArray_Set(nil_chk(array), 0, ADXSimpleArrayMap_mTwiceBaseCache);
         IOSObjectArray_Set(array, 1, hashes);
-        for (jint i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
+        for (int32_t i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
           IOSObjectArray_Set(array, i, nil);
         }
         JreStrongAssign(&ADXSimpleArrayMap_mTwiceBaseCache, array);
@@ -672,7 +687,7 @@ void ADXSimpleArrayMap_freeArraysWithIntArray_withNSObjectArray_withInt_(IOSIntA
       if (ADXSimpleArrayMap_mBaseCacheSize < ADXSimpleArrayMap_CACHE_SIZE) {
         IOSObjectArray_Set(nil_chk(array), 0, ADXSimpleArrayMap_mBaseCache);
         IOSObjectArray_Set(array, 1, hashes);
-        for (jint i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
+        for (int32_t i = (JreLShift32(size, 1)) - 1; i >= 2; i--) {
           IOSObjectArray_Set(array, i, nil);
         }
         JreStrongAssign(&ADXSimpleArrayMap_mBaseCache, array);
@@ -697,7 +712,7 @@ ADXSimpleArrayMap *create_ADXSimpleArrayMap_init() {
   J2OBJC_CREATE_IMPL(ADXSimpleArrayMap, init)
 }
 
-void ADXSimpleArrayMap_initWithInt_(ADXSimpleArrayMap *self, jint capacity) {
+void ADXSimpleArrayMap_initWithInt_(ADXSimpleArrayMap *self, int32_t capacity) {
   NSObject_init(self);
   if (capacity == 0) {
     JreStrongAssign(&self->mHashes_, JreLoadStatic(ADContainerHelpers, EMPTY_INTS));
@@ -709,11 +724,11 @@ void ADXSimpleArrayMap_initWithInt_(ADXSimpleArrayMap *self, jint capacity) {
   self->mSize_ = 0;
 }
 
-ADXSimpleArrayMap *new_ADXSimpleArrayMap_initWithInt_(jint capacity) {
+ADXSimpleArrayMap *new_ADXSimpleArrayMap_initWithInt_(int32_t capacity) {
   J2OBJC_NEW_IMPL(ADXSimpleArrayMap, initWithInt_, capacity)
 }
 
-ADXSimpleArrayMap *create_ADXSimpleArrayMap_initWithInt_(jint capacity) {
+ADXSimpleArrayMap *create_ADXSimpleArrayMap_initWithInt_(int32_t capacity) {
   J2OBJC_CREATE_IMPL(ADXSimpleArrayMap, initWithInt_, capacity)
 }
 
@@ -733,3 +748,5 @@ ADXSimpleArrayMap *create_ADXSimpleArrayMap_initWithADXSimpleArrayMap_(ADXSimple
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXSimpleArrayMap)
+
+J2OBJC_NAME_MAPPING(ADXSimpleArrayMap, "androidx.collection", "ADX")

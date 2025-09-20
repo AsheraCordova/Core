@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\JavaEventCommand.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
@@ -14,10 +19,16 @@
 #include "PluginInvoker.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/NumberFormatException.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -35,7 +46,7 @@ withASJavaEventCommand_SingleParamFunction:(id<ASJavaEventCommand_SingleParamFun
 - (id)getObjectWithASIWidget:(id<ASIWidget>)widget
                 withNSString:(NSString *)expression;
 
-- (jfloat)getFloatWithId:(id)modelVal;
+- (float)getFloatWithId:(id)modelVal;
 
 - (id)incrementWithASIWidget:(id<ASIWidget>)widget
                       withId:(id)modelVal
@@ -57,7 +68,7 @@ __attribute__((unused)) static void ASJavaEventCommand_storeObjectWithASIWidget_
 
 __attribute__((unused)) static id ASJavaEventCommand_getObjectWithASIWidget_withNSString_(ASJavaEventCommand *self, id<ASIWidget> widget, NSString *expression);
 
-__attribute__((unused)) static jfloat ASJavaEventCommand_getFloatWithId_(ASJavaEventCommand *self, id modelVal);
+__attribute__((unused)) static float ASJavaEventCommand_getFloatWithId_(ASJavaEventCommand *self, id modelVal);
 
 __attribute__((unused)) static id ASJavaEventCommand_incrementWithASIWidget_withId_withJavaUtilMap_(ASJavaEventCommand *self, id<ASIWidget> widget, id modelVal, id<JavaUtilMap> configMap);
 
@@ -88,6 +99,7 @@ __attribute__((unused)) static ASJavaEventCommand_$Lambda$1 *new_ASJavaEventComm
 
 __attribute__((unused)) static ASJavaEventCommand_$Lambda$1 *create_ASJavaEventCommand_$Lambda$1_initWithASJavaEventCommand_(ASJavaEventCommand *outer$);
 
+
 @interface ASJavaEventCommand_$Lambda$2 : NSObject < ASJavaEventCommand_SingleParamFunction > {
  @public
   ASJavaEventCommand *target$_;
@@ -107,6 +119,7 @@ __attribute__((unused)) static ASJavaEventCommand_$Lambda$2 *new_ASJavaEventComm
 
 __attribute__((unused)) static ASJavaEventCommand_$Lambda$2 *create_ASJavaEventCommand_$Lambda$2_initWithASJavaEventCommand_(ASJavaEventCommand *outer$);
 
+
 @interface ASJavaEventCommand_$Lambda$3 : NSObject < ASJavaEventCommand_SingleParamFunction > {
  @public
   ASJavaEventCommand *target$_;
@@ -125,6 +138,7 @@ __attribute__((unused)) static void ASJavaEventCommand_$Lambda$3_initWithASJavaE
 __attribute__((unused)) static ASJavaEventCommand_$Lambda$3 *new_ASJavaEventCommand_$Lambda$3_initWithASJavaEventCommand_(ASJavaEventCommand *outer$) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASJavaEventCommand_$Lambda$3 *create_ASJavaEventCommand_$Lambda$3_initWithASJavaEventCommand_(ASJavaEventCommand *outer$);
+
 
 @implementation ASJavaEventCommand
 
@@ -170,7 +184,7 @@ withASJavaEventCommand_SingleParamFunction:(id<ASJavaEventCommand_SingleParamFun
   return ASJavaEventCommand_getObjectWithASIWidget_withNSString_(self, widget, expression);
 }
 
-- (jfloat)getFloatWithId:(id)modelVal {
+- (float)getFloatWithId:(id)modelVal {
   return ASJavaEventCommand_getFloatWithId_(self, modelVal);
 }
 
@@ -273,8 +287,8 @@ id ASJavaEventCommand_getObjectWithASIWidget_withNSString_(ASJavaEventCommand *s
   return obj;
 }
 
-jfloat ASJavaEventCommand_getFloatWithId_(ASJavaEventCommand *self, id modelVal) {
-  jfloat val = 0;
+float ASJavaEventCommand_getFloatWithId_(ASJavaEventCommand *self, id modelVal) {
+  float val = 0;
   @try {
     val = [((JavaLangFloat *) nil_chk(ASPluginInvoker_getFloatWithId_(modelVal))) floatValue];
   }
@@ -284,8 +298,8 @@ jfloat ASJavaEventCommand_getFloatWithId_(ASJavaEventCommand *self, id modelVal)
 }
 
 id ASJavaEventCommand_incrementWithASIWidget_withId_withJavaUtilMap_(ASJavaEventCommand *self, id<ASIWidget> widget, id modelVal, id<JavaUtilMap> configMap) {
-  jfloat val = ASJavaEventCommand_getFloatWithId_(self, modelVal);
-  jfloat increment = 1;
+  float val = ASJavaEventCommand_getFloatWithId_(self, modelVal);
+  float increment = 1;
   if ([((id<JavaUtilMap>) nil_chk(configMap)) containsKeyWithId:@"inc"]) {
     increment = ASJavaEventCommand_getFloatWithId_(self, [configMap getWithId:@"inc"]);
   }
@@ -294,13 +308,13 @@ id ASJavaEventCommand_incrementWithASIWidget_withId_withJavaUtilMap_(ASJavaEvent
   }
   JrePlusAssignFloatF(&val, increment);
   if ([configMap containsKeyWithId:@"max"]) {
-    jfloat max = ASJavaEventCommand_getFloatWithId_(self, [configMap getWithId:@"max"]);
+    float max = ASJavaEventCommand_getFloatWithId_(self, [configMap getWithId:@"max"]);
     if (val > max) {
       val = max;
     }
   }
   if ([configMap containsKeyWithId:@"exp_max"]) {
-    jfloat max = ASJavaEventCommand_getFloatWithId_(self, ASJavaEventCommand_getObjectWithASIWidget_withNSString_(self, widget, (NSString *) cast_chk([configMap getWithId:@"exp_max"], [NSString class])));
+    float max = ASJavaEventCommand_getFloatWithId_(self, ASJavaEventCommand_getObjectWithASIWidget_withNSString_(self, widget, (NSString *) cast_chk([configMap getWithId:@"exp_max"], [NSString class])));
     if (val > max) {
       val = max;
     }
@@ -309,8 +323,8 @@ id ASJavaEventCommand_incrementWithASIWidget_withId_withJavaUtilMap_(ASJavaEvent
 }
 
 id ASJavaEventCommand_decrementWithASIWidget_withId_withJavaUtilMap_(ASJavaEventCommand *self, id<ASIWidget> widget, id modelVal, id<JavaUtilMap> configMap) {
-  jfloat val = ASJavaEventCommand_getFloatWithId_(self, modelVal);
-  jfloat decrement = 1;
+  float val = ASJavaEventCommand_getFloatWithId_(self, modelVal);
+  float decrement = 1;
   if ([((id<JavaUtilMap>) nil_chk(configMap)) containsKeyWithId:@"dec"]) {
     decrement = ASJavaEventCommand_getFloatWithId_(self, [configMap getWithId:@"dec"]);
   }
@@ -319,13 +333,13 @@ id ASJavaEventCommand_decrementWithASIWidget_withId_withJavaUtilMap_(ASJavaEvent
   }
   JreMinusAssignFloatF(&val, decrement);
   if ([configMap containsKeyWithId:@"min"]) {
-    jfloat min = ASJavaEventCommand_getFloatWithId_(self, [configMap getWithId:@"min"]);
+    float min = ASJavaEventCommand_getFloatWithId_(self, [configMap getWithId:@"min"]);
     if (val < min) {
       val = min;
     }
   }
   if ([configMap containsKeyWithId:@"exp_min"]) {
-    jfloat min = ASJavaEventCommand_getFloatWithId_(self, ASJavaEventCommand_getObjectWithASIWidget_withNSString_(self, widget, (NSString *) cast_chk([configMap getWithId:@"exp_min"], [NSString class])));
+    float min = ASJavaEventCommand_getFloatWithId_(self, ASJavaEventCommand_getObjectWithASIWidget_withNSString_(self, widget, (NSString *) cast_chk([configMap getWithId:@"exp_min"], [NSString class])));
     if (val < min) {
       val = min;
     }
@@ -339,6 +353,8 @@ id ASJavaEventCommand_toggleWithASIWidget_withId_withJavaUtilMap_(ASJavaEventCom
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASJavaEventCommand)
+
+J2OBJC_NAME_MAPPING(ASJavaEventCommand, "com.ashera.converter", "AS")
 
 @implementation ASJavaEventCommand_SingleParamFunction
 

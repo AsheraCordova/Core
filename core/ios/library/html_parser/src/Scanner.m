@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\Scanner.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "Scanner.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSScanner : NSObject
@@ -34,3 +45,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(TSScanner)
+
+J2OBJC_NAME_MAPPING(TSScanner, "repackaged.org.ccil.cowan.tagsoup", "TS")

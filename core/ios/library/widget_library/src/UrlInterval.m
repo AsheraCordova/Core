@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\UrlInterval.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "Interval.h"
@@ -10,6 +15,15 @@
 #include "StyleInterval.h"
 #include "UrlInterval.h"
 #include "WidgetAttributeMap.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASUrlInterval () {
@@ -31,8 +45,8 @@ J2OBJC_FIELD_SETTER(ASUrlInterval, href_, NSString *)
   JreStrongAssign(&self->href_, href);
 }
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)style
                withNSString:(NSString *)href {
   ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(self, start, end, style, href);
@@ -43,8 +57,8 @@ J2OBJC_FIELD_SETTER(ASUrlInterval, href_, NSString *)
   return JreStrcat("CI$I$$C", '[', [self getStart], @", ", [self getEnd], @", ", self->href_, ']');
 }
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments {
   return create_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(start, end, (ASWidgetAttributeMap *) cast_chk(IOSObjectArray_Get(nil_chk(arguments), 0), [ASWidgetAttributeMap class]), (NSString *) cast_chk(IOSObjectArray_Get(arguments, 1), [NSString class]));
 }
@@ -87,17 +101,19 @@ J2OBJC_FIELD_SETTER(ASUrlInterval, href_, NSString *)
 
 @end
 
-void ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(ASUrlInterval *self, jint start, jint end, ASWidgetAttributeMap *style, NSString *href) {
+void ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(ASUrlInterval *self, int32_t start, int32_t end, ASWidgetAttributeMap *style, NSString *href) {
   ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(self, start, end, style);
   JreStrongAssign(&self->href_, href);
 }
 
-ASUrlInterval *new_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(jint start, jint end, ASWidgetAttributeMap *style, NSString *href) {
+ASUrlInterval *new_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(int32_t start, int32_t end, ASWidgetAttributeMap *style, NSString *href) {
   J2OBJC_NEW_IMPL(ASUrlInterval, initWithInt_withInt_withASWidgetAttributeMap_withNSString_, start, end, style, href)
 }
 
-ASUrlInterval *create_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(jint start, jint end, ASWidgetAttributeMap *style, NSString *href) {
+ASUrlInterval *create_ASUrlInterval_initWithInt_withInt_withASWidgetAttributeMap_withNSString_(int32_t start, int32_t end, ASWidgetAttributeMap *style, NSString *href) {
   J2OBJC_CREATE_IMPL(ASUrlInterval, initWithInt_withInt_withASWidgetAttributeMap_withNSString_, start, end, style, href)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUrlInterval)
+
+J2OBJC_NAME_MAPPING(ASUrlInterval, "com.ashera.attributedtext", "AS")

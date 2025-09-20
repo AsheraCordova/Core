@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\SwitchImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SwitchImpl")
@@ -27,6 +28,9 @@
 @class ADSwitch;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -53,7 +57,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -67,9 +71,9 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getHighlightedTextColor;
 
@@ -81,21 +85,21 @@
 
 - (id)getIsUserInteractionEnabled;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
 - (id)getMinimumScaleFactor;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getNumberOfLines;
 
@@ -121,18 +125,18 @@
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b;
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
 
-- (jint)nativeMeasureSwitchHeightWithId:(id)switchButton;
+- (int32_t)nativeMeasureSwitchHeightWithId:(id)switchButton;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -206,7 +210,7 @@
 - (void)setThumbTintColorWithId:(id)nativeWidget
                          withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 + (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
@@ -255,6 +259,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl)
 
 @compatibility_alias ComAsheraLayoutSwitchImpl ASSwitchImpl;
 
+
 #endif
 
 #if !defined (ASSwitchImpl_Ellipsize_) && (INCLUDE_ALL_SwitchImpl || defined(INCLUDE_ASSwitchImpl_Ellipsize))
@@ -291,6 +296,7 @@ FOUNDATION_EXPORT ASSwitchImpl_Ellipsize *create_ASSwitchImpl_Ellipsize_init(voi
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_Ellipsize)
 
+
 #endif
 
 #if !defined (ASSwitchImpl_MarqueeRepeatLimit_) && (INCLUDE_ALL_SwitchImpl || defined(INCLUDE_ASSwitchImpl_MarqueeRepeatLimit))
@@ -300,6 +306,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_Ellipsize)
 #define INCLUDE_ASAbstractEnumToIntConverter 1
 #include "AbstractEnumToIntConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
 @protocol JavaUtilMap;
 
@@ -311,7 +318,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_Ellipsize)
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 #pragma mark Package-Private
 
@@ -328,6 +335,7 @@ FOUNDATION_EXPORT ASSwitchImpl_MarqueeRepeatLimit *new_ASSwitchImpl_MarqueeRepea
 FOUNDATION_EXPORT ASSwitchImpl_MarqueeRepeatLimit *create_ASSwitchImpl_MarqueeRepeatLimit_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_MarqueeRepeatLimit)
+
 
 #endif
 
@@ -365,6 +373,7 @@ FOUNDATION_EXPORT ASSwitchImpl_JustificationMode *create_ASSwitchImpl_Justificat
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_JustificationMode)
 
+
 #endif
 
 #if !defined (ASSwitchImpl_Font_) && (INCLUDE_ALL_SwitchImpl || defined(INCLUDE_ASSwitchImpl_Font))
@@ -400,6 +409,7 @@ FOUNDATION_EXPORT ASSwitchImpl_Font *new_ASSwitchImpl_Font_init(void) NS_RETURNS
 FOUNDATION_EXPORT ASSwitchImpl_Font *create_ASSwitchImpl_Font_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_Font)
+
 
 #endif
 
@@ -437,6 +447,7 @@ FOUNDATION_EXPORT ASSwitchImpl_TextStyle *create_ASSwitchImpl_TextStyle_init(voi
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_TextStyle)
 
+
 #endif
 
 #if !defined (ASSwitchImpl_DrawableTintMode_) && (INCLUDE_ALL_SwitchImpl || defined(INCLUDE_ASSwitchImpl_DrawableTintMode))
@@ -473,6 +484,7 @@ FOUNDATION_EXPORT ASSwitchImpl_DrawableTintMode *create_ASSwitchImpl_DrawableTin
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASSwitchImpl_SwitchExt_) && (INCLUDE_ALL_SwitchImpl || defined(INCLUDE_ASSwitchImpl_SwitchExt))
@@ -492,6 +504,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -501,7 +517,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
 - (instancetype)initWithASSwitchImpl:(ASSwitchImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -510,13 +526,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -532,19 +548,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -567,7 +583,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -583,16 +599,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -610,6 +626,7 @@ FOUNDATION_EXPORT ASSwitchImpl_SwitchExt *create_ASSwitchImpl_SwitchExt_initWith
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_SwitchExt)
 
+
 #endif
 
 #if !defined (ASSwitchImpl_PostMeasureHandler_) && (INCLUDE_ALL_SwitchImpl || defined(INCLUDE_ASSwitchImpl_PostMeasureHandler))
@@ -620,6 +637,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_SwitchExt)
 #include "EventBusHandler.h"
 
 @class ASSwitchImpl;
+@class NSString;
 
 @interface ASSwitchImpl_PostMeasureHandler : ASEventBusHandler
 
@@ -647,6 +665,7 @@ FOUNDATION_EXPORT ASSwitchImpl_PostMeasureHandler *new_ASSwitchImpl_PostMeasureH
 FOUNDATION_EXPORT ASSwitchImpl_PostMeasureHandler *create_ASSwitchImpl_PostMeasureHandler_initWithASSwitchImpl_withNSString_(ASSwitchImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
+
 
 #endif
 

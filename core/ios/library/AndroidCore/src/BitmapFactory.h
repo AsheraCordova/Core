@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\BitmapFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BitmapFactory")
@@ -46,17 +47,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADBitmapFactory)
 
 @compatibility_alias RAndroidGraphicsBitmapFactory ADBitmapFactory;
 
+
 #endif
 
 #if !defined (ADBitmapFactory_Options_) && (INCLUDE_ALL_BitmapFactory || defined(INCLUDE_ADBitmapFactory_Options))
 #define ADBitmapFactory_Options_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+
 @interface ADBitmapFactory_Options : NSObject {
  @public
-  jint outHeight_;
-  jint outWidth_;
-  jboolean inJustDecodeBounds_;
-  jint inSampleSize_;
+  int32_t outHeight_;
+  int32_t outWidth_;
+  bool inJustDecodeBounds_;
+  int32_t inSampleSize_;
 }
 
 #pragma mark Public
@@ -74,6 +79,7 @@ FOUNDATION_EXPORT ADBitmapFactory_Options *new_ADBitmapFactory_Options_init(void
 FOUNDATION_EXPORT ADBitmapFactory_Options *create_ADBitmapFactory_Options_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADBitmapFactory_Options)
+
 
 #endif
 

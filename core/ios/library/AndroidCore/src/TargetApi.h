@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\TargetApi.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TargetApi")
@@ -21,12 +22,15 @@
 #include "java/lang/annotation/Annotation.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADTargetApi < JavaLangAnnotationAnnotation >
 
-@property (readonly) jint value;
+@property (readonly) int32_t value;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -34,18 +38,19 @@
 
 @interface ADTargetApi : NSObject < ADTargetApi > {
  @public
-  jint value_;
+  int32_t value_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADTargetApi)
 
-FOUNDATION_EXPORT id<ADTargetApi> create_ADTargetApi(jint value);
+FOUNDATION_EXPORT id<ADTargetApi> create_ADTargetApi(int32_t value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTargetApi)
 
 #define RAndroidAnnotationTargetApi ADTargetApi
+
 
 #endif
 

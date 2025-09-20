@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\TypeEvaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TypeEvaluator")
@@ -15,6 +16,8 @@
 
 #if !defined (ADTypeEvaluator_) && (INCLUDE_ALL_TypeEvaluator || defined(INCLUDE_ADTypeEvaluator))
 #define ADTypeEvaluator_
+
+@class JavaLangFloat;
 
 /*!
  @brief Interface for use with the <code>ValueAnimator.setEvaluator(TypeEvaluator)</code> function.Evaluators
@@ -37,7 +40,7 @@
  @return A linear interpolation between the start and end values, given the
           <code>fraction</code> parameter.
  */
-- (id)evaluateWithFloat:(jfloat)fraction
+- (id)evaluateWithFloat:(float)fraction
                  withId:(id)startValue
                  withId:(id)endValue;
 
@@ -48,6 +51,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADTypeEvaluator)
 J2OBJC_TYPE_LITERAL_HEADER(ADTypeEvaluator)
 
 #define RAndroidAnimationTypeEvaluator ADTypeEvaluator
+
 
 #endif
 

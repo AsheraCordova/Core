@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\pm\PackageManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PackageManager")
@@ -18,6 +19,8 @@
 
 @class ADApplicationInfo;
 @class ADPackageManager_PackageInfo;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADPackageManager : NSObject
 
@@ -29,15 +32,15 @@
                                          withNSString:(NSString *)getMetaData;
 
 - (ADPackageManager_PackageInfo *)getPackageInfoWithNSString:(NSString *)packageName
-                                                     withInt:(jint)i;
+                                                     withInt:(int32_t)i;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADPackageManager)
 
-inline jint ADPackageManager_get_PERMISSION_GRANTED(void);
+inline int32_t ADPackageManager_get_PERMISSION_GRANTED(void);
 #define ADPackageManager_PERMISSION_GRANTED 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADPackageManager, PERMISSION_GRANTED, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADPackageManager, PERMISSION_GRANTED, int32_t)
 
 inline NSString *ADPackageManager_get_GET_META_DATA(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -54,6 +57,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPackageManager)
 
 @compatibility_alias RAndroidContentPmPackageManager ADPackageManager;
 
+
 #endif
 
 #if !defined (ADPackageManager_NameNotFoundException_) && (INCLUDE_ALL_PackageManager || defined(INCLUDE_ADPackageManager_NameNotFoundException))
@@ -63,7 +67,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPackageManager)
 #define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+@class JavaLangBoolean;
 @class JavaLangThrowable;
+@class NSString;
 
 @interface ADPackageManager_NameNotFoundException : JavaLangRuntimeException
 
@@ -82,8 +88,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPackageManager)
 
 - (instancetype)initWithNSString:(NSString *)arg0
            withJavaLangThrowable:(JavaLangThrowable *)arg1
-                     withBoolean:(jboolean)arg2
-                     withBoolean:(jboolean)arg3 NS_UNAVAILABLE;
+                     withBoolean:(bool)arg2
+                     withBoolean:(bool)arg3 NS_UNAVAILABLE;
 
 @end
 
@@ -97,16 +103,18 @@ FOUNDATION_EXPORT ADPackageManager_NameNotFoundException *create_ADPackageManage
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPackageManager_NameNotFoundException)
 
+
 #endif
 
 #if !defined (ADPackageManager_PackageInfo_) && (INCLUDE_ALL_PackageManager || defined(INCLUDE_ADPackageManager_PackageInfo))
 #define ADPackageManager_PackageInfo_
 
 @class ADPackageManager;
+@class JavaLangInteger;
 
 @interface ADPackageManager_PackageInfo : NSObject {
  @public
-  jint versionCode_;
+  int32_t versionCode_;
 }
 
 #pragma mark Public
@@ -128,6 +136,7 @@ FOUNDATION_EXPORT ADPackageManager_PackageInfo *new_ADPackageManager_PackageInfo
 FOUNDATION_EXPORT ADPackageManager_PackageInfo *create_ADPackageManager_PackageInfo_initWithADPackageManager_(ADPackageManager *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPackageManager_PackageInfo)
+
 
 #endif
 

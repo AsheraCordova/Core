@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\PlainMap.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PlainMap")
@@ -24,6 +25,8 @@
 #define INCLUDE_ASIFlatMap 1
 #include "IFlatMap.h"
 
+@class JavaLangBoolean;
+@class NSString;
 @protocol JavaUtilMap;
 
 /*!
@@ -59,7 +62,7 @@
 
 - (void)clear;
 
-- (jboolean)existsWithNSString:(NSString *)path;
+- (bool)existsWithNSString:(NSString *)path;
 
 - (NSString *)extractParent;
 
@@ -103,6 +106,7 @@ FOUNDATION_EXPORT ASPlainMap *create_ASPlainMap_initWithJavaUtilMap_withNSString
 J2OBJC_TYPE_LITERAL_HEADER(ASPlainMap)
 
 @compatibility_alias ComAsheraModelPlainMap ASPlainMap;
+
 
 #endif
 

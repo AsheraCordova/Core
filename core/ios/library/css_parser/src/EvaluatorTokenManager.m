@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\EvaluatorTokenManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "EvaluatorTokenManager.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -13,7 +18,17 @@
 #include "TokenMgrError.h"
 #include "java/io/IOException.h"
 #include "java/io/PrintStream.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/System.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSEvaluatorTokenManager () {
@@ -22,92 +37,92 @@
   IOSIntArray *jjstateSet_;
 }
 
-- (jint)jjStopStringLiteralDfa_0WithInt:(jint)pos
-                               withLong:(jlong)active0;
+- (int32_t)jjStopStringLiteralDfa_0WithInt:(int32_t)pos
+                                  withLong:(int64_t)active0;
 
-- (jint)jjStartNfa_0WithInt:(jint)pos
-                   withLong:(jlong)active0;
+- (int32_t)jjStartNfa_0WithInt:(int32_t)pos
+                      withLong:(int64_t)active0;
 
-- (jint)jjStopAtPosWithInt:(jint)pos
-                   withInt:(jint)kind;
+- (int32_t)jjStopAtPosWithInt:(int32_t)pos
+                      withInt:(int32_t)kind;
 
-- (jint)jjMoveStringLiteralDfa0_0;
+- (int32_t)jjMoveStringLiteralDfa0_0;
 
-- (jint)jjMoveStringLiteralDfa1_0WithLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa1_0WithLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa2_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa2_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa3_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa3_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa4_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa4_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa5_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa5_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa6_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa6_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa7_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa7_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa8_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa8_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa9_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa9_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa10_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa10_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa11_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa11_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa12_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa12_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa13_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa13_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa14_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa14_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa15_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa15_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa16_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa16_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa17_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa17_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa18_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa18_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa19_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa19_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa20_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa20_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa21_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa21_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveStringLiteralDfa22_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0;
+- (int32_t)jjMoveStringLiteralDfa22_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0;
 
-- (jint)jjMoveNfa_0WithInt:(jint)startState
-                   withInt:(jint)curPos;
+- (int32_t)jjMoveNfa_0WithInt:(int32_t)startState
+                      withInt:(int32_t)curPos;
 
-- (void)jjCheckNAddWithInt:(jint)state;
+- (void)jjCheckNAddWithInt:(int32_t)state;
 
-- (void)jjAddStatesWithInt:(jint)start
-                   withInt:(jint)end;
+- (void)jjAddStatesWithInt:(int32_t)start
+                   withInt:(int32_t)end;
 
-- (void)jjCheckNAddTwoStatesWithInt:(jint)state1
-                            withInt:(jint)state2;
+- (void)jjCheckNAddTwoStatesWithInt:(int32_t)state1
+                            withInt:(int32_t)state2;
 
 - (void)ReInitRounds;
 
@@ -116,65 +131,65 @@
 J2OBJC_FIELD_SETTER(CSSEvaluatorTokenManager, jjrounds_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(CSSEvaluatorTokenManager, jjstateSet_, IOSIntArray *)
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, jint pos, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, int32_t pos, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, jint pos, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, int32_t pos, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(CSSEvaluatorTokenManager *self, jint pos, jint kind);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t pos, int32_t kind);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(CSSEvaluatorTokenManager *self);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(CSSEvaluatorTokenManager *self);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(CSSEvaluatorTokenManager *self, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(CSSEvaluatorTokenManager *self, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0);
 
-__attribute__((unused)) static jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManager *self, jint startState, jint curPos);
+__attribute__((unused)) static int32_t CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t startState, int32_t curPos);
 
-__attribute__((unused)) static void CSSEvaluatorTokenManager_jjCheckNAddWithInt_(CSSEvaluatorTokenManager *self, jint state);
+__attribute__((unused)) static void CSSEvaluatorTokenManager_jjCheckNAddWithInt_(CSSEvaluatorTokenManager *self, int32_t state);
 
-__attribute__((unused)) static void CSSEvaluatorTokenManager_jjAddStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, jint start, jint end);
+__attribute__((unused)) static void CSSEvaluatorTokenManager_jjAddStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t start, int32_t end);
 
-__attribute__((unused)) static void CSSEvaluatorTokenManager_jjCheckNAddTwoStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, jint state1, jint state2);
+__attribute__((unused)) static void CSSEvaluatorTokenManager_jjCheckNAddTwoStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t state1, int32_t state2);
 
 __attribute__((unused)) static void CSSEvaluatorTokenManager_ReInitRounds(CSSEvaluatorTokenManager *self);
 
@@ -192,146 +207,146 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
   JreStrongAssign(&debugStream_, ds);
 }
 
-- (jint)jjStopStringLiteralDfa_0WithInt:(jint)pos
-                               withLong:(jlong)active0 {
+- (int32_t)jjStopStringLiteralDfa_0WithInt:(int32_t)pos
+                                  withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(self, pos, active0);
 }
 
-- (jint)jjStartNfa_0WithInt:(jint)pos
-                   withLong:(jlong)active0 {
+- (int32_t)jjStartNfa_0WithInt:(int32_t)pos
+                      withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, pos, active0);
 }
 
-- (jint)jjStopAtPosWithInt:(jint)pos
-                   withInt:(jint)kind {
+- (int32_t)jjStopAtPosWithInt:(int32_t)pos
+                      withInt:(int32_t)kind {
   return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, pos, kind);
 }
 
-- (jint)jjMoveStringLiteralDfa0_0 {
+- (int32_t)jjMoveStringLiteralDfa0_0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(self);
 }
 
-- (jint)jjMoveStringLiteralDfa1_0WithLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa1_0WithLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(self, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa2_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa2_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa3_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa3_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa4_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa4_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa5_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa5_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa6_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa6_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa7_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa7_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa8_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa8_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa9_0WithLong:(jlong)old0
-                                 withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa9_0WithLong:(int64_t)old0
+                                    withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa10_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa10_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa11_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa11_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa12_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa12_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa13_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa13_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa14_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa14_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa15_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa15_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa16_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa16_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa17_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa17_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa18_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa18_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa19_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa19_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa20_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa20_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa21_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa21_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveStringLiteralDfa22_0WithLong:(jlong)old0
-                                  withLong:(jlong)active0 {
+- (int32_t)jjMoveStringLiteralDfa22_0WithLong:(int64_t)old0
+                                     withLong:(int64_t)active0 {
   return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(self, old0, active0);
 }
 
-- (jint)jjMoveNfa_0WithInt:(jint)startState
-                   withInt:(jint)curPos {
+- (int32_t)jjMoveNfa_0WithInt:(int32_t)startState
+                      withInt:(int32_t)curPos {
   return CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(self, startState, curPos);
 }
 
 - (CSSToken *)jjFillToken {
   __unused CSSToken *t;
   __unused NSString *curTokenImage;
-  __unused jint beginLine;
-  __unused jint endLine;
-  __unused jint beginColumn;
-  __unused jint endColumn;
+  __unused int32_t beginLine;
+  __unused int32_t endLine;
+  __unused int32_t beginColumn;
+  __unused int32_t endColumn;
   __unused NSString *im = IOSObjectArray_Get(nil_chk(CSSEvaluatorTokenManager_jjstrLiteralImages), jjmatchedKind_);
   curTokenImage = (im == nil) ? [((CSSJavaCharStream *) nil_chk(input_stream_)) GetImage] : im;
   beginLine = [((CSSJavaCharStream *) nil_chk(input_stream_)) getBeginLine];
@@ -348,7 +363,7 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
 
 - (CSSToken *)getNextToken {
   __unused CSSToken *matchedToken;
-  __unused jint curPos = 0;
+  __unused int32_t curPos = 0;
   for (; ; ) {
     {
       @try {
@@ -362,15 +377,15 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
       }
       @try {
         [((CSSJavaCharStream *) nil_chk(input_stream_)) backupWithInt:0];
-        while (curChar_ <= 32 && ((jlong) 0x100002600LL & (JreLShift64(1LL, curChar_))) != 0LL) curChar_ = [((CSSJavaCharStream *) nil_chk(input_stream_)) BeginToken];
+        while (curChar_ <= 32 && ((int64_t) 0x100002600LL & (JreLShift64(1LL, curChar_))) != 0LL) curChar_ = [((CSSJavaCharStream *) nil_chk(input_stream_)) BeginToken];
       }
       @catch (JavaIoIOException *e1) {
         goto continue_EOFLoop;
       }
-      jjmatchedKind_ = (jint) 0x7fffffff;
+      jjmatchedKind_ = (int32_t) 0x7fffffff;
       jjmatchedPos_ = 0;
       curPos = CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(self);
-      if (jjmatchedKind_ != (jint) 0x7fffffff) {
+      if (jjmatchedKind_ != (int32_t) 0x7fffffff) {
         if (jjmatchedPos_ + 1 < curPos) [((CSSJavaCharStream *) nil_chk(input_stream_)) backupWithInt:curPos - jjmatchedPos_ - 1];
         if ((IOSLongArray_Get(nil_chk(CSSEvaluatorTokenManager_jjtoToken), JreRShift32(jjmatchedKind_, 6)) & (JreLShift64(1LL, (jjmatchedKind_ & 077)))) != 0LL) {
           matchedToken = [self jjFillToken];
@@ -380,10 +395,10 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
           goto continue_EOFLoop;
         }
       }
-      __unused jint error_line = [((CSSJavaCharStream *) nil_chk(input_stream_)) getEndLine];
-      __unused jint error_column = [((CSSJavaCharStream *) nil_chk(input_stream_)) getEndColumn];
+      __unused int32_t error_line = [((CSSJavaCharStream *) nil_chk(input_stream_)) getEndLine];
+      __unused int32_t error_column = [((CSSJavaCharStream *) nil_chk(input_stream_)) getEndColumn];
       __unused NSString *error_after = nil;
-      __unused jboolean EOFSeen = false;
+      __unused bool EOFSeen = false;
       @try {
         [((CSSJavaCharStream *) nil_chk(input_stream_)) readChar];
         [((CSSJavaCharStream *) nil_chk(input_stream_)) backupWithInt:1];
@@ -407,17 +422,17 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
   }
 }
 
-- (void)jjCheckNAddWithInt:(jint)state {
+- (void)jjCheckNAddWithInt:(int32_t)state {
   CSSEvaluatorTokenManager_jjCheckNAddWithInt_(self, state);
 }
 
-- (void)jjAddStatesWithInt:(jint)start
-                   withInt:(jint)end {
+- (void)jjAddStatesWithInt:(int32_t)start
+                   withInt:(int32_t)end {
   CSSEvaluatorTokenManager_jjAddStatesWithInt_withInt_(self, start, end);
 }
 
-- (void)jjCheckNAddTwoStatesWithInt:(jint)state1
-                            withInt:(jint)state2 {
+- (void)jjCheckNAddTwoStatesWithInt:(int32_t)state1
+                            withInt:(int32_t)state2 {
   CSSEvaluatorTokenManager_jjCheckNAddTwoStatesWithInt_withInt_(self, state1, state2);
 }
 
@@ -427,7 +442,7 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
 }
 
 - (instancetype)initPackagePrivateWithCSSJavaCharStream:(CSSJavaCharStream *)stream
-                                                withInt:(jint)lexState {
+                                                withInt:(int32_t)lexState {
   CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(self, stream, lexState);
   return self;
 }
@@ -444,12 +459,12 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
 }
 
 - (void)ReInitWithCSSJavaCharStream:(CSSJavaCharStream *)stream
-                            withInt:(jint)lexState {
+                            withInt:(int32_t)lexState {
   [self ReInitWithCSSJavaCharStream:stream];
   [self SwitchToWithInt:lexState];
 }
 
-- (void)SwitchToWithInt:(jint)lexState {
+- (void)SwitchToWithInt:(int32_t)lexState {
   if (lexState >= 1 || lexState < 0) @throw create_CSSTokenMgrError_initPackagePrivateWithNSString_withInt_(JreStrcat("$I$", @"Error: Ignoring invalid lexical state : ", lexState, @". State unchanged."), CSSTokenMgrError_INVALID_LEXICAL_STATE);
   else curLexState_ = lexState;
 }
@@ -572,63 +587,63 @@ IOSLongArray *CSSEvaluatorTokenManager_jjtoSkip;
 
 + (void)initialize {
   if (self == [CSSEvaluatorTokenManager class]) {
-    JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_jjnextStates, [IOSIntArray newArrayWithInts:(jint[]){ 7, 8 } count:2]);
+    JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_jjnextStates, [IOSIntArray newArrayWithInts:(int32_t[]){ 7, 8 } count:2]);
     JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_jjstrLiteralImages, [IOSObjectArray newArrayWithObjects:(id[]){ @"", nil, nil, nil, nil, nil, nil, nil, nil, @"|", nil, nil, @"{", @"}", @":", @";", nil, @"(", @")" } count:19 type:NSString_class_()]);
     JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_lexStateNames, [IOSObjectArray newArrayWithObjects:(id[]){ @"DEFAULT" } count:1 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_jjtoToken, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x7ffe1LL } count:1]);
-    JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_jjtoSkip, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x1eLL } count:1]);
+    JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_jjtoToken, [IOSLongArray newArrayWithLongs:(int64_t[]){ (int64_t) 0x7ffe1LL } count:1]);
+    JreStrongAssignAndConsume(&CSSEvaluatorTokenManager_jjtoSkip, [IOSLongArray newArrayWithLongs:(int64_t[]){ (int64_t) 0x1eLL } count:1]);
     J2OBJC_SET_INITIALIZED(CSSEvaluatorTokenManager)
   }
 }
 
 @end
 
-jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, jint pos, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, int32_t pos, int64_t active0) {
   switch (pos) {
     case 0:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       self->jjmatchedKind_ = 11;
       return 5;
     }
-    if ((active0 & (jlong) 0xc0LL) != 0LL) return 5;
+    if ((active0 & (int64_t) 0xc0LL) != 0LL) return 5;
     return -1;
     case 1:
-    if ((active0 & (jlong) 0x60LL) != 0LL) {
+    if ((active0 & (int64_t) 0x60LL) != 0LL) {
       self->jjmatchedKind_ = 11;
       self->jjmatchedPos_ = 1;
       return 5;
     }
     return -1;
     case 2:
-    if ((active0 & (jlong) 0x60LL) != 0LL) {
+    if ((active0 & (int64_t) 0x60LL) != 0LL) {
       self->jjmatchedKind_ = 11;
       self->jjmatchedPos_ = 2;
       return 5;
     }
     return -1;
     case 3:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       self->jjmatchedKind_ = 11;
       self->jjmatchedPos_ = 3;
       return 5;
     }
     return -1;
     case 4:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       self->jjmatchedKind_ = 11;
       self->jjmatchedPos_ = 4;
       return 5;
     }
     return -1;
     case 5:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       self->jjmatchedKind_ = 11;
       self->jjmatchedPos_ = 5;
       return 5;
     }
     return -1;
     case 6:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -637,7 +652,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 7:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -646,7 +661,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 8:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -655,7 +670,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 9:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -664,7 +679,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 10:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -673,7 +688,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 11:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -682,7 +697,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 12:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -691,7 +706,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 13:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -700,7 +715,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 14:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -709,7 +724,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 15:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -718,7 +733,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 16:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -727,7 +742,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 17:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -736,7 +751,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 18:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -745,7 +760,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 19:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -754,7 +769,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 20:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -763,7 +778,7 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
     }
     return -1;
     case 21:
-    if ((active0 & (jlong) 0x20LL) != 0LL) {
+    if ((active0 & (int64_t) 0x20LL) != 0LL) {
       if (self->jjmatchedPos_ < 5) {
         self->jjmatchedKind_ = 11;
         self->jjmatchedPos_ = 5;
@@ -776,17 +791,17 @@ jint CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(CSSEvalu
   }
 }
 
-jint CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, jint pos, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(CSSEvaluatorTokenManager *self, int32_t pos, int64_t active0) {
   return CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(self, CSSEvaluatorTokenManager_jjStopStringLiteralDfa_0WithInt_withLong_(self, pos, active0), pos + 1);
 }
 
-jint CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(CSSEvaluatorTokenManager *self, jint pos, jint kind) {
+int32_t CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t pos, int32_t kind) {
   self->jjmatchedKind_ = kind;
   self->jjmatchedPos_ = pos;
   return pos + 1;
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(CSSEvaluatorTokenManager *self) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(CSSEvaluatorTokenManager *self) {
   switch (self->curChar_) {
     case 40:
     return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, 0, 17);
@@ -797,11 +812,11 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(CSSEvaluatorTokenManager
     case 59:
     return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, 0, 15);
     case 64:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(self, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(self, (int64_t) 0x20LL);
     case 65:
     case 97:
     self->jjmatchedKind_ = 7;
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(self, (jlong) 0x40LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(self, (int64_t) 0x40LL);
     case 123:
     return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, 0, 12);
     case 124:
@@ -813,7 +828,7 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa0_0(CSSEvaluatorTokenManager
   }
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(CSSEvaluatorTokenManager *self, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(CSSEvaluatorTokenManager *self, int64_t active0) {
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
   }
@@ -824,17 +839,17 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa1_0WithLong_(CSSEvaluatorTok
   switch (self->curChar_) {
     case 77:
     case 109:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     case 78:
     case 110:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(self, active0, (jlong) 0x40LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(self, active0, (int64_t) 0x40LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 0, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 0, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -846,17 +861,17 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa2_0WithLong_withLong_(CSSEva
   switch (self->curChar_) {
     case 68:
     case 100:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(self, active0, (jlong) 0x40LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(self, active0, (int64_t) 0x40LL);
     case 69:
     case 101:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 1, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 1, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -867,18 +882,18 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa3_0WithLong_withLong_(CSSEva
   }
   switch (self->curChar_) {
     case 32:
-    if ((active0 & (jlong) 0x40LL) != 0LL) return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, 3, 6);
+    if ((active0 & (int64_t) 0x40LL) != 0LL) return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, 3, 6);
     break;
     case 68:
     case 100:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 2, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 2, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -890,14 +905,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa4_0WithLong_withLong_(CSSEva
   switch (self->curChar_) {
     case 73:
     case 105:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 3, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 3, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -909,14 +924,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa5_0WithLong_withLong_(CSSEva
   switch (self->curChar_) {
     case 65:
     case 97:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 4, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 4, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -927,14 +942,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa6_0WithLong_withLong_(CSSEva
   }
   switch (self->curChar_) {
     case 32:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 5, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 5, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -946,14 +961,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa7_0WithLong_withLong_(CSSEva
   switch (self->curChar_) {
     case 79:
     case 111:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 6, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 6, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -965,14 +980,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa8_0WithLong_withLong_(CSSEva
   switch (self->curChar_) {
     case 78:
     case 110:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 7, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 7, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -984,14 +999,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa9_0WithLong_withLong_(CSSEva
   switch (self->curChar_) {
     case 76:
     case 108:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 8, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 8, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1003,14 +1018,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa10_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 89:
     case 121:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 9, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 9, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1021,14 +1036,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa11_0WithLong_withLong_(CSSEv
   }
   switch (self->curChar_) {
     case 32:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 10, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 10, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1040,14 +1055,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa12_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 83:
     case 115:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 11, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 11, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1059,14 +1074,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa13_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 67:
     case 99:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 12, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 12, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1078,14 +1093,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa14_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 82:
     case 114:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 13, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 13, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1097,14 +1112,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa15_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 69:
     case 101:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 14, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 14, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1116,14 +1131,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa16_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 69:
     case 101:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 15, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 15, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1135,14 +1150,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa17_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 78:
     case 110:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 16, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 16, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1153,14 +1168,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa18_0WithLong_withLong_(CSSEv
   }
   switch (self->curChar_) {
     case 32:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 17, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 17, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1172,14 +1187,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa19_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 65:
     case 97:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 18, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 18, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1191,14 +1206,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa20_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 78:
     case 110:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 19, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 19, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1210,14 +1225,14 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa21_0WithLong_withLong_(CSSEv
   switch (self->curChar_) {
     case 68:
     case 100:
-    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(self, active0, (jlong) 0x20LL);
+    return CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(self, active0, (int64_t) 0x20LL);
     default:
     break;
   }
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 20, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(CSSEvaluatorTokenManager *self, jlong old0, jlong active0) {
+int32_t CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(CSSEvaluatorTokenManager *self, int64_t old0, int64_t active0) {
   if (((active0 &= old0)) == 0LL) return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 20, old0);
   @try {
     self->curChar_ = [((CSSJavaCharStream *) nil_chk(self->input_stream_)) readChar];
@@ -1228,7 +1243,7 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(CSSEv
   }
   switch (self->curChar_) {
     case 32:
-    if ((active0 & (jlong) 0x20LL) != 0LL) return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, 22, 5);
+    if ((active0 & (int64_t) 0x20LL) != 0LL) return CSSEvaluatorTokenManager_jjStopAtPosWithInt_withInt_(self, 22, 5);
     break;
     default:
     break;
@@ -1236,20 +1251,20 @@ jint CSSEvaluatorTokenManager_jjMoveStringLiteralDfa22_0WithLong_withLong_(CSSEv
   return CSSEvaluatorTokenManager_jjStartNfa_0WithInt_withLong_(self, 21, active0);
 }
 
-jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManager *self, jint startState, jint curPos) {
-  __unused jint startsAt = 0;
+int32_t CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t startState, int32_t curPos) {
+  __unused int32_t startsAt = 0;
   self->jjnewStateCnt_ = 9;
-  __unused jint i = 1;
+  __unused int32_t i = 1;
   *IOSIntArray_GetRef(nil_chk(self->jjstateSet_), 0) = startState;
-  __unused jint kind = (jint) 0x7fffffff;
+  __unused int32_t kind = (int32_t) 0x7fffffff;
   for (; ; ) {
-    if (++self->jjround_ == (jint) 0x7fffffff) CSSEvaluatorTokenManager_ReInitRounds(self);
+    if (++self->jjround_ == (int32_t) 0x7fffffff) CSSEvaluatorTokenManager_ReInitRounds(self);
     if (self->curChar_ < 64) {
-      __unused jlong l = JreLShift64(1LL, self->curChar_);
+      __unused int64_t l = JreLShift64(1LL, self->curChar_);
       do {
         switch (IOSIntArray_Get(self->jjstateSet_, --i)) {
           case 0:
-          if (((jlong) 0x3ff600800000000LL & l) != 0LL) {
+          if (((int64_t) 0x3ff600800000000LL & l) != 0LL) {
             if (kind > 11) kind = 11;
             {
               CSSEvaluatorTokenManager_jjCheckNAddWithInt_(self, 5);
@@ -1287,7 +1302,7 @@ jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManag
           }
           break;
           case 5:
-          if (((jlong) 0x3ff600800000000LL & l) == 0LL) break;
+          if (((int64_t) 0x3ff600800000000LL & l) == 0LL) break;
           if (kind > 11) kind = 11;
           {
             CSSEvaluatorTokenManager_jjCheckNAddWithInt_(self, 5);
@@ -1299,7 +1314,7 @@ jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManag
           }
           break;
           case 7:
-          if (((jlong) 0x3ffe00900000000LL & l) != 0LL) {
+          if (((int64_t) 0x3ffe00900000000LL & l) != 0LL) {
             CSSEvaluatorTokenManager_jjCheckNAddTwoStatesWithInt_withInt_(self, 7, 8);
           }
           break;
@@ -1313,29 +1328,29 @@ jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManag
       while (i != startsAt);
     }
     else if (self->curChar_ < 128) {
-      __unused jlong l = JreLShift64(1LL, (self->curChar_ & 077));
+      __unused int64_t l = JreLShift64(1LL, (self->curChar_ & 077));
       do {
         switch (IOSIntArray_Get(self->jjstateSet_, --i)) {
           case 0:
-          if (((jlong) 0x7fffffe87ffffffLL & l) != 0LL) {
+          if (((int64_t) 0x7fffffe87ffffffLL & l) != 0LL) {
             if (kind > 11) kind = 11;
             {
               CSSEvaluatorTokenManager_jjCheckNAddWithInt_(self, 5);
             }
           }
-          if (((jlong) 0x40010000400100LL & l) != 0LL) {
+          if (((int64_t) 0x40010000400100LL & l) != 0LL) {
             if (kind > 8) kind = 8;
           }
           break;
           case 5:
-          if (((jlong) 0x7fffffe87ffffffLL & l) == 0LL) break;
+          if (((int64_t) 0x7fffffe87ffffffLL & l) == 0LL) break;
           if (kind > 11) kind = 11;
           {
             CSSEvaluatorTokenManager_jjCheckNAddWithInt_(self, 5);
           }
           break;
           case 7:
-          if (((jlong) 0x7fffffe87ffffffLL & l) != 0LL) {
+          if (((int64_t) 0x7fffffe87ffffffLL & l) != 0LL) {
             CSSEvaluatorTokenManager_jjAddStatesWithInt_withInt_(self, 0, 1);
           }
           break;
@@ -1346,11 +1361,11 @@ jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManag
       while (i != startsAt);
     }
     else {
-      __unused jint hiByte = (JreRShift32(self->curChar_, 8));
-      __unused jint i1 = JreRShift32(hiByte, 6);
-      __unused jlong l1 = JreLShift64(1LL, (hiByte & 077));
-      __unused jint i2 = JreRShift32((self->curChar_ & (jint) 0xff), 6);
-      __unused jlong l2 = JreLShift64(1LL, (self->curChar_ & 077));
+      __unused int32_t hiByte = (JreRShift32(self->curChar_, 8));
+      __unused int32_t i1 = JreRShift32(hiByte, 6);
+      __unused int64_t l1 = JreLShift64(1LL, (hiByte & 077));
+      __unused int32_t i2 = JreRShift32((self->curChar_ & (int32_t) 0xff), 6);
+      __unused int64_t l2 = JreLShift64(1LL, (self->curChar_ & 077));
       do {
         switch (IOSIntArray_Get(self->jjstateSet_, --i)) {
           default:
@@ -1360,10 +1375,10 @@ jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManag
       }
       while (i != startsAt);
     }
-    if (kind != (jint) 0x7fffffff) {
+    if (kind != (int32_t) 0x7fffffff) {
       self->jjmatchedKind_ = kind;
       self->jjmatchedPos_ = curPos;
-      kind = (jint) 0x7fffffff;
+      kind = (int32_t) 0x7fffffff;
     }
     ++curPos;
     if ((i = self->jjnewStateCnt_) == (startsAt = 9 - (self->jjnewStateCnt_ = startsAt))) return curPos;
@@ -1376,21 +1391,21 @@ jint CSSEvaluatorTokenManager_jjMoveNfa_0WithInt_withInt_(CSSEvaluatorTokenManag
   }
 }
 
-void CSSEvaluatorTokenManager_jjCheckNAddWithInt_(CSSEvaluatorTokenManager *self, jint state) {
+void CSSEvaluatorTokenManager_jjCheckNAddWithInt_(CSSEvaluatorTokenManager *self, int32_t state) {
   if (IOSIntArray_Get(nil_chk(self->jjrounds_), state) != self->jjround_) {
     *IOSIntArray_GetRef(nil_chk(self->jjstateSet_), self->jjnewStateCnt_++) = state;
     *IOSIntArray_GetRef(self->jjrounds_, state) = self->jjround_;
   }
 }
 
-void CSSEvaluatorTokenManager_jjAddStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, jint start, jint end) {
+void CSSEvaluatorTokenManager_jjAddStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t start, int32_t end) {
   do {
     *IOSIntArray_GetRef(nil_chk(self->jjstateSet_), self->jjnewStateCnt_++) = IOSIntArray_Get(nil_chk(CSSEvaluatorTokenManager_jjnextStates), start);
   }
   while (start++ != end);
 }
 
-void CSSEvaluatorTokenManager_jjCheckNAddTwoStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, jint state1, jint state2) {
+void CSSEvaluatorTokenManager_jjCheckNAddTwoStatesWithInt_withInt_(CSSEvaluatorTokenManager *self, int32_t state1, int32_t state2) {
   CSSEvaluatorTokenManager_jjCheckNAddWithInt_(self, state1);
   CSSEvaluatorTokenManager_jjCheckNAddWithInt_(self, state2);
 }
@@ -1413,7 +1428,7 @@ CSSEvaluatorTokenManager *create_CSSEvaluatorTokenManager_initPackagePrivateWith
   J2OBJC_CREATE_IMPL(CSSEvaluatorTokenManager, initPackagePrivateWithCSSJavaCharStream_, stream)
 }
 
-void CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSEvaluatorTokenManager *self, CSSJavaCharStream *stream, jint lexState) {
+void CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSEvaluatorTokenManager *self, CSSJavaCharStream *stream, int32_t lexState) {
   NSObject_init(self);
   JreStrongAssign(&self->debugStream_, JreLoadStatic(JavaLangSystem, out));
   self->curLexState_ = 0;
@@ -1424,17 +1439,17 @@ void CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(C
   [self SwitchToWithInt:lexState];
 }
 
-CSSEvaluatorTokenManager *new_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, jint lexState) {
+CSSEvaluatorTokenManager *new_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, int32_t lexState) {
   J2OBJC_NEW_IMPL(CSSEvaluatorTokenManager, initPackagePrivateWithCSSJavaCharStream_withInt_, stream, lexState)
 }
 
-CSSEvaluatorTokenManager *create_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, jint lexState) {
+CSSEvaluatorTokenManager *create_CSSEvaluatorTokenManager_initPackagePrivateWithCSSJavaCharStream_withInt_(CSSJavaCharStream *stream, int32_t lexState) {
   J2OBJC_CREATE_IMPL(CSSEvaluatorTokenManager, initPackagePrivateWithCSSJavaCharStream_withInt_, stream, lexState)
 }
 
 void CSSEvaluatorTokenManager_ReInitRounds(CSSEvaluatorTokenManager *self) {
-  __unused jint i;
-  self->jjround_ = (jint) 0x80000001;
+  __unused int32_t i;
+  self->jjround_ = (int32_t) 0x80000001;
   for (i = 9; i-- > 0; ) *IOSIntArray_GetRef(nil_chk(self->jjrounds_), i) = -0x7fffffff - 1;
 }
 

@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\util\AndroidRuntimeException.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AndroidRuntimeException.h"
 #include "J2ObjC_source.h"
 #include "java/lang/RuntimeException.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAndroidRuntimeException
@@ -44,3 +55,5 @@ ADAndroidRuntimeException *create_ADAndroidRuntimeException_initWithNSString_(NS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAndroidRuntimeException)
+
+J2OBJC_NAME_MAPPING(ADAndroidRuntimeException, "r.android.util", "AD")

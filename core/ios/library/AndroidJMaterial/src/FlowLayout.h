@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\internal\FlowLayout.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FlowLayout")
@@ -21,6 +22,8 @@
 #include "ViewGroup.h"
 
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADXFlowLayout : ADViewGroup
 
@@ -28,28 +31,28 @@
 
 - (instancetype)init;
 
-- (jint)getRowIndexWithADView:(ADView *)child;
+- (int32_t)getRowIndexWithADView:(ADView *)child;
 
-- (jboolean)isSingleLine;
+- (bool)isSingleLine;
 
-- (void)setSingleLineWithBoolean:(jboolean)singleLine;
+- (void)setSingleLineWithBoolean:(bool)singleLine;
 
 #pragma mark Protected
 
-- (jint)getRowCount;
+- (int32_t)getRowCount;
 
-- (void)onLayoutWithBoolean:(jboolean)sizeChanged
-                    withInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom;
+- (void)onLayoutWithBoolean:(bool)sizeChanged
+                    withInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
-- (void)setItemSpacingWithInt:(jint)itemSpacing;
+- (void)setItemSpacingWithInt:(int32_t)itemSpacing;
 
-- (void)setLineSpacingWithInt:(jint)lineSpacing;
+- (void)setLineSpacingWithInt:(int32_t)lineSpacing;
 
 @end
 
@@ -64,6 +67,7 @@ FOUNDATION_EXPORT ADXFlowLayout *create_ADXFlowLayout_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADXFlowLayout)
 
 @compatibility_alias ComGoogleAndroidMaterialInternalFlowLayout ADXFlowLayout;
+
 
 #endif
 

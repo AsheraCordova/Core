@@ -3,17 +3,29 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\widget\ListView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbsListView.h"
 #include "J2ObjC_source.h"
 #include "ListAdapter.h"
 #include "ListView.h"
 #include "View.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADListView () {
  @public
-  jint widthMeasureSpec_;
-  jint heightMeasureSpec_;
+  int32_t widthMeasureSpec_;
+  int32_t heightMeasureSpec_;
 }
 
 @end
@@ -27,8 +39,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   self->widthMeasureSpec_ = widthMeasureSpec;
   self->heightMeasureSpec_ = heightMeasureSpec;
@@ -82,3 +94,5 @@ ADListView *create_ADListView_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADListView)
+
+J2OBJC_NAME_MAPPING(ADListView, "r.android.widget", "AD")

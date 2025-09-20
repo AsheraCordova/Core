@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Log.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Log")
@@ -16,7 +17,10 @@
 #if !defined (ADLog_) && (INCLUDE_ALL_Log || defined(INCLUDE_ADLog))
 #define ADLog_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @class JavaLangThrowable;
+@class NSString;
 
 @interface ADLog : NSObject
 
@@ -45,8 +49,8 @@ withJavaLangThrowable:(JavaLangThrowable *)e;
          withNSString:(NSString *)s
 withJavaLangThrowable:(JavaLangThrowable *)e;
 
-+ (jboolean)isLoggableWithNSString:(NSString *)tag
-                           withInt:(jint)debug2;
++ (bool)isLoggableWithNSString:(NSString *)tag
+                       withInt:(int32_t)debug2;
 
 + (void)vWithNSString:(NSString *)tag
          withNSString:(NSString *)s;
@@ -69,25 +73,25 @@ withJavaLangThrowable:(JavaLangThrowable *)e;
 
 J2OBJC_EMPTY_STATIC_INIT(ADLog)
 
-inline jint ADLog_get_DEBUG(void);
+inline int32_t ADLog_get_DEBUG(void);
 #define ADLog_DEBUG 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLog, DEBUG, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLog, DEBUG, int32_t)
 
-inline jint ADLog_get_VERBOSE(void);
+inline int32_t ADLog_get_VERBOSE(void);
 #define ADLog_VERBOSE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLog, VERBOSE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLog, VERBOSE, int32_t)
 
-inline jint ADLog_get_INFO(void);
+inline int32_t ADLog_get_INFO(void);
 #define ADLog_INFO 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLog, INFO, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLog, INFO, int32_t)
 
-inline jint ADLog_get_WARN(void);
+inline int32_t ADLog_get_WARN(void);
 #define ADLog_WARN 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLog, WARN, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLog, WARN, int32_t)
 
-inline jint ADLog_get_ERROR(void);
+inline int32_t ADLog_get_ERROR(void);
 #define ADLog_ERROR 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADLog, ERROR, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADLog, ERROR, int32_t)
 
 FOUNDATION_EXPORT void ADLog_init(ADLog *self);
 
@@ -95,7 +99,7 @@ FOUNDATION_EXPORT ADLog *new_ADLog_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADLog *create_ADLog_init(void);
 
-FOUNDATION_EXPORT jboolean ADLog_isLoggableWithNSString_withInt_(NSString *tag, jint debug2);
+FOUNDATION_EXPORT bool ADLog_isLoggableWithNSString_withInt_(NSString *tag, int32_t debug2);
 
 FOUNDATION_EXPORT void ADLog_dWithNSString_withNSString_(NSString *tag, NSString *string);
 
@@ -122,6 +126,7 @@ FOUNDATION_EXPORT void ADLog_iWithNSString_withNSString_withJavaLangThrowable_(N
 J2OBJC_TYPE_LITERAL_HEADER(ADLog)
 
 @compatibility_alias RAndroidUtilLog ADLog;
+
 
 #endif
 

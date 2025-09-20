@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttribute.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetAttribute")
@@ -17,7 +18,9 @@
 #define ASWidgetAttribute_
 
 @class ASWidgetAttribute_Builder;
+@class JavaLangBoolean;
 @class JavaLangInteger;
+@class NSString;
 
 @interface ASWidgetAttribute : NSObject
 
@@ -29,7 +32,7 @@
  */
 + (ASWidgetAttribute_Builder *)builder;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSString *)getArrayListToFinalType;
 
@@ -39,23 +42,23 @@
 
 - (NSString *)getAttributeType;
 
-- (jint)getBufferStrategy;
+- (int32_t)getBufferStrategy;
 
 - (NSString *)getDecorator;
 
-- (jint)getOrder;
+- (int32_t)getOrder;
 
-- (jint)getSimpleWrapableViewStrategy;
+- (int32_t)getSimpleWrapableViewStrategy;
 
 - (JavaLangInteger *)getStylePriority;
 
-- (jint)getUpdateUiFlag;
+- (int32_t)getUpdateUiFlag;
 
 - (NSUInteger)hash;
 
-- (jboolean)isApplyBeforeChildAdd;
+- (bool)isApplyBeforeChildAdd;
 
-- (jboolean)isForChild;
+- (bool)isForChild;
 
 - (void)setArrayListToFinalTypeWithNSString:(NSString *)arrayListToFinalType;
 
@@ -65,17 +68,17 @@
 
 - (void)setAttributeTypeWithNSString:(NSString *)attributeType;
 
-- (void)setBufferStrategyWithInt:(jint)bufferStrategy;
+- (void)setBufferStrategyWithInt:(int32_t)bufferStrategy;
 
 - (void)setDecoratorWithNSString:(NSString *)decorator;
 
-- (void)setForChildWithBoolean:(jboolean)isForChild;
+- (void)setForChildWithBoolean:(bool)isForChild;
 
-- (void)setOrderWithInt:(jint)order;
+- (void)setOrderWithInt:(int32_t)order;
 
-- (void)setSimpleWrapableViewStrategyWithInt:(jint)simpleWrapableViewStrategy;
+- (void)setSimpleWrapableViewStrategyWithInt:(int32_t)simpleWrapableViewStrategy;
 
-- (void)setUpdateUiFlagWithInt:(jint)updateUiFlag;
+- (void)setUpdateUiFlagWithInt:(int32_t)updateUiFlag;
 
 - (NSString *)description;
 
@@ -93,6 +96,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttribute)
 
 @compatibility_alias ComAsheraWidgetWidgetAttribute ASWidgetAttribute;
 
+
 #endif
 
 #if !defined (ASWidgetAttribute_Builder_) && (INCLUDE_ALL_WidgetAttribute || defined(INCLUDE_ASWidgetAttribute_Builder))
@@ -100,6 +104,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttribute)
 
 @class ASWidgetAttribute;
 @class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief Builder to build <code>WidgetAttribute</code>.
@@ -120,21 +125,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttribute)
 
 - (ASWidgetAttribute_Builder *)withArrayTypeWithNSString:(NSString *)arrayType;
 
-- (ASWidgetAttribute_Builder *)withBufferStrategyWithInt:(jint)bufferStrategy;
+- (ASWidgetAttribute_Builder *)withBufferStrategyWithInt:(int32_t)bufferStrategy;
 
 - (ASWidgetAttribute_Builder *)withDecoratorWithNSString:(NSString *)decorator;
 
 - (ASWidgetAttribute_Builder *)withNameWithNSString:(NSString *)attributeName;
 
-- (ASWidgetAttribute_Builder *)withOrderWithInt:(jint)order;
+- (ASWidgetAttribute_Builder *)withOrderWithInt:(int32_t)order;
 
-- (ASWidgetAttribute_Builder *)withSimpleWrapableViewStrategyWithInt:(jint)simpleWrapableViewStrategy;
+- (ASWidgetAttribute_Builder *)withSimpleWrapableViewStrategyWithInt:(int32_t)simpleWrapableViewStrategy;
 
 - (ASWidgetAttribute_Builder *)withStylePriorityWithJavaLangInteger:(JavaLangInteger *)stylePriority;
 
 - (ASWidgetAttribute_Builder *)withTypeWithNSString:(NSString *)attributeType;
 
-- (ASWidgetAttribute_Builder *)withUiFlagWithInt:(jint)updateUiFlag;
+- (ASWidgetAttribute_Builder *)withUiFlagWithInt:(int32_t)updateUiFlag;
 
 @end
 
@@ -147,6 +152,7 @@ FOUNDATION_EXPORT ASWidgetAttribute_Builder *new_ASWidgetAttribute_Builder_init(
 FOUNDATION_EXPORT ASWidgetAttribute_Builder *create_ASWidgetAttribute_Builder_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttribute_Builder)
+
 
 #endif
 

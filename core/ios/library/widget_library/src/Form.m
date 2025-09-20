@@ -3,12 +3,18 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\Form.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Field.h"
 #include "FieldValidationException.h"
 #include "Form.h"
 #include "FormElement.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collections.h"
@@ -21,13 +27,11 @@
 #include "java/util/function/ToIntFunction.h"
 #include "java/util/function/ToLongFunction.h"
 
-@class JavaUtilHashMap;
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -35,7 +39,7 @@
 @interface ASForm () {
  @public
   id<JavaUtilList> mFields_;
-  jboolean requireOrdering_;
+  bool requireOrdering_;
   JavaUtilHashMap *widgetMap_;
 }
 
@@ -48,8 +52,8 @@ J2OBJC_FIELD_SETTER(ASForm, widgetMap_, JavaUtilHashMap *)
 
 - (instancetype)init;
 
-- (jint)compareWithId:(ASField *)lhs
-               withId:(ASField *)rhs;
+- (int32_t)compareWithId:(ASField *)lhs
+                  withId:(ASField *)rhs;
 
 @end
 
@@ -60,6 +64,7 @@ __attribute__((unused)) static void ASForm_1_init(ASForm_1 *self);
 __attribute__((unused)) static ASForm_1 *new_ASForm_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASForm_1 *create_ASForm_1_init(void);
+
 
 @implementation ASForm
 
@@ -78,12 +83,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<JavaUtilList>) nil_chk(mFields_)) addWithId:field];
 }
 
-- (jboolean)isValid {
+- (bool)isValid {
   if (requireOrdering_) {
     JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(mFields_, create_ASForm_1_init());
   }
-  jboolean result = true;
-  jboolean focus = false;
+  bool result = true;
+  bool focus = false;
   [self resetErrors];
   for (ASField * __strong field in nil_chk(mFields_)) {
     @try {
@@ -177,6 +182,8 @@ ASForm *create_ASForm_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASForm)
 
+J2OBJC_NAME_MAPPING(ASForm, "com.ashera.validations", "AS")
+
 @implementation ASForm_1
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -186,8 +193,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)compareWithId:(ASField *)lhs
-               withId:(ASField *)rhs {
+- (int32_t)compareWithId:(ASField *)lhs
+                  withId:(ASField *)rhs {
   return [create_JavaLangInteger_initWithInt_([((ASField *) nil_chk(lhs)) getOrder]) compareToWithId:JavaLangInteger_valueOfWithInt_([((ASField *) nil_chk(rhs)) getOrder])];
 }
 
@@ -232,7 +239,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(compareWithId:withId:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "compare", "LASField;LASField;", "LASForm;", "isValid", "Ljava/lang/Object;Ljava/util/Comparator<Lcom/ashera/validations/Field;>;" };
-  static const J2ObjcClassInfo _ASForm_1 = { "", "com.ashera.validations", ptrTable, methods, NULL, 7, 0x8010, 2, 0, 2, -1, 3, 4, -1 };
+  static const J2ObjcClassInfo _ASForm_1 = { "", "com.ashera.validations", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 2, -1, 3, 4, -1 };
   return &_ASForm_1;
 }
 

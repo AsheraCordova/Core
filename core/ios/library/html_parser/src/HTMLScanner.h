@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\HTMLScanner.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HTMLScanner")
@@ -28,6 +29,8 @@
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaIoReader;
+@class JavaLangInteger;
+@class NSString;
 @protocol TSScanHandler;
 
 /*!
@@ -38,10 +41,10 @@
  */
 @interface TSHTMLScanner : NSObject < TSScanner, OrgXmlSaxLocator > {
  @public
-  jint theState_;
-  jint theNextState_;
+  int32_t theState_;
+  int32_t theNextState_;
   IOSCharArray *theOutputBuffer_;
-  jint theSize_;
+  int32_t theSize_;
   IOSIntArray *theWinMap_;
 }
 
@@ -49,9 +52,9 @@
 
 - (instancetype)init;
 
-- (jint)getColumnNumber;
+- (int32_t)getColumnNumber;
 
-- (jint)getLineNumber;
+- (int32_t)getLineNumber;
 
 - (NSString *)getPublicId;
 
@@ -121,12 +124,12 @@ J2OBJC_STATIC_FIELD_OBJ(TSHTMLScanner, statetableIndex, IOSObjectArray *)
  See the doc comment for statetableIndex to see how this
   is used.
  */
-inline jint TSHTMLScanner_get_statetableIndexMaxChar(void);
-inline jint TSHTMLScanner_set_statetableIndexMaxChar(jint value);
-inline jint *TSHTMLScanner_getRef_statetableIndexMaxChar(void);
+inline int32_t TSHTMLScanner_get_statetableIndexMaxChar(void);
+inline int32_t TSHTMLScanner_set_statetableIndexMaxChar(int32_t value);
+inline int32_t *TSHTMLScanner_getRef_statetableIndexMaxChar(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint TSHTMLScanner_statetableIndexMaxChar;
-J2OBJC_STATIC_FIELD_PRIMITIVE(TSHTMLScanner, statetableIndexMaxChar, jint)
+FOUNDATION_EXPORT int32_t TSHTMLScanner_statetableIndexMaxChar;
+J2OBJC_STATIC_FIELD_PRIMITIVE(TSHTMLScanner, statetableIndexMaxChar, int32_t)
 
 FOUNDATION_EXPORT void TSHTMLScanner_init(TSHTMLScanner *self);
 
@@ -137,6 +140,7 @@ FOUNDATION_EXPORT TSHTMLScanner *create_TSHTMLScanner_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(TSHTMLScanner)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupHTMLScanner TSHTMLScanner;
+
 
 #endif
 

@@ -3,8 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\MathUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "MathUtils.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADMathUtils
@@ -16,39 +31,39 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)constrainWithInt:(jint)amount
-                 withInt:(jint)low
-                 withInt:(jint)high {
++ (int32_t)constrainWithInt:(int32_t)amount
+                    withInt:(int32_t)low
+                    withInt:(int32_t)high {
   return ADMathUtils_constrainWithInt_withInt_withInt_(amount, low, high);
 }
 
-+ (jfloat)constrainWithFloat:(jfloat)amount
-                   withFloat:(jfloat)low
-                   withFloat:(jfloat)high {
++ (float)constrainWithFloat:(float)amount
+                  withFloat:(float)low
+                  withFloat:(float)high {
   return ADMathUtils_constrainWithFloat_withFloat_withFloat_(amount, low, high);
 }
 
-+ (jfloat)clampWithFloat:(jfloat)value
-               withFloat:(jfloat)min
-               withFloat:(jfloat)max {
++ (float)clampWithFloat:(float)value
+              withFloat:(float)min
+              withFloat:(float)max {
   return ADMathUtils_clampWithFloat_withFloat_withFloat_(value, min, max);
 }
 
-+ (jint)clampWithInt:(jint)value
-             withInt:(jint)min
-             withInt:(jint)max {
++ (int32_t)clampWithInt:(int32_t)value
+                withInt:(int32_t)min
+                withInt:(int32_t)max {
   return ADMathUtils_clampWithInt_withInt_withInt_(value, min, max);
 }
 
-+ (jdouble)clampWithDouble:(jdouble)value
-                withDouble:(jdouble)min
-                withDouble:(jdouble)max {
++ (double)clampWithDouble:(double)value
+               withDouble:(double)min
+               withDouble:(double)max {
   return ADMathUtils_clampWithDouble_withDouble_withDouble_(value, min, max);
 }
 
-+ (jlong)clampWithLong:(jlong)value
-              withLong:(jlong)min
-              withLong:(jlong)max {
++ (int64_t)clampWithLong:(int64_t)value
+                withLong:(int64_t)min
+                withLong:(int64_t)max {
   return ADMathUtils_clampWithLong_withLong_withLong_(value, min, max);
 }
 
@@ -92,17 +107,17 @@ ADMathUtils *create_ADMathUtils_init() {
   J2OBJC_CREATE_IMPL(ADMathUtils, init)
 }
 
-jint ADMathUtils_constrainWithInt_withInt_withInt_(jint amount, jint low, jint high) {
+int32_t ADMathUtils_constrainWithInt_withInt_withInt_(int32_t amount, int32_t low, int32_t high) {
   ADMathUtils_initialize();
   return amount < low ? low : (amount > high ? high : amount);
 }
 
-jfloat ADMathUtils_constrainWithFloat_withFloat_withFloat_(jfloat amount, jfloat low, jfloat high) {
+float ADMathUtils_constrainWithFloat_withFloat_withFloat_(float amount, float low, float high) {
   ADMathUtils_initialize();
   return amount < low ? low : (amount > high ? high : amount);
 }
 
-jfloat ADMathUtils_clampWithFloat_withFloat_withFloat_(jfloat value, jfloat min, jfloat max) {
+float ADMathUtils_clampWithFloat_withFloat_withFloat_(float value, float min, float max) {
   ADMathUtils_initialize();
   if (value < min) {
     return min;
@@ -113,7 +128,7 @@ jfloat ADMathUtils_clampWithFloat_withFloat_withFloat_(jfloat value, jfloat min,
   return value;
 }
 
-jint ADMathUtils_clampWithInt_withInt_withInt_(jint value, jint min, jint max) {
+int32_t ADMathUtils_clampWithInt_withInt_withInt_(int32_t value, int32_t min, int32_t max) {
   ADMathUtils_initialize();
   if (value < min) {
     return min;
@@ -124,7 +139,7 @@ jint ADMathUtils_clampWithInt_withInt_withInt_(jint value, jint min, jint max) {
   return value;
 }
 
-jdouble ADMathUtils_clampWithDouble_withDouble_withDouble_(jdouble value, jdouble min, jdouble max) {
+double ADMathUtils_clampWithDouble_withDouble_withDouble_(double value, double min, double max) {
   ADMathUtils_initialize();
   if (value < min) {
     return min;
@@ -135,7 +150,7 @@ jdouble ADMathUtils_clampWithDouble_withDouble_withDouble_(jdouble value, jdoubl
   return value;
 }
 
-jlong ADMathUtils_clampWithLong_withLong_withLong_(jlong value, jlong min, jlong max) {
+int64_t ADMathUtils_clampWithLong_withLong_withLong_(int64_t value, int64_t min, int64_t max) {
   ADMathUtils_initialize();
   if (value < min) {
     return min;
@@ -147,3 +162,5 @@ jlong ADMathUtils_clampWithLong_withLong_withLong_(jlong value, jlong min, jlong
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMathUtils)
+
+J2OBJC_NAME_MAPPING(ADMathUtils, "r.android.util", "AD")

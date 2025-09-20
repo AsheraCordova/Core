@@ -3,14 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierPath.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bezier.h"
 #include "BezierListProducer.h"
 #include "BezierPath.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "PointF.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/ArrayList.h"
@@ -21,25 +30,31 @@
 #include "java/util/regex/Pattern.h"
 
 
-inline jint ADBezierPath_get_MAX_NUM_POINTS(void);
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+inline int32_t ADBezierPath_get_MAX_NUM_POINTS(void);
 #define ADBezierPath_MAX_NUM_POINTS 100
-J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, MAX_NUM_POINTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, MAX_NUM_POINTS, int32_t)
 
-inline jint ADBezierPath_get_FRACTION_OFFSET(void);
+inline int32_t ADBezierPath_get_FRACTION_OFFSET(void);
 #define ADBezierPath_FRACTION_OFFSET 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, FRACTION_OFFSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, FRACTION_OFFSET, int32_t)
 
-inline jint ADBezierPath_get_X_OFFSET(void);
+inline int32_t ADBezierPath_get_X_OFFSET(void);
 #define ADBezierPath_X_OFFSET 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, X_OFFSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, X_OFFSET, int32_t)
 
-inline jint ADBezierPath_get_Y_OFFSET(void);
+inline int32_t ADBezierPath_get_Y_OFFSET(void);
 #define ADBezierPath_Y_OFFSET 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, Y_OFFSET, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, Y_OFFSET, int32_t)
 
-inline jint ADBezierPath_get_NUM_COMPONENTS(void);
+inline int32_t ADBezierPath_get_NUM_COMPONENTS(void);
 #define ADBezierPath_NUM_COMPONENTS 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, NUM_COMPONENTS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADBezierPath, NUM_COMPONENTS, int32_t)
 
 J2OBJC_INITIALIZED_DEFN(ADBezierPath)
 
@@ -65,10 +80,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   while ([((JavaUtilRegexMatcher *) nil_chk(matchPathCmd)) find]) {
     [tokens addLastWithId:[matchPathCmd group]];
   }
-  jchar curCmd = 'Z';
+  unichar curCmd = 'Z';
   while ([tokens size] != 0) {
     NSString *curToken = JreRetainedLocalValue([tokens removeFirst]);
-    jchar initChar = [((NSString *) nil_chk(curToken)) charAtWithInt:0];
+    unichar initChar = [((NSString *) nil_chk(curToken)) charAtWithInt:0];
     if ((initChar >= 'A' && initChar <= 'Z') || (initChar >= 'a' && initChar <= 'z')) {
       curCmd = initChar;
     }
@@ -139,18 +154,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-+ (jfloat)nextFloatWithJavaUtilLinkedList:(JavaUtilLinkedList *)l {
++ (float)nextFloatWithJavaUtilLinkedList:(JavaUtilLinkedList *)l {
   return ADBezierPath_nextFloatWithJavaUtilLinkedList_(l);
 }
 
-- (ADPointF *)evalWithFloat:(jfloat)interp {
+- (ADPointF *)evalWithFloat:(float)interp {
   ADPointF *point = create_ADPointF_init();
-  jdouble curLength = ((ADBezierListProducer *) nil_chk(path_))->curveLength_ * interp;
+  double curLength = ((ADBezierListProducer *) nil_chk(path_))->curveLength_ * interp;
   for (id<JavaUtilIterator> it = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(path_->bezierSegs_)) iterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
     ADBezier *bez = JreRetainedLocalValue([it next]);
-    jdouble bezLength = [((ADBezier *) nil_chk(bez)) getLength];
+    double bezLength = [((ADBezier *) nil_chk(bez)) getLength];
     if (curLength <= bezLength) {
-      jdouble param = curLength / bezLength;
+      double param = curLength / bezLength;
       [bez evalWithDouble:param withADPointF:point];
       break;
     }
@@ -159,25 +174,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   return point;
 }
 
-- (IOSFloatArray *)approximateWithFloat:(jfloat)acceptableError {
+- (IOSFloatArray *)approximateWithFloat:(float)acceptableError {
   if (acceptableError < 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"acceptableError must be greater than or equal to 0");
   }
-  jfloat totalLength = 0;
+  float totalLength = 0;
   id<JavaUtilList> summedContourLengths = create_JavaUtilArrayList_init();
   [summedContourLengths addWithId:JavaLangFloat_valueOfWithFloat_(0.0f)];
   for (id<JavaUtilIterator> it = JreRetainedLocalValue([((JavaUtilArrayList *) nil_chk(((ADBezierListProducer *) nil_chk(path_))->bezierSegs_)) iterator]); [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
     ADBezier *bez = JreRetainedLocalValue([it next]);
-    jdouble pathLength = [((ADBezier *) nil_chk(bez)) getLength];
+    double pathLength = [((ADBezier *) nil_chk(bez)) getLength];
     JrePlusAssignFloatD(&totalLength, pathLength);
     [summedContourLengths addWithId:JavaLangFloat_valueOfWithFloat_(totalLength)];
   }
-  jint numPoints = JavaLangMath_minWithInt_withInt_(ADBezierPath_MAX_NUM_POINTS, JreFpToInt((totalLength / acceptableError)) + 1);
+  int32_t numPoints = JavaLangMath_minWithInt_withInt_(ADBezierPath_MAX_NUM_POINTS, JreFpToInt((totalLength / acceptableError)) + 1);
   IOSFloatArray *coords = [IOSFloatArray arrayWithLength:ADBezierPath_NUM_COMPONENTS * numPoints];
   ADPointF *position = nil;
-  jfloat step = totalLength / (numPoints - 1);
-  jfloat cumulativeDistance = 0;
-  for (jint i = 0; i < numPoints; i++) {
+  float step = totalLength / (numPoints - 1);
+  float cumulativeDistance = 0;
+  for (int32_t i = 0; i < numPoints; i++) {
     position = [self evalWithFloat:cumulativeDistance / totalLength];
     *IOSFloatArray_GetRef(coords, i * ADBezierPath_NUM_COMPONENTS + ADBezierPath_FRACTION_OFFSET) = cumulativeDistance / totalLength;
     *IOSFloatArray_GetRef(coords, i * ADBezierPath_NUM_COMPONENTS + ADBezierPath_X_OFFSET) = ((ADPointF *) nil_chk(position))->x_;
@@ -247,10 +262,12 @@ ADBezierPath *create_ADBezierPath_init() {
   J2OBJC_CREATE_IMPL(ADBezierPath, init)
 }
 
-jfloat ADBezierPath_nextFloatWithJavaUtilLinkedList_(JavaUtilLinkedList *l) {
+float ADBezierPath_nextFloatWithJavaUtilLinkedList_(JavaUtilLinkedList *l) {
   ADBezierPath_initialize();
   NSString *s = JreRetainedLocalValue([((JavaUtilLinkedList *) nil_chk(l)) removeFirst]);
   return JavaLangFloat_parseFloatWithNSString_(s);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBezierPath)
+
+J2OBJC_NAME_MAPPING(ADBezierPath, "r.android.graphics", "AD")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\ImageInterval.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ImageInterval")
@@ -21,21 +22,23 @@
 #include "Interval.h"
 
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ASImageInterval : ASInterval
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
                withNSString:(NSString *)src;
 
 - (IOSObjectArray *)getArgs;
 
 - (NSString *)getSrc;
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments;
 
 - (void)setSrcWithNSString:(NSString *)src;
@@ -44,22 +47,23 @@
 
 // Disallowed inherited constructors, do not use.
 
-- (instancetype)initWithInt:(jint)arg0
-                    withInt:(jint)arg1 NS_UNAVAILABLE;
+- (instancetype)initWithInt:(int32_t)arg0
+                    withInt:(int32_t)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASImageInterval)
 
-FOUNDATION_EXPORT void ASImageInterval_initWithInt_withInt_withNSString_(ASImageInterval *self, jint start, jint end, NSString *src);
+FOUNDATION_EXPORT void ASImageInterval_initWithInt_withInt_withNSString_(ASImageInterval *self, int32_t start, int32_t end, NSString *src);
 
-FOUNDATION_EXPORT ASImageInterval *new_ASImageInterval_initWithInt_withInt_withNSString_(jint start, jint end, NSString *src) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASImageInterval *new_ASImageInterval_initWithInt_withInt_withNSString_(int32_t start, int32_t end, NSString *src) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASImageInterval *create_ASImageInterval_initWithInt_withInt_withNSString_(jint start, jint end, NSString *src);
+FOUNDATION_EXPORT ASImageInterval *create_ASImageInterval_initWithInt_withInt_withNSString_(int32_t start, int32_t end, NSString *src);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASImageInterval)
 
 @compatibility_alias ComAsheraAttributedtextImageInterval ASImageInterval;
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\BaseWidget.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "AttributeCommandChain.h"
 #include "BaseHasWidgets.h"
@@ -40,7 +45,9 @@
 #include "WidgetFactory.h"
 #include "java/io/PrintStream.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalAccessException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
@@ -70,15 +77,12 @@
 #include "java/util/function/ToIntFunction.h"
 #include "java/util/function/ToLongFunction.h"
 
-@protocol JavaUtilComparator;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionToDoubleFunction;
-@protocol JavaUtilFunctionToIntFunction;
-@protocol JavaUtilFunctionToLongFunction;
-@protocol JavaUtilIterator;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -86,19 +90,19 @@
 @interface ASBaseWidget () {
  @public
   id<ASIWidgetLifeCycleListener> listener_;
-  __unsafe_unretained ASEventBus *eventBus_;
+  WEAK_ ASEventBus *eventBus_;
   id<JavaUtilMap> cachedDecorators_;
   NSString *id__;
   NSString *behaviorGroupId_;
   id<JavaUtilList> eventBusHandlers_;
-  jboolean initialised_;
+  bool initialised_;
   id<JavaUtilMap> attributeCommandChainMap_;
   id<JavaUtilMap> updateAttributes_;
   id<JavaUtilMap> attributeCommandMap_;
   id<JavaUtilMap> commandPhases_;
   id<JavaUtilList> bufferedAttributes_;
-  jboolean onMethodCalled_;
-  jint zIndex_;
+  bool onMethodCalled_;
+  int32_t zIndex_;
   id<JavaUtilSet> eventBubblers_;
   NSString *componentId_;
   id animator_;
@@ -110,11 +114,11 @@
   ASLoopParam *loopParam_;
   NSString *modelPojoToUiParams_;
   NSString *modelUiToPojoEventIds_;
-  jboolean invalidateOnFrameChange_;
+  bool invalidateOnFrameChange_;
   NSString *formGroupId_;
   NSString *errorStyle_;
   NSString *normalStyle_;
-  jint validationErrorDisplayType_;
+  int32_t validationErrorDisplayType_;
   id<JavaUtilList> customErrorMessageKeys_;
   id<JavaUtilList> customErrorMessageValues_;
   id<JavaUtilMap> unresolvedAttributes_;
@@ -130,7 +134,7 @@
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                    withId:(id)objValue
-                              withBoolean:(jboolean)skipConvert;
+                              withBoolean:(bool)skipConvert;
 
 - (void)applyStyleToWidgetWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                   withASIWidget:(id<ASIWidget>)childWidget
@@ -141,13 +145,13 @@
                                   withASIWidget:(id<ASIWidget>)childWidget
                                          withId:(id)objValue
                                    withNSString:(NSString *)phase
-                                    withBoolean:(jboolean)skipConvert;
+                                    withBoolean:(bool)skipConvert;
 
 - (void)applyStyleToWidgetWithoutBufferingWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                                   withASIWidget:(id<ASIWidget>)childWidget
                                                          withId:(id)objValue
                                                    withNSString:(NSString *)phase
-                                                    withBoolean:(jboolean)skipConvert;
+                                                    withBoolean:(bool)skipConvert;
 
 - (id)handleArrayTypeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                               withNSString:(NSString *)type
@@ -163,20 +167,20 @@
 
 - (NSString *)stripOSWithNSString:(NSString *)key;
 
-- (jint)convertToIntFromDpWithNSString:(NSString *)dimension;
+- (int32_t)convertToIntFromDpWithNSString:(NSString *)dimension;
 
 - (void)handlePathWithJavaUtilMap:(id<JavaUtilMap>)map
                     withASIWidget:(id<ASIWidget>)w
-                          withInt:(jint)methods;
+                          withInt:(int32_t)methods;
 
-- (jint)compareByValueWithJavaUtilMap:(id<JavaUtilMap>)payLoad
-                         withNSString:(NSString *)a
-                         withNSString:(NSString *)b
-                         withNSString:(NSString *)orderKey;
+- (int32_t)compareByValueWithJavaUtilMap:(id<JavaUtilMap>)payLoad
+                            withNSString:(NSString *)a
+                            withNSString:(NSString *)b
+                            withNSString:(NSString *)orderKey;
 
 - (id)getAttributeValueFromWidgetWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                          withASIWidget:(id<ASIWidget>)childWidget
-                                           withBoolean:(jboolean)skipConvert;
+                                           withBoolean:(bool)skipConvert;
 
 - (id)handleArrayTypeForGetWithId:(id)objValue
                      withNSString:(NSString *)arrayType
@@ -199,7 +203,7 @@
                                   withId:(id)handler
                             withNSString:(NSString *)idKey
                          withASLoopParam:(ASLoopParam *)model
-                                 withInt:(jint)index;
+                                 withInt:(int32_t)index;
 
 @end
 
@@ -235,13 +239,13 @@ __attribute__((unused)) static void ASBaseWidget_addAttributeCommandToChainWithN
 
 __attribute__((unused)) static void ASBaseWidget_applyStyleToWidgetWithNSString_withNSString_withASAttributeCommandChain_(ASBaseWidget *self, NSString *sourceName, NSString *phase, ASAttributeCommandChain *attributeCommandChain);
 
-__attribute__((unused)) static void ASBaseWidget_setAttributeWithASWidgetAttribute_withId_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id objValue, jboolean skipConvert);
+__attribute__((unused)) static void ASBaseWidget_setAttributeWithASWidgetAttribute_withId_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id objValue, bool skipConvert);
 
 __attribute__((unused)) static void ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase);
 
-__attribute__((unused)) static void ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, jboolean skipConvert);
+__attribute__((unused)) static void ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, bool skipConvert);
 
-__attribute__((unused)) static void ASBaseWidget_applyStyleToWidgetWithoutBufferingWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, jboolean skipConvert);
+__attribute__((unused)) static void ASBaseWidget_applyStyleToWidgetWithoutBufferingWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, bool skipConvert);
 
 __attribute__((unused)) static id ASBaseWidget_handleArrayTypeWithASWidgetAttribute_withNSString_withId_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, NSString *type, id convertedValue);
 
@@ -255,13 +259,13 @@ __attribute__((unused)) static void ASBaseWidget_createWithASIFragment_withJavaU
 
 __attribute__((unused)) static NSString *ASBaseWidget_stripOSWithNSString_(ASBaseWidget *self, NSString *key);
 
-__attribute__((unused)) static jint ASBaseWidget_convertToIntFromDpWithNSString_(ASBaseWidget *self, NSString *dimension);
+__attribute__((unused)) static int32_t ASBaseWidget_convertToIntFromDpWithNSString_(ASBaseWidget *self, NSString *dimension);
 
-__attribute__((unused)) static void ASBaseWidget_handlePathWithJavaUtilMap_withASIWidget_withInt_(ASBaseWidget *self, id<JavaUtilMap> map, id<ASIWidget> w, jint methods);
+__attribute__((unused)) static void ASBaseWidget_handlePathWithJavaUtilMap_withASIWidget_withInt_(ASBaseWidget *self, id<JavaUtilMap> map, id<ASIWidget> w, int32_t methods);
 
-__attribute__((unused)) static jint ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(ASBaseWidget *self, id<JavaUtilMap> payLoad, NSString *a, NSString *b, NSString *orderKey);
+__attribute__((unused)) static int32_t ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(ASBaseWidget *self, id<JavaUtilMap> payLoad, NSString *a, NSString *b, NSString *orderKey);
 
-__attribute__((unused)) static id ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, jboolean skipConvert);
+__attribute__((unused)) static id ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, bool skipConvert);
 
 __attribute__((unused)) static id ASBaseWidget_handleArrayTypeForGetWithId_withNSString_withNSString_(ASBaseWidget *self, id objValue, NSString *arrayType, NSString *finalArrayType);
 
@@ -273,11 +277,11 @@ __attribute__((unused)) static void ASBaseWidget_handleModelUiToPojo(ASBaseWidge
 
 __attribute__((unused)) static void ASBaseWidget_loadAndAddWidgetsWithJavaUtilIterator_withASIWidget_withId_withNSString_withASLoopParam_(ASBaseWidget *self, id<JavaUtilIterator> iterator, id<ASIWidget> root, id handler, NSString *idKey, ASLoopParam *model);
 
-__attribute__((unused)) static id<ASIWidget> ASBaseWidget_loadWidgetWithASIWidget_withASIWidget_withId_withNSString_withASLoopParam_withInt_(ASBaseWidget *self, id<ASIWidget> objWidget, id<ASIWidget> root, id handler, NSString *idKey, ASLoopParam *model, jint index);
+__attribute__((unused)) static id<ASIWidget> ASBaseWidget_loadWidgetWithASIWidget_withASIWidget_withId_withNSString_withASLoopParam_withInt_(ASBaseWidget *self, id<ASIWidget> objWidget, id<ASIWidget> root, id handler, NSString *idKey, ASLoopParam *model, int32_t index);
 
 @interface ASBaseWidget_LazyBaseWidget () {
  @public
-  __unsafe_unretained ASBaseWidget *this$0_;
+  WEAK_ ASBaseWidget *this$0_;
 }
 
 @end
@@ -292,8 +296,8 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ASBaseWidget_LazyBaseWidget, LOCAL_NAME, NSString 
   id<JavaUtilMap> val$payLoad_;
 }
 
-- (jint)compareWithId:(NSString *)a
-               withId:(NSString *)b;
+- (int32_t)compareWithId:(NSString *)a
+                  withId:(NSString *)b;
 
 @end
 
@@ -305,14 +309,15 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$1 *new_ASBaseWidget_$Lambda$
 
 __attribute__((unused)) static ASBaseWidget_$Lambda$1 *create_ASBaseWidget_$Lambda$1_initWithASBaseWidget_withJavaUtilMap_(ASBaseWidget *outer$, id<JavaUtilMap> capture$0);
 
+
 @interface ASBaseWidget_$Lambda$2 : NSObject < JavaUtilComparator > {
  @public
   ASBaseWidget *this$0_;
   id<JavaUtilMap> val$payLoad_;
 }
 
-- (jint)compareWithId:(NSString *)a
-               withId:(NSString *)b;
+- (int32_t)compareWithId:(NSString *)a
+                  withId:(NSString *)b;
 
 @end
 
@@ -324,6 +329,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *new_ASBaseWidget_$Lambda$
 
 __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lambda$2_initWithASBaseWidget_withJavaUtilMap_(ASBaseWidget *outer$, id<JavaUtilMap> capture$0);
 
+
 @implementation ASBaseWidget
 
 - (id)getAnimator {
@@ -334,11 +340,11 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   JreStrongAssign(&self->animator_, animator);
 }
 
-- (jint)getZIndex {
+- (int32_t)getZIndex {
   return zIndex_;
 }
 
-- (void)setZIndexWithInt:(jint)zIndex {
+- (void)setZIndexWithInt:(int32_t)zIndex {
   self->zIndex_ = zIndex;
 }
 
@@ -358,7 +364,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   }
 }
 
-- (jboolean)hasBufferedAttributes {
+- (bool)hasBufferedAttributes {
   return bufferedAttributes_ != nil && [bufferedAttributes_ size] > 0;
 }
 
@@ -388,7 +394,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *attr = *b__++;
+      NSString *attr = RETAIN_AND_AUTORELEASE(*b__++);
       ASAttributeCommandChain *attributeCommandChain = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(attributeCommandChainMap_)) getWithId:attr]);
       if (attributeCommandChain == nil) {
         attributeCommandChain = create_ASAttributeCommandChain_init();
@@ -401,7 +407,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 - (void)applyAttributeCommandWithNSString:(NSString *)sourceName
                              withNSString:(NSString *)commandName
                         withNSStringArray:(IOSObjectArray *)attributes
-                              withBoolean:(jboolean)add
+                              withBoolean:(bool)add
                         withNSObjectArray:(IOSObjectArray *)args {
   if (attributeCommandMap_ == nil) {
     JreStrongAssignAndConsume(&attributeCommandMap_, new_JavaUtilHashMap_init());
@@ -493,7 +499,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *attributeName = *b__++;
+        NSString *attributeName = RETAIN_AND_AUTORELEASE(*b__++);
         id<JavaUtilList> list = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(updateAttributes_)) getWithId:attributeName]);
         if (list != nil) {
           [list removeWithId:sourceName];
@@ -525,7 +531,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return id__;
 }
 
-- (jint)getIdAsInt {
+- (int32_t)getIdAsInt {
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id__ withNSString:@"id"], [JavaLangInteger class]))) intValue];
 }
 
@@ -617,7 +623,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 
 - (void)setAttributeWithNSString:(NSString *)key
                           withId:(id)objValue
-                     withBoolean:(jboolean)skipConvert {
+                     withBoolean:(bool)skipConvert {
   if ([((id<ASIFragment>) nil_chk(fragment_)) getRootWidget] == nil || [self isWidgetDisposed]) {
     return;
   }
@@ -635,7 +641,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                    withId:(id)objValue
-                              withBoolean:(jboolean)skipConvert {
+                              withBoolean:(bool)skipConvert {
   ASBaseWidget_setAttributeWithASWidgetAttribute_withId_withBoolean_(self, widgetAttribute, objValue, skipConvert);
 }
 
@@ -650,7 +656,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
                                   withASIWidget:(id<ASIWidget>)childWidget
                                          withId:(id)objValue
                                    withNSString:(NSString *)phase
-                                    withBoolean:(jboolean)skipConvert {
+                                    withBoolean:(bool)skipConvert {
   ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(self, widgetAttribute, childWidget, objValue, phase, skipConvert);
 }
 
@@ -661,7 +667,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
                                                   withASIWidget:(id<ASIWidget>)childWidget
                                                          withId:(id)objValue
                                                    withNSString:(NSString *)phase
-                                                    withBoolean:(jboolean)skipConvert {
+                                                    withBoolean:(bool)skipConvert {
   ASBaseWidget_applyStyleToWidgetWithoutBufferingWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(self, widgetAttribute, childWidget, objValue, phase, skipConvert);
 }
 
@@ -851,23 +857,23 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return attribute;
 }
 
-- (jboolean)checkIfAttributeMatchesWithASWidgetAttributeValue:(ASWidgetAttributeValue *)attribute {
+- (bool)checkIfAttributeMatchesWithASWidgetAttributeValue:(ASWidgetAttributeValue *)attribute {
   NSString *orientation = ASPluginInvoker_getOrientation();
-  jint screenWidth = ASPluginInvoker_getScreenWidth();
-  jint screenHeight = ASPluginInvoker_getScreenHeight();
-  jboolean orientationCheck = [((NSString *) nil_chk([((ASWidgetAttributeValue *) nil_chk(attribute)) getOrientation])) isEqual:@"default"] || [((NSString *) nil_chk([attribute getOrientation])) isEqual:orientation];
-  jint minWidth = (jint) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMinWidth]);
-  jint maxWidth = (jint) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMaxWidth]);
-  jint minHeight = (jint) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMinHeight]);
-  jint maxHeight = (jint) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMaxHeight]);
-  jboolean minWidthCheck = minWidth == -1 || minWidth < screenWidth;
-  jboolean maxWidthCheck = maxWidth == -1 || maxWidth > screenWidth;
-  jboolean minHeightCheck = minHeight == -1 || minHeight < screenHeight;
-  jboolean maxHeightCheck = maxHeight == -1 || maxHeight > screenHeight;
+  int32_t screenWidth = ASPluginInvoker_getScreenWidth();
+  int32_t screenHeight = ASPluginInvoker_getScreenHeight();
+  bool orientationCheck = [((NSString *) nil_chk([((ASWidgetAttributeValue *) nil_chk(attribute)) getOrientation])) isEqual:@"default"] || [((NSString *) nil_chk([attribute getOrientation])) isEqual:orientation];
+  int32_t minWidth = (int32_t) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMinWidth]);
+  int32_t maxWidth = (int32_t) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMaxWidth]);
+  int32_t minHeight = (int32_t) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMinHeight]);
+  int32_t maxHeight = (int32_t) ASBaseWidget_convertToIntFromDpWithNSString_(self, [attribute getMaxHeight]);
+  bool minWidthCheck = minWidth == -1 || minWidth < screenWidth;
+  bool maxWidthCheck = maxWidth == -1 || maxWidth > screenWidth;
+  bool minHeightCheck = minHeight == -1 || minHeight < screenHeight;
+  bool maxHeightCheck = maxHeight == -1 || maxHeight > screenHeight;
   return orientationCheck && minWidthCheck && maxWidthCheck && minHeightCheck && maxHeightCheck;
 }
 
-- (jint)convertToIntFromDpWithNSString:(NSString *)dimension {
+- (int32_t)convertToIntFromDpWithNSString:(NSString *)dimension {
   return ASBaseWidget_convertToIntFromDpWithNSString_(self, dimension);
 }
 
@@ -889,8 +895,8 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   }
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
 }
 
 - (void)updateWidgetMapWithASWidgetAttribute:(ASWidgetAttribute *)attribute
@@ -913,7 +919,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 - (void)executeCommandWithASIWidget:(id<ASIWidget>)w
                    withJavaUtilList:(id<JavaUtilList>)commandDataArr
       withASIWidget_CommandCallBack:(id<ASIWidget_CommandCallBack>)command
-                            withInt:(jint)methods {
+                            withInt:(int32_t)methods {
   for (id __strong commandObj in nil_chk(commandDataArr)) {
     id<JavaUtilMap> map = ASPluginInvoker_getMapWithId_(commandObj);
     @try {
@@ -937,13 +943,13 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 
 - (void)handlePathWithJavaUtilMap:(id<JavaUtilMap>)map
                     withASIWidget:(id<ASIWidget>)w
-                          withInt:(jint)methods {
+                          withInt:(int32_t)methods {
   ASBaseWidget_handlePathWithJavaUtilMap_withASIWidget_withInt_(self, map, w, methods);
 }
 
 - (void)executeCommandWithJavaUtilMap:(id<JavaUtilMap>)payLoad
         withASIWidget_CommandCallBack:(id<ASIWidget_CommandCallBack>)command
-                              withInt:(jint)methods {
+                              withInt:(int32_t)methods {
   id<JavaUtilList> keySet = create_JavaUtilArrayList_initWithJavaUtilCollection_([((id<JavaUtilMap>) nil_chk(payLoad)) keySet]);
   if ((methods & ASIWidget_COMMAND_EXEC_SETTER_METHOD) != 0) {
     JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(keySet, create_ASBaseWidget_$Lambda$1_initWithASBaseWidget_withJavaUtilMap_(self, payLoad));
@@ -954,7 +960,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   if (command != nil) {
     [command onWidgetWithASIWidget:self];
   }
-  jint updateUiFlag = ASIWidget_UPDATE_UI_NONE;
+  int32_t updateUiFlag = ASIWidget_UPDATE_UI_NONE;
   for (NSString * __strong key in keySet) {
     if ([((NSString *) nil_chk(key)) isEqual:@"event-data"]) {
       [self storeUserDataWithNSString:key withId:[payLoad getWithId:key]];
@@ -983,7 +989,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
         id<JavaUtilMap> commandObj = ASPluginInvoker_getMapWithId_(objValue);
         if (commandObj != nil) {
           if ((methods & ASIWidget_COMMAND_EXEC_SETTER_METHOD) != 0) {
-            jboolean isSetter = [self getBooleanWithId:[commandObj getWithId:@"setter"]];
+            bool isSetter = [self getBooleanWithId:[commandObj getWithId:@"setter"]];
             if (isSetter) {
               objValue = [commandObj getWithId:@"value"];
               [((ASWidgetAttributeMap *) nil_chk([self getAttributes])) putWithASWidgetAttribute:widgetAttribute withASWidgetAttributeValue:create_ASWidgetAttributeValue_initWithNSString_(objValue != nil ? [objValue description] : nil)];
@@ -996,7 +1002,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
             }
           }
           if ((methods & ASIWidget_COMMAND_EXEC_GETTER_METHOD) != 0) {
-            jboolean isGetter = [self getBooleanWithId:[commandObj getWithId:@"getter"]];
+            bool isGetter = [self getBooleanWithId:[commandObj getWithId:@"getter"]];
             if (isGetter) {
               if ([key java_hasPrefix:@"layout_"]) {
                 objValue = ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(nil_chk(((ASBaseWidget *) cast_chk([self getParent], [ASBaseWidget class]))), widgetAttribute, self, false);
@@ -1015,7 +1021,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 }
 
 - (id)getAttributeWithNSString:(NSString *)attributeName
-                   withBoolean:(jboolean)skipConvert {
+                   withBoolean:(bool)skipConvert {
   id objValue = nil;
   if ([((NSString *) nil_chk(attributeName)) java_hasPrefix:@"layout_"]) {
     ASWidgetAttribute *widgetAttribute = ASWidgetFactory_getAttributeWithNSString_withNSString_([((id<ASHasWidgets>) nil_chk([self getParent])) getLocalName], attributeName);
@@ -1030,7 +1036,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return objValue;
 }
 
-- (void)requestLayoutNInvalidateIfRequiredWithInt:(jint)updateUiFlag {
+- (void)requestLayoutNInvalidateIfRequiredWithInt:(int32_t)updateUiFlag {
   if ((updateUiFlag & ASIWidget_UPDATE_UI_REQUEST_LAYOUT) != 0) {
     [self requestLayout];
   }
@@ -1039,16 +1045,16 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   }
 }
 
-- (jint)compareByValueWithJavaUtilMap:(id<JavaUtilMap>)payLoad
-                         withNSString:(NSString *)a
-                         withNSString:(NSString *)b
-                         withNSString:(NSString *)orderKey {
+- (int32_t)compareByValueWithJavaUtilMap:(id<JavaUtilMap>)payLoad
+                            withNSString:(NSString *)a
+                            withNSString:(NSString *)b
+                            withNSString:(NSString *)orderKey {
   return ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(self, payLoad, a, b, orderKey);
 }
 
 - (id)getAttributeValueFromWidgetWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                                          withASIWidget:(id<ASIWidget>)childWidget
-                                           withBoolean:(jboolean)skipConvert {
+                                           withBoolean:(bool)skipConvert {
   return ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(self, widgetAttribute, childWidget, skipConvert);
 }
 
@@ -1083,11 +1089,11 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return idWidget;
 }
 
-- (jboolean)isInvalidateOnFrameChange {
+- (bool)isInvalidateOnFrameChange {
   return invalidateOnFrameChange_;
 }
 
-- (void)setInvalidateOnFrameChangeWithBoolean:(jboolean)invalidateOnFrameChange {
+- (void)setInvalidateOnFrameChangeWithBoolean:(bool)invalidateOnFrameChange {
   self->invalidateOnFrameChange_ = invalidateOnFrameChange;
 }
 
@@ -1162,7 +1168,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   JreStrongAssign(&self->modelUiToPojo_, syncExpression);
 }
 
-- (jboolean)applyModelAttributes {
+- (bool)applyModelAttributes {
   return true;
 }
 
@@ -1210,14 +1216,14 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 - (void)invalidate {
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
 }
 
-- (jboolean)isInitialised {
+- (bool)isInitialised {
   return initialised_;
 }
 
-- (jint)getBaseLine {
+- (int32_t)getBaseLine {
   return -1;
 }
 
@@ -1230,7 +1236,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 - (void)updateModelToEventMapWithJavaUtilMap:(id<JavaUtilMap>)eventMap
                                 withNSString:(NSString *)eventParams
                              withASLoopParam:(ASLoopParam *)loopParam {
-  if (eventParams != nil && ![eventParams java_isEmpty]) {
+  if (eventParams != nil && ![eventParams isEmpty]) {
     id<JavaUtilList> modelEventHolders = ASModelExpressionParser_parseEventExpressionWithNSString_(eventParams);
     for (ASModelExpressionParser_ModelEventHolder * __strong modelEventHolder in nil_chk(modelEventHolders)) {
       NSString *key = JreRetainedLocalValue(((ASModelExpressionParser_ModelEventHolder *) nil_chk(modelEventHolder))->key_);
@@ -1391,12 +1397,12 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return [((id<ASHasWidgets>) nil_chk([self getParent])) findNearestViewWithNSString:id_];
 }
 
-- (jboolean)getBooleanWithId:(id)val {
+- (bool)getBooleanWithId:(id)val {
   return [((JavaLangBoolean *) nil_chk(ASStringUtils_getBooleanWithId_(val))) booleanValue];
 }
 
-- (jboolean)hasFeatureWithNSString:(NSString *)key
-                      withNSString:(NSString *)featureName {
+- (bool)hasFeatureWithNSString:(NSString *)key
+                  withNSString:(NSString *)featureName {
   NSString *os = ASPluginInvoker_getOS();
   NSString *value = nil;
   if ([((id<JavaUtilMap>) nil_chk(params_)) containsKeyWithId:JreStrcat("$C$", key, '-', os)]) {
@@ -1450,7 +1456,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   [self executeMethodListenersWithNSString:methodName withJavaLangRunnable:nil withNSObjectArray:args];
 }
 
-- (jboolean)hasMethodListenerWithNSString:(NSString *)methodName {
+- (bool)hasMethodListenerWithNSString:(NSString *)methodName {
   return methodListeners_ != nil && [methodListeners_ containsKeyWithId:methodName];
 }
 
@@ -1475,13 +1481,13 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   }
 }
 
-- (void)setOnMethodCalledWithBoolean:(jboolean)onMethodCalled {
+- (void)setOnMethodCalledWithBoolean:(bool)onMethodCalled {
   self->onMethodCalled_ = onMethodCalled;
 }
 
-- (jboolean)setFieldUsingReflectionWithId:(id)targetObject
-                             withNSString:(NSString *)fieldName
-                                   withId:(id)fieldValue {
+- (bool)setFieldUsingReflectionWithId:(id)targetObject
+                         withNSString:(NSString *)fieldName
+                               withId:(id)fieldValue {
   JavaLangReflectField *field;
   @try {
     field = [[nil_chk(targetObject) java_getClass] getDeclaredField:fieldName];
@@ -1554,12 +1560,12 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withIOSClassArray_withNSObjectArray_(obj, methodName, classArray, params);
 }
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType {
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType {
   return nil;
 }
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype {
+                      withInt:(int32_t)viewtype {
   return nil;
 }
 
@@ -1570,7 +1576,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return nil;
 }
 
-- (jboolean)isAfterParentInitRequired {
+- (bool)isAfterParentInitRequired {
   return false;
 }
 
@@ -1589,10 +1595,10 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return groupName_;
 }
 
-- (void)setDrawableBoundsWithInt:(jint)l
-                         withInt:(jint)t
-                         withInt:(jint)r
-                         withInt:(jint)b {
+- (void)setDrawableBoundsWithInt:(int32_t)l
+                         withInt:(int32_t)t
+                         withInt:(int32_t)r
+                         withInt:(int32_t)b {
 }
 
 - (void)setEventBubblersWithJavaUtilCollection:(id<JavaUtilCollection>)flags {
@@ -1616,15 +1622,15 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 
 - (void)applyThemeStyleWithNSString:(NSString *)themeName {
   NSString *attrStr = ASResourceBundleUtils_getStringWithNSString_withNSString_withASIFragment_(@"values/theme", themeName, fragment_);
-  if (attrStr != nil && ![attrStr java_isEmpty]) {
+  if (attrStr != nil && ![attrStr isEmpty]) {
     IOSObjectArray *attrs = [attrStr java_split:@";"];
     {
       IOSObjectArray *a__ = attrs;
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *attr = *b__++;
-        IOSObjectArray *nameAndValue = [((NSString *) nil_chk(attr)) java_split:@"\\:"];
+        NSString *attr = RETAIN_AND_AUTORELEASE(*b__++);
+        IOSObjectArray *nameAndValue = [attr java_split:@"\\:"];
         NSString *key = IOSObjectArray_Get(nil_chk(nameAndValue), 0);
         NSString *value = nameAndValue->size_ <= 1 ? @"" : IOSObjectArray_Get(nameAndValue, 1);
         ASWidgetAttribute *attribute = [self getAttributeWithASHasWidgets:parent_ withNSString:[self getLocalName] withNSString:key];
@@ -1637,7 +1643,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 }
 
 - (id<ASIWidget>)loadLazyWidgetsWithASHasWidgets:(id<ASHasWidgets>)parent
-                                         withInt:(jint)index
+                                         withInt:(int32_t)index
                                     withNSString:(NSString *)idKey
                                  withASLoopParam:(ASLoopParam *)model {
   id handler = ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(parent, index, fragment_);
@@ -1667,15 +1673,15 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
                                   withId:(id)handler
                             withNSString:(NSString *)idKey
                          withASLoopParam:(ASLoopParam *)model
-                                 withInt:(jint)index {
+                                 withInt:(int32_t)index {
   return ASBaseWidget_loadWidgetWithASIWidget_withASIWidget_withId_withNSString_withASLoopParam_withInt_(self, objWidget, root, handler, idKey, model, index);
 }
 
-- (jint)getValidationErrorDisplayType {
+- (int32_t)getValidationErrorDisplayType {
   return validationErrorDisplayType_;
 }
 
-- (void)setValidationErrorDisplayTypeWithInt:(jint)validationErrorDisplayType {
+- (void)setValidationErrorDisplayTypeWithInt:(int32_t)validationErrorDisplayType {
   self->validationErrorDisplayType_ = validationErrorDisplayType;
 }
 
@@ -1689,7 +1695,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 
 - (NSString *)getCustomMessageWithNSString:(NSString *)key {
   if (customErrorMessageKeys_ != nil) {
-    jint index = [customErrorMessageKeys_ indexOfWithId:key];
+    int32_t index = [customErrorMessageKeys_ indexOfWithId:key];
     if (index != -1) {
       return [((id<JavaUtilList>) nil_chk(customErrorMessageValues_)) getWithInt:index];
     }
@@ -1722,7 +1728,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return nil;
 }
 
-- (jboolean)isWidgetDisposed {
+- (bool)isWidgetDisposed {
   return false;
 }
 
@@ -2202,7 +2208,7 @@ void ASBaseWidget_addAttributeCommandToChainWithNSString_withNSStringArray_withA
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      NSString *attributeName = *b__++;
+      NSString *attributeName = RETAIN_AND_AUTORELEASE(*b__++);
       if (![((id<JavaUtilMap>) nil_chk(self->updateAttributes_)) containsKeyWithId:attributeName]) {
         [((id<JavaUtilMap>) nil_chk(self->updateAttributes_)) putWithId:attributeName withId:create_JavaUtilArrayList_init()];
       }
@@ -2218,7 +2224,7 @@ void ASBaseWidget_addAttributeCommandToChainWithNSString_withNSStringArray_withA
 
 void ASBaseWidget_applyStyleToWidgetWithNSString_withNSString_withASAttributeCommandChain_(ASBaseWidget *self, NSString *sourceName, NSString *phase, ASAttributeCommandChain *attributeCommandChain) {
   id value = JreRetainedLocalValue([((ASAttributeCommandChain *) nil_chk(attributeCommandChain)) getOriginalStringValue]);
-  jboolean skipConvert = false;
+  bool skipConvert = false;
   if (value == nil && [attributeCommandChain getOriginalValue] != nil) {
     value = [attributeCommandChain getOriginalValue];
     skipConvert = true;
@@ -2226,7 +2232,7 @@ void ASBaseWidget_applyStyleToWidgetWithNSString_withNSString_withASAttributeCom
   ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(self, ASWidgetFactory_getAttributeWithNSString_withNSString_([self getLocalName], sourceName), nil, value, phase, skipConvert);
 }
 
-void ASBaseWidget_setAttributeWithASWidgetAttribute_withId_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id objValue, jboolean skipConvert) {
+void ASBaseWidget_setAttributeWithASWidgetAttribute_withId_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id objValue, bool skipConvert) {
   ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(self, widgetAttribute, nil, objValue, nil, skipConvert);
   [self requestLayoutNInvalidateIfRequiredWithInt:[((ASWidgetAttribute *) nil_chk(widgetAttribute)) getUpdateUiFlag]];
 }
@@ -2235,9 +2241,9 @@ void ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_w
   ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(self, widgetAttribute, childWidget, objValue, phase, false);
 }
 
-void ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, jboolean skipConvert) {
+void ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, bool skipConvert) {
   if (widgetAttribute != nil) {
-    jint bufferStrategy = [widgetAttribute getBufferStrategy];
+    int32_t bufferStrategy = [widgetAttribute getBufferStrategy];
     if (bufferStrategy > 0 && ((bufferStrategy == ASIWidget_BUFFER_STRATEGY_ALWAYS) || !([self isInitialised] && bufferStrategy == ASIWidget_BUFFER_STRATEGY_DURING_INIT))) {
       if (self->bufferedAttributes_ == nil) {
         JreStrongAssignAndConsume(&self->bufferedAttributes_, new_JavaUtilArrayList_init());
@@ -2250,7 +2256,7 @@ void ASBaseWidget_applyStyleToWidgetWithASWidgetAttribute_withASIWidget_withId_w
   }
 }
 
-void ASBaseWidget_applyStyleToWidgetWithoutBufferingWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, jboolean skipConvert) {
+void ASBaseWidget_applyStyleToWidgetWithoutBufferingWithASWidgetAttribute_withASIWidget_withId_withNSString_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, id objValue, NSString *phase, bool skipConvert) {
   @try {
     NSString *type = JreRetainedLocalValue([((ASWidgetAttribute *) nil_chk(widgetAttribute)) getAttributeType]);
     id convertedValue = nil;
@@ -2332,7 +2338,7 @@ id ASBaseWidget_handleArrayTypeWithId_withNSString_withNSString_(ASBaseWidget *s
       NSString * const *b__ = a__->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
-        NSString *value = *b__++;
+        NSString *value = RETAIN_AND_AUTORELEASE(*b__++);
         [finalValues addWithId:[self quickConvertWithId:value withNSString:arrayType]];
       }
     }
@@ -2410,7 +2416,7 @@ NSString *ASBaseWidget_stripOSWithNSString_(ASBaseWidget *self, NSString *key) {
   return key;
 }
 
-jint ASBaseWidget_convertToIntFromDpWithNSString_(ASBaseWidget *self, NSString *dimension) {
+int32_t ASBaseWidget_convertToIntFromDpWithNSString_(ASBaseWidget *self, NSString *dimension) {
   if (dimension == nil) {
     return -1;
   }
@@ -2422,7 +2428,7 @@ jint ASBaseWidget_convertToIntFromDpWithNSString_(ASBaseWidget *self, NSString *
   }
 }
 
-void ASBaseWidget_handlePathWithJavaUtilMap_withASIWidget_withInt_(ASBaseWidget *self, id<JavaUtilMap> map, id<ASIWidget> w, jint methods) {
+void ASBaseWidget_handlePathWithJavaUtilMap_withASIWidget_withInt_(ASBaseWidget *self, id<JavaUtilMap> map, id<ASIWidget> w, int32_t methods) {
   id<JavaUtilList> paths = ASPluginInvoker_getListWithId_([((id<JavaUtilMap>) nil_chk(map)) getWithId:@"paths"]);
   id<ASIWidget> widget = JreRetainedLocalValue(w);
   id<JavaUtilList> pathWidgets = create_JavaUtilArrayList_init();
@@ -2448,7 +2454,7 @@ void ASBaseWidget_handlePathWithJavaUtilMap_withASIWidget_withInt_(ASBaseWidget 
   }
 }
 
-jint ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(ASBaseWidget *self, id<JavaUtilMap> payLoad, NSString *a, NSString *b, NSString *orderKey) {
+int32_t ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(ASBaseWidget *self, id<JavaUtilMap> payLoad, NSString *a, NSString *b, NSString *orderKey) {
   id valueA = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(payLoad)) getWithId:a]);
   id valueB = JreRetainedLocalValue([payLoad getWithId:b]);
   id<JavaUtilMap> mapA = ASPluginInvoker_getMapWithId_(valueA);
@@ -2457,8 +2463,8 @@ jint ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNS
     id objectA = JreRetainedLocalValue([mapA getWithId:orderKey]);
     id objectB = JreRetainedLocalValue([mapB getWithId:orderKey]);
     if (objectA != nil && objectB != nil) {
-      jint orderKeyA = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_(objectA))) intValue];
-      jint orderKeyB = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_(objectB))) intValue];
+      int32_t orderKeyA = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_(objectA))) intValue];
+      int32_t orderKeyB = [((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_(objectB))) intValue];
       return orderKeyA - orderKeyB;
     }
   }
@@ -2468,7 +2474,7 @@ jint ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNS
   return -1;
 }
 
-id ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, jboolean skipConvert) {
+id ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, bool skipConvert) {
   id objValue;
   id<ASILifeCycleDecorator> lifeCycleDecorator = ASBaseWidget_getDecoratorWithASWidgetAttribute_(self, widgetAttribute);
   if (childWidget != nil) {
@@ -2499,7 +2505,7 @@ id ASBaseWidget_handleArrayTypeForGetWithId_withNSString_withNSString_(ASBaseWid
     id<ASIConverter> converter = ASPluginInvoker_getConverterWithNSString_(arrayType);
     id<JavaUtilList> values = (id<JavaUtilList>) cast_check(objValue, JavaUtilList_class_());
     IOSObjectArray *finalValues = [IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(values)) size] type:NSString_class_()];
-    for (jint i = 0; i < [values size]; i++) {
+    for (int32_t i = 0; i < [values size]; i++) {
       id value = JreRetainedLocalValue([values getWithInt:i]);
       IOSObjectArray_Set(finalValues, i, (NSString *) cast_chk([((id<ASIConverter>) nil_chk(converter)) convertToWithId:value withASIFragment:self->fragment_], [NSString class]));
     }
@@ -2583,9 +2589,9 @@ void ASBaseWidget_handleModelUiToPojo(ASBaseWidget *self) {
 
 id ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withNSObjectArray_(id obj, NSString *methodName, IOSObjectArray *params) {
   ASBaseWidget_initialize();
-  jint paramCount = ((IOSObjectArray *) nil_chk(params))->size_;
+  int32_t paramCount = ((IOSObjectArray *) nil_chk(params))->size_;
   IOSObjectArray *classArray = [IOSObjectArray arrayWithLength:paramCount type:IOSClass_class_()];
-  for (jint i = 0; i < paramCount; i++) {
+  for (int32_t i = 0; i < paramCount; i++) {
     IOSObjectArray_Set(classArray, i, [nil_chk(IOSObjectArray_Get(params, i)) java_getClass]);
   }
   id requiredObj = ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withIOSClassArray_withNSObjectArray_(obj, methodName, classArray, params);
@@ -2625,7 +2631,7 @@ void ASBaseWidget_loadAndAddWidgetsWithJavaUtilIterator_withASIWidget_withId_wit
   }
 }
 
-id<ASIWidget> ASBaseWidget_loadWidgetWithASIWidget_withASIWidget_withId_withNSString_withASLoopParam_withInt_(ASBaseWidget *self, id<ASIWidget> objWidget, id<ASIWidget> root, id handler, NSString *idKey, ASLoopParam *model, jint index) {
+id<ASIWidget> ASBaseWidget_loadWidgetWithASIWidget_withASIWidget_withId_withNSString_withASLoopParam_withInt_(ASBaseWidget *self, id<ASIWidget> objWidget, id<ASIWidget> root, id handler, NSString *idKey, ASLoopParam *model, int32_t index) {
   id<ASIWidget> widgetCreated = nil;
   if ([objWidget isKindOfClass:[ASBaseHasWidgets_LazyBaseWidget class]]) {
     ASBaseHasWidgets_LazyBaseWidget *widget = (ASBaseHasWidgets_LazyBaseWidget *) objWidget;
@@ -2653,6 +2659,8 @@ id<ASIWidget> ASBaseWidget_loadWidgetWithASIWidget_withASIWidget_withId_withNSSt
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseWidget)
+
+J2OBJC_NAME_MAPPING(ASBaseWidget, "com.ashera.widget", "AS")
 
 @implementation ASBaseWidget_LazyBaseWidget
 
@@ -2826,8 +2834,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseWidget_EventHolder)
 
 @implementation ASBaseWidget_$Lambda$1
 
-- (jint)compareWithId:(NSString *)a
-               withId:(NSString *)b {
+- (int32_t)compareWithId:(NSString *)a
+                  withId:(NSString *)b {
   return ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(this$0_, val$payLoad_, a, b, @"orderSet");
 }
 
@@ -2884,8 +2892,8 @@ ASBaseWidget_$Lambda$1 *create_ASBaseWidget_$Lambda$1_initWithASBaseWidget_withJ
 
 @implementation ASBaseWidget_$Lambda$2
 
-- (jint)compareWithId:(NSString *)a
-               withId:(NSString *)b {
+- (int32_t)compareWithId:(NSString *)a
+                  withId:(NSString *)b {
   return ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(this$0_, val$payLoad_, a, b, @"orderGet");
 }
 

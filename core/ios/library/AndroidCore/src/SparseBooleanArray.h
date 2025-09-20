@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\SparseBooleanArray.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SparseBooleanArray")
@@ -15,6 +16,10 @@
 
 #if !defined (ADSparseBooleanArray_) && (INCLUDE_ALL_SparseBooleanArray || defined(INCLUDE_ADSparseBooleanArray))
 #define ADSparseBooleanArray_
+
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADSparseBooleanArray : NSObject
 
@@ -32,14 +37,14 @@
   sparse array will be initialized with a light-weight representation
   not requiring any additional array allocations.
  */
-- (instancetype)initWithInt:(jint)initialCapacity;
+- (instancetype)initWithInt:(int32_t)initialCapacity;
 
 /*!
  @brief Puts a key/value pair into the array, optimizing for the case where
   the key is greater than all existing keys in the array.
  */
-- (void)appendWithInt:(jint)key
-          withBoolean:(jboolean)value;
+- (void)appendWithInt:(int32_t)key
+          withBoolean:(bool)value;
 
 /*!
  @brief Removes all key-value mappings from this SparseBooleanArray.
@@ -51,27 +56,27 @@
 /*!
  @brief Removes the mapping from the specified key, if there was any.
  */
-- (void)delete__WithInt:(jint)key;
+- (void)delete__WithInt:(int32_t)key;
 
 /*!
  @brief Gets the boolean mapped from the specified key, or <code>false</code>
   if no such mapping has been made.
  */
-- (jboolean)getWithInt:(jint)key;
+- (bool)getWithInt:(int32_t)key;
 
 /*!
  @brief Gets the boolean mapped from the specified key, or the specified value
   if no such mapping has been made.
  */
-- (jboolean)getWithInt:(jint)key
-           withBoolean:(jboolean)valueIfKeyNotFound;
+- (bool)getWithInt:(int32_t)key
+       withBoolean:(bool)valueIfKeyNotFound;
 
 /*!
  @brief Returns the index for which <code>keyAt</code> would return the
   specified key, or a negative number if the specified
   key is not mapped.
  */
-- (jint)indexOfKeyWithInt:(jint)key;
+- (int32_t)indexOfKeyWithInt:(int32_t)key;
 
 /*!
  @brief Returns an index for which <code>valueAt</code> would return the
@@ -81,7 +86,7 @@
   and that multiple keys can map to the same value and this will
   find only one of them.
  */
-- (jint)indexOfValueWithBoolean:(jboolean)value;
+- (int32_t)indexOfValueWithBoolean:(bool)value;
 
 /*!
  @brief Given an index in the range <code>0...size()-1</code>, returns
@@ -92,33 +97,34 @@
   smallest key and <code>keyAt(size()-1)</code> will return the largest
   key.</p>
  */
-- (jint)keyAtWithInt:(jint)index;
+- (int32_t)keyAtWithInt:(int32_t)index;
 
 /*!
  @brief Adds a mapping from the specified key to the specified value,
   replacing the previous mapping from the specified key if there
   was one.
  */
-- (void)putWithInt:(jint)key
-       withBoolean:(jboolean)value;
+- (void)putWithInt:(int32_t)key
+       withBoolean:(bool)value;
 
 /*!
  */
-- (void)removeAtWithInt:(jint)index;
+- (void)removeAtWithInt:(int32_t)index;
 
 /*!
  */
-- (void)setValueAtWithInt:(jint)index
-              withBoolean:(jboolean)value;
+- (void)setValueAtWithInt:(int32_t)index
+              withBoolean:(bool)value;
 
 /*!
  @brief Returns the number of key-value mappings that this SparseBooleanArray
   currently stores.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
- @brief <p>This implementation composes a string by iterating over its mappings.
+ @brief  
+ <p>This implementation composes a string by iterating over its mappings.
  */
 - (NSString *)description;
 
@@ -132,7 +138,7 @@
   smallest key and <code>valueAt(size()-1)</code> will return the value
   associated with the largest key.</p>
  */
-- (jboolean)valueAtWithInt:(jint)index;
+- (bool)valueAtWithInt:(int32_t)index;
 
 @end
 
@@ -144,15 +150,16 @@ FOUNDATION_EXPORT ADSparseBooleanArray *new_ADSparseBooleanArray_init(void) NS_R
 
 FOUNDATION_EXPORT ADSparseBooleanArray *create_ADSparseBooleanArray_init(void);
 
-FOUNDATION_EXPORT void ADSparseBooleanArray_initWithInt_(ADSparseBooleanArray *self, jint initialCapacity);
+FOUNDATION_EXPORT void ADSparseBooleanArray_initWithInt_(ADSparseBooleanArray *self, int32_t initialCapacity);
 
-FOUNDATION_EXPORT ADSparseBooleanArray *new_ADSparseBooleanArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADSparseBooleanArray *new_ADSparseBooleanArray_initWithInt_(int32_t initialCapacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADSparseBooleanArray *create_ADSparseBooleanArray_initWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT ADSparseBooleanArray *create_ADSparseBooleanArray_initWithInt_(int32_t initialCapacity);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADSparseBooleanArray)
 
 @compatibility_alias RAndroidUtilSparseBooleanArray ADSparseBooleanArray;
+
 
 #endif
 

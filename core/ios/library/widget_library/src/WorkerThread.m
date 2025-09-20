@@ -3,14 +3,23 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\utils\WorkerThread.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FileUtils.h"
 #include "J2ObjC_source.h"
 #include "WorkerThread.h"
 #include "java/util/Map.h"
 #include "java/util/concurrent/CountDownLatch.h"
 
-@class JavaUtilConcurrentCountDownLatch;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASWorkerThread () {
@@ -93,3 +102,5 @@ ASWorkerThread *create_ASWorkerThread_initWithNSString_withJavaUtilConcurrentCou
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWorkerThread)
+
+J2OBJC_NAME_MAPPING(ASWorkerThread, "com.ashera.utils", "AS")

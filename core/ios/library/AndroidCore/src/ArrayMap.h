@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\ArrayMap.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ArrayMap")
@@ -23,6 +24,9 @@
 @class ADMapCollections;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilCollection;
 @protocol JavaUtilFunctionBiConsumer;
 @protocol JavaUtilFunctionBiFunction;
@@ -54,7 +58,7 @@
  @public
   IOSIntArray *mHashes_;
   IOSObjectArray *mArray_;
-  jint mSize_;
+  int32_t mSize_;
   ADMapCollections *mCollections_;
 }
 
@@ -74,7 +78,7 @@
 /*!
  @brief Create a new ArrayMap with a given initial capacity.
  */
-- (instancetype)initWithInt:(jint)capacity;
+- (instancetype)initWithInt:(int32_t)capacity;
 
 /*!
  @brief Special fast path for appending items to the end of the array without validation.
@@ -94,14 +98,14 @@
  @return Returns true if this array map contains a key for every entry
   in <var>collection</var>, else returns false.
  */
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
 /*!
  @brief Check whether a key exists in the array.
  @param key The key to search for.
  @return Returns true if the key exists, else false.
  */
-- (jboolean)containsKeyWithId:(id)key;
+- (bool)containsKeyWithId:(id)key;
 
 /*!
  @brief Check whether a value exists in the array.This requires a linear search
@@ -109,13 +113,13 @@
  @param value The value to search for.
  @return Returns true if the value exists, else false.
  */
-- (jboolean)containsValueWithId:(id)value;
+- (bool)containsValueWithId:(id)value;
 
 /*!
  @brief Ensure the array map can hold at least <var>minimumCapacity</var>
   items.
  */
-- (void)ensureCapacityWithInt:(jint)minimumCapacity;
+- (void)ensureCapacityWithInt:(int32_t)minimumCapacity;
 
 /*!
  @brief Return a <code>java.util.Set</code> for iterating over and interacting with all mappings
@@ -133,13 +137,14 @@
 - (id<JavaUtilSet>)entrySet;
 
 /*!
- @brief <p>This implementation returns false if the object is not a map, or
+ @brief  
+ <p>This implementation returns false if the object is not a map, or
   if the maps have different sizes.
  Otherwise, for each key in this map,
   values of both maps are compared. If the values for any key are not
   equal, the method returns false, otherwise it returns true.
  */
-- (jboolean)isEqual:(id)object;
+- (bool)isEqual:(id)object;
 
 /*!
  */
@@ -162,19 +167,19 @@
  @param key The key to search for.
  @return Returns the index of the key if it exists, else a negative integer.
  */
-- (jint)indexOfKeyWithId:(id)key;
+- (int32_t)indexOfKeyWithId:(id)key;
 
 /*!
  @brief Return true if the array map contains no items.
  */
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 /*!
  @brief Return the key at the given index in the array.
  @param index The desired index, must be between 0 and <code>size()</code> -1.
  @return Returns the key stored at the given index.
  */
-- (id)keyAtWithInt:(jint)index;
+- (id)keyAtWithInt:(int32_t)index;
 
 /*!
  @brief Return a <code>java.util.Set</code> for iterating over and interacting with all keys
@@ -220,21 +225,21 @@
  @param collection The collection whose contents are to be used to remove keys.
  @return Returns true if any keys were removed from the array map, else false.
  */
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
 /*!
  @brief Remove the key/value mapping at the given index.
  @param index The desired index, must be between 0 and <code>size()</code> -1.
  @return Returns the value that was stored at this index.
  */
-- (id)removeAtWithInt:(jint)index;
+- (id)removeAtWithInt:(int32_t)index;
 
 /*!
  @brief Remove all keys in the array map that do <b>not</b> exist in the given collection.
  @param collection The collection whose contents are to be used to determine which  keys to keep.
  @return Returns true if any keys were removed from the array map, else false.
  */
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+- (bool)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
 /*!
  @brief Set the value at a given index in the array.
@@ -242,16 +247,17 @@
  @param value The new value to store at this index.
  @return Returns the previous value at the given index.
  */
-- (id)setValueAtWithInt:(jint)index
+- (id)setValueAtWithInt:(int32_t)index
                  withId:(id)value;
 
 /*!
  @brief Return the number of items in this array map.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
- @brief <p>This implementation composes a string by iterating over its mappings.
+ @brief  
+ <p>This implementation composes a string by iterating over its mappings.
  If
   this map contains itself as a key or a value, the string "(this Map)"
   will appear in its place.
@@ -273,7 +279,7 @@
  @param index The desired index, must be between 0 and <code>size()</code> -1.
  @return Returns the value stored at the given index.
  */
-- (id)valueAtWithInt:(jint)index;
+- (id)valueAtWithInt:(int32_t)index;
 
 /*!
  @brief Return a <code>java.util.Collection</code> for iterating over and interacting with all values
@@ -286,12 +292,12 @@
 
 #pragma mark Package-Private
 
-- (jint)indexOfWithId:(id)key
-              withInt:(jint)hash_;
+- (int32_t)indexOfWithId:(id)key
+                 withInt:(int32_t)hash_;
 
-- (jint)indexOfNull;
+- (int32_t)indexOfNull;
 
-- (jint)indexOfValueWithId:(id)value;
+- (int32_t)indexOfValueWithId:(id)value;
 
 @end
 
@@ -320,12 +326,12 @@ inline IOSObjectArray *ADArrayMap_set_mBaseCache(IOSObjectArray *value);
 FOUNDATION_EXPORT IOSObjectArray *ADArrayMap_mBaseCache;
 J2OBJC_STATIC_FIELD_OBJ(ADArrayMap, mBaseCache, IOSObjectArray *)
 
-inline jint ADArrayMap_get_mBaseCacheSize(void);
-inline jint ADArrayMap_set_mBaseCacheSize(jint value);
-inline jint *ADArrayMap_getRef_mBaseCacheSize(void);
+inline int32_t ADArrayMap_get_mBaseCacheSize(void);
+inline int32_t ADArrayMap_set_mBaseCacheSize(int32_t value);
+inline int32_t *ADArrayMap_getRef_mBaseCacheSize(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ADArrayMap_mBaseCacheSize;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADArrayMap, mBaseCacheSize, jint)
+FOUNDATION_EXPORT int32_t ADArrayMap_mBaseCacheSize;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADArrayMap, mBaseCacheSize, int32_t)
 
 inline IOSObjectArray *ADArrayMap_get_mTwiceBaseCache(void);
 inline IOSObjectArray *ADArrayMap_set_mTwiceBaseCache(IOSObjectArray *value);
@@ -333,12 +339,12 @@ inline IOSObjectArray *ADArrayMap_set_mTwiceBaseCache(IOSObjectArray *value);
 FOUNDATION_EXPORT IOSObjectArray *ADArrayMap_mTwiceBaseCache;
 J2OBJC_STATIC_FIELD_OBJ(ADArrayMap, mTwiceBaseCache, IOSObjectArray *)
 
-inline jint ADArrayMap_get_mTwiceBaseCacheSize(void);
-inline jint ADArrayMap_set_mTwiceBaseCacheSize(jint value);
-inline jint *ADArrayMap_getRef_mTwiceBaseCacheSize(void);
+inline int32_t ADArrayMap_get_mTwiceBaseCacheSize(void);
+inline int32_t ADArrayMap_set_mTwiceBaseCacheSize(int32_t value);
+inline int32_t *ADArrayMap_getRef_mTwiceBaseCacheSize(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ADArrayMap_mTwiceBaseCacheSize;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADArrayMap, mTwiceBaseCacheSize, jint)
+FOUNDATION_EXPORT int32_t ADArrayMap_mTwiceBaseCacheSize;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADArrayMap, mTwiceBaseCacheSize, int32_t)
 
 /*!
  @brief Special hash array value that indicates the container is immutable.
@@ -354,11 +360,11 @@ FOUNDATION_EXPORT ADArrayMap *new_ADArrayMap_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADArrayMap *create_ADArrayMap_init(void);
 
-FOUNDATION_EXPORT void ADArrayMap_initWithInt_(ADArrayMap *self, jint capacity);
+FOUNDATION_EXPORT void ADArrayMap_initWithInt_(ADArrayMap *self, int32_t capacity);
 
-FOUNDATION_EXPORT ADArrayMap *new_ADArrayMap_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADArrayMap *new_ADArrayMap_initWithInt_(int32_t capacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADArrayMap *create_ADArrayMap_initWithInt_(jint capacity);
+FOUNDATION_EXPORT ADArrayMap *create_ADArrayMap_initWithInt_(int32_t capacity);
 
 FOUNDATION_EXPORT void ADArrayMap_initWithADArrayMap_(ADArrayMap *self, ADArrayMap *map);
 
@@ -369,6 +375,7 @@ FOUNDATION_EXPORT ADArrayMap *create_ADArrayMap_initWithADArrayMap_(ADArrayMap *
 J2OBJC_TYPE_LITERAL_HEADER(ADArrayMap)
 
 @compatibility_alias RAndroidUtilArrayMap ADArrayMap;
+
 
 #endif
 

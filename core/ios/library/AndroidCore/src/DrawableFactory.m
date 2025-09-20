@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\com\ashera\drawable\DrawableFactory.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CommonConverters.h"
 #include "Drawable.h"
 #include "DrawableFactory.h"
@@ -26,8 +31,12 @@
 #include "java/util/stream/IntStream.h"
 #include "java/util/stream/Stream.h"
 
-@class JavaLangInteger;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -49,9 +58,9 @@
          withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
          withASIFragment:(id<ASIFragment>)fragment;
 
-+ (jint)dimensionConvertWithId:(id)value
-               withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
-               withASIFragment:(id<ASIFragment>)fragment;
++ (int32_t)dimensionConvertWithId:(id)value
+                  withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
+                  withASIFragment:(id<ASIFragment>)fragment;
 
 @end
 
@@ -69,11 +78,11 @@ __attribute__((unused)) static void ASDrawableFactory_createShapeDrawableWithJav
 
 __attribute__((unused)) static id ASDrawableFactory_colorConvertWithId_withJavaUtilMap_withASIFragment_(id value, id<JavaUtilMap> dependentAttributesMap, id<ASIFragment> fragment);
 
-__attribute__((unused)) static jint ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(id value, id<JavaUtilMap> dependentAttributesMap, id<ASIFragment> fragment);
+__attribute__((unused)) static int32_t ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(id value, id<JavaUtilMap> dependentAttributesMap, id<ASIFragment> fragment);
 
 @interface ASDrawableFactory_$Lambda$1 : NSObject < JavaUtilFunctionToIntFunction >
 
-- (jint)applyAsIntWithId:(JavaLangInteger *)i;
+- (int32_t)applyAsIntWithId:(JavaLangInteger *)i;
 
 @end
 
@@ -88,6 +97,7 @@ __attribute__((unused)) static void ASDrawableFactory_$Lambda$1_init(ASDrawableF
 __attribute__((unused)) static ASDrawableFactory_$Lambda$1 *new_ASDrawableFactory_$Lambda$1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASDrawableFactory_$Lambda$1 *create_ASDrawableFactory_$Lambda$1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(ASDrawableFactory)
 
@@ -128,9 +138,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASDrawableFactory_colorConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
 }
 
-+ (jint)dimensionConvertWithId:(id)value
-               withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
-               withASIFragment:(id<ASIFragment>)fragment {
++ (int32_t)dimensionConvertWithId:(id)value
+                  withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
+                  withASIFragment:(id<ASIFragment>)fragment {
   return ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
 }
 
@@ -165,7 +175,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (void)initialize {
   if (self == [ASDrawableFactory class]) {
     JreStrongAssignAndConsume(&ASDrawableFactory_DRAWABLE_STATE_LIST, [IOSObjectArray newArrayWithObjects:(id[]){ @"@android:state_window_focused", @"@android:state_selected", @"@android:state_focused", @"@android:state_pressed", @"@android:state_hovered", @"@android:state_activated", @"@android:state_accelerated", @"@android:state_enabled", @"@android:state_drag_can_accept", @"@android:state_drag_hovered", @"@android:state_checked" } count:11 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&ASDrawableFactory_DRAWABLE_STATE_LIST_ATTR, [IOSIntArray newArrayWithInts:(jint[]){ ADR_attr_state_window_focused, ADR_attr_state_selected, ADR_attr_state_focused, ADR_attr_state_pressed, ADR_attr_state_hovered, ADR_attr_state_activated, ADR_attr_state_accelerated, ADR_attr_state_enabled, ADR_attr_state_drag_can_accept, ADR_attr_state_drag_hovered, ADR_attr_state_checked } count:11]);
+    JreStrongAssignAndConsume(&ASDrawableFactory_DRAWABLE_STATE_LIST_ATTR, [IOSIntArray newArrayWithInts:(int32_t[]){ ADR_attr_state_window_focused, ADR_attr_state_selected, ADR_attr_state_focused, ADR_attr_state_pressed, ADR_attr_state_hovered, ADR_attr_state_activated, ADR_attr_state_accelerated, ADR_attr_state_enabled, ADR_attr_state_drag_can_accept, ADR_attr_state_drag_hovered, ADR_attr_state_checked } count:11]);
     J2OBJC_SET_INITIALIZED(ASDrawableFactory)
   }
 }
@@ -214,9 +224,9 @@ void ASDrawableFactory_addStateListDrawableWithNSString_withJavaUtilMap_withASIF
   ASDrawableFactory_initialize();
   id<JavaUtilMap> itemMap = ASPluginInvoker_getMapWithId_(item);
   id<JavaUtilList> stateList = create_JavaUtilArrayList_init();
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(ASDrawableFactory_DRAWABLE_STATE_LIST))->size_; i++) {
+  for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(ASDrawableFactory_DRAWABLE_STATE_LIST))->size_; i++) {
     NSString *state = IOSObjectArray_Get(ASDrawableFactory_DRAWABLE_STATE_LIST, i);
-    jint attrState = IOSIntArray_Get(nil_chk(ASDrawableFactory_DRAWABLE_STATE_LIST_ATTR), i);
+    int32_t attrState = IOSIntArray_Get(nil_chk(ASDrawableFactory_DRAWABLE_STATE_LIST_ATTR), i);
     id attrValue = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(itemMap)) getWithId:state]);
     if (attrValue != nil) {
       JavaLangBoolean *attrValueBool = ASPluginInvoker_getBooleanWithId_(attrValue);
@@ -254,12 +264,12 @@ void ASDrawableFactory_createShapeDrawableWithJavaUtilMap_withJavaUtilMap_withAS
     id<JavaUtilMap> size = ASPluginInvoker_getMapWithId_([shape getWithId:@"size"]);
     if ([((id<JavaUtilMap>) nil_chk(size)) containsKeyWithId:@"@android:width"]) {
       id value = JreRetainedLocalValue([size getWithId:@"@android:width"]);
-      jint width = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
+      int32_t width = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
       [((ADShapeDrawable *) nil_chk(shapeDrawable)) setWidthWithInt:width];
     }
     if ([size containsKeyWithId:@"@android:height"]) {
       id value = JreRetainedLocalValue([size getWithId:@"@android:height"]);
-      jint height = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
+      int32_t height = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
       [((ADShapeDrawable *) nil_chk(shapeDrawable)) setHeightWithInt:height];
     }
     [((ADShapeDrawable *) nil_chk(shapeDrawable)) setBoundsWithInt:0 withInt:0 withInt:[shapeDrawable getWidth] withInt:[shapeDrawable getHeight]];
@@ -268,12 +278,12 @@ void ASDrawableFactory_createShapeDrawableWithJavaUtilMap_withJavaUtilMap_withAS
     id<JavaUtilMap> stroke = ASPluginInvoker_getMapWithId_([shape getWithId:@"stroke"]);
     if ([((id<JavaUtilMap>) nil_chk(stroke)) containsKeyWithId:@"@android:width"]) {
       id value = JreRetainedLocalValue([stroke getWithId:@"@android:width"]);
-      jint width = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
+      int32_t width = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
       [((ADShapeDrawable *) nil_chk(shapeDrawable)) setStrokeWidthWithInt:width];
     }
     if ([stroke containsKeyWithId:@"@android:height"]) {
       id value = JreRetainedLocalValue([stroke getWithId:@"@android:height"]);
-      jint height = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
+      int32_t height = ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(value, dependentAttributesMap, fragment);
       [((ADShapeDrawable *) nil_chk(shapeDrawable)) setStrokeHeightWithInt:height];
     }
     if ([stroke containsKeyWithId:@"@android:color"]) {
@@ -289,18 +299,20 @@ id ASDrawableFactory_colorConvertWithId_withJavaUtilMap_withASIFragment_(id valu
   return ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASPluginInvoker_getConverterWithNSString_(@"color"), dependentAttributesMap, value, fragment);
 }
 
-jint ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(id value, id<JavaUtilMap> dependentAttributesMap, id<ASIFragment> fragment) {
+int32_t ASDrawableFactory_dimensionConvertWithId_withJavaUtilMap_withASIFragment_(id value, id<JavaUtilMap> dependentAttributesMap, id<ASIFragment> fragment) {
   ASDrawableFactory_initialize();
   return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASPluginInvoker_getConverterWithNSString_(ASCommonConverters_dimension), dependentAttributesMap, value, fragment), [JavaLangInteger class]))) intValue];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDrawableFactory)
 
+J2OBJC_NAME_MAPPING(ASDrawableFactory, "com.ashera.drawable", "AS")
+
 J2OBJC_INITIALIZED_DEFN(ASDrawableFactory_$Lambda$1)
 
 @implementation ASDrawableFactory_$Lambda$1
 
-- (jint)applyAsIntWithId:(JavaLangInteger *)i {
+- (int32_t)applyAsIntWithId:(JavaLangInteger *)i {
   return [((JavaLangInteger *) nil_chk(i)) intValue];
 }
 

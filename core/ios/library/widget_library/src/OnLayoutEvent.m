@@ -3,18 +3,31 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\OnLayoutEvent.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "OnLayoutEvent.h"
 #include "WidgetEvent.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASOnLayoutEvent () {
  @public
-  jboolean changed_;
-  jint l_;
-  jint t_;
-  jint r_;
-  jint b_;
+  bool changed_;
+  int32_t l_;
+  int32_t t_;
+  int32_t r_;
+  int32_t b_;
 }
 
 @end
@@ -28,43 +41,43 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)isChanged {
+- (bool)isChanged {
   return changed_;
 }
 
-- (void)setChangedWithBoolean:(jboolean)changed {
+- (void)setChangedWithBoolean:(bool)changed {
   self->changed_ = changed;
 }
 
-- (jint)getL {
+- (int32_t)getL {
   return l_;
 }
 
-- (void)setLWithInt:(jint)l {
+- (void)setLWithInt:(int32_t)l {
   self->l_ = l;
 }
 
-- (jint)getT {
+- (int32_t)getT {
   return t_;
 }
 
-- (void)setTWithInt:(jint)t {
+- (void)setTWithInt:(int32_t)t {
   self->t_ = t;
 }
 
-- (jint)getR {
+- (int32_t)getR {
   return r_;
 }
 
-- (void)setRWithInt:(jint)r {
+- (void)setRWithInt:(int32_t)r {
   self->r_ = r;
 }
 
-- (jint)getB {
+- (int32_t)getB {
   return b_;
 }
 
-- (void)setBWithInt:(jint)b {
+- (void)setBWithInt:(int32_t)b {
   self->b_ = b;
 }
 
@@ -124,3 +137,5 @@ ASOnLayoutEvent *create_ASOnLayoutEvent_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASOnLayoutEvent)
+
+J2OBJC_NAME_MAPPING(ASOnLayoutEvent, "com.ashera.widget", "AS")

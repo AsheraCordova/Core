@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\Animator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Animator")
@@ -22,8 +23,12 @@
 #if !defined (ADAnimator_) && (INCLUDE_ALL_Animator || defined(INCLUDE_ADAnimator))
 #define ADAnimator_
 
+
 @class ADConstantState;
 @class ADLongArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 @class JavaUtilArrayList;
 @protocol ADAnimator_AnimatorCaller;
 @protocol ADAnimator_AnimatorListener;
@@ -48,18 +53,18 @@
   /*!
    @brief Whether this animator is currently in a paused state.
    */
-  jboolean mPaused_;
+  bool mPaused_;
   /*!
    @brief A set of flags which identify the type of configuration changes that can affect this
   Animator.Used by the Animator cache.
    */
-  jint mChangingConfigurations_;
+  int32_t mChangingConfigurations_;
   /*!
    @brief Tracks whether we've notified listeners of the onAnimationStart() event.This can be
   complex to keep track of since we notify listeners at different times depending on
   startDelay and whether start() was called before end().
    */
-  jboolean mStartListenersCalled_;
+  bool mStartListenersCalled_;
 }
 
 #pragma mark Public
@@ -84,7 +89,7 @@
   and the provided configs.
  This method is called while loading the animator.
  */
-- (void)appendChangingConfigurationsWithInt:(jint)configs;
+- (void)appendChangingConfigurationsWithInt:(int32_t)configs;
 
 /*!
  @brief Cancels the animation.Unlike <code>end()</code>, <code>cancel()</code> causes the animation to
@@ -98,7 +103,7 @@
 
 /*!
  */
-- (jboolean)canReverse;
+- (bool)canReverse;
 
 - (ADAnimator *)java_clone;
 
@@ -129,7 +134,7 @@
  @brief Gets the duration for delaying pausing animators when apps go into the background.
  Used by AnimationHandler when requested to pause animators.
  */
-+ (jlong)getBackgroundPauseDelay;
++ (int64_t)getBackgroundPauseDelay;
 
 /*!
  @brief Return a mask of the configuration parameters for which this animator may change, requiring
@@ -139,13 +144,13 @@
  <code>r.android.content.pm.ActivityInfo</code>.
  - seealso: r.android.content.pm.ActivityInfo
  */
-- (jint)getChangingConfigurations;
+- (int32_t)getChangingConfigurations;
 
 /*!
  @brief Gets the duration of the animation.
  @return The length of the animation, in milliseconds.
  */
-- (jlong)getDuration;
+- (int64_t)getDuration;
 
 /*!
  @brief Returns the timing interpolator that this animation uses.
@@ -165,7 +170,7 @@
   after <code>start()</code> is called.
  @return the number of milliseconds to delay running the animation
  */
-- (jlong)getStartDelay;
+- (int64_t)getStartDelay;
 
 /*!
  @brief Gets the total duration of the animation, accounting for animation sequences, start delay,
@@ -174,7 +179,7 @@
            is called. <code>DURATION_INFINITE</code> will be returned if the animation or any
            child animation repeats infinite times.
  */
-- (jlong)getTotalDuration;
+- (int64_t)getTotalDuration;
 
 /*!
  @brief Returns whether this animator is currently in a paused state.
@@ -182,14 +187,14 @@
  - seealso: #pause()
  - seealso: #resume()
  */
-- (jboolean)isPaused;
+- (bool)isPaused;
 
 /*!
  @brief Returns whether this Animator is currently running (having been started and gone past any
   initial startDelay period and not yet ended).
  @return Whether the Animator is running.
  */
-- (jboolean)isRunning;
+- (bool)isRunning;
 
 /*!
  @brief Returns whether this Animator has been started and not yet ended.For reusable
@@ -204,7 +209,7 @@
   started, because they cannot return to a non-started state.
  @return Whether the Animator has been started and not yet ended.
  */
-- (jboolean)isStarted;
+- (bool)isStarted;
 
 /*!
  @brief Pauses a running animation.This method should only be called on the same thread on
@@ -255,10 +260,9 @@
 
 /*!
  @brief <p>Whether or not the Animator is allowed to run asynchronously off of
-  the UI thread.
- This is a hint that informs the Animator that it is
+  the UI thread.This is a hint that informs the Animator that it is
   OK to run the animation off-thread, however the Animator may decide
-  that it must run the animation on the UI thread anyway. 
+  that it must run the animation on the UI thread anyway.
  <p>Regardless of whether or not the animation runs asynchronously, all
   listener callbacks will be called on the UI thread.</p>
   
@@ -283,7 +287,7 @@
      for this reason.</li>
   </ol>
  */
-- (void)setAllowRunningAsynchronouslyWithBoolean:(jboolean)mayRunAsync;
+- (void)setAllowRunningAsynchronouslyWithBoolean:(bool)mayRunAsync;
 
 /*!
  @brief Sets the behavior of animator pausing when apps go into the background.
@@ -292,13 +296,13 @@
   system wide.
  @param enable Enable (default behavior) or disable background pausing behavior.
  */
-+ (void)setAnimatorPausingEnabledWithBoolean:(jboolean)enable;
++ (void)setAnimatorPausingEnabledWithBoolean:(bool)enable;
 
 /*!
  @brief Sets the duration for delaying pausing animators when apps go into the background.
  Used by AnimationHandler when requested to pause animators.
  */
-+ (void)setBackgroundPauseDelayWithLong:(jlong)value;
++ (void)setBackgroundPauseDelayWithLong:(int64_t)value;
 
 /*!
  @brief Set a mask of the configuration parameters for which this animator may change, requiring
@@ -307,13 +311,13 @@
  <code>r.android.content.pm.ActivityInfo</code> .
  - seealso: r.android.content.pm.ActivityInfo
  */
-- (void)setChangingConfigurationsWithInt:(jint)configs;
+- (void)setChangingConfigurationsWithInt:(int32_t)configs;
 
 /*!
  @brief Sets the duration of the animation.
  @param duration The length of the animation, in milliseconds.
  */
-- (ADAnimator *)setDurationWithLong:(jlong)duration;
+- (ADAnimator *)setDurationWithLong:(int64_t)duration;
 
 /*!
  @brief The time interpolator used in calculating the elapsed fraction of the
@@ -330,7 +334,7 @@
   after <code>start()</code> is called.
  @param startDelay The amount of the delay, in milliseconds
  */
-- (void)setStartDelayWithLong:(jlong)startDelay;
+- (void)setStartDelayWithLong:(int64_t)startDelay;
 
 /*!
  @brief Sets the target object whose property will be animated by this animation.Not all subclasses
@@ -389,8 +393,8 @@
  @brief Internal use only.This animates any animation that has ended since lastPlayTime.
  If an animation hasn't been finished, no change will be made.
  */
-- (void)animateSkipToEndsWithLong:(jlong)currentPlayTime
-                         withLong:(jlong)lastPlayTime;
+- (void)animateSkipToEndsWithLong:(int64_t)currentPlayTime
+                         withLong:(int64_t)lastPlayTime;
 
 /*!
  @brief Internal use only.Changes the value of the animator as if currentPlayTime has passed since
@@ -399,8 +403,8 @@
   repetition. lastPlayTime is similar and is used to calculate how many repeats have been
   done between the two times.
  */
-- (void)animateValuesInRangeWithLong:(jlong)currentPlayTime
-                            withLong:(jlong)lastPlayTime;
+- (void)animateValuesInRangeWithLong:(int64_t)currentPlayTime
+                            withLong:(int64_t)lastPlayTime;
 
 /*!
  @brief Calls <code>call</code> for every item in <code>list</code> with <code>animator</code> and 
@@ -413,14 +417,14 @@
 - (void)callOnListWithJavaUtilArrayList:(JavaUtilArrayList *)list
           withADAnimator_AnimatorCaller:(id<ADAnimator_AnimatorCaller>)call
                                  withId:(id)animator
-                            withBoolean:(jboolean)isReverse;
+                            withBoolean:(bool)isReverse;
 
 /*!
  @brief Internal use only.Adds all start times (after delay) to and end times to times.
  The value must include offset.
  */
 - (void)getStartAndEndTimesWithADLongArray:(ADLongArray *)times
-                                  withLong:(jlong)offset;
+                                  withLong:(int64_t)offset;
 
 /*!
  @brief Internal use only.
@@ -428,9 +432,9 @@
   should always be true. For ObjectAnimators, the start values are setup in the initialization
   of the animation.
  */
-- (jboolean)isInitialized;
+- (bool)isInitialized;
 
-- (void)notifyEndListenersWithBoolean:(jboolean)isReversing;
+- (void)notifyEndListenersWithBoolean:(bool)isReversing;
 
 /*!
  @brief Calls notification for each AnimatorListener.
@@ -438,7 +442,7 @@
  @param isReverse When this is used with start/end, this is the isReverse parameter. For                   other calls, this is ignored.
  */
 - (void)notifyListenersWithADAnimator_AnimatorCaller:(id<ADAnimator_AnimatorCaller>)notification
-                                         withBoolean:(jboolean)isReverse;
+                                         withBoolean:(bool)isReverse;
 
 /*!
  @brief Call pause/resume on each AnimatorPauseListener.
@@ -446,9 +450,9 @@
  */
 - (void)notifyPauseListenersWithADAnimator_AnimatorCaller:(id<ADAnimator_AnimatorCaller>)notification;
 
-- (void)notifyStartListenersWithBoolean:(jboolean)isReversing;
+- (void)notifyStartListenersWithBoolean:(bool)isReversing;
 
-- (jboolean)pulseAnimationFrameWithLong:(jlong)frameTime;
+- (bool)pulseAnimationFrameWithLong:(int64_t)frameTime;
 
 /*!
  @brief Internal use only.
@@ -456,7 +460,7 @@
   or backward.
  @param inReverse whether the end value is based on a reverse direction. If yes, this is                   equivalent to skip to start value in a forward playing direction.
  */
-- (void)skipToEndValueWithBoolean:(jboolean)inReverse;
+- (void)skipToEndValueWithBoolean:(bool)inReverse;
 
 /*!
  @brief Internal use only.
@@ -466,7 +470,7 @@
   every frame.
  @param inReverse whether the animation should play in reverse direction
  */
-- (void)startWithoutPulsingWithBoolean:(jboolean)inReverse;
+- (void)startWithoutPulsingWithBoolean:(bool)inReverse;
 
 @end
 
@@ -478,21 +482,22 @@ J2OBJC_FIELD_SETTER(ADAnimator, mPauseListeners_, JavaUtilArrayList *)
 /*!
  @brief The value used to indicate infinite duration (e.g.when Animators repeat infinitely).
  */
-inline jlong ADAnimator_get_DURATION_INFINITE(void);
+inline int64_t ADAnimator_get_DURATION_INFINITE(void);
 #define ADAnimator_DURATION_INFINITE -1LL
-J2OBJC_STATIC_FIELD_CONSTANT(ADAnimator, DURATION_INFINITE, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAnimator, DURATION_INFINITE, int64_t)
 
 FOUNDATION_EXPORT void ADAnimator_init(ADAnimator *self);
 
-FOUNDATION_EXPORT void ADAnimator_setBackgroundPauseDelayWithLong_(jlong value);
+FOUNDATION_EXPORT void ADAnimator_setBackgroundPauseDelayWithLong_(int64_t value);
 
-FOUNDATION_EXPORT jlong ADAnimator_getBackgroundPauseDelay(void);
+FOUNDATION_EXPORT int64_t ADAnimator_getBackgroundPauseDelay(void);
 
-FOUNDATION_EXPORT void ADAnimator_setAnimatorPausingEnabledWithBoolean_(jboolean enable);
+FOUNDATION_EXPORT void ADAnimator_setAnimatorPausingEnabledWithBoolean_(bool enable);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimator)
 
 @compatibility_alias RAndroidAnimationAnimator ADAnimator;
+
 
 #endif
 
@@ -500,6 +505,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimator)
 #define ADAnimator_AnimatorListener_
 
 @class ADAnimator;
+@class JavaLangBoolean;
 
 /*!
  @brief <p>An animation listener receives notifications from an animation.
@@ -518,12 +524,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimator)
  @param isReverse Whether the animation is playing in reverse.
  */
 - (void)onAnimationStartWithADAnimator:(ADAnimator *)animation
-                           withBoolean:(jboolean)isReverse;
+                           withBoolean:(bool)isReverse;
 
 /*!
- @brief <p>Notifies the end of the animation.
- This callback is not invoked
-  for animations with repeat count set to INFINITE.</p>
+ @brief <p>Notifies the end of the animation.This callback is not invoked
+  for animations with repeat count set to INFINITE.
+ </p>
   
  <p>This method's default behavior is to call <code>onAnimationEnd(Animator)</code>. This
   method can be overridden, though not required, to get the additional play direction info
@@ -533,7 +539,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimator)
  @param isReverse Whether the animation is playing in reverse.
  */
 - (void)onAnimationEndWithADAnimator:(ADAnimator *)animation
-                         withBoolean:(jboolean)isReverse;
+                         withBoolean:(bool)isReverse;
 
 /*!
  @brief <p>Notifies the start of the animation.
@@ -543,17 +549,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimator)
 - (void)onAnimationStartWithADAnimator:(ADAnimator *)animation;
 
 /*!
- @brief <p>Notifies the end of the animation.
- This callback is not invoked
-  for animations with repeat count set to INFINITE.</p>
+ @brief <p>Notifies the end of the animation.This callback is not invoked
+  for animations with repeat count set to INFINITE.
+ </p>
  @param animation The animation which reached its end.
  */
 - (void)onAnimationEndWithADAnimator:(ADAnimator *)animation;
 
 /*!
- @brief <p>Notifies the cancellation of the animation.
- This callback is not invoked
-  for animations with repeat count set to INFINITE.</p>
+ @brief <p>Notifies the cancellation of the animation.This callback is not invoked
+  for animations with repeat count set to INFINITE.
+ </p>
  @param animation The animation which was canceled.
  */
 - (void)onAnimationCancelWithADAnimator:(ADAnimator *)animation;
@@ -569,11 +575,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimator)
 
 J2OBJC_EMPTY_STATIC_INIT(ADAnimator_AnimatorListener)
 
-FOUNDATION_EXPORT void ADAnimator_AnimatorListener_onAnimationStartWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, jboolean isReverse);
+FOUNDATION_EXPORT void ADAnimator_AnimatorListener_onAnimationStartWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, bool isReverse);
 
-FOUNDATION_EXPORT void ADAnimator_AnimatorListener_onAnimationEndWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, jboolean isReverse);
+FOUNDATION_EXPORT void ADAnimator_AnimatorListener_onAnimationEndWithADAnimator_withBoolean_(id<ADAnimator_AnimatorListener> self, ADAnimator *animation, bool isReverse);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimator_AnimatorListener)
+
 
 #endif
 
@@ -612,10 +619,13 @@ J2OBJC_EMPTY_STATIC_INIT(ADAnimator_AnimatorPauseListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimator_AnimatorPauseListener)
 
+
 #endif
 
 #if !defined (ADAnimator_AnimatorCaller_) && (INCLUDE_ALL_Animator || defined(INCLUDE_ADAnimator_AnimatorCaller))
 #define ADAnimator_AnimatorCaller_
+
+@class JavaLangBoolean;
 
 /*!
  @brief Internally used by <code>callOnList(ArrayList, AnimatorCaller, Object, boolean)</code> to
@@ -626,7 +636,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimator_AnimatorPauseListener)
 
 - (void)callWithId:(id)listener
             withId:(id)animator
-       withBoolean:(jboolean)isReverse;
+       withBoolean:(bool)isReverse;
 
 @end
 
@@ -672,6 +682,7 @@ FOUNDATION_EXPORT id<ADAnimator_AnimatorCaller> ADAnimator_AnimatorCaller_ON_UPD
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADAnimator_AnimatorCaller, ON_UPDATE, id<ADAnimator_AnimatorCaller>)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimator_AnimatorCaller)
+
 
 #endif
 

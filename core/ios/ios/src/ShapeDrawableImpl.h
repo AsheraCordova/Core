@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\ShapeDrawableImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ShapeDrawableImpl")
@@ -47,6 +48,7 @@ FOUNDATION_EXPORT ASShapeDrawableImpl *create_ASShapeDrawableImpl_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASShapeDrawableImpl)
 
 @compatibility_alias ComAsheraCoreShapeDrawableImpl ASShapeDrawableImpl;
+
 
 #endif
 

@@ -3,13 +3,26 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\SpannableStringBuilder.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Editable.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "SpannableStringBuilder.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/util/stream/IntStream.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -21,53 +34,53 @@
   return self;
 }
 
-- (jint)java_length {
+- (int32_t)java_length {
   return 0;
 }
 
-- (jchar)charAtWithInt:(jint)index {
+- (unichar)charAtWithInt:(int32_t)index {
   return 0;
 }
 
-- (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
-                                         to:(jint)end {
+- (id<JavaLangCharSequence>)subSequenceFrom:(int32_t)start
+                                         to:(int32_t)end {
   return nil;
 }
 
-- (void)getCharsWithInt:(jint)start
-                withInt:(jint)end
+- (void)getCharsWithInt:(int32_t)start
+                withInt:(int32_t)end
           withCharArray:(IOSCharArray *)dest
-                withInt:(jint)destoff {
+                withInt:(int32_t)destoff {
 }
 
-- (id<ADEditable>)replaceWithInt:(jint)st
-                         withInt:(jint)en
+- (id<ADEditable>)replaceWithInt:(int32_t)st
+                         withInt:(int32_t)en
         withJavaLangCharSequence:(id<JavaLangCharSequence>)source
-                         withInt:(jint)start
-                         withInt:(jint)end {
+                         withInt:(int32_t)start
+                         withInt:(int32_t)end {
   return nil;
 }
 
-- (id<ADEditable>)replaceWithInt:(jint)st
-                         withInt:(jint)en
+- (id<ADEditable>)replaceWithInt:(int32_t)st
+                         withInt:(int32_t)en
         withJavaLangCharSequence:(id<JavaLangCharSequence>)text {
   return nil;
 }
 
-- (id<ADEditable>)insertWithInt:(jint)where
+- (id<ADEditable>)insertWithInt:(int32_t)where
        withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                        withInt:(jint)start
-                        withInt:(jint)end {
+                        withInt:(int32_t)start
+                        withInt:(int32_t)end {
   return nil;
 }
 
-- (id<ADEditable>)insertWithInt:(jint)where
+- (id<ADEditable>)insertWithInt:(int32_t)where
        withJavaLangCharSequence:(id<JavaLangCharSequence>)text {
   return nil;
 }
 
-- (id<ADEditable>)delete__WithInt:(jint)st
-                          withInt:(jint)en {
+- (id<ADEditable>)delete__WithInt:(int32_t)st
+                          withInt:(int32_t)en {
   return nil;
 }
 
@@ -76,12 +89,12 @@
 }
 
 - (id<ADEditable>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                         withInt:(jint)start
-                                         withInt:(jint)end {
+                                         withInt:(int32_t)start
+                                         withInt:(int32_t)end {
   return nil;
 }
 
-- (id<ADEditable>)appendWithChar:(jchar)text {
+- (id<ADEditable>)appendWithChar:(unichar)text {
   return nil;
 }
 
@@ -167,3 +180,5 @@ ADSpannableStringBuilder *create_ADSpannableStringBuilder_initWithJavaLangCharSe
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSpannableStringBuilder)
+
+J2OBJC_NAME_MAPPING(ADSpannableStringBuilder, "r.android.text", "AD")

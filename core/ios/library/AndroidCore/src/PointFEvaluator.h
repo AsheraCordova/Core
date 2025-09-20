@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\PointFEvaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PointFEvaluator")
@@ -21,6 +22,7 @@
 #include "TypeEvaluator.h"
 
 @class ADPointF;
+@class JavaLangFloat;
 
 /*!
  @brief This evaluator can be used to perform type interpolation between <code>PointF</code> values.
@@ -63,7 +65,7 @@
  @return A linear interpolation between the start and end values, given the
           <code>fraction</code> parameter.
  */
-- (ADPointF *)evaluateWithFloat:(jfloat)fraction
+- (ADPointF *)evaluateWithFloat:(float)fraction
                          withId:(ADPointF *)startValue
                          withId:(ADPointF *)endValue;
 
@@ -86,6 +88,7 @@ FOUNDATION_EXPORT ADPointFEvaluator *create_ADPointFEvaluator_initWithADPointF_(
 J2OBJC_TYPE_LITERAL_HEADER(ADPointFEvaluator)
 
 @compatibility_alias RAndroidAnimationPointFEvaluator ADPointFEvaluator;
+
 
 #endif
 

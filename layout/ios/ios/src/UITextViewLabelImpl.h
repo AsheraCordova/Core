@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\UITextViewLabelImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_UITextViewLabelImpl")
@@ -27,6 +28,9 @@
 @class ADTextView;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -52,7 +56,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -64,9 +68,9 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getClearsOnInsertion;
 
@@ -74,19 +78,19 @@
 
 - (id)getIsSelectable;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getPaddingBottom;
 
@@ -110,7 +114,7 @@
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -152,7 +156,7 @@
 - (void)setUsesStandardTextScalingWithId:(id)nativeWidget
                                   withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 + (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
@@ -201,6 +205,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl)
 
 @compatibility_alias ComAsheraLayoutUITextViewLabelImpl ASUITextViewLabelImpl;
 
+
 #endif
 
 #if !defined (ASUITextViewLabelImpl_AutoSizeTextType_) && (INCLUDE_ALL_UITextViewLabelImpl || defined(INCLUDE_ASUITextViewLabelImpl_AutoSizeTextType))
@@ -236,6 +241,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_AutoSizeTextType *new_ASUITextViewLabelI
 FOUNDATION_EXPORT ASUITextViewLabelImpl_AutoSizeTextType *create_ASUITextViewLabelImpl_AutoSizeTextType_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_AutoSizeTextType)
+
 
 #endif
 
@@ -273,6 +279,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_Ellipsize *create_ASUITextViewLabelImpl_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_Ellipsize)
 
+
 #endif
 
 #if !defined (ASUITextViewLabelImpl_MarqueeRepeatLimit_) && (INCLUDE_ALL_UITextViewLabelImpl || defined(INCLUDE_ASUITextViewLabelImpl_MarqueeRepeatLimit))
@@ -282,6 +289,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_Ellipsize)
 #define INCLUDE_ASAbstractEnumToIntConverter 1
 #include "AbstractEnumToIntConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
 @protocol JavaUtilMap;
 
@@ -293,7 +301,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_Ellipsize)
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 #pragma mark Package-Private
 
@@ -310,6 +318,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_MarqueeRepeatLimit *new_ASUITextViewLabe
 FOUNDATION_EXPORT ASUITextViewLabelImpl_MarqueeRepeatLimit *create_ASUITextViewLabelImpl_MarqueeRepeatLimit_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_MarqueeRepeatLimit)
+
 
 #endif
 
@@ -347,6 +356,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_JustificationMode *create_ASUITextViewLa
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_JustificationMode)
 
+
 #endif
 
 #if !defined (ASUITextViewLabelImpl_AutoLink_) && (INCLUDE_ALL_UITextViewLabelImpl || defined(INCLUDE_ASUITextViewLabelImpl_AutoLink))
@@ -357,6 +367,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_JustificationMode)
 #include "AbstractBitFlagConverter.h"
 
 @class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilMap;
 
 @interface ASUITextViewLabelImpl_AutoLink : ASAbstractBitFlagConverter
@@ -384,6 +395,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_AutoLink *new_ASUITextViewLabelImpl_Auto
 FOUNDATION_EXPORT ASUITextViewLabelImpl_AutoLink *create_ASUITextViewLabelImpl_AutoLink_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_AutoLink)
+
 
 #endif
 
@@ -421,6 +433,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_Font *create_ASUITextViewLabelImpl_Font_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_Font)
 
+
 #endif
 
 #if !defined (ASUITextViewLabelImpl_TextStyle_) && (INCLUDE_ALL_UITextViewLabelImpl || defined(INCLUDE_ASUITextViewLabelImpl_TextStyle))
@@ -456,6 +469,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_TextStyle *new_ASUITextViewLabelImpl_Tex
 FOUNDATION_EXPORT ASUITextViewLabelImpl_TextStyle *create_ASUITextViewLabelImpl_TextStyle_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_TextStyle)
+
 
 #endif
 
@@ -493,6 +507,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_DrawableTintMode *create_ASUITextViewLab
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASUITextViewLabelImpl_UITextViewLabelExt_) && (INCLUDE_ALL_UITextViewLabelImpl || defined(INCLUDE_ASUITextViewLabelImpl_UITextViewLabelExt))
@@ -512,6 +527,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -521,7 +540,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
 - (instancetype)initWithASUITextViewLabelImpl:(ASUITextViewLabelImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -530,13 +549,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -552,21 +571,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)remeasure;
 
@@ -589,7 +608,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -605,16 +624,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -632,6 +651,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_UITextViewLabelExt *create_ASUITextViewL
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_UITextViewLabelExt)
 
+
 #endif
 
 #if !defined (ASUITextViewLabelImpl_PostMeasureHandler_) && (INCLUDE_ALL_UITextViewLabelImpl || defined(INCLUDE_ASUITextViewLabelImpl_PostMeasureHandler))
@@ -642,6 +662,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_UITextViewLabelExt)
 #include "EventBusHandler.h"
 
 @class ASUITextViewLabelImpl;
+@class NSString;
 
 @interface ASUITextViewLabelImpl_PostMeasureHandler : ASEventBusHandler
 
@@ -669,6 +690,7 @@ FOUNDATION_EXPORT ASUITextViewLabelImpl_PostMeasureHandler *new_ASUITextViewLabe
 FOUNDATION_EXPORT ASUITextViewLabelImpl_PostMeasureHandler *create_ASUITextViewLabelImpl_PostMeasureHandler_initWithASUITextViewLabelImpl_withNSString_(ASUITextViewLabelImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
+
 
 #endif
 

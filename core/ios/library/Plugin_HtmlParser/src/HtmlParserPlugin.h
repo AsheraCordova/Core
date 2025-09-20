@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\HtmlParserPlugin.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HtmlParserPlugin")
@@ -25,6 +26,9 @@
 #include "IHtmlParser.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASHasWidgets;
 @protocol ASIFragment;
 @protocol ASIWidget;
@@ -39,7 +43,7 @@
                    withASIWidget:(id<ASIWidget>)widget;
 
 - (id)getHandlerWithASHasWidgets:(id<ASHasWidgets>)parent
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                  withASIFragment:(id<ASIFragment>)fragment;
 
 - (NSString *)getName;
@@ -49,31 +53,31 @@
 
 - (id<ASIWidget>)handlerStartWithId:(id)handler
                       withASIWidget:(id<ASIWidget>)widget
-                            withInt:(jint)index;
+                            withInt:(int32_t)index;
 
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args;
 
 - (id<ASIWidget>)parseWithNSString:(NSString *)html
-                       withBoolean:(jboolean)template_
+                       withBoolean:(bool)template_
                    withASIFragment:(id<ASIFragment>)fragment;
 
 - (id<ASIWidget>)parseFileWithNSString:(NSString *)fileName
-                           withBoolean:(jboolean)template_
+                           withBoolean:(bool)template_
                        withASIFragment:(id<ASIFragment>)fragment;
 
 - (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileNameOrHtml
-                               withBoolean:(jboolean)template_
+                               withBoolean:(bool)template_
                            withASIFragment:(id<ASIFragment>)fragment;
 
 - (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
                         withNSString:(NSString *)componentId
-                         withBoolean:(jboolean)template_
+                         withBoolean:(bool)template_
                      withASIFragment:(id<ASIFragment>)fragment;
 
 - (id<ASIWidget>)parseWithParentWithNSString:(NSString *)html
-                                 withBoolean:(jboolean)template_
+                                 withBoolean:(bool)template_
                             withASHasWidgets:(id<ASHasWidgets>)parent
                              withASIFragment:(id<ASIFragment>)fragment;
 
@@ -93,6 +97,7 @@ FOUNDATION_EXPORT ASHtmlParserPlugin *create_ASHtmlParserPlugin_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASHtmlParserPlugin)
 
 @compatibility_alias ComAsheraParserHtmlHtmlParserPlugin ASHtmlParserPlugin;
+
 
 #endif
 

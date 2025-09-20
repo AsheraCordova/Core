@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\Editable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Editable")
@@ -33,6 +34,8 @@
 #include "java/lang/Appendable.h"
 
 @class IOSObjectArray;
+@class JavaLangCharacter;
+@class JavaLangInteger;
 
 /*!
  @brief This is the interface for text whose content and markup
@@ -65,42 +68,42 @@
  @return a reference to this object.
  - seealso: Spanned#SPAN_PARAGRAPH
  */
-- (id<ADEditable>)replaceWithInt:(jint)st
-                         withInt:(jint)en
+- (id<ADEditable>)replaceWithInt:(int32_t)st
+                         withInt:(int32_t)en
         withJavaLangCharSequence:(id<JavaLangCharSequence>)source
-                         withInt:(jint)start
-                         withInt:(jint)end;
+                         withInt:(int32_t)start
+                         withInt:(int32_t)end;
 
 /*!
  @brief Convenience for replace(st, en, text, 0, text.length())
  - seealso: #replace(int, int, CharSequence, int, int)
  */
-- (id<ADEditable>)replaceWithInt:(jint)st
-                         withInt:(jint)en
+- (id<ADEditable>)replaceWithInt:(int32_t)st
+                         withInt:(int32_t)en
         withJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 /*!
  @brief Convenience for replace(where, where, text, start, end)
  - seealso: #replace(int, int, CharSequence, int, int)
  */
-- (id<ADEditable>)insertWithInt:(jint)where
+- (id<ADEditable>)insertWithInt:(int32_t)where
        withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                        withInt:(jint)start
-                        withInt:(jint)end;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)end;
 
 /*!
  @brief Convenience for replace(where, where, text, 0, text.length());
  - seealso: #replace(int, int, CharSequence, int, int)
  */
-- (id<ADEditable>)insertWithInt:(jint)where
+- (id<ADEditable>)insertWithInt:(int32_t)where
        withJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 /*!
  @brief Convenience for replace(st, en, "", 0, 0)
  - seealso: #replace(int, int, CharSequence, int, int)
  */
-- (id<ADEditable>)delete__WithInt:(jint)st
-                          withInt:(jint)en;
+- (id<ADEditable>)delete__WithInt:(int32_t)st
+                          withInt:(int32_t)en;
 
 /*!
  @brief Convenience for replace(length(), length(), text, 0, text.length())
@@ -113,14 +116,14 @@
  - seealso: #replace(int, int, CharSequence, int, int)
  */
 - (id<ADEditable>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                         withInt:(jint)start
-                                         withInt:(jint)end;
+                                         withInt:(int32_t)start
+                                         withInt:(int32_t)end;
 
 /*!
  @brief Convenience for append(String.valueOf(text)).
  - seealso: #replace(int, int, CharSequence, int, int)
  */
-- (id<ADEditable>)appendWithChar:(jchar)text;
+- (id<ADEditable>)appendWithChar:(unichar)text;
 
 /*!
  @brief Convenience for replace(0, length(), "", 0, 0).
@@ -156,6 +159,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADEditable)
 J2OBJC_TYPE_LITERAL_HEADER(ADEditable)
 
 #define RAndroidTextEditable ADEditable
+
 
 #endif
 
@@ -201,6 +205,7 @@ FOUNDATION_EXPORT ADEditable_Factory *create_ADEditable_Factory_init(void);
 FOUNDATION_EXPORT ADEditable_Factory *ADEditable_Factory_getInstance(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADEditable_Factory)
+
 
 #endif
 

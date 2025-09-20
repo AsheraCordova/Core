@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\IListener.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IListener")
@@ -16,6 +17,8 @@
 #if !defined (ASIListener_) && (INCLUDE_ALL_IListener || defined(INCLUDE_ASIListener))
 #define ASIListener_
 
+@class NSString;
+
 @protocol ASIListener < JavaObject >
 
 - (NSString *)getAction;
@@ -27,6 +30,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIListener)
 J2OBJC_TYPE_LITERAL_HEADER(ASIListener)
 
 #define ComAsheraWidgetIListener ASIListener
+
 
 #endif
 

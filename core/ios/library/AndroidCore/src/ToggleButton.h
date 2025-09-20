@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ToggleButton.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ToggleButton")
@@ -37,6 +38,7 @@ FOUNDATION_EXPORT void ADToggleButton_initWithASIWidget_(ADToggleButton *self, i
 J2OBJC_TYPE_LITERAL_HEADER(ADToggleButton)
 
 @compatibility_alias RAndroidWidgetToggleButton ADToggleButton;
+
 
 #endif
 

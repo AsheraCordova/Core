@@ -3,14 +3,26 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Color.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Color.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Character.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADColor
@@ -22,19 +34,19 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)HSVToColorWithFloatArray:(IOSFloatArray *)value {
++ (int32_t)HSVToColorWithFloatArray:(IOSFloatArray *)value {
   return ADColor_HSVToColorWithFloatArray_(value);
 }
 
-+ (jint)alphaWithInt:(jint)i {
++ (int32_t)alphaWithInt:(int32_t)i {
   return ADColor_alphaWithInt_(i);
 }
 
-+ (jint)parseColorWithNSString:(NSString *)colorString {
++ (int32_t)parseColorWithNSString:(NSString *)colorString {
   return ADColor_parseColorWithNSString_(colorString);
 }
 
-+ (NSString *)formatColorWithInt:(jint)intColor {
++ (NSString *)formatColorWithInt:(int32_t)intColor {
   return ADColor_formatColorWithInt_(intColor);
 }
 
@@ -80,38 +92,40 @@ ADColor *create_ADColor_init() {
   J2OBJC_CREATE_IMPL(ADColor, init)
 }
 
-jint ADColor_HSVToColorWithFloatArray_(IOSFloatArray *value) {
+int32_t ADColor_HSVToColorWithFloatArray_(IOSFloatArray *value) {
   ADColor_initialize();
   return 0;
 }
 
-jint ADColor_alphaWithInt_(jint i) {
+int32_t ADColor_alphaWithInt_(int32_t i) {
   ADColor_initialize();
   return 0;
 }
 
-jint ADColor_parseColorWithNSString_(NSString *colorString) {
+int32_t ADColor_parseColorWithNSString_(NSString *colorString) {
   ADColor_initialize();
   if ([((NSString *) nil_chk(colorString)) charAtWithInt:0] == '#') {
     if ([colorString java_length] == 4) {
       colorString = JreStrcat("CCCCCCC", '#', [colorString charAtWithInt:1], [colorString charAtWithInt:1], [colorString charAtWithInt:2], [colorString charAtWithInt:2], [colorString charAtWithInt:3], [colorString charAtWithInt:3]);
     }
-    jlong color = JavaLangLong_parseLongWithNSString_withInt_([colorString java_substring:1], 16);
+    int64_t color = JavaLangLong_parseLongWithNSString_withInt_([colorString java_substring:1], 16);
     if ([colorString java_length] == 7) {
-      color |= (jint) 0x00000000ff000000;
+      color |= (int32_t) 0x00000000ff000000;
     }
     else if ([colorString java_length] != 9) {
       @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Unknown color");
     }
-    return (jint) color;
+    return (int32_t) color;
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Unknown color");
 }
 
-NSString *ADColor_formatColorWithInt_(jint intColor) {
+NSString *ADColor_formatColorWithInt_(int32_t intColor) {
   ADColor_initialize();
-  NSString *hexColor = NSString_java_formatWithNSString_withNSObjectArray_(@"#%08X", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(((jint) 0xFFFFFFFF & intColor)) } count:1 type:NSObject_class_()]);
+  NSString *hexColor = NSString_java_formatWithNSString_withNSObjectArray_(@"#%08X", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(((int32_t) 0xFFFFFFFF & intColor)) } count:1 type:NSObject_class_()]);
   return hexColor;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADColor)
+
+J2OBJC_NAME_MAPPING(ADColor, "r.android.graphics", "AD")

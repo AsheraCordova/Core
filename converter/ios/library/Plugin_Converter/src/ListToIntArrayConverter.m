@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ListToIntArrayConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -13,6 +18,12 @@
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASListToIntArrayConverter
@@ -35,7 +46,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSIntArray *)convertIntegersWithJavaUtilList:(id<JavaUtilList>)integers {
   IOSIntArray *ret = [IOSIntArray arrayWithLength:[((id<JavaUtilList>) nil_chk(integers)) size]];
-  for (jint i = 0; i < ret->size_; i++) {
+  for (int32_t i = 0; i < ret->size_; i++) {
     *IOSIntArray_GetRef(ret, i) = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([integers getWithInt:i], [JavaLangInteger class]))) intValue];
   }
   return ret;
@@ -87,3 +98,5 @@ ASListToIntArrayConverter *create_ASListToIntArrayConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListToIntArrayConverter)
+
+J2OBJC_NAME_MAPPING(ASListToIntArrayConverter, "com.ashera.converter", "AS")

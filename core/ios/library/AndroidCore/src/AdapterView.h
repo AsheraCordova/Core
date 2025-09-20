@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\widget\AdapterView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AdapterView")
@@ -21,6 +22,9 @@
 #include "FrameLayout.h"
 
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 @interface ADAdapterView : ADFrameLayout
 
@@ -28,21 +32,21 @@
 
 - (instancetype)init;
 
-- (jboolean)performItemClickWithADView:(ADView *)view
-                               withInt:(jint)position
-                              withLong:(jlong)id_;
+- (bool)performItemClickWithADView:(ADView *)view
+                           withInt:(int32_t)position
+                          withLong:(int64_t)id_;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADAdapterView)
 
-inline jint ADAdapterView_get_ITEM_VIEW_TYPE_IGNORE(void);
+inline int32_t ADAdapterView_get_ITEM_VIEW_TYPE_IGNORE(void);
 #define ADAdapterView_ITEM_VIEW_TYPE_IGNORE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADAdapterView, ITEM_VIEW_TYPE_IGNORE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAdapterView, ITEM_VIEW_TYPE_IGNORE, int32_t)
 
-inline jint ADAdapterView_get_INVALID_POSITION(void);
+inline int32_t ADAdapterView_get_INVALID_POSITION(void);
 #define ADAdapterView_INVALID_POSITION -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADAdapterView, INVALID_POSITION, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADAdapterView, INVALID_POSITION, int32_t)
 
 FOUNDATION_EXPORT void ADAdapterView_init(ADAdapterView *self);
 
@@ -54,6 +58,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAdapterView)
 
 @compatibility_alias RAndroidWidgetAdapterView ADAdapterView;
 
+
 #endif
 
 #if !defined (ADAdapterView_OnItemLongClickListener_) && (INCLUDE_ALL_AdapterView || defined(INCLUDE_ADAdapterView_OnItemLongClickListener))
@@ -61,19 +66,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAdapterView)
 
 @class ADAdapterView;
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 @protocol ADAdapterView_OnItemLongClickListener < JavaObject >
 
-- (jboolean)onItemLongClickWithADAdapterView:(ADAdapterView *)parent
-                                  withADView:(ADView *)view
-                                     withInt:(jint)position
-                                    withLong:(jlong)id_;
+- (bool)onItemLongClickWithADAdapterView:(ADAdapterView *)parent
+                              withADView:(ADView *)view
+                                 withInt:(int32_t)position
+                                withLong:(int64_t)id_;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADAdapterView_OnItemLongClickListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAdapterView_OnItemLongClickListener)
+
 
 #endif
 
@@ -82,19 +91,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAdapterView_OnItemLongClickListener)
 
 @class ADAdapterView;
 @class ADView;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 @protocol ADAdapterView_OnItemClickListener < JavaObject >
 
 - (void)onItemClickWithADAdapterView:(ADAdapterView *)parent
                           withADView:(ADView *)view
-                             withInt:(jint)position
-                            withLong:(jlong)id_;
+                             withInt:(int32_t)position
+                            withLong:(int64_t)id_;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADAdapterView_OnItemClickListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAdapterView_OnItemClickListener)
+
 
 #endif
 

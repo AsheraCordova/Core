@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\app\AlertDialog.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AlertDialog.h"
 #include "Context.h"
 #include "DialogInterface.h"
 #include "EditText.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAlertDialog
@@ -53,6 +66,8 @@ ADAlertDialog *create_ADAlertDialog_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAlertDialog)
+
+J2OBJC_NAME_MAPPING(ADAlertDialog, "r.android.app", "AD")
 
 @implementation ADAlertDialog_OnClickListener
 
@@ -106,7 +121,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAlertDialog_OnClickListener)
 - (void)setTitleWithNSString:(NSString *)string {
 }
 
-- (void)setCancelableWithBoolean:(jboolean)b {
+- (void)setCancelableWithBoolean:(bool)b {
 }
 
 - (void)setOnCancelListenerWithADDialogInterface_OnCancelListener:(ADDialogInterface_OnCancelListener *)onCancelListener {
@@ -122,15 +137,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAlertDialog_OnClickListener)
 - (void)setViewWithADEditText:(ADEditText *)input {
 }
 
-- (void)setPositiveButtonWithInt:(jint)ok
+- (void)setPositiveButtonWithInt:(int32_t)ok
 withADAlertDialog_OnClickListener:(ADAlertDialog_OnClickListener *)onClickListener {
 }
 
-- (void)setPositiveButtonWithInt:(jint)ok
+- (void)setPositiveButtonWithInt:(int32_t)ok
 withADDialogInterface_OnClickListener:(ADDialogInterface_OnClickListener *)onClickListener {
 }
 
-- (void)setNegativeButtonWithInt:(jint)cancel
+- (void)setNegativeButtonWithInt:(int32_t)cancel
 withADDialogInterface_OnClickListener:(ADDialogInterface_OnClickListener *)onClickListener {
 }
 

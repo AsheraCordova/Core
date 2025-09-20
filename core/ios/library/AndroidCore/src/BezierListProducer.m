@@ -3,13 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\BezierListProducer.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bezier.h"
 #include "BezierHistory.h"
 #include "BezierListProducer.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "PointF.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADBezierListProducer
@@ -26,17 +40,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((JavaUtilArrayList *) nil_chk(bezierSegs_)) clear];
 }
 
-- (void)movetoRelWithFloat:(jfloat)x
-                 withFloat:(jfloat)y {
-  jfloat offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
-  jfloat offy = hist_->lastPoint_->y_;
+- (void)movetoRelWithFloat:(float)x
+                 withFloat:(float)y {
+  float offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
+  float offy = hist_->lastPoint_->y_;
   [self movetoAbsWithFloat:offx + x withFloat:offy + y];
   
   ;
 }
 
-- (void)movetoAbsWithFloat:(jfloat)x
-                 withFloat:(jfloat)y {
+- (void)movetoAbsWithFloat:(float)x
+                 withFloat:(float)y {
   [((ADBezierHistory *) nil_chk(hist_)) setLastPointWithFloat:x withFloat:y];
 }
 
@@ -44,15 +58,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self linetoRelWithFloat:((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->startPoint_))->x_ withFloat:hist_->startPoint_->y_];
 }
 
-- (void)linetoRelWithFloat:(jfloat)x
-                 withFloat:(jfloat)y {
-  jfloat offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
-  jfloat offy = hist_->lastPoint_->y_;
+- (void)linetoRelWithFloat:(float)x
+                 withFloat:(float)y {
+  float offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
+  float offy = hist_->lastPoint_->y_;
   [self linetoAbsWithFloat:offx + x withFloat:offy + y];
 }
 
-- (void)linetoAbsWithFloat:(jfloat)x
-                 withFloat:(jfloat)y {
+- (void)linetoAbsWithFloat:(float)x
+                 withFloat:(float)y {
   *IOSFloatArray_GetRef(nil_chk(coords_), 0) = x;
   *IOSFloatArray_GetRef(coords_, 1) = y;
   ADBezier *b = create_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_, hist_->lastPoint_->y_, coords_, 1);
@@ -62,39 +76,39 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADBezierHistory *) nil_chk(hist_)) setLastKnotWithFloat:x withFloat:y];
 }
 
-- (void)linetoHorizontalRelWithFloat:(jfloat)x {
+- (void)linetoHorizontalRelWithFloat:(float)x {
   [self linetoAbsWithFloat:x + ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_ withFloat:hist_->lastPoint_->y_];
 }
 
-- (void)linetoHorizontalAbsWithFloat:(jfloat)x {
+- (void)linetoHorizontalAbsWithFloat:(float)x {
   [self linetoAbsWithFloat:x withFloat:((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->y_];
 }
 
-- (void)linetoVerticalRelWithFloat:(jfloat)y {
+- (void)linetoVerticalRelWithFloat:(float)y {
   [self linetoAbsWithFloat:((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_ withFloat:y + hist_->lastPoint_->y_];
 }
 
-- (void)linetoVerticalAbsWithFloat:(jfloat)y {
+- (void)linetoVerticalAbsWithFloat:(float)y {
   [self linetoAbsWithFloat:((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_ withFloat:y];
 }
 
-- (void)curvetoCubicRelWithFloat:(jfloat)x1
-                       withFloat:(jfloat)y1
-                       withFloat:(jfloat)x2
-                       withFloat:(jfloat)y2
-                       withFloat:(jfloat)x
-                       withFloat:(jfloat)y {
-  jfloat offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
-  jfloat offy = hist_->lastPoint_->y_;
+- (void)curvetoCubicRelWithFloat:(float)x1
+                       withFloat:(float)y1
+                       withFloat:(float)x2
+                       withFloat:(float)y2
+                       withFloat:(float)x
+                       withFloat:(float)y {
+  float offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
+  float offy = hist_->lastPoint_->y_;
   [self curvetoCubicAbsWithFloat:x1 + offx withFloat:y1 + offy withFloat:x2 + offx withFloat:y2 + offy withFloat:x + offx withFloat:y + offy];
 }
 
-- (void)curvetoCubicAbsWithFloat:(jfloat)x1
-                       withFloat:(jfloat)y1
-                       withFloat:(jfloat)x2
-                       withFloat:(jfloat)y2
-                       withFloat:(jfloat)x
-                       withFloat:(jfloat)y {
+- (void)curvetoCubicAbsWithFloat:(float)x1
+                       withFloat:(float)y1
+                       withFloat:(float)x2
+                       withFloat:(float)y2
+                       withFloat:(float)x
+                       withFloat:(float)y {
   *IOSFloatArray_GetRef(nil_chk(coords_), 0) = x1;
   *IOSFloatArray_GetRef(coords_, 1) = y1;
   *IOSFloatArray_GetRef(coords_, 2) = x2;
@@ -108,25 +122,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADBezierHistory *) nil_chk(hist_)) setLastKnotWithFloat:x2 withFloat:y2];
 }
 
-- (void)curvetoCubicSmoothRelWithFloat:(jfloat)x2
-                             withFloat:(jfloat)y2
-                             withFloat:(jfloat)x
-                             withFloat:(jfloat)y {
-  jfloat offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
-  jfloat offy = hist_->lastPoint_->y_;
+- (void)curvetoCubicSmoothRelWithFloat:(float)x2
+                             withFloat:(float)y2
+                             withFloat:(float)x
+                             withFloat:(float)y {
+  float offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
+  float offy = hist_->lastPoint_->y_;
   [self curvetoCubicSmoothAbsWithFloat:x2 + offx withFloat:y2 + offy withFloat:x + offx withFloat:y + offy];
 }
 
-- (void)curvetoCubicSmoothAbsWithFloat:(jfloat)x2
-                             withFloat:(jfloat)y2
-                             withFloat:(jfloat)x
-                             withFloat:(jfloat)y {
-  jfloat oldKx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastKnot_))->x_;
-  jfloat oldKy = hist_->lastKnot_->y_;
-  jfloat oldX = ((ADPointF *) nil_chk(hist_->lastPoint_))->x_;
-  jfloat oldY = hist_->lastPoint_->y_;
-  jfloat k1x = oldX * 2.0f - oldKx;
-  jfloat k1y = oldY * 2.0f - oldKy;
+- (void)curvetoCubicSmoothAbsWithFloat:(float)x2
+                             withFloat:(float)y2
+                             withFloat:(float)x
+                             withFloat:(float)y {
+  float oldKx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastKnot_))->x_;
+  float oldKy = hist_->lastKnot_->y_;
+  float oldX = ((ADPointF *) nil_chk(hist_->lastPoint_))->x_;
+  float oldY = hist_->lastPoint_->y_;
+  float k1x = oldX * 2.0f - oldKx;
+  float k1y = oldY * 2.0f - oldKy;
   *IOSFloatArray_GetRef(nil_chk(coords_), 0) = k1x;
   *IOSFloatArray_GetRef(coords_, 1) = k1y;
   *IOSFloatArray_GetRef(coords_, 2) = x2;
@@ -140,19 +154,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADBezierHistory *) nil_chk(hist_)) setLastKnotWithFloat:x2 withFloat:y2];
 }
 
-- (void)curvetoQuadraticRelWithFloat:(jfloat)x1
-                           withFloat:(jfloat)y1
-                           withFloat:(jfloat)x
-                           withFloat:(jfloat)y {
-  jfloat offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
-  jfloat offy = hist_->lastPoint_->y_;
+- (void)curvetoQuadraticRelWithFloat:(float)x1
+                           withFloat:(float)y1
+                           withFloat:(float)x
+                           withFloat:(float)y {
+  float offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
+  float offy = hist_->lastPoint_->y_;
   [self curvetoQuadraticAbsWithFloat:x1 + offx withFloat:y1 + offy withFloat:x + offx withFloat:y + offy];
 }
 
-- (void)curvetoQuadraticAbsWithFloat:(jfloat)x1
-                           withFloat:(jfloat)y1
-                           withFloat:(jfloat)x
-                           withFloat:(jfloat)y {
+- (void)curvetoQuadraticAbsWithFloat:(float)x1
+                           withFloat:(float)y1
+                           withFloat:(float)x
+                           withFloat:(float)y {
   *IOSFloatArray_GetRef(nil_chk(coords_), 0) = x1;
   *IOSFloatArray_GetRef(coords_, 1) = y1;
   *IOSFloatArray_GetRef(coords_, 2) = x;
@@ -164,34 +178,34 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADBezierHistory *) nil_chk(hist_)) setLastKnotWithFloat:x1 withFloat:y1];
 }
 
-- (void)curvetoQuadraticSmoothRelWithFloat:(jfloat)x
-                                 withFloat:(jfloat)y {
-  jfloat offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
-  jfloat offy = hist_->lastPoint_->y_;
+- (void)curvetoQuadraticSmoothRelWithFloat:(float)x
+                                 withFloat:(float)y {
+  float offx = ((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastPoint_))->x_;
+  float offy = hist_->lastPoint_->y_;
   [self curvetoQuadraticSmoothAbsWithFloat:x + offx withFloat:y + offy];
 }
 
-- (void)curvetoQuadraticSmoothAbsWithFloat:(jfloat)x
-                                 withFloat:(jfloat)y {
+- (void)curvetoQuadraticSmoothAbsWithFloat:(float)x
+                                 withFloat:(float)y {
   [self curvetoQuadraticAbsWithFloat:((ADPointF *) nil_chk(((ADBezierHistory *) nil_chk(hist_))->lastKnot_))->x_ withFloat:hist_->lastKnot_->y_ withFloat:x withFloat:y];
 }
 
-- (void)arcRelWithFloat:(jfloat)rx
-              withFloat:(jfloat)ry
-              withFloat:(jfloat)xAxisRotation
-            withBoolean:(jboolean)largeArcFlag
-            withBoolean:(jboolean)sweepFlag
-              withFloat:(jfloat)x
-              withFloat:(jfloat)y {
+- (void)arcRelWithFloat:(float)rx
+              withFloat:(float)ry
+              withFloat:(float)xAxisRotation
+            withBoolean:(bool)largeArcFlag
+            withBoolean:(bool)sweepFlag
+              withFloat:(float)x
+              withFloat:(float)y {
 }
 
-- (void)arcAbsWithFloat:(jfloat)rx
-              withFloat:(jfloat)ry
-              withFloat:(jfloat)xAxisRotation
-            withBoolean:(jboolean)largeArcFlag
-            withBoolean:(jboolean)sweepFlag
-              withFloat:(jfloat)x
-              withFloat:(jfloat)y {
+- (void)arcAbsWithFloat:(float)rx
+              withFloat:(float)ry
+              withFloat:(float)xAxisRotation
+            withBoolean:(bool)largeArcFlag
+            withBoolean:(bool)sweepFlag
+              withFloat:(float)x
+              withFloat:(float)y {
 }
 
 - (void)endPath {
@@ -287,3 +301,5 @@ ADBezierListProducer *create_ADBezierListProducer_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBezierListProducer)
+
+J2OBJC_NAME_MAPPING(ADBezierListProducer, "r.android.graphics", "AD")

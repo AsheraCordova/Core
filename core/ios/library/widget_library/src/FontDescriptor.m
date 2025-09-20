@@ -3,14 +3,27 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\FontDescriptor.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FontDescriptor.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASFontDescriptor () {
  @public
   NSString *name_;
-  jint style_;
+  int32_t style_;
 }
 
 @end
@@ -20,16 +33,16 @@ J2OBJC_FIELD_SETTER(ASFontDescriptor, name_, NSString *)
 @implementation ASFontDescriptor
 
 - (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)style {
+                         withInt:(int32_t)style {
   ASFontDescriptor_initWithNSString_withInt_(self, name, style);
   return self;
 }
 
-- (jint)getStyle {
+- (int32_t)getStyle {
   return style_;
 }
 
-- (void)setStyleWithInt:(jint)style {
+- (void)setStyleWithInt:(int32_t)style {
   self->style_ = style;
 }
 
@@ -74,18 +87,20 @@ J2OBJC_FIELD_SETTER(ASFontDescriptor, name_, NSString *)
 
 @end
 
-void ASFontDescriptor_initWithNSString_withInt_(ASFontDescriptor *self, NSString *name, jint style) {
+void ASFontDescriptor_initWithNSString_withInt_(ASFontDescriptor *self, NSString *name, int32_t style) {
   NSObject_init(self);
   JreStrongAssign(&self->name_, name);
   self->style_ = style;
 }
 
-ASFontDescriptor *new_ASFontDescriptor_initWithNSString_withInt_(NSString *name, jint style) {
+ASFontDescriptor *new_ASFontDescriptor_initWithNSString_withInt_(NSString *name, int32_t style) {
   J2OBJC_NEW_IMPL(ASFontDescriptor, initWithNSString_withInt_, name, style)
 }
 
-ASFontDescriptor *create_ASFontDescriptor_initWithNSString_withInt_(NSString *name, jint style) {
+ASFontDescriptor *create_ASFontDescriptor_initWithNSString_withInt_(NSString *name, int32_t style) {
   J2OBJC_CREATE_IMPL(ASFontDescriptor, initWithNSString_withInt_, name, style)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFontDescriptor)
+
+J2OBJC_NAME_MAPPING(ASFontDescriptor, "com.ashera.model", "AS")

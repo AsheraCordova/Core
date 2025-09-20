@@ -3,11 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Property.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "Property.h"
 #include "ReflectiveProperty.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/UnsupportedOperationException.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADProperty () {
@@ -35,7 +48,7 @@ J2OBJC_FIELD_SETTER(ADProperty, mType_, IOSClass *)
   return self;
 }
 
-- (jboolean)isReadOnly {
+- (bool)isReadOnly {
   return false;
 }
 
@@ -108,3 +121,5 @@ void ADProperty_initWithIOSClass_withNSString_(ADProperty *self, IOSClass *type,
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADProperty)
+
+J2OBJC_NAME_MAPPING(ADProperty, "r.android.util", "AD")

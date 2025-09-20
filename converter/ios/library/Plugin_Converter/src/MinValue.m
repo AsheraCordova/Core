@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\validations\MinValue.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IFragment.h"
 #include "IOSClass.h"
@@ -12,25 +17,32 @@
 #include "MinValue.h"
 #include "ResourceBundleUtils.h"
 #include "Validation.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/NumberFormatException.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASMinValue () {
  @public
-  jint mMinValue_;
+  int32_t mMinValue_;
 }
 
-- (instancetype)initWithInt:(jint)minValue;
+- (instancetype)initWithInt:(int32_t)minValue;
 
 @end
 
-__attribute__((unused)) static void ASMinValue_initWithInt_(ASMinValue *self, jint minValue);
+__attribute__((unused)) static void ASMinValue_initWithInt_(ASMinValue *self, int32_t minValue);
 
-__attribute__((unused)) static ASMinValue *new_ASMinValue_initWithInt_(jint minValue) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASMinValue *new_ASMinValue_initWithInt_(int32_t minValue) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASMinValue *create_ASMinValue_initWithInt_(jint minValue);
+__attribute__((unused)) static ASMinValue *create_ASMinValue_initWithInt_(int32_t minValue);
 
 @implementation ASMinValue
 
@@ -45,7 +57,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ASMinValue_initWithInt_(JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(nil_chk(argument), 0)));
 }
 
-- (instancetype)initWithInt:(jint)minValue {
+- (instancetype)initWithInt:(int32_t)minValue {
   ASMinValue_initWithInt_(self, minValue);
   return self;
 }
@@ -55,9 +67,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return NSString_java_formatWithNSString_withNSObjectArray_(res, [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(mMinValue_) } count:1 type:NSObject_class_()]);
 }
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget {
-  if (text == nil || [text java_isEmpty]) {
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget {
+  if (text == nil || [text isEmpty]) {
     return true;
   }
   @try {
@@ -108,17 +120,19 @@ ASMinValue *create_ASMinValue_init() {
   J2OBJC_CREATE_IMPL(ASMinValue, init)
 }
 
-void ASMinValue_initWithInt_(ASMinValue *self, jint minValue) {
+void ASMinValue_initWithInt_(ASMinValue *self, int32_t minValue) {
   ASBaseValidator_init(self);
   self->mMinValue_ = minValue;
 }
 
-ASMinValue *new_ASMinValue_initWithInt_(jint minValue) {
+ASMinValue *new_ASMinValue_initWithInt_(int32_t minValue) {
   J2OBJC_NEW_IMPL(ASMinValue, initWithInt_, minValue)
 }
 
-ASMinValue *create_ASMinValue_initWithInt_(jint minValue) {
+ASMinValue *create_ASMinValue_initWithInt_(int32_t minValue) {
   J2OBJC_CREATE_IMPL(ASMinValue, initWithInt_, minValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMinValue)
+
+J2OBJC_NAME_MAPPING(ASMinValue, "com.ashera.validations", "AS")

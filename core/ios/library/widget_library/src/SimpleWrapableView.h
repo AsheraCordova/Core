@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\SimpleWrapableView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SimpleWrapableView")
@@ -16,18 +17,20 @@
 #if !defined (ASSimpleWrapableView_) && (INCLUDE_ALL_SimpleWrapableView || defined(INCLUDE_ASSimpleWrapableView))
 #define ASSimpleWrapableView_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
 @interface ASSimpleWrapableView : NSObject {
  @public
-  __unsafe_unretained id wrappedView_;
+  WEAK_ id wrappedView_;
 }
 
 #pragma mark Public
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget
-                          withInt:(jint)viewtype;
+                          withInt:(int32_t)viewtype;
 
 - (id)asNativeWidget;
 
@@ -35,17 +38,17 @@
 
 - (id<JavaUtilList>)getNativeWidgets;
 
-- (jint)getViewtype;
+- (int32_t)getViewtype;
 
 - (id)getWrappedView;
 
 - (id)getWrapperViewHolder;
 
-- (jboolean)isDisableForeground;
+- (bool)isDisableForeground;
 
-- (jboolean)isViewWrapped;
+- (bool)isViewWrapped;
 
-- (void)setDisableForegroundWithBoolean:(jboolean)disableForeground;
+- (void)setDisableForegroundWithBoolean:(bool)disableForeground;
 
 - (void)setForegroundWithId:(id)foreground;
 
@@ -59,15 +62,16 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASSimpleWrapableView)
 
-FOUNDATION_EXPORT void ASSimpleWrapableView_initWithASIWidget_withInt_(ASSimpleWrapableView *self, id<ASIWidget> widget, jint viewtype);
+FOUNDATION_EXPORT void ASSimpleWrapableView_initWithASIWidget_withInt_(ASSimpleWrapableView *self, id<ASIWidget> widget, int32_t viewtype);
 
-FOUNDATION_EXPORT ASSimpleWrapableView *new_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, jint viewtype) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASSimpleWrapableView *new_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, int32_t viewtype) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASSimpleWrapableView *create_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, jint viewtype);
+FOUNDATION_EXPORT ASSimpleWrapableView *create_ASSimpleWrapableView_initWithASIWidget_withInt_(id<ASIWidget> widget, int32_t viewtype);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSimpleWrapableView)
 
 @compatibility_alias ComAsheraWidgetSimpleWrapableView ASSimpleWrapableView;
+
 
 #endif
 

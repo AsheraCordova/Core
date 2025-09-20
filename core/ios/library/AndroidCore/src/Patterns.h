@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Patterns.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Patterns")
@@ -18,6 +19,7 @@
 
 @class JavaUtilRegexMatcher;
 @class JavaUtilRegexPattern;
+@class NSString;
 
 /*!
  @brief Commonly used regular expression patterns.
@@ -170,6 +172,7 @@ FOUNDATION_EXPORT NSString *ADPatterns_digitsAndPlusOnlyWithJavaUtilRegexMatcher
 J2OBJC_TYPE_LITERAL_HEADER(ADPatterns)
 
 @compatibility_alias RAndroidUtilPatterns ADPatterns;
+
 
 #endif
 

@@ -3,16 +3,27 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\TextUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "TextUtils.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/util/Locale.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 
-@class JavaUtilLocale;
-@class JavaUtilRegexPattern;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 /*!
@@ -30,7 +41,7 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ADTextUtils, RtlLocalesRe, JavaUtilRegexPattern *)
 
 - (instancetype)initWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
-- (jboolean)isRightToLeft;
+- (bool)isRightToLeft;
 
 + (ADTextUtils_ULocale *)forLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
@@ -50,6 +61,7 @@ __attribute__((unused)) static ADTextUtils_ULocale *ADTextUtils_ULocale_forLocal
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextUtils_ULocale)
 
+
 J2OBJC_INITIALIZED_DEFN(ADTextUtils)
 
 @implementation ADTextUtils
@@ -61,24 +73,24 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jint)getLayoutDirectionFromLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale {
++ (int32_t)getLayoutDirectionFromLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale {
   return ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(locale);
 }
 
-+ (jboolean)isEmptyWithNSString:(NSString *)text {
++ (bool)isEmptyWithNSString:(NSString *)text {
   return ADTextUtils_isEmptyWithNSString_(text);
 }
 
-+ (jboolean)isEmptyWithJavaLangCharSequence:(id<JavaLangCharSequence>)text {
++ (bool)isEmptyWithJavaLangCharSequence:(id<JavaLangCharSequence>)text {
   return ADTextUtils_isEmptyWithJavaLangCharSequence_(text);
 }
 
-+ (jint)getTrimmedLengthWithJavaLangCharSequence:(id<JavaLangCharSequence>)s {
++ (int32_t)getTrimmedLengthWithJavaLangCharSequence:(id<JavaLangCharSequence>)s {
   return ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(s);
 }
 
-+ (jboolean)equalsWithJavaLangCharSequence:(id<JavaLangCharSequence>)a
-                  withJavaLangCharSequence:(id<JavaLangCharSequence>)b {
++ (bool)equalsWithJavaLangCharSequence:(id<JavaLangCharSequence>)a
+              withJavaLangCharSequence:(id<JavaLangCharSequence>)b {
   return ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(a, b);
 }
 
@@ -130,45 +142,45 @@ ADTextUtils *create_ADTextUtils_init() {
   J2OBJC_CREATE_IMPL(ADTextUtils, init)
 }
 
-jint ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale *locale) {
+int32_t ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale *locale) {
   ADTextUtils_initialize();
   return ((locale != nil && ![locale isEqual:JreLoadStatic(JavaUtilLocale, ROOT)] && [((ADTextUtils_ULocale *) nil_chk(ADTextUtils_ULocale_forLocaleWithJavaUtilLocale_(locale))) isRightToLeft]) ? ADView_LAYOUT_DIRECTION_RTL : ADView_LAYOUT_DIRECTION_LTR);
 }
 
-jboolean ADTextUtils_isEmptyWithNSString_(NSString *text) {
+bool ADTextUtils_isEmptyWithNSString_(NSString *text) {
   ADTextUtils_initialize();
-  return text == nil || [text java_isEmpty];
+  return text == nil || [text isEmpty];
 }
 
-jboolean ADTextUtils_isEmptyWithJavaLangCharSequence_(id<JavaLangCharSequence> text) {
+bool ADTextUtils_isEmptyWithJavaLangCharSequence_(id<JavaLangCharSequence> text) {
   ADTextUtils_initialize();
   return text == nil || [text java_length] == 0;
 }
 
-jint ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(id<JavaLangCharSequence> s) {
+int32_t ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(id<JavaLangCharSequence> s) {
   ADTextUtils_initialize();
-  jint len = [((id<JavaLangCharSequence>) nil_chk(s)) java_length];
-  jint start = 0;
+  int32_t len = [((id<JavaLangCharSequence>) nil_chk(s)) java_length];
+  int32_t start = 0;
   while (start < len && [s charAtWithInt:start] <= ' ') {
     start++;
   }
-  jint end = len;
+  int32_t end = len;
   while (end > start && [s charAtWithInt:end - 1] <= ' ') {
     end--;
   }
   return end - start;
 }
 
-jboolean ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> a, id<JavaLangCharSequence> b) {
+bool ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> a, id<JavaLangCharSequence> b) {
   ADTextUtils_initialize();
-  if (a == b) return true;
-  jint length;
+  if (JreObjectEqualsEquals(a, b)) return true;
+  int32_t length;
   if (a != nil && b != nil && (length = [a java_length]) == [b java_length]) {
     if ([a isKindOfClass:[NSString class]] && [b isKindOfClass:[NSString class]]) {
       return [a isEqual:b];
     }
     else {
-      for (jint i = 0; i < length; i++) {
+      for (int32_t i = 0; i < length; i++) {
         if ([a charAtWithInt:i] != [b charAtWithInt:i]) return false;
       }
       return true;
@@ -179,6 +191,8 @@ jboolean ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(id
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextUtils)
 
+J2OBJC_NAME_MAPPING(ADTextUtils, "r.android.text", "AD")
+
 @implementation ADTextUtils_ULocale
 
 - (instancetype)initWithJavaUtilLocale:(JavaUtilLocale *)locale {
@@ -186,7 +200,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextUtils)
   return self;
 }
 
-- (jboolean)isRightToLeft {
+- (bool)isRightToLeft {
   NSString *languageString = JreRetainedLocalValue([((JavaUtilLocale *) nil_chk(locale_)) getLanguage]);
   return languageString != nil && [((JavaUtilRegexMatcher *) nil_chk([((JavaUtilRegexPattern *) nil_chk(JreLoadStatic(ADTextUtils, RtlLocalesRe))) matcherWithJavaLangCharSequence:languageString])) find];
 }

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\RadioButtonImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RadioButtonImpl")
@@ -35,6 +36,9 @@
 @class ADRadioButton;
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -63,7 +67,7 @@
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -79,9 +83,9 @@
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (jint)getBaseLine;
+- (int32_t)getBaseLine;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
 - (id)getHighlightedTextColor;
 
@@ -91,21 +95,21 @@
 
 - (id)getIsUserInteractionEnabled;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
 - (id)getMinimumScaleFactor;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
 - (id)getNumberOfLines;
 
@@ -123,17 +127,17 @@
 
 - (void)invalidate;
 
-- (jboolean)isChecked;
+- (bool)isChecked;
 
-- (jboolean)isViewVisible;
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
-- (jint)measureWidth;
+- (int32_t)measureWidth;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
+- (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
 
 - (void)requestLayout;
 
@@ -150,7 +154,7 @@
                                    withId:(id)objValue
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
-- (void)setCheckedWithBoolean:(jboolean)checked;
+- (void)setCheckedWithBoolean:(bool)checked;
 
 - (void)setErrorMessageWithNSString:(NSString *)message;
 
@@ -196,7 +200,7 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 - (void)showErrorWithNSString:(NSString *)message;
 
@@ -247,6 +251,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl)
 
 @compatibility_alias ComAsheraLayoutRadioButtonImpl ASRadioButtonImpl;
 
+
 #endif
 
 #if !defined (ASRadioButtonImpl_ButtonTinttMode_) && (INCLUDE_ALL_RadioButtonImpl || defined(INCLUDE_ASRadioButtonImpl_ButtonTinttMode))
@@ -282,6 +287,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_ButtonTinttMode *new_ASRadioButtonImpl_Butto
 FOUNDATION_EXPORT ASRadioButtonImpl_ButtonTinttMode *create_ASRadioButtonImpl_ButtonTinttMode_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_ButtonTinttMode)
+
 
 #endif
 
@@ -319,6 +325,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_Ellipsize *create_ASRadioButtonImpl_Ellipsiz
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_Ellipsize)
 
+
 #endif
 
 #if !defined (ASRadioButtonImpl_MarqueeRepeatLimit_) && (INCLUDE_ALL_RadioButtonImpl || defined(INCLUDE_ASRadioButtonImpl_MarqueeRepeatLimit))
@@ -328,6 +335,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_Ellipsize)
 #define INCLUDE_ASAbstractEnumToIntConverter 1
 #include "AbstractEnumToIntConverter.h"
 
+@class JavaLangBoolean;
 @class JavaLangInteger;
 @protocol JavaUtilMap;
 
@@ -339,7 +347,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_Ellipsize)
 
 - (id<JavaUtilMap>)getMapping;
 
-- (jboolean)supportsIntAlso;
+- (bool)supportsIntAlso;
 
 #pragma mark Package-Private
 
@@ -356,6 +364,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_MarqueeRepeatLimit *new_ASRadioButtonImpl_Ma
 FOUNDATION_EXPORT ASRadioButtonImpl_MarqueeRepeatLimit *create_ASRadioButtonImpl_MarqueeRepeatLimit_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_MarqueeRepeatLimit)
+
 
 #endif
 
@@ -393,6 +402,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_JustificationMode *create_ASRadioButtonImpl_
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_JustificationMode)
 
+
 #endif
 
 #if !defined (ASRadioButtonImpl_Font_) && (INCLUDE_ALL_RadioButtonImpl || defined(INCLUDE_ASRadioButtonImpl_Font))
@@ -428,6 +438,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_Font *new_ASRadioButtonImpl_Font_init(void) 
 FOUNDATION_EXPORT ASRadioButtonImpl_Font *create_ASRadioButtonImpl_Font_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_Font)
+
 
 #endif
 
@@ -465,6 +476,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_TextStyle *create_ASRadioButtonImpl_TextStyl
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_TextStyle)
 
+
 #endif
 
 #if !defined (ASRadioButtonImpl_DrawableTintMode_) && (INCLUDE_ALL_RadioButtonImpl || defined(INCLUDE_ASRadioButtonImpl_DrawableTintMode))
@@ -501,6 +513,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_DrawableTintMode *create_ASRadioButtonImpl_D
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 
+
 #endif
 
 #if !defined (ASRadioButtonImpl_RadioButtonExt_) && (INCLUDE_ALL_RadioButtonImpl || defined(INCLUDE_ASRadioButtonImpl_RadioButtonExt))
@@ -520,6 +533,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -529,7 +546,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 
 - (instancetype)initWithASRadioButtonImpl:(ASRadioButtonImpl *)outer$;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (void)drawableStateChanged;
 
@@ -538,13 +555,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -560,19 +577,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width;
 
-- (jint)nativeMeasureWidthWithId:(id)uiView;
+- (int32_t)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -595,7 +612,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -611,16 +628,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -638,6 +655,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_RadioButtonExt *create_ASRadioButtonImpl_Rad
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_RadioButtonExt)
 
+
 #endif
 
 #if !defined (ASRadioButtonImpl_PostMeasureHandler_) && (INCLUDE_ALL_RadioButtonImpl || defined(INCLUDE_ASRadioButtonImpl_PostMeasureHandler))
@@ -648,6 +666,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_RadioButtonExt)
 #include "EventBusHandler.h"
 
 @class ASRadioButtonImpl;
+@class NSString;
 
 @interface ASRadioButtonImpl_PostMeasureHandler : ASEventBusHandler
 
@@ -675,6 +694,7 @@ FOUNDATION_EXPORT ASRadioButtonImpl_PostMeasureHandler *new_ASRadioButtonImpl_Po
 FOUNDATION_EXPORT ASRadioButtonImpl_PostMeasureHandler *create_ASRadioButtonImpl_PostMeasureHandler_initWithASRadioButtonImpl_withNSString_(ASRadioButtonImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
+
 
 #endif
 

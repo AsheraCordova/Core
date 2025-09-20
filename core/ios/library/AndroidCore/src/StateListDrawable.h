@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\StateListDrawable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_StateListDrawable")
@@ -21,6 +22,8 @@
 #include "Drawable.h"
 
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @protocol JavaUtilList;
 
 @interface ADStateListDrawable : ADDrawable
@@ -29,53 +32,53 @@
 
 - (instancetype)init;
 
-- (jint)addChildWithADDrawable:(ADDrawable *)dr;
+- (int32_t)addChildWithADDrawable:(ADDrawable *)dr;
 
 - (void)addStateWithIntArray:(IOSIntArray *)stateSet
               withADDrawable:(ADDrawable *)drawable;
 
 - (id<JavaUtilList>)getAllDrawables;
 
-- (jint)getChildCount;
+- (int32_t)getChildCount;
 
 - (ADDrawable *)getCurrentDrawable;
 
 - (id)getDrawable;
 
-- (void)growArrayWithInt:(jint)oldSize
-                 withInt:(jint)newSize;
+- (void)growArrayWithInt:(int32_t)oldSize
+                 withInt:(int32_t)newSize;
 
-- (void)growArrayStateSetWithInt:(jint)oldSize
-                         withInt:(jint)newSize;
+- (void)growArrayStateSetWithInt:(int32_t)oldSize
+                         withInt:(int32_t)newSize;
 
-- (jboolean)isStateful;
+- (bool)isStateful;
 
-+ (jboolean)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec;
++ (bool)isWildCardWithIntArray:(IOSIntArray *)stateSetOrSpec;
 
-- (jboolean)selectDrawableWithInt:(jint)index;
+- (bool)selectDrawableWithInt:(int32_t)index;
 
-- (void)setBoundsWithInt:(jint)left
-                 withInt:(jint)top
-                 withInt:(jint)right
-                 withInt:(jint)bottom;
+- (void)setBoundsWithInt:(int32_t)left
+                 withInt:(int32_t)top
+                 withInt:(int32_t)right
+                 withInt:(int32_t)bottom;
 
 - (void)setDrawableWithId:(id)drawable;
 
-+ (jboolean)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
-                           withIntArray:(IOSIntArray *)stateSet;
++ (bool)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec
+                       withIntArray:(IOSIntArray *)stateSet;
 
 #pragma mark Protected
 
-- (jboolean)onStateChangeWithIntArray:(IOSIntArray *)stateSet;
+- (bool)onStateChangeWithIntArray:(IOSIntArray *)stateSet;
 
 #pragma mark Package-Private
 
-- (jint)addStateSetWithIntArray:(IOSIntArray *)stateSet
-                 withADDrawable:(ADDrawable *)drawable;
+- (int32_t)addStateSetWithIntArray:(IOSIntArray *)stateSet
+                    withADDrawable:(ADDrawable *)drawable;
 
-- (jint)getCapacity;
+- (int32_t)getCapacity;
 
-- (jint)indexOfStateSetWithIntArray:(IOSIntArray *)stateSet;
+- (int32_t)indexOfStateSetWithIntArray:(IOSIntArray *)stateSet;
 
 @end
 
@@ -87,13 +90,14 @@ FOUNDATION_EXPORT ADStateListDrawable *new_ADStateListDrawable_init(void) NS_RET
 
 FOUNDATION_EXPORT ADStateListDrawable *create_ADStateListDrawable_init(void);
 
-FOUNDATION_EXPORT jboolean ADStateListDrawable_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec);
+FOUNDATION_EXPORT bool ADStateListDrawable_isWildCardWithIntArray_(IOSIntArray *stateSetOrSpec);
 
-FOUNDATION_EXPORT jboolean ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet);
+FOUNDATION_EXPORT bool ADStateListDrawable_stateSetMatchesWithIntArray_withIntArray_(IOSIntArray *stateSpec, IOSIntArray *stateSet);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADStateListDrawable)
 
 @compatibility_alias RAndroidGraphicsDrawableStateListDrawable ADStateListDrawable;
+
 
 #endif
 

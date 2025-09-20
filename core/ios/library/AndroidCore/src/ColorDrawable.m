@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\ColorDrawable.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ColorDrawable.h"
 #include "Drawable.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADColorDrawable
@@ -21,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (void)setColorWithInt:(jint)mColorValue {
+- (void)setColorWithInt:(int32_t)mColorValue {
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -57,3 +69,5 @@ ADColorDrawable *create_ADColorDrawable_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADColorDrawable)
+
+J2OBJC_NAME_MAPPING(ADColorDrawable, "r.android.graphics.drawable", "AD")

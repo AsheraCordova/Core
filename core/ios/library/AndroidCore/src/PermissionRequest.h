@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\PermissionRequest.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PermissionRequest")
@@ -41,6 +42,7 @@ FOUNDATION_EXPORT ADPermissionRequest *create_ADPermissionRequest_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADPermissionRequest)
 
 @compatibility_alias RAndroidWebkitPermissionRequest ADPermissionRequest;
+
 
 #endif
 

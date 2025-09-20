@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\TextView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseMeasurableView.h"
 #include "ColorStateList.h"
 #include "DisplayMetrics.h"
@@ -24,7 +29,10 @@
 #include "TextWatcher.h"
 #include "View.h"
 #include "WidgetAttribute.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Byte.h"
 #include "java/lang/Character.h"
+#include "java/lang/Double.h"
 #include "java/lang/Enum.h"
 #include "java/lang/Exception.h"
 #include "java/lang/Float.h"
@@ -40,8 +48,12 @@
 #include "java/util/List.h"
 #include "java/util/Locale.h"
 
-@class JavaUtilArrayList;
-@protocol JavaLangRunnable;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADTextView () {
@@ -49,46 +61,46 @@
   ADColorStateList *mTextColor_;
   ADColorStateList *mHintTextColor_;
   ADColorStateList *mLinkTextColor_;
-  jint mCurTextColor_;
-  jint mCurHintTextColor_;
+  int32_t mCurTextColor_;
+  int32_t mCurHintTextColor_;
   ADLayout *mHintLayout_;
   JavaUtilArrayList *mListeners_;
   ADTextView_TextPaint *mTextPaint_;
   ADLayout *mLayout_;
-  jint mGravity_;
-  jint mMaximum_;
-  jint mMaxMode_;
-  jint mMinimum_;
-  jint mMinMode_;
-  jint mMaxWidth_;
-  jint mMaxWidthMode_;
-  jint mMinWidth_TextView_;
-  jint mMinWidthMode_;
+  int32_t mGravity_;
+  int32_t mMaximum_;
+  int32_t mMaxMode_;
+  int32_t mMinimum_;
+  int32_t mMinMode_;
+  int32_t mMaxWidth_;
+  int32_t mMaxWidthMode_;
+  int32_t mMinWidth_TextView_;
+  int32_t mMinWidthMode_;
   id<ADTextView_Editor> mEditor_;
-  jint mAutoSizeTextType_;
-  jboolean mNeedsAutoSizeText_;
-  jfloat mAutoSizeStepGranularityInPx_;
-  jfloat mAutoSizeMinTextSizeInPx_;
-  jfloat mAutoSizeMaxTextSizeInPx_;
+  int32_t mAutoSizeTextType_;
+  bool mNeedsAutoSizeText_;
+  float mAutoSizeStepGranularityInPx_;
+  float mAutoSizeMinTextSizeInPx_;
+  float mAutoSizeMaxTextSizeInPx_;
   IOSIntArray *mAutoSizeTextSizesInPx_;
-  jboolean mHasPresetAutoSizeValues_;
+  bool mHasPresetAutoSizeValues_;
   NSString *mText_;
   ASWidgetAttribute *widgetAttribute_;
   id handler_;
   id<JavaLangRunnable> mTickRunnable_;
 }
 
-- (jboolean)setupAutoSizeUniformPresetSizesConfiguration;
+- (bool)setupAutoSizeUniformPresetSizesConfiguration;
 
-- (void)validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat:(jfloat)autoSizeMinTextSizeInPx
-                                                          withFloat:(jfloat)autoSizeMaxTextSizeInPx
-                                                          withFloat:(jfloat)autoSizeStepGranularityInPx;
+- (void)validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat:(float)autoSizeMinTextSizeInPx
+                                                          withFloat:(float)autoSizeMaxTextSizeInPx
+                                                          withFloat:(float)autoSizeStepGranularityInPx;
 
 - (void)clearAutoSizeConfiguration;
 
 - (IOSIntArray *)cleanupAutoSizePresetSizesWithIntArray:(IOSIntArray *)presetValues;
 
-- (jboolean)setupAutoSizeText;
+- (bool)setupAutoSizeText;
 
 - (void)updateTextColors;
 
@@ -96,17 +108,17 @@
 
 - (void)autoSizeText;
 
-- (jint)findLargestTextSizeWhichFitsWithADRectF:(ADRectF *)availableSpace;
+- (int32_t)findLargestTextSizeWhichFitsWithADRectF:(ADRectF *)availableSpace;
 
-- (jboolean)isAutoSizeEnabled;
+- (bool)isAutoSizeEnabled;
 
-- (jint)getExtendedPaddingBottom;
+- (int32_t)getExtendedPaddingBottom;
 
-- (jint)getExtendedPaddingTop;
+- (int32_t)getExtendedPaddingTop;
 
 - (void)invalidateDrawableWithADDrawable:(ADDrawable *)dr;
 
-- (void)setTextSizeWithFloat:(jfloat)f;
+- (void)setTextSizeWithFloat:(float)f;
 
 @end
 
@@ -124,47 +136,47 @@ J2OBJC_FIELD_SETTER(ADTextView, widgetAttribute_, ASWidgetAttribute *)
 J2OBJC_FIELD_SETTER(ADTextView, handler_, id)
 J2OBJC_FIELD_SETTER(ADTextView, mTickRunnable_, id<JavaLangRunnable>)
 
-inline jint ADTextView_get_LINES(void);
+inline int32_t ADTextView_get_LINES(void);
 #define ADTextView_LINES 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, LINES, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, LINES, int32_t)
 
-inline jint ADTextView_get_EMS(void);
+inline int32_t ADTextView_get_EMS(void);
 #define ADTextView_EMS 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, EMS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, EMS, int32_t)
 
-inline jint ADTextView_get_PIXELS(void);
+inline int32_t ADTextView_get_PIXELS(void);
 #define ADTextView_PIXELS 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, PIXELS, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, PIXELS, int32_t)
 
 inline ADRectF *ADTextView_get_TEMP_RECTF(void);
 static ADRectF *ADTextView_TEMP_RECTF;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADTextView, TEMP_RECTF, ADRectF *)
 
-inline jint ADTextView_get_DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP(void);
+inline int32_t ADTextView_get_DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP(void);
 #define ADTextView_DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP, int32_t)
 
-inline jint ADTextView_get_DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP(void);
+inline int32_t ADTextView_get_DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP(void);
 #define ADTextView_DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP 112
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP, int32_t)
 
-inline jint ADTextView_get_DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX(void);
+inline int32_t ADTextView_get_DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX(void);
 #define ADTextView_DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX, int32_t)
 
-inline jfloat ADTextView_get_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE(void);
+inline float ADTextView_get_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE(void);
 #define ADTextView_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE -1.0f
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE, jfloat)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE, float)
 
-__attribute__((unused)) static jboolean ADTextView_setupAutoSizeUniformPresetSizesConfiguration(ADTextView *self);
+__attribute__((unused)) static bool ADTextView_setupAutoSizeUniformPresetSizesConfiguration(ADTextView *self);
 
-__attribute__((unused)) static void ADTextView_validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat_withFloat_withFloat_(ADTextView *self, jfloat autoSizeMinTextSizeInPx, jfloat autoSizeMaxTextSizeInPx, jfloat autoSizeStepGranularityInPx);
+__attribute__((unused)) static void ADTextView_validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat_withFloat_withFloat_(ADTextView *self, float autoSizeMinTextSizeInPx, float autoSizeMaxTextSizeInPx, float autoSizeStepGranularityInPx);
 
 __attribute__((unused)) static void ADTextView_clearAutoSizeConfiguration(ADTextView *self);
 
 __attribute__((unused)) static IOSIntArray *ADTextView_cleanupAutoSizePresetSizesWithIntArray_(ADTextView *self, IOSIntArray *presetValues);
 
-__attribute__((unused)) static jboolean ADTextView_setupAutoSizeText(ADTextView *self);
+__attribute__((unused)) static bool ADTextView_setupAutoSizeText(ADTextView *self);
 
 __attribute__((unused)) static void ADTextView_updateTextColors(ADTextView *self);
 
@@ -172,23 +184,23 @@ __attribute__((unused)) static ADLayout_Alignment *ADTextView_getLayoutAlignment
 
 __attribute__((unused)) static void ADTextView_autoSizeText(ADTextView *self);
 
-__attribute__((unused)) static jint ADTextView_findLargestTextSizeWhichFitsWithADRectF_(ADTextView *self, ADRectF *availableSpace);
+__attribute__((unused)) static int32_t ADTextView_findLargestTextSizeWhichFitsWithADRectF_(ADTextView *self, ADRectF *availableSpace);
 
-__attribute__((unused)) static jboolean ADTextView_isAutoSizeEnabled(ADTextView *self);
+__attribute__((unused)) static bool ADTextView_isAutoSizeEnabled(ADTextView *self);
 
-__attribute__((unused)) static jint ADTextView_getExtendedPaddingBottom(ADTextView *self);
+__attribute__((unused)) static int32_t ADTextView_getExtendedPaddingBottom(ADTextView *self);
 
-__attribute__((unused)) static jint ADTextView_getExtendedPaddingTop(ADTextView *self);
+__attribute__((unused)) static int32_t ADTextView_getExtendedPaddingTop(ADTextView *self);
 
 __attribute__((unused)) static void ADTextView_invalidateDrawableWithADDrawable_(ADTextView *self, ADDrawable *dr);
 
-__attribute__((unused)) static void ADTextView_setTextSizeWithFloat_(ADTextView *self, jfloat f);
+__attribute__((unused)) static void ADTextView_setTextSizeWithFloat_(ADTextView *self, float f);
 
 @interface ADTextView_OnEditorActionListener : NSObject
 
 @end
 
-__attribute__((unused)) static void ADTextView_BufferType_initWithNSString_withInt_(ADTextView_BufferType *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void ADTextView_BufferType_initWithNSString_withInt_(ADTextView_BufferType *self, NSString *__name, int32_t __ordinal);
 
 @interface ADTextView_Editor : NSObject
 
@@ -199,9 +211,9 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
 @implementation ADTextView
 
 - (void)setAutoSizeTextTypeUniformWithPresetSizesWithIntArray:(IOSIntArray *)presetSizes
-                                                      withInt:(jint)unit {
+                                                      withInt:(int32_t)unit {
   if ([self supportsAutoSizeText]) {
-    jint presetSizesLength = ((IOSIntArray *) nil_chk(presetSizes))->size_;
+    int32_t presetSizesLength = ((IOSIntArray *) nil_chk(presetSizes))->size_;
     if (presetSizesLength > 0) {
       IOSIntArray *presetSizesInPx = [IOSIntArray arrayWithLength:presetSizesLength];
       if (unit == JreLoadStatic(ADTextView_TypedValue, COMPLEX_UNIT_PX)) {
@@ -209,7 +221,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
       }
       else {
         ADDisplayMetrics *displayMetrics = [((ADResources *) nil_chk([self getResources])) getDisplayMetrics];
-        for (jint i = 0; i < presetSizesLength; i++) {
+        for (int32_t i = 0; i < presetSizesLength; i++) {
           *IOSIntArray_GetRef(presetSizesInPx, i) = JavaLangMath_roundWithFloat_(ADTextView_TypedValue_applyDimensionWithInt_withInt_withADDisplayMetrics_(unit, IOSIntArray_Get(presetSizes, i), displayMetrics));
         }
       }
@@ -228,29 +240,29 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   }
 }
 
-- (jint)getAutoSizeTextType {
+- (int32_t)getAutoSizeTextType {
   return mAutoSizeTextType_;
 }
 
-- (jint)getAutoSizeStepGranularity {
+- (int32_t)getAutoSizeStepGranularity {
   return JavaLangMath_roundWithFloat_(mAutoSizeStepGranularityInPx_);
 }
 
-- (jint)getAutoSizeMinTextSize {
+- (int32_t)getAutoSizeMinTextSize {
   return JavaLangMath_roundWithFloat_(mAutoSizeMinTextSizeInPx_);
 }
 
-- (jint)getAutoSizeMaxTextSize {
+- (int32_t)getAutoSizeMaxTextSize {
   return JavaLangMath_roundWithFloat_(mAutoSizeMaxTextSizeInPx_);
 }
 
-- (jboolean)setupAutoSizeUniformPresetSizesConfiguration {
+- (bool)setupAutoSizeUniformPresetSizesConfiguration {
   return ADTextView_setupAutoSizeUniformPresetSizesConfiguration(self);
 }
 
-- (void)validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat:(jfloat)autoSizeMinTextSizeInPx
-                                                          withFloat:(jfloat)autoSizeMaxTextSizeInPx
-                                                          withFloat:(jfloat)autoSizeStepGranularityInPx {
+- (void)validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat:(float)autoSizeMinTextSizeInPx
+                                                          withFloat:(float)autoSizeMaxTextSizeInPx
+                                                          withFloat:(float)autoSizeStepGranularityInPx {
   ADTextView_validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat_withFloat_withFloat_(self, autoSizeMinTextSizeInPx, autoSizeMaxTextSizeInPx, autoSizeStepGranularityInPx);
 }
 
@@ -262,19 +274,19 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return ADTextView_cleanupAutoSizePresetSizesWithIntArray_(self, presetValues);
 }
 
-- (jboolean)setupAutoSizeText {
+- (bool)setupAutoSizeText {
   return ADTextView_setupAutoSizeText(self);
 }
 
-- (jint)getTotalPaddingLeft {
+- (int32_t)getTotalPaddingLeft {
   return [self getCompoundPaddingLeft];
 }
 
-- (jint)getTotalPaddingRight {
+- (int32_t)getTotalPaddingRight {
   return [self getCompoundPaddingRight];
 }
 
-- (void)setTextColorWithInt:(jint)color {
+- (void)setTextColorWithInt:(int32_t)color {
   JreStrongAssign(&mTextColor_, ADColorStateList_valueOfWithInt_(color));
   ADTextView_updateTextColors(self);
 }
@@ -287,7 +299,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   ADTextView_updateTextColors(self);
 }
 
-- (jint)getCurrentTextColor {
+- (int32_t)getCurrentTextColor {
   return mCurTextColor_;
 }
 
@@ -295,7 +307,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return mTextPaint_;
 }
 
-- (void)setHintTextColorWithInt:(jint)color {
+- (void)setHintTextColorWithInt:(int32_t)color {
   JreStrongAssign(&mHintTextColor_, ADColorStateList_valueOfWithInt_(color));
   ADTextView_updateTextColors(self);
 }
@@ -309,11 +321,11 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return mHintTextColor_;
 }
 
-- (jint)getCurrentHintTextColor {
+- (int32_t)getCurrentHintTextColor {
   return mHintTextColor_ != nil ? mCurHintTextColor_ : mCurTextColor_;
 }
 
-- (void)setLinkTextColorWithInt:(jint)color {
+- (void)setLinkTextColorWithInt:(int32_t)color {
   JreStrongAssign(&mLinkTextColor_, ADColorStateList_valueOfWithInt_(color));
   ADTextView_updateTextColors(self);
 }
@@ -327,14 +339,14 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return mLinkTextColor_;
 }
 
-- (void)setGravityWithInt:(jint)gravity {
+- (void)setGravityWithInt:(int32_t)gravity {
   if ((gravity & ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK) == 0) {
     gravity |= ADGravity_START;
   }
   if ((gravity & ADGravity_VERTICAL_GRAVITY_MASK) == 0) {
     gravity |= ADGravity_TOP;
   }
-  jboolean newLayout = false;
+  bool newLayout = false;
   if ((gravity & ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK) != (mGravity_ & ADGravity_RELATIVE_HORIZONTAL_GRAVITY_MASK)) {
     newLayout = true;
   }
@@ -343,119 +355,119 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   }
   mGravity_ = gravity;
   if (mLayout_ != nil && newLayout) {
-    jint want = [mLayout_ getWidth];
-    jint hintWant = mHintLayout_ == nil ? 0 : [mHintLayout_ getWidth];
+    int32_t want = [mLayout_ getWidth];
+    int32_t hintWant = mHintLayout_ == nil ? 0 : [mHintLayout_ getWidth];
     [self makeNewLayoutWithInt:want withInt:hintWant withInt:ADTextView_UNKNOWN_BORING withInt:ADTextView_UNKNOWN_BORING withInt:mRight_ - mLeft_ - [self getCompoundPaddingLeft] - [self getCompoundPaddingRight] withBoolean:true];
   }
 }
 
-- (jint)getGravity {
+- (int32_t)getGravity {
   return mGravity_;
 }
 
-- (void)setMinLinesWithInt:(jint)minLines {
+- (void)setMinLinesWithInt:(int32_t)minLines {
   mMinimum_ = minLines;
   mMinMode_ = ADTextView_LINES;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMinLines {
+- (int32_t)getMinLines {
   return mMinMode_ == ADTextView_LINES ? mMinimum_ : -1;
 }
 
-- (void)setMinHeightWithInt:(jint)minPixels {
+- (void)setMinHeightWithInt:(int32_t)minPixels {
   mMinimum_ = minPixels;
   mMinMode_ = ADTextView_PIXELS;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMinHeight {
+- (int32_t)getMinHeight {
   return mMinMode_ == ADTextView_PIXELS ? mMinimum_ : -1;
 }
 
-- (void)setMaxLinesWithInt:(jint)maxLines {
+- (void)setMaxLinesWithInt:(int32_t)maxLines {
   mMaximum_ = maxLines;
   mMaxMode_ = ADTextView_LINES;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMaxLines {
+- (int32_t)getMaxLines {
   return mMaxMode_ == ADTextView_LINES ? mMaximum_ : -1;
 }
 
-- (void)setMaxHeightWithInt:(jint)maxPixels {
+- (void)setMaxHeightWithInt:(int32_t)maxPixels {
   mMaximum_ = maxPixels;
   mMaxMode_ = ADTextView_PIXELS;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxMode_ == ADTextView_PIXELS ? mMaximum_ : -1;
 }
 
-- (void)setLinesWithInt:(jint)lines {
+- (void)setLinesWithInt:(int32_t)lines {
   mMaximum_ = mMinimum_ = lines;
   mMaxMode_ = mMinMode_ = ADTextView_LINES;
   [self requestLayout];
   [self invalidate];
 }
 
-- (void)setMinEmsWithInt:(jint)minEms {
+- (void)setMinEmsWithInt:(int32_t)minEms {
   mMinWidth_TextView_ = minEms;
   mMinWidthMode_ = ADTextView_EMS;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMinEms {
+- (int32_t)getMinEms {
   return mMinWidthMode_ == ADTextView_EMS ? mMinWidth_TextView_ : -1;
 }
 
-- (void)setMinWidthWithInt:(jint)minPixels {
+- (void)setMinWidthWithInt:(int32_t)minPixels {
   mMinWidth_TextView_ = minPixels;
   mMinWidthMode_ = ADTextView_PIXELS;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMinWidth {
+- (int32_t)getMinWidth {
   return mMinWidthMode_ == ADTextView_PIXELS ? mMinWidth_TextView_ : -1;
 }
 
-- (void)setMaxEmsWithInt:(jint)maxEms {
+- (void)setMaxEmsWithInt:(int32_t)maxEms {
   mMaxWidth_ = maxEms;
   mMaxWidthMode_ = ADTextView_EMS;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMaxEms {
+- (int32_t)getMaxEms {
   return mMaxWidthMode_ == ADTextView_EMS ? mMaxWidth_ : -1;
 }
 
-- (void)setMaxWidthWithInt:(jint)maxPixels {
+- (void)setMaxWidthWithInt:(int32_t)maxPixels {
   mMaxWidth_ = maxPixels;
   mMaxWidthMode_ = ADTextView_PIXELS;
   [self requestLayout];
   [self invalidate];
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidthMode_ == ADTextView_PIXELS ? mMaxWidth_ : -1;
 }
 
-- (void)setEmsWithInt:(jint)ems {
+- (void)setEmsWithInt:(int32_t)ems {
   mMaxWidth_ = mMinWidth_TextView_ = ems;
   mMaxWidthMode_ = mMinWidthMode_ = ADTextView_EMS;
   [self requestLayout];
   [self invalidate];
 }
 
-- (void)setWidthWithInt:(jint)pixels {
+- (void)setWidthWithInt:(int32_t)pixels {
   mMaxWidth_ = mMinWidth_TextView_ = pixels;
   mMaxWidthMode_ = mMinWidthMode_ = ADTextView_PIXELS;
   [self requestLayout];
@@ -489,7 +501,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   ADTextView_autoSizeText(self);
 }
 
-- (jint)findLargestTextSizeWhichFitsWithADRectF:(ADRectF *)availableSpace {
+- (int32_t)findLargestTextSizeWhichFitsWithADRectF:(ADRectF *)availableSpace {
   return ADTextView_findLargestTextSizeWhichFitsWithADRectF_(self, availableSpace);
 }
 
@@ -502,18 +514,18 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
 
 - (void)removeTextChangedListenerWithADTextWatcher:(id<ADTextWatcher>)watcher {
   if (mListeners_ != nil) {
-    jint i = [mListeners_ indexOfWithId:watcher];
+    int32_t i = [mListeners_ indexOfWithId:watcher];
     if (i >= 0) {
       [((JavaUtilArrayList *) nil_chk(mListeners_)) removeWithInt:i];
     }
   }
 }
 
-- (jboolean)isAutoSizeEnabled {
+- (bool)isAutoSizeEnabled {
   return ADTextView_isAutoSizeEnabled(self);
 }
 
-- (jboolean)supportsAutoSizeText {
+- (bool)supportsAutoSizeText {
   return true;
 }
 
@@ -524,8 +536,8 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   if ([self isTypePhone]) {
     JavaTextDecimalFormatSymbols *symbols = JavaTextDecimalFormatSymbols_getInstanceWithJavaUtilLocale_([self getTextLocale]);
     NSString *zero = IOSObjectArray_Get(nil_chk([self getDigitStringsWithJavaTextDecimalFormatSymbols:symbols]), 0);
-    jint firstCodepoint = [((NSString *) nil_chk(zero)) java_codePointAt:0];
-    jbyte digitDirection = JavaLangCharacter_getDirectionalityWithInt_(firstCodepoint);
+    int32_t firstCodepoint = [((NSString *) nil_chk(zero)) java_codePointAt:0];
+    int8_t digitDirection = JavaLangCharacter_getDirectionalityWithInt_(firstCodepoint);
     if (digitDirection == JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT || digitDirection == JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC) {
       return JreLoadStatic(ADTextDirectionHeuristics, RTL);
     }
@@ -533,7 +545,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
       return JreLoadStatic(ADTextDirectionHeuristics, LTR);
     }
   }
-  jboolean defaultIsRtl = [self getLayoutDirection] == ADView_LAYOUT_DIRECTION_RTL;
+  bool defaultIsRtl = [self getLayoutDirection] == ADView_LAYOUT_DIRECTION_RTL;
   switch ([self getTextDirection]) {
     default:
     case ADView_TEXT_DIRECTION_FIRST_STRONG:
@@ -558,33 +570,33 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return self;
 }
 
-- (jint)getExtendedPaddingBottom {
+- (int32_t)getExtendedPaddingBottom {
   return ADTextView_getExtendedPaddingBottom(self);
 }
 
-- (jint)getExtendedPaddingTop {
+- (int32_t)getExtendedPaddingTop {
   return ADTextView_getExtendedPaddingTop(self);
 }
 
-- (void)makeNewLayoutWithInt:(jint)availableWidth
-                     withInt:(jint)i
-                     withInt:(jint)unknownBoring
-                     withInt:(jint)unknownBoring2
-                     withInt:(jint)j
-                 withBoolean:(jboolean)b {
+- (void)makeNewLayoutWithInt:(int32_t)availableWidth
+                     withInt:(int32_t)i
+                     withInt:(int32_t)unknownBoring
+                     withInt:(int32_t)unknownBoring2
+                     withInt:(int32_t)j
+                 withBoolean:(bool)b {
 }
 
-- (void)setUpAutoSizeTextTypeUniformWithInt:(jint)autoSizeMin
-                                    withInt:(jint)autoSizeMax
-                                    withInt:(jint)autoSizeGranular {
-  jfloat autoSizeMinTextSizeInPx = autoSizeMin == ADTextView_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE ? ASPluginInvoker_convertSpToPixelWithNSString_(JreStrcat("I$", ADTextView_DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP, @"sp")) : autoSizeMin;
-  jfloat autoSizeMaxTextSizeInPx = autoSizeMax == ADTextView_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE ? ASPluginInvoker_convertSpToPixelWithNSString_(JreStrcat("I$", ADTextView_DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP, @"sp")) : autoSizeMax;
-  jfloat autoSizeStepGranularityInPx = autoSizeGranular == ADTextView_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE ? ADTextView_DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX : autoSizeGranular;
+- (void)setUpAutoSizeTextTypeUniformWithInt:(int32_t)autoSizeMin
+                                    withInt:(int32_t)autoSizeMax
+                                    withInt:(int32_t)autoSizeGranular {
+  float autoSizeMinTextSizeInPx = autoSizeMin == ADTextView_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE ? ASPluginInvoker_convertSpToPixelWithNSString_(JreStrcat("I$", ADTextView_DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP, @"sp")) : autoSizeMin;
+  float autoSizeMaxTextSizeInPx = autoSizeMax == ADTextView_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE ? ASPluginInvoker_convertSpToPixelWithNSString_(JreStrcat("I$", ADTextView_DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP, @"sp")) : autoSizeMax;
+  float autoSizeStepGranularityInPx = autoSizeGranular == ADTextView_UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE ? ADTextView_DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX : autoSizeGranular;
   ADTextView_validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat_withFloat_withFloat_(self, autoSizeMinTextSizeInPx, autoSizeMaxTextSizeInPx, autoSizeStepGranularityInPx);
   ADTextView_setupAutoSizeText(self);
 }
 
-- (jboolean)isAutoSizeTextTypeUniformWithInt:(jint)autoTextType {
+- (bool)isAutoSizeTextTypeUniformWithInt:(int32_t)autoTextType {
   return autoTextType == ADTextView_AUTO_SIZE_TEXT_TYPE_UNIFORM;
 }
 
@@ -597,7 +609,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
 }
 
 - (void)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                                withInt:(jint)delay {
+                                withInt:(int32_t)delay {
   JreStrongAssign(&self->mTickRunnable_, mTickRunnable);
   @try {
     JreStrongAssign(&handler_, ASPluginInvoker_postDelayedWithJavaLangRunnable_withInt_(mTickRunnable, delay));
@@ -607,20 +619,20 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   }
 }
 
-- (jboolean)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable {
+- (bool)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable {
   if (self->mTickRunnable_ != nil && handler_ != nil) {
     ASPluginInvoker_removeCallbacksWithId_withJavaLangRunnable_(handler_, mTickRunnable);
   }
   return true;
 }
 
-- (jboolean)isShown {
+- (bool)isShown {
   return true;
 }
 
-- (jint)measureWidthWithInt:(jint)widthMode
-                    withInt:(jint)widthSize
-                    withInt:(jint)width {
+- (int32_t)measureWidthWithInt:(int32_t)widthMode
+                       withInt:(int32_t)widthSize
+                       withInt:(int32_t)width {
   if (mMaxWidth_ != JavaLangInteger_MAX_VALUE) {
     if (mMaxWidthMode_ == ADTextView_EMS) {
       width = JavaLangMath_minWithInt_withInt_(width, mMaxWidth_ * [self getLineHeight]);
@@ -640,17 +652,17 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return width;
 }
 
-- (jint)measureHeightWithInt:(jint)heightMode
-                     withInt:(jint)heightSize
-                     withInt:(jint)height {
+- (int32_t)measureHeightWithInt:(int32_t)heightMode
+                        withInt:(int32_t)heightSize
+                        withInt:(int32_t)height {
   if (mMaximum_ != JavaLangInteger_MAX_VALUE) {
     if (mMaxMode_ != ADTextView_LINES) {
       height = JavaLangMath_minWithInt_withInt_(height, mMaximum_);
     }
     else {
-      jint lineHeightWithPad = [self getLineHeight] + [self getLineHeightPadding];
-      jint borderHeightPadding = ([self getBorderWidth] * 2) + [self getBorderPadding];
-      jint calc = (mMaximum_ * lineHeightWithPad) + borderHeightPadding;
+      int32_t lineHeightWithPad = [self getLineHeight] + [self getLineHeightPadding];
+      int32_t borderHeightPadding = ([self getBorderWidth] * 2) + [self getBorderPadding];
+      int32_t calc = (mMaximum_ * lineHeightWithPad) + borderHeightPadding;
       if (height < ((lineHeightWithPad) + borderHeightPadding)) {
         height = (lineHeightWithPad) + borderHeightPadding;
       }
@@ -668,19 +680,19 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return height;
 }
 
-- (jint)getLineHeightPadding {
+- (int32_t)getLineHeightPadding {
   return 0;
 }
 
-- (jint)getBorderPadding {
+- (int32_t)getBorderPadding {
   return 0;
 }
 
-- (jint)getLineHeight {
+- (int32_t)getLineHeight {
   return 0;
 }
 
-- (jint)getBorderWidth {
+- (int32_t)getBorderWidth {
   return 0;
 }
 
@@ -688,7 +700,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return ADTextView_getLayoutAlignment(self);
 }
 
-- (jboolean)hasPasswordTransformationMethod {
+- (bool)hasPasswordTransformationMethod {
   return false;
 }
 
@@ -696,7 +708,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return nil;
 }
 
-- (jboolean)isTypePhone {
+- (bool)isTypePhone {
   return false;
 }
 
@@ -712,24 +724,24 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   ADTextView_invalidateDrawableWithADDrawable_(self, dr);
 }
 
-- (void)setTextSizeInternalWithInt:(jint)unit
-                         withFloat:(jfloat)optimalTextSize
-                       withBoolean:(jboolean)b {
+- (void)setTextSizeInternalWithInt:(int32_t)unit
+                         withFloat:(float)optimalTextSize
+                       withBoolean:(bool)b {
 }
 
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
-                                withADRectF:(ADRectF *)availableSpace {
-  jfloat width = [((ADRectF *) nil_chk(availableSpace)) width];
-  jfloat height = [availableSpace height];
+- (bool)suggestedSizeFitsInSpaceWithInt:(int32_t)mAutoSizeTextSizeInPx
+                            withADRectF:(ADRectF *)availableSpace {
+  float width = [((ADRectF *) nil_chk(availableSpace)) width];
+  float height = [availableSpace height];
   ADTextView_setTextSizeWithFloat_(self, mAutoSizeTextSizeInPx * 1.0f);
-  jint y = [self computeSizeWithFloat:width];
+  int32_t y = [self computeSizeWithFloat:width];
   if (y > height) {
     return false;
   }
   return true;
 }
 
-- (jfloat)getTextSize {
+- (float)getTextSize {
   return 0;
 }
 
@@ -744,13 +756,13 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   return 0;
 }
 
-- (jint)computeSizeWithFloat:(jfloat)width {
+- (int32_t)computeSizeWithFloat:(float)width {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
 }
 
-- (void)setTextSizeWithFloat:(jfloat)f {
+- (void)setTextSizeWithFloat:(float)f {
   ADTextView_setTextSizeWithFloat_(self, f);
 }
 
@@ -1007,8 +1019,8 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
 
 @end
 
-jboolean ADTextView_setupAutoSizeUniformPresetSizesConfiguration(ADTextView *self) {
-  jint sizesLength = ((IOSIntArray *) nil_chk(self->mAutoSizeTextSizesInPx_))->size_;
+bool ADTextView_setupAutoSizeUniformPresetSizesConfiguration(ADTextView *self) {
+  int32_t sizesLength = ((IOSIntArray *) nil_chk(self->mAutoSizeTextSizesInPx_))->size_;
   self->mHasPresetAutoSizeValues_ = (sizesLength > 0);
   if (self->mHasPresetAutoSizeValues_) {
     self->mAutoSizeTextType_ = ADTextView_AUTO_SIZE_TEXT_TYPE_UNIFORM;
@@ -1019,7 +1031,7 @@ jboolean ADTextView_setupAutoSizeUniformPresetSizesConfiguration(ADTextView *sel
   return self->mHasPresetAutoSizeValues_;
 }
 
-void ADTextView_validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat_withFloat_withFloat_(ADTextView *self, jfloat autoSizeMinTextSizeInPx, jfloat autoSizeMaxTextSizeInPx, jfloat autoSizeStepGranularityInPx) {
+void ADTextView_validateAndSetAutoSizeTextTypeUniformConfigurationWithFloat_withFloat_withFloat_(ADTextView *self, float autoSizeMinTextSizeInPx, float autoSizeMaxTextSizeInPx, float autoSizeStepGranularityInPx) {
   if (autoSizeMinTextSizeInPx <= 0) {
     @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$F$", @"Minimum auto-size text size (", autoSizeMinTextSizeInPx, @"px) is less or equal to (0px)"));
   }
@@ -1046,14 +1058,14 @@ void ADTextView_clearAutoSizeConfiguration(ADTextView *self) {
 }
 
 IOSIntArray *ADTextView_cleanupAutoSizePresetSizesWithIntArray_(ADTextView *self, IOSIntArray *presetValues) {
-  jint presetValuesLength = ((IOSIntArray *) nil_chk(presetValues))->size_;
+  int32_t presetValuesLength = ((IOSIntArray *) nil_chk(presetValues))->size_;
   if (presetValuesLength == 0) {
     return presetValues;
   }
   JavaUtilArrays_sortWithIntArray_(presetValues);
   ADIntArray *uniqueValidSizes = create_ADIntArray_init();
-  for (jint i = 0; i < presetValuesLength; i++) {
-    jint currentPresetValue = IOSIntArray_Get(presetValues, i);
+  for (int32_t i = 0; i < presetValuesLength; i++) {
+    int32_t currentPresetValue = IOSIntArray_Get(presetValues, i);
     if (currentPresetValue > 0 && [uniqueValidSizes binarySearchWithInt:currentPresetValue] < 0) {
       [uniqueValidSizes addWithInt:currentPresetValue];
     }
@@ -1061,12 +1073,12 @@ IOSIntArray *ADTextView_cleanupAutoSizePresetSizesWithIntArray_(ADTextView *self
   return presetValuesLength == [uniqueValidSizes size] ? presetValues : [uniqueValidSizes toArray];
 }
 
-jboolean ADTextView_setupAutoSizeText(ADTextView *self) {
+bool ADTextView_setupAutoSizeText(ADTextView *self) {
   if ([self supportsAutoSizeText] && self->mAutoSizeTextType_ == ADTextView_AUTO_SIZE_TEXT_TYPE_UNIFORM) {
     if (!self->mHasPresetAutoSizeValues_ || ((IOSIntArray *) nil_chk(self->mAutoSizeTextSizesInPx_))->size_ == 0) {
-      jint autoSizeValuesLength = (JreFpToInt(JavaLangMath_floorWithDouble_((self->mAutoSizeMaxTextSizeInPx_ - self->mAutoSizeMinTextSizeInPx_) / self->mAutoSizeStepGranularityInPx_))) + 1;
+      int32_t autoSizeValuesLength = (JreFpToInt(JavaLangMath_floorWithDouble_((self->mAutoSizeMaxTextSizeInPx_ - self->mAutoSizeMinTextSizeInPx_) / self->mAutoSizeStepGranularityInPx_))) + 1;
       IOSIntArray *autoSizeTextSizesInPx = [IOSIntArray arrayWithLength:autoSizeValuesLength];
-      for (jint i = 0; i < autoSizeValuesLength; i++) {
+      for (int32_t i = 0; i < autoSizeValuesLength; i++) {
         *IOSIntArray_GetRef(autoSizeTextSizesInPx, i) = JavaLangMath_roundWithFloat_(self->mAutoSizeMinTextSizeInPx_ + (i * self->mAutoSizeStepGranularityInPx_));
       }
       JreStrongAssign(&self->mAutoSizeTextSizesInPx_, ADTextView_cleanupAutoSizePresetSizesWithIntArray_(self, autoSizeTextSizesInPx));
@@ -1080,9 +1092,9 @@ jboolean ADTextView_setupAutoSizeText(ADTextView *self) {
 }
 
 void ADTextView_updateTextColors(ADTextView *self) {
-  jboolean inval = false;
+  bool inval = false;
   IOSIntArray *drawableState = [self getDrawableState];
-  jint color = 0;
+  int32_t color = 0;
   if (self->mTextColor_ != nil) {
     color = [self->mTextColor_ getColorForStateWithIntArray:drawableState withInt:0];
   }
@@ -1168,8 +1180,8 @@ void ADTextView_autoSizeText(ADTextView *self) {
     if ([self getMeasuredWidth] <= 0 || [self getMeasuredHeight] <= 0) {
       return;
     }
-    jint availableWidth = self->mHorizontallyScrolling_ ? JreLoadStatic(ASBaseMeasurableView, VERY_WIDE) : [self getMeasuredWidth] - [self getTotalPaddingLeft] - [self getTotalPaddingRight];
-    jint availableHeight = [self getMeasuredHeight] - ADTextView_getExtendedPaddingBottom(self) - ADTextView_getExtendedPaddingTop(self);
+    int32_t availableWidth = self->mHorizontallyScrolling_ ? JreLoadStatic(ASBaseMeasurableView, VERY_WIDE) : [self getMeasuredWidth] - [self getTotalPaddingLeft] - [self getTotalPaddingRight];
+    int32_t availableHeight = [self getMeasuredHeight] - ADTextView_getExtendedPaddingBottom(self) - ADTextView_getExtendedPaddingTop(self);
     if (availableWidth <= 0 || availableHeight <= 0) {
       return;
     }
@@ -1177,7 +1189,7 @@ void ADTextView_autoSizeText(ADTextView *self) {
       [((ADRectF *) nil_chk(ADTextView_TEMP_RECTF)) setEmpty];
       ADTextView_TEMP_RECTF->right_ = availableWidth;
       ADTextView_TEMP_RECTF->bottom_ = availableHeight;
-      jfloat optimalTextSize = ADTextView_findLargestTextSizeWhichFitsWithADRectF_(self, ADTextView_TEMP_RECTF);
+      float optimalTextSize = ADTextView_findLargestTextSizeWhichFitsWithADRectF_(self, ADTextView_TEMP_RECTF);
       if (optimalTextSize != [self getTextSize]) {
         [self setTextSizeInternalWithInt:JreLoadStatic(ADTextView_TypedValue, COMPLEX_UNIT_PX) withFloat:optimalTextSize withBoolean:false];
         [self makeNewLayoutWithInt:availableWidth withInt:0 withInt:ADTextView_UNKNOWN_BORING withInt:ADTextView_UNKNOWN_BORING withInt:self->mRight_ - self->mLeft_ - [self getCompoundPaddingLeft] - [self getCompoundPaddingRight] withBoolean:false];
@@ -1187,15 +1199,15 @@ void ADTextView_autoSizeText(ADTextView *self) {
   self->mNeedsAutoSizeText_ = true;
 }
 
-jint ADTextView_findLargestTextSizeWhichFitsWithADRectF_(ADTextView *self, ADRectF *availableSpace) {
-  jint sizesCount = ((IOSIntArray *) nil_chk(self->mAutoSizeTextSizesInPx_))->size_;
+int32_t ADTextView_findLargestTextSizeWhichFitsWithADRectF_(ADTextView *self, ADRectF *availableSpace) {
+  int32_t sizesCount = ((IOSIntArray *) nil_chk(self->mAutoSizeTextSizesInPx_))->size_;
   if (sizesCount == 0) {
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"No available text sizes to choose from.");
   }
-  jint bestSizeIndex = 0;
-  jint lowIndex = bestSizeIndex + 1;
-  jint highIndex = sizesCount - 1;
-  jint sizeToTryIndex;
+  int32_t bestSizeIndex = 0;
+  int32_t lowIndex = bestSizeIndex + 1;
+  int32_t highIndex = sizesCount - 1;
+  int32_t sizeToTryIndex;
   while (lowIndex <= highIndex) {
     sizeToTryIndex = JreIntDiv((lowIndex + highIndex), 2);
     if ([self suggestedSizeFitsInSpaceWithInt:IOSIntArray_Get(nil_chk(self->mAutoSizeTextSizesInPx_), sizeToTryIndex) withADRectF:availableSpace]) {
@@ -1210,7 +1222,7 @@ jint ADTextView_findLargestTextSizeWhichFitsWithADRectF_(ADTextView *self, ADRec
   return IOSIntArray_Get(nil_chk(self->mAutoSizeTextSizesInPx_), bestSizeIndex);
 }
 
-jboolean ADTextView_isAutoSizeEnabled(ADTextView *self) {
+bool ADTextView_isAutoSizeEnabled(ADTextView *self) {
   return [self supportsAutoSizeText] && self->mAutoSizeTextType_ != ADTextView_AUTO_SIZE_TEXT_TYPE_NONE;
 }
 
@@ -1236,22 +1248,24 @@ void ADTextView_initWithASIWidget_(ADTextView *self, id<ASIWidget> widget) {
   JreStrongAssignAndConsume(&self->mTextPaint_, new_ADTextView_TextPaint_initWithADTextView_(self));
 }
 
-jint ADTextView_getExtendedPaddingBottom(ADTextView *self) {
+int32_t ADTextView_getExtendedPaddingBottom(ADTextView *self) {
   return [self getCompoundPaddingBottom];
 }
 
-jint ADTextView_getExtendedPaddingTop(ADTextView *self) {
+int32_t ADTextView_getExtendedPaddingTop(ADTextView *self) {
   return [self getCompoundPaddingTop];
 }
 
 void ADTextView_invalidateDrawableWithADDrawable_(ADTextView *self, ADDrawable *dr) {
 }
 
-void ADTextView_setTextSizeWithFloat_(ADTextView *self, jfloat f) {
+void ADTextView_setTextSizeWithFloat_(ADTextView *self, float f) {
   [self setMyAttributeWithNSString:@"textSize" withId:JavaLangFloat_valueOfWithFloat_(f)];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextView)
+
+J2OBJC_NAME_MAPPING(ADTextView, "r.android.widget", "AD")
 
 @implementation ADTextView_OnEditorActionListener
 
@@ -1291,6 +1305,24 @@ ADTextView_BufferType *ADTextView_BufferType_values_[3];
   return (ADTextView_BufferType_Enum)[self ordinal];
 }
 
+- (ADTextView_BufferType_Enum)enumValue {
+  return (ADTextView_BufferType_Enum)[self ordinal];
+}
+
++ (ADTextView_BufferType *)fromNSEnum:(ADTextView_BufferType_Enum)nativeValue {
+  ADTextView_BufferType *javaEnum = ADTextView_BufferType_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ADTextView_BufferType_Enum out of range.");
+  return javaEnum;
+}
+
+- (ADTextView_BufferType_ORDINAL)ordinal {
+  return (ADTextView_BufferType_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithBufferType:(ADTextView_BufferType_Enum)value {
+  return RETAIN_(ADTextView_BufferType_fromOrdinal((ADTextView_BufferType_ORDINAL)value));
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "[LADTextView_BufferType;", 0x9, -1, -1, -1, -1, -1, -1 },
@@ -1318,7 +1350,7 @@ ADTextView_BufferType *ADTextView_BufferType_values_[3];
     size_t allocSize = 3 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 3; i++) {
+    for (int32_t i = 0; i < 3; i++) {
       ((void)(ADTextView_BufferType_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ADTextView_BufferType_initWithNSString_withInt_(e, JreEnumConstantName(ADTextView_BufferType_class_(), i), i);
     }
@@ -1328,7 +1360,7 @@ ADTextView_BufferType *ADTextView_BufferType_values_[3];
 
 @end
 
-void ADTextView_BufferType_initWithNSString_withInt_(ADTextView_BufferType *self, NSString *__name, jint __ordinal) {
+void ADTextView_BufferType_initWithNSString_withInt_(ADTextView_BufferType *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -1346,12 +1378,11 @@ ADTextView_BufferType *ADTextView_BufferType_valueOfWithNSString_(NSString *name
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ADTextView_BufferType *ADTextView_BufferType_fromOrdinal(NSUInteger ordinal) {
+ADTextView_BufferType *ADTextView_BufferType_fromOrdinal(ADTextView_BufferType_ORDINAL ordinal) {
   ADTextView_BufferType_initialize();
-  if (ordinal >= 3) {
+  if (ordinal < 0 || ordinal >= 3) {
     return nil;
   }
   return ADTextView_BufferType_values_[ordinal];
@@ -1359,7 +1390,7 @@ ADTextView_BufferType *ADTextView_BufferType_fromOrdinal(NSUInteger ordinal) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextView_BufferType)
 
-jint ADTextView_TypedValue_COMPLEX_UNIT_PX = 0;
+int32_t ADTextView_TypedValue_COMPLEX_UNIT_PX = 0;
 
 @implementation ADTextView_TypedValue
 
@@ -1370,9 +1401,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jfloat)applyDimensionWithInt:(jint)unit
-                        withInt:(jint)i
-           withADDisplayMetrics:(ADDisplayMetrics *)displayMetrics {
++ (float)applyDimensionWithInt:(int32_t)unit
+                       withInt:(int32_t)i
+          withADDisplayMetrics:(ADDisplayMetrics *)displayMetrics {
   return ADTextView_TypedValue_applyDimensionWithInt_withInt_withADDisplayMetrics_(unit, i, displayMetrics);
 }
 
@@ -1409,7 +1440,7 @@ ADTextView_TypedValue *create_ADTextView_TypedValue_init() {
   J2OBJC_CREATE_IMPL(ADTextView_TypedValue, init)
 }
 
-jfloat ADTextView_TypedValue_applyDimensionWithInt_withInt_withADDisplayMetrics_(jint unit, jint i, ADDisplayMetrics *displayMetrics) {
+float ADTextView_TypedValue_applyDimensionWithInt_withInt_withADDisplayMetrics_(int32_t unit, int32_t i, ADDisplayMetrics *displayMetrics) {
   ADTextView_TypedValue_initialize();
   return 0;
 }

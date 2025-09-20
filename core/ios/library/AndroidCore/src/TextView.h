@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\TextView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TextView")
@@ -40,8 +41,12 @@
 @class ADTextView_TextPaint;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 @class JavaTextDecimalFormatSymbols;
 @class JavaUtilLocale;
+@class NSString;
 @protocol ADTextDirectionHeuristic;
 @protocol ADTextView_Drawables;
 @protocol ADTextWatcher;
@@ -63,53 +68,53 @@
 
 - (void)clearAutoSizeTypeConfiguration;
 
-- (jint)computeSizeWithFloat:(jfloat)width;
+- (int32_t)computeSizeWithFloat:(float)width;
 
 - (ADLayout_Alignment *)getAlignmentOfLayout;
 
-- (jint)getAutoSizeMaxTextSize;
+- (int32_t)getAutoSizeMaxTextSize;
 
-- (jint)getAutoSizeMinTextSize;
+- (int32_t)getAutoSizeMinTextSize;
 
-- (jint)getAutoSizeStepGranularity;
+- (int32_t)getAutoSizeStepGranularity;
 
-- (jint)getAutoSizeTextType;
+- (int32_t)getAutoSizeTextType;
 
-- (jint)getBorderPadding;
+- (int32_t)getBorderPadding;
 
-- (jint)getBorderWidth;
+- (int32_t)getBorderWidth;
 
-- (jint)getCurrentHintTextColor;
+- (int32_t)getCurrentHintTextColor;
 
-- (jint)getCurrentTextColor;
+- (int32_t)getCurrentTextColor;
 
 - (IOSObjectArray *)getDigitStringsWithJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)symbols;
 
-- (jint)getGravity;
+- (int32_t)getGravity;
 
 - (ADColorStateList *)getHintTextColors;
 
-- (jint)getLineHeight;
+- (int32_t)getLineHeight;
 
-- (jint)getLineHeightPadding;
+- (int32_t)getLineHeightPadding;
 
 - (ADColorStateList *)getLinkTextColors;
 
-- (jint)getMaxEms;
+- (int32_t)getMaxEms;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxLines;
+- (int32_t)getMaxLines;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
-- (jint)getMinEms;
+- (int32_t)getMinEms;
 
-- (jint)getMinHeight;
+- (int32_t)getMinHeight;
 
-- (jint)getMinLines;
+- (int32_t)getMinLines;
 
-- (jint)getMinWidth;
+- (int32_t)getMinWidth;
 
 - (ADTextView_TextPaint *)getPaint;
 
@@ -121,99 +126,99 @@
 
 - (JavaUtilLocale *)getTextLocale;
 
-- (jint)getTotalPaddingLeft;
+- (int32_t)getTotalPaddingLeft;
 
-- (jint)getTotalPaddingRight;
+- (int32_t)getTotalPaddingRight;
 
-- (jboolean)hasPasswordTransformationMethod;
+- (bool)hasPasswordTransformationMethod;
 
-- (jboolean)isAutoSizeTextTypeUniformWithInt:(jint)autoTextType;
+- (bool)isAutoSizeTextTypeUniformWithInt:(int32_t)autoTextType;
 
-- (jboolean)isShown;
+- (bool)isShown;
 
-- (jboolean)isTypePhone;
+- (bool)isTypePhone;
 
-- (jint)measureHeightWithInt:(jint)heightMode
-                     withInt:(jint)heightSize
-                     withInt:(jint)height;
+- (int32_t)measureHeightWithInt:(int32_t)heightMode
+                        withInt:(int32_t)heightSize
+                        withInt:(int32_t)height;
 
-- (jint)measureWidthWithInt:(jint)widthMode
-                    withInt:(jint)widthSize
-                    withInt:(jint)width;
+- (int32_t)measureWidthWithInt:(int32_t)widthMode
+                       withInt:(int32_t)widthSize
+                       withInt:(int32_t)width;
 
 - (void)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
-                                withInt:(jint)delay;
+                                withInt:(int32_t)delay;
 
-- (jboolean)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
+- (bool)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
 
 - (void)removeTextChangedListenerWithADTextWatcher:(id<ADTextWatcher>)watcher;
 
 - (void)setAutoSizeTextTypeUniformWithPresetSizesWithIntArray:(IOSIntArray *)presetSizes
-                                                      withInt:(jint)unit;
+                                                      withInt:(int32_t)unit;
 
-- (void)setEmsWithInt:(jint)ems;
+- (void)setEmsWithInt:(int32_t)ems;
 
-- (void)setGravityWithInt:(jint)gravity;
+- (void)setGravityWithInt:(int32_t)gravity;
 
 - (void)setHintTextColorWithADColorStateList:(ADColorStateList *)colors;
 
-- (void)setHintTextColorWithInt:(jint)color;
+- (void)setHintTextColorWithInt:(int32_t)color;
 
-- (void)setLinesWithInt:(jint)lines;
+- (void)setLinesWithInt:(int32_t)lines;
 
 - (void)setLinkTextColorWithADColorStateList:(ADColorStateList *)colors;
 
-- (void)setLinkTextColorWithInt:(jint)color;
+- (void)setLinkTextColorWithInt:(int32_t)color;
 
-- (void)setMaxEmsWithInt:(jint)maxEms;
+- (void)setMaxEmsWithInt:(int32_t)maxEms;
 
-- (void)setMaxHeightWithInt:(jint)maxPixels;
+- (void)setMaxHeightWithInt:(int32_t)maxPixels;
 
-- (void)setMaxLinesWithInt:(jint)maxLines;
+- (void)setMaxLinesWithInt:(int32_t)maxLines;
 
-- (void)setMaxWidthWithInt:(jint)maxPixels;
+- (void)setMaxWidthWithInt:(int32_t)maxPixels;
 
-- (void)setMinEmsWithInt:(jint)minEms;
+- (void)setMinEmsWithInt:(int32_t)minEms;
 
-- (void)setMinHeightWithInt:(jint)minPixels;
+- (void)setMinHeightWithInt:(int32_t)minPixels;
 
-- (void)setMinLinesWithInt:(jint)minLines;
+- (void)setMinLinesWithInt:(int32_t)minLines;
 
-- (void)setMinWidthWithInt:(jint)minPixels;
+- (void)setMinWidthWithInt:(int32_t)minPixels;
 
 - (void)setTextWithNSString:(NSString *)text;
 
 - (void)setTextColorWithADColorStateList:(ADColorStateList *)colors;
 
-- (void)setTextColorWithInt:(jint)color;
+- (void)setTextColorWithInt:(int32_t)color;
 
-- (void)setUpAutoSizeTextTypeUniformWithInt:(jint)autoSizeMin
-                                    withInt:(jint)autoSizeMax
-                                    withInt:(jint)autoSizeGranular;
+- (void)setUpAutoSizeTextTypeUniformWithInt:(int32_t)autoSizeMin
+                                    withInt:(int32_t)autoSizeMax
+                                    withInt:(int32_t)autoSizeGranular;
 
-- (void)setWidthWithInt:(jint)pixels;
+- (void)setWidthWithInt:(int32_t)pixels;
 
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
-                                withADRectF:(ADRectF *)availableSpace;
+- (bool)suggestedSizeFitsInSpaceWithInt:(int32_t)mAutoSizeTextSizeInPx
+                            withADRectF:(ADRectF *)availableSpace;
 
 #pragma mark Protected
 
 - (void)drawableStateChanged;
 
-- (jfloat)getTextSize;
+- (float)getTextSize;
 
-- (void)makeNewLayoutWithInt:(jint)availableWidth
-                     withInt:(jint)i
-                     withInt:(jint)unknownBoring
-                     withInt:(jint)unknownBoring2
-                     withInt:(jint)j
-                 withBoolean:(jboolean)b;
+- (void)makeNewLayoutWithInt:(int32_t)availableWidth
+                     withInt:(int32_t)i
+                     withInt:(int32_t)unknownBoring
+                     withInt:(int32_t)unknownBoring2
+                     withInt:(int32_t)j
+                 withBoolean:(bool)b;
 
-- (void)setTextSizeInternalWithInt:(jint)unit
-                         withFloat:(jfloat)optimalTextSize
-                       withBoolean:(jboolean)b;
+- (void)setTextSizeInternalWithInt:(int32_t)unit
+                         withFloat:(float)optimalTextSize
+                       withBoolean:(bool)b;
 
-- (jboolean)supportsAutoSizeText;
+- (bool)supportsAutoSizeText;
 
 @end
 
@@ -221,23 +226,24 @@ J2OBJC_STATIC_INIT(ADTextView)
 
 J2OBJC_FIELD_SETTER(ADTextView, mDrawables_, id<ADTextView_Drawables>)
 
-inline jint ADTextView_get_AUTO_SIZE_TEXT_TYPE_NONE(void);
+inline int32_t ADTextView_get_AUTO_SIZE_TEXT_TYPE_NONE(void);
 #define ADTextView_AUTO_SIZE_TEXT_TYPE_NONE 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, AUTO_SIZE_TEXT_TYPE_NONE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, AUTO_SIZE_TEXT_TYPE_NONE, int32_t)
 
-inline jint ADTextView_get_AUTO_SIZE_TEXT_TYPE_UNIFORM(void);
+inline int32_t ADTextView_get_AUTO_SIZE_TEXT_TYPE_UNIFORM(void);
 #define ADTextView_AUTO_SIZE_TEXT_TYPE_UNIFORM 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, AUTO_SIZE_TEXT_TYPE_UNIFORM, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, AUTO_SIZE_TEXT_TYPE_UNIFORM, int32_t)
 
-inline jint ADTextView_get_UNKNOWN_BORING(void);
+inline int32_t ADTextView_get_UNKNOWN_BORING(void);
 #define ADTextView_UNKNOWN_BORING 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, UNKNOWN_BORING, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADTextView, UNKNOWN_BORING, int32_t)
 
 FOUNDATION_EXPORT void ADTextView_initWithASIWidget_(ADTextView *self, id<ASIWidget> widget);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextView)
 
 @compatibility_alias RAndroidWidgetTextView ADTextView;
+
 
 #endif
 
@@ -246,18 +252,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextView)
 
 @class ADKeyEvent;
 @class ADTextView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @protocol ADTextView_OnEditorActionListener < JavaObject >
 
-- (jboolean)onEditorActionWithADTextView:(ADTextView *)v
-                                 withInt:(jint)actionId
-                          withADKeyEvent:(ADKeyEvent *)event;
+- (bool)onEditorActionWithADTextView:(ADTextView *)v
+                             withInt:(int32_t)actionId
+                      withADKeyEvent:(ADKeyEvent *)event;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADTextView_OnEditorActionListener)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextView_OnEditorActionListener)
+
 
 #endif
 
@@ -269,12 +278,20 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextView_OnEditorActionListener)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ADTextView_BufferType_Enum) {
-  ADTextView_BufferType_Enum_NORMAL = 0,
-  ADTextView_BufferType_Enum_SPANNABLE = 1,
-  ADTextView_BufferType_Enum_EDITABLE = 2,
+typedef NS_ENUM(int32_t, ADTextView_BufferType_Enum) {
+  ADTextView_BufferType_Enum_NORMAL NS_SWIFT_NAME(normal) = 0,
+  ADTextView_BufferType_Enum_SPANNABLE NS_SWIFT_NAME(spannable) = 1,
+  ADTextView_BufferType_Enum_EDITABLE NS_SWIFT_NAME(editable) = 2,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ADTextView_BufferType_ORDINAL int32_t
+#else
+#define ADTextView_BufferType_ORDINAL ADTextView_BufferType_Enum
+#endif
+
 
 @interface ADTextView_BufferType : JavaLangEnum
 
@@ -287,6 +304,13 @@ typedef NS_ENUM(NSUInteger, ADTextView_BufferType_Enum) {
 #pragma mark Package-Private
 
 - (ADTextView_BufferType_Enum)toNSEnum;
+
+@property(readonly) ADTextView_BufferType_Enum enumValue;
++ (ADTextView_BufferType *)fromNSEnum:(ADTextView_BufferType_Enum)value;
+
+- (ADTextView_BufferType_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithBufferType:(ADTextView_BufferType_Enum)value;
 
 @end
 
@@ -308,9 +332,10 @@ FOUNDATION_EXPORT IOSObjectArray *ADTextView_BufferType_values(void);
 
 FOUNDATION_EXPORT ADTextView_BufferType *ADTextView_BufferType_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ADTextView_BufferType *ADTextView_BufferType_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ADTextView_BufferType *ADTextView_BufferType_fromOrdinal(ADTextView_BufferType_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextView_BufferType)
+
 
 #endif
 
@@ -318,14 +343,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextView_BufferType)
 #define ADTextView_TypedValue_
 
 @class ADDisplayMetrics;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 @interface ADTextView_TypedValue : NSObject
 
 #pragma mark Public
 
-+ (jfloat)applyDimensionWithInt:(jint)unit
-                        withInt:(jint)i
-           withADDisplayMetrics:(ADDisplayMetrics *)displayMetrics;
++ (float)applyDimensionWithInt:(int32_t)unit
+                       withInt:(int32_t)i
+          withADDisplayMetrics:(ADDisplayMetrics *)displayMetrics;
 
 #pragma mark Package-Private
 
@@ -335,12 +362,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTextView_BufferType)
 
 J2OBJC_EMPTY_STATIC_INIT(ADTextView_TypedValue)
 
-inline jint ADTextView_TypedValue_get_COMPLEX_UNIT_PX(void);
-inline jint ADTextView_TypedValue_set_COMPLEX_UNIT_PX(jint value);
-inline jint *ADTextView_TypedValue_getRef_COMPLEX_UNIT_PX(void);
+inline int32_t ADTextView_TypedValue_get_COMPLEX_UNIT_PX(void);
+inline int32_t ADTextView_TypedValue_set_COMPLEX_UNIT_PX(int32_t value);
+inline int32_t *ADTextView_TypedValue_getRef_COMPLEX_UNIT_PX(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ADTextView_TypedValue_COMPLEX_UNIT_PX;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADTextView_TypedValue, COMPLEX_UNIT_PX, jint)
+FOUNDATION_EXPORT int32_t ADTextView_TypedValue_COMPLEX_UNIT_PX;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADTextView_TypedValue, COMPLEX_UNIT_PX, int32_t)
 
 FOUNDATION_EXPORT void ADTextView_TypedValue_init(ADTextView_TypedValue *self);
 
@@ -348,9 +375,10 @@ FOUNDATION_EXPORT ADTextView_TypedValue *new_ADTextView_TypedValue_init(void) NS
 
 FOUNDATION_EXPORT ADTextView_TypedValue *create_ADTextView_TypedValue_init(void);
 
-FOUNDATION_EXPORT jfloat ADTextView_TypedValue_applyDimensionWithInt_withInt_withADDisplayMetrics_(jint unit, jint i, ADDisplayMetrics *displayMetrics);
+FOUNDATION_EXPORT float ADTextView_TypedValue_applyDimensionWithInt_withInt_withADDisplayMetrics_(int32_t unit, int32_t i, ADDisplayMetrics *displayMetrics);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextView_TypedValue)
+
 
 #endif
 
@@ -367,16 +395,18 @@ J2OBJC_EMPTY_STATIC_INIT(ADTextView_Editor)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextView_Editor)
 
+
 #endif
 
 #if !defined (ADTextView_TextPaint_) && (INCLUDE_ALL_TextView || defined(INCLUDE_ADTextView_TextPaint))
 #define ADTextView_TextPaint_
 
 @class ADTextView;
+@class JavaLangInteger;
 
 @interface ADTextView_TextPaint : NSObject {
  @public
-  jint linkColor_;
+  int32_t linkColor_;
 }
 
 #pragma mark Public
@@ -398,6 +428,7 @@ FOUNDATION_EXPORT ADTextView_TextPaint *new_ADTextView_TextPaint_initWithADTextV
 FOUNDATION_EXPORT ADTextView_TextPaint *create_ADTextView_TextPaint_initWithADTextView_(ADTextView *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextView_TextPaint)
+
 
 #endif
 
@@ -422,6 +453,7 @@ FOUNDATION_EXPORT id<JavaUtilList> ADTextView_Drawables_mShowing;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADTextView_Drawables, mShowing, id<JavaUtilList>)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextView_Drawables)
+
 
 #endif
 

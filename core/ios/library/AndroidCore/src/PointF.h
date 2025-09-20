@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\PointF.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PointF")
@@ -28,6 +29,10 @@
 
 @class ADParcelable_Creator;
 @class ADPoint;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADParcel;
 
 /*!
@@ -35,16 +40,16 @@
  */
 @interface ADPointF : NSObject < ADParcelable > {
  @public
-  jfloat x_;
-  jfloat y_;
+  float x_;
+  float y_;
 }
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithFloat:(jfloat)x
-                    withFloat:(jfloat)y;
+- (instancetype)initWithFloat:(float)x
+                    withFloat:(float)y;
 
 - (instancetype)initWithADPoint:(ADPoint *)p;
 
@@ -58,33 +63,33 @@
 /*!
  @brief Parcelable interface methods
  */
-- (jint)describeContents;
+- (int32_t)describeContents;
 
 /*!
  @brief Returns true if the point's coordinates equal (x,y)
  */
-- (jboolean)equalsWithFloat:(jfloat)x
-                  withFloat:(jfloat)y;
+- (bool)equalsWithFloat:(float)x
+              withFloat:(float)y;
 
-- (jboolean)isEqual:(id)o;
+- (bool)isEqual:(id)o;
 
 - (NSUInteger)hash;
 
 /*!
  @brief Return the euclidian distance from (0,0) to the point
  */
-- (jfloat)length;
+- (float)length;
 
 /*!
  @brief Returns the euclidian distance from (0,0) to (x,y)
  */
-+ (jfloat)lengthWithFloat:(jfloat)x
-                withFloat:(jfloat)y;
++ (float)lengthWithFloat:(float)x
+               withFloat:(float)y;
 
 - (void)negate;
 
-- (void)offsetWithFloat:(jfloat)dx
-              withFloat:(jfloat)dy;
+- (void)offsetWithFloat:(float)dx
+              withFloat:(float)dy;
 
 /*!
  @brief Set the point's coordinates from the data stored in the specified
@@ -96,8 +101,8 @@
 /*!
  @brief Set the point's x and y coordinates
  */
-- (void)setWithFloat:(jfloat)x
-           withFloat:(jfloat)y;
+- (void)setWithFloat:(float)x
+           withFloat:(float)y;
 
 /*!
  @brief Set the point's x and y coordinates to the coordinates of p
@@ -112,7 +117,7 @@
  @param outArg The parcel to write the point's coordinates into
  */
 - (void)writeToParcelWithADParcel:(id<ADParcel>)outArg
-                          withInt:(jint)flags;
+                          withInt:(int32_t)flags;
 
 @end
 
@@ -129,11 +134,11 @@ FOUNDATION_EXPORT ADPointF *new_ADPointF_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADPointF *create_ADPointF_init(void);
 
-FOUNDATION_EXPORT void ADPointF_initWithFloat_withFloat_(ADPointF *self, jfloat x, jfloat y);
+FOUNDATION_EXPORT void ADPointF_initWithFloat_withFloat_(ADPointF *self, float x, float y);
 
-FOUNDATION_EXPORT ADPointF *new_ADPointF_initWithFloat_withFloat_(jfloat x, jfloat y) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPointF *new_ADPointF_initWithFloat_withFloat_(float x, float y) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPointF *create_ADPointF_initWithFloat_withFloat_(jfloat x, jfloat y);
+FOUNDATION_EXPORT ADPointF *create_ADPointF_initWithFloat_withFloat_(float x, float y);
 
 FOUNDATION_EXPORT void ADPointF_initWithADPoint_(ADPointF *self, ADPoint *p);
 
@@ -147,11 +152,12 @@ FOUNDATION_EXPORT ADPointF *new_ADPointF_initWithADPointF_(ADPointF *p) NS_RETUR
 
 FOUNDATION_EXPORT ADPointF *create_ADPointF_initWithADPointF_(ADPointF *p);
 
-FOUNDATION_EXPORT jfloat ADPointF_lengthWithFloat_withFloat_(jfloat x, jfloat y);
+FOUNDATION_EXPORT float ADPointF_lengthWithFloat_withFloat_(float x, float y);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPointF)
 
 @compatibility_alias RAndroidGraphicsPointF ADPointF;
+
 
 #endif
 

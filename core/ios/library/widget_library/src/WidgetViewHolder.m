@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetViewHolder.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "ModelExpressionParser.h"
@@ -10,6 +15,12 @@
 #include "WidgetViewHolder.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASWidgetViewHolder
@@ -61,6 +72,8 @@ ASWidgetViewHolder *create_ASWidgetViewHolder_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetViewHolder)
+
+J2OBJC_NAME_MAPPING(ASWidgetViewHolder, "com.ashera.widget", "AS")
 
 @implementation ASWidgetViewHolder_AttributeViewHolder
 

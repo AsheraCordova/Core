@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\SystemProperties.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "SystemProperties.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADSystemProperties
@@ -16,8 +28,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jboolean)getBooleanWithNSString:(NSString *)string
-                       withBoolean:(jboolean)b {
++ (bool)getBooleanWithNSString:(NSString *)string
+                   withBoolean:(bool)b {
   return ADSystemProperties_getBooleanWithNSString_withBoolean_(string, b);
 }
 
@@ -51,9 +63,11 @@ ADSystemProperties *create_ADSystemProperties_init() {
   J2OBJC_CREATE_IMPL(ADSystemProperties, init)
 }
 
-jboolean ADSystemProperties_getBooleanWithNSString_withBoolean_(NSString *string, jboolean b) {
+bool ADSystemProperties_getBooleanWithNSString_withBoolean_(NSString *string, bool b) {
   ADSystemProperties_initialize();
   return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADSystemProperties)
+
+J2OBJC_NAME_MAPPING(ADSystemProperties, "r.android.os", "AD")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\MaxLengthCommandConveter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "IOSObjectArray.h"
@@ -12,9 +17,15 @@
 #include "java/lang/Integer.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASMaxLengthCommandConveter () {
  @public
-  jint maxLength_;
+  int32_t maxLength_;
 }
 
 @end
@@ -27,7 +38,7 @@
 }
 
 - (instancetype)initWithNSString:(NSString *)id_
-                         withInt:(jint)maxLength {
+                         withInt:(int32_t)maxLength {
   ASMaxLengthCommandConveter_initWithNSString_withInt_(self, id_, maxLength);
   return self;
 }
@@ -94,17 +105,19 @@ ASMaxLengthCommandConveter *create_ASMaxLengthCommandConveter_initWithNSString_(
   J2OBJC_CREATE_IMPL(ASMaxLengthCommandConveter, initWithNSString_, id_)
 }
 
-void ASMaxLengthCommandConveter_initWithNSString_withInt_(ASMaxLengthCommandConveter *self, NSString *id_, jint maxLength) {
+void ASMaxLengthCommandConveter_initWithNSString_withInt_(ASMaxLengthCommandConveter *self, NSString *id_, int32_t maxLength) {
   ASBaseAttributeCommand_initWithNSString_(self, id_);
   self->maxLength_ = maxLength;
 }
 
-ASMaxLengthCommandConveter *new_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, jint maxLength) {
+ASMaxLengthCommandConveter *new_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, int32_t maxLength) {
   J2OBJC_NEW_IMPL(ASMaxLengthCommandConveter, initWithNSString_withInt_, id_, maxLength)
 }
 
-ASMaxLengthCommandConveter *create_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, jint maxLength) {
+ASMaxLengthCommandConveter *create_ASMaxLengthCommandConveter_initWithNSString_withInt_(NSString *id_, int32_t maxLength) {
   J2OBJC_CREATE_IMPL(ASMaxLengthCommandConveter, initWithNSString_withInt_, id_, maxLength)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMaxLengthCommandConveter)
+
+J2OBJC_NAME_MAPPING(ASMaxLengthCommandConveter, "com.ashera.converter", "AS")

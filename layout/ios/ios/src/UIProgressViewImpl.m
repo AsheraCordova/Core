@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\UIProgressViewImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseWidget.h"
 #include "Color.h"
 #include "ColorStateList.h"
@@ -26,6 +31,8 @@
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/HashMap.h"
@@ -42,16 +49,20 @@
 
 #include "ASUIProgressView.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASUIProgressViewImpl () {
  @public
   ASSimpleWrapableView *simpleWrapableView_;
-  jint max_;
-  jint min_;
-  jint progress_;
+  int32_t max_;
+  int32_t min_;
+  int32_t progress_;
   id progressTint_;
   id progressTintBackground_;
 }
@@ -88,21 +99,21 @@
 
 - (void)setPaddingWithId:(id)objValue;
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b;
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
 
 - (void)createSimpleWrapableView;
 
-- (jboolean)hasScrollView;
+- (bool)hasScrollView;
 
-- (jboolean)isViewWrapped;
+- (bool)isViewWrapped;
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b;
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b;
 
 - (void)invalidateWrapViewHolder;
 
@@ -112,9 +123,9 @@
 
 - (void)setProgressWithId:(id)objValue;
 
-- (void)nativeSetProgressWithFloat:(jfloat)progress;
+- (void)nativeSetProgressWithFloat:(float)progress;
 
-- (id)nativeCreateViewWithInt:(jint)viewtype;
+- (id)nativeCreateViewWithInt:(int32_t)viewtype;
 
 - (void)setMinWithId:(id)objValue;
 
@@ -180,15 +191,15 @@ __attribute__((unused)) static void ASUIProgressViewImpl_setPaddingBottomWithId_
 
 __attribute__((unused)) static void ASUIProgressViewImpl_setPaddingWithId_(ASUIProgressViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASUIProgressViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASUIProgressViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static void ASUIProgressViewImpl_createSimpleWrapableView(ASUIProgressViewImpl *self);
 
-__attribute__((unused)) static jboolean ASUIProgressViewImpl_hasScrollView(ASUIProgressViewImpl *self);
+__attribute__((unused)) static bool ASUIProgressViewImpl_hasScrollView(ASUIProgressViewImpl *self);
 
-__attribute__((unused)) static jboolean ASUIProgressViewImpl_isViewWrapped(ASUIProgressViewImpl *self);
+__attribute__((unused)) static bool ASUIProgressViewImpl_isViewWrapped(ASUIProgressViewImpl *self);
 
-__attribute__((unused)) static void ASUIProgressViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, jint l, jint t, jint r, jint b);
+__attribute__((unused)) static void ASUIProgressViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
 __attribute__((unused)) static void ASUIProgressViewImpl_invalidateWrapViewHolder(ASUIProgressViewImpl *self);
 
@@ -198,9 +209,9 @@ __attribute__((unused)) static void ASUIProgressViewImpl_incrementProgressByWith
 
 __attribute__((unused)) static void ASUIProgressViewImpl_setProgressWithId_(ASUIProgressViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASUIProgressViewImpl_nativeSetProgressWithFloat_(ASUIProgressViewImpl *self, jfloat progress);
+__attribute__((unused)) static void ASUIProgressViewImpl_nativeSetProgressWithFloat_(ASUIProgressViewImpl *self, float progress);
 
-__attribute__((unused)) static id ASUIProgressViewImpl_nativeCreateViewWithInt_(ASUIProgressViewImpl *self, jint viewtype);
+__attribute__((unused)) static id ASUIProgressViewImpl_nativeCreateViewWithInt_(ASUIProgressViewImpl *self, int32_t viewtype);
 
 __attribute__((unused)) static void ASUIProgressViewImpl_setMinWithId_(ASUIProgressViewImpl *self, id objValue);
 
@@ -218,12 +229,12 @@ __attribute__((unused)) static id ASUIProgressViewImpl_getProgressBackgroundTint
 
 @interface ASUIProgressViewImpl_UIProgressViewExt () {
  @public
-  __unsafe_unretained ASUIProgressViewImpl *this$0_;
+  WEAK_ ASUIProgressViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -536,20 +547,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASUIProgressViewImpl_setPaddingWithId_(self, objValue);
 }
 
-- (void)nativeMakeFrameForChildWidgetWithInt:(jint)l
-                                     withInt:(jint)t
-                                     withInt:(jint)r
-                                     withInt:(jint)b {
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b {
   ASUIProgressViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
-- (jint)measureWidth {
-  jint width = [((ADProgressBar *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
+- (int32_t)measureWidth {
+  int32_t width = [((ADProgressBar *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
   return width;
 }
 
-- (jint)measureHeightWithInt:(jint)width {
-  jint height = [((ADProgressBar *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
+- (int32_t)measureHeightWithInt:(int32_t)width {
+  int32_t height = [((ADProgressBar *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
   return height;
 }
 
@@ -589,7 +600,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ((ASUIProgressView*) uiView_).trackImage;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -600,7 +611,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -626,11 +637,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASUIProgressViewImpl_createSimpleWrapableView(self);
 }
 
-- (jboolean)hasScrollView {
+- (bool)hasScrollView {
   return ASUIProgressViewImpl_hasScrollView(self);
 }
 
-- (jboolean)isViewWrapped {
+- (bool)isViewWrapped {
   return ASUIProgressViewImpl_isViewWrapped(self);
 }
 
@@ -648,10 +659,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((ASSimpleWrapableView *) nil_chk(simpleWrapableView_)) getForeground];
 }
 
-- (void)setForegroundFrameWithInt:(jint)l
-                          withInt:(jint)t
-                          withInt:(jint)r
-                          withInt:(jint)b {
+- (void)setForegroundFrameWithInt:(int32_t)l
+                          withInt:(int32_t)t
+                          withInt:(int32_t)r
+                          withInt:(int32_t)b {
   ASUIProgressViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(self, l, t, r, b);
 }
 
@@ -664,13 +675,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)createWrapperViewWithId:(id)wrapperParent
-                      withInt:(jint)viewtype {
+                      withInt:(int32_t)viewtype {
   uiView_ = ASUIProgressViewImpl_nativeCreateViewWithInt_(self, viewtype);
   ASViewGroupImpl_nativeAddViewWithId_withId_(ASViewImpl_getFirstChildOrSelfWithId_(wrapperParent), uiView_);
   return uiView_;
 }
 
-- (id)createWrapperViewHolderWithInt:(jint)viewType {
+- (id)createWrapperViewHolderWithInt:(int32_t)viewType {
   return [self createWrapperViewHolderNativeWithInt:viewType];
 }
 
@@ -682,7 +693,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView;
 }
 
-- (id)createWrapperViewHolderNativeWithInt:(jint)viewType {
+- (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType {
   if (viewType == 1) {
     ASUIView* uiView = [ASUIView new];
     uiView.widget = self;
@@ -726,11 +737,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASUIProgressViewImpl_setProgressWithId_(self, objValue);
 }
 
-- (void)nativeSetProgressWithFloat:(jfloat)progress {
+- (void)nativeSetProgressWithFloat:(float)progress {
   ASUIProgressViewImpl_nativeSetProgressWithFloat_(self, progress);
 }
 
-- (id)nativeCreateViewWithInt:(jint)viewtype {
+- (id)nativeCreateViewWithInt:(int32_t)viewtype {
   return ASUIProgressViewImpl_nativeCreateViewWithInt_(self, viewtype);
 }
 
@@ -1034,7 +1045,7 @@ void ASUIProgressViewImpl_setPaddingWithId_(ASUIProgressViewImpl *self, id objVa
   ASUIProgressViewImpl_setPaddingLeftWithId_(self, objValue);
 }
 
-void ASUIProgressViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, jint l, jint t, jint r, jint b) {
+void ASUIProgressViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   if (ASUIProgressViewImpl_isViewWrapped(self)) {
     id progressView = [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getWrappedView];
     ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(progressView, [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingStart], [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingTop], r - l - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingStart] - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingEnd], b - t - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingTop] - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingBottom]);
@@ -1042,11 +1053,11 @@ void ASUIProgressViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_w
 }
 
 void ASUIProgressViewImpl_createSimpleWrapableView(ASUIProgressViewImpl *self) {
-  jboolean wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
-  jint viewType = -1;
+  bool wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
+  int32_t viewType = -1;
   if (wrapViewFeature) {
-    jboolean hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
-    jboolean vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
+    bool hscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"hscroll"];
+    bool vscroll = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"vscroll"];
     viewType = 1;
     if (hscroll) viewType = 2;
     if (vscroll) viewType = 3;
@@ -1054,15 +1065,15 @@ void ASUIProgressViewImpl_createSimpleWrapableView(ASUIProgressViewImpl *self) {
   self->simpleWrapableView_ = new_ASSimpleWrapableView_initWithASIWidget_withInt_(self, viewType);
 }
 
-jboolean ASUIProgressViewImpl_hasScrollView(ASUIProgressViewImpl *self) {
+bool ASUIProgressViewImpl_hasScrollView(ASUIProgressViewImpl *self) {
   return ASUIProgressViewImpl_isViewWrapped(self) && ([((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 2 || [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getViewtype] == 3);
 }
 
-jboolean ASUIProgressViewImpl_isViewWrapped(ASUIProgressViewImpl *self) {
+bool ASUIProgressViewImpl_isViewWrapped(ASUIProgressViewImpl *self) {
   return [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) isViewWrapped];
 }
 
-void ASUIProgressViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, jint l, jint t, jint r, jint b) {
+void ASUIProgressViewImpl_setForegroundFrameWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
   id foreground = [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getForeground];
   if (foreground != nil) {
     ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(foreground, 0, 0, r - l, b - t);
@@ -1092,11 +1103,11 @@ void ASUIProgressViewImpl_setProgressWithId_(ASUIProgressViewImpl *self, id objV
   ASUIProgressViewImpl_nativeSetProgressWithFloat_(self, (self->progress_) / (self->max_ * 1.0f));
 }
 
-void ASUIProgressViewImpl_nativeSetProgressWithFloat_(ASUIProgressViewImpl *self, jfloat progress) {
+void ASUIProgressViewImpl_nativeSetProgressWithFloat_(ASUIProgressViewImpl *self, float progress) {
   [(ASUIProgressView*)self.uiView setProgress: progress animated: YES];
 }
 
-id ASUIProgressViewImpl_nativeCreateViewWithInt_(ASUIProgressViewImpl *self, jint viewtype) {
+id ASUIProgressViewImpl_nativeCreateViewWithInt_(ASUIProgressViewImpl *self, int32_t viewtype) {
   return [[ASUIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
 }
 
@@ -1148,25 +1159,27 @@ id ASUIProgressViewImpl_getProgressBackgroundTint(ASUIProgressViewImpl *self) {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
 
+J2OBJC_NAME_MAPPING(ASUIProgressViewImpl, "com.ashera.layout", "AS")
+
 @implementation ASUIProgressViewImpl_UIProgressViewExt
 
 - (id<ASIWidget>)getWidget {
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -1175,8 +1188,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -1192,11 +1205,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1224,8 +1237,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1293,12 +1306,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1328,17 +1341,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
+- (int32_t)nativeMeasureWidthWithId:(id)uiView {
   return ASViewImpl_nativeMeasureWidthWithId_(uiView);
 }
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
+- (int32_t)nativeMeasureHeightWithId:(id)uiView
+                             withInt:(int32_t)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 

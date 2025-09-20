@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\AnimatorListenerAdapter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Animator.h"
 #include "AnimatorListenerAdapter.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAnimatorListenerAdapter
@@ -36,12 +48,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onAnimationStartWithADAnimator:(ADAnimator *)arg0
-                           withBoolean:(jboolean)arg1 {
+                           withBoolean:(bool)arg1 {
   ADAnimator_AnimatorListener_onAnimationStartWithADAnimator_withBoolean_(self, arg0, arg1);
 }
 
 - (void)onAnimationEndWithADAnimator:(ADAnimator *)arg0
-                         withBoolean:(jboolean)arg1 {
+                         withBoolean:(bool)arg1 {
   ADAnimator_AnimatorListener_onAnimationEndWithADAnimator_withBoolean_(self, arg0, arg1);
 }
 
@@ -78,3 +90,5 @@ void ADAnimatorListenerAdapter_init(ADAnimatorListenerAdapter *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimatorListenerAdapter)
+
+J2OBJC_NAME_MAPPING(ADAnimatorListenerAdapter, "r.android.animation", "AD")

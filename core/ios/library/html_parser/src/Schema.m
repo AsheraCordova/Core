@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\Schema.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ElementType.h"
 #include "J2ObjC_source.h"
 #include "Schema.h"
@@ -10,7 +15,12 @@
 #include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 
-@class JavaUtilHashMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface TSSchema () {
@@ -19,7 +29,7 @@
   JavaUtilHashMap *theElementTypes_;
   NSString *theURI_;
   NSString *thePrefix_;
-  __unsafe_unretained TSElementType *theRoot_;
+  WEAK_ TSElementType *theRoot_;
 }
 
 @end
@@ -39,9 +49,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)elementTypeWithNSString:(NSString *)name
-                        withInt:(jint)model
-                        withInt:(jint)memberOf
-                        withInt:(jint)flags {
+                        withInt:(int32_t)model
+                        withInt:(int32_t)memberOf
+                        withInt:(int32_t)flags {
   TSElementType *e = create_TSElementType_initWithNSString_withInt_withInt_withInt_withTSSchema_(name, model, memberOf, flags, self);
   [((JavaUtilHashMap *) nil_chk(theElementTypes_)) putWithId:name withId:e];
   if (memberOf == TSSchema_M_ROOT) theRoot_ = e;
@@ -76,7 +86,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)entityWithNSString:(NSString *)name
-                   withInt:(jint)value {
+                   withInt:(int32_t)value {
   [((JavaUtilHashMap *) nil_chk(theEntities_)) putWithId:name withId:create_JavaLangInteger_initWithInt_(value)];
 }
 
@@ -84,7 +94,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return (TSElementType *) cast_chk(([((JavaUtilHashMap *) nil_chk(theElementTypes_)) getWithId:name]), [TSElementType class]);
 }
 
-- (jint)getEntityWithNSString:(NSString *)name {
+- (int32_t)getEntityWithNSString:(NSString *)name {
   JavaLangInteger *ch = (JavaLangInteger *) cast_chk([((JavaUtilHashMap *) nil_chk(theEntities_)) getWithId:name], [JavaLangInteger class]);
   if (ch == nil) return 0;
   return [ch intValue];
@@ -181,3 +191,5 @@ void TSSchema_init(TSSchema *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(TSSchema)
+
+J2OBJC_NAME_MAPPING(TSSchema, "repackaged.org.ccil.cowan.tagsoup", "TS")

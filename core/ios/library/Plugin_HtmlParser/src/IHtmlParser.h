@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\IHtmlParser.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IHtmlParser")
@@ -16,6 +17,9 @@
 #if !defined (ASIHtmlParser_) && (INCLUDE_ALL_IHtmlParser || defined(INCLUDE_ASIHtmlParser))
 #define ASIHtmlParser_
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASHasWidgets;
 @protocol ASIFragment;
 @protocol ASIWidget;
@@ -23,35 +27,35 @@
 @protocol ASIHtmlParser < JavaObject >
 
 - (id<ASIWidget>)parseWithNSString:(NSString *)html
-                       withBoolean:(jboolean)template_
+                       withBoolean:(bool)template_
                    withASIFragment:(id<ASIFragment>)fragment;
 
 - (id<ASIWidget>)parseWithParentWithNSString:(NSString *)html
-                                 withBoolean:(jboolean)template_
+                                 withBoolean:(bool)template_
                             withASHasWidgets:(id<ASHasWidgets>)parent
                              withASIFragment:(id<ASIFragment>)fragment;
 
 - (id<ASIWidget>)parseFileWithNSString:(NSString *)fileName
-                           withBoolean:(jboolean)template_
+                           withBoolean:(bool)template_
                        withASIFragment:(id<ASIFragment>)fragment;
 
 - (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileName
-                               withBoolean:(jboolean)template_
+                               withBoolean:(bool)template_
                            withASIFragment:(id<ASIFragment>)fragment;
 
 - (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
                         withNSString:(NSString *)componentId
-                         withBoolean:(jboolean)template_
+                         withBoolean:(bool)template_
                      withASIFragment:(id<ASIFragment>)fragment;
 
 - (id)getHandlerWithASHasWidgets:(id<ASHasWidgets>)parent
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                  withASIFragment:(id<ASIFragment>)fragment;
 
 - (id<ASIWidget>)handlerStartWithId:(id)handler
                       withASIWidget:(id<ASIWidget>)widget
-                            withInt:(jint)index;
+                            withInt:(int32_t)index;
 
 - (void)handlerEndWithId:(id)handler
            withASIWidget:(id<ASIWidget>)widget;
@@ -69,6 +73,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIHtmlParser)
 J2OBJC_TYPE_LITERAL_HEADER(ASIHtmlParser)
 
 #define ComAsheraParserHtmlIHtmlParser ASIHtmlParser
+
 
 #endif
 

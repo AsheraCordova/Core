@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\collection\SimpleArrayMap.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_SimpleArrayMap")
@@ -24,6 +25,9 @@
 
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief Base implementation of <code>ArrayMap</code> that doesn't include any standard Java
@@ -38,7 +42,7 @@
  @public
   IOSIntArray *mHashes_;
   IOSObjectArray *mArray_;
-  jint mSize_;
+  int32_t mSize_;
 }
 
 #pragma mark Public
@@ -52,7 +56,7 @@
 /*!
  @brief Create a new ArrayMap with a given initial capacity.
  */
-- (instancetype)initWithInt:(jint)capacity;
+- (instancetype)initWithInt:(int32_t)capacity;
 
 /*!
  @brief Create a new ArrayMap with the mappings from the given ArrayMap.
@@ -69,7 +73,7 @@
  @param key The key to search for.
  @return Returns true if the key exists, else false.
  */
-- (jboolean)containsKeyWithId:(id)key;
+- (bool)containsKeyWithId:(id)key;
 
 /*!
  @brief Check whether a value exists in the array.This requires a linear search
@@ -77,22 +81,23 @@
  @param value The value to search for.
  @return Returns true if the value exists, else false.
  */
-- (jboolean)containsValueWithId:(id)value;
+- (bool)containsValueWithId:(id)value;
 
 /*!
  @brief Ensure the array map can hold at least <var>minimumCapacity</var>
   items.
  */
-- (void)ensureCapacityWithInt:(jint)minimumCapacity;
+- (void)ensureCapacityWithInt:(int32_t)minimumCapacity;
 
 /*!
- @brief <p>This implementation returns false if the object is not a Map or
+ @brief  
+ <p>This implementation returns false if the object is not a Map or
   SimpleArrayMap, or if the maps have different sizes.
  Otherwise, for each
   key in this map, values of both maps are compared. If the values for any
   key are not equal, the method returns false, otherwise it returns true.
  */
-- (jboolean)isEqual:(id)object;
+- (bool)isEqual:(id)object;
 
 /*!
  @brief Retrieve a value from the array.
@@ -121,19 +126,19 @@
  @param key The key to search for.
  @return Returns the index of the key if it exists, else a negative integer.
  */
-- (jint)indexOfKeyWithId:(id)key;
+- (int32_t)indexOfKeyWithId:(id)key;
 
 /*!
  @brief Return true if the array map contains no items.
  */
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 /*!
  @brief Return the key at the given index in the array.
  @param index The desired index, must be between 0 and <code>size()</code> -1.
  @return Returns the key stored at the given index.
  */
-- (id)keyAtWithInt:(jint)index;
+- (id)keyAtWithInt:(int32_t)index;
 
 /*!
  @brief Add a new value to the array map.
@@ -177,15 +182,15 @@
  @param value The value expected to be mapped to the key.
  @return Returns true if the mapping was removed.
  */
-- (jboolean)removeWithId:(id)key
-                  withId:(id)value;
+- (bool)removeWithId:(id)key
+              withId:(id)value;
 
 /*!
  @brief Remove the key/value mapping at the given index.
  @param index The desired index, must be between 0 and <code>size()</code> -1.
  @return Returns the value that was stored at this index.
  */
-- (id)removeAtWithInt:(jint)index;
+- (id)removeAtWithInt:(int32_t)index;
 
 /*!
  @brief Replace the mapping for <code>key</code> only if it is already mapped to a value.
@@ -203,9 +208,9 @@
  @param newValue The value to store for the given key.
  @return Returns true if the value was replaced.
  */
-- (jboolean)replaceWithId:(id)key
-                   withId:(id)oldValue
-                   withId:(id)newValue;
+- (bool)replaceWithId:(id)key
+               withId:(id)oldValue
+               withId:(id)newValue;
 
 /*!
  @brief Set the value at a given index in the array.
@@ -213,16 +218,17 @@
  @param value The new value to store at this index.
  @return Returns the previous value at the given index.
  */
-- (id)setValueAtWithInt:(jint)index
+- (id)setValueAtWithInt:(int32_t)index
                  withId:(id)value;
 
 /*!
  @brief Return the number of items in this array map.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
- @brief <p>This implementation composes a string by iterating over its mappings.
+ @brief  
+ <p>This implementation composes a string by iterating over its mappings.
  If
   this map contains itself as a key or a value, the string "(this Map)"
   will appear in its place.
@@ -234,16 +240,16 @@
  @param index The desired index, must be between 0 and <code>size()</code> -1.
  @return Returns the value stored at the given index.
  */
-- (id)valueAtWithInt:(jint)index;
+- (id)valueAtWithInt:(int32_t)index;
 
 #pragma mark Package-Private
 
-- (jint)indexOfWithId:(id)key
-              withInt:(jint)hash_;
+- (int32_t)indexOfWithId:(id)key
+                 withInt:(int32_t)hash_;
 
-- (jint)indexOfNull;
+- (int32_t)indexOfNull;
 
-- (jint)indexOfValueWithId:(id)value;
+- (int32_t)indexOfValueWithId:(id)value;
 
 @end
 
@@ -264,12 +270,12 @@ inline IOSObjectArray *ADXSimpleArrayMap_set_mBaseCache(IOSObjectArray *value);
 FOUNDATION_EXPORT IOSObjectArray *ADXSimpleArrayMap_mBaseCache;
 J2OBJC_STATIC_FIELD_OBJ(ADXSimpleArrayMap, mBaseCache, IOSObjectArray *)
 
-inline jint ADXSimpleArrayMap_get_mBaseCacheSize(void);
-inline jint ADXSimpleArrayMap_set_mBaseCacheSize(jint value);
-inline jint *ADXSimpleArrayMap_getRef_mBaseCacheSize(void);
+inline int32_t ADXSimpleArrayMap_get_mBaseCacheSize(void);
+inline int32_t ADXSimpleArrayMap_set_mBaseCacheSize(int32_t value);
+inline int32_t *ADXSimpleArrayMap_getRef_mBaseCacheSize(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ADXSimpleArrayMap_mBaseCacheSize;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADXSimpleArrayMap, mBaseCacheSize, jint)
+FOUNDATION_EXPORT int32_t ADXSimpleArrayMap_mBaseCacheSize;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADXSimpleArrayMap, mBaseCacheSize, int32_t)
 
 inline IOSObjectArray *ADXSimpleArrayMap_get_mTwiceBaseCache(void);
 inline IOSObjectArray *ADXSimpleArrayMap_set_mTwiceBaseCache(IOSObjectArray *value);
@@ -277,12 +283,12 @@ inline IOSObjectArray *ADXSimpleArrayMap_set_mTwiceBaseCache(IOSObjectArray *val
 FOUNDATION_EXPORT IOSObjectArray *ADXSimpleArrayMap_mTwiceBaseCache;
 J2OBJC_STATIC_FIELD_OBJ(ADXSimpleArrayMap, mTwiceBaseCache, IOSObjectArray *)
 
-inline jint ADXSimpleArrayMap_get_mTwiceBaseCacheSize(void);
-inline jint ADXSimpleArrayMap_set_mTwiceBaseCacheSize(jint value);
-inline jint *ADXSimpleArrayMap_getRef_mTwiceBaseCacheSize(void);
+inline int32_t ADXSimpleArrayMap_get_mTwiceBaseCacheSize(void);
+inline int32_t ADXSimpleArrayMap_set_mTwiceBaseCacheSize(int32_t value);
+inline int32_t *ADXSimpleArrayMap_getRef_mTwiceBaseCacheSize(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
-FOUNDATION_EXPORT jint ADXSimpleArrayMap_mTwiceBaseCacheSize;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ADXSimpleArrayMap, mTwiceBaseCacheSize, jint)
+FOUNDATION_EXPORT int32_t ADXSimpleArrayMap_mTwiceBaseCacheSize;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADXSimpleArrayMap, mTwiceBaseCacheSize, int32_t)
 
 FOUNDATION_EXPORT void ADXSimpleArrayMap_init(ADXSimpleArrayMap *self);
 
@@ -290,11 +296,11 @@ FOUNDATION_EXPORT ADXSimpleArrayMap *new_ADXSimpleArrayMap_init(void) NS_RETURNS
 
 FOUNDATION_EXPORT ADXSimpleArrayMap *create_ADXSimpleArrayMap_init(void);
 
-FOUNDATION_EXPORT void ADXSimpleArrayMap_initWithInt_(ADXSimpleArrayMap *self, jint capacity);
+FOUNDATION_EXPORT void ADXSimpleArrayMap_initWithInt_(ADXSimpleArrayMap *self, int32_t capacity);
 
-FOUNDATION_EXPORT ADXSimpleArrayMap *new_ADXSimpleArrayMap_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADXSimpleArrayMap *new_ADXSimpleArrayMap_initWithInt_(int32_t capacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADXSimpleArrayMap *create_ADXSimpleArrayMap_initWithInt_(jint capacity);
+FOUNDATION_EXPORT ADXSimpleArrayMap *create_ADXSimpleArrayMap_initWithInt_(int32_t capacity);
 
 FOUNDATION_EXPORT void ADXSimpleArrayMap_initWithADXSimpleArrayMap_(ADXSimpleArrayMap *self, ADXSimpleArrayMap *map);
 
@@ -305,6 +311,7 @@ FOUNDATION_EXPORT ADXSimpleArrayMap *create_ADXSimpleArrayMap_initWithADXSimpleA
 J2OBJC_TYPE_LITERAL_HEADER(ADXSimpleArrayMap)
 
 @compatibility_alias AndroidxCollectionSimpleArrayMap ADXSimpleArrayMap;
+
 
 #endif
 

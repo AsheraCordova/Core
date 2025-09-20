@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\telephony\TelephonyManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "TelephonyManager.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 NSString *ADTelephonyManager_ACTION_PHONE_STATE_CHANGED;
@@ -58,3 +69,5 @@ ADTelephonyManager *create_ADTelephonyManager_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTelephonyManager)
+
+J2OBJC_NAME_MAPPING(ADTelephonyManager, "r.android.telephony", "AD")

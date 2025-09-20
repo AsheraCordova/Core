@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSJSONAdapter\src\main\java\com\ashera\jsonadapter\JSONAdapterImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_JSONAdapterImpl")
@@ -30,6 +31,7 @@
 @class JavaLangDouble;
 @class JavaLangFloat;
 @class JavaLangInteger;
+@class NSString;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
@@ -39,8 +41,8 @@
 
 - (instancetype)init;
 
-- (id)addObjectWithId:(id)list
-               withId:(id)object;
+- (void)addObjectWithId:(id)list
+                 withId:(id)object;
 
 - (IOSObjectArray *)getArrayWithId:(id)payLoad;
 
@@ -71,9 +73,9 @@
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args;
 
-- (jboolean)isBooleanWithId:(id)obj;
+- (bool)isBooleanWithId:(id)obj;
 
-- (jboolean)isNullWithId:(id)object;
+- (bool)isNullWithId:(id)object;
 
 - (NSString *)marshalWithId:(id)payload;
 
@@ -103,6 +105,7 @@ FOUNDATION_EXPORT void ASJSONAdapterImpl_initPlugin(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASJSONAdapterImpl)
 
 @compatibility_alias ComAsheraJsonadapterJSONAdapterImpl ASJSONAdapterImpl;
+
 
 #endif
 

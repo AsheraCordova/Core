@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Pools.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Pools")
@@ -53,10 +54,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPools)
 
 @compatibility_alias RAndroidUtilPools ADPools;
 
+
 #endif
 
 #if !defined (ADPools_Pool_) && (INCLUDE_ALL_Pools || defined(INCLUDE_ADPools_Pool))
 #define ADPools_Pool_
+
+@class JavaLangBoolean;
 
 /*!
  @brief Interface for managing a pool of objects.
@@ -74,7 +78,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPools)
  @return Whether the instance was put in the pool.
  @throw IllegalStateExceptionIf the instance is already in the pool.
  */
-- (jboolean)release__WithId:(id)instance;
+- (bool)release__WithId:(id)instance;
 
 @end
 
@@ -82,10 +86,14 @@ J2OBJC_EMPTY_STATIC_INIT(ADPools_Pool)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPools_Pool)
 
+
 #endif
 
 #if !defined (ADPools_SimplePool_) && (INCLUDE_ALL_Pools || defined(INCLUDE_ADPools_SimplePool))
 #define ADPools_SimplePool_
+
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief Simple (non-synchronized) pool of objects.
@@ -99,11 +107,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPools_Pool)
  @param maxPoolSize The max pool size.
  @throw IllegalArgumentExceptionIf the max pool size is less than zero.
  */
-- (instancetype)initWithInt:(jint)maxPoolSize;
+- (instancetype)initWithInt:(int32_t)maxPoolSize;
 
 - (id)acquire;
 
-- (jboolean)release__WithId:(id)instance;
+- (bool)release__WithId:(id)instance;
 
 // Disallowed inherited constructors, do not use.
 
@@ -113,18 +121,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPools_Pool)
 
 J2OBJC_EMPTY_STATIC_INIT(ADPools_SimplePool)
 
-FOUNDATION_EXPORT void ADPools_SimplePool_initWithInt_(ADPools_SimplePool *self, jint maxPoolSize);
+FOUNDATION_EXPORT void ADPools_SimplePool_initWithInt_(ADPools_SimplePool *self, int32_t maxPoolSize);
 
-FOUNDATION_EXPORT ADPools_SimplePool *new_ADPools_SimplePool_initWithInt_(jint maxPoolSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPools_SimplePool *new_ADPools_SimplePool_initWithInt_(int32_t maxPoolSize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPools_SimplePool *create_ADPools_SimplePool_initWithInt_(jint maxPoolSize);
+FOUNDATION_EXPORT ADPools_SimplePool *create_ADPools_SimplePool_initWithInt_(int32_t maxPoolSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPools_SimplePool)
+
 
 #endif
 
 #if !defined (ADPools_SynchronizedPool_) && (INCLUDE_ALL_Pools || defined(INCLUDE_ADPools_SynchronizedPool))
 #define ADPools_SynchronizedPool_
+
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief Synchronized) pool of objects.
@@ -138,23 +150,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPools_SimplePool)
  @param maxPoolSize The max pool size.
  @throw IllegalArgumentExceptionIf the max pool size is less than zero.
  */
-- (instancetype)initWithInt:(jint)maxPoolSize;
+- (instancetype)initWithInt:(int32_t)maxPoolSize;
 
 - (id)acquire;
 
-- (jboolean)release__WithId:(id)element;
+- (bool)release__WithId:(id)element;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADPools_SynchronizedPool)
 
-FOUNDATION_EXPORT void ADPools_SynchronizedPool_initWithInt_(ADPools_SynchronizedPool *self, jint maxPoolSize);
+FOUNDATION_EXPORT void ADPools_SynchronizedPool_initWithInt_(ADPools_SynchronizedPool *self, int32_t maxPoolSize);
 
-FOUNDATION_EXPORT ADPools_SynchronizedPool *new_ADPools_SynchronizedPool_initWithInt_(jint maxPoolSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPools_SynchronizedPool *new_ADPools_SynchronizedPool_initWithInt_(int32_t maxPoolSize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPools_SynchronizedPool *create_ADPools_SynchronizedPool_initWithInt_(jint maxPoolSize);
+FOUNDATION_EXPORT ADPools_SynchronizedPool *create_ADPools_SynchronizedPool_initWithInt_(int32_t maxPoolSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPools_SynchronizedPool)
+
 
 #endif
 

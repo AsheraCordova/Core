@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\HorizontalScrollViewImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HorizontalScrollViewImpl")
@@ -22,6 +23,10 @@
 
 @class ASWidgetAttribute;
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangDouble;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -40,13 +45,13 @@
                     withNSString:(NSString *)localname;
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index;
+                 withInt:(int32_t)index;
 
 - (id)asNativeWidget;
 
 - (id)asWidget;
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v;
+- (bool)checkIosVersionWithNSString:(NSString *)v;
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
@@ -67,23 +72,23 @@
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
 
-- (jdouble)nativeGetScrollXWithId:(id)view;
+- (double)nativeGetScrollXWithId:(id)view;
 
-- (jdouble)nativeGetScrollYWithId:(id)view;
+- (double)nativeGetScrollYWithId:(id)view;
 
 - (id)nativeHscrollViewCreate;
 
 - (void)nativeSetScrollXWithId:(id)view
-                       withInt:(jint)value;
+                       withInt:(int32_t)value;
 
 - (void)nativeSetScrollYWithId:(id)view
-                       withInt:(jint)value;
+                       withInt:(int32_t)value;
 
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)removeWithInt:(jint)index;
+- (bool)removeWithInt:(int32_t)index;
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w;
+- (bool)removeWithASIWidget:(id<ASIWidget>)w;
 
 - (void)requestLayout;
 
@@ -99,7 +104,7 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)setVisibleWithBoolean:(jboolean)b;
+- (void)setVisibleWithBoolean:(bool)b;
 
 @end
 
@@ -137,6 +142,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 
 @compatibility_alias ComAsheraLayoutHorizontalScrollViewImpl ASHorizontalScrollViewImpl;
 
+
 #endif
 
 #if !defined (ASHorizontalScrollViewImpl_HorizontalScrollViewExt_) && (INCLUDE_ALL_HorizontalScrollViewImpl || defined(INCLUDE_ASHorizontalScrollViewImpl_HorizontalScrollViewExt))
@@ -160,6 +166,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 @class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
@@ -180,9 +189,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
-- (jint)getMaxHeight;
+- (int32_t)getMaxHeight;
 
-- (jint)getMaxWidth;
+- (int32_t)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
@@ -196,12 +205,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
-- (void)offsetLeftAndRightWithInt:(jint)offset;
+- (void)offsetLeftAndRightWithInt:(int32_t)offset;
 
-- (void)offsetTopAndBottomWithInt:(jint)offset;
+- (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 - (void)remeasure;
 
@@ -211,9 +220,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setMaxHeightWithInt:(jint)height;
+- (void)setMaxHeightWithInt:(int32_t)height;
 
-- (void)setMaxWidthWithInt:(jint)width;
+- (void)setMaxWidthWithInt:(int32_t)width;
 
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
@@ -228,7 +237,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 
 - (void)setState4WithId:(id)value;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setVisibilityWithInt:(int32_t)visibility;
 
 - (void)state0;
 
@@ -244,16 +253,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 
 - (void)stateYes;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height;
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -271,17 +280,19 @@ FOUNDATION_EXPORT ASHorizontalScrollViewImpl_HorizontalScrollViewExt *create_ASH
 
 J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_HorizontalScrollViewExt)
 
+
 #endif
 
 #if !defined (ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_) && (INCLUDE_ALL_HorizontalScrollViewImpl || defined(INCLUDE_ASHorizontalScrollViewImpl_MyUIScrollViewDelegate))
 #define ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_
 
 @class ASHorizontalScrollViewImpl;
+@class JavaLangInteger;
 
 @interface ASHorizontalScrollViewImpl_MyUIScrollViewDelegate : NSObject {
  @public
-  jint oldScrollY_;
-  jint oldScrollX_;
+  int32_t oldScrollY_;
+  int32_t oldScrollX_;
 }
 
 #pragma mark Public
@@ -290,8 +301,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_HorizontalScrollViewExt)
 
 - (void)nativeScrollChangeListenerWithId:(id)nativeWidget;
 
-- (void)onscrollWithInt:(jint)scrollX
-                withInt:(jint)scrollY;
+- (void)onscrollWithInt:(int32_t)scrollX
+                withInt:(int32_t)scrollY;
 
 #pragma mark Package-Private
 
@@ -310,6 +321,7 @@ FOUNDATION_EXPORT ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *new_ASHoriz
 FOUNDATION_EXPORT ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *create_ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ImageView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ImageView")
@@ -41,6 +42,7 @@ FOUNDATION_EXPORT ADImageView *create_ADImageView_initWithASIWidget_(id<ASIWidge
 J2OBJC_TYPE_LITERAL_HEADER(ADImageView)
 
 @compatibility_alias RAndroidWidgetImageView ADImageView;
+
 
 #endif
 

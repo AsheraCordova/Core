@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebResourceResponse.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WebResourceResponse")
@@ -15,6 +16,8 @@
 
 #if !defined (ADWebResourceResponse_) && (INCLUDE_ALL_WebResourceResponse || defined(INCLUDE_ADWebResourceResponse))
 #define ADWebResourceResponse_
+
+@class NSString;
 
 @interface ADWebResourceResponse : NSObject
 
@@ -41,6 +44,7 @@ FOUNDATION_EXPORT ADWebResourceResponse *create_ADWebResourceResponse_initWithNS
 J2OBJC_TYPE_LITERAL_HEADER(ADWebResourceResponse)
 
 @compatibility_alias RAndroidWebkitWebResourceResponse ADWebResourceResponse;
+
 
 #endif
 

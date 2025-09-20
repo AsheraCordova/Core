@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\MenuItemImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MenuItemImpl")
@@ -25,6 +26,9 @@
 @class ADView;
 @class ADXMenuBuilder;
 @class ADXSubMenuBuilder;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADMenuItem;
 @protocol JavaLangCharSequence;
 
@@ -37,13 +41,13 @@
 
 - (ADView *)getActionView;
 
-- (jint)getGroupId;
+- (int32_t)getGroupId;
 
 - (ADDrawable *)getIcon;
 
-- (jint)getItemId;
+- (int32_t)getItemId;
 
-- (jint)getOrdering;
+- (int32_t)getOrdering;
 
 - (ADXSubMenuBuilder *)getSubMenu;
 
@@ -51,67 +55,67 @@
 
 - (id<JavaLangCharSequence>)getTooltipText;
 
-- (jboolean)hasCollapsibleActionView;
+- (bool)hasCollapsibleActionView;
 
-- (jboolean)hasSubMenu;
+- (bool)hasSubMenu;
 
-- (jboolean)invoke;
+- (bool)invoke;
 
-- (jboolean)isActionButton;
+- (bool)isActionButton;
 
-- (jboolean)isActionViewExpanded;
+- (bool)isActionViewExpanded;
 
-- (jboolean)isCheckable;
+- (bool)isCheckable;
 
-- (jboolean)isChecked;
+- (bool)isChecked;
 
-- (jboolean)isEnabled;
+- (bool)isEnabled;
 
-- (jboolean)isExclusiveCheckable;
+- (bool)isExclusiveCheckable;
 
-- (jboolean)isVisible;
+- (bool)isVisible;
 
-- (jboolean)requestsActionButton;
+- (bool)requestsActionButton;
 
-- (jboolean)requiresActionButton;
+- (bool)requiresActionButton;
 
 - (id<ADXSupportMenuItem>)setActionViewWithADView:(ADView *)view;
 
-- (id<ADMenuItem>)setCheckableWithBoolean:(jboolean)checkable;
+- (id<ADMenuItem>)setCheckableWithBoolean:(bool)checkable;
 
-- (id<ADMenuItem>)setCheckedWithBoolean:(jboolean)checked;
+- (id<ADMenuItem>)setCheckedWithBoolean:(bool)checked;
 
-- (id<ADMenuItem>)setEnabledWithBoolean:(jboolean)enabled;
+- (id<ADMenuItem>)setEnabledWithBoolean:(bool)enabled;
 
-- (void)setExclusiveCheckableWithBoolean:(jboolean)exclusive;
+- (void)setExclusiveCheckableWithBoolean:(bool)exclusive;
 
 - (id<ADMenuItem>)setIconWithADDrawable:(ADDrawable *)icon;
 
-- (id<ADMenuItem>)setIconWithInt:(jint)iconResId;
+- (id<ADMenuItem>)setIconWithInt:(int32_t)iconResId;
 
 - (id<ADMenuItem>)setIconTintListWithADColorStateList:(ADColorStateList *)iconTintList;
 
-- (void)setIsActionButtonWithBoolean:(jboolean)isActionButton;
+- (void)setIsActionButtonWithBoolean:(bool)isActionButton;
 
-- (void)setShowAsActionWithInt:(jint)actionEnum;
+- (void)setShowAsActionWithInt:(int32_t)actionEnum;
 
 - (void)setSubMenuWithADXSubMenuBuilder:(ADXSubMenuBuilder *)subMenu;
 
-- (id<ADMenuItem>)setVisibleWithBoolean:(jboolean)shown;
+- (id<ADMenuItem>)setVisibleWithBoolean:(bool)shown;
 
 #pragma mark Package-Private
 
 - (instancetype)initWithADXMenuBuilder:(ADXMenuBuilder *)menu
-                               withInt:(jint)group
-                               withInt:(jint)id_
-                               withInt:(jint)categoryOrder
-                               withInt:(jint)ordering
+                               withInt:(int32_t)group
+                               withInt:(int32_t)id_
+                               withInt:(int32_t)categoryOrder
+                               withInt:(int32_t)ordering
               withJavaLangCharSequence:(id<JavaLangCharSequence>)title
-                               withInt:(jint)showAsAction;
+                               withInt:(int32_t)showAsAction;
 
-- (void)setCheckedIntWithBoolean:(jboolean)checked;
+- (void)setCheckedIntWithBoolean:(bool)checked;
 
-- (jboolean)setVisibleIntWithBoolean:(jboolean)shown;
+- (bool)setVisibleIntWithBoolean:(bool)shown;
 
 // Disallowed inherited constructors, do not use.
 
@@ -123,19 +127,20 @@ J2OBJC_EMPTY_STATIC_INIT(ADXMenuItemImpl)
 
 J2OBJC_FIELD_SETTER(ADXMenuItemImpl, mMenu_, ADXMenuBuilder *)
 
-inline jint ADXMenuItemImpl_get_NO_ICON(void);
+inline int32_t ADXMenuItemImpl_get_NO_ICON(void);
 #define ADXMenuItemImpl_NO_ICON 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, NO_ICON, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, NO_ICON, int32_t)
 
-FOUNDATION_EXPORT void ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuItemImpl *self, ADXMenuBuilder *menu, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint showAsAction);
+FOUNDATION_EXPORT void ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuItemImpl *self, ADXMenuBuilder *menu, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t showAsAction);
 
-FOUNDATION_EXPORT ADXMenuItemImpl *new_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint showAsAction) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADXMenuItemImpl *new_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t showAsAction) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADXMenuItemImpl *create_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, jint group, jint id_, jint categoryOrder, jint ordering, id<JavaLangCharSequence> title, jint showAsAction);
+FOUNDATION_EXPORT ADXMenuItemImpl *create_ADXMenuItemImpl_initWithADXMenuBuilder_withInt_withInt_withInt_withInt_withJavaLangCharSequence_withInt_(ADXMenuBuilder *menu, int32_t group, int32_t id_, int32_t categoryOrder, int32_t ordering, id<JavaLangCharSequence> title, int32_t showAsAction);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuItemImpl)
 
 @compatibility_alias AndroidxAppcompatViewMenuMenuItemImpl ADXMenuItemImpl;
+
 
 #endif
 
@@ -144,20 +149,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXMenuItemImpl)
 
 @class ADView;
 @class ADXMenuItemImpl;
+@class JavaLangBoolean;
 
 @protocol ADXMenuItemImpl_ActionProvider < JavaObject >
 
-- (jboolean)overridesItemVisibility;
+- (bool)overridesItemVisibility;
 
 - (ADView *)onCreateActionViewWithADXMenuItemImpl:(ADXMenuItemImpl *)menuItemImpl;
 
-- (jboolean)isVisible;
+- (bool)isVisible;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXMenuItemImpl_ActionProvider)
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuItemImpl_ActionProvider)
+
 
 #endif
 

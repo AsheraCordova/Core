@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\compat\annotation\UnsupportedAppUsage.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_UnsupportedAppUsage")
@@ -21,12 +22,15 @@
 #include "java/lang/annotation/Annotation.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADUnsupportedAppUsage < JavaLangAnnotationAnnotation >
 
-@property (readonly) jint maxTargetSdk;
+@property (readonly) int32_t maxTargetSdk;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -34,18 +38,19 @@
 
 @interface ADUnsupportedAppUsage : NSObject < ADUnsupportedAppUsage > {
  @public
-  jint maxTargetSdk_;
+  int32_t maxTargetSdk_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADUnsupportedAppUsage)
 
-FOUNDATION_EXPORT id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(jint maxTargetSdk);
+FOUNDATION_EXPORT id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(int32_t maxTargetSdk);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUnsupportedAppUsage)
 
 #define RAndroidCompatAnnotationUnsupportedAppUsage ADUnsupportedAppUsage
+
 
 #endif
 

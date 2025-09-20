@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\BaseAttributeCommand.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BaseAttributeCommand")
@@ -21,10 +22,13 @@
 #include "AttributeCommand.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ASBaseAttributeCommand : NSObject < ASAttributeCommand > {
  @public
-  jint priority_;
+  int32_t priority_;
   NSString *phase_;
   NSString *id__;
 }
@@ -33,15 +37,15 @@
 
 - (instancetype)initWithNSString:(NSString *)id_;
 
-- (jboolean)executeAfterPostMeasure;
+- (bool)executeAfterPostMeasure;
 
 - (NSString *)getId;
 
-- (jint)getPriority;
+- (int32_t)getPriority;
 
 - (id)getValueWithNSString:(NSString *)attributeName;
 
-- (void)setPriorityWithInt:(jint)priority;
+- (void)setPriorityWithInt:(int32_t)priority;
 
 - (void)updatePhaseArgsWithNSObjectArray:(IOSObjectArray *)args;
 
@@ -61,6 +65,7 @@ FOUNDATION_EXPORT void ASBaseAttributeCommand_initWithNSString_(ASBaseAttributeC
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseAttributeCommand)
 
 @compatibility_alias ComAsheraWidgetBaseAttributeCommand ASBaseAttributeCommand;
+
 
 #endif
 

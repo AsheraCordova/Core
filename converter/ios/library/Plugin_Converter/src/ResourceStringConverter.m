@@ -3,12 +3,23 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\ResourceStringConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "ResourceBundleUtils.h"
 #include "ResourceStringConverter.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASResourceStringConverter
@@ -70,3 +81,5 @@ ASResourceStringConverter *create_ASResourceStringConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASResourceStringConverter)
+
+J2OBJC_NAME_MAPPING(ASResourceStringConverter, "com.ashera.converter", "AS")

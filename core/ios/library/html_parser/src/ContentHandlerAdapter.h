@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\com\ashera\parser\html\ContentHandlerAdapter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ContentHandlerAdapter")
@@ -21,6 +22,8 @@
 #include "org/xml/sax/ContentHandler.h"
 
 @class IOSCharArray;
+@class JavaLangInteger;
+@class NSString;
 @protocol OrgXmlSaxAttributes;
 @protocol OrgXmlSaxLocator;
 
@@ -31,8 +34,8 @@
 - (instancetype)init;
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length;
 
 - (void)endDocument;
 
@@ -43,8 +46,8 @@
 - (void)endPrefixMappingWithNSString:(NSString *)prefix;
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length;
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length;
 
 - (void)processingInstructionWithNSString:(NSString *)target
                              withNSString:(NSString *)data;
@@ -76,6 +79,7 @@ FOUNDATION_EXPORT ASContentHandlerAdapter *create_ASContentHandlerAdapter_init(v
 J2OBJC_TYPE_LITERAL_HEADER(ASContentHandlerAdapter)
 
 @compatibility_alias ComAsheraParserHtmlContentHandlerAdapter ASContentHandlerAdapter;
+
 
 #endif
 

@@ -3,19 +3,31 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\os\AsyncTask.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AsyncTask.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/Thread.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ADAsyncTask () {
  @public
-  jboolean cancel_;
+  bool cancel_;
 }
 
 @end
@@ -38,6 +50,7 @@ __attribute__((unused)) static ADAsyncTask_$Lambda$2 *new_ADAsyncTask_$Lambda$2_
 
 __attribute__((unused)) static ADAsyncTask_$Lambda$2 *create_ADAsyncTask_$Lambda$2_initWithADAsyncTask_withId_(ADAsyncTask *outer$, id capture$0);
 
+
 @interface ADAsyncTask_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   ADAsyncTask *this$0_;
@@ -55,6 +68,7 @@ __attribute__((unused)) static void ADAsyncTask_$Lambda$1_initWithADAsyncTask_wi
 __attribute__((unused)) static ADAsyncTask_$Lambda$1 *new_ADAsyncTask_$Lambda$1_initWithADAsyncTask_withNSObjectArray_(ADAsyncTask *outer$, IOSObjectArray *capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADAsyncTask_$Lambda$1 *create_ADAsyncTask_$Lambda$1_initWithADAsyncTask_withNSObjectArray_(ADAsyncTask *outer$, IOSObjectArray *capture$0);
+
 
 @implementation ADAsyncTask
 
@@ -79,11 +93,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (void)cancelWithBoolean:(jboolean)cancel {
+- (void)cancelWithBoolean:(bool)cancel {
   self->cancel_ = cancel;
 }
 
-- (jboolean)isCancelled {
+- (bool)isCancelled {
   return cancel_;
 }
 
@@ -121,6 +135,8 @@ void ADAsyncTask_init(ADAsyncTask *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAsyncTask)
+
+J2OBJC_NAME_MAPPING(ADAsyncTask, "r.android.os", "AD")
 
 @implementation ADAsyncTask_$Lambda$2
 

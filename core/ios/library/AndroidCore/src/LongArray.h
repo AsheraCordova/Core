@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\LongArray.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LongArray")
@@ -22,7 +23,11 @@
 #if !defined (ADLongArray_) && (INCLUDE_ALL_LongArray || defined(INCLUDE_ADLongArray))
 #define ADLongArray_
 
+
 @class IOSLongArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 /*!
  @brief Implements a growing array of long primitives.
@@ -39,20 +44,20 @@
 /*!
  @brief Creates an empty LongArray with the specified initial capacity.
  */
-- (instancetype)initWithInt:(jint)initialCapacity;
+- (instancetype)initWithInt:(int32_t)initialCapacity;
 
 /*!
  @brief Inserts a value at the specified position in this array.If the specified index is equal to
   the length of the array, the value is added at the end.
  @throw IndexOutOfBoundsExceptionwhen index &lt; 0 || index &gt; size()
  */
-- (void)addWithInt:(jint)index
-          withLong:(jlong)value;
+- (void)addWithInt:(int32_t)index
+          withLong:(int64_t)value;
 
 /*!
  @brief Appends the specified value to the end of this array.
  */
-- (void)addWithLong:(jlong)value;
+- (void)addWithLong:(int64_t)value;
 
 /*!
  @brief Adds the values in the specified array to this array.
@@ -69,30 +74,30 @@
 /*!
  @brief Test if each element of <code>a</code> equals corresponding element from <code>b</code>
  */
-+ (jboolean)elementsEqualWithADLongArray:(ADLongArray *)a
-                         withADLongArray:(ADLongArray *)b;
++ (bool)elementsEqualWithADLongArray:(ADLongArray *)a
+                     withADLongArray:(ADLongArray *)b;
 
 /*!
  @brief Creates an LongArray from the given primitive long array, copying it.
  */
 + (ADLongArray *)fromArrayWithLongArray:(IOSLongArray *)array
-                                withInt:(jint)size;
+                                withInt:(int32_t)size;
 
 /*!
  @brief Returns the value at the specified position in this array.
  */
-- (jlong)getWithInt:(jint)index;
+- (int64_t)getWithInt:(int32_t)index;
 
 /*!
  @brief Returns the index of the first occurrence of the specified value in this
   array, or -1 if this array does not contain the value.
  */
-- (jint)indexOfWithLong:(jlong)value;
+- (int32_t)indexOfWithLong:(int64_t)value;
 
 /*!
  @brief Removes the value at the specified index from this array.
  */
-- (void)removeWithInt:(jint)index;
+- (void)removeWithInt:(int32_t)index;
 
 /*!
  @brief Changes the size of this LongArray.If this LongArray is shrinked, the backing array capacity
@@ -100,18 +105,18 @@
  If the new size is larger than backing array capacity, a new backing array is
   created from the current content of this LongArray padded with 0s.
  */
-- (void)resizeWithInt:(jint)newSize;
+- (void)resizeWithInt:(int32_t)newSize;
 
 /*!
  @brief Sets the value at the specified position in this array.
  */
-- (void)setWithInt:(jint)index
-          withLong:(jlong)value;
+- (void)setWithInt:(int32_t)index
+          withLong:(int64_t)value;
 
 /*!
  @brief Returns the number of values in this array.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
  @brief Returns a new array with the contents of this LongArray.
@@ -133,21 +138,22 @@ FOUNDATION_EXPORT ADLongArray *new_ADLongArray_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADLongArray *create_ADLongArray_init(void);
 
-FOUNDATION_EXPORT void ADLongArray_initWithInt_(ADLongArray *self, jint initialCapacity);
+FOUNDATION_EXPORT void ADLongArray_initWithInt_(ADLongArray *self, int32_t initialCapacity);
 
-FOUNDATION_EXPORT ADLongArray *new_ADLongArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADLongArray *new_ADLongArray_initWithInt_(int32_t initialCapacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADLongArray *create_ADLongArray_initWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT ADLongArray *create_ADLongArray_initWithInt_(int32_t initialCapacity);
 
 FOUNDATION_EXPORT ADLongArray *ADLongArray_wrapWithLongArray_(IOSLongArray *array);
 
-FOUNDATION_EXPORT ADLongArray *ADLongArray_fromArrayWithLongArray_withInt_(IOSLongArray *array, jint size);
+FOUNDATION_EXPORT ADLongArray *ADLongArray_fromArrayWithLongArray_withInt_(IOSLongArray *array, int32_t size);
 
-FOUNDATION_EXPORT jboolean ADLongArray_elementsEqualWithADLongArray_withADLongArray_(ADLongArray *a, ADLongArray *b);
+FOUNDATION_EXPORT bool ADLongArray_elementsEqualWithADLongArray_withADLongArray_(ADLongArray *a, ADLongArray *b);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLongArray)
 
 @compatibility_alias RAndroidUtilLongArray ADLongArray;
+
 
 #endif
 

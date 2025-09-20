@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\Validation.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Validation")
@@ -17,6 +18,8 @@
 #define ASValidation_
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASIWidget;
 
 /*!
@@ -30,8 +33,8 @@
 
 - (void)setErrorMessageWithNSString:(NSString *)errorMessage;
 
-- (jboolean)isValidWithNSString:(NSString *)text
-                  withASIWidget:(id<ASIWidget>)widget;
+- (bool)isValidWithNSString:(NSString *)text
+              withASIWidget:(id<ASIWidget>)widget;
 
 @end
 
@@ -40,6 +43,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASValidation)
 J2OBJC_TYPE_LITERAL_HEADER(ASValidation)
 
 #define ComAsheraValidationsValidation ASValidation
+
 
 #endif
 

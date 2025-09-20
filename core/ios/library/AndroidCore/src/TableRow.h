@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\TableRow.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TableRow")
@@ -25,6 +26,8 @@
 @class ADView;
 @class ADViewGroup_LayoutParams;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADTableRow : ADLinearLayout
 
@@ -32,50 +35,50 @@
 
 - (instancetype)init;
 
-- (ADView *)getVirtualChildAtWithInt:(jint)i;
+- (ADView *)getVirtualChildAtWithInt:(int32_t)i;
 
-- (jint)getVirtualChildCount;
+- (int32_t)getVirtualChildCount;
 
 #pragma mark Protected
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
 - (ADLinearLayout_LayoutParams *)generateDefaultLayoutParams;
 
 - (ADLinearLayout_LayoutParams *)generateLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 #pragma mark Package-Private
 
-- (jint)getChildrenSkipCountWithADView:(ADView *)child
-                               withInt:(jint)index;
+- (int32_t)getChildrenSkipCountWithADView:(ADView *)child
+                                  withInt:(int32_t)index;
 
-- (IOSIntArray *)getColumnsWidthsWithInt:(jint)widthMeasureSpec
-                                 withInt:(jint)heightMeasureSpec;
+- (IOSIntArray *)getColumnsWidthsWithInt:(int32_t)widthMeasureSpec
+                                 withInt:(int32_t)heightMeasureSpec;
 
-- (jint)getLocationOffsetWithADView:(ADView *)child;
+- (int32_t)getLocationOffsetWithADView:(ADView *)child;
 
-- (jint)getNextLocationOffsetWithADView:(ADView *)child;
+- (int32_t)getNextLocationOffsetWithADView:(ADView *)child;
 
 - (void)measureChildBeforeLayoutWithADView:(ADView *)child
-                                   withInt:(jint)childIndex
-                                   withInt:(jint)widthMeasureSpec
-                                   withInt:(jint)totalWidth
-                                   withInt:(jint)heightMeasureSpec
-                                   withInt:(jint)totalHeight;
+                                   withInt:(int32_t)childIndex
+                                   withInt:(int32_t)widthMeasureSpec
+                                   withInt:(int32_t)totalWidth
+                                   withInt:(int32_t)heightMeasureSpec
+                                   withInt:(int32_t)totalHeight;
 
-- (jint)measureNullChildWithInt:(jint)childIndex;
+- (int32_t)measureNullChildWithInt:(int32_t)childIndex;
 
-- (void)setColumnCollapsedWithInt:(jint)columnIndex
-                      withBoolean:(jboolean)collapsed;
+- (void)setColumnCollapsedWithInt:(int32_t)columnIndex
+                      withBoolean:(bool)collapsed;
 
 - (void)setColumnsWidthConstraintsWithIntArray:(IOSIntArray *)columnWidths;
 
@@ -97,6 +100,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTableRow)
 
 @compatibility_alias RAndroidWidgetTableRow ADTableRow;
 
+
 #endif
 
 #if !defined (ADTableRow_LayoutParams_) && (INCLUDE_ALL_TableRow || defined(INCLUDE_ADTableRow_LayoutParams))
@@ -107,19 +111,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTableRow)
 #include "LinearLayout.h"
 
 @class ADViewGroup_LayoutParams;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 @interface ADTableRow_LayoutParams : ADLinearLayout_LayoutParams {
  @public
-  jint column_;
-  jint span_;
+  int32_t column_;
+  int32_t span_;
 }
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)w
-                    withInt:(jint)h;
+- (instancetype)initWithInt:(int32_t)w
+                    withInt:(int32_t)h;
 
 - (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
@@ -127,19 +133,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTableRow)
 
 - (instancetype)initWithADLinearLayout_LayoutParams:(ADLinearLayout_LayoutParams *)arg0 NS_UNAVAILABLE;
 
-- (instancetype)initWithInt:(jint)arg0
-                    withInt:(jint)arg1
-                  withFloat:(jfloat)arg2 NS_UNAVAILABLE;
+- (instancetype)initWithInt:(int32_t)arg0
+                    withInt:(int32_t)arg1
+                  withFloat:(float)arg2 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADTableRow_LayoutParams)
 
-FOUNDATION_EXPORT void ADTableRow_LayoutParams_initWithInt_withInt_(ADTableRow_LayoutParams *self, jint w, jint h);
+FOUNDATION_EXPORT void ADTableRow_LayoutParams_initWithInt_withInt_(ADTableRow_LayoutParams *self, int32_t w, int32_t h);
 
-FOUNDATION_EXPORT ADTableRow_LayoutParams *new_ADTableRow_LayoutParams_initWithInt_withInt_(jint w, jint h) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADTableRow_LayoutParams *new_ADTableRow_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADTableRow_LayoutParams *create_ADTableRow_LayoutParams_initWithInt_withInt_(jint w, jint h);
+FOUNDATION_EXPORT ADTableRow_LayoutParams *create_ADTableRow_LayoutParams_initWithInt_withInt_(int32_t w, int32_t h);
 
 FOUNDATION_EXPORT void ADTableRow_LayoutParams_init(ADTableRow_LayoutParams *self);
 
@@ -154,6 +160,7 @@ FOUNDATION_EXPORT ADTableRow_LayoutParams *new_ADTableRow_LayoutParams_initWithA
 FOUNDATION_EXPORT ADTableRow_LayoutParams *create_ADTableRow_LayoutParams_initWithADViewGroup_LayoutParams_(ADViewGroup_LayoutParams *p);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTableRow_LayoutParams)
+
 
 #endif
 

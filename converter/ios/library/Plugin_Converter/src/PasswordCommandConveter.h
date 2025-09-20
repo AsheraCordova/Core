@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\PasswordCommandConveter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_PasswordCommandConveter")
@@ -21,6 +22,7 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASIWidget;
 
 @interface ASPasswordCommandConveter : ASBaseAttributeCommand
@@ -52,6 +54,7 @@ FOUNDATION_EXPORT ASPasswordCommandConveter *create_ASPasswordCommandConveter_in
 J2OBJC_TYPE_LITERAL_HEADER(ASPasswordCommandConveter)
 
 @compatibility_alias ComAsheraConverterPasswordCommandConveter ASPasswordCommandConveter;
+
 
 #endif
 

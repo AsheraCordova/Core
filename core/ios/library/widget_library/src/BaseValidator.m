@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\BaseValidator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseValidator.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -69,3 +80,5 @@ void ASBaseValidator_init(ASBaseValidator *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASBaseValidator)
+
+J2OBJC_NAME_MAPPING(ASBaseValidator, "com.ashera.validations", "AS")

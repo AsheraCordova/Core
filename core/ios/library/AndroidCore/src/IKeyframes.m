@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\IKeyframes.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IKeyframes.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADIKeyframes : NSObject
@@ -50,6 +61,8 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADIKeyframes)
+
+J2OBJC_NAME_MAPPING(ADIKeyframes, "r.android.animation", "AD")
 
 @implementation ADIKeyframes_IntIKeyframes
 

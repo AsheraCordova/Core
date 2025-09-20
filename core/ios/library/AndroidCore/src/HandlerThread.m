@@ -3,12 +3,25 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\HandlerThread.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Handler.h"
 #include "HandlerThread.h"
 #include "J2ObjC_source.h"
 #include "Looper.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/InterruptedException.h"
 #include "java/lang/Thread.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADHandlerThread () {
@@ -28,7 +41,7 @@ J2OBJC_FIELD_SETTER(ADHandlerThread, mHandler_, ADHandler *)
 }
 
 - (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)priority {
+                         withInt:(int32_t)priority {
   ADHandlerThread_initWithNSString_withInt_(self, name, priority);
   return self;
 }
@@ -52,7 +65,7 @@ J2OBJC_FIELD_SETTER(ADHandlerThread, mHandler_, ADHandler *)
   if (![self isAlive]) {
     return nil;
   }
-  jboolean wasInterrupted = false;
+  bool wasInterrupted = false;
   @synchronized(self) {
     while ([self isAlive] && mLooper_ == nil) {
       @try {
@@ -76,7 +89,7 @@ J2OBJC_FIELD_SETTER(ADHandlerThread, mHandler_, ADHandler *)
   return mHandler_;
 }
 
-- (jboolean)quit {
+- (bool)quit {
   ADLooper *looper = JreRetainedLocalValue([self getLooper]);
   if (looper != nil) {
     [looper quit];
@@ -85,7 +98,7 @@ J2OBJC_FIELD_SETTER(ADHandlerThread, mHandler_, ADHandler *)
   return false;
 }
 
-- (jboolean)quitSafely {
+- (bool)quitSafely {
   ADLooper *looper = JreRetainedLocalValue([self getLooper]);
   if (looper != nil) {
     [looper quitSafely];
@@ -94,7 +107,7 @@ J2OBJC_FIELD_SETTER(ADHandlerThread, mHandler_, ADHandler *)
   return false;
 }
 
-- (jint)getThreadId {
+- (int32_t)getThreadId {
   return mTid_;
 }
 
@@ -156,18 +169,20 @@ ADHandlerThread *create_ADHandlerThread_initWithNSString_(NSString *name) {
   J2OBJC_CREATE_IMPL(ADHandlerThread, initWithNSString_, name)
 }
 
-void ADHandlerThread_initWithNSString_withInt_(ADHandlerThread *self, NSString *name, jint priority) {
+void ADHandlerThread_initWithNSString_withInt_(ADHandlerThread *self, NSString *name, int32_t priority) {
   JavaLangThread_initWithNSString_(self, name);
   self->mTid_ = -1;
   self->mPriority_ = priority;
 }
 
-ADHandlerThread *new_ADHandlerThread_initWithNSString_withInt_(NSString *name, jint priority) {
+ADHandlerThread *new_ADHandlerThread_initWithNSString_withInt_(NSString *name, int32_t priority) {
   J2OBJC_NEW_IMPL(ADHandlerThread, initWithNSString_withInt_, name, priority)
 }
 
-ADHandlerThread *create_ADHandlerThread_initWithNSString_withInt_(NSString *name, jint priority) {
+ADHandlerThread *create_ADHandlerThread_initWithNSString_withInt_(NSString *name, int32_t priority) {
   J2OBJC_CREATE_IMPL(ADHandlerThread, initWithNSString_withInt_, name, priority)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADHandlerThread)
+
+J2OBJC_NAME_MAPPING(ADHandlerThread, "r.android.os", "AD")

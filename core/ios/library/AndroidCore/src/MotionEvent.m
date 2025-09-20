@@ -3,17 +3,29 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\MotionEvent.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "MotionEvent.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADMotionEvent () {
  @public
-  jint x_;
-  jint y_;
-  jint rawX_;
-  jint rawY_;
-  jint action_;
+  int32_t x_;
+  int32_t y_;
+  int32_t rawX_;
+  int32_t rawY_;
+  int32_t action_;
 }
 
 @end
@@ -27,47 +39,47 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getAction {
+- (int32_t)getAction {
   return action_;
 }
 
-- (void)setActionWithInt:(jint)action {
+- (void)setActionWithInt:(int32_t)action {
   self->action_ = action;
 }
 
-- (jint)getX {
+- (int32_t)getX {
   return x_;
 }
 
-- (void)setXWithInt:(jint)x {
+- (void)setXWithInt:(int32_t)x {
   self->x_ = x;
 }
 
-- (jint)getY {
+- (int32_t)getY {
   return y_;
 }
 
-- (void)setYWithInt:(jint)y {
+- (void)setYWithInt:(int32_t)y {
   self->y_ = y;
 }
 
-- (jint)getRawX {
+- (int32_t)getRawX {
   return rawX_;
 }
 
-- (void)setRawXWithInt:(jint)rawX {
+- (void)setRawXWithInt:(int32_t)rawX {
   self->rawX_ = rawX;
 }
 
-- (jint)getRawY {
+- (int32_t)getRawY {
   return rawY_;
 }
 
-- (void)setRawYWithInt:(jint)rawY {
+- (void)setRawYWithInt:(int32_t)rawY {
   self->rawY_ = rawY;
 }
 
-- (jint)getEventTime {
+- (int32_t)getEventTime {
   return 0;
 }
 
@@ -137,3 +149,5 @@ ADMotionEvent *create_ADMotionEvent_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMotionEvent)
+
+J2OBJC_NAME_MAPPING(ADMotionEvent, "r.android.view", "AD")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ScrollView.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ApplicationInfo.h"
 #include "Build.h"
 #include "Context.h"
@@ -11,31 +16,39 @@
 #include "ScrollView.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADScrollView () {
  @public
-  jint mLastMotionY_;
-  jboolean mIsLayoutDirty_;
-  jboolean mIsBeingDragged_;
-  jboolean mFillViewport_;
-  jboolean mSmoothScrollingEnabled_;
-  jint mTouchSlop_ScrollView_;
-  jint mMinimumVelocity_;
-  jint mMaximumVelocity_;
-  jint mOverscrollDistance_;
-  jint mOverflingDistance_;
-  jint mActivePointerId_;
-  jint mNestedYOffset_;
-  jint originalRightPadding_;
+  int32_t mLastMotionY_;
+  bool mIsLayoutDirty_;
+  bool mIsBeingDragged_;
+  bool mFillViewport_;
+  bool mSmoothScrollingEnabled_;
+  int32_t mTouchSlop_ScrollView_;
+  int32_t mMinimumVelocity_;
+  int32_t mMaximumVelocity_;
+  int32_t mOverscrollDistance_;
+  int32_t mOverflingDistance_;
+  int32_t mActivePointerId_;
+  int32_t mNestedYOffset_;
+  int32_t originalRightPadding_;
 }
 
 @end
 
-inline jint ADScrollView_get_INVALID_POINTER(void);
+inline int32_t ADScrollView_get_INVALID_POINTER(void);
 #define ADScrollView_INVALID_POINTER -1
-J2OBJC_STATIC_FIELD_CONSTANT(ADScrollView, INVALID_POINTER, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADScrollView, INVALID_POINTER, int32_t)
 
 @implementation ADScrollView
 
@@ -46,32 +59,32 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jboolean)isFillViewport {
+- (bool)isFillViewport {
   return mFillViewport_;
 }
 
-- (void)setFillViewportWithBoolean:(jboolean)fillViewport {
+- (void)setFillViewportWithBoolean:(bool)fillViewport {
   if (fillViewport != mFillViewport_) {
     mFillViewport_ = fillViewport;
     [self requestLayout];
   }
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   [super onMeasureWithInt:widthMeasureSpec withInt:heightMeasureSpec];
   if (!mFillViewport_) {
     return;
   }
-  jint heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
+  int32_t heightMode = ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec);
   if (heightMode == ADView_MeasureSpec_UNSPECIFIED) {
     return;
   }
   if ([self getChildCount] > 0) {
     ADView *child = [self getChildAtWithInt:0];
-    jint widthPadding;
-    jint heightPadding;
-    jint targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
+    int32_t widthPadding;
+    int32_t heightPadding;
+    int32_t targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
     ADFrameLayout_LayoutParams *lp = (ADFrameLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADFrameLayout_LayoutParams class]);
     if (targetSdkVersion >= ADBuild_VERSION_CODES_M) {
       widthPadding = mPaddingLeft_ + mPaddingRight_ + ((ADFrameLayout_LayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_;
@@ -81,24 +94,24 @@ J2OBJC_IGNORE_DESIGNATED_END
       widthPadding = mPaddingLeft_ + mPaddingRight_;
       heightPadding = mPaddingTop_ + mPaddingBottom_;
     }
-    jint desiredHeight = [self getMeasuredHeight] - heightPadding;
+    int32_t desiredHeight = [self getMeasuredHeight] - heightPadding;
     if ([child getMeasuredHeight] < desiredHeight) {
-      jint childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, widthPadding, ((ADFrameLayout_LayoutParams *) nil_chk(lp))->width_);
-      jint childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(desiredHeight, ADView_MeasureSpec_EXACTLY);
+      int32_t childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, widthPadding, ((ADFrameLayout_LayoutParams *) nil_chk(lp))->width_);
+      int32_t childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(desiredHeight, ADView_MeasureSpec_EXACTLY);
       [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
     }
   }
 }
 
-- (jint)computeVerticalScrollRange {
-  jint count = [self getChildCount];
-  jint contentHeight = [self getHeight] - mPaddingBottom_ - mPaddingTop_;
+- (int32_t)computeVerticalScrollRange {
+  int32_t count = [self getChildCount];
+  int32_t contentHeight = [self getHeight] - mPaddingBottom_ - mPaddingTop_;
   if (count == 0) {
     return contentHeight;
   }
-  jint scrollRange = [((ADView *) nil_chk([self getChildAtWithInt:0])) getBottom];
-  jint scrollY = mScrollY_;
-  jint overscrollBottom = JavaLangMath_maxWithInt_withInt_(0, scrollRange - contentHeight);
+  int32_t scrollRange = [((ADView *) nil_chk([self getChildAtWithInt:0])) getBottom];
+  int32_t scrollY = mScrollY_;
+  int32_t overscrollBottom = JavaLangMath_maxWithInt_withInt_(0, scrollRange - contentHeight);
   if (scrollY < 0) {
     scrollRange -= scrollY;
   }
@@ -109,26 +122,26 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)measureChildWithADView:(ADView *)child
-                       withInt:(jint)parentWidthMeasureSpec
-                       withInt:(jint)parentHeightMeasureSpec {
+                       withInt:(int32_t)parentWidthMeasureSpec
+                       withInt:(int32_t)parentHeightMeasureSpec {
   ADViewGroup_LayoutParams *lp = JreRetainedLocalValue([((ADView *) nil_chk(child)) getLayoutParams]);
-  jint childWidthMeasureSpec;
-  jint childHeightMeasureSpec;
+  int32_t childWidthMeasureSpec;
+  int32_t childHeightMeasureSpec;
   childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, mPaddingLeft_ + mPaddingRight_, ((ADViewGroup_LayoutParams *) nil_chk(lp))->width_);
-  jint verticalPadding = mPaddingTop_ + mPaddingBottom_;
+  int32_t verticalPadding = mPaddingTop_ + mPaddingBottom_;
   childHeightMeasureSpec = ADView_MeasureSpec_makeSafeMeasureSpecWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(0, ADView_MeasureSpec_getSizeWithInt_(parentHeightMeasureSpec) - verticalPadding), ADView_MeasureSpec_UNSPECIFIED);
   [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
 - (void)measureChildWithMarginsWithADView:(ADView *)child
-                                  withInt:(jint)parentWidthMeasureSpec
-                                  withInt:(jint)widthUsed
-                                  withInt:(jint)parentHeightMeasureSpec
-                                  withInt:(jint)heightUsed {
+                                  withInt:(int32_t)parentWidthMeasureSpec
+                                  withInt:(int32_t)widthUsed
+                                  withInt:(int32_t)parentHeightMeasureSpec
+                                  withInt:(int32_t)heightUsed {
   ADViewGroup_MarginLayoutParams *lp = (ADViewGroup_MarginLayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADViewGroup_MarginLayoutParams class]);
-  jint childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, mPaddingLeft_ + mPaddingRight_ + ((ADViewGroup_MarginLayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + widthUsed, lp->width_);
-  jint usedTotal = mPaddingTop_ + mPaddingBottom_ + lp->topMargin_ + lp->bottomMargin_ + heightUsed;
-  jint childHeightMeasureSpec = ADView_MeasureSpec_makeSafeMeasureSpecWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(0, ADView_MeasureSpec_getSizeWithInt_(parentHeightMeasureSpec) - usedTotal), ADView_MeasureSpec_UNSPECIFIED);
+  int32_t childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(parentWidthMeasureSpec, mPaddingLeft_ + mPaddingRight_ + ((ADViewGroup_MarginLayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_ + widthUsed, lp->width_);
+  int32_t usedTotal = mPaddingTop_ + mPaddingBottom_ + lp->topMargin_ + lp->bottomMargin_ + heightUsed;
+  int32_t childHeightMeasureSpec = ADView_MeasureSpec_makeSafeMeasureSpecWithInt_withInt_(JavaLangMath_maxWithInt_withInt_(0, ADView_MeasureSpec_getSizeWithInt_(parentHeightMeasureSpec) - usedTotal), ADView_MeasureSpec_UNSPECIFIED);
   [child measureWithInt:childWidthMeasureSpec withInt:childHeightMeasureSpec];
 }
 
@@ -137,14 +150,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super requestLayout];
 }
 
-- (void)adjustPaddingIfScrollBarPresentWithInt:(jint)widthMeasureSpec
-                                       withInt:(jint)heightMeasureSpec
-                                       withInt:(jint)thumbWidth {
+- (void)adjustPaddingIfScrollBarPresentWithInt:(int32_t)widthMeasureSpec
+                                       withInt:(int32_t)heightMeasureSpec
+                                       withInt:(int32_t)thumbWidth {
   if ([self getChildCount] > 0) {
     ADView *child = [self getChildAtWithInt:0];
-    jint widthPadding;
-    jint heightPadding;
-    jint targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
+    int32_t widthPadding;
+    int32_t heightPadding;
+    int32_t targetSdkVersion = ((ADApplicationInfo *) nil_chk([((ADContext *) nil_chk([self getContext])) getApplicationInfo]))->targetSdkVersion_;
     ADFrameLayout_LayoutParams *lp = (ADFrameLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADFrameLayout_LayoutParams class]);
     if (targetSdkVersion >= ADBuild_VERSION_CODES_M) {
       widthPadding = mPaddingLeft_ + mPaddingRight_ + ((ADFrameLayout_LayoutParams *) nil_chk(lp))->leftMargin_ + lp->rightMargin_;
@@ -154,7 +167,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       widthPadding = mPaddingLeft_ + mPaddingRight_;
       heightPadding = mPaddingTop_ + mPaddingBottom_;
     }
-    jint desiredHeight = [self getMeasuredHeight] - heightPadding;
+    int32_t desiredHeight = [self getMeasuredHeight] - heightPadding;
     if (desiredHeight >= [child getMeasuredHeight]) {
       if (mPaddingRight_ == thumbWidth && originalRightPadding_ != thumbWidth) {
         mPaddingRight_ = originalRightPadding_;
@@ -238,3 +251,5 @@ ADScrollView *create_ADScrollView_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADScrollView)
+
+J2OBJC_NAME_MAPPING(ADScrollView, "r.android.widget", "AD")

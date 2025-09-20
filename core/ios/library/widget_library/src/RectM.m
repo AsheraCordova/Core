@@ -3,16 +3,28 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\RectM.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "RectM.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASRectM
 
-- (instancetype)initWithInt:(jint)x
-                    withInt:(jint)y
-                    withInt:(jint)width
-                    withInt:(jint)height {
+- (instancetype)initWithInt:(int32_t)x
+                    withInt:(int32_t)y
+                    withInt:(int32_t)width
+                    withInt:(int32_t)height {
   ASRectM_initWithInt_withInt_withInt_withInt_(self, x, y, width, height);
   return self;
 }
@@ -39,7 +51,7 @@
 
 @end
 
-void ASRectM_initWithInt_withInt_withInt_withInt_(ASRectM *self, jint x, jint y, jint width, jint height) {
+void ASRectM_initWithInt_withInt_withInt_withInt_(ASRectM *self, int32_t x, int32_t y, int32_t width, int32_t height) {
   NSObject_init(self);
   self->x_ = x;
   self->y_ = y;
@@ -47,12 +59,14 @@ void ASRectM_initWithInt_withInt_withInt_withInt_(ASRectM *self, jint x, jint y,
   self->height_ = height;
 }
 
-ASRectM *new_ASRectM_initWithInt_withInt_withInt_withInt_(jint x, jint y, jint width, jint height) {
+ASRectM *new_ASRectM_initWithInt_withInt_withInt_withInt_(int32_t x, int32_t y, int32_t width, int32_t height) {
   J2OBJC_NEW_IMPL(ASRectM, initWithInt_withInt_withInt_withInt_, x, y, width, height)
 }
 
-ASRectM *create_ASRectM_initWithInt_withInt_withInt_withInt_(jint x, jint y, jint width, jint height) {
+ASRectM *create_ASRectM_initWithInt_withInt_withInt_withInt_(int32_t x, int32_t y, int32_t width, int32_t height) {
   J2OBJC_CREATE_IMPL(ASRectM, initWithInt_withInt_withInt_withInt_, x, y, width, height)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRectM)
+
+J2OBJC_NAME_MAPPING(ASRectM, "com.ashera.model", "AS")

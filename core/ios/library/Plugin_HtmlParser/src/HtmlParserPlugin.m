@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\HtmlParserPlugin.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "HasWidgets.h"
 #include "Html2JsonSaxHandler.h"
 #include "HtmlParser.h"
@@ -19,6 +24,12 @@
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASHtmlParserPlugin
@@ -67,13 +78,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<ASIWidget>)parseWithNSString:(NSString *)html
-                       withBoolean:(jboolean)template_
+                       withBoolean:(bool)template_
                    withASIFragment:(id<ASIFragment>)fragment {
   return [self parseWithParentWithNSString:html withBoolean:template_ withASHasWidgets:nil withASIFragment:fragment];
 }
 
 - (id<ASIWidget>)parseWithParentWithNSString:(NSString *)html
-                                 withBoolean:(jboolean)template_
+                                 withBoolean:(bool)template_
                             withASHasWidgets:(id<ASHasWidgets>)parent
                              withASIFragment:(id<ASIFragment>)fragment {
   ASHtmlSaxHandler *handler = create_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(fragment, template_);
@@ -85,7 +96,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<ASIWidget>)parseFileWithNSString:(NSString *)fileName
-                           withBoolean:(jboolean)template_
+                           withBoolean:(bool)template_
                        withASIFragment:(id<ASIFragment>)fragment {
   NSString *html;
   if ([((id<ASIFragment>) nil_chk(fragment)) getRootDirectory] != nil) {
@@ -98,7 +109,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileNameOrHtml
-                               withBoolean:(jboolean)template_
+                               withBoolean:(bool)template_
                            withASIFragment:(id<ASIFragment>)fragment {
   NSString *html = JreRetainedLocalValue(fileNameOrHtml);
   if ([((NSString *) nil_chk(fileNameOrHtml)) java_hasPrefix:@"layout"]) {
@@ -111,7 +122,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)getHandlerWithASHasWidgets:(id<ASHasWidgets>)parent
-                         withInt:(jint)index
+                         withInt:(int32_t)index
                  withASIFragment:(id<ASIFragment>)fragment {
   ASHtmlSaxHandler *handler = create_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(fragment, false);
   if (parent != nil) {
@@ -122,7 +133,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<ASIWidget>)handlerStartWithId:(id)handler
                       withASIWidget:(id<ASIWidget>)widget
-                            withInt:(jint)index {
+                            withInt:(int32_t)index {
   return [((ASHtmlSaxHandler *) nil_chk(((ASHtmlSaxHandler *) cast_chk(handler, [ASHtmlSaxHandler class])))) startCreateWidgetWithNSString:[((id<ASIWidget>) nil_chk(widget)) getLocalName] withASIWidget:nil withNSString:nil withNSString:[widget getId] withInt:index withOrgXmlSaxAttributes:nil withASWidgetAttributeMap:[widget getAttributes] withJavaUtilMap:[widget getParams] withJavaUtilMap:[widget getUnResolvedAttributes]];
 }
 
@@ -139,7 +150,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
                         withNSString:(NSString *)componentId
-                         withBoolean:(jboolean)template_
+                         withBoolean:(bool)template_
                      withASIFragment:(id<ASIFragment>)fragment {
   ASHtmlSaxHandler *handler = create_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(fragment, componentId, template_);
   [handler initRootWithASHasWidgets:parent];
@@ -215,3 +226,5 @@ ASHtmlParserPlugin *create_ASHtmlParserPlugin_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHtmlParserPlugin)
+
+J2OBJC_NAME_MAPPING(ASHtmlParserPlugin, "com.ashera.parser.html", "AS")

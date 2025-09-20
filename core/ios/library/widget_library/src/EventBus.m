@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\EventBus.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CompositeHandler.h"
 #include "EventBus.h"
 #include "EventBusCallback.h"
@@ -10,13 +15,18 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASEventBus () {
@@ -45,6 +55,7 @@ __attribute__((unused)) static void ASEventBus_1_init(ASEventBus_1 *self);
 __attribute__((unused)) static ASEventBus_1 *new_ASEventBus_1_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASEventBus_1 *create_ASEventBus_1_init(void);
+
 
 J2OBJC_INITIALIZED_DEFN(ASEventBus)
 
@@ -86,7 +97,7 @@ withASEventBusHandlerArray:(IOSObjectArray *)handler {
   [((id<JavaUtilMap>) nil_chk(_listeners_)) removeWithId:type];
 }
 
-- (jboolean)handlesWithNSString:(NSString *)eventName {
+- (bool)handlesWithNSString:(NSString *)eventName {
   return [((id<JavaUtilMap>) nil_chk(_listeners_)) containsKeyWithId:eventName];
 }
 
@@ -108,8 +119,8 @@ withASEventBusHandlerArray:(IOSObjectArray *)handler {
     ASEventBusHandler * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     ASEventBusHandler * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
-      ASEventBusHandler *eventBusHandler = *b__++;
-      [((ASCompositeHandler *) nil_chk([((id<JavaUtilMap>) nil_chk(_listeners_)) getWithId:[((ASEventBusHandler *) nil_chk(eventBusHandler)) getType]])) removeWithASEventBusHandler:eventBusHandler];
+      ASEventBusHandler *eventBusHandler = RETAIN_AND_AUTORELEASE(*b__++);
+      [((ASCompositeHandler *) nil_chk([((id<JavaUtilMap>) nil_chk(_listeners_)) getWithId:[eventBusHandler getType]])) removeWithASEventBusHandler:eventBusHandler];
     }
   }
 }
@@ -191,6 +202,8 @@ ASEventBus *create_ASEventBus_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEventBus)
 
+J2OBJC_NAME_MAPPING(ASEventBus, "com.ashera.widget.bus", "AS")
+
 @implementation ASEventBus_1
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -215,7 +228,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(call);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "LASEventBus;" };
-  static const J2ObjcClassInfo _ASEventBus_1 = { "", "com.ashera.widget.bus", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASEventBus_1 = { "", "com.ashera.widget.bus", ptrTable, methods, NULL, 7, 0x8000, 2, 0, 0, -1, -1, -1, -1 };
   return &_ASEventBus_1;
 }
 

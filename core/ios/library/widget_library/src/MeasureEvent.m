@@ -3,15 +3,27 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\MeasureEvent.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "MeasureEvent.h"
 #include "WidgetEvent.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASMeasureEvent () {
  @public
-  jint width_;
-  jint height_;
+  int32_t width_;
+  int32_t height_;
 }
 
 @end
@@ -25,19 +37,19 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (jint)getWidth {
+- (int32_t)getWidth {
   return width_;
 }
 
-- (void)setWidthWithInt:(jint)width {
+- (void)setWidthWithInt:(int32_t)width {
   self->width_ = width;
 }
 
-- (jint)getHeight {
+- (int32_t)getHeight {
   return height_;
 }
 
-- (void)setHeightWithInt:(jint)height {
+- (void)setHeightWithInt:(int32_t)height {
   self->height_ = height;
 }
 
@@ -82,3 +94,5 @@ ASMeasureEvent *create_ASMeasureEvent_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMeasureEvent)
+
+J2OBJC_NAME_MAPPING(ASMeasureEvent, "com.ashera.widget", "AS")

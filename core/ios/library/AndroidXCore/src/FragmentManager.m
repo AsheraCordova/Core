@@ -3,13 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\fragment\app\FragmentManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FragmentManager.h"
 #include "FragmentTransaction.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXFragmentManager () {
@@ -82,3 +92,5 @@ ADXFragmentManager *create_ADXFragmentManager_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXFragmentManager)
+
+J2OBJC_NAME_MAPPING(ADXFragmentManager, "androidx.fragment.app", "ADX")

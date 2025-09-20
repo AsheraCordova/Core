@@ -3,11 +3,22 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\ViewGroupOverlay.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Context.h"
 #include "J2ObjC_source.h"
 #include "View.h"
 #include "ViewGroupOverlay.h"
 #include "ViewOverlay.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADViewGroupOverlay
@@ -59,3 +70,5 @@ ADViewGroupOverlay *create_ADViewGroupOverlay_initWithADContext_withADView_(ADCo
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroupOverlay)
+
+J2OBJC_NAME_MAPPING(ADViewGroupOverlay, "r.android.view", "AD")

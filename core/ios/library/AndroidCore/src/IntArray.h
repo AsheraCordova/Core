@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\IntArray.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntArray")
@@ -16,7 +17,9 @@
 #if !defined (ADIntArray_) && (INCLUDE_ALL_IntArray || defined(INCLUDE_ADIntArray))
 #define ADIntArray_
 
+
 @class IOSIntArray;
+@class JavaLangInteger;
 
 /*!
  @brief Implements a growing array of int primitives.
@@ -33,20 +36,20 @@
 /*!
  @brief Creates an empty IntArray with the specified initial capacity.
  */
-- (instancetype)initWithInt:(jint)initialCapacity;
+- (instancetype)initWithInt:(int32_t)initialCapacity;
 
 /*!
  @brief Appends the specified value to the end of this array.
  */
-- (void)addWithInt:(jint)value;
+- (void)addWithInt:(int32_t)value;
 
 /*!
  @brief Inserts a value at the specified position in this array.If the specified index is equal to
   the length of the array, the value is added at the end.
  @throw IndexOutOfBoundsExceptionwhen index &lt; 0 || index &gt; size()
  */
-- (void)addWithInt:(jint)index
-           withInt:(jint)value;
+- (void)addWithInt:(int32_t)index
+           withInt:(int32_t)value;
 
 /*!
  @brief Adds the values in the specified array to this array.
@@ -66,7 +69,7 @@
           Note that this guarantees that the return value will be >= 0 if and only if the key
           is found.
  */
-- (jint)binarySearchWithInt:(jint)value;
+- (int32_t)binarySearchWithInt:(int32_t)value;
 
 /*!
  @brief Removes all values from this array.
@@ -79,23 +82,23 @@
  @brief Creates an IntArray from the given primitive int array, copying it.
  */
 + (ADIntArray *)fromArrayWithIntArray:(IOSIntArray *)array
-                              withInt:(jint)size;
+                              withInt:(int32_t)size;
 
 /*!
  @brief Returns the value at the specified position in this array.
  */
-- (jint)getWithInt:(jint)index;
+- (int32_t)getWithInt:(int32_t)index;
 
 /*!
  @brief Returns the index of the first occurrence of the specified value in this
   array, or -1 if this array does not contain the value.
  */
-- (jint)indexOfWithInt:(jint)value;
+- (int32_t)indexOfWithInt:(int32_t)value;
 
 /*!
  @brief Removes the value at the specified index from this array.
  */
-- (void)removeWithInt:(jint)index;
+- (void)removeWithInt:(int32_t)index;
 
 /*!
  @brief Changes the size of this IntArray.If this IntArray is shrinked, the backing array capacity
@@ -103,18 +106,18 @@
  If the new size is larger than backing array capacity, a new backing array is
   created from the current content of this IntArray padded with 0s.
  */
-- (void)resizeWithInt:(jint)newSize;
+- (void)resizeWithInt:(int32_t)newSize;
 
 /*!
  @brief Sets the value at the specified position in this array.
  */
-- (void)setWithInt:(jint)index
-           withInt:(jint)value;
+- (void)setWithInt:(int32_t)index
+           withInt:(int32_t)value;
 
 /*!
  @brief Returns the number of values in this array.
  */
-- (jint)size;
+- (int32_t)size;
 
 /*!
  @brief Returns a new array with the contents of this IntArray.
@@ -136,19 +139,20 @@ FOUNDATION_EXPORT ADIntArray *new_ADIntArray_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADIntArray *create_ADIntArray_init(void);
 
-FOUNDATION_EXPORT void ADIntArray_initWithInt_(ADIntArray *self, jint initialCapacity);
+FOUNDATION_EXPORT void ADIntArray_initWithInt_(ADIntArray *self, int32_t initialCapacity);
 
-FOUNDATION_EXPORT ADIntArray *new_ADIntArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADIntArray *new_ADIntArray_initWithInt_(int32_t initialCapacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADIntArray *create_ADIntArray_initWithInt_(jint initialCapacity);
+FOUNDATION_EXPORT ADIntArray *create_ADIntArray_initWithInt_(int32_t initialCapacity);
 
 FOUNDATION_EXPORT ADIntArray *ADIntArray_wrapWithIntArray_(IOSIntArray *array);
 
-FOUNDATION_EXPORT ADIntArray *ADIntArray_fromArrayWithIntArray_withInt_(IOSIntArray *array, jint size);
+FOUNDATION_EXPORT ADIntArray *ADIntArray_fromArrayWithIntArray_withInt_(IOSIntArray *array, int32_t size);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIntArray)
 
 @compatibility_alias RAndroidUtilIntArray ADIntArray;
+
 
 #endif
 

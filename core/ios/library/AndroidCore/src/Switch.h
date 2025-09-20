@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\Switch.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Switch")
@@ -24,6 +25,9 @@
 @class ADRect;
 @class ADSwitch_Layout;
 @class ASRectM;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 @protocol JavaLangCharSequence;
 
@@ -33,47 +37,47 @@
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
-- (ASRectM *)getBottomDrawableBoundsWithInt:(jint)x
-                                    withInt:(jint)y
-                                    withInt:(jint)width
-                                    withInt:(jint)height;
+- (ASRectM *)getBottomDrawableBoundsWithInt:(int32_t)x
+                                    withInt:(int32_t)y
+                                    withInt:(int32_t)width
+                                    withInt:(int32_t)height;
 
-- (jint)getCompoundPaddingLeft;
+- (int32_t)getCompoundPaddingLeft;
 
-- (jint)getCompoundPaddingRight;
+- (int32_t)getCompoundPaddingRight;
 
-- (ASRectM *)getRightDrawableBoundsWithInt:(jint)x
-                                   withInt:(jint)y
-                                   withInt:(jint)width
-                                   withInt:(jint)height;
+- (ASRectM *)getRightDrawableBoundsWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)width
+                                   withInt:(int32_t)height;
 
 - (ADRect *)getSwitchBounds;
 
-- (jint)getSwitchMinWidth;
+- (int32_t)getSwitchMinWidth;
 
-- (jint)getSwitchPadding;
+- (int32_t)getSwitchPadding;
 
 - (NSString *)getText;
 
 - (ADColorStateList *)getThumbTintList;
 
-- (ASRectM *)getTopDrawableBoundsWithInt:(jint)x
-                                 withInt:(jint)y
-                                 withInt:(jint)width
-                                 withInt:(jint)height;
+- (ASRectM *)getTopDrawableBoundsWithInt:(int32_t)x
+                                 withInt:(int32_t)y
+                                 withInt:(int32_t)width
+                                 withInt:(int32_t)height;
 
 - (ADColorStateList *)getTrackTintList;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
-- (void)setIntrinsicHeightWithInt:(jint)intrinsicHeight;
+- (void)setIntrinsicHeightWithInt:(int32_t)intrinsicHeight;
 
-- (void)setIntrinsicWidthWithInt:(jint)intrinsicWidth;
+- (void)setIntrinsicWidthWithInt:(int32_t)intrinsicWidth;
 
-- (void)setSwitchMinWidthWithInt:(jint)pixels;
+- (void)setSwitchMinWidthWithInt:(int32_t)pixels;
 
-- (void)setSwitchPaddingWithInt:(jint)pixels;
+- (void)setSwitchPaddingWithInt:(int32_t)pixels;
 
 - (void)setTextWithNSString:(NSString *)text;
 
@@ -83,11 +87,11 @@
 
 #pragma mark Protected
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom;
 
 #pragma mark Package-Private
 
@@ -103,12 +107,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADSwitch)
 
 @compatibility_alias RAndroidWidgetSwitch ADSwitch;
 
+
 #endif
 
 #if !defined (ADSwitch_Layout_) && (INCLUDE_ALL_Switch || defined(INCLUDE_ADSwitch_Layout))
 #define ADSwitch_Layout_
 
 @class ADSwitch;
+@class JavaLangInteger;
 
 @interface ADSwitch_Layout : NSObject
 
@@ -116,7 +122,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADSwitch)
 
 - (instancetype)initWithADSwitch:(ADSwitch *)outer$;
 
-- (jint)getWidth;
+- (int32_t)getWidth;
 
 // Disallowed inherited constructors, do not use.
 
@@ -133,6 +139,7 @@ FOUNDATION_EXPORT ADSwitch_Layout *new_ADSwitch_Layout_initWithADSwitch_(ADSwitc
 FOUNDATION_EXPORT ADSwitch_Layout *create_ADSwitch_Layout_initWithADSwitch_(ADSwitch *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADSwitch_Layout)
+
 
 #endif
 

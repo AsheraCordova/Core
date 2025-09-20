@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingChild2.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollingChild2")
@@ -27,6 +28,8 @@
 #include "NestedScrollingChild.h"
 
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 /*!
  @brief This interface should be implemented by <code>View</code> subclasses that wish
@@ -79,8 +82,8 @@
  - seealso: #dispatchNestedPreScroll(int, int, int[], int[], int)
  - seealso: #dispatchNestedScroll(int, int, int, int, int[], int)
  */
-- (jboolean)startNestedScrollWithInt:(jint)axes
-                             withInt:(jint)type;
+- (bool)startNestedScrollWithInt:(int32_t)axes
+                         withInt:(int32_t)type;
 
 /*!
  @brief Stop a nested scroll in progress for the given input type.
@@ -88,7 +91,7 @@
  @param type the type of input which cause this scroll event
  - seealso: #startNestedScroll(int, int)
  */
-- (void)stopNestedScrollWithInt:(jint)type;
+- (void)stopNestedScrollWithInt:(int32_t)type;
 
 /*!
  @brief Returns true if this view has a nested scrolling parent for the given input type.
@@ -97,7 +100,7 @@
  @param type the type of input which cause this scroll event
  @return whether this view has a nested scrolling parent
  */
-- (jboolean)hasNestedScrollingParentWithInt:(jint)type;
+- (bool)hasNestedScrollingParentWithInt:(int32_t)type;
 
 /*!
  @brief Dispatch one step of a nested scroll in progress.
@@ -120,12 +123,12 @@
  @return true if the event was dispatched, false if it could not be dispatched.
  - seealso: #dispatchNestedPreScroll(int, int, int[], int[], int)
  */
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow
-                                withInt:(jint)type;
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow
+                            withInt:(int32_t)type;
 
 /*!
  @brief Dispatch one step of a nested scroll in progress before this view consumes any portion of it.
@@ -143,11 +146,11 @@
  @return true if the parent consumed some or all of the scroll delta
  - seealso: #dispatchNestedScroll(int, int, int, int, int[], int)
  */
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow
-                                   withInt:(jint)type;
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow
+                               withInt:(int32_t)type;
 
 @end
 
@@ -156,6 +159,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXNestedScrollingChild2)
 J2OBJC_TYPE_LITERAL_HEADER(ADXNestedScrollingChild2)
 
 #define AndroidxCoreViewNestedScrollingChild2 ADXNestedScrollingChild2
+
 
 #endif
 

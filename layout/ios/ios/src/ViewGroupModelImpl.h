@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewGroupModelImpl.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewGroupModelImpl")
@@ -18,6 +19,8 @@
 
 @class ASSimpleWrapableView;
 @class ASWidgetAttribute;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
 
@@ -32,7 +35,7 @@
 + (id)getChildAttributeWithASIWidget:(id<ASIWidget>)w
                withASWidgetAttribute:(ASWidgetAttribute *)key;
 
-+ (jboolean)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key;
++ (bool)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key;
 
 + (void)register__WithNSString:(NSString *)localName;
 
@@ -70,11 +73,12 @@ FOUNDATION_EXPORT id ASViewGroupModelImpl_getAttributeWithASIWidget_withASWidget
 
 FOUNDATION_EXPORT id ASViewGroupModelImpl_getChildAttributeWithASIWidget_withASWidgetAttribute_(id<ASIWidget> w, ASWidgetAttribute *key);
 
-FOUNDATION_EXPORT jboolean ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key);
+FOUNDATION_EXPORT bool ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl)
 
 @compatibility_alias ComAsheraLayoutViewGroupModelImpl ASViewGroupModelImpl;
+
 
 #endif
 

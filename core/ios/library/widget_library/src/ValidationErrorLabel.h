@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\validations\ValidationErrorLabel.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ValidationErrorLabel")
@@ -16,6 +17,8 @@
 #if !defined (ASValidationErrorLabel_) && (INCLUDE_ALL_ValidationErrorLabel || defined(INCLUDE_ASValidationErrorLabel))
 #define ASValidationErrorLabel_
 
+@class NSString;
+
 @protocol ASValidationErrorLabel < JavaObject >
 
 - (void)setErrorMessageWithNSString:(NSString *)message;
@@ -27,6 +30,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASValidationErrorLabel)
 J2OBJC_TYPE_LITERAL_HEADER(ASValidationErrorLabel)
 
 #define ComAsheraValidationsValidationErrorLabel ASValidationErrorLabel
+
 
 #endif
 

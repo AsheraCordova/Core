@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\attributedtext\StyleInterval.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_StyleInterval")
@@ -22,21 +23,23 @@
 
 @class ASWidgetAttributeMap;
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ASStyleInterval : ASInterval
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
+- (instancetype)initWithInt:(int32_t)start
+                    withInt:(int32_t)end
    withASWidgetAttributeMap:(ASWidgetAttributeMap *)style;
 
 - (IOSObjectArray *)getArgs;
 
 - (ASWidgetAttributeMap *)getStyle;
 
-- (ASInterval *)makeNodeWithInt:(jint)start
-                        withInt:(jint)end
+- (ASInterval *)makeNodeWithInt:(int32_t)start
+                        withInt:(int32_t)end
               withNSObjectArray:(IOSObjectArray *)arguments;
 
 - (void)setStyleWithASWidgetAttributeMap:(ASWidgetAttributeMap *)style;
@@ -45,22 +48,23 @@
 
 // Disallowed inherited constructors, do not use.
 
-- (instancetype)initWithInt:(jint)arg0
-                    withInt:(jint)arg1 NS_UNAVAILABLE;
+- (instancetype)initWithInt:(int32_t)arg0
+                    withInt:(int32_t)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASStyleInterval)
 
-FOUNDATION_EXPORT void ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(ASStyleInterval *self, jint start, jint end, ASWidgetAttributeMap *style);
+FOUNDATION_EXPORT void ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(ASStyleInterval *self, int32_t start, int32_t end, ASWidgetAttributeMap *style);
 
-FOUNDATION_EXPORT ASStyleInterval *new_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(jint start, jint end, ASWidgetAttributeMap *style) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASStyleInterval *new_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(int32_t start, int32_t end, ASWidgetAttributeMap *style) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASStyleInterval *create_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(jint start, jint end, ASWidgetAttributeMap *style);
+FOUNDATION_EXPORT ASStyleInterval *create_ASStyleInterval_initWithInt_withInt_withASWidgetAttributeMap_(int32_t start, int32_t end, ASWidgetAttributeMap *style);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASStyleInterval)
 
 @compatibility_alias ComAsheraAttributedtextStyleInterval ASStyleInterval;
+
 
 #endif
 

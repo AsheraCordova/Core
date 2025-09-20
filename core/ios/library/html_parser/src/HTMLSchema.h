@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\HTMLSchema.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HTMLSchema")
@@ -47,6 +48,7 @@ FOUNDATION_EXPORT TSHTMLSchema *create_TSHTMLSchema_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(TSHTMLSchema)
 
 @compatibility_alias RepackagedOrgCcilCowanTagsoupHTMLSchema TSHTMLSchema;
+
 
 #endif
 

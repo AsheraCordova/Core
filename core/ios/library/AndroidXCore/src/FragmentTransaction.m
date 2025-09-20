@@ -3,13 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\fragment\app\FragmentTransaction.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FragmentTransaction.h"
 #include "IFragmentContainer.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 
-@protocol JavaUtilList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXFragmentTransaction () {
@@ -100,9 +111,11 @@ ADXFragmentTransaction *create_ADXFragmentTransaction_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXFragmentTransaction)
 
+J2OBJC_NAME_MAPPING(ADXFragmentTransaction, "androidx.fragment.app", "ADX")
+
 @implementation ADXFragmentTransaction_Ops
 
-- (instancetype)initWithInt:(jint)type
+- (instancetype)initWithInt:(int32_t)type
    withASIFragmentContainer:(id<ASIFragmentContainer>)fragmentContainer
                withNSString:(NSString *)name
                withNSString:(NSString *)layout
@@ -145,7 +158,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXFragmentTransaction)
 
 @end
 
-void ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(ADXFragmentTransaction_Ops *self, jint type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) {
+void ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(ADXFragmentTransaction_Ops *self, int32_t type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) {
   NSObject_init(self);
   self->type_ = type;
   JreStrongAssign(&self->fragmentContainer_, fragmentContainer);
@@ -154,11 +167,11 @@ void ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSStrin
   JreStrongAssign(&self->tag_, tag);
 }
 
-ADXFragmentTransaction_Ops *new_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(jint type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) {
+ADXFragmentTransaction_Ops *new_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(int32_t type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) {
   J2OBJC_NEW_IMPL(ADXFragmentTransaction_Ops, initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_, type, fragmentContainer, name, layout, navGraphId, tag)
 }
 
-ADXFragmentTransaction_Ops *create_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(jint type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) {
+ADXFragmentTransaction_Ops *create_ADXFragmentTransaction_Ops_initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_(int32_t type, id<ASIFragmentContainer> fragmentContainer, NSString *name, NSString *layout, NSString *navGraphId, NSString *tag) {
   J2OBJC_CREATE_IMPL(ADXFragmentTransaction_Ops, initWithInt_withASIFragmentContainer_withNSString_withNSString_withNSString_withNSString_, type, fragmentContainer, name, layout, navGraphId, tag)
 }
 

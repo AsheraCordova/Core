@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\chip\ChipGroup.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CheckableGroup.h"
 #include "Chip.h"
 #include "ChipGroup.h"
@@ -11,28 +16,33 @@
 #include "J2ObjC_source.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/List.h"
 #include "java/util/Set.h"
 
+
 @class ADXChipGroup_PassThroughHierarchyChangeListener;
-@protocol JavaUtilList;
-@protocol JavaUtilSet;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXChipGroup () {
  @public
-  jint chipSpacingHorizontal_;
-  jint chipSpacingVertical_;
+  int32_t chipSpacingHorizontal_;
+  int32_t chipSpacingVertical_;
   id<ADXChipGroup_OnCheckedStateChangeListener> onCheckedStateChangeListener_;
   ADXCheckableGroup *checkableGroup_;
-  jint defaultCheckedId_;
+  int32_t defaultCheckedId_;
   ADXChipGroup_PassThroughHierarchyChangeListener *passThroughListener_;
 }
 
-- (jint)getVisibleChipCount;
+- (int32_t)getVisibleChipCount;
 
-- (jboolean)isChildVisibleWithInt:(jint)i;
+- (bool)isChildVisibleWithInt:(int32_t)i;
 
 @end
 
@@ -40,9 +50,9 @@ J2OBJC_FIELD_SETTER(ADXChipGroup, onCheckedStateChangeListener_, id<ADXChipGroup
 J2OBJC_FIELD_SETTER(ADXChipGroup, checkableGroup_, ADXCheckableGroup *)
 J2OBJC_FIELD_SETTER(ADXChipGroup, passThroughListener_, ADXChipGroup_PassThroughHierarchyChangeListener *)
 
-__attribute__((unused)) static jint ADXChipGroup_getVisibleChipCount(ADXChipGroup *self);
+__attribute__((unused)) static int32_t ADXChipGroup_getVisibleChipCount(ADXChipGroup *self);
 
-__attribute__((unused)) static jboolean ADXChipGroup_isChildVisibleWithInt_(ADXChipGroup *self, jint i);
+__attribute__((unused)) static bool ADXChipGroup_isChildVisibleWithInt_(ADXChipGroup *self, int32_t i);
 
 @interface ADXChipGroup_OnCheckedChangeListener : NSObject
 
@@ -74,6 +84,7 @@ __attribute__((unused)) static ADXChipGroup_1 *new_ADXChipGroup_1_initWithADXChi
 
 __attribute__((unused)) static ADXChipGroup_1 *create_ADXChipGroup_1_initWithADXChipGroup_withADXChipGroup_OnCheckedChangeListener_(ADXChipGroup *outer$, id<ADXChipGroup_OnCheckedChangeListener> capture$0);
 
+
 @interface ADXChipGroup_PassThroughHierarchyChangeListener : NSObject < ADViewGroup_OnHierarchyChangeListener > {
  @public
   ADXChipGroup *this$0_;
@@ -102,6 +113,7 @@ __attribute__((unused)) static ADXChipGroup_PassThroughHierarchyChangeListener *
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXChipGroup_PassThroughHierarchyChangeListener)
 
+
 @interface ADXChipGroup_2 : NSObject < ADXCheckableGroup_OnCheckedStateChangeListener > {
  @public
   ADXChipGroup *this$0_;
@@ -121,6 +133,7 @@ __attribute__((unused)) static ADXChipGroup_2 *new_ADXChipGroup_2_initWithADXChi
 
 __attribute__((unused)) static ADXChipGroup_2 *create_ADXChipGroup_2_initWithADXChipGroup_(ADXChipGroup *outer$);
 
+
 @implementation ADXChipGroup
 
 - (ADViewGroup_LayoutParams *)generateLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)lp {
@@ -131,7 +144,7 @@ __attribute__((unused)) static ADXChipGroup_2 *create_ADXChipGroup_2_initWithADX
   return create_ADXChipGroup_LayoutParams_initWithInt_withInt_(ADViewGroup_LayoutParams_WRAP_CONTENT, ADViewGroup_LayoutParams_WRAP_CONTENT);
 }
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return [super checkLayoutParamsWithADViewGroup_LayoutParams:p] && ([p isKindOfClass:[ADXChipGroup_LayoutParams class]]);
 }
 
@@ -143,23 +156,23 @@ __attribute__((unused)) static ADXChipGroup_2 *create_ADXChipGroup_2_initWithADX
   @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Changing divider drawables have no effect. ChipGroup do not use divider drawables as spacing.");
 }
 
-- (void)setShowDividerHorizontalWithInt:(jint)dividerMode {
+- (void)setShowDividerHorizontalWithInt:(int32_t)dividerMode {
   @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Changing divider modes has no effect. ChipGroup do not use divider drawables as spacing.");
 }
 
-- (void)setShowDividerVerticalWithInt:(jint)dividerMode {
+- (void)setShowDividerVerticalWithInt:(int32_t)dividerMode {
   @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Changing divider modes has no effect. ChipGroup do not use divider drawables as spacing.");
 }
 
-- (void)setFlexWrapWithInt:(jint)flexWrap {
+- (void)setFlexWrapWithInt:(int32_t)flexWrap {
   @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Changing flex wrap not allowed. ChipGroup exposes a singleLine attribute instead.");
 }
 
-- (void)checkWithInt:(jint)id_ {
+- (void)checkWithInt:(int32_t)id_ {
   [((ADXCheckableGroup *) nil_chk(checkableGroup_)) checkWithInt:id_];
 }
 
-- (jint)getCheckedChipId {
+- (int32_t)getCheckedChipId {
   return [((ADXCheckableGroup *) nil_chk(checkableGroup_)) getSingleCheckedId];
 }
 
@@ -183,20 +196,20 @@ __attribute__((unused)) static ADXChipGroup_2 *create_ADXChipGroup_2_initWithADX
   JreStrongAssign(&onCheckedStateChangeListener_, listener);
 }
 
-- (jint)getVisibleChipCount {
+- (int32_t)getVisibleChipCount {
   return ADXChipGroup_getVisibleChipCount(self);
 }
 
-- (jint)getIndexOfChipWithADView:(ADView *)child {
+- (int32_t)getIndexOfChipWithADView:(ADView *)child {
   if (!([child isKindOfClass:[ADXChip class]])) {
     return -1;
   }
-  jint index = 0;
-  for (jint i = 0; i < [self getChildCount]; i++) {
+  int32_t index = 0;
+  for (int32_t i = 0; i < [self getChildCount]; i++) {
     ADView *current = JreRetainedLocalValue([self getChildAtWithInt:i]);
     if ([current isKindOfClass:[ADXChip class]] && ADXChipGroup_isChildVisibleWithInt_(self, i)) {
       ADXChip *chip = (ADXChip *) cast_chk(current, [ADXChip class]);
-      if (chip == child) {
+      if (JreObjectEqualsEquals(chip, child)) {
         return index;
       }
       index++;
@@ -205,20 +218,20 @@ __attribute__((unused)) static ADXChipGroup_2 *create_ADXChipGroup_2_initWithADX
   return -1;
 }
 
-- (jboolean)isChildVisibleWithInt:(jint)i {
+- (bool)isChildVisibleWithInt:(int32_t)i {
   return ADXChipGroup_isChildVisibleWithInt_(self, i);
 }
 
-- (void)setChipSpacingWithInt:(jint)chipSpacing {
+- (void)setChipSpacingWithInt:(int32_t)chipSpacing {
   [self setChipSpacingHorizontalWithInt:chipSpacing];
   [self setChipSpacingVerticalWithInt:chipSpacing];
 }
 
-- (jint)getChipSpacingHorizontal {
+- (int32_t)getChipSpacingHorizontal {
   return chipSpacingHorizontal_;
 }
 
-- (void)setChipSpacingHorizontalWithInt:(jint)chipSpacingHorizontal {
+- (void)setChipSpacingHorizontalWithInt:(int32_t)chipSpacingHorizontal {
   if (self->chipSpacingHorizontal_ != chipSpacingHorizontal) {
     self->chipSpacingHorizontal_ = chipSpacingHorizontal;
     [self setItemSpacingWithInt:chipSpacingHorizontal];
@@ -226,11 +239,11 @@ __attribute__((unused)) static ADXChipGroup_2 *create_ADXChipGroup_2_initWithADX
   }
 }
 
-- (jint)getChipSpacingVertical {
+- (int32_t)getChipSpacingVertical {
   return chipSpacingVertical_;
 }
 
-- (void)setChipSpacingVerticalWithInt:(jint)chipSpacingVertical {
+- (void)setChipSpacingVerticalWithInt:(int32_t)chipSpacingVertical {
   if (self->chipSpacingVertical_ != chipSpacingVertical) {
     self->chipSpacingVertical_ = chipSpacingVertical;
     [self setLineSpacingWithInt:chipSpacingVertical];
@@ -238,27 +251,27 @@ __attribute__((unused)) static ADXChipGroup_2 *create_ADXChipGroup_2_initWithADX
   }
 }
 
-- (jboolean)isSingleLine {
+- (bool)isSingleLine {
   return [super isSingleLine];
 }
 
-- (void)setSingleLineWithBoolean:(jboolean)singleLine {
+- (void)setSingleLineWithBoolean:(bool)singleLine {
   [super setSingleLineWithBoolean:singleLine];
 }
 
-- (jboolean)isSingleSelection {
+- (bool)isSingleSelection {
   return [((ADXCheckableGroup *) nil_chk(checkableGroup_)) isSingleSelection];
 }
 
-- (void)setSingleSelectionWithBoolean:(jboolean)singleSelection {
+- (void)setSingleSelectionWithBoolean:(bool)singleSelection {
   [((ADXCheckableGroup *) nil_chk(checkableGroup_)) setSingleSelectionWithBoolean:singleSelection];
 }
 
-- (void)setSelectionRequiredWithBoolean:(jboolean)selectionRequired {
+- (void)setSelectionRequiredWithBoolean:(bool)selectionRequired {
   [((ADXCheckableGroup *) nil_chk(checkableGroup_)) setSelectionRequiredWithBoolean:selectionRequired];
 }
 
-- (jboolean)isSelectionRequired {
+- (bool)isSelectionRequired {
   return [((ADXCheckableGroup *) nil_chk(checkableGroup_)) isSelectionRequired];
 }
 
@@ -356,9 +369,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-jint ADXChipGroup_getVisibleChipCount(ADXChipGroup *self) {
-  jint count = 0;
-  for (jint i = 0; i < [self getChildCount]; i++) {
+int32_t ADXChipGroup_getVisibleChipCount(ADXChipGroup *self) {
+  int32_t count = 0;
+  for (int32_t i = 0; i < [self getChildCount]; i++) {
     if ([[self getChildAtWithInt:i] isKindOfClass:[ADXChip class]] && ADXChipGroup_isChildVisibleWithInt_(self, i)) {
       count++;
     }
@@ -366,7 +379,7 @@ jint ADXChipGroup_getVisibleChipCount(ADXChipGroup *self) {
   return count;
 }
 
-jboolean ADXChipGroup_isChildVisibleWithInt_(ADXChipGroup *self, jint i) {
+bool ADXChipGroup_isChildVisibleWithInt_(ADXChipGroup *self, int32_t i) {
   return [((ADView *) nil_chk([self getChildAtWithInt:i])) getVisibility] == ADView_VISIBLE;
 }
 
@@ -388,6 +401,8 @@ ADXChipGroup *create_ADXChipGroup_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXChipGroup)
+
+J2OBJC_NAME_MAPPING(ADXChipGroup, "com.google.android.material.chip", "ADX")
 
 @implementation ADXChipGroup_OnCheckedChangeListener
 
@@ -436,8 +451,8 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADXChipGroup_OnCheckedStateChangeListener)
   return self;
 }
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height {
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height {
   ADXChipGroup_LayoutParams_initWithInt_withInt_(self, width, height);
   return self;
 }
@@ -472,15 +487,15 @@ ADXChipGroup_LayoutParams *create_ADXChipGroup_LayoutParams_initWithADViewGroup_
   J2OBJC_CREATE_IMPL(ADXChipGroup_LayoutParams, initWithADViewGroup_LayoutParams_, source)
 }
 
-void ADXChipGroup_LayoutParams_initWithInt_withInt_(ADXChipGroup_LayoutParams *self, jint width, jint height) {
+void ADXChipGroup_LayoutParams_initWithInt_withInt_(ADXChipGroup_LayoutParams *self, int32_t width, int32_t height) {
   ADViewGroup_MarginLayoutParams_initWithInt_withInt_(self, width, height);
 }
 
-ADXChipGroup_LayoutParams *new_ADXChipGroup_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADXChipGroup_LayoutParams *new_ADXChipGroup_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_NEW_IMPL(ADXChipGroup_LayoutParams, initWithInt_withInt_, width, height)
 }
 
-ADXChipGroup_LayoutParams *create_ADXChipGroup_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADXChipGroup_LayoutParams *create_ADXChipGroup_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_CREATE_IMPL(ADXChipGroup_LayoutParams, initWithInt_withInt_, width, height)
 }
 
@@ -524,7 +539,7 @@ withADXChipGroup_OnCheckedChangeListener:(id<ADXChipGroup_OnCheckedChangeListene
     { "val$listener_", "LADXChipGroup_OnCheckedChangeListener;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADXChipGroup;LADXChipGroup_OnCheckedChangeListener;", "onCheckedChanged", "LADXChipGroup;LJavaUtilList;", "(Lcom/google/android/material/chip/ChipGroup;Ljava/util/List<Ljava/lang/Integer;>;)V", "LADXChipGroup;", "setOnCheckedChangeListenerWithADXChipGroup_OnCheckedChangeListener:" };
-  static const J2ObjcClassInfo _ADXChipGroup_1 = { "", "com.google.android.material.chip", ptrTable, methods, fields, 7, 0x8010, 2, 2, 4, -1, 5, -1, -1 };
+  static const J2ObjcClassInfo _ADXChipGroup_1 = { "", "com.google.android.material.chip", ptrTable, methods, fields, 7, 0x8000, 2, 2, 4, -1, 5, -1, -1 };
   return &_ADXChipGroup_1;
 }
 
@@ -553,8 +568,8 @@ ADXChipGroup_1 *create_ADXChipGroup_1_initWithADXChipGroup_withADXChipGroup_OnCh
 
 - (void)onChildViewAddedWithADView:(ADView *)parent
                         withADView:(ADView *)child {
-  if (parent == this$0_ && [child isKindOfClass:[ADXChip class]]) {
-    jint id_ = [((ADView *) nil_chk(child)) getId];
+  if (JreObjectEqualsEquals(parent, this$0_) && [child isKindOfClass:[ADXChip class]]) {
+    int32_t id_ = [((ADView *) nil_chk(child)) getId];
     if (id_ == ADView_NO_ID) {
       [child setIdWithInt:id_];
     }
@@ -567,7 +582,7 @@ ADXChipGroup_1 *create_ADXChipGroup_1_initWithADXChipGroup_withADXChipGroup_OnCh
 
 - (void)onChildViewRemovedWithADView:(ADView *)parent
                           withADView:(ADView *)child {
-  if (parent == this$0_ && [child isKindOfClass:[ADXChip class]]) {
+  if (JreObjectEqualsEquals(parent, this$0_) && [child isKindOfClass:[ADXChip class]]) {
     [((ADXCheckableGroup *) nil_chk(this$0_->checkableGroup_)) removeCheckableWithADXMaterialCheckable:(ADXChip *) cast_chk(child, [ADXChip class])];
   }
   if (onHierarchyChangeListener_ != nil) {
@@ -653,7 +668,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXChipGroup_PassThroughHierarchyChangeListener
     { "this$0_", "LADXChipGroup;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADXChipGroup;", "onCheckedStateChanged", "LJavaUtilSet;", "(Ljava/util/Set<Ljava/lang/Integer;>;)V", "init" };
-  static const J2ObjcClassInfo _ADXChipGroup_2 = { "", "com.google.android.material.chip", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 4, -1, -1 };
+  static const J2ObjcClassInfo _ADXChipGroup_2 = { "", "com.google.android.material.chip", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 4, -1, -1 };
   return &_ADXChipGroup_2;
 }
 

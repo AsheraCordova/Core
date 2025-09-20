@@ -3,15 +3,29 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\annotation\RestrictTo.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "RestrictTo.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/Integer.h"
 
 
-__attribute__((unused)) static void ADXRestrictTo_Scope_initWithNSString_withInt_(ADXRestrictTo_Scope *self, NSString *__name, jint __ordinal);
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
+__attribute__((unused)) static void ADXRestrictTo_Scope_initWithNSString_withInt_(ADXRestrictTo_Scope *self, NSString *__name, int32_t __ordinal);
 
 @implementation ADXRestrictTo
 
@@ -25,7 +39,7 @@ __attribute__((unused)) static void ADXRestrictTo_Scope_initWithNSString_withInt
   return [NSString stringWithFormat:@"@androidx.annotation.RestrictTo(value=%@)", value_];
 }
 
-- (jboolean)isEqual:(id)obj {
+- (bool)isEqual:(id)obj {
   return JreAnnotationEquals(self, obj);
 }
 
@@ -65,6 +79,8 @@ id<ADXRestrictTo> create_ADXRestrictTo(IOSObjectArray *value) {
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADXRestrictTo)
 
+J2OBJC_NAME_MAPPING(ADXRestrictTo, "androidx.annotation", "ADX")
+
 J2OBJC_INITIALIZED_DEFN(ADXRestrictTo_Scope)
 
 ADXRestrictTo_Scope *ADXRestrictTo_Scope_values_[6];
@@ -81,6 +97,24 @@ ADXRestrictTo_Scope *ADXRestrictTo_Scope_values_[6];
 
 - (ADXRestrictTo_Scope_Enum)toNSEnum {
   return (ADXRestrictTo_Scope_Enum)[self ordinal];
+}
+
+- (ADXRestrictTo_Scope_Enum)enumValue {
+  return (ADXRestrictTo_Scope_Enum)[self ordinal];
+}
+
++ (ADXRestrictTo_Scope *)fromNSEnum:(ADXRestrictTo_Scope_Enum)nativeValue {
+  ADXRestrictTo_Scope *javaEnum = ADXRestrictTo_Scope_fromOrdinal(nativeValue);
+  if (!javaEnum) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NSEnum ADXRestrictTo_Scope_Enum out of range.");
+  return javaEnum;
+}
+
+- (ADXRestrictTo_Scope_ORDINAL)ordinal {
+  return (ADXRestrictTo_Scope_ORDINAL)[super ordinal];
+}
+
+- (nullable instancetype)initWithScope:(ADXRestrictTo_Scope_Enum)value {
+  return RETAIN_(ADXRestrictTo_Scope_fromOrdinal((ADXRestrictTo_Scope_ORDINAL)value));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -113,7 +147,7 @@ ADXRestrictTo_Scope *ADXRestrictTo_Scope_values_[6];
     size_t allocSize = 6 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 6; i++) {
+    for (int32_t i = 0; i < 6; i++) {
       ((void)(ADXRestrictTo_Scope_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ADXRestrictTo_Scope_initWithNSString_withInt_(e, JreEnumConstantName(ADXRestrictTo_Scope_class_(), i), i);
     }
@@ -123,7 +157,7 @@ ADXRestrictTo_Scope *ADXRestrictTo_Scope_values_[6];
 
 @end
 
-void ADXRestrictTo_Scope_initWithNSString_withInt_(ADXRestrictTo_Scope *self, NSString *__name, jint __ordinal) {
+void ADXRestrictTo_Scope_initWithNSString_withInt_(ADXRestrictTo_Scope *self, NSString *__name, int32_t __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
@@ -141,12 +175,11 @@ ADXRestrictTo_Scope *ADXRestrictTo_Scope_valueOfWithNSString_(NSString *name) {
     }
   }
   @throw create_JavaLangIllegalArgumentException_initWithNSString_(name);
-  return nil;
 }
 
-ADXRestrictTo_Scope *ADXRestrictTo_Scope_fromOrdinal(NSUInteger ordinal) {
+ADXRestrictTo_Scope *ADXRestrictTo_Scope_fromOrdinal(ADXRestrictTo_Scope_ORDINAL ordinal) {
   ADXRestrictTo_Scope_initialize();
-  if (ordinal >= 6) {
+  if (ordinal < 0 || ordinal >= 6) {
     return nil;
   }
   return ADXRestrictTo_Scope_values_[ordinal];

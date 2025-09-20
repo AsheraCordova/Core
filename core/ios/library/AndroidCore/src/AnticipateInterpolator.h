@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\AnticipateInterpolator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AnticipateInterpolator")
@@ -20,6 +21,9 @@
 #define INCLUDE_ADBaseInterpolator 1
 #include "BaseInterpolator.h"
 
+@class JavaLangFloat;
+@class JavaLangLong;
+
 /*!
  @brief An interpolator where the change starts backward then flings forward.
  */
@@ -33,15 +37,15 @@
  @param tension Amount of anticipation. When tension equals 0.0f, there is                 no anticipation and the interpolator becomes a simple
                   acceleration interpolator.
  */
-- (instancetype)initWithFloat:(jfloat)tension;
+- (instancetype)initWithFloat:(float)tension;
 
 /*!
  */
-- (jlong)createNativeInterpolator;
+- (int64_t)createNativeInterpolator;
 
 /*!
  */
-- (jfloat)getInterpolationWithFloat:(jfloat)t;
+- (float)getInterpolationWithFloat:(float)t;
 
 @end
 
@@ -53,15 +57,16 @@ FOUNDATION_EXPORT ADAnticipateInterpolator *new_ADAnticipateInterpolator_init(vo
 
 FOUNDATION_EXPORT ADAnticipateInterpolator *create_ADAnticipateInterpolator_init(void);
 
-FOUNDATION_EXPORT void ADAnticipateInterpolator_initWithFloat_(ADAnticipateInterpolator *self, jfloat tension);
+FOUNDATION_EXPORT void ADAnticipateInterpolator_initWithFloat_(ADAnticipateInterpolator *self, float tension);
 
-FOUNDATION_EXPORT ADAnticipateInterpolator *new_ADAnticipateInterpolator_initWithFloat_(jfloat tension) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADAnticipateInterpolator *new_ADAnticipateInterpolator_initWithFloat_(float tension) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADAnticipateInterpolator *create_ADAnticipateInterpolator_initWithFloat_(jfloat tension);
+FOUNDATION_EXPORT ADAnticipateInterpolator *create_ADAnticipateInterpolator_initWithFloat_(float tension);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnticipateInterpolator)
 
 @compatibility_alias RAndroidViewAnimationAnticipateInterpolator ADAnticipateInterpolator;
+
 
 #endif
 

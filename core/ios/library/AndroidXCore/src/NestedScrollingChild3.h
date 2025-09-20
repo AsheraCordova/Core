@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingChild3.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollingChild3")
@@ -27,6 +28,7 @@
 #include "NestedScrollingChild2.h"
 
 @class IOSIntArray;
+@class JavaLangInteger;
 
 /*!
  @brief This interface should be implemented by <code>View</code> subclasses that wish
@@ -67,12 +69,12 @@
                    dimension
  - seealso: NestedScrollingParent3#onNestedScroll(View, int, int, int, int, int, int[])
  */
-- (void)dispatchNestedScrollWithInt:(jint)dxConsumed
-                            withInt:(jint)dyConsumed
-                            withInt:(jint)dxUnconsumed
-                            withInt:(jint)dyUnconsumed
+- (void)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
                        withIntArray:(IOSIntArray *)offsetInWindow
-                            withInt:(jint)type
+                            withInt:(int32_t)type
                        withIntArray:(IOSIntArray *)consumed;
 
 @end
@@ -82,6 +84,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXNestedScrollingChild3)
 J2OBJC_TYPE_LITERAL_HEADER(ADXNestedScrollingChild3)
 
 #define AndroidxCoreViewNestedScrollingChild3 ADXNestedScrollingChild3
+
 
 #endif
 

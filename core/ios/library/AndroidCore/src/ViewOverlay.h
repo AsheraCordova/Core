@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\ViewOverlay.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ViewOverlay")
@@ -21,6 +22,7 @@
 @class ADView;
 @class ADViewGroup;
 @class ADViewOverlay_OverlayViewGroup;
+@class JavaLangBoolean;
 @protocol JavaUtilList;
 
 @interface ADViewOverlay : NSObject {
@@ -45,7 +47,7 @@
 
 - (ADViewGroup *)getOverlayView;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 // Disallowed inherited constructors, do not use.
 
@@ -67,6 +69,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADViewOverlay)
 
 @compatibility_alias RAndroidViewViewOverlay ADViewOverlay;
 
+
 #endif
 
 #if !defined (ADViewOverlay_OverlayViewGroup_) && (INCLUDE_ALL_ViewOverlay || defined(INCLUDE_ADViewOverlay_OverlayViewGroup))
@@ -80,6 +83,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADViewOverlay)
 @class ADDrawable;
 @class ADRect;
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 @class JavaUtilArrayList;
 @protocol ADCanvas;
 
@@ -99,12 +104,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADViewOverlay)
 
 - (void)invalidate;
 
-- (void)invalidateWithBoolean:(jboolean)invalidateCache;
+- (void)invalidateWithBoolean:(bool)invalidateCache;
 
-- (void)invalidateWithInt:(jint)l
-                  withInt:(jint)t
-                  withInt:(jint)r
-                  withInt:(jint)b;
+- (void)invalidateWithInt:(int32_t)l
+                  withInt:(int32_t)t
+                  withInt:(int32_t)r
+                  withInt:(int32_t)b;
 
 - (void)invalidateWithADRect:(ADRect *)dirty;
 
@@ -122,23 +127,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ADViewOverlay)
 
 - (void)invalidateParentIfNeeded;
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b;
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b;
 
-- (jboolean)verifyDrawableWithADDrawable:(ADDrawable *)who;
+- (bool)verifyDrawableWithADDrawable:(ADDrawable *)who;
 
 #pragma mark Package-Private
 
 - (instancetype)initWithADContext:(ADContext *)context
                        withADView:(ADView *)hostView;
 
-- (void)invalidateViewPropertyWithBoolean:(jboolean)invalidateParent
-                              withBoolean:(jboolean)forceRedraw;
+- (void)invalidateViewPropertyWithBoolean:(bool)invalidateParent
+                              withBoolean:(bool)forceRedraw;
 
-- (jboolean)isEmpty;
+- (bool)isEmpty;
 
 // Disallowed inherited constructors, do not use.
 
@@ -158,6 +163,7 @@ FOUNDATION_EXPORT ADViewOverlay_OverlayViewGroup *new_ADViewOverlay_OverlayViewG
 FOUNDATION_EXPORT ADViewOverlay_OverlayViewGroup *create_ADViewOverlay_OverlayViewGroup_initWithADContext_withADView_(ADContext *context, ADView *hostView);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADViewOverlay_OverlayViewGroup)
+
 
 #endif
 

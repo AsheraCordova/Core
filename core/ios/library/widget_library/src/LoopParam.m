@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\LoopParam.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "LoopParam.h"
 #include "java/util/HashMap.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASLoopParam
@@ -46,3 +57,5 @@ ASLoopParam *create_ASLoopParam_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLoopParam)
+
+J2OBJC_NAME_MAPPING(ASLoopParam, "com.ashera.model", "AS")

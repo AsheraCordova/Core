@@ -3,20 +3,33 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\MarqueeCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "MarqueeCommandConverter.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/StringBuffer.h"
 
 
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASMarqueeCommandConverter () {
  @public
-  jint whiteSpace_;
-  jint offset_;
+  int32_t whiteSpace_;
+  int32_t offset_;
   NSString *originalText_;
   NSString *direction_;
 }
@@ -34,8 +47,8 @@ J2OBJC_FIELD_SETTER(ASMarqueeCommandConverter, direction_, NSString *)
 }
 
 - (instancetype)initWithNSString:(NSString *)id_
-                         withInt:(jint)whiteSpace
-                         withInt:(jint)offset
+                         withInt:(int32_t)whiteSpace
+                         withInt:(int32_t)offset
                     withNSString:(NSString *)direction {
   ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(self, id_, whiteSpace, offset, direction);
   return self;
@@ -59,7 +72,7 @@ J2OBJC_FIELD_SETTER(ASMarqueeCommandConverter, direction_, NSString *)
   JreStrongAssign(&self->originalText_, text);
   if ([((NSString *) nil_chk(direction_)) isEqual:@"forward"]) {
     JavaLangStringBuffer *strBuf = create_JavaLangStringBuffer_initWithNSString_(text);
-    for (jint i = 0; i < whiteSpace_; i++) {
+    for (int32_t i = 0; i < whiteSpace_; i++) {
       [strBuf appendWithNSString:@"\u2003"];
     }
     NSString *indexFirst = JreRetainedLocalValue([strBuf substringWithInt:0 withInt:offset_]);
@@ -68,7 +81,7 @@ J2OBJC_FIELD_SETTER(ASMarqueeCommandConverter, direction_, NSString *)
   }
   else {
     JavaLangStringBuffer *strBuf = create_JavaLangStringBuffer_initWithNSString_(text);
-    for (jint i = 0; i < whiteSpace_; i++) {
+    for (int32_t i = 0; i < whiteSpace_; i++) {
       [strBuf insertWithInt:0 withNSString:@"\u2003"];
     }
     NSString *indexFirst = JreRetainedLocalValue([strBuf substringWithInt:[strBuf java_length] - offset_ withInt:[strBuf java_length]]);
@@ -86,7 +99,7 @@ J2OBJC_FIELD_SETTER(ASMarqueeCommandConverter, direction_, NSString *)
   offset_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangInteger class]))) intValue];
 }
 
-- (jint)getOffset {
+- (int32_t)getOffset {
   return offset_;
 }
 
@@ -140,18 +153,20 @@ ASMarqueeCommandConverter *create_ASMarqueeCommandConverter_initWithNSString_(NS
   J2OBJC_CREATE_IMPL(ASMarqueeCommandConverter, initWithNSString_, id_)
 }
 
-void ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(ASMarqueeCommandConverter *self, NSString *id_, jint whiteSpace, jint offset, NSString *direction) {
+void ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(ASMarqueeCommandConverter *self, NSString *id_, int32_t whiteSpace, int32_t offset, NSString *direction) {
   ASBaseAttributeCommand_initWithNSString_(self, id_);
   self->whiteSpace_ = whiteSpace;
   JreStrongAssign(&self->direction_, direction);
 }
 
-ASMarqueeCommandConverter *new_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, jint whiteSpace, jint offset, NSString *direction) {
+ASMarqueeCommandConverter *new_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, int32_t whiteSpace, int32_t offset, NSString *direction) {
   J2OBJC_NEW_IMPL(ASMarqueeCommandConverter, initWithNSString_withInt_withInt_withNSString_, id_, whiteSpace, offset, direction)
 }
 
-ASMarqueeCommandConverter *create_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, jint whiteSpace, jint offset, NSString *direction) {
+ASMarqueeCommandConverter *create_ASMarqueeCommandConverter_initWithNSString_withInt_withInt_withNSString_(NSString *id_, int32_t whiteSpace, int32_t offset, NSString *direction) {
   J2OBJC_CREATE_IMPL(ASMarqueeCommandConverter, initWithNSString_withInt_withInt_withNSString_, id_, whiteSpace, offset, direction)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMarqueeCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASMarqueeCommandConverter, "com.ashera.converter", "AS")

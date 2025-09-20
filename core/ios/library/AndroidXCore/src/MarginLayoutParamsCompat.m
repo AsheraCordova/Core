@@ -3,9 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\MarginLayoutParamsCompat.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "MarginLayoutParamsCompat.h"
 #include "ViewGroup.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADXMarginLayoutParamsCompat
@@ -18,20 +30,20 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)setMarginStartWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params
-                                                 withInt:(jint)start {
+                                                 withInt:(int32_t)start {
   ADXMarginLayoutParamsCompat_setMarginStartWithADViewGroup_MarginLayoutParams_withInt_(params, start);
 }
 
 + (void)setMarginEndWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params
-                                               withInt:(jint)end {
+                                               withInt:(int32_t)end {
   ADXMarginLayoutParamsCompat_setMarginEndWithADViewGroup_MarginLayoutParams_withInt_(params, end);
 }
 
-+ (jint)getMarginStartWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params {
++ (int32_t)getMarginStartWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params {
   return ADXMarginLayoutParamsCompat_getMarginStartWithADViewGroup_MarginLayoutParams_(params);
 }
 
-+ (jint)getMarginEndWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params {
++ (int32_t)getMarginEndWithADViewGroup_MarginLayoutParams:(ADViewGroup_MarginLayoutParams *)params {
   return ADXMarginLayoutParamsCompat_getMarginEndWithADViewGroup_MarginLayoutParams_(params);
 }
 
@@ -71,24 +83,26 @@ ADXMarginLayoutParamsCompat *create_ADXMarginLayoutParamsCompat_init() {
   J2OBJC_CREATE_IMPL(ADXMarginLayoutParamsCompat, init)
 }
 
-void ADXMarginLayoutParamsCompat_setMarginStartWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, jint start) {
+void ADXMarginLayoutParamsCompat_setMarginStartWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, int32_t start) {
   ADXMarginLayoutParamsCompat_initialize();
   [((ADViewGroup_MarginLayoutParams *) nil_chk(params)) setMarginStartWithInt:start];
 }
 
-void ADXMarginLayoutParamsCompat_setMarginEndWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, jint end) {
+void ADXMarginLayoutParamsCompat_setMarginEndWithADViewGroup_MarginLayoutParams_withInt_(ADViewGroup_MarginLayoutParams *params, int32_t end) {
   ADXMarginLayoutParamsCompat_initialize();
   [((ADViewGroup_MarginLayoutParams *) nil_chk(params)) setMarginEndWithInt:end];
 }
 
-jint ADXMarginLayoutParamsCompat_getMarginStartWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params) {
+int32_t ADXMarginLayoutParamsCompat_getMarginStartWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params) {
   ADXMarginLayoutParamsCompat_initialize();
   return [((ADViewGroup_MarginLayoutParams *) nil_chk(params)) getMarginStart];
 }
 
-jint ADXMarginLayoutParamsCompat_getMarginEndWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params) {
+int32_t ADXMarginLayoutParamsCompat_getMarginEndWithADViewGroup_MarginLayoutParams_(ADViewGroup_MarginLayoutParams *params) {
   ADXMarginLayoutParamsCompat_initialize();
   return [((ADViewGroup_MarginLayoutParams *) nil_chk(params)) getMarginEnd];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXMarginLayoutParamsCompat)
+
+J2OBJC_NAME_MAPPING(ADXMarginLayoutParamsCompat, "androidx.core.view", "ADX")

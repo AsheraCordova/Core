@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\util\PathParser.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "PathParser.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADPathParser
@@ -45,6 +56,8 @@ ADPathParser *create_ADPathParser_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathParser)
+
+J2OBJC_NAME_MAPPING(ADPathParser, "r.android.util", "AD")
 
 @implementation ADPathParser_PathData
 

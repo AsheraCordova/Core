@@ -3,8 +3,19 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\parser\css\CssResult.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CssResult.h"
 #include "J2ObjC_source.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSCssResult : NSObject
@@ -30,3 +41,5 @@
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(CSSCssResult)
+
+J2OBJC_NAME_MAPPING(CSSCssResult, "com.ashera.parser.css", "CSS")

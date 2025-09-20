@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\parser\css\CssDataHolder.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "CssDataHolder.h"
 #include "CssResult.h"
 #include "CssTree.h"
@@ -11,6 +16,12 @@
 #include "ParseException.h"
 #include "java/io/StringReader.h"
 #include "java/util/List.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface CSSCssDataHolder () {
@@ -101,3 +112,5 @@ CSSCssDataHolder *create_CSSCssDataHolder_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(CSSCssDataHolder)
+
+J2OBJC_NAME_MAPPING(CSSCssDataHolder, "com.ashera.parser.css", "CSS")

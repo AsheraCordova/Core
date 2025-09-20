@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\AttributeCommand.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AttributeCommand")
@@ -17,6 +18,9 @@
 #define ASAttributeCommand_
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIWidget;
 
 @protocol ASAttributeCommand < JavaObject >
@@ -33,11 +37,11 @@
 
 - (void)updatePhaseArgsWithNSObjectArray:(IOSObjectArray *)args;
 
-- (jint)getPriority;
+- (int32_t)getPriority;
 
-- (void)setPriorityWithInt:(jint)priority;
+- (void)setPriorityWithInt:(int32_t)priority;
 
-- (jboolean)executeAfterPostMeasure;
+- (bool)executeAfterPostMeasure;
 
 - (id)getValueWithNSString:(NSString *)attributeName;
 
@@ -50,6 +54,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASAttributeCommand)
 J2OBJC_TYPE_LITERAL_HEADER(ASAttributeCommand)
 
 #define ComAsheraWidgetAttributeCommand ASAttributeCommand
+
 
 #endif
 

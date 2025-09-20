@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\ClientCertRequest.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ClientCertRequest")
@@ -17,6 +18,8 @@
 #define ADClientCertRequest_
 
 @class IOSObjectArray;
+@class JavaLangInteger;
+@class NSString;
 @protocol JavaSecurityPrivateKey;
 
 @interface ADClientCertRequest : NSObject
@@ -31,7 +34,7 @@
 
 - (IOSObjectArray *)getKeyTypes;
 
-- (jint)getPort;
+- (int32_t)getPort;
 
 - (IOSObjectArray *)getPrincipals;
 
@@ -53,6 +56,7 @@ FOUNDATION_EXPORT ADClientCertRequest *create_ADClientCertRequest_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADClientCertRequest)
 
 @compatibility_alias RAndroidWebkitClientCertRequest ADClientCertRequest;
+
 
 #endif
 

@@ -3,10 +3,21 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\accessibility\AccessibilityManager.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AccessibilityManager.h"
 #include "Context.h"
 #include "J2ObjC_source.h"
 #include "View.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADAccessibilityManager
@@ -58,3 +69,5 @@ ADView *ADAccessibilityManager_getInstanceWithADContext_(ADContext *mContext) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAccessibilityManager)
+
+J2OBJC_NAME_MAPPING(ADAccessibilityManager, "r.android.view.accessibility", "AD")

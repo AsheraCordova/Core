@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WebView")
@@ -27,6 +28,9 @@
 @class ADWebChromeClient;
 @class ADWebSettings;
 @class ADWebViewClient;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @interface ADWebView : ADViewGroup
 
@@ -40,15 +44,15 @@
 - (void)addJavascriptInterfaceWithId:(id)exposedJsApi
                         withNSString:(NSString *)string;
 
-- (jboolean)canGoBack;
+- (bool)canGoBack;
 
-- (void)clearCacheWithBoolean:(jboolean)b;
+- (void)clearCacheWithBoolean:(bool)b;
 
 - (void)clearHistory;
 
 - (void)destroy;
 
-- (jboolean)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event;
+- (bool)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event;
 
 - (void)evaluateJavascriptWithNSString:(NSString *)js
                    withADValueCallback:(ADValueCallback *)callback;
@@ -69,15 +73,15 @@
 
 - (void)resumeTimers;
 
-- (void)setInitialScaleWithInt:(jint)i;
+- (void)setInitialScaleWithInt:(int32_t)i;
 
-- (void)setNetworkAvailableWithBoolean:(jboolean)value;
+- (void)setNetworkAvailableWithBoolean:(bool)value;
 
-- (void)setVerticalScrollBarEnabledWithBoolean:(jboolean)b;
+- (void)setVerticalScrollBarEnabledWithBoolean:(bool)b;
 
 - (void)setWebChromeClientWithADWebChromeClient:(ADWebChromeClient *)client;
 
-+ (void)setWebContentsDebuggingEnabledWithBoolean:(jboolean)b;
++ (void)setWebContentsDebuggingEnabledWithBoolean:(bool)b;
 
 - (void)setWebViewClientWithADWebViewClient:(ADWebViewClient *)client;
 
@@ -99,11 +103,12 @@ FOUNDATION_EXPORT ADWebView *new_ADWebView_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADWebView *create_ADWebView_init(void);
 
-FOUNDATION_EXPORT void ADWebView_setWebContentsDebuggingEnabledWithBoolean_(jboolean b);
+FOUNDATION_EXPORT void ADWebView_setWebContentsDebuggingEnabledWithBoolean_(bool b);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADWebView)
 
 @compatibility_alias RAndroidWebkitWebView ADWebView;
+
 
 #endif
 

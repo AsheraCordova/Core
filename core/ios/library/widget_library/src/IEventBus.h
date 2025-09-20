@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\bus\IEventBus.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IEventBus")
@@ -17,6 +18,8 @@
 #define ASIEventBus_
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol JavaUtilList;
 
 /*!
@@ -34,7 +37,7 @@ withASEventBusHandlerArray:(IOSObjectArray *)handler;
 
 - (void)offAll;
 
-- (jboolean)handlesWithNSString:(NSString *)string;
+- (bool)handlesWithNSString:(NSString *)string;
 
 - (void)notifyObserversWithNSString:(NSString *)type
                              withId:(id)data;
@@ -46,6 +49,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASIEventBus)
 J2OBJC_TYPE_LITERAL_HEADER(ASIEventBus)
 
 #define ComAsheraWidgetBusIEventBus ASIEventBus
+
 
 #endif
 

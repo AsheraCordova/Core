@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\text\Layout.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Layout")
@@ -22,13 +23,15 @@
 #if !defined (ADLayout_) && (INCLUDE_ALL_Layout || defined(INCLUDE_ADLayout))
 #define ADLayout_
 
+@class JavaLangInteger;
+
 @interface ADLayout : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)getWidth;
+- (int32_t)getWidth;
 
 @end
 
@@ -44,6 +47,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLayout)
 
 @compatibility_alias RAndroidTextLayout ADLayout;
 
+
 #endif
 
 #if !defined (ADLayout_Alignment_) && (INCLUDE_ALL_Layout || defined(INCLUDE_ADLayout_Alignment))
@@ -54,14 +58,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLayout)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ADLayout_Alignment_Enum) {
-  ADLayout_Alignment_Enum_ALIGN_NORMAL = 0,
-  ADLayout_Alignment_Enum_ALIGN_OPPOSITE = 1,
-  ADLayout_Alignment_Enum_ALIGN_CENTER = 2,
-  ADLayout_Alignment_Enum_ALIGN_LEFT = 3,
-  ADLayout_Alignment_Enum_ALIGN_RIGHT = 4,
+typedef NS_ENUM(int32_t, ADLayout_Alignment_Enum) {
+  ADLayout_Alignment_Enum_ALIGN_NORMAL NS_SWIFT_NAME(alignNormal) = 0,
+  ADLayout_Alignment_Enum_ALIGN_OPPOSITE NS_SWIFT_NAME(alignOpposite) = 1,
+  ADLayout_Alignment_Enum_ALIGN_CENTER NS_SWIFT_NAME(alignCenter) = 2,
+  ADLayout_Alignment_Enum_ALIGN_LEFT NS_SWIFT_NAME(alignLeft) = 3,
+  ADLayout_Alignment_Enum_ALIGN_RIGHT NS_SWIFT_NAME(alignRight) = 4,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ADLayout_Alignment_ORDINAL int32_t
+#else
+#define ADLayout_Alignment_ORDINAL ADLayout_Alignment_Enum
+#endif
+
 
 @interface ADLayout_Alignment : JavaLangEnum
 
@@ -74,6 +86,13 @@ typedef NS_ENUM(NSUInteger, ADLayout_Alignment_Enum) {
 #pragma mark Package-Private
 
 - (ADLayout_Alignment_Enum)toNSEnum;
+
+@property(readonly) ADLayout_Alignment_Enum enumValue;
++ (ADLayout_Alignment *)fromNSEnum:(ADLayout_Alignment_Enum)value;
+
+- (ADLayout_Alignment_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithAlignment:(ADLayout_Alignment_Enum)value;
 
 @end
 
@@ -101,9 +120,10 @@ FOUNDATION_EXPORT IOSObjectArray *ADLayout_Alignment_values(void);
 
 FOUNDATION_EXPORT ADLayout_Alignment *ADLayout_Alignment_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ADLayout_Alignment *ADLayout_Alignment_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ADLayout_Alignment *ADLayout_Alignment_fromOrdinal(ADLayout_Alignment_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLayout_Alignment)
+
 
 #endif
 

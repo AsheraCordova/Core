@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\FloatEvaluator.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FloatEvaluator")
@@ -21,6 +22,7 @@
 #include "TypeEvaluator.h"
 
 @class JavaLangFloat;
+@class NSNumber;
 
 /*!
  @brief This evaluator can be used to perform type interpolation between <code>float</code> values.
@@ -44,7 +46,7 @@
  @return A linear interpolation between the start and end values, given the
           <code>fraction</code> parameter.
  */
-- (JavaLangFloat *)evaluateWithFloat:(jfloat)fraction
+- (JavaLangFloat *)evaluateWithFloat:(float)fraction
                               withId:(NSNumber *)startValue
                               withId:(NSNumber *)endValue;
 
@@ -61,6 +63,7 @@ FOUNDATION_EXPORT ADFloatEvaluator *create_ADFloatEvaluator_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADFloatEvaluator)
 
 @compatibility_alias RAndroidAnimationFloatEvaluator ADFloatEvaluator;
+
 
 #endif
 

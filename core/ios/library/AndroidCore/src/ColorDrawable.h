@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\graphics\drawable\ColorDrawable.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ColorDrawable")
@@ -20,6 +21,8 @@
 #define INCLUDE_ADDrawable 1
 #include "Drawable.h"
 
+@class JavaLangInteger;
+
 @interface ADColorDrawable : ADDrawable
 
 #pragma mark Public
@@ -28,7 +31,7 @@
 
 - (id)getColor;
 
-- (void)setColorWithInt:(jint)mColorValue;
+- (void)setColorWithInt:(int32_t)mColorValue;
 
 @end
 
@@ -43,6 +46,7 @@ FOUNDATION_EXPORT ADColorDrawable *create_ADColorDrawable_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADColorDrawable)
 
 @compatibility_alias RAndroidGraphicsDrawableColorDrawable ADColorDrawable;
+
 
 #endif
 

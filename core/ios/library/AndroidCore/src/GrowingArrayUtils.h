@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\GrowingArrayUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_GrowingArrayUtils")
@@ -20,6 +21,9 @@
 @class IOSIntArray;
 @class IOSLongArray;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class JavaLangLong;
 
 /*!
  @brief A helper class that aims to provide comparable growth performance to ArrayList, but on primitive
@@ -36,22 +40,22 @@
  @brief Primitive boolean version of <code>append(Object[], int, Object)</code>.
  */
 + (IOSBooleanArray *)appendWithBooleanArray:(IOSBooleanArray *)array
-                                    withInt:(jint)currentSize
-                                withBoolean:(jboolean)element;
+                                    withInt:(int32_t)currentSize
+                                withBoolean:(bool)element;
 
 /*!
  @brief Primitive int version of <code>append(Object[], int, Object)</code>.
  */
 + (IOSIntArray *)appendWithIntArray:(IOSIntArray *)array
-                            withInt:(jint)currentSize
-                            withInt:(jint)element;
+                            withInt:(int32_t)currentSize
+                            withInt:(int32_t)element;
 
 /*!
  @brief Primitive long version of <code>append(Object[], int, Object)</code>.
  */
 + (IOSLongArray *)appendWithLongArray:(IOSLongArray *)array
-                              withInt:(jint)currentSize
-                             withLong:(jlong)element;
+                              withInt:(int32_t)currentSize
+                             withLong:(int64_t)element;
 
 /*!
  @brief Appends an element to the end of the array, growing the array if there is no more room.
@@ -62,7 +66,7 @@
           array.
  */
 + (IOSObjectArray *)appendWithNSObjectArray:(IOSObjectArray *)array
-                                    withInt:(jint)currentSize
+                                    withInt:(int32_t)currentSize
                                      withId:(id)element;
 
 /*!
@@ -70,31 +74,31 @@
  This is typically double the given size, but should not be relied upon to do so in the
   future.
  */
-+ (jint)growSizeWithInt:(jint)currentSize;
++ (int32_t)growSizeWithInt:(int32_t)currentSize;
 
 /*!
  @brief Primitive boolean version of <code>insert(Object[], int, int, Object)</code>.
  */
 + (IOSBooleanArray *)insertWithBooleanArray:(IOSBooleanArray *)array
-                                    withInt:(jint)currentSize
-                                    withInt:(jint)index
-                                withBoolean:(jboolean)element;
+                                    withInt:(int32_t)currentSize
+                                    withInt:(int32_t)index
+                                withBoolean:(bool)element;
 
 /*!
  @brief Primitive int version of <code>insert(Object[], int, int, Object)</code>.
  */
 + (IOSIntArray *)insertWithIntArray:(IOSIntArray *)array
-                            withInt:(jint)currentSize
-                            withInt:(jint)index
-                            withInt:(jint)element;
+                            withInt:(int32_t)currentSize
+                            withInt:(int32_t)index
+                            withInt:(int32_t)element;
 
 /*!
  @brief Primitive long version of <code>insert(Object[], int, int, Object)</code>.
  */
 + (IOSLongArray *)insertWithLongArray:(IOSLongArray *)array
-                              withInt:(jint)currentSize
-                              withInt:(jint)index
-                             withLong:(jlong)element;
+                              withInt:(int32_t)currentSize
+                              withInt:(int32_t)index
+                             withLong:(int64_t)element;
 
 /*!
  @brief Inserts an element into the array at the specified index, growing the array if there is no
@@ -106,35 +110,36 @@
           array.
  */
 + (IOSObjectArray *)insertWithNSObjectArray:(IOSObjectArray *)array
-                                    withInt:(jint)currentSize
-                                    withInt:(jint)index
+                                    withInt:(int32_t)currentSize
+                                    withInt:(int32_t)index
                                      withId:(id)element;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADGrowingArrayUtils)
 
-FOUNDATION_EXPORT IOSBooleanArray *ADGrowingArrayUtils_appendWithBooleanArray_withInt_withBoolean_(IOSBooleanArray *array, jint currentSize, jboolean element);
+FOUNDATION_EXPORT IOSBooleanArray *ADGrowingArrayUtils_appendWithBooleanArray_withInt_withBoolean_(IOSBooleanArray *array, int32_t currentSize, bool element);
 
-FOUNDATION_EXPORT IOSObjectArray *ADGrowingArrayUtils_appendWithNSObjectArray_withInt_withId_(IOSObjectArray *array, jint currentSize, id element);
+FOUNDATION_EXPORT IOSObjectArray *ADGrowingArrayUtils_appendWithNSObjectArray_withInt_withId_(IOSObjectArray *array, int32_t currentSize, id element);
 
-FOUNDATION_EXPORT IOSIntArray *ADGrowingArrayUtils_appendWithIntArray_withInt_withInt_(IOSIntArray *array, jint currentSize, jint element);
+FOUNDATION_EXPORT IOSIntArray *ADGrowingArrayUtils_appendWithIntArray_withInt_withInt_(IOSIntArray *array, int32_t currentSize, int32_t element);
 
-FOUNDATION_EXPORT IOSIntArray *ADGrowingArrayUtils_insertWithIntArray_withInt_withInt_withInt_(IOSIntArray *array, jint currentSize, jint index, jint element);
+FOUNDATION_EXPORT IOSIntArray *ADGrowingArrayUtils_insertWithIntArray_withInt_withInt_withInt_(IOSIntArray *array, int32_t currentSize, int32_t index, int32_t element);
 
-FOUNDATION_EXPORT IOSLongArray *ADGrowingArrayUtils_insertWithLongArray_withInt_withInt_withLong_(IOSLongArray *array, jint currentSize, jint index, jlong element);
+FOUNDATION_EXPORT IOSLongArray *ADGrowingArrayUtils_insertWithLongArray_withInt_withInt_withLong_(IOSLongArray *array, int32_t currentSize, int32_t index, int64_t element);
 
-FOUNDATION_EXPORT IOSBooleanArray *ADGrowingArrayUtils_insertWithBooleanArray_withInt_withInt_withBoolean_(IOSBooleanArray *array, jint currentSize, jint index, jboolean element);
+FOUNDATION_EXPORT IOSBooleanArray *ADGrowingArrayUtils_insertWithBooleanArray_withInt_withInt_withBoolean_(IOSBooleanArray *array, int32_t currentSize, int32_t index, bool element);
 
-FOUNDATION_EXPORT jint ADGrowingArrayUtils_growSizeWithInt_(jint currentSize);
+FOUNDATION_EXPORT int32_t ADGrowingArrayUtils_growSizeWithInt_(int32_t currentSize);
 
-FOUNDATION_EXPORT IOSObjectArray *ADGrowingArrayUtils_insertWithNSObjectArray_withInt_withInt_withId_(IOSObjectArray *array, jint currentSize, jint index, id element);
+FOUNDATION_EXPORT IOSObjectArray *ADGrowingArrayUtils_insertWithNSObjectArray_withInt_withInt_withId_(IOSObjectArray *array, int32_t currentSize, int32_t index, id element);
 
-FOUNDATION_EXPORT IOSLongArray *ADGrowingArrayUtils_appendWithLongArray_withInt_withLong_(IOSLongArray *array, jint currentSize, jlong element);
+FOUNDATION_EXPORT IOSLongArray *ADGrowingArrayUtils_appendWithLongArray_withInt_withLong_(IOSLongArray *array, int32_t currentSize, int64_t element);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADGrowingArrayUtils)
 
 @compatibility_alias RAndroidUtilGrowingArrayUtils ADGrowingArrayUtils;
+
 
 #endif
 

@@ -3,14 +3,28 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\view\animation\OvershootInterpolator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseInterpolator.h"
 #include "J2ObjC_source.h"
 #include "OvershootInterpolator.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADOvershootInterpolator () {
  @public
-  jfloat mTension_;
+  float mTension_;
 }
 
 @end
@@ -24,17 +38,17 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithFloat:(jfloat)tension {
+- (instancetype)initWithFloat:(float)tension {
   ADOvershootInterpolator_initWithFloat_(self, tension);
   return self;
 }
 
-- (jfloat)getInterpolationWithFloat:(jfloat)t {
+- (float)getInterpolationWithFloat:(float)t {
   JreMinusAssignFloatF(&t, 1.0f);
   return t * t * ((mTension_ + 1) * t + mTension_) + 1.0f;
 }
 
-- (jlong)createNativeInterpolator {
+- (int64_t)createNativeInterpolator {
   return 0;
 }
 
@@ -76,17 +90,19 @@ ADOvershootInterpolator *create_ADOvershootInterpolator_init() {
   J2OBJC_CREATE_IMPL(ADOvershootInterpolator, init)
 }
 
-void ADOvershootInterpolator_initWithFloat_(ADOvershootInterpolator *self, jfloat tension) {
+void ADOvershootInterpolator_initWithFloat_(ADOvershootInterpolator *self, float tension) {
   ADBaseInterpolator_init(self);
   self->mTension_ = tension;
 }
 
-ADOvershootInterpolator *new_ADOvershootInterpolator_initWithFloat_(jfloat tension) {
+ADOvershootInterpolator *new_ADOvershootInterpolator_initWithFloat_(float tension) {
   J2OBJC_NEW_IMPL(ADOvershootInterpolator, initWithFloat_, tension)
 }
 
-ADOvershootInterpolator *create_ADOvershootInterpolator_initWithFloat_(jfloat tension) {
+ADOvershootInterpolator *create_ADOvershootInterpolator_initWithFloat_(float tension) {
   J2OBJC_CREATE_IMPL(ADOvershootInterpolator, initWithFloat_, tension)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADOvershootInterpolator)
+
+J2OBJC_NAME_MAPPING(ADOvershootInterpolator, "r.android.view.animation", "AD")

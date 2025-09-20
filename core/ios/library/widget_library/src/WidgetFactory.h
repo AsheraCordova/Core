@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetFactory")
@@ -20,6 +21,8 @@
 @class ASWidgetAttributeMap;
 @class ASWidgetAttribute_Builder;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASHasWidgets;
 @protocol ASIAttributable;
 @protocol ASIBehavior;
@@ -42,10 +45,10 @@
 + (id<ASIWidget>)createWidgetWithNSString:(NSString *)localName
                              withNSString:(NSString *)themeName
                          withASHasWidgets:(id<ASHasWidgets>)parent
-                              withBoolean:(jboolean)addNativeOnly;
+                              withBoolean:(bool)addNativeOnly;
 
 + (id<ASIWidget>)getWithNSString:(NSString *)localname
-                     withBoolean:(jboolean)isLazy;
+                     withBoolean:(bool)isLazy;
 
 + (id<ASIAttributable>)getAttributableWithNSString:(NSString *)localname;
 
@@ -71,7 +74,7 @@
 
 + (id<JavaUtilSet>)getStyleAttributesWithNSString:(NSString *)localname;
 
-+ (jboolean)isAttributeLoadedWithNSString:(NSString *)localname;
++ (bool)isAttributeLoadedWithNSString:(NSString *)localname;
 
 + (void)loadWidgetWithASIWidget:(id<ASIWidget>)widget
        withASWidgetAttributeMap:(ASWidgetAttributeMap *)attributes
@@ -112,7 +115,7 @@ FOUNDATION_EXPORT ASWidgetFactory *new_ASWidgetFactory_init(void) NS_RETURNS_RET
 
 FOUNDATION_EXPORT ASWidgetFactory *create_ASWidgetFactory_init(void);
 
-FOUNDATION_EXPORT id<ASIWidget> ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(NSString *localName, NSString *themeName, id<ASHasWidgets> parent, jboolean addNativeOnly);
+FOUNDATION_EXPORT id<ASIWidget> ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(NSString *localName, NSString *themeName, id<ASHasWidgets> parent, bool addNativeOnly);
 
 FOUNDATION_EXPORT id<JavaUtilSet> ASWidgetFactory_getConstructorAttributesWithNSString_(NSString *localname);
 
@@ -126,7 +129,7 @@ FOUNDATION_EXPORT id<ASIAttributable> ASWidgetFactory_getAttributableWithNSStrin
 
 FOUNDATION_EXPORT id<JavaUtilList> ASWidgetFactory_getAttributablesWithNSStringArray_(IOSObjectArray *localnames);
 
-FOUNDATION_EXPORT id<ASIWidget> ASWidgetFactory_getWithNSString_withBoolean_(NSString *localname, jboolean isLazy);
+FOUNDATION_EXPORT id<ASIWidget> ASWidgetFactory_getWithNSString_withBoolean_(NSString *localname, bool isLazy);
 
 FOUNDATION_EXPORT id<ASIDecorator> ASWidgetFactory_getDecoratorWithASICompositeDecorator_withASIWidget_withNSString_(id<ASICompositeDecorator> wrappingWidget, id<ASIWidget> wrappedWidget, NSString *localname);
 
@@ -136,7 +139,7 @@ FOUNDATION_EXPORT void ASWidgetFactory_register__WithASIWidget_(id<ASIWidget> ui
 
 FOUNDATION_EXPORT void ASWidgetFactory_registerDecoratorWithASIDecorator_(id<ASIDecorator> ui);
 
-FOUNDATION_EXPORT jboolean ASWidgetFactory_isAttributeLoadedWithNSString_(NSString *localname);
+FOUNDATION_EXPORT bool ASWidgetFactory_isAttributeLoadedWithNSString_(NSString *localname);
 
 FOUNDATION_EXPORT void ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(NSString *localname, ASWidgetAttribute_Builder *builder);
 
@@ -161,6 +164,7 @@ FOUNDATION_EXPORT id<JavaUtilCollection> ASWidgetFactory_getAttributesWithNSStri
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetFactory)
 
 @compatibility_alias ComAsheraWidgetWidgetFactory ASWidgetFactory;
+
 
 #endif
 

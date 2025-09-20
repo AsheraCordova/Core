@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\AndroidJMaterial\src\main\java\com\google\android\material\badge\BadgeUtils.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_BadgeUtils")
@@ -20,6 +21,8 @@
 @class ADRect;
 @class ADView;
 @class ADXBadgeDrawable;
+@class JavaLangBoolean;
+@class JavaLangFloat;
 
 @interface ADXBadgeUtils : NSObject
 
@@ -39,18 +42,18 @@
                                  withADFrameLayout:(ADFrameLayout *)compatBadgeParent;
 
 + (void)updateBadgeBoundsWithADRect:(ADRect *)rect
-                          withFloat:(jfloat)centerX
-                          withFloat:(jfloat)centerY
-                          withFloat:(jfloat)halfWidth
-                          withFloat:(jfloat)halfHeight;
+                          withFloat:(float)centerX
+                          withFloat:(float)centerY
+                          withFloat:(float)halfWidth
+                          withFloat:(float)halfHeight;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXBadgeUtils)
 
-inline jboolean ADXBadgeUtils_get_USE_COMPAT_PARENT(void);
+inline bool ADXBadgeUtils_get_USE_COMPAT_PARENT(void);
 #define ADXBadgeUtils_USE_COMPAT_PARENT false
-J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeUtils, USE_COMPAT_PARENT, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADXBadgeUtils, USE_COMPAT_PARENT, bool)
 
 FOUNDATION_EXPORT void ADXBadgeUtils_init(ADXBadgeUtils *self);
 
@@ -58,7 +61,7 @@ FOUNDATION_EXPORT ADXBadgeUtils *new_ADXBadgeUtils_init(void) NS_RETURNS_RETAINE
 
 FOUNDATION_EXPORT ADXBadgeUtils *create_ADXBadgeUtils_init(void);
 
-FOUNDATION_EXPORT void ADXBadgeUtils_updateBadgeBoundsWithADRect_withFloat_withFloat_withFloat_withFloat_(ADRect *rect, jfloat centerX, jfloat centerY, jfloat halfWidth, jfloat halfHeight);
+FOUNDATION_EXPORT void ADXBadgeUtils_updateBadgeBoundsWithADRect_withFloat_withFloat_withFloat_withFloat_(ADRect *rect, float centerX, float centerY, float halfWidth, float halfHeight);
 
 FOUNDATION_EXPORT void ADXBadgeUtils_attachBadgeDrawableWithADXBadgeDrawable_withADView_withADFrameLayout_(ADXBadgeDrawable *badgeDrawable, ADView *anchor, ADFrameLayout *customBadgeParent);
 
@@ -69,6 +72,7 @@ FOUNDATION_EXPORT void ADXBadgeUtils_setBadgeDrawableBoundsWithADXBadgeDrawable_
 J2OBJC_TYPE_LITERAL_HEADER(ADXBadgeUtils)
 
 @compatibility_alias ComGoogleAndroidMaterialBadgeBadgeUtils ADXBadgeUtils;
+
 
 #endif
 

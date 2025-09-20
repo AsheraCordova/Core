@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\MethodHandlerFactory.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_MethodHandlerFactory")
@@ -50,6 +51,7 @@ FOUNDATION_EXPORT void ASMethodHandlerFactory_register__WithASMethodHandler_(id<
 J2OBJC_TYPE_LITERAL_HEADER(ASMethodHandlerFactory)
 
 @compatibility_alias ComAsheraModelMethodHandlerFactory ASMethodHandlerFactory;
+
 
 #endif
 

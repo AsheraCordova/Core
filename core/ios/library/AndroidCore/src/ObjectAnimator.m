@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\ObjectAnimator.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AnimationHandler.h"
 #include "Animator.h"
 #include "ArgbEvaluator.h"
@@ -22,13 +27,20 @@
 #include "ValueAnimator.h"
 #include "View.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/SafeVarargs.h"
 #include "java/lang/annotation/Annotation.h"
 #include "java/lang/ref/WeakReference.h"
 #include "java/util/HashMap.h"
 
-@class JavaLangRefWeakReference;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADObjectAnimator () {
@@ -40,7 +52,7 @@
   JavaLangRefWeakReference *mTarget_;
   NSString *mPropertyName_;
   ADProperty *mProperty_;
-  jboolean mAutoCancel_;
+  bool mAutoCancel_;
 }
 
 /*!
@@ -62,7 +74,7 @@
 - (instancetype)initWithId:(id)target
             withADProperty:(ADProperty *)property;
 
-- (jboolean)hasSameTargetAndPropertiesWithADAnimator:(ADAnimator *)anim;
+- (bool)hasSameTargetAndPropertiesWithADAnimator:(ADAnimator *)anim;
 
 @end
 
@@ -74,9 +86,9 @@ inline NSString *ADObjectAnimator_get_LOG_TAG(void);
 static NSString *ADObjectAnimator_LOG_TAG = @"ObjectAnimator";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADObjectAnimator, LOG_TAG, NSString *)
 
-inline jboolean ADObjectAnimator_get_DBG(void);
+inline bool ADObjectAnimator_get_DBG(void);
 #define ADObjectAnimator_DBG false
-J2OBJC_STATIC_FIELD_CONSTANT(ADObjectAnimator, DBG, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(ADObjectAnimator, DBG, bool)
 
 __attribute__((unused)) static void ADObjectAnimator_initWithId_withNSString_(ADObjectAnimator *self, id target, NSString *propertyName);
 
@@ -90,7 +102,7 @@ __attribute__((unused)) static ADObjectAnimator *new_ADObjectAnimator_initWithId
 
 __attribute__((unused)) static ADObjectAnimator *create_ADObjectAnimator_initWithId_withADProperty_(id target, ADProperty *property);
 
-__attribute__((unused)) static jboolean ADObjectAnimator_hasSameTargetAndPropertiesWithADAnimator_(ADObjectAnimator *self, ADAnimator *anim);
+__attribute__((unused)) static bool ADObjectAnimator_hasSameTargetAndPropertiesWithADAnimator_(ADObjectAnimator *self, ADAnimator *anim);
 
 __attribute__((unused)) static IOSObjectArray *ADObjectAnimator__Annotations$0(void);
 
@@ -138,7 +150,7 @@ __attribute__((unused)) static IOSObjectArray *ADObjectAnimator__Annotations$3(v
     propertyName = [mProperty_ getName];
   }
   else if (mValues_ != nil && mValues_->size_ > 0) {
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(mValues_))->size_; ++i) {
+    for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(mValues_))->size_; ++i) {
       if (i == 0) {
         propertyName = @"";
       }
@@ -361,11 +373,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setAutoCancelWithBoolean:(jboolean)cancel {
+- (void)setAutoCancelWithBoolean:(bool)cancel {
   mAutoCancel_ = cancel;
 }
 
-- (jboolean)hasSameTargetAndPropertiesWithADAnimator:(ADAnimator *)anim {
+- (bool)hasSameTargetAndPropertiesWithADAnimator:(ADAnimator *)anim {
   return ADObjectAnimator_hasSameTargetAndPropertiesWithADAnimator_(self, anim);
 }
 
@@ -374,7 +386,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super start];
 }
 
-- (jboolean)shouldAutoCancelWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)anim {
+- (bool)shouldAutoCancelWithADAnimationHandler_AnimationFrameCallback:(id<ADAnimationHandler_AnimationFrameCallback>)anim {
   if (anim == nil) {
     return false;
   }
@@ -391,8 +403,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (!mInitialized_) {
     id target = [self getTarget];
     if (target != nil) {
-      jint numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
-      for (jint i = 0; i < numValues; ++i) {
+      int32_t numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
+      for (int32_t i = 0; i < numValues; ++i) {
         [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) setupSetterAndGetterWithId:target];
       }
     }
@@ -400,7 +412,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (ADObjectAnimator *)setDurationWithLong:(jlong)duration {
+- (ADObjectAnimator *)setDurationWithLong:(int64_t)duration {
   [super setDurationWithLong:duration];
   return self;
 }
@@ -411,7 +423,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setTargetWithId:(id)target {
   id oldTarget = [self getTarget];
-  if (oldTarget != target) {
+  if (!JreObjectEqualsEquals(oldTarget, target)) {
     if ([self isStarted]) {
       [self cancel];
     }
@@ -424,8 +436,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self initAnimation];
   id target = [self getTarget];
   if (target != nil) {
-    jint numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
-    for (jint i = 0; i < numValues; ++i) {
+    int32_t numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
+    for (int32_t i = 0; i < numValues; ++i) {
       [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) setupStartValueWithId:target];
     }
   }
@@ -435,14 +447,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self initAnimation];
   id target = [self getTarget];
   if (target != nil) {
-    jint numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
-    for (jint i = 0; i < numValues; ++i) {
+    int32_t numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
+    for (int32_t i = 0; i < numValues; ++i) {
       [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) setupEndValueWithId:target];
     }
   }
 }
 
-- (void)animateValueWithFloat:(jfloat)fraction {
+- (void)animateValueWithFloat:(float)fraction {
   id target = [self getTarget];
   if (mTarget_ != nil && target == nil) {
     [self cancel];
@@ -453,8 +465,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     if ([target isKindOfClass:[ADView class]]) {
       [((ADView *) nil_chk(((ADView *) target))) setMyAttributeWithNSString:@"swtRedraw" withId:JavaLangBoolean_valueOfWithBoolean_(false)];
     }
-    jint numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
-    for (jint i = 0; i < numValues; ++i) {
+    int32_t numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
+    for (int32_t i = 0; i < numValues; ++i) {
       [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) setAnimatedValueWithId:target];
     }
   }
@@ -465,7 +477,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isInitialized {
+- (bool)isInitialized {
   return mInitialized_;
 }
 
@@ -475,9 +487,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  NSString *returnVal = JreStrcat("$$$@", @"ObjectAnimator@", JavaLangInteger_toHexStringWithInt_(((jint) [self hash])), @", target ", [self getTarget]);
+  NSString *returnVal = JreStrcat("$$$@", @"ObjectAnimator@", JavaLangInteger_toHexStringWithInt_(((int32_t) [self hash])), @", target ", [self getTarget]);
   if (mValues_ != nil) {
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(mValues_))->size_; ++i) {
+    for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(mValues_))->size_; ++i) {
       JreStrAppend(&returnVal, "$$", @"\n    ", [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(mValues_, i))) description]);
     }
   }
@@ -800,11 +812,11 @@ ADObjectAnimator *ADObjectAnimator_ofPropertyValuesHolderWithId_withADPropertyVa
   return anim;
 }
 
-jboolean ADObjectAnimator_hasSameTargetAndPropertiesWithADAnimator_(ADObjectAnimator *self, ADAnimator *anim) {
+bool ADObjectAnimator_hasSameTargetAndPropertiesWithADAnimator_(ADObjectAnimator *self, ADAnimator *anim) {
   if ([anim isKindOfClass:[ADObjectAnimator class]]) {
     IOSObjectArray *theirValues = [((ADObjectAnimator *) nil_chk(((ADObjectAnimator *) anim))) getValues];
-    if ([((ADObjectAnimator *) nil_chk(((ADObjectAnimator *) anim))) getTarget] == [self getTarget] && ((IOSObjectArray *) nil_chk(self->mValues_))->size_ == ((IOSObjectArray *) nil_chk(theirValues))->size_) {
-      for (jint i = 0; i < ((IOSObjectArray *) nil_chk(self->mValues_))->size_; ++i) {
+    if (JreObjectEqualsEquals([((ADObjectAnimator *) nil_chk(((ADObjectAnimator *) anim))) getTarget], [self getTarget]) && ((IOSObjectArray *) nil_chk(self->mValues_))->size_ == ((IOSObjectArray *) nil_chk(theirValues))->size_) {
+      for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(self->mValues_))->size_; ++i) {
         ADPropertyValuesHolder *pvhMine = IOSObjectArray_Get(self->mValues_, i);
         ADPropertyValuesHolder *pvhTheirs = IOSObjectArray_Get(nil_chk(theirValues), i);
         if ([((ADPropertyValuesHolder *) nil_chk(pvhMine)) getPropertyName] == nil || ![((NSString *) nil_chk([pvhMine getPropertyName])) isEqual:[((ADPropertyValuesHolder *) nil_chk(pvhTheirs)) getPropertyName]]) {
@@ -834,3 +846,5 @@ IOSObjectArray *ADObjectAnimator__Annotations$3() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADObjectAnimator)
+
+J2OBJC_NAME_MAPPING(ADObjectAnimator, "r.android.animation", "AD")

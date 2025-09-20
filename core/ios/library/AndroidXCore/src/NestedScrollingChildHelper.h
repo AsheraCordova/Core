@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingChildHelper.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollingChildHelper")
@@ -24,6 +25,9 @@
 
 @class ADView;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 /*!
  @brief Helper class for implementing nested scrolling child views compatible with Android platform
@@ -55,9 +59,9 @@
   signature to implement the standard policy.</p>
  @return true if the parent consumed the nested fling
  */
-- (jboolean)dispatchNestedFlingWithFloat:(jfloat)velocityX
-                               withFloat:(jfloat)velocityY
-                             withBoolean:(jboolean)consumed;
+- (bool)dispatchNestedFlingWithFloat:(float)velocityX
+                           withFloat:(float)velocityY
+                         withBoolean:(bool)consumed;
 
 /*!
  @brief Dispatch a nested pre-fling operation to the current nested scrolling parent.
@@ -66,8 +70,8 @@
   signature to implement the standard policy.</p>
  @return true if the parent consumed the nested fling
  */
-- (jboolean)dispatchNestedPreFlingWithFloat:(jfloat)velocityX
-                                  withFloat:(jfloat)velocityY;
+- (bool)dispatchNestedPreFlingWithFloat:(float)velocityX
+                              withFloat:(float)velocityY;
 
 /*!
  @brief Dispatch one step of a nested pre-scrolling operation to the current nested scrolling parent.
@@ -76,10 +80,10 @@
   signature to implement the standard policy.</p>
  @return true if the parent consumed any of the nested scroll
  */
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow;
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow;
 
 /*!
  @brief Dispatch one step of a nested pre-scrolling operation to the current nested scrolling parent.
@@ -88,11 +92,11 @@
   signature to implement the standard policy.</p>
  @return true if the parent consumed any of the nested scroll
  */
-- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
-                                   withInt:(jint)dy
-                              withIntArray:(IOSIntArray *)consumed
-                              withIntArray:(IOSIntArray *)offsetInWindow
-                                   withInt:(jint)type;
+- (bool)dispatchNestedPreScrollWithInt:(int32_t)dx
+                               withInt:(int32_t)dy
+                          withIntArray:(IOSIntArray *)consumed
+                          withIntArray:(IOSIntArray *)offsetInWindow
+                               withInt:(int32_t)type;
 
 /*!
  @brief Dispatch one step of a nested scrolling operation to the current nested scrolling parent.
@@ -101,11 +105,11 @@
   signature to implement the standard policy.</p>
  @return <code>true</code> if the parent consumed any of the nested scroll distance
  */
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow;
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow;
 
 /*!
  @brief Dispatch one step of a nested scrolling operation to the current nested scrolling parent.
@@ -113,24 +117,24 @@
   method with the same signature to implement the standard policy.
  @return <code>true</code> if the parent consumed any of the nested scroll distance
  */
-- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
-                                withInt:(jint)dyConsumed
-                                withInt:(jint)dxUnconsumed
-                                withInt:(jint)dyUnconsumed
-                           withIntArray:(IOSIntArray *)offsetInWindow
-                                withInt:(jint)type;
+- (bool)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
+                       withIntArray:(IOSIntArray *)offsetInWindow
+                            withInt:(int32_t)type;
 
 /*!
  @brief Dispatch one step of a nested scrolling operation to the current nested scrolling parent.
  <p>This is a delegate method. Call it from your <code>NestedScrollingChild3</code> interface
   method with the same signature to implement the standard policy.
  */
-- (void)dispatchNestedScrollWithInt:(jint)dxConsumed
-                            withInt:(jint)dyConsumed
-                            withInt:(jint)dxUnconsumed
-                            withInt:(jint)dyUnconsumed
+- (void)dispatchNestedScrollWithInt:(int32_t)dxConsumed
+                            withInt:(int32_t)dyConsumed
+                            withInt:(int32_t)dxUnconsumed
+                            withInt:(int32_t)dyUnconsumed
                        withIntArray:(IOSIntArray *)offsetInWindow
-                            withInt:(jint)type
+                            withInt:(int32_t)type
                        withIntArray:(IOSIntArray *)consumed;
 
 /*!
@@ -141,7 +145,7 @@
   signature to implement the standard policy.</p>
  @return true if this view has a nested scrolling parent, false otherwise
  */
-- (jboolean)hasNestedScrollingParent;
+- (bool)hasNestedScrollingParent;
 
 /*!
  @brief Check if this view has a nested scrolling parent view currently receiving events for
@@ -151,7 +155,7 @@
   signature to implement the standard policy.</p>
  @return true if this view has a nested scrolling parent, false otherwise
  */
-- (jboolean)hasNestedScrollingParentWithInt:(jint)type;
+- (bool)hasNestedScrollingParentWithInt:(int32_t)type;
 
 /*!
  @brief Check if nested scrolling is enabled for this view.
@@ -160,7 +164,7 @@
   signature to implement the standard policy.</p>
  @return true if nested scrolling is enabled for this view
  */
-- (jboolean)isNestedScrollingEnabled;
+- (bool)isNestedScrollingEnabled;
 
 /*!
  @brief View subclasses should always call this method on their 
@@ -187,7 +191,7 @@
   signature to implement the standard policy.</p>
  @param enabled true to enable nested scrolling dispatch from this view, false otherwise
  */
-- (void)setNestedScrollingEnabledWithBoolean:(jboolean)enabled;
+- (void)setNestedScrollingEnabledWithBoolean:(bool)enabled;
 
 /*!
  @brief Start a new nested scroll for this view.
@@ -198,7 +202,7 @@
  <code>androidx.core.view.NestedScrollingChild.startNestedScroll(int)</code> .
  @return true if a cooperating parent view was found and nested scrolling started successfully
  */
-- (jboolean)startNestedScrollWithInt:(jint)axes;
+- (bool)startNestedScrollWithInt:(int32_t)axes;
 
 /*!
  @brief Start a new nested scroll for this view.
@@ -211,8 +215,8 @@
   .
  @return true if a cooperating parent view was found and nested scrolling started successfully
  */
-- (jboolean)startNestedScrollWithInt:(jint)axes
-                             withInt:(jint)type;
+- (bool)startNestedScrollWithInt:(int32_t)axes
+                         withInt:(int32_t)type;
 
 /*!
  @brief Stop a nested scroll in progress.
@@ -228,7 +232,7 @@
   method/<code>androidx.core.view.NestedScrollingChild2</code> interface method with the same
   signature to implement the standard policy.</p>
  */
-- (void)stopNestedScrollWithInt:(jint)type;
+- (void)stopNestedScrollWithInt:(int32_t)type;
 
 // Disallowed inherited constructors, do not use.
 
@@ -247,6 +251,7 @@ FOUNDATION_EXPORT ADXNestedScrollingChildHelper *create_ADXNestedScrollingChildH
 J2OBJC_TYPE_LITERAL_HEADER(ADXNestedScrollingChildHelper)
 
 @compatibility_alias AndroidxCoreViewNestedScrollingChildHelper ADXNestedScrollingChildHelper;
+
 
 #endif
 

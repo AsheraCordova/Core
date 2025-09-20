@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\Plugin_HtmlParser\src\com\ashera\parser\html\HtmlSaxHandler.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_HtmlSaxHandler")
@@ -22,6 +23,9 @@
 
 @class ASWidgetAttributeMap;
 @class IOSCharArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASHasWidgets;
 @protocol ASIFragment;
 @protocol ASIWidget;
@@ -34,17 +38,17 @@
 #pragma mark Public
 
 - (instancetype)initWithASIFragment:(id<ASIFragment>)fragment
-                        withBoolean:(jboolean)template_;
+                        withBoolean:(bool)template_;
 
 - (instancetype)initWithASIFragment:(id<ASIFragment>)fragment
                        withNSString:(NSString *)componentId
-                        withBoolean:(jboolean)template_;
+                        withBoolean:(bool)template_;
 
 - (void)addToCurrentParentWithASIWidget:(id<ASIWidget>)widget;
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
+                        withInt:(int32_t)start
+                        withInt:(int32_t)length;
 
 - (void)endCreateWidgetWithNSString:(NSString *)localName;
 
@@ -59,8 +63,8 @@
 - (id<ASIWidget>)getRoot;
 
 - (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length;
+                                 withInt:(int32_t)start
+                                 withInt:(int32_t)length;
 
 - (void)initRootWithASHasWidgets:(id<ASHasWidgets>)parent OBJC_METHOD_FAMILY_NONE;
 
@@ -75,7 +79,7 @@
                                  withASIWidget:(id<ASIWidget>)widget
                                   withNSString:(NSString *)tagName
                                   withNSString:(NSString *)id_
-                                       withInt:(jint)index
+                                       withInt:(int32_t)index
                        withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
                       withASWidgetAttributeMap:(ASWidgetAttributeMap *)widgetAttributeMap
                                withJavaUtilMap:(id<JavaUtilMap>)params
@@ -99,21 +103,22 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ASHtmlSaxHandler)
 
-FOUNDATION_EXPORT void ASHtmlSaxHandler_initWithASIFragment_withBoolean_(ASHtmlSaxHandler *self, id<ASIFragment> fragment, jboolean template_);
+FOUNDATION_EXPORT void ASHtmlSaxHandler_initWithASIFragment_withBoolean_(ASHtmlSaxHandler *self, id<ASIFragment> fragment, bool template_);
 
-FOUNDATION_EXPORT ASHtmlSaxHandler *new_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(id<ASIFragment> fragment, jboolean template_) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASHtmlSaxHandler *new_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(id<ASIFragment> fragment, bool template_) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASHtmlSaxHandler *create_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(id<ASIFragment> fragment, jboolean template_);
+FOUNDATION_EXPORT ASHtmlSaxHandler *create_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(id<ASIFragment> fragment, bool template_);
 
-FOUNDATION_EXPORT void ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(ASHtmlSaxHandler *self, id<ASIFragment> fragment, NSString *componentId, jboolean template_);
+FOUNDATION_EXPORT void ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(ASHtmlSaxHandler *self, id<ASIFragment> fragment, NSString *componentId, bool template_);
 
-FOUNDATION_EXPORT ASHtmlSaxHandler *new_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *componentId, jboolean template_) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASHtmlSaxHandler *new_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *componentId, bool template_) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASHtmlSaxHandler *create_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *componentId, jboolean template_);
+FOUNDATION_EXPORT ASHtmlSaxHandler *create_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *componentId, bool template_);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASHtmlSaxHandler)
 
 @compatibility_alias ComAsheraParserHtmlHtmlSaxHandler ASHtmlSaxHandler;
+
 
 #endif
 

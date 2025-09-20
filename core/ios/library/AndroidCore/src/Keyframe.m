@@ -3,12 +3,24 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\Keyframe.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "Keyframe.h"
 #include "TimeInterpolator.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADKeyframe () {
@@ -33,42 +45,42 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (ADKeyframe *)ofIntWithFloat:(jfloat)fraction
-                       withInt:(jint)value {
++ (ADKeyframe *)ofIntWithFloat:(float)fraction
+                       withInt:(int32_t)value {
   return ADKeyframe_ofIntWithFloat_withInt_(fraction, value);
 }
 
-+ (ADKeyframe *)ofIntWithFloat:(jfloat)fraction {
++ (ADKeyframe *)ofIntWithFloat:(float)fraction {
   return ADKeyframe_ofIntWithFloat_(fraction);
 }
 
-+ (ADKeyframe *)ofFloatWithFloat:(jfloat)fraction
-                       withFloat:(jfloat)value {
++ (ADKeyframe *)ofFloatWithFloat:(float)fraction
+                       withFloat:(float)value {
   return ADKeyframe_ofFloatWithFloat_withFloat_(fraction, value);
 }
 
-+ (ADKeyframe *)ofFloatWithFloat:(jfloat)fraction {
++ (ADKeyframe *)ofFloatWithFloat:(float)fraction {
   return ADKeyframe_ofFloatWithFloat_(fraction);
 }
 
-+ (ADKeyframe *)ofObjectWithFloat:(jfloat)fraction
++ (ADKeyframe *)ofObjectWithFloat:(float)fraction
                            withId:(id)value {
   return ADKeyframe_ofObjectWithFloat_withId_(fraction, value);
 }
 
-+ (ADKeyframe *)ofObjectWithFloat:(jfloat)fraction {
++ (ADKeyframe *)ofObjectWithFloat:(float)fraction {
   return ADKeyframe_ofObjectWithFloat_(fraction);
 }
 
-- (jboolean)hasValue {
+- (bool)hasValue {
   return mHasValue_;
 }
 
-- (jboolean)valueWasSetOnStart {
+- (bool)valueWasSetOnStart {
   return mValueWasSetOnStart_;
 }
 
-- (void)setValueWasSetOnStartWithBoolean:(jboolean)valueWasSetOnStart {
+- (void)setValueWasSetOnStartWithBoolean:(bool)valueWasSetOnStart {
   mValueWasSetOnStart_ = valueWasSetOnStart;
 }
 
@@ -83,11 +95,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (jfloat)getFraction {
+- (float)getFraction {
   return mFraction_;
 }
 
-- (void)setFractionWithFloat:(jfloat)fraction {
+- (void)setFractionWithFloat:(float)fraction {
   mFraction_ = fraction;
 }
 
@@ -181,41 +193,43 @@ void ADKeyframe_init(ADKeyframe *self) {
   JreStrongAssign(&self->mInterpolator_, nil);
 }
 
-ADKeyframe *ADKeyframe_ofIntWithFloat_withInt_(jfloat fraction, jint value) {
+ADKeyframe *ADKeyframe_ofIntWithFloat_withInt_(float fraction, int32_t value) {
   ADKeyframe_initialize();
   return create_ADKeyframe_IntKeyframe_initWithFloat_withInt_(fraction, value);
 }
 
-ADKeyframe *ADKeyframe_ofIntWithFloat_(jfloat fraction) {
+ADKeyframe *ADKeyframe_ofIntWithFloat_(float fraction) {
   ADKeyframe_initialize();
   return create_ADKeyframe_IntKeyframe_initWithFloat_(fraction);
 }
 
-ADKeyframe *ADKeyframe_ofFloatWithFloat_withFloat_(jfloat fraction, jfloat value) {
+ADKeyframe *ADKeyframe_ofFloatWithFloat_withFloat_(float fraction, float value) {
   ADKeyframe_initialize();
   return create_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(fraction, value);
 }
 
-ADKeyframe *ADKeyframe_ofFloatWithFloat_(jfloat fraction) {
+ADKeyframe *ADKeyframe_ofFloatWithFloat_(float fraction) {
   ADKeyframe_initialize();
   return create_ADKeyframe_FloatKeyframe_initWithFloat_(fraction);
 }
 
-ADKeyframe *ADKeyframe_ofObjectWithFloat_withId_(jfloat fraction, id value) {
+ADKeyframe *ADKeyframe_ofObjectWithFloat_withId_(float fraction, id value) {
   ADKeyframe_initialize();
   return create_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(fraction, value);
 }
 
-ADKeyframe *ADKeyframe_ofObjectWithFloat_(jfloat fraction) {
+ADKeyframe *ADKeyframe_ofObjectWithFloat_(float fraction) {
   ADKeyframe_initialize();
   return create_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(fraction, nil);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe)
 
+J2OBJC_NAME_MAPPING(ADKeyframe, "r.android.animation", "AD")
+
 @implementation ADKeyframe_ObjectKeyframe
 
-- (instancetype)initWithFloat:(jfloat)fraction
+- (instancetype)initWithFloat:(float)fraction
                        withId:(id)value {
   ADKeyframe_ObjectKeyframe_initWithFloat_withId_(self, fraction, value);
   return self;
@@ -267,7 +281,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe)
 
 @end
 
-void ADKeyframe_ObjectKeyframe_initWithFloat_withId_(ADKeyframe_ObjectKeyframe *self, jfloat fraction, id value) {
+void ADKeyframe_ObjectKeyframe_initWithFloat_withId_(ADKeyframe_ObjectKeyframe *self, float fraction, id value) {
   ADKeyframe_init(self);
   self->mFraction_ = fraction;
   JreStrongAssign(&self->mValue_, value);
@@ -275,11 +289,11 @@ void ADKeyframe_ObjectKeyframe_initWithFloat_withId_(ADKeyframe_ObjectKeyframe *
   JreStrongAssign(&self->mValueType_, self->mHasValue_ ? [nil_chk(value) java_getClass] : NSObject_class_());
 }
 
-ADKeyframe_ObjectKeyframe *new_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(jfloat fraction, id value) {
+ADKeyframe_ObjectKeyframe *new_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(float fraction, id value) {
   J2OBJC_NEW_IMPL(ADKeyframe_ObjectKeyframe, initWithFloat_withId_, fraction, value)
 }
 
-ADKeyframe_ObjectKeyframe *create_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(jfloat fraction, id value) {
+ADKeyframe_ObjectKeyframe *create_ADKeyframe_ObjectKeyframe_initWithFloat_withId_(float fraction, id value) {
   J2OBJC_CREATE_IMPL(ADKeyframe_ObjectKeyframe, initWithFloat_withId_, fraction, value)
 }
 
@@ -287,18 +301,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe_ObjectKeyframe)
 
 @implementation ADKeyframe_IntKeyframe
 
-- (instancetype)initWithFloat:(jfloat)fraction
-                      withInt:(jint)value {
+- (instancetype)initWithFloat:(float)fraction
+                      withInt:(int32_t)value {
   ADKeyframe_IntKeyframe_initWithFloat_withInt_(self, fraction, value);
   return self;
 }
 
-- (instancetype)initWithFloat:(jfloat)fraction {
+- (instancetype)initWithFloat:(float)fraction {
   ADKeyframe_IntKeyframe_initWithFloat_(self, fraction);
   return self;
 }
 
-- (jint)getIntValue {
+- (int32_t)getIntValue {
   return mValue_;
 }
 
@@ -307,7 +321,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe_ObjectKeyframe)
 }
 
 - (void)setValueWithId:(id)value {
-  if (value != nil && [value java_getClass] == JavaLangInteger_class_()) {
+  if (value != nil && JreObjectEqualsEquals([value java_getClass], JavaLangInteger_class_())) {
     mValue_ = [((JavaLangInteger *) cast_chk(value, [JavaLangInteger class])) intValue];
     mHasValue_ = true;
   }
@@ -349,7 +363,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe_ObjectKeyframe)
 
 @end
 
-void ADKeyframe_IntKeyframe_initWithFloat_withInt_(ADKeyframe_IntKeyframe *self, jfloat fraction, jint value) {
+void ADKeyframe_IntKeyframe_initWithFloat_withInt_(ADKeyframe_IntKeyframe *self, float fraction, int32_t value) {
   ADKeyframe_init(self);
   self->mFraction_ = fraction;
   self->mValue_ = value;
@@ -357,25 +371,25 @@ void ADKeyframe_IntKeyframe_initWithFloat_withInt_(ADKeyframe_IntKeyframe *self,
   self->mHasValue_ = true;
 }
 
-ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_withInt_(jfloat fraction, jint value) {
+ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_withInt_(float fraction, int32_t value) {
   J2OBJC_NEW_IMPL(ADKeyframe_IntKeyframe, initWithFloat_withInt_, fraction, value)
 }
 
-ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_withInt_(jfloat fraction, jint value) {
+ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_withInt_(float fraction, int32_t value) {
   J2OBJC_CREATE_IMPL(ADKeyframe_IntKeyframe, initWithFloat_withInt_, fraction, value)
 }
 
-void ADKeyframe_IntKeyframe_initWithFloat_(ADKeyframe_IntKeyframe *self, jfloat fraction) {
+void ADKeyframe_IntKeyframe_initWithFloat_(ADKeyframe_IntKeyframe *self, float fraction) {
   ADKeyframe_init(self);
   self->mFraction_ = fraction;
   JreStrongAssign(&self->mValueType_, [IOSClass intClass]);
 }
 
-ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_(jfloat fraction) {
+ADKeyframe_IntKeyframe *new_ADKeyframe_IntKeyframe_initWithFloat_(float fraction) {
   J2OBJC_NEW_IMPL(ADKeyframe_IntKeyframe, initWithFloat_, fraction)
 }
 
-ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_(jfloat fraction) {
+ADKeyframe_IntKeyframe *create_ADKeyframe_IntKeyframe_initWithFloat_(float fraction) {
   J2OBJC_CREATE_IMPL(ADKeyframe_IntKeyframe, initWithFloat_, fraction)
 }
 
@@ -383,18 +397,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe_IntKeyframe)
 
 @implementation ADKeyframe_FloatKeyframe
 
-- (instancetype)initWithFloat:(jfloat)fraction
-                    withFloat:(jfloat)value {
+- (instancetype)initWithFloat:(float)fraction
+                    withFloat:(float)value {
   ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(self, fraction, value);
   return self;
 }
 
-- (instancetype)initWithFloat:(jfloat)fraction {
+- (instancetype)initWithFloat:(float)fraction {
   ADKeyframe_FloatKeyframe_initWithFloat_(self, fraction);
   return self;
 }
 
-- (jfloat)getFloatValue {
+- (float)getFloatValue {
   return mValue_;
 }
 
@@ -403,7 +417,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe_IntKeyframe)
 }
 
 - (void)setValueWithId:(id)value {
-  if (value != nil && [value java_getClass] == JavaLangFloat_class_()) {
+  if (value != nil && JreObjectEqualsEquals([value java_getClass], JavaLangFloat_class_())) {
     mValue_ = [((JavaLangFloat *) cast_chk(value, [JavaLangFloat class])) floatValue];
     mHasValue_ = true;
   }
@@ -445,7 +459,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADKeyframe_IntKeyframe)
 
 @end
 
-void ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(ADKeyframe_FloatKeyframe *self, jfloat fraction, jfloat value) {
+void ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(ADKeyframe_FloatKeyframe *self, float fraction, float value) {
   ADKeyframe_init(self);
   self->mFraction_ = fraction;
   self->mValue_ = value;
@@ -453,25 +467,25 @@ void ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(ADKeyframe_FloatKeyframe 
   self->mHasValue_ = true;
 }
 
-ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(jfloat fraction, jfloat value) {
+ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(float fraction, float value) {
   J2OBJC_NEW_IMPL(ADKeyframe_FloatKeyframe, initWithFloat_withFloat_, fraction, value)
 }
 
-ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(jfloat fraction, jfloat value) {
+ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_withFloat_(float fraction, float value) {
   J2OBJC_CREATE_IMPL(ADKeyframe_FloatKeyframe, initWithFloat_withFloat_, fraction, value)
 }
 
-void ADKeyframe_FloatKeyframe_initWithFloat_(ADKeyframe_FloatKeyframe *self, jfloat fraction) {
+void ADKeyframe_FloatKeyframe_initWithFloat_(ADKeyframe_FloatKeyframe *self, float fraction) {
   ADKeyframe_init(self);
   self->mFraction_ = fraction;
   JreStrongAssign(&self->mValueType_, [IOSClass floatClass]);
 }
 
-ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_(jfloat fraction) {
+ADKeyframe_FloatKeyframe *new_ADKeyframe_FloatKeyframe_initWithFloat_(float fraction) {
   J2OBJC_NEW_IMPL(ADKeyframe_FloatKeyframe, initWithFloat_, fraction)
 }
 
-ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_(jfloat fraction) {
+ADKeyframe_FloatKeyframe *create_ADKeyframe_FloatKeyframe_initWithFloat_(float fraction) {
   J2OBJC_CREATE_IMPL(ADKeyframe_FloatKeyframe, initWithFloat_, fraction)
 }
 

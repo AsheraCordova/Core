@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\webkit\WebStorage.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WebStorage")
@@ -36,12 +37,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWebStorage)
 
 @compatibility_alias RAndroidWebkitWebStorage ADWebStorage;
 
+
 #endif
 
 #if !defined (ADWebStorage_QuotaUpdater_) && (INCLUDE_ALL_WebStorage || defined(INCLUDE_ADWebStorage_QuotaUpdater))
 #define ADWebStorage_QuotaUpdater_
 
 @class ADWebStorage;
+@class JavaLangLong;
 
 @interface ADWebStorage_QuotaUpdater : NSObject
 
@@ -49,7 +52,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADWebStorage)
 
 - (instancetype)initWithADWebStorage:(ADWebStorage *)outer$;
 
-- (void)updateQuotaWithLong:(jlong)mAX_QUOTA;
+- (void)updateQuotaWithLong:(int64_t)mAX_QUOTA;
 
 // Disallowed inherited constructors, do not use.
 
@@ -66,6 +69,7 @@ FOUNDATION_EXPORT ADWebStorage_QuotaUpdater *new_ADWebStorage_QuotaUpdater_initW
 FOUNDATION_EXPORT ADWebStorage_QuotaUpdater *create_ADWebStorage_QuotaUpdater_initWithADWebStorage_(ADWebStorage *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADWebStorage_QuotaUpdater)
+
 
 #endif
 

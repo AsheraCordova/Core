@@ -3,21 +3,35 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\graphics\Bezier.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bezier.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "PointF.h"
+#include "java/lang/Double.h"
+#include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADBezier ()
 
 - (void)calcLength;
 
-- (jfloat)lineLengthWithFloat:(jfloat)x1
-                    withFloat:(jfloat)y1
-                    withFloat:(jfloat)x2
-                    withFloat:(jfloat)y2;
+- (float)lineLengthWithFloat:(float)x1
+                   withFloat:(float)y1
+                   withFloat:(float)x2
+                   withFloat:(float)y2;
 
 /*!
  @brief Calculates the bernstein polynomial for evaluating parametric bezier
@@ -25,48 +39,48 @@
  @param knotNo - knot we are evaluating Bernstein for
  @param param - Parametric value we are evaluating at
  */
-- (jdouble)bernsteinWithInt:(jint)numKnots
-                    withInt:(jint)knotNo
-                 withDouble:(jdouble)param;
+- (double)bernsteinWithInt:(int32_t)numKnots
+                   withInt:(int32_t)knotNo
+                withDouble:(double)param;
 
-- (jint)chooseWithInt:(jint)num
-              withInt:(jint)denom;
+- (int32_t)chooseWithInt:(int32_t)num
+                 withInt:(int32_t)denom;
 
 @end
 
 __attribute__((unused)) static void ADBezier_calcLength(ADBezier *self);
 
-__attribute__((unused)) static jfloat ADBezier_lineLengthWithFloat_withFloat_withFloat_withFloat_(ADBezier *self, jfloat x1, jfloat y1, jfloat x2, jfloat y2);
+__attribute__((unused)) static float ADBezier_lineLengthWithFloat_withFloat_withFloat_withFloat_(ADBezier *self, float x1, float y1, float x2, float y2);
 
-__attribute__((unused)) static jdouble ADBezier_bernsteinWithInt_withInt_withDouble_(ADBezier *self, jint numKnots, jint knotNo, jdouble param);
+__attribute__((unused)) static double ADBezier_bernsteinWithInt_withInt_withDouble_(ADBezier *self, int32_t numKnots, int32_t knotNo, double param);
 
-__attribute__((unused)) static jint ADBezier_chooseWithInt_withInt_(ADBezier *self, jint num, jint denom);
+__attribute__((unused)) static int32_t ADBezier_chooseWithInt_withInt_(ADBezier *self, int32_t num, int32_t denom);
 
 @implementation ADBezier
 
-- (instancetype)initWithFloat:(jfloat)sx
-                    withFloat:(jfloat)sy
+- (instancetype)initWithFloat:(float)sx
+                    withFloat:(float)sy
                withFloatArray:(IOSFloatArray *)coords
-                      withInt:(jint)numCoords {
+                      withInt:(int32_t)numCoords {
   ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(self, sx, sy, coords, numCoords);
   return self;
 }
 
-- (void)setCoordsWithFloat:(jfloat)sx
-                 withFloat:(jfloat)sy
+- (void)setCoordsWithFloat:(float)sx
+                 withFloat:(float)sy
             withFloatArray:(IOSFloatArray *)coords
-                   withInt:(jint)numCoords {
+                   withInt:(int32_t)numCoords {
   JreStrongAssignAndConsume(&coord_, [IOSFloatArray newArrayWithLength:numCoords * 2 + 2]);
   *IOSFloatArray_GetRef(coord_, 0) = sx;
   *IOSFloatArray_GetRef(coord_, 1) = sy;
-  for (jint i = 0; i < numCoords; i++) {
+  for (int32_t i = 0; i < numCoords; i++) {
     *IOSFloatArray_GetRef(coord_, i * 2 + 2) = IOSFloatArray_Get(nil_chk(coords), i * 2);
     *IOSFloatArray_GetRef(coord_, i * 2 + 3) = IOSFloatArray_Get(coords, i * 2 + 1);
   }
   ADBezier_calcLength(self);
 }
 
-- (jfloat)getLength {
+- (float)getLength {
   return length_;
 }
 
@@ -74,10 +88,10 @@ __attribute__((unused)) static jint ADBezier_chooseWithInt_withInt_(ADBezier *se
   ADBezier_calcLength(self);
 }
 
-- (jfloat)lineLengthWithFloat:(jfloat)x1
-                    withFloat:(jfloat)y1
-                    withFloat:(jfloat)x2
-                    withFloat:(jfloat)y2 {
+- (float)lineLengthWithFloat:(float)x1
+                   withFloat:(float)y1
+                   withFloat:(float)x2
+                   withFloat:(float)y2 {
   return ADBezier_lineLengthWithFloat_withFloat_withFloat_withFloat_(self, x1, y1, x2, y2);
 }
 
@@ -87,27 +101,27 @@ __attribute__((unused)) static jint ADBezier_chooseWithInt_withInt_(ADBezier *se
   return point;
 }
 
-- (ADPointF *)evalWithDouble:(jdouble)param
+- (ADPointF *)evalWithDouble:(double)param
                 withADPointF:(ADPointF *)point {
   ((ADPointF *) nil_chk(point))->x_ = 0;
   point->y_ = 0;
-  jint numKnots = JreIntDiv(((IOSFloatArray *) nil_chk(coord_))->size_, 2);
-  for (jint i = 0; i < numKnots; i++) {
-    jdouble scale_ = ADBezier_bernsteinWithInt_withInt_withDouble_(self, numKnots - 1, i, param);
+  int32_t numKnots = JreIntDiv(((IOSFloatArray *) nil_chk(coord_))->size_, 2);
+  for (int32_t i = 0; i < numKnots; i++) {
+    double scale_ = ADBezier_bernsteinWithInt_withInt_withDouble_(self, numKnots - 1, i, param);
     JrePlusAssignFloatD(&point->x_, IOSFloatArray_Get(nil_chk(coord_), i * 2) * scale_);
     JrePlusAssignFloatD(&point->y_, IOSFloatArray_Get(coord_, i * 2 + 1) * scale_);
   }
   return point;
 }
 
-- (jdouble)bernsteinWithInt:(jint)numKnots
-                    withInt:(jint)knotNo
-                 withDouble:(jdouble)param {
+- (double)bernsteinWithInt:(int32_t)numKnots
+                   withInt:(int32_t)knotNo
+                withDouble:(double)param {
   return ADBezier_bernsteinWithInt_withInt_withDouble_(self, numKnots, knotNo, param);
 }
 
-- (jint)chooseWithInt:(jint)num
-              withInt:(jint)denom {
+- (int32_t)chooseWithInt:(int32_t)num
+                 withInt:(int32_t)denom {
   return ADBezier_chooseWithInt_withInt_(self, num, denom);
 }
 
@@ -152,34 +166,34 @@ __attribute__((unused)) static jint ADBezier_chooseWithInt_withInt_(ADBezier *se
 
 @end
 
-void ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(ADBezier *self, jfloat sx, jfloat sy, IOSFloatArray *coords, jint numCoords) {
+void ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(ADBezier *self, float sx, float sy, IOSFloatArray *coords, int32_t numCoords) {
   NSObject_init(self);
   [self setCoordsWithFloat:sx withFloat:sy withFloatArray:coords withInt:numCoords];
 }
 
-ADBezier *new_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(jfloat sx, jfloat sy, IOSFloatArray *coords, jint numCoords) {
+ADBezier *new_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(float sx, float sy, IOSFloatArray *coords, int32_t numCoords) {
   J2OBJC_NEW_IMPL(ADBezier, initWithFloat_withFloat_withFloatArray_withInt_, sx, sy, coords, numCoords)
 }
 
-ADBezier *create_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(jfloat sx, jfloat sy, IOSFloatArray *coords, jint numCoords) {
+ADBezier *create_ADBezier_initWithFloat_withFloat_withFloatArray_withInt_(float sx, float sy, IOSFloatArray *coords, int32_t numCoords) {
   J2OBJC_CREATE_IMPL(ADBezier, initWithFloat_withFloat_withFloatArray_withInt_, sx, sy, coords, numCoords)
 }
 
 void ADBezier_calcLength(ADBezier *self) {
   self->length_ = 0;
-  for (jint i = 2; i < ((IOSFloatArray *) nil_chk(self->coord_))->size_; i += 2) {
+  for (int32_t i = 2; i < ((IOSFloatArray *) nil_chk(self->coord_))->size_; i += 2) {
     JrePlusAssignFloatF(&self->length_, ADBezier_lineLengthWithFloat_withFloat_withFloat_withFloat_(self, IOSFloatArray_Get(self->coord_, i - 2), IOSFloatArray_Get(self->coord_, i - 1), IOSFloatArray_Get(self->coord_, i), IOSFloatArray_Get(self->coord_, i + 1)));
   }
 }
 
-jfloat ADBezier_lineLengthWithFloat_withFloat_withFloat_withFloat_(ADBezier *self, jfloat x1, jfloat y1, jfloat x2, jfloat y2) {
-  jfloat dx = x2 - x1;
-  jfloat dy = y2 - y1;
-  return (jfloat) JavaLangMath_sqrtWithDouble_(dx * dx + dy * dy);
+float ADBezier_lineLengthWithFloat_withFloat_withFloat_withFloat_(ADBezier *self, float x1, float y1, float x2, float y2) {
+  float dx = x2 - x1;
+  float dy = y2 - y1;
+  return (float) JavaLangMath_sqrtWithDouble_(dx * dx + dy * dy);
 }
 
-jdouble ADBezier_bernsteinWithInt_withInt_withDouble_(ADBezier *self, jint numKnots, jint knotNo, jdouble param) {
-  jdouble iParam = 1 - param;
+double ADBezier_bernsteinWithInt_withInt_withDouble_(ADBezier *self, int32_t numKnots, int32_t knotNo, double param) {
+  double iParam = 1 - param;
   switch (numKnots) {
     case 0:
     return 1;
@@ -220,32 +234,34 @@ jdouble ADBezier_bernsteinWithInt_withInt_withDouble_(ADBezier *self, jint numKn
       break;
     }
   }
-  jdouble retVal = 1;
-  for (jint i = 0; i < knotNo; i++) {
+  double retVal = 1;
+  for (int32_t i = 0; i < knotNo; i++) {
     JreTimesAssignDoubleD(&retVal, param);
   }
-  for (jint i = 0; i < numKnots - knotNo; i++) {
+  for (int32_t i = 0; i < numKnots - knotNo; i++) {
     JreTimesAssignDoubleD(&retVal, iParam);
   }
   JreTimesAssignDoubleD(&retVal, ADBezier_chooseWithInt_withInt_(self, numKnots, knotNo));
   return retVal;
 }
 
-jint ADBezier_chooseWithInt_withInt_(ADBezier *self, jint num, jint denom) {
-  jint denom2 = num - denom;
+int32_t ADBezier_chooseWithInt_withInt_(ADBezier *self, int32_t num, int32_t denom) {
+  int32_t denom2 = num - denom;
   if (denom < denom2) {
-    jint tmp = denom;
+    int32_t tmp = denom;
     denom = denom2;
     denom2 = tmp;
   }
-  jint prod = 1;
-  for (jint i = num; i > denom; i--) {
+  int32_t prod = 1;
+  for (int32_t i = num; i > denom; i--) {
     prod *= num;
   }
-  for (jint i = 2; i <= denom2; i++) {
+  for (int32_t i = 2; i <= denom2; i++) {
     prod /= i;
   }
   return prod;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADBezier)
+
+J2OBJC_NAME_MAPPING(ADBezier, "r.android.graphics", "AD")

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\accessibility\AccessibilityManager.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AccessibilityManager")
@@ -42,6 +43,7 @@ FOUNDATION_EXPORT ADView *ADAccessibilityManager_getInstanceWithADContext_(ADCon
 J2OBJC_TYPE_LITERAL_HEADER(ADAccessibilityManager)
 
 @compatibility_alias RAndroidViewAccessibilityAccessibilityManager ADAccessibilityManager;
+
 
 #endif
 

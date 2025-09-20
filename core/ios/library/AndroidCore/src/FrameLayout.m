@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\FrameLayout.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Drawable.h"
 #include "FrameLayout.h"
 #include "Gravity.h"
@@ -10,36 +15,42 @@
 #include "Rect.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/util/ArrayList.h"
 
-@class JavaUtilArrayList;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADFrameLayout () {
  @public
-  jint mForegroundPaddingLeft_;
-  jint mForegroundPaddingTop_;
-  jint mForegroundPaddingRight_;
-  jint mForegroundPaddingBottom_;
+  int32_t mForegroundPaddingLeft_;
+  int32_t mForegroundPaddingTop_;
+  int32_t mForegroundPaddingRight_;
+  int32_t mForegroundPaddingBottom_;
   JavaUtilArrayList *mMatchParentChildren_;
 }
 
-- (jint)getPaddingTopWithForeground;
+- (int32_t)getPaddingTopWithForeground;
 
-- (jint)getPaddingBottomWithForeground;
+- (int32_t)getPaddingBottomWithForeground;
 
 @end
 
 J2OBJC_FIELD_SETTER(ADFrameLayout, mMatchParentChildren_, JavaUtilArrayList *)
 
-inline jint ADFrameLayout_get_DEFAULT_CHILD_GRAVITY(void);
+inline int32_t ADFrameLayout_get_DEFAULT_CHILD_GRAVITY(void);
 #define ADFrameLayout_DEFAULT_CHILD_GRAVITY 8388659
-J2OBJC_STATIC_FIELD_CONSTANT(ADFrameLayout, DEFAULT_CHILD_GRAVITY, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADFrameLayout, DEFAULT_CHILD_GRAVITY, int32_t)
 
-__attribute__((unused)) static jint ADFrameLayout_getPaddingTopWithForeground(ADFrameLayout *self);
+__attribute__((unused)) static int32_t ADFrameLayout_getPaddingTopWithForeground(ADFrameLayout *self);
 
-__attribute__((unused)) static jint ADFrameLayout_getPaddingBottomWithForeground(ADFrameLayout *self);
+__attribute__((unused)) static int32_t ADFrameLayout_getPaddingBottomWithForeground(ADFrameLayout *self);
 
 @implementation ADFrameLayout
 
@@ -50,7 +61,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)setForegroundGravityWithInt:(jint)foregroundGravity {
+- (void)setForegroundGravityWithInt:(int32_t)foregroundGravity {
   if ([self getForegroundGravity] != foregroundGravity) {
     [super setForegroundGravityWithInt:foregroundGravity];
     ADDrawable *foreground = [self getForeground];
@@ -77,31 +88,31 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ADFrameLayout_LayoutParams_initWithInt_withInt_(ADViewGroup_LayoutParams_MATCH_PARENT, ADViewGroup_LayoutParams_MATCH_PARENT);
 }
 
-- (jint)getPaddingLeftWithForeground {
+- (int32_t)getPaddingLeftWithForeground {
   return [self isForegroundInsidePadding] ? JavaLangMath_maxWithInt_withInt_(mPaddingLeft_, mForegroundPaddingLeft_) : mPaddingLeft_ + mForegroundPaddingLeft_;
 }
 
-- (jint)getPaddingRightWithForeground {
+- (int32_t)getPaddingRightWithForeground {
   return [self isForegroundInsidePadding] ? JavaLangMath_maxWithInt_withInt_(mPaddingRight_, mForegroundPaddingRight_) : mPaddingRight_ + mForegroundPaddingRight_;
 }
 
-- (jint)getPaddingTopWithForeground {
+- (int32_t)getPaddingTopWithForeground {
   return ADFrameLayout_getPaddingTopWithForeground(self);
 }
 
-- (jint)getPaddingBottomWithForeground {
+- (int32_t)getPaddingBottomWithForeground {
   return ADFrameLayout_getPaddingBottomWithForeground(self);
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
-  jint count = [self getChildCount];
-  jboolean measureMatchParentChildren = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec) != ADView_MeasureSpec_EXACTLY || ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec) != ADView_MeasureSpec_EXACTLY;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
+  int32_t count = [self getChildCount];
+  bool measureMatchParentChildren = ADView_MeasureSpec_getModeWithInt_(widthMeasureSpec) != ADView_MeasureSpec_EXACTLY || ADView_MeasureSpec_getModeWithInt_(heightMeasureSpec) != ADView_MeasureSpec_EXACTLY;
   [((JavaUtilArrayList *) nil_chk(mMatchParentChildren_)) clear];
-  jint maxHeight = 0;
-  jint maxWidth = 0;
-  jint childState = 0;
-  for (jint i = 0; i < count; i++) {
+  int32_t maxHeight = 0;
+  int32_t maxWidth = 0;
+  int32_t childState = 0;
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = [self getChildAtWithInt:i];
     if (mMeasureAllChildren_ || [((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       [self measureChildWithMarginsWithADView:child withInt:widthMeasureSpec withInt:0 withInt:heightMeasureSpec withInt:0];
@@ -128,20 +139,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self setMeasuredDimensionWithInt:ADView_resolveSizeAndStateWithInt_withInt_withInt_(maxWidth, widthMeasureSpec, childState) withInt:ADView_resolveSizeAndStateWithInt_withInt_withInt_(maxHeight, heightMeasureSpec, JreLShift32(childState, ADView_MEASURED_HEIGHT_STATE_SHIFT))];
   count = [mMatchParentChildren_ size];
   if (count > 1) {
-    for (jint i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
       ADView *child = [mMatchParentChildren_ getWithInt:i];
       ADViewGroup_MarginLayoutParams *lp = (ADViewGroup_MarginLayoutParams *) cast_chk([((ADView *) nil_chk(child)) getLayoutParams], [ADViewGroup_MarginLayoutParams class]);
-      jint childWidthMeasureSpec;
+      int32_t childWidthMeasureSpec;
       if (((ADViewGroup_MarginLayoutParams *) nil_chk(lp))->width_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
-        jint width = JavaLangMath_maxWithInt_withInt_(0, [self getMeasuredWidth] - [self getPaddingLeftWithForeground] - [self getPaddingRightWithForeground] - lp->leftMargin_ - lp->rightMargin_);
+        int32_t width = JavaLangMath_maxWithInt_withInt_(0, [self getMeasuredWidth] - [self getPaddingLeftWithForeground] - [self getPaddingRightWithForeground] - lp->leftMargin_ - lp->rightMargin_);
         childWidthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(width, ADView_MeasureSpec_EXACTLY);
       }
       else {
         childWidthMeasureSpec = ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(widthMeasureSpec, [self getPaddingLeftWithForeground] + [self getPaddingRightWithForeground] + lp->leftMargin_ + lp->rightMargin_, lp->width_);
       }
-      jint childHeightMeasureSpec;
+      int32_t childHeightMeasureSpec;
       if (lp->height_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
-        jint height = JavaLangMath_maxWithInt_withInt_(0, [self getMeasuredHeight] - ADFrameLayout_getPaddingTopWithForeground(self) - ADFrameLayout_getPaddingBottomWithForeground(self) - lp->topMargin_ - lp->bottomMargin_);
+        int32_t height = JavaLangMath_maxWithInt_withInt_(0, [self getMeasuredHeight] - ADFrameLayout_getPaddingTopWithForeground(self) - ADFrameLayout_getPaddingBottomWithForeground(self) - lp->topMargin_ - lp->bottomMargin_);
         childHeightMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(height, ADView_MeasureSpec_EXACTLY);
       }
       else {
@@ -152,39 +163,39 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)left
-                    withInt:(jint)top
-                    withInt:(jint)right
-                    withInt:(jint)bottom {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)left
+                    withInt:(int32_t)top
+                    withInt:(int32_t)right
+                    withInt:(int32_t)bottom {
   [self layoutChildrenWithInt:left withInt:top withInt:right withInt:bottom withBoolean:false];
 }
 
-- (void)layoutChildrenWithInt:(jint)left
-                      withInt:(jint)top
-                      withInt:(jint)right
-                      withInt:(jint)bottom
-                  withBoolean:(jboolean)forceLeftGravity {
-  jint count = [self getChildCount];
-  jint parentLeft = [self getPaddingLeftWithForeground];
-  jint parentRight = right - left - [self getPaddingRightWithForeground];
-  jint parentTop = ADFrameLayout_getPaddingTopWithForeground(self);
-  jint parentBottom = bottom - top - ADFrameLayout_getPaddingBottomWithForeground(self);
-  for (jint i = 0; i < count; i++) {
+- (void)layoutChildrenWithInt:(int32_t)left
+                      withInt:(int32_t)top
+                      withInt:(int32_t)right
+                      withInt:(int32_t)bottom
+                  withBoolean:(bool)forceLeftGravity {
+  int32_t count = [self getChildCount];
+  int32_t parentLeft = [self getPaddingLeftWithForeground];
+  int32_t parentRight = right - left - [self getPaddingRightWithForeground];
+  int32_t parentTop = ADFrameLayout_getPaddingTopWithForeground(self);
+  int32_t parentBottom = bottom - top - ADFrameLayout_getPaddingBottomWithForeground(self);
+  for (int32_t i = 0; i < count; i++) {
     ADView *child = [self getChildAtWithInt:i];
     if ([((ADView *) nil_chk(child)) getVisibility] != ADView_GONE) {
       ADFrameLayout_LayoutParams *lp = (ADFrameLayout_LayoutParams *) cast_chk([child getLayoutParams], [ADFrameLayout_LayoutParams class]);
-      jint width = [child getMeasuredWidth];
-      jint height = [child getMeasuredHeight];
-      jint childLeft;
-      jint childTop;
-      jint gravity = ((ADFrameLayout_LayoutParams *) nil_chk(lp))->gravity_;
+      int32_t width = [child getMeasuredWidth];
+      int32_t height = [child getMeasuredHeight];
+      int32_t childLeft;
+      int32_t childTop;
+      int32_t gravity = ((ADFrameLayout_LayoutParams *) nil_chk(lp))->gravity_;
       if (gravity == -1) {
         gravity = ADFrameLayout_DEFAULT_CHILD_GRAVITY;
       }
-      jint layoutDirection = [self getLayoutDirection];
-      jint absoluteGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
-      jint verticalGravity = gravity & ADGravity_VERTICAL_GRAVITY_MASK;
+      int32_t layoutDirection = [self getLayoutDirection];
+      int32_t absoluteGravity = ADGravity_getAbsoluteGravityWithInt_withInt_(gravity, layoutDirection);
+      int32_t verticalGravity = gravity & ADGravity_VERTICAL_GRAVITY_MASK;
       switch (absoluteGravity & ADGravity_HORIZONTAL_GRAVITY_MASK) {
         case ADGravity_CENTER_HORIZONTAL:
         childLeft = parentLeft + JreIntDiv((parentRight - parentLeft - width), 2) + lp->leftMargin_ - lp->rightMargin_;
@@ -216,15 +227,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setMeasureAllChildrenWithBoolean:(jboolean)measureAll {
+- (void)setMeasureAllChildrenWithBoolean:(bool)measureAll {
   mMeasureAllChildren_ = measureAll;
 }
 
-- (jboolean)getMeasureAllChildren {
+- (bool)getMeasureAllChildren {
   return mMeasureAllChildren_;
 }
 
-- (jboolean)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
+- (bool)checkLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return [p isKindOfClass:[ADFrameLayout_LayoutParams class]];
 }
 
@@ -314,27 +325,29 @@ ADFrameLayout *create_ADFrameLayout_init() {
   J2OBJC_CREATE_IMPL(ADFrameLayout, init)
 }
 
-jint ADFrameLayout_getPaddingTopWithForeground(ADFrameLayout *self) {
+int32_t ADFrameLayout_getPaddingTopWithForeground(ADFrameLayout *self) {
   return [self isForegroundInsidePadding] ? JavaLangMath_maxWithInt_withInt_(self->mPaddingTop_, self->mForegroundPaddingTop_) : self->mPaddingTop_ + self->mForegroundPaddingTop_;
 }
 
-jint ADFrameLayout_getPaddingBottomWithForeground(ADFrameLayout *self) {
+int32_t ADFrameLayout_getPaddingBottomWithForeground(ADFrameLayout *self) {
   return [self isForegroundInsidePadding] ? JavaLangMath_maxWithInt_withInt_(self->mPaddingBottom_, self->mForegroundPaddingBottom_) : self->mPaddingBottom_ + self->mForegroundPaddingBottom_;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADFrameLayout)
 
+J2OBJC_NAME_MAPPING(ADFrameLayout, "r.android.widget", "AD")
+
 @implementation ADFrameLayout_LayoutParams
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height {
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height {
   ADFrameLayout_LayoutParams_initWithInt_withInt_(self, width, height);
   return self;
 }
 
-- (instancetype)initWithInt:(jint)width
-                    withInt:(jint)height
-                    withInt:(jint)gravity {
+- (instancetype)initWithInt:(int32_t)width
+                    withInt:(int32_t)height
+                    withInt:(int32_t)gravity {
   ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(self, width, height, gravity);
   return self;
 }
@@ -375,30 +388,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADFrameLayout)
 
 @end
 
-void ADFrameLayout_LayoutParams_initWithInt_withInt_(ADFrameLayout_LayoutParams *self, jint width, jint height) {
+void ADFrameLayout_LayoutParams_initWithInt_withInt_(ADFrameLayout_LayoutParams *self, int32_t width, int32_t height) {
   ADViewGroup_MarginLayoutParams_initWithInt_withInt_(self, width, height);
   self->gravity_ = ADFrameLayout_LayoutParams_UNSPECIFIED_GRAVITY;
 }
 
-ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_NEW_IMPL(ADFrameLayout_LayoutParams, initWithInt_withInt_, width, height)
 }
 
-ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_(jint width, jint height) {
+ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_(int32_t width, int32_t height) {
   J2OBJC_CREATE_IMPL(ADFrameLayout_LayoutParams, initWithInt_withInt_, width, height)
 }
 
-void ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(ADFrameLayout_LayoutParams *self, jint width, jint height, jint gravity) {
+void ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(ADFrameLayout_LayoutParams *self, int32_t width, int32_t height, int32_t gravity) {
   ADViewGroup_MarginLayoutParams_initWithInt_withInt_(self, width, height);
   self->gravity_ = ADFrameLayout_LayoutParams_UNSPECIFIED_GRAVITY;
   self->gravity_ = gravity;
 }
 
-ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(jint width, jint height, jint gravity) {
+ADFrameLayout_LayoutParams *new_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(int32_t width, int32_t height, int32_t gravity) {
   J2OBJC_NEW_IMPL(ADFrameLayout_LayoutParams, initWithInt_withInt_withInt_, width, height, gravity)
 }
 
-ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(jint width, jint height, jint gravity) {
+ADFrameLayout_LayoutParams *create_ADFrameLayout_LayoutParams_initWithInt_withInt_withInt_(int32_t width, int32_t height, int32_t gravity) {
   J2OBJC_CREATE_IMPL(ADFrameLayout_LayoutParams, initWithInt_withInt_withInt_, width, height, gravity)
 }
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\annotation\RestrictTo.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_RestrictTo")
@@ -28,12 +29,15 @@
 
 @class IOSClass;
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADXRestrictTo < JavaLangAnnotationAnnotation >
 
 @property (readonly) IOSObjectArray *value;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -54,6 +58,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXRestrictTo)
 
 #define AndroidxAnnotationRestrictTo ADXRestrictTo
 
+
 #endif
 
 #if !defined (ADXRestrictTo_Scope_) && (INCLUDE_ALL_RestrictTo || defined(INCLUDE_ADXRestrictTo_Scope))
@@ -64,15 +69,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ADXRestrictTo)
 #include "java/lang/Enum.h"
 
 @class IOSObjectArray;
+@class NSString;
 
-typedef NS_ENUM(NSUInteger, ADXRestrictTo_Scope_Enum) {
-  ADXRestrictTo_Scope_Enum_LIBRARY = 0,
-  ADXRestrictTo_Scope_Enum_LIBRARY_GROUP = 1,
-  ADXRestrictTo_Scope_Enum_LIBRARY_GROUP_PREFIX = 2,
-  ADXRestrictTo_Scope_Enum_GROUP_ID = 3,
-  ADXRestrictTo_Scope_Enum_TESTS = 4,
-  ADXRestrictTo_Scope_Enum_SUBCLASSES = 5,
+typedef NS_ENUM(int32_t, ADXRestrictTo_Scope_Enum) {
+  ADXRestrictTo_Scope_Enum_LIBRARY NS_SWIFT_NAME(library) = 0,
+  ADXRestrictTo_Scope_Enum_LIBRARY_GROUP NS_SWIFT_NAME(libraryGroup) = 1,
+  ADXRestrictTo_Scope_Enum_LIBRARY_GROUP_PREFIX NS_SWIFT_NAME(libraryGroupPrefix) = 2,
+  ADXRestrictTo_Scope_Enum_GROUP_ID NS_SWIFT_NAME(groupId) = 3,
+  ADXRestrictTo_Scope_Enum_TESTS NS_SWIFT_NAME(tests) = 4,
+  ADXRestrictTo_Scope_Enum_SUBCLASSES NS_SWIFT_NAME(subclasses) = 5,
 };
+
+#if J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION
+#define ADXRestrictTo_Scope_ORDINAL int32_t
+#else
+#define ADXRestrictTo_Scope_ORDINAL ADXRestrictTo_Scope_Enum
+#endif
+
 
 @interface ADXRestrictTo_Scope : JavaLangEnum
 
@@ -85,6 +98,13 @@ typedef NS_ENUM(NSUInteger, ADXRestrictTo_Scope_Enum) {
 #pragma mark Package-Private
 
 - (ADXRestrictTo_Scope_Enum)toNSEnum;
+
+@property(readonly) ADXRestrictTo_Scope_Enum enumValue;
++ (ADXRestrictTo_Scope *)fromNSEnum:(ADXRestrictTo_Scope_Enum)value;
+
+- (ADXRestrictTo_Scope_ORDINAL)ordinal NS_SWIFT_UNAVAILABLE("Use .enumValue");
+
+- (nullable instancetype)initWithScope:(ADXRestrictTo_Scope_Enum)value;
 
 @end
 
@@ -117,9 +137,10 @@ FOUNDATION_EXPORT IOSObjectArray *ADXRestrictTo_Scope_values(void);
 
 FOUNDATION_EXPORT ADXRestrictTo_Scope *ADXRestrictTo_Scope_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT ADXRestrictTo_Scope *ADXRestrictTo_Scope_fromOrdinal(NSUInteger ordinal);
+FOUNDATION_EXPORT ADXRestrictTo_Scope *ADXRestrictTo_Scope_fromOrdinal(ADXRestrictTo_Scope_ORDINAL ordinal);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXRestrictTo_Scope)
+
 
 #endif
 

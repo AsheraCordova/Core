@@ -3,8 +3,20 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\content\pm\ApplicationInfo.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ApplicationInfo.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ADApplicationInfo
@@ -51,3 +63,5 @@ ADApplicationInfo *create_ADApplicationInfo_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADApplicationInfo)
+
+J2OBJC_NAME_MAPPING(ADApplicationInfo, "r.android.content.pm", "AD")

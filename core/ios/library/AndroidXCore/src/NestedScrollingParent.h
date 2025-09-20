@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\core\view\NestedScrollingParent.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_NestedScrollingParent")
@@ -24,6 +25,9 @@
 
 @class ADView;
 @class IOSIntArray;
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
 
 /*!
  @brief This interface should be implemented by <code>ViewGroup</code> subclasses
@@ -59,9 +63,9 @@
                            <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  @return true if this ViewParent accepts the nested scroll operation
  */
-- (jboolean)onStartNestedScrollWithADView:(ADView *)child
-                               withADView:(ADView *)target
-                                  withInt:(jint)axes;
+- (bool)onStartNestedScrollWithADView:(ADView *)child
+                           withADView:(ADView *)target
+                              withInt:(int32_t)axes;
 
 /*!
  @brief React to the successful claiming of a nested scroll operation.
@@ -79,7 +83,7 @@
  */
 - (void)onNestedScrollAcceptedWithADView:(ADView *)child
                               withADView:(ADView *)target
-                                 withInt:(jint)axes;
+                                 withInt:(int32_t)axes;
 
 /*!
  @brief React to a nested scroll operation ending.
@@ -112,10 +116,10 @@
  @param dyUnconsumed Vertical scroll distance in pixels not consumed by target
  */
 - (void)onNestedScrollWithADView:(ADView *)target
-                         withInt:(jint)dxConsumed
-                         withInt:(jint)dyConsumed
-                         withInt:(jint)dxUnconsumed
-                         withInt:(jint)dyUnconsumed;
+                         withInt:(int32_t)dxConsumed
+                         withInt:(int32_t)dyConsumed
+                         withInt:(int32_t)dxUnconsumed
+                         withInt:(int32_t)dyUnconsumed;
 
 /*!
  @brief React to a nested scroll in progress before the target view consumes a portion of the scroll.
@@ -136,8 +140,8 @@
  @param consumed Output. The horizontal and vertical scroll distance consumed by this parent
  */
 - (void)onNestedPreScrollWithADView:(ADView *)target
-                            withInt:(jint)dx
-                            withInt:(jint)dy
+                            withInt:(int32_t)dx
+                            withInt:(int32_t)dy
                        withIntArray:(IOSIntArray *)consumed;
 
 /*!
@@ -157,10 +161,10 @@
  @param consumed true if the child consumed the fling, false otherwise
  @return true if this parent consumed or otherwise reacted to the fling
  */
-- (jboolean)onNestedFlingWithADView:(ADView *)target
-                          withFloat:(jfloat)velocityX
-                          withFloat:(jfloat)velocityY
-                        withBoolean:(jboolean)consumed;
+- (bool)onNestedFlingWithADView:(ADView *)target
+                      withFloat:(float)velocityX
+                      withFloat:(float)velocityY
+                    withBoolean:(bool)consumed;
 
 /*!
  @brief React to a nested fling before the target view consumes it.
@@ -180,9 +184,9 @@
  @param velocityY Vertical velocity in pixels per second
  @return true if this parent consumed the fling ahead of the target view
  */
-- (jboolean)onNestedPreFlingWithADView:(ADView *)target
-                             withFloat:(jfloat)velocityX
-                             withFloat:(jfloat)velocityY;
+- (bool)onNestedPreFlingWithADView:(ADView *)target
+                         withFloat:(float)velocityX
+                         withFloat:(float)velocityY;
 
 /*!
  @brief Return the current axes of nested scrolling for this NestedScrollingParent.
@@ -194,7 +198,7 @@
  - seealso: ViewCompat#SCROLL_AXIS_VERTICAL
  - seealso: ViewCompat#SCROLL_AXIS_NONE
  */
-- (jint)getNestedScrollAxes;
+- (int32_t)getNestedScrollAxes;
 
 @end
 
@@ -203,6 +207,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADXNestedScrollingParent)
 J2OBJC_TYPE_LITERAL_HEADER(ADXNestedScrollingParent)
 
 #define AndroidxCoreViewNestedScrollingParent ADXNestedScrollingParent
+
 
 #endif
 

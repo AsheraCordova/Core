@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\html_parser\src\repackaged\org\ccil\cowan\tagsoup\AutoDetector.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_AutoDetector")
@@ -46,6 +47,7 @@ J2OBJC_EMPTY_STATIC_INIT(TSAutoDetector)
 J2OBJC_TYPE_LITERAL_HEADER(TSAutoDetector)
 
 #define RepackagedOrgCcilCowanTagsoupAutoDetector TSAutoDetector
+
 
 #endif
 

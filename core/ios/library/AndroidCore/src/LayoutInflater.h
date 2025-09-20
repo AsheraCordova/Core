@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\LayoutInflater.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_LayoutInflater")
@@ -19,6 +20,9 @@
 @class ADContext;
 @class ADView;
 @class ADViewGroup;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ADView_OnClickListener;
 
 @interface ADLayoutInflater : NSObject
@@ -29,13 +33,13 @@
 
 + (ADLayoutInflater *)fromWithADContext:(ADContext *)context;
 
-- (ADView *)inflateWithInt:(jint)layout
+- (ADView *)inflateWithInt:(int32_t)layout
            withADViewGroup:(ADViewGroup *)parent
-               withBoolean:(jboolean)b;
+               withBoolean:(bool)b;
 
 - (ADView *)inflateWithNSString:(NSString *)layout
                 withADViewGroup:(ADViewGroup *)parent
-                    withBoolean:(jboolean)b;
+                    withBoolean:(bool)b;
 
 + (void)recurseSetWithADViewGroup:(ADViewGroup *)parent
        withADView_OnClickListener:(id<ADView_OnClickListener>)onClickListener;
@@ -57,6 +61,7 @@ FOUNDATION_EXPORT void ADLayoutInflater_recurseSetWithADViewGroup_withADView_OnC
 J2OBJC_TYPE_LITERAL_HEADER(ADLayoutInflater)
 
 @compatibility_alias RAndroidViewLayoutInflater ADLayoutInflater;
+
 
 #endif
 

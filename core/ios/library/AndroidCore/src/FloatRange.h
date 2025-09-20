@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\annotation\FloatRange.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FloatRange")
@@ -21,12 +22,15 @@
 #include "java/lang/annotation/Annotation.h"
 
 @class IOSClass;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 
 @protocol ADFloatRange < JavaLangAnnotationAnnotation >
 
-@property (readonly) jint from;
+@property (readonly) int32_t from;
 
-- (jboolean)isEqual:(id)obj;
+- (bool)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
@@ -34,18 +38,19 @@
 
 @interface ADFloatRange : NSObject < ADFloatRange > {
  @public
-  jint from_;
+  int32_t from_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADFloatRange)
 
-FOUNDATION_EXPORT id<ADFloatRange> create_ADFloatRange(jint from);
+FOUNDATION_EXPORT id<ADFloatRange> create_ADFloatRange(int32_t from);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFloatRange)
 
 #define RAndroidAnnotationFloatRange ADFloatRange
+
 
 #endif
 

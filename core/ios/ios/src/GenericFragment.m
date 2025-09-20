@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\GenericFragment.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Bundle.h"
 #include "Context.h"
 #include "Error.h"
@@ -36,6 +41,7 @@
 #include "java/io/StringReader.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -47,10 +53,12 @@
 #include "java/util/UUID.h"
 #include "java/util/WeakHashMap.h"
 
-@class JavaUtilStack;
-@class JavaUtilWeakHashMap;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASGenericFragment () {
@@ -68,17 +76,17 @@
   id<JavaUtilMap> devData_;
   id<JavaUtilMap> inlineResources_;
   id<JavaUtilMap> tempCache_;
-  jint x_;
-  jint y_;
-  jint width_;
-  jint height_;
+  int32_t x_;
+  int32_t y_;
+  int32_t width_;
+  int32_t height_;
   NSString *DELLOC_EVENT_;
   JavaUtilWeakHashMap *listeners_;
   id<JavaUtilList> disposables_;
-  jboolean measuring_;
+  bool measuring_;
   JavaUtilStack *disableRemeasures_;
-  jboolean isPaused_;
-  jboolean remeasureOnResume_;
+  bool isPaused_;
+  bool remeasureOnResume_;
 }
 
 - (void)inheritRootDirectoryAndNamespace;
@@ -164,7 +172,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   id<JavaUtilList> matchedListeners = new_JavaUtilArrayList_init();
   for (id<JavaUtilList> __strong list in nil_chk(values)) {
     for (id __strong o in nil_chk(list)) {
-      if ([nil_chk(o) java_getClass] == type) {
+      if (JreObjectEqualsEquals([nil_chk(o) java_getClass], type)) {
         [matchedListeners addWithId:o];
       }
     }
@@ -181,7 +189,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   id<JavaUtilList> list = [((JavaUtilWeakHashMap *) nil_chk(listeners_)) getWithId:widget];
   if (list != nil) {
     for (id __strong o in list) {
-      if ([nil_chk(o) java_getClass] == type) {
+      if (JreObjectEqualsEquals([nil_chk(o) java_getClass], type)) {
         [matchedListeners addWithId:o];
       }
     }
@@ -239,10 +247,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   self->rootDirectory_ = [args getStringWithNSString:@"rootDirectory"];
   self->namespace__ = [args getStringWithNSString:@"namespace"];
   ASGenericFragment_inheritRootDirectoryAndNamespace(self);
-  jint scopedObjectCount = [args getIntWithNSString:@"count"];
-  for (jint i = 0; i < scopedObjectCount; i++) {
+  int32_t scopedObjectCount = [args getIntWithNSString:@"count"];
+  for (int32_t i = 0; i < scopedObjectCount; i++) {
     NSString *expression = [args getStringWithNSString:JreStrcat("$I", @"expression", i)];
-    if (expression != nil && ![expression java_isEmpty]) {
+    if (expression != nil && ![expression isEmpty]) {
       id payload = [args getSerializableWithNSString:JreStrcat("$I", @"payload", i)];
       ASModelExpressionParser_ModelStoreVarHolder *modelStoreVarHolder = ASModelExpressionParser_parseModelStoreVarExpressionWithNSString_(expression);
       NSString *varName = ((ASModelExpressionParser_ModelStoreVarHolder *) nil_chk(modelStoreVarHolder))->varName_;
@@ -316,7 +324,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return (ADView *) cast_chk([self onCreateViewWithBoolean:false], [ADView class]);
 }
 
-- (id)onCreateViewWithBoolean:(jboolean)measure {
+- (id)onCreateViewWithBoolean:(bool)measure {
   if (view_ == nil) {
     @try {
       id<ASIFragment> rootFragment = [self getParent];
@@ -425,7 +433,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   (void) [userData_ putWithId:key withId:object];
 }
 
-- (jboolean)hasDevDataWithNSString:(NSString *)key {
+- (bool)hasDevDataWithNSString:(NSString *)key {
   return devData_ != nil && [devData_ containsKeyWithId:key];
 }
 
@@ -444,7 +452,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   self->styleSheet_ = styleSheet;
 }
 
-- (jboolean)isViewLoaded {
+- (bool)isViewLoaded {
   return view_ != nil;
 }
 
@@ -463,10 +471,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [tempCache_ getWithId:key];
 }
 
-- (void)setFrameWithInt:(jint)x
-                withInt:(jint)y
-                withInt:(jint)width
-                withInt:(jint)height {
+- (void)setFrameWithInt:(int32_t)x
+                withInt:(int32_t)y
+                withInt:(int32_t)width
+                withInt:(int32_t)height {
   self->x_ = x;
   self->y_ = y;
   self->width_ = width;
@@ -494,8 +502,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   measuring_ = false;
 }
 
-- (void)resizeWindowWithInt:(jint)width
-                    withInt:(jint)height {
+- (void)resizeWindowWithInt:(int32_t)width
+                    withInt:(int32_t)height {
   [self setFrameWithInt:x_ withInt:y_ withInt:width withInt:height];
   if (!isPaused_) {
     [self remeasure];
@@ -505,7 +513,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isMeasuring {
+- (bool)isMeasuring {
   return measuring_ || [((JavaUtilStack *) nil_chk(disableRemeasures_)) size] > 0;
 }
 
@@ -537,7 +545,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<ASIRoot>) nil_chk(((id<ASIRoot>) cast_check(rootWidget_, ASIRoot_class_())))) displayErrorIndicator];
 }
 
-- (jboolean)hasErrors {
+- (bool)hasErrors {
   return [((id<JavaUtilList>) nil_chk([((ASErrors *) nil_chk(ASGenericFragment_getFatalErrors(self))) getErrors])) size] > 0;
 }
 
@@ -554,7 +562,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setInlineResourceWithNSString:(NSString *)key
                          withNSString:(NSString *)value
-                          withBoolean:(jboolean)append {
+                          withBoolean:(bool)append {
   if (inlineResources_ == nil) {
     inlineResources_ = new_JavaUtilHashMap_init();
   }
@@ -801,9 +809,9 @@ ADBundle *ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUt
   [bundle putStringWithNSString:@"fileName" withNSString:fileName];
   [bundle putStringWithNSString:@"id" withNSString:resId];
   if (scopedObjects != nil && ![scopedObjects isEmpty]) {
-    jint scopedObjectCount = [scopedObjects size];
+    int32_t scopedObjectCount = [scopedObjects size];
     [bundle putIntWithNSString:@"count" withInt:scopedObjectCount];
-    for (jint i = 0; i < scopedObjectCount; i++) {
+    for (int32_t i = 0; i < scopedObjectCount; i++) {
       id<JavaUtilMap> map = ASPluginInvoker_getMapWithId_([scopedObjects getWithInt:i]);
       [bundle putStringWithNSString:JreStrcat("$I", @"expression", i) withNSString:ASPluginInvoker_getStringWithId_([((id<JavaUtilMap>) nil_chk(map)) getWithId:@"expression"])];
       id payload = [map getWithId:@"payload"];
@@ -904,3 +912,5 @@ ASErrors *ASGenericFragment_getFatalErrors(ASGenericFragment *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASGenericFragment)
+
+J2OBJC_NAME_MAPPING(ASGenericFragment, "com.ashera.core", "AS")

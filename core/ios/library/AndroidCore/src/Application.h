@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\app\Application.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Application")
@@ -39,6 +40,7 @@ FOUNDATION_EXPORT ADApplication *create_ADApplication_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADApplication)
 
 @compatibility_alias RAndroidAppApplication ADApplication;
+
 
 #endif
 

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\model\Errors.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_Errors")
@@ -17,6 +18,7 @@
 #define ASErrors_
 
 @class ASError;
+@class JavaLangBoolean;
 @protocol JavaUtilList;
 
 @interface ASErrors : NSObject
@@ -31,7 +33,7 @@
 
 - (id<JavaUtilList>)getErrors;
 
-- (jboolean)hasErrors;
+- (bool)hasErrors;
 
 - (void)setErrorsWithJavaUtilList:(id<JavaUtilList>)errors;
 
@@ -48,6 +50,7 @@ FOUNDATION_EXPORT ASErrors *create_ASErrors_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASErrors)
 
 @compatibility_alias ComAsheraModelErrors ASErrors;
+
 
 #endif
 

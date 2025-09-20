@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-widget_library\widget_library\src\com\ashera\widget\WidgetAttributeMapFilter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_WidgetAttributeMapFilter")
@@ -16,10 +17,13 @@
 #if !defined (ASWidgetAttributeMapFilter_) && (INCLUDE_ALL_WidgetAttributeMapFilter || defined(INCLUDE_ASWidgetAttributeMapFilter))
 #define ASWidgetAttributeMapFilter_
 
+@class JavaLangBoolean;
+@class NSString;
+
 @protocol ASWidgetAttributeMapFilter < JavaObject >
 
-- (jboolean)acceptWithNSString:(NSString *)attributeName
-                  withNSString:(NSString *)localName;
+- (bool)acceptWithNSString:(NSString *)attributeName
+              withNSString:(NSString *)localName;
 
 @end
 
@@ -28,6 +32,7 @@ J2OBJC_EMPTY_STATIC_INIT(ASWidgetAttributeMapFilter)
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttributeMapFilter)
 
 #define ComAsheraWidgetWidgetAttributeMapFilter ASWidgetAttributeMapFilter
+
 
 #endif
 

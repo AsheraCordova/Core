@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\widget\ScrollView.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ScrollView")
@@ -21,6 +22,8 @@
 #include "FrameLayout.h"
 
 @class ADView;
+@class JavaLangBoolean;
+@class JavaLangInteger;
 
 @interface ADScrollView : ADFrameLayout
 
@@ -28,40 +31,40 @@
 
 - (instancetype)init;
 
-- (void)adjustPaddingIfScrollBarPresentWithInt:(jint)widthMeasureSpec
-                                       withInt:(jint)heightMeasureSpec
-                                       withInt:(jint)thumbWidth;
+- (void)adjustPaddingIfScrollBarPresentWithInt:(int32_t)widthMeasureSpec
+                                       withInt:(int32_t)heightMeasureSpec
+                                       withInt:(int32_t)thumbWidth;
 
-- (jboolean)isFillViewport;
+- (bool)isFillViewport;
 
 - (void)requestLayout;
 
-- (void)setFillViewportWithBoolean:(jboolean)fillViewport;
+- (void)setFillViewportWithBoolean:(bool)fillViewport;
 
 #pragma mark Protected
 
-- (jint)computeVerticalScrollRange;
+- (int32_t)computeVerticalScrollRange;
 
 - (void)measureChildWithADView:(ADView *)child
-                       withInt:(jint)parentWidthMeasureSpec
-                       withInt:(jint)parentHeightMeasureSpec;
+                       withInt:(int32_t)parentWidthMeasureSpec
+                       withInt:(int32_t)parentHeightMeasureSpec;
 
 - (void)measureChildWithMarginsWithADView:(ADView *)child
-                                  withInt:(jint)parentWidthMeasureSpec
-                                  withInt:(jint)widthUsed
-                                  withInt:(jint)parentHeightMeasureSpec
-                                  withInt:(jint)heightUsed;
+                                  withInt:(int32_t)parentWidthMeasureSpec
+                                  withInt:(int32_t)widthUsed
+                                  withInt:(int32_t)parentHeightMeasureSpec
+                                  withInt:(int32_t)heightUsed;
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec;
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADScrollView)
 
-inline jint ADScrollView_get_ANIMATED_SCROLL_GAP(void);
+inline int32_t ADScrollView_get_ANIMATED_SCROLL_GAP(void);
 #define ADScrollView_ANIMATED_SCROLL_GAP 250
-J2OBJC_STATIC_FIELD_CONSTANT(ADScrollView, ANIMATED_SCROLL_GAP, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ADScrollView, ANIMATED_SCROLL_GAP, int32_t)
 
 FOUNDATION_EXPORT void ADScrollView_init(ADScrollView *self);
 
@@ -72,6 +75,7 @@ FOUNDATION_EXPORT ADScrollView *create_ADScrollView_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADScrollView)
 
 @compatibility_alias RAndroidWidgetScrollView ADScrollView;
+
 
 #endif
 

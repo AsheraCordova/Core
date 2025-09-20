@@ -3,10 +3,23 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\widget\ViewUtils.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "J2ObjC_source.h"
 #include "View.h"
 #include "ViewCompat.h"
 #include "ViewUtils.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ADXViewUtils ()
@@ -30,7 +43,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (jboolean)isLayoutRtlWithADView:(ADView *)view {
++ (bool)isLayoutRtlWithADView:(ADView *)view {
   return ADXViewUtils_isLayoutRtlWithADView_(view);
 }
 
@@ -64,9 +77,11 @@ ADXViewUtils *create_ADXViewUtils_init() {
   J2OBJC_CREATE_IMPL(ADXViewUtils, init)
 }
 
-jboolean ADXViewUtils_isLayoutRtlWithADView_(ADView *view) {
+bool ADXViewUtils_isLayoutRtlWithADView_(ADView *view) {
   ADXViewUtils_initialize();
   return ADXViewCompat_getLayoutDirectionWithADView_(view) == ADXViewCompat_LAYOUT_DIRECTION_RTL;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXViewUtils)
+
+J2OBJC_NAME_MAPPING(ADXViewUtils, "androidx.appcompat.widget", "ADX")

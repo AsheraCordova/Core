@@ -3,12 +3,24 @@
 //  source: D:\Java\git\core-widget_library\Plugin_Converter\src\com\ashera\converter\AbstractStringToEnumConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AbstractStringToEnumConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASAbstractStringToEnumConverter
@@ -38,7 +50,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   id<JavaUtilSet> keySet = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(mapping)) keySet]);
   for (NSString * __strong key in nil_chk(keySet)) {
     id mappingValue = JreRetainedLocalValue([mapping getWithId:key]);
-    if (mappingValue == value) {
+    if (JreObjectEqualsEquals(mappingValue, value)) {
       convertValue = key;
       break;
     }
@@ -93,3 +105,5 @@ void ASAbstractStringToEnumConverter_init(ASAbstractStringToEnumConverter *self)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAbstractStringToEnumConverter)
+
+J2OBJC_NAME_MAPPING(ASAbstractStringToEnumConverter, "com.ashera.converter", "AS")

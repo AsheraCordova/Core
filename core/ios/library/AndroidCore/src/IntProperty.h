@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\IntProperty.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_IntProperty")
@@ -22,6 +23,7 @@
 
 @class IOSClass;
 @class JavaLangInteger;
+@class NSString;
 
 /*!
  @brief An implementation of <code>r.android.util.Property</code> to be used specifically with fields of type 
@@ -36,7 +38,7 @@
 
 - (instancetype)initWithNSString:(NSString *)name;
 
-- (JavaLangInteger *)getWithId:(id)arg0;
+- (JavaLangInteger *)getWithId:(id)object;
 
 - (void)setWithId:(id)object
            withId:(JavaLangInteger *)value;
@@ -46,7 +48,7 @@
   with fields of type <code>int</code>.
  */
 - (void)setValueWithId:(id)object
-               withInt:(jint)value;
+               withInt:(int32_t)value;
 
 // Disallowed inherited constructors, do not use.
 
@@ -62,6 +64,7 @@ FOUNDATION_EXPORT void ADIntProperty_initWithNSString_(ADIntProperty *self, NSSt
 J2OBJC_TYPE_LITERAL_HEADER(ADIntProperty)
 
 @compatibility_alias RAndroidUtilIntProperty ADIntProperty;
+
 
 #endif
 
