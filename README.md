@@ -573,9 +573,9 @@ popBackStack()	| Remove the top view from stack. Equivalent of hitting back butt
 popBackStackTo(destinationId: string, inclusive: boolean)	| Pop all screens until the destinationId<Id of fragment defined in xml> based on inclusive flag.
 navigateWithPopBackStackTo(actionId:string, destinationId: string, inclusive: boolean, ...scopedObjects:ScopedObject[])	| Navigate to page with actionId (a constant defined in NavGraph.ts) and pop all screens until the destinationId<Id of fragment defined in xml> based on inclusive flag.
 navigateAsTop(actionId:string, ...scopedObjects:ScopedObject[])	| Remove all screens in stack and make this the top most screen.
-
-Note: dialog is not supported in fragments. Instead use navigator.navigate(...) methods and declare dialogs in the main nav_graph.xml.
-
+closeDialog(id : string)	| Close the ialog with id of the dialog. Id is used only for android and other platforms closes the top most open dialog
+namespace	| Fragment can display offline content that is stored in the mobile app directory. e.g. TestApp. When namespace TestApp is set, the calls from the native ui to fragment is routed to module TestApp which is loaded dynamically
+rootDirectory	| Fragment can display offline content that is stored in the mobile app directory. e.g. cordova.file.persistent/TestApp. Child app can be downloaded from the internet in zip file and can be store at cordova.file.persistent/TestApp location. 
 
 ### Viewoverlay
 Name                	| Description
