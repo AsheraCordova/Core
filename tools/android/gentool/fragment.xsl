@@ -14,8 +14,9 @@ import { <xsl:value-of select="$name" /> } from './android/widget/<xsl:value-of 
 import { Fragment, Inject } from './app/Fragment';
 import { NavController, InjectController } from './navigation/NavController';
 import { ScopedObject } from './app/ScopedObject';
+<xsl:variable name="className"><xsl:value-of select="//*[@fragment != '']/@fragment" /></xsl:variable>
 //start - className
-export default class <xsl:value-of select="//*[@fragment != '']/@fragment" /> extends Fragment
+export default class <xsl:value-of select="$className" /> extends Fragment
 //end - className
 {
         //start - body
@@ -28,7 +29,9 @@ export default class <xsl:value-of select="//*[@fragment != '']/@fragment" /> ex
             <xsl:text>@Inject({ id: "</xsl:text><xsl:value-of select="@android:id" /><xsl:text>" })</xsl:text>&#xa;
         <xsl:text>private </xsl:text><xsl:value-of select="$id" /><xsl:text>!:</xsl:text><xsl:value-of select="$name" /><xsl:text>;&#xa;</xsl:text>
         </xsl:for-each>
-
+		static createInstance () {
+			return new <xsl:value-of select="$className" />();
+		}
         async goToPreviousScreen() {
             await this.navController.reset().popBackStack().executeCommand();
         }        
