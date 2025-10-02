@@ -13,7 +13,7 @@
       </feature>
     </config-file>
    	<framework src="layout.gradle" custom="true" type="gradleReference" />
-   	<resource-file src="www/css/layout.css" target="../../src/main/assets/www/css/layout.css" />
+   	<asset src="www/css/layout.css" target="css/layout.css" />
    	
    	<js-module src="www/js/add_res.js" name="layoutAddRes">
     	 <runs/>

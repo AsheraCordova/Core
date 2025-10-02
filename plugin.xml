@@ -123,7 +123,7 @@
      <source-file src="core/android/tsc/webpack.config.js" target-dir="tsc"/>
      <!-- tsc end -->
      
-     <resource-file src="core/android/www/css/font_standard.css" target="../../src/main/assets/www/css/font_standard.css" />
+     <asset src="core/android/www/css/font_standard.css" target="css/font_standard.css" />
   
   	<framework src="tools/android/tools.gradle" custom="true" type="gradleReference" />
     <!-- start gentool -->
@@ -1589,8 +1589,8 @@
   	<js-module src="core/browser/www/js/add_res.js" name="coreAddRes">
     	 <runs/>
   	</js-module>
-  	<resource-file src="core/browser/www/js/window_ext.js" target="../../src/main/assets/www/js/window_ext.js" />
-  	<resource-file src="core/browser/www/css/shadowhost.css" target="../../src/main/assets/www/css/shadowhost.css" />
+  	<asset src="core/browser/www/js/window_ext.js" target="js/window_ext.js" />
+  	<asset src="core/browser/www/css/shadowhost.css" target="css/shadowhost.css" />
   	<source-file src="core/browser/src/main/other/com/ashera/Client.java" target-dir="com/ashera/"/>
   	<source-file src="core/browser/src/main/other/com/ashera/ResourcesSupplier.java" target-dir="com/ashera/"/>
   	
@@ -1621,7 +1621,7 @@
       </feature>
     </config-file>
    	<framework src="layout/browser/layout.gradle" custom="true" type="gradleReference" />
-   	<resource-file src="layout/browser/www/css/layout.css" target="../../src/main/assets/www/css/layout.css" />
+   	<asset src="layout/browser/www/css/layout.css" target="css/layout.css" />
    	
    	<js-module src="layout/browser/www/js/add_res.js" name="layoutAddRes">
     	 <runs/>

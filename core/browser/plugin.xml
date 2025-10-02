@@ -19,8 +19,8 @@
   	<js-module src="www/js/add_res.js" name="coreAddRes">
     	 <runs/>
   	</js-module>
-  	<resource-file src="www/js/window_ext.js" target="../../src/main/assets/www/js/window_ext.js" />
-  	<resource-file src="www/css/shadowhost.css" target="../../src/main/assets/www/css/shadowhost.css" />
+  	<asset src="www/js/window_ext.js" target="js/window_ext.js" />
+  	<asset src="www/css/shadowhost.css" target="css/shadowhost.css" />
   	<source-file src="src/main/other/com/ashera/Client.java" target-dir="com/ashera/"/>
   	<source-file src="src/main/other/com/ashera/ResourcesSupplier.java" target-dir="com/ashera/"/>
   	
