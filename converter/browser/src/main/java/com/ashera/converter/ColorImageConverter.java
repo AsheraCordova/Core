@@ -69,10 +69,10 @@ public class ColorImageConverter extends ColorConverter {
             			fileExtension = "png";
                 	}
 
-            		String webfileName = getWebFileLocation("res-swt/" + directoryName + "-" + density + "dpi" + "/" + fileName + "." + fileExtension, fragment);
+            		String webfileName = getWebFileLocation("res-swt/" + directoryName + "-" + density + "dpi" + "/" + fileName + "." + fileExtension, fragment, true);
 	                
 	                if (webfileName == null) {
-	                	webfileName = getWebFileLocation("res-swt/" + directoryName + "/" + fileName + "." + fileExtension, fragment);
+	                	webfileName = getWebFileLocation("res-swt/" + directoryName + "/" + fileName + "." + fileExtension, fragment, false);
 	                }
 	
 	                return webfileName;
@@ -83,14 +83,19 @@ public class ColorImageConverter extends ColorConverter {
         throw new RuntimeException("Unable to convert path to image : " + value);
     }
     
-	private String getWebFileLocation(String path, IFragment fragment) {
+	private String getWebFileLocation(String path, IFragment fragment, boolean checkPath) {
 		if (fragment.getRootDirectory() != null) {
 			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(FileUtils.getSlashAppendedDirectoryName(fragment.getRootDirectory()) + path, fragment);
 			return getLocalStorage(cordovaFileUri);			
 		}
 		
-		InputStream f = FileUtils.getInputStreamFromClassPath(path);
-		return f == null ? null : path;
+		// ISSUE - the classpath does not work. need to find a way to check if images exists
+		if (checkPath) {
+			InputStream f = FileUtils.getInputStreamFromClassPath(path);
+			return f == null ? null : path;
+		}
+		
+		return path;
 	}
 
     @Override
