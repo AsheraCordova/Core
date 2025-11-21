@@ -1691,7 +1691,7 @@
 	<js-module src="core/swt/www/coreManager.js" name="coreManager">
     	<clobbers target="coreManager" />
   	</js-module>
-  	<dependency id="SWTSwitch" url="https://github.com/AsheraCordova/SWTSwitch.git" />
+  	<dependency id="com.ashera.myswitch.swt" url="https://github.com/AsheraCordova/SWTSwitch.git" />
   
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="ConverterCordovaPlugin">
