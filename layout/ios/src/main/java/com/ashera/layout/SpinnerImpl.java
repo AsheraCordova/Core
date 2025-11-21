@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -1172,11 +1187,11 @@ return getTextSize();				}
     	return (int) Math.ceil((float)getTextSize());
     }
     
-    private native int nativeGetFontStyle() /*-[	 
+    private native int nativeGetFontStyle()/*-[	 
     	ASUITextField* label = ((ASUITextField*)self->uiView_);
     	return label.font.fontDescriptor.symbolicTraits;
    	]-*/;
-    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor) /*-[	
+    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor)/*-[	
     	ASUITextField* label = ((ASUITextField*)self->uiView_);
      	UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
      	if (font == nil) {
@@ -1190,7 +1205,7 @@ return getTextSize();				}
 	    }
     ]-*/;
     
-    private native void nativeSetFontStyle(int style) /*-[
+    private native void nativeSetFontStyle(int style)/*-[
 		ASUITextField* label = ((ASUITextField*)self->uiView_);
   		UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   		((ASUITextField*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -1269,7 +1284,7 @@ return getTextSize();				}
 	
 
 
-	private native Object getTextSize() /*-[
+	private native Object getTextSize()/*-[
 		  return [JavaLangFloat valueOfWithFloat:((ASUITextField*)self.uiView).font.pointSize];
 	]-*/;
 	private void setMyTextSize(Object objValue) {
@@ -1300,7 +1315,7 @@ return getTextSize();				}
 	}
 
 
-	private native void setHorizontalAligmentCenter() /*-[
+	private native void setHorizontalAligmentCenter()/*-[
 		((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentCenter;
 	]-*/;
 	
@@ -1308,7 +1323,7 @@ return getTextSize();				}
 		setHorizontalAligmentRightInternal();
 	}
 
-	private native void setHorizontalAligmentRightInternal() /*-[
+	private native void setHorizontalAligmentRightInternal()/*-[
 		((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentRight;
 	]-*/;
 
@@ -1316,7 +1331,7 @@ return getTextSize();				}
 		setHorizontalAligmentLeftInternal();
 	}
 	
-	private native void setHorizontalAligmentLeftInternal() /*-[
+	private native void setHorizontalAligmentLeftInternal()/*-[
 		((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentLeft;
 	]-*/;
 
@@ -1324,7 +1339,7 @@ return getTextSize();				}
 	private static final int TEXT_ALIGN_LEFT = 0; 
 	private static final int TEXT_ALIGN_RIGHT = 1; 
 
-    private native int getTextAlignment() /*-[
+    private native int getTextAlignment()/*-[
     	int alignment = (int) ((ASUITextField*)self.uiView).textAlignment;
     	
     	if (alignment == NSTextAlignmentCenter) {
@@ -1411,7 +1426,7 @@ return getTextSize();				}
 		}
 	}
 
-	private native int getImageHeight(Object objValue) /*-[
+	private native int getImageHeight(Object objValue)/*-[
 		if ([objValue isKindOfClass:[UIImage class]]) {
 	    	UIImage* image = ((UIImage*) objValue);
 	    	return image.size.height;
@@ -1420,7 +1435,7 @@ return getTextSize();				}
 	   	return 0;
 	]-*/;	
 	
-	private native int getImageWidth(Object objValue) /*-[
+	private native int getImageWidth(Object objValue)/*-[
     	if ([objValue isKindOfClass:[UIImage class]]) {
         	UIImage* image = ((UIImage*) objValue);
         	return image.size.width;
@@ -1553,7 +1568,7 @@ return getTextSize();				}
 		return 0;
 	}
 	
-	private native int getLineHeight() /*-[
+	private native int getLineHeight()/*-[
   		return ceil(((ASUITextField*)self.uiView).font.lineHeight);
 	]-*/;
 	private int getBorderWidth() {
@@ -1698,16 +1713,16 @@ return getTextSize();				}
 	private void updatePadding() {
 	}
 
-	private native void nativeSetVerticalAligmentCenter() /*-[
+	private native void nativeSetVerticalAligmentCenter()/*-[
 	    ((ASUITextField*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 	]-*/;
 
-	private native void nativeSetVerticalAligmentBottom() /*-[
+	private native void nativeSetVerticalAligmentBottom()/*-[
 		((ASUITextField*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 		
 	]-*/;
 
-	private native void nativeSetVerticalAligmentTop() /*-[
+	private native void nativeSetVerticalAligmentTop()/*-[
 		((ASUITextField*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
 		
 	]-*/;
@@ -1722,7 +1737,7 @@ return getTextSize();				}
 		nativeSetHintColor(ViewImpl.getColor(objValue));
 	}
 	
-	private native void nativeSetHintColor(Object value) /*-[
+	private native void nativeSetHintColor(Object value)/*-[
 		((ASUITextField*)self.uiView).placeHolderColor = (UIColor*) value;
 	]-*/;
 
@@ -1730,7 +1745,7 @@ return getTextSize();				}
 		this.invalidate();
 	}
 
-	public native void nativeSetEnabled(boolean value) /*-[
+	public native void nativeSetEnabled(boolean value)/*-[
 		((ASUITextField*)self.uiView).enabled = value;
 	]-*/;
 	
@@ -1743,7 +1758,7 @@ return getTextSize();				}
 	
 
 
-	private native void becomeFirstResponder() /*-[
+	private native void becomeFirstResponder()/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		[tv becomeFirstResponder];
 	]-*/;
@@ -1789,67 +1804,67 @@ return getTextSize();				}
 	}
 	
 
-	public native void setText(Object nativeWidget, Object value) /*-[
+	public native void setText(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).text = (NSString*) value;
 ]-*/;
-	public native Object getText() /*-[
+	public native Object getText()/*-[
 return ((ASUITextField*) uiView_).text;
   ]-*/;
-	public native void setPlaceholder(Object nativeWidget, Object value) /*-[
+	public native void setPlaceholder(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).placeholder = (NSString*) value;
 ]-*/;
-	public native Object getPlaceholder() /*-[
+	public native Object getPlaceholder()/*-[
 return ((ASUITextField*) uiView_).placeholder;
   ]-*/;
-	public native void setTextColor(Object nativeWidget, Object value) /*-[
+	public native void setTextColor(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).textColor = (UIColor*) value;
 ]-*/;
-	public native Object getTextColor() /*-[
+	public native Object getTextColor()/*-[
 return ((ASUITextField*) uiView_).textColor;
   ]-*/;
-	public native void setAdjustsFontSizeToFitWidth(Object nativeWidget, Object value) /*-[
+	public native void setAdjustsFontSizeToFitWidth(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).adjustsFontSizeToFitWidth = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAdjustsFontSizeToFitWidth() /*-[
+	public native Object getAdjustsFontSizeToFitWidth()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).adjustsFontSizeToFitWidth];
   ]-*/;
-	public native void setMinimumFontSize(Object nativeWidget, Object value) /*-[
+	public native void setMinimumFontSize(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).minimumFontSize = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getMinimumFontSize() /*-[
+	public native Object getMinimumFontSize()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITextField*) uiView_).minimumFontSize];
   ]-*/;
-	public native Object getIsEditing() /*-[
+	public native Object getIsEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).editing];
   ]-*/;
-	public native void setClearsOnBeginEditing(Object nativeWidget, Object value) /*-[
+	public native void setClearsOnBeginEditing(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).clearsOnBeginEditing = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getClearsOnBeginEditing() /*-[
+	public native Object getClearsOnBeginEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).clearsOnBeginEditing];
   ]-*/;
-	public native void setClearsOnInsertion(Object nativeWidget, Object value) /*-[
+	public native void setClearsOnInsertion(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).clearsOnInsertion = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getClearsOnInsertion() /*-[
+	public native Object getClearsOnInsertion()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).clearsOnInsertion];
   ]-*/;
-	public native void setAllowsEditingTextAttributes(Object nativeWidget, Object value) /*-[
+	public native void setAllowsEditingTextAttributes(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).allowsEditingTextAttributes = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsEditingTextAttributes() /*-[
+	public native Object getAllowsEditingTextAttributes()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).allowsEditingTextAttributes];
   ]-*/;
-	public native void setBackground(Object nativeWidget, Object value) /*-[
+	public native void setBackground(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).background = (UIImage*) value;
 ]-*/;
-	public native Object getBackground() /*-[
+	public native Object getBackground()/*-[
 return ((ASUITextField*) uiView_).background;
   ]-*/;
-	public native void setDisabledBackground(Object nativeWidget, Object value) /*-[
+	public native void setDisabledBackground(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).disabledBackground = (UIImage*) value;
 ]-*/;
-	public native Object getDisabledBackground() /*-[
+	public native Object getDisabledBackground()/*-[
 return ((ASUITextField*) uiView_).disabledBackground;
   ]-*/;
 	@SuppressLint("NewApi")
@@ -2107,12 +2122,12 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 	private void setTextColorLink(r.android.content.res.ColorStateList linkTextColors) {
 	}
 	
-	private native Object getMyText() /*-[
+	private native Object getMyText()/*-[
 		return ((ASUITextField*)self.uiView).text;
 	]-*/;
 
 
-	private native int getSelectedItemPosition() /*-[
+	private native int getSelectedItemPosition()/*-[
 		UIPickerView *picker = ((UIPickerView*) ((ASUITextField*)[self asNativeWidget]).inputView);
 		return (int) [picker selectedRowInComponent:0];
 ]-*/;

@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 import java.util.*;
@@ -4717,4 +4732,72 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		htmlElement.getStyle().setProperty("border-radius", objValue + "px");
 	}
 
+	public static void nativeAddTouchEvent(IWidget widget) {
+		new NativeTouchHandler(widget).nativeAddOnSwipe();
+	}
+
+	static class NativeTouchHandler {
+		private int action = 0; 
+		private MotionEvent motionEvent = new MotionEvent();
+		private IWidget widget;
+		public NativeTouchHandler(IWidget widget) {
+			this.widget = widget;
+		}
+		public void nativeAddOnSwipe() {
+			View view = (View) widget.asWidget();
+			org.teavm.jso.dom.events.EventListener<ViewImpl.HtmlMouseEvent> flistener = (event) -> {
+				motionEvent.setX(event.getClientX());
+				motionEvent.setY(event.getClientY());
+				switch (event.getType()) {
+				case "mousedown":
+					action = 1;
+					motionEvent.setAction(MotionEvent.ACTION_DOWN);
+					view.onTouchEvent(motionEvent);
+					break;
+				case "mouseup":
+					if (action == 1) {
+						motionEvent.setAction(MotionEvent.ACTION_UP);
+						view.onTouchEvent(motionEvent);
+						action = 0;
+					}
+					break;
+				case "mousemove":
+					
+					if (action == 1) {
+						motionEvent.setAction(MotionEvent.ACTION_MOVE);
+						view.onTouchEvent(motionEvent);
+					}
+					break;
+				default:
+					break;
+				}
+			};
+			String eventId = "temouseup" + id;
+			setOnListener(widget, org.teavm.jso.browser.Window.current(), flistener, eventId, "mouseup");
+			ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mousedown", "mousedown");
+			ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mousemove", "mousemove");
+			addDellocHandler(eventId);
+			id++;
+		}
+
+		@com.google.j2objc.annotations.WeakOuter
+		class DallocHandler extends com.ashera.widget.bus.EventBusHandler {
+			String eventId;
+			public DallocHandler(String type, String id) {
+				super(type);
+				eventId = id;
+			}
+
+			@Override
+			protected void doPerform(Object payload) {
+				ViewImpl.removeListener(widget, org.teavm.jso.browser.Window.current(), eventId, "mouseup");
+			}
+			
+		}
+		private void addDellocHandler(String id) {
+			widget.getFragment().getEventBus().on(DELLOC_EVENT, new DallocHandler(DELLOC_EVENT, id));
+		}
+		private static int id = 0;
+		private final static String DELLOC_EVENT = com.ashera.widget.bus.Event.StandardEvents.dealloc.toString();
+	}
 }

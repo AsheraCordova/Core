@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 // start - imports
 import java.util.*;
@@ -695,7 +710,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
 		nativeSetScrollX(asNativeWidget(), (int) objValue);
 	}
 	
-	public native void nativeSetScrollX(Object view, int value) /*-[
+	public native void nativeSetScrollX(Object view, int value)/*-[
   		[((ASUIScrollView*)view) setContentOffset:CGPointMake(value ,((ASUIScrollView*)view).contentOffset.y)];
 	]-*/;
 	
@@ -703,7 +718,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
 		nativeSetScrollY(asNativeWidget(), (int) objValue);
 	}
 	
-	public native void nativeSetScrollY(Object view, int value) /*-[
+	public native void nativeSetScrollY(Object view, int value)/*-[
     	[((ASUIScrollView*)view) setContentOffset:CGPointMake(((ASUIScrollView*)view).contentOffset.x, value)];	
     ]-*/;
 
@@ -712,7 +727,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
 		return nativeGetScrollX(asNativeWidget());
 	}
 	
-	public native double nativeGetScrollX(Object view) /*-[
+	public native double nativeGetScrollX(Object view)/*-[
 		return ((ASUIScrollView*)view).contentOffset.x;
 	]-*/;
 	
@@ -720,7 +735,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
 		return nativeGetScrollY(asNativeWidget());
 	}
 	
-	public native double nativeGetScrollY(Object view) /*-[
+	public native double nativeGetScrollY(Object view)/*-[
 		return ((ASUIScrollView*)view).contentOffset.y;
 	]-*/;
 
@@ -770,7 +785,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
 		nativeSetPreventAutoScroll((boolean) objValue);
 	}
 	
-	private native void nativeSetPreventAutoScroll(boolean preventAutoScroll)  /*-[
+	private native void nativeSetPreventAutoScroll(boolean preventAutoScroll) /*-[
 		ASUIScrollView* scrollview = ((ASUIScrollView*)self.uiView);
 		scrollview.preventAutoScroll = preventAutoScroll;
 	]-*/;

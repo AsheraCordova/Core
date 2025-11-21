@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -2039,13 +2054,13 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		[((ASUITextView*)self->uiView_) setAttributedText : (NSMutableAttributedString*)text];
 	]-*/;
 	
-	private native Object getMyText() /*-[
+	private native Object getMyText()/*-[
 		return ((ASUITextView*)self.uiView).text;
 	]-*/;
 	
 
 
-	private native Object getTextSize() /*-[
+	private native Object getTextSize()/*-[
 		  return [JavaLangFloat valueOfWithFloat:((ASUITextView*)self.uiView).font.pointSize];
 	]-*/;
 	private void setMyTextSize(Object objValue) {
@@ -2077,7 +2092,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	}
 
 
-	private native void setHorizontalAligmentCenter() /*-[
+	private native void setHorizontalAligmentCenter()/*-[
 		((ASUITextView*)self.uiView).textAlignment = NSTextAlignmentCenter;
 	]-*/;
 	
@@ -2085,7 +2100,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		setHorizontalAligmentRightInternal();
 	}
 
-	private native void setHorizontalAligmentRightInternal() /*-[
+	private native void setHorizontalAligmentRightInternal()/*-[
 		((ASUITextView*)self.uiView).textAlignment = NSTextAlignmentRight;
 	]-*/;
 
@@ -2093,7 +2108,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		setHorizontalAligmentLeftInternal();
 	}
 	
-	private native void setHorizontalAligmentLeftInternal() /*-[
+	private native void setHorizontalAligmentLeftInternal()/*-[
 		((ASUITextView*)self.uiView).textAlignment = NSTextAlignmentLeft;
 	]-*/;
 
@@ -2101,7 +2116,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	private static final int TEXT_ALIGN_LEFT = 0; 
 	private static final int TEXT_ALIGN_RIGHT = 1; 
 
-    private native int getTextAlignment() /*-[
+    private native int getTextAlignment()/*-[
     	int alignment = (int) ((ASUITextView*)self.uiView).textAlignment;
     	
     	if (alignment == NSTextAlignmentCenter) {
@@ -2199,7 +2214,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 	}
 
-	private native int getImageHeight(Object objValue) /*-[
+	private native int getImageHeight(Object objValue)/*-[
 		if ([objValue isKindOfClass:[UIImage class]]) {
 	    	UIImage* image = ((UIImage*) objValue);
 	    	return image.size.height;
@@ -2208,7 +2223,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	   	return 0;
 	]-*/;	
 	
-	private native int getImageWidth(Object objValue) /*-[
+	private native int getImageWidth(Object objValue)/*-[
     	if ([objValue isKindOfClass:[UIImage class]]) {
         	UIImage* image = ((UIImage*) objValue);
         	return image.size.width;
@@ -2273,11 +2288,11 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     	return (int) Math.ceil((float)getTextSize());
     }
     
-    private native int nativeGetFontStyle() /*-[	 
+    private native int nativeGetFontStyle()/*-[	 
     	ASUITextView* label = ((ASUITextView*)self->uiView_);
     	return label.font.fontDescriptor.symbolicTraits;
    	]-*/;
-    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor) /*-[	
+    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor)/*-[	
     	ASUITextView* label = ((ASUITextView*)self->uiView_);
      	UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
      	if (font == nil) {
@@ -2291,7 +2306,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	    }
     ]-*/;
     
-    private native void nativeSetFontStyle(int style) /*-[
+    private native void nativeSetFontStyle(int style)/*-[
 		ASUITextView* label = ((ASUITextView*)self->uiView_);
   		UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   		((ASUITextView*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -2321,7 +2336,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		return 0;
 	}
 	
-	private native int getLineHeight() /*-[
+	private native int getLineHeight()/*-[
   		return ceil(((ASUITextView*)self.uiView).font.lineHeight);
 	]-*/;
 	private int getBorderWidth() {
@@ -2424,26 +2439,26 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     	setPaddingBottom(paddingBottom);
     }
 	//end - templatepadding
-	private native void nativeSetPaddingBottom(int value) /*-[
+	private native void nativeSetPaddingBottom(int value)/*-[
 		ASUITextView* label = ((ASUITextView*) self.uiView);
 		UIEdgeInsets edgeInsets = label.textContainerInset;
 		[label setTextContainerInset:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, value, edgeInsets.right)];		
 	]-*/;
 
-	private native void nativeSetPaddingLeft(int value) /*-[
+	private native void nativeSetPaddingLeft(int value)/*-[
 		ASUITextView* label = ((ASUITextView*) self.uiView);
 		UIEdgeInsets edgeInsets = label.textContainerInset;
 		[label setTextContainerInset:UIEdgeInsetsMake(edgeInsets.top, value, edgeInsets.bottom, edgeInsets.right)];		
 	]-*/;
 
-	private native void nativeSetPaddingRight(int value) /*-[
+	private native void nativeSetPaddingRight(int value)/*-[
 		ASUITextView* label = ((ASUITextView*) self.uiView);
 		UIEdgeInsets edgeInsets = label.textContainerInset;
 		[label setTextContainerInset:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, value)];		
 	]-*/;
 
 
-	private native void nativeSetPaddingTop(int value) /*-[
+	private native void nativeSetPaddingTop(int value)/*-[
 		ASUITextView* label = ((ASUITextView*) self.uiView);
 		UIEdgeInsets edgeInsets = label.textContainerInset;
 		[label setTextContainerInset:UIEdgeInsetsMake(value, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)];		
@@ -2524,7 +2539,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		ViewImpl.setTintColor(uiView, nativeGetTintColor(!(boolean)objValue));
 	}
 	private Object originalTintColor;
-	private native Object nativeGetTintColor(boolean clearColor) /*-[
+	private native Object nativeGetTintColor(boolean clearColor)/*-[
 		ASUITextView* tv = ((ASUITextView*)self.uiView);
 		
 		if (self->originalTintColor_ == nil) {
@@ -2545,7 +2560,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetCapitalize((int) objValue);
 	}
 	
-	private native void nativeSetCapitalize(int capitalizeType) /*-[
+	private native void nativeSetCapitalize(int capitalizeType)/*-[
 		ASUITextView* tv = ((ASUITextView*)self.uiView);
 		tv.autocapitalizationType = capitalizeType;
 	]-*/;
@@ -2559,13 +2574,13 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 	}
 	
-	private native void nativeSetCorrectionType(int capitalizeType) /*-[
+	private native void nativeSetCorrectionType(int capitalizeType)/*-[
 		ASUITextView* tv = ((ASUITextView*)self.uiView);
 		tv.autocorrectionType = capitalizeType;
 	]-*/;
 	
 	
-	private native boolean getCursorVisible() /*-[
+	private native boolean getCursorVisible()/*-[
 		ASUITextView* tv = ((ASUITextView*)self.uiView);
 		return CGColorEqualToColor(tv.tintColor.CGColor, [UIColor clearColor].CGColor);
 	]-*/;
@@ -2642,7 +2657,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetPhoneNumber((boolean) objValue);
 	}
 	
-	private native void nativeSetPhoneNumber(boolean value) /*-[
+	private native void nativeSetPhoneNumber(boolean value)/*-[
 		if (value) {
 			[((ASUITextView*)self.uiView) setKeyboardType: UIKeyboardTypePhonePad];
 		} else {
@@ -2651,7 +2666,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	]-*/;
 	
 
-	private native Object getFont() /*-[
+	private native Object getFont()/*-[
 		return ((ASUITextView*)self.uiView).font;
 	]-*/;
 	
@@ -2659,7 +2674,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetKeyboardType((int) objValue);
 	}
 
-	private native void nativeSetKeyboardType(int value) /*-[
+	private native void nativeSetKeyboardType(int value)/*-[
 		[((ASUITextView*)self.uiView) setKeyboardType: value];
 	]-*/;
 	
@@ -2668,7 +2683,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		return nativeGetKeyboardType();
 	}
 	
-	private native int nativeGetKeyboardType() /*-[
+	private native int nativeGetKeyboardType()/*-[
 		return ((ASUITextView*)self.uiView).keyboardType;
 	]-*/;
 	
@@ -2678,10 +2693,10 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetImeOptions((int) objValue);
 	}
 	
-	private native void nativeSetImeOptions(int imeOptions) /*-[
+	private native void nativeSetImeOptions(int imeOptions)/*-[
 		[((ASUITextView*)self->uiView_) setReturnKeyType:imeOptions];
 	]-*/;
-	private native int nativeGetImeOptions() /*-[
+	private native int nativeGetImeOptions()/*-[
 		return ((ASUITextView*)self->uiView_).returnKeyType;
 	]-*/;
 	
@@ -2738,7 +2753,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetInputAccessoryViewDoneButton((String) objValue);
 	}
 
-	private native void nativeSetInputAccessoryViewDoneButton(String title) /*-[
+	private native void nativeSetInputAccessoryViewDoneButton(String title)/*-[
 		UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
 		[keyboardToolbar sizeToFit];
 		UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
@@ -2753,7 +2768,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		
 
 	]-*/;
-	 /*-[
+	/*-[
 	-(void)doneButtonPressed:(id)sender withEvent:(UIEvent *) event{
 		[self textFieldShouldReturn: ((ASUITextView*)self.uiView)];
 	}
@@ -2831,18 +2846,18 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 	}
 	
-	private native boolean isFirstResponder() /*-[
+	private native boolean isFirstResponder()/*-[
 		ASUITextView* tv = ((ASUITextView*)self.uiView);
 		return [tv isFirstResponder];
 	]-*/;
 	//start - becomeFirstResponder
-	private native void becomeFirstResponder() /*-[
+	private native void becomeFirstResponder()/*-[
 		ASUITextView* tv = ((ASUITextView*)self.uiView);
 		[tv becomeFirstResponder];
 	]-*/;
 	//end - becomeFirstResponder
 	
-	private native void nativeSetSelectAll(float delay) /*-[
+	private native void nativeSetSelectAll(float delay)/*-[
 		ASUITextView* tv = ((ASUITextView*)self.uiView);
 		[self performSelector:@selector(nativeSetSelectAllActual:) withObject:tv afterDelay:delay]; 
 	]-*/;
@@ -2978,7 +2993,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		textAllCaps = (boolean) objValue;
 	}
 	
-	private native void forceRedraw() /*-[
+	private native void forceRedraw()/*-[
     	NSString * text = ((ASUITextView*) self->uiView_).text;
     	[((ASUITextView*) self->uiView_) setText:@""];
     	[((ASUITextView*) self->uiView_) setText:text];
@@ -2998,7 +3013,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
         }
 	}
 
-	private native void updateScrollViewContentOffset() /*-[
+	private native void updateScrollViewContentOffset()/*-[
 	    ASUIScrollView* scrollView = ((ASUIScrollView*) [self getScrollView]);
 	 	int x =   [((ASUITextView*)self.uiView) caretRectForPosition:((ASUITextView*)self.uiView).selectedTextRange.start].origin.x;
 	    int y = scrollView.contentOffset.x;
@@ -3109,46 +3124,46 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	}
 	
 
-	public native void setText(Object nativeWidget, Object value) /*-[
+	public native void setText(Object nativeWidget, Object value)/*-[
 ((ASUITextView*) nativeWidget).text = (NSString*) value;
 ]-*/;
-	public native Object getText() /*-[
+	public native Object getText()/*-[
 return ((ASUITextView*) uiView_).text;
   ]-*/;
-	public native void setTextColor(Object nativeWidget, Object value) /*-[
+	public native void setTextColor(Object nativeWidget, Object value)/*-[
 ((ASUITextView*) nativeWidget).textColor = (UIColor*) value;
 ]-*/;
-	public native Object getTextColor() /*-[
+	public native Object getTextColor()/*-[
 return ((ASUITextView*) uiView_).textColor;
   ]-*/;
-	public native void setUsesStandardTextScaling(Object nativeWidget, Object value) /*-[
+	public native void setUsesStandardTextScaling(Object nativeWidget, Object value)/*-[
 ((ASUITextView*) nativeWidget).usesStandardTextScaling = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getUsesStandardTextScaling() /*-[
+	public native Object getUsesStandardTextScaling()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextView*) uiView_).usesStandardTextScaling];
   ]-*/;
-	public native void setIsEditable(Object nativeWidget, Object value) /*-[
+	public native void setIsEditable(Object nativeWidget, Object value)/*-[
 ((ASUITextView*) nativeWidget).editable = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getIsEditable() /*-[
+	public native Object getIsEditable()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextView*) uiView_).editable];
   ]-*/;
-	public native void setAllowsEditingTextAttributes(Object nativeWidget, Object value) /*-[
+	public native void setAllowsEditingTextAttributes(Object nativeWidget, Object value)/*-[
 ((ASUITextView*) nativeWidget).allowsEditingTextAttributes = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsEditingTextAttributes() /*-[
+	public native Object getAllowsEditingTextAttributes()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextView*) uiView_).allowsEditingTextAttributes];
   ]-*/;
-	public native void setClearsOnInsertion(Object nativeWidget, Object value) /*-[
+	public native void setClearsOnInsertion(Object nativeWidget, Object value)/*-[
 ((ASUITextView*) nativeWidget).clearsOnInsertion = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getClearsOnInsertion() /*-[
+	public native Object getClearsOnInsertion()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextView*) uiView_).clearsOnInsertion];
   ]-*/;
-	public native void setIsSelectable(Object nativeWidget, Object value) /*-[
+	public native void setIsSelectable(Object nativeWidget, Object value)/*-[
 ((ASUITextView*) nativeWidget).selectable = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getIsSelectable() /*-[
+	public native Object getIsSelectable()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextView*) uiView_).selectable];
   ]-*/;
 	@SuppressLint("NewApi")
@@ -3709,7 +3724,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 
 	]-*/;
 	
-	private native void updatePlaceHolderVisibility() /*-[
+	private native void updatePlaceHolderVisibility()/*-[
 	  	ASUITextView* textview = ((ASUITextView*) self.uiView);
 		UITextView* placeholderLabel = (UITextView*)self->placeholderLabel_;
   		if (placeholderLabel != nil) {
@@ -3718,7 +3733,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 	]-*/;
 
 
-	private native void syncPlaceholderLabel() /*-[
+	private native void syncPlaceholderLabel()/*-[
   		ASUITextView* textview = ((ASUITextView*) self.uiView);
   		UITextView* placeholderLabel = (UITextView*)self->placeholderLabel_;
   		if (placeholderLabel != nil) {
@@ -3752,7 +3767,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		return nativeGetHint();
 	}
 	
-	private native String nativeGetHint() /*-[
+	private native String nativeGetHint()/*-[
 		ASUITextView* textview = ((ASUITextView*) self.uiView);
 		UITextView* placeholderLabel = (UITextView*)self->placeholderLabel_;
 		if (placeholderLabel != nil) {
@@ -3761,7 +3776,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		return nil;
 	]-*/;	
 	
-	private native void nativeSetHintColor(Object objValue) /*-[
+	private native void nativeSetHintColor(Object objValue)/*-[
 		ASUITextView* textview = ((ASUITextView*) self.uiView);
 		UITextView* placeholderLabel = (UITextView*)self->placeholderLabel_;
   		if (placeholderLabel != nil) {
@@ -3787,7 +3802,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
     	return lineSpacing_; // For really wide spacing; pick your own value
 	}
 	]-*/;	
-	private native void updateBounds(int topPadding, int bottomPadding, Object parent, Object child) /*-[
+	private native void updateBounds(int topPadding, int bottomPadding, Object parent, Object child)/*-[
 		UIView* pview = ((UIView*) parent);
 		UIView* childview = ((UIView*) child);
 		if (childview != nil) {
@@ -3845,7 +3860,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		return nativeGetLineBreakMode();
 	}
 
-	private native void nativeSetMaxLines(int lines) /*-[
+	private native void nativeSetMaxLines(int lines)/*-[
 		((UITextView*)self->uiView_).textContainer.maximumNumberOfLines = lines;
 	]-*/;
 	
@@ -3858,10 +3873,10 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		}
 	}
 	
-	private native void nativeSetLineBreakMode(int lineBreakMode) /*-[
+	private native void nativeSetLineBreakMode(int lineBreakMode)/*-[
 		((UITextView*)self->uiView_).textContainer.lineBreakMode = lineBreakMode;
 	]-*/;
-	private native int nativeGetLineBreakMode() /*-[
+	private native int nativeGetLineBreakMode()/*-[
 		return (jint) ((UITextView*)self->uiView_).textContainer.lineBreakMode;
 	]-*/;
 	
@@ -3871,7 +3886,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		lineSpacing =  Math.round((mSpacingAdd + (mSpacingMult * getLineHeight())));
 	}
 	
-	private native void nativeSetLayoutManagerDelegate() /*-[
+	private native void nativeSetLayoutManagerDelegate()/*-[
 		((UITextView*)self->uiView_).layoutManager.delegate = self;
 	]-*/;
 

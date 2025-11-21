@@ -36,8 +36,8 @@
     "js",
     "javascript"
   ],
-  "author": "Maniae",
-  "license": "ISC",
+  "author": "Ram M",
+  "license": "Apache-2.0",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "class-transformer": "^0.5.1",

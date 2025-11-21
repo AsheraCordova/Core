@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.converter;
 
 import com.ashera.widget.AttributeCommand;
@@ -32,7 +47,7 @@ public class DrawImageOrColorCommandConverter extends BaseAttributeCommand{
 		return value;
 	}
 	
-	private native void setBounds(Drawable drawable, Object nativeWidget) /*-[
+	private native void setBounds(Drawable drawable, Object nativeWidget)/*-[
 		UIView* uiview = (UIView*) nativeWidget;
 		[drawable setBoundsWithInt: 0 withInt: 0 withInt:uiview.frame.size.width withInt:uiview.frame.size.height];
 	]-*/;
@@ -66,7 +81,7 @@ public class DrawImageOrColorCommandConverter extends BaseAttributeCommand{
 		return super.getValue(attributeName);
 	}
 
-	private native void drawImage(Object image) /*-[
+	private native void drawImage(Object image)/*-[
 		self->image_ = image;
 		if ([image isKindOfClass:UIImage.class]) {
 			CGRect rect = ((CGRectWrapper*) self->rectObj_).rect;

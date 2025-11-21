@@ -19,5 +19,6 @@
 	<js-module src="www/coreManager.js" name="coreManager">
     	<clobbers target="coreManager" />
   	</js-module>
+  	<!-- XXX dependency id="SWTSwitch" url="https://github.com/AsheraCordova/SWTSwitch.git" /> XXX -->
   </platform>
 </plugin>

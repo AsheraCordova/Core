@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.core;
 
 import java.io.File;
@@ -181,7 +196,7 @@ public class CorePlugin implements IPlugin, ICore {
 		}
 	}
 	
-	public static native String getFileAsset(String path) /*-[
+	public static native String getFileAsset(String path)/*-[
     	NSError* error = nil;
 		NSString *abspath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:path];
 		NSString *res = [NSString stringWithContentsOfFile: abspath encoding:NSUTF8StringEncoding error: &error];
@@ -752,7 +767,7 @@ public class CorePlugin implements IPlugin, ICore {
 		return null;
 	}
 
-	private static native String navtiveGetDirectory(int type) /*-[
+	private static native String navtiveGetDirectory(int type)/*-[
 	 	NSString* libPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
 		NSString* libPathSync = [libPath stringByAppendingPathComponent:@"Cloud"];
 		NSString* libPathNoSync = [libPath stringByAppendingPathComponent:@"NoCloud"];
@@ -817,7 +832,7 @@ public class CorePlugin implements IPlugin, ICore {
 		return getFileContent(location);
 	}
 	
-	public static native String getFileContent(String path) /*-[
+	public static native String getFileContent(String path)/*-[
 		NSError* error = nil;
 		NSString *res = [NSString stringWithContentsOfFile: path encoding:NSUTF8StringEncoding error: &error];
 		return res;

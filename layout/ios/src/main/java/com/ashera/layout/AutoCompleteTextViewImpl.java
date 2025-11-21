@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -1733,7 +1748,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		ViewImpl.setTintColor(uiView, nativeGetTintColor(!(boolean)objValue));
 	}
 	private Object originalTintColor;
-	private native Object nativeGetTintColor(boolean clearColor) /*-[
+	private native Object nativeGetTintColor(boolean clearColor)/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		
 		if (self->originalTintColor_ == nil) {
@@ -1754,7 +1769,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetCapitalize((int) objValue);
 	}
 	
-	private native void nativeSetCapitalize(int capitalizeType) /*-[
+	private native void nativeSetCapitalize(int capitalizeType)/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		tv.autocapitalizationType = capitalizeType;
 	]-*/;
@@ -1768,13 +1783,13 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 	}
 	
-	private native void nativeSetCorrectionType(int capitalizeType) /*-[
+	private native void nativeSetCorrectionType(int capitalizeType)/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		tv.autocorrectionType = capitalizeType;
 	]-*/;
 	
 	
-	private native boolean getCursorVisible() /*-[
+	private native boolean getCursorVisible()/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		return CGColorEqualToColor(tv.tintColor.CGColor, [UIColor clearColor].CGColor);
 	]-*/;
@@ -1851,7 +1866,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetPhoneNumber((boolean) objValue);
 	}
 	
-	private native void nativeSetPhoneNumber(boolean value) /*-[
+	private native void nativeSetPhoneNumber(boolean value)/*-[
 		if (value) {
 			[((ASUITextField*)self.uiView) setKeyboardType: UIKeyboardTypePhonePad];
 		} else {
@@ -1860,7 +1875,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	]-*/;
 	
 
-	private native Object getFont() /*-[
+	private native Object getFont()/*-[
 		return ((ASUITextField*)self.uiView).font;
 	]-*/;
 	
@@ -1868,7 +1883,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetKeyboardType((int) objValue);
 	}
 
-	private native void nativeSetKeyboardType(int value) /*-[
+	private native void nativeSetKeyboardType(int value)/*-[
 		[((ASUITextField*)self.uiView) setKeyboardType: value];
 	]-*/;
 	
@@ -1877,7 +1892,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		return nativeGetKeyboardType();
 	}
 	
-	private native int nativeGetKeyboardType() /*-[
+	private native int nativeGetKeyboardType()/*-[
 		return ((ASUITextField*)self.uiView).keyboardType;
 	]-*/;
 	
@@ -1887,10 +1902,10 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetImeOptions((int) objValue);
 	}
 	
-	private native void nativeSetImeOptions(int imeOptions) /*-[
+	private native void nativeSetImeOptions(int imeOptions)/*-[
 		[((ASUITextField*)self->uiView_) setReturnKeyType:imeOptions];
 	]-*/;
-	private native int nativeGetImeOptions() /*-[
+	private native int nativeGetImeOptions()/*-[
 		return ((ASUITextField*)self->uiView_).returnKeyType;
 	]-*/;
 	
@@ -1947,7 +1962,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetInputAccessoryViewDoneButton((String) objValue);
 	}
 
-	private native void nativeSetInputAccessoryViewDoneButton(String title) /*-[
+	private native void nativeSetInputAccessoryViewDoneButton(String title)/*-[
 		UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
 		[keyboardToolbar sizeToFit];
 		UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
@@ -1962,7 +1977,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		
 
 	]-*/;
-	 /*-[
+	/*-[
 	-(void)doneButtonPressed:(id)sender withEvent:(UIEvent *) event{
 		[self textFieldShouldReturn: ((ASUITextField*)self.uiView)];
 	}
@@ -2040,18 +2055,18 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 	}
 	
-	private native boolean isFirstResponder() /*-[
+	private native boolean isFirstResponder()/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		return [tv isFirstResponder];
 	]-*/;
 	//start - becomeFirstResponder
-	private native void becomeFirstResponder() /*-[
+	private native void becomeFirstResponder()/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		[tv becomeFirstResponder];
 	]-*/;
 	//end - becomeFirstResponder
 	
-	private native void nativeSetSelectAll(float delay) /*-[
+	private native void nativeSetSelectAll(float delay)/*-[
 		ASUITextField* tv = ((ASUITextField*)self.uiView);
 		[self performSelector:@selector(nativeSetSelectAllActual:) withObject:tv afterDelay:delay]; 
 	]-*/;
@@ -2187,7 +2202,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		textAllCaps = (boolean) objValue;
 	}
 	
-	private native void forceRedraw() /*-[
+	private native void forceRedraw()/*-[
     	NSString * text = ((ASUITextField*) self->uiView_).text;
     	[((ASUITextField*) self->uiView_) setText:@""];
     	[((ASUITextField*) self->uiView_) setText:text];
@@ -2207,7 +2222,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
         }
 	}
 
-	private native void updateScrollViewContentOffset() /*-[
+	private native void updateScrollViewContentOffset()/*-[
 	    ASUIScrollView* scrollView = ((ASUIScrollView*) [self getScrollView]);
 	 	int x =   [((ASUITextField*)self.uiView) caretRectForPosition:((ASUITextField*)self.uiView).selectedTextRange.start].origin.x;
 	    int y = scrollView.contentOffset.x;
@@ -2306,7 +2321,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	
 
 
-	private native void nativeAddTextFieldDidChange() /*-[
+	private native void nativeAddTextFieldDidChange()/*-[
 		[((ASUITextField*)self.uiView) addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 	]-*/;
 
@@ -2325,7 +2340,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetSecureTextEntry((boolean) objValue);
 	}
 
-	private native void nativeSetSecureTextEntry(boolean value) /*-[
+	private native void nativeSetSecureTextEntry(boolean value)/*-[
 		((ASUITextField*)self.uiView).secureTextEntry = value;
 	]-*/;
 	
@@ -2365,7 +2380,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	private void setBorderStyle(Object value) {
 		nativeSetBorderStyle((int) value);
 	}
-	private native void nativeSetBorderStyle(int value) /*-[
+	private native void nativeSetBorderStyle(int value)/*-[
 		[((ASUITextField*)self.uiView) setBorderStyle:value];
 	]-*/;	
 	
@@ -2386,16 +2401,16 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	private void updatePadding() {
 	}
 
-	private native void nativeSetVerticalAligmentCenter() /*-[
+	private native void nativeSetVerticalAligmentCenter()/*-[
 	    ((ASUITextField*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 	]-*/;
 
-	private native void nativeSetVerticalAligmentBottom() /*-[
+	private native void nativeSetVerticalAligmentBottom()/*-[
 		((ASUITextField*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 		
 	]-*/;
 
-	private native void nativeSetVerticalAligmentTop() /*-[
+	private native void nativeSetVerticalAligmentTop()/*-[
 		((ASUITextField*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
 		
 	]-*/;
@@ -2410,7 +2425,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		nativeSetHintColor(ViewImpl.getColor(objValue));
 	}
 	
-	private native void nativeSetHintColor(Object value) /*-[
+	private native void nativeSetHintColor(Object value)/*-[
 		((ASUITextField*)self.uiView).placeHolderColor = (UIColor*) value;
 	]-*/;
 
@@ -2418,7 +2433,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		this.invalidate();
 	}
 
-	public native void nativeSetEnabled(boolean value) /*-[
+	public native void nativeSetEnabled(boolean value)/*-[
 		((ASUITextField*)self.uiView).enabled = value;
 	]-*/;
 	
@@ -3339,11 +3354,11 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     	return (int) Math.ceil((float)getTextSize());
     }
     
-    private native int nativeGetFontStyle() /*-[	 
+    private native int nativeGetFontStyle()/*-[	 
     	ASUITextField* label = ((ASUITextField*)self->uiView_);
     	return label.font.fontDescriptor.symbolicTraits;
    	]-*/;
-    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor) /*-[	
+    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor)/*-[	
     	ASUITextField* label = ((ASUITextField*)self->uiView_);
      	UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
      	if (font == nil) {
@@ -3357,7 +3372,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	    }
     ]-*/;
     
-    private native void nativeSetFontStyle(int style) /*-[
+    private native void nativeSetFontStyle(int style)/*-[
 		ASUITextField* label = ((ASUITextField*)self->uiView_);
   		UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   		((ASUITextField*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -3449,13 +3464,13 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		[((ASUITextField*)self->uiView_) setAttributedText : (NSMutableAttributedString*)text];
 	]-*/;
 	
-	private native Object getMyText() /*-[
+	private native Object getMyText()/*-[
 		return ((ASUITextField*)self.uiView).text;
 	]-*/;
 	
 
 
-	private native Object getTextSize() /*-[
+	private native Object getTextSize()/*-[
 		  return [JavaLangFloat valueOfWithFloat:((ASUITextField*)self.uiView).font.pointSize];
 	]-*/;
 	private void setMyTextSize(Object objValue) {
@@ -3486,7 +3501,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	}
 
 
-	private native void setHorizontalAligmentCenter() /*-[
+	private native void setHorizontalAligmentCenter()/*-[
 		((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentCenter;
 	]-*/;
 	
@@ -3494,7 +3509,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		setHorizontalAligmentRightInternal();
 	}
 
-	private native void setHorizontalAligmentRightInternal() /*-[
+	private native void setHorizontalAligmentRightInternal()/*-[
 		((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentRight;
 	]-*/;
 
@@ -3502,7 +3517,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		setHorizontalAligmentLeftInternal();
 	}
 	
-	private native void setHorizontalAligmentLeftInternal() /*-[
+	private native void setHorizontalAligmentLeftInternal()/*-[
 		((ASUITextField*)self.uiView).textAlignment = NSTextAlignmentLeft;
 	]-*/;
 
@@ -3510,7 +3525,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	private static final int TEXT_ALIGN_LEFT = 0; 
 	private static final int TEXT_ALIGN_RIGHT = 1; 
 
-    private native int getTextAlignment() /*-[
+    private native int getTextAlignment()/*-[
     	int alignment = (int) ((ASUITextField*)self.uiView).textAlignment;
     	
     	if (alignment == NSTextAlignmentCenter) {
@@ -3597,7 +3612,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 	}
 
-	private native int getImageHeight(Object objValue) /*-[
+	private native int getImageHeight(Object objValue)/*-[
 		if ([objValue isKindOfClass:[UIImage class]]) {
 	    	UIImage* image = ((UIImage*) objValue);
 	    	return image.size.height;
@@ -3606,7 +3621,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	   	return 0;
 	]-*/;	
 	
-	private native int getImageWidth(Object objValue) /*-[
+	private native int getImageWidth(Object objValue)/*-[
     	if ([objValue isKindOfClass:[UIImage class]]) {
         	UIImage* image = ((UIImage*) objValue);
         	return image.size.width;
@@ -3739,7 +3754,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		return 0;
 	}
 	
-	private native int getLineHeight() /*-[
+	private native int getLineHeight()/*-[
   		return ceil(((ASUITextField*)self.uiView).font.lineHeight);
 	]-*/;
 	private int getBorderWidth() {
@@ -3758,67 +3773,67 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	}
 	
 
-	public native void setText(Object nativeWidget, Object value) /*-[
+	public native void setText(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).text = (NSString*) value;
 ]-*/;
-	public native Object getText() /*-[
+	public native Object getText()/*-[
 return ((ASUITextField*) uiView_).text;
   ]-*/;
-	public native void setPlaceholder(Object nativeWidget, Object value) /*-[
+	public native void setPlaceholder(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).placeholder = (NSString*) value;
 ]-*/;
-	public native Object getPlaceholder() /*-[
+	public native Object getPlaceholder()/*-[
 return ((ASUITextField*) uiView_).placeholder;
   ]-*/;
-	public native void setTextColor(Object nativeWidget, Object value) /*-[
+	public native void setTextColor(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).textColor = (UIColor*) value;
 ]-*/;
-	public native Object getTextColor() /*-[
+	public native Object getTextColor()/*-[
 return ((ASUITextField*) uiView_).textColor;
   ]-*/;
-	public native void setAdjustsFontSizeToFitWidth(Object nativeWidget, Object value) /*-[
+	public native void setAdjustsFontSizeToFitWidth(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).adjustsFontSizeToFitWidth = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAdjustsFontSizeToFitWidth() /*-[
+	public native Object getAdjustsFontSizeToFitWidth()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).adjustsFontSizeToFitWidth];
   ]-*/;
-	public native void setMinimumFontSize(Object nativeWidget, Object value) /*-[
+	public native void setMinimumFontSize(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).minimumFontSize = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getMinimumFontSize() /*-[
+	public native Object getMinimumFontSize()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITextField*) uiView_).minimumFontSize];
   ]-*/;
-	public native Object getIsEditing() /*-[
+	public native Object getIsEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).editing];
   ]-*/;
-	public native void setClearsOnBeginEditing(Object nativeWidget, Object value) /*-[
+	public native void setClearsOnBeginEditing(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).clearsOnBeginEditing = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getClearsOnBeginEditing() /*-[
+	public native Object getClearsOnBeginEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).clearsOnBeginEditing];
   ]-*/;
-	public native void setClearsOnInsertion(Object nativeWidget, Object value) /*-[
+	public native void setClearsOnInsertion(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).clearsOnInsertion = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getClearsOnInsertion() /*-[
+	public native Object getClearsOnInsertion()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).clearsOnInsertion];
   ]-*/;
-	public native void setAllowsEditingTextAttributes(Object nativeWidget, Object value) /*-[
+	public native void setAllowsEditingTextAttributes(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).allowsEditingTextAttributes = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsEditingTextAttributes() /*-[
+	public native Object getAllowsEditingTextAttributes()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITextField*) uiView_).allowsEditingTextAttributes];
   ]-*/;
-	public native void setBackground(Object nativeWidget, Object value) /*-[
+	public native void setBackground(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).background = (UIImage*) value;
 ]-*/;
-	public native Object getBackground() /*-[
+	public native Object getBackground()/*-[
 return ((ASUITextField*) uiView_).background;
   ]-*/;
-	public native void setDisabledBackground(Object nativeWidget, Object value) /*-[
+	public native void setDisabledBackground(Object nativeWidget, Object value)/*-[
 ((ASUITextField*) nativeWidget).disabledBackground = (UIImage*) value;
 ]-*/;
-	public native Object getDisabledBackground() /*-[
+	public native Object getDisabledBackground()/*-[
 return ((ASUITextField*) uiView_).disabledBackground;
   ]-*/;
 	@SuppressLint("NewApi")
@@ -4418,7 +4433,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		nativeAddTextFieldDidChangeForPopup();
 	}
 
-	private native void nativeAddTextFieldDidChangeForPopup() /*-[
+	private native void nativeAddTextFieldDidChangeForPopup()/*-[
 		[((ASUITextField*)self.uiView) addTarget:self action:@selector(textFieldDidChangeForPopup:) forControlEvents:UIControlEventEditingChanged];
 	]-*/;
 

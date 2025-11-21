@@ -26,6 +26,7 @@
 #include "LayoutTransition.h"
 #include "Log.h"
 #include "LongSparseLongArray.h"
+#include "MotionEvent.h"
 #include "Rect.h"
 #include "RenderNode.h"
 #include "Resources.h"
@@ -110,6 +111,8 @@
   int32_t verticalScrollbarWidth_;
   int32_t horizontalScrollbarHeight_;
   bool isOverlay_;
+  ADMotionEvent *motionEvent_;
+  bool hasOnTouchEvent_;
 }
 
 - (void)setPressedWithBoolean:(bool)pressed
@@ -163,6 +166,10 @@
 
 - (ADHandler *)getRunQueue;
 
+- (void)initMotionEventWithInt:(int32_t)x
+                       withInt:(int32_t)y
+                       withInt:(int32_t)action OBJC_METHOD_FAMILY_NONE;
+
 @end
 
 J2OBJC_FIELD_SETTER(ADView, mKeyedTags_, ADSparseArray *)
@@ -179,6 +186,7 @@ J2OBJC_FIELD_SETTER(ADView, mTempNestedScrollConsumed_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(ADView, mRoundScrollbarRenderer_, ADView_RoundScrollbarRenderer *)
 J2OBJC_FIELD_SETTER(ADView, mCurrentAnimation_, id)
 J2OBJC_FIELD_SETTER(ADView, mGhostView_, ADView *)
+J2OBJC_FIELD_SETTER(ADView, motionEvent_, ADMotionEvent *)
 
 inline bool ADView_get_DBG(void);
 #define ADView_DBG false
@@ -437,6 +445,8 @@ __attribute__((unused)) static void ADView_performCollectViewAttributesWithADVie
 __attribute__((unused)) static void ADView_resetPressedState(ADView *self);
 
 __attribute__((unused)) static ADHandler *ADView_getRunQueue(ADView *self);
+
+__attribute__((unused)) static void ADView_initMotionEventWithInt_withInt_withInt_(ADView *self, int32_t x, int32_t y, int32_t action);
 
 @interface ADView_ForegroundInfo : NSObject {
  @public
@@ -3211,13 +3221,42 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setOverlayWithBoolean:(bool)isOverlay {
-  self->isOverlay_ = isOverlay;
-  if (isOverlay) {
-    [self setFlagsWithInt:ADView_GONE withInt:ADView_VISIBILITY_MASK];
-  }
-  else {
-    [self setFlagsWithInt:ADView_VISIBLE withInt:ADView_VISIBILITY_MASK];
-  }
+}
+
+- (bool)onTouchEventWithADMotionEvent:(ADMotionEvent *)event {
+  return false;
+}
+
+- (void)onTouchEventMoveWithInt:(int32_t)x
+                        withInt:(int32_t)y {
+  ADView_initMotionEventWithInt_withInt_withInt_(self, x, y, ADMotionEvent_ACTION_MOVE);
+  [self onTouchEventWithADMotionEvent:motionEvent_];
+}
+
+- (void)initMotionEventWithInt:(int32_t)x
+                       withInt:(int32_t)y
+                       withInt:(int32_t)action {
+  ADView_initMotionEventWithInt_withInt_withInt_(self, x, y, action);
+}
+
+- (void)onTouchEventDownWithInt:(int32_t)x
+                        withInt:(int32_t)y {
+  ADView_initMotionEventWithInt_withInt_withInt_(self, x, y, ADMotionEvent_ACTION_DOWN);
+  [self onTouchEventWithADMotionEvent:motionEvent_];
+}
+
+- (void)onTouchEventUpWithInt:(int32_t)x
+                      withInt:(int32_t)y {
+  ADView_initMotionEventWithInt_withInt_withInt_(self, x, y, ADMotionEvent_ACTION_UP);
+  [self onTouchEventWithADMotionEvent:motionEvent_];
+}
+
+- (bool)hasOnTouchEvent {
+  return hasOnTouchEvent_;
+}
+
+- (void)setHasOnTouchEventWithBoolean:(bool)hasOnTouchEvent {
+  self->hasOnTouchEvent_ = hasOnTouchEvent;
 }
 
 - (void)__javaClone:(ADView *)original {
@@ -3248,6 +3287,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   RELEASE_(mAttachInfo_);
   RELEASE_(sThreadLocal_);
   RELEASE_(mListenerInfo_);
+  RELEASE_(motionEvent_);
   [super dealloc];
 }
 
@@ -3588,6 +3628,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 170, 35, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 171, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 172, 173, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 174, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 175, 92, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 176, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 177, 50, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 178, 11, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -3927,27 +3974,34 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[332].selector = @selector(getDrawingRectWithADRect:);
   methods[333].selector = @selector(isOverlay);
   methods[334].selector = @selector(setOverlayWithBoolean:);
+  methods[335].selector = @selector(onTouchEventWithADMotionEvent:);
+  methods[336].selector = @selector(onTouchEventMoveWithInt:withInt:);
+  methods[337].selector = @selector(initMotionEventWithInt:withInt:withInt:);
+  methods[338].selector = @selector(onTouchEventDownWithInt:withInt:);
+  methods[339].selector = @selector(onTouchEventUpWithInt:withInt:);
+  methods[340].selector = @selector(hasOnTouchEvent);
+  methods[341].selector = @selector(setHasOnTouchEventWithBoolean:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "DBG", "Z", .constantValue.asBOOL = ADView_DBG, 0x1a, -1, -1, -1, -1 },
-    { "DEBUG_DRAW", "Z", .constantValue.asLong = 0, 0x9, -1, 172, -1, -1 },
-    { "VIEW_LOG_TAG", "LNSString;", .constantValue.asLong = 0, 0x1c, -1, 173, -1, -1 },
-    { "mDebugViewAttributes", "Z", .constantValue.asLong = 0, 0x9, -1, 174, -1, -1 },
+    { "DEBUG_DRAW", "Z", .constantValue.asLong = 0, 0x9, -1, 179, -1, -1 },
+    { "VIEW_LOG_TAG", "LNSString;", .constantValue.asLong = 0, 0x1c, -1, 180, -1, -1 },
+    { "mDebugViewAttributes", "Z", .constantValue.asLong = 0, 0x9, -1, 181, -1, -1 },
     { "NO_ID", "I", .constantValue.asInt = ADView_NO_ID, 0x19, -1, -1, -1, -1 },
     { "LAST_APP_AUTOFILL_ID", "I", .constantValue.asInt = ADView_LAST_APP_AUTOFILL_ID, 0x19, -1, -1, -1, -1 },
-    { "sCompatibilityDone", "Z", .constantValue.asLong = 0, 0xa, -1, 175, -1, -1 },
-    { "sUseBrokenMakeMeasureSpec", "Z", .constantValue.asLong = 0, 0xa, -1, 176, -1, -1 },
-    { "sUseZeroUnspecifiedMeasureSpec", "Z", .constantValue.asLong = 0, 0x8, -1, 177, -1, -1 },
-    { "sIgnoreMeasureCache", "Z", .constantValue.asLong = 0, 0xa, -1, 178, -1, -1 },
-    { "sAlwaysRemeasureExactly", "Z", .constantValue.asLong = 0, 0xa, -1, 179, -1, -1 },
-    { "sLayoutParamsAlwaysChanged", "Z", .constantValue.asLong = 0, 0xa, -1, 180, -1, -1 },
-    { "sTextureViewIgnoresDrawableSetters", "Z", .constantValue.asLong = 0, 0x8, -1, 181, -1, -1 },
-    { "sPreserveMarginParamsInLayoutParamConversion", "Z", .constantValue.asLong = 0, 0xc, -1, 182, -1, -1 },
-    { "sCascadedDragDrop", "Z", .constantValue.asLong = 0, 0x8, -1, 183, -1, -1 },
-    { "sHasFocusableExcludeAutoFocusable", "Z", .constantValue.asLong = 0, 0x8, -1, 184, -1, -1 },
-    { "sAutoFocusableOffUIThreadWontNotifyParents", "Z", .constantValue.asLong = 0, 0xa, -1, 185, -1, -1 },
-    { "sThrowOnInvalidFloatProperties", "Z", .constantValue.asLong = 0, 0xa, -1, 186, -1, -1 },
-    { "sAcceptZeroSizeDragShadow", "Z", .constantValue.asLong = 0, 0xa, -1, 187, -1, -1 },
+    { "sCompatibilityDone", "Z", .constantValue.asLong = 0, 0xa, -1, 182, -1, -1 },
+    { "sUseBrokenMakeMeasureSpec", "Z", .constantValue.asLong = 0, 0xa, -1, 183, -1, -1 },
+    { "sUseZeroUnspecifiedMeasureSpec", "Z", .constantValue.asLong = 0, 0x8, -1, 184, -1, -1 },
+    { "sIgnoreMeasureCache", "Z", .constantValue.asLong = 0, 0xa, -1, 185, -1, -1 },
+    { "sAlwaysRemeasureExactly", "Z", .constantValue.asLong = 0, 0xa, -1, 186, -1, -1 },
+    { "sLayoutParamsAlwaysChanged", "Z", .constantValue.asLong = 0, 0xa, -1, 187, -1, -1 },
+    { "sTextureViewIgnoresDrawableSetters", "Z", .constantValue.asLong = 0, 0x8, -1, 188, -1, -1 },
+    { "sPreserveMarginParamsInLayoutParamConversion", "Z", .constantValue.asLong = 0, 0xc, -1, 189, -1, -1 },
+    { "sCascadedDragDrop", "Z", .constantValue.asLong = 0, 0x8, -1, 190, -1, -1 },
+    { "sHasFocusableExcludeAutoFocusable", "Z", .constantValue.asLong = 0, 0x8, -1, 191, -1, -1 },
+    { "sAutoFocusableOffUIThreadWontNotifyParents", "Z", .constantValue.asLong = 0, 0xa, -1, 192, -1, -1 },
+    { "sThrowOnInvalidFloatProperties", "Z", .constantValue.asLong = 0, 0xa, -1, 193, -1, -1 },
+    { "sAcceptZeroSizeDragShadow", "Z", .constantValue.asLong = 0, 0xa, -1, 194, -1, -1 },
     { "NOT_FOCUSABLE", "I", .constantValue.asInt = ADView_NOT_FOCUSABLE, 0x19, -1, -1, -1, -1 },
     { "FOCUSABLE", "I", .constantValue.asInt = ADView_FOCUSABLE, 0x19, -1, -1, -1, -1 },
     { "FOCUSABLE_AUTO", "I", .constantValue.asInt = ADView_FOCUSABLE_AUTO, 0x19, -1, -1, -1, -1 },
@@ -4021,11 +4075,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "MEASURED_STATE_MASK", "I", .constantValue.asInt = ADView_MEASURED_STATE_MASK, 0x19, -1, -1, -1, -1 },
     { "MEASURED_HEIGHT_STATE_SHIFT", "I", .constantValue.asInt = ADView_MEASURED_HEIGHT_STATE_SHIFT, 0x19, -1, -1, -1, -1 },
     { "MEASURED_STATE_TOO_SMALL", "I", .constantValue.asInt = ADView_MEASURED_STATE_TOO_SMALL, 0x19, -1, -1, -1, -1 },
-    { "EMPTY_STATE_SET", "[I", .constantValue.asLong = 0, 0x1c, -1, 188, -1, -1 },
-    { "SELECTED_STATE_SET", "[I", .constantValue.asLong = 0, 0x1c, -1, 189, -1, -1 },
+    { "EMPTY_STATE_SET", "[I", .constantValue.asLong = 0, 0x1c, -1, 195, -1, -1 },
+    { "SELECTED_STATE_SET", "[I", .constantValue.asLong = 0, 0x1c, -1, 196, -1, -1 },
     { "DEBUG_CORNERS_SIZE_DIP", "I", .constantValue.asInt = ADView_DEBUG_CORNERS_SIZE_DIP, 0x18, -1, -1, -1, -1 },
-    { "mKeyedTags_", "LADSparseArray;", .constantValue.asLong = 0, 0x2, -1, -1, 190, -1 },
-    { "sNextAccessibilityViewId", "I", .constantValue.asLong = 0, 0xa, -1, 191, -1, -1 },
+    { "mKeyedTags_", "LADSparseArray;", .constantValue.asLong = 0, 0x2, -1, -1, 197, -1 },
+    { "sNextAccessibilityViewId", "I", .constantValue.asLong = 0, 0xa, -1, 198, -1, -1 },
     { "mMeasuredWidth_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mMeasuredHeight_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mRecreateDisplayList_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
@@ -4266,9 +4320,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "mBackgroundSizeChanged_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDefaultFocusHighlight_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDefaultFocusHighlightSizeChanged_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "sUseDefaultFocusHighlight", "Z", .constantValue.asLong = 0, 0xa, -1, 192, -1, -1 },
-    { "sCanFocusZeroSized", "Z", .constantValue.asLong = 0, 0xa, -1, 193, -1, -1 },
-    { "sAlwaysAssignFocus", "Z", .constantValue.asLong = 0, 0xa, -1, 194, -1, -1 },
+    { "sUseDefaultFocusHighlight", "Z", .constantValue.asLong = 0, 0xa, -1, 199, -1, -1 },
+    { "sCanFocusZeroSized", "Z", .constantValue.asLong = 0, 0xa, -1, 200, -1, -1 },
+    { "sAlwaysAssignFocus", "Z", .constantValue.asLong = 0, 0xa, -1, 201, -1, -1 },
     { "mContext_", "LADContext;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "mDrawableState_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mNextFocusLeftId_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -4319,9 +4373,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "sThreadLocal_", "LADView_ThreadLocal;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mListenerInfo_", "LADView_ListenerInfo;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "isOverlay_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "motionEvent_", "LADMotionEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "hasOnTouchEvent_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "addOnLayoutChangeListener", "LADView_OnLayoutChangeListener;", "removeOnLayoutChangeListener", "addOnAttachStateChangeListener", "LADView_OnAttachStateChangeListener;", "removeOnAttachStateChangeListener", "setOnKeyListener", "LADView_OnKeyListener;", "setVisibility", "I", "setEnabled", "Z", "setFocusable", "setLayoutDirection", "setWillNotDraw", "setClickable", "setLongClickable", "setPressed", "ZFF", "dispatchSetPressed", "onVisibilityChanged", "LADView;I", "setHovered", "onHoverChanged", "onSizeChanged", "IIII", "setTop", "setBottom", "setLeft", "setRight", "offsetTopAndBottom", "offsetLeftAndRight", "setLayoutParams", "LADViewGroup_LayoutParams;", "invalidate", "LADRect;", "invalidateInternal", "IIIIZZ", "invalidateViewProperty", "ZZ", "post", "LJavaLangRunnable;", "removeCallbacks", "canScrollHorizontally", "canScrollVertically", "assignParent", "LADViewParent;", "onRtlPropertiesChanged", "invalidateInheritedLayoutMode", "combineVisibility", "II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setDuplicateParentStateEnabled", "isLayoutModeOptical", "LNSObject;", "setOpticalFrame", "layout", "onLayout", "ZIIII", "setFrame", "verifyDrawable", "LADDrawable;", "onCreateDrawableState", "mergeDrawableStates", "[I[I", "setBackgroundTintList", "LADColorStateList;", "setForeground", "setForegroundGravity", "setForegroundTintList", "setPadding", "internalSetPadding", "setPaddingRelative", "setSelected", "dispatchSetSelected", "setActivated", "dispatchSetActivated", "findViewTraversal", "<T:Lr/android/view/View;>(I)TT;", "findViewById", "setTag", "getTag", "ILNSObject;", "setKeyedTag", "measure", "onMeasure", "setMeasuredDimension", "setMeasuredDimensionRaw", "combineMeasuredStates", "resolveSize", "resolveSizeAndState", "III", "getDefaultSize", "setMinimumHeight", "setMinimumWidth", "dispatchNestedScroll", "IIII[I", "dispatchNestedPreScroll", "II[I[I", "dispatchNestedFling", "FFZ", "dispatchNestedPreFling", "FF", "setTextDirection", "setTextAlignment", "getLocationOnScreen", "[I", "getLocationInWindow", "getHitRect", "getWindowVisibleDisplayFrame", "getWindowDisplayFrame", "requestRectangleOnScreen", "LADRect;Z", "onDraw", "LADCanvas;", "setAlpha", "F", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setPivotX", "setPivotY", "setTranslationX", "setTranslationY", "setTranslationZ", "setElevation", "clearFocusInternal", "LADView;ZZ", "notifyEnterOrExitForAutoFillIfNeeded", "setBackgroundColor", "setSystemUiVisibility", "setOverScrollMode", "setVerticalScrollbarWidth", "setHorizontalScrollbarHeight", "setFlags", "sizeChange", "onResolveDrawables", "setId", "unFocus", "needGlobalAttributesUpdate", "onWindowVisibilityChanged", "onVisibilityAggregated", "performCollectViewAttributes", "setBackground", "setAccessibilityDelegate", "setDrawingCacheBackgroundColor", "setImportantForAccessibility", "setDrawingCacheEnabled", "dispatchKeyEvent", "LADKeyEvent;", "unscheduleDrawable", "drawableHotspotChanged", "setFocused", "onFocusChanged", "setDragHovered", "onDragHovered", "setDragCanAccept", "onDragCanAccept", "getForegroundBounds", "invokeKeyListenerDown", "invokeKeyListenerUp", "sendAccessibilityEvent", "notifyViewAccessibilityStateChangedIfNeeded", "inflateView", "LNSString;", "setMyAttribute", "LNSString;LNSObject;", "getDrawingRect", "setOverlay", &ADView_DEBUG_DRAW, &ADView_VIEW_LOG_TAG, &ADView_mDebugViewAttributes, &ADView_sCompatibilityDone, &ADView_sUseBrokenMakeMeasureSpec, &ADView_sUseZeroUnspecifiedMeasureSpec, &ADView_sIgnoreMeasureCache, &ADView_sAlwaysRemeasureExactly, &ADView_sLayoutParamsAlwaysChanged, &ADView_sTextureViewIgnoresDrawableSetters, &ADView_sPreserveMarginParamsInLayoutParamConversion, &ADView_sCascadedDragDrop, &ADView_sHasFocusableExcludeAutoFocusable, &ADView_sAutoFocusableOffUIThreadWontNotifyParents, &ADView_sThrowOnInvalidFloatProperties, &ADView_sAcceptZeroSizeDragShadow, &ADView_EMPTY_STATE_SET, &ADView_SELECTED_STATE_SET, "Lr/android/util/SparseArray<Ljava/lang/Object;>;", &ADView_sNextAccessibilityViewId, &ADView_sUseDefaultFocusHighlight, &ADView_sCanFocusZeroSized, &ADView_sAlwaysAssignFocus, "LADView_ForegroundInfo;LADView_OnScrollChangeListener;LADView_OnLayoutChangeListener;LADView_MeasureSpec;LADView_OnKeyListener;LADView_OnTouchListener;LADView_OnHoverListener;LADView_OnLongClickListener;LADView_OnDragListener;LADView_OnFocusChangeListener;LADView_OnClickListener;LADView_OnContextClickListener;LADView_OnAttachStateChangeListener;LADView_ThreadedRenderer;LADView_AttachInfo;LADView_ThreadLocal;LADView_TextUtils;LADView_ViewRootImpl;LADView_ListenerInfo;LADView_AccessibilityNodeInfo;LADView_AccessibilityNodeProvider;LADView_RoundScrollbarRenderer;LADView_DragEvent;LADView_TintInfo;" };
-  static const J2ObjcClassInfo _ADView = { "View", "r.android.view", ptrTable, methods, fields, 7, 0x1, 335, 390, -1, 195, -1, -1, -1 };
+  static const void *ptrTable[] = { "addOnLayoutChangeListener", "LADView_OnLayoutChangeListener;", "removeOnLayoutChangeListener", "addOnAttachStateChangeListener", "LADView_OnAttachStateChangeListener;", "removeOnAttachStateChangeListener", "setOnKeyListener", "LADView_OnKeyListener;", "setVisibility", "I", "setEnabled", "Z", "setFocusable", "setLayoutDirection", "setWillNotDraw", "setClickable", "setLongClickable", "setPressed", "ZFF", "dispatchSetPressed", "onVisibilityChanged", "LADView;I", "setHovered", "onHoverChanged", "onSizeChanged", "IIII", "setTop", "setBottom", "setLeft", "setRight", "offsetTopAndBottom", "offsetLeftAndRight", "setLayoutParams", "LADViewGroup_LayoutParams;", "invalidate", "LADRect;", "invalidateInternal", "IIIIZZ", "invalidateViewProperty", "ZZ", "post", "LJavaLangRunnable;", "removeCallbacks", "canScrollHorizontally", "canScrollVertically", "assignParent", "LADViewParent;", "onRtlPropertiesChanged", "invalidateInheritedLayoutMode", "combineVisibility", "II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setDuplicateParentStateEnabled", "isLayoutModeOptical", "LNSObject;", "setOpticalFrame", "layout", "onLayout", "ZIIII", "setFrame", "verifyDrawable", "LADDrawable;", "onCreateDrawableState", "mergeDrawableStates", "[I[I", "setBackgroundTintList", "LADColorStateList;", "setForeground", "setForegroundGravity", "setForegroundTintList", "setPadding", "internalSetPadding", "setPaddingRelative", "setSelected", "dispatchSetSelected", "setActivated", "dispatchSetActivated", "findViewTraversal", "<T:Lr/android/view/View;>(I)TT;", "findViewById", "setTag", "getTag", "ILNSObject;", "setKeyedTag", "measure", "onMeasure", "setMeasuredDimension", "setMeasuredDimensionRaw", "combineMeasuredStates", "resolveSize", "resolveSizeAndState", "III", "getDefaultSize", "setMinimumHeight", "setMinimumWidth", "dispatchNestedScroll", "IIII[I", "dispatchNestedPreScroll", "II[I[I", "dispatchNestedFling", "FFZ", "dispatchNestedPreFling", "FF", "setTextDirection", "setTextAlignment", "getLocationOnScreen", "[I", "getLocationInWindow", "getHitRect", "getWindowVisibleDisplayFrame", "getWindowDisplayFrame", "requestRectangleOnScreen", "LADRect;Z", "onDraw", "LADCanvas;", "setAlpha", "F", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setPivotX", "setPivotY", "setTranslationX", "setTranslationY", "setTranslationZ", "setElevation", "clearFocusInternal", "LADView;ZZ", "notifyEnterOrExitForAutoFillIfNeeded", "setBackgroundColor", "setSystemUiVisibility", "setOverScrollMode", "setVerticalScrollbarWidth", "setHorizontalScrollbarHeight", "setFlags", "sizeChange", "onResolveDrawables", "setId", "unFocus", "needGlobalAttributesUpdate", "onWindowVisibilityChanged", "onVisibilityAggregated", "performCollectViewAttributes", "setBackground", "setAccessibilityDelegate", "setDrawingCacheBackgroundColor", "setImportantForAccessibility", "setDrawingCacheEnabled", "dispatchKeyEvent", "LADKeyEvent;", "unscheduleDrawable", "drawableHotspotChanged", "setFocused", "onFocusChanged", "setDragHovered", "onDragHovered", "setDragCanAccept", "onDragCanAccept", "getForegroundBounds", "invokeKeyListenerDown", "invokeKeyListenerUp", "sendAccessibilityEvent", "notifyViewAccessibilityStateChangedIfNeeded", "inflateView", "LNSString;", "setMyAttribute", "LNSString;LNSObject;", "getDrawingRect", "setOverlay", "onTouchEvent", "LADMotionEvent;", "onTouchEventMove", "initMotionEvent", "onTouchEventDown", "onTouchEventUp", "setHasOnTouchEvent", &ADView_DEBUG_DRAW, &ADView_VIEW_LOG_TAG, &ADView_mDebugViewAttributes, &ADView_sCompatibilityDone, &ADView_sUseBrokenMakeMeasureSpec, &ADView_sUseZeroUnspecifiedMeasureSpec, &ADView_sIgnoreMeasureCache, &ADView_sAlwaysRemeasureExactly, &ADView_sLayoutParamsAlwaysChanged, &ADView_sTextureViewIgnoresDrawableSetters, &ADView_sPreserveMarginParamsInLayoutParamConversion, &ADView_sCascadedDragDrop, &ADView_sHasFocusableExcludeAutoFocusable, &ADView_sAutoFocusableOffUIThreadWontNotifyParents, &ADView_sThrowOnInvalidFloatProperties, &ADView_sAcceptZeroSizeDragShadow, &ADView_EMPTY_STATE_SET, &ADView_SELECTED_STATE_SET, "Lr/android/util/SparseArray<Ljava/lang/Object;>;", &ADView_sNextAccessibilityViewId, &ADView_sUseDefaultFocusHighlight, &ADView_sCanFocusZeroSized, &ADView_sAlwaysAssignFocus, "LADView_ForegroundInfo;LADView_OnScrollChangeListener;LADView_OnLayoutChangeListener;LADView_MeasureSpec;LADView_OnKeyListener;LADView_OnTouchListener;LADView_OnHoverListener;LADView_OnLongClickListener;LADView_OnDragListener;LADView_OnFocusChangeListener;LADView_OnClickListener;LADView_OnContextClickListener;LADView_OnAttachStateChangeListener;LADView_ThreadedRenderer;LADView_AttachInfo;LADView_ThreadLocal;LADView_TextUtils;LADView_ViewRootImpl;LADView_ListenerInfo;LADView_AccessibilityNodeInfo;LADView_AccessibilityNodeProvider;LADView_RoundScrollbarRenderer;LADView_DragEvent;LADView_TintInfo;" };
+  static const J2ObjcClassInfo _ADView = { "View", "r.android.view", ptrTable, methods, fields, 7, 0x1, 342, 392, -1, 202, -1, -1, -1 };
   return &_ADView;
 }
 
@@ -4608,6 +4664,15 @@ void ADView_resetPressedState(ADView *self) {
 
 ADHandler *ADView_getRunQueue(ADView *self) {
   return create_ADHandler_init();
+}
+
+void ADView_initMotionEventWithInt_withInt_withInt_(ADView *self, int32_t x, int32_t y, int32_t action) {
+  if (self->motionEvent_ == nil) {
+    JreStrongAssignAndConsume(&self->motionEvent_, new_ADMotionEvent_init());
+  }
+  [self->motionEvent_ setXWithInt:x];
+  [((ADMotionEvent *) nil_chk(self->motionEvent_)) setXWithInt:y];
+  [((ADMotionEvent *) nil_chk(self->motionEvent_)) setActionWithInt:action];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADView)

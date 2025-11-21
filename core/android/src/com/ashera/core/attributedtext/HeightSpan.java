@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.core.attributedtext;
 
 import android.graphics.Paint;
@@ -33,7 +48,7 @@ public class HeightSpan implements LineHeightSpan.WithDensity {
             fm.ascent = fm.ascent - size;
         } else {
             if (sProportion == 0) {
-                /*
+               /*
                  * Calculate what fraction of the nominal ascent
                  * the height of a capital letter actually is,
                  * so that we won't reduce the ascent to less than
@@ -51,14 +66,14 @@ public class HeightSpan implements LineHeightSpan.WithDensity {
             int need = (int) Math.ceil(-fm.top * sProportion);
 
             if (size - fm.descent >= need) {
-                /*
+               /*
                  * It is safe to shrink the ascent this much.
                  */
 
                 fm.top = fm.bottom - size;
                 fm.ascent = fm.descent - size;
             } else if (size >= need) {
-                /*
+               /*
                  * We can't show all the descent, but we can at least
                  * show all the ascent.
                  */
@@ -66,7 +81,7 @@ public class HeightSpan implements LineHeightSpan.WithDensity {
                 fm.top = fm.ascent = -need;
                 fm.bottom = fm.descent = fm.top + size;
             } else {
-                /*
+               /*
                  * Show as much of the ascent as we can, and no descent.
                  */
 

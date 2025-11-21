@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 // start - imports
 import java.util.*;
@@ -1442,7 +1457,7 @@ return getDividerHeight();			}
 		nativeSetScrollX(asNativeWidget(), (int) objValue);
 	}
 	
-	public native void nativeSetScrollX(Object view, int value) /*-[
+	public native void nativeSetScrollX(Object view, int value)/*-[
   		[((ASUITableView*)view) setContentOffset:CGPointMake(value ,((ASUITableView*)view).contentOffset.y)];
 	]-*/;
 	
@@ -1450,7 +1465,7 @@ return getDividerHeight();			}
 		nativeSetScrollY(asNativeWidget(), (int) objValue);
 	}
 	
-	public native void nativeSetScrollY(Object view, int value) /*-[
+	public native void nativeSetScrollY(Object view, int value)/*-[
     	[((ASUITableView*)view) setContentOffset:CGPointMake(((ASUITableView*)view).contentOffset.x, value)];	
     ]-*/;
 
@@ -1459,7 +1474,7 @@ return getDividerHeight();			}
 		return nativeGetScrollX(asNativeWidget());
 	}
 	
-	public native double nativeGetScrollX(Object view) /*-[
+	public native double nativeGetScrollX(Object view)/*-[
 		return ((ASUITableView*)view).contentOffset.x;
 	]-*/;
 	
@@ -1467,7 +1482,7 @@ return getDividerHeight();			}
 		return nativeGetScrollY(asNativeWidget());
 	}
 	
-	public native double nativeGetScrollY(Object view) /*-[
+	public native double nativeGetScrollY(Object view)/*-[
 		return ((ASUITableView*)view).contentOffset.y;
 	]-*/;
 
@@ -1492,172 +1507,172 @@ return getDividerHeight();			}
     }
     
 
-	public native void setRowHeight(Object nativeWidget, Object value) /*-[
+	public native void setRowHeight(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).rowHeight = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getRowHeight() /*-[
+	public native Object getRowHeight()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).rowHeight];
   ]-*/;
-	public native void setEstimatedRowHeight(Object nativeWidget, Object value) /*-[
+	public native void setEstimatedRowHeight(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).estimatedRowHeight = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getEstimatedRowHeight() /*-[
+	public native Object getEstimatedRowHeight()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).estimatedRowHeight];
   ]-*/;
-	public native void setCellLayoutMarginsFollowReadableWidth(Object nativeWidget, Object value) /*-[
+	public native void setCellLayoutMarginsFollowReadableWidth(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).cellLayoutMarginsFollowReadableWidth = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getCellLayoutMarginsFollowReadableWidth() /*-[
+	public native Object getCellLayoutMarginsFollowReadableWidth()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).cellLayoutMarginsFollowReadableWidth];
   ]-*/;
-	public native void setInsetsContentViewsToSafeArea(Object nativeWidget, Object value) /*-[
+	public native void setInsetsContentViewsToSafeArea(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).insetsContentViewsToSafeArea = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getInsetsContentViewsToSafeArea() /*-[
+	public native Object getInsetsContentViewsToSafeArea()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).insetsContentViewsToSafeArea];
   ]-*/;
-	public native void setSectionHeaderHeight(Object nativeWidget, Object value) /*-[
+	public native void setSectionHeaderHeight(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).sectionHeaderHeight = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getSectionHeaderHeight() /*-[
+	public native Object getSectionHeaderHeight()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).sectionHeaderHeight];
   ]-*/;
-	public native void setSectionFooterHeight(Object nativeWidget, Object value) /*-[
+	public native void setSectionFooterHeight(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).sectionFooterHeight = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getSectionFooterHeight() /*-[
+	public native Object getSectionFooterHeight()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).sectionFooterHeight];
   ]-*/;
-	public native void setEstimatedSectionHeaderHeight(Object nativeWidget, Object value) /*-[
+	public native void setEstimatedSectionHeaderHeight(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).estimatedSectionHeaderHeight = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getEstimatedSectionHeaderHeight() /*-[
+	public native Object getEstimatedSectionHeaderHeight()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).estimatedSectionHeaderHeight];
   ]-*/;
-	public native void setEstimatedSectionFooterHeight(Object nativeWidget, Object value) /*-[
+	public native void setEstimatedSectionFooterHeight(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).estimatedSectionFooterHeight = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getEstimatedSectionFooterHeight() /*-[
+	public native Object getEstimatedSectionFooterHeight()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).estimatedSectionFooterHeight];
   ]-*/;
-	public native void setSectionHeaderTopPadding(Object nativeWidget, Object value) /*-[
+	public native void setSectionHeaderTopPadding(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).sectionHeaderTopPadding = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getSectionHeaderTopPadding() /*-[
+	public native Object getSectionHeaderTopPadding()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).sectionHeaderTopPadding];
   ]-*/;
-	public native void setSeparatorColor(Object nativeWidget, Object value) /*-[
+	public native void setSeparatorColor(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).separatorColor = (UIColor*) value;
 ]-*/;
-	public native Object getSeparatorColor() /*-[
+	public native Object getSeparatorColor()/*-[
 return ((ASUITableView*) uiView_).separatorColor;
   ]-*/;
-	public native Object getNumberOfSections() /*-[
+	public native Object getNumberOfSections()/*-[
 return [JavaLangInteger valueOfWithInt :((ASUITableView*) uiView_).numberOfSections];
   ]-*/;
-	public native void setAllowsSelection(Object nativeWidget, Object value) /*-[
+	public native void setAllowsSelection(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).allowsSelection = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsSelection() /*-[
+	public native Object getAllowsSelection()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).allowsSelection];
   ]-*/;
-	public native void setAllowsMultipleSelection(Object nativeWidget, Object value) /*-[
+	public native void setAllowsMultipleSelection(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).allowsMultipleSelection = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsMultipleSelection() /*-[
+	public native Object getAllowsMultipleSelection()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).allowsMultipleSelection];
   ]-*/;
-	public native void setAllowsSelectionDuringEditing(Object nativeWidget, Object value) /*-[
+	public native void setAllowsSelectionDuringEditing(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).allowsSelectionDuringEditing = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsSelectionDuringEditing() /*-[
+	public native Object getAllowsSelectionDuringEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).allowsSelectionDuringEditing];
   ]-*/;
-	public native void setAllowsMultipleSelectionDuringEditing(Object nativeWidget, Object value) /*-[
+	public native void setAllowsMultipleSelectionDuringEditing(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).allowsMultipleSelectionDuringEditing = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsMultipleSelectionDuringEditing() /*-[
+	public native Object getAllowsMultipleSelectionDuringEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).allowsMultipleSelectionDuringEditing];
   ]-*/;
-	public native void setSelectionFollowsFocus(Object nativeWidget, Object value) /*-[
+	public native void setSelectionFollowsFocus(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).selectionFollowsFocus = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getSelectionFollowsFocus() /*-[
+	public native Object getSelectionFollowsFocus()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).selectionFollowsFocus];
   ]-*/;
-	public native void setSectionIndexMinimumDisplayRowCount(Object nativeWidget, Object value) /*-[
+	public native void setSectionIndexMinimumDisplayRowCount(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).sectionIndexMinimumDisplayRowCount = [(JavaLangInteger*) value intValue];
 ]-*/;
-	public native Object getSectionIndexMinimumDisplayRowCount() /*-[
+	public native Object getSectionIndexMinimumDisplayRowCount()/*-[
 return [JavaLangInteger valueOfWithInt :((ASUITableView*) uiView_).sectionIndexMinimumDisplayRowCount];
   ]-*/;
-	public native void setSectionIndexColor(Object nativeWidget, Object value) /*-[
+	public native void setSectionIndexColor(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).sectionIndexColor = (UIColor*) value;
 ]-*/;
-	public native Object getSectionIndexColor() /*-[
+	public native Object getSectionIndexColor()/*-[
 return ((ASUITableView*) uiView_).sectionIndexColor;
   ]-*/;
-	public native void setSectionIndexBackgroundColor(Object nativeWidget, Object value) /*-[
+	public native void setSectionIndexBackgroundColor(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).sectionIndexBackgroundColor = (UIColor*) value;
 ]-*/;
-	public native Object getSectionIndexBackgroundColor() /*-[
+	public native Object getSectionIndexBackgroundColor()/*-[
 return ((ASUITableView*) uiView_).sectionIndexBackgroundColor;
   ]-*/;
-	public native void setSectionIndexTrackingBackgroundColor(Object nativeWidget, Object value) /*-[
+	public native void setSectionIndexTrackingBackgroundColor(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).sectionIndexTrackingBackgroundColor = (UIColor*) value;
 ]-*/;
-	public native Object getSectionIndexTrackingBackgroundColor() /*-[
+	public native Object getSectionIndexTrackingBackgroundColor()/*-[
 return ((ASUITableView*) uiView_).sectionIndexTrackingBackgroundColor;
   ]-*/;
-	public native Object getHasUncommittedUpdates() /*-[
+	public native Object getHasUncommittedUpdates()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).hasUncommittedUpdates];
   ]-*/;
-	public native Object getHasActiveDrag() /*-[
+	public native Object getHasActiveDrag()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).hasActiveDrag];
   ]-*/;
-	public native void setDragInteractionEnabled(Object nativeWidget, Object value) /*-[
+	public native void setDragInteractionEnabled(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).dragInteractionEnabled = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getDragInteractionEnabled() /*-[
+	public native Object getDragInteractionEnabled()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).dragInteractionEnabled];
   ]-*/;
-	public native Object getHasActiveDrop() /*-[
+	public native Object getHasActiveDrop()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).hasActiveDrop];
   ]-*/;
-	public native void setIsEditing(Object nativeWidget, Object value) /*-[
+	public native void setIsEditing(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).editing = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getIsEditing() /*-[
+	public native Object getIsEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).editing];
   ]-*/;
-	public native void setRemembersLastFocusedIndexPath(Object nativeWidget, Object value) /*-[
+	public native void setRemembersLastFocusedIndexPath(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).remembersLastFocusedIndexPath = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getRemembersLastFocusedIndexPath() /*-[
+	public native Object getRemembersLastFocusedIndexPath()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).remembersLastFocusedIndexPath];
   ]-*/;
-	public native void setAllowsFocus(Object nativeWidget, Object value) /*-[
+	public native void setAllowsFocus(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).allowsFocus = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsFocus() /*-[
+	public native Object getAllowsFocus()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).allowsFocus];
   ]-*/;
-	public native void setAllowsFocusDuringEditing(Object nativeWidget, Object value) /*-[
+	public native void setAllowsFocusDuringEditing(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).allowsFocusDuringEditing = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsFocusDuringEditing() /*-[
+	public native Object getAllowsFocusDuringEditing()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).allowsFocusDuringEditing];
   ]-*/;
-	public native void setFillerRowHeight(Object nativeWidget, Object value) /*-[
+	public native void setFillerRowHeight(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).fillerRowHeight = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getFillerRowHeight() /*-[
+	public native Object getFillerRowHeight()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUITableView*) uiView_).fillerRowHeight];
   ]-*/;
-	public native void setIsPrefetchingEnabled(Object nativeWidget, Object value) /*-[
+	public native void setIsPrefetchingEnabled(Object nativeWidget, Object value)/*-[
 ((ASUITableView*) nativeWidget).prefetchingEnabled = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getIsPrefetchingEnabled() /*-[
+	public native Object getIsPrefetchingEnabled()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUITableView*) uiView_).prefetchingEnabled];
   ]-*/;
 	@SuppressLint("NewApi")
@@ -2045,7 +2060,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		}
 	}
 	
-	private native void nativeSetSeparatorCellInsetRight(Object cell, int val) /*-[
+	private native void nativeSetSeparatorCellInsetRight(Object cell, int val)/*-[
 		CustomUITableViewCell* mycell = (UITableView*) self.uiView;
 		mycell.separatorInset = UIEdgeInsetsMake(mycell.separatorInset.top, mycell.separatorInset.left, mycell.separatorInset.bottom, val);		
 	]-*/;
@@ -2255,7 +2270,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		nativeSetSeparatorStyle((int) objValue);
 	}
 
-	private native void nativeSetSeparatorStyle(int separatorStyle) /*-[
+	private native void nativeSetSeparatorStyle(int separatorStyle)/*-[
 		[((UITableView*)self->uiView_) setSeparatorStyle:separatorStyle];
 	]-*/;
 
@@ -2278,19 +2293,19 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		}
 	}
 	
-	private native boolean nativeGetStackFromBottom() /*-[
+	private native boolean nativeGetStackFromBottom()/*-[
 		return ((ASUITableView*)self->uiView_).stackFromBottom;
 	]-*/;
 	
-	private native void nativeSetStackFromBottom(boolean stackFromBottom) /*-[
+	private native void nativeSetStackFromBottom(boolean stackFromBottom)/*-[
 		((ASUITableView*)self->uiView_).stackFromBottom = stackFromBottom;
 	]-*/;
 	
-	private native void nativesetStackFromBottom() /*-[
+	private native void nativesetStackFromBottom()/*-[
 		// fixed in layoutsubviews
 	]-*/;
 	
-	private native void nativesetStackFromTop() /*-[
+	private native void nativesetStackFromTop()/*-[
 		((UITableView*)self->uiView_).contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 	]-*/;
 	private AdapterView.OnItemLongClickListener onItemLongClickListener;
@@ -2373,7 +2388,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		nativesetTrackSelectedCell(listSelector != null && listSelector.isStateful());
 	}
 
-	private native void nativesetTrackSelectedCell(boolean trackSelectedCell) /*-[
+	private native void nativesetTrackSelectedCell(boolean trackSelectedCell)/*-[
 		((ASUITableView*)self->uiView_).trackSelectedCell = trackSelectedCell;
 	]-*/;
 	public Object getListSelector() {
@@ -2394,7 +2409,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		}
 	}
 
-	private native Object getCurrentSelectedCell() /*-[
+	private native Object getCurrentSelectedCell()/*-[
 		ASUITableView* tableView = (ASUITableView*) self.uiView;
 		return tableView.currentSelectedCell;
 	]-*/;
@@ -2449,7 +2464,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		nativeSetSeparatorInsetRight(separatorInsetRight);
 	}
 	
-	private native void nativeSetSeparatorInsetRight(int val) /*-[
+	private native void nativeSetSeparatorInsetRight(int val)/*-[
 		ASUITableView* tableView = (ASUITableView*) self.uiView;
 		tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, tableView.separatorInset.left, tableView.separatorInset.bottom, val);		
 	]-*/;
@@ -2458,7 +2473,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		nativeSetSeparatorInsetLeft((int) objValue);
 	}
 	
-	private native void nativeSetSeparatorInsetLeft(int val) /*-[
+	private native void nativeSetSeparatorInsetLeft(int val)/*-[
 		ASUITableView* tableView = (ASUITableView*) self.uiView;
 		tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, val, tableView.separatorInset.bottom, tableView.separatorInset.right);		
 	]-*/;
@@ -2467,7 +2482,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		nativeSetSeparatorInsetBottom((int) objValue);
 	}
 	
-	private native void nativeSetSeparatorInsetBottom(int val) /*-[
+	private native void nativeSetSeparatorInsetBottom(int val)/*-[
 		ASUITableView* tableView = (ASUITableView*) self.uiView;
 		tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, tableView.separatorInset.left, val, tableView.separatorInset.right);		
 	]-*/;
@@ -2476,7 +2491,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		nativeSetSeparatorInsetTop((int) objValue);
 	}
 	
-	private native void nativeSetSeparatorInsetTop(int val) /*-[
+	private native void nativeSetSeparatorInsetTop(int val)/*-[
 		ASUITableView* tableView = (ASUITableView*) self.uiView;
 		tableView.separatorInset = UIEdgeInsetsMake(val, tableView.separatorInset.left, tableView.separatorInset.bottom, tableView.separatorInset.right);		
 	]-*/;

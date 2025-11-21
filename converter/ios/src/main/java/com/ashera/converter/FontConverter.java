@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.converter;
 
 //start - imports
@@ -27,7 +42,7 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 	static {
 		nativeSetVars();
 	}
-    private native static void nativeSetVars()  /*-[	    
+    private native static void nativeSetVars() /*-[	    
 		ASFontConverter_ITALIC_FONT_TRAIT =  (jint) UIFontDescriptorTraitItalic;
 		ASFontConverter_BOLD_FONT_TRAIT =  (jint) UIFontDescriptorTraitBold;
 	]-*/;
@@ -74,7 +89,7 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 				boolean matches = matcher.matches();
 
 				if (matches) {
-					java.util.Properties bundle = readProps(matcher.group(2));
+					java.util.Properties bundle = readProps(matcher.group(2), fragment);
 					Set<Object> fonts = bundle.keySet();
 					for (Object font : fonts) {
 						String fontKey = getFontKey(font.toString());
@@ -133,7 +148,7 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 		fontDescriptors.put("normal_400", new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
 	}	
 
-	private native String navtiveGetFont(String fontFilePath) /*-[
+	private native String navtiveGetFont(String fontFilePath)/*-[
 		NSData *inData = [NSData dataWithContentsOfFile:fontFilePath];
 	    CFErrorRef error;
 	    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)inData);

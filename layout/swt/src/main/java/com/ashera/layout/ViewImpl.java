@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 import java.util.*;
@@ -4829,4 +4844,63 @@ break;}
 		
 	}
 	//end - customproperty
+	
+	private final static class TouchEventListener implements org.eclipse.swt.widgets.Listener {
+		private View view;
+		private int action;
+		private MotionEvent motionEvent = new MotionEvent();
+		public TouchEventListener(View view) {
+			this.view = view;
+		}
+
+		@Override
+		public void handleEvent(org.eclipse.swt.widgets.Event event) {
+			java.awt.PointerInfo p = java.awt.MouseInfo.getPointerInfo();
+			int x = p.getLocation().x;
+			int y = p.getLocation().y;
+			motionEvent.setX(x);
+			motionEvent.setY(y);
+			
+			switch (event.type) {
+			case org.eclipse.swt.SWT.MouseDown:
+				action = 1;
+				motionEvent.setAction(MotionEvent.ACTION_DOWN);
+				this.view.onTouchEvent(motionEvent);
+				break;
+			case org.eclipse.swt.SWT.MouseMove:
+				if (action == 1) {
+					motionEvent.setAction(MotionEvent.ACTION_MOVE);
+					this.view.onTouchEvent(motionEvent);
+				}
+				break;
+			case org.eclipse.swt.SWT.MouseUp:
+				if (action == 1) {
+					motionEvent.setAction(MotionEvent.ACTION_UP);
+					this.view.onTouchEvent(motionEvent);
+
+		        	action = 0;
+				}
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	public static void nativeAddTouchEvent(IWidget widget) {
+		org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) widget.asNativeWidget();
+		TouchEventListener listener = (TouchEventListener) widget.getFromTempCache("AddTouchEventListener");
+		if (listener != null) {
+			control.removeListener(org.eclipse.swt.SWT.MouseDown, listener);
+			control.removeListener(org.eclipse.swt.SWT.MouseMove, listener);
+			control.removeListener(org.eclipse.swt.SWT.MouseUp, listener);
+		}
+
+		listener = new TouchEventListener((View) widget.asWidget());
+		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseDown, listener);
+		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseMove, listener);
+		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseUp, listener);
+		widget.storeInTempCache("AddTouchEventListener", listener);
+	}
 }

@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.converter;
 
 import java.io.FileNotFoundException;
@@ -93,12 +108,12 @@ public class ColorImageConverter extends ColorConverter {
 	}
 	
     
-	public static native Object nativeLoadImageFromPath(String imagePath) /*-[
+	public static native Object nativeLoadImageFromPath(String imagePath)/*-[
 		return [UIImage imageWithContentsOfFile:imagePath];
 ;
 	]-*/;
 
-	public static native Object getImageFromBase64(Object strEncoded) /*-[
+	public static native Object getImageFromBase64(Object strEncoded)/*-[
 		NSData *dataEncoded = [[NSData alloc] initWithBase64EncodedString:strEncoded  options:0]; 
 		UIImage *image = [UIImage imageWithData:dataEncoded];
 		return image;
@@ -122,17 +137,17 @@ public class ColorImageConverter extends ColorConverter {
     	}
         
     }
-	private native boolean isImage(Object objImage) /*-[
+	private native boolean isImage(Object objImage)/*-[
 		return [objImage isKindOfClass:[UIImage class]];
 	]-*/;
 	
-	private native String imageAsBase64(Object objImage) /*-[
+	private native String imageAsBase64(Object objImage)/*-[
 		NSData *imageData = UIImagePNGRepresentation(objImage);
 		NSString * base64String = [imageData base64EncodedStringWithOptions:0];
 		return [NSString stringWithFormat:@"data:image/png;base64,%@", base64String];
 	]-*/;
 
-	public native String colorToString(Object color)  /*-[	    
+	public native String colorToString(Object color) /*-[	    
 	    CGFloat red, green, blue, alpha;
 	    [((UIColor*) color) getRed:&red green:&green blue:&blue alpha:&alpha];
   		return [[NSString stringWithFormat:@"#%02x%02x%02x", (int)(red * 255), (int)(green * 255) , (int)(blue * 255)] uppercaseString];

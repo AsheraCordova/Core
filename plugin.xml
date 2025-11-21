@@ -123,7 +123,7 @@
      <source-file src="core/android/tsc/webpack.config.js" target-dir="tsc"/>
      <!-- tsc end -->
      
-     <asset src="core/android/www/css/font_standard.css" target="css/font_standard.css" />
+     <asset src="core/android/www/css/font_standard.css" target="css/font_standard.css" />     
   
   	<framework src="tools/android/tools.gradle" custom="true" type="gradleReference" />
     <!-- start gentool -->
@@ -204,6 +204,9 @@
     <framework src="layout/android/layout.gradle" custom="true" type="gradleReference" />
 
 	 <!-- start res -->
+     <source-file src="layout/android/res/drawable-xxxhdpi/star_empty.png" target-dir="res/drawable-xxxhdpi"/>
+     <source-file src="layout/android/res/drawable-xxxhdpi/star_full.png" target-dir="res/drawable-xxxhdpi"/>
+     <source-file src="layout/android/res/drawable-xxxhdpi/star_half.png" target-dir="res/drawable-xxxhdpi"/>
      <source-file src="layout/android/res/layout/autocomplete_completion.xml" target-dir="res/layout"/>
      <source-file src="layout/android/res/layout/autocomplete_entries.xml" target-dir="res/layout"/>
      <source-file src="layout/android/res/values/model_attrs.xml" target-dir="res/values"/>
@@ -234,6 +237,7 @@
      <source-file src="layout/android/src/com/ashera/layout/ProgressBarImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/RadioButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/RadioGroupImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/RatingBarImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/RelativeLayoutImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/RootImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ScrollViewImpl.java" target-dir="src/com/ashera/layout"/>
@@ -273,6 +277,7 @@
      <source-file src="layout/android/tsc/src/android/widget/ProgressBarImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/RadioButtonImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/RadioGroupImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="layout/android/tsc/src/android/widget/RatingBarImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/RootImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ScrollViewImpl.ts" target-dir="tsc/src/android/widget"/>
@@ -774,6 +779,8 @@
      <source-file src="core/ios/library/AndroidCore/src/CookieManager.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Cursor.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Cursor.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/CustomRatingBar.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/CustomRatingBar.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/CycleInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/CycleInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/DataSetObservable.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1434,6 +1441,7 @@
      <source-file src="layout/ios/tsc/src/ios/widget/ProgressBarImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/RadioButtonImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/RadioGroupImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="layout/ios/tsc/src/ios/widget/RatingBarImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/RootImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ScrollViewImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -1500,6 +1508,8 @@
      <source-file src="layout/ios/ios/src/RadioButtonImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/RadioGroupImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/RadioGroupImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/RatingBarImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/RatingBarImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/RelativeLayoutImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/RelativeLayoutImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/RootImpl.h" target-dir="LayoutPlugin/ios/src"/>
@@ -1648,6 +1658,7 @@
      <source-file src="layout/browser/tsc/src/web/widget/ProgressBarImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/RadioButtonImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/RadioGroupImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/RatingBarImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/RootImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>
@@ -1680,6 +1691,7 @@
 	<js-module src="core/swt/www/coreManager.js" name="coreManager">
     	<clobbers target="coreManager" />
   	</js-module>
+  	<dependency id="SWTSwitch" url="https://github.com/AsheraCordova/SWTSwitch.git" />
   
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="ConverterCordovaPlugin">
@@ -1732,14 +1744,13 @@
      <source-file src="layout/swt/tsc/src/swt/widget/RadioButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/RadioButtonStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/RadioGroupImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/RatingBarImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/RootImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/SpinnerImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/StyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/StyledTextImpl.ts" target-dir="tsc/src/swt/widget"/>
-     <source-file src="layout/swt/tsc/src/swt/widget/SwitchImpl.ts" target-dir="tsc/src/swt/widget"/>
-     <source-file src="layout/swt/tsc/src/swt/widget/SwitchStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/TableLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/TableRowImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/TextViewButtonImpl.ts" target-dir="tsc/src/swt/widget"/>

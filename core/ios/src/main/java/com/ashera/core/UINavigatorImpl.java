@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.core;
 
 import java.util.List;
@@ -151,12 +166,12 @@ public class UINavigatorImpl {
 		return fileName;
 	}
 	
-	private native void updateViewFrame(Object controller, Object obj) /*-[
+	private native void updateViewFrame(Object controller, Object obj)/*-[
 		UIView* uiview = (UIView*) obj;
 		UINavigationController* currentController =  (UINavigationController*) controller;
 		[uiview setFrame:CGRectMake((currentController.view.frame.size.width-uiview.frame.size.width)/2, (currentController.view.frame.size.height-uiview.frame.size.height)/2, uiview.frame.size.width, uiview.frame.size.height)];
 	]-*/;
-	private native void navigateToDialog(Object rootFragment, Object backdropColor, String windowCloseOnTouchOutside, String backgroundDimEnabled) /*-[
+	private native void navigateToDialog(Object rootFragment, Object backdropColor, String windowCloseOnTouchOutside, String backgroundDimEnabled)/*-[
   		ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
   		UIViewController* presentedController = [self getTopPresentedController];
   		ASDialogFragmentController* v = [ASDialogFragmentController new];
@@ -221,7 +236,7 @@ public class UINavigatorImpl {
 		closeDialog(presentedController);
 	}
 	
-	private native Object getFragment(Object presentedController) /*-[
+	private native Object getFragment(Object presentedController)/*-[
 		if ([presentedController class] == [ASDialogFragmentController class]) {
 			ASDialogFragmentController* presentedViewController = (ASDialogFragmentController*) presentedController;
 			return presentedViewController.rootFragment;
@@ -229,7 +244,7 @@ public class UINavigatorImpl {
 		return nil;
 	]-*/;
 	
-	private native void closeDialog(Object presentedController) /*-[
+	private native void closeDialog(Object presentedController)/*-[
 		if ([presentedController class] == [ASDialogFragmentController class]) {
 			ASDialogFragmentController* presentedViewController = (ASDialogFragmentController*) presentedController;
 			[presentedViewController dismiss];
@@ -237,7 +252,7 @@ public class UINavigatorImpl {
 	]-*/;
 
 
-	private native Object getTopPresentedController() /*-[
+	private native Object getTopPresentedController()/*-[
 		ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
 		UIViewController* presentedController = mainViewController;
 		

@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.jsonadapter;
 
 import java.util.List;
@@ -83,7 +98,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		}
 		return (Object[]) getNativeArray(payLoad);
 	}
-	private native Object getNativeArray(Object nsarray) /*-[
+	private native Object getNativeArray(Object nsarray)/*-[
 		if ([nsarray isKindOfClass:[NSMutableArray class]]) {
 	  		return [IOSObjectArray arrayWithNSArray:nsarray type:[IOSClass forName: @"java.lang.Object"]];
 	  	}
@@ -112,7 +127,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		return com.ashera.utils.StringUtils.getBoolean(payLoad);
 	}
 	
-	private native boolean isClassNSMutableArray(Object object) /*-[
+	private native boolean isClassNSMutableArray(Object object)/*-[
 	  return [object isKindOfClass:[NSMutableArray class]];
 	]-*/;
 	
@@ -152,7 +167,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		}
 		return null;
 	}
-	private native Object tryNativeType(Object object) /*-[
+	private native Object tryNativeType(Object object)/*-[
 	  if ([object isKindOfClass:[NSNumber class]]) {
     		return [(NSNumber*)object stringValue];
 	  }
@@ -191,7 +206,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
         throw new RuntimeException("Unable to convert to int value");
     }
 	
-	private native Object tryNativeIntType(Object object) /*-[
+	private native Object tryNativeIntType(Object object)/*-[
 	  if ([object isKindOfClass:[NSNumber class]]) {
         return [JavaLangInteger valueOfWithInt:[(NSNumber*) object intValue] ];
 	  }
@@ -215,7 +230,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		throw new RuntimeException("Unsupported method");
 	}
 	
-	private native String getJSONString(Object payload) /*-[
+	private native String getJSONString(Object payload)/*-[
 	    if (payload == nil) {
 	    	payload = [NSDictionary new];
 		}
@@ -236,7 +251,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		return (T) getMap(mutableArray);
 	}
 	
-	private native Object unmarshal(String jsonString) /*-[
+	private native Object unmarshal(String jsonString)/*-[
 		NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
 	    NSError *e = nil;
 	    id jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
@@ -244,7 +259,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 	]-*/;
 
 	@Override
-	public native Map<String, Object> getJSONCompatMap() /*-[
+	public native Map<String, Object> getJSONCompatMap()/*-[
 		return [[ASDictionaryMap alloc] initWithDictionary:[NSDictionary new]];
 	]-*/;
 
@@ -296,19 +311,19 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		return obj;
 	}
 	
-	private native Object convertToNSInteger(int value) /*-[
+	private native Object convertToNSInteger(int value)/*-[
     	return [NSNumber numberWithInteger:value];
 	]-*/;
 	
-	private native Object convertToNSDouble(double value) /*-[
+	private native Object convertToNSDouble(double value)/*-[
 		return [NSNumber numberWithDouble:value];
 	]-*/;
 
-	private native Object convertToNSFloat(float value) /*-[
+	private native Object convertToNSFloat(float value)/*-[
 		return [NSNumber numberWithFloat:value];
 	]-*/;
 
-	private native Object convertToNSLong(long value) /*-[
+	private native Object convertToNSLong(long value)/*-[
 		return [NSNumber numberWithLong:value];
 	]-*/;
 
@@ -321,7 +336,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 	  return result;
 	]-*/;
 	
-	public native void addObject(Object list, Object object) /*-[
+	public native void addObject(Object list, Object object)/*-[
 		[list addObject:object];
 	]-*/;
 	
@@ -364,14 +379,14 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
         
 	}
 	
-	private native Object tryNativeDoubleType(Object object) /*-[
+	private native Object tryNativeDoubleType(Object object)/*-[
 	  if ([object isKindOfClass:[NSNumber class]]) {
       	return [JavaLangDouble valueOfWithDouble:[(NSNumber*) object doubleValue] ];
 	  }
 	  return nil;
 	]-*/;
 	
-	private native Object tryNativeFloatType(Object object) /*-[
+	private native Object tryNativeFloatType(Object object)/*-[
 	  if ([object isKindOfClass:[NSNumber class]]) {
     	return [JavaLangFloat valueOfWithFloat:[(NSNumber*) object floatValue] ];
 	  }
@@ -408,7 +423,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 	}
 
 	@Override
-	public native Object getNativeMap(Map<String, Object> payLoad) /*-[
+	public native Object getNativeMap(Map<String, Object> payLoad)/*-[
 		return ((ASDictionaryMap*) payLoad)->dictionary_;
 	]-*/;
 
@@ -438,7 +453,7 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		return object == null || nativeIsNull(object);
 	}
 	
-	private native boolean nativeIsNull(Object object) /*-[
+	private native boolean nativeIsNull(Object object)/*-[
 	  return object  == [NSNull null];
 	]-*/;
 }

@@ -40,6 +40,7 @@
      <source-file src="tsc/src/web/widget/ProgressBarImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/RadioButtonImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/RadioGroupImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/RatingBarImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/RootImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>

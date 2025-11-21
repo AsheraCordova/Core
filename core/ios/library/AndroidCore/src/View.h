@@ -22,6 +22,7 @@
 @class ADDrawable;
 @class ADInsets;
 @class ADKeyEvent;
+@class ADMotionEvent;
 @class ADRect;
 @class ADRenderNode;
 @class ADResources;
@@ -326,6 +327,8 @@
 
 - (bool)hasOnKeyListener;
 
+- (bool)hasOnTouchEvent;
+
 - (bool)hasTransientState;
 
 - (bool)hasUnhandledKeyListener;
@@ -443,6 +446,17 @@
 
 - (void)onStartTemporaryDetach;
 
+- (bool)onTouchEventWithADMotionEvent:(ADMotionEvent *)event;
+
+- (void)onTouchEventDownWithInt:(int32_t)x
+                        withInt:(int32_t)y;
+
+- (void)onTouchEventMoveWithInt:(int32_t)x
+                        withInt:(int32_t)y;
+
+- (void)onTouchEventUpWithInt:(int32_t)x
+                      withInt:(int32_t)y;
+
 - (void)onVisibilityAggregatedWithBoolean:(bool)isVisible;
 
 - (bool)postWithJavaLangRunnable:(id<JavaLangRunnable>)action;
@@ -546,6 +560,8 @@
 - (void)setForegroundGravityWithInt:(int32_t)gravity;
 
 - (void)setForegroundTintListWithADColorStateList:(ADColorStateList *)tint;
+
+- (void)setHasOnTouchEventWithBoolean:(bool)hasOnTouchEvent;
 
 - (void)setHorizontalScrollbarHeightWithInt:(int32_t)horizontalScrollbarHeight;
 

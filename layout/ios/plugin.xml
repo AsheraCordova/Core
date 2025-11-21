@@ -38,6 +38,7 @@
      <source-file src="tsc/src/ios/widget/ProgressBarImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/RadioButtonImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/RadioGroupImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="tsc/src/ios/widget/RatingBarImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/RootImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ScrollViewImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -104,6 +105,8 @@
      <source-file src="ios/src/RadioButtonImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/RadioGroupImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/RadioGroupImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/RatingBarImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="ios/src/RatingBarImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/RelativeLayoutImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/RelativeLayoutImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/RootImpl.h" target-dir="LayoutPlugin/ios/src"/>

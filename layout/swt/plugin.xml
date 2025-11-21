@@ -41,14 +41,13 @@
      <source-file src="tsc/src/swt/widget/RadioButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/RadioButtonStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/RadioGroupImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/RatingBarImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/RootImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/ScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/SpinnerImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/StyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/StyledTextImpl.ts" target-dir="tsc/src/swt/widget"/>
-     <source-file src="tsc/src/swt/widget/SwitchImpl.ts" target-dir="tsc/src/swt/widget"/>
-     <source-file src="tsc/src/swt/widget/SwitchStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/TableLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/TableRowImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/TextViewButtonImpl.ts" target-dir="tsc/src/swt/widget"/>

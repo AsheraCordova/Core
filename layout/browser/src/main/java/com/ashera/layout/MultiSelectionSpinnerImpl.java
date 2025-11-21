@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -801,12 +816,12 @@ return getSelectedValues();				}
 	
 
 	public static class MultiSelectionSpinner {
-	    /**
+	   /**
 	     * Interface definition for a callback to be invoked when
 	     * an item in this view has been selected.
 	     */
 	    public interface OnMultiItemSelectedListener {
-	        /**
+	       /**
 	         * <p>Callback method to be invoked when an item in this view has been
 	         * selected. This callback is invoked only when the newly selected
 	         * position is different from the previously selected position or if
@@ -820,7 +835,7 @@ return getSelectedValues();				}
 	         */
 	        void onItemSelected(View view, List<Integer> positions);
 
-	        /**
+	       /**
 	         * Callback method to be invoked when the selection disappears from this
 	         * view. The selection can disappear for instance when touch is activated
 	         * or when the adapter becomes empty.

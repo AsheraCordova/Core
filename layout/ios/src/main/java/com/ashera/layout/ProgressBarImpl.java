@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -606,16 +621,16 @@ return getProgressTint();				}
 
     
 
-	public native void setHidesWhenStopped(Object nativeWidget, Object value) /*-[
+	public native void setHidesWhenStopped(Object nativeWidget, Object value)/*-[
 ((ASUIActivityIndicatorView*) nativeWidget).hidesWhenStopped = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getHidesWhenStopped() /*-[
+	public native Object getHidesWhenStopped()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUIActivityIndicatorView*) uiView_).hidesWhenStopped];
   ]-*/;
-	public native void setColor(Object nativeWidget, Object value) /*-[
+	public native void setColor(Object nativeWidget, Object value)/*-[
 ((ASUIActivityIndicatorView*) nativeWidget).color = (UIColor*) value;
 ]-*/;
-	public native Object getColor() /*-[
+	public native Object getColor()/*-[
 return ((ASUIActivityIndicatorView*) uiView_).color;
   ]-*/;
 	
@@ -784,7 +799,7 @@ return ((ASUIActivityIndicatorView*) uiView_).color;
 		simpleWrapableView.setDisableForeground(true);
 	}
 	
-	private native Object nativeCreateView(int viewType) /*-[
+	private native Object nativeCreateView(int viewType)/*-[
 		ASUIActivityIndicatorView* view;
 		if (self->large_) {
 			if (@available(iOS 13.0, *)) {

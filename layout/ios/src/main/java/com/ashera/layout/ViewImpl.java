@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 import java.util.*;
@@ -3357,169 +3372,169 @@ break;}
 	}
 	
 
-	public static native void setBackgroundColor(Object nativeWidget, Object value) /*-[
+	public static native void setBackgroundColor(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).backgroundColor = (UIColor*) value;
 ]-*/;
-	public static native Object getBackgroundColor(Object uiView) /*-[
+	public static native Object getBackgroundColor(Object uiView)/*-[
 return ((UIView*) uiView).backgroundColor;
   ]-*/;
-	public static native void setIsHidden(Object nativeWidget, Object value) /*-[
+	public static native void setIsHidden(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).hidden = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getIsHidden(Object uiView) /*-[
+	public static native Object getIsHidden(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).hidden];
   ]-*/;
-	public static native void setAlpha(Object nativeWidget, Object value) /*-[
+	public static native void setAlpha(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).alpha = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public static native Object getAlpha(Object uiView) /*-[
+	public static native Object getAlpha(Object uiView)/*-[
 return [JavaLangFloat valueOfWithFloat :((UIView*) uiView).alpha];
   ]-*/;
-	public static native void setIsOpaque(Object nativeWidget, Object value) /*-[
+	public static native void setIsOpaque(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).opaque = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getIsOpaque(Object uiView) /*-[
+	public static native Object getIsOpaque(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).opaque];
   ]-*/;
-	public static native void setTintColor(Object nativeWidget, Object value) /*-[
+	public static native void setTintColor(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).tintColor = (UIColor*) value;
 ]-*/;
-	public static native Object getTintColor(Object uiView) /*-[
+	public static native Object getTintColor(Object uiView)/*-[
 return ((UIView*) uiView).tintColor;
   ]-*/;
-	public static native void setClipsToBounds(Object nativeWidget, Object value) /*-[
+	public static native void setClipsToBounds(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).clipsToBounds = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getClipsToBounds(Object uiView) /*-[
+	public static native Object getClipsToBounds(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).clipsToBounds];
   ]-*/;
-	public static native void setClearsContextBeforeDrawing(Object nativeWidget, Object value) /*-[
+	public static native void setClearsContextBeforeDrawing(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).clearsContextBeforeDrawing = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getClearsContextBeforeDrawing(Object uiView) /*-[
+	public static native Object getClearsContextBeforeDrawing(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).clearsContextBeforeDrawing];
   ]-*/;
-	public static native void setIsUserInteractionEnabled(Object nativeWidget, Object value) /*-[
+	public static native void setIsUserInteractionEnabled(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).userInteractionEnabled = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getIsUserInteractionEnabled(Object uiView) /*-[
+	public static native Object getIsUserInteractionEnabled(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).userInteractionEnabled];
   ]-*/;
-	public static native void setIsMultipleTouchEnabled(Object nativeWidget, Object value) /*-[
+	public static native void setIsMultipleTouchEnabled(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).multipleTouchEnabled = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getIsMultipleTouchEnabled(Object uiView) /*-[
+	public static native Object getIsMultipleTouchEnabled(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).multipleTouchEnabled];
   ]-*/;
-	public static native void setIsExclusiveTouch(Object nativeWidget, Object value) /*-[
+	public static native void setIsExclusiveTouch(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).exclusiveTouch = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getIsExclusiveTouch(Object uiView) /*-[
+	public static native Object getIsExclusiveTouch(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).exclusiveTouch];
   ]-*/;
-	public static native void setPreservesSuperviewLayoutMargins(Object nativeWidget, Object value) /*-[
+	public static native void setPreservesSuperviewLayoutMargins(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).preservesSuperviewLayoutMargins = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getPreservesSuperviewLayoutMargins(Object uiView) /*-[
+	public static native Object getPreservesSuperviewLayoutMargins(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).preservesSuperviewLayoutMargins];
   ]-*/;
-	public static native void setInsetsLayoutMarginsFromSafeArea(Object nativeWidget, Object value) /*-[
+	public static native void setInsetsLayoutMarginsFromSafeArea(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).insetsLayoutMarginsFromSafeArea = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getInsetsLayoutMarginsFromSafeArea(Object uiView) /*-[
+	public static native Object getInsetsLayoutMarginsFromSafeArea(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).insetsLayoutMarginsFromSafeArea];
   ]-*/;
-	public static native void setAutoresizesSubviews(Object nativeWidget, Object value) /*-[
+	public static native void setAutoresizesSubviews(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).autoresizesSubviews = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getAutoresizesSubviews(Object uiView) /*-[
+	public static native Object getAutoresizesSubviews(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).autoresizesSubviews];
   ]-*/;
-	public static native void setTranslatesAutoresizingMaskIntoConstraints(Object nativeWidget, Object value) /*-[
+	public static native void setTranslatesAutoresizingMaskIntoConstraints(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).translatesAutoresizingMaskIntoConstraints = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getTranslatesAutoresizingMaskIntoConstraints(Object uiView) /*-[
+	public static native Object getTranslatesAutoresizingMaskIntoConstraints(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).translatesAutoresizingMaskIntoConstraints];
   ]-*/;
-	public static native void setContentScaleFactor(Object nativeWidget, Object value) /*-[
+	public static native void setContentScaleFactor(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).contentScaleFactor = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public static native Object getContentScaleFactor(Object uiView) /*-[
+	public static native Object getContentScaleFactor(Object uiView)/*-[
 return [JavaLangFloat valueOfWithFloat :((UIView*) uiView).contentScaleFactor];
   ]-*/;
-	public static native Object getIsFocused(Object uiView) /*-[
+	public static native Object getIsFocused(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).focused];
   ]-*/;
-	public static native void setRestorationIdentifier(Object nativeWidget, Object value) /*-[
+	public static native void setRestorationIdentifier(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).restorationIdentifier = (NSString*) value;
 ]-*/;
-	public static native Object getRestorationIdentifier(Object uiView) /*-[
+	public static native Object getRestorationIdentifier(Object uiView)/*-[
 return ((UIView*) uiView).restorationIdentifier;
   ]-*/;
-	public static native void setTag(Object nativeWidget, Object value) /*-[
+	public static native void setTag(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).tag = [(JavaLangInteger*) value intValue];
 ]-*/;
-	public static native Object getTag(Object uiView) /*-[
+	public static native Object getTag(Object uiView)/*-[
 return [JavaLangInteger valueOfWithInt :((UIView*) uiView).tag];
   ]-*/;
-	public static native void setAccessibilityIgnoresInvertColors(Object nativeWidget, Object value) /*-[
+	public static native void setAccessibilityIgnoresInvertColors(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).accessibilityIgnoresInvertColors = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getAccessibilityIgnoresInvertColors(Object uiView) /*-[
+	public static native Object getAccessibilityIgnoresInvertColors(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).accessibilityIgnoresInvertColors];
   ]-*/;
-	public static native void setLargeContentImage(Object nativeWidget, Object value) /*-[
+	public static native void setLargeContentImage(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).largeContentImage = (UIImage*) value;
 ]-*/;
-	public static native Object getLargeContentImage(Object uiView) /*-[
+	public static native Object getLargeContentImage(Object uiView)/*-[
 return ((UIView*) uiView).largeContentImage;
   ]-*/;
-	public static native void setLargeContentTitle(Object nativeWidget, Object value) /*-[
+	public static native void setLargeContentTitle(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).largeContentTitle = (NSString*) value;
 ]-*/;
-	public static native Object getLargeContentTitle(Object uiView) /*-[
+	public static native Object getLargeContentTitle(Object uiView)/*-[
 return ((UIView*) uiView).largeContentTitle;
   ]-*/;
-	public static native void setScalesLargeContentImage(Object nativeWidget, Object value) /*-[
+	public static native void setScalesLargeContentImage(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).scalesLargeContentImage = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getScalesLargeContentImage(Object uiView) /*-[
+	public static native Object getScalesLargeContentImage(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).scalesLargeContentImage];
   ]-*/;
-	public static native void setShowsLargeContentViewer(Object nativeWidget, Object value) /*-[
+	public static native void setShowsLargeContentViewer(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).showsLargeContentViewer = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getShowsLargeContentViewer(Object uiView) /*-[
+	public static native Object getShowsLargeContentViewer(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).showsLargeContentViewer];
   ]-*/;
-	public static native void setIsAccessibilityElement(Object nativeWidget, Object value) /*-[
+	public static native void setIsAccessibilityElement(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).isAccessibilityElement = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public static native Object getIsAccessibilityElement(Object uiView) /*-[
+	public static native Object getIsAccessibilityElement(Object uiView)/*-[
 return [JavaLangBoolean valueOfWithBoolean :((UIView*) uiView).isAccessibilityElement];
   ]-*/;
-	public static native void setAccessibilityLabel(Object nativeWidget, Object value) /*-[
+	public static native void setAccessibilityLabel(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).accessibilityLabel = (NSString*) value;
 ]-*/;
-	public static native Object getAccessibilityLabel(Object uiView) /*-[
+	public static native Object getAccessibilityLabel(Object uiView)/*-[
 return ((UIView*) uiView).accessibilityLabel;
   ]-*/;
-	public static native void setAccessibilityHint(Object nativeWidget, Object value) /*-[
+	public static native void setAccessibilityHint(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).accessibilityHint = (NSString*) value;
 ]-*/;
-	public static native Object getAccessibilityHint(Object uiView) /*-[
+	public static native Object getAccessibilityHint(Object uiView)/*-[
 return ((UIView*) uiView).accessibilityHint;
   ]-*/;
-	public static native void setAccessibilityValue(Object nativeWidget, Object value) /*-[
+	public static native void setAccessibilityValue(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).accessibilityValue = (NSString*) value;
 ]-*/;
-	public static native Object getAccessibilityValue(Object uiView) /*-[
+	public static native Object getAccessibilityValue(Object uiView)/*-[
 return ((UIView*) uiView).accessibilityValue;
   ]-*/;
-	public static native void setAccessibilityTraits(Object nativeWidget, Object value) /*-[
+	public static native void setAccessibilityTraits(Object nativeWidget, Object value)/*-[
 ((UIView*) nativeWidget).accessibilityTraits = [(JavaLangInteger*) value intValue];
 ]-*/;
-	public static native Object getAccessibilityTraits(Object uiView) /*-[
+	public static native Object getAccessibilityTraits(Object uiView)/*-[
 return [JavaLangInteger valueOfWithInt :((UIView*) uiView).accessibilityTraits];
   ]-*/;
 	@SuppressLint("NewApi")
@@ -4239,12 +4254,12 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		((UIScrollView*) uiView).contentSize = CGSizeMake(r-l, height);
 	]-*/;
 	
-	public native static void updateBounds(Object objview, int x, int y, int width, int height) /*-[
+	public native static void updateBounds(Object objview, int x, int y, int width, int height)/*-[
 		UIView* uiview = ((UIView*) objview);
 		uiview.frame = CGRectMake(x, y, width, height);
 	]-*/;
 	
-	public native static Object getFirstChildOrSelf(Object objview) /*-[
+	public native static Object getFirstChildOrSelf(Object objview)/*-[
 		UIView* uiview = ((UIView*) objview);
 		return uiview.subviews.count > 0 ? uiview.subviews[0] : uiview;
 	]-*/;
@@ -4266,7 +4281,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		return isRTLLayout();
 	}
 	
-	public native static boolean isRTLLayout() /*-[
+	public native static boolean isRTLLayout()/*-[
 		return [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
 	]-*/;
 
@@ -4337,7 +4352,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	    view.setBackground(background);
 	}
 	
-	public static native boolean isColor(Object value) /*-[
+	public static native boolean isColor(Object value)/*-[
 		return[value isKindOfClass:[UIColor class]];
 	]-*/;
 	
@@ -4345,7 +4360,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		return (obj != null && obj.getClass().getName().equals("_UIResizableImage"));
 	}
 
-	public static native boolean isImage(Object value) /*-[
+	public static native boolean isImage(Object value)/*-[
 		return[value isKindOfClass:[UIImage class]];
 	]-*/;
 	
@@ -4359,10 +4374,10 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		return image.size.height;
 	]-*/;
 
-	private static native void clearBgColor(Object view, Object value) /*-[
+	private static native void clearBgColor(Object view, Object value)/*-[
 		((UIView *) view).backgroundColor = [UIColor clearColor];
 	]-*/;
-	private static native void nativeSetBgColor(Object view, Object value) /*-[
+	private static native void nativeSetBgColor(Object view, Object value)/*-[
 		((UIView *) view).backgroundColor = value;
 	]-*/;
 	
@@ -4622,7 +4637,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	     view.setVisibility((int) objValue);	
 	}
 	
-	public static native void nativeSetVisibility(Object view, boolean hidden) /*-[
+	public static native void nativeSetVisibility(Object view, boolean hidden)/*-[
 		[((UIView *) view) setHidden:  hidden];
 	]-*/;
 
@@ -4631,7 +4646,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		return nativeGetClickable(nativeWidget);
 	}
 	
-	private native static boolean nativeGetClickable(Object view)  /*-[
+	private native static boolean nativeGetClickable(Object view) /*-[
 		return ((UIView *) view).userInteractionEnabled;
 	]-*/;
 	
@@ -4643,7 +4658,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	}
 	
 	
-	private static native void nativeSetClickable(Object view, boolean clickable) /*-[
+	private static native void nativeSetClickable(Object view, boolean clickable)/*-[
 		((UIView *) view).userInteractionEnabled = clickable;
 	]-*/;
 
@@ -4789,18 +4804,18 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		nativeInvalidate(nativeView);
 	}
 	
-	public static native void nativeRequestLayout(Object view) /*-[
+	public static native void nativeRequestLayout(Object view)/*-[
 		[((UIView *) view) setNeedsLayout];
 	]-*/;
 	
-	public static native void nativeInvalidate(Object view) /*-[
+	public static native void nativeInvalidate(Object view)/*-[
 		[((UIView *) view) setNeedsDisplay];
 	]-*/;
 	
-	public static native void setKeepScreenOn(Object nativeWidget, Object value) /*-[
+	public static native void setKeepScreenOn(Object nativeWidget, Object value)/*-[
 		[UIApplication sharedApplication].idleTimerDisabled = [(JavaLangBoolean*) value booleanValue];
 	]-*/;
-	public static native Object getKeepScreenOn(Object uiView) /*-[
+	public static native Object getKeepScreenOn(Object uiView)/*-[
 		return [JavaLangBoolean valueOfWithBoolean :[UIApplication sharedApplication].idleTimerDisabled];
   ]-*/;
 
@@ -4875,7 +4890,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			}
 		}
 
-		public native void nativeAddDragInteraction(Object nativeWidget) /*-[
+		public native void nativeAddDragInteraction(Object nativeWidget)/*-[
 			UIDragInteraction* dragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
 			dragInteraction.enabled = TRUE;
 			UIView* view = ((UIView*)nativeWidget);
@@ -4941,7 +4956,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			listener.onDrag((View) widget.asWidget(), dragEvent);
 			System.out.println("action " + action);
 		}
-		public native void nativeAddDropInteraction(Object nativeWidget) /*-[
+		public native void nativeAddDropInteraction(Object nativeWidget)/*-[
 			UIDropInteraction* dropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
 			UIView* view = ((UIView*)nativeWidget);
 		    for (id<UIInteraction> interaction in view.interactions) {
@@ -5040,7 +5055,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		nativeSetLayerCornerRadius(nativeWidget, (float) objValue);
 	}
 
-	private static native void nativeSetLayerCornerRadius(Object nativeWidget, float value) /*-[
+	private static native void nativeSetLayerCornerRadius(Object nativeWidget, float value)/*-[
 		UIView* view = ((UIView*)nativeWidget);
 		view.layer.cornerRadius = value;
 	]-*/;
@@ -5049,7 +5064,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		nativeLayerBorderColor(nativeWidget, objValue);
 	}
 
-	private static native void nativeLayerBorderColor(Object nativeWidget, Object value) /*-[
+	private static native void nativeLayerBorderColor(Object nativeWidget, Object value)/*-[
 		UIView* view = ((UIView*)nativeWidget);
 		view.layer.borderColor = ((UIColor*) value).CGColor;
 	]-*/;
@@ -5058,7 +5073,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		nativeLayerBorderWidth(nativeWidget, (float) objValue);
 	}
 
-	private static native void nativeLayerBorderWidth(Object nativeWidget, float value) /*-[
+	private static native void nativeLayerBorderWidth(Object nativeWidget, float value)/*-[
 		UIView* view = ((UIView*)nativeWidget);
 		view.layer.borderWidth = value;
 	]-*/;
@@ -5068,7 +5083,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		nativeLayerBMasksToBounds(nativeWidget, (boolean) objValue);
 	}
 	
-	private static native void nativeLayerBMasksToBounds(Object nativeWidget, boolean value) /*-[
+	private static native void nativeLayerBMasksToBounds(Object nativeWidget, boolean value)/*-[
 		UIView* view = ((UIView*)nativeWidget);
 		view.layer.masksToBounds = value;
 	]-*/;
@@ -5088,13 +5103,13 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	private static void setNativeId(IWidget w, String strValue) {
 	}
 
-	public static native int getLocationXOnScreen(Object nativeWidget) /*-[
+	public static native int getLocationXOnScreen(Object nativeWidget)/*-[
 		UIView* view = ((UIView*)nativeWidget);
     	CGPoint point = [view.superview convertPoint:view.frame.origin toView:nil];
 		return point.x;
 	]-*/;
 	
-	public static native int getLocationYOnScreen(Object nativeWidget) /*-[
+	public static native int getLocationYOnScreen(Object nativeWidget)/*-[
 	UIView* view = ((UIView*)nativeWidget);
 	CGPoint point = [view.superview convertPoint:view.frame.origin toView:nil];
 	return point.y;
@@ -5231,17 +5246,17 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		]-*/
 	}
 
-	public native static int getX(Object objview) /*-[
+	public native static int getX(Object objview)/*-[
 		UIView* uiview = ((UIView*) objview);
 		return uiview.frame.origin.x;
 	]-*/;
 	
-	public native static int getY(Object objview) /*-[
+	public native static int getY(Object objview)/*-[
 		UIView* uiview = ((UIView*) objview);
 		return uiview.frame.origin.y;
 	]-*/;
 
-	public native static void updateBoundsX(Object objview, int x) /*-[
+	public native static void updateBoundsX(Object objview, int x)/*-[
 		UIView* uiview = ((UIView*) objview);
 	    CGRect frame = uiview.frame;
 	    frame.origin.x = x;
@@ -5260,7 +5275,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			this.objview = objview;
 			this.callBack = callBack;
 		}
-		private native void nativeAnimate(int x, int y, int animationDurationInMs) /*-[
+		private native void nativeAnimate(int x, int y, int animationDurationInMs)/*-[
 			UIView* uiview = ((UIView*) self->objview_);
 			CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(animationDidUpdate)];
 			displayLink.frameInterval = 1;
@@ -5296,7 +5311,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		setShadowColor(w.asNativeWidget(), objValue);
 	}
 
-	private native static void setShadowColor(Object view, Object color)  /*-[
+	private native static void setShadowColor(Object view, Object color) /*-[
 		((UIView*)view).layer.shadowColor = ((UIColor*)color).CGColor;
 	]-*/;
 	
@@ -5307,8 +5322,13 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		
 	}
 	
-	private static native void setCornerRadiusOnView(Object view, float radius) /*-[
+	private static native void setCornerRadiusOnView(Object view, float radius)/*-[
 		((UIView*)view).layer.cornerRadius = radius;
 		((UIView*)view).clipsToBounds = YES;
 	]-*/;
+
+	public static void nativeAddTouchEvent(IWidget widget) {
+		View view = (View) widget.asWidget();
+		view.setHasOnTouchEvent(true);
+	}
 }

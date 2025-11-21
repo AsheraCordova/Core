@@ -211,6 +211,8 @@
 
 + (bool)isRTLLayoutDirectionWithASIWidget:(id<ASIWidget>)widget;
 
++ (void)nativeAddTouchEventWithASIWidget:(id<ASIWidget>)widget;
+
 + (void)nativeBringToFrontWithId:(id)nativeWidget;
 
 + (void)nativeInvalidateWithId:(id)view;
@@ -736,6 +738,8 @@ FOUNDATION_EXPORT int32_t ASViewImpl_getYWithId_(id objview);
 FOUNDATION_EXPORT void ASViewImpl_updateBoundsXWithId_withInt_(id objview, int32_t x);
 
 FOUNDATION_EXPORT void ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(id objview, int32_t x, int32_t y, int32_t animationDurationInMs, id<ASViewImpl_AnimationCallBack> callBack);
+
+FOUNDATION_EXPORT void ASViewImpl_nativeAddTouchEventWithASIWidget_(id<ASIWidget> widget);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl)
 

@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -678,11 +693,11 @@ return getTintColor();				}
 		return measurableView.getImageDrawable();
 	}
 	
-	private native int getImageHeight(Object image) /*-[
+	private native int getImageHeight(Object image)/*-[
 		return ((UIImage*) image).size.height;
 	]-*/;
 	
-	private native int getImageWidth(Object image) /*-[
+	private native int getImageWidth(Object image)/*-[
 		return ((UIImage*) image).size.width;
 	]-*/;
 	
@@ -884,26 +899,26 @@ return getTintColor();				}
     	setPaddingTop(measurableView.getPaddingTop());
     	setPaddingBottom(measurableView.getPaddingBottom());
     }
-	private native void nativeSetPaddingBottom(int value) /*-[
+	private native void nativeSetPaddingBottom(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.imageEdgeInsets;
 		[label setImageEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, value, edgeInsets.right)];		
 	]-*/;
 
-	private native void nativeSetPaddingLeft(int value) /*-[
+	private native void nativeSetPaddingLeft(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.imageEdgeInsets;
 		[label setImageEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, value, edgeInsets.bottom, edgeInsets.right)];		
 	]-*/;
 	
-	private native void nativeSetPaddingRight(int value) /*-[
+	private native void nativeSetPaddingRight(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.imageEdgeInsets;
 		[label setImageEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, value)];		
 	]-*/;
 	
 	
-	private native void nativeSetPaddingTop(int value) /*-[
+	private native void nativeSetPaddingTop(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.imageEdgeInsets;
 		[label setImageEdgeInsets:UIEdgeInsetsMake(value, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)];		
@@ -982,12 +997,12 @@ return getTintColor();				}
 		applyAttributeCommand("src", "tintColor", new String[] {"tint"}, true, ViewImpl.getColor(objValue));
 	}
 	
-	private native Object getTintColor() /*-[
+	private native Object getTintColor()/*-[
 		return ((ASUIButton*)self->uiView_).imageView.tintColor;
 	]-*/;
 	
 
-	private native Object getImageNative() /*-[
+	private native Object getImageNative()/*-[
 		return [((ASUIButton*)self->uiView_) imageForState:UIControlStateNormal];
 	]-*/;
 	
@@ -1000,7 +1015,7 @@ return getTintColor();				}
 		}
 	}
 	
-	private native void setImageNativeSimple(Object value) /*-[
+	private native void setImageNativeSimple(Object value)/*-[
 		if ([value isKindOfClass:[UIImage class]]) {
 			[((ASUIButton*) self->uiView_) setImage:(UIImage*) value forState:UIControlStateNormal];
 			[((ASUIButton*) self->uiView_) setBackgroundColor:[UIColor clearColor]];
@@ -1013,14 +1028,14 @@ return getTintColor();				}
 		}
 	]-*/;
 	
-	private native void setImageNativeWithTemplate(Object value, Object tintColor) /*-[
+	private native void setImageNativeWithTemplate(Object value, Object tintColor)/*-[
 		if (tintColor != nil) {
 			[((ASUIButton*)self->uiView_).imageView setTintColor:(UIColor*)tintColor];
 		}
 		[((ASUIButton*) self->uiView_) setImage:[(UIImage*) value imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
 	]-*/;
 	
-	private native void nativeSetContentMode(int contentMode)  /*-[
+	private native void nativeSetContentMode(int contentMode) /*-[
 		[((ASUIButton*)self->uiView_).imageView setContentMode:contentMode];
 	]-*/;
 }

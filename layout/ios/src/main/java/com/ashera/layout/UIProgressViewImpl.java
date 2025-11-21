@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -710,28 +725,28 @@ return getProgressBackgroundTint();				}
 	}
 	
 
-	public native void setProgressTintColor(Object nativeWidget, Object value) /*-[
+	public native void setProgressTintColor(Object nativeWidget, Object value)/*-[
 ((ASUIProgressView*) nativeWidget).progressTintColor = (UIColor*) value;
 ]-*/;
-	public native Object getProgressTintColor() /*-[
+	public native Object getProgressTintColor()/*-[
 return ((ASUIProgressView*) uiView_).progressTintColor;
   ]-*/;
-	public native void setProgressImage(Object nativeWidget, Object value) /*-[
+	public native void setProgressImage(Object nativeWidget, Object value)/*-[
 ((ASUIProgressView*) nativeWidget).progressImage = (UIImage*) value;
 ]-*/;
-	public native Object getProgressImage() /*-[
+	public native Object getProgressImage()/*-[
 return ((ASUIProgressView*) uiView_).progressImage;
   ]-*/;
-	public native void setTrackTintColor(Object nativeWidget, Object value) /*-[
+	public native void setTrackTintColor(Object nativeWidget, Object value)/*-[
 ((ASUIProgressView*) nativeWidget).trackTintColor = (UIColor*) value;
 ]-*/;
-	public native Object getTrackTintColor() /*-[
+	public native Object getTrackTintColor()/*-[
 return ((ASUIProgressView*) uiView_).trackTintColor;
   ]-*/;
-	public native void setTrackImage(Object nativeWidget, Object value) /*-[
+	public native void setTrackImage(Object nativeWidget, Object value)/*-[
 ((ASUIProgressView*) nativeWidget).trackImage = (UIImage*) value;
 ]-*/;
-	public native Object getTrackImage() /*-[
+	public native Object getTrackImage()/*-[
 return ((ASUIProgressView*) uiView_).trackImage;
   ]-*/;
 	
@@ -915,7 +930,7 @@ return ((ASUIProgressView*) uiView_).trackImage;
 
 
 
-	private native Object nativeCreateView(int viewtype) /*-[
+	private native Object nativeCreateView(int viewtype)/*-[
 		return [[ASUIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
 	]-*/;
 	private void setMin(Object objValue) {

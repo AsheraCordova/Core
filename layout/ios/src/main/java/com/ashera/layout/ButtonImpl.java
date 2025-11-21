@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -1639,7 +1654,7 @@ return getShadowColor();				}
 	
 
 
-	private native Object getTextSize() /*-[
+	private native Object getTextSize()/*-[
 		  return [JavaLangFloat valueOfWithFloat:((ASUIButton*)self.uiView).font.pointSize];
 	]-*/;
 	private void setMyTextSize(Object objValue) {
@@ -1736,7 +1751,7 @@ return getShadowColor();				}
 		}
 	}
 
-	private native int getImageHeight(Object objValue) /*-[
+	private native int getImageHeight(Object objValue)/*-[
 		if ([objValue isKindOfClass:[UIImage class]]) {
 	    	UIImage* image = ((UIImage*) objValue);
 	    	return image.size.height;
@@ -1745,7 +1760,7 @@ return getShadowColor();				}
 	   	return 0;
 	]-*/;	
 	
-	private native int getImageWidth(Object objValue) /*-[
+	private native int getImageWidth(Object objValue)/*-[
     	if ([objValue isKindOfClass:[UIImage class]]) {
         	UIImage* image = ((UIImage*) objValue);
         	return image.size.width;
@@ -1864,11 +1879,11 @@ return getShadowColor();				}
     	return (int) Math.ceil((float)getTextSize());
     }
     
-    private native int nativeGetFontStyle() /*-[	 
+    private native int nativeGetFontStyle()/*-[	 
     	ASUIButton* label = ((ASUIButton*)self->uiView_);
     	return label.font.fontDescriptor.symbolicTraits;
    	]-*/;
-    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor) /*-[	
+    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor)/*-[	
     	ASUIButton* label = ((ASUIButton*)self->uiView_);
      	UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
      	if (font == nil) {
@@ -1882,7 +1897,7 @@ return getShadowColor();				}
 	    }
     ]-*/;
     
-    private native void nativeSetFontStyle(int style) /*-[
+    private native void nativeSetFontStyle(int style)/*-[
 		ASUIButton* label = ((ASUIButton*)self->uiView_);
   		UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   		((ASUIButton*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -1940,7 +1955,7 @@ return getShadowColor();				}
 		return 0;
 	}
 	
-	private native int getLineHeight() /*-[
+	private native int getLineHeight()/*-[
   		return ceil(((ASUIButton*)self.uiView).font.lineHeight);
 	]-*/;
 	private int getBorderWidth() {
@@ -1954,7 +1969,7 @@ return getShadowColor();				}
 	}
 	
 
-	private native void cancelNativeTimer() /*-[
+	private native void cancelNativeTimer()/*-[
 		if (self->timer_ != nil) {
 			[(NSTimer*) self->timer_ invalidate];
 			self->timer_ = nil;
@@ -2092,24 +2107,24 @@ return getShadowColor();				}
 		[((ASUIButton*)uiView) setTitle:text forState:UIControlStateNormal];
 	]-*/;
 	
-	private native Object getMyText() /*-[
+	private native Object getMyText()/*-[
   		return ((ASUIButton*)self.uiView).titleLabel.text;
 	]-*/;
 	
-	private native Object getTitleLabel() /*-[
+	private native Object getTitleLabel()/*-[
 		return ((ASUIButton*)self.uiView).titleLabel;
 	]-*/;
 
-	private native void setHorizontalAligmentCenter() /*-[
+	private native void setHorizontalAligmentCenter()/*-[
 		((ASUIButton*)self.uiView).contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	]-*/;
 
 
-	private native void setHorizontalAligmentRight() /*-[
+	private native void setHorizontalAligmentRight()/*-[
 		((ASUIButton*)self.uiView).contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
 	]-*/;
 
-	private native void setHorizontalAligmentLeft() /*-[
+	private native void setHorizontalAligmentLeft()/*-[
 		((ASUIButton*)self.uiView).contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 	]-*/;
 	
@@ -2118,16 +2133,16 @@ return getShadowColor();				}
 		nativeSetVerticalAligmentCenter();
 	}
 
-	private native void nativeSetVerticalAligmentBottom() /*-[
+	private native void nativeSetVerticalAligmentBottom()/*-[
 		((ASUIButton*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 	]-*/;
 	
 	
-	private native void nativeSetVerticalAligmentTop() /*-[
+	private native void nativeSetVerticalAligmentTop()/*-[
 		((ASUIButton*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
 	]-*/;
 	
-	private native void nativeSetVerticalAligmentCenter() /*-[
+	private native void nativeSetVerticalAligmentCenter()/*-[
 		((ASUIButton*)self.uiView).contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 	]-*/;
 
@@ -2146,7 +2161,7 @@ return getShadowColor();				}
 	private static final int TEXT_ALIGN_LEFT = 0; 
 	private static final int TEXT_ALIGN_RIGHT = 1; 
 
-    private native int getTextAlignment() /*-[
+    private native int getTextAlignment()/*-[
     	int alignment = (int) ((ASUIButton*)self.uiView).contentHorizontalAlignment;
     	
     	if (alignment == UIControlContentHorizontalAlignmentCenter) {
@@ -2238,26 +2253,26 @@ return getShadowColor();				}
     	setPaddingTop(measurableView.getPaddingTop());
     	setPaddingBottom(measurableView.getPaddingBottom());
     }
-	private native void nativeSetPaddingBottom(int value) /*-[
+	private native void nativeSetPaddingBottom(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.titleEdgeInsets;
 		[label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, value, edgeInsets.right)];		
 	]-*/;
 
-	private native void nativeSetPaddingLeft(int value) /*-[
+	private native void nativeSetPaddingLeft(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.titleEdgeInsets;
 		[label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, value, edgeInsets.bottom, edgeInsets.right)];		
 	]-*/;
 	
-	private native void nativeSetPaddingRight(int value) /*-[
+	private native void nativeSetPaddingRight(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.titleEdgeInsets;
 		[label setTitleEdgeInsets:UIEdgeInsetsMake(edgeInsets.top, edgeInsets.left, edgeInsets.bottom, value)];		
 	]-*/;
 	
 	
-	private native void nativeSetPaddingTop(int value) /*-[
+	private native void nativeSetPaddingTop(int value)/*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
 		UIEdgeInsets edgeInsets = label.titleEdgeInsets;
 		[label setTitleEdgeInsets:UIEdgeInsetsMake(value, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)];		
@@ -2270,7 +2285,7 @@ return getShadowColor();				}
 		
 	}
 	
-	private native void setTextColor(Object uiView, Object color) /*-[
+	private native void setTextColor(Object uiView, Object color)/*-[
 		[((ASUIButton*)uiView) setTitleColor:color forState:UIControlStateNormal];
 	]-*/;
 
@@ -2294,7 +2309,7 @@ return getShadowColor();				}
 		nativeSetEnabled((boolean) objValue);
 	}
 
-	private native void nativeSetEnabled(boolean enabled) /*-[
+	private native void nativeSetEnabled(boolean enabled)/*-[
 		[((ASUIButton*)self.uiView) setEnabled:enabled];
 	]-*/;
 
@@ -2313,25 +2328,25 @@ return getShadowColor();				}
 	
 
 
-	private native void setNumberOfLines(Object uiView, int lines) /*-[
+	private native void setNumberOfLines(Object uiView, int lines)/*-[
 		((ASUIButton*)uiView).titleLabel.numberOfLines = lines;		
 	]-*/;
 	
-	private native void nativeSetLineBreakMode(int lineBreakMode) /*-[
+	private native void nativeSetLineBreakMode(int lineBreakMode)/*-[
 		((ASUIButton*)self.uiView).titleLabel.lineBreakMode = lineBreakMode;
 		((ASUIButton*)self.uiView).titleLabel.adjustsFontSizeToFitWidth = false;		
 	]-*/;
 
 
-	private native Object nativeGetLinBreakMode() /*-[
+	private native Object nativeGetLinBreakMode()/*-[
 		return [JavaLangInteger valueOfWithInt:(jint)((ASUIButton*)self.uiView).titleLabel.lineBreakMode];
 	]-*/;
 	
-	private native Object getSingleLine() /*-[
+	private native Object getSingleLine()/*-[
 		return [JavaLangBoolean valueOfWithBoolean:((ASUIButton*)self.uiView).titleLabel.numberOfLines == 1];
 ]-*/;
 	
-	private native Object getFont() /*-[
+	private native Object getFont()/*-[
 	ASUIButton* label = ((ASUIButton*)self->uiView_);
 	return label.font;
 ]-*/;
@@ -2341,7 +2356,7 @@ return getShadowColor();				}
 		
 	}
 	
-	private native void nativeSetTextAligment(int textAlignment) /*-[
+	private native void nativeSetTextAligment(int textAlignment)/*-[
 		[((ASUIButton*)self->uiView_).titleLabel setTextAlignment:textAlignment];
 	]-*/;
 
@@ -2349,7 +2364,7 @@ return getShadowColor();				}
 		return nativeGetTextAligment();
 	}
 
-	private native Integer nativeGetTextAligment() /*-[
+	private native Integer nativeGetTextAligment()/*-[
 		return [JavaLangInteger valueOfWithInt:(jint)((ASUIButton*)self->uiView_).titleLabel.textAlignment];
 	]-*/;
 	
@@ -2362,25 +2377,25 @@ return getShadowColor();				}
 	private native Object getShadowColor()/*-[
 		return ((ASUIButton*)self->uiView_).titleLabel.shadowColor;
 	]-*/;
-	private native void setShadowColor(Object objValue, String strValue) /*-[
+	private native void setShadowColor(Object objValue, String strValue)/*-[
 		[((ASUIButton*)self->uiView_) setTitleShadowColor:(UIColor*) objValue forState:UIControlStateNormal] ;
 	]-*/;
 	
-	private native void setShadowDy(Float objValue, String strValue) /*-[
+	private native void setShadowDy(Float objValue, String strValue)/*-[
 		UILabel* label = ((ASUIButton*)self->uiView_).titleLabel;
 		[label setShadowOffset:CGSizeMake(label.shadowOffset.width, [objValue floatValue])];
 	]-*/;
 	
-	private native void setShadowDx(Float objValue, String strValue) /*-[
+	private native void setShadowDx(Float objValue, String strValue)/*-[
 		UILabel* label = ((ASUIButton*)self->uiView_).titleLabel;
 		[label setShadowOffset:CGSizeMake([objValue floatValue], label.shadowOffset.height)];		
 	]-*/;
 	
-	private native Object getShadowDy() /*-[
+	private native Object getShadowDy()/*-[
 		return [JavaLangFloat valueOfWithFloat:(jint)((ASUIButton*)self->uiView_).titleLabel.shadowOffset.height];
 	]-*/;
 	
-	private native Object getShadowDx() /*-[
+	private native Object getShadowDx()/*-[
 		return [JavaLangFloat valueOfWithFloat:(jint)((ASUIButton*)self->uiView_).titleLabel.shadowOffset.width];
 	]-*/;
 	//end - codecopy

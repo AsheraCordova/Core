@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.converter;
 
 import java.io.File;
@@ -67,7 +82,7 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
 				boolean matches = matcher.matches();
 
 				if (matches) {
-					java.util.Properties bundle = readProps(matcher.group(2));
+					java.util.Properties bundle = readProps(matcher.group(2), fragment);
 					Set<Object> fonts = bundle.keySet();
 					for (Object font : fonts) {
 						String fontKey = getFontKey(font.toString());
@@ -100,7 +115,7 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
 	}
 	// end - body
 
-	private Properties readProps(String name) {
+	private Properties readProps(String name, IFragment fragment) {
 		return FileUtils.loadPropertiesFromClassPath("font/font_" + name + ".properties");
 	}
 

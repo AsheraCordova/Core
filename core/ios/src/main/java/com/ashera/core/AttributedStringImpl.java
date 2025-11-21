@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.core;
 
 import java.util.Map;
@@ -26,7 +41,7 @@ public class AttributedStringImpl implements com.ashera.attributedtext.Attribute
 		
 	}
 	
-	public native void init(String text) /*-[
+	public native void init(String text)/*-[
 		attributedString_ = [[NSMutableAttributedString alloc]
 		        initWithString:text];
 	]-*/;
@@ -112,17 +127,17 @@ public class AttributedStringImpl implements com.ashera.attributedtext.Attribute
 		}
 	}
 	
-	public native void applySuperscript(float textSize, int start, int end) /*-[
+	public native void applySuperscript(float textSize, int start, int end)/*-[
 		[((NSMutableAttributedString*)attributedString_)  addAttribute:NSBaselineOffsetAttributeName
 	              value:@(textSize/2) range:NSMakeRange(start, end - start)];
 	]-*/;
 
-	public native void applySubscript(float textSize, int start, int end) /*-[
+	public native void applySubscript(float textSize, int start, int end)/*-[
 		[((NSMutableAttributedString*)attributedString_)  addAttribute:NSBaselineOffsetAttributeName
 	              value:@(-textSize/2) range:NSMakeRange(start, end - start)];
 	]-*/;
 	
-	private native float getSystemFontSize() /*-[	
+	private native float getSystemFontSize()/*-[	
 		return [UIFont labelFontSize];
 	]-*/;
 	
@@ -137,7 +152,7 @@ public class AttributedStringImpl implements com.ashera.attributedtext.Attribute
 	]-*/;
 
 	@Override
-	public native void applyLineHeight(float height, int start, int end) /*-[
+	public native void applyLineHeight(float height, int start, int end)/*-[
 		NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
 		[style setLineSpacing:height];
 		[((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
@@ -156,20 +171,20 @@ public class AttributedStringImpl implements com.ashera.attributedtext.Attribute
 		}
 	}
 	
-	public native void applyTextAlignCenter(int start, int end) /*-[
+	public native void applyTextAlignCenter(int start, int end)/*-[
 		NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 		[paragraphStyle setAlignment:NSTextAlignmentCenter];
 		[((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
 	                  value:paragraphStyle range:NSMakeRange(start, end - start)];
 	]-*/;
 	
-	public native void applyTextAlignLeft(int start, int end) /*-[
+	public native void applyTextAlignLeft(int start, int end)/*-[
 		NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 		[paragraphStyle setAlignment:NSTextAlignmentLeft];
 		[((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
 	                  value:paragraphStyle range:NSMakeRange(start, end - start)];
 	]-*/;
-	public native void applyTextAlignRight(int start, int end) /*-[
+	public native void applyTextAlignRight(int start, int end)/*-[
 		NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 		[paragraphStyle setAlignment:NSTextAlignmentRight];
 		[((NSMutableAttributedString*)attributedString_)  addAttribute:NSParagraphStyleAttributeName
@@ -177,7 +192,7 @@ public class AttributedStringImpl implements com.ashera.attributedtext.Attribute
 	]-*/;
 
 	@Override
-	public native void applyBackgroundColor(Object color, int start, int end) /*-[
+	public native void applyBackgroundColor(Object color, int start, int end)/*-[
 		[((NSMutableAttributedString*)attributedString_) addAttributes: @{NSBackgroundColorAttributeName:(UIColor*)color} range:NSMakeRange(start,end-start)];
 	]-*/;
 
@@ -192,7 +207,7 @@ public class AttributedStringImpl implements com.ashera.attributedtext.Attribute
 		nativeApplyImg(drawable, start, end);
 	}
 	
-	public native void nativeApplyImg(Object image, int start, int end) /*-[
+	public native void nativeApplyImg(Object image, int start, int end)/*-[
 		NSMutableAttributedString *attributedString = ((NSMutableAttributedString*)attributedString_);
 		NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
 		textAttachment.image = (UIImage*) image;
@@ -201,7 +216,7 @@ public class AttributedStringImpl implements com.ashera.attributedtext.Attribute
 	]-*/;
 
 	@Override
-	public native void applyBullet(int indent, int spacing, int start, int end) /*-[
+	public native void applyBullet(int indent, int spacing, int start, int end)/*-[
 		NSMutableParagraphStyle *const bulletParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		bulletParagraphStyle.headIndent = indent + spacing;
 		bulletParagraphStyle.firstLineHeadIndent = indent;

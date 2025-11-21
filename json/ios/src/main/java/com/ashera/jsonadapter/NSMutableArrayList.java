@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.jsonadapter;
 
 import java.util.Collection;
@@ -55,7 +70,7 @@ public class NSMutableArrayList<E> extends java.util.AbstractList<E> {
 		return (T[]) getNativeArray(nsmutableArray);
 	}
 
-	private native Object getNativeArray(Object nsarray) /*-[
+	private native Object getNativeArray(Object nsarray)/*-[
 	  return [IOSObjectArray arrayWithNSArray:nsarray type:[IOSClass forName: @"java.lang.Object"]];
 	]-*/;
 	@Override
@@ -74,7 +89,7 @@ public class NSMutableArrayList<E> extends java.util.AbstractList<E> {
 		return false;
 	}
 	
-	public native void removeObject(Object e) /*-[
+	public native void removeObject(Object e)/*-[
 	  [(NSMutableArray*)self->nsmutableArray_ removeObject:e];
 	]-*/;
 
@@ -104,12 +119,12 @@ public class NSMutableArrayList<E> extends java.util.AbstractList<E> {
 	}
 
 	@Override
-	public native void clear() /*-[
+	public native void clear()/*-[
 	  [(NSMutableArray*)self->nsmutableArray_ removeAllObjects];
 	]-*/;
 
 	@Override
-	public native E get(int index) /*-[
+	public native E get(int index)/*-[
 		return [(NSMutableArray*)self->nsmutableArray_ objectAtIndex:index];;
 	]-*/;
 
@@ -120,12 +135,12 @@ public class NSMutableArrayList<E> extends java.util.AbstractList<E> {
 		return oldValue;
 	}
 	
-	public native void nativeSet(int index, E element) /*-[
+	public native void nativeSet(int index, E element)/*-[
 		[(NSMutableArray*)self->nsmutableArray_ replaceObjectAtIndex:index withObject:element];
 	]-*/;
 
 	@Override
-	public native void add(int index, E element) /*-[
+	public native void add(int index, E element)/*-[
 		if (index == -1) {
 	  		[(NSMutableArray*)self->nsmutableArray_ addObject:element];
 		} else {
@@ -139,18 +154,18 @@ public class NSMutableArrayList<E> extends java.util.AbstractList<E> {
 		removeObjectAtIndex(index);
 		return oldValue;
 	}
-	private native void removeObjectAtIndex(int index) /*-[
+	private native void removeObjectAtIndex(int index)/*-[
 		[(NSMutableArray*)self->nsmutableArray_ removeObjectAtIndex:index];
 	]-*/;
 
 
 	@Override
-	public native int indexOf(Object o) /*-[
+	public native int indexOf(Object o)/*-[
 		return (int) [(NSMutableArray*)self->nsmutableArray_ indexOfObject: o];
 	]-*/;
 
 	@Override
-	public native int lastIndexOf(Object o) /*-[
+	public native int lastIndexOf(Object o)/*-[
 		NSMutableArray* rArray=[[[(NSMutableArray*)self->nsmutableArray_ reverseObjectEnumerator] allObjects] mutableCopy];
 		return (int) [rArray indexOfObject:o];
 	]-*/;
@@ -222,7 +237,7 @@ public class NSMutableArrayList<E> extends java.util.AbstractList<E> {
         }
     }
 
-    /**
+   /**
      * An optimized version of AbstractList.ListItr
      */
     private class ListItr extends Itr implements ListIterator<E> {

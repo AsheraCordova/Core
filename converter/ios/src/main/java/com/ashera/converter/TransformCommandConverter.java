@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.converter;
 
 import com.ashera.widget.AttributeCommand;
@@ -51,7 +66,7 @@ public class TransformCommandConverter extends com.ashera.widget.BaseAttributeCo
 		return value;
 	}
 
-	private native void resetTranform(Object uiView) /*-[
+	private native void resetTranform(Object uiView)/*-[
 		if (@available(iOS 13.0, *)) {
 			((UIView*)uiView).transform3D = CATransform3DIdentity;
 		} else {
@@ -61,7 +76,7 @@ public class TransformCommandConverter extends com.ashera.widget.BaseAttributeCo
 
 	
 	private native void updateTranform(Object view, float translationX, float translationY, float translationZ, float rotation, 
-			float rotationX, float rotationY, float scaleX, float scaleY, Float anchorX, Float anchorY) /*-[
+			float rotationX, float rotationY, float scaleX, float scaleY, Float anchorX, Float anchorY)/*-[
 		UIView * uiView = ((UIView *) view);
 		
 		if (anchorX != nil && anchorY != nil) {

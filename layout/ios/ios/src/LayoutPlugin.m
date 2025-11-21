@@ -29,6 +29,7 @@
 #include "ProgressBarImpl.h"
 #include "RadioButtonImpl.h"
 #include "RadioGroupImpl.h"
+#include "RatingBarImpl.h"
 #include "RelativeLayoutImpl.h"
 #include "RootImpl.h"
 #include "ScrollViewImpl.h"
@@ -135,6 +136,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASUIProgressViewImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASPopupWindowImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASAutoCompleteTextViewImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASRatingBarImpl_init());
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASViewGroupImpl_ClipPaddingMaskCommand_initWithNSString_(@"clipToPadding"));
 }
 

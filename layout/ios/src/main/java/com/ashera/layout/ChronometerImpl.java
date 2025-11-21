@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -1959,7 +1974,7 @@ return getTextColorState();				}
 		[((ASUILabel*)self->uiView_) setAttributedText : (NSMutableAttributedString*)text];
 	]-*/;
 	
-	private native Object getMyText() /*-[
+	private native Object getMyText()/*-[
 		return ((ASUILabel*)self.uiView).text;
 	]-*/;
 	//end - text
@@ -2036,7 +2051,7 @@ return getTextColorState();				}
 	//end - padding
 	
 	//start - mytextsize
-	private native Object getTextSize() /*-[
+	private native Object getTextSize()/*-[
 		  return [JavaLangFloat valueOfWithFloat:((ASUILabel*)self.uiView).font.pointSize];
 	]-*/;
 	private void setMyTextSize(Object objValue) {
@@ -2068,7 +2083,7 @@ return getTextColorState();				}
 	}
 
 
-	private native void setHorizontalAligmentCenter() /*-[
+	private native void setHorizontalAligmentCenter()/*-[
 		((ASUILabel*)self.uiView).textAlignment = NSTextAlignmentCenter;
 	]-*/;
 	
@@ -2076,7 +2091,7 @@ return getTextColorState();				}
 		setHorizontalAligmentRightInternal();
 	}
 
-	private native void setHorizontalAligmentRightInternal() /*-[
+	private native void setHorizontalAligmentRightInternal()/*-[
 		((ASUILabel*)self.uiView).textAlignment = NSTextAlignmentRight;
 	]-*/;
 
@@ -2084,7 +2099,7 @@ return getTextColorState();				}
 		setHorizontalAligmentLeftInternal();
 	}
 	
-	private native void setHorizontalAligmentLeftInternal() /*-[
+	private native void setHorizontalAligmentLeftInternal()/*-[
 		((ASUILabel*)self.uiView).textAlignment = NSTextAlignmentLeft;
 	]-*/;
 
@@ -2092,7 +2107,7 @@ return getTextColorState();				}
 	private static final int TEXT_ALIGN_LEFT = 0; 
 	private static final int TEXT_ALIGN_RIGHT = 1; 
 
-    private native int getTextAlignment() /*-[
+    private native int getTextAlignment()/*-[
     	int alignment = (int) ((ASUILabel*)self.uiView).textAlignment;
     	
     	if (alignment == NSTextAlignmentCenter) {
@@ -2133,7 +2148,7 @@ return getTextColorState();				}
 		return 0;
 	}
 	
-	private native int getLineHeight() /*-[
+	private native int getLineHeight()/*-[
   		return ceil(((ASUILabel*)self.uiView).font.lineHeight);
 	]-*/;
 	private int getBorderWidth() {
@@ -2175,10 +2190,10 @@ return getTextColorState();				}
 	}
 	//end - ellipsize
 	
-	private native Integer nativeGetLinBreakMode() /*-[
+	private native Integer nativeGetLinBreakMode()/*-[
 		return [JavaLangInteger valueOfWithInt:(jint) ((ASUILabel*)self->uiView_).lineBreakMode];
 	]-*/;
-	private native void nativeSetLineBreakMode(int lineBreakMode) /*-[
+	private native void nativeSetLineBreakMode(int lineBreakMode)/*-[
 		[((ASUILabel*)self->uiView_) setLineBreakMode:lineBreakMode];
 	]-*/;
 
@@ -2187,7 +2202,7 @@ return getTextColorState();				}
 		
 	}
 	
-	private native void nativeSetTextAligment(int textAlignment) /*-[
+	private native void nativeSetTextAligment(int textAlignment)/*-[
 		[((ASUILabel*)self->uiView_) setTextAlignment:textAlignment];
 	]-*/;
 
@@ -2195,26 +2210,26 @@ return getTextColorState();				}
 		return nativeGetTextAligment();
 	}
 
-	private native Integer nativeGetTextAligment() /*-[
+	private native Integer nativeGetTextAligment()/*-[
 		return [JavaLangInteger valueOfWithInt:(jint)((ASUILabel*)self->uiView_).textAlignment];
 	]-*/;
 
-	private native void setShadowDy(Float objValue, String strValue) /*-[
+	private native void setShadowDy(Float objValue, String strValue)/*-[
 		ASUILabel* label = ((ASUILabel*)self->uiView_);
 		[label setShadowOffset:CGSizeMake(label.shadowOffset.width, [objValue floatValue])];
 	]-*/;
 
-	private native void setShadowDx(Float objValue, String strValue) /*-[
+	private native void setShadowDx(Float objValue, String strValue)/*-[
 		ASUILabel* label = ((ASUILabel*)self->uiView_);
 		[label setShadowOffset:CGSizeMake([objValue floatValue], label.shadowOffset.height)];		
 	]-*/;
 	
 	
-	private native Object getShadowDy() /*-[
+	private native Object getShadowDy()/*-[
 		return [JavaLangFloat valueOfWithFloat:(jint)((ASUILabel*)self->uiView_).shadowOffset.height];
 	]-*/;
 
-	private native Object getShadowDx() /*-[
+	private native Object getShadowDx()/*-[
 		return [JavaLangFloat valueOfWithFloat:(jint)((ASUILabel*)self->uiView_).shadowOffset.width];
 	]-*/;
 	
@@ -2228,7 +2243,7 @@ return getTextColorState();				}
 	}
 	//end - singleLine
 	
-	private native Object getSingleLine() /*-[
+	private native Object getSingleLine()/*-[
   		return [JavaLangBoolean valueOfWithBoolean:((ASUILabel*)self.uiView).numberOfLines == 1];
 	]-*/;
 	
@@ -2253,11 +2268,11 @@ return getTextColorState();				}
     	return (int) Math.ceil((float)getTextSize());
     }
     
-    private native int nativeGetFontStyle() /*-[	 
+    private native int nativeGetFontStyle()/*-[	 
     	ASUILabel* label = ((ASUILabel*)self->uiView_);
     	return label.font.fontDescriptor.symbolicTraits;
    	]-*/;
-    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor) /*-[	
+    private native void nativeSetCustomFont(int height, com.ashera.model.FontDescriptor fontDescriptor)/*-[	
     	ASUILabel* label = ((ASUILabel*)self->uiView_);
      	UIFont* font = [UIFont fontWithName:[fontDescriptor getName] size:height];
      	if (font == nil) {
@@ -2271,7 +2286,7 @@ return getTextColorState();				}
 	    }
     ]-*/;
     
-    private native void nativeSetFontStyle(int style) /*-[
+    private native void nativeSetFontStyle(int style)/*-[
 		ASUILabel* label = ((ASUILabel*)self->uiView_);
   		UIFontDescriptor* fontD = [label.font.fontDescriptor fontDescriptorWithSymbolicTraits:style];
   		((ASUILabel*)label).font = [UIFont fontWithDescriptor:fontD size:0];
@@ -2346,7 +2361,7 @@ return getTextColorState();				}
 		}
 	}
 
-	private native int getImageHeight(Object objValue) /*-[
+	private native int getImageHeight(Object objValue)/*-[
 		if ([objValue isKindOfClass:[UIImage class]]) {
 	    	UIImage* image = ((UIImage*) objValue);
 	    	return image.size.height;
@@ -2355,7 +2370,7 @@ return getTextColorState();				}
 	   	return 0;
 	]-*/;	
 	
-	private native int getImageWidth(Object objValue) /*-[
+	private native int getImageWidth(Object objValue)/*-[
     	if ([objValue isKindOfClass:[UIImage class]]) {
         	UIImage* image = ((UIImage*) objValue);
         	return image.size.width;
@@ -2425,7 +2440,7 @@ return getTextColorState();				}
 	}
 	
 
-	private native void cancelNativeTimer() /*-[
+	private native void cancelNativeTimer()/*-[
 		if (self->timer_ != nil) {
 			[(NSTimer*) self->timer_ invalidate];
 			self->timer_ = nil;
@@ -2566,12 +2581,12 @@ return getTextColorState();				}
 		return nativeGetBaseLine() + measurableView.getPaddingTop();
 	}
 	
-	 private native int nativeGetBaseLine() /*-[
+	 private native int nativeGetBaseLine()/*-[
 		ASUILabel* label = ((ASUILabel*)self->uiView_);
 		return label.font.ascender;
 	]-*/;
 	 
-	private native Object getFont() /*-[
+	private native Object getFont()/*-[
 		ASUILabel* label = ((ASUILabel*)self->uiView_);
 		return label.font;
 	]-*/;
@@ -2582,76 +2597,76 @@ return getTextColorState();				}
 	}
 	
 
-	public native void setText(Object nativeWidget, Object value) /*-[
+	public native void setText(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).text = (NSString*) value;
 ]-*/;
-	public native Object getText() /*-[
+	public native Object getText()/*-[
 return ((ASUILabel*) uiView_).text;
   ]-*/;
-	public native void setTextColor(Object nativeWidget, Object value) /*-[
+	public native void setTextColor(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).textColor = (UIColor*) value;
 ]-*/;
-	public native Object getTextColor() /*-[
+	public native Object getTextColor()/*-[
 return ((ASUILabel*) uiView_).textColor;
   ]-*/;
-	public native void setIsEnabled(Object nativeWidget, Object value) /*-[
+	public native void setIsEnabled(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).enabled = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getIsEnabled() /*-[
+	public native Object getIsEnabled()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).enabled];
   ]-*/;
-	public native void setAdjustsFontSizeToFitWidth(Object nativeWidget, Object value) /*-[
+	public native void setAdjustsFontSizeToFitWidth(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).adjustsFontSizeToFitWidth = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAdjustsFontSizeToFitWidth() /*-[
+	public native Object getAdjustsFontSizeToFitWidth()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).adjustsFontSizeToFitWidth];
   ]-*/;
-	public native void setAllowsDefaultTighteningForTruncation(Object nativeWidget, Object value) /*-[
+	public native void setAllowsDefaultTighteningForTruncation(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).allowsDefaultTighteningForTruncation = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getAllowsDefaultTighteningForTruncation() /*-[
+	public native Object getAllowsDefaultTighteningForTruncation()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).allowsDefaultTighteningForTruncation];
   ]-*/;
-	public native void setMinimumScaleFactor(Object nativeWidget, Object value) /*-[
+	public native void setMinimumScaleFactor(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).minimumScaleFactor = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getMinimumScaleFactor() /*-[
+	public native Object getMinimumScaleFactor()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUILabel*) uiView_).minimumScaleFactor];
   ]-*/;
-	public native void setNumberOfLines(Object nativeWidget, Object value) /*-[
+	public native void setNumberOfLines(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).numberOfLines = [(JavaLangInteger*) value intValue];
 ]-*/;
-	public native Object getNumberOfLines() /*-[
+	public native Object getNumberOfLines()/*-[
 return [JavaLangInteger valueOfWithInt :((ASUILabel*) uiView_).numberOfLines];
   ]-*/;
-	public native void setHighlightedTextColor(Object nativeWidget, Object value) /*-[
+	public native void setHighlightedTextColor(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).highlightedTextColor = (UIColor*) value;
 ]-*/;
-	public native Object getHighlightedTextColor() /*-[
+	public native Object getHighlightedTextColor()/*-[
 return ((ASUILabel*) uiView_).highlightedTextColor;
   ]-*/;
-	public native void setIsHighlighted(Object nativeWidget, Object value) /*-[
+	public native void setIsHighlighted(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).highlighted = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getIsHighlighted() /*-[
+	public native Object getIsHighlighted()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).highlighted];
   ]-*/;
-	public native void setShadowColor(Object nativeWidget, Object value) /*-[
+	public native void setShadowColor(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).shadowColor = (UIColor*) value;
 ]-*/;
-	public native Object getShadowColor() /*-[
+	public native Object getShadowColor()/*-[
 return ((ASUILabel*) uiView_).shadowColor;
   ]-*/;
-	public native void setPreferredMaxLayoutWidth(Object nativeWidget, Object value) /*-[
+	public native void setPreferredMaxLayoutWidth(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).preferredMaxLayoutWidth = [(JavaLangFloat*) value floatValue];
 ]-*/;
-	public native Object getPreferredMaxLayoutWidth() /*-[
+	public native Object getPreferredMaxLayoutWidth()/*-[
 return [JavaLangFloat valueOfWithFloat :((ASUILabel*) uiView_).preferredMaxLayoutWidth];
   ]-*/;
-	public native void setIsUserInteractionEnabled(Object nativeWidget, Object value) /*-[
+	public native void setIsUserInteractionEnabled(Object nativeWidget, Object value)/*-[
 ((ASUILabel*) nativeWidget).userInteractionEnabled = [(JavaLangBoolean*) value booleanValue];
 ]-*/;
-	public native Object getIsUserInteractionEnabled() /*-[
+	public native Object getIsUserInteractionEnabled()/*-[
 return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).userInteractionEnabled];
   ]-*/;
 	@SuppressLint("NewApi")

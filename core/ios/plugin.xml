@@ -493,6 +493,8 @@
      <source-file src="library/AndroidCore/src/CookieManager.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/Cursor.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/Cursor.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidCore/src/CustomRatingBar.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="library/AndroidCore/src/CustomRatingBar.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/CycleInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/CycleInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/DataSetObservable.h" target-dir="CorePlugin/AndroidCore/src"/>

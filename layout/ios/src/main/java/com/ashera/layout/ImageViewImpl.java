@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.layout;
 //start - imports
 
@@ -996,11 +1011,11 @@ return getCropToPadding();				}
 		return measurableView.getImageDrawable();
 	}
 	
-	private native int getImageHeight(Object image) /*-[
+	private native int getImageHeight(Object image)/*-[
 		return ((UIImage*) image).size.height;
 	]-*/;
 	
-	private native int getImageWidth(Object image) /*-[
+	private native int getImageWidth(Object image)/*-[
 		return ((UIImage*) image).size.width;
 	]-*/;
 	
@@ -1061,11 +1076,11 @@ return getCropToPadding();				}
 	}
 	//end - image
 
-	public native Object getImageNative() /*-[
+	public native Object getImageNative()/*-[
 		return ((ASUIImageView*) self->uiView_).image;
 	]-*/;
 
-	public native void setImageNative(Object value, Object tintColor) /*-[
+	public native void setImageNative(Object value, Object tintColor)/*-[
 		if ([value isKindOfClass:[UIImage class]]) {
 			if (tintColor != nil) {
 				value = [(UIImage*) value imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -1082,10 +1097,10 @@ return getCropToPadding();				}
 		}
 	]-*/;
 	
-	private native Integer nativeGetContentMode() /*-[
+	private native Integer nativeGetContentMode()/*-[
 		return [JavaLangInteger valueOfWithInt:(jint) ((ASUIImageView*)self->uiView_).contentMode];
 	]-*/;
-	private native void nativeSetContentMode(int contentMode) /*-[
+	private native void nativeSetContentMode(int contentMode)/*-[
 		[((ASUIImageView*)self->uiView_) setContentMode:contentMode];
 	]-*/;
 	
@@ -1100,7 +1115,7 @@ return getCropToPadding();				}
 		applyAttributeCommand("src", "tintColor", new String[] {"tint"}, true, ViewImpl.getColor(objValue));
 	}
 	
-	private native Object getTintColor() /*-[
+	private native Object getTintColor()/*-[
 		return ((ASUIImageView*)self->uiView_).tintColor;
 	]-*/;
 	
@@ -1119,7 +1134,7 @@ return getCropToPadding();				}
 	}
     
 
-	public native void createMask(Object viewToMask, int x, int y, int width, int height) /*-[
+	public native void createMask(Object viewToMask, int x, int y, int width, int height)/*-[
 		// Create a mask layer and the frame to determine what will be visible in the view.
 		CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
 		CGRect maskRect = CGRectMake(x, y, width, height);
@@ -1137,7 +1152,7 @@ return getCropToPadding();				}
 		((UIView*)viewToMask).layer.mask = maskLayer;
 	]-*/;
 	
-	public native void removeMask(Object viewToMask) /*-[
+	public native void removeMask(Object viewToMask)/*-[
 		((UIView*)viewToMask).layer.mask = nil;
 	]-*/;
 	
