@@ -4516,8 +4516,9 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		@Override
 		public void handleEvent(HtmlMouseEvent event) {
 
-			int eventX = event.getClientX();
-			int eventY = event.getClientY();
+			int eventX = getClientX(event, widget);
+			int eventY = getClientY(event, widget);
+			
 			switch (event.getType()) {
 			case "mousedown":
 				org.teavm.jso.browser.Window.current().addEventListener("mouseup", this, false);
@@ -4746,8 +4747,10 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		public void nativeAddOnSwipe() {
 			View view = (View) widget.asWidget();
 			org.teavm.jso.dom.events.EventListener<ViewImpl.HtmlMouseEvent> flistener = (event) -> {
-				motionEvent.setX(event.getClientX());
-				motionEvent.setY(event.getClientY());
+				int x = getClientX(event, widget);
+				int y = getClientY(event, widget);
+				motionEvent.setX(x);
+				motionEvent.setY(y);
 				switch (event.getType()) {
 				case "mousedown":
 					action = 1;
@@ -4800,4 +4803,17 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		private static int id = 0;
 		private final static String DELLOC_EVENT = com.ashera.widget.bus.Event.StandardEvents.dealloc.toString();
 	}
+	
+	public static int getClientX(ViewImpl.HtmlMouseEvent event, IWidget widget) {
+		HTMLElement rootElement = (HTMLElement) widget.getRootFragment().getRootWidget().asNativeWidget();
+		int x = event.getClientX() - rootElement.getBoundingClientRect().getLeft();
+		return x;
+	}
+	
+	public static int getClientY(ViewImpl.HtmlMouseEvent event, IWidget widget) {
+		HTMLElement rootElement = (HTMLElement) widget.getRootFragment().getRootWidget().asNativeWidget();
+		int y = event.getClientY() - rootElement.getBoundingClientRect().getTop();
+		return y;
+	}
+
 }
