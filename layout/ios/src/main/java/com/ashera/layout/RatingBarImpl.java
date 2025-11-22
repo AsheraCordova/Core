@@ -553,7 +553,7 @@ public class RatingBarImpl extends BaseHasWidgets {
 			case "onRatingBarChange": {
 
 
-		customRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingChanged"));
+		customRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingBarChange"));
 
 
 

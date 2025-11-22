@@ -123,7 +123,7 @@
      <source-file src="core/android/tsc/webpack.config.js" target-dir="tsc"/>
      <!-- tsc end -->
      
-     <asset src="core/android/www/css/font_standard.css" target="css/font_standard.css" />     
+     <asset src="core/android/www/css/font_standard.css" target="css/font_standard.css" />
   
   	<framework src="tools/android/tools.gradle" custom="true" type="gradleReference" />
     <!-- start gentool -->

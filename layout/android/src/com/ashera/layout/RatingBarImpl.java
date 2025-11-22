@@ -503,7 +503,7 @@ Context context = (Context) fragment.getRootActivity();
 				
 
 
-		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingChanged"));
+		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingBarChange"));
 
 
 

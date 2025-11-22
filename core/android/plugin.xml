@@ -123,6 +123,6 @@
      <source-file src="tsc/webpack.config.js" target-dir="tsc"/>
      <!-- tsc end -->
      
-     <asset src="www/css/font_standard.css" target="css/font_standard.css" />     
+     <asset src="www/css/font_standard.css" target="css/font_standard.css" />
   </platform>
 </plugin>

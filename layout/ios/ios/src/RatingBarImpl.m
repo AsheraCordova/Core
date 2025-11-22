@@ -407,7 +407,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 8:
     {
-      [((ADCustomRatingBar *) nil_chk(customRatingBar_)) setOnRatingBarChangeListenerWithADCustomRatingBar_OnRatingBarChangeListener:new_ASRatingBarImpl_OnRatingBarChangeListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onRatingChanged")];
+      [((ADCustomRatingBar *) nil_chk(customRatingBar_)) setOnRatingBarChangeListenerWithADCustomRatingBar_OnRatingBarChangeListener:new_ASRatingBarImpl_OnRatingBarChangeListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onRatingBarChange")];
     }
     break;
     case 9:
