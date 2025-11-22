@@ -68,7 +68,7 @@ public class RatingBarImpl extends BaseHasWidgets {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("secondaryProgressDrawable").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("numStars").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("isIndicator").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onRatingBarChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onRatingChanged").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rating").withType("float"));
 	
 	}
@@ -550,10 +550,10 @@ public class RatingBarImpl extends BaseHasWidgets {
 
 			}
 			break;
-			case "onRatingBarChange": {
+			case "onRatingChanged": {
 
 
-		customRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingBarChange"));
+		customRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingChanged"));
 
 
 

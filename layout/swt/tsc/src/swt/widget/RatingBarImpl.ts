@@ -57,8 +57,8 @@ export abstract class RatingBarImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "isIndicator" }))
 	isIndicator!:CommandAttr<boolean>| undefined;
 	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "onRatingBarChange" }))
-	onRatingBarChange!:CommandAttr<string>| undefined;
+	@decorate(Expose({ name: "onRatingChanged" }))
+	onRatingChanged!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "rating" }))
 	rating!:CommandAttr<number>| undefined;
@@ -76,7 +76,7 @@ export abstract class RatingBarImpl<T> extends ViewImpl<T>{
 		this.secondaryProgressDrawable = undefined;
 		this.numStars = undefined;
 		this.isIndicator = undefined;
-		this.onRatingBarChange = undefined;
+		this.onRatingChanged = undefined;
 		this.rating = undefined;
 		return this.thisPointer;
 	}
@@ -198,16 +198,16 @@ export abstract class RatingBarImpl<T> extends ViewImpl<T>{
 	}
 		
 
-	public setOnRatingBarChange(value : string) : T {
+	public setOnRatingChanged(value : string) : T {
 		this.resetIfRequired();
-		if (this.onRatingBarChange == null || this.onRatingBarChange == undefined) {
-			this.onRatingBarChange = new CommandAttr<string>();
+		if (this.onRatingChanged == null || this.onRatingChanged == undefined) {
+			this.onRatingChanged = new CommandAttr<string>();
 		}
 		
-		this.onRatingBarChange.setSetter(true);
-		this.onRatingBarChange.setValue(value);
+		this.onRatingChanged.setSetter(true);
+		this.onRatingChanged.setValue(value);
 		this.orderSet++;
-		this.onRatingBarChange.setOrderSet(this.orderSet);
+		this.onRatingChanged.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

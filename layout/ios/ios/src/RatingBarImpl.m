@@ -229,7 +229,7 @@ NSString *ASRatingBarImpl_GROUP_NAME = @"RatingBar";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"secondaryProgressDrawable"])) withTypeWithNSString:@"drawable"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"numStars"])) withTypeWithNSString:@"int"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"isIndicator"])) withTypeWithNSString:@"boolean"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onRatingBarChange"])) withTypeWithNSString:@"string"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onRatingChanged"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"rating"])) withTypeWithNSString:@"float"]);
 }
 
@@ -364,7 +364,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   ASViewGroupImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
   id nativeWidget = [self asNativeWidget];
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"progressTint", @"progressBackgroundTint", @"secondaryProgressTint", @"progressDrawable", @"progressBackgroundDrawable", @"secondaryProgressDrawable", @"numStars", @"isIndicator", @"onRatingBarChange", @"rating" }, 10)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"progressTint", @"progressBackgroundTint", @"secondaryProgressTint", @"progressDrawable", @"progressBackgroundDrawable", @"secondaryProgressDrawable", @"numStars", @"isIndicator", @"onRatingChanged", @"rating" }, 10)) {
     case 0:
     {
       ASRatingBarImpl_setProgressTintWithId_(self, objValue);
@@ -407,7 +407,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 8:
     {
-      [((ADCustomRatingBar *) nil_chk(customRatingBar_)) setOnRatingBarChangeListenerWithADCustomRatingBar_OnRatingBarChangeListener:new_ASRatingBarImpl_OnRatingBarChangeListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onRatingBarChange")];
+      [((ADCustomRatingBar *) nil_chk(customRatingBar_)) setOnRatingBarChangeListenerWithADCustomRatingBar_OnRatingBarChangeListener:new_ASRatingBarImpl_OnRatingBarChangeListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onRatingChanged")];
     }
     break;
     case 9:

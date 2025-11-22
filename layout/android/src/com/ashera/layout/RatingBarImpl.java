@@ -73,7 +73,7 @@ public class RatingBarImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressTint").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressBackgroundTint").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("secondaryProgressTint").withType("colorstate"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onRatingBarChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onRatingChanged").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("max").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressDrawable").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressBackgroundDrawable").withType("drawable"));
@@ -499,11 +499,11 @@ Context context = (Context) fragment.getRootActivity();
 
 			}
 			break;
-			case "onRatingBarChange": {
+			case "onRatingChanged": {
 				
 
 
-		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingBarChange"));
+		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(this, strValue, "onRatingChanged"));
 
 
 
