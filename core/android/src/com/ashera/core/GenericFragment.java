@@ -197,6 +197,7 @@ public class GenericFragment extends Fragment implements IFragment{
 	public void onAttach(IActivity activity) {
 		this.activity = activity;
 		this.id = UUID.randomUUID().toString();
+		FragmentRegistry.getInstance().register(this);
 		Bundle args = getArguments();
 		this.fileName = args.getString("fileName");
 		this.rootDirectory = args.getString("rootDirectory");
@@ -396,6 +397,7 @@ public class GenericFragment extends Fragment implements IFragment{
 			parent = parent.getParent();
 		}
 
+		FragmentRegistry.getInstance().unregister(this);
 		sendLifeCycleEvent("onDestroy", getEventData("onDestroy"), null, null);
 		clear();
 	}

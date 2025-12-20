@@ -1,17 +1,17 @@
 module.exports = {
     executeCommand: function (name, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "com.ashera.core.ios", "executeCommand", [name]);
+        cordova.exec(successCallback, errorCallback, "CoreCordovaPlugin", "executeCommand", [name]);
     },
     onDeviceReady: function (successCallback, errorCallback) {
-         cordova.exec(successCallback, errorCallback, "com.ashera.core.ios", "onDeviceReady", []);
+         cordova.exec(successCallback, errorCallback, "CoreCordovaPlugin", "onDeviceReady", []);
     },
     navigateCommand: function (commands, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "com.ashera.core.ios", "navigateCommand", [commands]);
+        cordova.exec(successCallback, errorCallback, "CoreCordovaPlugin", "navigateCommand", [commands]);
     },
     executeSimpleCommand: function (commands, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "com.ashera.core.ios", "executeSimpleCommand", commands);
+        cordova.exec(successCallback, errorCallback, "CoreCordovaPlugin", "executeSimpleCommand", commands);
     },
     getOs: function (successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "com.ashera.core.ios", "getOs");
+        cordova.exec(successCallback, errorCallback, "CoreCordovaPlugin", "getOs");
     }
 };

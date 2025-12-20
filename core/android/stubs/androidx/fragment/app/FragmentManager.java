@@ -38,6 +38,16 @@ public class FragmentManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public boolean isDestroyed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void popBackStack() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

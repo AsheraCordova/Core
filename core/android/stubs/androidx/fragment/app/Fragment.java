@@ -93,4 +93,27 @@ public class Fragment {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public FragmentManager getFragmentManager() {
+		return null;
+	}
+	
+	public android.app.Activity getActivity() {
+		return null;
+	}
+
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static Fragment instantiate(Context mContext, String name, Bundle prepareArguments) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

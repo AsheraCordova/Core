@@ -32,4 +32,24 @@ public class FragmentTransaction {
 		
 	}
 
+	public void add(Fragment actionSheet, String tag) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addToBackStack(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void commitAllowingStateLoss() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void remove(Fragment actionSheet) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

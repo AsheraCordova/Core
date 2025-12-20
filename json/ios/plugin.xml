@@ -11,7 +11,7 @@
 
   <platform name="ios">
     <config-file target="config.xml" parent="/widget">
-      <feature name="com.ashera.json.ios">
+      <feature name="JSONAdapterCordovaPlugin">
         	<param name="ios-package" value="JSONAdapterCordovaPlugin" />
          	<param name="onload" value="true" />
       </feature>

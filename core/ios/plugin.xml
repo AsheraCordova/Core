@@ -11,7 +11,7 @@
 
   <platform name="ios">
     <config-file target="config.xml" parent="/widget">
-      <feature name="com.ashera.core.ios">
+      <feature name="CoreCordovaPlugin">
         	<param name="ios-package" value="CoreCordovaPlugin" />
          	<param name="onload" value="true" />
       </feature>
@@ -194,6 +194,8 @@
      <source-file src="library/widget_library/src/Form.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/FormElement.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/FormElement.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/widget_library/src/FragmentRegistry.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="library/widget_library/src/FragmentRegistry.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/GenericDecorator.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/GenericDecorator.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/HasLifeCycleDecorators.h" target-dir="CorePlugin/widget_library/src"/>

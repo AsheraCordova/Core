@@ -17,6 +17,7 @@
 #include "EventExpressionParser.h"
 #include "FileUtils.h"
 #include "Fragment.h"
+#include "FragmentRegistry.h"
 #include "GenericFragment.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
@@ -242,6 +243,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)onAttachWithASIActivity:(id<ASIActivity>)activity {
   self->activity_ = activity;
   self->id__ = [((JavaUtilUUID *) nil_chk(JavaUtilUUID_randomUUID())) description];
+  [((ASFragmentRegistry *) nil_chk(ASFragmentRegistry_getInstance())) register__WithASIFragment:self];
   ADBundle *args = [self getArguments];
   self->fileName_ = [((ADBundle *) nil_chk(args)) getStringWithNSString:@"fileName"];
   self->rootDirectory_ = [args getStringWithNSString:@"rootDirectory"];
@@ -379,6 +381,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [((ASEventBus *) nil_chk([parent getEventBus])) removeEventBusWithASEventBus:eventBus_];
     parent = [parent getParent];
   }
+  [((ASFragmentRegistry *) nil_chk(ASFragmentRegistry_getInstance())) unregisterWithASIFragment:self];
   ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withJavaUtilMap_(self, @"onDestroy", ASGenericFragment_getEventDataWithNSString_(self, @"onDestroy"), nil, nil);
   [self clear];
 }

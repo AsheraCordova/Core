@@ -197,6 +197,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	public void onAttach(IActivity activity) {
 		this.activity = activity;
 		this.id = UUID.randomUUID().toString();
+		FragmentRegistry.getInstance().register(this);
 		Bundle args = getArguments();
 		this.fileName = args.getString("fileName");
 		this.rootDirectory = args.getString("rootDirectory");
@@ -396,6 +397,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 			parent = parent.getParent();
 		}
 
+		FragmentRegistry.getInstance().unregister(this);
 		sendLifeCycleEvent("onDestroy", getEventData("onDestroy"), null, null);
 		clear();
 	}
