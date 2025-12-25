@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ColorStateConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Color.h"
 #include "ColorStateConverter.h"
 #include "ColorStateList.h"
@@ -14,9 +19,17 @@
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "ResourceBundleUtils.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/ResourceBundle.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASColorStateConverter
@@ -44,7 +57,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)convertToWithId:(ADColorStateList *)value
               withASIFragment:(id<ASIFragment>)fragment {
-  return ASColorUtil_getColorStringWithInt_([((ADColorStateList *) nil_chk(value)) getColorForStateWithIntArray:[IOSIntArray newArrayWithInts:(jint[]){  } count:0] withInt:[value getDefaultColor]]);
+  return ASColorUtil_getColorStringWithInt_([((ADColorStateList *) nil_chk(value)) getColorForStateWithIntArray:[IOSIntArray newArrayWithInts:(int32_t[]){  } count:0] withInt:[value getDefaultColor]]);
 }
 
 - (id<JavaUtilList>)getDependentAttributes {
@@ -89,3 +102,5 @@ ASColorStateConverter *create_ASColorStateConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASColorStateConverter)
+
+J2OBJC_NAME_MAPPING(ASColorStateConverter, "com.ashera.converter", "AS")

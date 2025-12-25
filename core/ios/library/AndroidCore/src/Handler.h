@@ -97,8 +97,8 @@
   Asynchronous messages represent interrupts or events that do not require global ordering
   with respect to synchronous messages.  Asynchronous messages are not subject to
   the synchronization barriers introduced by <code>MessageQueue.enqueueSyncBarrier(long)</code>.
- @param async If true, the handler calls <code>Message.setAsynchronous(boolean)</code>  for
-   each <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
+ @param async If true, the handler calls <code>Message.setAsynchronous(boolean)</code>  for  each 
+ <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
  */
 - (instancetype)initWithBoolean:(bool)async;
 
@@ -121,8 +121,8 @@
   with respect to synchronous messages.  Asynchronous messages are not subject to
   the synchronization barriers introduced by <code>MessageQueue.enqueueSyncBarrier(long)</code>.
  @param callback The callback interface in which to handle messages, or null.
- @param async If true, the handler calls <code>Message.setAsynchronous(boolean)</code>  for
-   each <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
+ @param async If true, the handler calls <code>Message.setAsynchronous(boolean)</code>  for  each 
+ <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
  */
 - (instancetype)initWithADHandler_Callback:(id<ADHandler_Callback>)callback
                                withBoolean:(bool)async;
@@ -153,8 +153,8 @@
   the synchronization barriers introduced by conditions such as display vsync.
  @param looper The looper, must not be null.
  @param callback The callback interface in which to handle messages, or null.
- @param async If true, the handler calls <code>Message.setAsynchronous(boolean)</code>  for
-   each <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
+ @param async If true, the handler calls <code>Message.setAsynchronous(boolean)</code>  for  each 
+ <code>Message</code>  that is sent to it or <code>Runnable</code>  that is posted to it.
  */
 - (instancetype)initWithADLooper:(ADLooper *)looper
           withADHandler_Callback:(id<ADHandler_Callback>)callback
@@ -359,8 +359,8 @@
   Time spent in deep sleep will add an additional delay to execution.
   The runnable will be run on the thread to which this handler is attached.
  @param r The Runnable that will be executed.
- @param token An instance which can be used to cancel <code>r</code>  via
-           <code>removeCallbacksAndMessages</code> .
+ @param token An instance which can be used to cancel <code>r</code>  via          
+ <code>removeCallbacksAndMessages</code> .
  @param uptimeMillis The absolute time at which the callback should run,          using the 
  <code>r.android.os.SystemClock.uptimeMillis</code>  time-base.
  @return Returns true if the Runnable was successfully placed in to the 
@@ -408,8 +408,8 @@
  <b>The time-base is <code>r.android.os.SystemClock.uptimeMillis</code>.</b>
   Time spent in deep sleep will add an additional delay to execution.
  @param r The Runnable that will be executed.
- @param token An instance which can be used to cancel <code>r</code>  via
-           <code>removeCallbacksAndMessages</code> .
+ @param token An instance which can be used to cancel <code>r</code>  via          
+ <code>removeCallbacksAndMessages</code> .
  @param delayMillis The delay (in milliseconds) until the Runnable         will be executed.
  @return Returns true if the Runnable was successfully placed in to the
           message queue.  Returns false on failure, usually because the

@@ -29,6 +29,7 @@
 @protocol ADUnsupportedAppUsage < JavaLangAnnotationAnnotation >
 
 @property (readonly) int32_t maxTargetSdk;
+@property (readonly) int32_t trackingBug;
 
 - (bool)isEqual:(id)obj;
 
@@ -39,13 +40,14 @@
 @interface ADUnsupportedAppUsage : NSObject < ADUnsupportedAppUsage > {
  @public
   int32_t maxTargetSdk_;
+  int32_t trackingBug_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADUnsupportedAppUsage)
 
-FOUNDATION_EXPORT id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(int32_t maxTargetSdk);
+FOUNDATION_EXPORT id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(int32_t maxTargetSdk, int32_t trackingBug);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUnsupportedAppUsage)
 

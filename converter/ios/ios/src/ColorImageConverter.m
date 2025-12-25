@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ColorImageConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ColorConverter.h"
 #include "ColorImageConverter.h"
 #include "Drawable.h"
@@ -13,6 +18,9 @@
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "ResourceBundleUtils.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Character.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -20,11 +28,18 @@
 #include "java/util/regex/Pattern.h"
 
 
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASColorImageConverter ()
 
 - (id)nativeLoadImageBundleWithNSString:(NSString *)path;
 
-- (jboolean)isImageWithId:(id)objImage;
+- (bool)isImageWithId:(id)objImage;
 
 - (NSString *)imageAsBase64WithId:(id)objImage;
 
@@ -32,7 +47,7 @@
 
 __attribute__((unused)) static id ASColorImageConverter_nativeLoadImageBundleWithNSString_(ASColorImageConverter *self, NSString *path);
 
-__attribute__((unused)) static jboolean ASColorImageConverter_isImageWithId_(ASColorImageConverter *self, id objImage);
+__attribute__((unused)) static bool ASColorImageConverter_isImageWithId_(ASColorImageConverter *self, id objImage);
 
 __attribute__((unused)) static NSString *ASColorImageConverter_imageAsBase64WithId_(ASColorImageConverter *self, id objImage);
 
@@ -72,7 +87,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   else if ([value java_hasPrefix:@"@drawable/"]) {
     JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"@([a-z0-9_\\-]+)\\/([a-z0-9_\\-]+)");
     JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:value];
-    jboolean matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
+    bool matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
     if (matches) {
       NSString *fileName = [matcher groupWithInt:2];
       NSString *key1 = [value java_replaceFirst:@"@drawable/" withReplacement:@""];
@@ -146,7 +161,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (jboolean)isImageWithId:(id)objImage {
+- (bool)isImageWithId:(id)objImage {
   return ASColorImageConverter_isImageWithId_(self, objImage);
 }
 
@@ -227,7 +242,7 @@ id ASColorImageConverter_nativeLoadImageBundleWithNSString_(ASColorImageConverte
   return [UIImage imageNamed:path];
 }
 
-jboolean ASColorImageConverter_isImageWithId_(ASColorImageConverter *self, id objImage) {
+bool ASColorImageConverter_isImageWithId_(ASColorImageConverter *self, id objImage) {
   return [objImage isKindOfClass:[UIImage class]];
 }
 
@@ -238,3 +253,5 @@ NSString *ASColorImageConverter_imageAsBase64WithId_(ASColorImageConverter *self
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASColorImageConverter)
+
+J2OBJC_NAME_MAPPING(ASColorImageConverter, "com.ashera.converter", "AS")

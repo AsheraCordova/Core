@@ -139,9 +139,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "Q", "I", .constantValue.asInt = ADBuild_VERSION_CODES_Q, 0x19, -1, -1, -1, -1 },
     { "N", "I", .constantValue.asInt = ADBuild_VERSION_CODES_N, 0x19, -1, -1, -1, -1 },
     { "P", "I", .constantValue.asInt = ADBuild_VERSION_CODES_P, 0x19, -1, -1, -1, -1 },
+    { "R", "I", .constantValue.asInt = ADBuild_VERSION_CODES_R, 0x19, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LADBuild;" };
-  static const J2ObjcClassInfo _ADBuild_VERSION_CODES = { "VERSION_CODES", "r.android.os", ptrTable, methods, fields, 7, 0x9, 1, 15, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADBuild_VERSION_CODES = { "VERSION_CODES", "r.android.os", ptrTable, methods, fields, 7, 0x9, 1, 16, 0, -1, -1, -1, -1 };
   return &_ADBuild_VERSION_CODES;
 }
 

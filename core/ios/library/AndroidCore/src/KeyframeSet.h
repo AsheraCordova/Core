@@ -39,7 +39,7 @@
 /*!
  @brief This class holds a collection of Keyframe objects and is called by ValueAnimator to calculate
   values between those keyframes for a given animation.The class internal to the animation
-  package because it is an implementation detail of how IKeyframes are stored and used.
+ package because it is an implementation detail of how IKeyframes are stored and used.
  */
 @interface ADKeyframeSet : NSObject < ADIKeyframes > {
  @public

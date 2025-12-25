@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ConverterPlugin.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ConverterPlugin")
@@ -20,24 +21,29 @@
 #define INCLUDE_ASBaseConverterPlugin 1
 #include "BaseConverterPlugin.h"
 
+@class JavaLangBoolean;
+@class JavaLangFloat;
+@class JavaLangInteger;
+@class NSString;
+
 @interface ASConverterPlugin : ASBaseConverterPlugin
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jfloat)convertDpToPixelWithNSString:(NSString *)dimen;
+- (float)convertDpToPixelWithNSString:(NSString *)dimen;
 
 - (NSString *)convertPixelToDpWithId:(id)px
-                         withBoolean:(jboolean)isInt;
+                         withBoolean:(bool)isInt;
 
 - (NSString *)convertPixelToSpWithId:(id)px
-                         withBoolean:(jboolean)isInt;
+                         withBoolean:(bool)isInt;
 
-- (jfloat)convertSpToPixelWithNSString:(NSString *)dimen;
+- (float)convertSpToPixelWithNSString:(NSString *)dimen;
 
-+ (id)getColorWithInt:(jint)hexint
-              withInt:(jint)alpha;
++ (id)getColorWithInt:(int32_t)hexint
+              withInt:(int32_t)alpha;
 
 - (id)getColorWithNSString:(NSString *)color;
 
@@ -55,13 +61,14 @@ FOUNDATION_EXPORT ASConverterPlugin *new_ASConverterPlugin_init(void) NS_RETURNS
 
 FOUNDATION_EXPORT ASConverterPlugin *create_ASConverterPlugin_init(void);
 
-FOUNDATION_EXPORT id ASConverterPlugin_getColorWithInt_withInt_(jint hexint, jint alpha);
+FOUNDATION_EXPORT id ASConverterPlugin_getColorWithInt_withInt_(int32_t hexint, int32_t alpha);
 
 FOUNDATION_EXPORT void ASConverterPlugin_initPlugin(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASConverterPlugin)
 
 @compatibility_alias ComAsheraConverterConverterPlugin ASConverterPlugin;
+
 
 #endif
 

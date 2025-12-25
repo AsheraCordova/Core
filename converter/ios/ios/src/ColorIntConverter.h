@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ColorIntConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ColorIntConverter")
@@ -22,6 +23,7 @@
 
 @class JavaLangInteger;
 @class JavaUtilResourceBundle;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -59,6 +61,7 @@ FOUNDATION_EXPORT ASColorIntConverter *create_ASColorIntConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASColorIntConverter)
 
 @compatibility_alias ComAsheraConverterColorIntConverter ASColorIntConverter;
+
 
 #endif
 

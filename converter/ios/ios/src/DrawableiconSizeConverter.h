@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\DrawableiconSizeConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DrawableiconSizeConverter")
@@ -21,6 +22,7 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -53,6 +55,7 @@ FOUNDATION_EXPORT ASDrawableiconSizeConverter *create_ASDrawableiconSizeConverte
 J2OBJC_TYPE_LITERAL_HEADER(ASDrawableiconSizeConverter)
 
 @compatibility_alias ComAsheraConverterDrawableiconSizeConverter ASDrawableiconSizeConverter;
+
 
 #endif
 

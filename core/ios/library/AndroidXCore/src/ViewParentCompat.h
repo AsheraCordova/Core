@@ -47,9 +47,9 @@
  @param source The descendant view that changed.
  @param changeType A bit mask of the types of changes that occurred. One             or more of:
               
-  <ul>             
-  <li><code>AccessibilityEvent.CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION</code>              <li>
- <code>AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE</code>              <li><code>AccessibilityEvent.CONTENT_CHANGE_TYPE_TEXT</code>
+  <ul>              <li>
+ <code>AccessibilityEvent.CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION</code>              <li><code>AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE</code>
+               <li><code>AccessibilityEvent.CONTENT_CHANGE_TYPE_TEXT</code>
                <li><code>AccessibilityEvent.CONTENT_CHANGE_TYPE_UNDEFINED</code>
                </ul>
  */
@@ -238,8 +238,8 @@
  @param parent ViewParent that contains the child view.
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  */
 + (void)onNestedScrollAcceptedWithADViewParent:(id<ADViewParent>)parent
                                     withADView:(ADView *)child
@@ -256,8 +256,8 @@
  @param parent ViewParent that contains the child view.
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  @param type the type of input which cause this scroll event
  - seealso: #onStartNestedScroll(ViewParent, View, View, int)
  - seealso: #onStopNestedScroll(ViewParent, View, int)
@@ -277,8 +277,8 @@
  @param parent ViewParent that contains the child view.
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  @return true if this ViewParent accepts the nested scroll operation
  */
 + (bool)onStartNestedScrollWithADViewParent:(id<ADViewParent>)parent
@@ -303,8 +303,8 @@
  @param parent ViewParent that contains the child view.
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param nestedScrollAxes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  @param type the type of input which cause this scroll event
  @return true if this ViewParent accepts the nested scroll operation
  */

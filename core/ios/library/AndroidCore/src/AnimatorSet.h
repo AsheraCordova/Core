@@ -88,8 +88,7 @@
 - (void)commitAnimationFrameWithLong:(int64_t)frameTime;
 
 /*!
- @param frameTime The frame start time, in the <code>SystemClock.uptimeMillis()</code>  time
-                    base.
+ @param frameTime The frame start time, in the <code>SystemClock.uptimeMillis()</code>  time                   base.
  */
 - (bool)doAnimationFrameWithLong:(int64_t)frameTime;
 

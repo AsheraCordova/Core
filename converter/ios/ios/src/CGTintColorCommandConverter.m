@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\CGTintColorCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "CGTintColorCommandConverter.h"
@@ -15,20 +20,27 @@
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASCGTintColorCommandConverter () {
  @public
   id drawableTint_;
-  jint drawableTintMode_;
+  int32_t drawableTintMode_;
 }
 
 - (void)nativeSetDefaultTintMode;
 
 - (id)colorImageWithId:(id)objImage
                 withId:(id)drawableTintObj
-               withInt:(jint)drawableTintMode;
+               withInt:(int32_t)drawableTintMode;
 
 @end
 
@@ -36,7 +48,7 @@ J2OBJC_FIELD_SETTER(ASCGTintColorCommandConverter, drawableTint_, id)
 
 __attribute__((unused)) static void ASCGTintColorCommandConverter_nativeSetDefaultTintMode(ASCGTintColorCommandConverter *self);
 
-__attribute__((unused)) static id ASCGTintColorCommandConverter_colorImageWithId_withId_withInt_(ASCGTintColorCommandConverter *self, id objImage, id drawableTintObj, jint drawableTintMode);
+__attribute__((unused)) static id ASCGTintColorCommandConverter_colorImageWithId_withId_withInt_(ASCGTintColorCommandConverter *self, id objImage, id drawableTintObj, int32_t drawableTintMode);
 
 @implementation ASCGTintColorCommandConverter
 
@@ -60,7 +72,7 @@ __attribute__((unused)) static id ASCGTintColorCommandConverter_colorImageWithId
   id myTint = drawableTint_;
   if ([myTint isKindOfClass:[ADColorStateList class]]) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
-    jint color = [((ADColorStateList *) nil_chk(((ADColorStateList *) myTint))) getColorForStateWithIntArray:[((ADView *) nil_chk(view)) getDrawableState] withInt:ADColor_RED];
+    int32_t color = [((ADColorStateList *) nil_chk(((ADColorStateList *) myTint))) getColorForStateWithIntArray:[((ADView *) nil_chk(view)) getDrawableState] withInt:ADColor_RED];
     myTint = [self getColorWithInt:color];
   }
   if ([value isKindOfClass:[ADDrawable class]]) {
@@ -69,7 +81,7 @@ __attribute__((unused)) static id ASCGTintColorCommandConverter_colorImageWithId
   return ASCGTintColorCommandConverter_colorImageWithId_withId_withInt_(self, value, myTint, drawableTintMode_);
 }
 
-- (id)getColorWithInt:(jint)color {
+- (id)getColorWithInt:(int32_t)color {
   return ASPluginInvoker_getColorWithNSString_(ADColor_formatColorWithInt_(color));
 }
 
@@ -79,7 +91,7 @@ __attribute__((unused)) static id ASCGTintColorCommandConverter_colorImageWithId
   return drawableTintCommandConverter;
 }
 
-- (jboolean)executeAfterPostMeasure {
+- (bool)executeAfterPostMeasure {
   return true;
 }
 
@@ -108,7 +120,7 @@ __attribute__((unused)) static id ASCGTintColorCommandConverter_colorImageWithId
 
 - (id)colorImageWithId:(id)objImage
                 withId:(id)drawableTintObj
-               withInt:(jint)drawableTintMode {
+               withInt:(int32_t)drawableTintMode {
   return ASCGTintColorCommandConverter_colorImageWithId_withId_withInt_(self, objImage, drawableTintObj, drawableTintMode);
 }
 
@@ -165,7 +177,7 @@ void ASCGTintColorCommandConverter_nativeSetDefaultTintMode(ASCGTintColorCommand
   self->drawableTintMode_ =  (jint) kCGBlendModeSourceAtop;
 }
 
-id ASCGTintColorCommandConverter_colorImageWithId_withId_withInt_(ASCGTintColorCommandConverter *self, id objImage, id drawableTintObj, jint drawableTintMode) {
+id ASCGTintColorCommandConverter_colorImageWithId_withId_withInt_(ASCGTintColorCommandConverter *self, id objImage, id drawableTintObj, int32_t drawableTintMode) {
   if ([objImage isKindOfClass:[UIImage class]]) {
     UIImage* image = (UIImage*) objImage;
     UIColor* drawableTint = (UIColor*) drawableTintObj;
@@ -191,3 +203,5 @@ id ASCGTintColorCommandConverter_colorImageWithId_withId_withInt_(ASCGTintColorC
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCGTintColorCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASCGTintColorCommandConverter, "com.ashera.converter", "AS")

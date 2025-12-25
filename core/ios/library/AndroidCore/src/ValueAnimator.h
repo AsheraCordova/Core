@@ -377,8 +377,7 @@
 
 /*!
  @brief Overrides the global duration scale by a custom value.
- @param durationScale The duration scale to set; or <code>-1f</code>  to use the global duration
-                        scale.
+ @param durationScale The duration scale to set; or <code>-1f</code>  to use the global duration                       scale.
  */
 - (void)overrideDurationScaleWithFloat:(float)durationScale;
 

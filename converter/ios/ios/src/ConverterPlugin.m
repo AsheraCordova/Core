@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ConverterPlugin.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseConverterPlugin.h"
 #include "CGTintColorCommandConverter.h"
 #include "ColorConverter.h"
@@ -29,15 +34,24 @@
 #include "StringUtils.h"
 #include "TintColorCommandConverter.h"
 #include "TransformCommandConverter.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 
 #include <UIKit/UIKit.h>
 
 
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASConverterPlugin ()
 
-- (jint)getScaleFactor;
+- (int32_t)getScaleFactor;
 
 @end
 
@@ -45,7 +59,7 @@ inline NSString *ASConverterPlugin_get_CONVERTER_PLUGIN_NAME(void);
 static NSString *ASConverterPlugin_CONVERTER_PLUGIN_NAME = @"converter";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASConverterPlugin, CONVERTER_PLUGIN_NAME, NSString *)
 
-__attribute__((unused)) static jint ASConverterPlugin_getScaleFactor(ASConverterPlugin *self);
+__attribute__((unused)) static int32_t ASConverterPlugin_getScaleFactor(ASConverterPlugin *self);
 
 @implementation ASConverterPlugin
 
@@ -61,23 +75,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASConverterPlugin_getColorWithInt_withInt_(IOSIntArray_Get(nil_chk(colorInt), 0), IOSIntArray_Get(colorInt, 1));
 }
 
-+ (id)getColorWithInt:(jint)hexint
-              withInt:(jint)alpha {
++ (id)getColorWithInt:(int32_t)hexint
+              withInt:(int32_t)alpha {
   return ASConverterPlugin_getColorWithInt_withInt_(hexint, alpha);
 }
 
-- (jfloat)convertDpToPixelWithNSString:(NSString *)dimen {
+- (float)convertDpToPixelWithNSString:(NSString *)dimen {
   if ([((NSString *) nil_chk(dimen)) java_hasSuffix:@"dp"]) {
     return JavaLangFloat_parseFloatWithNSString_([dimen java_replace:@"dp" withSequence:@""]) * ASPluginInvoker_getDisplayMetricDensity();
   }
   @throw new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"unsupported dimesion type ", dimen));
 }
 
-- (jint)getScaleFactor {
+- (int32_t)getScaleFactor {
   return ASConverterPlugin_getScaleFactor(self);
 }
 
-- (jfloat)convertSpToPixelWithNSString:(NSString *)dimen {
+- (float)convertSpToPixelWithNSString:(NSString *)dimen {
   if ([((NSString *) nil_chk(dimen)) java_hasSuffix:@"sp"]) {
     return JavaLangFloat_parseFloatWithNSString_([dimen java_replace:@"sp" withSequence:@""]) * ASPluginInvoker_getDisplayMetricDensity();
   }
@@ -89,8 +103,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)convertPixelToDpWithId:(id)px
-                         withBoolean:(jboolean)isInt {
-  jfloat f = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(px, [NSNumber class])))) floatValue] / ASPluginInvoker_getDisplayMetricDensity();
+                         withBoolean:(bool)isInt {
+  float f = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(px, [NSNumber class])))) floatValue] / ASPluginInvoker_getDisplayMetricDensity();
   if (isInt) {
     return JreStrcat("$$", ASStringUtils_floatToStringWithFloat_(JreFpToInt(f)), @"dp");
   }
@@ -98,9 +112,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)convertPixelToSpWithId:(id)px
-                         withBoolean:(jboolean)isInt {
-  jfloat scalingFactor = 1;
-  jfloat f = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(px, [NSNumber class])))) floatValue] / ASPluginInvoker_getDisplayMetricDensity() / scalingFactor;
+                         withBoolean:(bool)isInt {
+  float scalingFactor = 1;
+  float f = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(px, [NSNumber class])))) floatValue] / ASPluginInvoker_getDisplayMetricDensity() / scalingFactor;
   if (isInt) {
     return JreStrcat("$$", ASStringUtils_floatToStringWithFloat_(JreFpToInt(f)), @"sp");
   }
@@ -160,7 +174,7 @@ ASConverterPlugin *create_ASConverterPlugin_init() {
   J2OBJC_CREATE_IMPL(ASConverterPlugin, init)
 }
 
-id ASConverterPlugin_getColorWithInt_withInt_(jint hexint, jint alpha) {
+id ASConverterPlugin_getColorWithInt_withInt_(int32_t hexint, int32_t alpha) {
   ASConverterPlugin_initialize();
   // Create color object, specifying alpha as well
   UIColor *color =
@@ -172,7 +186,7 @@ id ASConverterPlugin_getColorWithInt_withInt_(jint hexint, jint alpha) {
   return color;
 }
 
-jint ASConverterPlugin_getScaleFactor(ASConverterPlugin *self) {
+int32_t ASConverterPlugin_getScaleFactor(ASConverterPlugin *self) {
   return [UIScreen mainScreen].scale;
 }
 
@@ -199,3 +213,5 @@ void ASConverterPlugin_initPlugin() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASConverterPlugin)
+
+J2OBJC_NAME_MAPPING(ASConverterPlugin, "com.ashera.converter", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ImageRepeatCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "Drawable.h"
@@ -10,6 +15,15 @@
 #include "IWidget.h"
 #include "ImageRepeatCommandConverter.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASImageRepeatCommandConverter () {
@@ -38,8 +52,8 @@ __attribute__((unused)) static id ASImageRepeatCommandConverter_colorWithPattern
                   withNSString:(NSString *)attributeName
                         withId:(id)value {
   if (backgroundRepeat_ != nil && [backgroundRepeat_ isEqual:@"repeat"]) {
-    jint minWidth = 0;
-    jint minHeight = 0;
+    int32_t minWidth = 0;
+    int32_t minHeight = 0;
     if ([value isKindOfClass:[ADDrawable class]]) {
       ADDrawable *drawable = (ADDrawable *) value;
       minWidth = [((ADDrawable *) nil_chk(drawable)) getMinimumWidth];
@@ -121,3 +135,5 @@ id ASImageRepeatCommandConverter_colorWithPatternImageWithId_(ASImageRepeatComma
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageRepeatCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASImageRepeatCommandConverter, "com.ashera.converter", "AS")

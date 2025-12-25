@@ -8,6 +8,7 @@
 
 
 
+#include "ColorStateList.h"
 #include "J2ObjC_source.h"
 #include "View.h"
 #include "ViewCompat.h"
@@ -179,6 +180,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADXViewCompat_stopNestedScrollWithADView_(view);
 }
 
++ (void)setBackgroundTintListWithADView:(ADView *)child
+                   withADColorStateList:(ADColorStateList *)backgroundTint {
+  ADXViewCompat_setBackgroundTintListWithADView_withADColorStateList_(child, backgroundTint);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -215,6 +221,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x9, 38, 1, -1, -1, -1, -1 },
     { NULL, "Z", 0x9, 39, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 40, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 41, 42, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -253,6 +260,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[31].selector = @selector(isLaidOutWithADView:);
   methods[32].selector = @selector(isPaddingRelativeWithADView:);
   methods[33].selector = @selector(stopNestedScrollWithADView:);
+  methods[34].selector = @selector(setBackgroundTintListWithADView:withADColorStateList:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "MEASURED_STATE_MASK", "I", .constantValue.asInt = ADXViewCompat_MEASURED_STATE_MASK, 0x19, -1, -1, -1, -1 },
@@ -270,8 +278,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "TYPE_TOUCH", "I", .constantValue.asInt = ADXViewCompat_TYPE_TOUCH, 0x19, -1, -1, -1, -1 },
     { "TYPE_NON_TOUCH", "I", .constantValue.asInt = ADXViewCompat_TYPE_NON_TOUCH, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "getMeasuredWidthAndState", "LADView;", "getMeasuredHeightAndState", "getLayoutDirection", "resolveSizeAndState", "III", "combineMeasuredStates", "II", "getMeasuredState", "getPaddingStart", "LADViewGroup;", "getPaddingEnd", "setLayoutDirection", "LADViewGroup;I", "setPaddingRelative", "LADView;IIII", "setX", "LADView;I", "setY", "getMinimumHeight", "jumpDrawablesToCurrentState", "getFitsSystemWindows", "setElevation", "LADView;F", "getElevation", "dispatchApplyWindowInsets", "LADView;LNSObject;", "getRootWindowInsets", "LNSObject;", "getMinimumWidth", "getImportantForAccessibility", "setImportantForAccessibility", "dispatchFinishTemporaryDetach", "dispatchStartTemporaryDetach", "hasTransientState", "isLayoutDirectionResolved", "offsetLeftAndRight", "offsetTopAndBottom", "isLaidOut", "isPaddingRelative", "stopNestedScroll" };
-  static const J2ObjcClassInfo _ADXViewCompat = { "ViewCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x1, 34, 14, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "getMeasuredWidthAndState", "LADView;", "getMeasuredHeightAndState", "getLayoutDirection", "resolveSizeAndState", "III", "combineMeasuredStates", "II", "getMeasuredState", "getPaddingStart", "LADViewGroup;", "getPaddingEnd", "setLayoutDirection", "LADViewGroup;I", "setPaddingRelative", "LADView;IIII", "setX", "LADView;I", "setY", "getMinimumHeight", "jumpDrawablesToCurrentState", "getFitsSystemWindows", "setElevation", "LADView;F", "getElevation", "dispatchApplyWindowInsets", "LADView;LNSObject;", "getRootWindowInsets", "LNSObject;", "getMinimumWidth", "getImportantForAccessibility", "setImportantForAccessibility", "dispatchFinishTemporaryDetach", "dispatchStartTemporaryDetach", "hasTransientState", "isLayoutDirectionResolved", "offsetLeftAndRight", "offsetTopAndBottom", "isLaidOut", "isPaddingRelative", "stopNestedScroll", "setBackgroundTintList", "LADView;LADColorStateList;" };
+  static const J2ObjcClassInfo _ADXViewCompat = { "ViewCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x1, 35, 14, -1, -1, -1, -1, -1 };
   return &_ADXViewCompat;
 }
 
@@ -447,6 +455,11 @@ bool ADXViewCompat_isPaddingRelativeWithADView_(ADView *view) {
 void ADXViewCompat_stopNestedScrollWithADView_(ADView *view) {
   ADXViewCompat_initialize();
   [((ADView *) nil_chk(view)) stopNestedScroll];
+}
+
+void ADXViewCompat_setBackgroundTintListWithADView_withADColorStateList_(ADView *child, ADColorStateList *backgroundTint) {
+  ADXViewCompat_initialize();
+  [((ADView *) nil_chk(child)) setBackgroundTintListWithADColorStateList:backgroundTint];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXViewCompat)

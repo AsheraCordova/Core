@@ -219,8 +219,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADAnimationHandler_AnimationFrameCallbackProvider)
 
 /*!
  @brief Run animation based on the frame time.
- @param frameTime The frame start time, in the <code>SystemClock.uptimeMillis()</code>  time
-                    base.
+ @param frameTime The frame start time, in the <code>SystemClock.uptimeMillis()</code>  time                   base.
  @return if the animation has finished.
  */
 - (bool)doAnimationFrameWithLong:(int64_t)frameTime;

@@ -123,8 +123,8 @@
   values imply a starting value, values to animate through along the way, and an ending value
   (these values will be distributed evenly across the duration of the animation).
  @param target The object whose property is to be animated. This object should  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.
  @param propertyName The name of the property being animated.
  @param values A set of values that the animation will animate between over time.
  @return An ObjectAnimator object that is set up to animate between the given values.
@@ -159,8 +159,8 @@
   values imply a starting value, values to animate through along the way, and an ending value
   (these values will be distributed evenly across the duration of the animation).
  @param target The object whose property is to be animated. This object should  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.
  @param propertyName The name of the property being animated.
  @param values A set of values that the animation will animate between over time.
  @return An ObjectAnimator object that is set up to animate between the given values.
@@ -178,9 +178,8 @@
  <code>xPropertyName</code> and <code>yPropertyName</code>.
  @param target The object whose properties are to be animated. This object should                have public methods on it called 
   <code> setNameX() </code>  and                
-  <code> setNameY </code> , where  <code> nameX </code>  and  <code> nameY </code>
-                 are the value of the  <code> xPropertyName </code>  and  <code> yPropertyName </code>
-                 parameters, respectively.
+  <code> setNameY </code> , where  <code> nameX </code>  and  <code> nameY </code>                are the value of the 
+  <code> xPropertyName </code>  and  <code> yPropertyName </code>                parameters, respectively.
  @param xPropertyName The name of the property for the x coordinate being animated.
  @param yPropertyName The name of the property for the y coordinate being animated.
  @param path The  <code> Path </code>  to animate values along.
@@ -235,8 +234,8 @@
   values imply a starting value, values to animate through along the way, and an ending value
   (these values will be distributed evenly across the duration of the animation).
  @param target The object whose property is to be animated. This object should  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.
  @param propertyName The name of the property being animated.
  @param values A set of values that the animation will animate between over time.
  @return An ObjectAnimator object that is set up to animate between the given values.
@@ -254,9 +253,8 @@
  <code>xPropertyName</code> and <code>yPropertyName</code>.
  @param target The object whose properties are to be animated. This object should                have public methods on it called 
   <code> setNameX() </code>  and                
-  <code> setNameY </code> , where  <code> nameX </code>  and  <code> nameY </code>
-                 are the value of  <code> xPropertyName </code>  and  <code> yPropertyName </code>
-                 parameters, respectively.
+  <code> setNameY </code> , where  <code> nameX </code>  and  <code> nameY </code>                are the value of 
+  <code> xPropertyName </code>  and  <code> yPropertyName </code>                parameters, respectively.
  @param xPropertyName The name of the property for the x coordinate being animated.
  @param yPropertyName The name of the property for the y coordinate being animated.
  @param path The  <code> Path </code>  to animate values along.
@@ -310,8 +308,8 @@
   values imply a starting value, values to animate through along the way, and an ending
   value (these values will be distributed evenly across the duration of the animation).
  @param target The object whose property is to be animated. This object may  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
    be the case-sensitive complete name of the public setter method.
  @param propertyName The name of the property being animated or the name of the setter method.
  @param values A set of values that the animation will animate between over time.
@@ -329,8 +327,8 @@
   coordinates are float x and y coordinates used in the first and second parameter of the
   setter, respectively.
  @param target The object whose property is to be animated. This object may  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
    be the case-sensitive complete name of the public setter method.
  @param propertyName The name of the property being animated or the name of the setter method.
  @param path The  <code> Path </code>  to animate values along.
@@ -347,8 +345,8 @@
   values imply a starting value, values to animate through along the way, and an ending
   value (these values will be distributed evenly across the duration of the animation).</p>
  @param target The object whose property is to be animated. This object may  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
    be the case-sensitive complete name of the public setter method.
  @param propertyName The name of the property being animated or the name of the setter method.
  @param converter Converts T objects into float parameters for the multi-value setter.
@@ -371,8 +369,8 @@
   values imply a starting value, values to animate through along the way, and an ending
   value (these values will be distributed evenly across the duration of the animation).
  @param target The object whose property is to be animated. This object may  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
    be the case-sensitive complete name of the public setter method.
  @param propertyName The name of the property being animated or the name of the setter method.
  @param values A set of values that the animation will animate between over time.
@@ -390,8 +388,8 @@
   coordinates are integer x and y coordinates used in the first and second parameter of the
   setter, respectively.
  @param target The object whose property is to be animated. This object may  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
    be the case-sensitive complete name of the public setter method.
  @param propertyName The name of the property being animated or the name of the setter method.
  @param path The  <code> Path </code>  to animate values along.
@@ -408,8 +406,8 @@
   values imply a starting value, values to animate through along the way, and an ending
   value (these values will be distributed evenly across the duration of the animation).</p>
  @param target The object whose property is to be animated. This object may  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.  <code> propertyName </code>  may also
    be the case-sensitive complete name of the public setter method.
  @param propertyName The name of the property being animated or the name of the setter method.
  @param converter Converts T objects into int parameters for the multi-value setter.
@@ -433,8 +431,8 @@
   <code>converter</code> can be used to change from <code>PointF</code> to the type
   associated with the <code>Property</code>.
  @param target The object whose property is to be animated. This object should  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.
  @param propertyName The name of the property being animated.
  @param converter Converts a PointF to the type associated with the setter. May be                   null if conversion is unnecessary.
  @param path The  <code> Path </code>  to animate values along.
@@ -458,8 +456,8 @@
   affect the values on the animator. If the objects will be mutated externally after
   this method is called, callers should pass a copy of those objects instead.
  @param target The object whose property is to be animated. This object should  have a public method on it called 
-  <code> setName() </code> , where  <code> name </code>  is
-   the value of the  <code> propertyName </code>  parameter.
+  <code> setName() </code> , where  <code> name </code>  is  the value of the 
+  <code> propertyName </code>  parameter.
  @param propertyName The name of the property being animated.
  @param evaluator A TypeEvaluator that will be called on each animation frame to  provide the necessary interpolation between the Object values to derive the animated
    value.

@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\CGTintColorCommandConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_CGTintColorCommandConverter")
@@ -21,6 +22,9 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -30,9 +34,9 @@
 
 - (instancetype)initWithNSString:(NSString *)id_;
 
-- (jboolean)executeAfterPostMeasure;
+- (bool)executeAfterPostMeasure;
 
-- (id)getColorWithInt:(jint)color;
+- (id)getColorWithInt:(int32_t)color;
 
 - (id)getValueWithNSString:(NSString *)attributeName;
 
@@ -59,6 +63,7 @@ FOUNDATION_EXPORT ASCGTintColorCommandConverter *create_ASCGTintColorCommandConv
 J2OBJC_TYPE_LITERAL_HEADER(ASCGTintColorCommandConverter)
 
 @compatibility_alias ComAsheraConverterCGTintColorCommandConverter ASCGTintColorCommandConverter;
+
 
 #endif
 

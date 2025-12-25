@@ -24,8 +24,13 @@
 @implementation ADUnsupportedAppUsage
 
 @synthesize maxTargetSdk = maxTargetSdk_;
+@synthesize trackingBug = trackingBug_;
 
 + (int32_t)maxTargetSdkDefault {
+  return 0;
+}
+
++ (int32_t)trackingBugDefault {
   return 0;
 }
 
@@ -34,7 +39,7 @@
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"@r.android.compat.annotation.UnsupportedAppUsage(maxTargetSdk=%d)", maxTargetSdk_];
+  return [NSString stringWithFormat:@"@r.android.compat.annotation.UnsupportedAppUsage(maxTargetSdk=%d, trackingBug=%d)", maxTargetSdk_, trackingBug_];
 }
 
 - (bool)isEqual:(id)obj {
@@ -48,24 +53,28 @@
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(maxTargetSdk);
+  methods[1].selector = @selector(trackingBug);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "maxTargetSdk_", "I", .constantValue.asLong = 0, 0x1000, -1, -1, -1, -1 },
+    { "trackingBug_", "I", .constantValue.asLong = 0, 0x1000, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _ADUnsupportedAppUsage = { "UnsupportedAppUsage", "r.android.compat.annotation", NULL, methods, fields, 7, 0x2609, 1, 1, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADUnsupportedAppUsage = { "UnsupportedAppUsage", "r.android.compat.annotation", NULL, methods, fields, 7, 0x2609, 2, 2, -1, -1, -1, -1, -1 };
   return &_ADUnsupportedAppUsage;
 }
 
 @end
 
-id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(int32_t maxTargetSdk) {
+id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(int32_t maxTargetSdk, int32_t trackingBug) {
   ADUnsupportedAppUsage *self = AUTORELEASE([[ADUnsupportedAppUsage alloc] init]);
   self->maxTargetSdk_ = maxTargetSdk;
+  self->trackingBug_ = trackingBug;
   return self;
 }
 

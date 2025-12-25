@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\FontConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_FontConverter")
@@ -20,6 +21,7 @@
 #define INCLUDE_ASIConverter 1
 #include "IConverter.h"
 
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -52,6 +54,7 @@ FOUNDATION_EXPORT ASFontConverter *create_ASFontConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASFontConverter)
 
 @compatibility_alias ComAsheraConverterFontConverter ASFontConverter;
+
 
 #endif
 

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\DrawableiconSizeConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "Drawable.h"
@@ -12,7 +17,11 @@
 #include "J2ObjC_source.h"
 #include "java/lang/Integer.h"
 
-@class JavaLangInteger;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASDrawableiconSizeConverter () {
@@ -95,3 +104,5 @@ ASDrawableiconSizeConverter *create_ASDrawableiconSizeConverter_initWithNSString
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDrawableiconSizeConverter)
+
+J2OBJC_NAME_MAPPING(ASDrawableiconSizeConverter, "com.ashera.converter", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\FontConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FileUtils.h"
 #include "FontConverter.h"
 #include "FontDescriptor.h"
@@ -12,6 +17,8 @@
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
 #include "ResourceBundleUtils.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -22,8 +29,12 @@
 
 #import <CoreText/CoreText.h>
 
-@class JavaUtilProperties;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASFontConverter ()
@@ -62,21 +73,21 @@ inline NSString *ASFontConverter_get_SANS_FONT(void);
 static NSString *ASFontConverter_SANS_FONT = @"Roboto";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASFontConverter, SANS_FONT, NSString *)
 
-inline jint ASFontConverter_get_ITALIC_FONT_TRAIT(void);
-inline jint ASFontConverter_set_ITALIC_FONT_TRAIT(jint value);
-inline jint *ASFontConverter_getRef_ITALIC_FONT_TRAIT(void);
-static jint ASFontConverter_ITALIC_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASFontConverter, ITALIC_FONT_TRAIT, jint)
+inline int32_t ASFontConverter_get_ITALIC_FONT_TRAIT(void);
+inline int32_t ASFontConverter_set_ITALIC_FONT_TRAIT(int32_t value);
+inline int32_t *ASFontConverter_getRef_ITALIC_FONT_TRAIT(void);
+static int32_t ASFontConverter_ITALIC_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASFontConverter, ITALIC_FONT_TRAIT, int32_t)
 
-inline jint ASFontConverter_get_BOLD_FONT_TRAIT(void);
-inline jint ASFontConverter_set_BOLD_FONT_TRAIT(jint value);
-inline jint *ASFontConverter_getRef_BOLD_FONT_TRAIT(void);
-static jint ASFontConverter_BOLD_FONT_TRAIT;
-J2OBJC_STATIC_FIELD_PRIMITIVE(ASFontConverter, BOLD_FONT_TRAIT, jint)
+inline int32_t ASFontConverter_get_BOLD_FONT_TRAIT(void);
+inline int32_t ASFontConverter_set_BOLD_FONT_TRAIT(int32_t value);
+inline int32_t *ASFontConverter_getRef_BOLD_FONT_TRAIT(void);
+static int32_t ASFontConverter_BOLD_FONT_TRAIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ASFontConverter, BOLD_FONT_TRAIT, int32_t)
 
-inline jint ASFontConverter_get_NORMAL_FONT_TRAIT(void);
+inline int32_t ASFontConverter_get_NORMAL_FONT_TRAIT(void);
 #define ASFontConverter_NORMAL_FONT_TRAIT 0
-J2OBJC_STATIC_FIELD_CONSTANT(ASFontConverter, NORMAL_FONT_TRAIT, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(ASFontConverter, NORMAL_FONT_TRAIT, int32_t)
 
 __attribute__((unused)) static void ASFontConverter_nativeSetVars(void);
 
@@ -141,20 +152,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     if ([((NSString *) nil_chk(value)) java_hasPrefix:@"@font"]) {
       JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");
       JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:value];
-      jboolean matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
+      bool matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
       if (matches) {
         JavaUtilProperties *bundle = ASFontConverter_readPropsWithNSString_withASIFragment_(self, [matcher groupWithInt:2], fragment);
         id<JavaUtilSet> fonts = [((JavaUtilProperties *) nil_chk(bundle)) keySet];
         for (id __strong font in nil_chk(fonts)) {
           NSString *fontKey = ASFontConverter_getFontKeyWithNSString_(self, [nil_chk(font) description]);
           if (fontKey != nil) {
-            if ([fragment getRootDirectory] != nil) {
-              NSString *fontFile = [bundle getPropertyWithNSString:[fontKey java_replace:@"_ios" withSequence:@"_android"]];
-              NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(JreStrcat("$$$", ASFileUtils_getSlashAppendedDirectoryNameWithNSString_([fragment getRootDirectory]), @"res/font/", fontFile), fragment);
-              if (cordovaFileUri != nil) {
-                ASFontConverter_loadFontWithNSString_withJavaUtilMap_(self, cordovaFileUri, fontDescriptors);
-              }
-            }
             (void) [fontDescriptors putWithId:fontKey withId:new_ASFontDescriptor_initWithNSString_withInt_([bundle getPropertyWithNSString:[font description]], ASFontConverter_NORMAL_FONT_TRAIT)];
           }
         }
@@ -308,3 +312,5 @@ NSString *ASFontConverter_navtiveGetFontWithNSString_(ASFontConverter *self, NSS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFontConverter)
+
+J2OBJC_NAME_MAPPING(ASFontConverter, "com.ashera.converter", "AS")

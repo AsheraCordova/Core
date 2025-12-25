@@ -62,8 +62,8 @@
   </p>
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  @param type the type of input which cause this scroll event
  @return true if this ViewParent accepts the nested scroll operation
  */
@@ -81,8 +81,8 @@
   implementation of this method if one is present.</p>
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  @param type the type of input which cause this scroll event
  - seealso: #onStartNestedScroll(View, View, int, int)
  - seealso: #onStopNestedScroll(View, int)

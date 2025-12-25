@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\DrawImageOrColorCommandConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DrawImageOrColorCommandConverter")
@@ -21,6 +22,8 @@
 #include "BaseAttributeCommand.h"
 
 @class IOSObjectArray;
+@class JavaLangBoolean;
+@class NSString;
 @protocol ASAttributeCommand;
 @protocol ASIWidget;
 
@@ -30,7 +33,7 @@
 
 - (instancetype)initWithNSString:(NSString *)id_;
 
-- (jboolean)executeAfterPostMeasure;
+- (bool)executeAfterPostMeasure;
 
 - (id)getValueWithNSString:(NSString *)attributeName;
 
@@ -59,6 +62,7 @@ FOUNDATION_EXPORT ASDrawImageOrColorCommandConverter *create_ASDrawImageOrColorC
 J2OBJC_TYPE_LITERAL_HEADER(ASDrawImageOrColorCommandConverter)
 
 @compatibility_alias ComAsheraConverterDrawImageOrColorCommandConverter ASDrawImageOrColorCommandConverter;
+
 
 #endif
 

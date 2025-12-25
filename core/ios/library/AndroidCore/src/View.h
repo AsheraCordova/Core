@@ -461,6 +461,8 @@
 
 - (bool)postWithJavaLangRunnable:(id<JavaLangRunnable>)action;
 
+- (void)postOnAnimationWithJavaLangRunnable:(id<JavaLangRunnable>)action;
+
 - (void)refreshDrawableState;
 
 - (void)registerPendingFrameMetricsObservers;

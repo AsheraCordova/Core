@@ -232,8 +232,7 @@
  <code>converter</code> converts the values to parameters in the setter function. 
  <p>At least two values must be supplied, a start and an end value.</p>
  @param propertyName The name of the property to associate with the set of values. This                      may also be the complete name of a setter function.
- @param converter Converts  <code> values </code>  into float parameters for the setter.
-                       Can be null if the IKeyframes have float[] values.
+ @param converter Converts  <code> values </code>  into float parameters for the setter.                      Can be null if the IKeyframes have float[] values.
  @param evaluator Used to interpolate between values.
  @param values The values at specific fractional times to evaluate between
  @return A PropertyValuesHolder for a multi-float parameter setter.
@@ -299,8 +298,7 @@
  <code>converter</code> converts the values to parameters in the setter function. 
  <p>At least two values must be supplied, a start and an end value.</p>
  @param propertyName The name of the property to associate with the set of values. This                      may also be the complete name of a setter function.
- @param converter Converts  <code> values </code>  into int parameters for the setter.
-                       Can be null if the IKeyframes have int[] values.
+ @param converter Converts  <code> values </code>  into int parameters for the setter.                      Can be null if the IKeyframes have int[] values.
  @param evaluator Used to interpolate between values.
  @param values The values at specific fractional times to evaluate between
  @return A PropertyValuesHolder for a multi-int parameter setter.

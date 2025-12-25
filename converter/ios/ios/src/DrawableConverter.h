@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\DrawableConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DrawableConverter")
@@ -20,6 +21,9 @@
 #define INCLUDE_ASColorImageConverter 1
 #include "ColorImageConverter.h"
 
+@class JavaLangBoolean;
+@class JavaLangInteger;
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -39,13 +43,13 @@
 
 - (id<JavaUtilList>)getDependentAttributes;
 
-+ (jint)getImageHeightWithId:(id)value;
++ (int32_t)getImageHeightWithId:(id)value;
 
-+ (jint)getImageWidthWithId:(id)value;
++ (int32_t)getImageWidthWithId:(id)value;
 
-+ (jboolean)isColorWithId:(id)value;
++ (bool)isColorWithId:(id)value;
 
-+ (jboolean)isImageWithId:(id)value;
++ (bool)isImageWithId:(id)value;
 
 @end
 
@@ -57,17 +61,18 @@ FOUNDATION_EXPORT ASDrawableConverter *new_ASDrawableConverter_init(void) NS_RET
 
 FOUNDATION_EXPORT ASDrawableConverter *create_ASDrawableConverter_init(void);
 
-FOUNDATION_EXPORT jboolean ASDrawableConverter_isImageWithId_(id value);
+FOUNDATION_EXPORT bool ASDrawableConverter_isImageWithId_(id value);
 
-FOUNDATION_EXPORT jboolean ASDrawableConverter_isColorWithId_(id value);
+FOUNDATION_EXPORT bool ASDrawableConverter_isColorWithId_(id value);
 
-FOUNDATION_EXPORT jint ASDrawableConverter_getImageWidthWithId_(id value);
+FOUNDATION_EXPORT int32_t ASDrawableConverter_getImageWidthWithId_(id value);
 
-FOUNDATION_EXPORT jint ASDrawableConverter_getImageHeightWithId_(id value);
+FOUNDATION_EXPORT int32_t ASDrawableConverter_getImageHeightWithId_(id value);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASDrawableConverter)
 
 @compatibility_alias ComAsheraConverterDrawableConverter ASDrawableConverter;
+
 
 #endif
 

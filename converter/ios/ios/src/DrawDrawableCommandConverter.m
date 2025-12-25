@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\DrawDrawableCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "BaseMeasurableView.h"
@@ -13,8 +18,17 @@
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "RectM.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 
 #include <UIKit/UIKit.h>
+
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASDrawDrawableCommandConverter () {
@@ -23,16 +37,16 @@
 }
 
 - (void)drawDrawableWithId:(id)image
-                   withInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)width
-                   withInt:(jint)height;
+                   withInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)width
+                   withInt:(int32_t)height;
 
 @end
 
 J2OBJC_FIELD_SETTER(ASDrawDrawableCommandConverter, drawable_, NSString *)
 
-__attribute__((unused)) static void ASDrawDrawableCommandConverter_drawDrawableWithId_withInt_withInt_withInt_withInt_(ASDrawDrawableCommandConverter *self, id image, jint x, jint y, jint width, jint height);
+__attribute__((unused)) static void ASDrawDrawableCommandConverter_drawDrawableWithId_withInt_withInt_withInt_withInt_(ASDrawDrawableCommandConverter *self, id image, int32_t x, int32_t y, int32_t width, int32_t height);
 
 @implementation ASDrawDrawableCommandConverter
 
@@ -80,7 +94,7 @@ __attribute__((unused)) static void ASDrawDrawableCommandConverter_drawDrawableW
   return value;
 }
 
-- (jboolean)executeAfterPostMeasure {
+- (bool)executeAfterPostMeasure {
   return true;
 }
 
@@ -96,10 +110,10 @@ __attribute__((unused)) static void ASDrawDrawableCommandConverter_drawDrawableW
 }
 
 - (void)drawDrawableWithId:(id)image
-                   withInt:(jint)x
-                   withInt:(jint)y
-                   withInt:(jint)width
-                   withInt:(jint)height {
+                   withInt:(int32_t)x
+                   withInt:(int32_t)y
+                   withInt:(int32_t)width
+                   withInt:(int32_t)height {
   ASDrawDrawableCommandConverter_drawDrawableWithId_withInt_withInt_withInt_withInt_(self, image, x, y, width, height);
 }
 
@@ -149,7 +163,7 @@ ASDrawDrawableCommandConverter *create_ASDrawDrawableCommandConverter_initWithNS
   J2OBJC_CREATE_IMPL(ASDrawDrawableCommandConverter, initWithNSString_, id_)
 }
 
-void ASDrawDrawableCommandConverter_drawDrawableWithId_withInt_withInt_withInt_withInt_(ASDrawDrawableCommandConverter *self, id image, jint x, jint y, jint width, jint height) {
+void ASDrawDrawableCommandConverter_drawDrawableWithId_withInt_withInt_withInt_withInt_(ASDrawDrawableCommandConverter *self, id image, int32_t x, int32_t y, int32_t width, int32_t height) {
   if ([image isKindOfClass:UIImage.class]) {
     CGRect rect = CGRectMake(x, y, width, height);
     [((UIImage*) image) drawInRect:rect];
@@ -157,3 +171,5 @@ void ASDrawDrawableCommandConverter_drawDrawableWithId_withInt_withInt_withInt_w
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDrawDrawableCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASDrawDrawableCommandConverter, "com.ashera.converter", "AS")

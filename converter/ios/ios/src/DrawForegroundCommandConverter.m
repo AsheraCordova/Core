@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\DrawForegroundCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "DrawForegroundCommandConverter.h"
@@ -11,10 +16,18 @@
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 
 #include <UIKit/UIKit.h>
 #include "CGRectWrapper.h"
 #include "Rect.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASDrawForegroundCommandConverter () {
@@ -54,7 +67,7 @@ __attribute__((unused)) static void ASDrawForegroundCommandConverter_drawImageWi
   return value;
 }
 
-- (jboolean)executeAfterPostMeasure {
+- (bool)executeAfterPostMeasure {
   return true;
 }
 
@@ -73,7 +86,7 @@ __attribute__((unused)) static void ASDrawForegroundCommandConverter_drawImageWi
 }
 
 - (void)updatePhaseArgsWithNSObjectArray:(IOSObjectArray *)args {
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(args))->size_; i += 2) {
+  for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(args))->size_; i += 2) {
     id attributeName = IOSObjectArray_Get(args, i);
     if ([nil_chk(attributeName) isEqual:@"rect"]) {
       rectObj_ = IOSObjectArray_Get(args, i + 1);
@@ -140,3 +153,5 @@ void ASDrawForegroundCommandConverter_drawImageWithId_withADView_(ASDrawForegrou
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDrawForegroundCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASDrawForegroundCommandConverter, "com.ashera.converter", "AS")

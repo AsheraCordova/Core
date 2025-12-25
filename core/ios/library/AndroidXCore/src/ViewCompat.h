@@ -17,6 +17,7 @@
 #if !defined (ADXViewCompat_) && (INCLUDE_ALL_ViewCompat || defined(INCLUDE_ADXViewCompat))
 #define ADXViewCompat_
 
+@class ADColorStateList;
 @class ADView;
 @class ADViewGroup;
 @class JavaLangBoolean;
@@ -86,6 +87,9 @@
 + (int32_t)resolveSizeAndStateWithInt:(int32_t)size
                               withInt:(int32_t)measureSpec
                               withInt:(int32_t)childMeasuredState;
+
++ (void)setBackgroundTintListWithADView:(ADView *)child
+                   withADColorStateList:(ADColorStateList *)backgroundTint;
 
 + (void)setElevationWithADView:(ADView *)child
                      withFloat:(float)mDrawerElevation;
@@ -241,6 +245,8 @@ FOUNDATION_EXPORT bool ADXViewCompat_isLaidOutWithADView_(ADView *view);
 FOUNDATION_EXPORT bool ADXViewCompat_isPaddingRelativeWithADView_(ADView *view);
 
 FOUNDATION_EXPORT void ADXViewCompat_stopNestedScrollWithADView_(ADView *view);
+
+FOUNDATION_EXPORT void ADXViewCompat_setBackgroundTintListWithADView_withADColorStateList_(ADView *child, ADColorStateList *backgroundTint);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXViewCompat)
 

@@ -3,15 +3,28 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\DrawableConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ColorDrawable.h"
 #include "ColorImageConverter.h"
 #include "Drawable.h"
 #include "DrawableConverter.h"
 #include "IFragment.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASDrawableConverter ()
@@ -73,19 +86,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASDrawableConverter_updateWidthAndHeightWithADDrawable_withId_(self, drawable, value);
 }
 
-+ (jboolean)isImageWithId:(id)value {
++ (bool)isImageWithId:(id)value {
   return ASDrawableConverter_isImageWithId_(value);
 }
 
-+ (jboolean)isColorWithId:(id)value {
++ (bool)isColorWithId:(id)value {
   return ASDrawableConverter_isColorWithId_(value);
 }
 
-+ (jint)getImageWidthWithId:(id)value {
++ (int32_t)getImageWidthWithId:(id)value {
   return ASDrawableConverter_getImageWidthWithId_(value);
 }
 
-+ (jint)getImageHeightWithId:(id)value {
++ (int32_t)getImageHeightWithId:(id)value {
   return ASDrawableConverter_getImageHeightWithId_(value);
 }
 
@@ -150,26 +163,28 @@ void ASDrawableConverter_updateWidthAndHeightWithADDrawable_withId_(ASDrawableCo
   [drawable setMinimumHeightWithInt:ASDrawableConverter_getImageHeightWithId_(value)];
 }
 
-jboolean ASDrawableConverter_isImageWithId_(id value) {
+bool ASDrawableConverter_isImageWithId_(id value) {
   ASDrawableConverter_initialize();
   return[value isKindOfClass:[UIImage class]];
 }
 
-jboolean ASDrawableConverter_isColorWithId_(id value) {
+bool ASDrawableConverter_isColorWithId_(id value) {
   ASDrawableConverter_initialize();
   return[value isKindOfClass:[UIColor class]];
 }
 
-jint ASDrawableConverter_getImageWidthWithId_(id value) {
+int32_t ASDrawableConverter_getImageWidthWithId_(id value) {
   ASDrawableConverter_initialize();
   UIImage* image = ((UIImage*) value);
   return image.size.width;
 }
 
-jint ASDrawableConverter_getImageHeightWithId_(id value) {
+int32_t ASDrawableConverter_getImageHeightWithId_(id value) {
   ASDrawableConverter_initialize();
   UIImage* image = ((UIImage*) value);
   return image.size.height;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDrawableConverter)
+
+J2OBJC_NAME_MAPPING(ASDrawableConverter, "com.ashera.converter", "AS")

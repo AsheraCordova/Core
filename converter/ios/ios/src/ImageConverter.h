@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ImageConverter.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_ImageConverter")
@@ -20,6 +21,7 @@
 #define INCLUDE_ASColorImageConverter 1
 #include "ColorImageConverter.h"
 
+@class NSString;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -52,6 +54,7 @@ FOUNDATION_EXPORT ASImageConverter *create_ASImageConverter_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASImageConverter)
 
 @compatibility_alias ComAsheraConverterImageConverter ASImageConverter;
+
 
 #endif
 

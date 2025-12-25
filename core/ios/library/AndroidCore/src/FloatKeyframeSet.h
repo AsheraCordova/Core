@@ -32,7 +32,7 @@
 /*!
  @brief This class holds a collection of FloatKeyframe objects and is called by ValueAnimator to calculate
   values between those keyframes for a given animation.The class internal to the animation
-  package because it is an implementation detail of how IKeyframes are stored and used.
+ package because it is an implementation detail of how IKeyframes are stored and used.
  <p>This type-specific subclass of KeyframeSet, along with the other type-specific subclass for
   int, exists to speed up the getValue() method when there is no custom
   TypeEvaluator set for the animation, so that values can be calculated without autoboxing to the

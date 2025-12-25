@@ -955,6 +955,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Objects.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Observable.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Observable.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/OverScroller.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/OverScroller.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/OvershootInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/OvershootInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/PackageManager.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1017,8 +1019,12 @@
      <source-file src="core/ios/library/AndroidCore/src/RenderNode.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Resources.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Resources.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Scroller.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Scroller.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ScrollView.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ScrollView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/SensorManager.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/SensorManager.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ShapeDrawable.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ShapeDrawable.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Space.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1103,6 +1109,8 @@
      <source-file src="core/ios/library/AndroidCore/src/ValueCallback.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/View.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/View.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ViewConfiguration.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ViewConfiguration.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewGroup.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ViewGroup.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewGroupOverlay.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1200,6 +1208,8 @@
      <source-file src="core/ios/library/AndroidXCore/src/TraceCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ViewCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/ViewCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/ViewDragHelper.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/ViewDragHelper.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ViewGroupCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/ViewGroupCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ViewParentCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
@@ -1219,6 +1229,8 @@
      <source-file src="core/ios/library/AndroidJMaterial/src/BadgeState.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidJMaterial/src/BadgeUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
      <source-file src="core/ios/library/AndroidJMaterial/src/BadgeUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidJMaterial/src/BottomSheetBehavior.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="core/ios/library/AndroidJMaterial/src/BottomSheetBehavior.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidJMaterial/src/CheckableGroup.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
      <source-file src="core/ios/library/AndroidJMaterial/src/CheckableGroup.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidJMaterial/src/Chip.h" target-dir="CorePlugin/AndroidJMaterial/src"/>

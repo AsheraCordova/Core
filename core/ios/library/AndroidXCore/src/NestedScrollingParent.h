@@ -59,8 +59,8 @@
   </p>
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  @return true if this ViewParent accepts the nested scroll operation
  */
 - (bool)onStartNestedScrollWithADView:(ADView *)child
@@ -76,8 +76,8 @@
   implementation of this method if one is present.</p>
  @param child Direct child of this ViewParent containing target
  @param target View that initiated the nested scroll
- @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,
-                           <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
+ @param axes Flags consisting of <code>ViewCompat.SCROLL_AXIS_HORIZONTAL</code> ,                          
+ <code>ViewCompat.SCROLL_AXIS_VERTICAL</code>  or both
  - seealso: #onStartNestedScroll(View, View, int)
  - seealso: #onStopNestedScroll(View)
  */

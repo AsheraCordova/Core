@@ -3,22 +3,34 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ImageConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "ColorImageConverter.h"
 #include "IFragment.h"
 #include "ImageConverter.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
 
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
+
+
 @interface ASImageConverter ()
 
-- (jboolean)isImageWithId:(id)objImage;
+- (bool)isImageWithId:(id)objImage;
 
 @end
 
-__attribute__((unused)) static jboolean ASImageConverter_isImageWithId_(ASImageConverter *self, id objImage);
+__attribute__((unused)) static bool ASImageConverter_isImageWithId_(ASImageConverter *self, id objImage);
 
 @implementation ASImageConverter
 
@@ -41,7 +53,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   @throw new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Unable to convert path to image : ", value));
 }
 
-- (jboolean)isImageWithId:(id)objImage {
+- (bool)isImageWithId:(id)objImage {
   return ASImageConverter_isImageWithId_(self, objImage);
 }
 
@@ -90,8 +102,10 @@ ASImageConverter *create_ASImageConverter_init() {
   J2OBJC_CREATE_IMPL(ASImageConverter, init)
 }
 
-jboolean ASImageConverter_isImageWithId_(ASImageConverter *self, id objImage) {
+bool ASImageConverter_isImageWithId_(ASImageConverter *self, id objImage) {
   return [objImage isKindOfClass:[UIImage class]];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageConverter)
+
+J2OBJC_NAME_MAPPING(ASImageConverter, "com.ashera.converter", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\TransformCommandConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
 #include "IOSObjectArray.h"
@@ -10,24 +15,30 @@
 #include "J2ObjC_source.h"
 #include "TransformCommandConverter.h"
 #include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
+#include "java/lang/Integer.h"
 
 #include <UIKit/UIKit.h>
 #define degreesToRadians(x) ((x) * M_PI / 180.0)
 
-@class JavaLangFloat;
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @interface ASTransformCommandConverter () {
  @public
-  jfloat translationX_;
-  jfloat translationY_;
-  jfloat translationZ_;
-  jfloat rotation_;
-  jfloat rotationX_;
-  jfloat rotationY_;
-  jfloat scaleX_;
-  jfloat scaleY_;
+  float translationX_;
+  float translationY_;
+  float translationZ_;
+  float rotation_;
+  float rotationX_;
+  float rotationY_;
+  float scaleX_;
+  float scaleY_;
   JavaLangFloat *transformPivotX_;
   JavaLangFloat *transformPivotY_;
 }
@@ -35,14 +46,14 @@
 - (void)resetTranformWithId:(id)uiView;
 
 - (void)updateTranformWithId:(id)view
-                   withFloat:(jfloat)translationX
-                   withFloat:(jfloat)translationY
-                   withFloat:(jfloat)translationZ
-                   withFloat:(jfloat)rotation
-                   withFloat:(jfloat)rotationX
-                   withFloat:(jfloat)rotationY
-                   withFloat:(jfloat)scaleX
-                   withFloat:(jfloat)scaleY
+                   withFloat:(float)translationX
+                   withFloat:(float)translationY
+                   withFloat:(float)translationZ
+                   withFloat:(float)rotation
+                   withFloat:(float)rotationX
+                   withFloat:(float)rotationY
+                   withFloat:(float)scaleX
+                   withFloat:(float)scaleY
            withJavaLangFloat:(JavaLangFloat *)anchorX
            withJavaLangFloat:(JavaLangFloat *)anchorY;
 
@@ -53,7 +64,7 @@ J2OBJC_FIELD_SETTER(ASTransformCommandConverter, transformPivotY_, JavaLangFloat
 
 __attribute__((unused)) static void ASTransformCommandConverter_resetTranformWithId_(ASTransformCommandConverter *self, id uiView);
 
-__attribute__((unused)) static void ASTransformCommandConverter_updateTranformWithId_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withJavaLangFloat_withJavaLangFloat_(ASTransformCommandConverter *self, id view, jfloat translationX, jfloat translationY, jfloat translationZ, jfloat rotation, jfloat rotationX, jfloat rotationY, jfloat scaleX, jfloat scaleY, JavaLangFloat *anchorX, JavaLangFloat *anchorY);
+__attribute__((unused)) static void ASTransformCommandConverter_updateTranformWithId_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withJavaLangFloat_withJavaLangFloat_(ASTransformCommandConverter *self, id view, float translationX, float translationY, float translationZ, float rotation, float rotationX, float rotationY, float scaleX, float scaleY, JavaLangFloat *anchorX, JavaLangFloat *anchorY);
 
 @implementation ASTransformCommandConverter
 
@@ -97,14 +108,14 @@ __attribute__((unused)) static void ASTransformCommandConverter_updateTranformWi
 }
 
 - (void)updateTranformWithId:(id)view
-                   withFloat:(jfloat)translationX
-                   withFloat:(jfloat)translationY
-                   withFloat:(jfloat)translationZ
-                   withFloat:(jfloat)rotation
-                   withFloat:(jfloat)rotationX
-                   withFloat:(jfloat)rotationY
-                   withFloat:(jfloat)scaleX
-                   withFloat:(jfloat)scaleY
+                   withFloat:(float)translationX
+                   withFloat:(float)translationY
+                   withFloat:(float)translationZ
+                   withFloat:(float)rotation
+                   withFloat:(float)rotationX
+                   withFloat:(float)rotationY
+                   withFloat:(float)scaleX
+                   withFloat:(float)scaleY
            withJavaLangFloat:(JavaLangFloat *)anchorX
            withJavaLangFloat:(JavaLangFloat *)anchorY {
   ASTransformCommandConverter_updateTranformWithId_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withJavaLangFloat_withJavaLangFloat_(self, view, translationX, translationY, translationZ, rotation, rotationX, rotationY, scaleX, scaleY, anchorX, anchorY);
@@ -139,7 +150,7 @@ __attribute__((unused)) static void ASTransformCommandConverter_updateTranformWi
 }
 
 - (void)updateArgsWithNSObjectArray:(IOSObjectArray *)args {
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(args))->size_; i += 2) {
+  for (int32_t i = 0; i < ((IOSObjectArray *) nil_chk(args))->size_; i += 2) {
     NSString *attributeName = (NSString *) cast_chk(IOSObjectArray_Get(args, i), [NSString class]);
     switch (JreIndexOfStr(attributeName, (id[]){ @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY" }, 10)) {
       case 0:
@@ -181,7 +192,7 @@ __attribute__((unused)) static void ASTransformCommandConverter_updateTranformWi
 - (void)updatePhaseArgsWithNSObjectArray:(IOSObjectArray *)args {
 }
 
-- (jboolean)executeAfterPostMeasure {
+- (bool)executeAfterPostMeasure {
   return true;
 }
 
@@ -279,7 +290,7 @@ void ASTransformCommandConverter_resetTranformWithId_(ASTransformCommandConverte
   }
 }
 
-void ASTransformCommandConverter_updateTranformWithId_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withJavaLangFloat_withJavaLangFloat_(ASTransformCommandConverter *self, id view, jfloat translationX, jfloat translationY, jfloat translationZ, jfloat rotation, jfloat rotationX, jfloat rotationY, jfloat scaleX, jfloat scaleY, JavaLangFloat *anchorX, JavaLangFloat *anchorY) {
+void ASTransformCommandConverter_updateTranformWithId_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withJavaLangFloat_withJavaLangFloat_(ASTransformCommandConverter *self, id view, float translationX, float translationY, float translationZ, float rotation, float rotationX, float rotationY, float scaleX, float scaleY, JavaLangFloat *anchorX, JavaLangFloat *anchorY) {
   UIView * uiView = ((UIView *) view);
   
   if (anchorX != nil && anchorY != nil) {
@@ -307,3 +318,5 @@ void ASTransformCommandConverter_updateTranformWithId_withFloat_withFloat_withFl
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTransformCommandConverter)
+
+J2OBJC_NAME_MAPPING(ASTransformCommandConverter, "com.ashera.converter", "AS")

@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSConverter\src\main\java\com\ashera\converter\ColorIntConverter.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "Color.h"
 #include "ColorIntConverter.h"
 #include "ColorUtil.h"
@@ -13,6 +18,12 @@
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/ResourceBundle.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASColorIntConverter
@@ -81,3 +92,5 @@ ASColorIntConverter *create_ASColorIntConverter_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASColorIntConverter)
+
+J2OBJC_NAME_MAPPING(ASColorIntConverter, "com.ashera.converter", "AS")
