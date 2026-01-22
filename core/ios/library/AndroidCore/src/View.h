@@ -17,6 +17,7 @@
 #if !defined (ADView_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView))
 #define ADView_
 
+@class ADAnimation;
 @class ADColorStateList;
 @class ADContext;
 @class ADDrawable;
@@ -45,6 +46,7 @@
 @protocol ADView_OnAttachStateChangeListener;
 @protocol ADView_OnKeyListener;
 @protocol ADView_OnLayoutChangeListener;
+@protocol ASIWidget;
 @protocol JavaLangRunnable;
 
 @interface ADView : NSObject {
@@ -120,6 +122,8 @@
 - (bool)canScrollVerticallyWithInt:(int32_t)direction;
 
 - (void)clearAccessibilityFocus;
+
+- (void)clearAnimation;
 
 - (bool)clearFocus;
 
@@ -234,6 +238,8 @@
 - (id<ADView_OnKeyListener>)getOnKeyListener;
 
 - (ADInsets *)getOpticalInsets;
+
+- (id<ASIWidget>)getOuterWidget;
 
 - (ADViewOverlay *)getOverlay;
 
@@ -650,6 +656,8 @@
 - (void)setWillNotDrawWithBoolean:(bool)willNotDraw;
 
 - (bool)shouldDrawRoundScrollbar;
+
+- (void)startAnimationWithADAnimation:(ADAnimation *)animation;
 
 - (void)state0;
 

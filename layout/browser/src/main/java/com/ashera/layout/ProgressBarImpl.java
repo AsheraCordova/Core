@@ -77,6 +77,8 @@ public class ProgressBarImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressTint").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressBackgroundTint").withType("colorstate"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("indeterminate").withType("boolean"));
+	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webIndeterminateProgressBarWidth").withType("string"));
+	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webIndeterminateProgressBarHeight").withType("string"));
 	}
 	
 	public ProgressBarImpl() {
@@ -675,14 +677,22 @@ return getProgressBackgroundTint();				}
 	private HTMLElement progressBar;
 	private int min;
 	private boolean indeterminate;
+	private String webIndeterminateProgressBarWidth = "30px";
+	private String webIndeterminateProgressBarHeight = "30px";
 	private void nativeCreate(Map<String, Object> params) {
 		Object indeterminateParam = params.get("indeterminate");
 		this.indeterminate = indeterminateParam == null || "true".equals(indeterminateParam);
 		hTMLElement = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
 		if (indeterminate) {
+			if (params.containsKey("webIndeterminateProgressBarWidth") ) {
+				webIndeterminateProgressBarWidth = params.get("webIndeterminateProgressBarWidth").toString(); 
+			}
+			if (params.containsKey("webIndeterminateProgressBarHeight") ) {
+				webIndeterminateProgressBarHeight = params.get("webIndeterminateProgressBarHeight").toString(); 
+			}
 			this.progressBar = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");		
-			progressBar.getStyle().setProperty("width", "30px");
-			progressBar.getStyle().setProperty("height", "30px");
+			progressBar.getStyle().setProperty("width", webIndeterminateProgressBarWidth);
+			progressBar.getStyle().setProperty("height", webIndeterminateProgressBarHeight);
 			progressBar.getStyle().setProperty("border-radius", "50%");
 			progressBar.getStyle().setProperty("border", "5px solid #f3f3f3");
 			progressBar.getStyle().setProperty("animation", "spin 2s linear infinite");

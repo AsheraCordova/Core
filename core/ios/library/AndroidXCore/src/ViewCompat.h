@@ -30,6 +30,12 @@
 
 - (instancetype)init;
 
++ (bool)canScrollHorizontallyWithADView:(ADView *)view
+                                withInt:(int32_t)direction;
+
++ (bool)canScrollVerticallyWithADView:(ADView *)view
+                              withInt:(int32_t)direction;
+
 + (int32_t)combineMeasuredStatesWithInt:(int32_t)curState
                                 withInt:(int32_t)newState;
 
@@ -247,6 +253,10 @@ FOUNDATION_EXPORT bool ADXViewCompat_isPaddingRelativeWithADView_(ADView *view);
 FOUNDATION_EXPORT void ADXViewCompat_stopNestedScrollWithADView_(ADView *view);
 
 FOUNDATION_EXPORT void ADXViewCompat_setBackgroundTintListWithADView_withADColorStateList_(ADView *child, ADColorStateList *backgroundTint);
+
+FOUNDATION_EXPORT bool ADXViewCompat_canScrollHorizontallyWithADView_withInt_(ADView *view, int32_t direction);
+
+FOUNDATION_EXPORT bool ADXViewCompat_canScrollVerticallyWithADView_withInt_(ADView *view, int32_t direction);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXViewCompat)
 

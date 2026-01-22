@@ -83,6 +83,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   return 0;
 }
 
+- (void)offsetLocationWithInt:(int32_t)i
+                      withInt:(int32_t)j {
+  x_ += i;
+  y_ += j;
+}
+
++ (ADMotionEvent *)obtainWithADMotionEvent:(ADMotionEvent *)ev {
+  return ADMotionEvent_obtainWithADMotionEvent_(ev);
+}
+
+- (void)recycle {
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -97,6 +110,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 5, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LADMotionEvent;", 0x9, 8, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -113,6 +129,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[9].selector = @selector(getRawY);
   methods[10].selector = @selector(setRawYWithInt:);
   methods[11].selector = @selector(getEventTime);
+  methods[12].selector = @selector(offsetLocationWithInt:withInt:);
+  methods[13].selector = @selector(obtainWithADMotionEvent:);
+  methods[14].selector = @selector(recycle);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "ACTION_DOWN", "I", .constantValue.asInt = ADMotionEvent_ACTION_DOWN, 0x19, -1, -1, -1, -1 },
@@ -129,8 +148,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "rawY_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "action_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setAction", "I", "setX", "setY", "setRawX", "setRawY" };
-  static const J2ObjcClassInfo _ADMotionEvent = { "MotionEvent", "r.android.view", ptrTable, methods, fields, 7, 0x1, 12, 13, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setAction", "I", "setX", "setY", "setRawX", "setRawY", "offsetLocation", "II", "obtain", "LADMotionEvent;" };
+  static const J2ObjcClassInfo _ADMotionEvent = { "MotionEvent", "r.android.view", ptrTable, methods, fields, 7, 0x1, 15, 13, -1, -1, -1, -1, -1 };
   return &_ADMotionEvent;
 }
 
@@ -146,6 +165,16 @@ ADMotionEvent *new_ADMotionEvent_init() {
 
 ADMotionEvent *create_ADMotionEvent_init() {
   J2OBJC_CREATE_IMPL(ADMotionEvent, init)
+}
+
+ADMotionEvent *ADMotionEvent_obtainWithADMotionEvent_(ADMotionEvent *ev) {
+  ADMotionEvent_initialize();
+  ADMotionEvent *m = create_ADMotionEvent_init();
+  m->x_ = ((ADMotionEvent *) nil_chk(ev))->x_;
+  m->y_ = ev->y_;
+  m->rawX_ = ev->rawX_;
+  m->rawY_ = ev->rawY_;
+  return m;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMotionEvent)

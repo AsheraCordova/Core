@@ -10503,6 +10503,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_UISwipeGestureRecognizerDelegate)
   JreRelease(widget_);
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+  return YES;
+}
+
 -(void)move:(UIPanGestureRecognizer*)tapRecognizer {
   int x = [tapRecognizer locationInView:self->uiLocationView_].x;
   int y = [tapRecognizer locationInView:self->uiLocationView_].y;
@@ -10562,6 +10568,7 @@ void ASViewImpl_PanGestureRecognizer_addUIPanGestureRecognizer(ASViewImpl_PanGes
   UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
   [panRecognizer setMinimumNumberOfTouches:1];
   [panRecognizer setMaximumNumberOfTouches:1];
+  panRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
   [uiview addGestureRecognizer:panRecognizer];
 }
 

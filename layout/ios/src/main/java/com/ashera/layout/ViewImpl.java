@@ -5228,8 +5228,17 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
 			[panRecognizer setMinimumNumberOfTouches:1];
 			[panRecognizer setMaximumNumberOfTouches:1];
+			panRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
 			[uiview addGestureRecognizer:panRecognizer];
 		]-*/;
+		
+		/*-[
+		- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+		 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+		{
+		    return YES;
+		}
+		]-*/
 		
 		/*-[
 			-(void)move:(UIPanGestureRecognizer*)tapRecognizer {

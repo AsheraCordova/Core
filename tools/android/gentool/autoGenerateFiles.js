@@ -252,10 +252,12 @@ function generateFile(name) {
 
 	if (name.startsWith(respath + 'values') && name.indexOf("strings.xml") != -1) {
 		console.log("xslt triggered" + name);
-		runXSLT(name, "strings.xsl", getStringFileName(dirName));
+		let outFileName = fileName.replace('.xml', "");
+		runXSLT(name, "strings.xsl", getStringFileName(dirName, outFileName));
 		if (name == respath + 'values' + path.sep + 'strings.xml'){		
 			runXSLT(name, "constants.xsl", "../tsc/src/Constants.ts");
 		}
+		sortAndConcatStringFiles(dirName);
 	}
 
 	if (name.startsWith(respath + 'values') && name.indexOf("styles.xml") != -1) {
@@ -398,13 +400,40 @@ function runXmlToJson(xmlPath, outputFilePath) {
 	fs.writeFileSync(outputFilePath, str);
 }
 
-function getStringFileName(dirName) {
+function sortAndConcatStringFiles(dirName) {
+	let finalStringFile;
+	let split = dirName.indexOf("-");
+
+	if (split == -1) {
+		finalStringFile = "strings.properties"
+	} else {
+		finalStringFile = "strings_" + dirName.replace(/values-/gi, "").replace(/\\-/gi, "_") + ".properties";
+	}
+	let dir = "../resources/values//";
+	let files = fs.readdirSync(dir);
+	fs.writeFileSync(dir + finalStringFile, "");
+
+	let str = '';
+	for (let i = 0; i < files.length; i++) {
+		let fileName = files[i];
+		if (fileName !== finalStringFile && fileName.indexOf(finalStringFile) != -1) {
+			str += fs.readFileSync(dir + fileName);
+			str += '\n';
+		}
+	}
+	fs.writeFileSync(dir + finalStringFile, str);
+}
+
+function getStringFileName(dirName, outFileName) {
 	let out;
 	let split = dirName.indexOf("-");
+	if (outFileName.startsWith('strings')) {
+		outFileName = 'tmp_' + outFileName;
+	}
 	if (split == -1) {
-		out = "../resources/values/strings.properties"
+		out = "../resources/values/" + outFileName + ".properties"
 	} else {
-		out = "../resources/values/strings_" + dirName.replace(/values-/gi, "").replace(/\\-/gi, "_") + ".properties";
+		out = "../resources/values/" + outFileName + "_" + dirName.replace(/values-/gi, "").replace(/\\-/gi, "_") + ".properties";
 	}
 	return out;
 }
@@ -469,6 +498,7 @@ function sortAndConcatRecylerFiles() {
 	str = str.replace(/"section3":/gi, '"section":');
 	fs.writeFileSync(finalColorFile, str);
 }
+
 function sortAndConcatMenuFiles() {
 	let dir = '../resources/menu/';
 	let finalColorFile = '../resources/menu/menu.properties';

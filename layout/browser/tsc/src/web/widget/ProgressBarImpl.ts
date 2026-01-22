@@ -32,6 +32,8 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ProgressBarImpl<T> extends ViewImpl<T>{

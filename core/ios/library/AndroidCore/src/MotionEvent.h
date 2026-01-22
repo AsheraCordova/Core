@@ -37,6 +37,13 @@
 
 - (int32_t)getY;
 
++ (ADMotionEvent *)obtainWithADMotionEvent:(ADMotionEvent *)ev;
+
+- (void)offsetLocationWithInt:(int32_t)i
+                      withInt:(int32_t)j;
+
+- (void)recycle;
+
 - (void)setActionWithInt:(int32_t)action;
 
 - (void)setRawXWithInt:(int32_t)rawX;
@@ -88,6 +95,8 @@ FOUNDATION_EXPORT void ADMotionEvent_init(ADMotionEvent *self);
 FOUNDATION_EXPORT ADMotionEvent *new_ADMotionEvent_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADMotionEvent *create_ADMotionEvent_init(void);
+
+FOUNDATION_EXPORT ADMotionEvent *ADMotionEvent_obtainWithADMotionEvent_(ADMotionEvent *ev);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMotionEvent)
 
