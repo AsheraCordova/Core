@@ -3226,6 +3226,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setOverlayWithBoolean:(bool)isOverlay {
+  self->isOverlay_ = isOverlay;
+  if (isOverlay) {
+    [self setFlagsWithInt:ADView_GONE withInt:ADView_VISIBILITY_MASK];
+  }
+  else {
+    [self setFlagsWithInt:ADView_VISIBLE withInt:ADView_VISIBILITY_MASK];
+  }
 }
 
 - (bool)onTouchEventWithADMotionEvent:(ADMotionEvent *)event {
