@@ -120,7 +120,8 @@ public class CorePlugin implements IPlugin, ICore {
 
 	@Override
 	public String getOrientation() {
-		return "portrait";
+		org.teavm.jso.browser.Window window = org.teavm.jso.browser.Window.current(); 
+		return window.getInnerWidth() > window.getInnerHeight() ? "landscape" : "portrait";
 	}
 
 	@org.teavm.jso.JSBody(params = {}, script = "return window.getScreenWidth();")
@@ -188,6 +189,10 @@ public class CorePlugin implements IPlugin, ICore {
 			for (Object object : objects) {
 	        	if (object instanceof r.android.animation.Animator) {
 	        		((r.android.animation.Animator) object).end();
+	        	}
+	        	
+	        	if (object instanceof Runnable) {
+	        		((Runnable) object).run();
 	        	}
 	        }
 		}

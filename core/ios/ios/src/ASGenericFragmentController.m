@@ -3,6 +3,7 @@
 #import "CordovaActivity.h"
 #include "Bundle.h"
 #include "IRoot.h"
+#include "EventBus.h"
 
 @implementation ASGenericFragmentController
 
@@ -59,6 +60,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     if (self.remeasure_) {
+     	[[self.rootFragment getEventBus] notifyObserversWithNSString:@"viewDidLayoutSubviews" withId:nil];
 		[self remeasure];
 	}
 }

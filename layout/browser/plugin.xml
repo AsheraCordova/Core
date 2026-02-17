@@ -51,6 +51,7 @@
      <source-file src="tsc/src/web/widget/TextAreaImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/TextViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ToggleButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/VideoViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ViewGroupImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ViewImpl.ts" target-dir="tsc/src/web/widget"/>

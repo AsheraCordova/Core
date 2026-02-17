@@ -575,6 +575,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxWidth").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("style").withType("string").withStylePriority(0));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("reappyStyleOnOrientationChange").withType("boolean").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("errorStyle").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validateForm").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validation").withType("array").withArrayType("string"));
@@ -1740,6 +1741,15 @@ if (objValue instanceof java.util.List) {
 
 
 		setStyle(w, view, objValue);
+
+
+
+			}
+			break;
+		case "reappyStyleOnOrientationChange": {
+
+
+		reappyStyleOnOrientationChange(w, objValue);
 
 
 
@@ -5034,6 +5044,15 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
 			formElement.setNormalStyle((String) objValue);
 		}
 		setStyle(w, objValue);
+		
+		Object reappyStyleOnOrientationChange = w.getFromTempCache("reappyStyleOnOrientationChange");
+		if (Boolean.TRUE.equals(reappyStyleOnOrientationChange)) {
+			addOrientationEventListener(w, objValue);
+		}
+	}
+	
+	private static void reappyStyleOnOrientationChange(IWidget w, Object objValue) {
+		w.storeInTempCache("reappyStyleOnOrientationChange", objValue);
 	}
 
 	public static void setStyle(IWidget w, Object objValue) {
@@ -5459,4 +5478,32 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
 	    }
 	}
 
+
+	private static void addOrientationEventListener(IWidget w, Object objValue) {
+		Context context = (Context) w.getFragment().getRootActivity();
+		OrientationEventListener listener = new OrientationEventListener(context.getApplicationContext()) {
+		    @Override
+		    public void onOrientationChanged(int orientation) {
+		    	try {
+		    		
+			    	if ((orientation >= 45 && orientation < 135) || (orientation >= 225 && orientation < 315)) {
+			    		w.storeInTempCache("currentOrientation", "landscape");
+			        } else {
+			        	w.storeInTempCache("currentOrientation", "default");
+			        }
+			    	setStyle(w,objValue);
+		    	} finally {
+		    		w.storeInTempCache("currentOrientation", null);
+		    	}
+		    }
+		};
+		listener.enable();
+		w.storeInTempCache("reappyStyleOnOrientationChange", Boolean.FALSE);
+		w.getFragment().addDisposable(new Runnable() {
+			@Override
+			public void run() {
+				listener.disable();
+			}
+		});
+	}
 }

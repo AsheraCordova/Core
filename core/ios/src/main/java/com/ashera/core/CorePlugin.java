@@ -442,6 +442,10 @@ public class CorePlugin implements IPlugin, ICore {
 	        	if (object instanceof r.android.animation.Animator) {
 	        		((r.android.animation.Animator) object).end();
 	        	}
+	        	
+	        	if (object instanceof Runnable) {
+	        		((Runnable) object).run();
+	        	}
 	        }
 		}
 	}

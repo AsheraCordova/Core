@@ -71,6 +71,7 @@ function syncSwtRes() {
   		
   		cpx.copySync("../res/anim/*.*", swtResPath + "/res/anim");
   		cpx.copySync("../res/animator/*.*", swtResPath + "/res/animator");
+		cpx.copySync("../res/raw/*.*", swtResPath + "/res/raw");
 	}
 }
 
@@ -150,6 +151,7 @@ function syncWebRes() {
   		
   		cpx.copySync("../res/anim/*.*", webPath + "/res/anim");
   		cpx.copySync("../res/animator/*.*", webPath + "/res/animator");
+  		cpx.copySync("../res/raw/*.*", webAssetPath + "/www/res/raw");
 	}
 }
 

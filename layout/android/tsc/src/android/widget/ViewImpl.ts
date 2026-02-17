@@ -389,6 +389,7 @@ return valueArr;
 
 
 
+
 export class ValidationErrorDisplayTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -801,6 +802,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Expose({ name: "style" }))
 	style!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "reappyStyleOnOrientationChange" }))
+	reappyStyleOnOrientationChange_!:CommandAttr<boolean>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "errorStyle" }))
 	errorStyle!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -1022,6 +1026,7 @@ export abstract class ViewImpl<T> {
 		this.maxWidth = undefined;
 		this.maxHeight = undefined;
 		this.style = undefined;
+		this.reappyStyleOnOrientationChange_ = undefined;
 		this.errorStyle = undefined;
 		this.validateForm_ = undefined;
 		this.validation = undefined;
@@ -4209,6 +4214,20 @@ this.foregroundGravity.setTransformer('gravity');		return this.thisPointer;
 		this.style.setValue(value);
 		this.orderSet++;
 		this.style.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public reappyStyleOnOrientationChange(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.reappyStyleOnOrientationChange_ == null || this.reappyStyleOnOrientationChange_ == undefined) {
+			this.reappyStyleOnOrientationChange_ = new CommandAttr<boolean>();
+		}
+		
+		this.reappyStyleOnOrientationChange_.setSetter(true);
+		this.reappyStyleOnOrientationChange_.setValue(value);
+		this.orderSet++;
+		this.reappyStyleOnOrientationChange_.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

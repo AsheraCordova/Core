@@ -393,6 +393,9 @@ J2OBJC_IGNORE_DESIGNATED_END
       if ([object isKindOfClass:[ADAnimator class]]) {
         [((ADAnimator *) nil_chk(((ADAnimator *) object))) end];
       }
+      if ([JavaLangRunnable_class_() isInstance:object]) {
+        [((id<JavaLangRunnable>) nil_chk(((id<JavaLangRunnable>) cast_check(object, JavaLangRunnable_class_())))) run];
+      }
     }
   }
 }

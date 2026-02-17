@@ -129,7 +129,8 @@ public class CorePlugin implements IPlugin, ICore {
 
 	@Override
 	public String getOrientation() {
-		return "portrait";
+		Shell rootShell = com.ashera.common.ShellManager.getInstance().getRootShell();
+		return rootShell.getBounds().width > rootShell.getBounds().height ? "landscape" : "portrait";
 	}
 
 	@Override

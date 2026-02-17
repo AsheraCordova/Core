@@ -264,8 +264,15 @@ public class CorePlugin implements IPlugin, ICore {
 
 
 	@Override
-	public void releaseNativeResources(List<Object> object) {
-		
+	public void releaseNativeResources(List<Object> objects) {
+		if (objects != null) {
+			for (Object object : objects) {
+	        	
+	        	if (object instanceof Runnable) {
+	        		((Runnable) object).run();
+	        	}
+	        }
+		}
 	}
 
 

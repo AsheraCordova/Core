@@ -64,6 +64,7 @@
      <source-file src="src/com/ashera/layout/TableRowImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/TextViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ToggleButtonImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/VideoViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ViewGroupImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ViewGroupModelImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ViewImpl.java" target-dir="src/com/ashera/layout"/>
@@ -103,6 +104,7 @@
      <source-file src="tsc/src/android/widget/TableRowImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/TextViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ToggleButtonImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="tsc/src/android/widget/VideoViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ViewGroupImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ViewImpl.ts" target-dir="tsc/src/android/widget"/>

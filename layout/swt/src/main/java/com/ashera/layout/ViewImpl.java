@@ -244,6 +244,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationEnd").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationCancel").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationRepeat").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("reappyStyleOnOrientationChange").withType("boolean").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("cornerRadius").withType("dimensionfloat"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("id").withType("id"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelSyncEvents").withType("string"));
@@ -660,6 +661,15 @@ public class ViewImpl {
 
 
 		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationRepeat"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "reappyStyleOnOrientationChange": {
+
+
+		reappyStyleOnOrientationChange(w, objValue);
 
 
 
@@ -1768,6 +1778,15 @@ return getBottom(w);			}
 			formElement.setNormalStyle((String) objValue);
 		}
 		setStyle(w, objValue);
+		
+		Object reappyStyleOnOrientationChange = w.getFromTempCache("reappyStyleOnOrientationChange");
+		if (Boolean.TRUE.equals(reappyStyleOnOrientationChange)) {
+			addOrientationEventListener(w, objValue);
+		}
+	}
+	
+	private static void reappyStyleOnOrientationChange(IWidget w, Object objValue) {
+		w.storeInTempCache("reappyStyleOnOrientationChange", objValue);
 	}
 
 	public static void setStyle(IWidget w, Object objValue) {
@@ -4903,4 +4922,25 @@ break;}
 		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseUp, listener);
 		widget.storeInTempCache("AddTouchEventListener", listener);
 	}
+	
+	
+	private static void addOrientationEventListener(IWidget w, Object objValue) {
+		Shell rootShell = com.ashera.common.ShellManager.getInstance().getRootShell();
+		Listener listener = new Listener() {
+            @Override
+            public void handleEvent(Event event) {
+			    setStyle(w,objValue);
+			    w.getFragment().remeasure();
+            }
+		};
+		rootShell.addListener(org.eclipse.swt.SWT.Resize, listener);
+		w.getFragment().addDisposable(new Runnable() {
+			@Override
+			public void run() {
+				rootShell.removeListener(org.eclipse.swt.SWT.Resize, listener);				
+			}
+			
+		});
+	}
+
 }

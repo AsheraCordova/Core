@@ -248,6 +248,7 @@
      <source-file src="layout/android/src/com/ashera/layout/TableRowImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/TextViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ToggleButtonImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/VideoViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ViewGroupImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ViewGroupModelImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ViewImpl.java" target-dir="src/com/ashera/layout"/>
@@ -287,6 +288,7 @@
      <source-file src="layout/android/tsc/src/android/widget/TableRowImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/TextViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ToggleButtonImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="layout/android/tsc/src/android/widget/VideoViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ViewGroupImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ViewImpl.ts" target-dir="tsc/src/android/widget"/>
@@ -1113,6 +1115,8 @@
      <source-file src="core/ios/library/AndroidCore/src/ValueAnimator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ValueCallback.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ValueCallback.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/VideoView.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/VideoView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/View.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/View.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewConfiguration.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1474,6 +1478,7 @@
      <source-file src="layout/ios/tsc/src/ios/widget/UIProgressViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/UITextViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/UITextViewLabelImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="layout/ios/tsc/src/ios/widget/VideoViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ViewGroupImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ViewImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -1554,6 +1559,8 @@
      <source-file src="layout/ios/ios/src/UITextViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/UITextViewLabelImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/UITextViewLabelImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/VideoViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/VideoViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ViewGroupImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ViewGroupImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ViewGroupModelImpl.h" target-dir="LayoutPlugin/ios/src"/>
@@ -1689,6 +1696,7 @@
      <source-file src="layout/browser/tsc/src/web/widget/TextAreaImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/TextViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ToggleButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/VideoViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ViewGroupImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ViewImpl.ts" target-dir="tsc/src/web/widget"/>
@@ -1776,6 +1784,7 @@
      <source-file src="layout/swt/tsc/src/swt/widget/TextViewButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/TextViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ToggleButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/VideoViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ViewGroupImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ViewImpl.ts" target-dir="tsc/src/swt/widget"/>

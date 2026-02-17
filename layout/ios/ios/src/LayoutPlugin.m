@@ -42,6 +42,7 @@
 #include "UIProgressViewImpl.h"
 #include "UITextViewImpl.h"
 #include "UITextViewLabelImpl.h"
+#include "VideoViewImpl.h"
 #include "ViewGroupImpl.h"
 #include "ViewOnlyImpl.h"
 #include "ViewOverlayImpl.h"
@@ -137,6 +138,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASPopupWindowImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASAutoCompleteTextViewImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASRatingBarImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASVideoViewImpl_init());
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASViewGroupImpl_ClipPaddingMaskCommand_initWithNSString_(@"clipToPadding"));
 }
 

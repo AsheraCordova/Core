@@ -332,6 +332,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageValues").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("reappyStyleOnOrientationChange").withType("boolean").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outlineAmbientShadowColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outlineSpotShadowColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("cornerRadius").withType("dimensionfloat"));
@@ -840,6 +841,15 @@ if (checkIosVersion("13.0")) {
 
 
 		setInvalidateOnFrameChange(w, objValue);
+
+
+
+			}
+			break;
+		case "reappyStyleOnOrientationChange": {
+
+
+		reappyStyleOnOrientationChange(w, objValue);
 
 
 
@@ -2172,6 +2182,15 @@ return getMaxHeight(w);			}
 			formElement.setNormalStyle((String) objValue);
 		}
 		setStyle(w, objValue);
+		
+		Object reappyStyleOnOrientationChange = w.getFromTempCache("reappyStyleOnOrientationChange");
+		if (Boolean.TRUE.equals(reappyStyleOnOrientationChange)) {
+			addOrientationEventListener(w, objValue);
+		}
+	}
+	
+	private static void reappyStyleOnOrientationChange(IWidget w, Object objValue) {
+		w.storeInTempCache("reappyStyleOnOrientationChange", objValue);
 	}
 
 	public static void setStyle(IWidget w, Object objValue) {
@@ -5339,5 +5358,15 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	public static void nativeAddTouchEvent(IWidget widget) {
 		View view = (View) widget.asWidget();
 		view.setHasOnTouchEvent(true);
+	}
+
+	private static void addOrientationEventListener(IWidget w, Object objValue) {
+		w.getFragment().getEventBus().on("viewDidLayoutSubviews", new com.ashera.widget.bus.EventBusHandler("viewDidLayoutSubviews") {
+			@Override
+			protected void doPerform(Object payload) {
+				ViewImpl.setStyle(w, objValue);
+			}
+			
+		});
 	}
 }

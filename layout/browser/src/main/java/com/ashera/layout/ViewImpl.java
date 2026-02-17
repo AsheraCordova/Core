@@ -232,6 +232,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("reappyStyleOnOrientationChange").withType("boolean").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outlineAmbientShadowColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outlineSpotShadowColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("cornerRadius").withType("dimensionfloat"));
@@ -576,6 +577,15 @@ public class ViewImpl {
 
 
 		 setBottom(w, objValue);
+
+
+
+			}
+			break;
+		case "reappyStyleOnOrientationChange": {
+
+
+		reappyStyleOnOrientationChange(w, objValue);
 
 
 
@@ -2722,6 +2732,15 @@ break;}
 			formElement.setNormalStyle((String) objValue);
 		}
 		setStyle(w, objValue);
+		
+		Object reappyStyleOnOrientationChange = w.getFromTempCache("reappyStyleOnOrientationChange");
+		if (Boolean.TRUE.equals(reappyStyleOnOrientationChange)) {
+			addOrientationEventListener(w, objValue);
+		}
+	}
+	
+	private static void reappyStyleOnOrientationChange(IWidget w, Object objValue) {
+		w.storeInTempCache("reappyStyleOnOrientationChange", objValue);
 	}
 
 	public static void setStyle(IWidget w, Object objValue) {
@@ -4814,6 +4833,26 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		HTMLElement rootElement = (HTMLElement) widget.getRootFragment().getRootWidget().asNativeWidget();
 		int y = event.getClientY() - rootElement.getBoundingClientRect().getTop();
 		return y;
+	}
+
+	
+	private static void addOrientationEventListener(IWidget w, Object objValue) {
+		org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event> listener = new  org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event>() {
+			@Override
+			public void handleEvent(org.teavm.jso.dom.events.Event evt) {
+				setStyle(w, objValue);
+				w.getFragment().remeasure();	
+				
+			}
+		};
+		org.teavm.jso.browser.Window.current().addEventListener("resize", listener);
+		
+		w.getFragment().addDisposable(new Runnable() {
+			@Override
+			public void run() {
+				org.teavm.jso.browser.Window.current().removeEventListener("resize", listener);	
+			}
+		});
 	}
 
 }

@@ -12,9 +12,11 @@ repositories {
 
 dependencies {
 	def project_version = '1.0.0';
+	def vlcj_version = '4.7.2';
 	
 	// layouts
 	implementation "com.ashera:SWTLayouts:${project_version}"
+	implementation "uk.co.caprica<:vlcj:${vlcj_version}"
 
     
 }

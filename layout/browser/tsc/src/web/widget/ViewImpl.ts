@@ -181,6 +181,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -269,6 +270,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "bottom" }))
 	bottom!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "reappyStyleOnOrientationChange" }))
+	reappyStyleOnOrientationChange_!:CommandAttr<boolean>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "outlineAmbientShadowColor" }))
 	outlineAmbientShadowColor!:CommandAttr<string>| undefined;
@@ -479,6 +483,7 @@ export abstract class ViewImpl<T> {
 		this.right = undefined;
 		this.top = undefined;
 		this.bottom = undefined;
+		this.reappyStyleOnOrientationChange_ = undefined;
 		this.outlineAmbientShadowColor = undefined;
 		this.outlineSpotShadowColor = undefined;
 		this.cornerRadius = undefined;
@@ -1044,6 +1049,20 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		this.bottom.setValue(value);
 		this.orderSet++;
 		this.bottom.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public reappyStyleOnOrientationChange(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.reappyStyleOnOrientationChange_ == null || this.reappyStyleOnOrientationChange_ == undefined) {
+			this.reappyStyleOnOrientationChange_ = new CommandAttr<boolean>();
+		}
+		
+		this.reappyStyleOnOrientationChange_.setSetter(true);
+		this.reappyStyleOnOrientationChange_.setValue(value);
+		this.orderSet++;
+		this.reappyStyleOnOrientationChange_.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

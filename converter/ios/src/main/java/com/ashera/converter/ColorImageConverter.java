@@ -15,7 +15,6 @@
 //end - license
 package com.ashera.converter;
 
-import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

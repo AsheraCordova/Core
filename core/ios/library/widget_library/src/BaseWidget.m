@@ -859,6 +859,9 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 
 - (bool)checkIfAttributeMatchesWithASWidgetAttributeValue:(ASWidgetAttributeValue *)attribute {
   NSString *orientation = ASPluginInvoker_getOrientation();
+  if ([self getFromTempCacheWithNSString:@"currentOrientation"] != nil) {
+    orientation = (NSString *) cast_chk([self getFromTempCacheWithNSString:@"currentOrientation"], [NSString class]);
+  }
   int32_t screenWidth = ASPluginInvoker_getScreenWidth();
   int32_t screenHeight = ASPluginInvoker_getScreenHeight();
   bool orientationCheck = [((NSString *) nil_chk([((ASWidgetAttributeValue *) nil_chk(attribute)) getOrientation])) isEqual:@"default"] || [((NSString *) nil_chk([attribute getOrientation])) isEqual:orientation];
