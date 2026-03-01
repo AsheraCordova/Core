@@ -94,6 +94,7 @@
      <source-file src="res/layout/error.xml" target-dir="res/layout"/>
      <source-file src="res/layout/erroritem.xml" target-dir="res/layout"/>
      <source-file src="res/layout/error_detail.xml" target-dir="res/layout"/>
+     <source-file src="res/values/core_strings.xml" target-dir="res/values"/>
      <!-- res end -->
       <!-- start tsc -->
      <source-file src="tsc/package.json" target-dir="tsc"/>

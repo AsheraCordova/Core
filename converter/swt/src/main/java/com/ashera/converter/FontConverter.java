@@ -77,7 +77,7 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
 		default:
 			// handle custom font
 			if (value.startsWith("@font")) {
-				Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");
+				Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-_]+)");
 				Matcher matcher = pattern.matcher(value);
 				boolean matches = matcher.matches();
 
@@ -87,6 +87,11 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
 					for (Object font : fonts) {
 						String fontKey = getFontKey(font.toString());
 						if (fontKey != null) {
+							if (fragment.getRootDirectory() != null) {
+								String rootDir = FileUtils.getSlashAppendedDirectoryName(fragment.getRootDirectory());
+								String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(rootDir + "res/font/" + bundle.getProperty(fontKey + "_android"), fragment);
+								loadFont(cordovaFileUri, null);
+							}
 							fontDescriptors.put(fontKey,
 									new FontDescriptor(bundle.getProperty(font.toString()), NORMAL_FONT_TRAIT));
 						}
@@ -115,8 +120,15 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
 	}
 	// end - body
 
-	private Properties readProps(String name, IFragment fragment) {
-		return FileUtils.loadPropertiesFromClassPath("font/font_" + name + ".properties");
+    private Properties readProps(String name, IFragment fragment) {
+    	String fileName = "font/font_" + name + ".properties";
+    	if (fragment.getRootDirectory() == null) {
+			return FileUtils.loadPropertiesFromClassPath(fileName);
+    	} else {
+    		String rootDir = FileUtils.getSlashAppendedDirectoryName(fragment.getRootDirectory() );
+			String fileStr = com.ashera.widget.PluginInvoker.readCdvDataAsString(rootDir, "resources/" + fileName, fragment);
+			return com.ashera.utils.ResourceBundleUtils.readStringAsProperties(fileStr);
+    	}
 	}
 
 	private String getFontKey(String font) {
@@ -140,7 +152,9 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
 				java.nio.file.Files.copy(src.toPath(), dest.toPath());
 			}
 			org.eclipse.swt.widgets.Display.getDefault().loadFont(dest.getAbsolutePath());
-			fontDescriptors.put("normal_400", new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
+			if (fontDescriptors != null) {
+				fontDescriptors.put("normal_400", new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
+			}
 			inputStream.close();
 		} catch (Exception e) {
 			throw new RuntimeException(e);

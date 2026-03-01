@@ -52,7 +52,7 @@ public class FontConverter implements IConverter<Typeface, String> {
 				int identifier = context.getResources().getIdentifier(key1, "font", context.getPackageName());
 				return ResourcesCompat.getFont(context, identifier);
 			} else {
-				Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");
+				Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-_]+)");
 				Matcher matcher = pattern.matcher(value);
 				boolean matches = matcher.matches();
 

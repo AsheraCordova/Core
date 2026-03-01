@@ -31,6 +31,7 @@
  @public
   IOSObjectArray *mStateSets_;
   IOSObjectArray *mDrawables_;
+  WEAK_ id currentMutatedDrawble_;
   int32_t mNumChildren_;
 }
 
@@ -46,6 +47,10 @@ __attribute__((unused)) static int32_t ADStateListDrawable_addChildWithADDrawabl
 __attribute__((unused)) static int32_t ADStateListDrawable_getChildCount(ADStateListDrawable *self);
 
 @implementation ADStateListDrawable
+
+- (void)setCurrentMutatedDrawbleWithId:(id)currentMutatedDrawble {
+  self->currentMutatedDrawble_ = currentMutatedDrawble;
+}
 
 - (id<JavaUtilList>)getAllDrawables {
   if (mDrawables_ == nil) {
@@ -72,6 +77,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getDrawable {
+  if (currentMutatedDrawble_ != nil) {
+    return currentMutatedDrawble_;
+  }
   ADDrawable *currentDrawable = JreRetainedLocalValue([self getCurrentDrawable]);
   if (currentDrawable == nil) {
     return nil;
@@ -196,6 +204,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (void)__javaClone:(ADStateListDrawable *)original {
+  [super __javaClone:original];
+  [currentMutatedDrawble_ release];
+}
+
 - (void)dealloc {
   RELEASE_(mStateSets_);
   RELEASE_(mDrawables_);
@@ -204,56 +217,59 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 2, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x10, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
     { NULL, "LADDrawable;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x11, 5, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "I", 0x0, 9, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 8, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 11, 12, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 13, 14, -1, -1, -1, -1 },
-    { NULL, "I", 0x0, 15, 12, -1, -1, -1, -1 },
+    { NULL, "I", 0x11, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 10, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 9, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 12, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x0, 16, 13, -1, -1, -1, -1 },
     { NULL, "I", 0x11, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 16, 12, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 17, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 17, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(getAllDrawables);
-  methods[1].selector = @selector(init);
-  methods[2].selector = @selector(getDrawable);
-  methods[3].selector = @selector(setDrawableWithId:);
-  methods[4].selector = @selector(getCapacity);
-  methods[5].selector = @selector(addStateWithIntArray:withADDrawable:);
-  methods[6].selector = @selector(getCurrentDrawable);
-  methods[7].selector = @selector(isStateful);
-  methods[8].selector = @selector(addChildWithADDrawable:);
-  methods[9].selector = @selector(growArrayWithInt:withInt:);
-  methods[10].selector = @selector(addStateSetWithIntArray:withADDrawable:);
-  methods[11].selector = @selector(growArrayStateSetWithInt:withInt:);
-  methods[12].selector = @selector(onStateChangeWithIntArray:);
-  methods[13].selector = @selector(selectDrawableWithInt:);
-  methods[14].selector = @selector(indexOfStateSetWithIntArray:);
-  methods[15].selector = @selector(getChildCount);
-  methods[16].selector = @selector(isWildCardWithIntArray:);
-  methods[17].selector = @selector(stateSetMatchesWithIntArray:withIntArray:);
-  methods[18].selector = @selector(setBoundsWithInt:withInt:withInt:withInt:);
+  methods[0].selector = @selector(setCurrentMutatedDrawbleWithId:);
+  methods[1].selector = @selector(getAllDrawables);
+  methods[2].selector = @selector(init);
+  methods[3].selector = @selector(getDrawable);
+  methods[4].selector = @selector(setDrawableWithId:);
+  methods[5].selector = @selector(getCapacity);
+  methods[6].selector = @selector(addStateWithIntArray:withADDrawable:);
+  methods[7].selector = @selector(getCurrentDrawable);
+  methods[8].selector = @selector(isStateful);
+  methods[9].selector = @selector(addChildWithADDrawable:);
+  methods[10].selector = @selector(growArrayWithInt:withInt:);
+  methods[11].selector = @selector(addStateSetWithIntArray:withADDrawable:);
+  methods[12].selector = @selector(growArrayStateSetWithInt:withInt:);
+  methods[13].selector = @selector(onStateChangeWithIntArray:);
+  methods[14].selector = @selector(selectDrawableWithInt:);
+  methods[15].selector = @selector(indexOfStateSetWithIntArray:);
+  methods[16].selector = @selector(getChildCount);
+  methods[17].selector = @selector(isWildCardWithIntArray:);
+  methods[18].selector = @selector(stateSetMatchesWithIntArray:withIntArray:);
+  methods[19].selector = @selector(setBoundsWithInt:withInt:withInt:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "mStateSets_", "[[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDrawables_", "[LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "currentMutatedDrawble_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mNumChildren_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "()Ljava/util/List<Ljava/lang/Object;>;", "setDrawable", "LNSObject;", "addState", "[ILADDrawable;", "addChild", "LADDrawable;", "growArray", "II", "addStateSet", "growArrayStateSet", "onStateChange", "[I", "selectDrawable", "I", "indexOfStateSet", "isWildCard", "stateSetMatches", "[I[I", "setBounds", "IIII" };
-  static const J2ObjcClassInfo _ADStateListDrawable = { "StateListDrawable", "r.android.graphics.drawable", ptrTable, methods, fields, 7, 0x1, 19, 3, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setCurrentMutatedDrawble", "LNSObject;", "()Ljava/util/List<Ljava/lang/Object;>;", "setDrawable", "addState", "[ILADDrawable;", "addChild", "LADDrawable;", "growArray", "II", "addStateSet", "growArrayStateSet", "onStateChange", "[I", "selectDrawable", "I", "indexOfStateSet", "isWildCard", "stateSetMatches", "[I[I", "setBounds", "IIII" };
+  static const J2ObjcClassInfo _ADStateListDrawable = { "StateListDrawable", "r.android.graphics.drawable", ptrTable, methods, fields, 7, 0x1, 20, 4, -1, -1, -1, -1, -1 };
   return &_ADStateListDrawable;
 }
 

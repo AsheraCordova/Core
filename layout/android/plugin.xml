@@ -30,6 +30,8 @@
      <!-- res end -->
 	 <!-- start src -->
      <source-file src="src/com/ashera/layout/AndroidLayoutsCordovaPlugin.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/AudioView.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/AudioViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/AutoCompleteTextViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/CheckBoxImpl.java" target-dir="src/com/ashera/layout"/>
@@ -75,6 +77,7 @@
      <!-- src end -->
      
      <!-- start tsc -->
+     <source-file src="tsc/src/android/widget/AudioViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ButtonImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/CheckBoxImpl.ts" target-dir="tsc/src/android/widget"/>

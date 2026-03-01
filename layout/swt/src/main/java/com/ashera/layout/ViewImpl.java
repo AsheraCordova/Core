@@ -3333,7 +3333,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	//end - viewcode
     
     
-    private static void setAttributeUnderTest(IWidget w, Object objValue) {
+    public static void setAttributeUnderTest(IWidget w, Object objValue) {
        Shell[] shells = Display.getDefault().getShells();
        for (Shell shell : shells) {
            if (shell.getData() instanceof com.ashera.plugin.IPlugin) {

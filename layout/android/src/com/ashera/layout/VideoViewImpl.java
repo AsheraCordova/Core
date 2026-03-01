@@ -924,17 +924,22 @@ public java.util.Map<String, Object> getOnInfoEventObj(MediaPlayer mp,int what,i
 	}
 	
 	private void setVideoPath(Object objValue) {
-		String videoPath = (String)objValue;
+		String videoPath = (String) objValue;
 		if (videoPath.startsWith("http:") || videoPath.startsWith("https:") || videoPath.startsWith("content:")) {
 			videoView.setVideoPath(videoPath);
-		} else if (fragment.getRootDirectory() == null) {
-			Context context = videoView.getContext();
-			int id = context.getResources().getIdentifier(videoPath.substring(0, videoPath.indexOf(".")), "raw", context.getPackageName());
-			videoView.setVideoPath("android.resource://" + context.getPackageName() + "/" + id);
-		} else {
-			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(fragment.getRootDirectory() + "/res/raw/" + videoPath, fragment);
+		} else if (fragment.getRootDirectory() != null) {
+			String cordovaFileUri = com.ashera.widget.PluginInvoker
+					.resolveCDVFileLocation(fragment.getRootDirectory() + "/res/raw/" + videoPath, fragment);
 			videoView.setVideoPath(cordovaFileUri);
-		}	
+		} else if (videoPath.startsWith("cordova.file")) {
+			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(videoPath, fragment);
+			videoView.setVideoPath(cordovaFileUri);
+		} else {
+			Context context = videoView.getContext();
+			int id = context.getResources().getIdentifier(videoPath.substring(0, videoPath.indexOf(".")), "raw",
+					context.getPackageName());
+			videoView.setVideoPath("android.resource://" + context.getPackageName() + "/" + id);
+		}
 	}
 
 	@Override

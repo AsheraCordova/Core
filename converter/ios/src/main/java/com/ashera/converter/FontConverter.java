@@ -84,7 +84,7 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 		default:
 			// handle custom font
 			if (value.startsWith("@font")) {
-				Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");
+				Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-_]+)");
 				Matcher matcher = pattern.matcher(value);
 				boolean matches = matcher.matches();
 
@@ -94,6 +94,11 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 					for (Object font : fonts) {
 						String fontKey = getFontKey(font.toString());
 						if (fontKey != null) {
+							if (fragment.getRootDirectory() != null) {
+								String rootDir = FileUtils.getSlashAppendedDirectoryName(fragment.getRootDirectory());
+								String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(rootDir + "res/font/" + bundle.getProperty(fontKey + "_android"), fragment);
+								loadFont(cordovaFileUri, null);
+							}
 							fontDescriptors.put(fontKey,
 									new FontDescriptor(bundle.getProperty(font.toString()), NORMAL_FONT_TRAIT));
 						}
@@ -145,7 +150,9 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 	
 	private void loadFont(String cordovaFileUri, Map<String, FontDescriptor> fontDescriptors) {
 		String fontName = navtiveGetFont(cordovaFileUri);
-		fontDescriptors.put("normal_400", new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
+		if (fontDescriptors != null) {
+			fontDescriptors.put("normal_400", new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
+		}
 	}	
 
 	private native String navtiveGetFont(String fontFilePath)/*-[

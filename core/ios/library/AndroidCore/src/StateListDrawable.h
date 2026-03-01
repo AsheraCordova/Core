@@ -62,6 +62,8 @@
                  withInt:(int32_t)right
                  withInt:(int32_t)bottom;
 
+- (void)setCurrentMutatedDrawbleWithId:(id)currentMutatedDrawble;
+
 - (void)setDrawableWithId:(id)drawable;
 
 + (bool)stateSetMatchesWithIntArray:(IOSIntArray *)stateSpec

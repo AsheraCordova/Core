@@ -47,6 +47,8 @@
 
 - (NSString *)getId;
 
+- (bool)isStopExecution;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASAttributeCommand)

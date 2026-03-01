@@ -30,9 +30,19 @@ import androidx.navigation.fragment.FragmentNavigator;
 
 public class MyNavHostFragment extends androidx.navigation.fragment.NavHostFragment{
     @Override
-    public void onCreate(android.os.Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        NavController navController = getNavController();
+    protected void onCreateNavController(NavController navController) {
+        super.onCreateNavController(navController);
+
+
+        createNavGraph(getNavController());
+    }
+
+    private void createNavGraph(NavController navController) {
+        IFragment parentFragment = (IFragment) getParentFragment();
+        if (parentFragment == null || parentFragment.getRootWidget() == null) {
+            return;
+        }
+
         String fileName = getArguments().getString("fileName");
         String rootDirectory = getArguments().getString("rootDirectory");
         String namespace = getArguments().getString("namespace");
@@ -41,7 +51,6 @@ public class MyNavHostFragment extends androidx.navigation.fragment.NavHostFragm
         FragmentNavigator fragmentNavigator = navController
                 .getNavigatorProvider()
                 .getNavigator(FragmentNavigator.class);
-        IFragment parentFragment = (IFragment) getParentFragment();
         String contentLocation = PluginInvoker.resolveCDVFileLocation(rootDirectory  + "/" + fileName, parentFragment);
         String contentHtml = null;
         try {

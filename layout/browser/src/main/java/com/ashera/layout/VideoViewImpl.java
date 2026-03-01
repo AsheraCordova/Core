@@ -804,18 +804,22 @@ public java.util.Map<String, Object> getOnErrorEventObj(MediaPlayer mp,int what,
     	video = (VideoElement) hTMLElement;
 	}
 	
-	
+    @org.teavm.jso.JSBody(params = { "key" }, script = "return localStorage.getItem(key);")
+    private static native String getLocalStorage(String key);
 	private void setVideoPath(Object objValue) {
 		HTMLElement source = org.teavm.jso.dom.html.HTMLDocument.current().createElement("source");
 		video.clear();
 		String videoPath = (String) objValue;
 		if (videoPath.startsWith("http:") || videoPath.startsWith("https:") || videoPath.startsWith("content:")) {
 			source.setAttribute("src", videoPath);
-		} else if (fragment.getRootDirectory() == null) {
-			source.setAttribute("src", "res/raw/" + videoPath);
-		} else {
+		} else if (fragment.getRootDirectory() != null) {
 			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(fragment.getRootDirectory() + "/res/raw/" + videoPath, fragment);
-			source.setAttribute("src", cordovaFileUri);
+			source.setAttribute("src", getLocalStorage(cordovaFileUri));
+		} else if (videoPath.startsWith("cordova.file")) {
+			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(videoPath, fragment);
+			source.setAttribute("src", getLocalStorage(cordovaFileUri));
+		} else {
+			source.setAttribute("src", "res/raw/" + videoPath);
 		}
 		
 		source.setAttribute("type", "video/mp4");

@@ -330,11 +330,11 @@ public class CorePlugin implements IPlugin, ICore {
 
 	@Override
 	public void enqueueTaskForEventLoop(Runnable runnable, long when) {
-		int delayInMills = (int) (when - System.currentTimeMillis());
+		long delayInMills = (when - System.currentTimeMillis());
 		if (delayInMills <= 0) {
 			Display.getDefault().asyncExec(runnable);
 		} else {
-			Display.getDefault().timerExec(delayInMills , runnable);
+			Display.getDefault().timerExec((int) delayInMills , runnable);
 		}
 	}
 

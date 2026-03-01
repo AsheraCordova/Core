@@ -8,6 +8,7 @@
 
 
 
+#include "AudioViewImpl.h"
 #include "AutoCompleteTextViewImpl.h"
 #include "ButtonImpl.h"
 #include "CheckBoxImpl.h"
@@ -138,6 +139,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASPopupWindowImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASAutoCompleteTextViewImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASRatingBarImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASAudioViewImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASVideoViewImpl_init());
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASViewGroupImpl_ClipPaddingMaskCommand_initWithNSString_(@"clipToPadding"));
 }

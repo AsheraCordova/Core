@@ -35,6 +35,7 @@
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -48,9 +49,10 @@
   methods[6].selector = @selector(executeAfterPostMeasure);
   methods[7].selector = @selector(getValueWithNSString:);
   methods[8].selector = @selector(getId);
+  methods[9].selector = @selector(isStopExecution);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "modifyValue", "LASIWidget;LNSObject;LNSString;LNSString;LNSObject;", "newInstance", "[LNSObject;", "updateArgs", "updatePhaseArgs", "setPriority", "I", "getValue", "LNSString;" };
-  static const J2ObjcClassInfo _ASAttributeCommand = { "AttributeCommand", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x609, 9, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASAttributeCommand = { "AttributeCommand", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x609, 10, 0, -1, -1, -1, -1, -1 };
   return &_ASAttributeCommand;
 }
 

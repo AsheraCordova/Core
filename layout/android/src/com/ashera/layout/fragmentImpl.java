@@ -899,7 +899,12 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 //end - fragment
 androidx.fragment.app.Fragment myfragment = null;
 private void addOrReplaceFragment(boolean add) {
-	if (this.name != null) {		
+    if (this.tag != null) {
+        androidx.fragment.app.FragmentManager manager = ((androidx.fragment.app.Fragment) getFragment()).getChildFragmentManager();
+        myfragment = manager.findFragmentByTag(this.tag);
+    }
+
+	if (myfragment == null && this.name != null) {		
 		switch (this.name) {
 		case "com.ashera.core.GenericFragment":
 			if (this.layout != null) {

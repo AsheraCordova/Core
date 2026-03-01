@@ -150,7 +150,7 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("typeface").withType("Spinner.font").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		ConverterFactory.register("Spinner.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("Spinner.textStyle").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withOrder(1).withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));

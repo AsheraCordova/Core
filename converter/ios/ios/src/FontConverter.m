@@ -150,7 +150,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     default:
     if ([((NSString *) nil_chk(value)) java_hasPrefix:@"@font"]) {
-      JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");
+      JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"@([a-z0-9\\-]+)\\/([a-z0-9\\-_]+)");
       JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:value];
       bool matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
       if (matches) {
@@ -159,6 +159,11 @@ J2OBJC_IGNORE_DESIGNATED_END
         for (id __strong font in nil_chk(fonts)) {
           NSString *fontKey = ASFontConverter_getFontKeyWithNSString_(self, [nil_chk(font) description]);
           if (fontKey != nil) {
+            if ([fragment getRootDirectory] != nil) {
+              NSString *rootDir = ASFileUtils_getSlashAppendedDirectoryNameWithNSString_([fragment getRootDirectory]);
+              NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(JreStrcat("$$$", rootDir, @"res/font/", [bundle getPropertyWithNSString:JreStrcat("$$", fontKey, @"_android")]), fragment);
+              ASFontConverter_loadFontWithNSString_withJavaUtilMap_(self, cordovaFileUri, nil);
+            }
             (void) [fontDescriptors putWithId:fontKey withId:new_ASFontDescriptor_initWithNSString_withInt_([bundle getPropertyWithNSString:[font description]], ASFontConverter_NORMAL_FONT_TRAIT)];
           }
         }
@@ -292,7 +297,9 @@ NSString *ASFontConverter_getFontKeyWithNSString_(ASFontConverter *self, NSStrin
 
 void ASFontConverter_loadFontWithNSString_withJavaUtilMap_(ASFontConverter *self, NSString *cordovaFileUri, id<JavaUtilMap> fontDescriptors) {
   NSString *fontName = ASFontConverter_navtiveGetFontWithNSString_(self, cordovaFileUri);
-  (void) [((id<JavaUtilMap>) nil_chk(fontDescriptors)) putWithId:@"normal_400" withId:new_ASFontDescriptor_initWithNSString_withInt_(fontName, ASFontConverter_NORMAL_FONT_TRAIT)];
+  if (fontDescriptors != nil) {
+    (void) [fontDescriptors putWithId:@"normal_400" withId:new_ASFontDescriptor_initWithNSString_withInt_(fontName, ASFontConverter_NORMAL_FONT_TRAIT)];
+  }
 }
 
 NSString *ASFontConverter_navtiveGetFontWithNSString_(ASFontConverter *self, NSString *fontFilePath) {

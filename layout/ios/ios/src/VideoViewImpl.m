@@ -125,6 +125,8 @@
 
 - (void)onError;
 
++ (void)initAudioSession OBJC_METHOD_FAMILY_NONE;
+
 @end
 
 J2OBJC_FIELD_SETTER(ASVideoViewImpl, onErrorListener_, id<ASVideoViewImpl_MediaPlayer_OnErrorListener>)
@@ -182,6 +184,8 @@ __attribute__((unused)) static void ASVideoViewImpl_onComplete(ASVideoViewImpl *
 __attribute__((unused)) static void ASVideoViewImpl_onPrepareWithInt_withInt_(ASVideoViewImpl *self, int32_t width, int32_t height);
 
 __attribute__((unused)) static void ASVideoViewImpl_onError(ASVideoViewImpl *self);
+
+__attribute__((unused)) static void ASVideoViewImpl_initAudioSession(void);
 
 @interface ASVideoViewImpl_VideoViewExt () {
  @public
@@ -409,6 +413,8 @@ __attribute__((unused)) static ASVideoViewImpl_$Lambda$2 *new_ASVideoViewImpl_$L
 
 __attribute__((unused)) static ASVideoViewImpl_$Lambda$2 *create_ASVideoViewImpl_$Lambda$2_initWithASVideoViewImpl_(ASVideoViewImpl *outer$);
 
+
+J2OBJC_INITIALIZED_DEFN(ASVideoViewImpl)
 
 NSString *ASVideoViewImpl_LOCAL_NAME = @"VideoView";
 NSString *ASVideoViewImpl_GROUP_NAME = @"VideoView";
@@ -754,6 +760,10 @@ context:(void *)context {
   ASVideoViewImpl_onError(self);
 }
 
++ (void)initAudioSession {
+  ASVideoViewImpl_initAudioSession();
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
@@ -798,6 +808,7 @@ context:(void *)context {
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 37, 38, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -844,6 +855,7 @@ context:(void *)context {
   methods[39].selector = @selector(onComplete);
   methods[40].selector = @selector(onPrepareWithInt:withInt:);
   methods[41].selector = @selector(onError);
+  methods[42].selector = @selector(initAudioSession);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 39, -1, -1 },
@@ -857,8 +869,17 @@ context:(void *)context {
     { "avplayerVC_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setOnErrorListener", "LASVideoViewImpl_MediaPlayer_OnErrorListener;", "setOnCompletionListener", "LASVideoViewImpl_MediaPlayer_OnCompletionListener;", "setOnPreparedListener", "LASVideoViewImpl_MediaPlayer_OnPreparedListener;", "checkIosVersion", "setId", "setVisible", "Z", "nativeMakeFrameForChildWidget", "IIII", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "LNSObject;LNSObject;", "setVideoPath", "LNSObject;", "nativeSetVideoPathReource", "nativeSetVideoPathLocal", "nativeSetVideoPathRemote", "showMediaControl", "nativeShowMediaControl", "seekTo", "nativeSeekTo", "I", "onPrepare", "II", &ASVideoViewImpl_LOCAL_NAME, &ASVideoViewImpl_GROUP_NAME, "LASVideoViewImpl_VideoViewExt;LASVideoViewImpl_MediaPlayer;LASVideoViewImpl_OnPreparedListener;LASVideoViewImpl_OnCompletionListener;LASVideoViewImpl_OnErrorListener;LASVideoViewImpl_DeallocHandler;" };
-  static const J2ObjcClassInfo _ASVideoViewImpl = { "VideoViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 42, 9, -1, 41, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASVideoViewImpl = { "VideoViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 43, 9, -1, 41, -1, -1, -1 };
   return &_ASVideoViewImpl;
+}
+
++ (void)initialize {
+  if (self == [ASVideoViewImpl class]) {
+    {
+      ASVideoViewImpl_initAudioSession();
+    }
+    J2OBJC_SET_INITIALIZED(ASVideoViewImpl)
+  }
 }
 
 @end
@@ -957,12 +978,16 @@ void ASVideoViewImpl_setVideoPathWithId_(ASVideoViewImpl *self, id objValue) {
   if ([((NSString *) nil_chk(videoPath)) java_hasPrefix:@"http:"] || [videoPath java_hasPrefix:@"https:"] || [videoPath java_hasPrefix:@"content:"]) {
     ASVideoViewImpl_nativeSetVideoPathRemoteWithNSString_(self, videoPath);
   }
-  else if ([((id<ASIFragment>) nil_chk(self->fragment_)) getRootDirectory] == nil) {
-    ASVideoViewImpl_nativeSetVideoPathReourceWithNSString_(self, JreStrcat("$$", @"raw/", videoPath));
-  }
-  else {
+  else if ([((id<ASIFragment>) nil_chk(self->fragment_)) getRootDirectory] != nil) {
     NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(JreStrcat("$$$", [((id<ASIFragment>) nil_chk(self->fragment_)) getRootDirectory], @"/res/raw/", videoPath), self->fragment_);
     ASVideoViewImpl_nativeSetVideoPathLocalWithNSString_(self, cordovaFileUri);
+  }
+  else if ([videoPath java_hasPrefix:@"cordova.file"]) {
+    NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(videoPath, self->fragment_);
+    ASVideoViewImpl_nativeSetVideoPathLocalWithNSString_(self, cordovaFileUri);
+  }
+  else {
+    ASVideoViewImpl_nativeSetVideoPathReourceWithNSString_(self, JreStrcat("$$", @"raw/", videoPath));
   }
 }
 
@@ -1044,6 +1069,13 @@ void ASVideoViewImpl_onError(ASVideoViewImpl *self) {
   if (self->onErrorListener_ != nil) {
     [self->onErrorListener_ onErrorWithASVideoViewImpl_MediaPlayer:new_ASVideoViewImpl_MediaPlayer_init() withInt:1 withInt:0];
   }
+}
+
+void ASVideoViewImpl_initAudioSession() {
+  ASVideoViewImpl_initialize();
+  NSError *error = nil;
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+  [[AVAudioSession sharedInstance] setActive:YES error:&error];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASVideoViewImpl)

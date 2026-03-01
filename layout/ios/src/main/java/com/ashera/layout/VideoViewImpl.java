@@ -836,11 +836,14 @@ public java.util.Map<String, Object> getOnErrorEventObj(MediaPlayer mp,int what,
 		String videoPath = (String) objValue;
 		if (videoPath.startsWith("http:") || videoPath.startsWith("https:") || videoPath.startsWith("content:")) {
 			nativeSetVideoPathRemote(videoPath);
-		} else if (fragment.getRootDirectory() == null) {
-			nativeSetVideoPathReource("raw/" + videoPath);
-		} else {
+		} else if (fragment.getRootDirectory() != null) {
 			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(fragment.getRootDirectory() + "/res/raw/" + videoPath, fragment);
 			nativeSetVideoPathLocal(cordovaFileUri);
+		} else if (videoPath.startsWith("cordova.file")) {
+			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(videoPath, fragment);
+			nativeSetVideoPathLocal(cordovaFileUri);
+		} else {
+			nativeSetVideoPathReource("raw/" + videoPath);
 		}
 	}
 	
@@ -988,4 +991,14 @@ public java.util.Map<String, Object> getOnErrorEventObj(MediaPlayer mp,int what,
 			onErrorListener.onError(new MediaPlayer(), 1, 0);
 		}
 	}
+	
+	static {
+		initAudioSession();
+	}
+
+	private native static void initAudioSession() /*-[
+		NSError *error = nil;
+		[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+		[[AVAudioSession sharedInstance] setActive:YES error:&error];
+	]-*/;
 }

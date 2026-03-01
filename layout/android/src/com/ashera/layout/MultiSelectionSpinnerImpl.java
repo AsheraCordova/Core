@@ -149,7 +149,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("typeface").withType("com.ashera.layout.MultiSelectionSpinner.font").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		ConverterFactory.register("com.ashera.layout.MultiSelectionSpinner.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("com.ashera.layout.MultiSelectionSpinner.textStyle").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withOrder(1).withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));

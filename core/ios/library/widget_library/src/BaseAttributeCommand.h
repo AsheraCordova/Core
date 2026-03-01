@@ -45,7 +45,11 @@
 
 - (id)getValueWithNSString:(NSString *)attributeName;
 
+- (bool)isStopExecution;
+
 - (void)setPriorityWithInt:(int32_t)priority;
+
+- (void)setStopExecutionWithBoolean:(bool)stopExecution;
 
 - (void)updatePhaseArgsWithNSObjectArray:(IOSObjectArray *)args;
 

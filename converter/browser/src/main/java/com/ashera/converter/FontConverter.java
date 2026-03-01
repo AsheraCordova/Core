@@ -73,7 +73,7 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
         default:
             // handle custom font
             if (value.startsWith("@font")) {
-                Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");  
+                Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-_]+)");  
                 Matcher matcher = pattern.matcher(value);  
                 boolean matches = matcher.matches();   
                 

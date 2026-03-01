@@ -108,6 +108,9 @@ J2OBJC_IGNORE_DESIGNATED_END
             [((id<ASAttributeCommand>) nil_chk(command)) updatePhaseArgsWithNSObjectArray:args];
           }
           finalValue = [((id<ASAttributeCommand>) nil_chk(command)) modifyValueWithASIWidget:widget withId:nativeWidget withNSString:phase withNSString:attributeName_ withId:finalValue];
+          if ([command isStopExecution]) {
+            break;
+          }
         }
       }
     }

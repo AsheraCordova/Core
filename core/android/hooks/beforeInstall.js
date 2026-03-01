@@ -26,33 +26,6 @@ var filestoreplace = [
     "platforms/android/app/src/main/assets/www/cordova.js",
     "throw new Error('Unknown event action ' + action);",
     "cordova.fireDocumentEvent(action, msg);break;",
-     "platforms/android/app/src/main/res/values/strings.xml",
-    `<string name="activity_name">@string/launcher_name</string>`,
-    `<string name="activity_name">@string/launcher_name</string>
-    <string name="error_text">There were errors on the page. Click here to view the same.</string>
-    <string name="required_error_message">Should not be empty.</string>
-    <string name="max_length_error_message">Maximum number of characters allowed is %d.</string>
-    <string name="min_length_error_message">Minimum number of characters required is %d.</string>
-    <string name="max_value_error_message">Max value allowed is %d.</string>
-    <string name="min_value_error_message">Min value required is %d.</string>
-    <string name="pattern_error_message">Invalid format specified.</string>
-    <string name="url_error_message">Please enter valid url.</string>
-    <string name="alphabets_error_message">Please enter only Alphabets.</string>
-    <string name="alphanumeric_error_message">Please enter only alphanumeric characters.</string>
-    <string name="date_error_message">Invalid date format.</string>
-    <string name="time_error_message">Invalid time format.</string>
-    <string name="inrange_error_message">Number must be between %d and %d.</string>
-    <string name="email_error_message">Invalid email address.</string>
-    <string name="mobile_error_message">Invalid Mobile number.</string>
-    <string name="number_error_message">Must be number.</string>
-    <string name="positivenumber_error_message">Should be positive integer.</string>
-    <string name="pincode_error_message">Must be valid pincode.</string>
-    <string name="length_between_error_message">Number length must be between %d and %d.</string>
-    <string name="length_atmost_error_message">Number should be atmost %d.</string>
-    <string name="length_atleast_error_message">Number should be atleast %d.</string>
-    <string name="strongpassword_error_message">Password should contains atleast 8 characters, one uppercase letter, number and special character.</string>
-    <string name="default_textOff">OFF</string>
-    <string name="default_textOn">ON</string>`,
 	"node_modules/cordova-common/src/ConfigChanges/ConfigFile.js",
     "function resolveConfigFilePath (project_dir, platform, file) {",
     "function resolveConfigFilePath (project_dir, platform, file) {if (file === 'config.xml' && platform === 'browser') {return path.join(project_dir, 'config.xml');}",

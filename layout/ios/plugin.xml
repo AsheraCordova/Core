@@ -18,6 +18,7 @@
     </config-file>
 
 	<!-- start tsc -->
+     <source-file src="tsc/src/ios/widget/AudioViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ButtonImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/CheckBoxImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -62,6 +63,8 @@
 	<!-- start ios -->
      <header-file src="ios/src/AndroidLayoutsCordovaPlugin.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/AndroidLayoutsCordovaPlugin.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/AudioViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="ios/src/AudioViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/AutoCompleteTextViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/AutoCompleteTextViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ButtonImpl.h" target-dir="LayoutPlugin/ios/src"/>

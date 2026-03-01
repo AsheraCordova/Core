@@ -23,6 +23,13 @@
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
+@interface ASBaseAttributeCommand () {
+ @public
+  bool stopExecution_;
+}
+
+@end
+
 @implementation ASBaseAttributeCommand
 
 - (instancetype)initWithNSString:(NSString *)id_ {
@@ -53,6 +60,14 @@
   return id__;
 }
 
+- (bool)isStopExecution {
+  return stopExecution_;
+}
+
+- (void)setStopExecutionWithBoolean:(bool)stopExecution {
+  self->stopExecution_ = stopExecution;
+}
+
 - (void)dealloc {
   RELEASE_(phase_);
   RELEASE_(id__);
@@ -68,6 +83,8 @@
     { NULL, "V", 0x81, 3, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 5, 0, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -79,14 +96,17 @@
   methods[4].selector = @selector(updatePhaseArgsWithNSObjectArray:);
   methods[5].selector = @selector(getValueWithNSString:);
   methods[6].selector = @selector(getId);
+  methods[7].selector = @selector(isStopExecution);
+  methods[8].selector = @selector(setStopExecutionWithBoolean:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "priority_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "phase_", "LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "id__", "LNSString;", .constantValue.asLong = 0, 0x4, 6, -1, -1, -1 },
+    { "id__", "LNSString;", .constantValue.asLong = 0, 0x4, 8, -1, -1, -1 },
+    { "stopExecution_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LNSString;", "setPriority", "I", "updatePhaseArgs", "[LNSObject;", "getValue", "id" };
-  static const J2ObjcClassInfo _ASBaseAttributeCommand = { "BaseAttributeCommand", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 7, 3, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LNSString;", "setPriority", "I", "updatePhaseArgs", "[LNSObject;", "getValue", "setStopExecution", "Z", "id" };
+  static const J2ObjcClassInfo _ASBaseAttributeCommand = { "BaseAttributeCommand", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 9, 4, -1, -1, -1, -1, -1 };
   return &_ASBaseAttributeCommand;
 }
 

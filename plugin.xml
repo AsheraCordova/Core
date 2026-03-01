@@ -94,6 +94,7 @@
      <source-file src="core/android/res/layout/error.xml" target-dir="res/layout"/>
      <source-file src="core/android/res/layout/erroritem.xml" target-dir="res/layout"/>
      <source-file src="core/android/res/layout/error_detail.xml" target-dir="res/layout"/>
+     <source-file src="core/android/res/values/core_strings.xml" target-dir="res/values"/>
      <!-- res end -->
       <!-- start tsc -->
      <source-file src="core/android/tsc/package.json" target-dir="tsc"/>
@@ -214,6 +215,8 @@
      <!-- res end -->
 	 <!-- start src -->
      <source-file src="layout/android/src/com/ashera/layout/AndroidLayoutsCordovaPlugin.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/AudioView.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/AudioViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/AutoCompleteTextViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/CheckBoxImpl.java" target-dir="src/com/ashera/layout"/>
@@ -259,6 +262,7 @@
      <!-- src end -->
      
      <!-- start tsc -->
+     <source-file src="layout/android/tsc/src/android/widget/AudioViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ButtonImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/CheckBoxImpl.ts" target-dir="tsc/src/android/widget"/>
@@ -1445,6 +1449,7 @@
     </config-file>
 
 	<!-- start tsc -->
+     <source-file src="layout/ios/tsc/src/ios/widget/AudioViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ButtonImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/CheckBoxImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -1489,6 +1494,8 @@
 	<!-- start ios -->
      <header-file src="layout/ios/ios/src/AndroidLayoutsCordovaPlugin.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/AndroidLayoutsCordovaPlugin.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/AudioViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/AudioViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/AutoCompleteTextViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/AutoCompleteTextViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ButtonImpl.h" target-dir="LayoutPlugin/ios/src"/>
@@ -1665,6 +1672,7 @@
   	</js-module>
   	
   	<!-- start tsc -->
+     <source-file src="layout/browser/tsc/src/web/widget/AudioViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ButtonImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/CheckBoxImpl.ts" target-dir="tsc/src/web/widget"/>
@@ -1746,6 +1754,7 @@
    	<framework src="layout/swt/layout.gradle" custom="true" type="gradleReference" />
    	
    	 <!-- start tsc -->
+     <source-file src="layout/swt/tsc/src/swt/widget/AudioViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/CComboImpl.ts" target-dir="tsc/src/swt/widget"/>

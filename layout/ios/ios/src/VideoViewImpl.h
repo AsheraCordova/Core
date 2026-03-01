@@ -86,7 +86,7 @@
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ASVideoViewImpl)
+J2OBJC_STATIC_INIT(ASVideoViewImpl)
 
 J2OBJC_FIELD_SETTER(ASVideoViewImpl, uiView_, id)
 J2OBJC_FIELD_SETTER(ASVideoViewImpl, measurableView_, ADVideoView *)

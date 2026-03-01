@@ -20,6 +20,7 @@
   	</js-module>
   	
   	<!-- start tsc -->
+     <source-file src="tsc/src/web/widget/AudioViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ButtonImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/CheckBoxImpl.ts" target-dir="tsc/src/web/widget"/>

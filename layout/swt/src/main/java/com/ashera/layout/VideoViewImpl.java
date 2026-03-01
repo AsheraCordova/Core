@@ -780,7 +780,13 @@ public java.util.Map<String, Object> getOnErrorEventObj(MediaPlayer mp,int what,
 		String videoPath = (String) objValue;
 		if (videoPath.startsWith("http:") || videoPath.startsWith("https:") || videoPath.startsWith("content:")) {
 			mediaPlayer.media().play(videoPath);
-		} else if (fragment.getRootDirectory() == null) {
+		}  else if (fragment.getRootDirectory() != null) {
+			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(fragment.getRootDirectory() + "/res/raw/" + videoPath, fragment);
+			mediaPlayer.media().play(cordovaFileUri);
+		} else if (videoPath.startsWith("cordova.file")) {
+			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(videoPath, fragment);
+			mediaPlayer.media().play(cordovaFileUri);
+		} else {
 			java.net.URL path = com.ashera.utils.FileUtils.getFilePathFromClassPath("res/raw/" + videoPath);
 			try {
 				String absolutePath = java.nio.file.Paths.get(path.toURI()).toAbsolutePath().toString();
@@ -788,9 +794,6 @@ public java.util.Map<String, Object> getOnErrorEventObj(MediaPlayer mp,int what,
 			} catch (java.net.URISyntaxException e) {
 				throw new RuntimeException(e);
 			}
-		} else {
-			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(fragment.getRootDirectory() + "/res/raw/" + videoPath, fragment);
-			mediaPlayer.media().play(cordovaFileUri);
 		}
 				
 	}

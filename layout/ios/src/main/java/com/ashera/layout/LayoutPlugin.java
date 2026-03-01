@@ -58,6 +58,7 @@ public class LayoutPlugin  {
         WidgetFactory.register(new com.ashera.layout.PopupWindowImpl());
         WidgetFactory.register(new com.ashera.layout.AutoCompleteTextViewImpl());
         WidgetFactory.register(new com.ashera.layout.RatingBarImpl());
+        WidgetFactory.register(new com.ashera.layout.AudioViewImpl());
         WidgetFactory.register(new com.ashera.layout.VideoViewImpl());
         //end - widgets
 		ConverterFactory.registerCommandConverter(new ClipPaddingMaskCommand("clipToPadding"));
