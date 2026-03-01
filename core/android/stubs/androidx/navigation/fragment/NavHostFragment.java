@@ -18,7 +18,10 @@ package androidx.navigation.fragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
-public class NavHostFragment extends Fragment{
+public class NavHostFragment extends Fragment {
+	protected void onCreateNavController(NavController navController) {
+
+	}
 
 	public static Fragment create(int identifier) {
 		// TODO Auto-generated method stub
@@ -29,7 +32,6 @@ public class NavHostFragment extends Fragment{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 	public NavController getNavController() {
 		// TODO Auto-generated method stub
