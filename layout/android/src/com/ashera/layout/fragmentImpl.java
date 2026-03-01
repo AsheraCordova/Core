@@ -826,6 +826,7 @@ private void setNavGraph(Object objValue) {
 private void replace(Object objValue) {
 	this.navGraph = (String) objValue;
 	this.layout = (String) objValue;
+	myfragment = null;
 	addOrReplaceFragment(false);
 	executePendingTransactions();
 }
