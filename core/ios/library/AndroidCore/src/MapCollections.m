@@ -644,10 +644,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_MapIterator)
   return JavaUtilSet_spliterator(self);
 }
 
-- (IOSObjectArray *)toArrayWithJavaUtilFunctionIntFunction:(id<JavaUtilFunctionIntFunction>)arg0 {
-  return JavaUtilCollection_toArrayWithJavaUtilFunctionIntFunction_(self, arg0);
-}
-
 - (bool)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
   return JavaUtilCollection_removeIfWithJavaUtilFunctionPredicate_(self, arg0);
 }
@@ -816,10 +812,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_EntrySet)
 
 - (id<JavaUtilSpliterator>)spliterator {
   return JavaUtilSet_spliterator(self);
-}
-
-- (IOSObjectArray *)toArrayWithJavaUtilFunctionIntFunction:(id<JavaUtilFunctionIntFunction>)arg0 {
-  return JavaUtilCollection_toArrayWithJavaUtilFunctionIntFunction_(self, arg0);
 }
 
 - (bool)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
@@ -1001,10 +993,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMapCollections_KeySet)
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)array {
   return [this$0_ toArrayHelperWithNSObjectArray:array withInt:1];
-}
-
-- (IOSObjectArray *)toArrayWithJavaUtilFunctionIntFunction:(id<JavaUtilFunctionIntFunction>)arg0 {
-  return JavaUtilCollection_toArrayWithJavaUtilFunctionIntFunction_(self, arg0);
 }
 
 - (bool)removeIfWithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
