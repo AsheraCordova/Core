@@ -304,6 +304,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCForegroundImage").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCImage").withType("drawable"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtIgnoreEventBubblers").withType("boolean"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
@@ -1169,10 +1170,19 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "swtGCForegroundImage": {
+
+
+		 drawImageUsingGC(w, objValue, true);
+
+
+
+			}
+			break;
 		case "swtGCImage": {
 
 
-		 drawImageUsingGC(w, objValue);
+		 drawImageUsingGC(w, objValue, false);
 
 
 
@@ -4718,7 +4728,7 @@ break;}
 	}
 	
 	
-	private static void drawImageUsingGC(IWidget w, Object objValue) {
+	private static void drawImageUsingGC(IWidget w, Object objValue, boolean isForeGround) {
 		Control control = (Control) w.asNativeWidget();
 		if (control.getData("paintListener") != null) {
 			control.removePaintListener((org.eclipse.swt.events.PaintListener) control.getData("paintListener"));
@@ -4746,12 +4756,19 @@ break;}
 				Object imageOrColor = drawable.getDrawable();
 				
 				if (imageOrColor instanceof Image) {
-					r.android.graphics.Rect bounds = drawable.getBounds();
 					Image image = (Image) imageOrColor;
-					if (bounds.width() != 0 && bounds.height() != 0) {
-						gc.drawImage(image, 0, 0, image.getImageData().width, image.getImageData().height, bounds.left, bounds.top, bounds.width(), bounds.height());
+					if (isForeGround) {
+						Rectangle controlBounds = control.getBounds();
+						
+				        gc.drawImage(image, 0, 0, image.getBounds().width, image.getBounds().height, 0, 0, controlBounds.width, controlBounds.height);
 					} else {
-						gc.drawImage(image, drawable.getLeft(), drawable.getTop());
+						r.android.graphics.Rect bounds = drawable.getBounds();
+
+						if (bounds.width() != 0 && bounds.height() != 0) {
+							gc.drawImage(image, 0, 0, image.getImageData().width, image.getImageData().height, bounds.left, bounds.top, bounds.width(), bounds.height());
+						} else {
+							gc.drawImage(image, drawable.getLeft(), drawable.getTop());
+						}
 					}
 				}
 				if (imageOrColor instanceof Color) {

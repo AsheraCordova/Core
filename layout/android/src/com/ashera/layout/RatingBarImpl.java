@@ -53,7 +53,7 @@ import com.ashera.widget.IWidgetLifeCycleListener.EventId.*;
 import static com.ashera.widget.IWidget.*;
 //end - imports
 @SuppressLint("NewApi")
-public class RatingBarImpl extends BaseWidget {
+public class RatingBarImpl extends BaseWidget implements com.ashera.validations.FormElement{
 	//start - body
 	public final static String LOCAL_NAME = "RatingBar"; 
 	public final static String GROUP_NAME = "RatingBar";
@@ -754,4 +754,44 @@ public java.util.Map<String, Object> getOnRatingChangedEventObj(RatingBar rating
 		return bitmap;
 	}
 
+	//start - form
+	@Override
+	public String getTextEntered() {
+		return ratingBar.getRating() == 0 ? "" : ratingBar.getRating() + "";
+	}
+
+	@Override
+	public boolean isViewVisible() {
+		return ratingBar.getVisibility() == View.VISIBLE;
+	}
+
+	@Override
+	public void focus() {
+		
+	}
+
+	@Override
+	public void resetError() {
+		int validationErrorDisplayType = getValidationErrorDisplayType();
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_LABEL) != 0) {
+			ViewImpl.setMessageOnLabel(this, "");	
+		}
+		
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_STYLE) != 0) {
+			ViewImpl.setStyle(this, getNormalStyle());
+		}
+	}
+
+	@Override
+	public void showError(String message) {
+		int validationErrorDisplayType = getValidationErrorDisplayType();
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_LABEL) != 0) {
+			ViewImpl.setMessageOnLabel(this, message);
+		}
+		
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_STYLE) != 0) {
+			ViewImpl.setStyle(this, getErrorStyle());
+		}
+	}
+	//end - form
 }

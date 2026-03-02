@@ -21,6 +21,10 @@
 #define INCLUDE_ASBaseHasWidgets 1
 #include "BaseHasWidgets.h"
 
+#define RESTRICT_FormElement 1
+#define INCLUDE_ASFormElement 1
+#include "FormElement.h"
+
 @class ASWidgetAttribute;
 @class IOSClass;
 @class JavaLangBoolean;
@@ -31,7 +35,7 @@
 @protocol ASIWidget;
 @protocol JavaUtilMap;
 
-@interface ASRatingBarImpl : ASBaseHasWidgets
+@interface ASRatingBarImpl : ASBaseHasWidgets < ASFormElement >
 @property id uiView;
 
 #pragma mark Public
@@ -55,17 +59,23 @@
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
 
+- (void)focus;
+
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
 - (id)getChildAttributeWithASIWidget:(id<ASIWidget>)w
                withASWidgetAttribute:(ASWidgetAttribute *)key;
 
+- (NSString *)getTextEntered;
+
 - (IOSClass *)getViewClass;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
 - (void)invalidate;
+
+- (bool)isViewVisible;
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
 
@@ -78,6 +88,8 @@
 - (bool)removeWithASIWidget:(id<ASIWidget>)w;
 
 - (void)requestLayout;
+
+- (void)resetError;
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                              withNSString:(NSString *)strValue
@@ -92,6 +104,8 @@
 - (void)setIdWithNSString:(NSString *)id_;
 
 - (void)setVisibleWithBoolean:(bool)b;
+
+- (void)showErrorWithNSString:(NSString *)message;
 
 @end
 

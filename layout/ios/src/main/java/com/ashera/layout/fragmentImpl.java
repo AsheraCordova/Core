@@ -771,6 +771,7 @@ private void setNavGraph(Object objValue) {
 private void replace(Object objValue) {
 	this.navGraph = (String) objValue;
 	this.layout = (String) objValue;
+	myfragment = null;
 	addOrReplaceFragment(false);
 	executePendingTransactions();
 }
@@ -845,7 +846,7 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 
 
 	private com.ashera.core.UINavigatorImpl navigator;
-	
+	private Object myfragment = null;
 	private void postSetAttribute(WidgetAttribute key, String strValue, Object objValue,
 			ILifeCycleDecorator decorator) {
 		switch (key.getAttributeName()) {

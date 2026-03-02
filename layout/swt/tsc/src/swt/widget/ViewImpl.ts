@@ -188,6 +188,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -460,6 +461,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Expose({ name: "bottom" }))
 	bottom!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtGCForegroundImage" }))
+	swtGCForegroundImage!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "swtGCImage" }))
 	swtGCImage!:CommandAttr<string>| undefined;
 
@@ -568,6 +572,7 @@ export abstract class ViewImpl<T> {
 		this.right = undefined;
 		this.top = undefined;
 		this.bottom = undefined;
+		this.swtGCForegroundImage = undefined;
 		this.swtGCImage = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
@@ -2521,6 +2526,20 @@ payload : any) : T {
 		this.bottom.setValue(value);
 		this.orderSet++;
 		this.bottom.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSwtGCForegroundImage(value : string) : T {
+		this.resetIfRequired();
+		if (this.swtGCForegroundImage == null || this.swtGCForegroundImage == undefined) {
+			this.swtGCForegroundImage = new CommandAttr<string>();
+		}
+		
+		this.swtGCForegroundImage.setSetter(true);
+		this.swtGCForegroundImage.setValue(value);
+		this.orderSet++;
+		this.swtGCForegroundImage.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

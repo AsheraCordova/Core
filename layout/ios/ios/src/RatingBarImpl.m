@@ -13,6 +13,7 @@
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
 #include "EventExpressionParser.h"
+#include "FormElement.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
 #include "IFragment.h"
@@ -505,6 +506,37 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASRatingBarImpl_getRating(self);
 }
 
+- (NSString *)getTextEntered {
+  return [((ADCustomRatingBar *) nil_chk(customRatingBar_)) getRating] == 0 ? @"" : JreStrcat("F", [((ADCustomRatingBar *) nil_chk(customRatingBar_)) getRating]);
+}
+
+- (bool)isViewVisible {
+  return [((ADCustomRatingBar *) nil_chk(customRatingBar_)) getVisibility] == ADView_VISIBLE;
+}
+
+- (void)focus {
+}
+
+- (void)resetError {
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
+  if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_LABEL) != 0) {
+    ASViewImpl_setMessageOnLabelWithASIWidget_withNSString_(self, @"");
+  }
+  if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_STYLE) != 0) {
+    ASViewImpl_setStyleWithASIWidget_withId_(self, [self getNormalStyle]);
+  }
+}
+
+- (void)showErrorWithNSString:(NSString *)message {
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
+  if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_LABEL) != 0) {
+    ASViewImpl_setMessageOnLabelWithASIWidget_withNSString_(self, message);
+  }
+  if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_STYLE) != 0) {
+    ASViewImpl_setStyleWithASIWidget_withId_(self, [self getErrorStyle]);
+  }
+}
+
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
@@ -558,9 +590,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 31, 26, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 32, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 33, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 34, 35, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 36, 37, -1, 38, -1, -1 },
+    { NULL, "V", 0x1, 34, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 36, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 37, 38, -1, 39, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -599,18 +636,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[31].selector = @selector(setProgressTintWithId:);
   methods[32].selector = @selector(setRatingWithId:);
   methods[33].selector = @selector(getRating);
-  methods[34].selector = @selector(setIdWithNSString:);
-  methods[35].selector = @selector(setVisibleWithBoolean:);
-  methods[36].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[34].selector = @selector(getTextEntered);
+  methods[35].selector = @selector(isViewVisible);
+  methods[36].selector = @selector(focus);
+  methods[37].selector = @selector(resetError);
+  methods[38].selector = @selector(showErrorWithNSString:);
+  methods[39].selector = @selector(setIdWithNSString:);
+  methods[40].selector = @selector(setVisibleWithBoolean:);
+  methods[41].selector = @selector(nativeCreateWithJavaUtilMap:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 39, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 40, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 40, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 41, -1, -1 },
     { "customRatingBar_", "LADCustomRatingBar;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "postSetAttribute", "setSecondaryProgressDrawable", "LNSObject;", "setProgressBackgroundDrawable", "setProgressDrawable", "setSecondaryProgressTint", "setProgressBackgroundTint", "setProgressTint", "setRating", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASRatingBarImpl_LOCAL_NAME, &ASRatingBarImpl_GROUP_NAME, "LASRatingBarImpl_RatingBarExt;LASRatingBarImpl_OnRatingBarChangeListener;" };
-  static const J2ObjcClassInfo _ASRatingBarImpl = { "RatingBarImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 37, 4, -1, 41, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "postSetAttribute", "setSecondaryProgressDrawable", "LNSObject;", "setProgressBackgroundDrawable", "setProgressDrawable", "setSecondaryProgressTint", "setProgressBackgroundTint", "setProgressTint", "setRating", "showError", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASRatingBarImpl_LOCAL_NAME, &ASRatingBarImpl_GROUP_NAME, "LASRatingBarImpl_RatingBarExt;LASRatingBarImpl_OnRatingBarChangeListener;" };
+  static const J2ObjcClassInfo _ASRatingBarImpl = { "RatingBarImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 42, 4, -1, 42, -1, -1, -1 };
   return &_ASRatingBarImpl;
 }
 

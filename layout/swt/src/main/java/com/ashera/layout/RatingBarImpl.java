@@ -42,7 +42,7 @@ import static com.ashera.widget.IWidget.*;
 //end - imports
 import com.kikt.view.CustomRatingBar;
 @SuppressLint("NewApi")
-public class RatingBarImpl extends BaseHasWidgets {
+public class RatingBarImpl extends BaseHasWidgets implements com.ashera.validations.FormElement{
 	//start - body
 	private Object pane;
 	public final static String LOCAL_NAME = "RatingBar"; 
@@ -609,6 +609,47 @@ return getRating();			}
     }
     
 	
+
+	@Override
+	public String getTextEntered() {
+		return customRatingBar.getRating() == 0 ? "" : customRatingBar.getRating() + "";
+	}
+
+	@Override
+	public boolean isViewVisible() {
+		return customRatingBar.getVisibility() == View.VISIBLE;
+	}
+
+	@Override
+	public void focus() {
+		
+	}
+
+	@Override
+	public void resetError() {
+		int validationErrorDisplayType = getValidationErrorDisplayType();
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_LABEL) != 0) {
+			ViewImpl.setMessageOnLabel(this, "");	
+		}
+		
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_STYLE) != 0) {
+			ViewImpl.setStyle(this, getNormalStyle());
+		}
+	}
+
+	@Override
+	public void showError(String message) {
+		int validationErrorDisplayType = getValidationErrorDisplayType();
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_LABEL) != 0) {
+			ViewImpl.setMessageOnLabel(this, message);
+		}
+		
+		if ((validationErrorDisplayType & com.ashera.validations.FormElement.ERROR_DISPLAY_TYPE_STYLE) != 0) {
+			ViewImpl.setStyle(this, getErrorStyle());
+		}
+	}
+	
+
 	@SuppressLint("NewApi")
 private static class OnRatingBarChangeListener implements CustomRatingBar.OnRatingBarChangeListener, com.ashera.widget.IListener{
 private IWidget w; private View view; private String strValue; private String action;

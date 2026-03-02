@@ -74,6 +74,7 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, int3
   NSString *rootDirectory_;
   NSString *namespace__;
   ASUINavigatorImpl *navigator_;
+  id myfragment_;
   id navController_;
 }
 
@@ -163,6 +164,7 @@ J2OBJC_FIELD_SETTER(ASfragmentImpl, tag_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, rootDirectory_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, namespace__, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, navigator_, ASUINavigatorImpl *)
+J2OBJC_FIELD_SETTER(ASfragmentImpl, myfragment_, id)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, navController_, id)
 
 __attribute__((unused)) static void ASfragmentImpl_setWidgetOnNativeClass(ASfragmentImpl *self);
@@ -1010,10 +1012,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "rootDirectory_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "namespace__", "LNSString;", .constantValue.asLong = 0, 0x2, 57, -1, -1, -1 },
     { "navigator_", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "myfragment_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navController_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setNamespace", "LNSObject;", "setRootDirectory", "setTemplate", "setName", "setNavGraph", "replace", "setTag", "navigate", "LNSObject;LNSObject;", "popBackStackTo", "navigateWithPopBackStackTo", "LNSObject;LNSObject;LNSObject;LNSObject;", "navigateAsTop", "navigateWithPopBackStack", "postSetAttribute", "addOrReplaceFragment", "Z", "LNSString;ZLNSString;LNSString;LNSString;", "createOrReplaceFragment", "LNSString;ZLNSString;", "closeDialog", "setId", "setVisible", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "nativeMakeFrameForChildWidget", "IIII", "getView", &ASfragmentImpl_LOCAL_NAME, &ASfragmentImpl_GROUP_NAME, "namespace", "LASfragmentImpl_fragmentExt;LASfragmentImpl_MyFragmentFactory;LASfragmentImpl_MyGenericFragment;" };
-  static const J2ObjcClassInfo _ASfragmentImpl = { "fragmentImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 56, 12, -1, 58, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASfragmentImpl = { "fragmentImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 56, 13, -1, 58, -1, -1, -1 };
   return &_ASfragmentImpl;
 }
 
@@ -1028,6 +1031,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void ASfragmentImpl_init(ASfragmentImpl *self) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, ASfragmentImpl_GROUP_NAME, ASfragmentImpl_LOCAL_NAME);
+  self->myfragment_ = nil;
 }
 
 ASfragmentImpl *new_ASfragmentImpl_init() {
@@ -1040,6 +1044,7 @@ ASfragmentImpl *create_ASfragmentImpl_init() {
 
 void ASfragmentImpl_initWithNSString_(ASfragmentImpl *self, NSString *localname) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, ASfragmentImpl_GROUP_NAME, localname);
+  self->myfragment_ = nil;
 }
 
 ASfragmentImpl *new_ASfragmentImpl_initWithNSString_(NSString *localname) {
@@ -1052,6 +1057,7 @@ ASfragmentImpl *create_ASfragmentImpl_initWithNSString_(NSString *localname) {
 
 void ASfragmentImpl_initWithNSString_withNSString_(ASfragmentImpl *self, NSString *groupName, NSString *localname) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, groupName, localname);
+  self->myfragment_ = nil;
 }
 
 ASfragmentImpl *new_ASfragmentImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
@@ -1116,6 +1122,7 @@ void ASfragmentImpl_setNavGraphWithId_(ASfragmentImpl *self, id objValue) {
 void ASfragmentImpl_replaceWithId_(ASfragmentImpl *self, id objValue) {
   self->navGraph_ = (NSString *) cast_chk(objValue, [NSString class]);
   self->layout_ = (NSString *) cast_chk(objValue, [NSString class]);
+  self->myfragment_ = nil;
   ASfragmentImpl_addOrReplaceFragmentWithBoolean_(self, false);
   ASfragmentImpl_executePendingTransactions(self);
 }
