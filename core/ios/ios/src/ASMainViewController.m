@@ -53,7 +53,7 @@
 
     self.cordovaActivity = [[ASCordovaActivity alloc] initWithASIActivity:self];
     childController.cordovaActivity = self.cordovaActivity;
-    ADBundle* bundle = [ASGenericFragment getInitialBundleWithNSString:@"index" withNSString:@"layout/index.xml" withJavaUtilList:nil];
+    ADBundle* bundle = [ASGenericFragment getInitialBundleWithNSString:@"index" withNSString:@"layout/index.xml" withNSString:@"" withJavaUtilList:nil];
     childController.rootFragment = [ASGenericFragment new];
     [childController.rootFragment setArgumentsWithADBundle:bundle];
     [self.navController willMoveToParentViewController:self];

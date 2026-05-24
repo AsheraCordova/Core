@@ -56,6 +56,15 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
+export class ImageViewImpl_gcSrcRotate {
+@decorate(Expose({ name: "id" }))
+id!:string;
+@decorate(Expose({ name: "rotate" }))
+rotate!:number;
+}
+
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ImageViewImpl<T> extends ViewImpl<T>{
@@ -131,6 +140,18 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "tintMode" }))
 	tintMode!:CommandAttr<TintMode>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gcSrcs" }))
+	gcSrcs!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gcSrcIds" }))
+	gcSrcIds!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gcSrcRotate" }))
+	gcSrcRotate!:CommandAttr<ImageViewImpl_gcSrcRotate>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gcSrcDelegateId" }))
+	gcSrcDelegateId!:CommandAttr<string>| undefined;
 
 	@decorate(Exclude())
 	protected thisPointer: T;	
@@ -160,6 +181,10 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.cropToPadding = undefined;
 		this.tint = undefined;
 		this.tintMode = undefined;
+		this.gcSrcs = undefined;
+		this.gcSrcIds = undefined;
+		this.gcSrcRotate = undefined;
+		this.gcSrcDelegateId = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -774,6 +799,66 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.tintMode.setValue(value);
 		this.orderSet++;
 		this.tintMode.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setGcSrcs(value : string) : T {
+		this.resetIfRequired();
+		if (this.gcSrcs == null || this.gcSrcs == undefined) {
+			this.gcSrcs = new CommandAttr<string>();
+		}
+		
+		this.gcSrcs.setSetter(true);
+		this.gcSrcs.setValue(value);
+		this.orderSet++;
+		this.gcSrcs.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setGcSrcIds(value : string) : T {
+		this.resetIfRequired();
+		if (this.gcSrcIds == null || this.gcSrcIds == undefined) {
+			this.gcSrcIds = new CommandAttr<string>();
+		}
+		
+		this.gcSrcIds.setSetter(true);
+		this.gcSrcIds.setValue(value);
+		this.orderSet++;
+		this.gcSrcIds.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setGcSrcRotate(id : string,
+rotate : number) : T {
+		this.resetIfRequired();
+		if (this.gcSrcRotate == null || this.gcSrcRotate == undefined) {
+			this.gcSrcRotate = new CommandAttr<ImageViewImpl_gcSrcRotate>();
+		}
+		
+		let wrapper:ImageViewImpl_gcSrcRotate = new ImageViewImpl_gcSrcRotate();
+		wrapper.id = id;
+		wrapper.rotate = rotate;
+		this.gcSrcRotate.setSetter(true);
+		this.gcSrcRotate.setValue(wrapper);	
+		this.orderSet++;
+		this.gcSrcRotate.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setGcSrcDelegateId(value : string) : T {
+		this.resetIfRequired();
+		if (this.gcSrcDelegateId == null || this.gcSrcDelegateId == undefined) {
+			this.gcSrcDelegateId = new CommandAttr<string>();
+		}
+		
+		this.gcSrcDelegateId.setSetter(true);
+		this.gcSrcDelegateId.setValue(value);
+		this.orderSet++;
+		this.gcSrcDelegateId.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

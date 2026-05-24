@@ -54,14 +54,17 @@ public class UINavigatorImpl {
 	public void navigate(String actionId, String destinationId, boolean inclusive, boolean finish, List<Map<String, Object>> scopedObjects, IFragment fragment) {
 		IActivity activity = fragment.getRootActivity();
 
+		//fragment#index#layout/index.xml
 		String[] destinationProps = actionId.split("#", -1);
 		
-		String type = destinationProps[0];
+		String[] typeAndManager = destinationProps[0].split("~");
+		String type = typeAndManager[0];
+		String manager = typeAndManager.length > 1 ? typeAndManager[1] : null;
 		String resId = destinationProps[1];
 		String fileName = getFileName(destinationProps, type.equals("dialog") ? 3 : 0);
 		
 		if (fileName != null && !fileName.equals("")) {
-			Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
+			Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, manager, scopedObjects);
 			
 			if (type.equals("dialog")) {
 				int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 3], null, fragment);

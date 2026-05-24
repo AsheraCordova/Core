@@ -133,6 +133,10 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tint").withType("colorstate").withOrder(-10));
 		ConverterFactory.register("ImageView.tintMode", new TintMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tintMode").withType("ImageView.tintMode").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gcSrcs").withType("array"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gcSrcIds").withType("array"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gcSrcRotate").withType("object"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gcSrcDelegateId").withType("id"));
 	}
 	
 	public ImageViewImpl() {
@@ -623,6 +627,63 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
 
 
 		setTintMode(strValue);
+
+
+
+			}
+			break;
+			case "gcSrcs": {
+				
+
+
+		setGcSrcs(objValue);
+
+
+
+			}
+			break;
+			case "gcSrcIds": {
+				
+
+
+		setGcSrcsIds(objValue);
+
+
+
+			}
+			break;
+			case "gcSrcRotate": {
+				
+		if (objValue instanceof Map) {
+			Map<String, Object> data = ((Map<String, Object>) objValue);
+		Object id = quickConvert(data.get("id"), "string");
+		Object rotate = quickConvert(data.get("rotate"), "float");
+
+
+		setGcSrcRotate(id, rotate);
+
+
+}
+if (objValue instanceof java.util.List) {
+	java.util.List<Object> list = (java.util.List<Object>) objValue;
+	for (Object object : list) {
+		Map<String, Object> data = PluginInvoker.getMap(object);
+		Object id = quickConvert(data.get("id"), "string");
+		Object rotate = quickConvert(data.get("rotate"), "float");
+
+
+		setGcSrcRotate(id, rotate);
+
+
+	}
+}
+			}
+			break;
+			case "gcSrcDelegateId": {
+				
+
+
+		setGcSrcDelegateId(strValue);
 
 
 
@@ -1261,5 +1322,134 @@ return getTintColor();				}
 	}
 
 	//end - imageFromUrl
+	private String[] gcSrcsIds;
+	private String gcSrcDelegateId;
+	private void setGcSrcDelegateId(String strValue) {
+		this.gcSrcDelegateId = strValue;
+	}
+	private void setGcSrcsIds(Object objValue) {
+		this.gcSrcsIds = (String[]) objValue;
+	}
 	
+	private void setGcSrcs(Object objValue) {
+		List<r.android.graphics.drawable.Drawable> drawables = new ArrayList<>();
+		
+		for(String image : (String[]) objValue) {
+			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) quickConvert("@drawable/" + image, "drawable");
+			drawables.add(drawable);
+		}
+		drawImageUsingGC(drawables);
+	}
+	
+	private void drawImageUsingGC(Object objValue) {
+		Control control = (Control) asNativeWidget();
+		if (control.getData("paintListener") != null) {
+			control.removePaintListener((org.eclipse.swt.events.PaintListener) control.getData("paintListener"));
+		}
+		
+		org.eclipse.swt.events.PaintListener listener = new org.eclipse.swt.events.PaintListener() {
+			@Override
+			public void paintControl(org.eclipse.swt.events.PaintEvent e) {
+				GC gc = e.gc;
+
+				if (objValue instanceof java.util.List) {
+					int index = 0;
+					for (Object obj : (java.util.List) objValue) {
+						if (obj instanceof r.android.graphics.drawable.Drawable) {
+							r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) obj;
+							drawImage(gc, drawable, getGcRotate(index));	
+						}
+						index++;
+					}
+				}
+				
+			}
+
+			private float getGcRotate(int index) {
+				
+				if (gcSrcsRotate != null && gcSrcsIds != null && index < gcSrcsIds.length) {
+					Object rotate = gcSrcsRotate.get(getId(index));
+					
+					if (rotate != null) {
+						return (float) rotate;
+					}
+				}
+				return -1;
+			}
+
+			private String getId(int index) {
+				String id = gcSrcsIds[index];
+				return id.startsWith("@") ? id : "@+id/" + id;
+			}
+	
+			private void drawImage(GC gc, r.android.graphics.drawable.Drawable drawable, float angle) {
+				Object imageOrColor = drawable.getDrawable();
+				
+				if (imageOrColor instanceof Image) {
+					Image image = (Image) imageOrColor;
+					Rectangle controlBounds = control.getBounds();
+					com.ashera.model.RectM bounds = measurableView.getImageBounds(controlBounds.width, controlBounds.height);
+
+					Transform oldTransform = null;
+			        if (angle != -1) {
+				        float pivotX = bounds.x + bounds.width / 2f;
+				        float pivotY = bounds.y + bounds.height / 2f;
+
+				        oldTransform = new Transform(gc.getDevice());
+				        gc.getTransform(oldTransform);
+	
+				        Transform transform = new Transform(gc.getDevice());
+	
+				        // rotate around center of bounds
+				        transform.translate(pivotX, pivotY);
+				        transform.rotate(angle);
+				        transform.translate(-pivotX, -pivotY);
+	
+				        gc.setTransform(transform);
+			        }
+			        
+			        gc.drawImage(image, 0, 0, image.getBounds().width, image.getBounds().height, 0, 0, bounds.width, bounds.height);
+			        if (oldTransform != null) {
+			        	 gc.setTransform(oldTransform);
+			        }
+
+					
+				}
+				if (imageOrColor instanceof Color) {
+					gc.setBackground((Color) imageOrColor);
+					r.android.graphics.Rect bounds = drawable.getBounds();
+					gc.fillRectangle(bounds.left, bounds.top, bounds.width(), bounds.height());
+				}
+			}
+			
+		};
+		control.setData("paintListener", listener);
+		control.addPaintListener(listener);
+		control.redraw();
+
+	}	
+
+	private Map<String, Object> gcSrcsRotate;
+	private void setGcSrcRotate(Object id, Object rotate) {
+		if (gcSrcDelegateId != null) {
+			
+			Map<String, Object> data = new HashMap<>();
+			data.put("rotate", rotate);
+			data.put("id", id);
+			findNearestView(gcSrcDelegateId).setAttribute("gcSrcRotate", data, true);
+		}
+		else {
+			if (gcSrcsRotate == null) {
+				gcSrcsRotate = new HashMap<>();
+			}
+			gcSrcsRotate.put((String) id, rotate);
+			
+			Control control = (Control) asNativeWidget();
+			control.redraw();
+			control.update();
+		}
+	}
+	
+	
+
 }

@@ -54,7 +54,8 @@
 
 - (ADBundle *)getInitialBundleWithJavaUtilList:(id<JavaUtilList>)scopedObjects
                                   withNSString:(NSString *)resId
-                                  withNSString:(NSString *)fileName;
+                                  withNSString:(NSString *)fileName
+                                  withNSString:(NSString *)manager;
 
 - (NSString *)getFileNameWithNSStringArray:(IOSObjectArray *)destinationProps
                                    withInt:(int32_t)noofProps;
@@ -92,7 +93,7 @@ J2OBJC_FIELD_SETTER(ASUINavigatorImpl, fragmentFactory_, ASUINavigatorImpl_Fragm
 J2OBJC_FIELD_SETTER(ASUINavigatorImpl, namespace__, NSString *)
 J2OBJC_FIELD_SETTER(ASUINavigatorImpl, rootDirectory_, NSString *)
 
-__attribute__((unused)) static ADBundle *ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_(ASUINavigatorImpl *self, id<JavaUtilList> scopedObjects, NSString *resId, NSString *fileName);
+__attribute__((unused)) static ADBundle *ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_withNSString_(ASUINavigatorImpl *self, id<JavaUtilList> scopedObjects, NSString *resId, NSString *fileName, NSString *manager);
 
 __attribute__((unused)) static NSString *ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(ASUINavigatorImpl *self, IOSObjectArray *destinationProps, int32_t noofProps);
 
@@ -232,7 +233,9 @@ J2OBJC_IGNORE_DESIGNATED_END
                  withBoolean:(bool)clear
              withASIFragment:(id<ASIFragment>)fragment {
   IOSObjectArray *destinationProps = [((NSString *) nil_chk(actionId)) java_split:@"#" limit:-1];
-  NSString *type = IOSObjectArray_Get(nil_chk(destinationProps), 0);
+  IOSObjectArray *typeAndManager = [((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(destinationProps), 0))) java_split:@"~"];
+  NSString *type = IOSObjectArray_Get(nil_chk(typeAndManager), 0);
+  NSString *manager = typeAndManager->size_ > 1 ? IOSObjectArray_Get(typeAndManager, 1) : nil;
   NSString *resId = IOSObjectArray_Get(destinationProps, 1);
   switch (JreIndexOfStr(type, (id[]){ @"dialog" }, 1)) {
     case 0:
@@ -279,7 +282,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       if (childNavHost_) {
         [dialogFragment setParentFragmentWithASIFragment:fragment];
       }
-      [dialogFragment setArgumentsWithADBundle:ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_(self, scopedObjects, resId, fileName)];
+      [dialogFragment setArgumentsWithADBundle:ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_withNSString_(self, scopedObjects, resId, fileName, manager)];
       ASUINavigatorImpl_navigateToDialogWithId_withId_withNSString_withNSString_(self, dialogFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
       break;
     }
@@ -287,7 +290,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     {
       NSString *fileName = ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, 0);
       ASGenericFragment *genericFragment = [((ASUINavigatorImpl_FragmentFactory *) nil_chk(self->fragmentFactory_)) getFragment];
-      [((ASGenericFragment *) nil_chk(genericFragment)) setArgumentsWithADBundle:ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_(self, scopedObjects, resId, fileName)];
+      [((ASGenericFragment *) nil_chk(genericFragment)) setArgumentsWithADBundle:ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_withNSString_(self, scopedObjects, resId, fileName, manager)];
       ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, genericFragment, finish, clear, popCount, self->remeasure_);
       break;
     }
@@ -296,8 +299,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (ADBundle *)getInitialBundleWithJavaUtilList:(id<JavaUtilList>)scopedObjects
                                   withNSString:(NSString *)resId
-                                  withNSString:(NSString *)fileName {
-  return ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_(self, scopedObjects, resId, fileName);
+                                  withNSString:(NSString *)fileName
+                                  withNSString:(NSString *)manager {
+  return ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_withNSString_(self, scopedObjects, resId, fileName, manager);
 }
 
 - (NSString *)getFileNameWithNSStringArray:(IOSObjectArray *)destinationProps
@@ -453,7 +457,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[5].selector = @selector(navigateAsTopWithNSString:withJavaUtilList:withASIFragment:);
   methods[6].selector = @selector(navigateWithPopBackStackToWithNSString:withNSString:withBoolean:withJavaUtilList:withASIFragment:);
   methods[7].selector = @selector(navigateWithNSString:withJavaUtilList:withBoolean:withInt:withBoolean:withASIFragment:);
-  methods[8].selector = @selector(getInitialBundleWithJavaUtilList:withNSString:withNSString:);
+  methods[8].selector = @selector(getInitialBundleWithJavaUtilList:withNSString:withNSString:withNSString:);
   methods[9].selector = @selector(getFileNameWithNSStringArray:withInt:);
   methods[10].selector = @selector(updateViewFrameWithId:withId:);
   methods[11].selector = @selector(navigateToDialogWithId:withId:withNSString:withNSString:);
@@ -481,7 +485,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "rootDirectory_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "childNavHost_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;LNSObject;Z", "navigate", "LNSString;LNSString;ZZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "getInitialBundle", "LJavaUtilList;LNSString;LNSString;", "(Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Ljava/lang/String;Ljava/lang/String;)Lr/android/os/Bundle;", "getFileName", "[LNSString;I", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZIZ", "closeDialog", "LASIFragment;", "getFragment", "LNSObject;", "popBackStack", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "getActiveFragment", "setNamespace", "LNSString;", "setRootDirectory", "namespace", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;LASUINavigatorImpl_FragmentFactory;" };
+  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;LNSObject;Z", "navigate", "LNSString;LNSString;ZZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "getInitialBundle", "LJavaUtilList;LNSString;LNSString;LNSString;", "(Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lr/android/os/Bundle;", "getFileName", "[LNSString;I", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZIZ", "closeDialog", "LASIFragment;", "getFragment", "LNSObject;", "popBackStack", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "getActiveFragment", "setNamespace", "LNSString;", "setRootDirectory", "namespace", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;LASUINavigatorImpl_FragmentFactory;" };
   static const J2ObjcClassInfo _ASUINavigatorImpl = { "UINavigatorImpl", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 27, 6, -1, 41, -1, -1, -1 };
   return &_ASUINavigatorImpl;
 }
@@ -519,8 +523,8 @@ ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFa
   J2OBJC_CREATE_IMPL(ASUINavigatorImpl, initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_, fragmentFactory, navController, remeasure)
 }
 
-ADBundle *ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_(ASUINavigatorImpl *self, id<JavaUtilList> scopedObjects, NSString *resId, NSString *fileName) {
-  ADBundle *bundle = ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUtilList_(resId, fileName, scopedObjects);
+ADBundle *ASUINavigatorImpl_getInitialBundleWithJavaUtilList_withNSString_withNSString_withNSString_(ASUINavigatorImpl *self, id<JavaUtilList> scopedObjects, NSString *resId, NSString *fileName, NSString *manager) {
+  ADBundle *bundle = ASGenericFragment_getInitialBundleWithNSString_withNSString_withNSString_withJavaUtilList_(resId, fileName, manager, scopedObjects);
   [((ADBundle *) nil_chk(bundle)) putStringWithNSString:@"rootDirectory" withNSString:self->rootDirectory_];
   [bundle putStringWithNSString:@"namespace" withNSString:self->namespace__];
   return bundle;

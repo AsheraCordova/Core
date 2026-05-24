@@ -174,6 +174,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (void)onSaveInstanceStateWithADBundle:(ADBundle *)outState {
+}
+
 - (void)dealloc {
   RELEASE_(childFragmentManager_);
   RELEASE_(bundle_);
@@ -201,6 +204,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LADXFragmentManager;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADXFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 6, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -222,16 +226,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[14].selector = @selector(getChildFragmentManager);
   methods[15].selector = @selector(getParentFragment);
   methods[16].selector = @selector(executePendingTransactions);
+  methods[17].selector = @selector(onSaveInstanceStateWithADBundle:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "childFragmentManager_", "LADXFragmentManager;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bundle_", "LADBundle;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "parentFragment_", "LASIFragment;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "childFragments_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 13, -1 },
+    { "childFragments_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 14, -1 },
     { "paused_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setParentFragment", "LASIFragment;", "LASIFragment;Z", "onAttach", "LADContext;", "onCreate", "LADBundle;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "setArguments", "Ljava/util/List<Landroidx/fragment/app/Fragment;>;" };
-  static const J2ObjcClassInfo _ADXFragment = { "Fragment", "androidx.fragment.app", ptrTable, methods, fields, 7, 0x1, 17, 5, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setParentFragment", "LASIFragment;", "LASIFragment;Z", "onAttach", "LADContext;", "onCreate", "LADBundle;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "setArguments", "onSaveInstanceState", "Ljava/util/List<Landroidx/fragment/app/Fragment;>;" };
+  static const J2ObjcClassInfo _ADXFragment = { "Fragment", "androidx.fragment.app", ptrTable, methods, fields, 7, 0x1, 18, 5, -1, -1, -1, -1, -1 };
   return &_ADXFragment;
 }
 

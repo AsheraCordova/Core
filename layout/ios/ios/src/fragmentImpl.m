@@ -73,6 +73,7 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, int3
   NSString *tag_;
   NSString *rootDirectory_;
   NSString *namespace__;
+  NSString *managers_;
   ASUINavigatorImpl *navigator_;
   id myfragment_;
   id navController_;
@@ -97,6 +98,8 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, int3
 - (void)setNavGraphWithId:(id)objValue;
 
 - (void)replaceWithId:(id)objValue;
+
+- (void)setManagersWithId:(id)objValue;
 
 - (void)setTagWithId:(id)objValue;
 
@@ -163,6 +166,7 @@ J2OBJC_FIELD_SETTER(ASfragmentImpl, navGraph_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, tag_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, rootDirectory_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, namespace__, NSString *)
+J2OBJC_FIELD_SETTER(ASfragmentImpl, managers_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, navigator_, ASUINavigatorImpl *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, myfragment_, id)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, navController_, id)
@@ -186,6 +190,8 @@ __attribute__((unused)) static void ASfragmentImpl_setNameWithId_(ASfragmentImpl
 __attribute__((unused)) static void ASfragmentImpl_setNavGraphWithId_(ASfragmentImpl *self, id objValue);
 
 __attribute__((unused)) static void ASfragmentImpl_replaceWithId_(ASfragmentImpl *self, id objValue);
+
+__attribute__((unused)) static void ASfragmentImpl_setManagersWithId_(ASfragmentImpl *self, id objValue);
 
 __attribute__((unused)) static void ASfragmentImpl_setTagWithId_(ASfragmentImpl *self, id objValue);
 
@@ -358,6 +364,7 @@ NSString *ASfragmentImpl_GROUP_NAME = @"fragment";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"layout"])) withTypeWithNSString:@"string"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"navGraph"])) withTypeWithNSString:@"string"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"tag"])) withTypeWithNSString:@"string"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"managers"])) withTypeWithNSString:@"string"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"replace"])) withTypeWithNSString:@"string"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"navigate"])) withTypeWithNSString:@"object"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"popBackStack"])) withTypeWithNSString:@"nil"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
@@ -501,7 +508,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   ASViewGroupImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
   id nativeWidget = [self asNativeWidget];
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"name", @"layout", @"navGraph", @"tag", @"replace", @"navigate", @"popBackStack", @"navigateWithPopBackStack", @"navigateAsTop", @"navigateWithPopBackStackTo", @"popBackStackTo", @"closeDialog", @"rootDirectory", @"namespace" }, 14)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"name", @"layout", @"navGraph", @"tag", @"managers", @"replace", @"navigate", @"popBackStack", @"navigateWithPopBackStack", @"navigateAsTop", @"navigateWithPopBackStackTo", @"popBackStackTo", @"closeDialog", @"rootDirectory", @"namespace" }, 15)) {
     case 0:
     {
       ASfragmentImpl_setNameWithId_(self, objValue);
@@ -524,10 +531,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 4:
     {
-      ASfragmentImpl_replaceWithId_(self, objValue);
+      ASfragmentImpl_setManagersWithId_(self, objValue);
     }
     break;
     case 5:
+    {
+      ASfragmentImpl_replaceWithId_(self, objValue);
+    }
+    break;
+    case 6:
     {
       if ([JavaUtilMap_class_() isInstance:objValue]) {
         id<JavaUtilMap> data = ((id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_()));
@@ -546,12 +558,12 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     break;
-    case 6:
+    case 7:
     {
       ASfragmentImpl_popBackStack(self);
     }
     break;
-    case 7:
+    case 8:
     {
       if ([JavaUtilMap_class_() isInstance:objValue]) {
         id<JavaUtilMap> data = ((id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_()));
@@ -570,7 +582,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     break;
-    case 8:
+    case 9:
     {
       if ([JavaUtilMap_class_() isInstance:objValue]) {
         id<JavaUtilMap> data = ((id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_()));
@@ -589,7 +601,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     break;
-    case 9:
+    case 10:
     {
       if ([JavaUtilMap_class_() isInstance:objValue]) {
         id<JavaUtilMap> data = ((id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_()));
@@ -612,7 +624,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     break;
-    case 10:
+    case 11:
     {
       if ([JavaUtilMap_class_() isInstance:objValue]) {
         id<JavaUtilMap> data = ((id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_()));
@@ -631,17 +643,17 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     break;
-    case 11:
+    case 12:
     {
       ASfragmentImpl_closeDialogWithId_(self, objValue);
     }
     break;
-    case 12:
+    case 13:
     {
       ASfragmentImpl_setRootDirectoryWithId_(self, objValue);
     }
     break;
-    case 13:
+    case 14:
     {
       ASfragmentImpl_setNamespaceWithId_(self, objValue);
     }
@@ -706,6 +718,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)replaceWithId:(id)objValue {
   ASfragmentImpl_replaceWithId_(self, objValue);
+}
+
+- (void)setManagersWithId:(id)objValue {
+  ASfragmentImpl_setManagersWithId_(self, objValue);
 }
 
 - (void)setTagWithId:(id)objValue {
@@ -913,31 +929,32 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 29, 25, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 30, 25, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 31, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 25, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 32, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 33, 34, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 36, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 37, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 40, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 35, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 36, 37, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 39, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 41, 42, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 42, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 43, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 41, 43, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 44, 45, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUINavigatorImpl;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 45, 25, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 46, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 47, 41, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 48, 49, -1, 50, -1, -1 },
+    { NULL, "V", 0x2, 46, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 47, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 48, 42, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 50, -1, 51, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 51, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 52, 53, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 54, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 52, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 54, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 55, 25, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -972,51 +989,53 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[26].selector = @selector(setNameWithId:);
   methods[27].selector = @selector(setNavGraphWithId:);
   methods[28].selector = @selector(replaceWithId:);
-  methods[29].selector = @selector(setTagWithId:);
-  methods[30].selector = @selector(initialized);
-  methods[31].selector = @selector(navigateWithId:withId:);
-  methods[32].selector = @selector(popBackStack);
-  methods[33].selector = @selector(popBackStackToWithId:withId:);
-  methods[34].selector = @selector(navigateWithPopBackStackToWithId:withId:withId:withId:);
-  methods[35].selector = @selector(navigateAsTopWithId:withId:);
-  methods[36].selector = @selector(navigateWithPopBackStackWithId:withId:);
-  methods[37].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[38].selector = @selector(addOrReplaceFragmentWithBoolean:);
-  methods[39].selector = @selector(executePendingTransactions);
-  methods[40].selector = @selector(addOrReplaceFragmentWithNSString:withBoolean:withNSString:withNSString:withNSString:);
-  methods[41].selector = @selector(createOrReplaceFragmentWithNSString:withBoolean:withNSString:);
-  methods[42].selector = @selector(makeCurrentFragmentActive);
-  methods[43].selector = @selector(getNavigator);
-  methods[44].selector = @selector(isValidFragment);
-  methods[45].selector = @selector(getActiveRootWidget);
-  methods[46].selector = @selector(closeDialog);
-  methods[47].selector = @selector(closeDialogWithId:);
-  methods[48].selector = @selector(setIdWithNSString:);
-  methods[49].selector = @selector(setVisibleWithBoolean:);
-  methods[50].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[51].selector = @selector(createView);
-  methods[52].selector = @selector(addChildViewControllerWithId:withId:);
-  methods[53].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
-  methods[54].selector = @selector(getViewWithId:);
-  methods[55].selector = @selector(remeasureIfRequired);
+  methods[29].selector = @selector(setManagersWithId:);
+  methods[30].selector = @selector(setTagWithId:);
+  methods[31].selector = @selector(initialized);
+  methods[32].selector = @selector(navigateWithId:withId:);
+  methods[33].selector = @selector(popBackStack);
+  methods[34].selector = @selector(popBackStackToWithId:withId:);
+  methods[35].selector = @selector(navigateWithPopBackStackToWithId:withId:withId:withId:);
+  methods[36].selector = @selector(navigateAsTopWithId:withId:);
+  methods[37].selector = @selector(navigateWithPopBackStackWithId:withId:);
+  methods[38].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[39].selector = @selector(addOrReplaceFragmentWithBoolean:);
+  methods[40].selector = @selector(executePendingTransactions);
+  methods[41].selector = @selector(addOrReplaceFragmentWithNSString:withBoolean:withNSString:withNSString:withNSString:);
+  methods[42].selector = @selector(createOrReplaceFragmentWithNSString:withBoolean:withNSString:);
+  methods[43].selector = @selector(makeCurrentFragmentActive);
+  methods[44].selector = @selector(getNavigator);
+  methods[45].selector = @selector(isValidFragment);
+  methods[46].selector = @selector(getActiveRootWidget);
+  methods[47].selector = @selector(closeDialog);
+  methods[48].selector = @selector(closeDialogWithId:);
+  methods[49].selector = @selector(setIdWithNSString:);
+  methods[50].selector = @selector(setVisibleWithBoolean:);
+  methods[51].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[52].selector = @selector(createView);
+  methods[53].selector = @selector(addChildViewControllerWithId:withId:);
+  methods[54].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[55].selector = @selector(getViewWithId:);
+  methods[56].selector = @selector(remeasureIfRequired);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 55, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 56, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 56, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 57, -1, -1 },
     { "frameLayout_", "LADFrameLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "layout_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "name_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navGraph_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "tag_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "rootDirectory_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "namespace__", "LNSString;", .constantValue.asLong = 0, 0x2, 57, -1, -1, -1 },
+    { "namespace__", "LNSString;", .constantValue.asLong = 0, 0x2, 58, -1, -1, -1 },
+    { "managers_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navigator_", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "myfragment_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navController_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setNamespace", "LNSObject;", "setRootDirectory", "setTemplate", "setName", "setNavGraph", "replace", "setTag", "navigate", "LNSObject;LNSObject;", "popBackStackTo", "navigateWithPopBackStackTo", "LNSObject;LNSObject;LNSObject;LNSObject;", "navigateAsTop", "navigateWithPopBackStack", "postSetAttribute", "addOrReplaceFragment", "Z", "LNSString;ZLNSString;LNSString;LNSString;", "createOrReplaceFragment", "LNSString;ZLNSString;", "closeDialog", "setId", "setVisible", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "nativeMakeFrameForChildWidget", "IIII", "getView", &ASfragmentImpl_LOCAL_NAME, &ASfragmentImpl_GROUP_NAME, "namespace", "LASfragmentImpl_fragmentExt;LASfragmentImpl_MyFragmentFactory;LASfragmentImpl_MyGenericFragment;" };
-  static const J2ObjcClassInfo _ASfragmentImpl = { "fragmentImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 56, 13, -1, 58, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setNamespace", "LNSObject;", "setRootDirectory", "setTemplate", "setName", "setNavGraph", "replace", "setManagers", "setTag", "navigate", "LNSObject;LNSObject;", "popBackStackTo", "navigateWithPopBackStackTo", "LNSObject;LNSObject;LNSObject;LNSObject;", "navigateAsTop", "navigateWithPopBackStack", "postSetAttribute", "addOrReplaceFragment", "Z", "LNSString;ZLNSString;LNSString;LNSString;", "createOrReplaceFragment", "LNSString;ZLNSString;", "closeDialog", "setId", "setVisible", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "nativeMakeFrameForChildWidget", "IIII", "getView", &ASfragmentImpl_LOCAL_NAME, &ASfragmentImpl_GROUP_NAME, "namespace", "LASfragmentImpl_fragmentExt;LASfragmentImpl_MyFragmentFactory;LASfragmentImpl_MyGenericFragment;" };
+  static const J2ObjcClassInfo _ASfragmentImpl = { "fragmentImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 57, 14, -1, 59, -1, -1, -1 };
   return &_ASfragmentImpl;
 }
 
@@ -1031,6 +1050,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void ASfragmentImpl_init(ASfragmentImpl *self) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, ASfragmentImpl_GROUP_NAME, ASfragmentImpl_LOCAL_NAME);
+  self->managers_ = @"";
   self->myfragment_ = nil;
 }
 
@@ -1044,6 +1064,7 @@ ASfragmentImpl *create_ASfragmentImpl_init() {
 
 void ASfragmentImpl_initWithNSString_(ASfragmentImpl *self, NSString *localname) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, ASfragmentImpl_GROUP_NAME, localname);
+  self->managers_ = @"";
   self->myfragment_ = nil;
 }
 
@@ -1057,6 +1078,7 @@ ASfragmentImpl *create_ASfragmentImpl_initWithNSString_(NSString *localname) {
 
 void ASfragmentImpl_initWithNSString_withNSString_(ASfragmentImpl *self, NSString *groupName, NSString *localname) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, groupName, localname);
+  self->managers_ = @"";
   self->myfragment_ = nil;
 }
 
@@ -1125,6 +1147,10 @@ void ASfragmentImpl_replaceWithId_(ASfragmentImpl *self, id objValue) {
   self->myfragment_ = nil;
   ASfragmentImpl_addOrReplaceFragmentWithBoolean_(self, false);
   ASfragmentImpl_executePendingTransactions(self);
+}
+
+void ASfragmentImpl_setManagersWithId_(ASfragmentImpl *self, id objValue) {
+  self->managers_ = (NSString *) cast_chk(objValue, [NSString class]);
 }
 
 void ASfragmentImpl_setTagWithId_(ASfragmentImpl *self, id objValue) {
@@ -1214,7 +1240,7 @@ void ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString
     if ([mylayout java_hasPrefix:@"@layout"]) {
       mylayout = JreStrcat("$$", [mylayout java_replace:@"@" withSequence:@""], @".xml");
     }
-    [((ASUINavigatorImpl *) nil_chk(self->navigator_)) navigateWithNSString:JreStrcat("$$C$", @"fragment#", id_, '#', mylayout) withNSString:nil withBoolean:false withBoolean:!add withJavaUtilList:nil withASIFragment:[self getFragment]];
+    [((ASUINavigatorImpl *) nil_chk(self->navigator_)) navigateWithNSString:JreStrcat("$$C$C$", @"fragment~", self->managers_, '#', id_, '#', mylayout) withNSString:nil withBoolean:false withBoolean:!add withJavaUtilList:nil withASIFragment:[self getFragment]];
     ASfragmentImpl_makeCurrentFragmentActive(self);
   }
 }

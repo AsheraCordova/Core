@@ -20,6 +20,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -75,6 +76,7 @@ public class GenericFragment extends Fragment implements IFragment{
 	private Stack<Boolean> disableRemeasures = new Stack<>();
 	private boolean isPaused;
 	private boolean remeasureOnResume;
+	private List<IFragmentManager> fragmentManagers;
 
 	@Override
 	public void addListener(IWidget widget, Object listener) {
@@ -155,13 +157,18 @@ public class GenericFragment extends Fragment implements IFragment{
 		tempCache = null;
 		eventBus = null;
 		userData = null;
+		if (fragmentManagers != null) {
+			fragmentManagers.clear();
+		}
+		fragmentManagers = null;
 		PluginInvoker.releaseNativeResources(disposables);
 	}
 
-	public static Bundle getInitialBundle(String resId, String fileName, List<Map<String, Object>> scopedObjects) {
+	public static Bundle getInitialBundle(String resId, String fileName, String managers, List<Map<String, Object>> scopedObjects) {
 		Bundle bundle = new Bundle();
 		bundle.putString("fileName", fileName);
 		bundle.putString("id", resId);
+		bundle.putString("fragmentManagers", managers);
 
 		if (scopedObjects != null && !scopedObjects.isEmpty()) {
 			int scopedObjectCount = scopedObjects.size();
@@ -225,8 +232,25 @@ public class GenericFragment extends Fragment implements IFragment{
 			parent.getEventBus().addEventBus(eventBus);
 			parent = parent.getParent();
 		}
+		invokeFragmentManager("onAttach");
 		sendLifeCycleEvent("onAttach", getEventData("onAttach"), null, null);
 
+	}
+
+	private List<IFragmentManager> getFragmentManagers(String managers) {
+		fragmentManagers = null;
+		if (managers != null && !managers.isEmpty()) {
+			String[] mymaanagers = managers.split(",");
+			fragmentManagers = new ArrayList<IFragmentManager>();
+			for (String manager : mymaanagers) {
+				IFragmentManager fragmentManager = FragmentManagerFactory.getManager(manager);
+				if (fragmentManager != null) {
+					fragmentManagers.add(fragmentManager.newInstance());
+				}
+			}
+
+		}
+		return fragmentManagers;
 	}
 
 	private void inheritRootDirectoryAndNamespace() {
@@ -250,12 +274,15 @@ public class GenericFragment extends Fragment implements IFragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.onCreate();
+		this.onCreate((Object) savedInstanceState);
 	}
 
 	@Override
-	public void onCreate() {
+	public void onCreate(Object... args) {
+		this.fragmentManagers = getFragmentManagers(getArguments().getString("fragmentManagers"));
 		readFileInDevMode();
+		
+		invokeFragmentManager("onCreate", args);
 		sendLifeCycleEvent("onCreate", getEventData("onCreate"), null, null);
 	}
 
@@ -309,6 +336,8 @@ public class GenericFragment extends Fragment implements IFragment{
 			remeasureOnResume = false;
 		}
 		isPaused = false;
+		
+		invokeFragmentManager("onResume");
 		sendLifeCycleEvent("onResume", getEventData("onResume"), null, null);
 	}
 
@@ -367,7 +396,39 @@ public class GenericFragment extends Fragment implements IFragment{
 	public void onPause() {
 		super.onPause();
 		isPaused = true;
+		
+		invokeFragmentManager("onPause");
 		sendLifeCycleEvent("onPause", getEventData("onPause"), null, null);
+	}
+
+	private void invokeFragmentManager(String lifeCycleMethod, Object... args) {
+		if (this.fragmentManagers != null) {
+			for (IFragmentManager fragmentManager : this.fragmentManagers) {
+				switch (lifeCycleMethod) {
+				case "onCreate":
+					fragmentManager.onCreate(this, args);
+					break;
+				case "onPause":
+					fragmentManager.onPause(this);
+					break;
+				case "onResume":
+					fragmentManager.onResume(this);			
+					break;
+				case "onAttach":
+					fragmentManager.onAttach(this);
+					break;
+				case "onDetach":
+					fragmentManager.onDetach(this);
+					break;
+				case "onSaveInstanceState":
+					fragmentManager.onSaveInstanceState(this, args);
+					break;
+				default:
+					break;
+				}
+				
+			}
+		}
 	}
 
 	// This event is triggered soon after onCreateView().
@@ -383,6 +444,7 @@ public class GenericFragment extends Fragment implements IFragment{
 	@Override
 	public void onDetach() {
 		super.onDetach();
+		invokeFragmentManager("onDetach");
 		sendLifeCycleEvent("onDetach", getEventData("onDetach"), null, null);
 		activity = null;
 
@@ -398,6 +460,7 @@ public class GenericFragment extends Fragment implements IFragment{
 		}
 
 		FragmentRegistry.getInstance().unregister(this);
+		invokeFragmentManager("onDestroy");
 		sendLifeCycleEvent("onDestroy", getEventData("onDestroy"), null, null);
 		clear();
 	}
@@ -414,7 +477,17 @@ public class GenericFragment extends Fragment implements IFragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
+	@Override
+	public void sendEvent(String action, Map<String, String> extraData) {
 
+		if (this.fragmentManagers != null) {
+			for (IFragmentManager fragmentManager : this.fragmentManagers) {
+				fragmentManager.sendEvent(action, extraData);
+			}
+		}
+	
+		sendLifeCycleEvent(action, getEventData(action), null, extraData);
+	}
 	private void sendLifeCycleEvent(String action, String eventExpression, String javascript, Map<String, String> extraData) {
 		if (activity != null) {
 			Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
@@ -704,4 +777,17 @@ public class GenericFragment extends Fragment implements IFragment{
 		return namespace;
 	}
 
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		if (this.fragmentManagers != null) {
+			for (IFragmentManager fragmentManager : this.fragmentManagers) {
+				fragmentManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+			}
+		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		invokeFragmentManager("onSaveInstanceState", outState);
+	}
 }

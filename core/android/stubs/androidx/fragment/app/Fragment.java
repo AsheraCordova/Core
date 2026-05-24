@@ -116,4 +116,14 @@ public class Fragment {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public Context requireContext() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void requestPermissions(String[] strings, int requestPermissionFineLocation) {
+		// TODO Auto-generated method stub
+		
+	}
 }

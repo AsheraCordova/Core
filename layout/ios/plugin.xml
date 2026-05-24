@@ -73,6 +73,8 @@
      <source-file src="ios/src/CheckBoxImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ChronometerImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/ChronometerImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/DummyFragmentManager.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="ios/src/DummyFragmentManager.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/EditTextImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/EditTextImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/fragmentImpl.h" target-dir="LayoutPlugin/ios/src"/>

@@ -19,6 +19,7 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
+
 export class fragmentImpl_navigate {
 @decorate(Expose({ name: "actionId" }))
 actionId!:string;
@@ -78,6 +79,9 @@ export abstract class fragmentImpl<T> extends ViewGroupImpl<T>{
 	@decorate(Expose({ name: "tag" }))
 	tag!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "managers" }))
+	managers!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "replace" }))
 	replace_!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -117,6 +121,7 @@ export abstract class fragmentImpl<T> extends ViewGroupImpl<T>{
 		this.layout = undefined;
 		this.navGraph = undefined;
 		this.tag = undefined;
+		this.managers = undefined;
 		this.replace_ = undefined;
 		this.navigate_ = undefined;
 		this.popBackStack_ = undefined;
@@ -187,6 +192,20 @@ export abstract class fragmentImpl<T> extends ViewGroupImpl<T>{
 		this.tag.setValue(value);
 		this.orderSet++;
 		this.tag.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setManagers(value : string) : T {
+		this.resetIfRequired();
+		if (this.managers == null || this.managers == undefined) {
+			this.managers = new CommandAttr<string>();
+		}
+		
+		this.managers.setSetter(true);
+		this.managers.setValue(value);
+		this.orderSet++;
+		this.managers.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

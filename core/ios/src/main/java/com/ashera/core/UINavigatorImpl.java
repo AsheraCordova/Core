@@ -89,7 +89,9 @@ public class UINavigatorImpl {
 	
 	public void navigate(String actionId, List<Map<String, Object>> scopedObjects, boolean finish, int popCount, boolean clear, IFragment fragment) {
 		String[] destinationProps = actionId.split("#", -1);
-		String type = destinationProps[0];
+		String[] typeAndManager = destinationProps[0].split("~");
+		String type = typeAndManager[0];
+		String manager = typeAndManager.length > 1 ? typeAndManager[1] : null;
 		String resId = destinationProps[1];
 
 		switch (type) {
@@ -132,14 +134,14 @@ public class UINavigatorImpl {
 			if (childNavHost) {
 				dialogFragment.setParentFragment(fragment);
 			}
-			dialogFragment.setArguments(getInitialBundle(scopedObjects, resId, fileName));
+			dialogFragment.setArguments(getInitialBundle(scopedObjects, resId, fileName, manager));
 			navigateToDialog(dialogFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
 			break;
 		}
 		default: {
 			String fileName = getFileName(destinationProps, 0);
 			GenericFragment genericFragment = this.fragmentFactory.getFragment();
-			genericFragment.setArguments(getInitialBundle(scopedObjects, resId, fileName));
+			genericFragment.setArguments(getInitialBundle(scopedObjects, resId, fileName, manager));
 			navigateToController(genericFragment, finish, clear, popCount, this.remeasure);
 
 			break;
@@ -147,8 +149,8 @@ public class UINavigatorImpl {
 		}
 	}
 
-	private Bundle getInitialBundle(List<Map<String, Object>> scopedObjects, String resId, String fileName) {
-		Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
+	private Bundle getInitialBundle(List<Map<String, Object>> scopedObjects, String resId, String fileName, String manager) {
+		Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, manager, scopedObjects);
 		bundle.putString("rootDirectory", rootDirectory);
 		bundle.putString("namespace", namespace);
 		return bundle;

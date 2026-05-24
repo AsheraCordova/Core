@@ -62,6 +62,6 @@ public class LayoutPlugin  {
         WidgetFactory.register(new com.ashera.layout.VideoViewImpl());
         //end - widgets
 		ConverterFactory.registerCommandConverter(new ClipPaddingMaskCommand("clipToPadding"));
-
+		com.ashera.core.FragmentManagerFactory.registerManager("test", new DummyFragmentManager());
     }
 }

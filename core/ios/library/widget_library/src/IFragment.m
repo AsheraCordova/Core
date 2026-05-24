@@ -30,47 +30,48 @@
     { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x481, 2, 3, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 2, 3, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 4, 5, -1, 6, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 7, 8, -1, -1, -1, -1 },
     { NULL, "LASIFragment;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASEventBus;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x401, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 9, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 11, 10, -1, -1, -1, -1 },
     { NULL, "LASIActivity;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 10, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 12, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 14, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 15, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 16, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 14, 15, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 16, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 17, 15, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 18, 10, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LCSSStyleSheet;", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 17, 18, -1, -1, -1, -1 },
-    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 19, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x401, -1, -1, -1, 21, -1, -1 },
-    { NULL, "V", 0x401, 22, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 24, 25, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x401, 26, 27, -1, 28, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x401, 26, 29, -1, 30, -1, -1 },
-    { NULL, "V", 0x401, 31, 25, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 32, 33, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x401, -1, -1, -1, 23, -1, -1 },
+    { NULL, "V", 0x401, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 26, 27, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x401, 28, 29, -1, 30, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x401, 28, 31, -1, 32, -1, -1 },
+    { NULL, "V", 0x401, 33, 27, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 34, 35, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x401, 36, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 37, 38, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 36, 37, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 38, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 39, 40, -1, -1, -1, -1 },
     { NULL, "LASIFragment;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 41, 42, -1, 43, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -79,7 +80,7 @@
   methods[1].selector = @selector(getActionUrl);
   methods[2].selector = @selector(onAttachWithASIActivity:);
   methods[3].selector = @selector(onDetach);
-  methods[4].selector = @selector(onCreate);
+  methods[4].selector = @selector(onCreateWithNSObjectArray:);
   methods[5].selector = @selector(onDestroy);
   methods[6].selector = @selector(onResume);
   methods[7].selector = @selector(onPause);
@@ -120,9 +121,10 @@
   methods[42].selector = @selector(getUId);
   methods[43].selector = @selector(getRootDirectory);
   methods[44].selector = @selector(getNamespace);
+  methods[45].selector = @selector(sendEventWithNSString:withJavaUtilMap:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "onAttach", "LASIActivity;", "onCloseDialog", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "onCreateView", "Z", "hasDevData", "LNSString;", "getDevData", "setRootWidget", "LASIWidget;", "storeUserData", "LNSString;LNSObject;", "getUserData", "storeInTempCache", "getFromTempCache", "setStyleSheet", "LCSSStyleSheet;", "setFrame", "IIII", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "addError", "LASError;", "resizeWindow", "II", "getInlineResource", "setInlineResource", "LNSString;LNSString;Z" };
-  static const J2ObjcClassInfo _ASIFragment = { "IFragment", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 45, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "onAttach", "LASIActivity;", "onCreate", "[LNSObject;", "onCloseDialog", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V", "onCreateView", "Z", "hasDevData", "LNSString;", "getDevData", "setRootWidget", "LASIWidget;", "storeUserData", "LNSString;LNSObject;", "getUserData", "storeInTempCache", "getFromTempCache", "setStyleSheet", "LCSSStyleSheet;", "setFrame", "IIII", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "addError", "LASError;", "resizeWindow", "II", "getInlineResource", "setInlineResource", "LNSString;LNSString;Z", "sendEvent", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" };
+  static const J2ObjcClassInfo _ASIFragment = { "IFragment", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 46, 0, -1, -1, -1, -1, -1 };
   return &_ASIFragment;
 }
 

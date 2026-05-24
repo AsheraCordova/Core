@@ -56,7 +56,7 @@ public class FragmentManager {
 		this.remeasure = remeasure;
 	}
 
-	private void storeInHistory(String type, String resId, String fileName, List<Map<String, Object>> scopedObjects) {
+	private void storeInHistory(String type, String resId, String fileName, String manager, List<Map<String, Object>> scopedObjects) {
 	}
 	
 	private void addRootToView(GenericFragment genericFragment) {
@@ -243,10 +243,10 @@ public class FragmentManager {
 	
 
 	public void navigate(String resId, String fileName) {
-		navigate("fragment", resId, fileName, null, true);
+		navigate("fragment", resId, fileName, null, null, true);
 	}
 
-	private void navigate(String type, String resId, String fileName,
+	private void navigate(String type, String resId, String fileName, String manager, 
 			List<Map<String, Object>> scopedObjects, boolean history) {
 		//onpause
 		onPause();
@@ -254,7 +254,7 @@ public class FragmentManager {
 		if (fragments.size() > 0) {
 			deactivateCurrentFragment(getActiveFragment());
 			if (history) {
-				storeInHistory(type, resId, fileName, scopedObjects);
+				storeInHistory(type, resId, fileName, manager, scopedObjects);
 			}
 		}
 		
@@ -262,7 +262,7 @@ public class FragmentManager {
 
 		
 		//oncreate
-		onCreate(resId, fileName, scopedObjects, genericFragment);
+		onCreate(resId, fileName, manager, scopedObjects, genericFragment);
 		
 		//oncreateview
 		genericFragment.onCreateView(this.remeasure);
@@ -299,7 +299,10 @@ public class FragmentManager {
 	
 	public void navigate(String actionId, List<Map<String, Object>> scopedObjects, IFragment fragment) {
 		String[] destinationProps = actionId.split("#", -1);
-		String type = destinationProps[0];
+		String[] typeAndManager = destinationProps[0].split("~");
+		String type = typeAndManager[0];
+		String manager = typeAndManager.length > 1 ? typeAndManager[1] : null;
+
 		String resId = destinationProps[1];
 		switch (type) {
 		case "dialog": {
@@ -337,12 +340,12 @@ public class FragmentManager {
 		        	}
 		        }
 			}
-			navigateToDialog(type, resId, fileName, width, height, windowCloseOnTouchOutside, backdropColor, backgroundDimEnabled, marginPercent, scopedObjects);
+			navigateToDialog(type, resId, fileName, width, height, windowCloseOnTouchOutside, backdropColor, backgroundDimEnabled, marginPercent, manager, scopedObjects);
 			break;
 		}
 		default: {
 			String fileName = getFileName(destinationProps, 0);
-			navigate(type, resId, fileName, scopedObjects, true);
+			navigate(type, resId, fileName, manager, scopedObjects, true);
 			break;
 		}
 		}
@@ -362,7 +365,7 @@ public class FragmentManager {
 	
 
 	private void navigateToDialog(String type, String resId, String fileName,
-			int width, int height, String windowCloseOnTouchOutside, Object backdropColor, String backgroundDimEnabled, Float marginPercent, List<Map<String, Object>> scopedObjects) {
+			int width, int height, String windowCloseOnTouchOutside, Object backdropColor, String backgroundDimEnabled, Float marginPercent, String managers, List<Map<String, Object>> scopedObjects) {
 		//onpause
 
 		Object dialog = createDialog();
@@ -374,7 +377,7 @@ public class FragmentManager {
 		}
 		
 		//oncreate
-		onCreate(resId, fileName, scopedObjects, genericFragment);
+		onCreate(resId, fileName, managers, scopedObjects, genericFragment);
 		dialogFragments.put(genericFragment.getFragmentId(), genericFragment);
 		
 		//oncreateview for dialog
@@ -387,9 +390,9 @@ public class FragmentManager {
 		genericFragment.onResume();
 	}
 	
-	private void onCreate(String resId, String fileName, List<Map<String, Object>> scopedObjects,
+	private void onCreate(String resId, String fileName, String fragmentManagers, List<Map<String, Object>> scopedObjects,
 			GenericFragment genericFragment) {
-		Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
+		Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, fragmentManagers, scopedObjects);
 		bundle.putString("rootDirectory", rootDirectory);
 		bundle.putString("namespace", namespace);
 		genericFragment.setArguments(bundle);

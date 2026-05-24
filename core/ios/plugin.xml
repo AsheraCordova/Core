@@ -194,6 +194,8 @@
      <source-file src="library/widget_library/src/Form.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/FormElement.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/FormElement.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/widget_library/src/FragmentManagerFactory.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="library/widget_library/src/FragmentManagerFactory.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/FragmentRegistry.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/FragmentRegistry.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/GenericDecorator.h" target-dir="CorePlugin/widget_library/src"/>
@@ -234,6 +236,8 @@
      <source-file src="library/widget_library/src/IFragment.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IFragmentContainer.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/IFragmentContainer.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/widget_library/src/IFragmentManager.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="library/widget_library/src/IFragmentManager.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IHasMultiNativeWidgets.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/IHasMultiNativeWidgets.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IImageDownloader.h" target-dir="CorePlugin/widget_library/src"/>

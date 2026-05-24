@@ -59,7 +59,7 @@ public class LayoutPlugin  {
         //end - widgets
         
         WidgetFactory.register(new com.ashera.layout.ImageViewImpl());
-        
+        com.ashera.core.FragmentManagerFactory.registerManager("test", new DummyFragmentManager());
 
     }
 }

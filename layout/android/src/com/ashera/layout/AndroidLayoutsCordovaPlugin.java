@@ -61,7 +61,7 @@ public class AndroidLayoutsCordovaPlugin extends CordovaPlugin {
         WidgetFactory.register(new com.ashera.layout.VideoViewImpl());
         WidgetFactory.register(new com.ashera.layout.AudioViewImpl());
         //end - widgets
-
+        com.ashera.core.FragmentManagerFactory.registerManager("test", new DummyFragmentManager());
 
     }
 }

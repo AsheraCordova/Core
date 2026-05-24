@@ -20,6 +20,7 @@
 @class ASError;
 @class ASEventBus;
 @class IOSClass;
+@class IOSObjectArray;
 @class JavaLangBoolean;
 @class JavaLangInteger;
 @class NSString;
@@ -39,7 +40,7 @@
 
 - (void)onDetach;
 
-- (void)onCreate;
+- (void)onCreateWithNSObjectArray:(IOSObjectArray *)args;
 
 - (void)onDestroy;
 
@@ -131,6 +132,9 @@
 - (NSString *)getRootDirectory;
 
 - (NSString *)getNamespace;
+
+- (void)sendEventWithNSString:(NSString *)action
+              withJavaUtilMap:(id<JavaUtilMap>)extraData;
 
 @end
 

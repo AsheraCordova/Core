@@ -58,6 +58,7 @@ public class fragmentImpl extends BaseHasWidgets implements com.ashera.core.IFra
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("layout").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("navGraph").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tag").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("managers").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("replace").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("navigate").withType("object").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("popBackStack").withType("nil").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -509,6 +510,15 @@ public class fragmentImpl extends BaseHasWidgets implements com.ashera.core.IFra
 
 			}
 			break;
+			case "managers": {
+
+
+		setManagers(objValue);
+
+
+
+			}
+			break;
 			case "replace": {
 
 
@@ -735,6 +745,7 @@ private String navGraph;
 private String tag;
 private String rootDirectory;
 private String namespace;
+private String managers = "";
 
 private void setNamespace(Object namespace) {
 	this.namespace = (String) namespace;
@@ -761,6 +772,11 @@ private void replace(Object objValue) {
 	myfragment = null;
 	addOrReplaceFragment(false);
 	executePendingTransactions();
+}
+
+
+private void setManagers(Object objValue) {
+	this.managers = (String) objValue;
 }
 
 private void setTag(Object objValue) {
@@ -903,7 +919,7 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 			if (mylayout.startsWith("@layout")) {
 				mylayout = mylayout.replace("@", "") + ".xml";
 			}
-			navigator.navigate("fragment#" + id + "#" + mylayout, null, false, !add, null, getFragment());
+			navigator.navigate("fragment~" + managers + "#" + id + "#" + mylayout, null, false, !add, null, getFragment());
 			makeCurrentFragmentActive();
 		}
 	}

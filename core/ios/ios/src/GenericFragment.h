@@ -33,6 +33,8 @@
 @class ASError;
 @class ASEventBus;
 @class IOSClass;
+@class IOSIntArray;
+@class IOSObjectArray;
 @class JavaLangBoolean;
 @class JavaLangInteger;
 @class JavaUtilProperties;
@@ -83,6 +85,7 @@
 
 + (ADBundle *)getInitialBundleWithNSString:(NSString *)resId
                               withNSString:(NSString *)fileName
+                              withNSString:(NSString *)managers
                           withJavaUtilList:(id<JavaUtilList>)scopedObjects;
 
 - (NSString *)getInlineResourceWithNSString:(NSString *)key;
@@ -128,9 +131,9 @@
 
 - (void)onCloseDialogWithJavaUtilMap:(id<JavaUtilMap>)eventData;
 
-- (void)onCreate;
-
 - (void)onCreateWithADBundle:(ADBundle *)savedInstanceState;
+
+- (void)onCreateWithNSObjectArray:(IOSObjectArray *)args;
 
 - (id)onCreateViewWithBoolean:(bool)measure;
 
@@ -144,7 +147,13 @@
 
 - (void)onPause;
 
+- (void)onRequestPermissionsResultWithInt:(int32_t)requestCode
+                        withNSStringArray:(IOSObjectArray *)permissions
+                             withIntArray:(IOSIntArray *)grantResults;
+
 - (void)onResume;
+
+- (void)onSaveInstanceStateWithADBundle:(ADBundle *)outState;
 
 - (void)onViewCreatedWithADView:(ADView *)view
                    withADBundle:(ADBundle *)savedInstanceState;
@@ -156,6 +165,9 @@
 
 - (void)resizeWindowWithInt:(int32_t)width
                     withInt:(int32_t)height;
+
+- (void)sendEventWithNSString:(NSString *)action
+              withJavaUtilMap:(id<JavaUtilMap>)extraData;
 
 - (void)setFrameWithInt:(int32_t)x
                 withInt:(int32_t)y
@@ -186,7 +198,7 @@ FOUNDATION_EXPORT ASGenericFragment *new_ASGenericFragment_init(void) NS_RETURNS
 
 FOUNDATION_EXPORT ASGenericFragment *create_ASGenericFragment_init(void);
 
-FOUNDATION_EXPORT ADBundle *ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUtilList_(NSString *resId, NSString *fileName, id<JavaUtilList> scopedObjects);
+FOUNDATION_EXPORT ADBundle *ASGenericFragment_getInitialBundleWithNSString_withNSString_withNSString_withJavaUtilList_(NSString *resId, NSString *fileName, NSString *managers, id<JavaUtilList> scopedObjects);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASGenericFragment)
 

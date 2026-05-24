@@ -221,6 +221,7 @@
      <source-file src="layout/android/src/com/ashera/layout/ButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/CheckBoxImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ChronometerImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/DummyFragmentManager.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/EditTextImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/fragmentImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/FrameLayoutImpl.java" target-dir="src/com/ashera/layout"/>
@@ -486,6 +487,8 @@
      <source-file src="core/ios/library/widget_library/src/Form.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/FormElement.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/FormElement.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/widget_library/src/FragmentManagerFactory.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="core/ios/library/widget_library/src/FragmentManagerFactory.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/FragmentRegistry.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/FragmentRegistry.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/GenericDecorator.h" target-dir="CorePlugin/widget_library/src"/>
@@ -526,6 +529,8 @@
      <source-file src="core/ios/library/widget_library/src/IFragment.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IFragmentContainer.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/IFragmentContainer.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/widget_library/src/IFragmentManager.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="core/ios/library/widget_library/src/IFragmentManager.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IHasMultiNativeWidgets.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/IHasMultiNativeWidgets.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IImageDownloader.h" target-dir="CorePlugin/widget_library/src"/>
@@ -1504,6 +1509,8 @@
      <source-file src="layout/ios/ios/src/CheckBoxImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ChronometerImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ChronometerImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/DummyFragmentManager.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/DummyFragmentManager.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/EditTextImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/EditTextImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/fragmentImpl.h" target-dir="LayoutPlugin/ios/src"/>

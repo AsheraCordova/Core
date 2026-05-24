@@ -58,6 +58,8 @@
 
 - (void)onResume;
 
+- (void)onSaveInstanceStateWithADBundle:(ADBundle *)outState;
+
 - (void)onViewCreatedWithADView:(ADView *)view
                    withADBundle:(ADBundle *)savedInstanceState;
 

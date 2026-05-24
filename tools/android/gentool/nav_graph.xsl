@@ -11,11 +11,11 @@
         </xsl:for-each>
         <xsl:for-each select="//fragment">
             <xsl:variable name="id" select="substring(@android:id, 6)"/>
-            <xsl:text>export const </xsl:text><xsl:value-of select="$id" /><xsl:text>:string = </xsl:text>'fragment#<xsl:value-of select="$id" />#<xsl:value-of select="substring(@tools:layout, 2)" />.xml<xsl:text>';&#xa;</xsl:text>
+            <xsl:text>export const </xsl:text><xsl:value-of select="$id" /><xsl:text>:string = </xsl:text>'fragment~<xsl:value-of select="@managers" />#<xsl:value-of select="$id" />#<xsl:value-of select="substring(@tools:layout, 2)" />.xml<xsl:text>';&#xa;</xsl:text>
         </xsl:for-each>
         <xsl:for-each select="//dialog">
             <xsl:variable name="id" select="substring(@android:id, 6)"/>
-            <xsl:text>export const </xsl:text><xsl:value-of select="$id" /><xsl:text>:string = </xsl:text>'dialog#<xsl:value-of select="$id" />#<xsl:value-of select="substring(@tools:layout, 2)" />.xml#<xsl:value-of select="@android:layout_width" />#<xsl:value-of select="@android:layout_height" />#<xsl:value-of select="@style" /><xsl:text>';&#xa;</xsl:text>
+            <xsl:text>export const </xsl:text><xsl:value-of select="$id" /><xsl:text>:string = </xsl:text>'dialog~<xsl:value-of select="@managers" />#<xsl:value-of select="$id" />#<xsl:value-of select="substring(@tools:layout, 2)" />.xml#<xsl:value-of select="@android:layout_width" />#<xsl:value-of select="@android:layout_height" />#<xsl:value-of select="@style" /><xsl:text>';&#xa;</xsl:text>
         </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>
