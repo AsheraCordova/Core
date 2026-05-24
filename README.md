@@ -11,6 +11,7 @@ The project provides the following functionality
 * Enable features
 * Drag & Drop
 * Resizing Images
+* Overlay Images
 * Expression Method handler
 * HTML support for TextView
 * Event Bubbling
@@ -390,6 +391,15 @@ retainGCTransparency	| true or false		| When image is resized in SWT, image loos
 colorSmoothenGcFilter	| expression		| e.g r > 100 && g > 100 && b > 100. Only works if retainGCTransparency is set to true. The above expression is used on the image to replace all pixels matching the above expression with the first pixel of the image.
 bufferedImageScalingMethod | enum		| Scalr is used for resizing BufferedImage. Scalr provides various methods of resizing. See [https://github.com/rkalla/imgscalr]. Only works if useBufferedImage is set to true.
 
+## Overlay Images
+SWT framework cannot overlayout one transparent image above the another. When we overlay 2 images over one another using ImageView, the top image of swt covers the bottom image and the botton image is clipped from view. To over come the issue, ImageView in swt has attribute which can draw multiple images using gc. The attributes are explained below:
+
+Name                	| Type 			|Description
+-------------       	| -------------		|-------------	
+gcSrcs      			| array (drawable)	| List of images which needs to be drawn one over the other.
+gcSrcIds      			| array (id) 		| Unique identifier for each drawable in the above image.
+gcSrcRotate      		| float				| Rotate a drawable.
+gcSrcDelegateId      	| id				| In other platforms, the image is represented by mutiple images. In swt, the images are combined into a single image. When an event arrives on a ImageView, the event is redirected to the main imageview which is specified by the gcSrcDelegateId attribute.
 
 ## HTML support for TextView	
 Android using Html.fromHtml to display html text in TextView. To provide html support, html boolean attribute has been introduced on the TextView. When set to true, the text is parsed using tag soup HTML parser and is set on the TextView.
