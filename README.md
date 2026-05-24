@@ -392,7 +392,8 @@ colorSmoothenGcFilter	| expression		| e.g r > 100 && g > 100 && b > 100. Only wo
 bufferedImageScalingMethod | enum		| Scalr is used for resizing BufferedImage. Scalr provides various methods of resizing. See [https://github.com/rkalla/imgscalr]. Only works if useBufferedImage is set to true.
 
 ## Overlay Images
-SWT framework cannot overlayout one transparent image above the another. When we overlay 2 images over one another using ImageView, the top image of swt covers the bottom image and the botton image is clipped from view. To over come the issue, ImageView in swt has attribute which can draw multiple images using gc. The attributes are explained below:
+SWT framework cannot overlayout one transparent image above the another. When we overlay 2 images over one another using ImageView, the top image of swt covers the bottom image and the bottom image is clipped from view. To overcome the issue, ImageView in swt has attribute which can draw multiple images using gc. 
+The attributes are explained below:
 
 Name                	| Type 			|Description
 -------------       	| -------------		|-------------	
