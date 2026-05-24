@@ -577,6 +577,29 @@ closeDialog(id : string)	| Close the ialog with id of the dialog. Id is used onl
 namespace	| Fragment can display offline content that is stored in the mobile app directory. e.g. TestApp. When namespace TestApp is set, the calls from the native ui to fragment is routed to module TestApp which is loaded dynamically
 rootDirectory	| Fragment can display offline content that is stored in the mobile app directory. e.g. cordova.file.persistent/TestApp. Child app can be downloaded from the internet in zip file and can be store at cordova.file.persistent/TestApp location. 
 
+#### managers for fragment 
+Each fragment can be configured with one or more managers by specifying a managers attribute in nav_graph.xml.
+```
+<fragment
+	android:id="@+id/z_welcome"
+	android:name="com.ashera.core.GenericFragment"
+	android:label="z_welcome"
+	tools:layout="@layout/z_welcome"
+	managers="compass,maps">
+</fragment>
+```
+The compass and maps are managers which are part of SpatialKit plugin. They add additional functionality to GenericFragment by adding functionality to well known lifecycle methods of fragment like onCreate, onResume etc.
+
+Manager class should implement [IFragmentManager](https://github.com/AsheraCordova/widget_library/blob/main/src/com/ashera/core/IFragmentManager.java) and register this manager with [FragmentManagerFactory](https://github.com/AsheraCordova/widget_library/blob/main/src/com/ashera/core/FragmentManagerFactory.java).
+
+Example of manager implementation:
+
+[CompassManager](https://github.com/AsheraCordova/SpatialKit/blob/main/android/src/com/ashera/spatialkit/CompassManager.java)
+
+[MapManager](https://github.com/AsheraCordova/SpatialKit/blob/main/android/src/com/ashera/spatialkit/MapManager.java)
+
+[Register map and compass](https://github.com/AsheraCordova/SpatialKit/blob/main/android/src/com/ashera/spatialkit/SpatialKitPlugin.java)
+
 ### Viewoverlay
 Name                	| Description
 -------------       	| -------------
