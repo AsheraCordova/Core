@@ -1408,7 +1408,7 @@ return getTintColor();				}
 				        gc.setTransform(transform);
 			        }
 			        
-			        gc.drawImage(image, 0, 0, image.getBounds().width, image.getBounds().height, 0, 0, bounds.width, bounds.height);
+			        gc.drawImage(image, 0, 0, image.getBounds().width, image.getBounds().height, bounds.x, bounds.y, bounds.width, bounds.height);
 			        if (oldTransform != null) {
 			        	 gc.setTransform(oldTransform);
 			        }
