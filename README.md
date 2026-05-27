@@ -11,6 +11,7 @@ The project provides the following functionality
 * Enable features
 * Drag & Drop
 * Resizing Images
+* Overlay Images
 * Expression Method handler
 * HTML support for TextView
 * Event Bubbling
@@ -390,6 +391,16 @@ retainGCTransparency	| true or false		| When image is resized in SWT, image loos
 colorSmoothenGcFilter	| expression		| e.g r > 100 && g > 100 && b > 100. Only works if retainGCTransparency is set to true. The above expression is used on the image to replace all pixels matching the above expression with the first pixel of the image.
 bufferedImageScalingMethod | enum		| Scalr is used for resizing BufferedImage. Scalr provides various methods of resizing. See [https://github.com/rkalla/imgscalr]. Only works if useBufferedImage is set to true.
 
+## Overlay Images
+SWT framework cannot overlayout one transparent image above the another. When we overlay 2 images over one another using ImageView, the top image of swt covers the bottom image and the bottom image is clipped from view. To overcome the issue, ImageView in swt has attribute which can draw multiple images using gc. 
+The attributes are explained below:
+
+Name                	| Type 			|Description
+-------------       	| -------------		|-------------	
+gcSrcs      			| array (drawable)	| List of images which needs to be drawn one over the other.
+gcSrcIds      			| array (id) 		| Unique identifier for each drawable in the above image.
+gcSrcRotate      		| float				| Rotate a drawable.
+gcSrcDelegateId      	| id				| In other platforms, the image is represented by mutiple images. In swt, the images are combined into a single image. When an event arrives on a ImageView, the event is redirected to the main imageview which is specified by the gcSrcDelegateId attribute.
 
 ## HTML support for TextView	
 Android using Html.fromHtml to display html text in TextView. To provide html support, html boolean attribute has been introduced on the TextView. When set to true, the text is parsed using tag soup HTML parser and is set on the TextView.
@@ -576,6 +587,29 @@ navigateAsTop(actionId:string, ...scopedObjects:ScopedObject[])	| Remove all scr
 closeDialog(id : string)	| Close the ialog with id of the dialog. Id is used only for android and other platforms closes the top most open dialog
 namespace	| Fragment can display offline content that is stored in the mobile app directory. e.g. TestApp. When namespace TestApp is set, the calls from the native ui to fragment is routed to module TestApp which is loaded dynamically
 rootDirectory	| Fragment can display offline content that is stored in the mobile app directory. e.g. cordova.file.persistent/TestApp. Child app can be downloaded from the internet in zip file and can be store at cordova.file.persistent/TestApp location. 
+
+#### managers for fragment 
+Each fragment can be configured with one or more managers by specifying a managers attribute in nav_graph.xml.
+```
+<fragment
+	android:id="@+id/z_welcome"
+	android:name="com.ashera.core.GenericFragment"
+	android:label="z_welcome"
+	tools:layout="@layout/z_welcome"
+	managers="compass,maps">
+</fragment>
+```
+The compass and maps are managers which are part of SpatialKit plugin. They add additional functionality to GenericFragment by adding functionality to well known lifecycle methods of fragment like onCreate, onResume etc.
+
+Manager class should implement [IFragmentManager](https://github.com/AsheraCordova/widget_library/blob/main/src/com/ashera/core/IFragmentManager.java) and register this manager with [FragmentManagerFactory](https://github.com/AsheraCordova/widget_library/blob/main/src/com/ashera/core/FragmentManagerFactory.java).
+
+Example of manager implementation:
+
+[CompassManager](https://github.com/AsheraCordova/SpatialKit/blob/main/android/src/com/ashera/spatialkit/CompassManager.java)
+
+[MapManager](https://github.com/AsheraCordova/SpatialKit/blob/main/android/src/com/ashera/spatialkit/MapManager.java)
+
+[Register map and compass](https://github.com/AsheraCordova/SpatialKit/blob/main/android/src/com/ashera/spatialkit/SpatialKitPlugin.java)
 
 ### Viewoverlay
 Name                	| Description
