@@ -41,6 +41,11 @@
 
 - (void)childDrawableStateChangedWithADView:(ADView *)child;
 
+- (void)requestDisallowInterceptTouchEventWithBoolean:(bool)disallowIntercept;
+
+- (void)childHasTransientStateChangedWithADView:(ADView *)child
+                                    withBoolean:(bool)hasTransientState;
+
 - (bool)canResolveLayoutDirection;
 
 - (bool)isLayoutDirectionResolved;

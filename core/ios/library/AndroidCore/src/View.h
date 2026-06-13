@@ -29,6 +29,7 @@
 @class ADResources;
 @class ADViewGroup_LayoutParams;
 @class ADViewOverlay;
+@class ADViewPropertyAnimator;
 @class ADViewTreeObserver;
 @class ADView_AccessibilityNodeProvider;
 @class ADView_AttachInfo;
@@ -39,6 +40,7 @@
 @class JavaLangBoolean;
 @class JavaLangFloat;
 @class JavaLangInteger;
+@class JavaLangLong;
 @class NSString;
 @protocol ADCanvas;
 @protocol ADIBinder;
@@ -95,6 +97,8 @@
   ADView_AttachInfo *mAttachInfo_;
   ADView_ThreadLocal *sThreadLocal_;
   ADView_ListenerInfo *mListenerInfo_;
+  int32_t action_;
+  int64_t downTime_;
 }
 
 #pragma mark Public
@@ -104,6 +108,8 @@
 - (void)addOnAttachStateChangeListenerWithADView_OnAttachStateChangeListener:(id<ADView_OnAttachStateChangeListener>)listener;
 
 - (void)addOnLayoutChangeListenerWithADView_OnLayoutChangeListener:(id<ADView_OnLayoutChangeListener>)listener;
+
+- (ADViewPropertyAnimator *)animate;
 
 - (void)applyBackgroundTint;
 
@@ -154,8 +160,12 @@
 
 - (void)dispatchStartTemporaryDetach;
 
+- (bool)dispatchTouchEventWithADMotionEvent:(ADMotionEvent *)event;
+
 - (void)drawableHotspotChangedWithFloat:(float)x
                               withFloat:(float)y;
+
+- (ADView *)findChildWithAccessibilityFocus;
 
 - (ADView *)findFocus;
 
@@ -279,6 +289,8 @@
 
 - (float)getRotationY;
 
+- (float)getRotationZ;
+
 - (float)getScaleX;
 
 - (float)getScaleY;
@@ -362,6 +374,8 @@
 
 - (void)invokeKeyListenerUpWithInt:(int32_t)keyCode;
 
+- (bool)isAccessibilityFocusedViewOrHost;
+
 - (bool)isActivated;
 
 - (bool)isAttachedToWindow;
@@ -436,11 +450,11 @@
 
 - (void)offsetTopAndBottomWithInt:(int32_t)offset;
 
-- (void)onAttachedToWindow;
-
 - (void)onDragCanAcceptWithBoolean:(bool)focus;
 
 - (void)onDragHoveredWithBoolean:(bool)focus;
+
+- (bool)onFilterTouchEventForSecurityWithADMotionEvent:(ADMotionEvent *)e;
 
 - (void)onFinishTemporaryDetach;
 
@@ -455,19 +469,42 @@
 - (bool)onTouchEventWithADMotionEvent:(ADMotionEvent *)event;
 
 - (void)onTouchEventDownWithInt:(int32_t)x
-                        withInt:(int32_t)y;
+                        withInt:(int32_t)y
+                        withInt:(int32_t)rawX
+                        withInt:(int32_t)rawY;
 
 - (void)onTouchEventMoveWithInt:(int32_t)x
-                        withInt:(int32_t)y;
+                        withInt:(int32_t)y
+                        withInt:(int32_t)rawX
+                        withInt:(int32_t)rawY;
 
 - (void)onTouchEventUpWithInt:(int32_t)x
-                      withInt:(int32_t)y;
+                      withInt:(int32_t)y
+                      withInt:(int32_t)rawX
+                      withInt:(int32_t)rawY;
 
 - (void)onVisibilityAggregatedWithBoolean:(bool)isVisible;
 
+- (bool)performClick;
+
+- (bool)performLongClick;
+
+- (bool)performLongClickWithFloat:(float)x
+                        withFloat:(float)y;
+
+- (bool)pointInViewWithFloat:(float)localX
+                   withFloat:(float)localY
+                   withFloat:(float)slop;
+
 - (bool)postWithJavaLangRunnable:(id<JavaLangRunnable>)action;
 
+- (bool)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)action
+                               withLong:(int64_t)delayMillis;
+
 - (void)postOnAnimationWithJavaLangRunnable:(id<JavaLangRunnable>)action;
+
+- (void)postOnAnimationDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)action
+                                          withLong:(int64_t)delayMillis;
 
 - (void)refreshDrawableState;
 
@@ -533,6 +570,8 @@
 
 - (void)setAlphaWithFloat:(float)alpha;
 
+- (bool)setAlphaNoInvalidationWithFloat:(float)value;
+
 - (void)setBackgroundWithADDrawable:(ADDrawable *)background;
 
 - (void)setBackgroundColorWithInt:(int32_t)backgroundColor;
@@ -570,6 +609,8 @@
 - (void)setForegroundTintListWithADColorStateList:(ADColorStateList *)tint;
 
 - (void)setHasOnTouchEventWithBoolean:(bool)hasOnTouchEvent;
+
+- (void)setHasTransientStateWithBoolean:(bool)hasTransientState;
 
 - (void)setHorizontalScrollbarHeightWithInt:(int32_t)horizontalScrollbarHeight;
 
@@ -623,6 +664,8 @@
 - (void)setRotationXWithFloat:(float)rotationX;
 
 - (void)setRotationYWithFloat:(float)rotationY;
+
+- (void)setRotationZWithFloat:(float)rotationZ;
 
 - (void)setScaleXWithFloat:(float)scaleX;
 
@@ -718,8 +761,12 @@
 
 - (void)invalidateParentIfNeededAndWasQuickRejected;
 
+- (bool)isInScrollingContainer;
+
 + (IOSIntArray *)mergeDrawableStatesWithIntArray:(IOSIntArray *)baseState
                                     withIntArray:(IOSIntArray *)additionalState;
+
+- (void)onAttachedToWindow;
 
 - (IOSIntArray *)onCreateDrawableStateWithInt:(int32_t)extraSpace;
 
@@ -747,6 +794,8 @@
                               withInt:(int32_t)visibility;
 
 - (void)onWindowVisibilityChangedWithInt:(int32_t)visibility;
+
+- (bool)performButtonActionOnTouchDownWithADMotionEvent:(ADMotionEvent *)event;
 
 - (void)resetResolvedDrawables;
 
@@ -809,6 +858,9 @@
 - (bool)isPaddingResolved;
 
 - (void)onResolveDrawablesWithInt:(int32_t)layoutDirection;
+
+- (bool)pointInViewWithFloat:(float)localX
+                   withFloat:(float)localY;
 
 - (void)resetResolvedDrawablesInternal;
 
@@ -2420,10 +2472,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ViewRootImpl)
 @class ADView;
 @class JavaUtilArrayList;
 @class JavaUtilConcurrentCopyOnWriteArrayList;
+@protocol ADView_OnClickListener;
 @protocol ADView_OnKeyListener;
+@protocol ADView_OnLongClickListener;
 
 @interface ADView_ListenerInfo : NSObject {
  @public
+  id<ADView_OnClickListener> mOnClickListener_;
+  id<ADView_OnLongClickListener> mOnLongClickListener_;
   JavaUtilConcurrentCopyOnWriteArrayList *mOnAttachStateChangeListeners_;
   JavaUtilArrayList *mOnLayoutChangeListeners_;
   id<ADView_OnKeyListener> mOnKeyListener_;
@@ -2445,6 +2501,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ViewRootImpl)
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_ListenerInfo)
 
+J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnClickListener_, id<ADView_OnClickListener>)
+J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnLongClickListener_, id<ADView_OnLongClickListener>)
 J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnAttachStateChangeListeners_, JavaUtilConcurrentCopyOnWriteArrayList *)
 J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnLayoutChangeListeners_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnKeyListener_, id<ADView_OnKeyListener>)
@@ -2663,6 +2721,81 @@ FOUNDATION_EXPORT ADView_TintInfo *new_ADView_TintInfo_initWithADView_(ADView *o
 FOUNDATION_EXPORT ADView_TintInfo *create_ADView_TintInfo_initWithADView_(ADView *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_TintInfo)
+
+
+#endif
+
+#if !defined (ADView_TouchDelegate_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_TouchDelegate))
+#define ADView_TouchDelegate_
+
+@class ADMotionEvent;
+@class ADView;
+@class JavaLangBoolean;
+
+@interface ADView_TouchDelegate : NSObject
+
+#pragma mark Public
+
+- (bool)onTouchEventWithADMotionEvent:(ADMotionEvent *)event;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithADView:(ADView *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADView_TouchDelegate)
+
+FOUNDATION_EXPORT void ADView_TouchDelegate_initWithADView_(ADView_TouchDelegate *self, ADView *outer$);
+
+FOUNDATION_EXPORT ADView_TouchDelegate *new_ADView_TouchDelegate_initWithADView_(ADView *outer$) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADView_TouchDelegate *create_ADView_TouchDelegate_initWithADView_(ADView *outer$);
+
+J2OBJC_TYPE_LITERAL_HEADER(ADView_TouchDelegate)
+
+
+#endif
+
+#if !defined (ADView_InputDevice_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_InputDevice))
+#define ADView_InputDevice_
+
+@class ADView;
+@class JavaLangInteger;
+
+@interface ADView_InputDevice : NSObject
+
+#pragma mark Package-Private
+
+- (instancetype)initWithADView:(ADView *)outer$;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADView_InputDevice)
+
+inline int32_t ADView_InputDevice_get_SOURCE_TOUCHSCREEN(void);
+#define ADView_InputDevice_SOURCE_TOUCHSCREEN 1
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_InputDevice, SOURCE_TOUCHSCREEN, int32_t)
+
+inline int32_t ADView_InputDevice_get_SOURCE_MOUSE(void);
+#define ADView_InputDevice_SOURCE_MOUSE 2
+J2OBJC_STATIC_FIELD_CONSTANT(ADView_InputDevice, SOURCE_MOUSE, int32_t)
+
+FOUNDATION_EXPORT void ADView_InputDevice_initWithADView_(ADView_InputDevice *self, ADView *outer$);
+
+FOUNDATION_EXPORT ADView_InputDevice *new_ADView_InputDevice_initWithADView_(ADView *outer$) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADView_InputDevice *create_ADView_InputDevice_initWithADView_(ADView *outer$);
+
+J2OBJC_TYPE_LITERAL_HEADER(ADView_InputDevice)
 
 
 #endif

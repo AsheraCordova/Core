@@ -17,27 +17,76 @@
 #if !defined (ADMotionEvent_) && (INCLUDE_ALL_MotionEvent || defined(INCLUDE_ADMotionEvent))
 #define ADMotionEvent_
 
+@class JavaLangBoolean;
+@class JavaLangFloat;
 @class JavaLangInteger;
+@class JavaLangLong;
 
-@interface ADMotionEvent : NSObject
+@interface ADMotionEvent : NSObject {
+ @public
+  int32_t mSeq_;
+  bool mRecycled_;
+}
 
 #pragma mark Public
 
 - (instancetype)init;
 
+- (int32_t)findPointerIndexWithInt:(int32_t)mActivePointerId;
+
 - (int32_t)getAction;
 
+- (int32_t)getActionIndex;
+
+- (int32_t)getActionMasked;
+
+- (int32_t)getButtonState;
+
+- (int32_t)getClassification;
+
+- (int64_t)getDownTime;
+
 - (int32_t)getEventTime;
+
+- (int32_t)getFlags;
+
+- (int32_t)getPointerCount;
+
+- (int32_t)getPointerIdWithInt:(int32_t)i;
+
+- (int32_t)getPointerIdBits;
 
 - (int32_t)getRawX;
 
 - (int32_t)getRawY;
 
+- (int32_t)getSource;
+
 - (int32_t)getX;
+
+- (float)getXWithInt:(int32_t)pointerIndex;
 
 - (int32_t)getY;
 
+- (float)getYWithInt:(int32_t)pointerIndex;
+
+- (bool)isButtonPressedWithInt:(int32_t)buttonPrimary;
+
+- (bool)isFromSourceWithInt:(int32_t)source;
+
+- (bool)isTargetAccessibilityFocus;
+
++ (ADMotionEvent *)obtainWithLong:(int64_t)downTime
+                         withLong:(int64_t)eventTime
+                          withInt:(int32_t)action
+                        withFloat:(float)x
+                        withFloat:(float)y
+                          withInt:(int32_t)metaState;
+
 + (ADMotionEvent *)obtainWithADMotionEvent:(ADMotionEvent *)ev;
+
+- (void)offsetLocationWithFloat:(float)deltaX
+                      withFloat:(float)deltaY;
 
 - (void)offsetLocationWithInt:(int32_t)i
                       withInt:(int32_t)j;
@@ -50,13 +99,23 @@
 
 - (void)setRawYWithInt:(int32_t)rawY;
 
+- (void)setSourceWithInt:(int32_t)sourceTouchscreen;
+
+- (void)setTargetAccessibilityFocusWithBoolean:(bool)b;
+
 - (void)setXWithInt:(int32_t)x;
 
 - (void)setYWithInt:(int32_t)y;
 
+- (ADMotionEvent *)splitWithInt:(int32_t)newPointerIdBits;
+
+#pragma mark Protected
+
+- (void)prepareForReuse;
+
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ADMotionEvent)
+J2OBJC_STATIC_INIT(ADMotionEvent)
 
 inline int32_t ADMotionEvent_get_ACTION_DOWN(void);
 #define ADMotionEvent_ACTION_DOWN 0
@@ -78,6 +137,18 @@ inline int32_t ADMotionEvent_get_ACTION_OUTSIDE(void);
 #define ADMotionEvent_ACTION_OUTSIDE 4
 J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_OUTSIDE, int32_t)
 
+inline int32_t ADMotionEvent_get_ACTION_POINTER_DOWN(void);
+#define ADMotionEvent_ACTION_POINTER_DOWN 5
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_POINTER_DOWN, int32_t)
+
+inline int32_t ADMotionEvent_get_ACTION_POINTER_UP(void);
+#define ADMotionEvent_ACTION_POINTER_UP 6
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_POINTER_UP, int32_t)
+
+inline int32_t ADMotionEvent_get_ACTION_HOVER_MOVE(void);
+#define ADMotionEvent_ACTION_HOVER_MOVE 7
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_HOVER_MOVE, int32_t)
+
 inline int32_t ADMotionEvent_get_ACTION_SCROLL(void);
 #define ADMotionEvent_ACTION_SCROLL 8
 J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_SCROLL, int32_t)
@@ -90,6 +161,30 @@ inline int32_t ADMotionEvent_get_ACTION_BUTTON_RELEASE(void);
 #define ADMotionEvent_ACTION_BUTTON_RELEASE 12
 J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_BUTTON_RELEASE, int32_t)
 
+inline int32_t ADMotionEvent_get_CLASSIFICATION_AMBIGUOUS_GESTURE(void);
+#define ADMotionEvent_CLASSIFICATION_AMBIGUOUS_GESTURE 1
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, CLASSIFICATION_AMBIGUOUS_GESTURE, int32_t)
+
+inline int32_t ADMotionEvent_get_CLASSIFICATION_DEEP_PRESS(void);
+#define ADMotionEvent_CLASSIFICATION_DEEP_PRESS 2
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, CLASSIFICATION_DEEP_PRESS, int32_t)
+
+inline int32_t ADMotionEvent_get_ACTION_MASK(void);
+#define ADMotionEvent_ACTION_MASK 255
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, ACTION_MASK, int32_t)
+
+inline int32_t ADMotionEvent_get_BUTTON_SECONDARY(void);
+#define ADMotionEvent_BUTTON_SECONDARY 2
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, BUTTON_SECONDARY, int32_t)
+
+inline int32_t ADMotionEvent_get_BUTTON_PRIMARY(void);
+#define ADMotionEvent_BUTTON_PRIMARY 1
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, BUTTON_PRIMARY, int32_t)
+
+inline int32_t ADMotionEvent_get_FLAG_IS_GENERATED_GESTURE(void);
+#define ADMotionEvent_FLAG_IS_GENERATED_GESTURE 8
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, FLAG_IS_GENERATED_GESTURE, int32_t)
+
 FOUNDATION_EXPORT void ADMotionEvent_init(ADMotionEvent *self);
 
 FOUNDATION_EXPORT ADMotionEvent *new_ADMotionEvent_init(void) NS_RETURNS_RETAINED;
@@ -97,6 +192,8 @@ FOUNDATION_EXPORT ADMotionEvent *new_ADMotionEvent_init(void) NS_RETURNS_RETAINE
 FOUNDATION_EXPORT ADMotionEvent *create_ADMotionEvent_init(void);
 
 FOUNDATION_EXPORT ADMotionEvent *ADMotionEvent_obtainWithADMotionEvent_(ADMotionEvent *ev);
+
+FOUNDATION_EXPORT ADMotionEvent *ADMotionEvent_obtainWithLong_withLong_withInt_withFloat_withFloat_withInt_(int64_t downTime, int64_t eventTime, int32_t action, float x, float y, int32_t metaState);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMotionEvent)
 

@@ -153,6 +153,8 @@
      <source-file src="ios/src/WebViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <!-- ios end -->
     <!-- start ios_ext -->
+     <header-file src="ios_ext/src/ASTouchGestureRecognizer.h" target-dir="LayoutPlugin/ios_ext/src"/>
+     <source-file src="ios_ext/src/ASTouchGestureRecognizer.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios_ext/src/ASUIActivityIndicatorView.h" target-dir="LayoutPlugin/ios_ext/src"/>
      <source-file src="ios_ext/src/ASUIActivityIndicatorView.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios_ext/src/ASUIButton.h" target-dir="LayoutPlugin/ios_ext/src"/>

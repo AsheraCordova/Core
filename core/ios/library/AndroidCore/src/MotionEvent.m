@@ -10,7 +10,12 @@
 
 #include "J2ObjC_source.h"
 #include "MotionEvent.h"
+#include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+#include "java/lang/RuntimeException.h"
+#include "java/util/concurrent/atomic/AtomicInteger.h"
 
 
 
@@ -26,9 +31,49 @@
   int32_t rawX_;
   int32_t rawY_;
   int32_t action_;
+  int64_t downTime_;
+  int64_t eventTime_;
+  ADMotionEvent *mNext_;
+  JavaLangRuntimeException *mRecycledLocation_;
 }
 
++ (ADMotionEvent *)obtain;
+
 @end
+
+J2OBJC_FIELD_SETTER(ADMotionEvent, mNext_, ADMotionEvent *)
+J2OBJC_FIELD_SETTER(ADMotionEvent, mRecycledLocation_, JavaLangRuntimeException *)
+
+inline bool ADMotionEvent_get_TRACK_RECYCLED_LOCATION(void);
+#define ADMotionEvent_TRACK_RECYCLED_LOCATION false
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, TRACK_RECYCLED_LOCATION, bool)
+
+inline int32_t ADMotionEvent_get_MAX_RECYCLED(void);
+#define ADMotionEvent_MAX_RECYCLED 10
+J2OBJC_STATIC_FIELD_CONSTANT(ADMotionEvent, MAX_RECYCLED, int32_t)
+
+inline id ADMotionEvent_get_gRecyclerLock(void);
+static id ADMotionEvent_gRecyclerLock;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADMotionEvent, gRecyclerLock, id)
+
+inline int32_t ADMotionEvent_get_gRecyclerUsed(void);
+inline int32_t ADMotionEvent_set_gRecyclerUsed(int32_t value);
+inline int32_t *ADMotionEvent_getRef_gRecyclerUsed(void);
+static int32_t ADMotionEvent_gRecyclerUsed;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADMotionEvent, gRecyclerUsed, int32_t)
+
+inline ADMotionEvent *ADMotionEvent_get_gRecyclerTop(void);
+inline ADMotionEvent *ADMotionEvent_set_gRecyclerTop(ADMotionEvent *value);
+static ADMotionEvent *ADMotionEvent_gRecyclerTop;
+J2OBJC_STATIC_FIELD_OBJ(ADMotionEvent, gRecyclerTop, ADMotionEvent *)
+
+inline JavaUtilConcurrentAtomicAtomicInteger *ADMotionEvent_get_mNextSeq(void);
+static JavaUtilConcurrentAtomicAtomicInteger *ADMotionEvent_mNextSeq;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADMotionEvent, mNextSeq, JavaUtilConcurrentAtomicAtomicInteger *)
+
+__attribute__((unused)) static ADMotionEvent *ADMotionEvent_obtain(void);
+
+J2OBJC_INITIALIZED_DEFN(ADMotionEvent)
 
 @implementation ADMotionEvent
 
@@ -93,7 +138,129 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADMotionEvent_obtainWithADMotionEvent_(ev);
 }
 
+- (int32_t)findPointerIndexWithInt:(int32_t)mActivePointerId {
+  return 0;
+}
+
+- (int32_t)getActionMasked {
+  return action_;
+}
+
+- (int32_t)getPointerIdWithInt:(int32_t)i {
+  return 0;
+}
+
+- (float)getXWithInt:(int32_t)pointerIndex {
+  return x_;
+}
+
+- (float)getYWithInt:(int32_t)pointerIndex {
+  return y_;
+}
+
+- (int32_t)getActionIndex {
+  return 0;
+}
+
+- (bool)isTargetAccessibilityFocus {
+  return false;
+}
+
+- (void)setTargetAccessibilityFocusWithBoolean:(bool)b {
+}
+
+- (int32_t)getButtonState {
+  return 0;
+}
+
+- (int32_t)getSource {
+  return 0;
+}
+
+- (bool)isFromSourceWithInt:(int32_t)source {
+  return false;
+}
+
+- (int64_t)getDownTime {
+  return downTime_;
+}
+
+- (void)offsetLocationWithFloat:(float)deltaX
+                      withFloat:(float)deltaY {
+  if (deltaX != 0.0f || deltaY != 0.0f) {
+    JrePlusAssignIntF(&x_, deltaX);
+    JrePlusAssignIntF(&y_, deltaY);
+    JrePlusAssignIntF(&rawX_, deltaX);
+    JrePlusAssignIntF(&rawY_, deltaX);
+  }
+}
+
+- (ADMotionEvent *)splitWithInt:(int32_t)newPointerIdBits {
+  return self;
+}
+
++ (ADMotionEvent *)obtainWithLong:(int64_t)downTime
+                         withLong:(int64_t)eventTime
+                          withInt:(int32_t)action
+                        withFloat:(float)x
+                        withFloat:(float)y
+                          withInt:(int32_t)metaState {
+  return ADMotionEvent_obtainWithLong_withLong_withInt_withFloat_withFloat_withInt_(downTime, eventTime, action, x, y, metaState);
+}
+
+- (void)setSourceWithInt:(int32_t)sourceTouchscreen {
+}
+
+- (int32_t)getPointerIdBits {
+  return 1;
+}
+
+- (bool)isButtonPressedWithInt:(int32_t)buttonPrimary {
+  return false;
+}
+
+- (int32_t)getPointerCount {
+  return 1;
+}
+
+- (int32_t)getFlags {
+  return 0;
+}
+
+- (int32_t)getClassification {
+  return 0;
+}
+
++ (ADMotionEvent *)obtain {
+  return ADMotionEvent_obtain();
+}
+
 - (void)recycle {
+  {
+    if (mRecycled_) {
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", [self description], @" recycled twice!"));
+    }
+    mRecycled_ = true;
+  }
+  @synchronized(ADMotionEvent_gRecyclerLock) {
+    if (ADMotionEvent_gRecyclerUsed < ADMotionEvent_MAX_RECYCLED) {
+      ADMotionEvent_gRecyclerUsed++;
+      JreStrongAssign(&mNext_, ADMotionEvent_gRecyclerTop);
+      JreStrongAssign(&ADMotionEvent_gRecyclerTop, self);
+    }
+  }
+}
+
+- (void)prepareForReuse {
+  mRecycled_ = false;
+  JreStrongAssign(&mRecycledLocation_, nil);
+  mSeq_ = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ADMotionEvent_mNextSeq)) getAndIncrement];
+}
+
+- (void)dealloc {
+  RELEASE_(mNext_);
+  RELEASE_(mRecycledLocation_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -112,7 +279,30 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
     { NULL, "LADMotionEvent;", 0x9, 8, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 11, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 12, 1, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 13, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 16, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 17, -1, -1, -1, -1 },
+    { NULL, "LADMotionEvent;", 0x1, 18, 1, -1, -1, -1, -1 },
+    { NULL, "LADMotionEvent;", 0x9, 8, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 21, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADMotionEvent;", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -131,7 +321,30 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[11].selector = @selector(getEventTime);
   methods[12].selector = @selector(offsetLocationWithInt:withInt:);
   methods[13].selector = @selector(obtainWithADMotionEvent:);
-  methods[14].selector = @selector(recycle);
+  methods[14].selector = @selector(findPointerIndexWithInt:);
+  methods[15].selector = @selector(getActionMasked);
+  methods[16].selector = @selector(getPointerIdWithInt:);
+  methods[17].selector = @selector(getXWithInt:);
+  methods[18].selector = @selector(getYWithInt:);
+  methods[19].selector = @selector(getActionIndex);
+  methods[20].selector = @selector(isTargetAccessibilityFocus);
+  methods[21].selector = @selector(setTargetAccessibilityFocusWithBoolean:);
+  methods[22].selector = @selector(getButtonState);
+  methods[23].selector = @selector(getSource);
+  methods[24].selector = @selector(isFromSourceWithInt:);
+  methods[25].selector = @selector(getDownTime);
+  methods[26].selector = @selector(offsetLocationWithFloat:withFloat:);
+  methods[27].selector = @selector(splitWithInt:);
+  methods[28].selector = @selector(obtainWithLong:withLong:withInt:withFloat:withFloat:withInt:);
+  methods[29].selector = @selector(setSourceWithInt:);
+  methods[30].selector = @selector(getPointerIdBits);
+  methods[31].selector = @selector(isButtonPressedWithInt:);
+  methods[32].selector = @selector(getPointerCount);
+  methods[33].selector = @selector(getFlags);
+  methods[34].selector = @selector(getClassification);
+  methods[35].selector = @selector(obtain);
+  methods[36].selector = @selector(recycle);
+  methods[37].selector = @selector(prepareForReuse);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "ACTION_DOWN", "I", .constantValue.asInt = ADMotionEvent_ACTION_DOWN, 0x19, -1, -1, -1, -1 },
@@ -139,18 +352,47 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "ACTION_MOVE", "I", .constantValue.asInt = ADMotionEvent_ACTION_MOVE, 0x19, -1, -1, -1, -1 },
     { "ACTION_CANCEL", "I", .constantValue.asInt = ADMotionEvent_ACTION_CANCEL, 0x19, -1, -1, -1, -1 },
     { "ACTION_OUTSIDE", "I", .constantValue.asInt = ADMotionEvent_ACTION_OUTSIDE, 0x19, -1, -1, -1, -1 },
+    { "ACTION_POINTER_DOWN", "I", .constantValue.asInt = ADMotionEvent_ACTION_POINTER_DOWN, 0x19, -1, -1, -1, -1 },
+    { "ACTION_POINTER_UP", "I", .constantValue.asInt = ADMotionEvent_ACTION_POINTER_UP, 0x19, -1, -1, -1, -1 },
+    { "ACTION_HOVER_MOVE", "I", .constantValue.asInt = ADMotionEvent_ACTION_HOVER_MOVE, 0x19, -1, -1, -1, -1 },
     { "ACTION_SCROLL", "I", .constantValue.asInt = ADMotionEvent_ACTION_SCROLL, 0x19, -1, -1, -1, -1 },
     { "ACTION_BUTTON_PRESS", "I", .constantValue.asInt = ADMotionEvent_ACTION_BUTTON_PRESS, 0x19, -1, -1, -1, -1 },
     { "ACTION_BUTTON_RELEASE", "I", .constantValue.asInt = ADMotionEvent_ACTION_BUTTON_RELEASE, 0x19, -1, -1, -1, -1 },
+    { "CLASSIFICATION_AMBIGUOUS_GESTURE", "I", .constantValue.asInt = ADMotionEvent_CLASSIFICATION_AMBIGUOUS_GESTURE, 0x19, -1, -1, -1, -1 },
+    { "CLASSIFICATION_DEEP_PRESS", "I", .constantValue.asInt = ADMotionEvent_CLASSIFICATION_DEEP_PRESS, 0x19, -1, -1, -1, -1 },
+    { "ACTION_MASK", "I", .constantValue.asInt = ADMotionEvent_ACTION_MASK, 0x19, -1, -1, -1, -1 },
+    { "BUTTON_SECONDARY", "I", .constantValue.asInt = ADMotionEvent_BUTTON_SECONDARY, 0x19, -1, -1, -1, -1 },
+    { "BUTTON_PRIMARY", "I", .constantValue.asInt = ADMotionEvent_BUTTON_PRIMARY, 0x19, -1, -1, -1, -1 },
+    { "FLAG_IS_GENERATED_GESTURE", "I", .constantValue.asInt = ADMotionEvent_FLAG_IS_GENERATED_GESTURE, 0x19, -1, -1, -1, -1 },
+    { "TRACK_RECYCLED_LOCATION", "Z", .constantValue.asBOOL = ADMotionEvent_TRACK_RECYCLED_LOCATION, 0x1a, -1, -1, -1, -1 },
+    { "MAX_RECYCLED", "I", .constantValue.asInt = ADMotionEvent_MAX_RECYCLED, 0x1a, -1, -1, -1, -1 },
     { "x_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "y_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "rawX_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "rawY_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "action_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "downTime_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "eventTime_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "gRecyclerLock", "LNSObject;", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
+    { "gRecyclerUsed", "I", .constantValue.asLong = 0, 0xa, -1, 23, -1, -1 },
+    { "gRecyclerTop", "LADMotionEvent;", .constantValue.asLong = 0, 0xa, -1, 24, -1, -1 },
+    { "mNext_", "LADMotionEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mSeq_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "mRecycled_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "mRecycledLocation_", "LJavaLangRuntimeException;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mNextSeq", "LJavaUtilConcurrentAtomicAtomicInteger;", .constantValue.asLong = 0, 0x1a, -1, 25, -1, -1 },
   };
-  static const void *ptrTable[] = { "setAction", "I", "setX", "setY", "setRawX", "setRawY", "offsetLocation", "II", "obtain", "LADMotionEvent;" };
-  static const J2ObjcClassInfo _ADMotionEvent = { "MotionEvent", "r.android.view", ptrTable, methods, fields, 7, 0x1, 15, 13, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setAction", "I", "setX", "setY", "setRawX", "setRawY", "offsetLocation", "II", "obtain", "LADMotionEvent;", "findPointerIndex", "getPointerId", "getX", "getY", "setTargetAccessibilityFocus", "Z", "isFromSource", "FF", "split", "JJIFFI", "setSource", "isButtonPressed", &ADMotionEvent_gRecyclerLock, &ADMotionEvent_gRecyclerUsed, &ADMotionEvent_gRecyclerTop, &ADMotionEvent_mNextSeq };
+  static const J2ObjcClassInfo _ADMotionEvent = { "MotionEvent", "r.android.view", ptrTable, methods, fields, 7, 0x1, 38, 34, -1, -1, -1, -1, -1 };
   return &_ADMotionEvent;
+}
+
++ (void)initialize {
+  if (self == [ADMotionEvent class]) {
+    JreStrongAssignAndConsume(&ADMotionEvent_gRecyclerLock, new_NSObject_init());
+    JreStrongAssignAndConsume(&ADMotionEvent_mNextSeq, new_JavaUtilConcurrentAtomicAtomicInteger_init());
+    J2OBJC_SET_INITIALIZED(ADMotionEvent)
+  }
 }
 
 @end
@@ -169,12 +411,44 @@ ADMotionEvent *create_ADMotionEvent_init() {
 
 ADMotionEvent *ADMotionEvent_obtainWithADMotionEvent_(ADMotionEvent *ev) {
   ADMotionEvent_initialize();
-  ADMotionEvent *m = create_ADMotionEvent_init();
-  m->x_ = ((ADMotionEvent *) nil_chk(ev))->x_;
+  ADMotionEvent *m = ADMotionEvent_obtain();
+  ((ADMotionEvent *) nil_chk(m))->downTime_ = ((ADMotionEvent *) nil_chk(ev))->downTime_;
+  m->eventTime_ = ev->eventTime_;
+  m->x_ = ev->x_;
   m->y_ = ev->y_;
   m->rawX_ = ev->rawX_;
   m->rawY_ = ev->rawY_;
+  m->action_ = ev->action_;
   return m;
+}
+
+ADMotionEvent *ADMotionEvent_obtainWithLong_withLong_withInt_withFloat_withFloat_withInt_(int64_t downTime, int64_t eventTime, int32_t action, float x, float y, int32_t metaState) {
+  ADMotionEvent_initialize();
+  ADMotionEvent *m = ADMotionEvent_obtain();
+  ((ADMotionEvent *) nil_chk(m))->downTime_ = downTime;
+  m->eventTime_ = eventTime;
+  m->action_ = action;
+  m->x_ = JreFpToInt(x);
+  m->y_ = JreFpToInt(y);
+  m->rawX_ = m->x_;
+  m->rawY_ = m->y_;
+  return m;
+}
+
+ADMotionEvent *ADMotionEvent_obtain() {
+  ADMotionEvent_initialize();
+  ADMotionEvent *ev;
+  @synchronized(ADMotionEvent_gRecyclerLock) {
+    ev = JreRetainedLocalValue(ADMotionEvent_gRecyclerTop);
+    if (ev == nil) {
+      return create_ADMotionEvent_init();
+    }
+    JreStrongAssign(&ADMotionEvent_gRecyclerTop, ev->mNext_);
+    ADMotionEvent_gRecyclerUsed -= 1;
+  }
+  JreStrongAssign(&ev->mNext_, nil);
+  [ev prepareForReuse];
+  return ev;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMotionEvent)

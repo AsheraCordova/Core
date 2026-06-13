@@ -621,6 +621,9 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 
 	@Override
 	public void remeasure() {
+		if (rootWidget == null) {
+			return;
+		}
 		HasWidgets parent = rootWidget.getParent();
 		
 		if (parent instanceof IFragmentContainer) {

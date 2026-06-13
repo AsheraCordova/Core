@@ -621,6 +621,9 @@ public class GenericFragment extends Fragment implements IFragment{
 
 	@Override
 	public void remeasure() {
+		if (rootWidget == null) {
+			return;
+		}
 		HasWidgets parent = rootWidget.getParent();
 		
 		if (parent instanceof IFragmentContainer) {

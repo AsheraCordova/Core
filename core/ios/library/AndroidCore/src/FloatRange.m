@@ -12,6 +12,7 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Boolean.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 
 
@@ -24,9 +25,14 @@
 @implementation ADFloatRange
 
 @synthesize from = from_;
+@synthesize to = to_;
 
-+ (int32_t)fromDefault {
-  return 0;
++ (float)fromDefault {
+  return 0.0f;
+}
+
++ (float)toDefault {
+  return 0.0f;
 }
 
 - (IOSClass *)annotationType {
@@ -34,7 +40,7 @@
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"@r.android.annotation.FloatRange(from=%d)", from_];
+  return [NSString stringWithFormat:@"@r.android.annotation.FloatRange(from=%f, to=%f)", from_, to_];
 }
 
 - (bool)isEqual:(id)obj {
@@ -47,25 +53,29 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(from);
+  methods[1].selector = @selector(to);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "from_", "I", .constantValue.asLong = 0, 0x1000, -1, -1, -1, -1 },
+    { "from_", "F", .constantValue.asLong = 0, 0x1000, -1, -1, -1, -1 },
+    { "to_", "F", .constantValue.asLong = 0, 0x1000, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _ADFloatRange = { "FloatRange", "r.android.annotation", NULL, methods, fields, 7, 0x2609, 1, 1, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADFloatRange = { "FloatRange", "r.android.annotation", NULL, methods, fields, 7, 0x2609, 2, 2, -1, -1, -1, -1, -1 };
   return &_ADFloatRange;
 }
 
 @end
 
-id<ADFloatRange> create_ADFloatRange(int32_t from) {
+id<ADFloatRange> create_ADFloatRange(float from, float to) {
   ADFloatRange *self = AUTORELEASE([[ADFloatRange alloc] init]);
   self->from_ = from;
+  self->to_ = to;
   return self;
 }
 

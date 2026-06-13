@@ -76,6 +76,12 @@
                              withId:(id)uiView
          withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback;
 
++ (void)addTouchListenerWithASIWidget:(id<ASIWidget>)widget
+                               withId:(id)uiView
+                               withId:(id)uiLocationView
+                          withBoolean:(bool)ignoreScrollOffset
+           withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback;
+
 + (void)addValidatorWithASIWidget:(id<ASIWidget>)w
                      withNSString:(NSString *)validationName
                 withNSStringArray:(IOSObjectArray *)params;
@@ -741,6 +747,8 @@ FOUNDATION_EXPORT void ASViewImpl_translateWithAnimationWithId_withInt_withInt_w
 
 FOUNDATION_EXPORT void ASViewImpl_nativeAddTouchEventWithASIWidget_(id<ASIWidget> widget);
 
+FOUNDATION_EXPORT void ASViewImpl_addTouchListenerWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl)
 
 @compatibility_alias ComAsheraLayoutViewImpl ASViewImpl;
@@ -1184,17 +1192,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AddRemoveCallBack)
 - (void)handlePanStartWithASIWidget:(id<ASIWidget>)widget
                              withId:(id)eventWidget
                             withInt:(int32_t)x
-                            withInt:(int32_t)y;
+                            withInt:(int32_t)y
+                            withInt:(int32_t)rawX
+                            withInt:(int32_t)rawY;
 
 - (void)handlePanDragWithASIWidget:(id<ASIWidget>)widget
                             withId:(id)eventWidget
                            withInt:(int32_t)x
-                           withInt:(int32_t)y;
+                           withInt:(int32_t)y
+                           withInt:(int32_t)rawX
+                           withInt:(int32_t)rawY;
 
 - (void)handlePanEndWithASIWidget:(id<ASIWidget>)widget
                            withId:(id)eventWidget
                           withInt:(int32_t)x
-                          withInt:(int32_t)y;
+                          withInt:(int32_t)y
+                          withInt:(int32_t)rawX
+                          withInt:(int32_t)rawY;
 
 @end
 
@@ -1574,6 +1588,44 @@ FOUNDATION_EXPORT ASViewImpl_AnimationUtils *new_ASViewImpl_AnimationUtils_initW
 FOUNDATION_EXPORT ASViewImpl_AnimationUtils *create_ASViewImpl_AnimationUtils_initWithId_withASViewImpl_AnimationCallBack_(id objview, id<ASViewImpl_AnimationCallBack> callBack);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationUtils)
+
+
+#endif
+
+#if !defined (ASViewImpl_TouchGestureRecognizer_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_TouchGestureRecognizer))
+#define ASViewImpl_TouchGestureRecognizer_
+
+@class JavaLangBoolean;
+@protocol ASIWidget;
+@protocol ASViewImpl_PanCallBack;
+
+@interface ASViewImpl_TouchGestureRecognizer : NSObject
+
+#pragma mark Public
+
+- (instancetype)initWithASIWidget:(id<ASIWidget>)widget
+                           withId:(id)uiView
+                           withId:(id)uiLocationView
+                      withBoolean:(bool)ignoreScrollOffset
+       withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback;
+
+#pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_TouchGestureRecognizer)
+
+FOUNDATION_EXPORT void ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(ASViewImpl_TouchGestureRecognizer *self, id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback);
+
+FOUNDATION_EXPORT ASViewImpl_TouchGestureRecognizer *new_ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewImpl_TouchGestureRecognizer *create_ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_TouchGestureRecognizer)
 
 
 #endif

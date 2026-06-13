@@ -42,8 +42,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "TYPE_VIEW_SELECTED", "I", .constantValue.asInt = ADAccessibilityEvent_TYPE_VIEW_SELECTED, 0x19, -1, -1, -1, -1 },
     { "CONTENT_CHANGE_TYPE_UNDEFINED", "I", .constantValue.asInt = ADAccessibilityEvent_CONTENT_CHANGE_TYPE_UNDEFINED, 0x19, -1, -1, -1, -1 },
     { "TYPE_WINDOW_STATE_CHANGED", "I", .constantValue.asInt = ADAccessibilityEvent_TYPE_WINDOW_STATE_CHANGED, 0x19, -1, -1, -1, -1 },
+    { "TYPE_VIEW_CLICKED", "I", .constantValue.asInt = ADAccessibilityEvent_TYPE_VIEW_CLICKED, 0x19, -1, -1, -1, -1 },
+    { "TYPE_VIEW_LONG_CLICKED", "I", .constantValue.asInt = ADAccessibilityEvent_TYPE_VIEW_LONG_CLICKED, 0x19, -1, -1, -1, -1 },
   };
-  static const J2ObjcClassInfo _ADAccessibilityEvent = { "AccessibilityEvent", "r.android.view.accessibility", NULL, methods, fields, 7, 0x1, 1, 4, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADAccessibilityEvent = { "AccessibilityEvent", "r.android.view.accessibility", NULL, methods, fields, 7, 0x1, 1, 6, -1, -1, -1, -1, -1 };
   return &_ADAccessibilityEvent;
 }
 

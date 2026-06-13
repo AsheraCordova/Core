@@ -110,6 +110,7 @@
 #include "ASUITapGestureRecognizer.h"
 #include "ASUISwipeGestureRecognizer.h"
 #include "ASUILongTapGestureRecognizer.h"
+#import "ASTouchGestureRecognizer.h"
 
 
 @class NSString;
@@ -521,6 +522,9 @@
 + (void)addOrientationEventListenerWithASIWidget:(id<ASIWidget>)w
                                           withId:(id)objValue;
 
++ (void)onAndroidTouchWithASIWidget:(id<ASIWidget>)widget
+                             withId:(id)objValue;
+
 @end
 
 __attribute__((unused)) static void ASViewImpl_init(ASViewImpl *self);
@@ -796,6 +800,8 @@ __attribute__((unused)) static void ASViewImpl_setCornerRadiusWithASIWidget_with
 __attribute__((unused)) static void ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(id view, float radius);
 
 __attribute__((unused)) static void ASViewImpl_addOrientationEventListenerWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_onAndroidTouchWithASIWidget_withId_(id<ASIWidget> widget, id objValue);
 
 @interface ASViewImpl_IosAccessibilityTraits () {
  @public
@@ -1762,6 +1768,64 @@ __attribute__((unused)) static ASViewImpl_3 *new_ASViewImpl_3_initWithASIWidget_
 
 __attribute__((unused)) static ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidget_withId_withNSString_(id<ASIWidget> capture$0, id capture$1, NSString *type);
 
+
+@interface ASViewImpl_4 : NSObject < ASViewImpl_PanCallBack > {
+ @public
+  ADView *val$view_;
+}
+
+- (instancetype)initWithADView:(ADView *)capture$0;
+
+- (void)handlePanStartWithASIWidget:(id<ASIWidget>)widget
+                             withId:(id)eventWidget
+                            withInt:(int32_t)x
+                            withInt:(int32_t)y
+                            withInt:(int32_t)rawX
+                            withInt:(int32_t)rawY;
+
+- (void)handlePanDragWithASIWidget:(id<ASIWidget>)widget
+                            withId:(id)eventWidget
+                           withInt:(int32_t)x
+                           withInt:(int32_t)y
+                           withInt:(int32_t)rawX
+                           withInt:(int32_t)rawY;
+
+- (void)handlePanEndWithASIWidget:(id<ASIWidget>)widget
+                           withId:(id)eventWidget
+                          withInt:(int32_t)x
+                          withInt:(int32_t)y
+                          withInt:(int32_t)rawX
+                          withInt:(int32_t)rawY;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_4)
+
+__attribute__((unused)) static void ASViewImpl_4_initWithADView_(ASViewImpl_4 *self, ADView *capture$0);
+
+__attribute__((unused)) static ASViewImpl_4 *new_ASViewImpl_4_initWithADView_(ADView *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASViewImpl_4 *create_ASViewImpl_4_initWithADView_(ADView *capture$0);
+
+
+@interface ASViewImpl_TouchGestureRecognizer () {
+ @public
+  WEAK_ id<ASIWidget> widget_;
+  id uiView_;
+  id uiLocationView_;
+  id<ASViewImpl_PanCallBack> callback_;
+  bool ignoreScrollOffset_;
+}
+
+- (void)addGestureRecognizer;
+
+@end
+
+J2OBJC_FIELD_SETTER(ASViewImpl_TouchGestureRecognizer, uiView_, id)
+J2OBJC_FIELD_SETTER(ASViewImpl_TouchGestureRecognizer, uiLocationView_, id)
+J2OBJC_FIELD_SETTER(ASViewImpl_TouchGestureRecognizer, callback_, id<ASViewImpl_PanCallBack>)
+
+__attribute__((unused)) static void ASViewImpl_TouchGestureRecognizer_addGestureRecognizer(ASViewImpl_TouchGestureRecognizer *self);
 
 @interface ASViewImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -3144,6 +3208,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewImpl_addOrientationEventListenerWithASIWidget_withId_(w, objValue);
 }
 
++ (void)onAndroidTouchWithASIWidget:(id<ASIWidget>)widget
+                             withId:(id)objValue {
+  ASViewImpl_onAndroidTouchWithASIWidget_withId_(widget, objValue);
+}
+
++ (void)addTouchListenerWithASIWidget:(id<ASIWidget>)widget
+                               withId:(id)uiView
+                               withId:(id)uiLocationView
+                          withBoolean:(bool)ignoreScrollOffset
+           withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback {
+  ASViewImpl_addTouchListenerWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(widget, uiView, uiLocationView, ignoreScrollOffset, callback);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
@@ -3422,6 +3499,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x10a, 307, 276, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 308, 26, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 309, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 310, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 311, 312, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -3702,9 +3781,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[273].selector = @selector(setCornerRadiusOnViewWithId:withFloat:);
   methods[274].selector = @selector(nativeAddTouchEventWithASIWidget:);
   methods[275].selector = @selector(addOrientationEventListenerWithASIWidget:withId:);
+  methods[276].selector = @selector(onAndroidTouchWithASIWidget:withId:);
+  methods[277].selector = @selector(addTouchListenerWithASIWidget:withId:withId:withBoolean:withASViewImpl_PanCallBack:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "LJavaUtilMap;LJavaUtilList;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/util/List<Ljava/lang/Integer;>;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "reappyStyleOnOrientationChange", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setBottom", "setTop", "setRight", "setLeft", "getBottom", "getTop", "getRight", "getLeft", "drawOverlay", "LASIWidget;LJavaUtilList;", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Lcom/ashera/widget/IWidget;>;)Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "setAnimatorXml", "getInterpolator", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "setOutlineSpotShadowColor", "setOutlineAmbientShadowColor", "setShadowColor", "setCornerRadius", "setCornerRadiusOnView", "nativeAddTouchEvent", "addOrientationEventListener", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_CustomProperty;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;" };
-  static const J2ObjcClassInfo _ASViewImpl = { "ViewImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 276, 0, -1, 310, -1, -1, -1 };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "LJavaUtilMap;LJavaUtilList;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/util/List<Ljava/lang/Integer;>;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "reappyStyleOnOrientationChange", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setBottom", "setTop", "setRight", "setLeft", "getBottom", "getTop", "getRight", "getLeft", "drawOverlay", "LASIWidget;LJavaUtilList;", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Lcom/ashera/widget/IWidget;>;)Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "setAnimatorXml", "getInterpolator", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "setOutlineSpotShadowColor", "setOutlineAmbientShadowColor", "setShadowColor", "setCornerRadius", "setCornerRadiusOnView", "nativeAddTouchEvent", "addOrientationEventListener", "onAndroidTouch", "addTouchListener", "LASIWidget;LNSObject;LNSObject;ZLASViewImpl_PanCallBack;", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_CustomProperty;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;LASViewImpl_TouchGestureRecognizer;" };
+  static const J2ObjcClassInfo _ASViewImpl = { "ViewImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 278, 0, -1, 313, -1, -1, -1 };
   return &_ASViewImpl;
 }
 
@@ -3856,6 +3937,7 @@ void ASViewImpl_register__WithNSString_(NSString *localName) {
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"maxHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onSwiped"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"outsideTouchable"])) withTypeWithNSString:@"boolean"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onAndroidTouch"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"formGroupId"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"enableFeatures"])) withTypeWithNSString:@"string"]);
   id<JavaUtilList> attributables = ASWidgetFactory_getAttributablesWithNSStringArray_([IOSObjectArray newArrayWithObjects:(id[]){ @"View", localName } count:2 type:NSString_class_()]);
@@ -3898,7 +3980,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
   {
     id<JavaUtilList> attributables;
-    switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"style", @"errorStyle", @"validateForm", @"validation", @"v_required", @"v_minlength", @"v_maxlength", @"v_min", @"v_max", @"v_pattern", @"v_type", @"validationErrorDisplayType", @"customErrorMessageValues", @"customErrorMessageKeys", @"invalidateOnFrameChange", @"reappyStyleOnOrientationChange", @"outlineAmbientShadowColor", @"outlineSpotShadowColor", @"cornerRadius", @"animatorXml", @"startAnimator", @"endAnimator", @"onAnimationStart", @"onAnimationEnd", @"onAnimationCancel", @"onAnimationRepeat", @"left", @"right", @"top", @"bottom", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"modelPojoToUiParams", @"refreshUiFromModel", @"modelUiToPojoEventIds", @"updateModelData", @"notifyDataSetChanged", @"background", @"backgroundRepeat", @"onClick", @"onTouch", @"minWidth", @"minHeight", @"attributeUnderTest", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundRepeat", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"onLongClick", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"invalidate", @"requestLayout", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"onDrag", @"asDragSource", @"enabled", @"duplicateParentState", @"foregroundGravity", @"onKey", @"iosLayerBorderWidth", @"iosLayerBorderColor", @"iosLayerCornerRadius", @"iosLayerMasksToBounds", @"zIndex", @"elevation", @"maxWidth", @"maxHeight", @"onSwiped", @"outsideTouchable" }, 120)) {
+    switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"style", @"errorStyle", @"validateForm", @"validation", @"v_required", @"v_minlength", @"v_maxlength", @"v_min", @"v_max", @"v_pattern", @"v_type", @"validationErrorDisplayType", @"customErrorMessageValues", @"customErrorMessageKeys", @"invalidateOnFrameChange", @"reappyStyleOnOrientationChange", @"outlineAmbientShadowColor", @"outlineSpotShadowColor", @"cornerRadius", @"animatorXml", @"startAnimator", @"endAnimator", @"onAnimationStart", @"onAnimationEnd", @"onAnimationCancel", @"onAnimationRepeat", @"left", @"right", @"top", @"bottom", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"modelPojoToUiParams", @"refreshUiFromModel", @"modelUiToPojoEventIds", @"updateModelData", @"notifyDataSetChanged", @"background", @"backgroundRepeat", @"onClick", @"onTouch", @"minWidth", @"minHeight", @"attributeUnderTest", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundRepeat", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"onLongClick", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"invalidate", @"requestLayout", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"onDrag", @"asDragSource", @"enabled", @"duplicateParentState", @"foregroundGravity", @"onKey", @"iosLayerBorderWidth", @"iosLayerBorderColor", @"iosLayerCornerRadius", @"iosLayerMasksToBounds", @"zIndex", @"elevation", @"maxWidth", @"maxHeight", @"onSwiped", @"outsideTouchable", @"onAndroidTouch" }, 121)) {
       case 0:
       {
         ASViewImpl_setBackgroundColorWithId_withId_(nativeWidget, objValue);
@@ -4535,6 +4617,11 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
       case 119:
       {
         ASViewImpl_setOutsideTouchableWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+      }
+      break;
+      case 120:
+      {
+        ASViewImpl_onAndroidTouchWithASIWidget_withId_(w, objValue);
       }
       break;
       default:
@@ -6851,6 +6938,17 @@ void ASViewImpl_addOrientationEventListenerWithASIWidget_withId_(id<ASIWidget> w
   [((ASEventBus *) nil_chk([((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w)) getFragment])) getEventBus])) onWithNSString:@"viewDidLayoutSubviews" withASEventBusHandlerArray:[IOSObjectArray newArrayWithObjects:(id[]){ create_ASViewImpl_3_initWithASIWidget_withId_withNSString_(w, objValue, @"viewDidLayoutSubviews") } count:1 type:ASEventBusHandler_class_()]];
 }
 
+void ASViewImpl_onAndroidTouchWithASIWidget_withId_(id<ASIWidget> widget, id objValue) {
+  ASViewImpl_initialize();
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+  ASViewImpl_addTouchListenerWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(widget, [widget asNativeWidget], [widget asNativeWidget], [((NSString *) nil_chk([widget getLocalName])) java_contains:@"RecyclerView"], new_ASViewImpl_4_initWithADView_(view));
+}
+
+void ASViewImpl_addTouchListenerWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback) {
+  ASViewImpl_initialize();
+  ASViewImpl_TouchGestureRecognizer_addGestureRecognizer(new_ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(widget, uiView, uiLocationView, ignoreScrollOffset, callback));
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl)
 
 J2OBJC_NAME_MAPPING(ASViewImpl, "com.ashera.layout", "AS")
@@ -7652,11 +7750,11 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASViewImpl_AddRemoveCallBack)
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(handlePanStartWithASIWidget:withId:withInt:withInt:);
-  methods[1].selector = @selector(handlePanDragWithASIWidget:withId:withInt:withInt:);
-  methods[2].selector = @selector(handlePanEndWithASIWidget:withId:withInt:withInt:);
+  methods[0].selector = @selector(handlePanStartWithASIWidget:withId:withInt:withInt:withInt:withInt:);
+  methods[1].selector = @selector(handlePanDragWithASIWidget:withId:withInt:withInt:withInt:withInt:);
+  methods[2].selector = @selector(handlePanEndWithASIWidget:withId:withInt:withInt:withInt:withInt:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "handlePanStart", "LASIWidget;LNSObject;II", "handlePanDrag", "handlePanEnd", "LASViewImpl;" };
+  static const void *ptrTable[] = { "handlePanStart", "LASIWidget;LNSObject;IIII", "handlePanDrag", "handlePanEnd", "LASViewImpl;" };
   static const J2ObjcClassInfo _ASViewImpl_PanCallBack = { "PanCallBack", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x609, 3, 0, 4, -1, -1, -1, -1 };
   return &_ASViewImpl_PanCallBack;
 }
@@ -10581,12 +10679,16 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(void)move:(UIPanGestureRecognizer*)tapRecognizer {
   int x = [tapRecognizer locationInView:self->uiLocationView_].x;
   int y = [tapRecognizer locationInView:self->uiLocationView_].y;
+  
+  CGPoint screenPoint = [tapRecognizer locationInView:nil];
+  int screenX = (int)screenPoint.x;
+  int screenY = (int)screenPoint.y;
   if (tapRecognizer.state == UIGestureRecognizerStateBegan) {
-    [self->callback_ handlePanStartWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+    [self->callback_ handlePanStartWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y withInt:screenX withInt:screenY];
   } else if (tapRecognizer.state == UIGestureRecognizerStateEnded || tapRecognizer.state == UIGestureRecognizerStateCancelled) {
-    [self->callback_ handlePanEndWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+    [self->callback_ handlePanEndWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y withInt:screenX withInt:screenY];
   } else {
-    [self->callback_ handlePanDragWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+    [self->callback_ handlePanDragWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y withInt:screenX withInt:screenY];
   }
 }
 
@@ -10765,6 +10867,203 @@ ASViewImpl_3 *new_ASViewImpl_3_initWithASIWidget_withId_withNSString_(id<ASIWidg
 ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidget_withId_withNSString_(id<ASIWidget> capture$0, id capture$1, NSString *type) {
   J2OBJC_CREATE_IMPL(ASViewImpl_3, initWithASIWidget_withId_withNSString_, capture$0, capture$1, type)
 }
+
+@implementation ASViewImpl_4
+
+- (instancetype)initWithADView:(ADView *)capture$0 {
+  ASViewImpl_4_initWithADView_(self, capture$0);
+  return self;
+}
+
+- (void)handlePanStartWithASIWidget:(id<ASIWidget>)widget
+                             withId:(id)eventWidget
+                            withInt:(int32_t)x
+                            withInt:(int32_t)y
+                            withInt:(int32_t)rawX
+                            withInt:(int32_t)rawY {
+  [((ADView *) nil_chk(val$view_)) onTouchEventDownWithInt:x withInt:y withInt:rawX withInt:rawY];
+}
+
+- (void)handlePanDragWithASIWidget:(id<ASIWidget>)widget
+                            withId:(id)eventWidget
+                           withInt:(int32_t)x
+                           withInt:(int32_t)y
+                           withInt:(int32_t)rawX
+                           withInt:(int32_t)rawY {
+  [((ADView *) nil_chk(val$view_)) onTouchEventMoveWithInt:x withInt:y withInt:rawX withInt:rawY];
+}
+
+- (void)handlePanEndWithASIWidget:(id<ASIWidget>)widget
+                           withId:(id)eventWidget
+                          withInt:(int32_t)x
+                          withInt:(int32_t)y
+                          withInt:(int32_t)rawX
+                          withInt:(int32_t)rawY {
+  [((ADView *) nil_chk(val$view_)) onTouchEventUpWithInt:x withInt:y withInt:rawX withInt:rawY];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithADView:);
+  methods[1].selector = @selector(handlePanStartWithASIWidget:withId:withInt:withInt:withInt:withInt:);
+  methods[2].selector = @selector(handlePanDragWithASIWidget:withId:withInt:withInt:withInt:withInt:);
+  methods[3].selector = @selector(handlePanEndWithASIWidget:withId:withInt:withInt:withInt:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$view_", "LADView;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LADView;", "handlePanStart", "LASIWidget;LNSObject;IIII", "handlePanDrag", "handlePanEnd", "LASViewImpl;", "onAndroidTouchWithASIWidget:withId:" };
+  static const J2ObjcClassInfo _ASViewImpl_4 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8000, 4, 1, 5, -1, 6, -1, -1 };
+  return &_ASViewImpl_4;
+}
+
+@end
+
+void ASViewImpl_4_initWithADView_(ASViewImpl_4 *self, ADView *capture$0) {
+  self->val$view_ = capture$0;
+  NSObject_init(self);
+}
+
+ASViewImpl_4 *new_ASViewImpl_4_initWithADView_(ADView *capture$0) {
+  J2OBJC_NEW_IMPL(ASViewImpl_4, initWithADView_, capture$0)
+}
+
+ASViewImpl_4 *create_ASViewImpl_4_initWithADView_(ADView *capture$0) {
+  J2OBJC_CREATE_IMPL(ASViewImpl_4, initWithADView_, capture$0)
+}
+
+@implementation ASViewImpl_TouchGestureRecognizer
+
+- (instancetype)initWithASIWidget:(id<ASIWidget>)widget
+                           withId:(id)uiView
+                           withId:(id)uiLocationView
+                      withBoolean:(bool)ignoreScrollOffset
+       withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback {
+  ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(self, widget, uiView, uiLocationView, ignoreScrollOffset, callback);
+  return self;
+}
+
+- (void)addGestureRecognizer {
+  ASViewImpl_TouchGestureRecognizer_addGestureRecognizer(self);
+}
+
+- (void)__javaClone:(ASViewImpl_TouchGestureRecognizer *)original {
+  [super __javaClone:original];
+  JreRelease(widget_);
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer: (UIGestureRecognizer *)otherGestureRecognizer {
+  return YES;
+}
+
+-(void)handleTouch:(ASTouchGestureRecognizer*)recognizer {
+  UITouch* touch = recognizer.activeTouch;
+  
+  if (touch == nil) {
+    return;
+  }
+  
+  CGPoint screenPoint = [touch locationInView:nil];
+  int screenX = (int)screenPoint.x;
+  int screenY = (int)screenPoint.y;
+  
+  int x = 0;
+  int y = 0;
+  
+  if (self->ignoreScrollOffset_) {
+    UIView* myView = (UIView*) self->uiLocationView_;
+    CGRect frameInWindow = [ myView convertRect:myView.bounds toView:nil];
+    x = screenX - frameInWindow.origin.x;
+    y = screenY - frameInWindow.origin.y;
+  } else {
+    CGPoint localPoint = [touch locationInView:self->uiLocationView_];
+    x = (int)localPoint.x;
+    y = (int)localPoint.y;
+  }
+  
+  switch (recognizer.state) {
+    
+    case UIGestureRecognizerStateBegan:
+    [self->callback_ handlePanStartWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+    break;
+    
+    case UIGestureRecognizerStateChanged:
+    [self->callback_ handlePanDragWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+    break;
+    
+    case UIGestureRecognizerStateEnded:
+    [self->callback_ handlePanEndWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+    break;
+    
+    case UIGestureRecognizerStateCancelled:
+    [self->callback_ handlePanEndWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+    break;
+    
+    default:
+    break;
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithASIWidget:withId:withId:withBoolean:withASViewImpl_PanCallBack:);
+  methods[1].selector = @selector(addGestureRecognizer);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "widget_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "uiLocationView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "callback_", "LASViewImpl_PanCallBack;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "ignoreScrollOffset_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LASIWidget;LNSObject;LNSObject;ZLASViewImpl_PanCallBack;", "LASViewImpl;" };
+  static const J2ObjcClassInfo _ASViewImpl_TouchGestureRecognizer = { "TouchGestureRecognizer", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8, 2, 5, 1, -1, -1, -1, -1 };
+  return &_ASViewImpl_TouchGestureRecognizer;
+}
+
+@end
+
+void ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(ASViewImpl_TouchGestureRecognizer *self, id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback) {
+  NSObject_init(self);
+  [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(widget)) getFragment])) addListenerWithASIWidget:widget withId:self];
+  self->widget_ = widget;
+  self->uiView_ = uiView;
+  self->uiLocationView_ = uiLocationView;
+  self->callback_ = callback;
+  self->ignoreScrollOffset_ = ignoreScrollOffset;
+}
+
+ASViewImpl_TouchGestureRecognizer *new_ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback) {
+  J2OBJC_NEW_IMPL(ASViewImpl_TouchGestureRecognizer, initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_, widget, uiView, uiLocationView, ignoreScrollOffset, callback)
+}
+
+ASViewImpl_TouchGestureRecognizer *create_ASViewImpl_TouchGestureRecognizer_initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback) {
+  J2OBJC_CREATE_IMPL(ASViewImpl_TouchGestureRecognizer, initWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_, widget, uiView, uiLocationView, ignoreScrollOffset, callback)
+}
+
+void ASViewImpl_TouchGestureRecognizer_addGestureRecognizer(ASViewImpl_TouchGestureRecognizer *self) {
+  UIView* view = (UIView*) self->uiView_;
+  view.userInteractionEnabled = YES;
+  ASTouchGestureRecognizer* recognizer = [[ASTouchGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouch:)];
+  recognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+  [view addGestureRecognizer:recognizer];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_TouchGestureRecognizer)
 
 @implementation ASViewImpl_$Lambda$1
 

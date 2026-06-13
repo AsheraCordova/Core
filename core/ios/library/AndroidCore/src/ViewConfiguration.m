@@ -13,6 +13,7 @@
 #include "ViewConfiguration.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 
 
 
@@ -37,6 +38,34 @@ inline int32_t ADViewConfiguration_get_TOUCH_SLOP(void);
 #define ADViewConfiguration_TOUCH_SLOP 8
 J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, TOUCH_SLOP, int32_t)
 
+inline int32_t ADViewConfiguration_get_TAP_TIMEOUT(void);
+#define ADViewConfiguration_TAP_TIMEOUT 100
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, TAP_TIMEOUT, int32_t)
+
+inline int32_t ADViewConfiguration_get_PRESSED_STATE_DURATION(void);
+#define ADViewConfiguration_PRESSED_STATE_DURATION 64
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, PRESSED_STATE_DURATION, int32_t)
+
+inline int32_t ADViewConfiguration_get_DOUBLE_TAP_TIMEOUT(void);
+#define ADViewConfiguration_DOUBLE_TAP_TIMEOUT 300
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, DOUBLE_TAP_TIMEOUT, int32_t)
+
+inline int32_t ADViewConfiguration_get_DOUBLE_TAP_MIN_TIME(void);
+#define ADViewConfiguration_DOUBLE_TAP_MIN_TIME 40
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, DOUBLE_TAP_MIN_TIME, int32_t)
+
+inline int32_t ADViewConfiguration_get_DOUBLE_TAP_SLOP(void);
+#define ADViewConfiguration_DOUBLE_TAP_SLOP 100
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, DOUBLE_TAP_SLOP, int32_t)
+
+inline int32_t ADViewConfiguration_get_DOUBLE_TAP_TOUCH_SLOP(void);
+#define ADViewConfiguration_DOUBLE_TAP_TOUCH_SLOP 8
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, DOUBLE_TAP_TOUCH_SLOP, int32_t)
+
+inline float ADViewConfiguration_get_AMBIGUOUS_GESTURE_MULTIPLIER(void);
+#define ADViewConfiguration_AMBIGUOUS_GESTURE_MULTIPLIER 2.0f
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, AMBIGUOUS_GESTURE_MULTIPLIER, float)
+
 @implementation ADViewConfiguration
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -58,12 +87,64 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADViewConfiguration_getWithADContext_(context);
 }
 
-- (float)getScaledMaximumFlingVelocity {
+- (int32_t)getScaledMaximumFlingVelocity {
   return ADViewConfiguration_MAXIMUM_FLING_VELOCITY;
 }
 
-- (float)getScaledMinimumFlingVelocity {
+- (int32_t)getScaledMinimumFlingVelocity {
   return ADViewConfiguration_MINIMUM_FLING_VELOCITY;
+}
+
++ (int32_t)getTapTimeout {
+  return ADViewConfiguration_getTapTimeout();
+}
+
++ (int32_t)getLongPressTimeout {
+  return ADViewConfiguration_getLongPressTimeout();
+}
+
++ (int64_t)getPressedStateDuration {
+  return ADViewConfiguration_getPressedStateDuration();
+}
+
++ (int32_t)getDoubleTapTimeout {
+  return ADViewConfiguration_getDoubleTapTimeout();
+}
+
++ (int32_t)getDoubleTapMinTime {
+  return ADViewConfiguration_getDoubleTapMinTime();
+}
+
++ (int32_t)getTouchSlop {
+  return ADViewConfiguration_getTouchSlop();
+}
+
++ (int32_t)getDoubleTapSlop {
+  return ADViewConfiguration_getDoubleTapSlop();
+}
+
++ (int32_t)getMinimumFlingVelocity {
+  return ADViewConfiguration_getMinimumFlingVelocity();
+}
+
++ (int32_t)getMaximumFlingVelocity {
+  return ADViewConfiguration_getMaximumFlingVelocity();
+}
+
++ (float)getAmbiguousGestureMultiplier {
+  return ADViewConfiguration_getAmbiguousGestureMultiplier();
+}
+
+- (int32_t)getScaledDoubleTapTouchSlop {
+  return ADViewConfiguration_DOUBLE_TAP_TOUCH_SLOP;
+}
+
+- (int32_t)getScaledDoubleTapSlop {
+  return ADViewConfiguration_DOUBLE_TAP_TOUCH_SLOP;
+}
+
+- (float)getScaledAmbiguousGestureMultiplier {
+  return ADViewConfiguration_AMBIGUOUS_GESTURE_MULTIPLIER;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -72,7 +153,20 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "F", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADViewConfiguration;", 0x9, 0, 1, -1, -1, -1, -1 },
-    { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -84,15 +178,36 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[3].selector = @selector(getWithADContext:);
   methods[4].selector = @selector(getScaledMaximumFlingVelocity);
   methods[5].selector = @selector(getScaledMinimumFlingVelocity);
+  methods[6].selector = @selector(getTapTimeout);
+  methods[7].selector = @selector(getLongPressTimeout);
+  methods[8].selector = @selector(getPressedStateDuration);
+  methods[9].selector = @selector(getDoubleTapTimeout);
+  methods[10].selector = @selector(getDoubleTapMinTime);
+  methods[11].selector = @selector(getTouchSlop);
+  methods[12].selector = @selector(getDoubleTapSlop);
+  methods[13].selector = @selector(getMinimumFlingVelocity);
+  methods[14].selector = @selector(getMaximumFlingVelocity);
+  methods[15].selector = @selector(getAmbiguousGestureMultiplier);
+  methods[16].selector = @selector(getScaledDoubleTapTouchSlop);
+  methods[17].selector = @selector(getScaledDoubleTapSlop);
+  methods[18].selector = @selector(getScaledAmbiguousGestureMultiplier);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "SCROLL_FRICTION", "F", .constantValue.asFloat = ADViewConfiguration_SCROLL_FRICTION, 0x1a, -1, -1, -1, -1 },
     { "MAXIMUM_FLING_VELOCITY", "I", .constantValue.asInt = ADViewConfiguration_MAXIMUM_FLING_VELOCITY, 0x1a, -1, -1, -1, -1 },
     { "MINIMUM_FLING_VELOCITY", "I", .constantValue.asInt = ADViewConfiguration_MINIMUM_FLING_VELOCITY, 0x1a, -1, -1, -1, -1 },
     { "TOUCH_SLOP", "I", .constantValue.asInt = ADViewConfiguration_TOUCH_SLOP, 0x1a, -1, -1, -1, -1 },
+    { "TAP_TIMEOUT", "I", .constantValue.asInt = ADViewConfiguration_TAP_TIMEOUT, 0x1a, -1, -1, -1, -1 },
+    { "PRESSED_STATE_DURATION", "I", .constantValue.asInt = ADViewConfiguration_PRESSED_STATE_DURATION, 0x1a, -1, -1, -1, -1 },
+    { "DEFAULT_LONG_PRESS_TIMEOUT", "I", .constantValue.asInt = ADViewConfiguration_DEFAULT_LONG_PRESS_TIMEOUT, 0x19, -1, -1, -1, -1 },
+    { "DOUBLE_TAP_TIMEOUT", "I", .constantValue.asInt = ADViewConfiguration_DOUBLE_TAP_TIMEOUT, 0x1a, -1, -1, -1, -1 },
+    { "DOUBLE_TAP_MIN_TIME", "I", .constantValue.asInt = ADViewConfiguration_DOUBLE_TAP_MIN_TIME, 0x1a, -1, -1, -1, -1 },
+    { "DOUBLE_TAP_SLOP", "I", .constantValue.asInt = ADViewConfiguration_DOUBLE_TAP_SLOP, 0x1a, -1, -1, -1, -1 },
+    { "DOUBLE_TAP_TOUCH_SLOP", "I", .constantValue.asInt = ADViewConfiguration_DOUBLE_TAP_TOUCH_SLOP, 0x1a, -1, -1, -1, -1 },
+    { "AMBIGUOUS_GESTURE_MULTIPLIER", "F", .constantValue.asFloat = ADViewConfiguration_AMBIGUOUS_GESTURE_MULTIPLIER, 0x1a, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "get", "LADContext;" };
-  static const J2ObjcClassInfo _ADViewConfiguration = { "ViewConfiguration", "r.android.view", ptrTable, methods, fields, 7, 0x1, 6, 4, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADViewConfiguration = { "ViewConfiguration", "r.android.view", ptrTable, methods, fields, 7, 0x1, 19, 12, -1, -1, -1, -1, -1 };
   return &_ADViewConfiguration;
 }
 
@@ -118,6 +233,56 @@ float ADViewConfiguration_getScrollFriction() {
 ADViewConfiguration *ADViewConfiguration_getWithADContext_(ADContext *context) {
   ADViewConfiguration_initialize();
   return create_ADViewConfiguration_init();
+}
+
+int32_t ADViewConfiguration_getTapTimeout() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_TAP_TIMEOUT;
+}
+
+int32_t ADViewConfiguration_getLongPressTimeout() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_DEFAULT_LONG_PRESS_TIMEOUT;
+}
+
+int64_t ADViewConfiguration_getPressedStateDuration() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_PRESSED_STATE_DURATION;
+}
+
+int32_t ADViewConfiguration_getDoubleTapTimeout() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_DOUBLE_TAP_TIMEOUT;
+}
+
+int32_t ADViewConfiguration_getDoubleTapMinTime() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_DOUBLE_TAP_MIN_TIME;
+}
+
+int32_t ADViewConfiguration_getTouchSlop() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_TOUCH_SLOP;
+}
+
+int32_t ADViewConfiguration_getDoubleTapSlop() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_DOUBLE_TAP_SLOP;
+}
+
+int32_t ADViewConfiguration_getMinimumFlingVelocity() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_MINIMUM_FLING_VELOCITY;
+}
+
+int32_t ADViewConfiguration_getMaximumFlingVelocity() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_MAXIMUM_FLING_VELOCITY;
+}
+
+float ADViewConfiguration_getAmbiguousGestureMultiplier() {
+  ADViewConfiguration_initialize();
+  return ADViewConfiguration_AMBIGUOUS_GESTURE_MULTIPLIER;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewConfiguration)

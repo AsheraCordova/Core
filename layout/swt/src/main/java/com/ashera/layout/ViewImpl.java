@@ -306,6 +306,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCForegroundImage").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCImage").withType("drawable"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAndroidTouch").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtIgnoreEventBubblers").withType("boolean"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtStyle").withType("string"));
@@ -1183,6 +1184,15 @@ if (objValue instanceof java.util.List) {
 
 
 		 drawImageUsingGC(w, objValue, false);
+
+
+
+			}
+			break;
+		case "onAndroidTouch": {
+
+
+		 onAndroidTouch(w, objValue);
 
 
 
@@ -3169,9 +3179,9 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	}
 	
 	public static interface PanCallBack {
-		void handlePanStart(IWidget widget, Object eventWidget, int x, int y);
-		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y);
-		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y);
+		void handlePanStart(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
+		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
+		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
 	}
 
 	public static interface AnimationCallBack {
@@ -3643,6 +3653,8 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 				
 				for (Listener listener2 : listeners) {
 					if (listener2 instanceof EventBubblerListener || hasEventHandler(parent)) {
+						event.x = control.getBounds().x + event.x;
+						event.y = control.getBounds().y + event.y;
 						listener2.handleEvent(event);
 					}
 				}
@@ -4031,15 +4043,16 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	
 		@Override
 		public void handleEvent(org.eclipse.swt.widgets.Event event) {
+			java.awt.Point point = java.awt.MouseInfo.getPointerInfo().getLocation();
 			if (event.type == org.eclipse.swt.SWT.MouseDown) {
-				this.callback.handlePanStart(widget, event.widget, event.x, event.y);
+				this.callback.handlePanStart(widget, event.widget, event.x, event.y, point.x, point.y);
 			}
 	
 			if (event.type == org.eclipse.swt.SWT.MouseMove) {
-				this.callback.handlePanDrag(widget, event.widget, event.x, event.y);
+				this.callback.handlePanDrag(widget, event.widget, event.x, event.y, point.x, point.y);
 			}
 			if (event.type == org.eclipse.swt.SWT.MouseUp) {
-				this.callback.handlePanEnd(widget, event.widget, event.x, event.y);
+				this.callback.handlePanEnd(widget, event.widget, event.x, event.y, point.x, point.y);
 			}
 		}
 	}
@@ -4960,4 +4973,45 @@ break;}
 		});
 	}
 
+	private final static class MouseListener implements org.eclipse.swt.widgets.Listener {
+		private IWidget widget;
+		public MouseListener(IWidget w) {
+			this.widget = w;
+		}
+
+		@Override
+		public void handleEvent(org.eclipse.swt.widgets.Event event) {
+			java.awt.PointerInfo p = java.awt.MouseInfo.getPointerInfo();
+			int x = event.x;
+			int y = event.y;
+			View view = (View) widget.asWidget();
+			int rawX = p.getLocation().x;
+			int rawY = p.getLocation().y;
+			switch (event.type) {
+			case org.eclipse.swt.SWT.MouseDown: {
+				view.onTouchEventDown(x, y, rawX, rawY);
+				break;
+			}
+			case org.eclipse.swt.SWT.MouseMove: {
+				view.onTouchEventMove(x, y, rawX, rawY);
+				break;
+			}
+			case org.eclipse.swt.SWT.MouseUp: {
+				view.onTouchEventUp(x, y, rawX, rawY);
+				break;
+			}
+			default:
+				break;
+			}
+		}
+	}
+
+	private static void onAndroidTouch(IWidget w, Object objValue) {
+		org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) w.asNativeWidget();
+		MouseListener listener = new MouseListener(w);
+		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseDown, listener);
+		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseMove, listener);
+		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseUp, listener);
+		
+	}
 }

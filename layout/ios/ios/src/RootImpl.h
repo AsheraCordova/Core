@@ -291,6 +291,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RemoveRule)
 
 - (void)removeFromParent;
 
+- (void)requestLayout;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;

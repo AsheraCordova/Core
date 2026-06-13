@@ -38,6 +38,7 @@ import static com.ashera.widget.IWidget.*;
 #include "ASUITapGestureRecognizer.h"
 #include "ASUISwipeGestureRecognizer.h"
 #include "ASUILongTapGestureRecognizer.h"
+#import "ASTouchGestureRecognizer.h"
 ]-*/
 import r.android.view.MotionEvent;
 import r.android.view.View.DragEvent;
@@ -415,6 +416,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outsideTouchable").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAndroidTouch").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
 		
@@ -1538,6 +1540,15 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "onAndroidTouch": {
+
+
+		 onAndroidTouch(w, objValue);
+
+
+
+			}
+			break;
 		default:
 			java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
 			if (attributables != null) {
@@ -2531,9 +2542,9 @@ return getMaxHeight(w);			}
 	}
 	
 	public static interface PanCallBack {
-		void handlePanStart(IWidget widget, Object eventWidget, int x, int y);
-		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y);
-		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y);
+		void handlePanStart(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
+		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
+		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
 	}
 
 	public static interface AnimationCallBack {
@@ -5263,12 +5274,16 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			-(void)move:(UIPanGestureRecognizer*)tapRecognizer {
 				int x = [tapRecognizer locationInView:self->uiLocationView_].x;
 				int y = [tapRecognizer locationInView:self->uiLocationView_].y;
+				
+				CGPoint screenPoint = [tapRecognizer locationInView:nil];
+    			int screenX = (int)screenPoint.x;
+    			int screenY = (int)screenPoint.y;
 				if (tapRecognizer.state == UIGestureRecognizerStateBegan) {
-		  			[self->callback_ handlePanStartWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+		  			[self->callback_ handlePanStartWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y withInt:screenX withInt:screenY];
 				} else if (tapRecognizer.state == UIGestureRecognizerStateEnded || tapRecognizer.state == UIGestureRecognizerStateCancelled) {
-		  			[self->callback_ handlePanEndWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+		  			[self->callback_ handlePanEndWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y withInt:screenX withInt:screenY];
 				} else {
-					[self->callback_ handlePanDragWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+					[self->callback_ handlePanDragWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y withInt:screenX withInt:screenY];
 				}
 		}
 		]-*/
@@ -5368,5 +5383,118 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			}
 			
 		});
+	}
+	
+	private static void onAndroidTouch(IWidget widget, Object objValue) {
+		View view = (View) widget.asWidget();
+		addTouchListener(widget, widget.asNativeWidget(),  widget.asNativeWidget(), widget.getLocalName().contains("RecyclerView"), new PanCallBack() {
+			@Override
+			public void handlePanStart(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY) {
+				view.onTouchEventDown(x, y, rawX, rawY);
+			}
+
+			@Override
+			public void handlePanDrag(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY) {
+				view.onTouchEventMove(x, y, rawX, rawY);
+			}
+
+			@Override
+			public void handlePanEnd(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY) {
+				view.onTouchEventUp(x, y, rawX, rawY);
+			}
+			
+		});
+	}
+	
+	public static void addTouchListener(IWidget widget, Object uiView, Object uiLocationView, boolean ignoreScrollOffset, PanCallBack callback) {
+	    new TouchGestureRecognizer(widget, uiView, uiLocationView, ignoreScrollOffset, callback).addGestureRecognizer();
+	}
+
+	static class TouchGestureRecognizer {
+	    @com.google.j2objc.annotations.Weak
+	    private IWidget widget;
+
+	    private Object uiView;
+	    private Object uiLocationView;
+	    private PanCallBack callback;
+	    private boolean ignoreScrollOffset;
+	    public TouchGestureRecognizer(
+	            IWidget widget,
+	            Object uiView,
+	            Object uiLocationView,
+	            boolean ignoreScrollOffset,
+	            PanCallBack callback) {
+	        widget.getFragment().addListener(widget, this);
+
+	        this.widget = widget;
+	        this.uiView = uiView;
+	        this.uiLocationView = uiLocationView;
+	        this.callback = callback;
+	        this.ignoreScrollOffset = ignoreScrollOffset;
+	    }
+
+	    private native void addGestureRecognizer() /*-[
+	        UIView* view = (UIView*) self->uiView_;
+	        view.userInteractionEnabled = YES;
+	        ASTouchGestureRecognizer* recognizer = [[ASTouchGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouch:)];
+	        recognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+	        [view addGestureRecognizer:recognizer];
+	    ]-*/;
+
+	    /*-[
+	    - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer: (UIGestureRecognizer *)otherGestureRecognizer {
+	        return YES;
+	    }
+	    ]-*/;
+
+	    /*-[
+	    -(void)handleTouch:(ASTouchGestureRecognizer*)recognizer {
+	        UITouch* touch = recognizer.activeTouch;
+
+	        if (touch == nil) {
+	            return;
+	        }
+
+			CGPoint screenPoint = [touch locationInView:nil];
+			int screenX = (int)screenPoint.x;
+	        int screenY = (int)screenPoint.y;
+
+			int x = 0;
+			int y = 0;
+	        
+	        if (self->ignoreScrollOffset_) {
+	        	UIView* myView = (UIView*) self->uiLocationView_;
+	        	CGRect frameInWindow = [ myView convertRect:myView.bounds toView:nil];
+	        	x = screenX - frameInWindow.origin.x;
+				y = screenY - frameInWindow.origin.y;
+	        } else {
+		        CGPoint localPoint = [touch locationInView:self->uiLocationView_];	        
+		        x = (int)localPoint.x;
+		        y = (int)localPoint.y;
+	        }
+
+	        switch (recognizer.state) {
+
+	            case UIGestureRecognizerStateBegan:
+	                [self->callback_ handlePanStartWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+	                break;
+
+	            case UIGestureRecognizerStateChanged:
+	                [self->callback_ handlePanDragWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+	                break;
+
+	            case UIGestureRecognizerStateEnded:
+	                [self->callback_ handlePanEndWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+	                break;
+
+	            case UIGestureRecognizerStateCancelled:
+	                [self->callback_ handlePanEndWithASIWidget:self->widget_ withId:self->uiView_ withInt:x withInt:y withInt:screenX withInt:screenY];
+	                break;
+
+	            default:
+	                break;
+	        }
+	    }
+	    ]-*/;
 	}
 }

@@ -247,6 +247,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -608,6 +609,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "outsideTouchable" }))
 	outsideTouchable!:CommandAttr<boolean>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onAndroidTouch" }))
+	onAndroidTouch!:CommandAttr<string>| undefined;
 
 	@decorate(Exclude())
 	protected thisPointer: T;	
@@ -744,6 +748,7 @@ export abstract class ViewImpl<T> {
 		this.maxHeight = undefined;
 		this.onSwiped = undefined;
 		this.outsideTouchable = undefined;
+		this.onAndroidTouch = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -3731,6 +3736,20 @@ this.foregroundGravity.setTransformer('gravity');		return this.thisPointer;
 		this.outsideTouchable.setValue(value);
 		this.orderSet++;
 		this.outsideTouchable.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAndroidTouch(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAndroidTouch == null || this.onAndroidTouch == undefined) {
+			this.onAndroidTouch = new CommandAttr<string>();
+		}
+		
+		this.onAndroidTouch.setSetter(true);
+		this.onAndroidTouch.setValue(value);
+		this.orderSet++;
+		this.onAndroidTouch.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

@@ -39,7 +39,9 @@
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
+#include "java/lang/System.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Collection.h"
 #include "java/util/HashMap.h"
@@ -66,6 +68,7 @@
   id uiView_;
   ADRelativeLayout *relativeLayout_;
   JavaUtilHashMap *ruleMapper_;
+  bool layoutScheduled_;
 }
 
 - (void)addDellocHandler;
@@ -103,6 +106,8 @@
 
 - (void)removeRuleWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)layoutParams
                                              withId:(id)objValue;
+
+- (void)postRequestLayoutWithADView:(ADView *)view;
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
@@ -145,6 +150,8 @@ __attribute__((unused)) static void ASRootImpl_removeAllRulesWithADRelativeLayou
 __attribute__((unused)) static id<JavaUtilMap> ASRootImpl_invertMapWithJavaUtilMap_(ASRootImpl *self, id<JavaUtilMap> map);
 
 __attribute__((unused)) static void ASRootImpl_removeRuleWithADRelativeLayout_LayoutParams_withId_(ASRootImpl *self, ADRelativeLayout_LayoutParams *layoutParams, id objValue);
+
+__attribute__((unused)) static void ASRootImpl_postRequestLayoutWithADView_(ASRootImpl *self, ADView *view);
 
 __attribute__((unused)) static void ASRootImpl_nativeCreateWithJavaUtilMap_(ASRootImpl *self, id<JavaUtilMap> params);
 
@@ -200,6 +207,25 @@ __attribute__((unused)) static void ASRootImpl_$Lambda$1_initWithASIWidget_(ASRo
 __attribute__((unused)) static ASRootImpl_$Lambda$1 *new_ASRootImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASRootImpl_$Lambda$1 *create_ASRootImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
+
+@interface ASRootImpl_$Lambda$2 : NSObject < JavaLangRunnable > {
+ @public
+  ASRootImpl *this$0_;
+  ADView *val$view_;
+}
+
+- (void)run;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASRootImpl_$Lambda$2)
+
+__attribute__((unused)) static void ASRootImpl_$Lambda$2_initWithASRootImpl_withADView_(ASRootImpl_$Lambda$2 *self, ASRootImpl *outer$, ADView *capture$0);
+
+__attribute__((unused)) static ASRootImpl_$Lambda$2 *new_ASRootImpl_$Lambda$2_initWithASRootImpl_withADView_(ASRootImpl *outer$, ADView *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASRootImpl_$Lambda$2 *create_ASRootImpl_$Lambda$2_initWithASRootImpl_withADView_(ASRootImpl *outer$, ADView *capture$0);
 
 
 J2OBJC_INITIALIZED_DEFN(ASRootImpl)
@@ -698,6 +724,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASRootImpl_removeRuleWithADRelativeLayout_LayoutParams_withId_(self, layoutParams, objValue);
 }
 
+- (void)postRequestLayoutWithADView:(ADView *)view {
+  ASRootImpl_postRequestLayoutWithADView_(self, view);
+}
+
 - (void)measure {
   int32_t width = ASPluginInvoker_getScreenWidth();
   int32_t height = ASPluginInvoker_getScreenHeight();
@@ -799,13 +829,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 32, 33, -1, -1, -1, -1 },
     { NULL, "LJavaUtilMap;", 0x2, 34, 35, -1, 36, -1, -1 },
     { NULL, "V", 0x2, 27, 37, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 39, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 39, 40, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 41, 42, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 43, 35, -1, 44, -1, -1 },
-    { NULL, "V", 0x2, 45, 35, -1, 44, -1, -1 },
+    { NULL, "V", 0x1, 41, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 42, 43, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 44, 35, -1, 45, -1, -1 },
+    { NULL, "V", 0x2, 46, 35, -1, 45, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -844,25 +875,27 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[30].selector = @selector(removeAllRulesWithADRelativeLayout_LayoutParams:);
   methods[31].selector = @selector(invertMapWithJavaUtilMap:);
   methods[32].selector = @selector(removeRuleWithADRelativeLayout_LayoutParams:withId:);
-  methods[33].selector = @selector(measure);
-  methods[34].selector = @selector(measureWithInt:withInt:withInt:withInt:);
-  methods[35].selector = @selector(displayErrorIndicator);
-  methods[36].selector = @selector(setIdWithNSString:);
-  methods[37].selector = @selector(setVisibleWithBoolean:);
-  methods[38].selector = @selector(createViewWithJavaUtilMap:);
-  methods[39].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[40].selector = @selector(setupForInsets);
+  methods[33].selector = @selector(postRequestLayoutWithADView:);
+  methods[34].selector = @selector(measure);
+  methods[35].selector = @selector(measureWithInt:withInt:withInt:withInt:);
+  methods[36].selector = @selector(displayErrorIndicator);
+  methods[37].selector = @selector(setIdWithNSString:);
+  methods[38].selector = @selector(setVisibleWithBoolean:);
+  methods[39].selector = @selector(createViewWithJavaUtilMap:);
+  methods[40].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[41].selector = @selector(setupForInsets);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 46, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 47, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 47, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 48, -1, -1 },
     { "relativeLayout_", "LADRelativeLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "DELLOC_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 48, -1, -1 },
-    { "ruleMapper_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 49, -1 },
+    { "DELLOC_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 49, -1, -1 },
+    { "ruleMapper_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
+    { "layoutScheduled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "addRule", "LADRelativeLayout_LayoutParams;ILNSObject;", "addRemoveRule", "removeRule", "LADRelativeLayout_LayoutParams;I", "getRule", "getBoolRule", "getInferredRule", "removeAllRules", "LADRelativeLayout_LayoutParams;", "invertMap", "LJavaUtilMap;", "<A:Ljava/lang/Object;B:Ljava/lang/Object;>(Ljava/util/Map<TA;TB;>;)Ljava/util/Map<TB;TA;>;", "LADRelativeLayout_LayoutParams;LNSObject;", "measure", "IIII", "setId", "setVisible", "Z", "createView", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeCreate", &ASRootImpl_LOCAL_NAME, &ASRootImpl_GROUP_NAME, &ASRootImpl_DELLOC_EVENT, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Integer;>;", "LASRootImpl_DallocHandler;LASRootImpl_RemoveRule;LASRootImpl_RootExt;" };
-  static const J2ObjcClassInfo _ASRootImpl = { "RootImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 41, 6, -1, 50, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "addRule", "LADRelativeLayout_LayoutParams;ILNSObject;", "addRemoveRule", "removeRule", "LADRelativeLayout_LayoutParams;I", "getRule", "getBoolRule", "getInferredRule", "removeAllRules", "LADRelativeLayout_LayoutParams;", "invertMap", "LJavaUtilMap;", "<A:Ljava/lang/Object;B:Ljava/lang/Object;>(Ljava/util/Map<TA;TB;>;)Ljava/util/Map<TB;TA;>;", "LADRelativeLayout_LayoutParams;LNSObject;", "postRequestLayout", "measure", "IIII", "setId", "setVisible", "Z", "createView", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeCreate", &ASRootImpl_LOCAL_NAME, &ASRootImpl_GROUP_NAME, &ASRootImpl_DELLOC_EVENT, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Integer;>;", "LASRootImpl_DallocHandler;LASRootImpl_RemoveRule;LASRootImpl_RootExt;" };
+  static const J2ObjcClassInfo _ASRootImpl = { "RootImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 42, 7, -1, 51, -1, -1, -1 };
   return &_ASRootImpl;
 }
 
@@ -1111,6 +1144,14 @@ void ASRootImpl_removeRuleWithADRelativeLayout_LayoutParams_withId_(ASRootImpl *
       ASRootImpl_removeRuleWithADRelativeLayout_LayoutParams_withInt_(self, layoutParams, finalRule);
     }
   }
+}
+
+void ASRootImpl_postRequestLayoutWithADView_(ASRootImpl *self, ADView *view) {
+  if (self->layoutScheduled_) {
+    return;
+  }
+  self->layoutScheduled_ = true;
+  ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(new_ASRootImpl_$Lambda$2_initWithASRootImpl_withADView_(self, view), JavaLangSystem_currentTimeMillis());
 }
 
 void ASRootImpl_nativeCreateWithJavaUtilMap_(ASRootImpl *self, id<JavaUtilMap> params) {
@@ -1495,6 +1536,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
   [this$0_ runBufferedRunnables];
 }
 
+- (void)requestLayout {
+  [super requestLayout];
+  ASRootImpl_postRequestLayoutWithADView_(this$0_, self);
+}
+
 - (void)__javaClone:(ASRootImpl_RootExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -1540,6 +1586,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 35, 36, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1582,6 +1629,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
   methods[35].selector = @selector(stateYes);
   methods[36].selector = @selector(stateNo);
   methods[37].selector = @selector(endViewTransitionWithADView:);
+  methods[38].selector = @selector(requestLayout);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRootImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1593,7 +1641,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
     { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 38, -1 },
   };
   static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASRootImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "endViewTransition", "LADView;", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASRootImpl_RootExt = { "RootExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 38, 7, 3, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASRootImpl_RootExt = { "RootExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 39, 7, 3, -1, -1, -1, -1 };
   return &_ASRootImpl_RootExt;
 }
 
@@ -1637,4 +1685,29 @@ ASRootImpl_$Lambda$1 *new_ASRootImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> 
 
 ASRootImpl_$Lambda$1 *create_ASRootImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
   J2OBJC_CREATE_IMPL(ASRootImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}
+
+@implementation ASRootImpl_$Lambda$2
+
+- (void)run {
+  if ([((ADView *) nil_chk(val$view_)) isLayoutRequested]) {
+    [val$view_ remeasure];
+  }
+  this$0_->layoutScheduled_ = false;
+}
+
+@end
+
+void ASRootImpl_$Lambda$2_initWithASRootImpl_withADView_(ASRootImpl_$Lambda$2 *self, ASRootImpl *outer$, ADView *capture$0) {
+  self->this$0_ = outer$;
+  self->val$view_ = capture$0;
+  NSObject_init(self);
+}
+
+ASRootImpl_$Lambda$2 *new_ASRootImpl_$Lambda$2_initWithASRootImpl_withADView_(ASRootImpl *outer$, ADView *capture$0) {
+  J2OBJC_NEW_IMPL(ASRootImpl_$Lambda$2, initWithASRootImpl_withADView_, outer$, capture$0)
+}
+
+ASRootImpl_$Lambda$2 *create_ASRootImpl_$Lambda$2_initWithASRootImpl_withADView_(ASRootImpl *outer$, ADView *capture$0) {
+  J2OBJC_CREATE_IMPL(ASRootImpl_$Lambda$2, initWithASRootImpl_withADView_, outer$, capture$0)
 }

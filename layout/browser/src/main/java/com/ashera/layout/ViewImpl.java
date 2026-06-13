@@ -232,6 +232,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAndroidTouch").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("reappyStyleOnOrientationChange").withType("boolean").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outlineAmbientShadowColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outlineSpotShadowColor").withType("color"));
@@ -283,15 +284,16 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("webTabIndex").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("webOverflow").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("webDraggable").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("webGlobalAttributes").withType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationX").withType("dimensionfloat").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationY").withType("dimensionfloat").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationZ").withType("dimensionfloat").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rotation").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rotationX").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rotationY").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleX").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleY").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationX").withType("dimensionfloat").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationY").withType("dimensionfloat").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationZ").withType("dimensionfloat").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rotation").withType("float").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rotationX").withType("float").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rotationY").withType("float").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleX").withType("float").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleY").withType("float").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outsideTouchable").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("elevation").withType("dimensionfloat"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
@@ -577,6 +579,15 @@ public class ViewImpl {
 
 
 		 setBottom(w, objValue);
+
+
+
+			}
+			break;
+		case "onAndroidTouch": {
+
+
+		 onAndroidTouch(w, objValue);
 
 
 
@@ -1004,6 +1015,15 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "webDraggable": {
+
+
+		 setWebDraggable(w, nativeWidget, objValue);
+
+
+
+			}
+			break;
 		case "webGlobalAttributes": {
 
 
@@ -1422,9 +1442,9 @@ return getScaleY(w, nativeWidget);			}
 	}
 	
 	public static interface PanCallBack {
-		void handlePanStart(IWidget widget, Object eventWidget, int x, int y);
-		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y);
-		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y);
+		void handlePanStart(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
+		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
+		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY);
 	}
 
 	public static interface AnimationCallBack {
@@ -4279,6 +4299,12 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		HTMLElement htmlElement = (HTMLElement) nativeWidget;
 		htmlElement.getStyle().setProperty("overflow", (String) objValue);
 	}
+	
+	
+	private static void setWebDraggable(IWidget w, Object nativeWidget, Object objValue) {
+		HTMLElement htmlElement = (HTMLElement) nativeWidget;
+		htmlElement.setAttribute("draggable", (String) objValue);
+	}
 
 	private static void setTabIndex(IWidget w, Object nativeWidget, Object objValue) {
 		HTMLElement htmlElement = (HTMLElement) nativeWidget;
@@ -4534,22 +4560,23 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 
 		@Override
 		public void handleEvent(HtmlMouseEvent event) {
-
+			int rawX = event.getClientX();
+			int rawY = event.getClientY();
 			int eventX = getClientX(event, widget);
 			int eventY = getClientY(event, widget);
 			
 			switch (event.getType()) {
 			case "mousedown":
 				org.teavm.jso.browser.Window.current().addEventListener("mouseup", this, false);
-				callback.handlePanStart(widget, event.getTarget(),  eventX, eventY);
+				callback.handlePanStart(widget, event.getTarget(),  eventX, eventY, rawX, rawY);
 				break;
 			case "mousemove":
-				callback.handlePanDrag(widget, event.getTarget(),  eventX, eventY);
+				callback.handlePanDrag(widget, event.getTarget(),  eventX, eventY, rawX, rawY);
 				break;
 			case "dragend":
 			case "mouseup":				
 				org.teavm.jso.browser.Window.current().removeEventListener("mouseup", this, false);
-				callback.handlePanEnd(widget, event.getTarget(),  eventX, eventY);
+				callback.handlePanEnd(widget, event.getTarget(),  eventX, eventY, rawX, rawY);
 				break;
 
 			default:
@@ -4855,4 +4882,39 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		});
 	}
 
+	private static void onAndroidTouch(IWidget widget, Object objValue) {
+		
+		org.teavm.jso.dom.events.EventListener<ViewImpl.HtmlMouseEvent> flistener = new org.teavm.jso.dom.events.EventListener<ViewImpl.HtmlMouseEvent>() {
+			@Override
+			public void handleEvent(HtmlMouseEvent event) {
+				int rawX = event.getClientX();
+				int rawY = event.getClientY();
+				HTMLElement htmlElement = (HTMLElement)widget.asNativeWidget();
+				org.teavm.jso.dom.html.TextRectangle boundingClientRect = htmlElement.getBoundingClientRect();
+				int x = rawX - boundingClientRect.getLeft();
+				int y = rawY - boundingClientRect.getTop();
+				View view = (View) widget.asWidget();
+				switch (event.getType()) {
+					case "mousedown": {
+						view.onTouchEventDown(x, y, rawX, rawY);
+						break;
+					}
+					case "mouseup": {
+						view.onTouchEventUp(x, y, rawX, rawY);
+						break;
+					}
+					case "mousemove": {
+						view.onTouchEventMove(x, y, rawX, rawY);
+						break;
+					}
+					default:
+						break;
+				}
+			}
+			
+		};
+		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mouseup", "mouseup");
+		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mousedown", "mousedown");
+		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mousemove", "mousemove");
+}
 }

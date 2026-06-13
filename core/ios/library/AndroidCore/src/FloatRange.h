@@ -23,12 +23,14 @@
 
 @class IOSClass;
 @class JavaLangBoolean;
+@class JavaLangFloat;
 @class JavaLangInteger;
 @class NSString;
 
 @protocol ADFloatRange < JavaLangAnnotationAnnotation >
 
-@property (readonly) int32_t from;
+@property (readonly) float from;
+@property (readonly) float to;
 
 - (bool)isEqual:(id)obj;
 
@@ -38,14 +40,15 @@
 
 @interface ADFloatRange : NSObject < ADFloatRange > {
  @public
-  int32_t from_;
+  float from_;
+  float to_;
 }
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADFloatRange)
 
-FOUNDATION_EXPORT id<ADFloatRange> create_ADFloatRange(int32_t from);
+FOUNDATION_EXPORT id<ADFloatRange> create_ADFloatRange(float from, float to);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADFloatRange)
 

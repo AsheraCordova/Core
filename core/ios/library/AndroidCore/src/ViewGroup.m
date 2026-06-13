@@ -13,13 +13,19 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "LayoutTransition.h"
+#include "Log.h"
+#include "MotionEvent.h"
+#include "PointF.h"
 #include "Rect.h"
 #include "RenderNode.h"
+#include "SystemClock.h"
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewParent.h"
+#include "java/lang/AbstractMethodError.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Byte.h"
+#include "java/lang/Character.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
@@ -27,12 +33,17 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
+#include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
 #include "java/util/HashSet.h"
 #include "java/util/List.h"
 
+static bool (*ADViewGroup_super$_dispatchTouchEventWithADMotionEvent_)(id, SEL, id);
 
+
+@class ADViewGroup_TouchTarget;
+@class NSString;
 
 
 #pragma clang diagnostic error "-Wreturn-type"
@@ -46,8 +57,12 @@
   ADViewGroup_DragEvent *mCurrentDragStartEvent_;
   bool mIsInterestedInDrag_;
   JavaUtilHashSet *mChildrenInterestedInDrag_;
+  IOSFloatArray *mTempPoint_;
+  ADViewGroup_TouchTarget *mFirstTouchTarget_;
   int64_t mLastTouchDownTime_;
   int32_t mLastTouchDownIndex_;
+  float mLastTouchDownX_;
+  float mLastTouchDownY_;
   bool mHoveredSelf_;
   bool mTooltipHoveredSelf_;
   int32_t mLayoutMode_;
@@ -56,6 +71,7 @@
   ADLayoutTransition *mTransition_;
   JavaUtilArrayList *mTransitioningViews_;
   JavaUtilArrayList *mVisibilityChangingChildren_;
+  JavaUtilArrayList *mPreSortedChildren_;
   int32_t mChildCountWithTransientState_;
   int32_t mNestedScrollAxes_;
   id<JavaUtilList> mTransientIndices_;
@@ -63,6 +79,40 @@
   id<ADLayoutTransition_TransitionListener> mLayoutTransitionListener_;
   IOSObjectArray *mChildren_;
 }
+
+- (int32_t)getAndVerifyPreorderedIndexWithInt:(int32_t)childrenCount
+                                      withInt:(int32_t)i
+                                  withBoolean:(bool)customOrder;
+
+- (void)resetTouchState;
+
++ (bool)resetCancelNextUpFlagWithADView:(ADView *)view;
+
+- (void)clearTouchTargets;
+
+- (void)cancelAndClearTouchTargetsWithADMotionEvent:(ADMotionEvent *)event;
+
+- (ADViewGroup_TouchTarget *)getTouchTargetWithADView:(ADView *)child;
+
+- (ADViewGroup_TouchTarget *)addTouchTargetWithADView:(ADView *)child
+                                              withInt:(int32_t)pointerIdBits;
+
+- (void)removePointersFromTouchTargetsWithInt:(int32_t)pointerIdBits;
+
++ (bool)canViewReceivePointerEventsWithADView:(ADView *)child;
+
+- (IOSFloatArray *)getTempPoint;
+
+- (bool)dispatchTransformedTouchEventWithADMotionEvent:(ADMotionEvent *)event
+                                           withBoolean:(bool)cancel
+                                            withADView:(ADView *)child
+                                               withInt:(int32_t)desiredPointerIdBits;
+
++ (ADView *)getAndVerifyPreorderedViewWithJavaUtilArrayList:(JavaUtilArrayList *)preorderedList
+                                            withADViewArray:(IOSObjectArray *)children
+                                                    withInt:(int32_t)childIndex;
+
+- (bool)hasChildWithZ;
 
 - (void)addViewInnerWithADView:(ADView *)child
                        withInt:(int32_t)index
@@ -95,9 +145,6 @@
 - (void)requestChildFocusWithADView:(ADView *)child
                              withId:(id)findFocus;
 
-- (void)childHasTransientStateChangedWithADView:(ADView *)child
-                                    withBoolean:(bool)b;
-
 - (void)notifyGlobalFocusClearedWithId:(id)viewGroup;
 
 - (bool)rootViewRequestFocus;
@@ -128,13 +175,20 @@ J2OBJC_FIELD_SETTER(ADViewGroup, mFocused_, ADView *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mDefaultFocus_, ADView *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mCurrentDragStartEvent_, ADViewGroup_DragEvent *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mChildrenInterestedInDrag_, JavaUtilHashSet *)
+J2OBJC_FIELD_SETTER(ADViewGroup, mTempPoint_, IOSFloatArray *)
+J2OBJC_FIELD_SETTER(ADViewGroup, mFirstTouchTarget_, ADViewGroup_TouchTarget *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mTransition_, ADLayoutTransition *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mTransitioningViews_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mVisibilityChangingChildren_, JavaUtilArrayList *)
+J2OBJC_FIELD_SETTER(ADViewGroup, mPreSortedChildren_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mTransientIndices_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mTransientViews_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mLayoutTransitionListener_, id<ADLayoutTransition_TransitionListener>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mChildren_, IOSObjectArray *)
+
+inline NSString *ADViewGroup_get_TAG(void);
+static NSString *ADViewGroup_TAG = @"ViewGroup";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADViewGroup, TAG, NSString *)
 
 inline bool ADViewGroup_get_DBG(void);
 #define ADViewGroup_DBG false
@@ -224,6 +278,32 @@ inline int32_t ADViewGroup_get_ARRAY_CAPACITY_INCREMENT(void);
 #define ADViewGroup_ARRAY_CAPACITY_INCREMENT 12
 J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup, ARRAY_CAPACITY_INCREMENT, int32_t)
 
+__attribute__((unused)) static int32_t ADViewGroup_getAndVerifyPreorderedIndexWithInt_withInt_withBoolean_(ADViewGroup *self, int32_t childrenCount, int32_t i, bool customOrder);
+
+__attribute__((unused)) static void ADViewGroup_resetTouchState(ADViewGroup *self);
+
+__attribute__((unused)) static bool ADViewGroup_resetCancelNextUpFlagWithADView_(ADView *view);
+
+__attribute__((unused)) static void ADViewGroup_clearTouchTargets(ADViewGroup *self);
+
+__attribute__((unused)) static void ADViewGroup_cancelAndClearTouchTargetsWithADMotionEvent_(ADViewGroup *self, ADMotionEvent *event);
+
+__attribute__((unused)) static ADViewGroup_TouchTarget *ADViewGroup_getTouchTargetWithADView_(ADViewGroup *self, ADView *child);
+
+__attribute__((unused)) static ADViewGroup_TouchTarget *ADViewGroup_addTouchTargetWithADView_withInt_(ADViewGroup *self, ADView *child, int32_t pointerIdBits);
+
+__attribute__((unused)) static void ADViewGroup_removePointersFromTouchTargetsWithInt_(ADViewGroup *self, int32_t pointerIdBits);
+
+__attribute__((unused)) static bool ADViewGroup_canViewReceivePointerEventsWithADView_(ADView *child);
+
+__attribute__((unused)) static IOSFloatArray *ADViewGroup_getTempPoint(ADViewGroup *self);
+
+__attribute__((unused)) static bool ADViewGroup_dispatchTransformedTouchEventWithADMotionEvent_withBoolean_withADView_withInt_(ADViewGroup *self, ADMotionEvent *event, bool cancel, ADView *child, int32_t desiredPointerIdBits);
+
+__attribute__((unused)) static ADView *ADViewGroup_getAndVerifyPreorderedViewWithJavaUtilArrayList_withADViewArray_withInt_(JavaUtilArrayList *preorderedList, IOSObjectArray *children, int32_t childIndex);
+
+__attribute__((unused)) static bool ADViewGroup_hasChildWithZ(ADViewGroup *self);
+
 __attribute__((unused)) static void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(ADViewGroup *self, ADView *child, int32_t index, ADViewGroup_LayoutParams *params, bool preventRequestLayout);
 
 __attribute__((unused)) static void ADViewGroup_addInArrayWithADView_withInt_(ADViewGroup *self, ADView *child, int32_t index);
@@ -245,8 +325,6 @@ __attribute__((unused)) static void ADViewGroup_setLayoutModeWithInt_withBoolean
 __attribute__((unused)) static void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *v);
 
 __attribute__((unused)) static void ADViewGroup_requestChildFocusWithADView_withId_(ADViewGroup *self, ADView *child, id findFocus);
-
-__attribute__((unused)) static void ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(ADViewGroup *self, ADView *child, bool b);
 
 __attribute__((unused)) static void ADViewGroup_notifyGlobalFocusClearedWithId_(ADViewGroup *self, id viewGroup);
 
@@ -344,6 +422,63 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_MarginLayoutParams, UNDEFINED_MARGIN, i
 
 __attribute__((unused)) static void ADViewGroup_MarginLayoutParams_doResolveMargins(ADViewGroup_MarginLayoutParams *self);
 
+@interface ADViewGroup_TouchTarget : NSObject {
+ @public
+  ADView *child_;
+  int32_t pointerIdBits_;
+  ADViewGroup_TouchTarget *next_;
+}
+
+- (instancetype)init;
+
++ (ADViewGroup_TouchTarget *)obtainWithADView:(ADView *)child
+                                      withInt:(int32_t)pointerIdBits;
+
+- (void)recycle;
+
+@end
+
+J2OBJC_STATIC_INIT(ADViewGroup_TouchTarget)
+
+J2OBJC_FIELD_SETTER(ADViewGroup_TouchTarget, child_, ADView *)
+J2OBJC_FIELD_SETTER(ADViewGroup_TouchTarget, next_, ADViewGroup_TouchTarget *)
+
+inline int32_t ADViewGroup_TouchTarget_get_MAX_RECYCLED(void);
+#define ADViewGroup_TouchTarget_MAX_RECYCLED 32
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_TouchTarget, MAX_RECYCLED, int32_t)
+
+inline id ADViewGroup_TouchTarget_get_sRecycleLock(void);
+static id ADViewGroup_TouchTarget_sRecycleLock;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADViewGroup_TouchTarget, sRecycleLock, id)
+
+inline ADViewGroup_TouchTarget *ADViewGroup_TouchTarget_get_sRecycleBin(void);
+inline ADViewGroup_TouchTarget *ADViewGroup_TouchTarget_set_sRecycleBin(ADViewGroup_TouchTarget *value);
+static ADViewGroup_TouchTarget *ADViewGroup_TouchTarget_sRecycleBin;
+J2OBJC_STATIC_FIELD_OBJ(ADViewGroup_TouchTarget, sRecycleBin, ADViewGroup_TouchTarget *)
+
+inline int32_t ADViewGroup_TouchTarget_get_sRecycledCount(void);
+inline int32_t ADViewGroup_TouchTarget_set_sRecycledCount(int32_t value);
+inline int32_t *ADViewGroup_TouchTarget_getRef_sRecycledCount(void);
+static int32_t ADViewGroup_TouchTarget_sRecycledCount;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADViewGroup_TouchTarget, sRecycledCount, int32_t)
+
+inline int32_t ADViewGroup_TouchTarget_get_ALL_POINTER_IDS(void);
+#define ADViewGroup_TouchTarget_ALL_POINTER_IDS -1
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_TouchTarget, ALL_POINTER_IDS, int32_t)
+
+__attribute__((unused)) static void ADViewGroup_TouchTarget_init(ADViewGroup_TouchTarget *self);
+
+__attribute__((unused)) static ADViewGroup_TouchTarget *new_ADViewGroup_TouchTarget_init(void) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ADViewGroup_TouchTarget *create_ADViewGroup_TouchTarget_init(void);
+
+__attribute__((unused)) static ADViewGroup_TouchTarget *ADViewGroup_TouchTarget_obtainWithADView_withInt_(ADView *child, int32_t pointerIdBits);
+
+J2OBJC_TYPE_LITERAL_HEADER(ADViewGroup_TouchTarget)
+
+
+J2OBJC_INITIALIZED_DEFN(ADViewGroup)
+
 int32_t ADViewGroup_LAYOUT_MODE_DEFAULT = 0;
 
 @implementation ADViewGroup
@@ -354,6 +489,26 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (void)childHasTransientStateChangedWithADView:(ADView *)child
+                                    withBoolean:(bool)childHasTransientState {
+  bool oldHasTransientState = [self hasTransientState];
+  if (childHasTransientState) {
+    mChildCountWithTransientState_++;
+  }
+  else {
+    mChildCountWithTransientState_--;
+  }
+  bool newHasTransientState = [self hasTransientState];
+  if (mParent_ != nil && oldHasTransientState != newHasTransientState) {
+    @try {
+      [mParent_ childHasTransientStateChangedWithADView:self withBoolean:newHasTransientState];
+    }
+    @catch (JavaLangAbstractMethodError *e) {
+      ADLog_eWithNSString_withNSString_withJavaLangThrowable_(ADViewGroup_TAG, JreStrcat("$$", [[((id<ADViewParent>) nil_chk(mParent_)) java_getClass] getSimpleName], @" does not fully implement ViewParent"), e);
+    }
+  }
+}
 
 - (void)onChildVisibilityChangedWithADView:(ADView *)child
                                    withInt:(int32_t)oldVisibility
@@ -380,6 +535,247 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (int32_t)getAndVerifyPreorderedIndexWithInt:(int32_t)childrenCount
+                                      withInt:(int32_t)i
+                                  withBoolean:(bool)customOrder {
+  return ADViewGroup_getAndVerifyPreorderedIndexWithInt_withInt_withBoolean_(self, childrenCount, i, customOrder);
+}
+
+- (bool)dispatchTouchEventWithADMotionEvent:(ADMotionEvent *)ev {
+  if ([((ADMotionEvent *) nil_chk(ev)) isTargetAccessibilityFocus] && [self isAccessibilityFocusedViewOrHost]) {
+    [ev setTargetAccessibilityFocusWithBoolean:false];
+  }
+  bool handled = false;
+  if ([self onFilterTouchEventForSecurityWithADMotionEvent:ev]) {
+    int32_t action = [ev getAction];
+    int32_t actionMasked = action & ADMotionEvent_ACTION_MASK;
+    if (actionMasked == ADMotionEvent_ACTION_DOWN) {
+      ADViewGroup_cancelAndClearTouchTargetsWithADMotionEvent_(self, ev);
+      ADViewGroup_resetTouchState(self);
+    }
+    bool intercepted;
+    if (actionMasked == ADMotionEvent_ACTION_DOWN || mFirstTouchTarget_ != nil) {
+      bool disallowIntercept = (mGroupFlags_ & ADViewGroup_FLAG_DISALLOW_INTERCEPT) != 0;
+      if (!disallowIntercept) {
+        intercepted = [self onInterceptTouchEventWithADMotionEvent:ev];
+        [ev setActionWithInt:action];
+      }
+      else {
+        intercepted = false;
+      }
+    }
+    else {
+      intercepted = true;
+    }
+    if (intercepted || mFirstTouchTarget_ != nil) {
+      [ev setTargetAccessibilityFocusWithBoolean:false];
+    }
+    bool canceled = ADViewGroup_resetCancelNextUpFlagWithADView_(self) || actionMasked == ADMotionEvent_ACTION_CANCEL;
+    bool split = (mGroupFlags_ & ADViewGroup_FLAG_SPLIT_MOTION_EVENTS) != 0;
+    ADViewGroup_TouchTarget *newTouchTarget = nil;
+    bool alreadyDispatchedToNewTouchTarget = false;
+    if (!canceled && !intercepted) {
+      ADView *childWithAccessibilityFocus = [ev isTargetAccessibilityFocus] ? [self findChildWithAccessibilityFocus] : nil;
+      if (actionMasked == ADMotionEvent_ACTION_DOWN || (split && actionMasked == ADMotionEvent_ACTION_POINTER_DOWN) || actionMasked == ADMotionEvent_ACTION_HOVER_MOVE) {
+        int32_t actionIndex = [ev getActionIndex];
+        int32_t idBitsToAssign = split ? JreLShift32(1, [ev getPointerIdWithInt:actionIndex]) : ADViewGroup_TouchTarget_ALL_POINTER_IDS;
+        ADViewGroup_removePointersFromTouchTargetsWithInt_(self, idBitsToAssign);
+        int32_t childrenCount = mChildrenCount_;
+        if (newTouchTarget == nil && childrenCount != 0) {
+          float x = [ev getXWithInt:actionIndex];
+          float y = [ev getYWithInt:actionIndex];
+          JavaUtilArrayList *preorderedList = [self buildTouchDispatchChildList];
+          bool customOrder = preorderedList == nil && [self isChildrenDrawingOrderEnabled];
+          IOSObjectArray *children = mChildren_;
+          for (int32_t i = childrenCount - 1; i >= 0; i--) {
+            int32_t childIndex = ADViewGroup_getAndVerifyPreorderedIndexWithInt_withInt_withBoolean_(self, childrenCount, i, customOrder);
+            ADView *child = ADViewGroup_getAndVerifyPreorderedViewWithJavaUtilArrayList_withADViewArray_withInt_(preorderedList, children, childIndex);
+            if (childWithAccessibilityFocus != nil) {
+              if (!JreObjectEqualsEquals(childWithAccessibilityFocus, child)) {
+                continue;
+              }
+              childWithAccessibilityFocus = nil;
+              i = childrenCount - 1;
+            }
+            if (!ADViewGroup_canViewReceivePointerEventsWithADView_(child) || ![self isTransformedTouchPointInViewWithFloat:x withFloat:y withADView:child withADPointF:nil]) {
+              [ev setTargetAccessibilityFocusWithBoolean:false];
+              continue;
+            }
+            newTouchTarget = ADViewGroup_getTouchTargetWithADView_(self, child);
+            if (newTouchTarget != nil) {
+              newTouchTarget->pointerIdBits_ |= idBitsToAssign;
+              break;
+            }
+            ADViewGroup_resetCancelNextUpFlagWithADView_(child);
+            if (ADViewGroup_dispatchTransformedTouchEventWithADMotionEvent_withBoolean_withADView_withInt_(self, ev, false, child, idBitsToAssign)) {
+              mLastTouchDownTime_ = [ev getDownTime];
+              if (preorderedList != nil) {
+                for (int32_t j = 0; j < childrenCount; j++) {
+                  if (JreObjectEqualsEquals(IOSObjectArray_Get(nil_chk(children), childIndex), IOSObjectArray_Get(nil_chk(mChildren_), j))) {
+                    mLastTouchDownIndex_ = j;
+                    break;
+                  }
+                }
+              }
+              else {
+                mLastTouchDownIndex_ = childIndex;
+              }
+              mLastTouchDownX_ = [ev getX];
+              mLastTouchDownY_ = [ev getY];
+              newTouchTarget = ADViewGroup_addTouchTargetWithADView_withInt_(self, child, idBitsToAssign);
+              alreadyDispatchedToNewTouchTarget = true;
+              break;
+            }
+            [ev setTargetAccessibilityFocusWithBoolean:false];
+          }
+          if (preorderedList != nil) [preorderedList clear];
+        }
+        if (newTouchTarget == nil && mFirstTouchTarget_ != nil) {
+          newTouchTarget = mFirstTouchTarget_;
+          while (newTouchTarget->next_ != nil) {
+            newTouchTarget = newTouchTarget->next_;
+          }
+          newTouchTarget->pointerIdBits_ |= idBitsToAssign;
+        }
+      }
+    }
+    if (mFirstTouchTarget_ == nil) {
+      handled = ADViewGroup_dispatchTransformedTouchEventWithADMotionEvent_withBoolean_withADView_withInt_(self, ev, canceled, nil, ADViewGroup_TouchTarget_ALL_POINTER_IDS);
+    }
+    else {
+      ADViewGroup_TouchTarget *predecessor = nil;
+      ADViewGroup_TouchTarget *target = JreRetainedLocalValue(mFirstTouchTarget_);
+      while (target != nil) {
+        ADViewGroup_TouchTarget *next = target->next_;
+        if (alreadyDispatchedToNewTouchTarget && JreObjectEqualsEquals(target, newTouchTarget)) {
+          handled = true;
+        }
+        else {
+          bool cancelChild = ADViewGroup_resetCancelNextUpFlagWithADView_(target->child_) || intercepted;
+          if (ADViewGroup_dispatchTransformedTouchEventWithADMotionEvent_withBoolean_withADView_withInt_(self, ev, cancelChild, target->child_, target->pointerIdBits_)) {
+            handled = true;
+          }
+          if (cancelChild) {
+            if (predecessor == nil) {
+              JreStrongAssign(&mFirstTouchTarget_, next);
+            }
+            else {
+              JreStrongAssign(&predecessor->next_, next);
+            }
+            [target recycle];
+            target = next;
+            continue;
+          }
+        }
+        predecessor = target;
+        target = next;
+      }
+    }
+    if (canceled || actionMasked == ADMotionEvent_ACTION_UP || actionMasked == ADMotionEvent_ACTION_HOVER_MOVE) {
+      ADViewGroup_resetTouchState(self);
+    }
+    else if (split && actionMasked == ADMotionEvent_ACTION_POINTER_UP) {
+      int32_t actionIndex = [ev getActionIndex];
+      int32_t idBitsToRemove = JreLShift32(1, [ev getPointerIdWithInt:actionIndex]);
+      ADViewGroup_removePointersFromTouchTargetsWithInt_(self, idBitsToRemove);
+    }
+  }
+  return handled;
+}
+
+- (JavaUtilArrayList *)buildTouchDispatchChildList {
+  return [self buildOrderedChildList];
+}
+
+- (void)resetTouchState {
+  ADViewGroup_resetTouchState(self);
+}
+
++ (bool)resetCancelNextUpFlagWithADView:(ADView *)view {
+  return ADViewGroup_resetCancelNextUpFlagWithADView_(view);
+}
+
+- (void)clearTouchTargets {
+  ADViewGroup_clearTouchTargets(self);
+}
+
+- (void)cancelAndClearTouchTargetsWithADMotionEvent:(ADMotionEvent *)event {
+  ADViewGroup_cancelAndClearTouchTargetsWithADMotionEvent_(self, event);
+}
+
+- (ADViewGroup_TouchTarget *)getTouchTargetWithADView:(ADView *)child {
+  return ADViewGroup_getTouchTargetWithADView_(self, child);
+}
+
+- (ADViewGroup_TouchTarget *)addTouchTargetWithADView:(ADView *)child
+                                              withInt:(int32_t)pointerIdBits {
+  return ADViewGroup_addTouchTargetWithADView_withInt_(self, child, pointerIdBits);
+}
+
+- (void)removePointersFromTouchTargetsWithInt:(int32_t)pointerIdBits {
+  ADViewGroup_removePointersFromTouchTargetsWithInt_(self, pointerIdBits);
+}
+
++ (bool)canViewReceivePointerEventsWithADView:(ADView *)child {
+  return ADViewGroup_canViewReceivePointerEventsWithADView_(child);
+}
+
+- (IOSFloatArray *)getTempPoint {
+  return ADViewGroup_getTempPoint(self);
+}
+
+- (bool)isTransformedTouchPointInViewWithFloat:(float)x
+                                     withFloat:(float)y
+                                    withADView:(ADView *)child
+                                  withADPointF:(ADPointF *)outLocalPoint {
+  IOSFloatArray *point = ADViewGroup_getTempPoint(self);
+  *IOSFloatArray_GetRef(nil_chk(point), 0) = x;
+  *IOSFloatArray_GetRef(point, 1) = y;
+  [self transformPointToViewLocalWithFloatArray:point withADView:child];
+  bool isInView = [((ADView *) nil_chk(child)) pointInViewWithFloat:IOSFloatArray_Get(point, 0) withFloat:IOSFloatArray_Get(point, 1)];
+  if (isInView && outLocalPoint != nil) {
+    [outLocalPoint setWithFloat:IOSFloatArray_Get(point, 0) withFloat:IOSFloatArray_Get(point, 1)];
+  }
+  return isInView;
+}
+
+- (void)transformPointToViewLocalWithFloatArray:(IOSFloatArray *)point
+                                     withADView:(ADView *)child {
+  JrePlusAssignFloatF(IOSFloatArray_GetRef(nil_chk(point), 0), mScrollX_ - ((ADView *) nil_chk(child))->mLeft_);
+  JrePlusAssignFloatF(IOSFloatArray_GetRef(point, 1), mScrollY_ - child->mTop_);
+  if (![child hasIdentityMatrix]) {
+  }
+}
+
+- (bool)dispatchTransformedTouchEventWithADMotionEvent:(ADMotionEvent *)event
+                                           withBoolean:(bool)cancel
+                                            withADView:(ADView *)child
+                                               withInt:(int32_t)desiredPointerIdBits {
+  return ADViewGroup_dispatchTransformedTouchEventWithADMotionEvent_withBoolean_withADView_withInt_(self, event, cancel, child, desiredPointerIdBits);
+}
+
+- (void)requestDisallowInterceptTouchEventWithBoolean:(bool)disallowIntercept {
+  if (disallowIntercept == ((mGroupFlags_ & ADViewGroup_FLAG_DISALLOW_INTERCEPT) != 0)) {
+    return;
+  }
+  if (disallowIntercept) {
+    mGroupFlags_ |= ADViewGroup_FLAG_DISALLOW_INTERCEPT;
+  }
+  else {
+    mGroupFlags_ &= ~ADViewGroup_FLAG_DISALLOW_INTERCEPT;
+  }
+  if (mParent_ != nil) {
+    [mParent_ requestDisallowInterceptTouchEventWithBoolean:disallowIntercept];
+  }
+}
+
+- (bool)onInterceptTouchEventWithADMotionEvent:(ADMotionEvent *)ev {
+  if ([((ADMotionEvent *) nil_chk(ev)) isFromSourceWithInt:ADView_InputDevice_SOURCE_MOUSE] && [ev getAction] == ADMotionEvent_ACTION_DOWN && [ev isButtonPressedWithInt:ADMotionEvent_BUTTON_PRIMARY] && [self isOnScrollbarThumbWithInt:[ev getX] withInt:[ev getY]]) {
+    return true;
+  }
+  return false;
+}
+
 - (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)info
                                               withInt:(int32_t)visibility {
   mGroupFlags_ |= ADViewGroup_FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW;
@@ -398,8 +794,47 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
++ (ADView *)getAndVerifyPreorderedViewWithJavaUtilArrayList:(JavaUtilArrayList *)preorderedList
+                                            withADViewArray:(IOSObjectArray *)children
+                                                    withInt:(int32_t)childIndex {
+  return ADViewGroup_getAndVerifyPreorderedViewWithJavaUtilArrayList_withADViewArray_withInt_(preorderedList, children, childIndex);
+}
+
 - (bool)isLayoutModeOptical {
   return mLayoutMode_ == ADViewGroup_LAYOUT_MODE_OPTICAL_BOUNDS;
+}
+
+- (int32_t)getChildDrawingOrderWithInt:(int32_t)childCount
+                               withInt:(int32_t)i {
+  return i;
+}
+
+- (bool)hasChildWithZ {
+  return ADViewGroup_hasChildWithZ(self);
+}
+
+- (JavaUtilArrayList *)buildOrderedChildList {
+  int32_t childrenCount = mChildrenCount_;
+  if (childrenCount <= 1 || !ADViewGroup_hasChildWithZ(self)) return nil;
+  if (mPreSortedChildren_ == nil) {
+    JreStrongAssignAndConsume(&mPreSortedChildren_, new_JavaUtilArrayList_initWithInt_(childrenCount));
+  }
+  else {
+    [mPreSortedChildren_ clear];
+    [((JavaUtilArrayList *) nil_chk(mPreSortedChildren_)) ensureCapacityWithInt:childrenCount];
+  }
+  bool customOrder = [self isChildrenDrawingOrderEnabled];
+  for (int32_t i = 0; i < childrenCount; i++) {
+    int32_t childIndex = ADViewGroup_getAndVerifyPreorderedIndexWithInt_withInt_withBoolean_(self, childrenCount, i, customOrder);
+    ADView *nextChild = IOSObjectArray_Get(nil_chk(mChildren_), childIndex);
+    float currentZ = [((ADView *) nil_chk(nextChild)) getZ];
+    int32_t insertIndex = i;
+    while (insertIndex > 0 && [((ADView *) nil_chk([((JavaUtilArrayList *) nil_chk(mPreSortedChildren_)) getWithInt:insertIndex - 1])) getZ] > currentZ) {
+      insertIndex--;
+    }
+    [((JavaUtilArrayList *) nil_chk(mPreSortedChildren_)) addWithInt:insertIndex withId:nextChild];
+  }
+  return mPreSortedChildren_;
 }
 
 - (void)setClipToPaddingWithBoolean:(bool)clipToPadding {
@@ -632,7 +1067,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
       [view dispatchDetachedFromWindow];
     }
     if ([view hasTransientState]) {
-      ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(self, view, false);
+      [self childHasTransientStateChangedWithADView:view withBoolean:false];
     }
     [self dispatchViewRemovedWithADView:view];
     view->mParent_ = nil;
@@ -650,6 +1085,35 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
       ADViewGroup_notifyGlobalFocusClearedWithId_(self, focused);
     }
   }
+}
+
+- (void)removeDetachedViewWithADView:(ADView *)child
+                         withBoolean:(bool)animate {
+  if (mTransition_ != nil) {
+    [mTransition_ removeChildWithADViewGroup:self withADView:child];
+  }
+  if (JreObjectEqualsEquals(child, mFocused_)) {
+    [((ADView *) nil_chk(child)) clearFocus];
+  }
+  if (JreObjectEqualsEquals(child, mDefaultFocus_)) {
+    ADViewGroup_clearDefaultFocusWithADView_(self, child);
+  }
+  if (JreObjectEqualsEquals(child, mFocusedInCluster_)) {
+    ADViewGroup_clearFocusedInClusterWithADView_(self, child);
+  }
+  [((ADView *) nil_chk(child)) clearAccessibilityFocus];
+  ADViewGroup_cancelTouchTargetWithADView_(self, child);
+  ADViewGroup_cancelHoverTargetWithADView_(self, child);
+  if ((animate && [child getAnimation] != nil) || (mTransitioningViews_ != nil && [mTransitioningViews_ containsWithId:child])) {
+    ADViewGroup_addDisappearingViewWithADView_(self, child);
+  }
+  else if (child->mAttachInfo_ != nil) {
+    [child dispatchDetachedFromWindow];
+  }
+  if ([child hasTransientState]) {
+    [self childHasTransientStateChangedWithADView:child withBoolean:false];
+  }
+  [self dispatchViewRemovedWithADView:child];
 }
 
 - (void)attachViewToParentWithADView:(ADView *)child
@@ -974,6 +1438,15 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return false;
 }
 
+- (bool)isOnScrollbarThumbWithInt:(int32_t)x
+                          withInt:(int32_t)y {
+  return false;
+}
+
+- (bool)isChildrenDrawingOrderEnabled {
+  return false;
+}
+
 - (ADRect *)getPaddingMaskBounds {
   int32_t flags = mGroupFlags_;
   bool clipToPadding = (flags & ADViewGroup_FLAG_CLIP_TO_PADDING) == ADViewGroup_FLAG_CLIP_TO_PADDING;
@@ -1010,11 +1483,6 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 - (void)requestChildFocusWithADView:(ADView *)child
                              withId:(id)findFocus {
   ADViewGroup_requestChildFocusWithADView_withId_(self, child, findFocus);
-}
-
-- (void)childHasTransientStateChangedWithADView:(ADView *)child
-                                    withBoolean:(bool)b {
-  ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(self, child, b);
 }
 
 - (void)notifyGlobalFocusClearedWithId:(id)viewGroup {
@@ -1108,9 +1576,12 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   RELEASE_(mFocusedInCluster_);
   RELEASE_(mCurrentDragStartEvent_);
   RELEASE_(mChildrenInterestedInDrag_);
+  RELEASE_(mTempPoint_);
+  RELEASE_(mFirstTouchTarget_);
   RELEASE_(mTransition_);
   RELEASE_(mTransitioningViews_);
   RELEASE_(mVisibilityChangingChildren_);
+  RELEASE_(mPreSortedChildren_);
   RELEASE_(mTransientIndices_);
   RELEASE_(mTransientViews_);
   RELEASE_(mLayoutTransitionListener_);
@@ -1121,214 +1592,267 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 0, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 2, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 4, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x1, -1, -1, -1, 8, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 11, 7, -1, -1, -1, -1 },
+    { NULL, "LADViewGroup_TouchTarget;", 0x2, 12, 10, -1, -1, -1, -1 },
+    { NULL, "LADViewGroup_TouchTarget;", 0x2, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 15, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 17, 10, -1, -1, -1, -1 },
+    { NULL, "[F", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 26, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 27, 28, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0xa, 29, 30, -1, 31, -1, -1 },
     { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x4, 32, 33, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilArrayList;", 0x0, -1, -1, -1, 8, -1, -1 },
+    { NULL, "V", 0x1, 34, 25, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 6, 5, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x4, 7, 8, -1, 9, -1, -1 },
-    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 14, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 15, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 19, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 21, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 11, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 23, 14, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 23, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 25, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 30, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 8, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, 32, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 32, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 34, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 35, 25, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x4, 36, 16, -1, 37, -1, -1 },
+    { NULL, "V", 0x1, 38, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 38, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 38, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 38, 39, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 38, 40, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 41, 42, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 43, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 45, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 46, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 47, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 48, 10, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 49, 40, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 49, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 51, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 52, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 54, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 54, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 55, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 56, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 57, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 57, 58, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 59, 60, -1, -1, -1, -1 },
     { NULL, "LADLayoutTransition;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 36, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 37, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 37, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 38, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 61, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 62, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 63, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 63, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 64, 33, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 8, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, 40, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 41, 42, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 43, 42, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 44, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 65, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 66, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 67, 68, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 69, 68, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 70, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 43, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 69, 16, -1, -1, -1, -1 },
     { NULL, "LADViewGroup_LayoutParams;", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 45, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 71, 10, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x1, 46, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 47, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 48, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 49, 50, -1, -1, -1, -1 },
-    { NULL, "I", 0x9, 51, 52, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 53, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 54, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 55, 11, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 72, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 73, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 74, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 75, 76, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 77, 78, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 79, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 80, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 81, 10, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "[I", 0x4, 56, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 57, 5, -1, -1, -1, -1 },
+    { NULL, "[I", 0x4, 82, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 83, 25, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 58, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 35, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 60, 61, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 62, 61, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 63, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 64, 50, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 65, 66, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 67, 68, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 69, 70, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 71, 13, -1, -1, -1, -1 },
-    { NULL, "Z", 0x0, 72, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 84, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 85, 60, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 86, 87, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 88, 87, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 89, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 90, 76, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 91, 92, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 93, 94, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 95, 96, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 97, 39, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 98, 10, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 99, 33, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADRect;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 73, 74, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 75, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 76, 11, -1, -1, -1, -1 },
-    { NULL, "LADViewGroup_LayoutParams;", 0x4, 77, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 78, 79, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 80, 81, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 82, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 100, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 102, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 103, 10, -1, -1, -1, -1 },
+    { NULL, "LADViewGroup_LayoutParams;", 0x4, 104, 42, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 105, 106, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 107, 108, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 84, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 86, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 87, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 88, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 89, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 90, 5, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 109, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 110, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 111, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 112, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 113, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 114, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 115, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 116, 10, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 92, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 93, 94, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 95, 5, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 96, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 117, 10, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 118, 119, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 120, 25, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 121, 10, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
-  methods[1].selector = @selector(onChildVisibilityChangedWithADView:withInt:withInt:);
-  methods[2].selector = @selector(dispatchAttachedToWindowWithADView_AttachInfo:withInt:);
-  methods[3].selector = @selector(isLayoutModeOptical);
-  methods[4].selector = @selector(setClipToPaddingWithBoolean:);
-  methods[5].selector = @selector(getClipToPadding);
-  methods[6].selector = @selector(dispatchSetPressedWithBoolean:);
-  methods[7].selector = @selector(findViewTraversalWithInt:);
-  methods[8].selector = @selector(addViewWithADView:);
-  methods[9].selector = @selector(addViewWithADView:withInt:);
-  methods[10].selector = @selector(addViewWithADView:withInt:withInt:);
-  methods[11].selector = @selector(addViewWithADView:withADViewGroup_LayoutParams:);
-  methods[12].selector = @selector(addViewWithADView:withInt:withADViewGroup_LayoutParams:);
-  methods[13].selector = @selector(checkLayoutParamsWithADViewGroup_LayoutParams:);
-  methods[14].selector = @selector(setOnHierarchyChangeListenerWithADViewGroup_OnHierarchyChangeListener:);
-  methods[15].selector = @selector(dispatchViewAddedWithADView:);
-  methods[16].selector = @selector(onViewAddedWithADView:);
-  methods[17].selector = @selector(dispatchViewRemovedWithADView:);
-  methods[18].selector = @selector(onViewRemovedWithADView:);
-  methods[19].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:);
-  methods[20].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
-  methods[21].selector = @selector(cleanupLayoutStateWithADView:);
-  methods[22].selector = @selector(addViewInnerWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
-  methods[23].selector = @selector(addInArrayWithADView:withInt:);
-  methods[24].selector = @selector(removeFromArrayWithInt:);
-  methods[25].selector = @selector(removeFromArrayWithInt:withInt:);
-  methods[26].selector = @selector(removeViewWithADView:);
-  methods[27].selector = @selector(removeViewAtWithInt:);
-  methods[28].selector = @selector(removeViewInternalWithADView:);
-  methods[29].selector = @selector(removeViewInternalWithInt:withADView:);
-  methods[30].selector = @selector(setLayoutTransitionWithADLayoutTransition:);
-  methods[31].selector = @selector(getLayoutTransition);
-  methods[32].selector = @selector(removeAllViews);
-  methods[33].selector = @selector(removeAllViewsInLayout);
-  methods[34].selector = @selector(attachViewToParentWithADView:withInt:withADViewGroup_LayoutParams:);
-  methods[35].selector = @selector(detachViewFromParentWithADView:);
-  methods[36].selector = @selector(detachViewFromParentWithInt:);
-  methods[37].selector = @selector(detachViewsFromParentWithInt:withInt:);
-  methods[38].selector = @selector(detachAllViewsFromParent);
-  methods[39].selector = @selector(offsetChildrenTopAndBottomWithInt:);
-  methods[40].selector = @selector(hasBooleanFlagWithInt:);
-  methods[41].selector = @selector(setBooleanFlagWithInt:withBoolean:);
-  methods[42].selector = @selector(setLayoutModeWithInt:withBoolean:);
-  methods[43].selector = @selector(invalidateInheritedLayoutModeWithInt:);
-  methods[44].selector = @selector(getLayoutMode);
-  methods[45].selector = @selector(setLayoutModeWithInt:);
-  methods[46].selector = @selector(generateDefaultLayoutParams);
-  methods[47].selector = @selector(indexOfChildWithADView:);
-  methods[48].selector = @selector(getChildCount);
-  methods[49].selector = @selector(getChildAtWithInt:);
-  methods[50].selector = @selector(measureChildrenWithInt:withInt:);
-  methods[51].selector = @selector(measureChildWithADView:withInt:withInt:);
-  methods[52].selector = @selector(measureChildWithMarginsWithADView:withInt:withInt:withInt:withInt:);
-  methods[53].selector = @selector(getChildMeasureSpecWithInt:withInt:withInt:);
-  methods[54].selector = @selector(addDisappearingViewWithADView:);
-  methods[55].selector = @selector(startViewTransitionWithADView:);
-  methods[56].selector = @selector(endViewTransitionWithADView:);
-  methods[57].selector = @selector(drawableStateChanged);
-  methods[58].selector = @selector(onCreateDrawableStateWithInt:);
-  methods[59].selector = @selector(setAddStatesFromChildrenWithBoolean:);
-  methods[60].selector = @selector(addStatesFromChildren);
-  methods[61].selector = @selector(childDrawableStateChangedWithADView:);
-  methods[62].selector = @selector(requestTransitionStartWithADLayoutTransition:);
-  methods[63].selector = @selector(onStartNestedScrollWithADView:withADView:withInt:);
-  methods[64].selector = @selector(onNestedScrollAcceptedWithADView:withADView:withInt:);
-  methods[65].selector = @selector(onStopNestedScrollWithADView:);
-  methods[66].selector = @selector(onNestedScrollWithADView:withInt:withInt:withInt:withInt:);
-  methods[67].selector = @selector(onNestedPreScrollWithADView:withInt:withInt:withIntArray:);
-  methods[68].selector = @selector(onNestedFlingWithADView:withFloat:withFloat:withBoolean:);
-  methods[69].selector = @selector(onNestedPreFlingWithADView:withFloat:withFloat:);
-  methods[70].selector = @selector(onSetLayoutParamsWithADView:withADViewGroup_LayoutParams:);
-  methods[71].selector = @selector(isViewTransitioningWithADView:);
-  methods[72].selector = @selector(getPaddingMaskBounds);
-  methods[73].selector = @selector(bringToFront);
-  methods[74].selector = @selector(incrementChildUnhandledKeyListeners);
-  methods[75].selector = @selector(invalidateChildWithADView:withADRect:);
-  methods[76].selector = @selector(recomputeViewAttributesWithADView:);
-  methods[77].selector = @selector(focusableViewAvailableWithADView:);
-  methods[78].selector = @selector(generateLayoutParamsWithADViewGroup_LayoutParams:);
-  methods[79].selector = @selector(requestChildFocusWithADView:withId:);
-  methods[80].selector = @selector(childHasTransientStateChangedWithADView:withBoolean:);
-  methods[81].selector = @selector(notifyGlobalFocusClearedWithId:);
-  methods[82].selector = @selector(rootViewRequestFocus);
-  methods[83].selector = @selector(clearChildFocusWithADView:);
-  methods[84].selector = @selector(cancelHoverTargetWithADView:);
-  methods[85].selector = @selector(cancelTouchTargetWithADView:);
-  methods[86].selector = @selector(touchAccessibilityNodeProviderIfNeededWithADView:);
-  methods[87].selector = @selector(setDefaultFocusWithADView:);
-  methods[88].selector = @selector(notifyChildOfDragStartWithADView:);
-  methods[89].selector = @selector(dispatchVisibilityAggregatedWithBoolean:);
-  methods[90].selector = @selector(clearFocusedInClusterWithADView:);
-  methods[91].selector = @selector(decrementChildUnhandledKeyListeners);
-  methods[92].selector = @selector(clearDefaultFocusWithADView:);
-  methods[93].selector = @selector(measureHeightOfChildrenWithInt:withInt:withInt:withInt:withInt:);
-  methods[94].selector = @selector(setRedrawWithBoolean:);
-  methods[95].selector = @selector(hasChildWithADView:);
+  methods[1].selector = @selector(childHasTransientStateChangedWithADView:withBoolean:);
+  methods[2].selector = @selector(onChildVisibilityChangedWithADView:withInt:withInt:);
+  methods[3].selector = @selector(getAndVerifyPreorderedIndexWithInt:withInt:withBoolean:);
+  methods[4].selector = @selector(dispatchTouchEventWithADMotionEvent:);
+  methods[5].selector = @selector(buildTouchDispatchChildList);
+  methods[6].selector = @selector(resetTouchState);
+  methods[7].selector = @selector(resetCancelNextUpFlagWithADView:);
+  methods[8].selector = @selector(clearTouchTargets);
+  methods[9].selector = @selector(cancelAndClearTouchTargetsWithADMotionEvent:);
+  methods[10].selector = @selector(getTouchTargetWithADView:);
+  methods[11].selector = @selector(addTouchTargetWithADView:withInt:);
+  methods[12].selector = @selector(removePointersFromTouchTargetsWithInt:);
+  methods[13].selector = @selector(canViewReceivePointerEventsWithADView:);
+  methods[14].selector = @selector(getTempPoint);
+  methods[15].selector = @selector(isTransformedTouchPointInViewWithFloat:withFloat:withADView:withADPointF:);
+  methods[16].selector = @selector(transformPointToViewLocalWithFloatArray:withADView:);
+  methods[17].selector = @selector(dispatchTransformedTouchEventWithADMotionEvent:withBoolean:withADView:withInt:);
+  methods[18].selector = @selector(requestDisallowInterceptTouchEventWithBoolean:);
+  methods[19].selector = @selector(onInterceptTouchEventWithADMotionEvent:);
+  methods[20].selector = @selector(dispatchAttachedToWindowWithADView_AttachInfo:withInt:);
+  methods[21].selector = @selector(getAndVerifyPreorderedViewWithJavaUtilArrayList:withADViewArray:withInt:);
+  methods[22].selector = @selector(isLayoutModeOptical);
+  methods[23].selector = @selector(getChildDrawingOrderWithInt:withInt:);
+  methods[24].selector = @selector(hasChildWithZ);
+  methods[25].selector = @selector(buildOrderedChildList);
+  methods[26].selector = @selector(setClipToPaddingWithBoolean:);
+  methods[27].selector = @selector(getClipToPadding);
+  methods[28].selector = @selector(dispatchSetPressedWithBoolean:);
+  methods[29].selector = @selector(findViewTraversalWithInt:);
+  methods[30].selector = @selector(addViewWithADView:);
+  methods[31].selector = @selector(addViewWithADView:withInt:);
+  methods[32].selector = @selector(addViewWithADView:withInt:withInt:);
+  methods[33].selector = @selector(addViewWithADView:withADViewGroup_LayoutParams:);
+  methods[34].selector = @selector(addViewWithADView:withInt:withADViewGroup_LayoutParams:);
+  methods[35].selector = @selector(checkLayoutParamsWithADViewGroup_LayoutParams:);
+  methods[36].selector = @selector(setOnHierarchyChangeListenerWithADViewGroup_OnHierarchyChangeListener:);
+  methods[37].selector = @selector(dispatchViewAddedWithADView:);
+  methods[38].selector = @selector(onViewAddedWithADView:);
+  methods[39].selector = @selector(dispatchViewRemovedWithADView:);
+  methods[40].selector = @selector(onViewRemovedWithADView:);
+  methods[41].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:);
+  methods[42].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
+  methods[43].selector = @selector(cleanupLayoutStateWithADView:);
+  methods[44].selector = @selector(addViewInnerWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
+  methods[45].selector = @selector(addInArrayWithADView:withInt:);
+  methods[46].selector = @selector(removeFromArrayWithInt:);
+  methods[47].selector = @selector(removeFromArrayWithInt:withInt:);
+  methods[48].selector = @selector(removeViewWithADView:);
+  methods[49].selector = @selector(removeViewAtWithInt:);
+  methods[50].selector = @selector(removeViewInternalWithADView:);
+  methods[51].selector = @selector(removeViewInternalWithInt:withADView:);
+  methods[52].selector = @selector(setLayoutTransitionWithADLayoutTransition:);
+  methods[53].selector = @selector(getLayoutTransition);
+  methods[54].selector = @selector(removeAllViews);
+  methods[55].selector = @selector(removeAllViewsInLayout);
+  methods[56].selector = @selector(removeDetachedViewWithADView:withBoolean:);
+  methods[57].selector = @selector(attachViewToParentWithADView:withInt:withADViewGroup_LayoutParams:);
+  methods[58].selector = @selector(detachViewFromParentWithADView:);
+  methods[59].selector = @selector(detachViewFromParentWithInt:);
+  methods[60].selector = @selector(detachViewsFromParentWithInt:withInt:);
+  methods[61].selector = @selector(detachAllViewsFromParent);
+  methods[62].selector = @selector(offsetChildrenTopAndBottomWithInt:);
+  methods[63].selector = @selector(hasBooleanFlagWithInt:);
+  methods[64].selector = @selector(setBooleanFlagWithInt:withBoolean:);
+  methods[65].selector = @selector(setLayoutModeWithInt:withBoolean:);
+  methods[66].selector = @selector(invalidateInheritedLayoutModeWithInt:);
+  methods[67].selector = @selector(getLayoutMode);
+  methods[68].selector = @selector(setLayoutModeWithInt:);
+  methods[69].selector = @selector(generateDefaultLayoutParams);
+  methods[70].selector = @selector(indexOfChildWithADView:);
+  methods[71].selector = @selector(getChildCount);
+  methods[72].selector = @selector(getChildAtWithInt:);
+  methods[73].selector = @selector(measureChildrenWithInt:withInt:);
+  methods[74].selector = @selector(measureChildWithADView:withInt:withInt:);
+  methods[75].selector = @selector(measureChildWithMarginsWithADView:withInt:withInt:withInt:withInt:);
+  methods[76].selector = @selector(getChildMeasureSpecWithInt:withInt:withInt:);
+  methods[77].selector = @selector(addDisappearingViewWithADView:);
+  methods[78].selector = @selector(startViewTransitionWithADView:);
+  methods[79].selector = @selector(endViewTransitionWithADView:);
+  methods[80].selector = @selector(drawableStateChanged);
+  methods[81].selector = @selector(onCreateDrawableStateWithInt:);
+  methods[82].selector = @selector(setAddStatesFromChildrenWithBoolean:);
+  methods[83].selector = @selector(addStatesFromChildren);
+  methods[84].selector = @selector(childDrawableStateChangedWithADView:);
+  methods[85].selector = @selector(requestTransitionStartWithADLayoutTransition:);
+  methods[86].selector = @selector(onStartNestedScrollWithADView:withADView:withInt:);
+  methods[87].selector = @selector(onNestedScrollAcceptedWithADView:withADView:withInt:);
+  methods[88].selector = @selector(onStopNestedScrollWithADView:);
+  methods[89].selector = @selector(onNestedScrollWithADView:withInt:withInt:withInt:withInt:);
+  methods[90].selector = @selector(onNestedPreScrollWithADView:withInt:withInt:withIntArray:);
+  methods[91].selector = @selector(onNestedFlingWithADView:withFloat:withFloat:withBoolean:);
+  methods[92].selector = @selector(onNestedPreFlingWithADView:withFloat:withFloat:);
+  methods[93].selector = @selector(onSetLayoutParamsWithADView:withADViewGroup_LayoutParams:);
+  methods[94].selector = @selector(isViewTransitioningWithADView:);
+  methods[95].selector = @selector(isOnScrollbarThumbWithInt:withInt:);
+  methods[96].selector = @selector(isChildrenDrawingOrderEnabled);
+  methods[97].selector = @selector(getPaddingMaskBounds);
+  methods[98].selector = @selector(bringToFront);
+  methods[99].selector = @selector(incrementChildUnhandledKeyListeners);
+  methods[100].selector = @selector(invalidateChildWithADView:withADRect:);
+  methods[101].selector = @selector(recomputeViewAttributesWithADView:);
+  methods[102].selector = @selector(focusableViewAvailableWithADView:);
+  methods[103].selector = @selector(generateLayoutParamsWithADViewGroup_LayoutParams:);
+  methods[104].selector = @selector(requestChildFocusWithADView:withId:);
+  methods[105].selector = @selector(notifyGlobalFocusClearedWithId:);
+  methods[106].selector = @selector(rootViewRequestFocus);
+  methods[107].selector = @selector(clearChildFocusWithADView:);
+  methods[108].selector = @selector(cancelHoverTargetWithADView:);
+  methods[109].selector = @selector(cancelTouchTargetWithADView:);
+  methods[110].selector = @selector(touchAccessibilityNodeProviderIfNeededWithADView:);
+  methods[111].selector = @selector(setDefaultFocusWithADView:);
+  methods[112].selector = @selector(notifyChildOfDragStartWithADView:);
+  methods[113].selector = @selector(dispatchVisibilityAggregatedWithBoolean:);
+  methods[114].selector = @selector(clearFocusedInClusterWithADView:);
+  methods[115].selector = @selector(decrementChildUnhandledKeyListeners);
+  methods[116].selector = @selector(clearDefaultFocusWithADView:);
+  methods[117].selector = @selector(measureHeightOfChildrenWithInt:withInt:withInt:withInt:withInt:);
+  methods[118].selector = @selector(setRedrawWithBoolean:);
+  methods[119].selector = @selector(hasChildWithADView:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
+    { "TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 122, -1, -1 },
     { "DBG", "Z", .constantValue.asBOOL = ADViewGroup_DBG, 0x1a, -1, -1, -1, -1 },
-    { "mDisappearingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x4, -1, -1, 97, -1 },
+    { "mDisappearingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x4, -1, -1, 123, -1 },
     { "mOnHierarchyChangeListener_", "LADViewGroup_OnHierarchyChangeListener;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "mFocused_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDefaultFocus_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mFocusedInCluster_", "LADView;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mCurrentDragStartEvent_", "LADViewGroup_DragEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mIsInterestedInDrag_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mChildrenInterestedInDrag_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x2, -1, -1, 98, -1 },
+    { "mChildrenInterestedInDrag_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x2, -1, -1, 124, -1 },
+    { "mTempPoint_", "[F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mFirstTouchTarget_", "LADViewGroup_TouchTarget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mLastTouchDownTime_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mLastTouchDownIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mLastTouchDownX_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mLastTouchDownY_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mHoveredSelf_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mTooltipHoveredSelf_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mGroupFlags_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
@@ -1371,7 +1895,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     { "LAYOUT_MODE_UNDEFINED", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_UNDEFINED, 0x1a, -1, -1, -1, -1 },
     { "LAYOUT_MODE_CLIP_BOUNDS", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_CLIP_BOUNDS, 0x19, -1, -1, -1, -1 },
     { "LAYOUT_MODE_OPTICAL_BOUNDS", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_OPTICAL_BOUNDS, 0x19, -1, -1, -1, -1 },
-    { "LAYOUT_MODE_DEFAULT", "I", .constantValue.asLong = 0, 0x9, -1, 99, -1, -1 },
+    { "LAYOUT_MODE_DEFAULT", "I", .constantValue.asLong = 0, 0x9, -1, 125, -1, -1 },
     { "CLIP_TO_PADDING_MASK", "I", .constantValue.asInt = ADViewGroup_CLIP_TO_PADDING_MASK, 0x1c, -1, -1, -1, -1 },
     { "CHILD_LEFT_INDEX", "I", .constantValue.asInt = ADViewGroup_CHILD_LEFT_INDEX, 0x1a, -1, -1, -1, -1 },
     { "CHILD_TOP_INDEX", "I", .constantValue.asInt = ADViewGroup_CHILD_TOP_INDEX, 0x1a, -1, -1, -1, -1 },
@@ -1381,19 +1905,27 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     { "ARRAY_INITIAL_CAPACITY", "I", .constantValue.asInt = ADViewGroup_ARRAY_INITIAL_CAPACITY, 0x1a, -1, -1, -1, -1 },
     { "ARRAY_CAPACITY_INCREMENT", "I", .constantValue.asInt = ADViewGroup_ARRAY_CAPACITY_INCREMENT, 0x1a, -1, -1, -1, -1 },
     { "mTransition_", "LADLayoutTransition;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mTransitioningViews_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 97, -1 },
-    { "mVisibilityChangingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 97, -1 },
+    { "mTransitioningViews_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 123, -1 },
+    { "mVisibilityChangingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 123, -1 },
+    { "mPreSortedChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 123, -1 },
     { "mChildCountWithTransientState_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mNestedScrollAxes_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mTransientIndices_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 100, -1 },
-    { "mTransientViews_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 101, -1 },
+    { "mTransientIndices_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 126, -1 },
+    { "mTransientViews_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 127, -1 },
     { "mChildUnhandledKeyListeners_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mLayoutTransitionListener_", "LADLayoutTransition_TransitionListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChildren_", "[LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "onChildVisibilityChanged", "LADView;II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setClipToPadding", "Z", "dispatchSetPressed", "findViewTraversal", "I", "<T:Lr/android/view/View;>(I)TT;", "addView", "LADView;", "LADView;I", "LADView;LADViewGroup_LayoutParams;", "LADView;ILADViewGroup_LayoutParams;", "checkLayoutParams", "LADViewGroup_LayoutParams;", "setOnHierarchyChangeListener", "LADViewGroup_OnHierarchyChangeListener;", "dispatchViewAdded", "onViewAdded", "dispatchViewRemoved", "onViewRemoved", "addViewInLayout", "LADView;ILADViewGroup_LayoutParams;Z", "cleanupLayoutState", "addViewInner", "addInArray", "removeFromArray", "II", "removeView", "removeViewAt", "removeViewInternal", "ILADView;", "setLayoutTransition", "LADLayoutTransition;", "attachViewToParent", "detachViewFromParent", "detachViewsFromParent", "offsetChildrenTopAndBottom", "hasBooleanFlag", "setBooleanFlag", "IZ", "setLayoutMode", "invalidateInheritedLayoutMode", "indexOfChild", "getChildAt", "measureChildren", "measureChild", "measureChildWithMargins", "LADView;IIII", "getChildMeasureSpec", "III", "addDisappearingView", "startViewTransition", "endViewTransition", "onCreateDrawableState", "setAddStatesFromChildren", "childDrawableStateChanged", "requestTransitionStart", "onStartNestedScroll", "LADView;LADView;I", "onNestedScrollAccepted", "onStopNestedScroll", "onNestedScroll", "onNestedPreScroll", "LADView;II[I", "onNestedFling", "LADView;FFZ", "onNestedPreFling", "LADView;FF", "onSetLayoutParams", "isViewTransitioning", "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "focusableViewAvailable", "generateLayoutParams", "requestChildFocus", "LADView;LNSObject;", "childHasTransientStateChanged", "LADView;Z", "notifyGlobalFocusCleared", "LNSObject;", "clearChildFocus", "cancelHoverTarget", "cancelTouchTarget", "touchAccessibilityNodeProviderIfNeeded", "setDefaultFocus", "notifyChildOfDragStart", "dispatchVisibilityAggregated", "clearFocusedInCluster", "clearDefaultFocus", "measureHeightOfChildren", "IIIII", "setRedraw", "hasChild", "Ljava/util/ArrayList<Lr/android/view/View;>;", "Ljava/util/HashSet<Lr/android/view/View;>;", &ADViewGroup_LAYOUT_MODE_DEFAULT, "Ljava/util/List<Ljava/lang/Integer;>;", "Ljava/util/List<Lr/android/view/View;>;", "LADViewGroup_OnHierarchyChangeListener;LADViewGroup_LayoutParams;LADViewGroup_MarginLayoutParams;LADViewGroup_DragEvent;" };
-  static const J2ObjcClassInfo _ADViewGroup = { "ViewGroup", "r.android.view", ptrTable, methods, fields, 7, 0x401, 96, 72, -1, 102, -1, -1, -1 };
+  static const void *ptrTable[] = { "childHasTransientStateChanged", "LADView;Z", "onChildVisibilityChanged", "LADView;II", "getAndVerifyPreorderedIndex", "IIZ", "dispatchTouchEvent", "LADMotionEvent;", "()Ljava/util/ArrayList<Lr/android/view/View;>;", "resetCancelNextUpFlag", "LADView;", "cancelAndClearTouchTargets", "getTouchTarget", "addTouchTarget", "LADView;I", "removePointersFromTouchTargets", "I", "canViewReceivePointerEvents", "isTransformedTouchPointInView", "FFLADView;LADPointF;", "transformPointToViewLocal", "[FLADView;", "dispatchTransformedTouchEvent", "LADMotionEvent;ZLADView;I", "requestDisallowInterceptTouchEvent", "Z", "onInterceptTouchEvent", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "getAndVerifyPreorderedView", "LJavaUtilArrayList;[LADView;I", "(Ljava/util/ArrayList<Lr/android/view/View;>;[Lr/android/view/View;I)Lr/android/view/View;", "getChildDrawingOrder", "II", "setClipToPadding", "dispatchSetPressed", "findViewTraversal", "<T:Lr/android/view/View;>(I)TT;", "addView", "LADView;LADViewGroup_LayoutParams;", "LADView;ILADViewGroup_LayoutParams;", "checkLayoutParams", "LADViewGroup_LayoutParams;", "setOnHierarchyChangeListener", "LADViewGroup_OnHierarchyChangeListener;", "dispatchViewAdded", "onViewAdded", "dispatchViewRemoved", "onViewRemoved", "addViewInLayout", "LADView;ILADViewGroup_LayoutParams;Z", "cleanupLayoutState", "addViewInner", "addInArray", "removeFromArray", "removeView", "removeViewAt", "removeViewInternal", "ILADView;", "setLayoutTransition", "LADLayoutTransition;", "removeDetachedView", "attachViewToParent", "detachViewFromParent", "detachViewsFromParent", "offsetChildrenTopAndBottom", "hasBooleanFlag", "setBooleanFlag", "IZ", "setLayoutMode", "invalidateInheritedLayoutMode", "indexOfChild", "getChildAt", "measureChildren", "measureChild", "measureChildWithMargins", "LADView;IIII", "getChildMeasureSpec", "III", "addDisappearingView", "startViewTransition", "endViewTransition", "onCreateDrawableState", "setAddStatesFromChildren", "childDrawableStateChanged", "requestTransitionStart", "onStartNestedScroll", "LADView;LADView;I", "onNestedScrollAccepted", "onStopNestedScroll", "onNestedScroll", "onNestedPreScroll", "LADView;II[I", "onNestedFling", "LADView;FFZ", "onNestedPreFling", "LADView;FF", "onSetLayoutParams", "isViewTransitioning", "isOnScrollbarThumb", "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "focusableViewAvailable", "generateLayoutParams", "requestChildFocus", "LADView;LNSObject;", "notifyGlobalFocusCleared", "LNSObject;", "clearChildFocus", "cancelHoverTarget", "cancelTouchTarget", "touchAccessibilityNodeProviderIfNeeded", "setDefaultFocus", "notifyChildOfDragStart", "dispatchVisibilityAggregated", "clearFocusedInCluster", "clearDefaultFocus", "measureHeightOfChildren", "IIIII", "setRedraw", "hasChild", &ADViewGroup_TAG, "Ljava/util/ArrayList<Lr/android/view/View;>;", "Ljava/util/HashSet<Lr/android/view/View;>;", &ADViewGroup_LAYOUT_MODE_DEFAULT, "Ljava/util/List<Ljava/lang/Integer;>;", "Ljava/util/List<Lr/android/view/View;>;", "LADViewGroup_OnHierarchyChangeListener;LADViewGroup_LayoutParams;LADViewGroup_MarginLayoutParams;LADViewGroup_TouchTarget;LADViewGroup_DragEvent;" };
+  static const J2ObjcClassInfo _ADViewGroup = { "ViewGroup", "r.android.view", ptrTable, methods, fields, 7, 0x401, 120, 78, -1, 128, -1, -1, -1 };
   return &_ADViewGroup;
+}
+
++ (void)initialize {
+  if (self == [ADViewGroup class]) {
+    ADViewGroup_super$_dispatchTouchEventWithADMotionEvent_ = (bool (*)(id, SEL, id))[ADView instanceMethodForSelector:@selector(dispatchTouchEventWithADMotionEvent:)];
+    J2OBJC_SET_INITIALIZED(ADViewGroup)
+  }
 }
 
 @end
@@ -1410,6 +1942,198 @@ void ADViewGroup_init(ADViewGroup *self) {
   self->mChildUnhandledKeyListeners_ = 0;
   JreStrongAssignAndConsume(&self->mLayoutTransitionListener_, new_ADViewGroup_1_initWithADViewGroup_(self));
   JreStrongAssignAndConsume(&self->mChildren_, [IOSObjectArray newArrayWithLength:ADViewGroup_ARRAY_INITIAL_CAPACITY type:ADView_class_()]);
+}
+
+int32_t ADViewGroup_getAndVerifyPreorderedIndexWithInt_withInt_withBoolean_(ADViewGroup *self, int32_t childrenCount, int32_t i, bool customOrder) {
+  int32_t childIndex;
+  if (customOrder) {
+    int32_t childIndex1 = [self getChildDrawingOrderWithInt:childrenCount withInt:i];
+    if (childIndex1 >= childrenCount) {
+      @throw create_JavaLangIndexOutOfBoundsException_initWithNSString_(JreStrcat("$I$IC", @"getChildDrawingOrder() returned invalid index ", childIndex1, @" (child count is ", childrenCount, ')'));
+    }
+    childIndex = childIndex1;
+  }
+  else {
+    childIndex = i;
+  }
+  return childIndex;
+}
+
+void ADViewGroup_resetTouchState(ADViewGroup *self) {
+  ADViewGroup_clearTouchTargets(self);
+  ADViewGroup_resetCancelNextUpFlagWithADView_(self);
+  self->mGroupFlags_ &= ~ADViewGroup_FLAG_DISALLOW_INTERCEPT;
+  self->mNestedScrollAxes_ = ADView_SCROLL_AXIS_NONE;
+}
+
+bool ADViewGroup_resetCancelNextUpFlagWithADView_(ADView *view) {
+  ADViewGroup_initialize();
+  if ((((ADView *) nil_chk(view))->mPrivateFlags_ & ADView_PFLAG_CANCEL_NEXT_UP_EVENT) != 0) {
+    view->mPrivateFlags_ &= ~ADView_PFLAG_CANCEL_NEXT_UP_EVENT;
+    return true;
+  }
+  return false;
+}
+
+void ADViewGroup_clearTouchTargets(ADViewGroup *self) {
+  ADViewGroup_TouchTarget *target = JreRetainedLocalValue(self->mFirstTouchTarget_);
+  if (target != nil) {
+    do {
+      ADViewGroup_TouchTarget *next = JreRetainedLocalValue(target->next_);
+      [target recycle];
+      target = next;
+    }
+    while (target != nil);
+    JreStrongAssign(&self->mFirstTouchTarget_, nil);
+  }
+}
+
+void ADViewGroup_cancelAndClearTouchTargetsWithADMotionEvent_(ADViewGroup *self, ADMotionEvent *event) {
+  if (self->mFirstTouchTarget_ != nil) {
+    bool syntheticEvent = false;
+    if (event == nil) {
+      int64_t now = ADSystemClock_uptimeMillis();
+      event = ADMotionEvent_obtainWithLong_withLong_withInt_withFloat_withFloat_withInt_(now, now, ADMotionEvent_ACTION_CANCEL, 0.0f, 0.0f, 0);
+      [((ADMotionEvent *) nil_chk(event)) setSourceWithInt:ADView_InputDevice_SOURCE_TOUCHSCREEN];
+      syntheticEvent = true;
+    }
+    for (ADViewGroup_TouchTarget *target = JreRetainedLocalValue(self->mFirstTouchTarget_); target != nil; target = target->next_) {
+      ADViewGroup_resetCancelNextUpFlagWithADView_(target->child_);
+      ADViewGroup_dispatchTransformedTouchEventWithADMotionEvent_withBoolean_withADView_withInt_(self, event, true, target->child_, target->pointerIdBits_);
+    }
+    ADViewGroup_clearTouchTargets(self);
+    if (syntheticEvent) {
+      [event recycle];
+    }
+  }
+}
+
+ADViewGroup_TouchTarget *ADViewGroup_getTouchTargetWithADView_(ADViewGroup *self, ADView *child) {
+  for (ADViewGroup_TouchTarget *target = JreRetainedLocalValue(self->mFirstTouchTarget_); target != nil; target = target->next_) {
+    if (JreObjectEqualsEquals(target->child_, child)) {
+      return target;
+    }
+  }
+  return nil;
+}
+
+ADViewGroup_TouchTarget *ADViewGroup_addTouchTargetWithADView_withInt_(ADViewGroup *self, ADView *child, int32_t pointerIdBits) {
+  ADViewGroup_TouchTarget *target = ADViewGroup_TouchTarget_obtainWithADView_withInt_(child, pointerIdBits);
+  JreStrongAssign(&((ADViewGroup_TouchTarget *) nil_chk(target))->next_, self->mFirstTouchTarget_);
+  JreStrongAssign(&self->mFirstTouchTarget_, target);
+  return target;
+}
+
+void ADViewGroup_removePointersFromTouchTargetsWithInt_(ADViewGroup *self, int32_t pointerIdBits) {
+  ADViewGroup_TouchTarget *predecessor = nil;
+  ADViewGroup_TouchTarget *target = JreRetainedLocalValue(self->mFirstTouchTarget_);
+  while (target != nil) {
+    ADViewGroup_TouchTarget *next = target->next_;
+    if ((target->pointerIdBits_ & pointerIdBits) != 0) {
+      target->pointerIdBits_ &= ~pointerIdBits;
+      if (target->pointerIdBits_ == 0) {
+        if (predecessor == nil) {
+          JreStrongAssign(&self->mFirstTouchTarget_, next);
+        }
+        else {
+          JreStrongAssign(&predecessor->next_, next);
+        }
+        [target recycle];
+        target = next;
+        continue;
+      }
+    }
+    predecessor = target;
+    target = next;
+  }
+}
+
+bool ADViewGroup_canViewReceivePointerEventsWithADView_(ADView *child) {
+  ADViewGroup_initialize();
+  return (((ADView *) nil_chk(child))->mViewFlags_ & ADView_VISIBILITY_MASK) == ADView_VISIBLE || [child getAnimation] != nil;
+}
+
+IOSFloatArray *ADViewGroup_getTempPoint(ADViewGroup *self) {
+  if (self->mTempPoint_ == nil) {
+    JreStrongAssignAndConsume(&self->mTempPoint_, [IOSFloatArray newArrayWithLength:2]);
+  }
+  return self->mTempPoint_;
+}
+
+bool ADViewGroup_dispatchTransformedTouchEventWithADMotionEvent_withBoolean_withADView_withInt_(ADViewGroup *self, ADMotionEvent *event, bool cancel, ADView *child, int32_t desiredPointerIdBits) {
+  bool handled;
+  int32_t oldAction = [((ADMotionEvent *) nil_chk(event)) getAction];
+  if (cancel || oldAction == ADMotionEvent_ACTION_CANCEL) {
+    [event setActionWithInt:ADMotionEvent_ACTION_CANCEL];
+    if (child == nil) {
+      handled = ADViewGroup_super$_dispatchTouchEventWithADMotionEvent_(self, @selector(dispatchTouchEventWithADMotionEvent:), event);
+    }
+    else {
+      handled = [child dispatchTouchEventWithADMotionEvent:event];
+    }
+    [event setActionWithInt:oldAction];
+    return handled;
+  }
+  int32_t oldPointerIdBits = [event getPointerIdBits];
+  int32_t newPointerIdBits = oldPointerIdBits & desiredPointerIdBits;
+  if (newPointerIdBits == 0) {
+    return false;
+  }
+  ADMotionEvent *transformedEvent;
+  if (newPointerIdBits == oldPointerIdBits) {
+    if (child == nil || [child hasIdentityMatrix]) {
+      if (child == nil) {
+        handled = ADViewGroup_super$_dispatchTouchEventWithADMotionEvent_(self, @selector(dispatchTouchEventWithADMotionEvent:), event);
+      }
+      else {
+        float offsetX = self->mScrollX_ - child->mLeft_;
+        float offsetY = self->mScrollY_ - child->mTop_;
+        [event offsetLocationWithFloat:offsetX withFloat:offsetY];
+        handled = [child dispatchTouchEventWithADMotionEvent:event];
+        [event offsetLocationWithFloat:-offsetX withFloat:-offsetY];
+      }
+      return handled;
+    }
+    transformedEvent = ADMotionEvent_obtainWithADMotionEvent_(event);
+  }
+  else {
+    transformedEvent = [event splitWithInt:newPointerIdBits];
+  }
+  if (child == nil) {
+    handled = ADViewGroup_super$_dispatchTouchEventWithADMotionEvent_(self, @selector(dispatchTouchEventWithADMotionEvent:), transformedEvent);
+  }
+  else {
+    float offsetX = self->mScrollX_ - child->mLeft_;
+    float offsetY = self->mScrollY_ - child->mTop_;
+    [((ADMotionEvent *) nil_chk(transformedEvent)) offsetLocationWithFloat:offsetX withFloat:offsetY];
+    if (![child hasIdentityMatrix]) {
+    }
+    handled = [child dispatchTouchEventWithADMotionEvent:transformedEvent];
+  }
+  [((ADMotionEvent *) nil_chk(transformedEvent)) recycle];
+  return handled;
+}
+
+ADView *ADViewGroup_getAndVerifyPreorderedViewWithJavaUtilArrayList_withADViewArray_withInt_(JavaUtilArrayList *preorderedList, IOSObjectArray *children, int32_t childIndex) {
+  ADViewGroup_initialize();
+  ADView *child;
+  if (preorderedList != nil) {
+    child = [preorderedList getWithInt:childIndex];
+    if (child == nil) {
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"Invalid preorderedList contained null child at index ", childIndex));
+    }
+  }
+  else {
+    child = IOSObjectArray_Get(nil_chk(children), childIndex);
+  }
+  return child;
+}
+
+bool ADViewGroup_hasChildWithZ(ADViewGroup *self) {
+  for (int32_t i = 0; i < self->mChildrenCount_; i++) {
+    if ([((ADView *) nil_chk(IOSObjectArray_Get(nil_chk(self->mChildren_), i))) getZ] != 0) return true;
+  }
+  return false;
 }
 
 void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(ADViewGroup *self, ADView *child, int32_t index, ADViewGroup_LayoutParams *params, bool preventRequestLayout) {
@@ -1470,7 +2194,7 @@ void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_wit
     self->mGroupFlags_ |= ADViewGroup_FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE;
   }
   if ([child hasTransientState]) {
-    ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(self, child, true);
+    [self childHasTransientStateChangedWithADView:child withBoolean:true];
   }
   if ([child getVisibility] != ADView_GONE) {
     [self notifySubtreeAccessibilityStateChangedIfNeeded];
@@ -1608,7 +2332,7 @@ void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, int32_
     [view dispatchDetachedFromWindow];
   }
   if ([view hasTransientState]) {
-    ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(self, view, false);
+    [self childHasTransientStateChangedWithADView:view withBoolean:false];
   }
   [self needGlobalAttributesUpdateWithBoolean:false];
   ADViewGroup_removeFromArrayWithInt_(self, index);
@@ -1721,9 +2445,6 @@ void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *v) {
 }
 
 void ADViewGroup_requestChildFocusWithADView_withId_(ADViewGroup *self, ADView *child, id findFocus) {
-}
-
-void ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(ADViewGroup *self, ADView *child, bool b) {
 }
 
 void ADViewGroup_notifyGlobalFocusClearedWithId_(ADViewGroup *self, id viewGroup) {
@@ -2249,6 +2970,118 @@ void ADViewGroup_MarginLayoutParams_doResolveMargins(ADViewGroup_MarginLayoutPar
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_MarginLayoutParams)
+
+J2OBJC_INITIALIZED_DEFN(ADViewGroup_TouchTarget)
+
+@implementation ADViewGroup_TouchTarget
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ADViewGroup_TouchTarget_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
++ (ADViewGroup_TouchTarget *)obtainWithADView:(ADView *)child
+                                      withInt:(int32_t)pointerIdBits {
+  return ADViewGroup_TouchTarget_obtainWithADView_withInt_(child, pointerIdBits);
+}
+
+- (void)recycle {
+  if (child_ == nil) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"already recycled once");
+  }
+  @synchronized(ADViewGroup_TouchTarget_sRecycleLock) {
+    if (ADViewGroup_TouchTarget_sRecycledCount < ADViewGroup_TouchTarget_MAX_RECYCLED) {
+      JreStrongAssign(&next_, ADViewGroup_TouchTarget_sRecycleBin);
+      JreStrongAssign(&ADViewGroup_TouchTarget_sRecycleBin, self);
+      ADViewGroup_TouchTarget_sRecycledCount += 1;
+    }
+    else {
+      JreStrongAssign(&next_, nil);
+    }
+    JreStrongAssign(&child_, nil);
+  }
+}
+
+- (void)dealloc {
+  RELEASE_(child_);
+  RELEASE_(next_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADViewGroup_TouchTarget;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(obtainWithADView:withInt:);
+  methods[2].selector = @selector(recycle);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "MAX_RECYCLED", "I", .constantValue.asInt = ADViewGroup_TouchTarget_MAX_RECYCLED, 0x1a, -1, -1, -1, -1 },
+    { "sRecycleLock", "LNSObject;", .constantValue.asLong = 0, 0x1a, -1, 2, -1, -1 },
+    { "sRecycleBin", "LADViewGroup_TouchTarget;", .constantValue.asLong = 0, 0xa, -1, 3, -1, -1 },
+    { "sRecycledCount", "I", .constantValue.asLong = 0, 0xa, -1, 4, -1, -1 },
+    { "ALL_POINTER_IDS", "I", .constantValue.asInt = ADViewGroup_TouchTarget_ALL_POINTER_IDS, 0x19, -1, -1, -1, -1 },
+    { "child_", "LADView;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "pointerIdBits_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "next_", "LADViewGroup_TouchTarget;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "obtain", "LADView;I", &ADViewGroup_TouchTarget_sRecycleLock, &ADViewGroup_TouchTarget_sRecycleBin, &ADViewGroup_TouchTarget_sRecycledCount, "LADViewGroup;" };
+  static const J2ObjcClassInfo _ADViewGroup_TouchTarget = { "TouchTarget", "r.android.view", ptrTable, methods, fields, 7, 0x1a, 3, 8, 5, -1, -1, -1, -1 };
+  return &_ADViewGroup_TouchTarget;
+}
+
++ (void)initialize {
+  if (self == [ADViewGroup_TouchTarget class]) {
+    JreStrongAssignAndConsume(&ADViewGroup_TouchTarget_sRecycleLock, [IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]);
+    J2OBJC_SET_INITIALIZED(ADViewGroup_TouchTarget)
+  }
+}
+
+@end
+
+void ADViewGroup_TouchTarget_init(ADViewGroup_TouchTarget *self) {
+  NSObject_init(self);
+}
+
+ADViewGroup_TouchTarget *new_ADViewGroup_TouchTarget_init() {
+  J2OBJC_NEW_IMPL(ADViewGroup_TouchTarget, init)
+}
+
+ADViewGroup_TouchTarget *create_ADViewGroup_TouchTarget_init() {
+  J2OBJC_CREATE_IMPL(ADViewGroup_TouchTarget, init)
+}
+
+ADViewGroup_TouchTarget *ADViewGroup_TouchTarget_obtainWithADView_withInt_(ADView *child, int32_t pointerIdBits) {
+  ADViewGroup_TouchTarget_initialize();
+  if (child == nil) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"child must be non-null");
+  }
+  ADViewGroup_TouchTarget *target;
+  @synchronized(ADViewGroup_TouchTarget_sRecycleLock) {
+    if (ADViewGroup_TouchTarget_sRecycleBin == nil) {
+      target = create_ADViewGroup_TouchTarget_init();
+    }
+    else {
+      target = JreRetainedLocalValue(ADViewGroup_TouchTarget_sRecycleBin);
+      JreStrongAssign(&ADViewGroup_TouchTarget_sRecycleBin, target->next_);
+      ADViewGroup_TouchTarget_sRecycledCount--;
+      JreStrongAssign(&target->next_, nil);
+    }
+  }
+  JreStrongAssign(&target->child_, child);
+  target->pointerIdBits_ = pointerIdBits;
+  return target;
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_TouchTarget)
 
 @implementation ADViewGroup_DragEvent
 

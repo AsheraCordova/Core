@@ -19,6 +19,7 @@
 
 @class ADConfiguration;
 @class ADDisplayMetrics;
+@class JavaLangFloat;
 @class JavaLangInteger;
 @class NSString;
 @protocol JavaLangCharSequence;
@@ -30,6 +31,10 @@
 - (instancetype)init;
 
 - (ADConfiguration *)getConfiguration;
+
+- (float)getDimensionWithNSString:(NSString *)string;
+
+- (int32_t)getDimensionPixelSizeWithNSString:(NSString *)string;
 
 - (ADDisplayMetrics *)getDisplayMetrics;
 

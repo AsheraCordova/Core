@@ -29,9 +29,12 @@
 #include "ViewParent.h"
 
 @class ADLayoutTransition;
+@class ADMotionEvent;
+@class ADPointF;
 @class ADRect;
 @class ADViewGroup_LayoutParams;
 @class ADView_AttachInfo;
+@class IOSFloatArray;
 @class IOSIntArray;
 @class JavaLangBoolean;
 @class JavaLangFloat;
@@ -74,7 +77,14 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (void)bringToFront;
 
+- (JavaUtilArrayList *)buildTouchDispatchChildList;
+
 - (void)childDrawableStateChangedWithADView:(ADView *)child;
+
+- (void)childHasTransientStateChangedWithADView:(ADView *)child
+                                    withBoolean:(bool)childHasTransientState;
+
+- (bool)dispatchTouchEventWithADMotionEvent:(ADMotionEvent *)ev;
 
 - (void)endViewTransitionWithADView:(ADView *)view;
 
@@ -105,6 +115,8 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 - (void)invalidateChildWithADView:(ADView *)child
                        withADRect:(ADRect *)r;
 
+- (bool)isChildrenDrawingOrderEnabled;
+
 - (int32_t)measureHeightOfChildrenWithInt:(int32_t)widthMeasureSpec
                                   withInt:(int32_t)startPosition
                                   withInt:(int32_t)endPosition
@@ -112,6 +124,8 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
                                   withInt:(int32_t)disallowPartialChildPosition;
 
 - (void)offsetChildrenTopAndBottomWithInt:(int32_t)offset;
+
+- (bool)onInterceptTouchEventWithADMotionEvent:(ADMotionEvent *)ev;
 
 - (bool)onNestedFlingWithADView:(ADView *)target
                       withFloat:(float)velocityX
@@ -157,6 +171,8 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (void)removeViewAtWithInt:(int32_t)index;
 
+- (void)requestDisallowInterceptTouchEventWithBoolean:(bool)disallowIntercept;
+
 - (void)requestTransitionStartWithADLayoutTransition:(ADLayoutTransition *)transition;
 
 - (void)setAddStatesFromChildrenWithBoolean:(bool)addsStates;
@@ -172,6 +188,9 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 - (void)setRedrawWithBoolean:(bool)flag;
 
 - (void)startViewTransitionWithADView:(ADView *)view;
+
+- (void)transformPointToViewLocalWithFloatArray:(IOSFloatArray *)point
+                                     withADView:(ADView *)child;
 
 #pragma mark Protected
 
@@ -211,6 +230,17 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (ADViewGroup_LayoutParams *)generateLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
+- (int32_t)getChildDrawingOrderWithInt:(int32_t)childCount
+                               withInt:(int32_t)i;
+
+- (bool)isOnScrollbarThumbWithInt:(int32_t)x
+                          withInt:(int32_t)y;
+
+- (bool)isTransformedTouchPointInViewWithFloat:(float)x
+                                     withFloat:(float)y
+                                    withADView:(ADView *)child
+                                  withADPointF:(ADPointF *)outLocalPoint;
+
 - (void)measureChildWithADView:(ADView *)child
                        withInt:(int32_t)parentWidthMeasureSpec
                        withInt:(int32_t)parentHeightMeasureSpec;
@@ -233,7 +263,12 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 - (void)onSetLayoutParamsWithADView:(ADView *)child
        withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)layoutParams;
 
+- (void)removeDetachedViewWithADView:(ADView *)child
+                         withBoolean:(bool)animate;
+
 #pragma mark Package-Private
+
+- (JavaUtilArrayList *)buildOrderedChildList;
 
 - (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)info
                                               withInt:(int32_t)visibility;
@@ -250,7 +285,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ADViewGroup)
+J2OBJC_STATIC_INIT(ADViewGroup)
 
 J2OBJC_FIELD_SETTER(ADViewGroup, mDisappearingChildren_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mOnHierarchyChangeListener_, id<ADViewGroup_OnHierarchyChangeListener>)

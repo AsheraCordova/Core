@@ -765,6 +765,11 @@ return layoutParams.alignWithParent;			}
 			runBufferedRunnables();
 		}
 	
+		@Override
+		public void requestLayout() {
+			super.requestLayout();
+			postRequestLayout(this);
+		}
 	}
 	@Override
 	public Class getViewClass() {
@@ -967,6 +972,24 @@ return relativeLayout.getGravity();			}
 	
 
 
+    
+    private boolean layoutScheduled;
+    
+
+	private void postRequestLayout(View view) {
+		if (layoutScheduled) {
+	        return;
+	    }
+
+	    layoutScheduled = true;
+
+	    PluginInvoker.enqueueTaskForEventLoop(() -> {
+	    	if (view.isLayoutRequested()) {
+	    		view.remeasure();
+	    	}
+	        layoutScheduled = false;
+	    }, System.currentTimeMillis());
+	}
 	@Override
 	public void measure() {
 		int width = PluginInvoker.getScreenWidth();

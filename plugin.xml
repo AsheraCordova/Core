@@ -844,6 +844,8 @@
      <source-file src="core/ios/library/AndroidCore/src/FrameLayout.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/GeolocationPermissions.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/GeolocationPermissions.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/GestureDetector.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/GestureDetector.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/GetChars.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/GetChars.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Gravity.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1124,6 +1126,8 @@
      <source-file src="core/ios/library/AndroidCore/src/ValueAnimator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ValueCallback.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ValueCallback.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/VelocityTracker.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/VelocityTracker.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/VideoView.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/VideoView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/View.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1138,6 +1142,8 @@
      <source-file src="core/ios/library/AndroidCore/src/ViewOverlay.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewParent.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ViewParent.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ViewPropertyAnimator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ViewPropertyAnimator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewTreeObserver.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ViewTreeObserver.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/WebChromeClient.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1589,6 +1595,8 @@
      <source-file src="layout/ios/ios/src/WebViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <!-- ios end -->
     <!-- start ios_ext -->
+     <header-file src="layout/ios/ios_ext/src/ASTouchGestureRecognizer.h" target-dir="LayoutPlugin/ios_ext/src"/>
+     <source-file src="layout/ios/ios_ext/src/ASTouchGestureRecognizer.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios_ext/src/ASUIActivityIndicatorView.h" target-dir="LayoutPlugin/ios_ext/src"/>
      <source-file src="layout/ios/ios_ext/src/ASUIActivityIndicatorView.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios_ext/src/ASUIButton.h" target-dir="LayoutPlugin/ios_ext/src"/>

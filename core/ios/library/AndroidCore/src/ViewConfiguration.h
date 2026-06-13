@@ -20,6 +20,7 @@
 @class ADContext;
 @class JavaLangFloat;
 @class JavaLangInteger;
+@class JavaLangLong;
 
 @interface ADViewConfiguration : NSObject
 
@@ -29,17 +30,47 @@
 
 + (ADViewConfiguration *)getWithADContext:(ADContext *)context;
 
-- (float)getScaledMaximumFlingVelocity;
++ (float)getAmbiguousGestureMultiplier;
 
-- (float)getScaledMinimumFlingVelocity;
++ (int32_t)getDoubleTapMinTime;
+
++ (int32_t)getDoubleTapSlop;
+
++ (int32_t)getDoubleTapTimeout;
+
++ (int32_t)getLongPressTimeout;
+
++ (int32_t)getMaximumFlingVelocity;
+
++ (int32_t)getMinimumFlingVelocity;
+
++ (int64_t)getPressedStateDuration;
+
+- (float)getScaledAmbiguousGestureMultiplier;
+
+- (int32_t)getScaledDoubleTapSlop;
+
+- (int32_t)getScaledDoubleTapTouchSlop;
+
+- (int32_t)getScaledMaximumFlingVelocity;
+
+- (int32_t)getScaledMinimumFlingVelocity;
 
 - (int32_t)getScaledTouchSlop;
 
 + (float)getScrollFriction;
 
++ (int32_t)getTapTimeout;
+
++ (int32_t)getTouchSlop;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADViewConfiguration)
+
+inline int32_t ADViewConfiguration_get_DEFAULT_LONG_PRESS_TIMEOUT(void);
+#define ADViewConfiguration_DEFAULT_LONG_PRESS_TIMEOUT 400
+J2OBJC_STATIC_FIELD_CONSTANT(ADViewConfiguration, DEFAULT_LONG_PRESS_TIMEOUT, int32_t)
 
 FOUNDATION_EXPORT void ADViewConfiguration_init(ADViewConfiguration *self);
 
@@ -50,6 +81,26 @@ FOUNDATION_EXPORT ADViewConfiguration *create_ADViewConfiguration_init(void);
 FOUNDATION_EXPORT float ADViewConfiguration_getScrollFriction(void);
 
 FOUNDATION_EXPORT ADViewConfiguration *ADViewConfiguration_getWithADContext_(ADContext *context);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getTapTimeout(void);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getLongPressTimeout(void);
+
+FOUNDATION_EXPORT int64_t ADViewConfiguration_getPressedStateDuration(void);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getDoubleTapTimeout(void);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getDoubleTapMinTime(void);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getTouchSlop(void);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getDoubleTapSlop(void);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getMinimumFlingVelocity(void);
+
+FOUNDATION_EXPORT int32_t ADViewConfiguration_getMaximumFlingVelocity(void);
+
+FOUNDATION_EXPORT float ADViewConfiguration_getAmbiguousGestureMultiplier(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADViewConfiguration)
 

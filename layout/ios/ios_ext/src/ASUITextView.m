@@ -73,7 +73,8 @@
     if ([view hasOnTouchEvent]) {
     	UITouch *touch = [touches anyObject];
     	CGPoint point = [touch locationInView:self];
-        [view onTouchEventDownWithInt:point.x withInt:point.y];
+    	CGPoint rawPoint = [touch locationInView:nil];
+        [view onTouchEventDownWithInt:point.x withInt:point.y withInt:rawPoint.x withInt:rawPoint.y];
     }
 
 }
@@ -84,7 +85,8 @@
     if ([view hasOnTouchEvent]) {
     	UITouch *touch = [touches anyObject];
     	CGPoint point = [touch locationInView:self];
-        [view onTouchEventMoveWithInt:point.x withInt:point.y];
+    	CGPoint rawPoint = [touch locationInView:nil];
+        [view onTouchEventMoveWithInt:point.x withInt:point.y withInt:rawPoint.x withInt:rawPoint.y];
     }
 }
 
@@ -99,7 +101,8 @@
     if ([view hasOnTouchEvent]) {
     	UITouch *touch = [touches anyObject];
     	CGPoint point = [touch locationInView:self];
-        [view onTouchEventUpWithInt:point.x withInt:point.y];
+    	CGPoint rawPoint = [touch locationInView:nil];
+        [view onTouchEventUpWithInt:point.x withInt:point.y withInt:rawPoint.x withInt:rawPoint.y];
     }
 }
 
@@ -114,7 +117,8 @@
      if ([view hasOnTouchEvent]) {
     	UITouch *touch = [touches anyObject];
     	CGPoint point = [touch locationInView:self];
-        [view onTouchEventUpWithInt:point.x withInt:point.y];
+    	CGPoint rawPoint = [touch locationInView:nil];
+        [view onTouchEventUpWithInt:point.x withInt:point.y withInt:rawPoint.x withInt:rawPoint.y];
     }
 }
 

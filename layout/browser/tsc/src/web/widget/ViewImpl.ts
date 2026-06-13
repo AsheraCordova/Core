@@ -182,6 +182,8 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -270,6 +272,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "bottom" }))
 	bottom!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onAndroidTouch" }))
+	onAndroidTouch!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "reappyStyleOnOrientationChange" }))
 	reappyStyleOnOrientationChange_!:CommandAttr<boolean>| undefined;
@@ -403,6 +408,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Expose({ name: "webOverflow" }))
 	webOverflow!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "webDraggable" }))
+	webDraggable!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "webGlobalAttributes" }))
 	webGlobalAttributes!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -483,6 +491,7 @@ export abstract class ViewImpl<T> {
 		this.right = undefined;
 		this.top = undefined;
 		this.bottom = undefined;
+		this.onAndroidTouch = undefined;
 		this.reappyStyleOnOrientationChange_ = undefined;
 		this.outlineAmbientShadowColor = undefined;
 		this.outlineSpotShadowColor = undefined;
@@ -527,6 +536,7 @@ export abstract class ViewImpl<T> {
 		this.maxHeight = undefined;
 		this.webTabIndex = undefined;
 		this.webOverflow = undefined;
+		this.webDraggable = undefined;
 		this.webGlobalAttributes = undefined;
 		this.translationX = undefined;
 		this.translationY = undefined;
@@ -1049,6 +1059,20 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		this.bottom.setValue(value);
 		this.orderSet++;
 		this.bottom.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAndroidTouch(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAndroidTouch == null || this.onAndroidTouch == undefined) {
+			this.onAndroidTouch = new CommandAttr<string>();
+		}
+		
+		this.onAndroidTouch.setSetter(true);
+		this.onAndroidTouch.setValue(value);
+		this.orderSet++;
+		this.onAndroidTouch.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -2023,6 +2047,20 @@ payload : any) : T {
 		this.webOverflow.setValue(value);
 		this.orderSet++;
 		this.webOverflow.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setWebDraggable(value : string) : T {
+		this.resetIfRequired();
+		if (this.webDraggable == null || this.webDraggable == undefined) {
+			this.webDraggable = new CommandAttr<string>();
+		}
+		
+		this.webDraggable.setSetter(true);
+		this.webDraggable.setValue(value);
+		this.orderSet++;
+		this.webDraggable.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

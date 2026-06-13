@@ -530,7 +530,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)remeasure {
-  id<ASHasWidgets> parent = [((id<ASIWidget>) nil_chk(rootWidget_)) getParent];
+  if (rootWidget_ == nil) {
+    return;
+  }
+  id<ASHasWidgets> parent = [rootWidget_ getParent];
   if ([ASIFragmentContainer_class_() isInstance:parent]) {
     [((id<ASIFragment>) nil_chk([((id<ASHasWidgets>) nil_chk(parent)) getRootFragment])) remeasure];
     return;

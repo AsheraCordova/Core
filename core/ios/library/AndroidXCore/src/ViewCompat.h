@@ -23,6 +23,8 @@
 @class JavaLangBoolean;
 @class JavaLangFloat;
 @class JavaLangInteger;
+@class JavaLangLong;
+@protocol JavaLangRunnable;
 
 @interface ADXViewCompat : NSObject
 
@@ -89,6 +91,13 @@
 
 + (void)offsetTopAndBottomWithADView:(ADView *)child
                              withInt:(int32_t)dy;
+
++ (void)postOnAnimationWithADView:(ADView *)view
+             withJavaLangRunnable:(id<JavaLangRunnable>)runnable;
+
++ (void)postOnAnimationDelayedWithADView:(ADView *)view
+                    withJavaLangRunnable:(id<JavaLangRunnable>)action
+                                withLong:(int64_t)delayMillis;
 
 + (int32_t)resolveSizeAndStateWithInt:(int32_t)size
                               withInt:(int32_t)measureSpec
@@ -257,6 +266,10 @@ FOUNDATION_EXPORT void ADXViewCompat_setBackgroundTintListWithADView_withADColor
 FOUNDATION_EXPORT bool ADXViewCompat_canScrollHorizontallyWithADView_withInt_(ADView *view, int32_t direction);
 
 FOUNDATION_EXPORT bool ADXViewCompat_canScrollVerticallyWithADView_withInt_(ADView *view, int32_t direction);
+
+FOUNDATION_EXPORT void ADXViewCompat_postOnAnimationWithADView_withJavaLangRunnable_(ADView *view, id<JavaLangRunnable> runnable);
+
+FOUNDATION_EXPORT void ADXViewCompat_postOnAnimationDelayedWithADView_withJavaLangRunnable_withLong_(ADView *view, id<JavaLangRunnable> action, int64_t delayMillis);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXViewCompat)
 

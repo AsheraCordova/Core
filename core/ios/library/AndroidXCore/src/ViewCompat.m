@@ -16,6 +16,8 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
+#include "java/lang/Runnable.h"
 
 
 
@@ -195,6 +197,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADXViewCompat_canScrollVerticallyWithADView_withInt_(view, direction);
 }
 
++ (void)postOnAnimationWithADView:(ADView *)view
+             withJavaLangRunnable:(id<JavaLangRunnable>)runnable {
+  ADXViewCompat_postOnAnimationWithADView_withJavaLangRunnable_(view, runnable);
+}
+
++ (void)postOnAnimationDelayedWithADView:(ADView *)view
+                    withJavaLangRunnable:(id<JavaLangRunnable>)action
+                                withLong:(int64_t)delayMillis {
+  ADXViewCompat_postOnAnimationDelayedWithADView_withJavaLangRunnable_withLong_(view, action, delayMillis);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -234,6 +247,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x9, 41, 42, -1, -1, -1, -1 },
     { NULL, "Z", 0x9, 43, 17, -1, -1, -1, -1 },
     { NULL, "Z", 0x9, 44, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 45, 46, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 47, 48, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -275,6 +290,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[34].selector = @selector(setBackgroundTintListWithADView:withADColorStateList:);
   methods[35].selector = @selector(canScrollHorizontallyWithADView:withInt:);
   methods[36].selector = @selector(canScrollVerticallyWithADView:withInt:);
+  methods[37].selector = @selector(postOnAnimationWithADView:withJavaLangRunnable:);
+  methods[38].selector = @selector(postOnAnimationDelayedWithADView:withJavaLangRunnable:withLong:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "MEASURED_STATE_MASK", "I", .constantValue.asInt = ADXViewCompat_MEASURED_STATE_MASK, 0x19, -1, -1, -1, -1 },
@@ -292,8 +309,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "TYPE_TOUCH", "I", .constantValue.asInt = ADXViewCompat_TYPE_TOUCH, 0x19, -1, -1, -1, -1 },
     { "TYPE_NON_TOUCH", "I", .constantValue.asInt = ADXViewCompat_TYPE_NON_TOUCH, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "getMeasuredWidthAndState", "LADView;", "getMeasuredHeightAndState", "getLayoutDirection", "resolveSizeAndState", "III", "combineMeasuredStates", "II", "getMeasuredState", "getPaddingStart", "LADViewGroup;", "getPaddingEnd", "setLayoutDirection", "LADViewGroup;I", "setPaddingRelative", "LADView;IIII", "setX", "LADView;I", "setY", "getMinimumHeight", "jumpDrawablesToCurrentState", "getFitsSystemWindows", "setElevation", "LADView;F", "getElevation", "dispatchApplyWindowInsets", "LADView;LNSObject;", "getRootWindowInsets", "LNSObject;", "getMinimumWidth", "getImportantForAccessibility", "setImportantForAccessibility", "dispatchFinishTemporaryDetach", "dispatchStartTemporaryDetach", "hasTransientState", "isLayoutDirectionResolved", "offsetLeftAndRight", "offsetTopAndBottom", "isLaidOut", "isPaddingRelative", "stopNestedScroll", "setBackgroundTintList", "LADView;LADColorStateList;", "canScrollHorizontally", "canScrollVertically" };
-  static const J2ObjcClassInfo _ADXViewCompat = { "ViewCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x1, 37, 14, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "getMeasuredWidthAndState", "LADView;", "getMeasuredHeightAndState", "getLayoutDirection", "resolveSizeAndState", "III", "combineMeasuredStates", "II", "getMeasuredState", "getPaddingStart", "LADViewGroup;", "getPaddingEnd", "setLayoutDirection", "LADViewGroup;I", "setPaddingRelative", "LADView;IIII", "setX", "LADView;I", "setY", "getMinimumHeight", "jumpDrawablesToCurrentState", "getFitsSystemWindows", "setElevation", "LADView;F", "getElevation", "dispatchApplyWindowInsets", "LADView;LNSObject;", "getRootWindowInsets", "LNSObject;", "getMinimumWidth", "getImportantForAccessibility", "setImportantForAccessibility", "dispatchFinishTemporaryDetach", "dispatchStartTemporaryDetach", "hasTransientState", "isLayoutDirectionResolved", "offsetLeftAndRight", "offsetTopAndBottom", "isLaidOut", "isPaddingRelative", "stopNestedScroll", "setBackgroundTintList", "LADView;LADColorStateList;", "canScrollHorizontally", "canScrollVertically", "postOnAnimation", "LADView;LJavaLangRunnable;", "postOnAnimationDelayed", "LADView;LJavaLangRunnable;J" };
+  static const J2ObjcClassInfo _ADXViewCompat = { "ViewCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x1, 39, 14, -1, -1, -1, -1, -1 };
   return &_ADXViewCompat;
 }
 
@@ -484,6 +501,16 @@ bool ADXViewCompat_canScrollHorizontallyWithADView_withInt_(ADView *view, int32_
 bool ADXViewCompat_canScrollVerticallyWithADView_withInt_(ADView *view, int32_t direction) {
   ADXViewCompat_initialize();
   return [((ADView *) nil_chk(view)) canScrollVerticallyWithInt:direction];
+}
+
+void ADXViewCompat_postOnAnimationWithADView_withJavaLangRunnable_(ADView *view, id<JavaLangRunnable> runnable) {
+  ADXViewCompat_initialize();
+  [((ADView *) nil_chk(view)) postOnAnimationWithJavaLangRunnable:runnable];
+}
+
+void ADXViewCompat_postOnAnimationDelayedWithADView_withJavaLangRunnable_withLong_(ADView *view, id<JavaLangRunnable> action, int64_t delayMillis) {
+  ADXViewCompat_initialize();
+  [((ADView *) nil_chk(view)) postOnAnimationDelayedWithJavaLangRunnable:action withLong:delayMillis];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXViewCompat)

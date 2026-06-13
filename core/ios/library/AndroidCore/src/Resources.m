@@ -78,6 +78,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
+- (float)getDimensionWithNSString:(NSString *)string {
+  return 0;
+}
+
+- (int32_t)getDimensionPixelSizeWithNSString:(NSString *)string {
+  return 0;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -88,6 +96,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSString;", 0x1, 7, 3, 4, -1, -1, -1 },
     { NULL, "LADDisplayMetrics;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangCharSequence;", 0x1, 5, 3, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 10, 9, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -100,12 +110,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[5].selector = @selector(getResourceEntryNameWithInt:);
   methods[6].selector = @selector(getDisplayMetrics);
   methods[7].selector = @selector(getStringWithInt:);
+  methods[8].selector = @selector(getDimensionWithNSString:);
+  methods[9].selector = @selector(getDimensionPixelSizeWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "displayMetric", "LADDisplayMetrics;", .constantValue.asLong = 0, 0x8, -1, 8, -1, -1 },
+    { "displayMetric", "LADDisplayMetrics;", .constantValue.asLong = 0, 0x8, -1, 11, -1, -1 },
   };
-  static const void *ptrTable[] = { "getIdentifier", "LNSString;LNSString;LNSString;", "getResourceName", "I", "LADResources_NotFoundException;", "getString", "ILNSString;", "getResourceEntryName", &ADResources_displayMetric, "LADResources_Theme;LADResources_NotFoundException;" };
-  static const J2ObjcClassInfo _ADResources = { "Resources", "r.android.content.res", ptrTable, methods, fields, 7, 0x1, 8, 1, -1, 9, -1, -1, -1 };
+  static const void *ptrTable[] = { "getIdentifier", "LNSString;LNSString;LNSString;", "getResourceName", "I", "LADResources_NotFoundException;", "getString", "ILNSString;", "getResourceEntryName", "getDimension", "LNSString;", "getDimensionPixelSize", &ADResources_displayMetric, "LADResources_Theme;LADResources_NotFoundException;" };
+  static const J2ObjcClassInfo _ADResources = { "Resources", "r.android.content.res", ptrTable, methods, fields, 7, 0x1, 10, 1, -1, 12, -1, -1, -1 };
   return &_ADResources;
 }
 
