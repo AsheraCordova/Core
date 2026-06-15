@@ -92,6 +92,8 @@
 
 - (id<ASIWidget>)getListItem;
 
+- (id)getModelAtIndexWithInt:(int32_t)index;
+
 - (NSString *)getModelDescPath;
 
 - (NSString *)getModelFor;
@@ -146,6 +148,9 @@
 - (void)setModelDescPathWithNSString:(NSString *)modelDescPath;
 
 - (void)setModelForWithNSString:(NSString *)modelFor;
+
+- (void)swapModelByIndexWithInt:(int32_t)fromIndex
+                        withInt:(int32_t)toIndex;
 
 #pragma mark Protected
 

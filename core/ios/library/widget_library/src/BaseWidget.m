@@ -1255,10 +1255,12 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
       NSString *idPath = JreRetainedLocalValue([self getModelIdPath]);
       if (idPath != nil) {
         id myobj = JreRetainedLocalValue([self getModelByPathWithNSString:idPath withId:obj]);
-        if (methodName != nil) {
-          myobj = ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(methodName, myobj, self);
+        if (myobj != nil) {
+          if (methodName != nil) {
+            myobj = ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(methodName, myobj, self);
+          }
+          ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(eventMap, idPath, myobj);
         }
-        ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(eventMap, idPath, myobj);
       }
       if (methodName != nil) {
         obj = ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(methodName, obj, self);
@@ -1296,7 +1298,11 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     }
     else {
       if (obj != nil) {
-        obj = [((id<JavaUtilMap>) nil_chk(ASPluginInvoker_getMapWithId_(obj))) getWithId:varPath];
+        id<JavaUtilMap> map = ASPluginInvoker_getMapWithId_(obj);
+        if (map == nil) {
+          return nil;
+        }
+        obj = [map getWithId:varPath];
       }
     }
   }

@@ -585,6 +585,39 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   }
 }
 
+- (void)swapModelByIndexWithInt:(int32_t)fromIndex
+                        withInt:(int32_t)toIndex {
+  if (fromIndex == toIndex) {
+    return;
+  }
+  id fromModel = JreRetainedLocalValue([self getModelAtIndexWithInt:fromIndex]);
+  id toModel = JreRetainedLocalValue([self getModelAtIndexWithInt:toIndex]);
+  if (fromIndex > toIndex) {
+    [self removeModelAtIndexWithInt:fromIndex];
+    [self removeModelAtIndexWithInt:toIndex];
+    [self addModelWithId:fromModel withInt:toIndex];
+    [self addModelWithId:toModel withInt:fromIndex];
+  }
+  else {
+    [self removeModelAtIndexWithInt:toIndex];
+    [self removeModelAtIndexWithInt:fromIndex];
+    [self addModelWithId:toModel withInt:fromIndex];
+    [self addModelWithId:fromModel withInt:toIndex];
+  }
+}
+
+- (id)getModelAtIndexWithInt:(int32_t)index {
+  if (index != -1) {
+    NSString *modelFor = JreRetainedLocalValue([self getModelFor]);
+    if (modelFor != nil) {
+      ASModelExpressionParser_ModelLoopHolder *modelLoopHolder = ASModelExpressionParser_parseModelLoopExpressionWithNSString_(modelFor);
+      id<JavaUtilList> listObj = ASBaseHasWidgets_getListObjectInScopeWithASModelExpressionParser_ModelLoopHolder_(self, modelLoopHolder);
+      return [((id<JavaUtilList>) nil_chk(listObj)) getWithInt:index];
+    }
+  }
+  return nil;
+}
+
 - (void)dealloc {
   RELEASE_(widgets_);
   RELEASE_(afterInitWidgets_);
@@ -654,6 +687,8 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
     { NULL, "V", 0x4, 51, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x4, 52, 53, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 54, 55, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 56, 13, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -713,19 +748,21 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   methods[52].selector = @selector(invalidateChildIfRequiredWithASIWidget:);
   methods[53].selector = @selector(addToBufferedRunnablesWithJavaLangRunnable:);
   methods[54].selector = @selector(runBufferedRunnables);
+  methods[55].selector = @selector(swapModelByIndexWithInt:withInt:);
+  methods[56].selector = @selector(getModelAtIndexWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "widgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 54, -1 },
-    { "afterInitWidgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 54, -1 },
-    { "bufferedRunnables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 55, -1 },
+    { "widgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 57, -1 },
+    { "afterInitWidgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 57, -1 },
+    { "bufferedRunnables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 58, -1 },
     { "listItem_", "LASIWidget;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "modelDescPath_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "dataList_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 56, -1 },
-    { "ids_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 57, -1 },
+    { "dataList_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 59, -1 },
+    { "ids_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 60, -1 },
     { "modelFor_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setModelDescPath", "LNSString;", "LNSString;LNSString;", "add", "LASIWidget;I", "setChildAttributes", "LASIWidget;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;", "LASIWidget;LASWidgetAttribute;LNSObject;Z", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;", "remove", "I", "removeWidget", "removeIdsAndData", "findWidgetById", "setModelFor", "addTemplate", "LNSObject;", "addAllModel", "addModel", "LASLoopParam;LNSString;", "LASLoopParam;ILNSString;", "addObject", "LASLoopParam;LNSString;ILNSString;", "()Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "addItemToParent", "ILNSString;LASLoopParam;", "onChildAdded", "updateModelRecurse", "LASIWidget;LASLoopParam;LASIWidget_CommandCallBack;", "LASIWidget;LASLoopParam;", "removeModelById", "()Ljava/util/List<Ljava/lang/String;>;", "get", "getCompositeLeaf", "filterData", "LNSObject;I", "removeModelAtIndex", "addModelByIndex", "getListObjectInScope", "LASModelExpressionParser_ModelLoopHolder;", "(Lcom/ashera/model/ModelExpressionParser$ModelLoopHolder;)Ljava/util/List<Ljava/lang/Object;>;", "createWidgetViewHolder", "LJavaUtilList;LASIWidget;", "(Ljava/util/List<Ljava/lang/String;>;Lcom/ashera/widget/IWidget;)Lcom/ashera/widget/WidgetViewHolder;", "setAttributeOnViewHolder", "LASWidgetViewHolder;I", "LASWidgetViewHolder;LASLoopParam;", "LASWidgetViewHolder;LASLoopParam;Z", "invalidateChildIfRequired", "addToBufferedRunnables", "LJavaLangRunnable;", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/List<Ljava/lang/Runnable;>;", "Ljava/util/List<Lcom/ashera/model/LoopParam;>;", "Ljava/util/List<Ljava/lang/String;>;", "LASBaseHasWidgets_LazyBaseWidget;" };
-  static const J2ObjcClassInfo _ASBaseHasWidgets = { "BaseHasWidgets", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 55, 8, -1, 58, -1, -1, -1 };
+  static const void *ptrTable[] = { "setModelDescPath", "LNSString;", "LNSString;LNSString;", "add", "LASIWidget;I", "setChildAttributes", "LASIWidget;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;", "LASIWidget;LASWidgetAttribute;LNSObject;Z", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;", "remove", "I", "removeWidget", "removeIdsAndData", "findWidgetById", "setModelFor", "addTemplate", "LNSObject;", "addAllModel", "addModel", "LASLoopParam;LNSString;", "LASLoopParam;ILNSString;", "addObject", "LASLoopParam;LNSString;ILNSString;", "()Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "addItemToParent", "ILNSString;LASLoopParam;", "onChildAdded", "updateModelRecurse", "LASIWidget;LASLoopParam;LASIWidget_CommandCallBack;", "LASIWidget;LASLoopParam;", "removeModelById", "()Ljava/util/List<Ljava/lang/String;>;", "get", "getCompositeLeaf", "filterData", "LNSObject;I", "removeModelAtIndex", "addModelByIndex", "getListObjectInScope", "LASModelExpressionParser_ModelLoopHolder;", "(Lcom/ashera/model/ModelExpressionParser$ModelLoopHolder;)Ljava/util/List<Ljava/lang/Object;>;", "createWidgetViewHolder", "LJavaUtilList;LASIWidget;", "(Ljava/util/List<Ljava/lang/String;>;Lcom/ashera/widget/IWidget;)Lcom/ashera/widget/WidgetViewHolder;", "setAttributeOnViewHolder", "LASWidgetViewHolder;I", "LASWidgetViewHolder;LASLoopParam;", "LASWidgetViewHolder;LASLoopParam;Z", "invalidateChildIfRequired", "addToBufferedRunnables", "LJavaLangRunnable;", "swapModelByIndex", "II", "getModelAtIndex", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/List<Ljava/lang/Runnable;>;", "Ljava/util/List<Lcom/ashera/model/LoopParam;>;", "Ljava/util/List<Ljava/lang/String;>;", "LASBaseHasWidgets_LazyBaseWidget;" };
+  static const J2ObjcClassInfo _ASBaseHasWidgets = { "BaseHasWidgets", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 57, 8, -1, 61, -1, -1, -1 };
   return &_ASBaseHasWidgets;
 }
 
