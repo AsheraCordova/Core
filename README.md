@@ -469,6 +469,7 @@ systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.x
 systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
 swtStyle   		| References the style attribute passed to the constructor. e.g. Control(Composite parent, **int style**)
 swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized using GC or use awt BufferedImage. Resize options is simple css expression which provides control over on how to resize an image to get the desired quality. See section **Resizing Image**
+onAndroidTouch      	| Used for enabling the onTouch lifecycle in non android platform. By default the onTouch methods are not executed. When onAndroidTouch is configured, the touch events call the  onTouch lifecycle methods.
 
 ### ViewGroup
 Name                	| Description
