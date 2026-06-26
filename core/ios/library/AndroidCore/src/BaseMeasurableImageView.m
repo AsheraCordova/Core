@@ -414,6 +414,14 @@ __attribute__((unused)) static int32_t ASBaseMeasurableImageView_resolveAdjusted
   JreStrongAssign(&self->imageDrawable_, imageDrawable);
 }
 
+- (int32_t)getDrawableWidth {
+  return mDrawableWidth_;
+}
+
+- (int32_t)getDrawableHeight {
+  return mDrawableHeight_;
+}
+
 - (void)__javaClone:(ASBaseMeasurableImageView *)original {
   [super __javaClone:original];
   [widget_ release];
@@ -456,6 +464,8 @@ __attribute__((unused)) static int32_t ASBaseMeasurableImageView_resolveAdjusted
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADDrawable;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -488,6 +498,8 @@ __attribute__((unused)) static int32_t ASBaseMeasurableImageView_resolveAdjusted
   methods[25].selector = @selector(hasDrawables);
   methods[26].selector = @selector(getImageDrawable);
   methods[27].selector = @selector(setImageDrawableWithADDrawable:);
+  methods[28].selector = @selector(getDrawableWidth);
+  methods[29].selector = @selector(getDrawableHeight);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "widget_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -514,7 +526,7 @@ __attribute__((unused)) static int32_t ASBaseMeasurableImageView_resolveAdjusted
     { "imageDrawable_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "setScaleType", "LNSString;I", "setUsePaddingForBounds", "Z", "setCropToPadding", "LASIWidget;", "onMeasure", "II", "resolveAdjustedSize", "III", "setAdjustViewBounds", "setMaxWidth", "I", "setMaxHeight", "setBaseline", "setBaselineAlignBottom", "getImageBounds", "setImageDrawable", "LADDrawable;", &ASBaseMeasurableImageView_SCALETYPE_FITXY, &ASBaseMeasurableImageView_SCALETYPE_CENTERINSIDE, &ASBaseMeasurableImageView_SCALETYPE_CENTER, &ASBaseMeasurableImageView_SCALETYPE_CENTERCROP, &ASBaseMeasurableImageView_SCALETYPE_FITEND, &ASBaseMeasurableImageView_SCALETYPE_FITSTART, &ASBaseMeasurableImageView_SCALETYPE_FITCENTER };
-  static const J2ObjcClassInfo _ASBaseMeasurableImageView = { "BaseMeasurableImageView", "com.ashera.view", ptrTable, methods, fields, 7, 0x401, 28, 22, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASBaseMeasurableImageView = { "BaseMeasurableImageView", "com.ashera.view", ptrTable, methods, fields, 7, 0x401, 30, 22, -1, -1, -1, -1, -1 };
   return &_ASBaseMeasurableImageView;
 }
 

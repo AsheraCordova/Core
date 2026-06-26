@@ -551,7 +551,7 @@ public class ViewImpl {
 		case "left": {
 
 
-		 setLeft(w, objValue);
+		 setLeft(w, nativeWidget, objValue);
 
 
 
@@ -560,7 +560,7 @@ public class ViewImpl {
 		case "right": {
 
 
-		 setRight(w, objValue);
+		 setRight(w, nativeWidget, objValue);
 
 
 
@@ -569,7 +569,7 @@ public class ViewImpl {
 		case "top": {
 
 
-		 setTop(w, objValue);
+		 setTop(w, nativeWidget, objValue);
 
 
 
@@ -578,7 +578,7 @@ public class ViewImpl {
 		case "bottom": {
 
 
-		 setBottom(w, objValue);
+		 setBottom(w, nativeWidget, objValue);
 
 
 
@@ -1465,8 +1465,7 @@ return getScaleY(w, nativeWidget);			}
 		return attributes.getValue(key);
 	}
 	
-	private static void setBottom(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setBottom(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setBottom(value);
@@ -1476,8 +1475,7 @@ return getScaleY(w, nativeWidget);			}
 		nativeMakeFrame(uiView, x, top, x + view.getMeasuredWidth(), value);
 	}
 
-	private static void setTop(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setTop(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setTop(value);
@@ -1487,8 +1485,7 @@ return getScaleY(w, nativeWidget);			}
 		
 	}
 
-	private static void setRight(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setRight(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setRight(value);
@@ -1496,8 +1493,7 @@ return getScaleY(w, nativeWidget);			}
 		nativeMakeFrame(uiView, value - view.getMeasuredWidth(), y, value, y + view.getMeasuredHeight());
 	}
 
-	private static void setLeft(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setLeft(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setLeft(value);
@@ -4894,21 +4890,28 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 				int x = rawX - boundingClientRect.getLeft();
 				int y = rawY - boundingClientRect.getTop();
 				View view = (View) widget.asWidget();
+				MotionEvent motionEvent = null;
+				
 				switch (event.getType()) {
 					case "mousedown": {
-						view.onTouchEventDown(x, y, rawX, rawY);
+						motionEvent = view.onTouchEventDown(x, y, rawX, rawY);
 						break;
 					}
 					case "mouseup": {
-						view.onTouchEventUp(x, y, rawX, rawY);
+						motionEvent = view.onTouchEventUp(x, y, rawX, rawY);
 						break;
 					}
 					case "mousemove": {
-						view.onTouchEventMove(x, y, rawX, rawY);
+						motionEvent = view.onTouchEventMove(x, y, rawX, rawY);
 						break;
 					}
 					default:
 						break;
+				}
+				
+				if (motionEvent != null) {
+					OnTouchListener listener = new OnTouchListener(widget, (String) objValue);
+					listener.onTouch(view, motionEvent);
 				}
 			}
 			

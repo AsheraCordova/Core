@@ -1956,7 +1956,7 @@ if (objValue instanceof java.util.List) {
 		case "left": {
 
 
-		 setLeft(w, objValue);
+		 setLeft(w, nativeWidget, objValue);
 
 
 
@@ -1965,7 +1965,7 @@ if (objValue instanceof java.util.List) {
 		case "right": {
 
 
-		 setRight(w, objValue);
+		 setRight(w, nativeWidget, objValue);
 
 
 
@@ -1974,7 +1974,7 @@ if (objValue instanceof java.util.List) {
 		case "top": {
 
 
-		 setTop(w, objValue);
+		 setTop(w, nativeWidget, objValue);
 
 
 
@@ -1983,7 +1983,7 @@ if (objValue instanceof java.util.List) {
 		case "bottom": {
 
 
-		 setBottom(w, objValue);
+		 setBottom(w, nativeWidget, objValue);
 
 
 
@@ -5310,22 +5310,22 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
  	}
  	
 	
-	private static void setBottom(IWidget w, Object objValue) {
+	private static void setBottom(IWidget w, Object nativeWidget, Object objValue) {
 		View view = (View) w.asWidget();
 		view.setLeft((int) objValue);
 	}
 
-	private static void setTop(IWidget w, Object objValue) {
+	private static void setTop(IWidget w, Object nativeWidget, Object objValue) {
 		View view = (View) w.asWidget();
 		view.setTop((int) objValue);
 	}
 
-	private static void setRight(IWidget w, Object objValue) {
+	private static void setRight(IWidget w, Object nativeWidget, Object objValue) {
 		View view = (View) w.asWidget();
 		view.setRight((int) objValue);
 	}
 
-	private static void setLeft(IWidget w, Object objValue) {
+	private static void setLeft(IWidget w, Object nativeWidget, Object objValue) {
 		View view = (View) w.asWidget();
 		view.setLeft((int) objValue);
 	}

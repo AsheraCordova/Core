@@ -950,7 +950,7 @@ if (checkIosVersion("13.0")) {
 		case "left": {
 
 
-		 setLeft(w, objValue);
+		 setLeft(w, nativeWidget, objValue);
 
 
 
@@ -959,7 +959,7 @@ if (checkIosVersion("13.0")) {
 		case "right": {
 
 
-		 setRight(w, objValue);
+		 setRight(w, nativeWidget, objValue);
 
 
 
@@ -968,7 +968,7 @@ if (checkIosVersion("13.0")) {
 		case "top": {
 
 
-		 setTop(w, objValue);
+		 setTop(w, nativeWidget, objValue);
 
 
 
@@ -977,7 +977,7 @@ if (checkIosVersion("13.0")) {
 		case "bottom": {
 
 
-		 setBottom(w, objValue);
+		 setBottom(w, nativeWidget, objValue);
 
 
 
@@ -1255,7 +1255,7 @@ if (objValue instanceof java.util.List) {
 		case "translationX": {
 
 
-		 setTranslationX(w, objValue);
+		 setTranslationX(w, nativeWidget, objValue);
 
 
 
@@ -1264,7 +1264,7 @@ if (objValue instanceof java.util.List) {
 		case "translationY": {
 
 
-		 setTranslationY(w, objValue);
+		 setTranslationY(w, nativeWidget, objValue);
 
 
 
@@ -1273,7 +1273,7 @@ if (objValue instanceof java.util.List) {
 		case "translationZ": {
 
 
-		 setTranslationZ(w, objValue);
+		 setTranslationZ(w, nativeWidget, objValue);
 
 
 
@@ -1282,7 +1282,7 @@ if (objValue instanceof java.util.List) {
 		case "rotation": {
 
 
-		 setRotation(w, objValue);
+		 setRotation(w, nativeWidget, objValue);
 
 
 
@@ -1291,7 +1291,7 @@ if (objValue instanceof java.util.List) {
 		case "rotationX": {
 
 
-		 setRotationX(w, objValue);
+		 setRotationX(w, nativeWidget, objValue);
 
 
 
@@ -1300,7 +1300,7 @@ if (objValue instanceof java.util.List) {
 		case "rotationY": {
 
 
-		 setRotationY(w, objValue);
+		 setRotationY(w, nativeWidget, objValue);
 
 
 
@@ -1309,7 +1309,7 @@ if (objValue instanceof java.util.List) {
 		case "scaleX": {
 
 
-		 setScaleX(w, objValue);
+		 setScaleX(w, nativeWidget, objValue);
 
 
 
@@ -1318,7 +1318,7 @@ if (objValue instanceof java.util.List) {
 		case "scaleY": {
 
 
-		 setScaleY(w, objValue);
+		 setScaleY(w, nativeWidget, objValue);
 
 
 
@@ -1327,7 +1327,7 @@ if (objValue instanceof java.util.List) {
 		case "transformPivotX": {
 
 
-		 setTransformPivotX(w, objValue);
+		 setTransformPivotX(w, nativeWidget, objValue);
 
 
 
@@ -1336,7 +1336,7 @@ if (objValue instanceof java.util.List) {
 		case "transformPivotY": {
 
 
-		 setTransformPivotY(w, objValue);
+		 setTransformPivotY(w, nativeWidget, objValue);
 
 
 
@@ -2565,8 +2565,7 @@ return getMaxHeight(w);			}
 		return attributes.getValue(key);
 	}
 	
-	private static void setBottom(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setBottom(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setBottom(value);
@@ -2576,8 +2575,7 @@ return getMaxHeight(w);			}
 		nativeMakeFrame(uiView, x, top, x + view.getMeasuredWidth(), value);
 	}
 
-	private static void setTop(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setTop(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setTop(value);
@@ -2587,8 +2585,7 @@ return getMaxHeight(w);			}
 		
 	}
 
-	private static void setRight(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setRight(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setRight(value);
@@ -2596,8 +2593,7 @@ return getMaxHeight(w);			}
 		nativeMakeFrame(uiView, value - view.getMeasuredWidth(), y, value, y + view.getMeasuredHeight());
 	}
 
-	private static void setLeft(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setLeft(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setLeft(value);
@@ -4710,7 +4706,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 	}
 	
 	
-	private static void setTranslationX(IWidget w, Object objValue) {
+	private static void setTranslationX(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("translationX", "transform", new String[] {}, true, "translationX", objValue);
 		relayout(w);
 	}
@@ -4721,47 +4717,47 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		}
 	}
 
-	private static void setTranslationY(IWidget w, Object objValue) {
+	private static void setTranslationY(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("translationY", "transform", new String[] {}, true, "translationY", objValue);
 		relayout(w);
 	}
 
-	private static void setTranslationZ(IWidget w, Object objValue) {
+	private static void setTranslationZ(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("translationZ", "transform", new String[] {}, true, "translationZ", objValue);
 		relayout(w);
 	}
 
-	private static void setTransformPivotY(IWidget w, Object objValue) {
+	private static void setTransformPivotY(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("transformPivotY", "transform", new String[] {}, true, "transformPivotY", objValue);
 		relayout(w);
 	}
 
-	private static void setTransformPivotX(IWidget w, Object objValue) {
+	private static void setTransformPivotX(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("transformPivotX", "transform", new String[] {}, true, "transformPivotX", objValue);
 		relayout(w);
 	}
 
-	private static void setScaleY(IWidget w, Object objValue) {
+	private static void setScaleY(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("scaleY", "transform", new String[] {}, true, "scaleY", objValue);
 		relayout(w);
 	}
 
-	private static void setScaleX(IWidget w, Object objValue) {
+	private static void setScaleX(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("scaleX", "transform", new String[] {}, true, "scaleX", objValue);
 		relayout(w);
 	}
 
-	private static void setRotationY(IWidget w, Object objValue) {
+	private static void setRotationY(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("rotationY", "transform", new String[] {}, true, "rotationY", objValue);	
 		relayout(w);
 	}
 
-	private static void setRotationX(IWidget w, Object objValue) {
+	private static void setRotationX(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("rotationX", "transform", new String[] {}, true, "rotationX", objValue);	
 		relayout(w);
 	}
 
-	private static void setRotation(IWidget w, Object objValue) {
+	private static void setRotation(IWidget w, Object nativeWidget, Object objValue) {
 		w.applyAttributeCommand("rotation", "transform", new String[] {}, true, "rotation", objValue);
 		relayout(w);
 	}
@@ -5390,17 +5386,27 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		addTouchListener(widget, widget.asNativeWidget(),  widget.asNativeWidget(), widget.getLocalName().contains("RecyclerView"), new PanCallBack() {
 			@Override
 			public void handlePanStart(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY) {
-				view.onTouchEventDown(x, y, rawX, rawY);
+				MotionEvent motionEvent = view.onTouchEventDown(x, y, rawX, rawY);
+				invokeOnTouchCallBack(objValue, view, widget, motionEvent);
+			}
+
+			private void invokeOnTouchCallBack(Object objValue, View view, IWidget widget, MotionEvent motionEvent) {
+				if (motionEvent != null) {
+					OnTouchListener listener = new OnTouchListener(widget, (String) objValue);
+					listener.onTouch(view, motionEvent);
+				}
 			}
 
 			@Override
 			public void handlePanDrag(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY) {
-				view.onTouchEventMove(x, y, rawX, rawY);
+				MotionEvent motionEvent = view.onTouchEventMove(x, y, rawX, rawY);
+				invokeOnTouchCallBack(objValue, view, widget, motionEvent);
 			}
 
 			@Override
 			public void handlePanEnd(IWidget widget, Object eventWidget, int x, int y, int rawX, int rawY) {
-				view.onTouchEventUp(x, y, rawX, rawY);
+				MotionEvent motionEvent = view.onTouchEventUp(x, y, rawX, rawY);
+				invokeOnTouchCallBack(objValue, view, widget, motionEvent);
 			}
 			
 		});

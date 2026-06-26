@@ -304,8 +304,8 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCForegroundImage").withType("drawable"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCImage").withType("drawable"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCForegroundImage").withType("drawable").withSimpleWrapableViewStrategy(APPLY_TO_VIEW_WRAPPER));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCImage").withType("drawable").withSimpleWrapableViewStrategy(APPLY_TO_VIEW_WRAPPER));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAndroidTouch").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtIgnoreEventBubblers").withType("boolean"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
@@ -1120,7 +1120,7 @@ if (objValue instanceof java.util.List) {
 		case "translationX": {
 
 
-		 setTranslationX(w, objValue);
+		 setTranslationX(w, nativeWidget, objValue);
 
 
 
@@ -1129,7 +1129,7 @@ if (objValue instanceof java.util.List) {
 		case "translationY": {
 
 
-		 setTranslationY(w, objValue);
+		 setTranslationY(w, nativeWidget, objValue);
 
 
 
@@ -1138,7 +1138,7 @@ if (objValue instanceof java.util.List) {
 		case "left": {
 
 
-		 setLeft(w, objValue);
+		 setLeft(w, nativeWidget, objValue);
 
 
 
@@ -1147,7 +1147,7 @@ if (objValue instanceof java.util.List) {
 		case "right": {
 
 
-		 setRight(w, objValue);
+		 setRight(w, nativeWidget, objValue);
 
 
 
@@ -1156,7 +1156,7 @@ if (objValue instanceof java.util.List) {
 		case "top": {
 
 
-		 setTop(w, objValue);
+		 setTop(w, nativeWidget, objValue);
 
 
 
@@ -1165,7 +1165,7 @@ if (objValue instanceof java.util.List) {
 		case "bottom": {
 
 
-		 setBottom(w, objValue);
+		 setBottom(w, nativeWidget, objValue);
 
 
 
@@ -1174,7 +1174,7 @@ if (objValue instanceof java.util.List) {
 		case "swtGCForegroundImage": {
 
 
-		 drawImageUsingGC(w, objValue, true);
+		 drawImageUsingGC(w, nativeWidget, objValue, true);
 
 
 
@@ -1183,7 +1183,7 @@ if (objValue instanceof java.util.List) {
 		case "swtGCImage": {
 
 
-		 drawImageUsingGC(w, objValue, false);
+		 drawImageUsingGC(w, nativeWidget, objValue, false);
 
 
 
@@ -3202,8 +3202,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		return attributes.getValue(key);
 	}
 	
-	private static void setBottom(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setBottom(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setBottom(value);
@@ -3213,8 +3212,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		nativeMakeFrame(uiView, x, top, x + view.getMeasuredWidth(), value);
 	}
 
-	private static void setTop(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setTop(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setTop(value);
@@ -3224,8 +3222,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		
 	}
 
-	private static void setRight(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setRight(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setRight(value);
@@ -3233,8 +3230,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		nativeMakeFrame(uiView, value - view.getMeasuredWidth(), y, value, y + view.getMeasuredHeight());
 	}
 
-	private static void setLeft(IWidget w, Object objValue) {
-		Object uiView = w.asNativeWidget();
+	private static void setLeft(IWidget w, Object uiView, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
 		view.setLeft(value);
@@ -4004,7 +4000,6 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 
     
 	private static void addSwipeListener(IWidget w, SwipeHelper swipeHelper) {
-		Control control = (Control) w.asNativeWidget();
 		setOnListener(w, org.eclipse.swt.SWT.MouseDown, org.eclipse.swt.SWT.MouseDown + "swipe",  (event) -> {
 			swipeHelper.onActionDown(event.x, event.y);
         });
@@ -4712,8 +4707,8 @@ break;}
 	}
 	//end - animator
 
-	private static void setTranslationX(IWidget w, Object objValue) {
-		Control control = (Control) w.asNativeWidget();
+	private static void setTranslationX(IWidget w, Object nativeWidget, Object objValue) {
+		Control control = (Control) nativeWidget;
 		View view = (View) w.asWidget();
 		int data = view.getLeft();
 		updateBounds(control, data + ((Float) objValue).intValue(), control.getBounds().y, control.getBounds().width, control.getBounds().height);
@@ -4726,8 +4721,8 @@ break;}
 		return control.getBounds().x - data;
 	}
 	
-	private static void setTranslationY(IWidget w, Object objValue) {
-		Control control = (Control) w.asNativeWidget();
+	private static void setTranslationY(IWidget w,  Object nativeWidget, Object objValue) {
+		Control control = (Control) nativeWidget;
 		View view = (View) w.asWidget();
 		int data = view.getTop();
 		updateBounds(control, control.getBounds().x, data + ((Float) objValue).intValue(), control.getBounds().width, control.getBounds().height);
@@ -4741,8 +4736,8 @@ break;}
 	}
 	
 	
-	private static void drawImageUsingGC(IWidget w, Object objValue, boolean isForeGround) {
-		Control control = (Control) w.asNativeWidget();
+	private static void drawImageUsingGC(IWidget w, Object nativeWidget, Object objValue, boolean isForeGround) {
+		Control control = (Control) nativeWidget;
 		if (control.getData("paintListener") != null) {
 			control.removePaintListener((org.eclipse.swt.events.PaintListener) control.getData("paintListener"));
 		}
@@ -4762,7 +4757,6 @@ break;}
 						}
 					}
 				}
-				
 			}
 
 			private void drawImage(GC gc, r.android.graphics.drawable.Drawable drawable) {
@@ -4975,8 +4969,10 @@ break;}
 
 	private final static class MouseListener implements org.eclipse.swt.widgets.Listener {
 		private IWidget widget;
-		public MouseListener(IWidget w) {
+		private String action;
+		public MouseListener(IWidget w, String action) {
 			this.widget = w;
+			this.action = action;
 		}
 
 		@Override
@@ -4987,28 +4983,34 @@ break;}
 			View view = (View) widget.asWidget();
 			int rawX = p.getLocation().x;
 			int rawY = p.getLocation().y;
+			MotionEvent motionEvent = null;
 			switch (event.type) {
 			case org.eclipse.swt.SWT.MouseDown: {
-				view.onTouchEventDown(x, y, rawX, rawY);
+				motionEvent = view.onTouchEventDown(x, y, rawX, rawY);
 				break;
 			}
 			case org.eclipse.swt.SWT.MouseMove: {
-				view.onTouchEventMove(x, y, rawX, rawY);
+				motionEvent = view.onTouchEventMove(x, y, rawX, rawY);
 				break;
 			}
 			case org.eclipse.swt.SWT.MouseUp: {
-				view.onTouchEventUp(x, y, rawX, rawY);
+				motionEvent = view.onTouchEventUp(x, y, rawX, rawY);
 				break;
 			}
 			default:
 				break;
+			}
+			
+			if (motionEvent != null) {
+				OnTouchListener listener = new OnTouchListener(widget, action);
+				listener.onTouch(view, motionEvent);
 			}
 		}
 	}
 
 	private static void onAndroidTouch(IWidget w, Object objValue) {
 		org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) w.asNativeWidget();
-		MouseListener listener = new MouseListener(w);
+		MouseListener listener = new MouseListener(w, (String) objValue);
 		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseDown, listener);
 		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseMove, listener);
 		ViewImpl.addListener(control, org.eclipse.swt.SWT.MouseUp, listener);

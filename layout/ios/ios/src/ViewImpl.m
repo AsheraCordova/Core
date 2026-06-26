@@ -300,15 +300,19 @@
                            withId:(id)objValue;
 
 + (void)setBottomWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)uiView
                         withId:(id)objValue;
 
 + (void)setTopWithASIWidget:(id<ASIWidget>)w
+                     withId:(id)uiView
                      withId:(id)objValue;
 
 + (void)setRightWithASIWidget:(id<ASIWidget>)w
+                       withId:(id)uiView
                        withId:(id)objValue;
 
 + (void)setLeftWithASIWidget:(id<ASIWidget>)w
+                      withId:(id)uiView
                       withId:(id)objValue;
 
 + (id)getBottomWithASIWidget:(id<ASIWidget>)w;
@@ -386,35 +390,45 @@
                              withId:(id)objValue;
 
 + (void)setTranslationXWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
                               withId:(id)objValue;
 
 + (void)relayoutWithASIWidget:(id<ASIWidget>)w;
 
 + (void)setTranslationYWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
                               withId:(id)objValue;
 
 + (void)setTranslationZWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
                               withId:(id)objValue;
 
 + (void)setTransformPivotYWithASIWidget:(id<ASIWidget>)w
+                                 withId:(id)nativeWidget
                                  withId:(id)objValue;
 
 + (void)setTransformPivotXWithASIWidget:(id<ASIWidget>)w
+                                 withId:(id)nativeWidget
                                  withId:(id)objValue;
 
 + (void)setScaleYWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)nativeWidget
                         withId:(id)objValue;
 
 + (void)setScaleXWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)nativeWidget
                         withId:(id)objValue;
 
 + (void)setRotationYWithASIWidget:(id<ASIWidget>)w
+                           withId:(id)nativeWidget
                            withId:(id)objValue;
 
 + (void)setRotationXWithASIWidget:(id<ASIWidget>)w
+                           withId:(id)nativeWidget
                            withId:(id)objValue;
 
 + (void)setRotationWithASIWidget:(id<ASIWidget>)w
+                          withId:(id)nativeWidget
                           withId:(id)objValue;
 
 + (id)getTranslationXWithASIWidget:(id<ASIWidget>)w;
@@ -645,13 +659,13 @@ __attribute__((unused)) static id ASViewImpl_getClipDataWithADView_DragEvent_(AD
 
 __attribute__((unused)) static void ASViewImpl_setElevationWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setBottomWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setBottomWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setTopWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setTopWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setRightWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setRightWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setLeftWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setLeftWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue);
 
 __attribute__((unused)) static id ASViewImpl_getBottomWithASIWidget_(id<ASIWidget> w);
 
@@ -701,27 +715,27 @@ __attribute__((unused)) static void ASViewImpl_nativeSetClickableWithId_withBool
 
 __attribute__((unused)) static void ASViewImpl_setOnLongClickWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeView, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setTranslationXWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setTranslationXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
 __attribute__((unused)) static void ASViewImpl_relayoutWithASIWidget_(id<ASIWidget> w);
 
-__attribute__((unused)) static void ASViewImpl_setTranslationYWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setTranslationYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setTranslationZWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setTranslationZWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setTransformPivotYWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setTransformPivotYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setTransformPivotXWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setTransformPivotXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setScaleYWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setScaleYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setScaleXWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setScaleXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setRotationYWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setRotationYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setRotationXWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setRotationXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setRotationWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+__attribute__((unused)) static void ASViewImpl_setRotationWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
 
 __attribute__((unused)) static id ASViewImpl_getTranslationXWithASIWidget_(id<ASIWidget> w);
 
@@ -1772,9 +1786,11 @@ __attribute__((unused)) static ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidg
 @interface ASViewImpl_4 : NSObject < ASViewImpl_PanCallBack > {
  @public
   ADView *val$view_;
+  id val$objValue_;
 }
 
-- (instancetype)initWithADView:(ADView *)capture$0;
+- (instancetype)initWithADView:(ADView *)capture$0
+                        withId:(id)capture$1;
 
 - (void)handlePanStartWithASIWidget:(id<ASIWidget>)widget
                              withId:(id)eventWidget
@@ -1782,6 +1798,11 @@ __attribute__((unused)) static ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidg
                             withInt:(int32_t)y
                             withInt:(int32_t)rawX
                             withInt:(int32_t)rawY;
+
+- (void)invokeOnTouchCallBackWithId:(id)objValue
+                         withADView:(ADView *)view
+                      withASIWidget:(id<ASIWidget>)widget
+                  withADMotionEvent:(ADMotionEvent *)motionEvent;
 
 - (void)handlePanDragWithASIWidget:(id<ASIWidget>)widget
                             withId:(id)eventWidget
@@ -1801,11 +1822,13 @@ __attribute__((unused)) static ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidg
 
 J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_4)
 
-__attribute__((unused)) static void ASViewImpl_4_initWithADView_(ASViewImpl_4 *self, ADView *capture$0);
+__attribute__((unused)) static void ASViewImpl_4_initWithADView_withId_(ASViewImpl_4 *self, ADView *capture$0, id capture$1);
 
-__attribute__((unused)) static ASViewImpl_4 *new_ASViewImpl_4_initWithADView_(ADView *capture$0) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASViewImpl_4 *new_ASViewImpl_4_initWithADView_withId_(ADView *capture$0, id capture$1) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASViewImpl_4 *create_ASViewImpl_4_initWithADView_(ADView *capture$0);
+__attribute__((unused)) static ASViewImpl_4 *create_ASViewImpl_4_initWithADView_withId_(ADView *capture$0, id capture$1);
+
+__attribute__((unused)) static void ASViewImpl_4_invokeOnTouchCallBackWithId_withADView_withASIWidget_withADMotionEvent_(ASViewImpl_4 *self, id objValue, ADView *view, id<ASIWidget> widget, ADMotionEvent *motionEvent);
 
 
 @interface ASViewImpl_TouchGestureRecognizer () {
@@ -2377,23 +2400,27 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)setBottomWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)uiView
                         withId:(id)objValue {
-  ASViewImpl_setBottomWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setBottomWithASIWidget_withId_withId_(w, uiView, objValue);
 }
 
 + (void)setTopWithASIWidget:(id<ASIWidget>)w
+                     withId:(id)uiView
                      withId:(id)objValue {
-  ASViewImpl_setTopWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setTopWithASIWidget_withId_withId_(w, uiView, objValue);
 }
 
 + (void)setRightWithASIWidget:(id<ASIWidget>)w
+                       withId:(id)uiView
                        withId:(id)objValue {
-  ASViewImpl_setRightWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setRightWithASIWidget_withId_withId_(w, uiView, objValue);
 }
 
 + (void)setLeftWithASIWidget:(id<ASIWidget>)w
+                      withId:(id)uiView
                       withId:(id)objValue {
-  ASViewImpl_setLeftWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setLeftWithASIWidget_withId_withId_(w, uiView, objValue);
 }
 
 + (id)getBottomWithASIWidget:(id<ASIWidget>)w {
@@ -2881,8 +2908,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)setTranslationXWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
                               withId:(id)objValue {
-  ASViewImpl_setTranslationXWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setTranslationXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)relayoutWithASIWidget:(id<ASIWidget>)w {
@@ -2890,48 +2918,57 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)setTranslationYWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
                               withId:(id)objValue {
-  ASViewImpl_setTranslationYWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setTranslationYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setTranslationZWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
                               withId:(id)objValue {
-  ASViewImpl_setTranslationZWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setTranslationZWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setTransformPivotYWithASIWidget:(id<ASIWidget>)w
+                                 withId:(id)nativeWidget
                                  withId:(id)objValue {
-  ASViewImpl_setTransformPivotYWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setTransformPivotYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setTransformPivotXWithASIWidget:(id<ASIWidget>)w
+                                 withId:(id)nativeWidget
                                  withId:(id)objValue {
-  ASViewImpl_setTransformPivotXWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setTransformPivotXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setScaleYWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)nativeWidget
                         withId:(id)objValue {
-  ASViewImpl_setScaleYWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setScaleYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setScaleXWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)nativeWidget
                         withId:(id)objValue {
-  ASViewImpl_setScaleXWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setScaleXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setRotationYWithASIWidget:(id<ASIWidget>)w
+                           withId:(id)nativeWidget
                            withId:(id)objValue {
-  ASViewImpl_setRotationYWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setRotationYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setRotationXWithASIWidget:(id<ASIWidget>)w
+                           withId:(id)nativeWidget
                            withId:(id)objValue {
-  ASViewImpl_setRotationXWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setRotationXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (void)setRotationWithASIWidget:(id<ASIWidget>)w
+                          withId:(id)nativeWidget
                           withId:(id)objValue {
-  ASViewImpl_setRotationWithASIWidget_withId_(w, objValue);
+  ASViewImpl_setRotationWithASIWidget_withId_withId_(w, nativeWidget, objValue);
 }
 
 + (id)getTranslationXWithASIWidget:(id<ASIWidget>)w {
@@ -3326,10 +3363,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LADDrawable;", 0x9, 124, 125, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 126, 32, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, 127, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 129, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 130, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 131, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 132, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 129, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 130, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 131, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 132, 34, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 133, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 134, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 135, 26, -1, -1, -1, -1 },
@@ -3430,17 +3467,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x10a, 235, 232, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 236, 34, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 236, 237, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 238, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 238, 34, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 239, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 240, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 241, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 242, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 243, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 244, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 245, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 246, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 247, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 248, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 240, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 241, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 242, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 243, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 244, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 245, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 246, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 247, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 248, 34, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 249, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 250, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 251, 26, -1, -1, -1, -1 },
@@ -3608,10 +3645,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[100].selector = @selector(getDrawableWithADColorStateList:);
   methods[101].selector = @selector(setElevationWithASIWidget:withId:);
   methods[102].selector = @selector(getValueWithNSString:withOrgXmlSaxAttributes:);
-  methods[103].selector = @selector(setBottomWithASIWidget:withId:);
-  methods[104].selector = @selector(setTopWithASIWidget:withId:);
-  methods[105].selector = @selector(setRightWithASIWidget:withId:);
-  methods[106].selector = @selector(setLeftWithASIWidget:withId:);
+  methods[103].selector = @selector(setBottomWithASIWidget:withId:withId:);
+  methods[104].selector = @selector(setTopWithASIWidget:withId:withId:);
+  methods[105].selector = @selector(setRightWithASIWidget:withId:withId:);
+  methods[106].selector = @selector(setLeftWithASIWidget:withId:withId:);
   methods[107].selector = @selector(getBottomWithASIWidget:);
   methods[108].selector = @selector(getTopWithASIWidget:);
   methods[109].selector = @selector(getRightWithASIWidget:);
@@ -3712,17 +3749,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[204].selector = @selector(nativeSetClickableWithId:withBoolean:);
   methods[205].selector = @selector(setOnLongClickWithASIWidget:withId:withId:);
   methods[206].selector = @selector(setOnLongClickWithASIWidget:withId:withADView_OnLongClickListener:);
-  methods[207].selector = @selector(setTranslationXWithASIWidget:withId:);
+  methods[207].selector = @selector(setTranslationXWithASIWidget:withId:withId:);
   methods[208].selector = @selector(relayoutWithASIWidget:);
-  methods[209].selector = @selector(setTranslationYWithASIWidget:withId:);
-  methods[210].selector = @selector(setTranslationZWithASIWidget:withId:);
-  methods[211].selector = @selector(setTransformPivotYWithASIWidget:withId:);
-  methods[212].selector = @selector(setTransformPivotXWithASIWidget:withId:);
-  methods[213].selector = @selector(setScaleYWithASIWidget:withId:);
-  methods[214].selector = @selector(setScaleXWithASIWidget:withId:);
-  methods[215].selector = @selector(setRotationYWithASIWidget:withId:);
-  methods[216].selector = @selector(setRotationXWithASIWidget:withId:);
-  methods[217].selector = @selector(setRotationWithASIWidget:withId:);
+  methods[209].selector = @selector(setTranslationYWithASIWidget:withId:withId:);
+  methods[210].selector = @selector(setTranslationZWithASIWidget:withId:withId:);
+  methods[211].selector = @selector(setTransformPivotYWithASIWidget:withId:withId:);
+  methods[212].selector = @selector(setTransformPivotXWithASIWidget:withId:withId:);
+  methods[213].selector = @selector(setScaleYWithASIWidget:withId:withId:);
+  methods[214].selector = @selector(setScaleXWithASIWidget:withId:withId:);
+  methods[215].selector = @selector(setRotationYWithASIWidget:withId:withId:);
+  methods[216].selector = @selector(setRotationXWithASIWidget:withId:withId:);
+  methods[217].selector = @selector(setRotationWithASIWidget:withId:withId:);
   methods[218].selector = @selector(getTranslationXWithASIWidget:);
   methods[219].selector = @selector(getTransformPivotYWithASIWidget:);
   methods[220].selector = @selector(getTransformPivotXWithASIWidget:);
@@ -4283,22 +4320,22 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
       break;
       case 56:
       {
-        ASViewImpl_setLeftWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLeftWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 57:
       {
-        ASViewImpl_setRightWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRightWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 58:
       {
-        ASViewImpl_setTopWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTopWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 59:
       {
-        ASViewImpl_setBottomWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setBottomWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 60:
@@ -4456,52 +4493,52 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
       break;
       case 88:
       {
-        ASViewImpl_setTranslationXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 89:
       {
-        ASViewImpl_setTranslationYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 90:
       {
-        ASViewImpl_setTranslationZWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationZWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 91:
       {
-        ASViewImpl_setRotationWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 92:
       {
-        ASViewImpl_setRotationXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 93:
       {
-        ASViewImpl_setRotationYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 94:
       {
-        ASViewImpl_setScaleXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setScaleXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 95:
       {
-        ASViewImpl_setScaleYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setScaleYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 96:
       {
-        ASViewImpl_setTransformPivotXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTransformPivotXWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 97:
       {
-        ASViewImpl_setTransformPivotYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTransformPivotYWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 98:
@@ -5777,10 +5814,9 @@ NSString *ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(NSString *key
   return [attributes getValueWithNSString:key];
 }
 
-void ASViewImpl_setBottomWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setBottomWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue) {
   ASViewImpl_initialize();
-  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
-  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
   int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setBottomWithInt:value];
   int32_t top = value - [view getMeasuredHeight];
@@ -5788,30 +5824,27 @@ void ASViewImpl_setBottomWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, x, top, x + [view getMeasuredWidth], value);
 }
 
-void ASViewImpl_setTopWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setTopWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue) {
   ASViewImpl_initialize();
-  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
-  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
   int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setTopWithInt:value];
   int32_t x = ASViewImpl_getXWithId_(uiView);
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, x, value, x + [view getMeasuredWidth], value + [view getMeasuredHeight]);
 }
 
-void ASViewImpl_setRightWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setRightWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue) {
   ASViewImpl_initialize();
-  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
-  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
   int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setRightWithInt:value];
   int32_t y = ASViewImpl_getYWithId_(uiView);
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, value - [view getMeasuredWidth], y, value, y + [view getMeasuredHeight]);
 }
 
-void ASViewImpl_setLeftWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setLeftWithASIWidget_withId_withId_(id<ASIWidget> w, id uiView, id objValue) {
   ASViewImpl_initialize();
-  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
-  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
   int32_t value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   [((ADView *) nil_chk(view)) setLeftWithInt:value];
   int32_t y = ASViewImpl_getYWithId_(uiView);
@@ -6505,7 +6538,7 @@ void ASViewImpl_setOnLongClickWithASIWidget_withId_withADView_OnLongClickListene
   [delegate nativeAddLongClickListenerWithId:nativeView];
 }
 
-void ASViewImpl_setTranslationXWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setTranslationXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"translationX" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"translationX", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
@@ -6518,55 +6551,55 @@ void ASViewImpl_relayoutWithASIWidget_(id<ASIWidget> w) {
   }
 }
 
-void ASViewImpl_setTranslationYWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setTranslationYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"translationY" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"translationY", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setTranslationZWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setTranslationZWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"translationZ" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"translationZ", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setTransformPivotYWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setTransformPivotYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"transformPivotY" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"transformPivotY", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setTransformPivotXWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setTransformPivotXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"transformPivotX" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"transformPivotX", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setScaleYWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setScaleYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"scaleY" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"scaleY", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setScaleXWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setScaleXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"scaleX" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"scaleX", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setRotationYWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setRotationYWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"rotationY" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"rotationY", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setRotationXWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setRotationXWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"rotationX" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"rotationX", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
 }
 
-void ASViewImpl_setRotationWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+void ASViewImpl_setRotationWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
   ASViewImpl_initialize();
   [((id<ASIWidget>) nil_chk(w)) applyAttributeCommandWithNSString:@"rotation" withNSString:@"transform" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"rotation", objValue } count:2 type:NSObject_class_()]];
   ASViewImpl_relayoutWithASIWidget_(w);
@@ -6941,7 +6974,7 @@ void ASViewImpl_addOrientationEventListenerWithASIWidget_withId_(id<ASIWidget> w
 void ASViewImpl_onAndroidTouchWithASIWidget_withId_(id<ASIWidget> widget, id objValue) {
   ASViewImpl_initialize();
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
-  ASViewImpl_addTouchListenerWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(widget, [widget asNativeWidget], [widget asNativeWidget], [((NSString *) nil_chk([widget getLocalName])) java_contains:@"RecyclerView"], new_ASViewImpl_4_initWithADView_(view));
+  ASViewImpl_addTouchListenerWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(widget, [widget asNativeWidget], [widget asNativeWidget], [((NSString *) nil_chk([widget getLocalName])) java_contains:@"RecyclerView"], new_ASViewImpl_4_initWithADView_withId_(view, objValue));
 }
 
 void ASViewImpl_addTouchListenerWithASIWidget_withId_withId_withBoolean_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, bool ignoreScrollOffset, id<ASViewImpl_PanCallBack> callback) {
@@ -10870,8 +10903,9 @@ ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidget_withId_withNSString_(id<ASIW
 
 @implementation ASViewImpl_4
 
-- (instancetype)initWithADView:(ADView *)capture$0 {
-  ASViewImpl_4_initWithADView_(self, capture$0);
+- (instancetype)initWithADView:(ADView *)capture$0
+                        withId:(id)capture$1 {
+  ASViewImpl_4_initWithADView_withId_(self, capture$0, capture$1);
   return self;
 }
 
@@ -10881,7 +10915,15 @@ ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidget_withId_withNSString_(id<ASIW
                             withInt:(int32_t)y
                             withInt:(int32_t)rawX
                             withInt:(int32_t)rawY {
-  [((ADView *) nil_chk(val$view_)) onTouchEventDownWithInt:x withInt:y withInt:rawX withInt:rawY];
+  ADMotionEvent *motionEvent = [((ADView *) nil_chk(val$view_)) onTouchEventDownWithInt:x withInt:y withInt:rawX withInt:rawY];
+  ASViewImpl_4_invokeOnTouchCallBackWithId_withADView_withASIWidget_withADMotionEvent_(self, val$objValue_, val$view_, widget, motionEvent);
+}
+
+- (void)invokeOnTouchCallBackWithId:(id)objValue
+                         withADView:(ADView *)view
+                      withASIWidget:(id<ASIWidget>)widget
+                  withADMotionEvent:(ADMotionEvent *)motionEvent {
+  ASViewImpl_4_invokeOnTouchCallBackWithId_withADView_withASIWidget_withADMotionEvent_(self, objValue, view, widget, motionEvent);
 }
 
 - (void)handlePanDragWithASIWidget:(id<ASIWidget>)widget
@@ -10890,7 +10932,8 @@ ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidget_withId_withNSString_(id<ASIW
                            withInt:(int32_t)y
                            withInt:(int32_t)rawX
                            withInt:(int32_t)rawY {
-  [((ADView *) nil_chk(val$view_)) onTouchEventMoveWithInt:x withInt:y withInt:rawX withInt:rawY];
+  ADMotionEvent *motionEvent = [((ADView *) nil_chk(val$view_)) onTouchEventMoveWithInt:x withInt:y withInt:rawX withInt:rawY];
+  ASViewImpl_4_invokeOnTouchCallBackWithId_withADView_withASIWidget_withADMotionEvent_(self, val$objValue_, val$view_, widget, motionEvent);
 }
 
 - (void)handlePanEndWithASIWidget:(id<ASIWidget>)widget
@@ -10899,45 +10942,57 @@ ASViewImpl_3 *create_ASViewImpl_3_initWithASIWidget_withId_withNSString_(id<ASIW
                           withInt:(int32_t)y
                           withInt:(int32_t)rawX
                           withInt:(int32_t)rawY {
-  [((ADView *) nil_chk(val$view_)) onTouchEventUpWithInt:x withInt:y withInt:rawX withInt:rawY];
+  ADMotionEvent *motionEvent = [((ADView *) nil_chk(val$view_)) onTouchEventUpWithInt:x withInt:y withInt:rawX withInt:rawY];
+  ASViewImpl_4_invokeOnTouchCallBackWithId_withADView_withASIWidget_withADMotionEvent_(self, val$objValue_, val$view_, widget, motionEvent);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithADView:);
+  methods[0].selector = @selector(initWithADView:withId:);
   methods[1].selector = @selector(handlePanStartWithASIWidget:withId:withInt:withInt:withInt:withInt:);
-  methods[2].selector = @selector(handlePanDragWithASIWidget:withId:withInt:withInt:withInt:withInt:);
-  methods[3].selector = @selector(handlePanEndWithASIWidget:withId:withInt:withInt:withInt:withInt:);
+  methods[2].selector = @selector(invokeOnTouchCallBackWithId:withADView:withASIWidget:withADMotionEvent:);
+  methods[3].selector = @selector(handlePanDragWithASIWidget:withId:withInt:withInt:withInt:withInt:);
+  methods[4].selector = @selector(handlePanEndWithASIWidget:withId:withInt:withInt:withInt:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "val$view_", "LADView;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$objValue_", "LNSObject;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LADView;", "handlePanStart", "LASIWidget;LNSObject;IIII", "handlePanDrag", "handlePanEnd", "LASViewImpl;", "onAndroidTouchWithASIWidget:withId:" };
-  static const J2ObjcClassInfo _ASViewImpl_4 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8000, 4, 1, 5, -1, 6, -1, -1 };
+  static const void *ptrTable[] = { "LADView;LNSObject;", "handlePanStart", "LASIWidget;LNSObject;IIII", "invokeOnTouchCallBack", "LNSObject;LADView;LASIWidget;LADMotionEvent;", "handlePanDrag", "handlePanEnd", "LASViewImpl;", "onAndroidTouchWithASIWidget:withId:" };
+  static const J2ObjcClassInfo _ASViewImpl_4 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8000, 5, 2, 7, -1, 8, -1, -1 };
   return &_ASViewImpl_4;
 }
 
 @end
 
-void ASViewImpl_4_initWithADView_(ASViewImpl_4 *self, ADView *capture$0) {
+void ASViewImpl_4_initWithADView_withId_(ASViewImpl_4 *self, ADView *capture$0, id capture$1) {
   self->val$view_ = capture$0;
+  self->val$objValue_ = capture$1;
   NSObject_init(self);
 }
 
-ASViewImpl_4 *new_ASViewImpl_4_initWithADView_(ADView *capture$0) {
-  J2OBJC_NEW_IMPL(ASViewImpl_4, initWithADView_, capture$0)
+ASViewImpl_4 *new_ASViewImpl_4_initWithADView_withId_(ADView *capture$0, id capture$1) {
+  J2OBJC_NEW_IMPL(ASViewImpl_4, initWithADView_withId_, capture$0, capture$1)
 }
 
-ASViewImpl_4 *create_ASViewImpl_4_initWithADView_(ADView *capture$0) {
-  J2OBJC_CREATE_IMPL(ASViewImpl_4, initWithADView_, capture$0)
+ASViewImpl_4 *create_ASViewImpl_4_initWithADView_withId_(ADView *capture$0, id capture$1) {
+  J2OBJC_CREATE_IMPL(ASViewImpl_4, initWithADView_withId_, capture$0, capture$1)
+}
+
+void ASViewImpl_4_invokeOnTouchCallBackWithId_withADView_withASIWidget_withADMotionEvent_(ASViewImpl_4 *self, id objValue, ADView *view, id<ASIWidget> widget, ADMotionEvent *motionEvent) {
+  if (motionEvent != nil) {
+    ASViewImpl_OnTouchListener *listener = new_ASViewImpl_OnTouchListener_initWithASIWidget_withNSString_(widget, (NSString *) cast_chk(objValue, [NSString class]));
+    [listener onTouchWithADView:view withADMotionEvent:motionEvent];
+  }
 }
 
 @implementation ASViewImpl_TouchGestureRecognizer

@@ -49,6 +49,10 @@
 
 - (bool)getCropToPadding;
 
+- (int32_t)getDrawableHeight;
+
+- (int32_t)getDrawableWidth;
+
 - (ASRectM *)getImageBounds;
 
 - (ASRectM *)getImageBoundsWithInt:(int32_t)measuredWidth

@@ -468,20 +468,20 @@
 
 - (bool)onTouchEventWithADMotionEvent:(ADMotionEvent *)event;
 
-- (void)onTouchEventDownWithInt:(int32_t)x
-                        withInt:(int32_t)y
-                        withInt:(int32_t)rawX
-                        withInt:(int32_t)rawY;
+- (ADMotionEvent *)onTouchEventDownWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)rawX
+                                   withInt:(int32_t)rawY;
 
-- (void)onTouchEventMoveWithInt:(int32_t)x
-                        withInt:(int32_t)y
-                        withInt:(int32_t)rawX
-                        withInt:(int32_t)rawY;
+- (ADMotionEvent *)onTouchEventMoveWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)rawX
+                                   withInt:(int32_t)rawY;
 
-- (void)onTouchEventUpWithInt:(int32_t)x
-                      withInt:(int32_t)y
-                      withInt:(int32_t)rawX
-                      withInt:(int32_t)rawY;
+- (ADMotionEvent *)onTouchEventUpWithInt:(int32_t)x
+                                 withInt:(int32_t)y
+                                 withInt:(int32_t)rawX
+                                 withInt:(int32_t)rawY;
 
 - (void)onVisibilityAggregatedWithBoolean:(bool)isVisible;
 

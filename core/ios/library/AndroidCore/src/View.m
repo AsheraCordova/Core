@@ -3765,41 +3765,46 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)onTouchEventMoveWithInt:(int32_t)x
-                        withInt:(int32_t)y
-                        withInt:(int32_t)rawX
-                        withInt:(int32_t)rawY {
+- (ADMotionEvent *)onTouchEventMoveWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)rawX
+                                   withInt:(int32_t)rawY {
   if (action_ == 1) {
     ADMotionEvent *me = ADMotionEvent_obtainWithLong_withLong_withInt_withFloat_withFloat_withInt_(downTime_, JavaLangSystem_currentTimeMillis(), ADMotionEvent_ACTION_MOVE, x, y, 0);
     [((ADMotionEvent *) nil_chk(me)) setRawXWithInt:rawX];
     [me setRawYWithInt:rawY];
     [self dispatchTouchEventWithADMotionEvent:me];
+    return me;
   }
+  return nil;
 }
 
-- (void)onTouchEventDownWithInt:(int32_t)x
-                        withInt:(int32_t)y
-                        withInt:(int32_t)rawX
-                        withInt:(int32_t)rawY {
+- (ADMotionEvent *)onTouchEventDownWithInt:(int32_t)x
+                                   withInt:(int32_t)y
+                                   withInt:(int32_t)rawX
+                                   withInt:(int32_t)rawY {
   action_ = 1;
   downTime_ = JavaLangSystem_currentTimeMillis();
   ADMotionEvent *me = ADMotionEvent_obtainWithLong_withLong_withInt_withFloat_withFloat_withInt_(downTime_, JavaLangSystem_currentTimeMillis(), ADMotionEvent_ACTION_DOWN, x, y, 0);
   [((ADMotionEvent *) nil_chk(me)) setRawXWithInt:rawX];
   [me setRawYWithInt:rawY];
   [self dispatchTouchEventWithADMotionEvent:me];
+  return me;
 }
 
-- (void)onTouchEventUpWithInt:(int32_t)x
-                      withInt:(int32_t)y
-                      withInt:(int32_t)rawX
-                      withInt:(int32_t)rawY {
+- (ADMotionEvent *)onTouchEventUpWithInt:(int32_t)x
+                                 withInt:(int32_t)y
+                                 withInt:(int32_t)rawX
+                                 withInt:(int32_t)rawY {
   if (action_ == 1) {
     ADMotionEvent *me = ADMotionEvent_obtainWithLong_withLong_withInt_withFloat_withFloat_withInt_(downTime_, JavaLangSystem_currentTimeMillis(), ADMotionEvent_ACTION_UP, x, y, 0);
     [((ADMotionEvent *) nil_chk(me)) setRawXWithInt:rawX];
     [me setRawYWithInt:rawY];
     [self dispatchTouchEventWithADMotionEvent:me];
     action_ = 0;
+    return me;
   }
+  return nil;
 }
 
 - (bool)hasOnTouchEvent {
@@ -4243,9 +4248,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 189, 45, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 190, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 191, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 192, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 193, 33, -1, -1, -1, -1 },
+    { NULL, "LADMotionEvent;", 0x1, 191, 33, -1, -1, -1, -1 },
+    { NULL, "LADMotionEvent;", 0x1, 192, 33, -1, -1, -1, -1 },
+    { NULL, "LADMotionEvent;", 0x1, 193, 33, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 194, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 195, 51, -1, -1, -1, -1 },
