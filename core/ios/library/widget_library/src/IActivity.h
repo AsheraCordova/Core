@@ -20,6 +20,7 @@
 @class JavaLangFloat;
 @class NSString;
 @protocol ASIFragment;
+@protocol JavaLangRunnable;
 @protocol JavaUtilMap;
 
 @protocol ASIActivity < JavaObject >
@@ -47,6 +48,10 @@
 - (id)getRootWidget;
 
 - (float)getScaleFactor;
+
+- (void)addBackPressCallBackWithJavaLangRunnable:(id<JavaLangRunnable>)callBack;
+
+- (void)removeBackPressCallBackWithJavaLangRunnable:(id<JavaLangRunnable>)callBack;
 
 - (NSString *)getPreferenceWithNSString:(NSString *)name;
 

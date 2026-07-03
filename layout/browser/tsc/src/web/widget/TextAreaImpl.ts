@@ -163,6 +163,12 @@ export class NumericTransformer implements ITranform {
 
 
 
+
+
+
+
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class TextAreaImpl<T> extends ViewImpl<T>{
@@ -352,6 +358,24 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "cursorVisible" }))
 	cursorVisible!:CommandAttr<boolean>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "setFocus" }))
+	setFocus!:CommandAttr<boolean>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "inputView" }))
+	inputView!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "inputViewParent" }))
+	inputViewParent!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "commitText" }))
+	commitText_!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "deletePreviousCharacter" }))
+	deletePreviousCharacter_!:CommandAttr<void>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "performEditorActionDone" }))
+	performEditorActionDone_!:CommandAttr<void>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "capitalize" }))
 	capitalize!:CommandAttr<Capitalize>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -435,6 +459,12 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 		this.digits = undefined;
 		this.hint = undefined;
 		this.cursorVisible = undefined;
+		this.setFocus = undefined;
+		this.inputView = undefined;
+		this.inputViewParent = undefined;
+		this.commitText_ = undefined;
+		this.deletePreviousCharacter_ = undefined;
+		this.performEditorActionDone_ = undefined;
 		this.capitalize = undefined;
 		this.onFocusChange = undefined;
 		this.onTextChange = undefined;
@@ -1897,6 +1927,90 @@ this.numeric.setTransformer('numeric');		return this.thisPointer;
 		this.cursorVisible.setValue(value);
 		this.orderSet++;
 		this.cursorVisible.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSetFocus(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.setFocus == null || this.setFocus == undefined) {
+			this.setFocus = new CommandAttr<boolean>();
+		}
+		
+		this.setFocus.setSetter(true);
+		this.setFocus.setValue(value);
+		this.orderSet++;
+		this.setFocus.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setInputView(value : string) : T {
+		this.resetIfRequired();
+		if (this.inputView == null || this.inputView == undefined) {
+			this.inputView = new CommandAttr<string>();
+		}
+		
+		this.inputView.setSetter(true);
+		this.inputView.setValue(value);
+		this.orderSet++;
+		this.inputView.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setInputViewParent(value : string) : T {
+		this.resetIfRequired();
+		if (this.inputViewParent == null || this.inputViewParent == undefined) {
+			this.inputViewParent = new CommandAttr<string>();
+		}
+		
+		this.inputViewParent.setSetter(true);
+		this.inputViewParent.setValue(value);
+		this.orderSet++;
+		this.inputViewParent.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public commitText(value : string) : T {
+		this.resetIfRequired();
+		if (this.commitText_ == null || this.commitText_ == undefined) {
+			this.commitText_ = new CommandAttr<string>();
+		}
+		
+		this.commitText_.setSetter(true);
+		this.commitText_.setValue(value);
+		this.orderSet++;
+		this.commitText_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public deletePreviousCharacter() : T {
+		this.resetIfRequired();
+		if (this.deletePreviousCharacter_ == null || this.deletePreviousCharacter_ == undefined) {
+			this.deletePreviousCharacter_ = new CommandAttr<void>();
+		}
+		
+		this.deletePreviousCharacter_.setSetter(true);
+		
+		this.orderSet++;
+		this.deletePreviousCharacter_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public performEditorActionDone() : T {
+		this.resetIfRequired();
+		if (this.performEditorActionDone_ == null || this.performEditorActionDone_ == undefined) {
+			this.performEditorActionDone_ = new CommandAttr<void>();
+		}
+		
+		this.performEditorActionDone_.setSetter(true);
+		
+		this.orderSet++;
+		this.performEditorActionDone_.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

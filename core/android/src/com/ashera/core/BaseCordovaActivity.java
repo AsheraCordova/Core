@@ -178,4 +178,28 @@ public class BaseCordovaActivity extends org.apache.cordova.CordovaActivity impl
 	private String getSystemOS() {
 		return null;
 	}
+	
+	@Override
+	public void onBackPressed() {
+		if (backPressCallBacks == null || backPressCallBacks.isEmpty()) {
+			super.onBackPressed();
+		} else {
+			backPressCallBacks.remove(backPressCallBacks.size() - 1).run();
+		}
+	}
+
+	private List<Runnable> backPressCallBacks;
+	@Override
+	public void addBackPressCallBack(Runnable callBack) {
+		if (backPressCallBacks == null) {
+			backPressCallBacks = new ArrayList<Runnable>();
+		}
+		
+		backPressCallBacks.add(callBack);
+	}
+	
+	@Override
+	public void removeBackPressCallBack(java.lang.Runnable callBack) {
+		backPressCallBacks.remove(callBack);
+	}
 }

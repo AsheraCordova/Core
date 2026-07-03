@@ -198,4 +198,12 @@ public class BaseCordovaActivity extends org.apache.cordova.CordovaActivity impl
 	private String getSystemOS() {
 		return com.ashera.common.OperatingSystem.getOs();
 	}
+
+	@Override
+	public void addBackPressCallBack(Runnable callBack) {
+	}
+
+	@Override
+	public void removeBackPressCallBack(Runnable callBack) {
+	}
 }

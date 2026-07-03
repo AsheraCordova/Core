@@ -14,6 +14,7 @@
 #include "IFragment.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Float.h"
+#include "java/lang/Runnable.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
@@ -106,6 +107,12 @@ J2OBJC_FIELD_SETTER(ASCordovaActivity, tempCache_, id<JavaUtilMap>)
   return [((id<ASIActivity>) nil_chk(delegate_)) getPreferenceWithNSString:name];
 }
 
+- (void)addBackPressCallBackWithJavaLangRunnable:(id<JavaLangRunnable>)callBack {
+}
+
+- (void)removeBackPressCallBackWithJavaLangRunnable:(id<JavaLangRunnable>)callBack {
+}
+
 - (void)__javaClone:(ASCordovaActivity *)original {
   [super __javaClone:original];
   JreRelease(delegate_);
@@ -126,6 +133,8 @@ J2OBJC_FIELD_SETTER(ASCordovaActivity, tempCache_, id<JavaUtilMap>)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, 10, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 12, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -143,14 +152,16 @@ J2OBJC_FIELD_SETTER(ASCordovaActivity, tempCache_, id<JavaUtilMap>)
   methods[10].selector = @selector(getRootWidget);
   methods[11].selector = @selector(getScaleFactor);
   methods[12].selector = @selector(getPreferenceWithNSString:);
+  methods[13].selector = @selector(addBackPressCallBackWithJavaLangRunnable:);
+  methods[14].selector = @selector(removeBackPressCallBackWithJavaLangRunnable:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "delegate_", "LASIActivity;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 11, -1 },
-    { "tempCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 11, -1 },
+    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 14, -1 },
+    { "tempCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 14, -1 },
   };
-  static const void *ptrTable[] = { "LASIActivity;", "sendEventMessage", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "LNSString;", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "getPreference", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;" };
-  static const J2ObjcClassInfo _ASCordovaActivity = { "CordovaActivity", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 13, 3, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASIActivity;", "sendEventMessage", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "LNSString;", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "getPreference", "addBackPressCallBack", "LJavaLangRunnable;", "removeBackPressCallBack", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _ASCordovaActivity = { "CordovaActivity", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 15, 3, -1, -1, -1, -1, -1 };
   return &_ASCordovaActivity;
 }
 

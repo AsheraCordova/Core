@@ -345,6 +345,10 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHighlight").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("inputView").withType("template").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("commitText").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("deletePreviousCharacter").withType("nil"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("performEditorActionDone").withType("nil"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("completionThreshold").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("completionHintView").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("completionHint").withType("resourcestring"));
@@ -1174,6 +1178,46 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 
 
 		setLastBaselineToBottomHeight(objValue);
+
+
+
+			}
+			break;
+			case "inputView": {
+				
+
+
+		setInputView(strValue, objValue);
+
+
+
+			}
+			break;
+			case "commitText": {
+				
+
+
+		commitText(objValue);
+
+
+
+			}
+			break;
+			case "deletePreviousCharacter": {
+				
+
+
+		deletePreviousCharacter();
+
+
+
+			}
+			break;
+			case "performEditorActionDone": {
+				
+
+
+		performEditorActionDone();
 
 
 
@@ -2242,7 +2286,9 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 			case 1:
 				setPickerView();
 				break;
-
+			case 2:
+				setDatePicker();
+				break;
 			default:
 				break;
 			}
@@ -2268,6 +2314,75 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     	[datepicker setDatePickerMode:UIDatePickerModeDate];
 		[((ASUITextField*)self.uiView) setInputView:datepicker];
 	]-*/;
+	
+	public static native void commitText(Object activeTextInput, String text) /*-[
+	    id<UITextInput> input = (id<UITextInput>)activeTextInput;
+	    if ([input conformsToProtocol:@protocol(UITextInput)]) {
+	        [input insertText:text];
+	    }
+	]-*/;
+	
+	public static native void performDone(Object activeTextInput) /*-[
+	    UIView *view = (UIView *)activeTextInput;
+	   	[view resignFirstResponder];
+	]-*/;
+	
+	public static native void deleteBackward(Object activeTextInput) /*-[
+	    id<UITextInput> input = (id<UITextInput>)activeTextInput;
+	    if ([input conformsToProtocol:@protocol(UITextInput)]) {
+	        [input deleteBackward];
+	    }
+	]-*/;
+	private void performEditorActionDone() {
+		performDone(uiView);
+	}
+
+	private void deletePreviousCharacter() {
+		deleteBackward(uiView);
+	}
+
+	private void commitText(Object objValue) {
+		commitText(uiView, (String) objValue);
+	}
+
+	private void setInputView(String strValue, Object objValue) {
+		HasWidgets rootWidget = (HasWidgets) fragment.getRootFragment().getRootWidget();
+		IWidget keyBoard = rootWidget.findWidgetById(strValue);
+		
+		if (keyBoard == null) {
+			IWidget parent = WidgetFactory.createWidget(FrameLayoutImpl.LOCAL_NAME, FrameLayoutImpl.GROUP_NAME, rootWidget, false);
+			parent.setAttribute("visibility", View.INVISIBLE, true);
+			View parentView = (View)parent.asWidget();
+			
+			r.android.widget.RelativeLayout.LayoutParams layoutParams = (r.android.widget.RelativeLayout.LayoutParams) parentView.getLayoutParams();
+			layoutParams.width = r.android.widget.RelativeLayout.LayoutParams.MATCH_PARENT;
+			layoutParams.height = r.android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT;
+	
+			IWidget widget = ((IWidget) objValue).loadLazyWidgets((BaseHasWidgets) parent);
+			widget.setId(strValue);
+			keyBoard = widget;
+		}
+
+		ViewGroupImpl.removeView(keyBoard.asNativeWidget());
+		setNativeInputView(keyBoard.asNativeWidget());
+
+		IWidget keyBoardView = keyBoard;
+		setAttribute("onFocusChange", new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View view, boolean hasFocus) {
+				handleFocus(keyBoardView, hasFocus);
+			}
+		}, false); 
+	}
+	
+	private void handleFocus(IWidget widget, boolean hasFocus) {
+		if (hasFocus) {
+			widget.storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, this);
+		} else {
+			widget.storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, null);
+		}
+	}
+	
 	
 
 

@@ -188,6 +188,10 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
+
+
+
 export class NumericTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -394,6 +398,18 @@ export abstract class EditTextImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "lastBaselineToBottomHeight" }))
 	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "inputView" }))
+	inputView!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "commitText" }))
+	commitText_!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "deletePreviousCharacter" }))
+	deletePreviousCharacter_!:CommandAttr<void>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "performEditorActionDone" }))
+	performEditorActionDone_!:CommandAttr<void>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "text" }))
 	text!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -535,6 +551,10 @@ export abstract class EditTextImpl<T> extends ViewImpl<T>{
 		this.textColorHighlight = undefined;
 		this.firstBaselineToTopHeight = undefined;
 		this.lastBaselineToBottomHeight = undefined;
+		this.inputView = undefined;
+		this.commitText_ = undefined;
+		this.deletePreviousCharacter_ = undefined;
+		this.performEditorActionDone_ = undefined;
 		this.text = undefined;
 		this.gravity = undefined;
 		this.autoText = undefined;
@@ -1833,6 +1853,62 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.lastBaselineToBottomHeight.setValue(value);
 		this.orderSet++;
 		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setInputView(value : string) : T {
+		this.resetIfRequired();
+		if (this.inputView == null || this.inputView == undefined) {
+			this.inputView = new CommandAttr<string>();
+		}
+		
+		this.inputView.setSetter(true);
+		this.inputView.setValue(value);
+		this.orderSet++;
+		this.inputView.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public commitText(value : string) : T {
+		this.resetIfRequired();
+		if (this.commitText_ == null || this.commitText_ == undefined) {
+			this.commitText_ = new CommandAttr<string>();
+		}
+		
+		this.commitText_.setSetter(true);
+		this.commitText_.setValue(value);
+		this.orderSet++;
+		this.commitText_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public deletePreviousCharacter() : T {
+		this.resetIfRequired();
+		if (this.deletePreviousCharacter_ == null || this.deletePreviousCharacter_ == undefined) {
+			this.deletePreviousCharacter_ = new CommandAttr<void>();
+		}
+		
+		this.deletePreviousCharacter_.setSetter(true);
+		
+		this.orderSet++;
+		this.deletePreviousCharacter_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public performEditorActionDone() : T {
+		this.resetIfRequired();
+		if (this.performEditorActionDone_ == null || this.performEditorActionDone_ == undefined) {
+			this.performEditorActionDone_ = new CommandAttr<void>();
+		}
+		
+		this.performEditorActionDone_.setSetter(true);
+		
+		this.orderSet++;
+		this.performEditorActionDone_.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

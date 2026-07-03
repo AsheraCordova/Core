@@ -69,6 +69,9 @@
 
 - (bool)checkIosVersionWithNSString:(NSString *)v;
 
++ (void)commitTextWithId:(id)activeTextInput
+            withNSString:(NSString *)text;
+
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params;
 
@@ -78,6 +81,8 @@
 - (id)createWrapperViewHolderWithInt:(int32_t)viewType;
 
 - (id)createWrapperViewHolderNativeWithInt:(int32_t)viewType;
+
++ (void)deleteBackwardWithId:(id)activeTextInput;
 
 - (void)drawableStateChanged;
 
@@ -145,6 +150,8 @@
 - (id<ASIWidget>)newInstance OBJC_METHOD_FAMILY_NONE;
 
 - (void)onRtlPropertiesChangedWithInt:(int32_t)layoutDirection;
+
++ (void)performDoneWithId:(id)activeTextInput;
 
 - (void)requestLayout;
 
@@ -233,6 +240,12 @@ FOUNDATION_EXPORT void ASUITextViewImpl_initWithNSString_withNSString_(ASUITextV
 FOUNDATION_EXPORT ASUITextViewImpl *new_ASUITextViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASUITextViewImpl *create_ASUITextViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT void ASUITextViewImpl_commitTextWithId_withNSString_(id activeTextInput, NSString *text);
+
+FOUNDATION_EXPORT void ASUITextViewImpl_performDoneWithId_(id activeTextInput);
+
+FOUNDATION_EXPORT void ASUITextViewImpl_deleteBackwardWithId_(id activeTextInput);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl)
 

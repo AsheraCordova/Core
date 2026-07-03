@@ -37,7 +37,9 @@
     { NULL, "LNSObject;", 0x401, 8, 6, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "F", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x401, 9, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 11, 10, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 12, 6, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -53,10 +55,12 @@
   methods[8].selector = @selector(getFromTempCacheWithNSString:);
   methods[9].selector = @selector(getRootWidget);
   methods[10].selector = @selector(getScaleFactor);
-  methods[11].selector = @selector(getPreferenceWithNSString:);
+  methods[11].selector = @selector(addBackPressCallBackWithJavaLangRunnable:);
+  methods[12].selector = @selector(removeBackPressCallBackWithJavaLangRunnable:);
+  methods[13].selector = @selector(getPreferenceWithNSString:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "sendEventMessage", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "storeUserData", "LNSString;LNSObject;", "getUserData", "LNSString;", "storeInTempCache", "getFromTempCache", "getPreference" };
-  static const J2ObjcClassInfo _ASIActivity = { "IActivity", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 12, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "sendEventMessage", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "storeUserData", "LNSString;LNSObject;", "getUserData", "LNSString;", "storeInTempCache", "getFromTempCache", "addBackPressCallBack", "LJavaLangRunnable;", "removeBackPressCallBack", "getPreference" };
+  static const J2ObjcClassInfo _ASIActivity = { "IActivity", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 14, 0, -1, -1, -1, -1, -1 };
   return &_ASIActivity;
 }
 

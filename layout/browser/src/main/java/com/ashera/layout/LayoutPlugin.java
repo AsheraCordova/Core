@@ -60,6 +60,6 @@ public class LayoutPlugin  {
         
         WidgetFactory.register(new com.ashera.layout.ImageViewImpl());
         com.ashera.core.FragmentManagerFactory.registerManager("test", new DummyFragmentManager());
-
+        com.ashera.widget.EventCommandFactory.registerCommand("keyboardevent", new CustomKeyboardEventCommand());
     }
 }

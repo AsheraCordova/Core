@@ -329,6 +329,11 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements com.ashe
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("setFocus").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectAll").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("inputView").withType("template").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("inputViewParent").withType("id").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("commitText").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("deletePreviousCharacter").withType("nil"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("performEditorActionDone").withType("nil"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp"));
@@ -1393,6 +1398,56 @@ if (Build.VERSION.SDK_INT >= 11) {
 
 			}
 			break;
+			case "inputView": {
+				
+
+
+		setInputView(strValue, objValue);
+
+
+
+			}
+			break;
+			case "inputViewParent": {
+				
+
+
+		setInputViewParent(strValue, objValue);
+
+
+
+			}
+			break;
+			case "commitText": {
+				
+
+
+		commitText(objValue);
+
+
+
+			}
+			break;
+			case "deletePreviousCharacter": {
+				
+
+
+		deletePreviousCharacter();
+
+
+
+			}
+			break;
+			case "performEditorActionDone": {
+				
+
+
+		performEditorActionDone();
+
+
+
+			}
+			break;
 			case "hintTextFormat": {
 				
 
@@ -2037,6 +2092,177 @@ return null;				}
 		}
 	}
 
+
+	//start - inputView
+	private Runnable backPressCallBack;
+	private String inputViewParentId;
+	private String keyboardContainerId;;
+	private void setInputView(String strValue, Object objValue) {
+		hideSoftInputOnFocus();
+		setAttribute("onFocusChange", new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View view, boolean hasFocus) {
+				handleFocusChange(strValue, objValue, hasFocus);	
+			}
+			
+		}, false); 
+	}
+	
+	private void setInputViewParent(String strValue, Object objValue) {
+		inputViewParentId = strValue;
+	}
+
+	private void handleFocusChange(String strValue, Object objValue, boolean hasFocus) {
+		if (hasFocus) {
+			if (isHandleFocusAsync()) {
+				handleFocusInAsync(strValue, objValue);
+			} else {
+				handleFocusIn(strValue, objValue);
+			}
+		} else {
+			if (isHandleFocusAsync()) {
+				handleFocusOutAsync();
+			} else {
+				handleFocusOut();
+			}
+		}
+	}
+
+	private void handleFocusIn(String strValue, Object objValue) {
+		keyboardContainerId = strValue;
+		// hide the system keyboard first
+		com.ashera.core.IActivity rootActivity = fragment.getRootActivity();		
+		hideSystemKeyboard(rootActivity);
+		
+		// show the custom keyboard
+		showCustomKeyboard(strValue, objValue);
+		
+		// back press handling
+		backPressCallBack = () -> {
+			handleFocusOut();
+		};
+		rootActivity.addBackPressCallBack(backPressCallBack);
+	}
+	
+	private void handleFocusInAsync(String strValue, Object objValue) {
+		PluginInvoker.postDelayed(() -> {
+			handleFocusIn(strValue, objValue);
+		}, 1);
+
+	}
+
+	private void showCustomKeyboard(String strValue, Object objValue) {
+		HasWidgets rootWidget = (HasWidgets) fragment.getRootFragment().getRootWidget();
+		IWidget parent = null;
+		
+		if (inputViewParentId != null) {
+			parent = rootWidget.findWidgetById(inputViewParentId);
+		}
+		
+		if (parent == null) {
+			parent = rootWidget;
+		}
+		
+		IWidget keyBoard = parent.findWidgetById(strValue);
+		
+		if (keyBoard == null) {
+			IWidget widget = ((IWidget) objValue).loadLazyWidgets((HasWidgets) parent);
+			widget.setId(strValue);
+			keyBoard = widget;
+		}
+		
+		keyBoard.setAttribute("zIndex", "100", false);
+		View keyboardView = (View) keyBoard.asWidget();
+		keyBoard.storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, this);
+		if (keyboardView.getLayoutParams() instanceof android.widget.RelativeLayout.LayoutParams) {
+			((android.widget.RelativeLayout.LayoutParams) keyboardView.getLayoutParams()).addRule(android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM);
+		}
+		keyBoard.setAttribute("visibility", View.VISIBLE, true);
+		addKeyboardListener(keyBoard);
+	}
+	
+	private void handleFocusOutAsync() {
+		PluginInvoker.postDelayed(() -> {
+			if (isKeyBoardPressed()) {
+				return;
+			}
+			handleFocusOut();
+		}, 0);
+
+	}
+	private void handleFocusOut() {
+		com.ashera.core.IActivity rootActivity = fragment.getRootActivity();
+		HasWidgets rootWidget = (HasWidgets) fragment.getRootFragment().getRootWidget();		
+		IWidget keyBoard = rootWidget.findWidgetById(keyboardContainerId);
+
+		if (keyBoard != null) {
+			keyBoard.storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, null);
+			if (backPressCallBack != null) {
+				rootActivity.removeBackPressCallBack(backPressCallBack);
+			}
+			hideKeyBoard(keyboardContainerId);
+			removeKeyboardListeners(keyBoard);
+		}
+		
+		backPressCallBack = null;
+	}
+	
+	private void hideKeyBoard(String strValue) {
+		HasWidgets rootWidget = (HasWidgets) fragment.getRootFragment().getRootWidget();
+		IWidget keyBoard = rootWidget.findWidgetById(strValue);
+
+		if (keyBoard != null) {
+			keyBoard.setAttribute("visibility", View.GONE, true);
+		}
+	}
+	//end - inputView
+	private void hideSoftInputOnFocus() {
+		appCompatAutoCompleteTextView.setShowSoftInputOnFocus(false);
+	}
+
+
+	private void hideSystemKeyboard(com.ashera.core.IActivity rootActivity) {
+		android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) ((Context) rootActivity).getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(appCompatAutoCompleteTextView.getWindowToken(), 0);
+	}
+
+	private void deletePreviousCharacter() {
+		android.view.inputmethod.EditorInfo editorInfo = new android.view.inputmethod.EditorInfo();
+		android.view.inputmethod.InputConnection inputConnection = appCompatAutoCompleteTextView.onCreateInputConnection(editorInfo);
+		inputConnection.deleteSurroundingText(1, 0);
+		
+	}
+
+	private void commitText(Object objValue) {
+		android.view.inputmethod.EditorInfo editorInfo = new android.view.inputmethod.EditorInfo();
+		android.view.inputmethod.InputConnection inputConnection = appCompatAutoCompleteTextView.onCreateInputConnection(editorInfo);
+		inputConnection.commitText((String)objValue, 1);
+		
+	}
+	
+
+
+	private void addKeyboardListener(IWidget keyBoard) {
+		
+	}
+
+	private boolean isKeyBoardPressed() {
+		return false;
+	}
+	
+	private boolean isHandleFocusAsync() {
+		return false;
+	}
+	private void removeKeyboardListeners(IWidget keyBoard) {
+		
+	}
+	
+	private void performEditorActionDone() {
+//		android.view.inputmethod.EditorInfo editorInfo = new android.view.inputmethod.EditorInfo();
+//		android.view.inputmethod.InputConnection inputConnection = appCompatAutoCompleteTextView.onCreateInputConnection(editorInfo);
+//		inputConnection.performEditorAction(android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
+		setFocus(false);
+	}
 	
 
 

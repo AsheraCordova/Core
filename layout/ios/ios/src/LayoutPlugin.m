@@ -14,8 +14,10 @@
 #include "CheckBoxImpl.h"
 #include "ChronometerImpl.h"
 #include "ConverterFactory.h"
+#include "CustomKeyboardEventCommand.h"
 #include "DummyFragmentManager.h"
 #include "EditTextImpl.h"
+#include "EventCommandFactory.h"
 #include "FragmentManagerFactory.h"
 #include "FrameLayoutImpl.h"
 #include "HorizontalScrollViewImpl.h"
@@ -145,6 +147,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASVideoViewImpl_init());
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASViewGroupImpl_ClipPaddingMaskCommand_initWithNSString_(@"clipToPadding"));
   ASFragmentManagerFactory_registerManagerWithNSString_withASIFragmentManager_(@"test", new_ASDummyFragmentManager_init());
+  ASEventCommandFactory_registerCommandWithNSString_withASEventCommand_(@"keyboardevent", new_ASCustomKeyboardEventCommand_init());
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLayoutPlugin)

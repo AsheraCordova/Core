@@ -63,5 +63,6 @@ public class LayoutPlugin  {
         //end - widgets
 		ConverterFactory.registerCommandConverter(new ClipPaddingMaskCommand("clipToPadding"));
 		com.ashera.core.FragmentManagerFactory.registerManager("test", new DummyFragmentManager());
+		com.ashera.widget.EventCommandFactory.registerCommand("keyboardevent", new CustomKeyboardEventCommand());
     }
 }

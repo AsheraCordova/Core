@@ -100,5 +100,13 @@ public class CordovaActivity extends r.android.app.Activity implements IActivity
 	public String getPreference(String name) {
 		return delegate.getPreference(name);
 	}
+	@Override
+	public void addBackPressCallBack(Runnable callBack) {
+		
+	}
+	@Override
+	public void removeBackPressCallBack(Runnable callBack) {
+		
+	}
 
 }

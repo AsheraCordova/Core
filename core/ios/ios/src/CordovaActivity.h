@@ -28,6 +28,7 @@
 @class JavaLangFloat;
 @class NSString;
 @protocol ASIFragment;
+@protocol JavaLangRunnable;
 @protocol JavaUtilMap;
 
 @interface ASCordovaActivity : ADActivity < ASIActivity >
@@ -35,6 +36,8 @@
 #pragma mark Public
 
 - (instancetype)initWithASIActivity:(id<ASIActivity>)delegate;
+
+- (void)addBackPressCallBackWithJavaLangRunnable:(id<JavaLangRunnable>)callBack;
 
 - (id<ASIFragment>)getActiveRootFragment;
 
@@ -53,6 +56,8 @@
 - (id)getUserDataWithNSString:(NSString *)key;
 
 - (void)onDeviceReady;
+
+- (void)removeBackPressCallBackWithJavaLangRunnable:(id<JavaLangRunnable>)callBack;
 
 - (void)sendEventMessageWithJavaUtilMap:(id<JavaUtilMap>)dataMap;
 

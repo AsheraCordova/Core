@@ -11,6 +11,7 @@
 #include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributedString.h"
+#include "BaseHasWidgets.h"
 #include "BaseMeasurableView.h"
 #include "BaseWidget.h"
 #include "Color.h"
@@ -25,6 +26,7 @@
 #include "FontDescriptor.h"
 #include "FontMetricsDescriptor.h"
 #include "FormElement.h"
+#include "FrameLayoutImpl.h"
 #include "GravityConverter.h"
 #include "HasWidgets.h"
 #include "Html.h"
@@ -43,10 +45,12 @@
 #include "Layout.h"
 #include "LayoutNativeVars.h"
 #include "MeasureEvent.h"
+#include "ModelScope.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
 #include "Rect.h"
 #include "RectM.h"
+#include "RelativeLayout.h"
 #include "ResourceBundleUtils.h"
 #include "SimpleWrapableView.h"
 #include "TextDirectionHeuristic.h"
@@ -54,6 +58,7 @@
 #include "TextWatcher.h"
 #include "UITextViewImpl.h"
 #include "View.h"
+#include "ViewGroup.h"
 #include "ViewGroupImpl.h"
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
@@ -468,6 +473,18 @@
 - (void)setPickerView;
 
 - (void)setDatePicker;
+
+- (void)performEditorActionDone;
+
+- (void)deletePreviousCharacter;
+
+- (void)commitTextWithId:(id)objValue;
+
+- (void)setInputViewWithNSString:(NSString *)strValue
+                          withId:(id)objValue;
+
+- (void)handleFocusWithASIWidget:(id<ASIWidget>)widget
+                     withBoolean:(bool)hasFocus;
 
 - (void)setErrorWithNSString:(NSString *)message;
 
@@ -927,6 +944,16 @@ __attribute__((unused)) static void ASUITextViewImpl_setPickerView(ASUITextViewI
 
 __attribute__((unused)) static void ASUITextViewImpl_setDatePicker(ASUITextViewImpl *self);
 
+__attribute__((unused)) static void ASUITextViewImpl_performEditorActionDone(ASUITextViewImpl *self);
+
+__attribute__((unused)) static void ASUITextViewImpl_deletePreviousCharacter(ASUITextViewImpl *self);
+
+__attribute__((unused)) static void ASUITextViewImpl_commitTextWithId_(ASUITextViewImpl *self, id objValue);
+
+__attribute__((unused)) static void ASUITextViewImpl_setInputViewWithNSString_withId_(ASUITextViewImpl *self, NSString *strValue, id objValue);
+
+__attribute__((unused)) static void ASUITextViewImpl_handleFocusWithASIWidget_withBoolean_(ASUITextViewImpl *self, id<ASIWidget> widget, bool hasFocus);
+
 __attribute__((unused)) static void ASUITextViewImpl_setErrorWithNSString_(ASUITextViewImpl *self, NSString *message);
 
 __attribute__((unused)) static void ASUITextViewImpl_setHintTextFormatWithId_(ASUITextViewImpl *self, id objValue);
@@ -1078,6 +1105,29 @@ J2OBJC_FIELD_SETTER(ASUITextViewImpl_UITextViewExt, measureFinished_, ASMeasureE
 J2OBJC_FIELD_SETTER(ASUITextViewImpl_UITextViewExt, onLayoutEvent_, ASOnLayoutEvent *)
 J2OBJC_FIELD_SETTER(ASUITextViewImpl_UITextViewExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASUITextViewImpl_UITextViewExt, templates_, id<JavaUtilMap>)
+
+@interface ASUITextViewImpl_1 : NSObject < ADView_OnFocusChangeListener > {
+ @public
+  ASUITextViewImpl *this$0_;
+  id<ASIWidget> val$keyBoardView_;
+}
+
+- (instancetype)initWithASUITextViewImpl:(ASUITextViewImpl *)outer$
+                           withASIWidget:(id<ASIWidget>)capture$0;
+
+- (void)onFocusChangeWithADView:(ADView *)view
+                    withBoolean:(bool)hasFocus;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASUITextViewImpl_1)
+
+__attribute__((unused)) static void ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(ASUITextViewImpl_1 *self, ASUITextViewImpl *outer$, id<ASIWidget> capture$0);
+
+__attribute__((unused)) static ASUITextViewImpl_1 *new_ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(ASUITextViewImpl *outer$, id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASUITextViewImpl_1 *create_ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(ASUITextViewImpl *outer$, id<ASIWidget> capture$0);
+
 
 @interface ASUITextViewImpl_OnEditorActionListener : NSObject < ADTextView_OnEditorActionListener, ASIListener > {
  @public
@@ -1319,6 +1369,10 @@ NSString *ASUITextViewImpl_GROUP_NAME = @"EditText";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosInputAccessoryViewDoneButton"])) withTypeWithNSString:@"resourcestring"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAllCaps"])) withTypeWithNSString:@"boolean"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"inputView"])) withTypeWithNSString:@"template"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"commitText"])) withTypeWithNSString:@"resourcestring"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"deletePreviousCharacter"])) withTypeWithNSString:@"nil"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"performEditorActionDone"])) withTypeWithNSString:@"nil"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"text"])) withTypeWithNSString:@"resourcestring"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"gravity"])) withTypeWithNSString:@"gravity"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textSize"])) withTypeWithNSString:@"dimensionsp"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
@@ -1382,7 +1436,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [((ASSimpleWrapableView *) nil_chk(simpleWrapableView_)) getWrappedView];
   ASViewImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, simpleWrapableView_, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"iosUsesStandardTextScaling", @"iosIsEditable", @"iosAllowsEditingTextAttributes", @"iosClearsOnInsertion", @"textIsSelectable", @"iosIsSelectable", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"enabled", @"textColorHighlight", @"drawableIconSize", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"autoText", @"capitalize", @"cursorVisible", @"numeric", @"digits", @"phoneNumber", @"inputType", @"imeOptions", @"selectAllOnFocus", @"selectAll", @"scrollHorizontally", @"singleLine", @"iosInputAccessoryViewDoneButton", @"textColor", @"textAllCaps", @"text", @"gravity", @"textSize", @"lineSpacingExtra", @"lineSpacingMultiplier", @"textColorHint", @"hint", @"onEditorAction", @"onFocusChange", @"onTextChange", @"onbeforeTextChange", @"onafterTextChange", @"iosInputView", @"hintTextFormat" }, 75)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"iosUsesStandardTextScaling", @"iosIsEditable", @"iosAllowsEditingTextAttributes", @"iosClearsOnInsertion", @"textIsSelectable", @"iosIsSelectable", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"enabled", @"textColorHighlight", @"drawableIconSize", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"autoText", @"capitalize", @"cursorVisible", @"numeric", @"digits", @"phoneNumber", @"inputType", @"imeOptions", @"selectAllOnFocus", @"selectAll", @"scrollHorizontally", @"singleLine", @"iosInputAccessoryViewDoneButton", @"textColor", @"textAllCaps", @"inputView", @"commitText", @"deletePreviousCharacter", @"performEditorActionDone", @"text", @"gravity", @"textSize", @"lineSpacingExtra", @"lineSpacingMultiplier", @"textColorHint", @"hint", @"onEditorAction", @"onFocusChange", @"onTextChange", @"onbeforeTextChange", @"onafterTextChange", @"iosInputView", @"hintTextFormat" }, 79)) {
     case 0:
     {
       [self setTextWithId:nativeWidget withId:objValue];
@@ -1688,70 +1742,90 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 61:
     {
-      [self setMyTextWithId:objValue];
+      ASUITextViewImpl_setInputViewWithNSString_withId_(self, strValue, objValue);
     }
     break;
     case 62:
     {
-      ASUITextViewImpl_setGravityWithId_(self, objValue);
+      ASUITextViewImpl_commitTextWithId_(self, objValue);
     }
     break;
     case 63:
     {
-      ASUITextViewImpl_setMyTextSizeWithId_(self, objValue);
+      ASUITextViewImpl_deletePreviousCharacter(self);
     }
     break;
     case 64:
     {
-      ASUITextViewImpl_setLineSpacingExtraWithId_(self, objValue);
+      ASUITextViewImpl_performEditorActionDone(self);
     }
     break;
     case 65:
     {
-      ASUITextViewImpl_setLineSpacingMultiplierWithId_(self, objValue);
+      [self setMyTextWithId:objValue];
     }
     break;
     case 66:
     {
-      ASUITextViewImpl_setHintColorWithId_(self, objValue);
+      ASUITextViewImpl_setGravityWithId_(self, objValue);
     }
     break;
     case 67:
     {
-      ASUITextViewImpl_setHintWithId_(self, objValue);
+      ASUITextViewImpl_setMyTextSizeWithId_(self, objValue);
     }
     break;
     case 68:
     {
-      ASUITextViewImpl_setOnEditorActionWithId_(self, objValue);
+      ASUITextViewImpl_setLineSpacingExtraWithId_(self, objValue);
     }
     break;
     case 69:
     {
-      ASUITextViewImpl_setOnFocusWithId_(self, objValue);
+      ASUITextViewImpl_setLineSpacingMultiplierWithId_(self, objValue);
     }
     break;
     case 70:
     {
-      ASUITextViewImpl_setOnTextChangeWithId_(self, objValue);
+      ASUITextViewImpl_setHintColorWithId_(self, objValue);
     }
     break;
     case 71:
     {
-      ASUITextViewImpl_setBeforeOnTextChangeWithId_(self, objValue);
+      ASUITextViewImpl_setHintWithId_(self, objValue);
     }
     break;
     case 72:
     {
-      ASUITextViewImpl_setOnAfterTextChangeWithId_(self, objValue);
+      ASUITextViewImpl_setOnEditorActionWithId_(self, objValue);
     }
     break;
     case 73:
     {
-      ASUITextViewImpl_setInputViewWithId_(self, objValue);
+      ASUITextViewImpl_setOnFocusWithId_(self, objValue);
     }
     break;
     case 74:
+    {
+      ASUITextViewImpl_setOnTextChangeWithId_(self, objValue);
+    }
+    break;
+    case 75:
+    {
+      ASUITextViewImpl_setBeforeOnTextChangeWithId_(self, objValue);
+    }
+    break;
+    case 76:
+    {
+      ASUITextViewImpl_setOnAfterTextChangeWithId_(self, objValue);
+    }
+    break;
+    case 77:
+    {
+      ASUITextViewImpl_setInputViewWithId_(self, objValue);
+    }
+    break;
+    case 78:
     {
       ASUITextViewImpl_setHintTextFormatWithId_(self, objValue);
     }
@@ -2794,6 +2868,41 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASUITextViewImpl_setDatePicker(self);
 }
 
++ (void)commitTextWithId:(id)activeTextInput
+            withNSString:(NSString *)text {
+  ASUITextViewImpl_commitTextWithId_withNSString_(activeTextInput, text);
+}
+
++ (void)performDoneWithId:(id)activeTextInput {
+  ASUITextViewImpl_performDoneWithId_(activeTextInput);
+}
+
++ (void)deleteBackwardWithId:(id)activeTextInput {
+  ASUITextViewImpl_deleteBackwardWithId_(activeTextInput);
+}
+
+- (void)performEditorActionDone {
+  ASUITextViewImpl_performEditorActionDone(self);
+}
+
+- (void)deletePreviousCharacter {
+  ASUITextViewImpl_deletePreviousCharacter(self);
+}
+
+- (void)commitTextWithId:(id)objValue {
+  ASUITextViewImpl_commitTextWithId_(self, objValue);
+}
+
+- (void)setInputViewWithNSString:(NSString *)strValue
+                          withId:(id)objValue {
+  ASUITextViewImpl_setInputViewWithNSString_withId_(self, strValue, objValue);
+}
+
+- (void)handleFocusWithASIWidget:(id<ASIWidget>)widget
+                     withBoolean:(bool)hasFocus {
+  ASUITextViewImpl_handleFocusWithASIWidget_withBoolean_(self, widget, hasFocus);
+}
+
 - (NSString *)getTextEntered {
   return (NSString *) cast_chk(ASUITextViewImpl_getMyText(self), [NSString class]);
 }
@@ -3368,30 +3477,38 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x102, 128, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 129, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 130, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 131, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 129, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 127, 51, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 132, 133, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 129, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 134, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 130, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 131, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 132, 133, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 135, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 136, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 137, 138, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 62, 133, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 62, 138, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 134, 133, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 139, 138, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 135, 133, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 140, 138, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 136, 133, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 141, 138, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 137, 133, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 142, 138, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 138, 133, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 143, 138, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 139, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 140, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 141, 87, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 144, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 145, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 146, 87, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -3399,39 +3516,39 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 142, 143, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 147, 148, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 144, 145, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 146, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 147, 148, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 149, 13, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 149, 150, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 151, 13, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, 152, 153, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, 154, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 150, 34, -1, 35, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 151, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 152, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 155, 34, -1, 35, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 156, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 157, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 153, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 154, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 158, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 159, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 155, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 156, 157, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 158, 143, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 160, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 161, 162, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 163, 148, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 159, 87, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 164, 87, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 160, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 161, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 162, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 165, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 166, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 167, 13, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 163, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 168, 7, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 164, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 169, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -3626,94 +3743,102 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[186].selector = @selector(setNativeInputViewWithId:);
   methods[187].selector = @selector(setPickerView);
   methods[188].selector = @selector(setDatePicker);
-  methods[189].selector = @selector(getTextEntered);
-  methods[190].selector = @selector(isViewVisible);
-  methods[191].selector = @selector(focus);
-  methods[192].selector = @selector(setErrorWithNSString:);
-  methods[193].selector = @selector(resetError);
-  methods[194].selector = @selector(showErrorWithNSString:);
-  methods[195].selector = @selector(setHintTextFormatWithId:);
-  methods[196].selector = @selector(setTextWithId:withId:);
-  methods[197].selector = @selector(getText);
-  methods[198].selector = @selector(setTextColorWithId:withId:);
-  methods[199].selector = @selector(getTextColor);
-  methods[200].selector = @selector(setUsesStandardTextScalingWithId:withId:);
-  methods[201].selector = @selector(getUsesStandardTextScaling);
-  methods[202].selector = @selector(setIsEditableWithId:withId:);
-  methods[203].selector = @selector(getIsEditable);
-  methods[204].selector = @selector(setAllowsEditingTextAttributesWithId:withId:);
-  methods[205].selector = @selector(getAllowsEditingTextAttributes);
-  methods[206].selector = @selector(setClearsOnInsertionWithId:withId:);
-  methods[207].selector = @selector(getClearsOnInsertion);
-  methods[208].selector = @selector(setIsSelectableWithId:withId:);
-  methods[209].selector = @selector(getIsSelectable);
-  methods[210].selector = @selector(checkIosVersionWithNSString:);
-  methods[211].selector = @selector(setIdWithNSString:);
-  methods[212].selector = @selector(setVisibleWithBoolean:);
-  methods[213].selector = @selector(requestLayout);
-  methods[214].selector = @selector(invalidate);
-  methods[215].selector = @selector(createSimpleWrapableView);
-  methods[216].selector = @selector(hasScrollView);
-  methods[217].selector = @selector(isViewWrapped);
-  methods[218].selector = @selector(addForegroundIfNeeded);
-  methods[219].selector = @selector(getForeground);
-  methods[220].selector = @selector(setForegroundFrameWithInt:withInt:withInt:withInt:);
-  methods[221].selector = @selector(asNativeWidget);
-  methods[222].selector = @selector(invalidateWrapViewHolder);
-  methods[223].selector = @selector(createWrapperViewWithId:withInt:);
-  methods[224].selector = @selector(createWrapperViewHolderWithInt:);
-  methods[225].selector = @selector(nativeAddForeGroundWithASIWidget:);
-  methods[226].selector = @selector(createWrapperViewHolderNativeWithInt:);
-  methods[227].selector = @selector(getScrollView);
-  methods[228].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[229].selector = @selector(nativeCreateViewWithInt:);
-  methods[230].selector = @selector(createPlaceHolderWithNSString:);
-  methods[231].selector = @selector(updatePlaceHolderVisibility);
-  methods[232].selector = @selector(syncPlaceholderLabel);
-  methods[233].selector = @selector(setHintWithId:);
-  methods[234].selector = @selector(setHintColorWithId:);
-  methods[235].selector = @selector(getHint);
-  methods[236].selector = @selector(nativeGetHint);
-  methods[237].selector = @selector(nativeSetHintColorWithId:);
-  methods[238].selector = @selector(updateBoundsWithInt:withInt:withId:withId:);
-  methods[239].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
-  methods[240].selector = @selector(addMinMaxListener);
-  methods[241].selector = @selector(isEllipsized);
-  methods[242].selector = @selector(nativeSetEnabledWithBoolean:);
-  methods[243].selector = @selector(getEllipsize);
-  methods[244].selector = @selector(nativeSetMaxLinesWithInt:);
-  methods[245].selector = @selector(setEllipsizeWithId:withNSString:);
-  methods[246].selector = @selector(nativeSetLineBreakModeWithInt:);
-  methods[247].selector = @selector(nativeGetLineBreakMode);
-  methods[248].selector = @selector(setLineSpacing);
-  methods[249].selector = @selector(nativeSetLayoutManagerDelegate);
-  methods[250].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[251].selector = @selector(measureWidth);
-  methods[252].selector = @selector(measureHeightWithInt:);
-  methods[253].selector = @selector(nativeAddTextFieldDidChange);
+  methods[189].selector = @selector(commitTextWithId:withNSString:);
+  methods[190].selector = @selector(performDoneWithId:);
+  methods[191].selector = @selector(deleteBackwardWithId:);
+  methods[192].selector = @selector(performEditorActionDone);
+  methods[193].selector = @selector(deletePreviousCharacter);
+  methods[194].selector = @selector(commitTextWithId:);
+  methods[195].selector = @selector(setInputViewWithNSString:withId:);
+  methods[196].selector = @selector(handleFocusWithASIWidget:withBoolean:);
+  methods[197].selector = @selector(getTextEntered);
+  methods[198].selector = @selector(isViewVisible);
+  methods[199].selector = @selector(focus);
+  methods[200].selector = @selector(setErrorWithNSString:);
+  methods[201].selector = @selector(resetError);
+  methods[202].selector = @selector(showErrorWithNSString:);
+  methods[203].selector = @selector(setHintTextFormatWithId:);
+  methods[204].selector = @selector(setTextWithId:withId:);
+  methods[205].selector = @selector(getText);
+  methods[206].selector = @selector(setTextColorWithId:withId:);
+  methods[207].selector = @selector(getTextColor);
+  methods[208].selector = @selector(setUsesStandardTextScalingWithId:withId:);
+  methods[209].selector = @selector(getUsesStandardTextScaling);
+  methods[210].selector = @selector(setIsEditableWithId:withId:);
+  methods[211].selector = @selector(getIsEditable);
+  methods[212].selector = @selector(setAllowsEditingTextAttributesWithId:withId:);
+  methods[213].selector = @selector(getAllowsEditingTextAttributes);
+  methods[214].selector = @selector(setClearsOnInsertionWithId:withId:);
+  methods[215].selector = @selector(getClearsOnInsertion);
+  methods[216].selector = @selector(setIsSelectableWithId:withId:);
+  methods[217].selector = @selector(getIsSelectable);
+  methods[218].selector = @selector(checkIosVersionWithNSString:);
+  methods[219].selector = @selector(setIdWithNSString:);
+  methods[220].selector = @selector(setVisibleWithBoolean:);
+  methods[221].selector = @selector(requestLayout);
+  methods[222].selector = @selector(invalidate);
+  methods[223].selector = @selector(createSimpleWrapableView);
+  methods[224].selector = @selector(hasScrollView);
+  methods[225].selector = @selector(isViewWrapped);
+  methods[226].selector = @selector(addForegroundIfNeeded);
+  methods[227].selector = @selector(getForeground);
+  methods[228].selector = @selector(setForegroundFrameWithInt:withInt:withInt:withInt:);
+  methods[229].selector = @selector(asNativeWidget);
+  methods[230].selector = @selector(invalidateWrapViewHolder);
+  methods[231].selector = @selector(createWrapperViewWithId:withInt:);
+  methods[232].selector = @selector(createWrapperViewHolderWithInt:);
+  methods[233].selector = @selector(nativeAddForeGroundWithASIWidget:);
+  methods[234].selector = @selector(createWrapperViewHolderNativeWithInt:);
+  methods[235].selector = @selector(getScrollView);
+  methods[236].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[237].selector = @selector(nativeCreateViewWithInt:);
+  methods[238].selector = @selector(createPlaceHolderWithNSString:);
+  methods[239].selector = @selector(updatePlaceHolderVisibility);
+  methods[240].selector = @selector(syncPlaceholderLabel);
+  methods[241].selector = @selector(setHintWithId:);
+  methods[242].selector = @selector(setHintColorWithId:);
+  methods[243].selector = @selector(getHint);
+  methods[244].selector = @selector(nativeGetHint);
+  methods[245].selector = @selector(nativeSetHintColorWithId:);
+  methods[246].selector = @selector(updateBoundsWithInt:withInt:withId:withId:);
+  methods[247].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[248].selector = @selector(addMinMaxListener);
+  methods[249].selector = @selector(isEllipsized);
+  methods[250].selector = @selector(nativeSetEnabledWithBoolean:);
+  methods[251].selector = @selector(getEllipsize);
+  methods[252].selector = @selector(nativeSetMaxLinesWithInt:);
+  methods[253].selector = @selector(setEllipsizeWithId:withNSString:);
+  methods[254].selector = @selector(nativeSetLineBreakModeWithInt:);
+  methods[255].selector = @selector(nativeGetLineBreakMode);
+  methods[256].selector = @selector(setLineSpacing);
+  methods[257].selector = @selector(nativeSetLayoutManagerDelegate);
+  methods[258].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[259].selector = @selector(measureWidth);
+  methods[260].selector = @selector(measureHeightWithInt:);
+  methods[261].selector = @selector(nativeAddTextFieldDidChange);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "FOREGROUND_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 165, -1, -1 },
-    { "VIEW_HOLDER_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 166, -1, -1 },
-    { "WIDGET_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 167, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 168, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 169, -1, -1 },
+    { "FOREGROUND_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 170, -1, -1 },
+    { "VIEW_HOLDER_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 171, -1, -1 },
+    { "WIDGET_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 172, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 173, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 174, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADTextView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 170, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 175, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 171, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 176, -1 },
     { "mSpacingAdd_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mSpacingMult_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "locale_", "LJavaUtilLocale;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "regexSpecialCharacters", "LJavaUtilList;", .constantValue.asLong = 0, 0xa, -1, 172, 173, -1 },
+    { "regexSpecialCharacters", "LJavaUtilList;", .constantValue.asLong = 0, 0xa, -1, 177, 178, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASUITextViewImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASUITextViewImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASUITextViewImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 174, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 175, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 179, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 180, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASUITextViewImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "paddingLeft_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paddingRight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3736,7 +3861,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "count_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "after_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "str_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "textWatchers_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 171, -1 },
+    { "textWatchers_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 176, -1 },
     { "textChangedListener_", "LADTextWatcher;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "textAllCaps_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "simpleWrapableView_", "LASSimpleWrapableView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3745,8 +3870,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "callMeasureOnChange_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "lineSpacing_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setLineSpacingMultiplier", "setLineSpacingExtra", "setNumeric", "setDigits", "drawableStateChange", "LNSString;LADDrawable;", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setTextColor", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "adjustContentSize", "II", "isContentOffsetCorrectionNeeded", "setContentOffset", "ILNSObject;", "setTextColorHighlight", "setMyText", "nativeTriggerChangeHandlers", "nativeTriggerBeforeChangeHandlers", "setCursorVisible", "nativeGetTintColor", "Z", "setCapitalize", "nativeSetCapitalize", "setAutoText", "nativeSetCorrectionType", "setMaxLength", "setEnabled", "getLocaleValueFromRS", "numericPatternMatches", "addNumericListener", "LJavaUtilRegexPattern;", "setPhoneNumber", "nativeSetPhoneNumber", "setInputType", "nativeSetKeyboardType", "setImeOptions", "nativeSetImeOptions", "setOnEditorAction", "setInputAccessoryViewDoneButton", "nativeSetInputAccessoryViewDoneButton", "setOnFocus", "setSelectAllOnFocus", "setSelectAll", "nativeSetSelectAll", "F", "setSingleLine", "setScrollHorizontally", "nativeSetScrollEnabled", "LNSObject;Z", "setTextColorLink", "LADColorStateList;", "handleOnBeforeTextChange", "LNSString;III", "getTextChangedListener", "setOnAfterTextChange", "setBeforeOnTextChange", "setOnTextChange", "setTextAllCaps", "nativeSetContentSize", "LNSObject;II", "setInputView", "setNativeInputView", "setError", "showError", "setHintTextFormat", "setText", "LNSObject;LNSObject;", "setUsesStandardTextScaling", "setIsEditable", "setAllowsEditingTextAttributes", "setClearsOnInsertion", "setIsSelectable", "checkIosVersion", "setId", "setVisible", "setForegroundFrame", "IIII", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "nativeCreate", "nativeCreateView", "createPlaceHolder", "setHint", "setHintColor", "nativeSetHintColor", "updateBounds", "IILNSObject;LNSObject;", "nativeMakeFrameForChildWidget", "nativeSetEnabled", "nativeSetMaxLines", "setEllipsize", "nativeSetLineBreakMode", "postSetAttribute", "measureHeight", &ASUITextViewImpl_FOREGROUND_REGEX, &ASUITextViewImpl_VIEW_HOLDER_REGEX, &ASUITextViewImpl_WIDGET_REGEX, &ASUITextViewImpl_LOCAL_NAME, &ASUITextViewImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASUITextViewImpl_regexSpecialCharacters, "Ljava/util/List<Ljava/lang/String;>;", &ASUITextViewImpl_ITALIC_FONT_TRAIT, &ASUITextViewImpl_BOLD_FONT_TRAIT, "LASUITextViewImpl_DrawableTintMode;LASUITextViewImpl_Font;LASUITextViewImpl_TextStyle;LASUITextViewImpl_Capitalize;LASUITextViewImpl_Numeric;LASUITextViewImpl_InputType;LASUITextViewImpl_ImeOptions;LASUITextViewImpl_InputView;LASUITextViewImpl_UITextViewExt;LASUITextViewImpl_OnEditorActionListener;LASUITextViewImpl_OnFocusChangeListener;LASUITextViewImpl_TextChangedListener;" };
-  static const J2ObjcClassInfo _ASUITextViewImpl = { "UITextViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 254, 51, -1, 176, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setLineSpacingMultiplier", "setLineSpacingExtra", "setNumeric", "setDigits", "drawableStateChange", "LNSString;LADDrawable;", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setTextColor", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "adjustContentSize", "II", "isContentOffsetCorrectionNeeded", "setContentOffset", "ILNSObject;", "setTextColorHighlight", "setMyText", "nativeTriggerChangeHandlers", "nativeTriggerBeforeChangeHandlers", "setCursorVisible", "nativeGetTintColor", "Z", "setCapitalize", "nativeSetCapitalize", "setAutoText", "nativeSetCorrectionType", "setMaxLength", "setEnabled", "getLocaleValueFromRS", "numericPatternMatches", "addNumericListener", "LJavaUtilRegexPattern;", "setPhoneNumber", "nativeSetPhoneNumber", "setInputType", "nativeSetKeyboardType", "setImeOptions", "nativeSetImeOptions", "setOnEditorAction", "setInputAccessoryViewDoneButton", "nativeSetInputAccessoryViewDoneButton", "setOnFocus", "setSelectAllOnFocus", "setSelectAll", "nativeSetSelectAll", "F", "setSingleLine", "setScrollHorizontally", "nativeSetScrollEnabled", "LNSObject;Z", "setTextColorLink", "LADColorStateList;", "handleOnBeforeTextChange", "LNSString;III", "getTextChangedListener", "setOnAfterTextChange", "setBeforeOnTextChange", "setOnTextChange", "setTextAllCaps", "nativeSetContentSize", "LNSObject;II", "setInputView", "setNativeInputView", "commitText", "performDone", "deleteBackward", "handleFocus", "LASIWidget;Z", "setError", "showError", "setHintTextFormat", "setText", "LNSObject;LNSObject;", "setUsesStandardTextScaling", "setIsEditable", "setAllowsEditingTextAttributes", "setClearsOnInsertion", "setIsSelectable", "checkIosVersion", "setId", "setVisible", "setForegroundFrame", "IIII", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "nativeCreate", "nativeCreateView", "createPlaceHolder", "setHint", "setHintColor", "nativeSetHintColor", "updateBounds", "IILNSObject;LNSObject;", "nativeMakeFrameForChildWidget", "nativeSetEnabled", "nativeSetMaxLines", "setEllipsize", "nativeSetLineBreakMode", "postSetAttribute", "measureHeight", &ASUITextViewImpl_FOREGROUND_REGEX, &ASUITextViewImpl_VIEW_HOLDER_REGEX, &ASUITextViewImpl_WIDGET_REGEX, &ASUITextViewImpl_LOCAL_NAME, &ASUITextViewImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASUITextViewImpl_regexSpecialCharacters, "Ljava/util/List<Ljava/lang/String;>;", &ASUITextViewImpl_ITALIC_FONT_TRAIT, &ASUITextViewImpl_BOLD_FONT_TRAIT, "LASUITextViewImpl_DrawableTintMode;LASUITextViewImpl_Font;LASUITextViewImpl_TextStyle;LASUITextViewImpl_Capitalize;LASUITextViewImpl_Numeric;LASUITextViewImpl_InputType;LASUITextViewImpl_ImeOptions;LASUITextViewImpl_InputView;LASUITextViewImpl_UITextViewExt;LASUITextViewImpl_OnEditorActionListener;LASUITextViewImpl_OnFocusChangeListener;LASUITextViewImpl_TextChangedListener;" };
+  static const J2ObjcClassInfo _ASUITextViewImpl = { "UITextViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 262, 51, -1, 181, -1, -1, -1 };
   return &_ASUITextViewImpl;
 }
 
@@ -4982,6 +5107,9 @@ void ASUITextViewImpl_setInputViewWithId_(ASUITextViewImpl *self, id objValue) {
       case 1:
       ASUITextViewImpl_setPickerView(self);
       break;
+      case 2:
+      ASUITextViewImpl_setDatePicker(self);
+      break;
       default:
       break;
     }
@@ -5007,6 +5135,69 @@ void ASUITextViewImpl_setDatePicker(ASUITextViewImpl *self) {
   UIDatePicker *datepicker = [UIDatePicker new];
   [datepicker setDatePickerMode:UIDatePickerModeDate];
   [((ASUITextView*)self.uiView) setInputView:datepicker];
+}
+
+void ASUITextViewImpl_commitTextWithId_withNSString_(id activeTextInput, NSString *text) {
+  ASUITextViewImpl_initialize();
+  id<UITextInput> input = (id<UITextInput>)activeTextInput;
+  if ([input conformsToProtocol:@protocol(UITextInput)]) {
+    [input insertText:text];
+  }
+}
+
+void ASUITextViewImpl_performDoneWithId_(id activeTextInput) {
+  ASUITextViewImpl_initialize();
+  UIView *view = (UIView *)activeTextInput;
+  [view resignFirstResponder];
+}
+
+void ASUITextViewImpl_deleteBackwardWithId_(id activeTextInput) {
+  ASUITextViewImpl_initialize();
+  id<UITextInput> input = (id<UITextInput>)activeTextInput;
+  if ([input conformsToProtocol:@protocol(UITextInput)]) {
+    [input deleteBackward];
+  }
+}
+
+void ASUITextViewImpl_performEditorActionDone(ASUITextViewImpl *self) {
+  ASUITextViewImpl_performDoneWithId_(self->uiView_);
+}
+
+void ASUITextViewImpl_deletePreviousCharacter(ASUITextViewImpl *self) {
+  ASUITextViewImpl_deleteBackwardWithId_(self->uiView_);
+}
+
+void ASUITextViewImpl_commitTextWithId_(ASUITextViewImpl *self, id objValue) {
+  ASUITextViewImpl_commitTextWithId_withNSString_(self->uiView_, (NSString *) cast_chk(objValue, [NSString class]));
+}
+
+void ASUITextViewImpl_setInputViewWithNSString_withId_(ASUITextViewImpl *self, NSString *strValue, id objValue) {
+  id<ASHasWidgets> rootWidget = (id<ASHasWidgets>) cast_check([((id<ASIFragment>) nil_chk([((id<ASIFragment>) nil_chk(self->fragment_)) getRootFragment])) getRootWidget], ASHasWidgets_class_());
+  id<ASIWidget> keyBoard = [((id<ASHasWidgets>) nil_chk(rootWidget)) findWidgetByIdWithNSString:strValue];
+  if (keyBoard == nil) {
+    id<ASIWidget> parent = ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(ASFrameLayoutImpl_LOCAL_NAME, ASFrameLayoutImpl_GROUP_NAME, rootWidget, false);
+    [((id<ASIWidget>) nil_chk(parent)) setAttributeWithNSString:@"visibility" withId:JavaLangInteger_valueOfWithInt_(ADView_INVISIBLE) withBoolean:true];
+    ADView *parentView = (ADView *) cast_chk([parent asWidget], [ADView class]);
+    ADRelativeLayout_LayoutParams *layoutParams = (ADRelativeLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(parentView)) getLayoutParams], [ADRelativeLayout_LayoutParams class]);
+    ((ADRelativeLayout_LayoutParams *) nil_chk(layoutParams))->width_ = ADViewGroup_LayoutParams_MATCH_PARENT;
+    layoutParams->height_ = ADViewGroup_LayoutParams_WRAP_CONTENT;
+    id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(((id<ASIWidget>) cast_check(objValue, ASIWidget_class_())))) loadLazyWidgetsWithASHasWidgets:(ASBaseHasWidgets *) cast_chk(parent, [ASBaseHasWidgets class])];
+    [((id<ASIWidget>) nil_chk(widget)) setIdWithNSString:strValue];
+    keyBoard = widget;
+  }
+  ASViewGroupImpl_removeViewWithId_([keyBoard asNativeWidget]);
+  ASUITextViewImpl_setNativeInputViewWithId_(self, [keyBoard asNativeWidget]);
+  id<ASIWidget> keyBoardView = keyBoard;
+  [self setAttributeWithNSString:@"onFocusChange" withId:new_ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(self, keyBoardView) withBoolean:false];
+}
+
+void ASUITextViewImpl_handleFocusWithASIWidget_withBoolean_(ASUITextViewImpl *self, id<ASIWidget> widget, bool hasFocus) {
+  if (hasFocus) {
+    [((id<ASIWidget>) nil_chk(widget)) storeModelToScopeWithNSString:@"activeEditText" withASModelScope:JreLoadEnum(ASModelScope, view) withId:self];
+  }
+  else {
+    [((id<ASIWidget>) nil_chk(widget)) storeModelToScopeWithNSString:@"activeEditText" withASModelScope:JreLoadEnum(ASModelScope, view) withId:nil];
+  }
 }
 
 void ASUITextViewImpl_setErrorWithNSString_(ASUITextViewImpl *self, NSString *message) {
@@ -6151,6 +6342,55 @@ ASUITextViewImpl_UITextViewExt *create_ASUITextViewImpl_UITextViewExt_initWithAS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewImpl_UITextViewExt)
+
+@implementation ASUITextViewImpl_1
+
+- (instancetype)initWithASUITextViewImpl:(ASUITextViewImpl *)outer$
+                           withASIWidget:(id<ASIWidget>)capture$0 {
+  ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(self, outer$, capture$0);
+  return self;
+}
+
+- (void)onFocusChangeWithADView:(ADView *)view
+                    withBoolean:(bool)hasFocus {
+  ASUITextViewImpl_handleFocusWithASIWidget_withBoolean_(this$0_, val$keyBoardView_, hasFocus);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithASUITextViewImpl:withASIWidget:);
+  methods[1].selector = @selector(onFocusChangeWithADView:withBoolean:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LASUITextViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$keyBoardView_", "LASIWidget;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LASUITextViewImpl;LASIWidget;", "onFocusChange", "LADView;Z", "LASUITextViewImpl;", "setInputViewWithNSString:withId:" };
+  static const J2ObjcClassInfo _ASUITextViewImpl_1 = { "", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8000, 2, 2, 3, -1, 4, -1, -1 };
+  return &_ASUITextViewImpl_1;
+}
+
+@end
+
+void ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(ASUITextViewImpl_1 *self, ASUITextViewImpl *outer$, id<ASIWidget> capture$0) {
+  self->this$0_ = outer$;
+  self->val$keyBoardView_ = capture$0;
+  NSObject_init(self);
+}
+
+ASUITextViewImpl_1 *new_ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(ASUITextViewImpl *outer$, id<ASIWidget> capture$0) {
+  J2OBJC_NEW_IMPL(ASUITextViewImpl_1, initWithASUITextViewImpl_withASIWidget_, outer$, capture$0)
+}
+
+ASUITextViewImpl_1 *create_ASUITextViewImpl_1_initWithASUITextViewImpl_withASIWidget_(ASUITextViewImpl *outer$, id<ASIWidget> capture$0) {
+  J2OBJC_CREATE_IMPL(ASUITextViewImpl_1, initWithASUITextViewImpl_withASIWidget_, outer$, capture$0)
+}
 
 @implementation ASUITextViewImpl_OnEditorActionListener
 
