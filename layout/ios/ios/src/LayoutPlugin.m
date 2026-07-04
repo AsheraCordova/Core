@@ -147,7 +147,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASVideoViewImpl_init());
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASViewGroupImpl_ClipPaddingMaskCommand_initWithNSString_(@"clipToPadding"));
   ASFragmentManagerFactory_registerManagerWithNSString_withASIFragmentManager_(@"test", new_ASDummyFragmentManager_init());
-  ASEventCommandFactory_registerCommandWithNSString_withASEventCommand_(@"keyboardevent", new_ASCustomKeyboardEventCommand_init());
+  ASEventCommandFactory_registerCommandWithNSString_withASEventCommand_(@"customkeyboard", new_ASCustomKeyboardEventCommand_init());
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLayoutPlugin)

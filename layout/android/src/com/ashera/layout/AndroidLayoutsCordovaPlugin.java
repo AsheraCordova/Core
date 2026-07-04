@@ -62,7 +62,7 @@ public class AndroidLayoutsCordovaPlugin extends CordovaPlugin {
         WidgetFactory.register(new com.ashera.layout.AudioViewImpl());
         //end - widgets
         com.ashera.core.FragmentManagerFactory.registerManager("test", new DummyFragmentManager());
-        com.ashera.widget.EventCommandFactory.registerCommand("keyboardevent", new CustomKeyboardEventCommand());
+        com.ashera.widget.EventCommandFactory.registerCommand("customkeyboard", new CustomKeyboardEventCommand());
 
     }
 }

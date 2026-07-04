@@ -3156,21 +3156,13 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 
 		ViewGroupImpl.removeView(keyBoard.asNativeWidget());
 		setNativeInputView(keyBoard.asNativeWidget());
-
-		IWidget keyBoardView = keyBoard;
-		setAttribute("onFocusChange", new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View view, boolean hasFocus) {
-				handleFocus(keyBoardView, hasFocus);
-			}
-		}, false); 
 	}
 	
-	private void handleFocus(IWidget widget, boolean hasFocus) {
-		if (hasFocus) {
-			widget.storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, this);
+	private void openOrCloseCustomKeyboard(boolean open) {
+		if (open) {
+			storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, this);
 		} else {
-			widget.storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, null);
+			storeModelToScope("activeEditText", com.ashera.model.ModelScope.view, null);
 		}
 	}
 	

@@ -2331,7 +2331,8 @@ return this.getDrawablePadding();				}
 		if (methodName.equals("nativeWidgetFor") && args[0].equals("onFocusChange")) {
 			return styledText;
 		}
-		return null;
+		
+		return invokeCustomKeyboardMethod(methodName);
 	}
 	
 
@@ -3152,38 +3153,51 @@ return this.getDrawablePadding();				}
 	private Runnable backPressCallBack;
 	private String inputViewParentId;
 	private String keyboardContainerId;;
+	private String cutomkeyboardLayoutId;
+	private Object cutomkeyboardLayoutTemplate;
 	private void setInputView(String strValue, Object objValue) {
+		cutomkeyboardLayoutId = strValue;
+		cutomkeyboardLayoutTemplate = objValue;
 		hideSoftInputOnFocus();
-		setAttribute("onFocusChange", new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View view, boolean hasFocus) {
-				handleFocusChange(strValue, objValue, hasFocus);	
-			}
-			
-		}, false); 
 	}
+
+	//start - invokeCustomKeyboardMethod
+	private java.lang.Object invokeCustomKeyboardMethod(java.lang.String methodName) {
+		switch (methodName) {
+		case "openCustomKeyboard":
+			openOrCloseCustomKeyboard(true);
+			break;
+		case "closeCustomKeyboard":
+			openOrCloseCustomKeyboard(false);
+			break;
+
+		default:
+			break;
+		}
+		return null;
+	}
+	//end - invokeCustomKeyboardMethod
 	
 	private void setInputViewParent(String strValue, Object objValue) {
 		inputViewParentId = strValue;
 	}
-
-	private void handleFocusChange(String strValue, Object objValue, boolean hasFocus) {
-		if (hasFocus) {
+	private void openOrCloseCustomKeyboard(boolean open) {
+		if (open) {
 			if (isHandleFocusAsync()) {
-				handleFocusInAsync(strValue, objValue);
+				openCustomKeyBoardAsync(cutomkeyboardLayoutId, cutomkeyboardLayoutTemplate);
 			} else {
-				handleFocusIn(strValue, objValue);
+				openCustomKeyBoard(cutomkeyboardLayoutId, cutomkeyboardLayoutTemplate);
 			}
 		} else {
 			if (isHandleFocusAsync()) {
-				handleFocusOutAsync();
+				closeCustomKeyBoardAsync();
 			} else {
-				handleFocusOut();
+				closeCustomKeyBoard();
 			}
 		}
 	}
 
-	private void handleFocusIn(String strValue, Object objValue) {
+	private void openCustomKeyBoard(String strValue, Object objValue) {
 		keyboardContainerId = strValue;
 		// hide the system keyboard first
 		com.ashera.core.IActivity rootActivity = fragment.getRootActivity();		
@@ -3194,14 +3208,14 @@ return this.getDrawablePadding();				}
 		
 		// back press handling
 		backPressCallBack = () -> {
-			handleFocusOut();
+			closeCustomKeyBoard();
 		};
 		rootActivity.addBackPressCallBack(backPressCallBack);
 	}
 	
-	private void handleFocusInAsync(String strValue, Object objValue) {
+	private void openCustomKeyBoardAsync(String strValue, Object objValue) {
 		PluginInvoker.postDelayed(() -> {
-			handleFocusIn(strValue, objValue);
+			openCustomKeyBoard(strValue, objValue);
 		}, 1);
 
 	}
@@ -3236,16 +3250,16 @@ return this.getDrawablePadding();				}
 		addKeyboardListener(keyBoard);
 	}
 	
-	private void handleFocusOutAsync() {
+	private void closeCustomKeyBoardAsync() {
 		PluginInvoker.postDelayed(() -> {
 			if (isKeyBoardPressed()) {
 				return;
 			}
-			handleFocusOut();
+			closeCustomKeyBoard();
 		}, 0);
 
 	}
-	private void handleFocusOut() {
+	private void closeCustomKeyBoard() {
 		com.ashera.core.IActivity rootActivity = fragment.getRootActivity();
 		HasWidgets rootWidget = (HasWidgets) fragment.getRootFragment().getRootWidget();		
 		IWidget keyBoard = rootWidget.findWidgetById(keyboardContainerId);
@@ -3294,6 +3308,7 @@ return this.getDrawablePadding();				}
 //		inputConnection.performEditorAction(r.android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
 		setFocus(false);
 	}
+	
 	
 
 	@SuppressLint("NewApi")

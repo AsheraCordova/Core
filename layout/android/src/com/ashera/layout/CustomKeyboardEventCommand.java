@@ -28,8 +28,17 @@ public class CustomKeyboardEventCommand implements com.ashera.widget.EventComman
 	public Object executeCommand(IWidget widget, Map<String, Object> eventObject, Object... params) {
 		String event = (String) eventObject.get(EventExpressionParser.KEY_SCRIPT_NAME);
 		switch (event) {
-			case "onClick": {
+			case "onKeyClick": {
 				handleKeyClicked(widget);
+				break;
+			}
+			
+			case "onEditTextFocusChanged": {
+				if (params[1].equals(Boolean.TRUE)) {
+					widget.invokeMethod("openCustomKeyboard");
+				} else {
+					widget.invokeMethod("closeCustomKeyboard");
+				}
 				break;
 			}
 		}

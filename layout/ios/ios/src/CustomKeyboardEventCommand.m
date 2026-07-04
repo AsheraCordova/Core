@@ -64,10 +64,20 @@ J2OBJC_IGNORE_DESIGNATED_END
                   withJavaUtilMap:(id<JavaUtilMap>)eventObject
                 withNSObjectArray:(IOSObjectArray *)params {
   NSString *event = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(eventObject)) getWithId:ASEventExpressionParser_KEY_SCRIPT_NAME], [NSString class]);
-  switch (JreIndexOfStr(event, (id[]){ @"onClick" }, 1)) {
+  switch (JreIndexOfStr(event, (id[]){ @"onKeyClick", @"onEditTextFocusChanged" }, 2)) {
     case 0:
     {
       ASCustomKeyboardEventCommand_handleKeyClickedWithASIWidget_(self, widget);
+      break;
+    }
+    case 1:
+    {
+      if ([nil_chk(IOSObjectArray_Get(nil_chk(params), 1)) isEqual:JreLoadStatic(JavaLangBoolean, TRUE)]) {
+        (void) [((id<ASIWidget>) nil_chk(widget)) invokeMethodWithNSString:@"openCustomKeyboard" withNSObjectArray:[IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]];
+      }
+      else {
+        (void) [((id<ASIWidget>) nil_chk(widget)) invokeMethodWithNSString:@"closeCustomKeyboard" withNSObjectArray:[IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]];
+      }
       break;
     }
   }
