@@ -639,7 +639,7 @@ The ScrollView, HorizontalScrollView, androidx.recyclerview.widget.RecyclerView 
 
 Name                	| Description
 -------------       	| -------------
-customScrollbarLayout	| Layout template of custom scrollbat i.e. [Custom Scrollbar sample](https://github.com/AsheraCordova/playground/blob/main/android_backup/res/layout/custom_scrollbar.xml)
+customScrollbarLayout	| Layout template of custom scrollbat i.e. [Custom Scrollbar sample](https://github.com/AsheraCordova/playground/blob/main/android_backup/res/layout/custom_scrollbarlayout.xml)
 overlayCustomScrollbar	| Attribute used to overlay scrollbar in swt as scrollbars cannot be hidden in swt.
 scrollbars				| Attribute used to hide the scrollbar. Used in android, web and ios platforms.
 
