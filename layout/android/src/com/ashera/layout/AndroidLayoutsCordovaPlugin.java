@@ -63,6 +63,7 @@ public class AndroidLayoutsCordovaPlugin extends CordovaPlugin {
         //end - widgets
         com.ashera.core.FragmentManagerFactory.registerManager("test", new DummyFragmentManager());
         com.ashera.widget.EventCommandFactory.registerCommand("customkeyboard", new CustomKeyboardEventCommand());
-
+        com.ashera.widget.EventCommandFactory.registerCommand("customscroll", new CustomScrollEventCommand());
     }
 }
+

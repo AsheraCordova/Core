@@ -174,6 +174,43 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl)
 
 #endif
 
+#if !defined (ASImageViewImpl_Square_) && (INCLUDE_ALL_ImageViewImpl || defined(INCLUDE_ASImageViewImpl_Square))
+#define ASImageViewImpl_Square_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASImageViewImpl_Square : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASImageViewImpl_Square)
+
+FOUNDATION_EXPORT void ASImageViewImpl_Square_init(ASImageViewImpl_Square *self);
+
+FOUNDATION_EXPORT ASImageViewImpl_Square *new_ASImageViewImpl_Square_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASImageViewImpl_Square *create_ASImageViewImpl_Square_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_Square)
+
+
+#endif
+
 #if !defined (ASImageViewImpl_ScaleType_) && (INCLUDE_ALL_ImageViewImpl || defined(INCLUDE_ASImageViewImpl_ScaleType))
 #define ASImageViewImpl_ScaleType_
 

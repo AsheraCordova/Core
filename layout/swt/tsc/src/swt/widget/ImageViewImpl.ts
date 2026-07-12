@@ -1,5 +1,12 @@
 // start - imports
 
+export const enum Square {
+none = "none",
+min = "min",
+max = "max",
+width = "width",
+height = "height",
+}
 export const enum ScaleType {
 center = "center",
 centerCrop = "centerCrop",
@@ -56,6 +63,7 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
+
 export class ImageViewImpl_gcSrcRotate {
 @decorate(Expose({ name: "id" }))
 id!:string;
@@ -74,6 +82,9 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "swtImage" }))
 	swtImage!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "square" }))
+	square!:CommandAttr<Square>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "src" }))
 	src!:CommandAttr<string>| undefined;
@@ -159,6 +170,7 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	reset() : T {	
 		super.reset();
 		this.swtImage = undefined;
+		this.square = undefined;
 		this.src = undefined;
 		this.scaleType = undefined;
 		this.adjustViewBounds = undefined;
@@ -221,6 +233,20 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.swtImage.setValue(value);
 		this.orderSet++;
 		this.swtImage.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSquare(value : Square) : T {
+		this.resetIfRequired();
+		if (this.square == null || this.square == undefined) {
+			this.square = new CommandAttr<Square>();
+		}
+		
+		this.square.setSetter(true);
+		this.square.setValue(value);
+		this.orderSet++;
+		this.square.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

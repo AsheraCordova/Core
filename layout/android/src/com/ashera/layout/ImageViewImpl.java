@@ -132,6 +132,26 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
 				return null;
 				}
 				}
+		@SuppressLint("NewApi")
+		final static class Square extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("none",  0x0);
+				mapping.put("min",  0x1);
+				mapping.put("max",  0x2);
+				mapping.put("width",  0x3);
+				mapping.put("height",  0x4);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
 	
 	@Override
 	public void loadAttributes(String attributeName) {
@@ -162,6 +182,8 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
+		ConverterFactory.register("ImageView.square", new Square());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("square").withType("ImageView.square").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	}
 	
 	public ImageViewImpl() {
@@ -205,6 +227,10 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
 			    measureFinished.setWidth(getMeasuredWidth());
 			    measureFinished.setHeight(getMeasuredHeight());
 				listener.eventOccurred(EventId.measureFinished, measureFinished);
+			}
+			int[] wh = ImageViewImpl.this.customPostMeasure(widthMeasureSpec, heightMeasureSpec);
+			if (wh != null) {
+				setMeasuredDimension(wh[0], wh[1]);
 			}
 		}
 		
@@ -708,6 +734,16 @@ if (Build.VERSION.SDK_INT >= 21) {
 
 			}
 			break;
+			case "square": {
+				
+
+
+		setSquare(strValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -861,4 +897,36 @@ return null;				}
 	}
 
     //end - codecopyimageview
+
+	//start - square
+	private String square;
+	private int[] customPostMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		if (this.square != null) {
+			switch (square) {
+			case "min": {
+				int size = Math.min(imageView.getMeasuredWidth(), imageView.getMeasuredHeight());	
+				return new int[] {size, size};
+			}
+			case "max": {
+				int size = Math.max(imageView.getMeasuredWidth(), imageView.getMeasuredHeight());	
+				return new int[] {size, size};
+			}
+			case "width":
+				return new int[] {imageView.getMeasuredWidth(), imageView.getMeasuredWidth()};
+			case "height":
+				return new int[] {imageView.getMeasuredHeight(), imageView.getMeasuredHeight()};
+			default:
+				break;
+			}
+			
+		}
+		
+		return null;
+	}
+	
+	
+	private void setSquare(String strValue) {
+		this.square = strValue;
+	}
+	//end - square
 }

@@ -23,6 +23,7 @@
 
 @class ASWidgetAttribute;
 @class IOSClass;
+@class IOSObjectArray;
 @class JavaLangBoolean;
 @class JavaLangDouble;
 @class JavaLangInteger;
@@ -69,6 +70,9 @@
 - (IOSClass *)getViewClass;
 
 - (void)invalidate;
+
+- (id)invokeMethodWithNSString:(NSString *)methodName
+             withNSObjectArray:(IOSObjectArray *)args;
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
 
@@ -141,6 +145,43 @@ FOUNDATION_EXPORT ASHorizontalScrollViewImpl *create_ASHorizontalScrollViewImpl_
 J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 
 @compatibility_alias ComAsheraLayoutHorizontalScrollViewImpl ASHorizontalScrollViewImpl;
+
+
+#endif
+
+#if !defined (ASHorizontalScrollViewImpl_Scrollbars_) && (INCLUDE_ALL_HorizontalScrollViewImpl || defined(INCLUDE_ASHorizontalScrollViewImpl_Scrollbars))
+#define ASHorizontalScrollViewImpl_Scrollbars_
+
+#define RESTRICT_AbstractBitFlagConverter 1
+#define INCLUDE_ASAbstractBitFlagConverter 1
+#include "AbstractBitFlagConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASHorizontalScrollViewImpl_Scrollbars : ASAbstractBitFlagConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASHorizontalScrollViewImpl_Scrollbars)
+
+FOUNDATION_EXPORT void ASHorizontalScrollViewImpl_Scrollbars_init(ASHorizontalScrollViewImpl_Scrollbars *self);
+
+FOUNDATION_EXPORT ASHorizontalScrollViewImpl_Scrollbars *new_ASHorizontalScrollViewImpl_Scrollbars_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASHorizontalScrollViewImpl_Scrollbars *create_ASHorizontalScrollViewImpl_Scrollbars_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_Scrollbars)
 
 
 #endif

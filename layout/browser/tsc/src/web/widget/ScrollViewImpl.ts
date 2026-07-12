@@ -1,6 +1,10 @@
 // start - imports
 
-	
+export const enum Scrollbars {
+none = "none",
+horizontal = "horizontal",
+vertical = "vertical",
+}	
 import CommandAttr from '../../widget/CommandAttr';
 import IWidget from '../../widget/IWidget';
 import ILayoutParam from '../../widget/ILayoutParam';
@@ -20,6 +24,35 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
+export class ScrollbarsTransformer implements ITranform {
+    transform(value: any, obj: any, type: number) : any{
+        if (type == 1) {
+            return value.toString().replace(",", "|");
+        } else {
+            let strArray:Array<string> = value.toString().split("|");
+            
+            let valueArr:Array<Scrollbars> = new Array<Scrollbars>();
+            for (let i =0; i < strArray.length; i++) {
+                switch(strArray[i]) {
+					case "none":
+						valueArr.push(Scrollbars.none);
+                       	break;	
+					case "horizontal":
+						valueArr.push(Scrollbars.horizontal);
+                       	break;	
+					case "vertical":
+						valueArr.push(Scrollbars.vertical);
+                       	break;	
+                }
+                
+            }
+            return valueArr;
+        }
+    }
+}
+
+
+
 import {ViewGroupImpl_LayoutParams} from './ViewGroupImpl';
 
 // end - imports
@@ -27,6 +60,7 @@ import {ViewGroupImpl} from './ViewGroupImpl';
 export abstract class ScrollViewImpl<T> extends ViewGroupImpl<T>{
 	//start - body
 	static initialize() {
+		TransformerFactory.getInstance().register("scrollbars", new ScrollbarsTransformer());
     }	
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "foregroundGravity" }))
@@ -43,6 +77,15 @@ export abstract class ScrollViewImpl<T> extends ViewGroupImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "onScrollChange" }))
 	onScrollChange!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "scrollbars" }))
+	scrollbars!:CommandAttr<Scrollbars[]>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "customScrollbarLayout" }))
+	customScrollbarLayout!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "overlayCustomScrollbar" }))
+	overlayCustomScrollbar!:CommandAttr<boolean>| undefined;
 
 	@decorate(Exclude())
 	protected thisPointer: T;	
@@ -54,6 +97,9 @@ export abstract class ScrollViewImpl<T> extends ViewGroupImpl<T>{
 		this.fillViewport = undefined;
 		this.scrollY = undefined;
 		this.onScrollChange = undefined;
+		this.scrollbars = undefined;
+		this.customScrollbarLayout = undefined;
+		this.overlayCustomScrollbar = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -182,6 +228,48 @@ this.foregroundGravity.setTransformer('gravity');		return this.thisPointer;
 		this.onScrollChange.setValue(value);
 		this.orderSet++;
 		this.onScrollChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setScrollbars(...value : Scrollbars[]) : T {
+		this.resetIfRequired();
+		if (this.scrollbars == null || this.scrollbars == undefined) {
+			this.scrollbars = new CommandAttr<Scrollbars[]>();
+		}
+		
+		this.scrollbars.setSetter(true);
+		this.scrollbars.setValue(value);
+		this.orderSet++;
+		this.scrollbars.setOrderSet(this.orderSet);
+this.scrollbars.setTransformer('scrollbars');		return this.thisPointer;
+	}
+		
+
+	public setCustomScrollbarLayout(value : string) : T {
+		this.resetIfRequired();
+		if (this.customScrollbarLayout == null || this.customScrollbarLayout == undefined) {
+			this.customScrollbarLayout = new CommandAttr<string>();
+		}
+		
+		this.customScrollbarLayout.setSetter(true);
+		this.customScrollbarLayout.setValue(value);
+		this.orderSet++;
+		this.customScrollbarLayout.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOverlayCustomScrollbar(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.overlayCustomScrollbar == null || this.overlayCustomScrollbar == undefined) {
+			this.overlayCustomScrollbar = new CommandAttr<boolean>();
+		}
+		
+		this.overlayCustomScrollbar.setSetter(true);
+		this.overlayCustomScrollbar.setValue(value);
+		this.orderSet++;
+		this.overlayCustomScrollbar.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

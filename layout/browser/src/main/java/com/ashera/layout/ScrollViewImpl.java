@@ -50,6 +50,24 @@ public class ScrollViewImpl extends BaseHasWidgets {
 	
 
 	
+		@SuppressLint("NewApi")
+		final static class Scrollbars  extends AbstractBitFlagConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("none", 0x0);
+				mapping.put("horizontal", 0x1);
+				mapping.put("vertical", 0x2);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
 	@Override
 	public void loadAttributes(String localName) {
 		ViewGroupImpl.register(localName);
@@ -59,6 +77,10 @@ public class ScrollViewImpl extends BaseHasWidgets {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fillViewport").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollY").withType("dimension").withBufferStrategy(BUFFER_STRATEGY_DURING_INIT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onScrollChange").withType("string"));
+		ConverterFactory.register("ScrollView.scrollbars", new Scrollbars());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollbars").withType("ScrollView.scrollbars"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customScrollbarLayout").withType("template"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("overlayCustomScrollbar").withType("boolean").withOrder(-1));
 	
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("layout_gravity").withType("gravity").forChild());
 	}
@@ -272,6 +294,7 @@ return layoutParams.gravity;			}
 			ViewImpl.setDrawableBounds(ScrollViewImpl.this, l, t, r, b);
 			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b, (int) (computeVerticalScrollRange()));
+			nativeMakeFrameForChildWidget(l, t, r, b);
 			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ScrollViewImpl.this);
@@ -520,6 +543,33 @@ return layoutParams.gravity;			}
 
 			}
 			break;
+			case "scrollbars": {
+
+
+		 setScrollbars(strValue, objValue);
+
+
+
+			}
+			break;
+			case "customScrollbarLayout": {
+
+
+		 setCustomScrollbarLayout(objValue);
+
+
+
+			}
+			break;
+			case "overlayCustomScrollbar": {
+
+
+		 setOverlayCustomScrollbar(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -593,6 +643,213 @@ return getScrollY();			}
 		}
 	}
 	
+	
+
+
+	private IWidget customScrollBarThumb;
+	private IWidget customScrollBarTrack;
+	private IWidget customScrollBar;
+	private boolean dragging = false; 
+	private float startRaw;
+	private float startThumbTranslation;
+	
+	private void setCustomScrollbarLayout(Object objValue) {
+		if (parent.getLocalName().equals(FrameLayoutImpl.LOCAL_NAME)) {
+			customScrollBar = ((IWidget) objValue).loadLazyWidgets(getParent());
+			
+			if (customScrollBar != null) {
+				overlayCustomScrollbar(customScrollBar);
+				customScrollBarThumb = customScrollBar.findWidgetById("@+id/thumb");
+				customScrollBarTrack = customScrollBar.findWidgetById("@+id/track");
+			}
+			
+		}
+	}
+	
+	@Override
+	public Object invokeMethod(String methodName, Object... args) {
+		switch (methodName) {
+		case "onScrollChange":
+			handleCustomScrollbarOnScrollChange(getScrollOffset(args), getScrollRange(), getScrollExtent());
+			break;
+			
+		case "onCustomScrollTouch":
+			handleCustomScrollbarTouchEvent((View) args[0], (MotionEvent) args[1]);
+			break;
+
+		default:
+			break;
+		}
+		return null;
+	}
+	
+	private float getRaw(MotionEvent motionEvent) {
+		return isVertical() ? motionEvent.getRawY() : motionEvent.getRawX();
+	}
+	
+	private int getViewLength(View view) {
+	    return isVertical() ? view.getHeight() : view.getWidth();
+	}
+	
+	private float getTouch(MotionEvent e) {
+	    return isVertical() ? e.getY() : e.getX();
+	}
+	
+	private void setTranslation(View view, float offset) {
+	    if (isVertical()) {
+	    	view.setTranslationY(offset);
+	    } else {
+	    	view.setTranslationX(offset);
+	    }
+	}
+	
+	private float getTranslation(View view) {
+		return isVertical() ? view.getTranslationY() : view.getTranslationX();
+	}
+	
+	private float getViewStart(View view) {
+	    return isVertical() ? view.getY() : view.getX();
+	}
+
+	private void handleCustomScrollbarTouchEvent(View view, MotionEvent motionEvent) {
+	    View track = (View) customScrollBarTrack.asWidget();
+	    View thumb = (View) customScrollBarThumb.asWidget();
+
+	    int range = getScrollRange();
+	    int extent = getScrollExtent();
+
+	    int trackLength = getViewLength(track);
+	    int thumbLength = getViewLength(thumb);
+
+	    switch (motionEvent.getAction()) {
+	    case MotionEvent.ACTION_DOWN: {
+	    	view.getParent().requestDisallowInterceptTouchEvent(true);
+	        if (view.getId() != thumb.getId()) {
+	            // Clicked on the track
+	        	float touch = getTouch(motionEvent);
+	            float newThumb = touch - thumbLength / 2f;
+	            newThumb = Math.max(0, Math.min(newThumb, trackLength - thumbLength));
+	            setTranslation(thumb, newThumb);
+	            int scrollOffset = (int) (newThumb * (range - extent) / Math.max(1, trackLength - thumbLength));
+	            setScroll(scrollOffset);
+	            // Pretend the drag started here
+	            startThumbTranslation = newThumb;
+	        } else {
+	            // Clicked on the thumb
+	            startThumbTranslation = getTranslation(thumb);
+	        }
+
+	        startRaw =  getRaw(motionEvent);
+	        dragging = true;
+	        break;
+	    }
+
+	    case MotionEvent.ACTION_MOVE: {
+	        if (!dragging) {
+	            return;
+	        }
+
+	        float delta = getRaw(motionEvent) - startRaw;
+	        float trackStart = getViewStart(track);
+	        float trackEnd = trackStart + getViewLength(track);
+	        
+	        float newThumbTranslation = startThumbTranslation + delta;
+	        newThumbTranslation = Math.max(trackStart, Math.min(newThumbTranslation, trackEnd - thumbLength));
+	        setTranslation(thumb, newThumbTranslation);
+	        int scrollOffset = (int) (newThumbTranslation * (range - extent) / Math.max(1, trackLength - thumbLength));
+	        setScroll(scrollOffset);
+
+	        break;
+	    }
+
+	    case MotionEvent.ACTION_UP:
+	    case MotionEvent.ACTION_CANCEL:
+	    	view.getParent().requestDisallowInterceptTouchEvent(false);
+	        dragging = false;
+	        break;
+	    }
+	}
+
+	private void handleCustomScrollbarOnScrollChange(int offset, int range, int extent) {
+		if (!dragging && customScrollBarThumb != null && customScrollBarTrack != null) {
+			View thumbView = (View) customScrollBarThumb.asWidget();
+			View trackView = (View) customScrollBarTrack.asWidget();
+			int thumbLength = getViewLength(thumbView);
+			int trackLength = getViewLength(trackView);
+			int thumbTranslation = (trackLength - thumbLength) * offset / Math.max(1, range - extent);
+			setTranslation(thumbView, thumbTranslation);
+		}
+	}
+	
+	private void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
+		if (customScrollBar != null) {
+			View customScrollBarView = (View) customScrollBar.asWidget();
+
+			boolean canScroll = canScroll();
+			int visibility = canScroll ? View.VISIBLE : View.INVISIBLE;
+
+			if (customScrollBarView.getVisibility() != visibility) {
+				customScrollBarView.setVisibility(visibility);
+			}
+			
+			handleCustomScrollbarOnScrollChange(getScrollOffset(), getScrollRange(), getScrollExtent());
+		}
+	}
+	
+
+
+	private void setScroll(int offset) {
+	    if (isVertical()) {
+	    	setScrollY(offset);
+	    } else {
+	    	setScrollX(offset);
+	    }
+	}	
+
+	private int getScrollOffset(Object... args) {
+		if (args == null || args.length == 0) {
+			return isVertical() ? scrollView.getScrollY() : scrollView.getScrollX();
+		}
+		return (int) (isVertical() ? args[2] : args[1]);
+	}
+	
+	private int getScrollRange() {
+		if (scrollView.getChildCount() > 0) {
+			View child = scrollView.getChildAt(0);
+			return isVertical() ? child.getHeight() : child.getWidth();
+		}
+		
+		return 0;
+	}
+	
+	private int getScrollExtent() {
+		if (scrollView.getChildCount() > 0) {
+			return isVertical() ? scrollView.getHeight() : scrollView.getWidth();
+		}
+		
+		return 0;
+	}
+
+
+	private boolean canScroll() {
+		if (scrollView.getChildCount() > 0) {
+			View child = scrollView.getChildAt(0);
+			return  getViewLength(child) > getViewLength(scrollView);
+		}
+		return false;
+	}
+	
+
+
+	private boolean isVertical() {
+		return true;
+	}
+	
+
+	
+	private void setScrollX(int offset) {
+		
+	}
 	
 
 	@SuppressLint("NewApi")
@@ -722,6 +979,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
     	}, "scroll", "scroll");
 	}
 	//end - scrollview
+	//start - scrollY
 	private void setScrollY(Object objValue) {
     	if (!isInitialised()) {
    		 org.teavm.jso.dom.html.HTMLDocument.current().addEventListener("DOMContentLoaded", new org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event>() {
@@ -739,5 +997,28 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
     private Object getScrollY() {
 		return htmlElement.getScrollTop();
 	}
+    //end - scrollY
 
+    //start - scrollbars 
+	private void setScrollbars(String strValue, Object objValue) {
+		int scrollbars = (int) objValue;
+		
+		if ((scrollbars & 1) != 0 || (scrollbars & 2) != 0) {
+			htmlElement.getStyle().setProperty("scrollbar-width", "auto");	
+		} else {
+			htmlElement.getStyle().setProperty("scrollbar-width", "none");
+		}
+		
+		
+	}
+	
+	private void overlayCustomScrollbar(IWidget widget) {
+		
+	}
+	
+	
+	private void setOverlayCustomScrollbar(Object objValue) {
+		
+	}
+	//end - scrollbars
 }

@@ -1,5 +1,12 @@
 // start - imports
 
+export const enum Square {
+none = "none",
+min = "min",
+max = "max",
+width = "width",
+height = "height",
+}
 export const enum ScaleType {
 center = "center",
 centerCrop = "centerCrop",
@@ -46,12 +53,16 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	//start - body
 	static initialize() {
     }	
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "square" }))
+	square!:CommandAttr<Square>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "src" }))
 	src!:CommandAttr<string>| undefined;
@@ -121,6 +132,7 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
+		this.square = undefined;
 		this.src = undefined;
 		this.scaleType = undefined;
 		this.adjustViewBounds = undefined;
@@ -149,6 +161,20 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
+
+	public setSquare(value : Square) : T {
+		this.resetIfRequired();
+		if (this.square == null || this.square == undefined) {
+			this.square = new CommandAttr<Square>();
+		}
+		
+		this.square.setSetter(true);
+		this.square.setValue(value);
+		this.orderSet++;
+		this.square.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
 
 	public tryGetSrc() : T {
 		this.resetIfRequired();

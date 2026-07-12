@@ -8,11 +8,14 @@
 
 
 
+#include "AbstractBitFlagConverter.h"
 #include "BaseHasWidgets.h"
+#include "ConverterFactory.h"
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
 #include "EventExpressionParser.h"
 #include "FrameLayout.h"
+#include "FrameLayoutImpl.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
 #include "IFragment.h"
@@ -26,6 +29,7 @@
 #include "J2ObjC_source.h"
 #include "LayoutTransition.h"
 #include "MeasureEvent.h"
+#include "MotionEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
 #include "Rect.h"
@@ -35,12 +39,15 @@
 #include "ViewGroup.h"
 #include "ViewGroupImpl.h"
 #include "ViewImpl.h"
+#include "ViewParent.h"
 #include "ViewTreeObserver.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Double.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Math.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/HashMap.h"
@@ -67,6 +74,12 @@
  @public
   id uiView_;
   ADScrollView *scrollView_;
+  id<ASIWidget> customScrollBarThumb_;
+  id<ASIWidget> customScrollBarTrack_;
+  id<ASIWidget> customScrollBar_;
+  bool dragging_;
+  float startRaw_;
+  float startThumbTranslation_;
   id<ADView_OnScrollChangeListener> listener_ScrollViewImpl_;
 }
 
@@ -77,6 +90,47 @@
 - (void)createLayoutParamsWithADView:(ADView *)view;
 
 - (ADFrameLayout_LayoutParams *)getLayoutParamsWithADView:(ADView *)view;
+
+- (void)setCustomScrollbarLayoutWithId:(id)objValue;
+
+- (float)getRawWithADMotionEvent:(ADMotionEvent *)motionEvent;
+
+- (int32_t)getViewLengthWithADView:(ADView *)view;
+
+- (float)getTouchWithADMotionEvent:(ADMotionEvent *)e;
+
+- (void)setTranslationWithADView:(ADView *)view
+                       withFloat:(float)offset;
+
+- (float)getTranslationWithADView:(ADView *)view;
+
+- (float)getViewStartWithADView:(ADView *)view;
+
+- (void)handleCustomScrollbarTouchEventWithADView:(ADView *)view
+                                withADMotionEvent:(ADMotionEvent *)motionEvent;
+
+- (void)handleCustomScrollbarOnScrollChangeWithInt:(int32_t)offset
+                                           withInt:(int32_t)range
+                                           withInt:(int32_t)extent;
+
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b;
+
+- (void)setScrollWithInt:(int32_t)offset;
+
+- (int32_t)getScrollOffsetWithNSObjectArray:(IOSObjectArray *)args;
+
+- (int32_t)getScrollRange;
+
+- (int32_t)getScrollExtent;
+
+- (bool)canScroll;
+
+- (bool)isVertical;
+
+- (void)setScrollXWithInt:(int32_t)offset;
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
@@ -90,10 +144,26 @@
 
 - (void)nativeSetPreventAutoScrollWithBoolean:(bool)preventAutoScroll;
 
+- (void)setScrollbarsWithNSString:(NSString *)strValue
+                           withId:(id)objValue;
+
+- (void)overlayCustomScrollbarWithASIWidget:(id<ASIWidget>)widget;
+
+- (void)setOverlayCustomScrollbarWithId:(id)objValue;
+
++ (void)setShowsVerticalScrollIndicatorWithId:(id)scrollView
+                                  withBoolean:(bool)value;
+
++ (void)setShowsHorizontalScrollIndicatorWithId:(id)scrollView
+                                    withBoolean:(bool)value;
+
 @end
 
 J2OBJC_FIELD_SETTER(ASScrollViewImpl, uiView_, id)
 J2OBJC_FIELD_SETTER(ASScrollViewImpl, scrollView_, ADScrollView *)
+J2OBJC_FIELD_SETTER(ASScrollViewImpl, customScrollBarThumb_, id<ASIWidget>)
+J2OBJC_FIELD_SETTER(ASScrollViewImpl, customScrollBarTrack_, id<ASIWidget>)
+J2OBJC_FIELD_SETTER(ASScrollViewImpl, customScrollBar_, id<ASIWidget>)
 J2OBJC_FIELD_SETTER(ASScrollViewImpl, listener_ScrollViewImpl_, id<ADView_OnScrollChangeListener>)
 
 __attribute__((unused)) static void ASScrollViewImpl_setWidgetOnNativeClass(ASScrollViewImpl *self);
@@ -103,6 +173,40 @@ __attribute__((unused)) static void ASScrollViewImpl_nativeRemoveViewWithASIWidg
 __attribute__((unused)) static void ASScrollViewImpl_createLayoutParamsWithADView_(ASScrollViewImpl *self, ADView *view);
 
 __attribute__((unused)) static ADFrameLayout_LayoutParams *ASScrollViewImpl_getLayoutParamsWithADView_(ASScrollViewImpl *self, ADView *view);
+
+__attribute__((unused)) static void ASScrollViewImpl_setCustomScrollbarLayoutWithId_(ASScrollViewImpl *self, id objValue);
+
+__attribute__((unused)) static float ASScrollViewImpl_getRawWithADMotionEvent_(ASScrollViewImpl *self, ADMotionEvent *motionEvent);
+
+__attribute__((unused)) static int32_t ASScrollViewImpl_getViewLengthWithADView_(ASScrollViewImpl *self, ADView *view);
+
+__attribute__((unused)) static float ASScrollViewImpl_getTouchWithADMotionEvent_(ASScrollViewImpl *self, ADMotionEvent *e);
+
+__attribute__((unused)) static void ASScrollViewImpl_setTranslationWithADView_withFloat_(ASScrollViewImpl *self, ADView *view, float offset);
+
+__attribute__((unused)) static float ASScrollViewImpl_getTranslationWithADView_(ASScrollViewImpl *self, ADView *view);
+
+__attribute__((unused)) static float ASScrollViewImpl_getViewStartWithADView_(ASScrollViewImpl *self, ADView *view);
+
+__attribute__((unused)) static void ASScrollViewImpl_handleCustomScrollbarTouchEventWithADView_withADMotionEvent_(ASScrollViewImpl *self, ADView *view, ADMotionEvent *motionEvent);
+
+__attribute__((unused)) static void ASScrollViewImpl_handleCustomScrollbarOnScrollChangeWithInt_withInt_withInt_(ASScrollViewImpl *self, int32_t offset, int32_t range, int32_t extent);
+
+__attribute__((unused)) static void ASScrollViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASScrollViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
+
+__attribute__((unused)) static void ASScrollViewImpl_setScrollWithInt_(ASScrollViewImpl *self, int32_t offset);
+
+__attribute__((unused)) static int32_t ASScrollViewImpl_getScrollOffsetWithNSObjectArray_(ASScrollViewImpl *self, IOSObjectArray *args);
+
+__attribute__((unused)) static int32_t ASScrollViewImpl_getScrollRange(ASScrollViewImpl *self);
+
+__attribute__((unused)) static int32_t ASScrollViewImpl_getScrollExtent(ASScrollViewImpl *self);
+
+__attribute__((unused)) static bool ASScrollViewImpl_canScroll(ASScrollViewImpl *self);
+
+__attribute__((unused)) static bool ASScrollViewImpl_isVertical(ASScrollViewImpl *self);
+
+__attribute__((unused)) static void ASScrollViewImpl_setScrollXWithInt_(ASScrollViewImpl *self, int32_t offset);
 
 __attribute__((unused)) static void ASScrollViewImpl_nativeCreateWithJavaUtilMap_(ASScrollViewImpl *self, id<JavaUtilMap> params);
 
@@ -115,6 +219,25 @@ __attribute__((unused)) static void ASScrollViewImpl_setOnScrollWithId_(ASScroll
 __attribute__((unused)) static void ASScrollViewImpl_setPreventAutoScrollWithId_(ASScrollViewImpl *self, id objValue);
 
 __attribute__((unused)) static void ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(ASScrollViewImpl *self, bool preventAutoScroll);
+
+__attribute__((unused)) static void ASScrollViewImpl_setScrollbarsWithNSString_withId_(ASScrollViewImpl *self, NSString *strValue, id objValue);
+
+__attribute__((unused)) static void ASScrollViewImpl_overlayCustomScrollbarWithASIWidget_(ASScrollViewImpl *self, id<ASIWidget> widget);
+
+__attribute__((unused)) static void ASScrollViewImpl_setOverlayCustomScrollbarWithId_(ASScrollViewImpl *self, id objValue);
+
+__attribute__((unused)) static void ASScrollViewImpl_setShowsVerticalScrollIndicatorWithId_withBoolean_(id scrollView, bool value);
+
+__attribute__((unused)) static void ASScrollViewImpl_setShowsHorizontalScrollIndicatorWithId_withBoolean_(id scrollView, bool value);
+
+@interface ASScrollViewImpl_Scrollbars () {
+ @public
+  id<JavaUtilMap> mapping_;
+}
+
+@end
+
+J2OBJC_FIELD_SETTER(ASScrollViewImpl_Scrollbars, mapping_, id<JavaUtilMap>)
 
 @interface ASScrollViewImpl_ScrollViewExt () {
  @public
@@ -190,12 +313,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_OnScrollChangeListener)
 @interface ASScrollViewImpl_MyUIScrollViewDelegate () {
  @public
   WEAK_ ASScrollViewImpl *this$0_;
-  id<ADView_OnScrollChangeListener> listener_;
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(ASScrollViewImpl_MyUIScrollViewDelegate, listener_, id<ADView_OnScrollChangeListener>)
 
 @interface ASScrollViewImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -229,6 +349,10 @@ NSString *ASScrollViewImpl_GROUP_NAME = @"ScrollView";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"fillViewport"])) withTypeWithNSString:@"boolean"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"scrollY"])) withTypeWithNSString:@"dimension"])) withBufferStrategyWithInt:ASIWidget_BUFFER_STRATEGY_DURING_INIT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onScrollChange"])) withTypeWithNSString:@"string"]);
+  ASConverterFactory_register__WithNSString_withASIConverter_(@"ScrollView.scrollbars", new_ASScrollViewImpl_Scrollbars_init());
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"scrollbars"])) withTypeWithNSString:@"ScrollView.scrollbars"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"customScrollbarLayout"])) withTypeWithNSString:@"template"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"overlayCustomScrollbar"])) withTypeWithNSString:@"boolean"])) withOrderWithInt:-1]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosPreventAutoScroll"])) withTypeWithNSString:@"boolean"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"layout_gravity"])) withTypeWithNSString:@"gravity"])) forChild]);
 }
@@ -373,7 +497,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   ASViewGroupImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
   id nativeWidget = [self asNativeWidget];
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"foregroundGravity", @"measureAllChildren", @"fillViewport", @"scrollY", @"onScrollChange", @"iosPreventAutoScroll" }, 6)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"foregroundGravity", @"measureAllChildren", @"fillViewport", @"scrollY", @"onScrollChange", @"scrollbars", @"customScrollbarLayout", @"overlayCustomScrollbar", @"iosPreventAutoScroll" }, 9)) {
     case 0:
     {
       [((ADScrollView *) nil_chk(scrollView_)) setForegroundGravityWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
@@ -400,6 +524,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     break;
     case 5:
+    {
+      ASScrollViewImpl_setScrollbarsWithNSString_withId_(self, strValue, objValue);
+    }
+    break;
+    case 6:
+    {
+      ASScrollViewImpl_setCustomScrollbarLayoutWithId_(self, objValue);
+    }
+    break;
+    case 7:
+    {
+      ASScrollViewImpl_setOverlayCustomScrollbarWithId_(self, objValue);
+    }
+    break;
+    case 8:
     {
       ASScrollViewImpl_setPreventAutoScrollWithId_(self, objValue);
     }
@@ -453,6 +592,96 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([self isInitialised]) {
     ASViewImpl_invalidateWithASIWidget_withId_(self, [self asNativeWidget]);
   }
+}
+
+- (void)setCustomScrollbarLayoutWithId:(id)objValue {
+  ASScrollViewImpl_setCustomScrollbarLayoutWithId_(self, objValue);
+}
+
+- (id)invokeMethodWithNSString:(NSString *)methodName
+             withNSObjectArray:(IOSObjectArray *)args {
+  switch (JreIndexOfStr(methodName, (id[]){ @"onScrollChange", @"onCustomScrollTouch" }, 2)) {
+    case 0:
+    ASScrollViewImpl_handleCustomScrollbarOnScrollChangeWithInt_withInt_withInt_(self, ASScrollViewImpl_getScrollOffsetWithNSObjectArray_(self, args), ASScrollViewImpl_getScrollRange(self), ASScrollViewImpl_getScrollExtent(self));
+    break;
+    case 1:
+    ASScrollViewImpl_handleCustomScrollbarTouchEventWithADView_withADMotionEvent_(self, (ADView *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [ADView class]), (ADMotionEvent *) cast_chk(IOSObjectArray_Get(args, 1), [ADMotionEvent class]));
+    break;
+    default:
+    break;
+  }
+  return nil;
+}
+
+- (float)getRawWithADMotionEvent:(ADMotionEvent *)motionEvent {
+  return ASScrollViewImpl_getRawWithADMotionEvent_(self, motionEvent);
+}
+
+- (int32_t)getViewLengthWithADView:(ADView *)view {
+  return ASScrollViewImpl_getViewLengthWithADView_(self, view);
+}
+
+- (float)getTouchWithADMotionEvent:(ADMotionEvent *)e {
+  return ASScrollViewImpl_getTouchWithADMotionEvent_(self, e);
+}
+
+- (void)setTranslationWithADView:(ADView *)view
+                       withFloat:(float)offset {
+  ASScrollViewImpl_setTranslationWithADView_withFloat_(self, view, offset);
+}
+
+- (float)getTranslationWithADView:(ADView *)view {
+  return ASScrollViewImpl_getTranslationWithADView_(self, view);
+}
+
+- (float)getViewStartWithADView:(ADView *)view {
+  return ASScrollViewImpl_getViewStartWithADView_(self, view);
+}
+
+- (void)handleCustomScrollbarTouchEventWithADView:(ADView *)view
+                                withADMotionEvent:(ADMotionEvent *)motionEvent {
+  ASScrollViewImpl_handleCustomScrollbarTouchEventWithADView_withADMotionEvent_(self, view, motionEvent);
+}
+
+- (void)handleCustomScrollbarOnScrollChangeWithInt:(int32_t)offset
+                                           withInt:(int32_t)range
+                                           withInt:(int32_t)extent {
+  ASScrollViewImpl_handleCustomScrollbarOnScrollChangeWithInt_withInt_withInt_(self, offset, range, extent);
+}
+
+- (void)nativeMakeFrameForChildWidgetWithInt:(int32_t)l
+                                     withInt:(int32_t)t
+                                     withInt:(int32_t)r
+                                     withInt:(int32_t)b {
+  ASScrollViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(self, l, t, r, b);
+}
+
+- (void)setScrollWithInt:(int32_t)offset {
+  ASScrollViewImpl_setScrollWithInt_(self, offset);
+}
+
+- (int32_t)getScrollOffsetWithNSObjectArray:(IOSObjectArray *)args {
+  return ASScrollViewImpl_getScrollOffsetWithNSObjectArray_(self, args);
+}
+
+- (int32_t)getScrollRange {
+  return ASScrollViewImpl_getScrollRange(self);
+}
+
+- (int32_t)getScrollExtent {
+  return ASScrollViewImpl_getScrollExtent(self);
+}
+
+- (bool)canScroll {
+  return ASScrollViewImpl_canScroll(self);
+}
+
+- (bool)isVertical {
+  return ASScrollViewImpl_isVertical(self);
+}
+
+- (void)setScrollXWithInt:(int32_t)offset {
+  ASScrollViewImpl_setScrollXWithInt_(self, offset);
 }
 
 - (void)setIdWithNSString:(NSString *)id_ {
@@ -526,6 +755,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(self, preventAutoScroll);
 }
 
+- (void)setScrollbarsWithNSString:(NSString *)strValue
+                           withId:(id)objValue {
+  ASScrollViewImpl_setScrollbarsWithNSString_withId_(self, strValue, objValue);
+}
+
+- (void)overlayCustomScrollbarWithASIWidget:(id<ASIWidget>)widget {
+  ASScrollViewImpl_overlayCustomScrollbarWithASIWidget_(self, widget);
+}
+
+- (void)setOverlayCustomScrollbarWithId:(id)objValue {
+  ASScrollViewImpl_setOverlayCustomScrollbarWithId_(self, objValue);
+}
+
++ (void)setShowsVerticalScrollIndicatorWithId:(id)scrollView
+                                  withBoolean:(bool)value {
+  ASScrollViewImpl_setShowsVerticalScrollIndicatorWithId_withBoolean_(scrollView, value);
+}
+
++ (void)setShowsHorizontalScrollIndicatorWithId:(id)scrollView
+                                    withBoolean:(bool)value {
+  ASScrollViewImpl_setShowsHorizontalScrollIndicatorWithId_withBoolean_(scrollView, value);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
@@ -551,21 +803,44 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x101, 23, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 28, -1, 29, -1, -1 },
+    { NULL, "V", 0x2, 24, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x81, 26, 27, -1, -1, -1, -1 },
+    { NULL, "F", 0x2, 28, 29, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 30, 13, -1, -1, -1, -1 },
+    { NULL, "F", 0x2, 31, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 33, -1, -1, -1, -1 },
+    { NULL, "F", 0x2, 34, 13, -1, -1, -1, -1 },
+    { NULL, "F", 0x2, 35, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 36, 37, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 39, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 42, 8, -1, -1, -1, -1 },
+    { NULL, "I", 0x82, 43, 44, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 45, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 46, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 47, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 50, -1, 51, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 30, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 32, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 35, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 45, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 52, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 54, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 55, 53, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "D", 0x101, 36, 31, -1, -1, -1, -1 },
+    { NULL, "D", 0x101, 56, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "D", 0x101, 37, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 40, 26, -1, -1, -1, -1 },
+    { NULL, "D", 0x101, 57, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 58, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 59, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 60, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 61, 62, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 63, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 64, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 65, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 67, 66, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -593,31 +868,60 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[20].selector = @selector(checkIosVersionWithNSString:);
   methods[21].selector = @selector(requestLayout);
   methods[22].selector = @selector(invalidate);
-  methods[23].selector = @selector(setIdWithNSString:);
-  methods[24].selector = @selector(setVisibleWithBoolean:);
-  methods[25].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[26].selector = @selector(nativescrollViewCreate);
-  methods[27].selector = @selector(setScrollXWithId:);
-  methods[28].selector = @selector(nativeSetScrollXWithId:withInt:);
-  methods[29].selector = @selector(setScrollYWithId:);
-  methods[30].selector = @selector(nativeSetScrollYWithId:withInt:);
-  methods[31].selector = @selector(getScrollX);
-  methods[32].selector = @selector(nativeGetScrollXWithId:);
-  methods[33].selector = @selector(getScrollY);
-  methods[34].selector = @selector(nativeGetScrollYWithId:);
-  methods[35].selector = @selector(setOnScrollWithId:);
-  methods[36].selector = @selector(setPreventAutoScrollWithId:);
-  methods[37].selector = @selector(nativeSetPreventAutoScrollWithBoolean:);
+  methods[23].selector = @selector(setCustomScrollbarLayoutWithId:);
+  methods[24].selector = @selector(invokeMethodWithNSString:withNSObjectArray:);
+  methods[25].selector = @selector(getRawWithADMotionEvent:);
+  methods[26].selector = @selector(getViewLengthWithADView:);
+  methods[27].selector = @selector(getTouchWithADMotionEvent:);
+  methods[28].selector = @selector(setTranslationWithADView:withFloat:);
+  methods[29].selector = @selector(getTranslationWithADView:);
+  methods[30].selector = @selector(getViewStartWithADView:);
+  methods[31].selector = @selector(handleCustomScrollbarTouchEventWithADView:withADMotionEvent:);
+  methods[32].selector = @selector(handleCustomScrollbarOnScrollChangeWithInt:withInt:withInt:);
+  methods[33].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[34].selector = @selector(setScrollWithInt:);
+  methods[35].selector = @selector(getScrollOffsetWithNSObjectArray:);
+  methods[36].selector = @selector(getScrollRange);
+  methods[37].selector = @selector(getScrollExtent);
+  methods[38].selector = @selector(canScroll);
+  methods[39].selector = @selector(isVertical);
+  methods[40].selector = @selector(setScrollXWithInt:);
+  methods[41].selector = @selector(setIdWithNSString:);
+  methods[42].selector = @selector(setVisibleWithBoolean:);
+  methods[43].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[44].selector = @selector(nativescrollViewCreate);
+  methods[45].selector = @selector(setScrollXWithId:);
+  methods[46].selector = @selector(nativeSetScrollXWithId:withInt:);
+  methods[47].selector = @selector(setScrollYWithId:);
+  methods[48].selector = @selector(nativeSetScrollYWithId:withInt:);
+  methods[49].selector = @selector(getScrollX);
+  methods[50].selector = @selector(nativeGetScrollXWithId:);
+  methods[51].selector = @selector(getScrollY);
+  methods[52].selector = @selector(nativeGetScrollYWithId:);
+  methods[53].selector = @selector(setOnScrollWithId:);
+  methods[54].selector = @selector(setPreventAutoScrollWithId:);
+  methods[55].selector = @selector(nativeSetPreventAutoScrollWithBoolean:);
+  methods[56].selector = @selector(setScrollbarsWithNSString:withId:);
+  methods[57].selector = @selector(overlayCustomScrollbarWithASIWidget:);
+  methods[58].selector = @selector(setOverlayCustomScrollbarWithId:);
+  methods[59].selector = @selector(setShowsVerticalScrollIndicatorWithId:withBoolean:);
+  methods[60].selector = @selector(setShowsHorizontalScrollIndicatorWithId:withBoolean:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 41, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 42, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 68, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 69, -1, -1 },
     { "scrollView_", "LADScrollView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "listener_ScrollViewImpl_", "LADView_OnScrollChangeListener;", .constantValue.asLong = 0, 0x2, 43, -1, -1, -1 },
+    { "customScrollBarThumb_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "customScrollBarTrack_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "customScrollBar_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "dragging_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startRaw_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "startThumbTranslation_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "listener_ScrollViewImpl_", "LADView_OnScrollChangeListener;", .constantValue.asLong = 0, 0x2, 70, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setScrollX", "LNSObject;", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", &ASScrollViewImpl_LOCAL_NAME, &ASScrollViewImpl_GROUP_NAME, "listener", "LASScrollViewImpl_ScrollViewExt;LASScrollViewImpl_OnScrollChangeListener;LASScrollViewImpl_MyUIScrollViewDelegate;" };
-  static const J2ObjcClassInfo _ASScrollViewImpl = { "ScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 38, 5, -1, 44, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setCustomScrollbarLayout", "LNSObject;", "invokeMethod", "LNSString;[LNSObject;", "getRaw", "LADMotionEvent;", "getViewLength", "getTouch", "setTranslation", "LADView;F", "getTranslation", "getViewStart", "handleCustomScrollbarTouchEvent", "LADView;LADMotionEvent;", "handleCustomScrollbarOnScrollChange", "III", "nativeMakeFrameForChildWidget", "IIII", "setScroll", "getScrollOffset", "[LNSObject;", "setScrollX", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", "setScrollbars", "LNSString;LNSObject;", "overlayCustomScrollbar", "setOverlayCustomScrollbar", "setShowsVerticalScrollIndicator", "LNSObject;Z", "setShowsHorizontalScrollIndicator", &ASScrollViewImpl_LOCAL_NAME, &ASScrollViewImpl_GROUP_NAME, "listener", "LASScrollViewImpl_Scrollbars;LASScrollViewImpl_ScrollViewExt;LASScrollViewImpl_OnScrollChangeListener;LASScrollViewImpl_MyUIScrollViewDelegate;" };
+  static const J2ObjcClassInfo _ASScrollViewImpl = { "ScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 61, 11, -1, 71, -1, -1, -1 };
   return &_ASScrollViewImpl;
 }
 
@@ -625,6 +929,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void ASScrollViewImpl_init(ASScrollViewImpl *self) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, ASScrollViewImpl_GROUP_NAME, ASScrollViewImpl_LOCAL_NAME);
+  self->dragging_ = false;
 }
 
 ASScrollViewImpl *new_ASScrollViewImpl_init() {
@@ -637,6 +942,7 @@ ASScrollViewImpl *create_ASScrollViewImpl_init() {
 
 void ASScrollViewImpl_initWithNSString_(ASScrollViewImpl *self, NSString *localname) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, ASScrollViewImpl_GROUP_NAME, localname);
+  self->dragging_ = false;
 }
 
 ASScrollViewImpl *new_ASScrollViewImpl_initWithNSString_(NSString *localname) {
@@ -649,6 +955,7 @@ ASScrollViewImpl *create_ASScrollViewImpl_initWithNSString_(NSString *localname)
 
 void ASScrollViewImpl_initWithNSString_withNSString_(ASScrollViewImpl *self, NSString *groupName, NSString *localname) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, groupName, localname);
+  self->dragging_ = false;
 }
 
 ASScrollViewImpl *new_ASScrollViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
@@ -690,6 +997,165 @@ ADFrameLayout_LayoutParams *ASScrollViewImpl_getLayoutParamsWithADView_(ASScroll
   return (ADFrameLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(view)) getLayoutParams], [ADFrameLayout_LayoutParams class]);
 }
 
+void ASScrollViewImpl_setCustomScrollbarLayoutWithId_(ASScrollViewImpl *self, id objValue) {
+  if ([((NSString *) nil_chk([((id<ASHasWidgets>) nil_chk(self->parent_)) getLocalName])) isEqual:ASFrameLayoutImpl_LOCAL_NAME]) {
+    self->customScrollBar_ = [((id<ASIWidget>) nil_chk(((id<ASIWidget>) cast_check(objValue, ASIWidget_class_())))) loadLazyWidgetsWithASHasWidgets:[self getParent]];
+    if (self->customScrollBar_ != nil) {
+      ASScrollViewImpl_overlayCustomScrollbarWithASIWidget_(self, self->customScrollBar_);
+      self->customScrollBarThumb_ = [((id<ASIWidget>) nil_chk(self->customScrollBar_)) findWidgetByIdWithNSString:@"@+id/thumb"];
+      self->customScrollBarTrack_ = [((id<ASIWidget>) nil_chk(self->customScrollBar_)) findWidgetByIdWithNSString:@"@+id/track"];
+    }
+  }
+}
+
+float ASScrollViewImpl_getRawWithADMotionEvent_(ASScrollViewImpl *self, ADMotionEvent *motionEvent) {
+  return ASScrollViewImpl_isVertical(self) ? [((ADMotionEvent *) nil_chk(motionEvent)) getRawY] : [((ADMotionEvent *) nil_chk(motionEvent)) getRawX];
+}
+
+int32_t ASScrollViewImpl_getViewLengthWithADView_(ASScrollViewImpl *self, ADView *view) {
+  return ASScrollViewImpl_isVertical(self) ? [((ADView *) nil_chk(view)) getHeight] : [((ADView *) nil_chk(view)) getWidth];
+}
+
+float ASScrollViewImpl_getTouchWithADMotionEvent_(ASScrollViewImpl *self, ADMotionEvent *e) {
+  return ASScrollViewImpl_isVertical(self) ? [((ADMotionEvent *) nil_chk(e)) getY] : [((ADMotionEvent *) nil_chk(e)) getX];
+}
+
+void ASScrollViewImpl_setTranslationWithADView_withFloat_(ASScrollViewImpl *self, ADView *view, float offset) {
+  if (ASScrollViewImpl_isVertical(self)) {
+    [((ADView *) nil_chk(view)) setTranslationYWithFloat:offset];
+  }
+  else {
+    [((ADView *) nil_chk(view)) setTranslationXWithFloat:offset];
+  }
+}
+
+float ASScrollViewImpl_getTranslationWithADView_(ASScrollViewImpl *self, ADView *view) {
+  return ASScrollViewImpl_isVertical(self) ? [((ADView *) nil_chk(view)) getTranslationY] : [((ADView *) nil_chk(view)) getTranslationX];
+}
+
+float ASScrollViewImpl_getViewStartWithADView_(ASScrollViewImpl *self, ADView *view) {
+  return ASScrollViewImpl_isVertical(self) ? [((ADView *) nil_chk(view)) getY] : [((ADView *) nil_chk(view)) getX];
+}
+
+void ASScrollViewImpl_handleCustomScrollbarTouchEventWithADView_withADMotionEvent_(ASScrollViewImpl *self, ADView *view, ADMotionEvent *motionEvent) {
+  ADView *track = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(self->customScrollBarTrack_)) asWidget], [ADView class]);
+  ADView *thumb = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(self->customScrollBarThumb_)) asWidget], [ADView class]);
+  int32_t range = ASScrollViewImpl_getScrollRange(self);
+  int32_t extent = ASScrollViewImpl_getScrollExtent(self);
+  int32_t trackLength = ASScrollViewImpl_getViewLengthWithADView_(self, track);
+  int32_t thumbLength = ASScrollViewImpl_getViewLengthWithADView_(self, thumb);
+  switch ([((ADMotionEvent *) nil_chk(motionEvent)) getAction]) {
+    case ADMotionEvent_ACTION_DOWN:
+    {
+      [((id<ADViewParent>) nil_chk([((ADView *) nil_chk(view)) getParent])) requestDisallowInterceptTouchEventWithBoolean:true];
+      if ([view getId] != [((ADView *) nil_chk(thumb)) getId]) {
+        float touch = ASScrollViewImpl_getTouchWithADMotionEvent_(self, motionEvent);
+        float newThumb = touch - thumbLength / 2.0f;
+        newThumb = JavaLangMath_maxWithFloat_withFloat_(0, JavaLangMath_minWithFloat_withFloat_(newThumb, trackLength - thumbLength));
+        ASScrollViewImpl_setTranslationWithADView_withFloat_(self, thumb, newThumb);
+        int32_t scrollOffset = JreFpToInt((newThumb * (range - extent) / JavaLangMath_maxWithInt_withInt_(1, trackLength - thumbLength)));
+        ASScrollViewImpl_setScrollWithInt_(self, scrollOffset);
+        self->startThumbTranslation_ = newThumb;
+      }
+      else {
+        self->startThumbTranslation_ = ASScrollViewImpl_getTranslationWithADView_(self, thumb);
+      }
+      self->startRaw_ = ASScrollViewImpl_getRawWithADMotionEvent_(self, motionEvent);
+      self->dragging_ = true;
+      break;
+    }
+    case ADMotionEvent_ACTION_MOVE:
+    {
+      if (!self->dragging_) {
+        return;
+      }
+      float delta = ASScrollViewImpl_getRawWithADMotionEvent_(self, motionEvent) - self->startRaw_;
+      float trackStart = ASScrollViewImpl_getViewStartWithADView_(self, track);
+      float trackEnd = trackStart + ASScrollViewImpl_getViewLengthWithADView_(self, track);
+      float newThumbTranslation = self->startThumbTranslation_ + delta;
+      newThumbTranslation = JavaLangMath_maxWithFloat_withFloat_(trackStart, JavaLangMath_minWithFloat_withFloat_(newThumbTranslation, trackEnd - thumbLength));
+      ASScrollViewImpl_setTranslationWithADView_withFloat_(self, thumb, newThumbTranslation);
+      int32_t scrollOffset = JreFpToInt((newThumbTranslation * (range - extent) / JavaLangMath_maxWithInt_withInt_(1, trackLength - thumbLength)));
+      ASScrollViewImpl_setScrollWithInt_(self, scrollOffset);
+      break;
+    }
+    case ADMotionEvent_ACTION_UP:
+    case ADMotionEvent_ACTION_CANCEL:
+    [((id<ADViewParent>) nil_chk([((ADView *) nil_chk(view)) getParent])) requestDisallowInterceptTouchEventWithBoolean:false];
+    self->dragging_ = false;
+    break;
+  }
+}
+
+void ASScrollViewImpl_handleCustomScrollbarOnScrollChangeWithInt_withInt_withInt_(ASScrollViewImpl *self, int32_t offset, int32_t range, int32_t extent) {
+  if (!self->dragging_ && self->customScrollBarThumb_ != nil && self->customScrollBarTrack_ != nil) {
+    ADView *thumbView = (ADView *) cast_chk([self->customScrollBarThumb_ asWidget], [ADView class]);
+    ADView *trackView = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(self->customScrollBarTrack_)) asWidget], [ADView class]);
+    int32_t thumbLength = ASScrollViewImpl_getViewLengthWithADView_(self, thumbView);
+    int32_t trackLength = ASScrollViewImpl_getViewLengthWithADView_(self, trackView);
+    int32_t thumbTranslation = JreIntDiv((trackLength - thumbLength) * offset, JavaLangMath_maxWithInt_withInt_(1, range - extent));
+    ASScrollViewImpl_setTranslationWithADView_withFloat_(self, thumbView, thumbTranslation);
+  }
+}
+
+void ASScrollViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASScrollViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b) {
+  if (self->customScrollBar_ != nil) {
+    ADView *customScrollBarView = (ADView *) cast_chk([self->customScrollBar_ asWidget], [ADView class]);
+    bool canScroll = ASScrollViewImpl_canScroll(self);
+    int32_t visibility = canScroll ? ADView_VISIBLE : ADView_INVISIBLE;
+    if ([((ADView *) nil_chk(customScrollBarView)) getVisibility] != visibility) {
+      [customScrollBarView setVisibilityWithInt:visibility];
+    }
+    ASScrollViewImpl_handleCustomScrollbarOnScrollChangeWithInt_withInt_withInt_(self, ASScrollViewImpl_getScrollOffsetWithNSObjectArray_(self, [IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]), ASScrollViewImpl_getScrollRange(self), ASScrollViewImpl_getScrollExtent(self));
+  }
+}
+
+void ASScrollViewImpl_setScrollWithInt_(ASScrollViewImpl *self, int32_t offset) {
+  if (ASScrollViewImpl_isVertical(self)) {
+    ASScrollViewImpl_setScrollYWithId_(self, JavaLangInteger_valueOfWithInt_(offset));
+  }
+  else {
+    ASScrollViewImpl_setScrollXWithInt_(self, offset);
+  }
+}
+
+int32_t ASScrollViewImpl_getScrollOffsetWithNSObjectArray_(ASScrollViewImpl *self, IOSObjectArray *args) {
+  if (args == nil || args->size_ == 0) {
+    return ASScrollViewImpl_isVertical(self) ? [((ADScrollView *) nil_chk(self->scrollView_)) getScrollY] : [((ADScrollView *) nil_chk(self->scrollView_)) getScrollX];
+  }
+  return [(JavaLangInteger *) cast_chk((ASScrollViewImpl_isVertical(self) ? IOSObjectArray_Get(args, 2) : IOSObjectArray_Get(args, 1)), [JavaLangInteger class]) intValue];
+}
+
+int32_t ASScrollViewImpl_getScrollRange(ASScrollViewImpl *self) {
+  if ([((ADScrollView *) nil_chk(self->scrollView_)) getChildCount] > 0) {
+    ADView *child = [((ADScrollView *) nil_chk(self->scrollView_)) getChildAtWithInt:0];
+    return ASScrollViewImpl_isVertical(self) ? [((ADView *) nil_chk(child)) getHeight] : [((ADView *) nil_chk(child)) getWidth];
+  }
+  return 0;
+}
+
+int32_t ASScrollViewImpl_getScrollExtent(ASScrollViewImpl *self) {
+  if ([((ADScrollView *) nil_chk(self->scrollView_)) getChildCount] > 0) {
+    return ASScrollViewImpl_isVertical(self) ? [((ADScrollView *) nil_chk(self->scrollView_)) getHeight] : [((ADScrollView *) nil_chk(self->scrollView_)) getWidth];
+  }
+  return 0;
+}
+
+bool ASScrollViewImpl_canScroll(ASScrollViewImpl *self) {
+  if ([((ADScrollView *) nil_chk(self->scrollView_)) getChildCount] > 0) {
+    ADView *child = [((ADScrollView *) nil_chk(self->scrollView_)) getChildAtWithInt:0];
+    return ASScrollViewImpl_getViewLengthWithADView_(self, child) > ASScrollViewImpl_getViewLengthWithADView_(self, self->scrollView_);
+  }
+  return false;
+}
+
+bool ASScrollViewImpl_isVertical(ASScrollViewImpl *self) {
+  return true;
+}
+
+void ASScrollViewImpl_setScrollXWithInt_(ASScrollViewImpl *self, int32_t offset) {
+}
+
 void ASScrollViewImpl_nativeCreateWithJavaUtilMap_(ASScrollViewImpl *self, id<JavaUtilMap> params) {
   self->uiView_ = [self nativescrollViewCreate];
   ASScrollViewImpl_MyUIScrollViewDelegate *myUIScrollViewDelegate = new_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(self);
@@ -722,9 +1188,97 @@ void ASScrollViewImpl_nativeSetPreventAutoScrollWithBoolean_(ASScrollViewImpl *s
   scrollview.preventAutoScroll = preventAutoScroll;
 }
 
+void ASScrollViewImpl_setScrollbarsWithNSString_withId_(ASScrollViewImpl *self, NSString *strValue, id objValue) {
+  ASScrollViewImpl_setShowsVerticalScrollIndicatorWithId_withBoolean_(self->uiView_, false);
+  ASScrollViewImpl_setShowsHorizontalScrollIndicatorWithId_withBoolean_(self->uiView_, false);
+  int32_t scrollbars = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  if ((scrollbars & 1) != 0) {
+    ASScrollViewImpl_setShowsHorizontalScrollIndicatorWithId_withBoolean_(self->uiView_, true);
+  }
+  if ((scrollbars & 2) != 0) {
+    ASScrollViewImpl_setShowsVerticalScrollIndicatorWithId_withBoolean_(self->uiView_, true);
+  }
+}
+
+void ASScrollViewImpl_overlayCustomScrollbarWithASIWidget_(ASScrollViewImpl *self, id<ASIWidget> widget) {
+}
+
+void ASScrollViewImpl_setOverlayCustomScrollbarWithId_(ASScrollViewImpl *self, id objValue) {
+}
+
+void ASScrollViewImpl_setShowsVerticalScrollIndicatorWithId_withBoolean_(id scrollView, bool value) {
+  ASScrollViewImpl_initialize();
+  ((UIScrollView*)scrollView).showsVerticalScrollIndicator = value;
+}
+
+void ASScrollViewImpl_setShowsHorizontalScrollIndicatorWithId_withBoolean_(id scrollView, bool value) {
+  ASScrollViewImpl_initialize();
+  ((UIScrollView*)scrollView).showsHorizontalScrollIndicator = value;
+}
+
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
 
 J2OBJC_NAME_MAPPING(ASScrollViewImpl, "com.ashera.layout", "AS")
+
+@implementation ASScrollViewImpl_Scrollbars
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASScrollViewImpl_Scrollbars_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilMap>)getMapping {
+  return mapping_;
+}
+
+- (JavaLangInteger *)getDefault {
+  return JavaLangInteger_valueOfWithInt_(0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getMapping);
+  methods[2].selector = @selector(getDefault);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "mapping_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASScrollViewImpl;" };
+  static const J2ObjcClassInfo _ASScrollViewImpl_Scrollbars = { "Scrollbars", "com.ashera.layout", ptrTable, methods, fields, 7, 0x18, 3, 1, 2, -1, -1, -1, -1 };
+  return &_ASScrollViewImpl_Scrollbars;
+}
+
+@end
+
+void ASScrollViewImpl_Scrollbars_init(ASScrollViewImpl_Scrollbars *self) {
+  ASAbstractBitFlagConverter_init(self);
+  self->mapping_ = new_JavaUtilHashMap_init();
+  {
+    (void) [self->mapping_ putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"horizontal" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"vertical" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+  }
+}
+
+ASScrollViewImpl_Scrollbars *new_ASScrollViewImpl_Scrollbars_init() {
+  J2OBJC_NEW_IMPL(ASScrollViewImpl_Scrollbars, init)
+}
+
+ASScrollViewImpl_Scrollbars *create_ASScrollViewImpl_Scrollbars_init() {
+  J2OBJC_CREATE_IMPL(ASScrollViewImpl_Scrollbars, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_Scrollbars)
 
 @implementation ASScrollViewImpl_ScrollViewExt
 
@@ -779,6 +1333,7 @@ J2OBJC_NAME_MAPPING(ASScrollViewImpl, "com.ashera.layout", "AS")
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
     ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b, (int32_t) ([self computeVerticalScrollRange]));
+    ASScrollViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   }
   [this$0_ replayBufferedEvents];
   ASViewImpl_redrawDrawablesWithASIWidget_(this$0_);
@@ -1240,8 +1795,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_OnScrollChangeListener)
 
 - (void)onscrollWithInt:(int32_t)scrollX
                 withInt:(int32_t)scrollY {
-  if (listener_ != nil) {
-    [listener_ onScrollChangeWithADView:(ADView *) cast_chk([this$0_ asWidget], [ADView class]) withInt:scrollX withInt:scrollY withInt:oldScrollX_ withInt:oldScrollY_];
+  if (this$0_->listener_ScrollViewImpl_ != nil) {
+    [this$0_->listener_ScrollViewImpl_ onScrollChangeWithADView:(ADView *) cast_chk([this$0_ asWidget], [ADView class]) withInt:scrollX withInt:scrollY withInt:oldScrollX_ withInt:oldScrollY_];
   }
   oldScrollX_ = scrollX;
   oldScrollY_ = scrollY;
@@ -1274,10 +1829,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_OnScrollChangeListener)
     { "this$0_", "LASScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "oldScrollY_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "oldScrollX_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
-    { "listener_", "LADView_OnScrollChangeListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASScrollViewImpl;", "nativeScrollChangeListener", "LNSObject;", "onscroll", "II" };
-  static const J2ObjcClassInfo _ASScrollViewImpl_MyUIScrollViewDelegate = { "MyUIScrollViewDelegate", "com.ashera.layout", ptrTable, methods, fields, 7, 0x0, 3, 4, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASScrollViewImpl_MyUIScrollViewDelegate = { "MyUIScrollViewDelegate", "com.ashera.layout", ptrTable, methods, fields, 7, 0x0, 3, 3, 0, -1, -1, -1, -1 };
   return &_ASScrollViewImpl_MyUIScrollViewDelegate;
 }
 

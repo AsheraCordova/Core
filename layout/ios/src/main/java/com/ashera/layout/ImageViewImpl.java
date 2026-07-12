@@ -73,6 +73,26 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 	protected r.android.widget.ImageView measurableView;		
 	
 		@SuppressLint("NewApi")
+		final static class Square extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("none",  0x0);
+				mapping.put("min",  0x1);
+				mapping.put("max",  0x2);
+				mapping.put("width",  0x3);
+				mapping.put("height",  0x4);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
 		final static class ScaleType extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -101,6 +121,8 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 		ViewImpl.register(attributeName);
 
 
+		ConverterFactory.register("ImageView.square", new Square());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("square").withType("ImageView.square").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("src").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		ConverterFactory.register("ImageView.scaleType", new ScaleType());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleType").withType("ImageView.scaleType").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -161,6 +183,10 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 				listener.eventOccurred(EventId.measureFinished, measureFinished);
 			}
 			postOnMeasure(widthMeasureSpec, heightMeasureSpec);
+			int[] wh = ImageViewImpl.this.customPostMeasure(widthMeasureSpec, heightMeasureSpec);
+			if (wh != null) {
+				setMeasuredDimension(wh[0], wh[1]);
+			}
 		}
 		
 		@Override
@@ -386,6 +412,16 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 		ViewImpl.setAttribute(this, simpleWrapableView, key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
+			case "square": {
+				
+
+
+		setSquare(strValue);
+
+
+
+			}
+			break;
 			case "src": {
 				
 
@@ -786,6 +822,38 @@ return getCropToPadding();				}
     }
 
     
+
+
+	private String square;
+	private int[] customPostMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		if (this.square != null) {
+			switch (square) {
+			case "min": {
+				int size = Math.min(measurableView.getMeasuredWidth(), measurableView.getMeasuredHeight());	
+				return new int[] {size, size};
+			}
+			case "max": {
+				int size = Math.max(measurableView.getMeasuredWidth(), measurableView.getMeasuredHeight());	
+				return new int[] {size, size};
+			}
+			case "width":
+				return new int[] {measurableView.getMeasuredWidth(), measurableView.getMeasuredWidth()};
+			case "height":
+				return new int[] {measurableView.getMeasuredHeight(), measurableView.getMeasuredHeight()};
+			default:
+				break;
+			}
+			
+		}
+		
+		return null;
+	}
+	
+	
+	private void setSquare(String strValue) {
+		this.square = strValue;
+	}
+	
 
 	
 	    public native boolean checkIosVersion(String v) /*-[

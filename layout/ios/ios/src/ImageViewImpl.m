@@ -42,6 +42,7 @@
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Math.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
@@ -67,6 +68,7 @@
 
 @interface ASImageViewImpl () {
  @public
+  NSString *square_;
   ASSimpleWrapableView *simpleWrapableView_;
   ADDrawable *imageFromUrlPlaceHolder_;
   bool measureCalled_;
@@ -128,6 +130,11 @@
 
 - (void)setPaddingWithId:(id)objValue;
 
+- (IOSIntArray *)customPostMeasureWithInt:(int32_t)widthMeasureSpec
+                                  withInt:(int32_t)heightMeasureSpec;
+
+- (void)setSquareWithNSString:(NSString *)strValue;
+
 - (void)createSimpleWrapableView;
 
 - (bool)hasScrollView;
@@ -186,6 +193,7 @@
 
 @end
 
+J2OBJC_FIELD_SETTER(ASImageViewImpl, square_, NSString *)
 J2OBJC_FIELD_SETTER(ASImageViewImpl, simpleWrapableView_, ASSimpleWrapableView *)
 J2OBJC_FIELD_SETTER(ASImageViewImpl, imageFromUrlPlaceHolder_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ASImageViewImpl, imageFromUrlError_, ADDrawable *)
@@ -262,6 +270,10 @@ __attribute__((unused)) static void ASImageViewImpl_setPaddingBottomWithId_(ASIm
 
 __attribute__((unused)) static void ASImageViewImpl_setPaddingWithId_(ASImageViewImpl *self, id objValue);
 
+__attribute__((unused)) static IOSIntArray *ASImageViewImpl_customPostMeasureWithInt_withInt_(ASImageViewImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec);
+
+__attribute__((unused)) static void ASImageViewImpl_setSquareWithNSString_(ASImageViewImpl *self, NSString *strValue);
+
 __attribute__((unused)) static void ASImageViewImpl_createSimpleWrapableView(ASImageViewImpl *self);
 
 __attribute__((unused)) static bool ASImageViewImpl_hasScrollView(ASImageViewImpl *self);
@@ -310,6 +322,15 @@ __attribute__((unused)) static void ASImageViewImpl_nativeInvalidate(ASImageView
 
 __attribute__((unused)) static void ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASImageViewImpl *self, int32_t l, int32_t t, int32_t r, int32_t b);
 
+@interface ASImageViewImpl_Square () {
+ @public
+  id<JavaUtilMap> mapping_;
+}
+
+@end
+
+J2OBJC_FIELD_SETTER(ASImageViewImpl_Square, mapping_, id<JavaUtilMap>)
+
 @interface ASImageViewImpl_ScaleType () {
  @public
   id<JavaUtilMap> mapping_;
@@ -346,6 +367,8 @@ NSString *ASImageViewImpl_GROUP_NAME = @"ImageView";
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName {
   ASViewImpl_register__WithNSString_(attributeName);
+  ASConverterFactory_register__WithNSString_withASIConverter_(@"ImageView.square", new_ASImageViewImpl_Square_init());
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"square"])) withTypeWithNSString:@"ImageView.square"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"src"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASConverterFactory_register__WithNSString_withASIConverter_(@"ImageView.scaleType", new_ASImageViewImpl_ScaleType_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"scaleType"])) withTypeWithNSString:@"ImageView.scaleType"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
@@ -416,108 +439,113 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [((ASSimpleWrapableView *) nil_chk(simpleWrapableView_)) getWrappedView];
   ASViewImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, simpleWrapableView_, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"src", @"scaleType", @"adjustViewBounds", @"maxHeight", @"maxWidth", @"imageFromUrl", @"imageFromUrlPlaceHolder", @"imageFromUrlError", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"baseline", @"baselineAlignBottom", @"tint", @"cropToPadding" }, 21)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"square", @"src", @"scaleType", @"adjustViewBounds", @"maxHeight", @"maxWidth", @"imageFromUrl", @"imageFromUrlPlaceHolder", @"imageFromUrlError", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"baseline", @"baselineAlignBottom", @"tint", @"cropToPadding" }, 22)) {
     case 0:
     {
-      [self setImageWithId:objValue];
+      ASImageViewImpl_setSquareWithNSString_(self, strValue);
     }
     break;
     case 1:
     {
-      ASImageViewImpl_setScaleTypeWithNSString_withId_(self, strValue, objValue);
+      [self setImageWithId:objValue];
     }
     break;
     case 2:
     {
-      ASImageViewImpl_setAdjustViewBoundsWithId_(self, objValue);
+      ASImageViewImpl_setScaleTypeWithNSString_withId_(self, strValue, objValue);
     }
     break;
     case 3:
     {
-      ASImageViewImpl_setMaxHeightWithId_(self, objValue);
+      ASImageViewImpl_setAdjustViewBoundsWithId_(self, objValue);
     }
     break;
     case 4:
     {
-      ASImageViewImpl_setMaxWidthWithId_(self, objValue);
+      ASImageViewImpl_setMaxHeightWithId_(self, objValue);
     }
     break;
     case 5:
     {
-      ASImageViewImpl_setImageFromUrlWithId_(self, objValue);
+      ASImageViewImpl_setMaxWidthWithId_(self, objValue);
     }
     break;
     case 6:
     {
-      ASImageViewImpl_setImageFromUrlPlaceHolderWithId_(self, objValue);
+      ASImageViewImpl_setImageFromUrlWithId_(self, objValue);
     }
     break;
     case 7:
     {
-      ASImageViewImpl_setImageFromUrlErrorWithId_(self, objValue);
+      ASImageViewImpl_setImageFromUrlPlaceHolderWithId_(self, objValue);
     }
     break;
     case 8:
     {
-      ASImageViewImpl_setPaddingWithId_(self, objValue);
+      ASImageViewImpl_setImageFromUrlErrorWithId_(self, objValue);
     }
     break;
     case 9:
     {
-      ASImageViewImpl_setPaddingBottomWithId_(self, objValue);
+      ASImageViewImpl_setPaddingWithId_(self, objValue);
     }
     break;
     case 10:
     {
-      ASImageViewImpl_setPaddingRightWithId_(self, objValue);
+      ASImageViewImpl_setPaddingBottomWithId_(self, objValue);
     }
     break;
     case 11:
     {
-      ASImageViewImpl_setPaddingLeftWithId_(self, objValue);
+      ASImageViewImpl_setPaddingRightWithId_(self, objValue);
     }
     break;
     case 12:
     {
-      ASImageViewImpl_setPaddingStartWithId_(self, objValue);
+      ASImageViewImpl_setPaddingLeftWithId_(self, objValue);
     }
     break;
     case 13:
     {
-      ASImageViewImpl_setPaddingEndWithId_(self, objValue);
+      ASImageViewImpl_setPaddingStartWithId_(self, objValue);
     }
     break;
     case 14:
     {
-      ASImageViewImpl_setPaddingTopWithId_(self, objValue);
+      ASImageViewImpl_setPaddingEndWithId_(self, objValue);
     }
     break;
     case 15:
     {
-      ASImageViewImpl_setPaddingHorizontalWithId_(self, objValue);
+      ASImageViewImpl_setPaddingTopWithId_(self, objValue);
     }
     break;
     case 16:
     {
-      ASImageViewImpl_setPaddingVerticalWithId_(self, objValue);
+      ASImageViewImpl_setPaddingHorizontalWithId_(self, objValue);
     }
     break;
     case 17:
     {
-      ASImageViewImpl_setBaseLineWithId_(self, objValue);
+      ASImageViewImpl_setPaddingVerticalWithId_(self, objValue);
     }
     break;
     case 18:
     {
-      ASImageViewImpl_setBaselineAlignBottomWithId_(self, objValue);
+      ASImageViewImpl_setBaseLineWithId_(self, objValue);
     }
     break;
     case 19:
     {
-      ASImageViewImpl_setTintColorWithId_(self, objValue);
+      ASImageViewImpl_setBaselineAlignBottomWithId_(self, objValue);
     }
     break;
     case 20:
+    {
+      ASImageViewImpl_setTintColorWithId_(self, objValue);
+    }
+    break;
+    case 21:
     {
       ASImageViewImpl_setCropToPaddingWithId_(self, objValue);
     }
@@ -720,6 +748,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPaddingWithId:(id)objValue {
   ASImageViewImpl_setPaddingWithId_(self, objValue);
+}
+
+- (IOSIntArray *)customPostMeasureWithInt:(int32_t)widthMeasureSpec
+                                  withInt:(int32_t)heightMeasureSpec {
+  return ASImageViewImpl_customPostMeasureWithInt_withInt_(self, widthMeasureSpec, heightMeasureSpec);
+}
+
+- (void)setSquareWithNSString:(NSString *)strValue {
+  ASImageViewImpl_setSquareWithNSString_(self, strValue);
 }
 
 - (bool)checkIosVersionWithNSString:(NSString *)v {
@@ -1076,9 +1113,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 23, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 24, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 25, 11, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 26, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 28, 29, -1, -1, -1, -1 },
+    { NULL, "[I", 0x2, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 29, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 30, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 32, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -1086,43 +1125,43 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 30, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 33, 34, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 32, 33, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 34, 35, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 36, 37, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 38, 35, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 35, 36, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 37, 38, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, 39, 40, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, 41, 38, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 40, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 41, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 42, 43, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 44, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 42, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 43, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 44, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 45, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 46, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 47, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 48, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 49, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 51, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 45, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 46, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 47, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 50, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 51, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 52, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 27, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 52, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 54, 55, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 54, 35, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 56, 38, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 57, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 56, 57, -1, 58, -1, -1 },
+    { NULL, "V", 0x2, 58, 59, -1, 60, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 59, 60, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 61, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 61, 62, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 63, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 62, 35, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 63, 31, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, 64, 38, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 65, 34, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1166,71 +1205,74 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[36].selector = @selector(setPaddingRightWithId:);
   methods[37].selector = @selector(setPaddingBottomWithId:);
   methods[38].selector = @selector(setPaddingWithId:);
-  methods[39].selector = @selector(checkIosVersionWithNSString:);
-  methods[40].selector = @selector(setIdWithNSString:);
-  methods[41].selector = @selector(setVisibleWithBoolean:);
-  methods[42].selector = @selector(requestLayout);
-  methods[43].selector = @selector(invalidate);
-  methods[44].selector = @selector(createSimpleWrapableView);
-  methods[45].selector = @selector(hasScrollView);
-  methods[46].selector = @selector(isViewWrapped);
-  methods[47].selector = @selector(addForegroundIfNeeded);
-  methods[48].selector = @selector(getForeground);
-  methods[49].selector = @selector(setForegroundFrameWithInt:withInt:withInt:withInt:);
-  methods[50].selector = @selector(asNativeWidget);
-  methods[51].selector = @selector(invalidateWrapViewHolder);
-  methods[52].selector = @selector(createWrapperViewWithId:withInt:);
-  methods[53].selector = @selector(createWrapperViewHolderWithInt:);
-  methods[54].selector = @selector(nativeAddForeGroundWithASIWidget:);
-  methods[55].selector = @selector(createWrapperViewHolderNativeWithInt:);
-  methods[56].selector = @selector(getScrollView);
-  methods[57].selector = @selector(getImage);
-  methods[58].selector = @selector(getImageDimension);
-  methods[59].selector = @selector(getScaleType);
-  methods[60].selector = @selector(setScaleTypeWithNSString:withId:);
-  methods[61].selector = @selector(setImageWithId:);
-  methods[62].selector = @selector(getSrc);
-  methods[63].selector = @selector(getImageHeightWithId:);
-  methods[64].selector = @selector(getImageWidthWithId:);
-  methods[65].selector = @selector(setImageFromUrlErrorWithId:);
-  methods[66].selector = @selector(setImageFromUrlPlaceHolderWithId:);
-  methods[67].selector = @selector(setImageFromUrlWithId:);
-  methods[68].selector = @selector(onBitmapFailedWithId:);
-  methods[69].selector = @selector(onPrepareLoadWithId:);
-  methods[70].selector = @selector(onBitmapLoadedWithId:);
-  methods[71].selector = @selector(postOnMeasureWithInt:withInt:);
-  methods[72].selector = @selector(getImageNative);
-  methods[73].selector = @selector(setImageNativeWithId:withId:);
-  methods[74].selector = @selector(nativeGetContentMode);
-  methods[75].selector = @selector(nativeSetContentModeWithInt:);
-  methods[76].selector = @selector(setTintColorWithId:);
-  methods[77].selector = @selector(getTintColor);
-  methods[78].selector = @selector(registerCommandAttributes);
-  methods[79].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[80].selector = @selector(nativeRequestLayout);
-  methods[81].selector = @selector(createMaskWithId:withInt:withInt:withInt:withInt:);
-  methods[82].selector = @selector(removeMaskWithId:);
-  methods[83].selector = @selector(nativeInvalidate);
-  methods[84].selector = @selector(nativeCreateViewWithInt:);
-  methods[85].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[39].selector = @selector(customPostMeasureWithInt:withInt:);
+  methods[40].selector = @selector(setSquareWithNSString:);
+  methods[41].selector = @selector(checkIosVersionWithNSString:);
+  methods[42].selector = @selector(setIdWithNSString:);
+  methods[43].selector = @selector(setVisibleWithBoolean:);
+  methods[44].selector = @selector(requestLayout);
+  methods[45].selector = @selector(invalidate);
+  methods[46].selector = @selector(createSimpleWrapableView);
+  methods[47].selector = @selector(hasScrollView);
+  methods[48].selector = @selector(isViewWrapped);
+  methods[49].selector = @selector(addForegroundIfNeeded);
+  methods[50].selector = @selector(getForeground);
+  methods[51].selector = @selector(setForegroundFrameWithInt:withInt:withInt:withInt:);
+  methods[52].selector = @selector(asNativeWidget);
+  methods[53].selector = @selector(invalidateWrapViewHolder);
+  methods[54].selector = @selector(createWrapperViewWithId:withInt:);
+  methods[55].selector = @selector(createWrapperViewHolderWithInt:);
+  methods[56].selector = @selector(nativeAddForeGroundWithASIWidget:);
+  methods[57].selector = @selector(createWrapperViewHolderNativeWithInt:);
+  methods[58].selector = @selector(getScrollView);
+  methods[59].selector = @selector(getImage);
+  methods[60].selector = @selector(getImageDimension);
+  methods[61].selector = @selector(getScaleType);
+  methods[62].selector = @selector(setScaleTypeWithNSString:withId:);
+  methods[63].selector = @selector(setImageWithId:);
+  methods[64].selector = @selector(getSrc);
+  methods[65].selector = @selector(getImageHeightWithId:);
+  methods[66].selector = @selector(getImageWidthWithId:);
+  methods[67].selector = @selector(setImageFromUrlErrorWithId:);
+  methods[68].selector = @selector(setImageFromUrlPlaceHolderWithId:);
+  methods[69].selector = @selector(setImageFromUrlWithId:);
+  methods[70].selector = @selector(onBitmapFailedWithId:);
+  methods[71].selector = @selector(onPrepareLoadWithId:);
+  methods[72].selector = @selector(onBitmapLoadedWithId:);
+  methods[73].selector = @selector(postOnMeasureWithInt:withInt:);
+  methods[74].selector = @selector(getImageNative);
+  methods[75].selector = @selector(setImageNativeWithId:withId:);
+  methods[76].selector = @selector(nativeGetContentMode);
+  methods[77].selector = @selector(nativeSetContentModeWithInt:);
+  methods[78].selector = @selector(setTintColorWithId:);
+  methods[79].selector = @selector(getTintColor);
+  methods[80].selector = @selector(registerCommandAttributes);
+  methods[81].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[82].selector = @selector(nativeRequestLayout);
+  methods[83].selector = @selector(createMaskWithId:withInt:withInt:withInt:withInt:);
+  methods[84].selector = @selector(removeMaskWithId:);
+  methods[85].selector = @selector(nativeInvalidate);
+  methods[86].selector = @selector(nativeCreateViewWithInt:);
+  methods[87].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "FOREGROUND_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 64, -1, -1 },
-    { "VIEW_HOLDER_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 65, -1, -1 },
-    { "WIDGET_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 66, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 67, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 68, -1, -1 },
+    { "FOREGROUND_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 66, -1, -1 },
+    { "VIEW_HOLDER_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 67, -1, -1 },
+    { "WIDGET_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 68, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 69, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 70, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADImageView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "square_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "simpleWrapableView_", "LASSimpleWrapableView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "scaleTypeToContentModeMapping", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 69, 70, -1 },
+    { "scaleTypeToContentModeMapping", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 71, 72, -1 },
     { "imageFromUrlPlaceHolder_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "measureCalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "imageFromUrlError_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "tintColor_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setBaseLine", "LNSObject;", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "checkIosVersion", "setId", "setVisible", "Z", "setForegroundFrame", "IIII", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "I", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "setScaleType", "LNSString;LNSObject;", "setImage", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setImageNative", "LNSObject;LNSObject;", "nativeSetContentMode", "setTintColor", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "createMask", "LNSObject;IIII", "removeMask", "nativeCreateView", "nativeMakeFrameForChildWidget", &ASImageViewImpl_FOREGROUND_REGEX, &ASImageViewImpl_VIEW_HOLDER_REGEX, &ASImageViewImpl_WIDGET_REGEX, &ASImageViewImpl_LOCAL_NAME, &ASImageViewImpl_GROUP_NAME, &ASImageViewImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageViewImpl_ScaleType;LASImageViewImpl_ImageViewExt;" };
-  static const J2ObjcClassInfo _ASImageViewImpl = { "ImageViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 86, 13, -1, 71, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setBaseLine", "LNSObject;", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "customPostMeasure", "II", "setSquare", "checkIosVersion", "setId", "setVisible", "Z", "setForegroundFrame", "IIII", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "I", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "setScaleType", "LNSString;LNSObject;", "setImage", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "setImageNative", "LNSObject;LNSObject;", "nativeSetContentMode", "setTintColor", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "createMask", "LNSObject;IIII", "removeMask", "nativeCreateView", "nativeMakeFrameForChildWidget", &ASImageViewImpl_FOREGROUND_REGEX, &ASImageViewImpl_VIEW_HOLDER_REGEX, &ASImageViewImpl_WIDGET_REGEX, &ASImageViewImpl_LOCAL_NAME, &ASImageViewImpl_GROUP_NAME, &ASImageViewImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageViewImpl_Square;LASImageViewImpl_ScaleType;LASImageViewImpl_ImageViewExt;" };
+  static const J2ObjcClassInfo _ASImageViewImpl = { "ImageViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 88, 14, -1, 73, -1, -1, -1 };
   return &_ASImageViewImpl;
 }
 
@@ -1404,6 +1446,34 @@ void ASImageViewImpl_setPaddingWithId_(ASImageViewImpl *self, id objValue) {
   ASImageViewImpl_setPaddingLeftWithId_(self, objValue);
 }
 
+IOSIntArray *ASImageViewImpl_customPostMeasureWithInt_withInt_(ASImageViewImpl *self, int32_t widthMeasureSpec, int32_t heightMeasureSpec) {
+  if (self->square_ != nil) {
+    switch (JreIndexOfStr(self->square_, (id[]){ @"min", @"max", @"width", @"height" }, 4)) {
+      case 0:
+      {
+        int32_t size = JavaLangMath_minWithInt_withInt_([((ADImageView *) nil_chk(self->measurableView_)) getMeasuredWidth], [((ADImageView *) nil_chk(self->measurableView_)) getMeasuredHeight]);
+        return [IOSIntArray newArrayWithInts:(int32_t[]){ size, size } count:2];
+      }
+      case 1:
+      {
+        int32_t size = JavaLangMath_maxWithInt_withInt_([((ADImageView *) nil_chk(self->measurableView_)) getMeasuredWidth], [((ADImageView *) nil_chk(self->measurableView_)) getMeasuredHeight]);
+        return [IOSIntArray newArrayWithInts:(int32_t[]){ size, size } count:2];
+      }
+      case 2:
+      return [IOSIntArray newArrayWithInts:(int32_t[]){ [((ADImageView *) nil_chk(self->measurableView_)) getMeasuredWidth], [((ADImageView *) nil_chk(self->measurableView_)) getMeasuredWidth] } count:2];
+      case 3:
+      return [IOSIntArray newArrayWithInts:(int32_t[]){ [((ADImageView *) nil_chk(self->measurableView_)) getMeasuredHeight], [((ADImageView *) nil_chk(self->measurableView_)) getMeasuredHeight] } count:2];
+      default:
+      break;
+    }
+  }
+  return nil;
+}
+
+void ASImageViewImpl_setSquareWithNSString_(ASImageViewImpl *self, NSString *strValue) {
+  self->square_ = strValue;
+}
+
 void ASImageViewImpl_createSimpleWrapableView(ASImageViewImpl *self) {
   bool wrapViewFeature = [self hasFeatureWithNSString:@"enableFeatures" withNSString:@"decorator"];
   int32_t viewType = -1;
@@ -1550,6 +1620,68 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl)
 
 J2OBJC_NAME_MAPPING(ASImageViewImpl, "com.ashera.layout", "AS")
 
+@implementation ASImageViewImpl_Square
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASImageViewImpl_Square_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilMap>)getMapping {
+  return mapping_;
+}
+
+- (JavaLangInteger *)getDefault {
+  return JavaLangInteger_valueOfWithInt_(0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getMapping);
+  methods[2].selector = @selector(getDefault);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "mapping_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageViewImpl;" };
+  static const J2ObjcClassInfo _ASImageViewImpl_Square = { "Square", "com.ashera.layout", ptrTable, methods, fields, 7, 0x18, 3, 1, 2, -1, -1, -1, -1 };
+  return &_ASImageViewImpl_Square;
+}
+
+@end
+
+void ASImageViewImpl_Square_init(ASImageViewImpl_Square *self) {
+  ASAbstractEnumToIntConverter_init(self);
+  self->mapping_ = new_JavaUtilHashMap_init();
+  {
+    (void) [self->mapping_ putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x0)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"min" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x1)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"max" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x2)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"width" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x3)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"height" withId:JavaLangInteger_valueOfWithInt_((int32_t) 0x4)];
+  }
+}
+
+ASImageViewImpl_Square *new_ASImageViewImpl_Square_init() {
+  J2OBJC_NEW_IMPL(ASImageViewImpl_Square, init)
+}
+
+ASImageViewImpl_Square *create_ASImageViewImpl_Square_init() {
+  J2OBJC_CREATE_IMPL(ASImageViewImpl_Square, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_Square)
+
 @implementation ASImageViewImpl_ScaleType
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -1636,6 +1768,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
     [listener eventOccurredWithASIWidgetLifeCycleListener_EventId:JreLoadEnum(ASIWidgetLifeCycleListener_EventId, measureFinished) withASWidgetEvent:measureFinished_];
   }
   ASImageViewImpl_postOnMeasureWithInt_withInt_(this$0_, widthMeasureSpec, heightMeasureSpec);
+  IOSIntArray *wh = ASImageViewImpl_customPostMeasureWithInt_withInt_(this$0_, widthMeasureSpec, heightMeasureSpec);
+  if (wh != nil) {
+    [self setMeasuredDimensionWithInt:IOSIntArray_Get(wh, 0) withInt:IOSIntArray_Get(wh, 1)];
+  }
 }
 
 - (void)onLayoutWithBoolean:(bool)changed

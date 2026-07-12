@@ -222,6 +222,7 @@
      <source-file src="layout/android/src/com/ashera/layout/CheckBoxImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ChronometerImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/CustomKeyboardEventCommand.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/CustomScrollEventCommand.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/DummyFragmentManager.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/EditTextImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/fragmentImpl.java" target-dir="src/com/ashera/layout"/>
@@ -1518,6 +1519,8 @@
      <source-file src="layout/ios/ios/src/ChronometerImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/CustomKeyboardEventCommand.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/CustomKeyboardEventCommand.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/CustomScrollEventCommand.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/CustomScrollEventCommand.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/DummyFragmentManager.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/DummyFragmentManager.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/EditTextImpl.h" target-dir="LayoutPlugin/ios/src"/>

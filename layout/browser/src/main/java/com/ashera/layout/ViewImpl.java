@@ -4878,14 +4878,24 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		});
 	}
 
+	public interface PointerEvent extends org.teavm.jso.dom.events.Event {
+	    @org.teavm.jso.JSProperty
+	    int getClientX();
+	    
+	    @org.teavm.jso.JSProperty
+	    int getClientY();
+	    
+	    @org.teavm.jso.JSProperty
+	    int getPointerId();
+	}
 	private static void onAndroidTouch(IWidget widget, Object objValue) {
-		
-		org.teavm.jso.dom.events.EventListener<ViewImpl.HtmlMouseEvent> flistener = new org.teavm.jso.dom.events.EventListener<ViewImpl.HtmlMouseEvent>() {
+		HTMLElement htmlElement = (HTMLElement)widget.asNativeWidget();
+		htmlElement.getStyle().setProperty("touch-action", "none");
+		org.teavm.jso.dom.events.EventListener<ViewImpl.PointerEvent> flistener = new org.teavm.jso.dom.events.EventListener<ViewImpl.PointerEvent>() {
 			@Override
-			public void handleEvent(HtmlMouseEvent event) {
+			public void handleEvent(PointerEvent event) {
 				int rawX = event.getClientX();
 				int rawY = event.getClientY();
-				HTMLElement htmlElement = (HTMLElement)widget.asNativeWidget();
 				org.teavm.jso.dom.html.TextRectangle boundingClientRect = htmlElement.getBoundingClientRect();
 				int x = rawX - boundingClientRect.getLeft();
 				int y = rawY - boundingClientRect.getTop();
@@ -4893,15 +4903,22 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 				MotionEvent motionEvent = null;
 				
 				switch (event.getType()) {
-					case "mousedown": {
+					case "pointerdown": {
+						event.preventDefault();
 						motionEvent = view.onTouchEventDown(x, y, rawX, rawY);
+						ViewImpl.setOnListener(widget, widget.asNativeWidget(), this, "pointermove", "pointermove");
 						break;
 					}
-					case "mouseup": {
+					case "pointercancel": 
+					case "pointerup": {
 						motionEvent = view.onTouchEventUp(x, y, rawX, rawY);
+						releasePointerCapture(htmlElement, event.getPointerId());
+						ViewImpl.removeListener(widget, widget.asNativeWidget(), "pointermove", "pointermove");
 						break;
 					}
-					case "mousemove": {
+					case "pointermove": {
+						event.preventDefault();
+						setPointerCapture(htmlElement, event.getPointerId());						
 						motionEvent = view.onTouchEventMove(x, y, rawX, rawY);
 						break;
 					}
@@ -4916,8 +4933,13 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			}
 			
 		};
-		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mouseup", "mouseup");
-		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mousedown", "mousedown");
-		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "mousemove", "mousemove");
-}
+		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "pointerup", "pointerup");
+		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "pointercancel", "pointercancel");
+		ViewImpl.setOnListener(widget, widget.asNativeWidget(), flistener, "pointerdown", "pointerdown");		
+	}
+	
+	@org.teavm.jso.JSBody(params = {"element", "pointerId"}, script = "if (!element.hasPointerCapture(pointerId)) {element.setPointerCapture(pointerId);}")
+    private static native void setPointerCapture(HTMLElement element, int pointerId);
+	@org.teavm.jso.JSBody(params = {"element", "pointerId"}, script = "if (element.hasPointerCapture(pointerId)) {element.releasePointerCapture(pointerId);}")
+    private static native void releasePointerCapture(HTMLElement element, int pointerId);
 }

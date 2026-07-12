@@ -8,6 +8,13 @@ src_atop = "src_atop",
 src_in = "src_in",
 src_over = "src_over",
 }
+export const enum Square {
+none = "none",
+min = "min",
+max = "max",
+width = "width",
+height = "height",
+}
 export const enum ScaleType {
 center = "center",
 centerCrop = "centerCrop",
@@ -30,6 +37,7 @@ import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
 import { Mixin, decorate } from 'ts-mixer';
+
 
 
 
@@ -125,6 +133,9 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "square" }))
+	square!:CommandAttr<Square>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "scaleType" }))
 	scaleType!:CommandAttr<ScaleType>| undefined;
 
@@ -154,6 +165,7 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.paddingEnd = undefined;
 		this.paddingHorizontal = undefined;
 		this.paddingVertical = undefined;
+		this.square = undefined;
 		this.scaleType = undefined;
 		return this.thisPointer;
 	}
@@ -705,6 +717,20 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.paddingVertical.setValue(value);
 		this.orderSet++;
 		this.paddingVertical.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSquare(value : Square) : T {
+		this.resetIfRequired();
+		if (this.square == null || this.square == undefined) {
+			this.square = new CommandAttr<Square>();
+		}
+		
+		this.square.setSetter(true);
+		this.square.setValue(value);
+		this.orderSet++;
+		this.square.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
