@@ -74,6 +74,8 @@ https://asheracordova.github.io/doc/android/widget/package-summary.html
 * ListView
 * fragment
 * ViewOverlay
+* Custom Keyboard
+* Custom Scrollbar
 
 ## Validation support
 
@@ -623,3 +625,22 @@ boundsType 		| Can be one of these: center, top_left, top_right, bottom_right, b
 offsetHorizontal 	| Horizontal Offset from the bounds calculated using the bounds type. e.g. 10dp
 offsetVertical		| Vertical Offset from the bounds calculated using the bounds type. e.g. 10dp
 boundsConverter 	| Custom converter which extends [OverlayBoundsConverter](https://raw.githubusercontent.com/AsheraCordova/Plugin_Converter/main/src/com/ashera/converter/OverlayBoundsConverter.java). If custom logic is required, extend the OverlayBoundsConverter and register it using new key "overlay_bounds_new" e.g. ConverterFactory.register("overlay_bounds_new", new ExtendedOverlayBoundsConverter());
+
+### Custom Keyboard
+The EditText, TextInputlayoutEditText have been extended to add the following attributes to support custom keyboard:
+
+Name                	| Description
+-------------       	| -------------
+inputView				| Layout template of custom keyboard i.e. [Custom Keyboard sample](https://github.com/AsheraCordova/playground/blob/main/android_backup/res/layout/custom_keyboard_layout.xml)
+inputViewParent			| Id of the parent under root fragment under which the keyboard will be displayed 
+
+### Custom Scrollbar
+The ScrollView, HorizontalScrollView, androidx.recyclerview.widget.RecyclerView and androidx.core.widget.NestedScrollView have been extended to add the following attributes to support custom scrollbar:
+
+Name                	| Description
+-------------       	| -------------
+customScrollbarLayout	| Layout template of custom scrollbat i.e. [Custom Scrollbar sample](https://github.com/AsheraCordova/playground/blob/main/android_backup/res/layout/custom_scrollbar.xml)
+overlayCustomScrollbar	| Attribute used to overlay scrollbar in swt as scrollbars cannot be hidden in swt.
+scrollbars				| Attribute used to hide the scrollbar. Used in android, web and ios platforms.
+
+Note: All widgets needs to be wrapped in Framelayout. Custombar will be added to the end of Framelayout
