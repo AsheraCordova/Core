@@ -627,7 +627,7 @@ offsetVertical		| Vertical Offset from the bounds calculated using the bounds ty
 boundsConverter 	| Custom converter which extends [OverlayBoundsConverter](https://raw.githubusercontent.com/AsheraCordova/Plugin_Converter/main/src/com/ashera/converter/OverlayBoundsConverter.java). If custom logic is required, extend the OverlayBoundsConverter and register it using new key "overlay_bounds_new" e.g. ConverterFactory.register("overlay_bounds_new", new ExtendedOverlayBoundsConverter());
 
 ### Custom Keyboard
-The EditText, TextInputlayoutEditText have been extended to add the following attributes to support custom keyboard:
+The EditText and com.google.android.material.textfield.TextInputEditText have been extended to add the following attributes to support custom keyboard:
 
 Name                	| Description
 -------------       	| -------------
